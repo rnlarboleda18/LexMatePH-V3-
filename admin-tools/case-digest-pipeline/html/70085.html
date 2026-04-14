@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267815 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ZZZ,*  ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70085' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267815, August 06, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ZZZ,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP>  ACCUSED-APPELLANT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is an appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA), which denied the appeal of accused-appellant ZZZ and affirmed with modification the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC). The CA found ZZZ guilty as charged, i.e., of statutory rape as defined and penalized under Article 266-A in relation to Article 266-B of the Revised Penal Code.<br><br><center><i>Antecedents</i></center><br>ZZZ was charged with the crime of rape in the Information which reads:<br><blockquote>The undersigned accuses [ZZZ] of the crime of RAPE, under [Article] 266-A, (1) (d) in relation to [Article] 266-B of the Revised Penal Code, committed as follows:<br><br>That on or about June 17, 2020, in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span>, Province of Cotabato, Philippines and within the jurisdiction of this Honorable Court, the said accused, did then and there willfully, unlawfully[,] and feloniously, with lewd design, by means of force, threat[,] and intimidation, have carnal knowledge with [AAA (private complainant)], [seven][-]year old minor, by then and there inserting his penis into her vagina, against the latter's will and consent.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </blockquote>Upon arraignment, ZZZ, who was assisted by his counsel, pleaded not guilty to the charge.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>Thereafter, trial ensued. The prosecution offered the testimonies of private complainant; BBB, eyewitness and private complainant's father; Police Staff Sergeant Lou G. Jawod (PSSg Jawod), the arresting police officer; and Barangay Captain CCC, the barangay officer who first responded to the rape incident and apprehended accused-appellant. The prosecution also presented the following documentary evidence: Judicial Affidavits; Affidavit of Apprehension; Medico-Legal Case Record; extract copy of police blotter; Birth Certificate of private complainant; and pictures.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>ZZZ testified as the lone witness for the defense.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>The version of the prosecution and the defense, as narrated by the CA, are as follows:<br><br><i>Version of the Prosecution</i><br><blockquote>The prosecution established that private complainant was born on <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. [ZZZ] and private complainant were <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> for [10] years at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Cotabato.<br><br>On June 17, 2020, at around 7:30 [a.m.]., private complainant, then [seven] years old, was left alone in their house as her mother went to the barangay to get rice ration, while her father tapped rubber. Private complainant was playing by the road just outside their house when [ZZZ] arrived. [ZZZ] invited private complainant to go inside their house by holding her hand and dragging her towards the house. Upon reaching inside the house, [ZZZ] closed the door and pulled down private complainant's short pants. Private complainant's private parts was [sic] immediately exposed as she was not wearing underwear at the time. [ZZZ] then opened the zipper of his pants and took out his penis. Thereafter, [ZZZ] kneeled and positioned himself at the back of private complainant. At the same time, [ZZZ] settled private complainant in a bent forward position. Thereafter, [ZZZ] inserted his penis into her vagina. Private complainant felt pain in her vagina as a result.<br><br>Private complainant cried for help as soon as [she] saw BBB arrive. BBB immediately came to her rescue and slapped accused-appellant. In retaliation, [ZZZ] threw a stone at BBB, who then ran towards the kitchen to get a<i> bolo</i>. Unfortunately, [ZZZ] was able to escape and run away.<br><br>To corroborate private complainant's testimony, BBB testified that on the day of the incident, at around 7:30 [a.m.], he arrived at their house after doing his livelihood of tapping rubber. He did not see anyone upon opening the main door. However, when he went to the living room, he saw [ZZZ] kneeling behind private complainant. Both [ZZZ] and private complainant were naked waist down. [ZZZ] was doing push and pull movement to private complainant. BBB intended to run to the kitchen to get his bolo, but upon hearing private complainant cry for help, he rushed towards her. At the sight of BBB, [ZZZ] fled immediately.<br><br>At 7:50 [a.m.], BBB went to the barangay captain to report the incident. The barangay captain responded by going back to BBB's house and take pictures of the crime scene. Afterwards, the barangay captain went to [ZZZ]'s house to apprehend him. Later, at 8:49 [a.m.], the police arrived and [ZZZ] was turned over to PSSg Jawod from the Municipal Station of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br>Thereafter, private complainant was brought to the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> for medical examination, where she was examined by Dr. Flora Mae Sumugat-Espenorio. In the Medico-Legal Case Record, Dr. Sumugat-Espenorio made significant examination findings that private complainant suffered â "hymenal laceration on 5 o'clock position [secondary] to vaginal penetration of a blunt object."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></blockquote><i>Version of the Defense</i><blockquote>In defense, [ZZZ] denied the charge against him. He presented himself as the sole witness of the defense. [ZZZ], being deaf-mute, testified in open court assisted by his mother.<br><br>On the day of the incident, [ZZZ] admitted going to the house of private complainant, as he usually does, in order to drink a glass of<i> tuba </i>(coconut wine). Upon reaching the house, he went directly to the kitchen to look for<i> tuba</i>. While inside the house, he saw private complainant sitting by the door in the<i> sala</i>. Not long thereafter, BBB arrived. BBB got angry since [ZZZ] entered his house without permission. BBB's anger prompted [ZZZ] to run away and go home. Later, [ZZZ] was shocked when the barangay captain came to his house and brought him to the latter's house. The police came to arrest him thereafter.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br></blockquote><center><i>Ruling of the RTC</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> dated January 29, 2021, the RTC convicted ZZZ as charged. The dispositive part of the RTC Decision states:<br><blockquote>WHEREFORE, in view of the foregoing, the court finds that the prosecution's evidence on record are sufficient to prove the guilt of [ZZZ] of the crime of qualified rape as charged beyond reasonable doubt.<br><br>Accordingly, the court finds [ZZZ]<b> GUILTY</b> beyond reasonable doubt of the crime of<b> QUALIFIED RAPE</b> under Article 266-A (1)(d) and penalized under Article 266-B of the Revised Penal code, and he is hereby sentenced to suffer the penalty of<i> reclusion perpetua</i> without eligibility for parole and to pay AAA the sum of [PHP] 100,000.00 as civil indemnity, [PHP] 100,000.00 as moral damages, and [PHP] 100,000.00 as exemplary damages. These damages shall earn interest at a rate of 6% per annum from the finality of this judgment until fully paid. The detention of [ZZZ] since his arrest up to the present is considered in his favour as his advance service of his sentence as herein imposed.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Emphasis in the original) </blockquote>Thereafter, without filing a motion for reconsideration, ZZZ appealed the RTC Decision dated January 29, 2021 to the CA.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br><center><i>Ruling of the CA</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated February 22, 2023, the CA denied the appeal and affirmed the RTC Decision dated January 29, 2021 with modifications. The dispositive portion of the CA Decision states:<br><blockquote><b>WHEREFORE</b>, the January 29, 2021 Decision of the Regional Trial Court, 12th Judicial Region, Branch 23, Kidapawan City in Criminal Case No. 5578-2020 is AFFIRMED with MODIFICATIONS.<br><br>Accused-appellant [ZZZ] is hereby found GUILTY as charged, and he is sentenced to suffer<i> reclusion perpetua</i>. Further, he is ORDERED to pay private complainant the amounts of - [PHP] 75,000.00 as civil indemnity; [PHP] 75,000.00 as moral damages; and [PHP] 75,000.00 as exemplary damages. The amounts are all subject to [6%]) interest [per annum] from finality of this Decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Emphasis in the original) </blockquote>At the outset, the CA discussed that while the dispositive portion of the RTC Decision indicated that ZZZ was found guilty of the crime of qualified rape, the body of the RTC Decision only contemplated the crime of statutory rape. Thus, for the CA, the seeming mistake of the RTC should not cause a confusion as it was merely typographical and therefore, trivial.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The CA ruled that all of the elements of statutory rape were established in the present case. The CA discussed that based on the records of the case, there was no dispute as to the date of birth of private complainant. Thus, when the incident happened on June 17, 2020, she was under 12 years old, being just 7 years of age. The CA further discussed that it was proven beyond reasonable doubt that ZZZ had carnal knowledge of private complainant. Specifically, the CA discussed that the positive testimony of private complainant established that on June 17, 2020, at 7:30 a.m., ZZZ invited her to go inside their house by holding her hand and dragging her towards the house. Once they were inside, ZZZ closed the door. Thereafter, ZZZ pulled down her short pants, thereby exposing her private parts since she was without underwear. ZZZ also opened the zipper of his pants and took out his penis. Thereafter, ZZZ kneeled and positioned himself at her back, while forcing her to bend forward. ZZZ then inserted his penis into her vagina. Private complainant felt pain as a result of ZZZ's action.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>The CA added that private complainant's testimony was well corroborated by BBB's testimony and the medical findings of Dr. Flora Mae Sumugat-Espenorio (Dr. Sumugat-Espenorio). Specifically, the CA discussed that based on the eyewitness account of BBB, he saw ZZZ in the act of having carnal knowledge with private complainant. The CA added that the result of the medico-legal examination of Dr. Sumugat-Espenorio indicated that private complainant suffered "hymenal laceration on 5 o'clock position [secondary] to vaginal penetration of a blunt object."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The CA found private complainant's testimony credible, natural, convincing, and consistent with human nature and the normal course of things. The CA emphasized that despite intense cross-examination, and considering her tender age, private complainant remained steadfast and never wavered in her accounts of the rape incident.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The CA did not give merit to ZZZ's allegation that the testimonies of private complainant and BBB were inconsistent with each other and were unworthy of merit. The CA ruled that the alleged inconsistencies cited by ZZZ pertained to minor details which were not fatal to the case.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>The CA further noted that ZZZ merely denied, without substantiating by clear and convincing evidence, the allegation against him. The CA stressed that the defense of denial is the weakest of all defenses and that it easily crumbles in the face of the witnesses' positive and categorical identification of the accused as the perpetrator. The CA stressed that private complainant and her eyewitnesses categorically identified ZZZ as the perpetrator of the crime.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>As to the penalty, the CA affirmed the RTC's imposition of the penalty of<i> reclusion perpetua</i> against ZZZ but deleted the RTC's stipulation that ZZZ shall not be eligible for parole.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>The CA also reduced the RTC's award of civil indemnity, moral damages, and exemplary damages to PHP 75,000.00 each, but affirmed the imposition of interest on the monetary awards at the rate of 6% per annum from the date of finality of judgment.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Hence, the appeal.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The Public Attorney's Office, on behalf of accused-appellant, filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated March 19, 2024, stating that accused-appellant will no longer file a Supplemental Brief as he believed that his Appellant's Brief before the CA already stated his arguments to support his prayer for acquittal.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>For its part, the Office of the Solicitor General filed the Appellee's Brief on behalf of the People.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br><center><i>The Court's Ruling </i></center><br>The Court denies the appeal.<br><br>The crime of rape is defined and penalized under Article 266-A in relation to Article 266-B of the Revised Penal Code, as amended by Republic Act No. 8353. Article 266-A and Article 266-B provide:<br><blockquote>Article 266-A.<i> Rape; When And How Committed. -</i> Rape is committed:<br><br>1) By a man who shall have carnal knowledge of a woman under any of the following circumstances:<br><br>a) Through force, threat, or intimidation;<br>b) When the offended party is deprived of reason or otherwise unconscious;<br>c) By means of fraudulent machination or grave abuse of authority; and<br><i>d) When the offended party is under twelve (12) years of age or is demented, even though none of the circumstances mentioned above be present. </i><br><br>2) By any person who, under any of the circumstances mentioned in paragraph 1 hereof, shall commit an act of sexual assault by inserting his penis into another person's mouth or anal orifice, or any instrument or object, into the genital or anal orifice of another person. (Emphasis supplied)<br><br>Article 266-B.<i> Penalty</i>. - Rape under paragraph 1 of the next preceding article shall be punished by<i> reclusion perpetua</i>.</blockquote>Notably, Article 266-A of the Revised Penal Code, as amended by Republic Act No. 8353, has been further amended by Republic Act No. 11648.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Specifically, as discussed by the Court in the recent case of<i> People v. Dalaguet</i><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> on March 22, 2022, Republic Act No. 11648 increased the age for determining the commission of statutory rape and other sexual acts, from 12 years old to 16 years old.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Article 266-A of the Revised Penal Code, as further amended by Republic Act No. 11648, reads in part:<br><blockquote>Article 266-A.<i> Rape; When and How Committed</i>. - Rape is committed:<br><br>1) By a person who shall have carnal knowledge of another person under any of the following circumstances:<br><br>. . . .<br><br>d) When the offended party is under [16] years of age or is demented, even though none of the circumstances mentioned above be present:<i> Provided,</i> That there shall be no criminal liability on the part of a person having carnal knowledge of another person under [16] years of age when the age difference between the parties is not more than [three] years, and the sexual act in question is proven to be consensual, non-abusive, and non-exploitative:<i> Provided, further,</i> That if the victim is under [13] years of age, this exception shall not apply.<br><br>As used in this Act, non-abusive shall mean the absence of undue influence, intimidation, fraudulent machinations, coercion, threat, physical, sexual, psychological, or mental injury or maltreatment, either with intention or through neglect, during the conduct of sexual activities with the child victim. On the other hand, non-exploitative shall mean there is no actual or attempted act or acts of unfairly taking advantage of the child's position of vulnerability, differential power, or trust during the conduct of sexual activities. </blockquote>It bears emphasis that Republic Act No. 11648 did not amend Article 266-B of the Revised Penal Code, which provides for the corresponding penalty for the crime of rape depending on the attendant circumstances. Article 22<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> of the Revised Penal Code provides that penal laws shall have a retroactive effect insofar as they are favorable to the accused.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Here, considering that the crime was committed on June 17, 2020, and considering that the further amendment of Article 266-A under Republic Act No. 11648 has no favorable effect on accused-appellant, the Court applies Article 266-A as amended by Republic Act No. 8353 and prior to its amendment by Republic Act No. 11648.<br><br>Article 266-A, paragraph 1(d) specifically defines the crime of statutory rape. In order to sustain a conviction for statutory rape, the prosecution must be able to prove the following elements: (1) the offended party is under 12 years of age; and (2) the accused had carnal knowledge of the victim regardless of whether there was force, threat, or intimidation or grave abuse of authority.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In every prosecution for statutory rape, consent is immaterial and force and intimidation are not necessary. The law presumes that the victim does not and cannot have a will of her own on account of her tender years. Thus, the only subject of inquiry is the age of the woman and whether carnal knowledge took place.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Here, the Court agrees with the findings of the RTC, as affirmed by the CA, that the prosecution was able to prove all of the elements of the crime of statutory rape.<br><br>First, the prosecution was able to prove that accused-appellant had carnal knowledge of private complainant on June 17, 2020. As found by the CA, the positive testimony of private complainant established that on June 17, 2020, at 7:30 a.m., accused-appellant invited her to go inside their house by holding her hand and dragging her towards the house. Once they were inside, accused-appellant closed the door. Thereafter, accused-appellant pulled down her short pants, thereby exposing her private parts since she was without underwear. Accused-appellant also opened the zipper of his pants and took out his penis. Thereafter, accused-appellant kneeled and positioned himself at her back, while forcing her to bend forward. Accused-appellant then inserted his penis into her vagina. Private complainant felt pain as a result of accused-appellant's action.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Furthermore, as narrated by the CA, BBB testified that when he arrived at their house and went to the living room, he saw accused-appellant kneeling behind private complainant, that both accused-appellant and private complainant were naked waist down, and that accused-appellant was doing a push and pull movement to private complainant.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Also, the medico-legal examination conducted by Dr. Sumugat-Espenorio on private complainant indicated that the latter suffered "hymenal laceration on 5 o'clock position [secondary] to vaginal penetration of a blunt object."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Second, it was established that private complainant was below 12 years old at the time that accused-appellant had carnal knowledge of her. As discussed by the RTC, private complainant's certificate of live birth indicated that she was born on January 28, 2013.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In his Appellant's Brief<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> before the CA, accused-appellant noted private complainant's testimony that during the rape incident, private complainant was bending forward while accused-appellant was sitting down and doing nothing and that while the latter purportedly took of his pants, he did not remove his brief and shorts. For accused-appellant, the relative positions of private complainant and accused-appellant raised serious doubts as to whether the latter succeeded in having carnal knowledge of her. Accused-appellant added that considering the tender age of private complainant, the impossibility of penile penetration is not hard to discern. Accused-appellant argued that the absence of penile penetration was confirmed by BBB who testified that when accused-appellant was doing the push and pull movement to private complainant, accused-appellant's penis was not yet inserted into private complainant's vagina because he already arrived. Accused-appellant added that based on private complainant's testimony, what angered her father, BBB, which led him to slap accused-appellant, was the latter's act of undressing private complainant.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Accused-appellant emphasized that the testimony of private complainant differed from that of BBB. While private complainant claimed that accused-appellant never removed his clothing as he was wearing his shorts and brief, on the other hand, for BBB, accused-appellant was completely naked. Furthermore, while BBB claimed that accused-appellant made a push and pull movement, private complainant claimed that he did nothing because he just stayed put.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>However, as aptly ruled by the CA, the alleged inconsistencies cited by accused-appellant pertain to minor details that are not fatal to the case. It has been ruled by the Court that "[a]s long as the testimonies of the witnesses corroborate one another on material points, minor inconsistencies therein cannot destroy their credibility. Inconsistencies on minor details do not undermine the integrity of a prosecution witness."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Furthermore, as to accused-appellant's asseveration that there was no penile penetration of private complainant, the Court, in<i> People v. Gratela</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> ruled that "when a rape victim's straightforward and truthful testimony conforms with the medical findings of the examining doctor, the same is sufficient to support a conviction for rape."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Here, private complainant's narration and the medico-legal examination conducted on the latter are sufficient to establish that accused-appellant inserted his penis into private complainant's vagina.<br><br>Likewise, the CA is correct in not giving credence to accused-appellant's defense of denial. It is well-settled that "mere denial cannot prevail over the positive testimony of a witness. The defense of denial is treated as a self-serving negative evidence which cannot be accorded greater evidentiary weight than the declaration of credible witnesses who testify on affirmative matters."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Furthermore, the defense of denial "has been invariably viewed by the Court with disfavor for it can easily be concocted and is a common and standard defense ploy in prosecutions for rape. In order to prosper, the defense of denial must be proved with strong and convincing evidence."<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> In the present case, accused-appellant's denial of the commission of the crime cannot stand against the categorical identification by private complainant and BBB of accused-appellant as the perpetrator of the crime, as well as the medico-legal examination of Dr. Sumugat-Espenorio, which revealed that private complainant suffered hymenal laceration as a result of penetration.<br><br><i>Penalty and Damages</i><br><br>Under Article 266-B of the Revised Penal Code, as amended by Republic Act No. 8353, the imposable penalty for statutory rape is<i> reclusion perpetua</i>. Thus, the CA is correct in affirming the imposition by the RTC of the penalty of<i> reclusion perpetua</i> against accused-appellant. The CA also correctly deleted the qualification that the penalty of<i> reclusion perpetua</i> imposed against accused-appellant is "without eligibility for parole." Such deletion is in accordance with A.M. No. 15-08-02-SC,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> wherein the Court provided the following guidelines in the imposition of penalties and in the use of the phrase "without eligibility for parole":<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">In cases where the death penalty is not warranted, there is no need to use the phrase "without eligibility for parole" to qualify the penalty of <i>reclusion perpetua</i>; it is understood that convicted persons penalized with an indivisible penalty are not eligible for parole; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">When circumstances are present warranting the imposition of the death penalty, but this penalty is not imposed because of [Republic Act No.] 9346, the qualification of "without eligibility for parole" shall be used to qualify <i> reclusion perpetua</i> in order to emphasize that the accused should have been sentenced to suffer the death penalty had it not been for [Republic Act] No. 9346. </div></td> </tr> </tbody></table></blockquote>Since the penalty imposed upon accused-appellant is<i> reclusion perpetua</i>, as distinguished from death penalty which is reduced to<i> reclusion perpetua</i> because of Republic Act No. 9346, the deletion of the phrase "without eligibility for parole" is proper.<br><br>Furthermore, considering the Court's pronouncement<i> in People v. Jugueta</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the CA is correct in modifying the amount of damages. Since the penalty imposed against accused-appellant is<i> reclusion perpetua</i> (as distinguished from the imposition of death penalty which is reduced to <i>reclusion perpetua</i> because of Republic Act No. 9346), the CA correctly ordered accused-appellant to pay private complainant the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, and PHP 75,000.00 as exemplary damages. Likewise, the CA aptly imposed interest on all the monetary awards at the legal rate of 6% per annum from the date of finality of the Decision until full payment.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br><b>ACCORDINGLY</b>, the appeal is <b>DISMISSED</b>. The Decision dated February 22, 2023 of the Court of Appeals in CA-G.R. CR HC No. 02764-MIN is <b>AFFIRMED</b>.<br><br>Accused-appellant ZZZ is found <b>GUILTY</b> beyond reasonable doubt of the crime of statutory rape as defined and penalized under Article 266-A paragraph 1(d) of the Revised Penal Code, as amended by Republic Act No. 8353, in relation to Article 226-B of the same law, and is <b>SENTENCED</b> to suffer the penalty of<i> reclusion perpetua</i>. He is <b>ORDERED</b> to pay private complainant AAA PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, and PHP 75,000.00 as exemplary damages.<br><br>Accused-appellant ZZZ is also <b>ORDERED</b> to pay interest at the rate of 6% per annum on all the monetary awards from the finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J. (Chairperson)</i> and <i>Hernando J.,</i> concur.<br><i>Zalameda</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> and <i>Marquez,</i><sup style="COLOR: RGB(255, 0, 0);">***</sup> <i>JJ.,</i>&nbsp; on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 8505, the name of the private offended party, along with all other personal circumstances that may tend to establish their identity, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 5-7, Notice of Appeal dated March 10, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 10-20. The February 22, 2023 Decision in CA-G.R. CR HC No. 02764-MIN was penned by Associate Justice Anisah B. Amanodin-Umpa and concurred in by Associate Justices Evalyn M. Arellano-Morales and John Z. Lee of the Twenty-Second Division, Court of Appeals, Cagayan De Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> CA <i>rollo</i> pp. 23-25. The January 29, 2021 Decision in Criminal Case No. 5578-2020 was penned by Presiding Judge Jose T. Tabosares of Branch 23, Regional Trial Court, Kidapawan City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> RTC records, p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, p. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> CA <i>rollo</i>, p. 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, pp. 11-13, 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> CA <i>rollo</i>, pp. 23-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, p. 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 10-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 5-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 5-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 48-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 31-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Republic Act No. 11648 (2022), An Act Providing for Stronger Protection Against Rape and Sexual Exploitation and Abuse, Increasing the Age for Determining the Commission of Statutory Rape, Amending for the Purpose Act No. 3815, as Amended, Otherwise Known as 'The Revised Penal Code,' Republic Act No. 8353, Also Known as 'The Anti-Rape Law of 1997,' and Republic Act No. 7610, as Amended, Otherwise Known as the 'Special Protection of Children Against Abuse, Exploitation and Discrimination Act'.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 926 Phil. 713 (2022) [J. Lopez, J., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 746.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Article 22 of the Revised Penal Code provides:<br><blockquote>Article 22. <i>Retroactive effect of penal laws</i>. - Penal Laws shall have a retroactive effect insofar as they favor the persons guilty of a felony, who is not a habitual criminal, as this term is defined in Rule 5 of Article 62 of this Code, although at the time of the publication of such laws a final sentence has been pronounced and the convict is serving the same.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>People v. Dalaguet</b>, 926 Phil. 713, 748 (2022) [J. Lopez, J., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>People v. Ronquillo</b>, 818 Phil. 641, 648 (2017) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 648 (2017) [Per J. Martires, Third Division] <i>citing</i> <b>People v. Arpon</b>, 678 Phil. 752, 773 (2011) [Per J. Leonardo-De Castro, First Division] and <b>People v. Macafe</b>, 650 Phil. 580, 588 (2010) [Per J. Brion, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i>, pp. 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> CA <i>rollo</i>, p. 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 14-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at. 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>People v. Moreno</b>, 872 Phil. 17, 29-30 (2020) [Per J. Hernando, Second Division] <i>citing</i> <b>People v. Mata-an</b>, 826 Phil. (2018) 512, 523 [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 868 Phil. 8 (2020) [Per J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>People v. Ulanday</b>, 785 Phil. 663, 680 (2016) [Per J. Perez, Third Division], as quoted in <b>People v. Camarino</b>, 892 Phil. 198, 204 (2020) [Per J. Hernando, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>People v. AAA</b>, 899 Phil. 504, 519 (2021) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> SC Administrative Matter No. 15-08-02-SC, August 4, 2015, Guidelines for the Proper Use of the Phrase "<i>Without Eligibility for Parole</i>" in Indivisible Penalties.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 783 Phil. 806, 848-849 (2016) [Per J. Peralta, <i>En Banc</i>]. The relevant pronouncement of the Court as to the award of damages in rape cases is as follows:<blockquote>. . . .<br><br>II. For Simple Rape/Qualified Rape:<br>1.1 Where the penalty imposed is Death but reduced to <i>reclusion perpetua</i> because of [Republic Act No.] 9346:<br>a. Civil indemnity â [PHP] 100,000.00<br>b. Moral damages â [PHP] 100,000.00<br>c. Exemplary damages â [PHP] 100,000.00<br><br>1.2 Where the crime committed was not consummated but merely attempted:<br>a. Civil indemnity â [PHP] 50,000.00<br>b. Moral damages â [PHP] 50,000.00<br>c. Exemplary damages â [PHP] 50,000.00<br><br><i>2.1 Where the penalty imposed is reclusion perpetua, other than the above-mentioned:<br>a. Civil indemnity â P75,000.00<br>b. Moral damages â P75,000.00<br>c. Exemplary damages â P75.000.00</i><br><br>2.2 Where the crime committed was not consummated, but merely attempted:<br>a. Civil indemnity â P25,000.00<br>b. Moral damages â P25,000.00<br>c. Exemplary damages â P25,000.00 (Emphasis supplied, citations omitted)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754, 781-782 (2022) [Per J. Leonen, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

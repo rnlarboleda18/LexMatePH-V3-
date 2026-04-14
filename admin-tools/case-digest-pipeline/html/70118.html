@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259322 - NELLIE Y. CHAN TEE TEN, PETITIONER, VS. WILLY Q. TEE TEN AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70118' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259322, August 06, 2025 ]</H2>
+			<H3>NELLIE Y. CHAN TEE TEN, PETITIONER, VS. WILLY Q. TEE TEN AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>The Court resolves the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court that Nellie Y. Chan Tee Ten (Nellie) filed to assail the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 4, 2021, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 13, 2021, of the Court of Appeals (CA.) in CA-G.R. CV No. 109458.</p><p> The CA affirmed <i>in toto</i> the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated November 3, 2016, and the Order dated May 4, 2017, of Branch 261, Regional Trial Court (RTC), Pasig City which declared Nellie's marriage with Willy Q. Tee Ten (Willy) void on the ground of psychological incapacity under Article 36 of the Family Code.</p><p align="center"> <i>The Antecedents</i> </p><p> On October 28, 2003, Willy instituted a petition with the RTC against Nellie for the declaration of nullity of their marriage and the dissolution of their property regime. Thereafter, he filed an Amended Petition on December 30, 2003, in which he alleged as follows:<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> Willy and Nellie were married on January 22, 1995. They had no ante nuptial agreement and their property relations are governed by the regime of absolute community of property.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> According to Willy, even prior to the wedding, the psychological incapacity of Nellie, whose childhood was marked with overindulgence at a time when her pathogenic family was still wealthy, was demonstrated by her domineering attitude coupled with her lazy and poor study habits.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> After the wedding, Nellie's incapacity to perform her marital obligations supposedly became more apparent given that she: (a) continued to be domineering and controlling, demanding Willy to always update her of his whereabouts; (b) displayed an arrogant and haughty attitude, especially towards Willy's mother, as well as an excessive sense of entitlement; (c) irrationally insisted that Willy was having an incestuous relationship with his mother; (d) verbally abused Willy whenever the latter brought their children to visit his side of the family; (e) physically abused Willy when he tried to take their daughter out of the house to buy a bike; and (f) tried to deliberately alienate their son from their paternal grandmother.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> Willy narrated that he started sleeping in his office because of Nellie's actions. With the tensions running high in their family home, Nellie and their children moved to a condominium unit in Pioneer Highlands beginning October 2002. In an effort to save the marriage, Willy followed his family to Pioneer Highlands with the hope of fixing his marital problems with Nellie, but to no avail.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> More than these, Willy alleged that Nellie psychologically abused their children when she: (a) physically attacked Willy in the presence of their kids, while he was holding their daughter; (b) did not invite any of Willy's relatives, except for one cousin, to their son's seventh birthday; (c) taught the kids to say bad things about Willy's mother; (d) always gave Willy a hard time whenever he tried to take the kids to visit his family; and (e) sneaked in the house of Willy's mother to take the kids home without telling anyone.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Finally, Willy averred that Nellie, without his consent and through intimidation, entered his place of employment and forcibly took documents, records, and other articles of value.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> Per the Psychological Assessment Report (psychological report) of Dr. Natividad A. Dayan (Dr. Dayan), a clinical psychologist, Nellie suffered from Narcissistic Personality Disorder with paranoid features. Dr. Dayan concluded that Nellie's psychological incapacity was grave, incurable, and had antecedents, thus, she recommended the termination of the parties' marriage.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> In her defense, Nellie countered that it was Willy who abused their children, not only psychologically but also sexually. She averred that in times of disagreement, Willy also physically and verbally abused her. Moreover, Nellie questioned the reliability of Dr. Dayan's psychological report as it was only based on Willy's clinical interview and psychological tests, coupled with collateral interviews of witnesses who were all biased against her.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p align="center"> <i>The Ruling of the RTC</i> </p><p> In the Decision dated November 3, 2016, the RTC granted Willy's petition and declared the marriage between the parties void on the ground of Nellie's psychological incapacity under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> Nellie filed a motion for reconsideration, which the RTC denied in the Order dated May 4, 2017 for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Aggrieved, she elevated the case via an ordinary appeal with the CA.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p align="center"> <i>The Ruling of the CA</i> </p><p> In the assailed Decision, the CA affirmed the RTC ruling <i>in toto</i>. It held that: </p><p> <i>One</i>, the testimony of Dr. Dayan, coupled with the personal accounts of Willy and his witnesses Jocelyn P. Arches<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Jocelyn), a common friend, Therese Tee<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> (Therese), his cousin-in-law, and Julieta Tobias,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> a social worker, sufficiently proved that Nellie was psychologically incapacitated to comply with her essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p> <p> <i>Two</i>, the psychological report did not lose its probative value even though Nellie was not personally examined by Dr. Dayan. It must be noted that it was Nellie who refused to undergo a personal examination in the first place.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p>And <i>three</i>, Willy was able to sufficiently establish the juridical antecedence, incurability, and severity of Nellie's psychological incapacity, which was present before the celebration of their marriage and continues to exist until now.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Nellie moved for reconsideration, but the CA denied the motion in the assailed Resolution for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Hence, the Petition.</p><p align="center"> <i>The Petition</i> </p><p> In the Petition, Nellie argues as follows: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">The CA committed an error when it upheld the declaration of nullity of Nellie's marriage with Willy on the basis of the psychological report of Dr. Dayan even though the psychologist never personally examined her.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify">The CA completely disregarded Nellie's narration of facts in relation to the physical, sexual, emotional, financial, and psychological abuse that she suffered in the hands of Willy. It also erred in not ruling that Willy's acts against Nellie was tantamount to contracting marriage in bad faith.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td><div align="justify">Assuming <i>arguendo</i> that the marriage is void, the CA erroneously ruled that Willy is not psychologically incapacitated to perform his marital obligations to Nellie.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(4)</div></td> <td><div align="justify">The amount of support<i> pendente lite</i> should be increased from PHP 70,000,00 to PHP 300,000.00, effective until such time that the property regime of the parties is dissolved, considering that Willy has grown in financial stature since the RTC ordered the payment of support in the Order dated June 17, 2013.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></div></td> </tr> </tbody></table> </blockquote> <p>Thus, Nellie prays for: <i>One</i>, the increase of the amount of support <i>pendente lite</i> to PHP 300,000.00. And <i>two</i>, the dismissal of Willy's petition for declaration of nullity of their marriage. <i>In the alternative</i>, if the marriage is declared void under Article 36 of the Family Code, Nellie prays that Willy be declared as the psychologically incapacitated spouse, who contracted the marriage in bad faith, thereby forfeiting his share in their common properties in favor of their children pursuant to Article 147 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p> <p> In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated July 27, 2022, the Court resolved to implead the Republic of the Philippines, through the Office of the Solicitor General (OSG), as a respondent in the case considering that it involved the declaration of nullity of the parties' marriage. It also required Willy and the OSG to comment on the Petition.</p><p align="center"> <i>Respondents' Comments</i> </p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> the OSG avers that the arguments raised in the Petition are factual matters that the Court cannot review,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> especially since the RTC and the CA are consistent in their findings regarding Nellie's psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p> Moreover, the OSG opines that the CA correctly upheld the RTC ruling that the marriage between the parties is void under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> It points out that the psychological report should still be given credence even though Dr. Dayan did not personally interview Nellie.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p><p> As for Willy, he asserts in his Comment/Opposition<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> that: <i>first</i>, the Petition should be denied outright for raising factual issues and rehashing the same arguments already passed upon by the lower courts;<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>second</i>, as the RTC and the CA aptly ruled, the fact of Nellie's psychological incapacity was sufficiently established by the findings of Dr. Dayan in the psychological report as well as the testimony of Willy and other witnesses;<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> and <i>third</i>, there is no reason to increase the amount of <i>support</i> <i>pendente lite</i> in the case considering that: (i) Willy has continued to provide for his children on top of the PHP 70,000.00 judicially-mandated support that he gives respondent monthly; and (ii) the parties' children are all of majority age and they have a direct access to Willy for any of their needs sans the participation of Nellie.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> On August 18, 2023, Nellie filed her Consolidated Reply<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> in which she reiterated the arguments in her Petition. </p><p align="center"> <i>The Issue</i> </p><p> The main issue for the Court's resolution is whether the lower courts correctly declared the marriage of the parties void on the ground of Nellie's psychological incapacity under Article 36 of the Family Code. </p><p align="center"> <i>The Court's Ruling</i> </p><p> The Petition is without merit. </p><p> To begin with, the issues raised in the Petition as to <i>the finding of Nellie's psychological incapacity, Willy's alleged psychological incapacity and bad faith in contracting the marriage, the proper amount of support pendente lite, and the liquidation, partition, and distribution of the parties' properties</i> are clearly factual in nature. The Court cannot entertain these issues in a Rule 45 proceeding where its jurisdiction is limited to reviewing and revising <i>errors of law</i> that might have been committed by the lower courts.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> While this rule is <i>not</i> absolute, none of the exceptions<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> thereto are present in the case.</p><p> At any rate, the Court finds no cogent reason to overturn the consistent findings and conclusions of the RTC and the CA which are supported by the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></p><p> In the landmark case of <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the Court explained the characteristics of psychological incapacity under Article 36 of the Family Code as follows: <i>First</i>, it must be <i>grave</i> enough to cause the party's inability, not mere refusal neglect, or difficulty, to perform the essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Second</i>, for <i>juridical antecedence</i>, it must be shown that the psychological incapacity existed prior to or at the time of the celebration of the marriage, even if it only manifested later on.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> And <i>third</i>, as to the legal concept of <i>incurability</i>, it must be established that the party, by reason of his or her psychological incapacity, persistently fails to comply with the essential marital obligations with respect to a specific partner.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></p><p> Per <i>Tan-Andal</i>, the quantum of proof necessary to establish psychological incapacity is now <i>clear and convincing evidence</i>, which "requires more than preponderant evidence but less than proof beyond reasonable doubt."<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> In connection thereto, psychological incapacity need <i>not</i> be proven through expert opinion as it is not an illness that has to be medically or clinically identified.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> As such, the psychological evaluation of either or both allegedly incapacitated spouses is not indispensable, even in cases where expert opinion is offered in evidence.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> "It is enough that the totality of evidence establishes the psychological incapacity of one or both spouses."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> It is, therefore, of no legal consequence that Dr. Dayan's psychological report was based only on the clinical interview and the battery of standardized tests that she administered on Willy as well as her collateral interviews with witnesses Therese and Jocelyn. <i>For one</i>, while Dr. Dayan was unable to interview Nellie, it does not automatically invalidate the psychological report for being biased considering that it was Nellie who refused to undergo such psychological evaluation despite being invited. <i>For another</i>, it would have been ideal for Nellie to be personally examined by Dr. Dayan, but in cases where the person <i>refuses</i> to participate, as in the case, "it is an accepted practice in psychiatry to base a person's psychiatric history on <i>collateral information</i>, or <i>information from sources aside from the person evaluated</i>."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></p><p> Besides, as the CA aptly noted, although Nellie's psychologist Dr. Elias Adamos (Dr. Adamos), in his Psychological Evaluation Report, opined that Nellie was "not incapacitated" to comply with her marital obligations, he <i>admitted</i> that the latter had withheld pertinent information which, if timely disclosed, could have affected his findings.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Certainly, such admission did not only compromise the findings and conclusions of Dr. Adamos, but Nellie's own credibility as well.</p><p> After a careful consideration, the Court finds that the totality of the evidence shows that Nellie is psychologically incapacitated to comply with her essential marital obligations to Willy. </p><p> As reiterated in <i>Tan-Andal</i>, the essential marital obligations include those between husband and wife under Articles 68 to 71 of the Family Code as well as those in Articles 220, 221, and 225 of the same Code on the effects of parental authority upon the persons and properties of the children.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The most basic of these obligations is, of course, the duty of the husband and wife "to live together, observe mutual love, respect and fidelity, and render mutual help and support."<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></p><p> Indeed, it was sufficiently established that Nellie suffered from a Narcissistic Personality Disorder with paranoid features through the accounts of Willy and other witnesses, which were, in turn, braced by the psychological report and testimony of Dr. Dayan. For clarity, the pertinent portion of the RTC Decision is quoted below: </p><blockquote> <p> It must be pointed out that the testimony of [Willy] relative to the behavioral manifestations that he observed from [Nellie] before and during their marriage were not only undisputed, the same were also corroborated by the testimony of his witness in the person of Jocelyn Arches and supported by the Psychological Evaluation Report and subsequent testimony of Dr. Natividad Dayan.</p> <p> Moreover, [Willy's] testimony was supported by the respective testimonies of Jocelyn [Arches], Juliet Tobias and Winona Nadine Tee Ten, [Nellie's] own witness.</p> <p> Recall that Jocelyn [Arches], a third-party and disinterested witness, corroborated the testimony of [Willy] relative to the abnormal behavioral manifestations of [Nellie], more specifically the revelation that [Nellie] harbors the fantasy that her husband, the herein petitioner, was having an incestuous relationship with his mother.</p> <p> On the other hand, Juliet Tobias, Court Social Worker and another disinterested witness[,] also corroborated the testimony of [Willy] that [Nellie] had a domineering and controlling character. Even Winona Nadine Chan Tee Ten, the herein parties (sic) daughter and [Nellie's] own witness[,] testified to the effect that [Nellie] actually ignored and disregarded the Hold-departure order issued by this Court by leaving the country without securing permission from this Court despite the prohibition. </p> <p> â¦.</p> <p> On another note, the Court found clear indications that the children of the herein parties had been brainwashed by [Nellie] to make them hate [Willy]. It is apparent from the reported sudden changes in the children's behavior at the time that [Willy,] was exercising his visitation rights under the supervision of Court Social Worker Juliet Tobias. The brainwashing of the children shows that [Nellie] had the propensity of being interpersonally manipulative or exploitative, another behavioral manifestation which is being attributed to a narcissist.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></p> </blockquote> <p> In addition, as Dr. Dayan noted, Nellie's narcissistic personality was clearly manifested by the following: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%">(1)</td> <td width="95%">She had a grandiose sense of self. She continued to be domineering and controlling. She always insisted on doing things her way and expected Willy to give in to her demands. She also demanded Willy to always tell her his whereabouts;</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td>(2)</td> <td>She had an arrogant and haughty attitude, especially toward (sic) Willy's mother, whom she resented. She had a strained relationship with her mother-in-law; and </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td>(3)</td> <td>She displayed an excessive sense of entitlement. She expected to be treated [well] at all times and would readily complain if things were not to her liking.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></td> </tr> </tbody></table> </blockquote> <p>Dr. Dayan also opined that the root cause of Nellie's psychological incapacity "can be traced to the experiences of overindulgence and over pampering by her siblings and parents" during her childhood,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> or well before the celebration of the parties' marriage. Moreover, Dr. Dayan concluded that the nature of such psychological incapacity is severe and pervasive as it affects all areas of her life, to the point that she is unable to perform her essential marital obligations to Willy.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></p> <p> It is quite apparent that Nellie's psychological incapacity, as shown by the behavioral manifestations of her personality disorder that is <i>rooted in her childhood</i> and carried over into her adulthood and married life, is <i>grave</i> and <i>legally incurable</i>. The actions of Nellie demonstrate an undeniable pattern of failure on her part to comply with her essential marital obligations to Willy. Thus, the CA correctly upheld the RTC Decision which declared the parties' marriage void on the ground of Nellie's psychological incapacity. </p><p> Even assuming <i>arguendo</i> that Nellie's allegations, i.e., that Willy had physically, sexually, emotionally, financially, and psychologically abused her and their children, are true, the finding of her psychological incapacity in the case<i> stands</i>. This is because such alleged abuse neither negates the evidence of Nellie's own psychological incapacity nor sufficiently proves, on its own, that Willy is psychologically incapacitated to perform his essential marital obligations. In the same vein, even if the Court declares Willy as the psychologically incapacitated spouse instead of Nellie as she contends, the result remains the same, that is, the marriage is still void under Article 36 of the Family Code. </p><p> That being said, the Court is constrained to <i>remand</i> the case to the trial court for the conduct of further proceedings in relation to: (i) the determination of the proper amount of support <i>pendente lite</i>, <i>if</i> still warranted under the circumstances; and (ii) the settlement of the parties' properties.</p><p> After all, the trial court, which has the jurisdiction to declare the marriage a nullity, likewise has the authority to resolve <i>incidental and consequential matters</i> thereto, including support and the settlement of the co-owned properties of the parties.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Besides, "the Court is not a trier of facts."<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Verily, the resolution of these matters necessarily requires the presentation of evidence that is outside the purview of this Rule 45 proceeding.</p><p> Pertinently, the <i>rules on co-ownership</i>, in relation to Article 147<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> of the Family Code, govern the liquidation, partition, and distribution of the common properties of spouses, whose marriage is declared void under Article 36 of the same Code,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> as in the case. It is also settled that it is not necessary to liquidate the common properties of the spouses in the same proceeding for declaration of nullity of marriage under Article 36.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></p><p> In the case, the settlement of the co-owned properties of Willy and Nellie need not be done through a judicial proceeding.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Nevertheless, the Court deems it proper to refer the matter back to the trial court as it appears that both parties have raised issues regarding their property relations in their respective pleadings.</p><p> <b>ACCORDINGLY,</b> the Petition is <b>DENIED</b> for lack of merit. The Decision dated May 4, 2021, and the Resolution dated December 13, 2021, of the Court of Appeals in CA-G.R. CV No. 109458 are <b>AFFIRMED.</b></p><p> The case is hereby <b>REMANDED</b> to Branch 261, Regional Trial Court, Pasig City, for the conduct of further proceedings in relation to: (1) the determination of the proper amount of support <i>pendente lite</i>, <i>if</i> still warranted under the circumstances; and (2) the liquidation, partition, and distribution of the co-owned properties of Willy Q. Tee Ten and Nellie Y. Chan Tee Ten in accordance with Article 147 of the Family Code.</p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa (Chairperson), Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur.<br> <i>Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 14-99.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 101-121. Penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Myra V. Garcia-Fernandez and Bonifacio S. Pascua of the Special Fourteenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 126-129. Penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Myra V. Garcia-Fernandez and Bonifacio S. Pascua of the Former Special Fourteenth Division, Court of Appeals, Manila. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Not appended in the <i>rollo</i>. </p><p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, pp. 101-102, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 102-103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 103-104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 105. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 105-106. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 106. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 20-21, Petition. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 106-107, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 107. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Referred to as Jocelyn Arces in some parts of the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Referred to as Theresa Tee in some parts of the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Referred to as Juliet Tobias in some parts of the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, p. 113, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 115-116. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 120. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 129. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 25. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 25-26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 93-95. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 97-98. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 149-150. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 151-167. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 158. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 159. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 164. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 174-193. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 176. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 189. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 190-191. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 207-221. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> <b>Far Eastern Surety and Insurance Co., Inc., v. People</b>, 721 Phil. 760, 770 (2013), <i>citing</i> <b>Remalante v. Tibe</b>, 241 Phil. 930 (1988). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>See</i> <b>Pascual v. Burgos</b>, 776 Phil. 167, 182-183 (2016), <i>citing</i> <b>Medina v. Mayor Asistio, Jr.</b>, 269 Phil. 225 (1990). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Gatan v. Vinarao</b>, 820 Phil. 257, 273-274 (2017), <i>citing</i> <b>Bank of the Philippine Islands v. Leobrera</b>, 461 Phil. 461, 469 (2003). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 902 Phil. 558 (2021). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 595-598, <i>citing</i> <b>Republic v. Court of Appeals and Molina</b>, 335 Phil. 664, 678 (1997). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 599-600. <i>See also</i> FAMILY CODE, Article 36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i>, at 591, <i>citing</i> <b>Spouses Manolo v. Roldan-Confesor</b>, 290 Phil. 311 (1992). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 597. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Georfo v. Republic of the Philippines</b>, 937 Phil. 518, 535 (2023). </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i>, <i>citing</i> <b>Tan-Andal v. Andal</b>, 902 Phil. 358 (2021). Emphasis supplied. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, p. 119, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 600-604 (2021), <i>citing</i> <b>Republic v. Court of Appeals and Molina</b>, 335 Phil. 664, 678 (1997). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> FAMILY CODE, Article 68. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> As culled from the CA Decision, <i>rollo</i>, pp. 118-119. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 113. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 114. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>See</i> <b>Tanyag v. Tanyag</b>, 914 Phil. 150, 157 (2021), <i>citing</i> <b>Valdes v. RTC, Br. 102, Quezon City</b>, 328 Phil. 1289 (1996). </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Aluzan v. Fortunado</b>, 946 Phil. 651, 658 (2023). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> ARTICLE 147. When a man and a woman who are capacitated to marry each other, live exclusively with each other as husband and wife without the benefit of marriage or under a void marriage, their wages and salaries shall be owned by them in equal shares and the property acquired by both of them through their work or industry shall be governed by the rules on co-ownership. </p><p> In the absence of proof to the contrary, properties acquired while they lived together shall be presumed to have been obtained by their joint efforts, work or industry, and shall be owned by them in equal shares. For purposes of this Article, a party who did not participate in the acquisition by the other party of any property shall be deemed to have contributed jointly in the acquisition thereof if the former's efforts consisted in the care and maintenance of the family and of the household.</p><p> Neither party can encumber or dispose by acts inter vivos of his or her share in the property acquired during cohabitation and owned in common without the consent of the other, until after the termination of their cohabitation.</p><p> When only one of the parties to a void marriage is in good faith, the share of the party in bad faith in the co-ownership shall be forfeited in favor of their common children. In case of default of or waiver by any or all of the common children or their descendants, each vacant share shall belong to the respective surviving descendants in the absence of descendants, such share shall belong to the innocent party. In all cases, the forfeiture shall take place upon termination of the cohabitation. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>DiÃ±o v. DiÃ±o</b>, 655 Phil. 175, 185 (2011). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 185. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>See</i> CIVIL CODE, Article 496. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

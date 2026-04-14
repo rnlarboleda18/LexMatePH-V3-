@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
 import { Search, Gavel, FileText, X, Filter, BookOpen, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, ChevronUp, Landmark } from 'lucide-react';
@@ -9,6 +10,7 @@ import { lexCache } from '../utils/cache';
 
 import { formatDate } from '../utils/dateUtils';
 import { apiUrl } from '../utils/apiUrl';
+import { consumeFreeTierUsage, notifyUsageBlocked } from '../utils/freeTierUsage';
 import { getSubjectColor, getSubjectAnswerColor, normalizeSubjectForColor } from '../utils/colors';
 import ReactMarkdown from 'react-markdown';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -474,7 +476,8 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
-    const { requireAccess } = useSubscription();
+    const { getToken, isSignedIn } = useAuth();
+    const { openUpgradeModal, canAccess } = useSubscription();
 
     // Seed from ?q= so direct links and page-refreshes restore the search.
     const [searchTerm, setSearchTerm] = useState(() =>
@@ -831,12 +834,32 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         if (onCaseSelect) {
             onCaseSelect(enrichedDecision);
         } else {
+            const usage = await consumeFreeTierUsage({
+                feature: 'case_digest',
+                getToken,
+                isSignedIn,
+                canAccess,
+            });
+            if (!usage.allowed) {
+                notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
+                return;
+            }
             setSelectedDecision(enrichedDecision);
         }
     };
 
     const handleViewFullText = async (e, decision) => {
         e.stopPropagation();
+        const usage = await consumeFreeTierUsage({
+            feature: 'case_digest',
+            getToken,
+            isSignedIn,
+            canAccess,
+        });
+        if (!usage.allowed) {
+            notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
+            return;
+        }
         setSelectedDecision(decision);
         setViewMode('full');
         setFullText(null);
@@ -938,10 +961,19 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
 
 
-    const handleDownloadDigestPDF = () => {
+    const handleDownloadDigestPDF = async () => {
         if (!selectedDecision) return;
-        
-        if (!requireAccess('case_digest_download')) return;
+
+        const usage = await consumeFreeTierUsage({
+            feature: 'case_digest_download',
+            getToken,
+            isSignedIn,
+            canAccess,
+        });
+        if (!usage.allowed) {
+            notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
+            return;
+        }
 
         const doc = new jsPDF({ format: 'a4', unit: 'mm' });
         const pageWidth = doc.internal.pageSize.getWidth();

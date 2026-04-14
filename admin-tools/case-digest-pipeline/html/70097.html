@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256093 - THE COMPULSORY HEIRS OF THE LATE BEN STA. RITA, NAMELY: AURORA STA. RITA-&shy;MIRANDA, JOSE B. STA. RITA, MARIO B. STA. RITA, ALFREDO B. STA. RITA, AND ESTATE, AS REPRESENTED BY ITS ESTATE ADMINISTRATOR, ALFRED R. STA. RITA, PETITIONERS, VS. THE HEIRS OF ELADIA MANALO, NAMELY: SALVADOR M. CRUZ, ALEJANDRA CRUZ-&shy;RECOMETA, ZENAIDA CRUZ-&shy;ROXAS, ARTURO M. CRUZ, TERESITA CRUZ-DELOS SANTOS, AIDA M. CRUZ, ARLENE LIWANAG-MENDOZA, AND GABRIEL C. CRUZ, RESPONDENTS. RODEL BARCELONA PROPERTIES, INC., RESPONDENT-INTERVENOR.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70097' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256093, July 30, 2025 ]</H2>
+			<H3>THE COMPULSORY HEIRS OF THE LATE BEN STA. RITA, NAMELY: AURORA STA. RITA-Â­MIRANDA, JOSE B. STA. RITA, MARIO B. STA. RITA, ALFREDO B. STA. RITA, AND ESTATE, AS REPRESENTED BY ITS ESTATE ADMINISTRATOR, ALFRED R. STA. RITA, PETITIONERS, VS. THE HEIRS OF ELADIA MANALO, NAMELY: SALVADOR M. CRUZ, ALEJANDRA CRUZ-Â­RECOMETA, ZENAIDA CRUZ-Â­ROXAS, ARTURO M. CRUZ, TERESITA CRUZ-DELOS SANTOS, AIDA M. CRUZ, ARLENE LIWANAG-MENDOZA, AND GABRIEL C. CRUZ, RESPONDENTS.<BR><BR> RODEL BARCELONA PROPERTIES, INC., RESPONDENT-INTERVENOR.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY"> A dismissal for failure to prosecute is a judgment on the merits that bars the filing of a subsequent complaint with similar parties, subject matter, and cause of action as that earlier dismissed.<br><br>This resolves the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by the compulsory heirs of the late Ben Sta. Rita (heirs of Ben Sta. Rita)<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> assailing the Court of Appeals September 25, 2020 Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and March 23, 2021 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> The Court of Appeals reversed the Order of Branch 266, Regional Trial Court, Pasig City dismissing<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> the Complaint for annulment of Deeds of Sale and Transfer Certificates of Title filed by the heirs of Eladia Manalo<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> on the grounds of <i>res judicata</i> and violation of the rule against forum shopping.<br><br>On March 14, 2006, the heirs of Eladia Manalo first filed before the Regional Trial Court of Pasig City a Complaint<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> against the heirs of Ben Sta. Rita. The case was for the annulment of Deeds of Sale and Transfer Certificates of Title numbered 18206 and 18670, both under the name of Ben Sta. Rita. The case was raffled to Branch 153 of the trial court (2006 Complaint).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>In a January 26, 2009 Order,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Branch 153 dismissed the 2006 Complaint for failure to prosecute. The Order states:<blockquote>On June 20, 2007, the Court issued an order declaring [the heirs of Ben Sta. Rita] in default and directing [the heirs of Eladia Manalo] to coordinate with the Branch Clerk of Court for the <i>ex-parte</i> presentation of evidence.<br><br>On August 29, 2007, the Motion and Manifestation filed by defendant Alfred R. Sta. Rita was denied.<br><br>On February 13, 2008, the New Motion for Reconsideration filed by the defendant was denied.<br><br>Since then, or for almost one (1) year, nothing has been heard from [the heirs of Eladia Manalo] showing a seeming lack of interest to pursue this case.<br><br><b>WHEREFORE</b>, premises considered, this Complaint is Dismissed for failure to prosecute.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[10]</sup></blockquote>In 2010, the heirs of Eladia Manalo filed before the Regional Trial Court of Pasig City another Complaint<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> for annulment of Deeds of Sale and Transfer Certificates of Title numbered 18206 and 18670. They again impleaded as defendants the heirs of Ben Sta. Rita and the Register of Deeds of Taguig City, but added Westmont Bank (now United Overseas Bank Phils.) as additional defendant. The case was raffled to Branch 266 of the trial court (2010 Complaint).<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In their 2010 Complaint, the heirs of Eladia Manalo alleged that, during her lifetime, Eladia Manalo owned two parcels of land: one comprising of 3,475 square meters and the other having an area of 4,192 square meters. After Eladia's death, all her compulsory heirs, including her husband Eleuterio Cruz, had free patent applications filed, resulting in Free Patents under the names of "The Heirs of Eladia Manalo" and "Eleuterio Cruz." These Free Patents were eventually registered with the Register of Deeds, and Original Certificates of Title over the parcels of land were issued in the names of the "Heirs of Eladia Manalo" and "Eleuterio Cruz." Being the husband of the deceased, Eleuterio took custody of the Original Certificates of Title.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>However, allegedly without the knowledge of the other heirs of Eladia Manalo and through Ben Sta. Rita's "fraudulent and malicious machinations,"<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Eleuterio mortgaged and sold the parcels of land to Ben Sta. Rita. This caused the cancellation of the Original Certificates of Title under the name of the "Heirs of Eladia Manalo" and the issuance of Transfer Certificates of Title numbered 18206 and 18670 under Ben Sta. Rita's name. The heirs of Eladia Manalo thus prayed that Transfer Certificates of Title numbered 18206 and 18670 and the contracts underlying the unauthorized transfer be declared null and void, and that the Original Certificates of Title under their name be reinstated.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In their Answer with Compulsory Counterclaim,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> the heirs of Ben Sta. Rita highlighted that the 2006 Complaintâwhich had identical parties, subject matter, and cause of action as that of the 2010 Complaintâwas previously dismissed in the January 26, 2009 Order for failure to prosecute. They stressed that the January 26, 2009 Order has already attained finality; hence, by virtue of Rule 17, Section 3<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of the 1997 Rules of Civil Procedure, the January 26, 2009 Order was a judgment on the merits. For these reasons, the heirs of Ben Sta. Rita argued that the 2010 Complaint may no longer be filed as it was barred by the January 26, 2009 Order under the doctrine of <i>res judicata</i>.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>In the meantime, on May 5, 2011, Transfer Certificate of Title number 18670 was cancelled, and a new one was issued under the name of United Overseas Bank Phils. In turn, the property under United Overseas Bank Phils.'s name was purchased by Rodel Barcelona Properties, Inc.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In its Answer-in-Intervention with Leave of Court, Rodel Barcelona Properties, Inc. contended that the heirs of Eladia Manalo had no cause of action against it because it was an innocent purchaser for value. It reiterated that the 2010 Complaint was barred by prior judgment and should be dismissed. It stressed that the heirs of Eladia Manalo supposedly violated the rule against forum shopping, specifically by failing to disclose to the trial court that it had earlier filed a similar Complaint in 2006.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The heirs of Eladia Manalo replied that the January 26, 2009 Order dismissing the 2006 Complaint did not have the effect of barring the subsequent filing of a similar complaint, the previous dismissal having been made on "sheer technicality."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> They argued that they did not violate the rule against forum shopping because the 2006 Complaint was not a pending case when they filed the 2010 Complaint.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>In its August 22, 2012 Order,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Branch 266 dismissed the 2010 Complaint. Citing Rule 17, Section 3 of the 1997 Rules of Civil Procedure, it held that the January 26, 2009 Order was a judgment on the merits considering that the 2006 Complaint was dismissed for failure to prosecute. Consequently, the January 26, 2009 Order had the effect of <i>res judicata</i> so as to bar the filing of the 2010 Complaint. Branch 266 noted that the 2010 Complaint had identical parties, subject matter, and causes of action as that of the 2006 Complaint.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Branch 266 added that the heirs of Eladia Manalo violated the rule against forum shopping. Contrary to the requirement in Rule 7, Section 5<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> of the 1997 Rules of Civil Procedure, the heirs of Eladia Manalo failed to disclose in the Certification of Non-Forum Shopping they attached to the 2010 Complaint that they had filed a similar action before Branch 153 back in 2006.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>On the grounds of <i>res judicata</i> and the heirs of Eladia Manalo' s failure to comply with Rule 7, Section 5, Branch 266 dismissed the 2010 Complaint. The dispositive portion of the August 22, 2012 Order reads:<blockquote><b>WHEREFORE</b>, the affirmative defenses/motions to dismiss of the aforementioned defendants are hereby <b>GRANTED</b>. Consequently, the present complaint is <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[27]</sup></blockquote>The heirs of Eladia Manalo filed a Motion for Reconsideration, which Branch 266 denied in its August 27, 2013 Order.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>On the heirs of Eladia Manalo's appeal, the Court of Appeals reversed and set aside Branch 266's August 22, 2012 and August 27, 2013 Orders and remanded the case to the trial court for further proceedings.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> It held that Branch 153's January 26, 2009 Order was not a judgment on the merits: first, because it dismissed the 2006 Complaint "on a mere technicality";<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> and second, it contained no declaration as to the parties' respective rights and liabilities.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The January 26, 2009 Order not being a judgment on the merits, the Court of Appeals said that it could not have operated as a bar to the filing of the 2010 Complaint.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The Court of Appeals added that the heirs of Eladia Manalo did not deliberately violate Rule 7, Section 5 of the Rules of Court on the required contents of the certification against forum shopping. It highlighted the policy behind the rule against forum shopping, i.e., to prevent parties from filing multiple suits in different fora to secure a win.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The Court of Appeals deduced that no deliberate violation can be imputed against the heirs of Eladia Manalo because they filed the 2010 Complaint "under the good faith belief that [the 2006 Complaint] could no longer be revived."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The Court of Appeals noted that there is forum shopping only when the elements of <i>litis pendentia</i>, or where a final judgment in one case will amount to <i>res judicata</i> in another, exist in a case. Considering that the 2006 Complaint was dismissed, there was no <i>litis pendentia</i>. Neither was there <i>res judicata</i> because, as the Court of Appeals had earlier rationalized, the January 26, 2009 Order was not a judgment on the merits but a "dismissal without prejudice." For these reasons, the Court of Appeals held that the heirs of Eladia Manalo's nondisclosure of the dismissal of the 2006 Complaint cannot be considered a violation of the rules against forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>The Court of Appeals' September 25, 2020 Decision<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> reads:<blockquote><b>ACCORDINGLY</b>, the appeal is <b>GRANTED</b>. The Order dated 22 August 2012 of the Regional Trial Court of Pasig, National Capital Judicial Region, Branch 266, Pasig City, dismissing Civil Case No. 72608-TG, and its subsequent Order dated 27 August 2013 denying reconsideration of said dismissal are hereby <b>REVERSED</b> and <b>SET ASIDE</b>.<br><br>The Clerk of Court is directed to remand the records immediately to the court of <i>a quo</i> and the latter to proceed with the trial of Civil Case No. 72608-TG with deliberate dispatch.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[37]</sup></blockquote>The heirs of Ben Sta. Rita filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> which the Court of Appeals denied in its March 23, 2021 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>On June 3, 2021, the heirs of Ben Sta. Rita filed their Petition for Review on Certiorari.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> In a July 5, 2023 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> this Court directed the heirs of Eladia Manalo and Rodel Barcelona Properties, Inc. to file their respective comments. Rodel Barcelona Properties, Inc. commented<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> on the Petition. For their part, after a show cause order,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the heirs of Eladia Manalo filed a Compliance,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> stating that they are adopting the Appellant's Brief they had filed before the Court of Appeals as their comment. Rodel Barcelona Properties, Inc.'s Comment and the heirs of Eladia Manalo's Compliance were both noted<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> by this Court.<br><br>The heirs of Ben Sta. Rita maintain that Branch 153's January 26, 2009 Order that dismissed the 2006 Complaint for failure to prosecute barred the filing of the 2010 Complaint. They argue that all the elements of <i>res judicata</i> are present in this case, specifically: the 2006 and 2010 Complaints have identical parties, subject matter, and causes of action; the January 26, 2009 Order dismissed the 2006 Complaint for failure to prosecute, making it a judgment on the merits under Rule 17, Section 3 of the 1997 Rules of Civil Procedure; the January 26, 2009 Order was rendered by a trial court with jurisdiction over the subject matter of the case; and the January 26, 2009 Order was already final. With all the elements of <i>res judicata</i> present, the heirs of Ben Sta. Rita stress that the January 26, 2009 Order dismissing the 2006 Complaint is with prejudice to the filing of the 2010 Complaint, the latter involving identical parties, subject matter, and cause of action with that of the former. For them, the Court of Appeals thus erred in remanding the case to Branch 266 for further proceedings.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Rodel Barcelona Properties, Inc. echoes the heirs of Ben Sta. Rita's argument, specifically, that the dismissal of the 2006 Complaint was an adjudication on the merits and with prejudice to the filing of the 2010 Complaint based on the doctrine of <i>res judicata</i>. It adds that the heirs of Eladia Manalo violated Rule 7, Section 5 of the 1997 Rules of Civil Procedure for failing to disclose their filing of the 2006 Complaint, a case that has the same issues as that of the 2010 Complaint. It argues that the disclosure requirement in Rule 7, Section 5 applies not only when both cases are pending but also when one of the cases was already decided. It pointed out the use of the phrase "<i>has been filed</i>" with respect to those similar cases that must be disclosed in a certificate against forum shopping. For the heirs of Eladia Manalo's alleged violation of Rule 7, Section 5, Rodel Barcelona Properties, Inc. prays for the dismissal of the 2010 Complaint.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>For their part, the heirs of Eladia Manalo maintain that the January 26, 2009 Order was not an adjudication on the merits but one that was based on mere technicality. They highlight that nothing in the January 26, 2009 Order states that it was with prejudice to the filing of a subsequent complaint involving the same parties, subject matter, or cause of action as the one they had earlier filed in 2006; therefore, the filing of the 2010 Complaint was not barred under the doctrine of <i>res judicata</i>.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> The heirs of Eladia Manalo submit that they did not violate the rule on forum shopping because <i>res judicata</i> is not applicable in this case.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>The issues for this Court's resolution are:<br><br><i>First</i>, whether <i>res judicata</i> barred the filing of the 2010 Complaint; and,<br><br><i>Second</i>, whether respondents heirs of Eladia Manalo violated Rule 7, Section 5 of the 1997 Rules of Civil Procedure when they failed to disclose their filing of the 2006 Complaint.<br><br>The Petition for Review on <i>Certiorari</i> is granted. The heirs of Eladia Manalo are barred from filing the 2010 Complaint under the doctrine of <i>res judicata</i>. Furthermore, they violated Rule 7, Section 5 of the 1997 Rules of Civil Procedure when they failed to disclose in the Certification Against Forum Shopping they attached to their 2010 Complaint that they had earlier filed a similar Complaint back in 2006. For these reasons, the Court of Appeals erred in remanding the case to the trial court for further proceedings. What the Court of Appeals should have done was to affirm the trial court's dismissal of the 2010 Complaint.<br><br><center><b>I</b></center><br>The filing of the 2010 Complaint was barred by a prior judgment, specifically, the January 26, 2009 Order of Branch 153 dismissing the 2006 Complaint. The January 26, 2009 Order operated as <i>res judicata</i> so as to bar the filing of a subsequent complaint with identical parties, subject matter, and cause of action as that of the 2006 Complaint.<br><br><i>Res judicata</i> literally means "a matter adjudged; a thing judicially acted upon or decided; [or] a thing or matter settled by judgment."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> It is understood in two senses: <i>first</i>, "bar by prior judgment," which precludes the prosecution of a second action upon the same claim, demand, or cause of action;<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and, <i>second</i>, "conclusiveness of judgment," where issues actually and directly resolved in a former suit cannot again be raised in any future case between the same parties involving a different cause of action.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Avoiding. unnecessary multiplicity of suits is the rationale behind the doctrine of <i>res judicata</i>. Indeed, that there should be an end to litigation is such an important public policy that, in amending the 1997 Rules of Civil Procedure in 2019, this Court retained "bar by prior judgment" as one of the three grounds for filing motions to dismiss but altogether prohibited the filing of motions to dismiss based on other grounds formerly allowed under the old rules.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Determining the applicability of <i>res judicata</i> rests on the existence of four elements: <i>first</i>, the judgment sought to bar the new action must be final; <i>second</i>, the decision must have been rendered by a court having jurisdiction over the subject matter and the parties; <i>third</i>, the disposition of the case must be a judgment on the merits; and <i>fourth</i>, there must be as between the first and second action identity of parties, subject matter, and causes of action.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>There is no dispute as to the existence of the first, second, and fourth elements. The judgment sought to bar the filing of the 2010 ComplaintâBranch 153's January 26, 2009 Order dismissing the 2006 Complaint for failure to prosecuteâhad already attained finality in 2009 as certified by Branch 153.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Branch 153, a branch of the Regional Trial Court of Pasig City, also had subject matter jurisdiction over the annulment of Deeds of Sale and Transfer Certificates of Title filed by the heirs of Eladia Manalo.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The trial court also had jurisdiction over the parties, specifically, over the heirs of Eladia Manalo due to their filing of the 2006 Complaint; and over the heirs of Ben Sta. Rita, by virtue of a valid service of summons on them and their voluntary appearance before the trial court.<br><br>There is also identity of parties, subject matter, and causes of action between the 2006 and 2010 Complaints. The plaintiffs in both Complaints were the heirs of Eladia Manalo, while the defendants were the heirs of Ben Sta. Rita. While an additional defendant was named in the 2010 Complaint, i.e., United Overseas Bank Phils., "the principle of <i>res judicata</i> does not require absolute identity of parties."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> So long as the parties remain substantially the same, as in this case, there is identity of parties. The subject matter of the cases is likewise identical, i.e., the properties covered by Transfer Certificates of Title numbered 18206 and 18670. Lastly, there is an identity of causes of action, with both Complaints praying for the annulment of contracts that caused the cancellation of the Original Certificates of Title under the heirs of Eladia Manalo and Eleuterio Cruz, and the issuance of Transfer Certificates of Title under the name of Ben Sta. Rita.<br><br>The issue in this case revolves around the existence of the third element of <i>res judicata</i>, i.e., whether the January 26, 2009 Order dismissing the 2006 Complaint for failure to prosecute was a judgment on the merits.<br><br>On this issue, we rule in the affirmative.<br><br>Rule 17, Section 3 of the 1997 Rules of Civil Procedure, then governing when the 2010 Complaint was filed, is definitive:<blockquote><center><b>RULE 17<br>DISMISSAL OF ACTIONS</b></center><br><b>SECTION 3. <i>Dismissal due to fault of plaintiff</i>.</b> â If, for no justifiable cause, the plaintiff fails to appear on the date of the presentation of his evidence in chief on the complaint, or to prosecute his action for an unreasonable length of time, or to comply with these Rules or any order of the court, the complaint may be dismissed upon motion of the defendant or upon the court's own motion, without prejudice to the right of the defendant to prosecute his counterclaim in the same or in a separate action. <i>This dismissal shall have the effect of an adjudication upon the merits, unless otherwise declared by the court.</i> (Emphasis supplied)</blockquote>With the addition of gender-appropriate pronouns, Rule 17, Section 3<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> was retained in the 2019 Amendments to the 1997 Rules of Civil Procedure.<br><br>As stated in the Rules, it is clear that a dismissal of action for failure to prosecute "shall have the effect" of an "adjudication upon the merits, unless otherwise declared by the court."<br><br>As shown by its contents, the January 26, 2009 Order was a dismissal of action for failure to prosecute, thus:<blockquote>On June 20, 2007, the Court issued an order declaring [the heirs of Ben Sta. Rita] in default and directing [the heirs of Eladia Manalo] to coordinate with the Branch Clerk of Court for the <i>ex-parte</i> presentation of evidence.<br><br>On August 29, 2007, the Motion and manifestation filed by defendant Alfred R. Sta. Rita was denied.<br><br>On February 13, 2008, the New Motion for Reconsideration filed by the defendant was denied.<br><br><i>Since then, or for almost one (1) year, nothing has been heard from [the heirs of Eladia Manalo] showing a seeming lack of interest to pursue this case.</i><br><br><i>WHEREFORE, premises considered, this Complaint is Dismissed for failure to prosecute.</i> (Emphasis supplied)</blockquote>The heirs of Eladia Manalo can repeatedly insist that the January 26, 2009 Order was a dismissal based on mere technicality. Even the Court of Appeals held that the January 26, 2009 Order was not a judgment on the merits because it contains no determination as to the rights and liabilities of parties based on established facts. But in so ruling, the Court of Appeals completely avoided a discussion of Rule 17, Section 3, an omission not lost on this Court.<br><br>In any case, this does not change the <i>effect</i> of the dismissal of the 2006 Complaint as provided in Rule 17, Section 3. Being a dismissal due to failure to prosecute, the January 26, 2009 Order is, by virtue of Rule 17, Section 3, a judgment on the merits.<br><br>With the January 26, 2009 Order being a judgment on the merits, all the elements of <i>res judicata</i> are present in this case. Therefore, the January 26, 2009 Order dismissing the 2006 Complaint barred the filing of the 2010 Complaint. Consequently, the Court of Appeals should have affirmed Branch 266's dismissal of the 2010 Complaint.<br><br><center><b>II</b></center><br>Worse, the heirs of Eladia Manalo violated Rule 7, Section 5 of the 1997 Rules of Civil Procedure when they submitted a false Certification against forum shopping. Rule 7, Section 5 provided:<blockquote>SECTION 5. <i>Certification against forum shopping</i>. â The plaintiff or principal party shall certify under oath in the complaint or other initiatory pleading asserting a claim for relief, or in a sworn certification annexed thereto and simultaneously filed therewith: (a) that he has not theretofore commenced any action or filed any claim involving the same issues in any court, tribunal or quasi-judicial agency and, to the best of his knowledge, no such other action or claim is pending therein; (b) if there is such other pending action or claim, a complete statement of the present status thereof; and (c) if he should thereafter learn that the same or similar action or claim has been filed or is pending, he shall report that fact within five (5) days therefrom to the court wherein his aforesaid complaint or initiatory pleading has been filed.<br><br>Failure to comply with the foregoing requirements shall not be curable by mere amendment of the complaint or other initiatory pleading but shall be cause for the dismissal of the case without prejudice, unless otherwise provided, upon motion and after hearing. The submission of a false certification or non-compliance with any of the undertakings therein shall constitute indirect contempt of court, without prejudice to the corresponding administrative and criminal actions. If the acts of the party or his counsel clearly constitute willful and deliberate forum shopping, the same shall be ground for summary dismissal with prejudice and shall constitute direct contempt, as well as a cause for administrative sanctions.</blockquote>In the Certification against forum shopping appended to the 2010 Complaint, the heirs of Eladia Manalo undertook that they "have not heretofore commenced any other action or proceeding involving the same issues in the Supreme Court, the Court of Appeals, or any other tribunal or agency."<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> This is a patently false undertaking because they have earlier commenced an action for annulment of Deeds of Sale and Transfer Certificates of Title in 2006, which involved the same issues as those raised in the 2010 Complaint. The 2006 Complaint was even filed before the same Regional Trial Court, albeit raffled to a different branch.<br><br>The argument that only pending cases are required to be disclosed is wrong. The phrase "<i>has not theretofore commenced any action</i>" in Rule 7, Section 5 clearly requires the disclosure not only of pending cases but also of cases previously filed, even if no longer pending. The term "<i>theretofore commenced</i>" includes cases that are still pending, cases that may have been dismissed, and even those that may have been decided with finality. So long as the cases involve the same issues, Rule 7, Section 5 demands disclosure.<br><br>This interpretation is consistent with the "grave evil sought to be avoided by the rule against forum shopping,"<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> i.e., "the rendition by two competent tribunals of two separate and contradictory decisions."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Some parties file multiple suits in different tribunals until they get a favorable result in one of them.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> This practice "trifle[s] with the orderly administration of justice."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Therefore, courts strictly adhere to the rule against forum shopping. They are required to dismiss any case filed violating the rule.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>The case of <i>City of Taguig v. City of Makati</i><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> enumerated several ways of committing forum shopping:<blockquote>(1) filing multiple cases based on the same cause of action and with the same prayer, the previous case not having been resolved yet (where the ground for dismissal is <i>litis pendentia</i>); (2) filing multiple cases based on the same cause of action and the same prayer, the previous case having been finally resolved (where the ground for dismissal is <i>res judicata</i>); and (3) filing multiple cases based on the same cause of action but with different prayers (splitting of causes of action, where the ground for dismissal is also either <i>litis pendentia</i> or <i>res judicata</i>).<sup style="COLOR: RGB(255, 0, 0);">[66]</sup></blockquote>The heirs of Eladia Manalo committed forum shopping under the second type: they filed two cases based on the same cause of action and the same prayer, the previous case having been finally resolved. This is consistent with our finding that the January 26, 2009 Order amounted to <i>res judicata</i> that barred the filing of the 2010 Complaint. Therefore, the heirs of Eladia Manalo violated Rule 7, Section 5 of the 1997 Rules of Civil Procedure, and the Court of Appeals should have affirmed the dismissal of the 2010 Complaint.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The September 25, 2020 Decision and March 23, 2021 Resolution of the Court of Appeals in CA-G.R. CV No. 103453 are <b>REVERSED</b> and <b>SET ASIDE</b>. The August 22, 2012 Order of Branch 266, Regional Trial Court, Pasig City in Civil Case No. 72608-TG is <b>REINSTATED</b>.<br><br>The Complaint dated March 8, 2010 and filed by respondents heirs of Eladia Manalo, namely Salvador M. Cruz, Alejandra Cruz-Recometa, Zenaida Cruz-Roxas, Arturo M. Cruz, Teresita Cruz-Delos Santos, Aida M. Cruz, Arlene Liwanag-Mendoza, and Gabriel C. Cruz is <b>DISMISSED</b> with prejudice to the filing of a similar complaint in the future.<br><br><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez, Dimaampao</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Villanueva, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional Member per Raffle dated September 13, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 29-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> The heirs of Ben Sta. Rita are Aurora Sta. Rita-Miranda, Jose B. Sta. Rita, Mario B. Sta. Rita, Alfredo B. Sta. Rita, and Estate, as represented by its Estate Administrator, Alfred R. Sta. Rita.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 44-56. The Decision in CA-G.R. CV No. 103453 was penned by Associate Justice Tita Marilyn B. Payoyo-Villordon and was concurred in by Associate Justice (now Presiding Justice) Fernanda Lampas Peralta and Associate Justice Nina G. Antonio-Valenzuela of the Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 57-59. The Resolution in CA-G.R. CV No. 103453 was penned by Associate Justice Tita Marilyn B. Payoyo-Villordon and concurred in by Associate Justice (now Presiding Justice) Fernanda Lampas Peralta and Associate Justice Nina G. Antonio-Valenzuela of the Former Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 213-219. The August 22, 2012 Order in Civil Case No. 72608 was penned by Judge Toribio E. Ilao, Jr. of Branch 266, Regional Trial Court, Pasig City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The Heirs of Eladia Manalo are Salvador M. Cruz, Alejandra Cruz-Recometa, Zenaida Cruz-Roxas, Arturo M. Cruz, Teresita Cruz-Delos Santos, Aida M. Cruz, Arlene Liwanag-Mendoza, and Gabriel C. Cruz.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 93-151. Titled "<b>The Heirs of Eladia Manalo, namely: Salvador M. Cruz, Alexandra CruzÂ­Recometa, Zenaida Cruz-Roxas, Arturo M. Cruz, Teresita Cruz-Delos Santos, Aida M. Cruz, Arlene Liwanag-Mendoza, and Gabriel C. Cruz v. The Compulsory Heirs of the late Ben Sta. Rita, namely: Aurora Sta. Rita-Miranda, Jose B. Sta. Rita, Mario B. Sta. Rita, Alfredo B. Sta. Rita, and Estate as represented by its Estate Administrator, Alfred R. Sta. Rita, and the Register of Deeds of the City of Taguig.</b>"<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 152. The Order in Civil Case No. 70723 was penned by Judge Briccio C. YgaÃ±a of Branch 153, Regional Trial Court, Pasig City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 156-204.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 157-160.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 161-167.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 205-212.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 1997 RULES OF CIVIL PROCEDURE, Rule 17, sec. 3 provided:<blockquote>SECTION 3. <i>Dismissal due to fault of plaintiff</i>. â If, for no justifiable cause, the plaintiff fails to appear on the date of the presentation of his evidence in chief on the complaint, or to prosecute his action for an unreasonable length of time, or to comply with these Rules or any order of the court, the complaint may be dismissed upon motion of the defendant or upon the court's own motion, without prejudice to the right of the defendant to prosecute his counterclaim in the same or in a separate action. <i>This dismissal shall have the effect of an adjudication upon the merits, unless otherwise declared by the court.</i> (Emphasis supplied)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, pp. 206-210.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 213.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 213-214.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 213-219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 215-217.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 1997 RULES OF CIVIL PROCEDURE, Rule 7, sec. 5 provided:<blockquote>SECTION 5. <i>Certification against forum shopping</i>. â The plaintiff or principal party shall certify under oath in the complaint or other initiatory pleading asserting a claim for relief, or in a sworn certification annexed thereto and simultaneously filed therewith: (a) that he has not theretofore commenced any action or filed any claim involving the same issues in any court, tribunal or quasiÂ­-judicial agency and, to the best of his knowledge, no such other action or claim is pending therein; (b) if there is such other pending action or claim, a complete statement of the present status thereof; and (c) if he should thereafter learn that the same or similar action or claim has been filed or is pending, he shall report that fact within five (5) days therefrom to the court wherein his aforesaid complaint or initiatory pleading has been filed.<br><br>Failure to comply with the foregoing requirements shall not be curable by mere amendment of the complaint or other initiatory pleading but shall be cause for the dismissal of the case without prejudice, unless otherwise provided, upon motion and after hearing. The submission of a false certification or non-compliance with any of the undertakings therein shall constitute indirect contempt of court, without prejudice to the corresponding administrative and criminal actions. If the acts of the party or his counsel clearly constitute willful and deliberate forum shopping, the same shall be ground for summary dismissal with prejudice and shall constitute direct contempt, as well as a cause for administrative sanctions.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, pp. 217-219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 49-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 53-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 44-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 60-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 57-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 29-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 235-236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 303-317.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 320-321, Resolution dated August 19, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 322-324.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 320-321; <i>rollo</i>, pp. 328-329, Resolution dated April 2, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, pp. 35-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 306-311.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 222-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Club Filipino, Inc. v. Bautista</b>, 150 Phil. 599, 617 (2015) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 618.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> A.M. No. 19-10-20-SC, Rule 15, sec. 12 provides:<blockquote>SECTION 12. <i>Prohibited motions</i>. â The following motions shall not be allowed:<br><blockquote>(a) Motion to dismiss except on the following grounds:<br><br>. . . .<br><br>3) That the cause of action is barred by a prior judgment or by the statute of limitations.&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Club Filipino, Inc. v. Bautista</b>, 150 Phil. 599, 618 (2015) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i>, p. 155, Certificate of Finality.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Batas Pambansa Blg. 129, sec. 19(2).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Heirs of Gabule v. Jumuad</b>, 887 Phil. 575, 592 (2020) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> A.M. No. 19-10-20-SC, Rule 17, sec. 3 provides:<blockquote>SECTION 3. <i>Dismissal due to fault of plaintiff</i>. â If, for no justifiable cause, the plaintiff fails to appear on the date of the presentation of his or her evidence in chief on the complaint, or to prosecute his or her action for an unreasonable length of time, or to comply with these Rules or any order of the court, the complaint may be dismissed upon motion of the defendant or upon the court's own motion, without prejudice to the right of the defendant to prosecute his or her counterclaim in the same or in a separate action. This dismissal shall have the effect of an adjudication upon the merits, unless otherwise declared by the court.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i>, p. 169.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Heirs of Mampo v. Morada</b>, 888 Phil. 583, 605 (2020) [Per J. Caguioa, First Division], <i>citing</i> <b>Dy v. Mandy Commodities Company, Inc.</b>, 611 Phil. 74, 84 (2009) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Heirs of Mampo v. Morada</b>, 888 Phil. 583, 593 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 606.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> 787 Phil. 367 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 386-387, <i>citing</i> <b>Collantes v. Court of Appeals</b>, 546 Phil. 391, 400 (2007) [Per J. Chico-Nazario, <i>En Banc</i>], <i>citing further</i> <b>Ao-As v. Court of Appeals</b>, 524 Phil. 645, 660 (2006) [Per J. Chico-Nazario, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

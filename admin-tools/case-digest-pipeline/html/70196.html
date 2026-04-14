@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 251119 - MAPFRE INSULAR INSURANCE CORPORATION (MAPFRE), PETITIONER, VS. ATTY. ARIS L. GULAPA, IN HIS CAPACITY AS REHABILITATION RECEIVER FOR THE PHILIPPINE PHOSPHATE FERTILIZER CORPORATION, AND PHILIPPINE PHOSPHATE FERTILIZER CORPORATION, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70196' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 251119, November 18, 2025 ]</H2>
+			<H3>MAPFRE INSULAR INSURANCE CORPORATION (MAPFRE), PETITIONER, VS. ATTY. ARIS L. GULAPA, IN HIS CAPACITY AS REHABILITATION RECEIVER FOR THE PHILIPPINE PHOSPHATE FERTILIZER CORPORATION, AND PHILIPPINE PHOSPHATE FERTILIZER CORPORATION, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Assailed in this Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> are the Resolutions dated December 21, 2017<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and December 4, 2019<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. CEB-SP No. 11367, which affirmed the Order<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated September 12, 2017 of Branch 8, Regional Trial Court, Tacloban City (RTC) directing petitioner MAPFRE Insular Insurance Corporation (MAPFRE), among other insurers, to submit to arbitration with respondent Philippine Phosphate Fertilizer Corporation (PhilPhos), upon the Motion of PhilPhos's receiver, Atty. Aris L. Gulapa (Atty. Gulapa).</p><p align="center"><strong> The Facts</strong> </p><p> This case stemmed from the Motion to Compel Petitioner's Insurers to Submit to Arbitration<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (Motion) filed by respondent Atty. Gulapa, in his capacity as PhilPhos's rehabilitation receiver, against petitioner MAPFRE, among other insurers, in relation to PhilPhos's insurance claim. </p><p> In the Motion, Atty. Gulapa alleged that PhilPhos insured its buildings, machinery, and equipment (BME) for a total insured value of PHP 17,572,571,300.00 with the following insurers: (<i>a</i>) The Solid Guaranty, Inc.; (<i>b</i>) QBE Insurance (Philippines), Inc.; (<i>c</i>) PNB General Insurers Co., Inc.; (<i>d</i>) The New India Assurance Co., Ltd.; (<i>e</i>) Malayan Insurance Co., Inc.; (<i>f</i>) Oriental Assurance Corp.; (<i>g</i>) BPI/MS Insurance Corporation; (<i>h</i>) AFP General Insurance Corporation; (<i>i</i>) UCPB General Insurance Co. Inc.; (<i>j</i>) MAA General Assurance Philippines, Inc.; (<i>k</i>) <b>MAPFRE</b>; and (<i>l</i>) Charter Ping An Insurance Corporation (collectively, insurers).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> Following the onslaught of Typhoon Yolanda on November 8, 2013, PhilPhos lodged insurance claims against its insurers, including MAPFRE under MAPFRE Insurance Policy Number FI-SRR-EO-0000120 (insurance policy),<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> for the damages suffered by its BME in the total amount of PHP 7,293,174,817.00, from which amount, PHP 734,910,000.00 had already been paid by the insurers.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Consequently, PhilPhos sent a Formal Demand Letter<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated December 22, 2015 asking the insurers to pay the balance of PHP 6,558,264,817.00 as indemnity claim.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Notwithstanding said demand, the insurers refused to settle PhilPhos's claim. Hence, on May 4, 2017, PhilPhos sought to refer the matter to arbitration through its Request for Arbitration.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> In response, the insurers averred that its appointed loss adjuster, Crawford &amp; Company Philippines, Inc. (Crawford), appraised the total indemnity owing to PhilPhos at only PHP 1,150,000,000.00.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Moreover, in a letter dated May 15, 2017, Crawford stated that there is a need to settle the issue on the fair market value of PhilPhos's two sulfuric acid plants.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Accordingly, Crawford requested for further negotiations but was rejected by PhilPhos.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> Meanwhile, on September 17, 2015, PhilPhos initiated rehabilitation proceedings through a Petition for Voluntary Rehabilitation,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> which was later assigned to the RTC as rehabilitation court, and where Atty. Gulapa was appointed as the court-appointed receiver.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> The insurers' continued refusal to settle PhilPhos's claim prompted Atty. Gulapa to file the Motion invoking his duty, as rehabilitation receiver, to preserve and maximize the value of PhilPhos's assets. In support of his Motion, Atty. Gulapa argued, among others, that: (a) Section 26 of Republic Act No. (RA) 10142 or the Financial Rehabilitation and Insolvency Act of 2010<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> vests the RTC, sitting as a rehabilitation court, the authority to refer any dispute relating to the rehabilitation proceedings pending before it to arbitration;<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> (b) Item No. 22 of the Insurance Policy Conditions provides that all differences as to the amount of any loss or damage covered thereby shall be referred to the decision of an arbitrator;<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> and (c) the appraisal of the BME and the corresponding valuation of indemnity require special attention and technical expertise, hence, should be heard by a specialized tribunal.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Notably, despite absence of hearing, the RTC took cognizance of the Motion.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> In defense, the insurers argued that Atty. Gulapa's Motion is completely bereft of merit. In their Opposition <i>Ad Cautelam</i> (Opposition) filed on September 18, 2017,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the insurers mainly submitted that the RTC, a court of limited jurisdiction sitting as a rehabilitation court, does not have jurisdiction over the insurers and the subject matter of PhilPhos's insurance claim.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p align="center"> <b>The RTC Ruling</b> </p><p>In an Order<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated September 12, 2017 (assailed Order)âbefore MAPFRE even filed its Opposition to the Motion on September 18, 2017<sup style="COLOR: RGB(255, 0, 0);">[25]</sup>âthe RTC granted the Motion and ordered MAPFRE, among others, to submit to arbitration with PhilPhos to determine the remaining insurance indemnity balance due. The RTC likewise directed the parties to immediately constitute the arbitration panel and proceed promptly with the arbitration proceedings in accordance with the arbitration clause of the insurance policy and thereafter make a report to the Court upon conclusion of the arbitration.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Echoing the view of Atty. Gulapa, the RTC explained that the resolution of the matter relating to the accuracy of the amount of PhilPhos's claim for indemnity would be resolved expeditiously and efficiently if heard in an arbitration proceeding instituted especially for the purpose, given the special attention and technical expertise it may provide relative to the issue.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> More importantly, the RTC gave due deference to Item No. 22 of the Insurance Policy Conditions which unequivocally declared that all differences as to the amount of any loss or damage shall be referred to arbitration.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p><p> Aggrieved, MAPFRE, along with other insurers, filed a Petition for <i>Certiorari</i> and Prohibition (With Application for the Issuance of a Temporary Restraining order and/or Writ of Preliminary Injunction)<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> under Rule 65 of the Rules of Court before the CA (Petition for <i>Certiorari</i>).</p><p> The insurers argued that they were deprived of their right to due process as they were not afforded the opportunity to be heard.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> They further averred that <b><i>the RTC had absolutely no jurisdiction over the subject matter as well as the persons of the insurers; thus, any order rendered by the RTC in relation to the insurance claim is a nullity and has no legal effect.</i></b><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Considering this, <b><i>the filing of a Motion for Reconsideration will not amount to a plain, speedy, adequate remedy to afford insurers any relief against the assailed order; hence, the immediate recourse to the CA via a petition for certiorari. </i></b>Finally, the insurers claimed that the case fell under the enumeration of extraordinary circumstances wherein a motion for reconsideration may be dispensed with.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p align="center"> <b>The CA Ruling</b> </p><p> In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated December 21, 2017, the CA dismissed the Petition for <i>Certiorari</i> for MAPFRE's failure to comply with the mandatory filing of a motion for reconsideration before filing the Petition for <i>Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p><p> Here, the CA found that MAPFRE was not able to discharge its burden of proving that the assailed Order granting the Motion was a patent nullity; hence, a motion for reconsideration should be a condition <i>sine qua non</i> for the filing of the Petition for <i>Certiorari</i> as none of the exceptions to this rule was established by MAPFRE.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> It further explained that, contrary to MAPFRE's claim of lack of due process, the Motion can be acted upon by the RTC without prejudicing the rights of the adverse party. As such, the RTC is not required to set the Motion for hearing before acting upon it.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The CA also maintained that it would even benefit both parties if the matter relating to the accuracy of the amount of PhilPhos's claim for indemnity, particularly the issue on the fair market value of the two sulfuric acid plants, as well as the BMEs, be addressed by the parties first in an arbitration.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> MAPFRE thereafter filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> but this was denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> dated December 4, 2019.</p><p> Hence, this Petition wherein MAPFRE averred, among others, that: (a) the assailed Order is void as the RTC had no jurisdiction to issue it; (b) the RTC committed grave abuse of discretion when it issued the assailed Order without regard for due process; and (c) the non-filing of a motion for reconsideration should not be fatal to the Petition for <i>Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p align="center"> <b>The Issue Before the Court</b> </p><p> The issue before the Court is whether the RTC, as rehabilitation court, has jurisdiction to compel MAPFRE to submit to arbitration.</p><p align="center"> <b>The Court's Ruling</b> </p><p> The Petition is denied.</p><p> At the outset, the Court notes that the CA did not err in dismissing the Petition for <i>Certiorari</i> for MAPFRE's failure to comply with the mandatory filing of a motion for reconsideration. It is well-settled that the filing of a motion for reconsideration is a condition <i>sine qua non</i> for the filing of a petition for <i>certiorari</i> in order to grant an opportunity for the court to correct any actual or perceived error attributed to it by re-examination of the legal and factual circumstances of the case.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> While this rule is subject to well-recognized exceptions,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> none of those were established by MAPFRE in the instant case; hence, direct resort to the CA via a petition for <i>certiorari</i> is not warranted by the Rules.</p><p> On the merits, Section 4 of RA 10142 defines "rehabilitation" as "the restoration of the debtor to a condition of successful operation and solvency, if it is shown that its continuance of operation is economically feasible and its creditors can recover by way of the present value of payments projected in the plan, more if the debtor continues as a going concern than if it is immediately liquidated." Relatedly, in <i>Bureau of Internal Revenue v. Lepanto Ceramics, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the Court elucidated that <b>"<i><i>the inherent purpose of rehabilitation is to find ways and means to minimize the expense of the distressed corporation during the rehabilitation period by providing the best possible framework for the corporation to gradually regain or achieve a sustainable operating form</i>.</i>"</b><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> To achieve this purpose, Section 26 of RA 10142 instructs that after the petition for rehabilitation is given due course, the rehabilitation receiver shall review, revise, and/or recommend action on the rehabilitation plan and submit it or a new one to the rehabilitation court. Pursuant to the rehabilitation plan, the rehabilitation court is given the authority to refer any dispute relating thereto to arbitration: </p><blockquote> <p> Section 26. <i>Petition Given Due Course</i>. â If the petition is given due course, the court shall direct the rehabilitation receiver to review, revise[,] and/or recommend action on the Rehabilitation Plan and submit the same or a new one to the court within a period of not more than ninety (90) days. </p> <p> <i>The Court may refer any dispute relating to the Rehabilitation Plan or the rehabilitation proceedings pending before it to arbitration or other modes of dispute resolution</i>, as provided for under Republic Act No. 9285, or the Alternative Dispute Resolution Act of 2004, should it determine that such mode will resolve the dispute more quickly, fairly and efficiently than the court. (Emphasis supplied) </p> </blockquote> <p> To recall, Atty. Gulapa used, among others, the abovementioned provision as basis in filing the Motion. However, MAPFRE, in its Petition, insists that the RTC has no jurisdiction to grant the Motion, invoking the Court's ruling in <i>Steel Corporation of the Philippines v. MAPFRE</i>.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> There, Steel Corporation of the Philippines (SCP) filed with the rehabilitation court a motion to direct its insurers to pay insurance proceeds after a fire broke out in its plant which damaged its properties. The Court held that "[t]he RTC, acting as a rehabilitation court, has no jurisdiction over the subject matter of the insurance claim of SCP against respondent insurers."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> It ratiocinated that "<b><i>the jurisdiction of the rehabilitation court is over claims against the debtor that is under rehabilitation, not over claims by the debtor against its own debtors or against third parties.</i></b>"<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> To support this finding, Steel Corporation of the Philippines pointed out that the term "claim," under RA 10142, refers to "all claims or demands of whatever nature or character <b><i>against the debtor or its property</i></b>."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Notably, while SCP's motion to pay differs from PhilPhos's Motion, MAPFRE, nonetheless, argues that PhilPhos's claim is in fact calculated to set the stage for PhilPhos's collection of insurance indemnity under the rehabilitation proceedings. In view of this, MAPFRE argues that <i>Steel Corporation of the Philippines</i> applies to the present case.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> MAPFRE's contention fails to persuade. </p><p> In City Government of <i>Taguig v. Shoppers Paradise Realty and Development Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> the Court explained that the interpretation of the term "claim" under RA 10142 <b><i>does not in any way preclude claims by the debtor which are incidental to the rehabilitation plan and proceedings. As such, the rehabilitation court is empowered to issue orders necessary to carry out the rehabilitation of the insolvent debtor</i></b>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></p><p> In that case, Shoppers Paradise FTI Corporation (SPFC) and Shoppers Paradise Realty &amp; Development Corporation (collectively Shoppers Paradise Group of Companies or SPGC) underwent rehabilitation proceedings where the City Government of Taguig (CGT) was among the creditors, claiming unpaid realty taxes. Under the rehabilitation plan, CGT and SPGC instituted an offsetting scheme whereby SPFC's tax obligations will be paid by the accrued rentals of CGT in favor of SPGC. CGT later disavowed the offsetting scheme, prompting SPFC to file an urgent motion for collection with prayer that CGT be directed to pay its unpaid rentals over the areas it leased from SPGC. This motion was granted over CGT's contention that the rehabilitation court lacks jurisdiction to resolve claims of such nature. The Court reasoned that: (a) the offsetting arrangement entered into between the parties was <b><i>sanctioned by the rehabilitation plan</i></b> so that SPGC may satisfy its unpaid realty taxes; (b) CGT was a party to the rehabilitation proceedings as it voluntarily appeared as a creditor therein; and (c) SPGC's claim against CGT was not disputed as it was duly established by evidence. Verily, "the Urgent Motion for Collection sought an incidental relief towards the successful rehabilitation of the SPGC."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p><p> Simply put, the Court, in <i>City Government of Taguig</i>, upheld the rehabilitation court's jurisdiction to resolve the matter at hand for the simple reason that the offsetting scheme agreed upon by SPGC and CGT, while merely incidental to the rehabilitation proceedings, was sanctioned by the rehabilitation plan and, as such, necessary to rehabilitate SPGC, among other reasons. This is in contrast with <i>Steel Corporation of the Philippines</i> where SCP's claim against the insurer was beyond the rehabilitation court's jurisdiction as it was not in any manner included in the rehabilitation plan and, as such, cannot clearly be considered part of the framework by which SPC can regain its operating form. </p><p> Guided by the foregoing considerations, the Court holds that the RTC has jurisdiction to issue the assailed Order directing the insurers, including MAPFRE, to submit to arbitration. </p><p> It bears reiterating that Section 26 of RA 10142 clearly provides that the rehabilitation court has the authority to refer <b><i>any dispute relating to the rehabilitation plan</i></b> to arbitration upon finding that such mode will resolve the dispute more quickly, fairly, and efficiently than the rehabilitation court. Here, the evidence on record reveals that <b><i>the collection of insurance claim from MAPFRE, among other insurers, relates to the rehabilitation proceedings as the same is sanctioned by PhilPhos's Revised Rehabilitation Plan</i></b>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> which was approved by the RTC through an Order<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> dated April 16, 2018. To be sure, this Revised Rehabilitation Plan provided a framework aimed at rehabilitating PhilPhos which includes the "Use of Insurance Proceeds,"<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> to wit: </p><blockquote> <p> Assuming that PhilPhos recovers 50% of the proceeds before Year 3, Philphos would receive PhP2.9 billion (net of advance of PhP735 million). From the said amount, the Rehabilitation Receiver proposes to use PhP1.2 billion for the capital expenditure build-up of the GP(Line No.2), other auxiliary equipment (including the port), and PAP(Line No.2). The remaining PhP1.7billion is proposed to be used to repay the creditors under the MTI. On the basis of this assumption, the recovery of 50% of the proceeds under the Insurance Policy may further reduce the period of repayment by about 3 years. This is based on a total allocation of PhP2.9 billion, with application for PhP1.2 billion for capital expenditure plus the PhP1.7 billion to repay the creditors. For every PhP1.0 billion of insurance proceeds from BME claim, the period of repayment will be reduced by 1 year.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></p> </blockquote> <p> This finding is consistent with the Court's ruling in <i>City Government of Taguig</i> which held that claims made by the debtor may be taken cognizance by the rehabilitation court provided that these are incidental to the rehabilitation plan. It then goes without saying that the Motion, in this case, is inextricably related to the rehabilitation plan as it affects the viability of the plan. As aptly argued by Atty. Gulapa, the final determination of the value of PhilPhos's insurance claim in the arbitration proceedings can increase the resource pool of PhilPhos from which creditors may be paid, in furtherance of the effort to salvage PhilPhos and restore it to its former position of successful operation and solvency.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p><p> As regards MAPFRE's claim that the Motion was fatally flawed as it failed to comply with the requirement of notice and hearing prescribed under Rule 15, Sections 4 and 5 of the Rules of Court, the Court is not convinced. </p><p> MAPFRE alleged that it received a copy of the Motion on September 4, 2017.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Consequently, on September 18, 2017, MAPFRE filed an Opposition to the said Motion. In the meantime, however, the RTC issued the Assailed Order granting the Motion on September 12, 2017. Given this timeline, the Court finds that MAPFRE was given sufficient notice regarding PhilPhos's demand to compel the insurers to submit to arbitration. In any case, the Court holds that the crux of MAPFRE's contention lies on the determination of the value of PhilPhos's claim for insurance indemnity. Hence, whatever opposition MAPFRE has against the questioned valuation may best be ventilated before the arbitration panel pursuant to the arbitration clause provided in the Insurance Policy MAPFRE itself executed with PhilPhos. </p><p> All told, the Court finds no reason to deviate from the findings of the CA that the RTC, as rehabilitation court, has jurisdiction to compel MAPFRE to submit to arbitration. </p><p> <b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Resolutions dated December 21, 2017 and December 4, 2019 of the Court of Appeals in CA-G.R. CEB-SP No. 11367 are hereby <b>AFFIRMED</b>. </p><p> <b>SO ORDERED.</b></p><p> <i>Leonen, SAJ. (Chairperson), Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-27. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 34-39. The December 21, 2017 Resolution was penned by Associate Justice and Chairperson Edgardo L. Delos Santos (a retired Member of this Court) and concurred in by Associate Justices Marilyn B. Lagura-Yap and Geraldine C. Fiel-Macaraig of the Special Nineteenth Division, Court of Appeals, Cebu City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 42-51. The December 4, 2019 Resolution was penned by Associate Justice and Chairman Edgardo L. Delos Santos (a retired Member of this Court) and concurred in by Associate Justices Marilyn B. Lagura-Yap and Carlito B. Calpatura of the Special Former Special Nineteenth Division, Court of Appeals, Cebu City.</p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 155-161. The September 12, 20217 Order was issued by Presiding Judge Agerico A. Avila of Branch 8, Regional Trial Court, Tacloban City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 616-626. </p><p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 616-617. </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 450-476. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 617. </p><p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 659-661. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 617. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 668-671, 689. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 617, 662. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 618. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 477-494. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Republic Act No. 10142 (2010), An Act Providing for the Rehabilitation or Liquidation of Financially Distressed Enterprises and Individuals. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, p. 619. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 620. Item No. 22 of the Policy Conditions reads: </p><blockquote> <p> All differences as to the amount of any loss or damage covered by the Policy shall be referred to the decision of an arbitrator to be appointed by the parties in difference or if they cannot agree upon a single arbitrator to the decision of two arbitrators one to be appointed in writing by each of the parties within thirty (30) days after having been required in writing to do so by either of the parties or in case of disagreement between the arbitrators to the decision of an umpire to be appointed in writing by the arbitrators before entering on the reference and an award by the arbitrator or arbitrators or umpire shall be a condition precedent to any right of action against the company, only in cases of difference as to the amount of liability arising out of this policy.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 620-621. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 16. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 511-542. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 512-513. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 155-161. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 16. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 161. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 160. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 157. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 52-116. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 54-55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 55-56. The insurers claimed that the case falls under the following enumeration of extraordinary circumstances warranting direct recourse to the CA via a petition for <i>certiorari</i> under Rule 65 of the Rules of Court: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="4%"><div align="justify">(a)</div></td> <td width="96%"><div align="justify">where the order is a patent nullity, as where the court <i>a quo</i> has no jurisdiction; </div></td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td> <div align="justify">where, under the circumstances, a motion for reconsideration would be useless;</div></td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td> <div align="justify">where petitioner was deprived of due process and there is extreme urgency for relief; </div></td> </tr> <tr valign="top"> <td><div align="justify">(d)</div></td> <td><div align="justify">where the proceedings in the lower court are a nullity for lack of due process;</div></td> </tr> <tr valign="top"> <td><div align="justify">(e)</div></td> <td><div align="justify">where the proceedings were<i> ex parte</i> or in which the petitioner had no opportunity to object; and</div></td> </tr> <tr valign="top"> <td><div align="justify">(f)</div></td> <td><div align="justify">where the issue raised is one purely of law and where public interest is involved.</div></td> </tr> </tbody></table> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 34-39. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 35-36.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> 36-38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 162-187.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 42-51. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 17-25.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Republic v. Bayao</b>, 710 Phil. 279, 287 (2013) [Per J. Leonen, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Seagull Shipmanagement and Transport, Inc. v. NLRC</b>, 388 Phil. 906, 912 (2000) [Per J. Quisumbing, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 809 Phil. 278 (2017) [Per J. Perlas-Bernabe, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 286. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 719 Phil. 683 (2013) [Per J. Carpio, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 655. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 656. (Emphasis supplied) </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 657. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 518. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> 908 Phil. 320 (2021) [Per J. J. Lopez, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 328, 336. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 333. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 216-224. The New Revised Rehabilitation Plan of Philippine Phosphate Fertilizer Corporation ("PhilPhos") dated February 6, 2018. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, pp. 434-449. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 223. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 224. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>BPI Family Savings Bank, Inc. v. St. Michael Medical Center, Inc.</b>, 757 Phil. 251 (2015) [Per J. Perlas-Bernabe, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 511. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

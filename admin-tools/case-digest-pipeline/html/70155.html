@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 263615 - PETRONILO SOLOMON SARIGUMBA, PETITIONER, VS. COMMISSION ON ELECTIONS, REPRESENTED BY CAMPAIGN FINANCE UNIT, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70155' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 263615, August 19, 2025 ]</H2>
+			<H3>PETRONILO SOLOMON SARIGUMBA, PETITIONER, VS. COMMISSION ON ELECTIONS, REPRESENTED BY CAMPAIGN FINANCE UNIT, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 64, in relation to Rule 65 of the Rules of Court, assailing the Minute Resolution No. 21Â­-0499-24<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated July 28, 2021 (Minute Resolution dated July 28, 2021) of respondent Commission on Elections (COMELEC)<i> En Banc</i>. The COMELEC<i> En Banc</i>, adopting the COMELEC Law Department Memorandum dated July 27, 2021, found probable cause to indict petitioner Petronilo Solomon Sarigumba (Sarigumba) for the election offense of overspending under Section 100 in relation to Section 262 of the Omnibus Election Code,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> as amended by Republic Act No. 7166.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center><i>Antecedents</i></center><br>In his Petition, Sarigumba alleged the following:<br><br>On December 1, 2009, Sarigumba filed his certificate of candidacy for mayor in the Municipality of Loboc, Province of Bohol for the 2010 National and Local Elections (NLE). However, in the May 10, 2010 elections, Sarigumba lost his bid for mayor of Loboc.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On June 10, 2010, Sarigumba filed his Statement of Election Contributions and Expenditures<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (SOCE) with the local elections officer of the Municipality of Loboc.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On November 3, 2014 or four years after the filing of the SOCE, Sarigumba was greatly surprised to receive a Letter<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> dated October 1, 2014 from Atty. Ferdinand T. Rafanan, head of the Campaign Finance Unit (CFU), COMELEC, who required him to submit his written explanation under oath of his alleged overspending during the 2010 NLE within 10 days from receipt thereof.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In reply to the said letter, Sarigumba submitted his Explanation<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> dated November 27, 2014. However, on February 10, 2015, the CFU filed with the COMELEC a Complaint<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> against Sarigumba for the election offense of overspending under Section 100 in relation to Section 262 of the Omnibus Election Code, as amended by Republic Act No. 7166.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On July 27, 2021, the COMELEC Law Department issued a memorandum finding probable cause against Sarigumba and recommended to the COMELEC<i> En Banc</i> the filing of an Information against him before the proper Regional Trial Court for violation of Section 100 in relation to Section 262 of the Omnibus Election Code, as amended by Republic Act No. 7166.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><center><i>Ruling of the COMELEC En Banc</i></center><br>Through COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> which contained an excerpt from the minutes of the July 28, 2021 regular <i>En Banc</i> meeting of the COMELEC, and which was attached to the Notice<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated July 5, 2022, the COMELEC<i> En Banc</i> adopted memorandum dated July 27, 2021. The COMELEC<i> En Banc</i> resolved as follows:<br><blockquote>The Commission<b> RESOLVED</b>, as it hereby<b> RESOLVES</b>, to<b> adopt </b>the recommendation of the Law Department<b> finding probable cause</b> to hold Respondent<b> PETRONILO SOLOMON SARIGUMBA</b> for trial and to<b> file an Information</b> before the appropriate Regional Trial Court for violation of Section 100 of the Omnibus Election Code, as amended by [Republic Act] No. 7166, in relation to Section 262 of the same Code.<br><br>Let the Law Department implement this Resolution.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis in the original) </blockquote>Hence, Sarigumba filed the instant Petition for<i> Certiorari</i>.<br><br>Petitioner mainly argues that the COMELEC is guilty of inordinate delay, and thus, committed grave abuse of discretion amounting to lack or excess of jurisdiction in finding probable cause to indict him for the election offense of overspending. Specifically, petitioner alleges that he received the COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021 on August 18, 2022 or almost eight years after the time of filing of the Complaint against him with the COMELEC. Petitioner maintains that the present case is on all fours with the case of<i> PeÃ±as v. COMELEC</i><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> wherein the Court found that the COMELEC therein acted with grave abuse of discretion amounting to lack or excess of jurisdiction when it found probable cause to indict petitioner therein for the election offense of overspending. Petitioner cites<i> PeÃ±as</i> where the Court declared that the COMELEC was guilty of inordinate delay when it took the latter six years to come up with a Resolution finding probable cause against petitioner therein and recommending the filing of an Information against him.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Further, petitioner also argues that the filing of a motion for reconsideration before the COMELEC prior to the filing of a petition for <i>certiorari</i> may be dispensed with. He maintains that there is an urgent necessity for the resolution of the issue as to the existence of inordinate delay, and that any further delay will prejudice his interest. He avers that since the filing of the Complaint in 2015, he has been living in misery and uncertainty, and that he had to put out any desire of serving the Municipality of Loboc because there is no certainty as to whether he will be able to hold office and finish his term should he win in the election; this is due to a possible disqualification brought about by the investigation or the case to be filed by the COMELEC. Petitioner claims that although he is already of a more advanced age with comorbidities, he still wants to confront the problem brought about by the COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021, to clear his name and reputation.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Petitioner posits that public interest is involved in the present Petition since at the center of the controversy is the right of every Filipino citizen to speedy disposition of cases before the COMELEC as guaranteed by the 1987 Constitution. Thus, the filing of the motion for reconsideration of COMELEC <i>En Banc</i> Minute Resolution dated July 28, 2021 can already be dispensed with.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Lastly, petitioner prays for the issuance of the writ of preliminary injunction to restrain the COMELEC from filing an Information and from prosecuting a criminal case against him. Petitioner contends that unless the COMELEC is enjoined by the issuance of a writ of preliminary injunction, he will suffer grave injustice and irreparable injury affecting his health, psychological well-being, his business, and his reputation in the community by the filing of a criminal case against him. Petitioner points out that he is already 76 years old, and as such, could no longer endure the rigors and extreme stress concomitant with the filing of an Information and the fullÂ­-blown trial it entails. He adds that he is currently suffering from hypertension, diabetes, and rheumatism.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>In its Comment on the Petition and Opposition to the Application for a Writ of Preliminary Injunction,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the COMELEC, through the Office of the Solicitor General, argues as follows:<br><br>First, petitioner has not demonstrated that his case falls within the exceptions to the rule requiring the filing of a motion for reconsideration prior to the filing of a petition for<i> certiorari</i>. Respondent maintains that the instant Petition should be dismissed as petitioner failed to resort to the plain, speedy, and adequate remedy of filing a motion for reconsideration before the COMELEC.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Second, the period of the investigating officer to resolve the case never began to run, as the reckoning point thereof was the submission by the petitioner of his counter-affidavit and other evidence. Specifically, the COMELEC argues that although Rule 3, Section 8 of the COMELEC Rules of Procedure prescribes a 20-day period to terminate a preliminary investigation, this period is reckoned only from the submission of the counter-affidavit and other evidence. In the present case, petitioner never submitted a counter-affidavit. The COMELEC notes that petitioner submitted an Explanation dated November 27, 2014 to the head of the CFU regarding his campaign expenditures. However, said Explanation is not the counter-affidavit contemplated by Rule 3, Section 8 of the COMELEC Rules of Procedure. The COMELEC adds that petitioner's right to submit a counter-affidavit to present his defenses in the preliminary investigation was a concession made by the Investigating Officer due to petitioner's repeated failure to appear at the required hearings. Moreover, the fact that the COMELEC Law Department refrained from immediate resolving the case and allowed sufficient time before concluding that petitioner had no interest in presenting evidence on his behalf, was to petitioner's advantage as he had more time and opportunity to rectify any deficiencies in his case. However, petitioner allowed the time to pass without taking action. At any rate, petitioner has waived his right to the speedy disposition of the case due to his failure to timely invoke the same, and his complete lack of participation in the preliminary investigation proceedings despite multiple opportunities to do so.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Third, the COMELEC's factual findings and ruling on the existence of probable cause against petitioner, being based on substantial evidence, should be upheld.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Fourth, petitioner failed to establish the requisites for the issuance of a writ of preliminary injunction. Specifically, petitioner has no clear legal right to the non-filing of the Information against him for election overspending. There is also no showing that petitioner is in danger of being deprived of liberty or of any other right that may be found under the Constitution and the laws due to the COMELEC's finding of probable cause against him. Further, injunction will not lie to enjoin a criminal prosecution because public interest requires that the criminal act/s be immediately investigated and prosecuted for the protection of the society. Although it is true that there are extreme cases in which exceptions to the general rule have been recognized, petitioner has not shown that his case comes under any of such exceptions.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Thereafter, petitioner filed his Reply<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> in amplification of his claims.<br><br><center><i>The Court's Ruling</i> </center><br>The Court grants the petition.<br><br><center>I.</center><br>As a rule, a special civil action for<i> certiorari</i> under Rule 65 of the Rules of Court will not lie unless a motion for reconsideration is filed before the respondent court.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>However, this rule is subject to exceptions such as (a) where the order is a patent nullity, as where the court a quo has no jurisdiction; (b) where the questions raised in the<i> certiorari</i> proceedings have been duly raised and passed upon by the lower court, or are the same as those raised and passed upon by the lower court; (c) where there is an urgent necessity for the resolution of the question and any further delay would prejudice the interests of the Government or of the petitioner or the subject matter of the action is perishable; (d) where, under the circumstances, a motion for reconsideration would be useless; (e) where petitioner was deprived of due process and there is extreme urgency for relief; (f) where, in a criminal case, relief from an order of arrest is urgent and the granting of such relief by the trial court is improbable; (g) where the proceedings in the lower court are a nullity for lack of due process; (h) where the proceedings were<i> ex parte</i> or in which the petitioner had no opportunity to object; and (i) where the issue raised is one purely of law or where public interest is involved.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In the present case, petitioner insists that public interest is involved as it concerns the right of every Filipino citizen to speedy disposition of cases, and that there is an urgent necessity for the resolution of the issue as to the existence of inordinate delay, and that any further delay will prejudice the interest of petitioner.<br><br>The Court finds that petitioner properly filed a Petition for<i> Certiorari </i>without filing a prior motion for reconsideration of COMELEC<i> En Banc </i>Minute Resolution dated July 28, 2021.<br><br>When there is a violation of the constitutional right of the accused to the speedy disposition of cases, the Court will not hesitate to dismiss a case.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> As will be discussed below, the Court finds that the COMELEC's proceedings â which led to the finding of probable cause against petitioner for election overspending in COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021 â were attended by inordinate delay. This alone merits the dismissal of the <i>motu proprio</i> Complaint. Thus, the filing of a motion for reconsideration of COMELEC<i> En Banc</i> of the Minute Resolution dated July 28, 2021 would have been futile.<br><br><center>II.</center><br>The Court finds that the petitioner's right to speedy disposition of cases was violated. In view of the inordinate delay in the conduct of the preliminary investigation by the COMELEC.<br><br>Article III, Section 16<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> of the 1987 Constitution guarantees the right of all persons to speedy disposition of cases before all judicial, quasi-judicial, or administrative bodies.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In<i> Cagang v. Sandiganbayan</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> the Court provided the framework of analysis in instances where the right to speedy disposition of cases or the right to speedy trial is invoked. The Court discussed as follows:<br><blockquote>This Court now clarifies the mode of analysis in situations where the right to speedy disposition of cases or the right to speedy trial is invoked.<br><br><i>First</i>, the right to speedy disposition of cases is different from the right to speedy trial. While the rationale for both rights is the same, the right to speedy trial may only be invoked in criminal prosecutions against courts of law. The right to speedy disposition of cases, however, may be invoked before any tribunal, whether judicial or quasi-judicial. What is important is that the accused may already be prejudiced by the proceeding for the right to speedy disposition of cases to be invoked.<br><br><i>Second</i>, a case is deemed initiated upon the filing of a formal complaint prior to a conduct of preliminary investigation. This Court acknowledges, however, that the Ombudsman should set reasonable periods for preliminary investigation, with due regard to the complexities and nuances of each case. Delays beyond this period will be taken against the prosecution. The period taken for fact-finding investigations prior to the filing of the formal complaint shall not be included in the determination of whether there has been inordinate delay.<br><br><i>Third</i>, courts must first determine which party carries the burden of proof. If the right is invoked within the given time periods contained in current Supreme Court resolutions and circulars, and the time periods that will be promulgated by the Office of the Ombudsman, the defense has the burden of proving that the right was justifiably invoked. If the delay occurs beyond the given time period and the right is invoked, the prosecution has the burden of justifying the delay.<br><br>If the defense has the burden of proof, it must prove first, whether the case is motivated by malice or clearly only politically motivated and is attended by utter lack of evidence, and<i> second</i>, that the defense did not contribute to the delay.<br><br>Once the burden of proof shifts to the prosecution, the prosecution must prove<i> first</i>, that it followed the prescribed procedure in the conduct of preliminary investigation and in the prosecution of the case;<i> second</i>, that the complexity of the issues and the volume of the evidence made the delay inevitable; and third, that no prejudice was suffered by the accused as a result of the delay.<br><br><i>Fourth</i>, determination of the length of delay is never mechanical. Courts must consider the entire context of the case, from the amount of evidence to be weighed to the simplicity or complexity of the issues raised.<br><br>An exception to the rule is if there is an allegation that the prosecution of the case was solely motivated by malice, such as when the case is politically motivated or when there is continued prosecution despite utter lack of evidence. Malicious intent may be gauged from the behavior of the prosecution throughout the proceedings. If malicious prosecution is properly alleged and substantially proven, the case would automatically be dismissed without need of further analysis of the delay.<br><br>Another exception would be the waiver of the accused to the right to. . . speedy disposition of cases or the right to speedy trial. If it can be proven that the accused acquiesced to the delay, the constitutional right can no longer be invoked.<br><br>In all cases of dismissals due to inordinate delay, the causes of the delays must be properly laid out and discussed by the relevant court.<br><br><i>Fifth</i>, the right to speedy disposition of cases or the right to speedy trial must be timely raised. The respondent or the accused must file the appropriate motion upon the lapse of the statutory or procedural periods. Otherwise, they are deemed to have waived their right to speedy disposition of cases.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> (Citation omitted) </blockquote>Considering that the present case involves the conduct of preliminary investigation proceedings before the COMELEC, the right to speedy disposition of cases may be invoked by petitioner.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>The timeline of the proceedings before the COMELEC was discussed in full detail in the COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021 which quoted the pertinent portions of the Memorandum dated July 27, 2021 of Director Maria Norina S. Tangaro-Casingal, Law Department of the COMELEC.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Specifically, on December 20, 2014, the Law Department of the CFU of the COMELEC filed a<i> motu proprio</i> Complaint against petitioner for alleged violation of Section 100 of Batas Pambansa Blg. 881, otherwise known as the Omnibus Election Code, as amended by Republic Act No. 7166, in relation to Section 262 of the same Code.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Thereafter, subpoenas were served to the parties setting the case for preliminary investigation on April 14, 2015. However, only complainant's representative appeared on April 14, 2015.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Also on April 14, 2015, the Law Department of the COMELEC received a formal notice of appearance with very urgent motion for cancellation and resetting filed by Atty. Josie Vida Corre-Sempron (Atty. Corre-Sempron), petitioner's counsel. Atty. Corre-Sempron requested the resetting of the hearing on May 12, 2015 at 3:00 p.m. because petitioner was unfit to travel as he was suffering from "COPD in exacerbation R/O" and that Atty. Corre-Sempron had to attend a hearing on April 15, 2015. The said motion was granted by the investigating officer.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>On May 12, 2015, the Law Department received another motion from Atty. Corre-Sempron entitled "Manifestation with Omnibus Motion for Cancellation of Setting and Motion for the Delegation of the Conduct of Preliminary Investigation to the Provincial COMELEC Officer."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>Thereafter, acting on the motion filed by Atty. Corre-Sempron on May 12, 2015, the Investigating Officer issued an Order dated June 11, 2015 denying the motion and directing petitioner to subscribe his counter-affidavit before a public prosecutor and to send a copy to the Law Department through registered mail or courier service.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>However, petitioner failed to submit his counter-affidavit.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>Later, on July 27, 2021, the COMELEC Law Department found probable cause to hold petitioner for trial and recommended the filing of an Information against him for violation of Section 100 of Batas Pambansa Blg. 881, otherwise known as the Omnibus Election Code, as amended by Republic Act No. 7166, in relation to Section 262 of the same Code.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>On July 28, 2021, the COMELEC<i> En Banc</i> adopted the recommendation of the COMELEC Law Department.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Based on the timeline of the proceedings before the COMELEC, petitioner's preliminary investigation and resolution of the Complaint before the COMELEC lasted from December 20, 2014 until July 28, 2021 or six years and over seven months from the date the<i> motu proprio</i> Complaint was filed. Notably, it took the COMELEC six years and over one month from the time that petitioner was ordered to file his counter-affidavit through the Order dated June 11, 2015 to resolve the<i> motu proprio</i> Complaint against petitioner.<br><br>In determining whether the COMELEC committed inordinate delay in resolving the Complaint filed against petitioner, the Court is guided by the periods provided under the COMELEC Rules of Procedure for the conduct of preliminary investigation and resolution of the complaint. Rule 34, Section 6 and Section 8 of the COMELEC Rules of Procedure provide:<br><blockquote>Sec. 6. Conduct of Preliminary Investigation. â (a) If on the basis of the complaint, affidavits and the supporting evidence, the investigating officer finds no ground to continue with the inquiry, he shall recommend the dismissal of the complaint and shall follow the procedure prescribed in Section 8(c) of this Rule. Otherwise, he shall issue a subpoena to the respondent, attaching thereto a copy of the complaint, affidavits and other supporting documents giving said respondent ten (10) days from receipt within which to submit counter-affidavits and other supporting documents. The respondent shall have the right to examine all other evidence submitted by the complainant.<br><br>(b) Such counter-affidavits and other supporting evidence submitted by the respondent shall be furnished by him to the complainant.<br><br><i>(c) If the respondent cannot be subpoenaed, or if subpoenaed, does not submit counter-affidavits within the ten-day period, the investigating officer shall base his resolution on the evidence presented by the complainant. </i><br><br>(d) If the investigating officer believes that there are matters to be clarified, he may set a hearing to propound clarificatory questions to the parties or their witnesses, during which the parties shall be afforded an opportunity to be present but without the right to examine or cross-examine. If the parties so desire, they may submit questions to the investigating officer which the latter may propound to the parties or witnesses concerned.<br><br>(e) Thereafter, the investigation shall be deemed concluded, and the investigating officer shall resolve the case within ten (10) days therefrom. Upon the evidence thus adduced, the investigating officer shall determine whether or not there is sufficient ground to hold the respondent for trial.<br><br>Sec. 8. Duty of Investigating Officer. â<i> The preliminary investigation must be terminated within twenty (20) days after receipt of the counter-affidavits and other evidence of the respondents, and resolution thereof shall be made within five (5) days thereafter</i>.<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">If the investigating officer finds no cause to hold the respondent for trial, he shall recommend dismissal of the complaint. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">If the investigating officer finds cause to hold the respondent for trial, he shall prepare the resolution, and the corresponding information wherein he shall certify under oath that he has examined the complainant and his witnesses, that there is reasonable ground to believe that a crime has been committed and that the accused was informed of the complaint and of the evidence submitted against him and that he was given an opportunity to submit controverting evidence. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">In either case, the investigating officer shall, within five (5) days from the rendition of his recommendation, forward the records of the case to: </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY">1) </div></td> <td width="90%" valign="top"> <div align="JUSTIFY">The Director of the Law Department of the Commission in cases investigated by any of the Commission lawyers or filed personnel, and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">2) </div></td> <td valign="top"> <div align="JUSTIFY">The State Prosecutor, Provincial Fiscal, or City Fiscal, as the case may be, pursuant to the continuing authority provided for in Section 2 of this Rule. (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>In arguing that the period of the Investigating Officer to resolve the case never began to run because petitioner failed to file his counter-affidavit, the COMELEC merely relies on Rule 34, Section 8 of the COMELEC Rules of Procedure.<br><br>The COMELEC's contention has no merit.<br><br>Rule 34, Section 8 of the COMELEC Rules of Procedure must not be read in isolation but must be read together with Rule 34, Section 6 of the same rules. The import of the two provisions is that the failure of a respondent to file a counter-affidavit does not give the COMELEC the unbridled license to indefinitely toll or delay the conduct of the preliminary investigation and the rendition of a resolution on the case.<br><br>Notably, Rule 34, Section 8 provides that the preliminary investigation must be terminated within 20 days after receipt of the counter-affidavits and other evidence of the respondents, and the resolution thereof shall be made within five days thereafter. On the other hand, Rule 34, Section 6 provides that if the respondent does not submit counter-affidavits within the 10-day period from receipt of the subpoena requiring him to do so, the investigating officer shall base his resolution on the evidence presented by the complainant. Harmonizing Sections 6 and 8 of Rule 34, in the event of failure to file a counter-affidavit, the 20-day period within which to conclude the preliminary investigation must be counted from the time that the period to file the counter-affidavit lapsed without one being filed.<br><br>In the present case, petitioner failed to file a counter-affidavit despite being required to do so. Notably, both petitioner and the COMELEC are silent as to when petitioner received the Order dated June 11, 2015. Nonetheless, none of the parties contend that petitioner did not receive the Order dated June 11, 2015 requiring him to submit a counter-affidavit.<br><br>The Court notes the COMELEC's failure to mention the date when petitioner received the Order dated June 11, 2015 and the deadline for petitioner to file his counter-affidavit. Had the COMELEC concluded the preliminary investigation within 20 days from the time that the period to file the counter-affidavit lapsed without one being filed and decided on the<i> motu proprio</i> Complaint thereafter, the COMELEC should have already mentioned such either in the assailed COMELEC Resolution or in its Comment. The COMELEC's silence on these matters, coupled with the fact that it took six years and one month for the COMELEC to resolve the case from the time that petitioner was ordered to file his counter-affidavit through the Order dated June 11, 2015, leads the Court to conclude that any discussion as to when petitioner received the Order dated June 11, 2015 and the deadline for petitioner to file his counter-affidavit would be prejudicial to the COMELEC's position.<br><br>Given the length of time that passed, i.e., six years and over one month from the time that petitioner was ordered to file his counter-affidavit, it is reasonable to conclude that the COMELEC failed to observe the 20-day period to conclude the preliminary investigation, and thereafter, the five-day period to render a resolution on the case under Rule 34, Section 8 in relation to Rule 34, Section 6 of the COMELEC Rules of Procedure.<br><br>Following the Court's pronouncement in<i> Cagang</i>, the COMELEC has the burden of justifying the delay in resolving the<i> motu proprio</i> complaint against petitioner.<br><br>However, the COMELEC failed to justify the delay.<br><br>Nowhere in the records does it show that in resolving the<i> motu proprio </i>Complaint, the COMELEC dealt with complex issues or voluminous records to justify a period of six years and over seven months, counted from the date the<i> motu proprio</i> complaint was filed, and more specifically, a period of six years and over one month from the time that petitioner was ordered to file his counter-affidavit. Notably, the COMELEC Law Department, as affirmed by the COMELEC<i> En Banc</i>, only relied on the SOCE of petitioner as basis for finding probable cause against him for violation of Section 100 of Batas Pambansa Blg. 881, otherwise known as the Omnibus Election Code, as amended by Republic Act No. 7166, in relation to Section 262 of the same Code. This is evident from the following discussion of the COMELEC Law Department, as affirmed by the COMELEC<i> En Banc</i>:<br><blockquote>The elements of the election offense of Overspending as defined and penalized are as follows:<ol><li>The offender is any candidate or registered political party;<br></li><li>The offender spent in his/her election campaign, an aggregate amount which exceeded the following expenditure limit for every registered voter in the constituency where the certificate of candidacy was filed, or the political party fielded its official candidates:<br><br>(a) Ten pesos ([PHP] 10.00) for President and Vice President;<br>(b) For other candidates:<br>&nbsp;&nbsp;&nbsp;&nbsp; (b.1) Three Pesos ([PHP] 3.00) if with political party;<br>&nbsp;&nbsp;&nbsp; (b.2) Five pesos ([PHP] 5.00) if without any political party and without support from any political party; and<br>(c) Five Pesos ([PHP] 5.00) for Political Parties.</li></ol>All the above elements are present in this case.<br><br>First, Respondent is a candidate for Mayor during the 2010 NLE.<br><br>Second, considering that Respondent belongs to a political party he is only allowed to spend Three Pesos (PHP 3.00) for every voter. However, in the case at bar, Respondent spent in his election campaign an aggregate amount of One Hundred Forty Three Thousand Pesos (PHP 143,000) which exceeded the expenditure limit set by law which is only Thirty Thousand Eight Hundred Sixteen Pesos (PHP 30,816) for the Ten Thousand Two Hundred Seventy Two (10,272) registered voters of Loboc, Bohol.<br><br>It is worth to note that the submission of SOCE is a requirement mandated by law with specific criminal and/or administrative sanctions. It is not a formal requirement simply for compliance.<br><br>Hence, every candidate and treasurer of the political party who are required to submit SOCE after the elections must be very circumspect in writing the details because they certify that the expenses stated therein are true and correct.<br><br>As can be gleaned from Respondent's SOCE, he indicated the following:<br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY"><b>CONTRIBUTIONS RECEIVED: (Itemized details in Annex "G"/ Schedule of Contributions):</b> </div></td> </tr> <tr> <td width="58%" valign="top"> <div align="JUSTIFY">&nbsp;&nbsp;&nbsp;&nbsp; Total contributions from party </div></td> <td width="42%" valign="top"> <div align="JUSTIFY">[PHP] 28,000.00 </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">&nbsp;&nbsp;&nbsp;&nbsp; Total contributions from other persons </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 115,000.00 </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TOTAL CONTRIBUTIONS RECEIVED </div></td> <td valign="top"> <div align="JUSTIFY">[PHP1 143,000.00 </div></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY"><b>EXPENSES INCURRED: </b>[(]<b>Itemized details in Annex "H"/ Schedule of Expenditures, to be filed with Annex "H-1"/Summary Report of Lawful Expenditures</b>): </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">For Candidates: </div></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Total expenditures paid out of personal funds </div></td> <td valign="top"> <div align="JUSTIFY"><b>[PHP] 28,000.00</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Total expenditure paid from contributions received </div></td> <td valign="top"> <div align="JUSTIFY"><b>[PHP] 115,000.00</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"><b>TOTAL EXPENDITURES INCURRED</b> </div></td> <td valign="top"> <div align="JUSTIFY"><b>[PHP] 143,000.00</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">â¢&nbsp; For Party Treasurer:</div></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Total expenditures paid by National Office </div></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Total expenditures paid by branches/ Chapters/ Committee </div></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">TOTAL EXPENDITURES INCURRED </div></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Further, in the bottom portion of the SOCE, a Certification reads:<br><br>"I, <u>PETRONILO SARIGUMBA</u>, after being duly sworn to, hereby depose and state that:<ol><li>The foregoing statement and supporting documents (Schedule 1 and 2) are supported by receipts, vouchers and other documents reflecting the full, true, accurate and complete election contributions received and expenditures incurred by me and/or by my duly authorized representative during the period indicated;<br></li><li>The expenditures indicated are for lawful purposes and the contributions were not received from persons or entities prohibited by law to give contributions.</li></ol>IN WITNESS WHEREOF, I have hereunto affixed my signature this 9<sup>th</sup> day of <u>June, 2010</u>.<br><br>Evidently, the above-quoted SOCE with Certification shows that Respondent is very much aware of the contents of his SOCE having certified that the items therein are full, true, accurate and complete incurred election expenditures.<br><br>Respondent's SOCE was notarized and acknowledged before a notary public and the SOCE being a public document enjoys the presumption of regularity. It is a<i> prima facie</i> evidence of the truth of the facts stated therein and a conclusive presumption of its existence and due execution.<br><br>. . . .<br><br>Respondent failed to overcome such presumption because when he affixed his signature he is deemed to have read the contents of the SOCE.<br><br>Lastly, it bears stressing that an election offense partakes the nature of a criminal case. It is, therefore, necessary that probable cause exists which will warrant the filing of Information before the court.<br><br>. . . .<br><br>Indeed, the purpose of a preliminary investigation is merely to determine whether a crime has been committed and whether there is probable cause to believe that the person accused of the crime is probably guilty thereof and should be held for trial.<br><br><i><b>WHEREFORE</b>, premises considered, the Law Department finds <b>PROBABLE CAUSE</b> to hold Respondent for trial and most respectfully recommends the<b> FILING</b> of<b> INFORMATION</b> against<b> PETRONILO SOLOMON SARIGUMBA</b> for violation of Section 100 of the Omnibus Election Code as amended by R.A. 7166 in relation to Section 262 of the same Code</i>.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis in the original) </blockquote>Further, the Court observes that in the Comment to the present Petition as well as the COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021 which quoted pertinent portions of the Memorandum dated July 27, 2021 of Director Maria Norina S. Tangaro-Casingal, Law Department of the COMELEC, the COMELEC<i> En Banc</i> did not give sufficient justification for the delay in the conduct of the preliminary investigation and resolution of the <i>motu proprio</i> Complaint against petitioner.<br><br>Notably, in arguing that his right to speedy disposition of cases was violated, petitioner relies on the Court's ruling in<i> PeÃ±as</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> On the other hand, the COMELEC argues that<i> PeÃ±as</i> does not apply to the present case considering that while the petitioner in<i> PeÃ±as</i> filed a counter-affidavit, petitioner herein did not file one.<br><br>In<i> PeÃ±as</i>, the COMELEC filed a<i> motu proprio</i> complaint against petitioner therein, a 2010 NLE candidate for mayor of Digos City, Davao Del Sur, for alleged election overspending.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> While the COMELEC found probable cause against petitioner therein, the Court nullified the COMELEC Resolution finding probable cause against him and ultimately, dismissed the complaint. Anchored on the grounds of inordinate delay of about six years in the conduct of the preliminary investigation, and the COMELEC's utter failure to provide sufficient justification for such delay.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> The Court ruled that petitioner's case did not at all involve complex or intricate issues which required scrutiny of voluminous records or evidence. Specifically, the Court emphasized that the lone issue needed to be resolved was whether petitioner therein spent beyond the prescribed campaign expenditure limit. The Court likewise underscored that there was only one respondent charged in the complaint.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The Court ruled in part:<br><blockquote>As stated, the complaint against petitioner was filed on November 12, 2014. Subsequently, petitioner filed his counter-affidavit on February 9, 2015. By Resolution No. 18-0665 dated November 5, 2018, or about four (4) years from when the complaint was filed, the COMELEC ordered the filing of an Information against petitioner. Petitioner moved for reconsideration and this time, it took the COMELEC another two (2) years to issue Resolution No. 220-00121-33 dated December 9, 2020 to deny the motion. Indubitably, the COMELEC went beyond the prescribed period for the conduct of a preliminary investigation.<br><br><i>Third</i>. In view of the COMELEC's failure to observe its own prescribed period for resolving petitioner's case, the burden of justifying the delay is shifted to it. Consequently, it must prove<i> first</i>, that it followed the prescribed procedure in the conduct of preliminary investigation and in the prosecution of the case;<i> second</i>, that the complexity of the issues and the volume of evidence made the delay inevitable; and<i> third</i>, that no prejudice was suffered by the accused as a result of the delay. The COMELEC, however, failed to establish these circumstances.<br><br><i>For one</i>. Instead of proving compliance with its own prescribed procedure, the COMELEC merely attempted to justify the delay by citing the two (2) general elections which it had to administer during the pendency of the investigation, i.e., the 2016 and 2019 NLE.<br><br>But this hardly justifies the delay it took the COMELEC to conclude the preliminary investigation. On the contrary, a prolonged investigation should have been avoided at all cost<i> precisely</i> because of the looming elections at that time.<br><br>Consider. An adverse finding during preliminary investigation would give rise to a criminal charge for an election offense. If found guilty thereof, petitioner would have been disqualified from running for public office let alone sit as mayor of Digos City. Surely, the fact that petitioner was an incumbent elected official who was set to run for re-election if not higher office during the 2016 and 2019 NLEs should have prompted the COMELEC to conclude its investigation with utmost dispatch. Otherwise, those who intended to vote for petitioner could have ended up wasting their vote for a disqualified candidate.<br><br><i>For another.<b> Petitioner's case did not at all involve complex or intricate issues which require voluminous records or evidence. The lone issue needed to be resolved was whether petitioner went beyond the prescribed campaign expenditure limit</b></i>. To determine if there had indeed been an excess, a simple mathematical equation is all that is required: multiply the number of registered voters in Digos City by three pesos ([PHP] 3.00). The product must then be parried with the amount<i> actually</i> spent by petitioner. If the amount spent was greater than the product, then there is probable cause to charge petitioner with election overspending, subject to any valid defense which petitioner may raise in his counter-affidavit.<br><br><b><i>Indeed, why the preliminary investigation lasted for an unreasonable period of time is clearly unfathomable considering the simplicity of the issue, that there is only one respondent charged in the complaint, and the evidence involved here was not at all voluminous</i></b>. As the Court pronounced in<i> Alarilla v. Sandiganbayan</i>, absent any extraordinary complication which the prosecution must adequately prove, such as the degree of difficulty of the questions involved in the case, or any event external thereto that effectively stymied the prosecution's normal work activity, any delay in the resolution of the preliminary investigation is not justified.<br><br><i>Yet another</i>. The six (6)-year period it took to resolve the complaint grossly prejudiced petitioner.<i> Prejudice</i> is assessed in light of the interests of the accused which the speedy disposition right is designed to protect, such as: (i) to prevent oppressive pretrial incarceration; (ii) to minimize anxiety and concern of the accused; and (iii) to limit the possibility that the defense will be impaired.<br><br>The Court notes that the first criterion does not apply in this case because petitioner was never arrested or incarcerated. The second and third criteria, however, apply to petitioner.<br><br>The unjustified delay caused petitioner mental anguish, fright, serious anxiety, besmirched reputation, wounded feelings, moral shock, social humiliation, and similar injury, which naturally attend every criminal prosecution. The pendency of the investigation unduly affected his reputation, an invaluable asset for an elected official like him. The ascription of an offense to him eroded the confidence reposed on him by the people of Digos City, all the more so because he was a "first time" mayor from whom much was expected by his constituents and adversaries. Too, the prolonged investigation impaired his defense in the event of a full-blown trial, for witnesses may no longer be available to testify for him, or documentary evidence such as receipts may have gotten lost along the way.<br><br>Clearly, the COMELEC failed to discharge its burden to justify the length of time it took for it to conclude the preliminary investigation in this case. There was no showing that the COMELEC followed its prescribed procedure to the letter in order to obviate any delay in the proceedings. Nor was it established that the issues were too complex and the evidence required voluminous, making delay inevitable. Indubitably, therefore, inordinate delay attended the COMELEC's conduct of the preliminary investigation of petitioner's case.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis supplied, citations omitted) </blockquote>Likewise, in<i> Peralta v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> therein petitioner was a candidate for mayor in the Municipality of San Marcelino Zambales during the 2010 NLE. The COMELEC filed a<i> motu proprio</i> complaint against therein petitioner for alleged election overspending.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The Court in<i> Peralta </i>ruled that there was inordinate delay in the conduct of the preliminary investigation before the COMELEC which violated the right of petitioner therein to speedy disposition of cases. Thus, the Court dismissed the complaint against therein petitioner.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The Court reiterated its ruling in<i> PeÃ±as, </i>the facts of which were found by the Court as in all fours with the case. Furthermore, citing its explanation in<i> PeÃ±as</i>, the Court ruled that the COMELEC cannot justify the conduct of preliminary investigation for more than six years, as the case did not involve a complex issue or require voluminous records or evidence.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Specifically, the Court ruled:<br><blockquote>Here, as with<i> PeÃ±as</i>, the complaint was filed against petitioner on May 9, 2015, and the preliminary investigation was concluded only on July 14, 2021, or after more than six (6) years. Too, no reasonable justification was offered by the COMELEC for the delay in the conduct thereof as the issue involved, i.e., whether the petitioner exceeded the election spending limits under the law, was not complex or novel and did not entail the review or examination of voluminous records. Verily, the Court's ruling in<i> PeÃ±as</i> as to the finding of inordinate delay finds application in the present case.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </blockquote>Admittedly, petitioners in both<i> PeÃ±as</i> and<i> Peralta</i> were able to file their respective counter-affidavits while petitioner in the instant case failed to do so. However, the failure of petitioner herein to file a counter-affidavit is not a blanket excuse for the COMELEC to unduly delay the resolution of the<i> motu proprio</i> Complaint. As the Court already discussed above, the COMELEC Rules of Procedure are clear as to the COMELEC's duty to make such determination even if petitioner fails to file a counter-affidavit. Thus, from the time that the period for petitioner to file a counter-affidavit lapsed, the investigating officer has the duty to resolve the case based on the available evidence with the COMELEC. At this point, the Court's ruling in<i> PeÃ±as</i> and <i>Peralta</i> applies â i.e., the delay in resolving the case was unjustified since the case did not involve complex or intricate issues or require a review of voluminous records or evidence.<br><br>The Court is not oblivious to the fact that from the time of filing of the Complaint on December 20, 2014, petitioner filed on April 14, 2015 a motion for the resetting of the hearing and another motion on May 12, 2015 entitled "Manifestation with Omnibus Motion for Cancellation of Setting and Motion for the Delegation of the Conduct of Preliminary Investigation to the Provincial Comelec Officer." However, the length of time that elapsed on account of petitioner's submissions before the COMELEC is not substantial as to persuade the Court to conclude that petitioner should be faulted for the delay in resolving the case. From the time that the period for petitioner to file a counter-affidavit lapsed, the delay was already attributable to the COMELEC.<br><br>Lastly, petitioner cannot be faulted for invoking his right to speedy disposition of cases only after the COMELEC<i> En Banc</i> promulgated its Minute Resolution dated July 28, 2021. As the Court ruled in<i> PeÃ±as</i>, a respondent in a criminal prosecution or investigation is not duty bound to follow up on his or her case, and that it is the governing agency that is tasked to promptly resolve it.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Furthermore, as held in<i> Cervantes v. Sandiganbayan</i><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> which the Court reiterated in<i> PeÃ±as</i>, "[i]t is the duty of the prosecutor to speedily resolve the complaint, as mandated by the Constitution, regardless of whether the petitioner did not object to the delay or that the delay was with his acquiescence provided that it was not due to causes directly attributable to him."<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Here, from the time that the period for petition to file his counter-affidavit lapsed, the COMELEC should have already timely resolved the<i> motu proprio</i> Complaint, and any delay in its resolution can only be attributed to the COMELEC.<br><br>Ultimately, the Court finds that the COMELEC committed inordinate delay in conducting the preliminary investigation against petitioner. Thus, the Court finds that the issuance of the COMELEC<i> En Banc</i> Minute Resolution dated July 28, 2021 is tainted with grave abuse of discretion. Consequently, the assailed COMELEC<i> En Banc</i> Minute Resolution should be nullified, and the criminal action filed against petitioner, if any, should be dismissed.<br><br><b>ACCORDINGLY</b>, the petition is<b> GRANTED</b>. The Minute Resolution No. 21-0499-24 dated July 28, 2021 of the Commission on Elections<i> En Banc </i>is<b> NULLIFIED</b> for having been rendered with grave abuse of discretion amounting to lack or excess of jurisdiction. The<i> motu proprio</i> Complaint against petitioner Petronilo Solomon Sarigumba for alleged violation of Section 100 of Batas Pambansa Blg. 881, otherwise known as the Omnibus Election Code, as amended by Republic Act No. 7166, in relation to Section 262 of the same Code for election overspending is<b> DISMISSED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, J. Lopez, Dimaampao, Marquez,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Kho, Jr.,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> no part.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> No part.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 128-134. "IN THE MATTER OF THE RECOMMENDATION OF THE LAW DEPARTMENT IN ELECTION OFFENSE CASE NO. 15-071, ENTITLED "COMMISSION ON ELECTIONS, Represented by the CAMPAIGN FINANCE UNIT [v.] PETRONILO SOLOMON SARIGUMBA", FOR ALLEGED VIOLATION OF SECTION 100 OF THE OMNIBUS ELECTION CODE AS AMENDED BY REPUBLIC ACT NO. 7166 IN RELATION TO SECTION 262 OF THE SAME CODE (OVERSPENDING)" The COMELEC <i>En Banc</i> Minute Resolution dated July 28, 2021 was signed by Chairman Sheriff M. Abas and Commissioners Ma. Rowena Amelia V. Guanzon, Marlon S. Casquejo, Antonio T. Kho, Jr. (now a Member of this Court) and Aimee P. Ferolino of the Commission on Elections, Manila (Commissioner Socorro B. Inting on leave).<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Batas Pambansa Blg. </i>881; Approved on December 3, 1985.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Titled "AN ACT PROVIDING FOR SYNCHRONIZED NATIONAL AND LOCAL ELECTIONS AND FOR ELECTORAL REFORMS, AUTHORIZING APPROPRIATIONS THEREFOR, AND FOR OTHER PURPOSES," Approved November 26, 1991.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 61-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 36-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 42-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. "IN THE MATTER OF THE RECOMMENDATION OF THE LAW DEPARTMENT IN ELECTION OFFENSE CASE NO. 15-071, ENTITLED "COMMISSION ON ELECTIONS, Represented by the CAMPAIGN FINANCE UNIT [v.] PETRONILO SOLOMON SARIGUMBA", FOR ALLEGED VIOLATION OF SECTION 100 OF THE OMNIBUS ELECTION CODE AS AMENDED BY REPUBLIC ACT NO. 7166 IN RELATION TO SECTION 262 OF THE SAME CODE (OVERSPENDING)" The COMELEC <i>En Banc</i> Minute Resolution dated July 28, 2021 was signed by Chairman Sheriff M. Abas and Commissioners Ma. Rowena Amelia V. Guanzon, Marlon S. Casquejo, Antonio T. Kho, Jr. (now a Member of the Court) and Aimee P. Ferolino of the Commission on Elections, Manila (Commissioner Socrorro B. Inting on leave).<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 919 Phil. 513 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, pp. 9-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 6-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 21-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 84-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 88-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 91-95.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 97-106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 106-107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 146-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Philippine Bank of Communications v. Court of Appeals</b>, 805 Phil. 964, 974 (2017) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 974-975.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Daep v. Sandiganbayan</b>, 903 Phil. 783, 799 (2021) [Per J. Lopez, J. Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Article III, Section 16 of the 1987 Constitution provides:<br><blockquote>Section 16. All persons shall have the right to a speedy disposition of their cases before all judicial, quasi-judicial or administrative bodies.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Figueroa v. Sandiganbayan</b>, 919 Phil. 892, 896 (2022) [Per J. Lopez, M., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> 837 Phil. 815 (2018) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 880-882.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Peralta v. Commission on Elections</b>, 950 Phil. 761, 773 (2024) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, p. 128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 129.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 133-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, pp. 31-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 919 Phil. 513 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 514-516.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 534-535.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 530-531.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 529-532.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 950 Phil. 761 (2024) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 762-766.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 771.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>. at 775-777.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 777.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>PeÃ±as v. Commission on Elections</b>, 919 Phil. 513, 533 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 366 Phil. 602 (1999) [Per J. Pardo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 609.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

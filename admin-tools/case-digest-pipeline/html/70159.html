@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 270327 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. HARLEY UYSON Y SANTIAGO ALIAS "AMO," ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70159' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 270327, October 06, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. HARLEY UYSON <i>Y</i> SANTIAGO ALIAS "AMO," ACCUSED-APPELLANT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING,<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is an Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated April 20, 2023, of the Court of Appeals (CA) in CA-G.R. CR-HC No. 15685. The CA affirmed the Joint Judgment<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated June 29, 2021, of Branch 79, Regional Trial Court (RTC) Quezon City in Criminal Case Nos. R-QZN-20-07005-CR and R-QZN-20-07008-CR that found Harley Uyson <i>y</i> Santiago alias "Amo"<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (accused-appellant) guilty beyond reasonable doubt of Illegal Sale and Illegal Possession of dangerous drugs as defined and penalized under Sections 5<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and 11,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Article II of Republic Act No. 9165,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> otherwise known as the "Comprehensive Dangerous Drugs Act of 2002," respectively.</p><p align="center"> <i>The Antecedents</i> </p><p> The case stemmed from four separate Informations<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> charging accused-appellant with the aforesaid crimes, the accusatory portions of which read: </p><blockquote> <p align="center"> Criminal Case No. R-QZN-20-07005-CR <br> (Violation of Section 5 of Republic Act No. 9165) </p> <p> That on or about the 10<sup>th</sup> day of September 2020, in Quezon City, Philippines, the above-named accused without lawful authority to sell, dispense, deliver, transport or distribute any dangerous drug, did then and there willfully, unlawfully and knowingly sell, trade, administer, dispense, deliver, giving away to another, distribute, dispatch in transit or transport, or act as a broker in the said transaction, one (1) transparent plastic sachet with marking BB-JM-HU 9-10-20, containing zero point thirteen (0.13) gram of white crystalline substance which after qualitative examination gave positive result to the test for Methamphetamine Hydrochloride, a dangerous drug.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p> </blockquote> <p align="center"> Criminal Case No. R-QZN-20-07006-CR<br> (Violation of Section 5 of Republic Act No. 9165) </p><blockquote> <p> That on or about the 10<sup>th</sup> day of September 2020, in Quezon City, Philippines, the above-named accused, without any authority of law to sell, dispense, deliver, transport or distribute any dangerous drug, did then and there, willfully, unlawfully and knowingly sell, deliver, [give] away and distribute to Michael Gacilos [<i>y</i>] Gacita, alias Mike, one (1) transparent plastic sachet with markings DD-MG 9-10-20, containing two point sixteen (2.16) grams of white crystalline substance which, after Qualitative Examination[,] gave positive result to the test for Methamphetamine Hydrochloride, a dangerous drug, in violation of said law.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p> </blockquote> <p align="center"> Criminal Case No. R-QZN-20-07007-CR<br> (Violation of Section 5 of Republic Act No. 9165) </p><blockquote> <p> That on or about the 10<sup>th</sup> day of September 2020, in Quezon City, Philippines, the above-named accused, without any authority of law to sell, dispense, deliver, transport or distribute any dangerous drug, did then and there willfully, unlawfully and knowingly sell, deliver, give away and distribute to Donna Del Rosario [<i>y</i>] Collado, alias Blue, one (1) transparent plastic sachet with markings MF-DD 9-10-20, containing zero point seventeen (0.17) gram of white crystalline substance which, after Qualitative Examination, gave positive result to the test for Methamphetamine Hydrochloride, a dangerous drug, in violation of said law. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p> </blockquote> <p align="center"> Criminal Case No. R-QZN-20-07008-CR<br> (Violation of Section 11 of Republic Act No. 9165) </p><blockquote> <p> That on or about the 10<sup>th</sup> day of September 2020, in Quezon City, Philippines, the above-named accused, not authorized by law to possess or use any dangerous drug, did then and there willfully, unlawfully and knowingly have in his possession and under his control one (1) transparent plastic sachet with marking JM-HU 9-10-20 containing two point seventeen (2.17) grams of white crystalline substance which, after Qualitative Examination, gave positive result to the test for Methamphetamine Hydrochloride, a dangerous drug, in violation of said law. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p> </blockquote> <p> Upon arraignment, accused-appellant entered pleas of "Not Guilty" to the charges.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> On the other hand, Donna Del Rosario <i>y</i> Collado <i>alias</i> Blue (Collado) and Michael Gacilos <i>y</i> Gacita <i>alias</i> Mike (Gacilos) filed a Motion to Allow Accused To Enter A Plea Bargaining Agreement<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated September 22, 2020, wherein they expressed their willingness to enter a plea of guilty to a violation of Section 12<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> In the Order<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated September 22, 2020, the RTC granted Collado and Gacilo's motion and found them guilty beyond reasonable doubt of violation of Section 12, Article II of Republic Act No. 9165, the pertinent portion of which reads: </p><blockquote> <p> Acting on the Motion to Allow Accused Michael Gacilos [<i>y</i>] Gacita and Donna Del Rosario y Collado to Enter Into a Plea Bargaining Agreement, the same is hereby GRANTED since the quantity of shabu involved in Criminal Case Nos. R-QZN-20-07009-10-CR is less than five (5) grams. </p> <p> . . . . </p> <p> PREMISES CONSIDERED, in Criminal Case No. R-QZN-20-07009-CR, judgment is hereby rendered finding accused MICHAEL GACILOS [<i>y</i>] GACITA GUILTY beyond reasonable doubt of violation of Section 12, Article II of Republic Act No. 9165 and he is sentenced to suffer imprisonment of six months and one day and to pay a fine [in the amount] of ten thousand pesos ([PHP] 10,000.00). Pursuant to the Supreme Court [<i>En Banc</i>] Resolution, A.M. No. 18-03-16-SC dated April 10, 2018, he is directed to undergo drug dependency evaluation/test to be conducted by a DOH accredited physician. </p> <p> If found positive for the use of illegal drugs, accused Michael Gacilos [<i>y</i>] Gacita shall undergo six months treatment and rehabilitation at the Quezon City Treatment and Rehabilitation Center which shall be credited to his penalty, unless, the DOH accredited physician who will examine the accused will recommend counselling only. </p> <p> In Criminal Case No. R-QZN-20-07010-CR, judgment is hereby rendered finding accused DONNA DEL ROSARIO [<i>y</i>] COLLADO GUILTY beyond reasonable doubt of violation of Section 12, Article II of Republic Act No. 9165 and [s]he is sentenced to suffer imprisonment of six months and one day and to pay a fine [in the amount] of [ten] thousand pesos ([PHP] 10,000.00). Pursuant to the Supreme Court [<i>En Banc</i>] Resolution, A.M. No. 18-03-16-SC dated April 10, 2018, [s]he is directed to undergo drug dependency evaluation/test to be conducted by a DOH accredited physician. </p> <p> If found positive for the use of illegal drugs, accused Donna Del Rosario y Collado shall undergo six months treatment and rehabilitation at the Quezon City Treatment and Rehabilitation Center which shall be credited to his penalty, unless, the DOH accredited physician who will examine the accused will recommend counselling only. </p> <p> . . . . </p> <p> The Director of the Quezon City Anti-Drug Abuse Advisory Council is directed to immediately order any DOH accredited physician assigned at the Special Drug Education Center to subject accused MICHAEL GACILOS [<i>y</i>] GACITA and DONNA DEL ROSARIO [<i>y</i>] COLLADO to drug dependency evaluation/tests as soon as the accused are brought there and to submit the results of the drug dependency evaluation/tests to this court, within seventy-two (72) hours from the conduct of the tests.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p> </blockquote> <p> Trial ensued as against accused-appellant only. </p><p align="center"> <i>The Version of the Prosecution</i> </p><p> On September 10, 2020, at around 7:15 p.m., a confidential informant (CI) informed the Station Drug Enforcement Unit (SDEU) of the Quezon City Police District (QCPD) that a cettain "<i>Amo</i>" was selling <i>shabu</i> at Sto. Cristo, Ilocos Sur Street, Bago Bantay, Quezon City. The SDEU formed a buy-bust team and designated Police Corporal Jevies Mallari (PCpl Mallari) as the poseur buyer; PCpl Marc Paul Frogoso (PCpl Frogoso) and PCpl Dalton De Guzman (PCpl De Guzman) as immediate back up officers; while the other police operatives as the perimeter security.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The buy-bust team then accomplished the Coordination Form<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> and Pre-Operation Report.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> In turn, the Philippine Drug Enforcement Agency issued a Certificate of Coordination.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> In line with the operation, the buy-bust team instructed the CI to call alias "Amo" and order Five Hundred Peso worth of <i>shabu</i>. In turn, Amo agreed to meet the CI at around 11:15 p.m., in front of No. 168 Ilocos Sur Street, Bago Bantay, Barangay Sto. Cristo, Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> On even date, at around 11:00 p.m., the buy-bust team proceeded to the target area and strategically positioned their vehicles at a viewing distance, i.e., 5 to 7 meters away, in order to monitor the transaction.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> At around 11:15 p.m., PCpl Mallari saw a man and a woman talking to each other in front of the target area. The CI whispered to PCpl Mallari, "<i>Sir, yung naka sando na itim na lalakeng kalbo, ayan po si [alias] Amo[.] [S]iya po ang kinukuhaan ko ng items.</i>" The CI then identified the woman as Collado.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Subsequently, the CI introduced PCpl Mallari to accused-appellant as the purported buyer of shabu. PCpl Mallari uttered to accused-appellant: "<i>Kuya[,] halagang limang daan lang po, babayaran ko na</i>", referring to the <i>shabu</i>. Accused-appellant demanded payment and PCpl Mallari handed him the marked-money, i.e., a genuine five-hundred-peso bill with serial number FU152115.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Meanwhile, a man later identified as Gacilos arrived in the middle of the buy-bust operation. Gacilos uttered to accused-appellant: "<i>Pre, yung hinihiram ko sa yo?</i>" to which accused-appellant answered: "<i>Nasa akin na, p're, yung inuutang mo</i>."<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Accused-appellant thereafter handed three heat-sealed transparent plastic sachet containing white crystalline substances suspected to be <i>shabu</i>, one for Gacilos, one for Collado, and another for PCpl Mallari, who then removed his bull cap as the pre-arranged signal that the transaction is completed. This prompted PCpl Frogoso and PCpl De Guzman to rush towards accused-appellant.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> At this instance, PCpl Mallari introduced himself as a police officer, arrested accused-appellant, and instructed the latter to bring out the contents of his pouch. Accused-appellant took out another plastic sachet of suspected <i>shabu</i>. PCpl Mallari seized the pouch and the plastic sachet of suspected drugs. He also confiscated the marked-money and accused-appellant's Samsung cellular phone.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Immediately thereafter, PCpl Mallari marked the plastic sachets of suspected drugs which he purchased and those he recovered from accused-appellant's possession, respectively, with "BB-JM-HU 9-10-20" and "JM-HU 9-10-20" in the place of arrest and in the presence of: 1) accused-appellant; 2) Nelson Cruz (Cruz), a barangay kagawad of Barangay Sto. Cristo; and 3) Henry Nicolas, Jr. (Nicolas) of Euro TV News.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The team likewise took photographs during the marking and the inventory of the seized items. Cruz and Nicolas, also signed the inventory document.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> The Inventory of Seized Items<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> reads: </p><blockquote> <table width="100%" border="1" cellspacing="0" cellpadding="4"> <tbody><tr> <td width="21%"><div align="center">Item No. </div></td> <td width="15%"><div align="center">Quantity</div></td> <td width="64%"><div align="center">Description</div></td> </tr> <tr valign="top"> <td valign="top"><div align="center"> <table width="100%" border="0" cellspacing="0" cellpadding="1"> <tbody><tr> <td><div align="center"> 1[.]<p></p> </div></td> </tr> <tr> <td><p>&nbsp;</p> <p>&nbsp;</p> <p><br> </p> <div align="center"></div> <div align="center"> <div align="center"></div> <div align="center"><br> <br> 2[.]</div> </div></td> </tr> <tr> <td><div align="center"></div><br></td> </tr> <tr> <td><div align="center"><br> <br> 3[.]</div></td> </tr> </tbody></table> </div></td> <td valign="top"><div align="center"> <table width="100%" border="0" cellspacing="0" cellpadding="1"> <tbody><tr> <td><div align="center">4</div></td> </tr> <tr> <td><p>&nbsp;</p> <p>&nbsp;</p> <p>&nbsp;</p> <p>&nbsp;</p> <div align="center"><br> 1</div></td> </tr> <tr> <td>&nbsp;</td> </tr> <tr> <td><div align="center"></div><br></td> </tr> <tr> <td>&nbsp;</td> </tr> <tr> <td><div align="center">1</div></td> </tr> </tbody></table> <p>&nbsp;</p> </div></td> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify">FOUR (4) PIECES OF SMALL HEAT-SEALED TRANSPARENT PLASTIC SACHETS CONTAINING WHITE CRYSTALLING SUBSTANCES SUSPECTED TO BE SHABU[,] A DANGEROUS DRUGS WITH INITIAL MARKINGS WITH SIGNATURE</div></td> </tr> <tr> <td>&nbsp;</td> </tr> <tr> <td>BB-JM-HU 9-10-20 </td> </tr> <tr> <td>JM-HU 9-10-20 </td> </tr> <tr> <td>DD-MG 9-10-20 </td> </tr> <tr> <td>ME-DD 9-10-20</td> </tr> <tr> <td>&nbsp;</td> </tr> <tr> <td><div align="justify">ONE (1) PIECE [OF] FIVE HUNDRED PESO BILL ([PHP] 500.00) WITH SERIAL NO. FU152115 SERVED AS A BUYBUST MONEY MARKED AS "JM"</div></td> </tr> <tr> <td>&nbsp;</td> </tr> <tr> <td>ONE (1) PIECE OF MERCURY POUCH MARKED AS JM-HU1 9-10-20</td> </tr> <tr> <td>&nbsp;</td> </tr> <tr> <td>ONE (1) UNIT SAMSUNG CELLULAR PHONE COLOR GOLD MARKED AS JM-HU2 9-10-20</td> </tr> <tr> <td>&nbsp;</td> </tr> </tbody></table> </td></tr></tbody></table> <p>&nbsp;</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="23%">Place of Inventory: </td> <td width="77%">No. 168 ILOCOS SUR ST. BRGY. STO CRISTO, QUEZON CITY</td> </tr> </tbody></table> <p>. . . .</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="64%">&nbsp;</td> <td width="36%">Witness/es: <br> KGO. Neil Cruz <br> Elected Public Official</td> </tr> <tr> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr> <td>&nbsp;</td> <td>Henry Nicolas<br> Media Representative<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </td> </tr> </tbody></table> </blockquote> <p>After the inventory, PCpl Mallari placed the seized items in a zip lock bag and kept them in his custody. The police operatives then brought accused-appellant and the seized items to the police station for post arrest procedures.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p> <p> At the police station,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> PCpl Mallari presented the seized items to Police Staff Sergeant Winston SemaÃ±a (PSSG SemaÃ±a), the investigator on-case, who prepared the Booking Sheet, Arrest Report,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> as well as the Request for Laboratory Examination<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> and Request for Drug Test.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> A few minutes later, or on September 11, 2020, PCpl Mallari, still in possession of the seized items, together with PCpl Frogoso and PCpl De Guzman, proceeded to the QCPD Crime Laboratory and turned over the seized items to Forensic Chemist Colonel Rhea Fe Dela Cruz-Alviar (FC Dela Cruz-Alviar) for analysis and examination. Per Chemistry Report No. D-1306-2020,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the specimens submitted for examination tested positive for the presence of Methamphetamine Hydrochloride, a dangerous drug.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Then, on May 18, 2021, Police Staff Sergeant Junia Tuccad (PSSG Tuccad) retrieved the sealed drug specimen from the crime laboratory and turned it over to the RTC.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p align="center"> <i>The Version of the Defense</i> </p><p> Accused-appellant vehemently denied the charges against him and asserted that he did not know where the illegal drugs came from. He narrated that on September 10, 2020, at around 7:00 p.m., while he was walking along Ilocos Sur Street, to buy food for his children, a black vehicle stopped beside him. Two men alighted and forced him to board the vehicle. The men brought him to Road 9 comer Road 2, Barangay Pag-Asa, where the police officers repeatedly asked him if he knew a certain "<i>Muktar</i>." When accused-appellant answered in the negative, the police officers mauled him and forced him to admit that he knew Muktar. Then, the police officers brought accused-appellant to Congressional Apartelle with other persons whom he did not know. The men transferred him to another vehicle with a man and a woman who were in handcuffs. Thereafter, the police officers brought him and the other arrested persons to the police station for processing. Afterwards, the police officers brought back accused-appellant to Ilocos Street where the police officers placed illegal drugs on top of the hood of a vehicle.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p align="center"> <i>The Ruling of the RTC</i> </p><p> In the Joint Judgment<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> dated June 29, 2021, the RTC acquitted accused-appellant of violation of Section 5, Article II of Republic Act No. 9165 in Criminal Case Nos. R-QZN-20-07006-CR and R-QZN-20-07007-CR considering the failure of the prosecution to prove the <i>corpus delicti</i> of the crime, to wit: </p><blockquote> <p> Anent the charges of violation of Section 5, Article II . . . for illegal delivery of dangerous drugs, the prosecution failed to prove the corpus delicti. The delivered dangerous drugs were not presented and identified by the sole witness of the prosecution, Police Corporal Javies Mallari. Concomittantly, the Court has no recourse but to exonerate accused of illegal delivery of dangerous drugs. </p> <p> In prosecutions involving narcotics, the narcotic substance itself constitutes the corpus delicti of the offense and the fact of its existence is vital to sustain a judgment of conviction beyond reasonable doubt[.]<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p> </blockquote> <p> This notwithstanding, the RTC convicted accused-appellant in Criminal Case Nos. R-QZN-20-07005-CR and R-QZN-20-07008-CR for illegal sale of 0.13 grams of <i>shabu</i> and illegal possession of 2.17 grams of <i>shabu</i>, respectively. The RTC viewed accused-appellant's defense of denial and frame up with disfavor and found that the prosecution was able to prove with the required quantum of proof all the elements of illegal sale and illegal possession of dangerous drugs. The police operatives successfully conducted a buy-bust operation where the poseur-buyer, PCpl Mallari, remained in possession of the seized items from the moment he recovered them until they were turned over to the crime laboratory for testing. Hence, the RTC concluded that the integrity of the <i>corpus delicti</i> was properly preserved.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> The dispositive portion of the RTC Joint Judgment<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> dated June 29, 2021 reads: </p><blockquote> <p> WHEREFORE judgment is hereby rendered as follows: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1.</div></td> <td width="95%"><div align="justify">Criminal Case No. R-QZN-20-07005-CR, accused HARLEY UYSON y SANTIAGO is hereby found GUILTY BEYOND REASONABLE DOUBT of violation of Section 5, Article II of Republic Act No. 9165 and he is sentenced to suffer life imprisonment, and to pay a fine of Five hundred thousand pesos ([PHP] 500,000.00); </div></td> </tr> <tr valign="top"> <td><div align="justify">2.</div></td> <td><div align="justify">In Criminal Case No. R-QZN-20-07006-CR, accused HARLEY UYSON y SANTIAGO is hereby ACQUITTED of violation of Section 5, Article II of Republic Act No. 9165;</div></td> </tr> <tr valign="top"> <td><div align="justify">3.</div></td> <td><div align="justify">In Criminal Case No. R-QZN-20-07007-CR, accused HARLEY UYSON y SANTIAGO is hereby ACQUITTED of violation of Section 5, Article II of Republic Act No. 9165; and</div></td> </tr> <tr valign="top"> <td><div align="justify">4.</div></td> <td><div align="justify">In Criminal Case No. R-QZN-20-07008-CR, accused HARLEY UYSON y SANTIAGO is hereby found GUILTY BEYOND REASONABLE DOUBT of violation of Section 11, Article II of Republic Act No. 9165 and he is sentenced to suffer imprisonment of twelve (12) years and one (1) day as minimum, to fourteen (14) years and eight (8) months, as maximum, and to pay a fine of Three hundred thousand pesos ([PHP] 300,000.00). </div></td> </tr> </tbody></table> <p>The Branch Clerk of Court is directed to immediately turn over to the Chief of PDEA Crime Laboratory, the subject drugs in these cases covered by Chemistry Report No. D-1306-2020, which are confiscated in favor of the government, to be disposed of in strict conformity with the provisions of [Republic Act] No. 9165 and its implementing rules and regulations on the matter. </p> <p> The Five hundred peso bill with serial number FU152115 is confiscated in favor of the government and the Branch Clerk of Court is directed to deposit/remit it to the General Fund. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p> </blockquote> <p> Aggrieved, accused-appellant appealed<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> to the CA asserting that the prosecution's non-presentation of the CI is fatal to the case. Accused-appellant also questioned the three hour delay between the inventory taking and the turnover to the crime laboratory of the seized items.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p align="center"> <i>The Ruling of the CA</i> </p><p> In the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> dated April 20, 2023, the CA affirmed the RTC Decision <i>in toto</i>, viz.: </p><blockquote> <p> WHEREFORE, the appeal is DENIED. The Joint Judgment dated June 29, 2021 of the Regional Trial Court of Quezon City, Branch 79, convicting accused-appellant Harley Uyson y Santiago of violation of Sections 5 and 11, Article II of [Republic Act] No. 9165, in Criminal Case Nos. R-QZN-20-07005-CR and R-QZN-20-07008-CR, is AFFIRMED [<i>in toto</i>]. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p> </blockquote> <p> The CA found all the links in the chain of custody intact. PCpl Mallari had custody of the seized items from their confiscation to the time they were transmitted for examination before the QCPD Crime Laboratory. Only briefly did he show them to PSSG SemaÃ±a and only for the purpose of preparing the requests for laboratory examination and drug test, among others. Hence, the CA ruled that the integrity and evidentiary value of the seized items were properly preserved.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> The CA further held that it is not indispensable for the prosecution to put the CI on the witness stand since his/her testimony will merely be corroborative of the apprehending officer's testimony regarding the subject buy-bust operation.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> Hence, the Appeal.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><p> In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> dated July 17, 2024, the Court notified both parties that they may file their respective supplemental briefs. </p><p> On December 10, 2024, the Office of the Solicitor General submitted its Manifestation (In Lieu of Supplemental Brief)<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> stating that a supplemental brief would no longer be filed as the arguments for the People had been succinctly discussed in its earlier Brief.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Similarly, accused-appellant manifested<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> that he had already exhaustively discussed his arguments in the Appellant's Brief.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup></p><p> In his Brief,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> accused-appellant maintained that the chain of custody of the seized items was breached because the required witnesses were not physically present at the time of the alleged transaction but was only called to witness the inventory of the seized items after the purported transaction was already consummated.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p><p align="center"> <i>The Issue</i> </p><p> Whether the CA correctly found accused-appellant guilty beyond reasonable doubt of illegal sale and illegal possession of dangerous drugs under Republic Act No. 9165. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The Court resolves to dismiss the Appeal. </p><p> Preliminarily, it is settled that an appeal in criminal cases throws the entire case wide open for review and the reviewing court can correct errors though unassigned in the appealed judgment.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Nonetheless, it is equally well settled that, absent any showing that the factual findings of the RTC were arbitrarily issued or tainted with a reversible error, such findings especially when affirmed by the CA, are binding upon this Court.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> </p><p> After a judicious scrutiny of the records, the Court sees no cogent reason to overturn the factual findings and conclusions of the courts <i>a quo</i> that the prosecution successfully established all the elements of the Illegal Sale and Illegal Possession of dangerous drugs. </p><p> Section 5 of Republic Act No. 9165 provides: </p><blockquote> <p> SECTION 5. <i>Sale, Trading, Administration, Dispensation, Delivery, Distribution and Transportation of Dangerous Drugs and/or Controlled Precursors and Essential Chemicals</i>. â The penalty of life imprisonment to death and a fine ranging from Five hundred thousand pesos ([PHP] 500,000.00) to Ten million pesos ([PHP] 10,000,000.00) shall be imposed upon any person, who, unless authorized by law, shall sell, trade, administer, dispense, deliver, give away to another, distribute, dispatch in transit or transport any dangerous drug, including any and all species of opium poppy regardless of the quantity and purity involved, or shall act as a broker in any of such transactions. </p> <p> The penalty of imprisonment ranging from twelve (12) years and one (1) day to twenty (20) years and a fine ranging from One hundred thousand pesos ([PHP] 100,000.00) to Five hundred thousand pesos ([PHP] 500,000.00) shall be imposed upon any person, who, unless authorized by law, shall sell, trade, administer, dispense, deliver, give away to another, distribute, dispatch in transit or transport any controlled precursor and essential chemical, or shall act as a broker in such transactions[.]</p> </blockquote> <p> On the other hand, Section 11 of the same law states: </p><blockquote> <p> SECTION 11. <i>Possession of Dangerous Drugs</i>. â The penalty of life imprisonment to death and a fine ranging from Five hundred thousand pesos ([PHP] 500,000.00) to Ten million pesos ([PHP] 10,000,000.00) shall be imposed upon any person, who, unless authorized by law, shall possess any dangerous drug in the following quantities, regardless of the degree of purity thereof: </p> <p> . . . . </p> <p> (1) Life imprisonment and a fine ranging from Four hundred thousand pesos ([PHP] 400,000.00) to Five hundred thousand pesos (P500,000.00), if the quantity of methamphetamine hydrochloride or "shabu" is ten (10) grams or more but less than fifty (50) grams; </p> <p> (2) Imprisonment of twenty (20) years and one (1) day to life imprisonment and a fine ranging from Four hundred thousand pesos ([PHP] 400,000.00) to Five hundred thousand pesos ([PHP] 500,000.00), if the quantities of dangerous drugs are five (5) grams or more but less than ten (10) grams of opium, morphine, heroin, cocaine or cocaine hydrochloride, marijuana resin or marijuana resin oil, methamphetamine hydrochloride or "shabu", or other dangerous drugs such as, but not limited to, MDMA or "ecstasy", PMA, TMA, LSD, GHB, and those similarly designed or newly introduced drugs and their derivatives, without having any therapeutic value or if the quantity possessed is far beyond therapeutic requirements; or three hundred (300) grams or more but less than five hundred (500) grams of marijuana; and</p> <p> (3) Imprisonment of twelve (12) years and one (1) day to twenty (20) years and a fine ranging from Three hundred thousand pesos ([PHP] 300,000.00) to Four hundred thousand pesos ([PHP] 400,000.00), if the quantities of dangerous drugs are less than five (5) grams of opium, morphine, heroin, cocaine or cocaine hydrochloride, marijuana resin or marijuana resin oil, methamphetamine hydrochloride or "shabu'', or other dangerous drugs such as, but not limited to, MDMA or "ecstasy", PMA, TMA, LSD, GHB, and those similarly designed or newly introduced drugs and their derivatives, without having any therapeutic value or if the quantity possessed is far beyond therapeutic requirements; or less than three hundred (300) grams of marijuana. </p> </blockquote> <p> For the successful prosecution of the crime of Illegal Sale of dangerous drugs, the following elements must concur: (1) the identity of the buyer and seller, the object, and the consideration; and (2) the delivery of the thing sold and its payment."<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> In contrast, the elements of Illegal Possession of dangerous drugs are: (1) the accused is in possession of an item or object, which is identified to be a prohibited or regulated drug; (2) such possession is not authorized by law; and (3) the accused freely and consciously possessed the drug.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p><p> In the case, the records show that accused-appellant was caught <i>in flagrante delicto</i> selling a sachet containing 0.13 grams of <i>shabu</i> to PCpl Mallari for PHP 500.00 during the buy-bust operation on September 10, 2020. Accused-appellant was also found to be in control and possession of another sachet containing 2.17 grams of <i>shabu</i>. Lastly, both sachets with suspected shabu seized from accused-appellant tested positive for <i>methamphetamine hydrochloride</i>. Thus, the RTC and the CA correctly found that accused-appellant committed the Illegal Sale and Illegal Possession of Dangerous Drugs.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p><p> Clutching at straws, accused-appellant maintained that the integrity of the seized items was not established with moral certainty because the insulating witnesses were not around when the subject drugs were seized from him and when he was arrested. In addition, it took three hours before the police operatives turned over the seized items to the crime laboratory from the time of the inventory taking.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> </p><p> The Court is not persuaded. </p><p> Section 21 of Republic Act No. 9165, as amended by Republic Act No. 10640, provides: </p><blockquote> <p> SECTION 21. <i>Custody and Disposition of Confiscated, Seized, and/or Surrendered Dangerous Drugs, Plant Sources of Dangerous Drugs, Controlled Precursors and Essential Chemicals, Instruments/Paraphernalia and/or Laboratory Equipment</i>. â The PDEA shall take charge and have custody of all dangerous drugs, . . . so confiscated, seized and/or surrendered, for proper disposition in the following manner: </p> <p> (1) The apprehending team having initial custody and control of the dangerous drugs, . . . shall, immediately after seizure and confiscation, conduct a physical inventory of the seized items and photograph the same in the presence of the accused or the persons from whom such items were confiscated and/or seized, or his/her representative or counsel, with an elected public official and a representative of the National Prosecution Service or the media who shall be required to sign the copies of the inventory and be given a copy thereof: Provided, That the physical inventory and photograph shall be conducted at the place where the search warrant is served; or at the nearest police station or at the nearest office of the apprehending officer/team, whichever is practicable, in case of warrantless seizures: Provided, finally, That noncompliance of these requirements under justifiable grounds, as long as the integrity and the evidentiary value of the seized items are properly preserved by the apprehending officer/team, shall not render void and invalid such seizures and custody over said items. </p> </blockquote> <p> Relatedly, jurisprudence dictates that the following links of the chain of custody must be established: </p><ol><li> The seizure and marking, if practicable, of the illegal drug recovered from the accused by the apprehending officer; <br><br></li><li>The turn-over of the seized illegal drug to the investigating officer; <br><br></li><li>The turn-over by the investigating officer of the illegal drug to the forensic chemist for laboratory examination; and <br><br></li><li>The turn-over and submission of the illegal drug from the forensic chemist to the court.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> </li></ol> <p> Indubitably, drugs, such as <i>shabu</i>, is susceptible to alteration, tampering, contamination, substitution and exchangeâwhether intentional or otherwiseâgiven the fungible nature.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> It is therefore essential that the identity and integrity of the subject drug should be sufficiently established with no less than moral certainty considering that the contraband itself constitutes the very <i>corpus delicti</i> of the offenses.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> </p><p> Anent the <i>first link</i> in the chain of custody, PCpl Mallari testified that marking and inventory taking was done <i>immediately</i> at the place of arrest, in the presence of accused-appellant and the insulating witnesses, viz.: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">If the plastic sachet that you purchased and recovered, Mr. Witness, will be shown to you, will you be able to identify it?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Why?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">I placed initials, sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What initials did you place?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">On the item I purchased, I placed "BB-JM-HU 9-10-20." </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about the plastic sachet that you recovered? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The item I recovered, I placed "JM-HU 9-10-20." </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Where were you when you placed those markings, Mr. Witness?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong>In front of the witnesses, in front of 168 Ilocos Sur Street, Barangay Sto. Cristo, Quezon City. </strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify"><strong>Now, where was the accused at that time?</strong></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify"><strong>They were in front of us.</strong><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">Now, Mr. Witness, where were you when you placed those markings?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong>At the place of arrest.</strong><sup style="COLOR: RGB(255, 0, 0);">[72]</sup></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Who are these witnesses that you are referring [to]?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong> The barangay representative, Nelson Cruz of Barangay Sto. Cristo.</strong></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"> <div align="justify">THE COURT: </div></td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What is his position in the barangay? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong> Barangay Kagawad, Your Honor, and the media representative is from Euro TV News, Henry Nicolas, Jr., Your Honor.</strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">ACP BARTOLOME</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>Now, Mr. Witness, after the markings, what else did you do to the plastic sachets that you purchased and recovered?</td> </tr> <tr valign="top"> <td>A:</td> <td> I placed them in a zip lock.</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>What documents did you prepare, Mr. Witness, in connection with the buy-bust operation?</td> </tr> <tr valign="top"> <td>A:</td> <td><strong> Inventory Form.</strong></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>Who conducted the inventory? </td> </tr> <tr valign="top"> <td>A:</td> <td><strong> Me and my back-up officers, in front of the required witnesses.</strong></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">THE COURT:</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>Who are the witnesses present when you conducted the Inventory?</td> </tr> <tr valign="top"> <td>A:</td> <td>Barangay Kagawad Nelson Cruz of Barangay Sto. Cristo, and media representative from Euro TV News, Henry Nicolas, Jr., Your Honor.</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>How about the accused, where was he?</td> </tr> <tr valign="top"> <td>A:</td> <td><strong>In front of us, Your Honor. </strong></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">. . . . </td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">ACP BARTOLOME</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>Below this document [Inventory Receipt], there is a signature above the name of Kagawad Cruz. Whose signature is this?</td> </tr> <tr valign="top"> <td>A:</td> <td> Signature of Barangay Kagawad Nelson Cruz.</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>And there is also signature above the name of Henry Nicolas, media representative. Whose signature is this? </td> </tr> <tr valign="top"> <td>A:</td> <td> Signature of the media representative.</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%">Q:</td> <td>How did you know that these are the respective signatures of these witnesses, Kagawad Cruz and Nicolas? </td> </tr> <tr valign="top"> <td>A:</td> <td><strong>We have photographs taken, sir[.]</strong><sup style="COLOR: RGB(255, 0, 0);">[73]</sup></td> </tr> </tbody></table> </blockquote> <p> In addition, the prosecution presented photographs showing the actual conduct of marking and inventory in front of accused-appellant and the insulating witnesses, i.e., Cruz and Nicolas, among others.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup></p> <p> PCpl Mallari also identified the photographs in this wise: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td colspan="2"><div align="justify">ACP BARTOLOME </div></td> </tr> <tr valign="top"> <td width="5%"><div align="justify"></div><br></td> <td width="95%"><div align="justify">The witness identified the photographs depicting the purchased item and including the recovered drug evidence, including the cellphone, the buy-bust money, and the Mercury Drug pouch bag. These photographs, Your Honor, were previously marked as Exhibit "N." </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Now, I am showing you another set of photographs, Mr. Witness. It consists of four (4) photographs. I am showing you the first photograph. Who are the persons depicted in this photograph?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong> The suspect, the arresting officers, and the witnesses. </strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Who is this person?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The one holding a camera is the media representative.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">And beside him, who is this? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">He is the barangay kagawad.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about this person, Mr. Witness?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">He is my back-up, PCpl De Guzman. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">And who is this person?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">That is Michael Gacilos. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about the woman beside him?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Donna Del Rosario. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">In the second photograph, who is this man in red shirt?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">That is me, sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">And what were you doing here? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong>I was conducting markings, sir. </strong></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">. . . . </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">I am showing you another set of photographs, Mr. Witness. Who are the persons in this photograph?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Those are the accused and the evidence.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">In this second photograph, who are these? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong>That is the barangay kagawad signing the Inventory.</strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about this last photograph? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong>That is the media representative signing the Inventory</strong>.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Without a doubt, the first link in the chain of custody was established. </p> <p> For emphasis, the guidelines in <i>Nisperos v. People</i><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> provides that the marking, inventory and photograph taking should be done immediately after seizure and confiscation of the illegal drug/s, viz.: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1.</div></td> <td colspan="3"><div align="justify">The marking of the seized dangerous drugs must be done:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">a.</div></td> <td colspan="2"><div align="justify">Immediately upon confiscation;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td colspan="2"> <div align="justify">At the place of confiscation; and</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">c.</div></td> <td colspan="2"> <div align="justify">In the presence of the offender (unless the offender eluded the arrest).</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">2.</div></td> <td colspan="3"><div align="justify">The conduct of inventory and taking of photographs of the seized dangerous drugs must be done:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">a.</div></td> <td colspan="2"> <div align="justify">Immediately after seizure and confiscation;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td colspan="2"> <div align="justify">In the presence of the accused, or the person/s from whom such items were confiscated and/or seized, or his/her representative or counsel; and</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">c.</div></td> <td colspan="2"> <div align="justify">Also in the presence of the insulating witnesses, as follows: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">i.</div></td> <td> <div align="justify">if the seizure occurred during the effectivity of [Republic Act] No. 9165, or from July 4, 2002 until August 6, 2014, the presence of three (3) witnesses, namely, an elected public official; a Department of Justice (DOJ) representative; and a media representative; </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">ii.</div></td> <td width="85%"> <div align="justify">if the seizure occurred after the effectivity of [Republic Act] No. 10640, or from August 7, 2014 onward, the presence of two (2) witnesses, namely, an elected public official; and a National Prosecution Service representative or a media representative. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">3.</div></td> <td colspan="3"><div align="justify">In case of any deviation from the foregoing, the prosecution must positively acknowledge the same and prove[:] (1) justifiable ground/s for non-compliance[;] and (2) the proper preservation of the integrity and evidentiary value of the seized item/s.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>In addition, <i>Nisperos</i> teaches that the insulating witnesses "<i>are not required to witness the arrest and the seizure or confiscation of the drugs or drug paraphernalia. They need only be readily available to witness the immediately ensuing inventory</i>."<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Verily, accused-appellant's argument that the insulating witnesses, although present during inventory taking, were unable to see with their own eyes the exact moment that the illegal transaction transpired holds no water. </p> <p> As to the <i>second link</i>, it appears that there was no turnover of the seized items to the investigating officer because the apprehending officer merely presented them to the investigating officer, who then prepared the request for laboratory examination, among others. </p><p> Nonetheless, in <i>People v. Hernandez</i>,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> the Court, citing <i>People v. Casilang</i><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> and <i>People v. Macaspac</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> explained that the failure of the apprehending officer to turnover the seized items to the investigating officer <i>does not constitute a breach in the chain of custody</i> as long as the movement of the seized item at each stage, from the time of seizure to its receipt by the forensic laboratory, as well as the date and time when transfer of custody was made, were appropriately established. </p><p> Here, PCpl Mallari testified that he remained in custody of the seized items from the time of the arrest up to the time it was submitted to the crime laboratory for testing, viz.: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td colspan="2"><div align="justify">ACP BARTOLOME</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">Who was in possession of the plastic sachet that you purchased and recovered when you went back to your office, Mr. Witness?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><b>I was in possession of the items I recovered.</b> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about the evidence that you purchased? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><b>In my possession also, sir.</b> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">When you arrived at the station, what did you do with the evidence?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><b>I presented them to the investigator, sir</b>. [<b>PSSg SemaÃ±a, sir</b>.]</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Who brought these pieces of evidence, Mr. Witness, that you purchased and you recovered to the Crime Lab, Mr. Witness? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><b>The items I purchased and recovered, I was the one who brought it to the Crime Lab, sir</b>[.]<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> </div></td> </tr> </tbody></table> </blockquote> <p> Moreover, PCpl Mallari's testimony is supported by the Chain of Custody of Seized Evidence,<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> the pertinent portion of which reads: </p> <blockquote> <p> . . . .</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">III.</div></td> <td colspan="3"><div align="justify">TDPO: At around 11:25 PM of Sept. 10, 2020, in front of [N]o. 168 Ilocos Sur St., Brgy. Sto. Cristo, Quezon City.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">IV.</div></td> <td colspan="3"><div align="justify">APPREHENDING OFFICER/S: PCpl Jevies Mallari, PCpl Mac Paul Frogoso and PCpl Dalton De Guzman, all SDEU Operatives of this Station.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">V.</div></td> <td colspan="3"><div align="justify">EVIDENCE SUBMITTED:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td colspan="3"><div align="justify">Four (4) pieces of heat-sealed transparent plastic sachets containing white crystalline substances, suspected to be Shabu, a dangerous drug with markings (All written on a masking tape with signatures) as follows: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="20%"><div align="justify"></div><br></td> <td colspan="2"><div align="justify">a1. BB-JM-HU 9-10-20<br> a2. JM-HU 9-10-20 <br> a3. DD-MG 9-10-20 <br> a4. MF-DD 9-10-20 </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td colspan="3"><div align="justify">=======================================================================</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Turned Over by: </div></td> <td width="6%"><div align="justify"></div><br></td> <td width="69%"><div align="left">PCpl Jevies Mallari, PCpl Mac Paul Frogoso and PCpl Dalton De Guzman</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td colspan="3"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Time and Date: </div></td> <td>&nbsp;</td> <td>3:00 AM / 9-11-20</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td colspan="3"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">RECEIVED BY:</div></td> <td>&nbsp;</td> <td>RHEA FE DC ALVIAR <br> Police Lieutenant Colonel <br> Forensic Chemist<sup style="COLOR: RGB(255, 0, 0);">[84]</sup></td> </tr> </tbody></table> </blockquote> <p>Following prevailing jurisprudence, the Court agrees with the RTC and CA that there is<i> substantial compliance</i> with the chain of custody procedure. </p> <p> Anent the <i>third and fourth link in the chain of custody</i>, the prosecution sufficiently established, based on the Chain of Custody of Seized Evidence<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> signed by PCpl Mallari, PCpl Frogoso, PCpl De Guzman, and FC Dela Cruz-Alviar that the seized items were turned over by the apprehending team to the forensic chemist at 3:00 a.m. on September 11, 2020. FC Dela Cruz-Alviar then confirmed that the specimen yielded positive for methamphetamine hydrochloride.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Subsequent thereto, FC Dela Cruz-Alviar turned over the sealed drug specimen to evidence custodian PSSG Tuccad, who in turn kept it in the evidence room of the laboratory until she was subpoenaed by the RTC to present the subject specimens in the Order<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> dated April 27, 2021. Hence, on May 18, 2021, PSSG Tuccad submitted the seized items to the court.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup></p><p> Notably, the forensic chemist did not testify before the trial court. </p><p> In lieu thereof, the prosecution offered as evidence her Chemistry Report showing that the seized item went through qualitative examination and yielded positive for<i> shabu</i>, the pertinent portion of which reads: </p><blockquote> <p> . . . . </p> <p> FINDINGS: </p> <p> Qualitative examination conducted on the above-stated specimens A1 thru A4 gave POSITIVE for the presence of Methamphetamine hydrochloride, a dangerous drug[.]</p> <p> CONCLUSION: </p> <p> Specimens A1 thru A4 contain Methamphetamine hydrochloride, a dangerous drug[.]<sup style="COLOR: RGB(255, 0, 0);">[89]</sup></p> </blockquote> <p> In <i>Macaspac</i>,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> the Court reiterated that not all people who came into contact with the seized drugs, such as the forensic chemist, are required to testify in court. Hence, the third link in the chain of custody may be established via stipulations. In connection to this, the Court, in <i>People v. Cabuhay</i>,<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> enumerated the matters that<i> must </i>be included in the stipulations in cases where the parties opt to dispense with the attendance and testimony of the forensic chemist, to wit: (1) that the forensic chemist received the seized article as marked, properly sealed, and intact; (2) that the forensic chemist resealed it after examination of the content; and (3) that forensic chemist placed his or her own marking on the same to ensure that it could not be tampered with pending trial.</p><p> Here, the prosecution and the defense agreed to dispense with the testimony of the forensic chemist. </p><p> In the Order<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> dated September 22, 2020, the parties stipulated as follows: </p><blockquote> <p> . . . .</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">4.</div></td> <td width="95%"><div align="justify">PLTCOL Rhea Dela Cruz-Alviar is one of the forensic chemist assigned to the QCPD, Crime Laboratory Office, Police Station 10, Edsa Kamuning, Quezon City; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">5.</div></td> <td> <div align="justify">[O]n September 11, 2020, Chemist Rhea Fe Dela Cruz-Alviar received from PCpl Jevies Mallari, PCpl Mac Paul Frogoso and PCpl Dalton De Guzman, a Request for Laboratory Examination, and four (4) small heat-sealed transparent plastic sachets containing white crystalline substance with markings "BB-JM-HU 9-10-20." "JM-HU 9-10-20," "DD-MG 9-10-20" and "MF-DD-9-10-20," all with signature;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">6.</div></td> <td> <div align="justify">[U]pon receiving the request and the specimens, Chemist Rhea Fe DelaCruz-Alviar conducted a qualitative examination of the submitted specimens and she found that the four (4) small heat-sealed transparent plastic sachets containing white crystalline substance with markings "BB-JM-HU 9-10-20," "JM-HU 9-10-20," "DD-MG 9-10-20" and "MF-DD 9-10-20," all with signature were <u>positive</u> for the presence of Methamphetamine hydrochloride, a dangerous drug;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">7.</div></td> <td><div align="justify">Chemist Rhea Fe Dela Cruz-Alviar issued Chemistry Report No. D-1306-2020;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td><div align="justify"><strong>[A]fter her examination, Chemist Rhea Fe Dela Cruz-Alviar placed the specimens she examined in a transparent plastic bag, sealed it with a masking tape, placed her markings "D-1306-2020 11 September 2020 RFDCA" and her signature thereon and then she turned over the specimens to the evidence custodian, PO2 Junia Tuccad;</strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">9.</div></td> <td><div align="justify"><strong>Upon receipt of the sealed specimen, PO2 Junia Tuccad placed it in the evidence room of the QCPD Crime Laboratory;</strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">10.</div></td> <td><div align="justify">Chemist Rhea Fe Dela Cruz-Alviar can identify the specimens' subject of her examination as well as the documents she prepared in connection with these cases;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">11.</div></td> <td><div align="justify">Chemist Rhea Fe Dela Cruz-Alviar has no personal knowledge as to the facts and circumstances of the arrest of the accused; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">12.</div></td> <td><div align="justify">Chemist Rhea Fe Dela Cruz-Alviar has no personal knowledge as to the recovery of the specimens turned to her for examination[.]<sup style="COLOR: RGB(255, 0, 0);">[93]</sup></div></td> </tr> </tbody></table> </blockquote> <p>To the Court's mind, the foregoing stipulations are sufficient. </p> <p> <i>First</i>, when FC Dela Cruz-Alviar received the request for laboratory examination and the four (4) small heat-sealed transparent plastic sachets containing white crystalline substance, she properly marked, sealed, and kept them intact. </p><p> <i>Second</i>, after examination, FC Dela Cruz-Alviar placed the specimens she examined in a transparent plastic bag, sealed it with a masking tape. </p><p> <i>Third</i>, she then placed her markings "D-1306-2020 11 September 2020 RFDCA" and her signature to ensure the integrity of the subject drug. </p><p> Surely, accused-appellant's bare denial cannot prevail over PCpl Mallari's positive testimony, much less, the presumption of regularity accorded the police operatives in the performance of their official duty.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> </p><p> All told, the Court finds no reason to deviate from the factual findings of the RTC, as affirmed by the CA, as there is no indication that the lower courts had overlooked, misunderstood, or misapplied the surrounding facts and circumstances of the case. </p><p> As to the penalty, a person found guilty of Illegal Sale of Dangerous Drugs, under Section 5 of Republic Act No. 9165, for selling any dangerous drug, may be penalized with "life imprisonment to death and a fine ranging from [PHP 500,000.00] to [PHP 10 million] regardless of the quantity and purity involved." On the other hand, the penalty for Illegal Possession of Dangerous Drugs under Section 11 of the same law is "[i]mprisonment of [12] years and [one] day to [20] years and a fine ranging from [PHP 300,000.00] to [PHP 400,000.00], if the quantities of dangerous drugs are less than [five] grams of . . . methamphetamine hydrochloride[.]" </p><p> Suffice it to say, the CA correctly affirmed accused-appellant's sentence to life imprisonment and a fine of PHP 500,000.00 in Criminal Case No. R-QZN-20-07005; and imprisonment of 12 years and one day as minimum, to 14 years and eight months, as maximum, and fine of PHP 300,000.00 in Criminal Case No. R-QZN-20-07008.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> </p><p> <b>FOR THESE REASONS</b>, the Appeal is <b>DISMISSED</b>. The Decision dated April 20, 2023, of the Court of Appeals in CA-G.R. CR-HC No. 15685 is <b>AFFIRMED <i>in toto</i></b>. </p><p> The Court finds accused-appellant Harley Uyson <i>y</i> Santiago alias "Amo" <b>GUILTY</b> beyond reasonable doubt of Illegal Sale and Illegal Possession of dangerous drugs, defined and penalized under Sections 5 and 11 of Republic Act No. 9165, otherwise known as the "Comprehensive Dangerous Drugs Act of 2002," in Criminal Case Nos. R-QZN-20-07005-CR and R-QZN-20-07008-CR filed with Branch 79, Regional Trial Court, Quezon City. Accused-appellant Harley Uyson <i>y</i> Santiago alias "Amo" is <b>SENTENCED</b> to suffer the following penalties: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">In Criminal Case No. R-QZN-20-07005-CR for Illegal Sale of Dangerous Drugs, the penalty of life imprisonment, and to <b>PAY</b> a fine in the amount of PHP 500,000.00; and </div></td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td><div align="justify">In Criminal Case No. R-QZN-20-07008-CR for Illegal Possession of Dangerous Drugs, the penalty of imprisonment of 12 years and one (1) day as minimum, to 14 years and eight months, as maximum, and to <b>PAY</b> a fine in the amount of PHP 300,000.00.</div></td> </tr> </tbody></table> </blockquote> <p><b>SO ORDERED</b>.</p> <p> <i>Gaerlan</i> and <i>Dimaampao, JJ</i>., concur. <i><br> Caguioa<sup style="COLOR: RGB(255, 0, 0);">*</sup> (Chairperson) </i>and <i>Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> JJ</i>., on official business. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Acting Chairperson per Special Order No. 3227 dated September 23, 2025. </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5, Notice of Appeal dated May 12, 2023.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-25. Penned by Associate Justice Gabriel T. Robeniol and concurred in by Associate Justices Ramon R. Garcia and Michael P. Ong of the Sixth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 27-36. Penned by Presiding Justice Nadine Jessica Corazon J. Fama. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> RTC records, pp. 60-62, photograph of suspect, and pieces of evidence.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> SECTION 5. <i>Sale, Trading, Administration, Dispensation, Delivery, Distribution and Transportation of Dangerous Drugs and/or Controlled Precursors and Essential Chemicals.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> SECTION 11. Possession of Dangerous Drugs. </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Titled, "AN ACT INSTITUTING THE COMPREHENSIVE DANGEROUS DRUGS ACT OF 2002, REPEALING REPUBLIC ACT NO. 6425, OTHERWISE KNOWN AS THE DANGEROUS DRUGS ACT OF 1972, AS AMENDED, PROVIDING FUNDS THEREFOR, AND FOR OTHER PURPOSES," approved on June 7, 2002. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records, pp. 3-26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 3. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 7. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 29. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> RTC records, pp. 104-105. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> SECTION 12. <i>Possession of Equipment, Instrument, Apparatus and Other Paraphernalia for Dangerous Drugs. -</i> . . . </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> RTC records, p. 106. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 106-110. Penned by Presiding Judge Nadine Jessica Corazon J. Fama. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 106-107. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 33, Sworn Statement (Poseur Buyer). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 41-42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 44. Certificate of Coordination issued by PDEA. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 33. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 72. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 34. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, p. 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> RTC records, p. 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> RTC records, p. 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> CA <i>rollo</i>, p. 72. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> RTC records, p. 45, Booking Sheet and Arrest Report. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 53. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> CA <i>rollo</i>, pp. 72-73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i>, pp. 12-13; RTC records, pp. 31-32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 27-36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 35. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 32-34. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 27-36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> RTC records, pp. 201-202. <i>See</i> Notice of Appeal dated July 13, 2021. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 8-25. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 25. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 15-16, 22-23. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 3-5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 39-43. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> CA <i>rollo</i>, pp. 67-80, Brief for the Appellee dated October 18, 2022. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, pp. 44-48, Manifestation in Lieu of Supplemental Brief dated January 10, 2025. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> CA <i>rollo</i>, pp. 27-48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, pp. 43-44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>People v. Verdadero</b>, 949 Phil. 537, 543 (2023); <b>People v. Lopina</b>, 936 Phil. 1029, 1035 (2023); <b>People v. Dapitan, G.R. No. 207518</b>, November 24, 2021 [Notice]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>People v. Yutig</b>, 912 Phil. 867, 873 (2021); <b>People v. Santos</b>, 823 Phil. 1162, 1178 (2018); <b>People v. Bontuyan</b>, 742 Phil. 788, 798 (2014). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>People v. Chen Junyue</b>, 930 Phil. 291, 301 (2022); <b>People v. Dela Cruz</b>, 869 Phil. 460, 465 (2020). </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>People v. Paguinto</b>, 933 Phil. 1056, 1064 (2023); <b>People v. Quijano</b>, 871 Phil. 547, 558 (2020); <b>People v. Manansala</b>, 826 Phil. 578 (2018); <b>People v. Que</b>, 824 Phil. 882, 893 (2018); <b>People v. Morales</b>, 630 Phil. 215, 228 (2010); <b>People v. Darisan</b>, 597 Phil. 479, 485 (2009); <b>People v. Hajili</b>, 447 Phil. 283, 295 (2003). </p><p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo</i>, pp. 18-19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 19-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>People v. Hernandez</b>, 923 Phil. 236, 242 (2022); <b>People v. Sipin</b>, 833 Phil. 67, 81 (2018); <b>People v. Amaro</b>, 786 Phil. 139, 148 (2016); <b>People v. Sapitula</b>, 780 Phil. 848, 858 (2016); <b>People v. Enad</b>, 780 Phil. 346, 358 (2016); <b>People v. Mammad</b>, 769 Phil. 782, 790 (2015); <b>People v. Enriquez</b>, 718 Phil. 352, 366 (2013); <b>People v. Magpayo</b>, 648 Phil. 641, 650 (2010); <b>People v. Kamad</b>, 624 Phil. 289, 304 (2010). </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>People v. Rebutazo</b>, 959 Phil. 270, 276-277 (2024). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>People v. Adrid</b>, 705 Phil. 654, 670 (2013); <b>People v. Hilario</b>, 823 Phil. 580, 590 (2018); <b>Mallillin v. People</b>, 576 Phil. 576, 586 (2008). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> TSN, PCpl Jevies Mallarie, February 5, 2021, pp. 2-3. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at p. 1. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 3-4. (Emphasis supplied) </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> RTC records, pp. 61-62. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 5-6. (Emphasis supplied) </p><p><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 931 Phil. 945 (2022). </p><p><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 956-957. (Citations omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 953. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> 923 Phil. 236, 243 (2022). </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 870 Phil. 379, 396 (2020). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 867 Phil. 164, 179 (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> TSN, PCpl Jevies Mallari, April 20, 2021, pp. 6-7. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> RTC records, p. 48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i>, Chain of Custody of Seized Evidence. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 48. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 56, Chemistry Report No. D-1306-2020. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 169. </p><p><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Rollo</i>, p. 35. </p><p><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> RTC records, p. 56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>See</i> <b>People v. Macaspac</b>, <i>supra</i> note 81, at 181. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[91]</sup> 836 Phil. 903, 918 (2018); <b>People v. Pajarin</b>, 654 Phil. 461, 466 (2011). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[92]</sup> RTC records, pp. 106-110. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i> at 107-108. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>People v. Macaspac</b>, <i>supra</i> note 80, at 182-183. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>People v. Paguinto</b>, 933 Phil. 1056, 1069 (2023). </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 271360 - GRACE M. TRIMILLOS, PETITIONER, VS. FCASH GLOBAL LENDING, INC., REPRESENTED BY SIOLY M. AMPARO, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70133' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 271360, August 13, 2025 ]</H2>
+			<H3>GRACE M. TRIMILLOS, PETITIONER, VS. FCASH GLOBAL LENDING, INC., REPRESENTED BY SIOLY M. AMPARO, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by petitioner Grace M. Trimillos (Trimillos) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 17, 2023, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 11, 2023, of the Court of Appeals (CA) in CA-G.R. SP No. 169222. The assailed issuances reversed and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated November 5, 2020, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated March 11, 2021, of the National Privacy Commission (NPC) in NPC 19-605.<br><br><center><i>The Antecedents</i></center><br>On July 26, 2019, Trimillos filed a Complaint<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> with the NPC against FCash Global Lending Inc., (FCash), operating the application "Fast Cash," for violating several provisions of Republic Act No. 10173 or the "Data Privacy Act of 2012" (DPA). Trimillos alleged that FCash accessed her phone's contact list without her authority and informed everyone on the list regarding the status of her loan with the latter, to wit:<br><blockquote>Unauthorized access on my phone's contact list. Informing everyone about my loan with the company. The worst part is, the last message my co-worker[s] and friends' got was they were my guarantors and if no payment was made, they are being forced to pay on my behalf. They even called my friends and co-workers though they have nothing to do about my transactions with them.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </blockquote>As a result thereof, Trimillos claims that her reputation was besmirched.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Consequently, NPC ordered the parties to appear on September 5, 2019, for a Discovery Conference. Due to the absence of FCash, it was reset on October 31, 2019.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On September 13, 2019, Trimillos submitted screenshots of the text messages allegedly sent by FCash and a print-out of her email correspondence with the National Telecommunications Commission (NTC).<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The alleged malicious text message reads:<br><blockquote>To: Grace Trimillos<br><br>Magandang Araw! Hindi kami nagkulang ng paalala sa inyo upang maayos ang inyong pagkakautang sa ISANG ONLINE LENDING COMPANY, pero nanatili kayong walang tugon at pakipag communicate. Dahil dyan[,] napagdesisyonan naming kayo ay aming isusumite sa legal proceedings ng SMALL CLAIMS sa pamamagitan ng pag babarangay sa inyo at ifile sa CIVIL COURT upang ito at mabayaran sa pamamagitan ng WRIT OF ATTACHMENT AND GARNISHMENT o ang pagkuha ng inyong personal property bilang kabayaran, kung ang buong halaga ng pagkakautang ay hindi mabayaran. Maraming salamat.<br><br>ANG DAHILAN KUNG BAKIT KAYO NAKATANGGAP NG MENSAHE NA ITO DAHIL GINAWA KAYONG CONTACT REFERENCE NG PANGALAN NA NASA TAAS AT IYON ANG LAGI NYANG DINADAHILAN KASABWAT KAYO SA LAHAT NG GINAGAWA NIYANG TRANSACTION SA MGA UTANG NIYA[.]<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></blockquote>On October 1, 2019, Trimillos requested via email that the Discovery Conference be set at an earlier date. Granting the request, NPC issued an Order for both parties to appear on October 10, 2019.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>During the Discovery Conference, both parties manifested their willingness to avail themselves of the mediation proceedings of the NPC. Unfortunately, they were unable to reach an agreement which resulted in the resumption of the proceedings. Upon termination of the Discovery Conference, NPC ordered FCash to file its responsive comment.<br><br>Based on records, no responsive comment to the Complaint was filed by FCash.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>There being no other pleadings filed, the case was submitted for resolution.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br><center><i>The Ruling of the NPC</i></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated November 5, 2020, the NPC awarded nominal damages to Trimillos and recommended the prosecution of FCash for the crimes under Sections 28<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and 31<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of the DPA. The dispositive portion of the Decision reads:<br><blockquote>WHEREFORE, premises considered, FCash Global Lending Inc. is hereby ORDERED by this Commission to pay Grace M. Trimillos nominal damages in the amount of fifteen thousand pesos ([PHP] 15,000.00).<br><br>This Commission FORWARDS this Decision and a copy of the pertinent case records to the Department of Justice, recommending the prosecution of FCash Global Lending Inc. for the crimes of Processing of Personal Information and Sensitive Personal Information for Unauthorized Purposes as provided under Section 28 and Malicious Disclosure as provided under Section 31 of Republic Act No. 10173 otherwise known as the Data Privacy Act of 2012.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </blockquote>The NPC explained that FCash gathered personal information in excess of what was necessary and processed them for purposes other than those stated in their own privacy policy, particularly when it sent out messages to the contacts of Trimillos.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> In addition, the unauthorized processing of personal information was done with malice when the messages reveal FCash's unquestionable intention to shame Trimillos and jeopardize her reputation until the latter settled her obligations.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> As a result thereof, NPC awarded Trimillos nominal damages in recognition of her violated privacy right.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>FCash filed its Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> but the NPC denied it for lack of merit in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated March 11, 2021.<br><br>Hence, FCash filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> before the CA.<br><br><center><i>The Ruling of the CA</i></center><br>The CA granted the Petition, to wit:<br><blockquote>WHEREFORE, the appeal is GRANTED. The Decision dated 5 November 2020 and Resolution dated 11 March 2021 of the National Privacy Commission are REVERSED and SET ASIDE and the instant case is hereby DISMISSED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>In reversing the ruling of the NPC, the CA ruled that the screenshots of the text message allegedly sent by FCash to Trimillos are inadmissible in evidence. The CA noted that Trimillos failed to have the screenshots authenticated by any of her supposed witnesses, in violation of the Rules on Electronic Evidence; thus, there is no admissible evidence to support a finding in her favor.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Trimillos sought reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> but the CA denied it in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated December 11, 2023.<br><br>Hence, Trimillos filed the present Petition.<br><br><center><i>Petitioner Trimillos' Arguments</i></center><br>In the main, Trimillos contends that the CA erred in finding the evidence inadmissible when in fact FCash has already waived its right to object thereto by refusing to participate in the proceedings before the NPC. Likewise, the CA should not have considered the issue of admissibility of evidence which was only raised for the first time on appeal.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Be that as it may, Trimillos argues that the findings of the NPC should not be so casually dismissed on technicality, as strict adherence to rules of procedure is not a feature in administrative proceedings. Accordingly, Trimillos submits that she was able to prove by substantial evidence that FCash violated the DPA.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> dated June 3, 2024, the Court required FCash to file its comment.<br><br><center><i>Respondent FCash's Arguments</i></center><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> FCash argues that unauthenticated electronic evidence is both inadmissible and without probative value. Even assuming<i> arguendo</i> that they may be admitted in evidence, they cannot be accorded evidentiary weight for failure to observe the Rule of Electronic Evidence for their authentication.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Furthermore, FCash avers that the NPC Rules of Procedure do not provide for formal offer of evidence; thus, the rule that objections to admissibility of evidence should be made after its offer cannot apply in the instant case.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> On the contrary, FCash claims that its first opportunity to raise objection thereto was upon the receipt of the NPC Decision admitting the unauthenticated electronic evidence to which it promptly and timely filed its Motion for Reconsideration. Accordingly, there is no waiver of objection to the admissibility of unauthenticated electronic evidence.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><center><i>The Issue</i></center><br>For the Court's resolution is whether the CA erred in finding that the evidence presented by Trimillos are inadmissible for failure to comply with the authentication requirements under the Rule on Electronic Evidence.<br><br><center><i>The Ruling of the Court </i></center><br>The Petition is impressed with merit.<br><br>Preliminary to the resolution on the merits of the issue at hand, the Court deems it necessary to discuss the rules of procedure<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> for initiating a complaint with the NPC.<br><br>The NPC is an independent body mandated to administer and implement provisions of the Data Privacy Act (DPA), and to monitor and ensure compliance of the country with international standards set for data protection. In the exercise of its quasi-judicial function, the NPC is authorized to receive complaints for violations of the DPA and institute investigations relative thereto.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>The NPC,<i> motu propio</i>, or persons who are subject of a privacy violation or personal data breach, or who are otherwise personally affected by a violation of the DPA may file a complaint.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Once a complaint is filed, the NPC shall assign an investigating officer who shall evaluate the complaint to determine (1) whether its allegations involve a violation of the DPA or related issuances; and (2) if, based on its allegations, there is reason to believe that there is a privacy violation or personal data breach.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>If, the allegations are deemed to be sufficient in form and substance, the investigating officer shall issue an order for all parties to confer, not later than ten days from receipt of the said order, whether discovery of information and of electronically-stored information is reasonably likely to be sought in the proceeding.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> A copy of the complaint, together with its supporting evidence, shall be included in the order to confer for discovery. The agreement of the parties therein will be reduced into a Discovery Conference Report to be signed and submitted by all parties to the NPC within five days of the conclusion of the conference.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Following the receipt of the Discovery Conference Report, the investigating officer shall issue an order directing the respondent to submit within ten days from receipt thereof, a responsive comment to the complaint, together with any supporting documents they may have, including the affidavits of any of the respondent's witnesses, if any. The investigating officer, upon his or her discretion, may require the complainant to file a reply within ten days after receipt of the order requiring the filing of a reply. Such an order may also require the respondent to file a rejoinder within ten days after receipt of the reply.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In the course of the investigation, the complainant and/or respondent may be required to furnish additional information, document or evidence, or to produce additional witnesses. The parties shall have<i> the right to examine the evidence submitted</i>, which he or she may not have been furnished, and to copy them at his expense.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>If the respondent does not file a comment, the investigating officer may consider the complaint as<i> submitted for resolution</i>. The respondent shall, in any event, have access to the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Upon the termination of the investigation, the investigating officer shall produce a fact-finding report, which shall include the results of the investigation, the evidence gathered, and any recommendations. The report shall be submitted to the Office of the Commissioner.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The Commissioner shall review the evidence presented, including the fact-finding report and supporting documents. On the basis of the review, the NPC may: (1) promulgate a decision; or (2) order the conduct of a clarificatory hearing, if in its discretion, additional information is needed to make a decision.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>The decision of the NPC shall adjudicate the issues raised in the complaint on the basis of all the evidence presented and its own consideration of the law. A copy of the decision shall be served upon the parties, for information and compliance with any directive contained therein.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>In the present case, the parties appeared before the NPC for a Discovery Conference on October 10, 2019. By this time, the evidence submitted by Trimillos on September 13, 2019, were already made available for examination of the parties. Upon the termination of the Discovery Conference, FCash was ordered to file its responsive comment to the Complaint which it failed to do so. Consequently, the NPC issued a Decision in favor of Trimillos.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Herein petitioner Trimillos avers that the CA erred in reversing and setting aside the decision of the NPC due to inadmissible evidence when any objection to the admissibility of evidence was already waived by FCash's refusal to file its comment before the NPC. Moreover, Trimillos submits that the issue of admissibility of evidence cannot be raised for the first time on appeal.<br><br>The Court sustains the petitioner's position.<br><br>Settled is the rule that the failure to interpose a timely objection to evidence shall be considered a waiver of the objection.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The Court in <i>Lorenzana v. Lelina</i><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> is instructive, to wit:<br><blockquote>In order to exclude evidence,<i> the objection to admissibility of evidence must be made at the proper time, and the grounds specified. </i>Objection to evidence must be made at the time it is formally offered. In case of documentary evidence, offer is made after all the witnesses of the party making the offer have testified, specifying the purpose for which the evidence is being offered. It is only at this time, and not at any other, that objection to the documentary evidence may be made. <i>And when a party failed to interpose a timely objection to evidence at the time they were offered in evidence, such objection shall be considered as waived</i>. This is true even if by its nature the evidence is inadmissible and would have surely been rejected if it had been challenged at the proper time. Moreover, grounds for objection must be specified in any case. Grounds for objections not raised at the proper time shall be considered waived, even if the evidence was objected to on some other ground. Thus, even on appeal, the appellate court may not consider any other ground of objection, except those that were raised at the proper time.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis supplied; citations omitted) </blockquote>As to the admissibility of electronic evidence in particular, the Court in<i> Ang v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> ruled that an objection on the ground of lack of authenticationâe.g., photograph sent<i> via</i> text messageâshall be deemed waived if not raised at the time of formal offer:<br><blockquote>Four. Rustan claims that the obscene picture sent to Irish through a text message constitutes an electronic document. Thus, it should be authenticated by means of an electronic signature, as provided under Section 1, Rule 5 of the Rules on Electronic Evidence (A.M. 01-7-01-SC).<br><br>But, firstly, Rustan is raising this objection to the admissibility of the obscene picture, Exhibit A, for the first time before this Court. The objection is too late since he should have objected to the admission of the picture on such ground at the time it was offered in evidence. He should be deemed to have already waived such ground for objection.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Citation omitted) </blockquote>Simply put, any objection to the admissibility of evidence should be made upon offer of the evidence in question or as soon thereafter as ground against its admissibility becomes apparent; otherwise the opposing party shall be regarded to have waived its objection. Consequently, the subject evidence will form part of the records of the case as competent and admissible evidence.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>In the same vein, basic considerations of fairness and due process require that arguments or issues not raised in the original proceedings cannot be raised for the first time on appeal.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> This is true whether the decision elevated for review originated from a regular court or an administrative agency or<i> quasi-judicial body</i>. The rationale is that quasi-judicial bodies, like the NPC are also bound by rules of fair play and due process, and parties are expected to raise all their objections and defenses at the earliest opportunity. Any issue raised for the first time on appeal is barred by estoppel.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>In the assailed Decision, the CA cited<i> Cadajas v. People</i><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> to emphasize that admissibility of evidence shall be governed by the rules on relevance, materiality, authentication of documents, and exclusionary rules under the Rules on Evidence. In reversing the ruling of the NPC, the CA explained that, unlike in<i> Cadajas</i> where the pieces of evidenceâ photos and conversations from a Facebook Messenger accountâwere properly authenticated, Trimillos failed to have the text message authenticated by any of her supposed witnesses through an affidavit in accordance with the Rules on Electronic Evidence.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>However, in the same case, the Court also recognized that inadmissible evidence may be admitted<i> if not challenged at the proper time</i> and such issue may not be raised for the first time on appeal, viz:<br><blockquote>In any case, it bears pointing out that petitioner failed to raise his objection to the admissibility of the photos during the proceedings in the RTC. Basic is the rule that in order to exclude evidence, the objection to admissibility of evidence must be made at the proper time, and the grounds therefore be specified. Objection to evidence must be made at the time it is formally offered. In case of documentary evidence, offer is made after all the witnesses of the party making the offer have testified, specifying the purpose for which the evidence is being offered. It is only at this time, and not at any other, that objection to the documentary evidence may be made.<i> When a party failed to interpose a timely objection to evidence at the time they were offered in evidence, such objection shall be considered as waived</i>. This is true even if by its nature the evidence is inadmissible and would have surely been rejected if it had been challenged at the proper time.<br><br>As a complimentary principle, it is well-settled that no question will be entertained on appeal unless it has been raised in the proceedings below.<i> Points of law, theories, issues and arguments not brought to the attention of the lower court, administrative agency or quasi-judicial body, need not be considered by a reviewing court, as they cannot be raised for the first time at that late stage</i>. Basic considerations of fairness and due process impel this rule. Any issue raised for the first time on appeal is barred by estoppel.<br><br>By failing to timely raise his objection to the admissibility of the photos, petitioner is deemed to have already waived the same. Thus, the photos taken from his Facebook Messenger account are admissible in evidence.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (Emphasis supplied) </blockquote>Here, there is no dispute that Trimillos' indispensable evidence to support her complaint is the text message allegedly sent by FCash to everyone appearing in her contact list. However, she failed to allege with particularity the persons who received said text messages and submit affidavits of said persons. Neither was the text message authenticated by any of the alleged recipients. Hence, Trimillos failed to comply with the rules of admissibility under Rules on Electronic Evidence, as follows:<br><blockquote><center>RULE 3<br>Electronic Documents</center><br>SECTION 2.<i> Admissibility. â</i> An electronic document is admissible in evidence if it complies with the rules on admissibility prescribed by the Rules of Court and related laws and is authenticated in the manner prescribed by these Rules.<br><br><center>RULE 5<br>Authentication of Electronic Documents</center><br>SECTION 1.<i> Burden of proving authenticity. â</i> The person seeking to introduce an electronic document in any legal proceeding has the burden of proving its authenticity in the manner provided in this Rule.<br><br>SECTION 2.<i> Manner of authentication. </i>â Before any private electronic document offered as authentic is received in evidence, its authenticity must be proved by any of the following means:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"><div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">by evidence that it had been digitally signed by the person purported to have signed the same; </div></td> </tr> <tr> <td valign="top"><div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">by evidence that other appropriate security procedures or devices as may be authorized by the Supreme Court or by law for authentication of electronic documents were applied to the document; or </div></td> </tr> <tr> <td valign="top"><div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">by other evidence showing its integrity and reliability to the satisfaction of the Judge. </div></td> </tr> </tbody></table></blockquote>While there had been a ground to question its admissibility, it is clear that FCash failed to make a timely objection on the presentation and offer of the screenshots.<br><br>To be sure, the screenshots of the text message were already submitted by Trimillos to the NPC before the Discovery Conference. Despite the availability for examination of said evidence, FCash failed to raise any objection thereto. What is more, FCash did not file a responsive comment on the complaint, where it could have threshed-out its counter-arguments against Trimillos, including its objection to the admissibility of the unauthenticated text message. Contrary to its allegations, the Motion for Reconsideration filed before the NPC likewise failed to raise any objection to the admissibility of the evidence presented by Trimillos. Such issue was only advanced by FCash for the first time in the Petition for Review filed before the CA.<br><br>At the risk of being repetitive, grounds for objections not raised at the proper time shall be considered waived. Thus, even on appeal, the CA may not consider any other ground of objection, except those that were raised at the proper time.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>In view of the foregoing, the CA is already barred by estoppel from reviewing the admissibility of the evidence which was not objected to by FCash before the NPC. Accordingly, the CA erred in reversing the decision of the NPC on the ground of inadmissible evidence.<br><br>Finally, the question on the probative value of the unauthenticated text message to support NPC's ruling invites a re-determination of questions of fact which is not within the province of a petition for review on<i> certiorari</i> under Rule 45 of the Rules of Court. Moreover, it is axiomatic that the Court cannot substitute its own discretion over the factual findings of the quasi-judicial body, whose decisions, in a long line of jurisprudence, were afforded respect and conclusiveness owing to the expertise they possess on specific matters under their jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The Decision dated May 17, 2023, and the Resolution dated December 11, 2023 of the Court of Appeals in CA-G.R. SP No. 169222 are<b> REVERSED</b> and<b> SET ASIDE</b>.<br><br>The Decision dated November 5, 2020, and the Resolution dated March 11, 2021 of the National Privacy Commission in NPC 19-605 are <b>REINSTATED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i><i>Rollo</i></i>, pp. 10-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 38-46. Penned by Associate Justice Lorenza R. Bordios and concurred in by Associate Justices Fernanda Lampas Peralta and Rafael Antonio M. Santos of the Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 48-50 Penned by Associate Justice Lorenza R. Bordios and concurred in by Associate Justices Fernanda Lampas Peralta and Rafael Antonio M. Santos of the Former Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 69-81. Penned by Deputy Privacy Commissioner John Henry D. Naga, with Privacy Commissioner Raymund Enriquez Liboro and Deputy Privacy Commissioner Leandro Angelo Y. Aguirre-of the National Privacy Commission, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 95-109. Penned by Deputy Privacy Commissioner John Henry D. Naga, with Privacy Commissioner Raymund Enriquez Liboro and Deputy Privacy Commissioner Leandro Angelo Y. Aguirre of the National Privacy Commission, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 110-116. <i>See</i> Complaint-Assisted Form.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 112.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 69-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> SECTION 28. <i>Processing of Personal Information and Sensitive Personal Information for Unauthorized Purposes</i>. â The processing of personal information for unauthorized purposes shall be penalized by imprisonment ranging from one (1) year and six (6) months to five (5) years and a fine of not less than Five hundred thousand pesos (Php500,000.00) but not more than One million pesos (Php 1,000,000.00) shall be imposed on persons processing personal information for purposes not authorized by the data subject, or otherwise authorized under this Act or under existing laws. The processing of sensitive personal information for unauthorized purposes shall be penalized by imprisonment ranging from two (2) years to seven (7) years and a fine of not less than five hundred thousand pesos (Php500,000.00) but not more than two million pesos (Php2,000,000.00) shall be imposed on persons processing sensitive personal information for purposes not authorized by the data subject, or otherwise authorized under this Act or under existing laws.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> SECTION 31. <i>Malicious Disclosure.</i> â Any personal information controller or personal information processor or any of its officials, employees or agents, who, with malice or in bad faith, discloses unwarranted or false information relative to any personal information or personal sensitive information obtained by him or her, shall be subject to imprisonment ranging from one (1) year and six (6) months to five (5) years and a fine of not less than five hundred thousand pesos (Php500,000.00) but not more than one million pesos (Php 1,000,000.00).<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i><i>Rollo</i></i>, p. 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 82-94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 95-109.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 51-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 43-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 135-142. <i>See</i> Motion for Reconsideration dated July 28, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 48-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 19-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 22-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 146-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 148-156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 151.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> NPC Circular No. 16-04, Rules of Procedure of the National Privacy Commission, approved on December 15, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> NPC Circular No. 16-04, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>See</i> NPC Circular No. 16-04, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> NPC Circular No. 16-04, sec. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> NPC Circular No. 16-04, sec. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>See</i> NPC Circular No. 16-04, sec. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> NPC Circular No. 16-04, sec. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>See</i> NPC Circular No. 16-04, sec. 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>See</i> NPC Circular No. 16-04, sec. 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> NPC Circular No. 16-04, sec. 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>See</i> NPC Circular No. 16-04, sec. 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>See</i> NPC Circular No. 16-04, sec. 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i><i>Rollo</i></i>, p. 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>See</i> <b>Spouses Decateng v. Philippine Episcopal Church</b>, 689 Phil. 422, 442 (2012); <b>People v. Bisda</b>, 454 Phil. 194, 222 (2003); <b>Republic v. Court of Appeals</b>, 402 Phil. 498, 509 (2001).<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> 793 Phil. 271 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 282-283.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 632 Phil. 609 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 623.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>People v. Bisda</b>, <i>supra</i> note 49, at 221-222, <i>citing</i> <b>Republic v. Court of Appeals</b>, <i>supra</i> note 49, at 509 (2001).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>See</i> <b>Rural Bank of Candelaria (Zambales), Inc. v. Banluta</b>, 921 Phil. 585, 595 (2022); <b>People v. Salak</b>, 660 Phil. 568, 582-583 (2011); <b>People v. Uy</b>, 384 Phil. 70, 93 (2000).<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>Horca v. People</b>, 914 Phil. 85, 91 (2021), <i>citing</i> <b>S.C. Megaworld Construction Development Corp. v. Parada</b>, 717 Phil. 752, 760 (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 915 Phil. 220 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Cadajas v. People</b>, <i>supra</i> note 57, at 233-234.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Lorenzana v. Lelina</b>, <i>supra</i> note 50, at 282-283, <i>citing</i> <b>Cabugao v. People</b>, 479 Phil. 546, 556 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Times Transportation Co. Inc. v. National Labor Relations Commission</b>, 538 Phil. 285, 296-295 (2006).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

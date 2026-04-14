@@ -1,0 +1,619 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 257105 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. RUDY PERALTA Y MABBONAG, CESAR LIBAN Y PERALTA, PHILIP SORIANO Y PASION, ADVIENTO SORIANO Y PASION, ROBERTO SORIANO Y PASION, FERDINAND SORIANO Y PASION ALIAS &#039;MAR,&#039; AND NAPOLEON LIBAN (AT LARGE), ACCUSED;
+
+RUDY PERALTA Y MABBONAG AND CESAR LIBAN Y PERALTA, ACCUSED-APPELLANTS. 
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70114' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 257105, August 27, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. RUDY PERALTA <I>Y</I> MABBONAG, CESAR LIBAN <I>Y</I> PERALTA, PHILIP SORIANO <I>Y</I> PASION, ADVIENTO SORIANO <I>Y</I> PASION, ROBERTO SORIANO <I>Y</I> PASION, FERDINAND SORIANO <I>Y</I> PASION ALIAS 'MAR,' AND NAPOLEON LIBAN (AT LARGE), ACCUSED;<BR><BR>
+
+RUDY PERALTA <I>Y</I> MABBONAG AND CESAR LIBAN <I>Y</I> PERALTA, ACCUSED-APPELLANTS. <BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Prior to the plea of the accused, a formal or substantial amendment of the information <i>ipso facto</i> supersedes the original one without need for the trial court to admit the amended information, except when the amendment downgrades the nature of the offense charged in or excludes any accused from the information. Moreover, in formal amendments such as when an indictment for frustrated murder is modified to murder following the victim's demise, the plea of the accused need not be retaken. </p><p> This is an ordinary appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Court of Appeals (CA) Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which affirmed with modification the Regional Trial Court (RTC) Judgment<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> only insofar as Rudy Peralta <i>y</i> Mabbonag (Peralta) and Cesar Liban <i>y</i> Peralta (Liban) were convicted of murder in Criminal Case No. 6621. </p><p align="center"> <i>I</i> </p><p> Peralta and Liban, with their co-accused Philip Soriano <i>y</i> Pasion (Philip), Adviento Soriano <i>y</i> Pasion, Roberto Soriano <i>y</i> Pasion (Roberto), Ferdinand Soriano <i>y</i> Pasion alias "Mar," and Napoleon Liban (collectively, accused), were charged with various crimes in six Informations pertaining to Criminal Case Nos. 6618, 6619, 6620, 6621, 6622, and 6642. After judgment, Peralta, Liban, and Philip filed a Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> only in Criminal Case No. 6621. The Information dated September 30, 1994 in said case reads: </p><blockquote> <p> The undersigned, Provincial Prosecutor accuses Rudy Peralta, Cesar Liban, Napoleon "POLI" Liban, Mario Bartolome, Philip Soriano, Roberto Soriano, Adviento Soriano, Mar Soriano and Lito Acierto y Cumloy of the crime of [<i>frustrated murder</i>]. . . committed as follows: </p> <p> That on or about June 11, 1994, in the Municipality of Baggao, Province of Cagayan, and within the jurisdiction of this Honorable Court, the said accused. . . armed with guns, conspiring together and helping one another, with intent to kill, with evident premeditation and with treachery did then and willfully, unlawfully and feloniously attack, assault and shoot one, Virgilio Remigio[,] inflicting upon him gunshot wound on his body. </p> <p> <i>That the accused had performed all the acts of execution which would have produce[d] the crime of Murder as a consequence, but which, nevertheless, did not produce it by reason of causes independent of their own will</i>. </p> <p> That in the commission of the offense[,] the aggravating circumstance of dwelling was present. </p> <p> Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (Emphasis supplied) </p> </blockquote> <p> Following the death of Virgilio Remigio (Virgilio) on November 19, 1994,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> the State filed an Amended Information dated January 26, 1995 in Criminal Case No. 6621, for murder in lieu of frustrated murder, viz.: </p><blockquote> <p> The undersigned, 1<sup>st</sup> Assistant Provincial Prosecutor accuses Rudy Peralta, Cesar Liban, Napoleon "POLI" Liban, Mario Bartolome, Philip Soriano, Roberto Soriano, Adviento Soriano, Mar Soriano and Lito Acierto <i>y</i> Cumloy of the crime of [<i>Murder</i>]. . . committed as follows:</p> <p> That on or about June 11, 1994, in the Municipality of Baggao, Province of Cagayan, and within the jurisdiction of this Honorable Court, the said accused. . . armed with guns, conspiring together and helping one another with intent to kill, with evident premeditation and with treachery did then and willfully, unlawfully and feloniously attack, assault and shoot one, Virgilio C. Remigio, inflicting upon him gunshot wound on his body <i>which caused his death</i>.</p> <p> That in the commission of the offense[,] the aggravating circumstance of dwelling was present.</p> <p> Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (Emphasis supplied)</p> </blockquote> <p> Peralta's Certificate of Arraignment<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> in Criminal Case No. 6621 indicated that he pleaded not guilty to the crime charged on January 30, 1995, but did not specify the crime. As for Liban, who was previously at large, his Certificate of Arraignment<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> in the same case indicated that he pleaded not guilty to murder on June 24, 1999.</p><p> During trial on the merits, accused Lito Acierto (Acierto) was discharged as a state witness.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The CA summarized his testimony as follows: </p><blockquote> <p> [Acierto] testified that in the evening of [June 11,] 1994, he met with the group of [Peralta]. They proceeded to Bitag PequeÃ±o. Upon reaching the place, they forcibly opened a house. . . [Peralta] pulled AAA outside and brought her near a guava tree where [he], [Roberto], and [Liban] sexually assaulted her.</p> <p> After the sexual assault against AAA, [Peralta, Liban, and Philip] and the group entered the house of Rodrigo dela Cruz. Thereafter, they proceeded to a house owned by [Virgilio]]. AAA was ordered to knock on the door and inform [Virgilio] that policemen were with her. Subsequently, one of the malefactors entered the house and poked a gun at [Virgilio]. Then, one of the malefactors shot [Virgilio] and his son Jimmy Remigio. [Virgilio] died from the injuries[.]<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p> </blockquote> <p> After the prosecution rested its case and filed its Formal Offer of Evidence<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated January 29, 2007, the RTC issued a February 15, 2007 Order<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> setting the initial presentation of defense evidence on March 6, 2007. The defense later filed a Demurrer to Evidence<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Demurrer) dated March 21, 2007, alleging, among others, that the charge in Criminal Case No. 6621 was for frustrated murder. In its Comment/Opposition,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the State countered that the charge had already been amended to murder. In its Reply,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> the defense averred that the RTC never admitted or gave due course to the Amended Information. Thus, since only the Information for frustrated murder was given due course, the accused should be tried for the lesser crime of frustrated murder. In its August 30, 2007 Order,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> the RTC denied the Demurrer and set anew the initial presentation of defense evidence on January 21, 2008. </p><p> Meanwhile, the RTC issued a September 10, 2007 Order admitting the Amended Information in Criminal Case No. 6621 for murder, and setting the arraignment of the accused on November 7, 2007. The Order reads: </p><blockquote> <p> The first information filed was frustrated murder but subsequently, the victim eventually passed away. This prompted the State to file an amended information [for] murder. The certificate of arraignment only mentions "pleaded not guilty to the crime charged" without mentioning the specific crime. Also, it appears from the records that there is no order admitting the Amended Information [for] [m]urder.</p> <p> Given the foregoing backdrop, Order is hereby issued admitting the [A]mended [I]nformation [for] [m]urder. The court hereby sets the arraignment of the accused. . . on November 7, 2007 at 8:30 [a.m.]</p> <p> SO ORDERED[.]<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p> </blockquote> <p> The Public Attorney's Office filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> on the ground that said Order violates the accused's constitutional rights to speedy trial and speedy disposition of their case, and that rearraignment would result in double jeopardy. Thus, it prayed that the RTC reconsider its Order and proceed with the trial of the charge for frustrated murder. The records, however, are bereft of any resolution on said Motion.</p><p> The presentation of defense evidence, thus, ensued. The RTC summarized the testimonies of Liban and Peralta as follows: </p><blockquote> <p> On June 11, 1994 at 10 [p.m.], [Liban] was at their house in Bacagan together with his wife, Linda Dela Cruz, and child, Arceli Liban. He was only 32 years old then. He does not know the place Bitag PequeÃ±o, Baggao and the private complainants in these cases. His co-accused [Peralta] is his cousin and both of them resided in Bacagan, Baggao. . . He does not know the other accused in these cases. He can vividly remember June 11, 1994 as that was the day he was accused of having committed a crime.</p> <p> [Peralta] recalled that on or about 10 [p.m.] of June 11, 1994, he was at their house in Bacagan, Baggao, Cagayan together with his wife[,] Nenet[,] and son[,] Frolan. He had been a resident of Bacagan, Baggao since birth but had not gone to barangay Bitag PequeÃ±o, Baggao. He can vividly recall June 11, 1994 as he was then so weak having vomited blood on June 9, 1994. He denied having known his co-accused Soriano brothers prior to incarceration and the private complainants in this case.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p> </blockquote> <p> In its Judgment, the RTC convicted Peralta and Liban of murder in Criminal Case No. 6621, among other crimes. The pertinent portion reads: </p><blockquote> <p> ACCORDINGLY, judgment is hereby rendered</p> <p> . . . .</p> <p> 5. In Criminal Case No. 6621- for MURDER</p> <p> Accused RUDY PERALTA <i>y</i> Mabbonag, CESAR LIBAN <i>y</i> Peralta, PHILIP SORIANO <i>y</i> Pasion are found guilty beyond reasonable doubt of the crime of [m]urder. . . The Court imposes. . . the penalty of RECLUSION PERPETUA. Likewise they are ordered to pay the heirs of Virgilio Remigio the amount of [PHP 50,000.00] as civil indemnity, [PHP 50,000.00] as moral damages[,] and [PHP 100,000.00] as actual damages for the medical and funeral expenses of the family of Virgilio Remigio.</p> <p> . . . .</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p> </blockquote> <p> Aggrieved, Peralta and Liban, and their co-accused, Philip, filed a Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> only in Criminal Case No. 6621 for murder. In their Brief,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> they alleged that the RTC quoted the Information for frustrated murder in its Judgment but convicted them for murder.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Prior to arraignment, the prosecution filed an Amended Information for murder, but the RTC did not issue an order admitting it. They claimed that they pleaded <i>not guilty</i> in relation to the crime of frustrated murder and not murder. They posited that the dismissal of the first Information for frustrated murder brought about by the amendment would be a bar to the filing of a subsequent case for murder. Assuming that they were properly arraigned for murder, the prosecution still failed to establish their guilt beyond reasonable doubt since it never presented a medical certificate or medico-legal officer to prove that the proximate cause of the victim's death was the gunshot wound allegedly inflicted by them.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> The People, through the Office of the Solicitor General, argued in their Brief<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> that Peralta, Liban, and Philip were properly convicted of murder in Criminal Case No. 6621, among other crimes.</p><p> In its assailed Decision, the CA affirmed the RTC Judgment with modification, as follows: </p><blockquote> <p> WHEREFORE, the instant Appeal is DISMISSED. The [August 24, 2010] Judgment. . . of the [RTC] of Tuguegarao City is AFFIRMED with the MODIFICATION in that all the monetary awards for damages shall earn annual interest at the legal rate of [6%] from the date of finality of this Decision until fully paid[.]</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></p> </blockquote> <p> Undeterred, Peralta and Liban filed their Notice of Appeal,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> while Philip manifested that he would no longer appeal because he intended to apply for parole or commutation of sentence.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Thus, a Partial Entry of Judgment<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> was issued with respect to him.</p><p> In their respective Manifestations,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the parties adopted their respective appellate briefs and dispensed with the filing of supplemental briefs.</p><p> In Our January 22, 2024 Minute Resolution,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> We noted the October 27, 2023 Notice of Death<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> from the Bureau of Corrections, Muntinlupa City, informing the Court that accused-appellant Peralta had died on October 25, 2023. Considering that his death occurred prior to final judgment, his criminal liability is totally extinguished<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> and the dismissal of Criminal Case No. 6621 follows as a matter of course. While such event likewise extinguishes his civil liability <i>ex delicto</i>, claims for civil liability predicated on other sources of obligation, if any, remain unaffected.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p align="center"> <i>II</i> </p><p> After a judicious review of the case, We find no cogent reason to reverse and set aside the assailed CA Decision as to accused-appellant Liban. As the CA correctly ruled, the prosecution was able to prove the elements of murder beyond reasonable doubt. Although only one malefactor shot Virgilio, conspiracy was also duly proven by the prosecution and may be inferred from accused-appellants' concerted actions with the rest of the accused arriving together at the scene of the crime fully armed.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Further, their defense of alibi is inherently weak and crumbles, considering their positive identification by credible witnesses. Axiomatic is the rule that findings of trial courts are accorded the highest respect and are generally not disturbed by the appellate court, unless dearly arbitrary or unfounded, or some substantial fact or circumstance that could materially affect the disposition of the case was overlooked, misunderstood, or misinterpreted.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> With regard to accused-appellants' contention that they were arraigned in 1995 only for frustrated murder because the RTC did not issue an order admitting the Amended Information for murder, the same deserves scant consideration. While the RTC revealed that the records were bereft of any order admitting the Amended Information, such an order was not a necessity, considering that the amendment was done without leave of court, as provided under Rule 110, Section 14 of the Rules of Court, viz.: </p><blockquote> <p> Sec. 14. <i>Amendment</i>. â The information or complaint may be amended; in substance or form, without leave of court, at any time before the accused pleads; and thereafter and during the trial as to all matter of form, by leave and at the discretion of the court, when the same can be done without prejudice to the rights of the accused. If it appears at any time before judgment that a mistake has been made in charging, the proper offense, the court shall dismiss the original complaint or information upon the filing of a new one charging the proper offense in accordance with Rule 119, Section 11, provided the accused would not be placed thereby in double jeopardy, and may also require the witnesses to give bail for appearance at the trial.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p> </blockquote> <p>Leave of court is defined as judicial permission to follow a non-routine procedure.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Thus, <i>without leave of court</i> means that the prosecution need not seek the trial court's permission to amend the information when it is done before plea and for as long as the amendment does not downgrade the nature of the offense charged in or exclude any accused from the information.</p> <p> This is similar to the right granted to the plaintiff in civil cases to amend a complaint before a responsive pleading is served. In such cases, the plaintiff need not even move that the amended complaint be admitted.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> It is only when the filing is not a matter of right that admission of the amended pleading is sought,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> and an order admitting the same is required.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></p><p> Since the amendment of an information, whether in form or substance, prior to the plea of the accused is a matter of right and does not require leave of court, save for the exception in the second paragraph of Rule 110, Section 14, the amended information <i>ipso facto</i> supersedes the original information<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> without the need to move for its admission and without further action from the court. Thus, the RTC's 2007 Order admitting the Amended Information was a superfluity and did not have the effect of dismissing the original Information since the latter had already been superseded by its amendment in 1995. At any rate, accused-appellants never moved for the Amended Information's quashal. Further, in their Notice of Appeal before the RTC, they referred to Criminal Case No. 6621 as a case "for murder." </p><p> It is worth mentioning that the amendment of the Information from frustrated murder to murder was merely a formal amendment which could not have come as a surprise to accused-appellants since it charges essentially the same offense as that charged under the original Information. Our <i>en banc</i> ruling in <i>Teehankee, Jr. v. Madayag</i><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> is instructive: </p><blockquote> <p> Petitioner avers that the additional allegation in the amended information. . . constitutes a substantial amendment since it involves a change in the nature of the offense charged, that is, from frustrated to consummated murder. Petitioner further submits that "[t]here is a need then to establish that the same mortal wounds, which were initially frustrated by timely and able medical assistance, ultimately caused the death of the victim, because it could have been caused by a supervening act or fact which is not imputable to the offender." From this, he argues that there being a substantial amendment, the same may no longer be allowed after arraignment and during the trial.</p> <p> Corollary thereto, petitioner then postulates that since the amended information for murder charges an entirely different offense, involving as it does a new fact, that is, the fact of death whose cause has to be established, it is essential that another preliminary investigation on the new charge be conducted before the new information can be admitted.</p> <p> We find no merit in the petition. There are sufficient legal and jurisprudential moorings for the orders of the trial court. </p> <p> Section 14, Rule 110 of the 1985 Rules on Criminal Procedure provides: </p> <blockquote> <p> "Sec. 14. <i>Amendment</i>. â The information or complaint may be amended, in substance or form, without leave of court, at any time before the accused pleads; and thereafter and during the trial as to all matters of form, by leave and at the discretion of the court, when the same can be done without prejudice to the rights of the accused.</p> <p> If it appears at any time before judgment that a mistake has been made in charging the proper offense, the court shall dismiss the original complaint or information upon the filing of a new one charging the proper offense in accordance with Rule 119, Section 11, provided the accused would not be placed thereby in double jeopardy and may also require the witnesses to give bail for their appearance at the trial."</p> </blockquote> <p> The first paragraph provides the rules for <i>amendment</i> of the information or complaint, while the second paragraph refers to the <i>substitution</i> of the information or complaint. </p> <p> It may accordingly be posited that both amendment and substitution of the information may be made before or after the defendant pleads, but they differ in the following respects:</p> <ol><li> Amendment may involve either formal or substantial changes, while substitution necessarily involves a substantial change from the original charge;<br><br></li><li> Amendment before plea has been entered can be effected without leave of court, but substitution of information must be with leave of court as the original information has to be dismissed;<br><br></li><li><i>Where the amendment is only as to form, there is no need for</i> another preliminary investigation and <i>the retaking of the plea of the accused</i>, in substitution of information, another preliminary investigation is entailed and the accused has to plead anew to the new information; and <br><br></li><li>An amended information refers to the same offense charged in the original information or to an offense which necessarily includes or is necessarily included in the original charge, hence substantial amendments to the information after the plea has been taken cannot be made over the objection of the accused, for if the original information would be withdrawn, the accused could, invoke double jeopardy. On the other hand, substitution requires or presupposes that the new information involves a different offense which does not include or is not necessarily included in the original charge, hence the accused cannot claim double jeopardy. </li></ol> <p> In determining, therefore, whether there should be an amendment under the first paragraph of Section 14, Rule 110, or a substitution of information under the second paragraph thereof, the rule is that where the second information involves the same offense, or an offense which necessarily includes or is necessarily included in the first information, an amendment of the information is sufficient, otherwise, where the new information charges an offense which is distinct and different from that initially charged, a substitution is in order.</p> <p> There is identity between the two offenses when the evidence to support a conviction for one offense would be sufficient to warrant a conviction for the other, or when the second offense is exactly the same as the first, or when the second offense is an attempt to commit or a frustration of, or when it necessarily includes or is necessarily included in, the offense charged in the first information. In this connection, an offense may be said to necessarily include another when some of the essential elements or ingredients of the former, as this is alleged in the information, constitute the latter. And, vice-versa, an offense may be said to be necessarily included in another when the essential ingredients of the former constitute or form a part of those constituting the latter.</p> <p> Going now to the case at bar, <i>it is evident that frustrated murder is but a stage in the execution of the crime of murder, hence the former is necessarily included in the latter</i>. It is indispensable that the essential element of intent to kill, as well as qualifying circumstances such as treachery or evident premeditation, be alleged in both an information for frustrated murder and for murder, thereby meaning and proving that the same material allegations are essential to the sufficiency of the informations filed for both. This is because, except for the death of the victim, the essential elements of consummated murder likewise constitute the essential ingredients to convict herein petitioner for the offense of frustrated murder.</p> <p> <i>In the present case, therefore, there is an identity of offenses charged in both the original and the amended information. What is involved here is not a variance of the nature of different offenses charge, but only a change in the stage of execution of the same offense from frustrated to consummated murder. This being the case, we hold that an amendment of the original information will suffice and, consequent thereto, the filing of the amended information for murder is proper</i>.</p> <p> Petitioner would insist however, that the additional allegation on the fact of death of the victim. . . constitutes a substantial amendment which may no longer be allowed after a plea has been entered. The proposition is erroneous and untenable.</p> <p> As earlier indicated, Section 14 of Rule 110 provides that an amendment, either of form or substance, may be made at any time before the accused enters a plea to the charge and, thereafter, as to all matters of form with leave of court.</p> <p> A substantial amendment consists of the recital of facts constituting the offense charged and determinative of the jurisdiction of the court. All other matters are merely of form. Thus, the following have been held to be merely formal amendments, viz.: (1) new allegations which relate only to the range of the penalty that the court might impose in the event of conviction; (2) an amendment which does not charge another offense different or distinct from that charged in the original one: (3) additional allegations which do not alter the prosecution's theory of the case so as to cause surprise to the accused and affect the form of defense he has or will assume; and (4) an amendment which does not adversely affect any substantial right of the accused, such as his right to invoke prescription.</p> <p> We repeat that after arraignment and during the trial, amendments are allowed, but only as to matters of form and provided that no prejudice is caused to the rights of the accused. The test of whether an amendment is only of form and an accused is not prejudiced by such amendment has been said to be whether or not a defense under the information as it originally stood would be equally available after the amendment is made, and whether or not any evidence the accused might have would be equally applicable to the information in the one form as in the other; if the answer is in the affirmative, the amendment is one of form and not of substance.</p> <p> Now, <i>an objective appraisal of the amended information for murder filed against herein petitioner will readily show that the nature of the offense originally charged was not actually changed. Instead, an additional allegation, that is, the supervening fact of the death of the victim was merely supplied to aid the trial court in determining the proper penalty for the crime. That the accused committed a felonious act with intent to kill the victim continues to be the prosecution's theory. There is no question that whatever defense herein petitioner may adduce under the original information for frustrated murder equally applies to the amended information for murder. Under the circumstances thus obtaining, it is irremissible that the amended information for murder is, at most, an amendment as to form which is allowed even during the trial of the case</i>.</p> <p> It consequently follows that since only a formal amendment was involved and introduced in the second information, a preliminary investigation is unnecessary and cannot be demanded by the accused. The filing of the amended information without the requisite preliminary investigation does not violate petitioner's right to be secured against hasty, malicious[,] and oppressive prosecutions, and to be protected from an open and public accusation of a crime, as well as from the trouble, expenses[,] and anxiety of a public trial. <i>The amended information could not conceivably have come as a surprise to petitioner for the simple and obvious reason that it charges essentially the same offense as that charged under the original information</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied, citations omitted)</p> </blockquote> <p> Even assuming that accused-appellants pleaded only to the charge of frustrated murder and not murder, as they claim in their appellate brief, it was unnecessary for the trial court to order their rearraignment for the murder charge since the amendment was only as to form. Except for the death of the victim, the essential elements of consummated murder likewise constitute the essential ingredients to convict the accused for frustrated murder.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Unlike for a substantial amendment, a second arraignment is not required for a formal amendment.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The purpose of arraignment, that is, to inform the accused of the nature and cause of the accusation against them, has already been attained when the accused were arraigned the first time. The subsequent amendment could not have conceivably come as a surprise to accused-appellants since it did not charge a new offense nor alter the theory of the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></p><p> Murder is punishable by <i>reclusiÃ³n perpetua</i> to death.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The presence of an ordinary aggravating circumstance, such as dwelling in this case, warrants the imposition of the greater penalty of death. In view, however, of Republic Act No. 9346 prohibiting the imposition of the death penalty, the RTC correctly imposed the penalty of <i>reclusiÃ³n perpetua</i>. Pursuant to A.M. No. 15-08-0-SC,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> We add the phrase "without eligibility for parole" to emphasize that accused-appellant Liban should have been sentenced to death were it not for Republic Act No. 9346. Further, We increase the award of civil indemnity and moral damages to PHP 100,000.00 each, and award PHP 100,000.00 as exemplary damages pursuant to prevailing jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Finally, in lieu of actual damages of PHP 100,000.00, We award PHP 50,000.00 as temperate damages since no evidence of burial or funeral expenses was presented.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p><p> <b>ACCORDINGLY</b>, the appeal is <b>DISMISSED</b>. The March 19, 2014 Decision of the Court of Appeals in CA-G.R. CR-H.C. No. 04713 is <b>AFFIRMED</b> with <b>MODIFICATION</b> insofar as accused-appellant Cesar Liban <i>y</i> Peralta is concerned. In Criminal Case No. 6621, he is found <b>GUILTY</b> beyond reasonable doubt of murder and is sentenced to suffer the penalty of <i>reclusiÃ³n perpetua</i> without eligibility for parole. He is <b>ORDERED</b> to pay the heirs of Virgilio Remigio PHP 100,000.00 as civil indemnity, PHP 100,000.00 as moral damages, PHP 100,000.00 as exemplary damages, and PHP 50,000.00 as temperate damages, all of which shall earn interest at the rate of 6% per annum from the finality of this Decision until fully paid. The award of actual damages is <b>DELETED</b>.</p><p> Criminal Case No. 6621 is <b>DISMISSED</b> insofar as accused-appellant Rudy Peralta <i>y</i> Mabbonag is concerned on account of his death.</p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-21. The March 19, 2014 Decision in CA-G.R. CR-H.C. No. 04713 was penned by Associate Justice Elihu A. YbaÃ±ez and concurred in by Associate Justices Japar B. Dimaampao (now a member of this Court) and Melchor Q.C. Sadang of the Thirteenth Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> CA <i>rollo</i>, pp. 15-35. The August 24, 2010 Judgment in Criminal Cases Nos. 6618-22 and 6642 was penned by Presiding Judge Lyliha I. Abella-Aquino of Branch 4, Regional Trial Court, Tuguegarao City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> RTC records, p. 1.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 25. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 36.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 117. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 126.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, p. 15.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> RTC records, pp. 275-277. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 281. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 289-297. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 298-304. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 305-308. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 312. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 218. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 212-217. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 391-392. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> CA <i>rollo</i>, pp. 32-35. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 65-86. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> It appears from the records of the case that there are two versions of the August 24, 2010 RTC Judgment. The version relied upon by accused-appellants quotes the Information in Criminal Case No. 6621 for frustrated murder (<i>rollo</i>, p. 28), while the version in the RTC records quotes the Amended Information for murder (RTC records, p. 384). It seems that the RTC may have made a clerical correction on an earlier version of its Judgment. Nonetheless. both versions convict accused-appellants for murder. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> CA <i>rollo</i>, pp. 80-85. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 122-144. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 20. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> CA <i>rollo</i>, pp. 169-170. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 173-174. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 180. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, pp. 57-53, 62-63. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 76-77. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 74-75. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> REV. PEN. CODE, art. 89(1) states: </p><blockquote> <p> Art. 89. <i>How criminal liability is totally extinguished</i>. â Criminal liability is totally extinguished:</p> <ol><li> By the death of the convict, as to the personal penalties; and as to pecuniary penalties, liability therefor is extinguished only when the death of the offender occurs before final judgment[.]</li></ol> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>People v. Bayotas</b>, 306 Phil. 266, 282 (1994) [Per J. Romero,<i> En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>People v. Torrefiel</b>, 326 Phil. 388, 399 (1996) [Per J. Hermosisima, Jr., First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Alicando v. People</b>, 715 Phil. 638, 648 (2003) [Per J. Reyes, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> RULES OF COURT, Rule 110, sec. 14 similarly provides: </p><blockquote> <p> Sec. 14. <i>Amendment or substitution</i>. â A complaint or information may be amended, in form or in substance, <i>without leave of court, at any time before the accused enters his plea</i>. After the plea and during the trial, a formal amendment may only be made with leave of court and when it can be done without causing prejudice to the rights of the accused.</p> <p> However, any amendment before plea, which downgrades the nature of the offense charged in or excludes any accused from the complaint or information, can be made only upon motion by the prosecutor, with notice to the offended party and with leave of court. The court shall state its reasons in resolving the motion and copies of its order shall be furnished all parties, especially the offended party. </p> <p> If it appears at any time before judgment that a mistake has been made in charging the proper offense, the court shall dismiss the original complaint or information upon the filing of a new one charging the proper offense in accordance with [Rule 119, sec. 19], provided the accused shall not be placed in double jeopardy. The court may require the witnesses to give bail for their appearance at the trial. (Emphasis supplied) </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> BLACK'S LAW DICTIONARY 1068 (12<sup>th</sup> ed., 2024). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Executive Secretary Mendoza v. Pilipinas Shell Petroleum Corp.</b>, 936 Phil. 538, 554 (2023) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> RULES OF COURT, Rule 15, sec. 10 states: </p><blockquote> <p> Sec. 10. <i>Motion for leave</i>. â A motion for leave to file a pleading or motion shall be accompanied by the pleading or motion sought to be admitted. (Emphasis supplied)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> RULES OF COURT, Rule 11, sec. 3 states: </p><blockquote> <p> Sec. 3. <i>Answer to amended complaint</i>. â . . .</p> <p> Where its filing is not a matter of right, the defendant shall answer the amended complaint within [15] calendar days from notice of the <i>order admitting the same</i>[.] (Emphasis supplied)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> RULES OF COURT, Rule 10, sec. 8 states: </p><blockquote> <p> Sec. 8. <i>Effect of amended pleadings</i>. â An amended pleading supersedes the pleading that it amends[.] </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 283 Phil. 956 (1992) [Per J. Regalado, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 962-967. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 2 FLORENZ D. REGALADO, REMEDIAL LAW C0MPENDIUM 309 (10<sup>th</sup> ed., 2004), <i>citing</i> <b>Teehankee, Jr. v. Madayag</b>, 283 Phil. 956 (1992) [Per J. Regalado, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Villarba v. Court of Appeals</b>, 874 Phil. 84, 99 (2020) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Kummer v. People</b>, 717 Phil. 670, 687-688 (2013) [Per J. Brion, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> REV. PEN. CODE, art. 248, as amended by Republic Act No. 7659 (1993). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> NON-ELIGIBILITY FOR PAROLE GUIDELINES. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Jugueta</b>, 783 Phil. 806, 847 (2016) [Per J. Peralta, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 853. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

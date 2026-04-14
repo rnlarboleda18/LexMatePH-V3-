@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 261412 - PHILIP JAYSON MIRANDA Y DE OCAMPO A.K.A. "PJ," PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70221' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 261412, October 29, 2025 ]</H2>
+			<H3>PHILIP JAYSON MIRANDA<I> Y </I>DE OCAMPO A.K.A. "PJ," PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated April 26, 2023, filed by petitioner Philip Jayson Miranda<i> y</i> De Ocampo a.k.a. "PJ" (Miranda) assailing the Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court dated November 28, 2022. The Court affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated June 23, 2021, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated June 6, 2022, of the Court of Appeals (CA) in CA-G.R. CR No. 44324. The CA, in turn, affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated July 29, 2019, of Branch 276, Regional Trial Court, Muntinlupa City in Criminal Case No. 18-455 that found Miranda guilty beyond reasonable doubt of violation of Section 261(p)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of Batas Pambansa Blg. 881, also known as the "Omnibus Election Code," as amended by Section 32<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> of Republic Act No. 7166,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> in relation to Commission on Elections (COMELEC) Resolution No. 10197,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> as amended by COMELEC Resolution No. 10246.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Miranda was originally charged with violation of Section 261(dd)(1)<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> of the Omnibus Election Code, as amended by Section 30<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> of Republic Act No. 7166, in relation to COMELEC Resolution No. 10197 in an Information dated May 17, 2018. The Information was later amended to charge Miranda with violation of Section 261(p) instead of Section 261(dd)(1) of the Omnibus Election Code. The Information states:<br><blockquote>That on the 13<sup>th</sup> day of May 2018 or thereabouts, in the City of Muntinlupa, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, did, then and there, willfully and unlawfully have in his possession, custody and direct control one (1) [k]itchen [k]nife measuring 13 inches long including the handle, which he earned outside his residence or place of business during the election period, which is from April 24 to May 21, 2018, without being authorized in writing by the Commission on Elections.<br><br>Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </blockquote>Miranda entered a plea of "Not Guilty" during his arraignment on June 22, 2018.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> As stated, both the RTC and the CA found Miranda guilty of violation of Section 261(p) of the Omnibus Election Code.<br><br>The Court resolved to affirm the CA in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated November 28, 2022. The dispositive portion of the Resolution of the Court provides:<br><blockquote>WHEREFORE, the [P]etition is DENIED. The Decision dated June 23, 2021[,] and [the] Resolution dated June 6, 2022 of the Court of Appeals in CA-G.R. CR No. 44324 finding petitioner Philip Jayson Miranda<i> y</i> De Ocampo<i> a.k.a</i> "PJ" GUILTY of violation of Section 261 (p) of Batas Pambansa Blg. 881, also known as the Omnibus Election Code, as amended by Section 32 of Republic Act No. 7166, are AFFIRMED. Petitioner is sentenced to a penalty of one (1) year imprisonment as minimum to six (6) years as maximum, and shall not be subject to probation. He is also sentenced to suffer disqualification to hold public office and deprivation of the right of suffrage.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </blockquote><center><i>Arguments in the Motion for Reconsideration</i></center><br>Miranda filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated April 26, 2023, wherein he raises<i> for the first time</i> the violation of his right against double jeopardy. He alleges that his conviction for Illegal Possession of Deadly Weapon under Presidential Decree No. 9, as amended by Batas Pambansa Blg. 6, in Criminal Case No. MeTC-M-57651 CR decided by Branch 114 of the Metropolitan Trial Court (MeTC), Muntinlupa City, should bar his prosecution in the case as it similarly involves the possession of a deadly weapon. Simply put, the former offense necessarily includes the latter offense. The MeTC sentenced Miranda to pay a fine of PHP 2,000.00 which he has already paid, as recognized by the MeTC in its Order<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated August 23, 2018.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Miranda likewise argues that the Information against him must be quashed or dismissed as it alleges two offenses. Section 32 of Republic Act No. 7166 did not amend or repeal Section 261(p) of the Omnibus Election Code.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Respondent People, through the Office of the Solicitor General (OSG), filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated February 21, 2024 stating that the Court has fully addressed all the matters raised in Miranda's Motion for Reconsideration. According to the OSG, there is no reason to reverse or modify the Court's ruling.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><i>The Issue</i></center><br>The issue before the Court is whether the Motion for Reconsideration of Miranda should be granted.<br><br><center><i>The Ruling of the Court</i></center><br>The Court grants the Motion for Reconsideration.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Miranda's right against double jeopardy was not violated</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The right against double jeopardy is provided for in Article III, Section 21 of the 1987 Constitution:<br><blockquote>SECTION 21. No person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act. </blockquote>Rule 117, Section 7 of the Revised Rules of Criminal Procedure<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> further states:<br><blockquote>SECTION 7.<i> Former conviction or acquittal; double jeopardy. â </i>When an accused has been convicted or acquitted, or the case against him dismissed or otherwise terminated without his express consent by a court of competent jurisdiction, upon a valid complaint or information or other formal charge sufficient in form and substance to sustain a conviction and after the accused had pleaded to the charge, the conviction or acquittal of the accused or the dismissal of the case shall be a bar to another prosecution for the offense charged, or for any attempt to commit the same or frustration thereof, or for any offense which necessarily includes or is necessarily included in the offense charged in the former complaint or information.<br><br>However, the conviction of the accused shall not be a bar to another prosecution for an offense which necessarily includes the offense charged in the former complaint or information under any of the following instances:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">the graver offense developed due to supervening facts arising from the same act or omission constituting the former charge; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">the facts constituting the graver charge became known or were discovered only after a plea was entered in the former complaint or information; or </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">the plea of guilty to the lesser offense was made without the consent of the prosecutor and of the offended party except as provided in section 1(f) of Rule 116. </div></td> </tr> </tbody></table><br>In any of the foregoing cases, where the accused satisfies or serves in whole or in part the judgment, he shall be credited with the same in the event of conviction for the graver offense. </blockquote>To successfully invoke the right against double jeopardy, the following requisites must be present: (1) a first jeopardy must have attached prior to the second; (2) the first jeopardy must have been validly terminated; and (3) the second jeopardy must be for the same offense as that in the first.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>The first jeopardy shall attach if there is: (1) a valid indictment; (2) a court of competent jurisdiction; (3) the arraignment of the accused; (4) a valid plea entered by the accused; and (5) the acquittal or conviction of the accused, or the dismissal or termination of the case without the accused's express consent.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The last requisite is met when there is: (a) an acquittal, which is final and executory upon promulgation; (b) a conviction of the accused by final judgment; and (c) a dismissal of the case without the express consent of the accused, which implies a final disposition or termination of the case.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The tests for determining whether there is double jeopardy is<i> first,</i> whether the second offense charged necessarily includes or is necessarily included in the offense charged in the former complaint or information; and<i> second,</i> whether the evidence which proves one would prove the other that is to say whether the facts alleged in the first charge if proven, would have been sufficient to support the second charge and vice versa; or whether one crime is an ingredient of the other.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Miranda was convicted of violation of Section 1 of Batas Pambansa Blg. 6 in the Decision<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated July 26, 2018, of the MeTC in Criminal Case No. MeTC-M-57651 CR:<br><blockquote>WHEREFORE, foregoing considered, the Court finds accused PHILIP JAYSON MIRANDA [<i>y</i>] DE Ocampo a.k.a. "PJ" guilty beyond reasonable doubt of the offense of Violation of Section 1 of Batas Pambansa [Blg.] 6 and he is hereby sentenced to pay a fine in the amount of TWO THOUSAND PESOS ([PHP] 2,000.00) with subsidiary imprisonment in case of non-payment of fine and to pay the costs of the [sic] suit.<br><br>The one (1) piece kitchen knife (Exhibit "D") is hereby confiscated in favor of the government.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </blockquote>Section 1 of Batas Pambansa Blg. 6,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> which amended Presidential Decree No. 9, states:<br><blockquote>SECTION 1. Paragraph three of Presidential Decree Numbered Nine is hereby amended to read as follows:<br><br>"3. It is unlawful to carry outside of one's residence any bladed, pointed or blunt weapon such as 'knife,' 'spear,' 'pana,' 'dagger,' 'bolo,' 'barong', 'kris,' or 'chako,' except where such articles are being used as necessary tools or implements to earn a livelihood or in pursuit of a lawful activity. Any person found guilty thereof shall suffer the penalty of imprisonment of not less than one month nor more than one year or a fine of not less than Two Hundred Pesos nor more than Two Thousand Pesos, or both such imprisonment and fine as the Court may direct." </blockquote>As early as 1978, the Court elucidated the elements of paragraph 3 of Presidential Decree No. 9 in<i> People v. Judge Purisima</i>:<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>first,</i> the carrying outside one's residence of any bladed, blunt, or pointed weapon, etc. not used as a necessary tool or implement for a livelihood; and<i> second, </i>that the act of carrying the weapon was either in furtherance of, or to abet, or in connection with subversion, rebellion, insurrection, lawless violence, criminality, chaos, or public disorder.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Notwithstanding the amendment in Batas Pambansa Blg. 6, the Court held that the elements for this offense remain the same.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Notably, the Court clarified in the recent case of<i> Managuelod v. People</i><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> that:<br><blockquote>On the other hand, Presidential Decree No. 9, the law amended by Batas Pambansa Blg. 6, was enacted for the purpose of curtailing "subversion, rebellion, insurrection, lawless violence, criminally, chaos and public disorder" by reason of Proclamation No. 1081, the law which proclaimed a state of martial law in the Philippines on September 21, 1972. Batas Pambansa Blg. 6, therefore, is no longer applicable since the rationale for its enactment, i.e., curtailment of public disorder during martial law, has already ceased.<i> Cessante rations legis cessat ipsa lex</i>. When the reason for the law ceases, the law itself ceases.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis in the original; citations omitted) </blockquote>Thus, it is not the mere carrying of a deadly weapon that is punishable under Batas Pambansa Blg. 6 but the motivation behind it.<br><br>While paragraph 3 of Presidential Decree No. 9, as amended by Batas Pambansa Blg. 6, and Section 261(p) of the Omnibus Election Code share a common element, that is the possession of a deadly weapon, their gravamen are distinct from each other. On the one hand, Presidential Decree 9 penalizes the carrying of a deadly weapon in support of subversion, rebellion, insurrection, lawless violence, criminality, chaos, or public disorder. On the other hand, Section 261(p) penalizes the carrying of a deadly weapon in public during the election period. Therefore, the Court disagrees with Miranda that the former necessarily includes the latter. They are two distinct offenses. Consequently, there is no violation of Miranda's right against double jeopardy.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Miranda is not guilty of Section 261(p) of the Omnibus Election Code</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>After the issuance of the assailed Resolution in the case, the Court made a significant ruling in<i> Buella v. People</i>.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The Court clarified that bladed instruments are not covered by Section 261(q)<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of the Omnibus Election Code and Section 32 of Republic Act No. 7166, and thus, it declared that the COMELEC erred in including them in the definition of deadly weapons under COMELEC Resolution No. 10015, which sought to implement these provisions.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The Court emphasized in<i> Buella</i> that Section 32 of Republic Act No. 7166 does not include bladed instruments and is limited to firearms and deadly weapons that are regulated.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> The Court explained:<br><blockquote>On the other hand, [Section] of [Republic Act] No. 7166 appears, at first glance, to expand the scope of this prohibition as in addition to firearms, it also contemplates other deadly weapons. However, a more careful reading of [Section] 32 of [Republic Act] No. 7166 reveals the phrase "deadly weapons" is restricted by the provision itself.<br><br>For one, [Section] 32 itself is entitled "Who May Bear Firearms." As pointed out by the esteemed Justice Zalameda, "the general term 'other deadly weapons' is restricted and limited by the specific term 'firearms.' Otherwise, the Congress should not have limited the title of Section 32 to firearms, and if intended to be construed in its unrestricted sense, the Congress would not have made an enumeration of [a] particular instrument such as firearms and should have only used the general term 'deadly weapon' or words of similar import."<br><br>Further, the phrases "even if licensed to possess or carry the same" and "unless authorized in writing by the Commission" qualify both firearms and other deadly weapons. Thus, to come within the ambit of this election offense," the deadly weapon must be: (1) one which is regulated or one for which a license is needed to possess or carry the same; and (2) one for which the COMELEC may issue an authorization to possess or carry during the election period.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </blockquote><i>Buella</i> expressly stated that the exclusion of bladed instruments from the term 'deadly weapons' does not apply to Section 261(p) of the Omnibus Election Code. Simply stated, bladed instruments, i.e., knives, are included under the term 'deadly weapons' as far as Section 261 (p) of the Omnibus Election Code is concerned, thus;<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><blockquote>Nonetheless, taking cue from the illuminating perspective offered by the respected Justice Zalameda during the deliberations on this case, [145] it must be clarified that the declaration in the instant case excluding "bladed instruments" from the term "deadly weapons" applies only to [Section] 1 (f), Rule I, in relation to [Section] 1 (a), Rule II, of COMELEC Resolution No. 10015, insofar as it "includes all types of bladed instruments" in the prohibition to bear, carry, or transport firearms and other deadly weapons during the election period. Said pronouncement does not apply to the inclusion of "bladed instruments" under the term "deadly weapons" in any other provision of law, such as [Section] 261 (p) of the Omnibus Election Code.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> (Citation omitted) </blockquote>Despite such clarification, it is important to note that the Court has previously ruled that Section 32 of Republic Act No. 7166 amended Section 261(p) of the Omnibus Election Code.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Considering the Court's pronouncement in<i> Buella</i> that Section 32 is limited to firearms and regulated deadly weapons, it must now be clarified if Section 32 is still applicable to Section 261(p) of the Omnibus Election Code.<br><br>A comparison of Sections 261(p) and (q) of the Omnibus Election Code vis-Ã -vis Section 32 of Republic Act No. 7166 would show that the subject of Section 32 is more in accord with Section 261(q) of the Omnibus Election Code than Section 261(p):<br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td valign="top" align="center"> <div><b>Section 261(p)</b> </div></td> <td valign="top" align="center"> <div><b>Section 32</b> </div></td> <td valign="top" align="center"> <div><b>Section 261(q)</b> </div></td> </tr> <tr> <td align="LEFT" valign="top"> <div align="JUSTIFY">(p) <i> Deadly weapons. â </i> Any person who carries any deadly weapon in the polling place and within a radius of one hundred meters thereof during the days and hours fixed by law for the registration of voters in the polling place, voting, counting of votes, or preparation of the election returns. However, in cases of affray, turmoil, or disorder, any peace officer or public officer authorized by the Commission to supervise the election is entitled to carry firearms or any other weapon for the purpose of preserving order and enforcing the law. </div> <div align="JUSTIFY"></div></td> <td valign="top"> <div align="JUSTIFY"><b>Section 32.</b> <i> Who May</i><b> </b> <i>Bear Firearms. â </i> During the election period, no person shall bear, carry or transport firearms or other deadly weapons in public places, including any building, street, park, private vehicle or public conveyance, even if licensed to possess or carry the same, unless authorized in writing by the Commission. The issuance of firearms licenses shall be suspended during the election period.&nbsp;&nbsp;</div><div align="JUSTIFY"><br></div><div align="JUSTIFY">Only regular members or officers of the Philippine National Police, the Armed Forces of the Philippines and other enforcement agencies of the Government who are duly deputized in writing by the Commission for election duty may be authorized to carry and possess firearms during the election period: <i>Provided,</i> That, when in the possession of firearms, the deputized law enforcement officer must be: (a) in full uniform showing clearly and legibly his name, rank and serial number which shall remain visible at all times; and (b) in the actual performance of his election duty in the specific area designated by the Commission. </div></td> <td valign="top"> <div align="JUSTIFY">(q) <i> Carrying firearms outside residence or place of business. â </i> Any person who, although possessing a permit to carry firearms, carries any firearms outside his residence or place of business during the election period, unless authorized in writing by the Commission: <i>Provided,</i> That a motor vehicle, water or air craft shall not be considered a residence or place of business or extension hereof.</div><div align="JUSTIFY"><br></div><div align="JUSTIFY">This prohibition shall not apply to cashiers and disbursing officers while in the performance of their duties or to persons who by nature of their official duties, profession, business or occupation habitually carry large sums of money or valuables. </div> </td> </tr> </tbody></table><br>It is a settled principle that any doubt shall be resolved against implied amendment or repeal and in favor of harmonization of all laws on the subject.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> The subject of Section 261(q) is more in line with Section 32, as they both concern the carrying of firearms during the election period, whereas, Section 261(p) is about deadly weapons in general. More, Section 32 and Section 261(q) involve regulated weapons considering that they provide that a license or permit to carry it is insufficient unless authorized by the COMELEC. In comparison, Section 261(p) makes no mention of a permit or license in defining the offense. But similar to Section 261(q) and Section 32, it excuses certain professions under specific circumstances. Moreover, Section 261(p) is more restrictive in terms of when and where it may be committed in comparison to Section 32 and Section 261(q).<br><br>Further, the term 'deadly weapons' is broader than firearms. On the one hand, firearms is defined in Section 3(e) of Republic Act No. 10591,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> or the "Comprehensive Firearms and Ammunition Regulation Act," as "any handheld or portable weapon, whether a small arm or light weapon, that expels or is designed to expel a bullet, shot, slug, missile or any projectile, which is discharged by means of expansive force of gases from burning gunpowder or other form of combustion or any similar instrument or implement." On the other hand, a deadly weapon refers to any weapon or instrument made and designed for offensive or defensive purposes, or for the destruction of life or the infliction of injury; or one which, from the manner used, is calculated or likely to produce death or serious bodily harm.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>In<i> Managuelod v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court pointed out that as early as 1907, the Legislature has considered bladed instruments to be deadly weapons under Act No. 1780, which provides:<br><blockquote>SECTION 26. It shall be unlawful for any person to carry concealed about his person any bowie knife, dirk, dagger, kris, or other deadly weapon: PROVIDED, That this prohibition shall not apply to firearms in the possession of persons who have secured a license therefor or who are entitled to carry [the] same under the provisions of this Act. </blockquote>The Court likewise acknowledged in<i> People v. Alfeche</i><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the long line of cases recognizing that a knife qualifies as a deadly weapon.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Hence, the offense punishable under Section 261(p) is distinct from what is provided under Section 261(q) and Section 32. Given this, it must be clarified that Section 32<i> did not amend</i> Section 261(p) because what it amended is Section 261(q). Section 32 cannot be applied in piecemeal to Section 261(p) such that only the area where the crime was committed shall be considered while disregarding the rest of the provision.<br><br>Following<i> Buella,</i> the Court clarifies that the elements of Section 261(p) are: (1) the person is bearing, carrying, or transporting deadly weapons; (2) the weapon is carried in the polling place and within a radius of one hundred meters thereof; and (3) such possession occurs during the days and hours fixed by law for the registration of voters in the polling place, voting, counting of votes, or preparation of the election returns.<br><br>Considering that its application would be favorable to Miranda, the Court re-examines whether he was proven guilty of the elements of Section 261(p) of the Omnibus Election Code. There is no question that Miranda was carrying a knife at the sidewalk of JPA Subdivision during the election period, as defined in COMELEC Resolution No. 10246. However, there is no proof that the area where he carried it was in the polling place or within one hundred meters thereof during the days and hours fixed by law for the registration of voters in the polling place, voting, counting of votes, or preparation of the election returns. Consequently, Miranda must be acquitted.<br><br><b>ACCORDINGLY</b>, the Motion for Reconsideration dated April 26, 2023 is<b> GRANTED</b>. The Resolution of the Court dated November 28, 2022 is<b> REVERSED and SET ASIDE</b>. Petitioner Philip Jayson Miranda <i>y</i> De Ocampo a.k.a. "PJ" is<b> ACQUITTED</b> of violation of Section 261(p) of the Omnibus Election Code in Criminal Case No. 18-455 filed before Branch 276, Regional Trial Court, Muntinlupa City for failure of the prosecution to establish his guilt beyond reasonable doubt.<br><br>The bail bond posted by petitioner Philip Jayson Miranda<i> y</i> De Ocampo a.k.a. "PJ" for his provisional liberty is<b> ORDERED CANCELLED</b>.<br><br>Let entry of judgment be<b> ISSUED</b> immediately.<br><br><b>SO ORDERED." </b><br><br><i>Caguioa (Chairperson), Gaerlan, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 255-266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 239-246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 46-53. Penned by Associate Justice Germano Francisco D. Legaspi and concurred in by Associate Justices Ramon R. Garcia and Raymond Reynold R. Lauigan of the Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 55-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 83-87. Penned by Presiding Judge Antonietta Pablo-Medina.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> SECTION 261. <i>Prohibited Acts</i>. â The following shall be guilty of an election offense:<br><blockquote>. . . .<br><br>(p) <i>Deadly weapons</i>. â Any person who carries any deadly weapon in the polling place and within a radius of one hundred meters thereof during the days and hours fixed by law for the registration of voters in the polling place, voting, counting of votes, or preparation of the election returns. However, in cases of affray, turmoil, or disorder, any peace officer or public officer authorized by the Commission to supervise the election is entitled to carry firearms or any other weapon for the purpose of preserving order and enforcing the law[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> SECTION 32. <i>Who May Bear Firearms</i>. â During the election period, no person shall bear, carry or transport firearms or other deadly weapons in public places, including any building, street, park, private vehicle or public conveyance, even if licensed to possess or carry the same, unless authorized in writing by the Commission. The issuance of firearms licenses shall be suspended during the election period. Only regular members or officers of the Philippine National Police, the Armed Forces of the Philippines and other enforcement agencies of the Government who are duly deputized in writing by the Commission for election duty may be authorized to carry and possess firearms during the election period: <i>Provided</i>, That, when in the possession of firearms, the deputized law enforcement officer must be: (a) in full uniform showing clearly and legibly his name, rank and serial number which shall remain visible at all times; and (b) in the actual performance of his election duty in the specific area designated by the Commission.</div><div align="JUSTIFY"><sup style="COLOR: RGB(255, 0, 0);"><br></sup></div><div align="JUSTIFY"><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Titled, "AN ACT PROVIDING FOR SYNCHRONIZED NATIONAL AND LOCAL ELECTIONS AND FOR ELECTORAL REFORMS, AUTHORIZING APPROPRIATIONS THEREFOR, AND FOR OTHER PURPOSES," approved on November 26, 1991.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> RULES AND REGULATIONS ON: (1) THE BAN ON BEARING, CARRYING OR TRANSPORTING OF FIREARMS OR OTHER DEADLY WEAPONS; AND (2) THE EMPLOYMENT, AVAILMENT OR ENGAGEMENT OF THE SERVICES OF SECURITY PERSONNEL OR BODYGUARDS DURING THE ELECTION PERIOD OF THE OCTOBER 23, 2017 BARANGAY AND SANGGUNIANG KABATAAN (SK) ELECTIONS, promulgated on September 14, 2017.<br><br>SECTION 2. <i>Prohibited Acts</i>. â During the Election Period:<br><blockquote>a. No person shall bear, carry or transport Firearms or Deadly Weapons outside his residence or place of business, and in all public places, including any building, street, park, and in private vehicles or public conveyances, even if he is licensed or authorized to possess or to carry the same, unless authorized by the Commission, through the CBFSP, in accordance with the provisions of this Resolution[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Issued on January 15, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> SECTION 261. <i>Prohibited Acts</i>. â The following shall be guilty of an election offense: . . .<br><blockquote>(dd) Other prohibitions:<br><br>(1) Any person who sells, furnishes, offers, buys, serves or takes intoxicating liquor on the days fixed by law for the registration of voters in the polling place, or on the day before the election or on election day: Provided, That hotels and other establishment duly certified by the Ministry of Tourism as tourist oriented and habitually in the business of catering to foreign tourists may be exempted for justifiable reasons upon prior authority of the Commission: Provided, further, That foreign tourists taking intoxicating liquor in said authorized hotels or establishments are exempted from the provisions of this subparagraph[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> SECTION 30. <i>Congress as the National Board of Canvassers for the Election of President and Vice-President: Determination of Authenticity and Due Execution of Certificates of Canvass</i>. â Congress shall determine the authenticity and due execution of the certificate of canvass for President and Vice-President as accomplished and transmitted to it by the local boards of canvassers, on a showing that: (1) each certificate of canvass was executed, signed and thumbmarked by the chairman and members of the board of canvassers and transmitted or caused to be transmitted to Congress by them; (2) each certificate of canvass contains the names of all of the candidates for President and Vice-President and their corresponding votes in words and in figures; and (3) there exists no discrepancy in other authentic copies of the certificate of canvass or discrepancy in the votes of any candidate in words and figures in the certificate.<br><br>[W]hen the certificate of canvass, duly certified by the board of canvassers of each province, city or district, appears to be incomplete, the Senate President shall require the board of canvassers concerned to transmit by personal delivery, the election returns from polling places that were not included in the certificate of canvass and supporting statements. Said election returns shall be submitted by personal delivery within two (2) days from receipt of notice.<br><br>[W]hen it appears that any certificate of canvass or supporting statement of votes by precinct bears erasures or alterations which may cast doubt as to the veracity of the number of votes stated therein and may affect the result of the election, upon request of the Presidential or Vice-Presidential candidate concerned or his party, Congress shall, for the sole purpose of verifying the actual number of votes cast for President and Vice-President, count the votes as they appear in the copies of the election returns submitted to it.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 61, <i>see</i> Brief for the Accused-Appellant; <i>id</i>. at 83, <i>see</i> RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 239-246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 245.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 255-266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 253.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 255-261.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 261-262.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 270-273.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 270.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> A.M. No. 00-5-03-SC, October 3, 2000.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>See</i> <b>People v. JJJ</b>, 954 Phil. 337, 358 (2024), <i>citing</i> <b>Aytona v. Paule</b>, 931 Phil. 681, 690 (2022), <i>and further citing</i> <b>People v. Declaro</b>, 252 Phil. 139, 143 (1989).<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>People v. JJJ</b>, <i>id</i>., <i>citing</i> <b>Raya v. People</b>, 902 Phil. 141, 158-159 (2021), and <i>further citing</i> <b>Condrada v. People</b>, 446 Phil. 635, 641 (2003).<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>People v. JJJ</b>, <i>id</i>., at 358-359, <i>citing</i> <b>People v. Molero</b>, 228 Phil. 375, 384 (1986), and <i>further citing</i> <b>Jaca v. Blanco</b>, 86 Phil. 452 (1950), <b>People v. Manlapas</b>, 116 Phil. 33 (1962), <b>People v. Hon. Surtida</b>, 150 Phil. 34 (1972), <b>People v. Mogol</b>, 216 Phil. 267 (1984).<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>See</i> <b>People v. Rangaig</b>, 901 Phil. 390, 401-402 (2021), <i>citing</i> <b>People v. F. Diaz</b>, 94 Phil. 714, 717 (1954).<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i>, pp. 281-285. Penned by Presiding Judge Nelvin M. Asi.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 285.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Titled, "AN ACT REDUCING THE PENALTY FOR ILLEGAL POSSESSION OF BLADED, POINTED OR BLUNT WEAPONS, AND FOR OTHER PURPOSES, AMENDING FOR THE PURPOSE PRESIDENTIAL DECREE NUMBERED NINE." Approved on November 21, 1978.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 176 Phil. 186 (1978).<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 202.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>People v. Bercadez</b>, 956 Phil. 590, 591 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 958 Phil. 217 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 939 Phil. 537 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> SECTION 261. <i>Prohibited Acts</i>. â The following shall be guilty of an election offense:<br><blockquote>. . . .<br><br>(q) <i>Carrying firearms outside residence or place of business</i>. â Any person who, although possessing a permit to carry firearms, carries any firearms outside his residence or place of business during the election period, unless authorized in writing by the Commission: <i>Provided</i>, That a motor vehicle, water or air craft shall not be considered a residence or place of business or extension hereof.<br><br>This prohibition shall not apply to cashiers and disbursing officers while in the performance of their duties or to persons who by nature of their official duties, profession, business or occupation habitually carry large sums of money or valuables.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Buella v. People</b>, <i>supra</i> at 576-593.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. Ildefonso, G.R. No. 249858</b>, February 19, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Buella v. People</b>, <i>supra</i> note 36, at 579.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 593.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 593-594.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Javier v. People</b>, 935 Phil. 675 (2023); <b>Gonzalez v. People</b>, 826 Phil. 190 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>See</i> <b>Grandspan Development Corp. v. Franklin Baker, Inc.</b>, 945 Phil. 132, 146-147 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Approved on May 29, 2013.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>People v. Alfeche</b>, 355 Phil. 776, 800-801 (1998). <i>See also</i> Black's Law Dictionary, Fifth ed., 359.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Supra</i> note 34, at 225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Supra</i> note 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 801.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -779,10 +779,10 @@ The legal period of duration of divisible penalties shall be considered as divid
 
 **TABLE SHOWING THE DURATION OF DIVISIBLE PENALTIES AND THE TIME INCLUDED IN EACH OF THEIR PERIODS**
 
-| Penalties | Time included in the penalty in its entirety | Time included in its minimum period | Time included in its medium period | Time included in its maximum period |
+| PENALTIES | TIME INCLUDED IN THE PENALTY IN ITS ENTIRETY | TIME INCLUDED IN ITS MINIMUM PERIOD | TIME INCLUDED IN ITS MEDIUM PERIOD | TIME INCLUDED IN ITS MAXIMUM PERIOD |
 | :--- | :--- | :--- | :--- | :--- |
-| *Reclusion temporal* | From 12 years and 1 day to 20 years. | From 12 years and 1 day to 14 years and 8 months. | From 14 years, 8 months and 1 day to 17 years and 4 months | From 17 years, 4 months and 1 day to 20 years. |
-| *Prision mayor,* absolute disqualification and special temporary disqualification. | From 6 years and 1 day to 12 years. | From 6 years and 1 day to 8 years. | From 8 years and 1 day to 10 years. | From 10 years and 1 day to 12 years. |
+| *Reclusion temporal* | From 12 years and 1 day to 20 years. | From 12 years and 1 day to 14 years and 8 months. | From 14 years, 8 months and 1 day to 17 years and 4 months. | From 17 years, 4 months and 1 day to 20 years. |
+| *Prision mayor*, absolute disqualification and special temporary disqualification. | From 6 years and 1 day to 12 years. | From 6 years and 1 day to 8 years. | From 8 years and 1 day to 10 years. | From 10 years and 1 day to 12 years. |
 | Prision correccional, suspension and destierro | From 6 months and 1 day to 6 years. | From 6 months and 1 day to 2 years and 4 months. | From 2 years, 4 months and 1 day to 4 years and 2 months. | From 4 years, 2 months and 1 day to 6 years. |
 | Arresto mayor | From 1 month and 1 day to 6 months. | From 1 to 2 months. | From 2 months and 1 day to 4 months. | From 4 months and 1 day to 6 months. |
 | Arresto menor | From 1 to 30 days. | From 1 to 10 days. | From 11 to 20 days. | From 21 to 30 days. |

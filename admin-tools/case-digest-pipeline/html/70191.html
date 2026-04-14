@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 243507 - JERRY U. BELTRAN, PETITIONER, VS. LAND BANK OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70191' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 243507, September 29, 2025 ]</H2>
+			<H3>JERRY U. BELTRAN, PETITIONER, VS. LAND BANK OF THE PHILIPPINES, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by Jerry U. Beltran<b> (Jerry)</b>, of the Resolutions, dated January 26, 2018<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and October 17, 2018,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals <b>(CA)</b> in CA-G.R. CV No. 04717-MIN. The CA granted the Motion to Dismiss filed by the Land Bank of the Philippines<b> (LBP)</b>. Jerry sought to appeal the Resolution, dated May 2, 2017, of the Regional Trial Court<b> (RTC)</b>, Branch 2, Tagum City, Davao del Norte, which dismissed his Complaint in Civil Case No. 4525 on the ground of lack of jurisdiction over the person of the defendant.<br><br><center><b><i>The Facts</i></b></center><br>Jerry, together with his deceased wife Estrella Beltran<b> (Estrella)</b>, are the owners of two parcels of land covered by Transfer Certificate of Title Nos. T-173733 and T-576231.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>On January 19, 2017, Jerry filed a Complaint for Declaration of Nullity of Real Estate Mortgage with Preliminary Injunction against LBP before the RTC. Jerry alleged that while he was going through the files left by Estrella after her death on June 14, 2014, he discovered that the subject properties were mortgaged to LBP. Jerry claimed that his signature appearing on the real estate mortgage was falsified or forged by Estrella. The mortgages on the subject properties were eventually foreclosed and new titles were issued in LBP's name.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>LBP filed its Answer with Special Affirmative Defenses and Compulsory Counterclaim. One of the defenses raised by LBP is the RTC's lack of jurisdiction over its person because summons was improperly served. LBP contended that it is an entity vested with juridical personality by virtue of Republic Act No. 3844,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> thus summons should have been served to the responsible corporate officers in accordance with Rule 14, Section 11 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> However, the summons, together with a copy of the Complaint, was served at the LBP Field Legal Services XI in Davao City instead of at its principal office in Manila where the corporate officers are located. While it may be argued that LBP is not a private juridical entity since it is a government-owned or controlled corporation, still, there was improper service of summons pursuant to Rule 14, Section 13.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Thus, LBP sought the immediate dismissal of Jerry's Complaint.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>In the Resolution, dated May 2, 2017, the RTC dismissed Jerry's Complaint for lack of jurisdiction over the person of LBP. The dispositive portion of the Resolution reads:<br><blockquote>WHEREFORE, premises considered, the Court not having acquired jurisdiction over the person of the defendant due to the defective service of summons upon it, this [C]omplaint is DISMISSED without prejudice.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </blockquote>Jerry filed a Motion for Reconsideration, which was denied by the RTC in the Order, dated June 19, 2017.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> He then filed an appeal with the CA.<br><br><center><b><i>The Ruling of the CA</i></b></center><br>In the proceedings before the CA, LBP filed its Brief coupled with a Motion to Dismiss the appeal. It argued that Jerry filed the wrong mode of appeal considering that the appeal raised a pure question of law. As such, in accordance with Rule 50, Section 2 of the Rules of Court,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> LBP sought the appeal's outright dismissal.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>In the Resolution, dated January 26, 2018, the CA granted LBP's Motion to Dismiss the appeal. The dispositive portion of the Resolution reads as follows:<br><blockquote>WHEREFORE, the Motion to Dismiss incorporated in the defendant-appellee Land Bank of the Philippines' brief is GRANTED, and the instant appeal filed by plaintiff-appellant Jerry Beltran is DISMISSED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </blockquote>The CA held that Jerry's appeal raised a pure question of law, i.e., whether the RTC drew an erroneous legal conclusion as to the circumstances of how service of summons was made on the defendant. Thus, the appropriate mode of appeal is by way of petition for review on<i> certiorari</i> under Rule 45 with this Court. Rule 50, Section 2 of the Rules of Court grants the CA the authority to outrightly dismiss the appeal.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Jerry's Motion for Reconsideration was denied by the CA in the Resolution, dated October 17, 2018.<br><br>Thus, the present Petition.<br><br><div align="center"><b><i>The Issue</i></b><br></div><br>Did the CA commit a reversible error when it dismissed Jerry's appeal?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Petition is meritorious, but for reasons different from the petitioner's.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The CA erred in dismissing the appeal notwithstanding that it raised a pure question of law</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Rule 41, Section 2 of the Rules of Court<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> provides for the modes of appeal from the decision of the RTC, namely: (a) ordinary appeal to the CA for cases resolved by the RTC in the exercise of its original jurisdiction; (b) petition for review to the CA for cases decided by the RTC in the exercise of its appellate jurisdiction; and (c) petition for review on<i> certiorari</i> to this Court in all cases where only questions of law are raised or involved.<br><br>Rule 50, Section 2 of the Rules of Court provides that in case an appeal under Rule 41 is taken from the RTC to the CA which raises only questions of law, the CA is empowered to dismiss the appeal since issues purely of law are not reviewable by the said court.<br><br>There is a question of law when "the petitioner is merely asking the court to determine whether the law was properly applied on the given facts and evidence without probing into or reviewing the evidence on record."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> In <i>Century Iron Works, Inc. v. BaÃ±as</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the Court differentiated between a question of law and a question of fact, thus:<br><blockquote>A question of law arises when there is doubt as to what the law is on a certain state of facts, while there is a question of fact when the doubt arises as to the truth or falsity of the alleged facts. For a question to be one of law, the question must not involve an examination of the probative value of the evidence presented by the litigants or any of them. The resolution of the issue must rest solely on what the law provides on the given set of circumstances. Once it is clear that the issue invites a review of the evidence presented, the question posed is one of fact.<br><br>Thus,<i> the test of whether a question is one of law or of fact is not the appellation given to such question by the party raising the same; rather, it is whether the appellate court can determine the issue raised without reviewing or evaluating the evidence, in which case, it is a question of law; otherwise it is a question of fact.</i><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis supplied) </blockquote>Applying the abovementioned test, it is clear that the issue raised by Jerry involves a pure question of law, i.e., that the RTC erred in dismissing the Complaint due to the defective service of summons to LBP, which led such trial court to rule that it failed to acquire jurisdiction over the person of the defendant. The fact that the service of summons was made to LBP's Field Legal Services XI in Davao City remains uncontested. The only question raised on appeal concerned the application of the rules on service of summons to the undisputed factual milieu. Thus, the CA was correct to dismiss the appeal in accordance with Rule 50, Section 2 of the Rules of Court.<br><br>Jerry contends that the appeal raises mixed questions of both fact and law. He argues that the following factual issues were also raised: (a) that it was the clerk of court of the RTC who decided to send the summons to LBP's branch office in Davao City; (b) that the sheriff was directed to LBP Field Legal Services XI instead; (c) that the sheriff served the summons to a legal assistant in the said field office after receiving confirmation that the office receives summonses; and (d) that upon receipt of the said summons, LBP filed its Answer.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The Court finds that these are not factual issues but a mere narration of the circumstances as to how the summons was served. It still remains that the summons was served at the LBP Field Legal Services XI, and the only question is whether such service complied with the Rules of Court so as to vest the RTC with jurisdiction over the person of the defendant. This is a pure legal question as it involves an interpretation of the rules on service of summons. The Court thus agrees with the CA that the crux of the appeal was the supposed erroneous conclusion drawn by the RTC from the uncontested facts.<br><br>Notwithstanding, procedural rules may be relaxed in the interest of substantial justice. Technical rules of procedure should be used to promote, not frustrate justice. While the swift unclogging of court dockets is a laudable objective, granting substantial justice is an even more urgent ideal.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The Court has held that "the merits of the case may be regarded as a special or compelling reason to relax the procedural rules."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> In<i> Cando v. Spouses Olazo</i>,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> the Court relaxed the application of Rule 50, Section 2 of the Rules of Court in the interest of substantial justice. Courts should endeavor to provide litigants with "the amplest opportunity for a proper and just disposition of their cause-free, as much as possible, from the constraints of procedural technicalities. In the interest of its equity jurisdiction, the Court may disregard procedural lapses so that a case may be resolved on its merits."<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>In this case, equity considerations lead the Court to relax procedural rules in order to afford the parties sufficient opportunity to ventilate their positions on the merits. As will be discussed hereafter, the 2019 Amendments to the Rules of Civil Procedure<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> provided for innovations that eliminated, or at least minimized, the circumstances by which trial courts can conveniently dismiss cases based on erroneous service of summonses. The Court finds that this case is an appropriate occasion to apply the relevant amendments in the interest of efficiency and judicial economy.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>LBP is a "public corporation" for the purpose of service of summons</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Before delving into the issue of whether the service of summons to the LBP Field Legal Services XI was valid as to vest the RTC with jurisdiction over the person of the defendant, the Court takes this opportunity to clarify how service of summons should be done with respect to government-owned and controlled corporations<b> (GOCCs)</b>, such as the LBP. In its Comment to the present Petition, the LBP cites Rule 14, Section 11 (now Section 12) of the 1997 Rules of Civil Procedure as the applicable provision.<br><br>The rule on service of summons on domestic<i> private</i> corporations is found in Rule 14, Section 12 of the current Rules of Court, as follows:<br><blockquote>Section 12.<i> Service upon domestic private juridical entity. â</i> When the defendant is a corporation, partnership or association organized under the laws of the Philippines with a juridical personality, service may be made on the president, managing partner, general manager, corporate secretary, treasurer, or inhouse counsel of the corporation wherever they may be found, or in their absence or unavailability, on their secretaries.<br><br>If such service cannot be made upon any of the foregoing persons, it shall be made upon the person who customarily receives the correspondence for the defendant at its principal office.<br><br>In case the domestic juridical entity is under receivership or liquidation, service of summons shall be made on the receiver or liquidator, as the case may be.<br><br>Should there be a refusal on the part of the persons above-mentioned to receive summons despite at least three (3) attempts on two (2) different dates, service may be made electronically, if allowed by the court, as provided under Section 6 of this Rule. </blockquote>On the other hand, service of summons on<i> public</i> corporations is governed by Rule 14, Section 15 of the current Rules of Court, as follows:<br><blockquote>Section 15.<i> Service upon public corporations.</i> â When the defendant is the Republic of the Philippines, service may be effected on the Solicitor General; in case of a province, city or municipality, or like public corporations, service may be effected on its executive head, or on such other officer or officers as the law or the court may direct. </blockquote>These provisions trace their roots to Section 396 of the Code of Civil Procedure,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> which was enacted by the American-controlled Philippine Commission in 1901. Pertinent portions of Section 396 read:<br><blockquote>SEC. 396.<i> Manner of serving summons.</i> â The summons must be served by delivering a copy thereof, as follows:<br><br>1. If the suit is against a corporation formed under the laws of the Philippine Islands, to the president or other head of the corporation, secretary, cashier, or managing agent thereof;<br><br>. . . .<br><br>5. If against a province, city, municipality, or pueblo, to the mayor or president, or other head of the legislative department thereof, or to the clerk or secretary thereof;</blockquote>It is evident that Section 396(1) of the Code of Civil Procedure governs service of summons to all kinds of corporations without respect as to whether they are created by the government or formed by private individuals under the general corporation law then prevailing.<br><br>Then, in<i> Poizat v. Morgan</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> the Court held that, with respect to a foreign corporation, it is the "resident agent" of the corporation as registered with the Securities and Exchange Commission who is authorized by law to receive summonses. Only when there is no designated agent shall the provisions of Section 396(1) of the Code of Civil Procedure apply. The<i> Poizat </i>ruling would pave the way for the creation of a separate provision in the 1940 Rules of Court for the service of summons to foreign corporations.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Section 396(1) of the Code of Civil Procedure was transformed into Rule 7, Section 13 of the 1940 Rules of Court, as follows:<br><blockquote>Section 13.<i> Service upon Private Domestic Corporation or Partnership.</i> â If the defendant is a corporation formed under the laws of the Philippines or a partnership duly registered, service may be made on the president, manager, secretary, cashier, agent, or any of its directors. </blockquote>It appears that this was the first time that the words "private" and "domestic" were used in the Rules to differentiate how service of summons should be effected on a "private" and "foreign" corporation. In addition, a distinction was made on effecting service of summons on a "public" corporation. Thus, with respect to service to service of summons to "public" corporations, Section 396(5) of the Code of Civil Procedure was transformed into Rule 7, Section 15 of the 1940 Rules of Court:<br><blockquote>Section 15.<i> Service upon Public Corporations.</i> â When the defendant is the Government of the Philippines, service may be effected on the Solicitor-General; in case of a province, city, municipality, or like public corporations, service may be effected on its executive head, or on such other officer or officers as the court may direct. </blockquote>An evident addition under Rule 7, Section 15 of the 1940 Rules of Court is the specific proviso regarding service of summons to the Government as a defendant, for which service must be done on the Solicitor General. The term "public corporation" would be explicitly added with respect to the enumeration contained in the phrase "province, city, municipality, or like public corporations."<br><br>Thereafter, the 1964 Rules of Court would essentially lift the same provisions from the 1940 Rules, the only difference is that the rules on service of summons would be transferred from Rule 7 in the 1940 Rules to Rule 14 in the 1964 Rules. The provisions read:<br><blockquote>Section 13.<i> Service upon private domestic corporation or partnership.</i> â If the defendant is a corporation organized under the laws of the Philippines or a partnership duly registered, service may be made on the president, manager, secretary, cashier, agent, or any of its directors.<br><br>. . . .<br><br>Section 15.<i> Service upon public corporation.</i> â When the defendant is the Republic of the Philippines service may be effected on the Solicitor General; in case of a province, city or municipality, or like public corporations, service may be effected on its executive head, or on such other officer or officers as the law or the court may direct. </blockquote>With respect to service of summons on domestic private corporations, the Court has applied a liberal interpretation as to the individuals authorized to receive summons. For example, the Court upheld service of summons upon a construction project manager, a corporation's assistant manager, an ordinary clerk of a corporation, private secretaries of corporate executives, retained counsel, and officials who had control over the operations of the corporation like the assistant general manager or the corporation's Chief Finance and Administrative Officer. The Court considered said persons as "agents" within the contemplation of the rule.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>The changes brought about by the 1997 Rules of Civil Procedure intended to create a more stringent rule with regard to service of summons on domestic private corporations. Rule 14, Section 11 of the said Rules states:<br><blockquote>Section 11.<i> Service upon domestic private juridical entity.</i> â When the defendant is a corporation, partnership or association organized under the laws of the Philippines with a juridical personality, service may be made on the president, managing partner, general manager, corporate secretary, treasurer, or in-house counsel. </blockquote>Evidently, "the designation of persons or officers who are authorized to accept summons for a domestic corporation or partnership is now limited and more clearly specified[.]... The rule now states 'general manager' instead of only 'manager'; 'corporate secretary' instead of 'secretary'; and 'treasurer' instead of 'cashier.' The phrase 'agent, or any of its directors' is conspicuously deleted in the new rule."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Thus, the rule became "restricted, limited and exclusive to the persons enumerated in Section 11, Rule 14 of the 1997 Rules of Civil Procedure."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>However, with the promulgation of the 2019 Amendments to the Rules of Civil Procedure, the rule on service of summons on domestic private corporations was relaxed. The present Rule 14, Section 12 of the Rules of Court not only retained the enumeration of individuals provided for in the 1997 Rules, but also expanded it to include "the secretaries" of such individuals. The said Section also contains a provision that allows service of summons to a "person who customarily receives the correspondence for the defendant at its principal office." Evidently, it was the Court's intention to veer away from the strict compliance prescribed by the 1997 Rules, and to liberalize the rule so that litigants may avoid the dismissal of their cases based on technicalities.<br><br>Meanwhile, service of summons on public corporations remained the same, word-for-word, as under the 1964 Rules of Court,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 1997 Rules of Civil Procedure,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> and the 2019 Amendments to the Rules of Civil Procedure.<br><br>Thus, the history of the rule on the service of summons upon corporations shows that, beginning in 1940 and subsisting up to the present, the Court has intended to provide different procedures depending on whether the corporation is<i> private</i> or<i> public</i>, and for private corporations, whether <i>foreign</i> or<i> domestic.</i> This is in line with the general framework provided under the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> As the Court stated in<i> Engr. Feliciano v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> "[t]he Constitution recognizes two classes of corporations. The first refers to private corporations created under a general law. The second refers to government-owned or controlled corporations created by special charters."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>A corporation is<i> private</i> when it is organized or formed under the prevailing corporation law<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> that permits for its incorporation.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Thus, a private corporation is, in the words of Rule 14, Section 12 of the Rules of Court, a "corporation [...] organized under the laws of the Philippines with a juridical personality[.]"<br><br>Since private corporations cannot have special charters as they are formed under the general corporation law, it follows that Congress can create corporations with special charters only if such corporations are government-owned or controlled.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Thus, a GOCC created by a charter, which cannot be a private corporation, must necessarily be a public corporation.<br><br>It may be inferred that a GOCC is not a public corporation under Rule 14, Section 15 of the present Rules of Court because it does not fall under the phrase "province, city, municipality or like public corporations." The rule of <i>ejusdem generis</i> provides that "where a general word or phrase follows an enumeration of particular and specific words of the same class, the general word or phrase is to be construed to includeâor to be restricted toâthings akin to or resembling, or of the same kind or class as, those specifically mentioned."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Applying this rule, the term "public corporation" should be read in relation to the words preceding it, i.e., local government units. More so, the use of the word "like," which means "similar or substantially similar; of much the same nature,"<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> supports this construction of the rule.<br><br>The term "public corporation" has been used to describe local government units. In<i> Bacani v. National Coconut Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> the Court described "public corporations" as "those formed or organized for the government of a portion of the State."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> It has been explained that a municipal corporation is "within its sphere, a political power. In its governmental capacity it may command; it is a municipal government; a<i> public corporation</i>."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> If read in this light, the term "public corporations" referred to in Rule 14, Section 15 of the Rules of Court can only mean municipal corporations.<br><br>However, to follow this interpretation would lead to a vacuum in the lawâa<i> lacuna legis</i>âwhich the Court seeks to avoid. For if a GOCC cannot be a public corporation under Rule 14, Section 15 of the Rules of Court, and it definitely cannot be a private corporation under Rule 14, Section 13, then there will be no provision applicable under the present Rules that would govern the service of summons on a GOCC. It is a rule in statutory interpretation that a law must be construed as to harmonize and give effect to all its provisions whenever possible.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Thus, the Court cannot subscribe to this construction.<br><br>Indeed, the Court would not have undergone this exercise if Rule 14, Section 15 of the Rules of Court had been phrased more clearly. The word "like" could have been deleted so as to remove any doubt that a public corporation, such as a GOCC, need not be similar to a local government unit. Another alternative is to insert the phrase "including government-owned or controlled corporations" after "public corporations" to explicitly embrace GOCCs under the provision. At any rate, the Court finds it opportune to refer this matter to the Committee on the Revision of the Rules of Court, particularly the Sub-Committee for the Revision of the Rules of Civil Procedure, for appropriate action.<br><br>To determine whether a corporation is public or private, the Court has applied two primary tests. In<i> Baluyot v. Holganza</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> the Court applied the "charter test," which asks the question, "[i]s [the corporation] created by its own charter for the exercise of a public function, or by incorporation under the general corporation law?"<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Those with special charters are considered GOCCs, while those incorporated under the corporation law are private corporations. Then, in<i> Phil. Society for the Prevention of Cruelty to Animals v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the Court decreed the "totality of relation test," which examines the corporation's relationship with the State. As the Court explained:<br><blockquote>The true criterion, therefore, to determine whether a corporation is public or private is found in the totality of the relation of the corporation to the State. If the corporation is created by the State as the latter's own agency or instrumentality to help it in carrying out its governmental functions, then that corporation is considered public; otherwise, it is private.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </blockquote>Applying these tests, the Court concludes that the LBP is a public corporation. First, the LBP was created under a special charter, Republic Act No. 3844, which had been amended by subsequent legislation, the most recent of which is Republic Act No. 10374,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> extending its corporate life for 50 years, renewable for another 50 years. Second, the LBP is tasked with the governmental function of supporting the State's agrarian reform program. The purpose of the LBP, as stated in its charter, is to "finance the acquisition by the Government of landed estates for division and resale to small landowners, as well as the purchase of the landholding by the agricultural lessee from the landowner[.]"<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> As held in<i> The Veterans Federation of the Phils. v. Hon. Reyes</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> "the compelling urgency with which the Constitution speaks of social justice does not leave any doubt that land reform is not an optional but a compulsory function of sovereignty."<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Considering that the LBP is a public corporation, service of summons on it must be done in accordance with Rule 14, Section 15 of the Rules of Court, that is, the summons must be served on LBP's executive head, or on such other officer or officers as the law or the court may direct.<br><br>Here, the undisputed fact remains that the summons was not served on LBP's executive head, but to a legal assistant in the LBP Field Legal Services XI. This is supported by the Sheriffs Return, which stated that the sheriff caused the service of summons "upon defendant [LBP], thru Irish Jeswani â Legal Assistant on March 7, 2017, at Torres Street, Davao City[.]"<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Evidently, the summons was not validly served, and the RTC did not acquire jurisdiction over the person of the LBP.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>In the interest of efficiency and judicial economy, the Court orders the counsel of LBP to serve the summons pursuant to Rule 14, Section 13 of the Rules of Court</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>At the time the summons was served to the LBP Field Legal Services XI on March 7, 2017, the prevailing rule was the 1997 Rules of Civil Procedure. However, the Court is constrained to apply the new provisions introduced by the 2019 Amendments to the Rules of Civil Procedure. This is explicitly provided for under the second paragraph of Rule 144 of the Rules of Court, which reads as follows:<br><blockquote>The 2019 Proposed Amendments to the 1997 Rules of Civil Procedure shall govern all cases filed after their effectivity on May 1, 2020, <i>and also all pending proceedings</i>, except to the extent that in the opinion of the court, their application would not be feasible or would work injustice, in which case the procedure under which the cases were filed shall govern. (Emphasis supplied) </blockquote>Likewise, it has been held that "[a]s a general rule, laws have no retroactive effect. But there are certain recognized exceptions such as when they are remedial or procedural in nature."<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Procedural law refers to "adjective law which prescribes rules and forms of procedure in order that courts may be able to administer justice."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Invariably, the 2019 Amendments to the Rules of Civil Procedure, which were promulgated during the pendency of this case before the Court, may be applied to resolve the issue raised in the Petition.<br><br>One of the innovations introduced by the 2019 Amendments to the Rules of Civil Procedure is the incorporation of Rule 14, Section 13 of the Rules of Court, which reads:<br><blockquote>Section 13.<i> Duty of counsel of record.</i> â Where the summons is improperly served and a lawyer makes a special appearance on behalf of the defendant to, among others, question the validity of service of summons, the counsel shall be deputized by the court to serve summons on his or her client. </blockquote>Under this provision, trial courts are given the authority to deputize the defendant's counsel of record when such counsel makes a special appearance to question the validity of the service of summons, precisely the situation here. The rationale for this rule is simple: a civil case should proceed notwithstanding supposed defects in the service of summons since the defendant has already been substantially notified of the complaint and its contents upon the filing of the special appearance. In such case, the improper service of summons may be cured by deputizing said counsel to serve the summons upon the defendant. This way, dismissal of the case on the ground of lack of jurisdiction over the person of the defendant would be precluded as the counsel will be duty-bound to effect the service of summons.<br><br>The Court has recognized the past practice of defendants, through their lawyers, of filing special appearances to question the validity of the service of summons notwithstanding the fact that they have already been substantially notified of the case including the filing of the complaint and the issuance of and attempt to serve the summons. This has led to a plethora of orders that dismissed complaints without pre-trial and trial ever being conducted for years. In fact, the Court has taken notice of the practice of litigants of designing ways to circumvent the service of summons. For example, in <i>Manotoc v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> the Court reminded sheriffs to be "resourceful, persevering, canny, and diligent in serving the process on the defendant" because the "defendant is expected to try to avoid and evade service of summons."<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Rule 14, Section 13 of the Rules of Court is premised on the duty of counsels as officers of the court. "They are called upon to assist in the administration of justice. They act as vanguards of our legal system to protect and uphold truth and the rule of law. They are expected to act with honesty in all their dealings, especially with the court."<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Thus, a lawyer has, first and foremost, a primordial duty to the court to aid in the efficient administration of justice. This can be accomplished when a lawyer is deputized to act as the court's server so that the case may proceed forthwith and the parties may be able to ventilate their positions during trial. This would also preclude counsels from participating in schemes designed to avoid service of summons since they may now be directed by the court to serve such summons in the first place.<br><br>Here, the LBP has known of the existence of the summons and the Complaint since the service to its field legal office in Davao City. This is undisputed and judicially admitted by the LBP.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Thus, the LBP had been substantially informed of the Complaint and its contents, as it was able to file an Answer with Special Affirmative Defenses and Compulsory Counterclaim with the RTC.<br><br>The Court notes that this case was initiated in 2017. In their respective compliances with the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> dated March 29, 2023, directing the parties to move in the premises, the LBP manifested that the title of the subject properties have been consolidated in the name of the LBP. However, Jerry continues to physically possess the property while a portion is occupied by informal settlers.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Jerry likewise manifested that the properties have been occupied by informal settlers.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>Social developments on the ground have taken hold while this case has been pending before the courts. Too long a time has lapsed that has posed a hindrance to the speedy resolution of the issues. Thus, in the interest of efficiency and judicial economy, and in accordance with Rule 14, Section 13 of the Rules of Court, the Court finds it proper to deputize the Legal Services Group of the LBP, as the defendant's counsel of record, to serve the summons to its client so that this case may proceed and trial may ensue.<br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The Resolutions, dated January 26, 2018 and October 17, 2018, of the Court of Appeals in CA-G.R. CV No. 04717-MIN are<b> REVERSED. </b>The Complaint filed by Jerry U. Beltran with the Regional Trial Court, Branch 2, Tagum City, Davao del Norte in Civil Case No. 4525 is<b> REINSTATED</b>.<br><br>The Legal Services Group of the Land Bank of the Philippines is <b>DEPUTIZED</b> and<b> DIRECTED</b> to serve the summons issued by the Regional Trial Court, together with a copy of the Complaint, to its client, Land Bank of the Philippines.<br><br>Let a copy of this Decision be<b> REFERRED</b> to the Sub-Committee for the Revision of the Rules of Civil Procedure for information and appropriate action.<br><br><b>SO ORDERED. </b><br><br><i>Inting</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> (<i>Acting Chairperson)</i><i>, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Caguioa</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> (<i>Chairperson), J.,</i> on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Per Special Order No. 3227 dated September 23, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 18-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 39-45. Penned by Associate Justice Perpetua T. Atal-PaÃ±o and concurred in by Associate Justices Edgardo A. Camello and Walter S. Ong of the Twenty-Second Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 47-49. Penned by Associate Justice Perpetua T. Atal-PaÃ±o and concurred in by Associate Justices Edgardo A. Camello and Walter S. Ong of the Former Twenty-Second Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> AGRARIAN CODE.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> 1997 RULES OF CIVIL PROCEDURE, rule 14, sec. 11 states:<br><blockquote>When the defendant is a corporation, partnership or association organized under the laws of the Philippines with a juridical personality, service may be made on the president, managing partner, general manager, corporate secretary, treasurer, or in-house counsel.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> 1997 RULES OF CIVIL PROCEDURE, rule 14, sec. 13 states:<br><blockquote>When the defendant is the Republic of the Philippines, service may be effected on the Solicitor General; in case of a province, city or municipality, or like public corporations, service may be effected on its executive head, or on such other officer or officers as the law or the court may direct.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, p. 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> RULES OF COURT, rule 50, sec. 2 states:<br><blockquote>An appeal under Rule 41 taken from the Regional Trial Court to the Court of Appeals raising only questions of law shall be dismissed, issues purely of law not being reviewable by said court. Similarly, an appeal by notice of appeal instead of by petition for review from the appellate judgment of a Regional Trial Court shall be dismissed.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 42-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> RULES OF COURT, rule 41, sec. 2 states:<br><blockquote>(a) <i>Ordinary appeal.</i> â The appeal to the Court of Appeals in cases decided by the Regional Trial Court in the exercise of its original jurisdiction shall be taken by filing a notice of appeal with the court which rendered the judgment or final order appealed from and serving a copy thereof upon the adverse party. No record on appeal shall be required except in special proceedings and other cases of multiple or separate appeals where law on these Rules so require. In such cases, the record on appeal shall be filed and served in like manner.<br><br>(b) <i>Petition for review.</i> â The appeal to the Court of Appeals in cases decided by the Regional Trial Court in the exercise of its appellate jurisdiction shall be by petition for review in accordance with Rule 42.<br><br>(c) <i>Appeal by certiorari.</i> â In all cases where only questions of law are raised or involved, the appeal shall be to the Supreme Court by petition for review on certiorari in accordance with the Rule 45.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Spouses Villanueva v. People</b>, 876 Phil. 855, 861 (2020) [Per J. Delos Santos, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 711 Phil. 576 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 585-586.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, pp. 22-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Twin Towers Condominium Corp. v. Court of Appeals</b>, 446 Phil. 280, 298 (2003) [Per J. Carpio, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>Bases Conversion Development Authority v. Reyes</b>, 711 Phil. 631, 643 (2013) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> 547 Phil. 630 (2007) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 637-638.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> A.M. NO. 19-10-20-SC (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Act No. 190 (1901). AN ACT PROVIDING FOR A CODE OF PROCEDURE IN CIVIL ACTIONS AND SPECIAL PROCEEDINGS IN THE PHILIPPINE ISLANDS.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 28 Phil. 597 (1914) [Per J. Moreland].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 1940 RULES OF COURT, rule 7, sec. 14 states:<br><blockquote>If the defendant is a foreign corporation, or a non-resident joint stock company or association, doing business in the Philippines, service may be made on its resident agent designated in accordance with law for that purpose, or, if there be no such agent, on the government official designated by law to that effect, or on any of its officers or agents within the Philippines.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Green Star Express, Inc. v. Nissin-Universal Robina Corp.</b>, 763 Phil. 27, 30 (2015) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>E.B. Villarosa &amp; Partner Co., Ltd. v. Judge Benito</b>, 370 Phil. 921, 929 (1999) [Per J. Gonzaga-Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Dole Philippines, Inc. (Tropifresh Div.) v. Judge Quilala</b>, 579 Phil. 700, 704 (2008) [Per J. Quisumbing, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 1964 RULES OF COURT, rule 14, sec. 15 states:<br><blockquote>When the defendant is the Republic of the Philippines service may be effected on the Solicitor General; in case of a province, city or municipality, or like public corporations, service may be effected on its executive head, or on such other officer or officers as the law or the court may direct.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> 1997 RULES OF CIVIL PROCEDURE, rule 14, sec. 13 states:<br><blockquote>When the defendant is the Republic of the Philippines, service may be effected on the Solicitor General; in case of a province, city or municipality, or like public corporations, service may be effected on its executive head, or on such other officer or officers as the law or the court may direct.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> CONST., art. XII, sec. 16 states:<br><blockquote>The Congress shall not, except by general law, provide for the formation, organization, or regulation of private corporations. Government-owned or controlled corporations may be created or established by special charters in the interest of the common good and subject to the test of economic viability.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 464 Phil. 439 (2004) [Per J. Carpio, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 454.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Act No. 1459 (1906), The Corporation Law; Batas Pambansa Blg. 68 (1980), The Corporation Code of the Philippines; and Republic Act No. 11232 (2019), Revised Corporation Code of the Philippines.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Engr. Felciano v. Commission on Audit</b>, 464 Phil. 439, 454 (2004) [Per J. Carpio, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 455.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Liwag v. Happy Glen Loop Homeowners Association, Inc.</b>, 690 Phil. 321, 333 (2012) [Per J. Sereno, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> BLACK'S LAW DICTIONARY (12<sup>th</sup> ed. 2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 100 Phil. 468 (1956) [Per J. Bautista Angelo].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>., citing Republic Act No. 1459, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Hebron v. Reyes</b>, 104 Phil. 175 (1958) [Per J. Concepcion]. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Eizmendi, Jr. v. Fernandez</b>, 866 Phil. 638, 653-654 (2019) [Per C.J. Peralta, Special Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 382 Phil. 131 (2000) [Per J. De Leon, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 136-137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 560 Phil. 385 (2007) [Per J. Austria-Martinez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 408.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Republic Act No. 3844, Agricultural Land Reform Code, as amended by Republic Act No. 10374 (2013), An Act Extending the Life of the Land Bank of the Philippines<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Republic Act No. 3844 (1963), sec. 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 518 Phil. 668 (2006) [Per J. Chico-Nazario, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 692.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Republic of the Philippines v. Pasig Rizal Co., Inc.</b>, 919 Phil. 622, 659 (2022) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>Sumiran v. Spouses Damaso</b>, 613 Phil. 72, 78 (2009) [Per J. Peralta, Third Division], <i>citing</i> <b>Sps. De Los Santos vs. Vda. de Mangubat</b>, 561 Phil. 512 (2007) [Per J. Austria-Martinez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 530 Phil. 454 (2006) [Per J. Velasco, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 469-470.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Genato v. Atty. Mallari</b>, 865 Phil. 247, 256-257 (2019) [Per Curiam, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Rollo</i>, p. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 106.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

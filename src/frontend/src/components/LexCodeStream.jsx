@@ -3,7 +3,11 @@ import ArticleNode from './ArticleNode';
 import { toTitleCase } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
 import { lexCache } from '../utils/cache';
-import { CODAL_LEXCACHE_REVISION, stripLegacyCodexArticleRunIn } from '../utils/codalMarkdown';
+import {
+    CODAL_LEXCACHE_REVISION,
+    repairRccBrokenIncorporatorPipeHeaders,
+    stripLegacyCodexArticleRunIn,
+} from '../utils/codalMarkdown';
 import { Play, Loader2 } from 'lucide-react';
 
 const INITIAL_CHUNK = 30; // articles to render at first load
@@ -155,7 +159,8 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         return (json.articles || []).map((a) => {
                             const num = a.article_num ?? a.article_number ?? a.key_id;
                             const raw = a.content_md || a.content || '';
-                            const content_md = stripLegacyCodexArticleRunIn(raw, num);
+                            let content_md = stripLegacyCodexArticleRunIn(raw, num);
+                            content_md = repairRccBrokenIncorporatorPipeHeaders(content_md);
                             return {
                                 ...a,
                                 article_num: num,

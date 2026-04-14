@@ -1,0 +1,617 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 252875 - HARBOUR CENTRE* PORT TERMINAL, INC., PETITIONER, VS. FEDERAL PHOENIX ASSURANCE COMPANY, INC., RESPONDENT.
+
+D E C I S I O N
+(BASED ON COMPROMISE AGREEMENT) - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70250' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 252875, December 03, 2025 ]</H2>
+			<H3>HARBOUR CENTRE<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PORT TERMINAL, INC., PETITIONER, VS. FEDERAL PHOENIX ASSURANCE COMPANY, INC., RESPONDENT.<br><br>
+
+D E C I S I O N<br>
+(BASED ON COMPROMISE AGREEMENT)</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Repugned through the instant Petition for Review on <i>Certiorari</i><sup style="color: rgb(255, 0, 0);">[1]</sup> are the Decision<sup style="color: rgb(255, 0, 0);">[2]</sup> and the Resolution<sup style="color: rgb(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in the consolidated cases docketed as CA-G.R. CV No. 106831 and CA-G.R. SP No. 146745. In essence, the CA upheld the Decision<sup style="color: rgb(255, 0, 0);">[4]</sup> of Branch 66, Regional Trial Court of Makati City (RTC) in Civil Case No. 09-525, adjudging petitioner Harbour Centre Port Terminal, Inc. (HCPTI) accountable for the first 40 damaged crates while the shipment insured by respondent Federal Phoenix Assurance Company, Inc. (Federal) was under its control and possession; and solidarily liable with Nonpareil International Freight and Cargo Services, Inc. (Nonpareil) for 141 additional spoiled crates. Concomitantly, the CA annulled and set aside the RTC Orders dated June 19, 2015<sup style="color: rgb(255, 0, 0);">[5]</sup> and May 2, 2016<sup style="color: rgb(255, 0, 0);">[6]</sup> in Civil Case No. 09-525, which granted the motion for execution filed by Federal; and denied HCPTI's motion for reconsideration thereof, respectively.</p><p> Culled from the records are the following operative facts: </p><p> On June 8, 2006, HCPTI received a shipment originating from the Port of Malaysia, consisting of 286 crates of particle board for consignee Top Asia Corporation (Top Asia).<sup style="color: rgb(255, 0, 0);">[7]</sup> The shipment was insured by Federal in the total amount of PHP 7,037,957.49. After initial survey conducted at HCPTI's premises in the Port of Manila, it was discovered that <b>40</b> crates were wet and in bad order. Subsequently, Top Asia tapped the services of Nonpareil to withdraw the shipment from HCPTI's storage facility. Upon delivery by Nonpareil, Top Asia inspected the items and determined that an additional <b>141</b> crates were spoiled. On that account, Top Asia was constrained to declare the shipment as a total loss and to file an insurance claim with Federal. Federal then paid PHP 2,768,375.44 to Top Asia. After disposing of some goods from the rejected shipment, Federal was able to earn PHP 495,000.00, which it deducted from the amount it paid to Top Asia. On the strength of such payment, Federal made several demands to HCPTI and Nonpareil for the balance of <b>PHP 2,273,375.44</b>, but to no avail.<sup style="color: rgb(255, 0, 0);">[8]</sup> Consequently, Federal lodged a complaint<sup style="color: rgb(255, 0, 0);">[9]</sup> for collection of sum of money and damages against HCPTI and/or Nonpareil, which was docketed as Civil Case No. 09-525. </p><p> Sifting through the discordant evidence of the parties with a fine-tooth comb, the RTC rendered judgment in favor of Federal as follows: </p><blockquote><p><b>WHEREFORE</b>, judgment is hereby rendered in favor of [Federal] and against [HCPTI and Nonpareil,] ordering [HCPTI and Nonpareil,] as follows: </p><blockquote><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1.</div></td><td colspan="2"><div align="justify">[HCPTI] is hereby ORDERED to pay [Federal] the amount of [<b>PHP</b>] 556,925.84 plus 6% interest thereon from [the] date of filing of the Complaint until fully paid; </div></td></tr><tr valign="top"><td><div align="justify">2.</div></td><td colspan="2"><div align="justify">[HCPTI] and [Nonpareil] are hereby ORDERED to pay jointly and severally, [Federal] the following sums:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify">2.1.</div></td><td width="90%"><div align="justify"><b>[PHP] 1,716,449.60</b> plus 6% interest thereon from [the] date of filing of the Complaint until fully paid[;] </div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">2.2.</div></td><td><div align="justify"><strong>2.5%</strong> of the total number 1 as attorney's fees; [and]</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">2.3.</div></td><td><div align="justify">Cost[s] of suit.</div></td></tr></tbody></table></blockquote><p>SO ORDERED.<sup style="color: rgb(255, 0, 0);">[10]</sup> (Emphasis in the original) </p></blockquote><p> The RTC held that there is sufficient evidence to show that the subject shipment sustained damage while in the possession of HCPTI and Nonpareil.<sup style="color: rgb(255, 0, 0);">[11]</sup> In particular, HCPTI is solely responsible for the value of 40 crates of particle board,<sup style="color: rgb(255, 0, 0);">[12]</sup> while HCPTI and Nonpareil are jointly and severally liable for the worth of the remaining 141 crates of particle board, seeing that the damage thereto could have only been incurred while they were in the custody of either HCPTI or Nonpareil.<sup style="color: rgb(255, 0, 0);">[13]</sup> By virtue of the payment of Top Asia's insurance claim, the RTC found it inevitable that Federal has been subrogated to the rights of Top Asia.<sup style="color: rgb(255, 0, 0);">[14]</sup> </p><p> Thereafter, only HCPTI moved for new trial and/or reconsideration.<sup style="color: rgb(255, 0, 0);">[15]</sup> Meanwhile, Federal sought the execution of the July 25, 2014 Decision.<sup style="color: rgb(255, 0, 0);">[16]</sup> Via the June 19, 2015 Order,<sup style="color: rgb(255, 0, 0);">[17]</sup> the RTC brushed aside HCPTI's motion for new trial and/or reconsideration but issued the writ of execution prayed for by Federal.<sup style="color: rgb(255, 0, 0);">[18]</sup> </p><p> Aggrieved, HCPTI filed a Notice of Appeal<sup style="color: rgb(255, 0, 0);">[19]</sup> with respect to the main judgment, docketed as <b>CA-G.R. CV No. 106381</b>, as well as a motion for reconsideration of the June 19, 2015 Order directing the issuance of a writ of execution in Federal's favor. However, the RTC gave short shrift to HCPTI's motion for reconsideration in its May 2, 2016 Order,<sup style="color: rgb(255, 0, 0);">[20]</sup> prompting it to file a Rule 65 petition before the CA,<sup style="color: rgb(255, 0, 0);">[21]</sup> which was docketed as <b>CA-G.R. SP No. 146745</b>. </p><p> On September 25, 2019, the CA promulgated the impugned Decision, the decretal portion of which reads: </p><blockquote><p><b>FOR THESE REASONS,</b> the instant appeal is <b>DENIED</b> for lack of merit. The Decision dated 25 July 2014 of the [RTC] is hereby <b>AFFIRMED in toto.</b> This notwithstanding, the present petition for <i>certiorari</i> is <b>GRANTED</b>[.] [T]he assailed Orders dated 19 June 2015 and 2 May 2016 are hereby <b>ANNULLED</b> and <b>SET ASIDE.</b> </p><p><b>SO ORDERED.</b><sup style="color: rgb(255, 0, 0);">[22]</sup> (Emphasis in the original) </p></blockquote><p> Preliminarily, the CA ruled that the RTC did not err in waiving the right of HCPTI to present its evidence owing to its failure to exercise the necessary prudence in litigating the case.<sup style="color: rgb(255, 0, 0);">[23]</sup> In the same vein, the RTC rightfully denied HCPTI's motion for new trial and/or reconsideration. For one, Rule 37, Section 1 of the Rules of Court refers to excusable negligence, not gross negligence. To this end, the negligence of HCPTI's counsel is not tantamount to excusable negligence which warrants a new trial.<sup style="color: rgb(255, 0, 0);">[24]</sup> For another, the affidavit of merit submitted by HCPTI did not even mention the particular evidence or witness it seeks to present should its motion be granted.<sup style="color: rgb(255, 0, 0);">[25]</sup> </p><p> On the merits, the CA ratiocinated that the subject shipment could only have been damaged while in the <i>successive</i> possession of HCPTI and Nonpareil. Thus, they are both accountable for the damage to 141 crates of the shipment, which was discovered only after thorough investigation. Anent the remaining 40 crates, the CA agreed with the RTC that HCPTI is exclusively responsible therefor since the damage was uncovered even before the shipment was turned over to Nonpareil.<sup style="color: rgb(255, 0, 0);">[26]</sup></p><p> Lastly, the CA decreed that the RTC committed grave abuse of discretion when it allowed the discretionary execution of its judgment without observing the requisites ordained by Rule 39, Section 2 of the Rules of Court.<sup style="color: rgb(255, 0, 0);">[27]</sup> As a result, all proceedings connected to the issuance and implementation of the writ of execution prematurely issued by the RTC are null and void.<sup style="color: rgb(255, 0, 0);">[28]</sup> </p><p> HCPTI's subsequent bid for partial reconsideration<sup style="color: rgb(255, 0, 0);">[29]</sup> was denied by the CA through the repugned Resolution.<sup style="color: rgb(255, 0, 0);">[30]</sup> </p><p> Unyielding, HCPTI seeks refuge before the Court. It asserts that the evidence adduced by Federal showed that the damage to the shipment was actually caused by Top Asia's failure to containerize the cargo.<sup style="color: rgb(255, 0, 0);">[31]</sup> Moreover, HCPTI insists that its former counsel committed gross and excusable negligence which caused the outright deprivation of its right to present evidence before the RTC. Therefore, the CA mistakenly denied HCPTI's motion for new trial and/or reconsideration.<sup style="color: rgb(255, 0, 0);">[32]</sup> </p><p> On the other hand, Federal maintains that the CA did not err in ruling that HCPTI was negligent in handling Top Asia's shipment.<sup style="color: rgb(255, 0, 0);">[33]</sup> By the same token, the CA correctly denied HCPTI's motion for new trial and/or reconsideration for the following reasons: <i>one</i>, HCPTI did not seek reconsideration of the RTC Order which declared it to have waived its right to present evidence; <i>two</i>, HCPTI was unable to present any witness during the hearing on its motion for new trial and/or reconsideration; and <i>three</i>, HCPTI's claim that its former counsel, Atty. Ricky G. Gonzaga, did not disclose the developments in the case is improbable since he was a member of its Legal Department. <sup style="color: rgb(255, 0, 0);">[34]</sup> </p><p> At the interstice, the Court directed the parties to move in the premises.<sup style="color: rgb(255, 0, 0);">[35]</sup> Conforming to the Court's directive, the parties submitted a Joint Manifestation and Motion to Withdraw Petition,<sup style="color: rgb(255, 0, 0);">[36]</sup> containing the following avowals: </p><blockquote><p> 2. In the interim, without admission of liability, and in order to avoid further litigation and <b>to save the precious time of the Honorable Supreme Court, the Parties have amicably settled their respective claims in relation to the case</b>. </p><p> 3. Thus, the Parties hereby move for the withdrawal of the instant [P]etition.<sup style="color: rgb(255, 0, 0);">[37]</sup> (Emphasis supplied) </p></blockquote><p> Through its Compliance,<sup style="color: rgb(255, 0, 0);">[38]</sup> HCPTI presented the Compromise Agreement<sup style="color: rgb(255, 0, 0);">[39]</sup> executed by the herein parties <i>for the Courts approval</i>, the full terms and conditions of which are reproduced hereunder: </p><p align="center"><b>COMPROMISE AGREEMENT</b> </p><blockquote><p> KNOW ALL MEN BY THESE PRESENTS: </p><blockquote><p> This Compromise Agreement (the "Agreement") entered into this __ day of December 2023 by and between: </p><p><b>HARBOUR CENTRE PORT TERMINAL, INC.</b>, a corporation duly organized and existing under and by virtue of Philippine laws, with principal office address at R-II Building, 136 Malakas Street, Diliman, Quezon City, represented herein by its President, KATHERINE JOY R. MODESTO (the "First Party");</p></blockquote><p align="center"> -and-</p><blockquote><p><b>FPG INSURANCE CO.[,] INC.</b>, formerly FEDERAL PHOENIX ASSURANCE COMPANY, a corporation duly organized and existing under and by virtue of Philippine laws, with principal office address at 6/F Zuellig Building, Makati Avenue comer Paseo De Roxas, Makati City, represented herein by its Vice[ ]President, [NOEL N. SALVADOR] (the "Second Party").</p></blockquote></blockquote><p align="center"><b>WITNESSETH THAT:</b> </p><blockquote><blockquote><p><b>WHEREAS,</b> the First Party is the petitioner in <i>Harbour Ventre</i> [sic] <i>Port Terminal, Inc. v. Federal Phoenix Assurance Company, Inc.</i> (G.R. No. 252875), currently pending before the Supreme Court-Third Division (the "Case["]); and</p><p><b>WHEREAS, <u>in order to avoid further litigation</u></b>, the Parties have agreed to amicably settle the Case. (Emphasis supplied) </p></blockquote><p><b>NOW, THEREFORE,</b> subject to the terms and conditions below, and without admission of any liability, the Parties have agreed as follows: </p><blockquote><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1.</div></td><td width="95%"><div align="justify">Upon the execution of this Agreement, the First Party shall pay to the Second Party the amount of Philippine Pesos: Three Million ([PHP] 3,000,000.00). </div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">2.</div></td><td><div align="justify">The Parties shall file with the Supreme Court the appropriate pleadings and motions to cause the withdrawal and settlement of the Case.</div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">3.</div></td><td><div align="justify">With the fulfillment of the foregoing, <b>the Parties amicably settle and resolve all of their respective claims, demands, and/or causes of action against each other with respect to the Case</b>, subject to, and in accordance with, the terms and conditions set forth in this Agreement and existing laws. (Emphasis supplied) </div></td></tr></tbody></table></blockquote><p><b>IN WITNESS WHEREOF,</b> the Parties have hereunto set their hands and signatures on the date and place above written. </p><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td colspan="2"><div align="center"><strong>HARBOUR CENTRE PORT<br> TERMINAL, INC.</strong></div></td><td colspan="2"><div align="center"><strong>FPG INSURANCE <br> CO., INC[.]</strong></div></td></tr><tr><td colspan="2">&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr><td width="7%">&nbsp;</td><td width="43%">By:</td><td width="11%">&nbsp;</td><td width="39%">By:</td></tr><tr><td colspan="2">&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr><td colspan="2"><div align="center">(Signed) <br><strong>KATHERINE JOY R. MODESTO</strong><br> President </div></td><td colspan="2"><div align="center">(Signed) <br><strong>NOEL N. SALVADOR </strong><br> Vice[ ]President </div></td></tr></tbody></table></blockquote><p><b><i>Acting on the joint motion to withdraw the instant Petition for Review on Certiorari grounded on the Compromise Agreement between HCPTI and Federal, the Court resolves to grant the same.</i></b></p><p> Article 2028 of the Civil Code remains to be the guiding polestar on compromise agreements, viz.: </p><blockquote><p> A compromise is a contract whereby the parties, by making reciprocal concessions, avoid a litigation or put an end to one already commenced. </p></blockquote><p> By entering into a compromise agreement, the parties in a legal action adjust their difficulties in the manner they have agreed upon, overlooking the possible gain in litigation and bearing in mind that such gain is balanced by the danger of losing.<sup style="color: rgb(255, 0, 0);">[40]</sup> Undeniably, compromise agreements are vital tools in dispute resolution.<sup style="color: rgb(255, 0, 0);">[41]</sup> Elsewise stated, such means of settling disagreements is an accepted, even desirable and encouraged, practice before courts of law as well as administrative tribunals.<sup style="color: rgb(255, 0, 0);">[42]</sup></p><p> Article 2028 contemplates two kinds of compromise agreements based on object or purpose. The first one is an <i>extrajudicial</i> compromise, where the object of the parties is to avoid litigation. The second one is a <i>judicial</i> compromise, the purpose of which is to terminate an existing lawsuit, such as in this case.<sup style="color: rgb(255, 0, 0);">[43]</sup> </p><p> As the term implies, a compromise agreement, be it extrajudicial or judicial, constitutes the contract between the parties. Hence, to be valid, it must comply with the following requisites under the law on contracts: (a) consent of the parties; (b) object certain; and (c) cause of the obligation. Likewise, the compromise agreement must be based on real claims and be actually agreed upon in good faith. Lastly, it must not be contrary to law, public order, public policy, morals, or good customs.<sup style="color: rgb(255, 0, 0);">[44]</sup> </p><p> The ramifications of a judicial compromise are ingrained in this jurisdiction, thusly: </p><blockquote><p> Once stamped with judicial <i>imprimatur</i>, [a compromise agreement] becomes more than a mere contract binding upon the parties; <b>having the sanction of the court and entered as its determination of the controversy, it has the force and effect of any other judgment.</b> It has the effect and authority of <i>res judicata</i>, although <b>no execution may issue until it would have received the corresponding approval of the court where the litigation pends and its compliance with the terms of the agreement is thereupon decreed</b>.<sup style="color: rgb(255, 0, 0);">[45]</sup> (Emphasis supplied, citation omitted) </p></blockquote><p> Accordingly, before stamping its imprimatur on any compromise agreement, courts are duty bound to strictly scrutinize the terms thereof to ensure that both the <i>compromise</i> and its <i>execution </i>are compliant with the pertinent laws and procedural rules.<sup style="color: rgb(255, 0, 0);">[46]</sup> </p><p> In the instant case, not only is the Compromise Agreement freely entered into by the duly authorized representatives of the parties to the dispute,<sup style="color: rgb(255, 0, 0);">[47]</sup> but the terms thereof are also consistent with law, morals, good customs, public order, and public policy. </p><p><b>ACCORDINGLY,</b> the Joint Manifestation and Motion to Withdraw Petition dated December 11, 2023 is <b>GRANTED.</b> The Compromise Agreement is <b>APPROVED</b> and <b>ADOPTED</b>, and judgment is hereby rendered in accordance therewith. The parties are <b>ORDERED</b> to comply with the terms and conditions of the Compromise Agreement in utmost good faith. </p><p> By virtue of the approval of the Compromise Agreement, this case is deemed <b>CLOSED</b> and <b>TERMINATED.</b> No pronouncement as to costs. </p><p> Let entry of judgment be <b>ISSUED IMMEDIATELY.</b> </p><p><b>SO ORDERED.</b> </p><p><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Kho, Jr., JJ</i>., concur. <br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><sup style="color: rgb(255, 0, 0);">*</sup> Also spelled as "Center" in some parts of the <i>rollo</i>. <p><sup style="color: rgb(255, 0, 0);">*</sup><sup style="color: rgb(255, 0, 0);">*</sup> Designated additional Member vice Singh, J., per Raffle dated October 14, 2025.</p><p><sup style="color: rgb(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 28-50.</p><p><sup style="color: rgb(255, 0, 0);">[2]</sup> <i>Id.</i> at 56-79. The September 25, 2019 Decision was penned by Associate Justice Elihu A. YbaÃ±ez and concurred in by Associate Justices Maria Filomena D. Singh (now a Member of the Court) and Tita Marilyn B. Payoyo-Villordon of the Fifteenth Division, Court of Appeals, Manila. </p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> at 52-54. The March 2, 2020 Resolution was penned by Associate Justice Elihu A. YbaÃ±ez and concurred in by Associate Justices Maria Filomena D. Singh (now a Member of the Court) and Tita Marilyn B. Payoyo-Villordon of the Former Fifteenth Division, Court of Appeals, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> <i>Id.</i> at 180-191. The July 25, 2014 Decision was penned by Presiding Judge Joselito C. Villarosa.</p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Id.</i> at 192-193. </p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> <i>Id.</i> at 196. </p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Id.</i> at 158.</p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>Id.</i> at 57-59. </p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> <i>Id.</i> at 157-160. Dated June 16, 2009.</p><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <i>Id.</i> at 191. </p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Id.</i> at 189. </p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> <i>Id.</i> at 189-190. </p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <i>Id.</i> at 190. </p><p><sup style="color: rgb(255, 0, 0);">[15]</sup> <i>Id.</i> at 293-303, Motion for New Trial and/or Motion for Reconsideration (Re: Decision dated July 25, 2014). </p><p><sup style="color: rgb(255, 0, 0);">[16]</sup> <i>Id.</i> at 316-324, Motion for Execution with Comment/Opposition to Defendant [HCPTI]'s Motion for New Trial and/or Motion for Reconsideration. </p><p><sup style="color: rgb(255, 0, 0);">[17]</sup> <i>Id.</i> at 192-193. </p><p><sup style="color: rgb(255, 0, 0);">[18]</sup> <i>Id.</i> at 193. </p><p><sup style="color: rgb(255, 0, 0);">[19]</sup> <i>Id.</i> at 194-195. Dated July 27, 2015. </p><p><sup style="color: rgb(255, 0, 0);">[20]</sup> <i>Id.</i> at 196. </p><p><sup style="color: rgb(255, 0, 0);">[21]</sup> <i>Id.</i> at 61. </p><p><sup style="color: rgb(255, 0, 0);">[22]</sup> <i>Id.</i> at 78. </p><p><sup style="color: rgb(255, 0, 0);">[23]</sup> <i>Id.</i> at 68. </p><p><sup style="color: rgb(255, 0, 0);">[24]</sup> <i>Id.</i> at 69. </p><p><sup style="color: rgb(255, 0, 0);">[25]</sup> <i>Id.</i> at 70. </p><p><sup style="color: rgb(255, 0, 0);">[26]</sup> <i>Id.</i> at 73. </p><p><sup style="color: rgb(255, 0, 0);">[27]</sup> <i>Id.</i> at 76. </p><p><sup style="color: rgb(255, 0, 0);">[28]</sup> <i>Id.</i> at 78. </p><p><sup style="color: rgb(255, 0, 0);">[29]</sup> <i>Id.</i> at 80-89, Partial Motion for Reconsideration. </p><p><sup style="color: rgb(255, 0, 0);">[30]</sup> <i>Id.</i> at 53. </p><p><sup style="color: rgb(255, 0, 0);">[31]</sup> <i>Id.</i> at 33-36. </p><p><sup style="color: rgb(255, 0, 0);">[32]</sup> <i>Id.</i> at 40-43. </p><p><sup style="color: rgb(255, 0, 0);">[33]</sup> <i>Id.</i> at 386-391, Comment/Opposition. </p><p><sup style="color: rgb(255, 0, 0);">[34]</sup> <i>Id.</i> at 391-392. </p><p><sup style="color: rgb(255, 0, 0);">[35]</sup> <i>Id.</i> at 402, March 29, 2023 [Notice, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[36]</sup> <i>Id.</i> at 412-415. Dated December 11, 2023. </p><p><sup style="color: rgb(255, 0, 0);">[37]</sup> <i>Id.</i> at 412. </p><p><sup style="color: rgb(255, 0, 0);">[38]</sup> <i>Id.</i> at 428-443. Dated November 7, 2024. </p><p><sup style="color: rgb(255, 0, 0);">[39]</sup> <i>Id.</i> at 431-432. </p><p><sup style="color: rgb(255, 0, 0);">[40]</sup> <i>See</i> <b>St. Francis Plaza Corporation v. Solco</b>, 898 Phil. 1015, 1030 (2021) [Per J. Inting, Third Division]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[41]</sup> <i>See</i> <b>Leones v. Judge Corpuz</b>, 915 Phil. 449, 461 (2021) [Per J. Hernando, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[42]</sup> <i>See</i> <b>Asset Pool A (SPV-AMC), Inc. v. Clark Dev't. Corp.</b>, 772 Phil. 576, 584 (2015) [Per J. Bersamin, First Division]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[43]</sup> <i>See</i> <b>Fil-Estate Properties, Inc. v. Reyes</b>, 863 Phil. 221, 256 (2019) [Per J. Leonen, Third Division]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[44]</sup> <i>See</i> <b>Ilocos Norte Electric Cooperative v. Andres-Ranjo</b>, 928 Phil. 568, 585 (2022) [Per J. M. Lopez, Second Division]. (Citations omitted) </p><p><sup style="color: rgb(255, 0, 0);">[45]</sup> <b>Republic v. Heirs of Eligio Cruz</b>, 842 Phil. 280, 288 (2018) [Per J. Caguioa, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[46]</sup> <i>See</i> id. at 288. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[47]</sup> <em>Rollo</em>, pp. 433-434, Acknowledgments. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

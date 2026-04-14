@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 266371 [Formerly UDK No. 17775] - RANDY DELA CRUZ Y DEGUERO AND RICKY VIDANES Y  OSELA, PETITIONERS, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70140' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 266371 [Formerly UDK No. 17775], August 13, 2025 ]</H2>
+			<H3>RANDY DELA CRUZ <I>Y</I> DEGUERO AND RICKY VIDANES<I> Y</I>  OSELA, PETITIONERS, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Randy Dela Cruz<i> y</i> Deguero (Randy) and Ricky Vidanes<i> y</i> Osela (Ricky) (collectively, petitioners) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated July 13, 2022, of the Court of Appeals (CA) in CA-G.R. CR No. 44960. The assailed CA Decision affirmed, with modification as to the monetary awards, the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated February 18, 2020, of Branch 80, Regional Trial Court (RTC), Morong, Rizal in Criminal Case No. 03-6050-M that found petitioners guilty beyond reasonable doubt of Homicide under Article 249<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Revised Penal Code.<br><br>Assailed as well is the Resolution dated January 16, 2023 of the CA which denied petitioners' Motion for Reconsideration.<br><br><center><i>The Antecedents</i></center><br>The case stemmed from an Information<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated June 30, 2003, that charged petitioners with Homicide. The accusatory portion of the Information reads:<br><blockquote>That on or about the 22<sup>nd</sup> day of June, 2003, in the Municipality of Pililla, Province of Rizal, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, conspiring and confederating together and both of them mutually helping and aiding one another, with the use of stone, and with intent to kill, did, then and there willfully, unlawfully and feloniously attack, assault and hit with said stone one ALBERTO VERSOZA y MARTINEZ, hitting him on his head, thereby inflicting upon him mortal wounds which directly caused his death.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </blockquote>Upon arraignment on September 9, 2003, petitioners entered their pleas of "Not Guilty" to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>After the pre-trial, trial on the merits ensued.<br><br><center><i>The Version of the Prosecution</i></center><br>The prosecution presented Abigail Garcia (Abigail) and Evangeline Versoza (Evangeline) as its witnesses.<br><br>Abigail is the niece of the victim, Alberto Versoza<i> y</i> Martinez (Alberto). She testified that on June 22, 2003, while she was in front of their house in San Antonio Street, Quisao, Pililla, Rizal, she witnessed Randy hit Alberto on the head with a stone approximately 3 to 4 inches in diameter. At the time Randy hit Alberto, she was behind the latter. Abigail recalled that Randy struck Alberto once on the top of his head, which caused the latter to lose consciousness. Thereafter, she saw Ricky jump and land on Alberto's stomach. Then, petitioners fled.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Evangeline, Alberto's sister, testified on the medical and burial expenses they incurred due to the incident. She attested that Alberto was initially brought to a hospital for treatment, where they spent about PHP 4,300.00. However, Alberto eventually died on June 25, 2003. Evangeline further asserted that they incurred burial expenses, which include PHP 10,000.00 for the coffin and PHP 3,000.00 for the autopsy.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><center><i>The Version of the Defense</i></center><br>Randy testified that on June 22, 2003, at around 5:00 p.m., he was having a drinking spree at a vacant lot in San Antonio Street, Barangay Quisao, Pililla, Rizal, with 10 of his friends, including Ricky, to celebrate the birthday of a certain Renan. Alberto passed by and had a drink with them that lasted for one and a half hours. After the drinking spree, Randy decided to go home. On his way home, he passed by Alberto's house, where Alberto called him. When Randy turned around, he saw Alberto pointing a knife at him. Randy ran away from Alberto. When he looked back at Alberto, he saw him stumble on a canal while holding the knife. Randy saw Alberto get up; he was bleeding. Randy was uncertain where the blood was coming from.<br><br>Randy alleged that he hit Alberto with a stone before fleeing. After a few minutes, he returned to the area of the incident to confront Alberto. However, there was a commotion and he noticed that Alberto was lying on the ground.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Randy further testified that upon learning that Alberto's family had accused him and Ricky of killing Alberto, they voluntarily went to the Office of the Barangay Captain.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>As for Ricky, he narrated that on June 22, 2003, while they were having a drinking session at 5:00 p.m., Alberto arrived and joined them. After drinking and eating with them, Alberto left without saying a word. When they ended their drinking session, Ricky told Randy to go home first as he had to return the things they borrowed for the drinking spree. When he went out, Randy was ahead of him.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Ricky further narrated that upon reaching the scene of the incident, he saw Alberto already lying on the ground while holding a knife. Alberto is known to carry a bladed weapon often. Priorly, Alberto and Randy did not engage in any heated argument. But by the time he arrived at the scene of the incident, the altercation between Alberto and Randy had already transpired, and people were hovering around. When he was about to approach Alberto, a certain Ariel Amongo brought out a long piece of wood and chased him.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated February 18, 2020, the RTC convicted petitioners of Homicide. The dispositive portion of the Decision states:<br><blockquote>WHEREFORE, premises considered, this Court found accused RANDY CRUZ [<i>y</i>] Duguero and RICKY VIDANES y Osela GUILTY beyond reasonable doubt of the crime of Homicide and sentences them to suffer the indeterminate penalty of eight (8) years and one (1) day of prision mayor, as minimum, to fourteen (14) years, eight months, and one (1) day of reclusion temporal, as maximum. They are further ordered to pay the heirs of Alberto Versoza y Martinez the amount of [PHP] 75,000.00 as civil indemnity, [PHP] 75,000.00 as moral damages and [PHP] 75,000.00 as exemplary damages with legal interest at 6% from the date of filing of the [Information until fully paid and the costs of suit.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </blockquote>The RTC gave full credence to the testimony of Abigail and ruled that petitioners conspired to kill Alberto. The RTC noted that the Certificate of Death, presented by the prosecution, which indicated the cause of death as "intracranial hemorrhage as a result of traumatic injuries, head," corroborated the testimony of Abigail and Randy's admission that the latter struck Alberto with a stone.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Aggrieved, petitioners appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>On appeal, petitioners argued that their constitutional right to speedy trial was blatantly violated, as the case remained pending for approximately 17 years before the RTC rendered its final Decision.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> After their arraignment, the scheduled hearings were repeatedly postponed due to the absence of the public prosecutor assigned, the absence of the Medico Legal Officer and other prosecution witnesses, and other delays not attributable to petitioners. Petitioners further asserted that the RTC erred in convicting them of the crime charged, as the prosecution failed to establish their guilt beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Lastly, petitioners argued that the prosecution did not sufficiently prove that they acted in conspiracy to kill Alberto.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The People of the Philippines, through the Office of the Solicitor General (OSG), countered that petitioners' right to speedy trial was not violated. The OSG asserted that petitioners failed to invoke their right to speedy trial timely. It further explained that the prosecution was able to establish all the elements of the crime of Homicide.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated July 13, 2022, the CA affirmed petitioners' conviction but modified the monetary awards, viz.:<br><blockquote>WHEREFORE, the instant appeal is DENIED. The Decision dated February 18, 2020 of the Regional Trial Court of Morong, Rizal, Branch 80, in Criminal Case No. 03-6050-M, convicting accused-appellants Randy Dela Cruz y Deguero and Ricky Vidanes [<i>y</i>] Osela of Homicide under Article 249 of the Revised Penal Code, as amended, and penalizing them therefor, is AFFIRMED with MODIFICATION that they are ordered to solidarily pay the heirs of victim Alberto Versoza the following reduced amounts: [PHP] 50,000.00 as civil indemnity, [PHP] 50,000.00 as moral damages and [PHP] 50,000.00 as temperate damages. Said award shall earn interest at the rate of six percent (6%) per annum from the date of finality of this Decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </blockquote>The CA held that the right to speedy trial of petitioners was not violated. It reasoned that petitioners failed to show that the causes of the delay in the prosecution of the case were unjust, unreasonable, and oppressive.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> It further ruled that the prosecution was able to prove beyond a reasonable doubt all the elements of Homicide, and that petitioners conspired in the killing of Alberto. It gave credence to the testimony of Abigail and her positive identification of petitioners as the perpetrators.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Undeterred, petitioners filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> but the CA denied it in the assailed Resolution<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> dated January 16, 2023.<br><br>Thus, the Petition for Review on<i> Certiorari</i>.<br><br><center><i>Petitioners' Argument</i></center><br>Petitioners argue that the CA erred in not dismissing the criminal case on the ground of blatant violation of their right to speedy trial. Petitioners highlight various reasons for the undue delay in resolving the criminal case: (1) pending availability of court records; (2) lack of notice to the private complainant and the intended prosecution witness; (3) insufficient time; (4) the Presiding Judge was indisposed and on sick leave; (5) prosecution witnesses did not appear; (6) the Presiding Judge had an unavoidable engagement; (7) the Presiding Judge was on forfeitable leave; and (8) the trial prosecutor was unavailable.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Petitioners assert that the postponements of hearings were not attributable to them but rather to the prosecution and the lower court.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Further, petitioners argue that the prosecution failed to prove their guilt beyond reasonable doubt. They contend that the testimony of Abigail, the sole eyewitness for the prosecution, was full of inconsistencies. They insist that she is not a credible witness.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In the Comment, the OSG maintains that there was no violation of petitioners' constitutional right to a speedy trial. The OSG contends that petitioners failed to substantiate their bare allegations with competent and specific evidence. In particular, petitioners did not provide any factual details as to the causes, extent, or circumstances of the alleged delay; neither did they demonstrate that the same was unjustified, unreasonable, vexatious, or oppressive so as to warrant the dismissal of the case on constitutional grounds.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Moreover, the OSG posits that the prosecution was able to establish all the essential elements of the crime of Homicide beyond reasonable doubt. It underscores that petitioners' defenses of denial and alibi are inherently weak and cannot prevail over the positive and categorical identification by the eyewitness, Abigail, whose testimony was unwavering, straightforward, and corroborated by material details.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The OSG further asserts that conspiracy among the petitioners was convincingly proven through their concerted acts leading to the victim's death. It was sufficiently established that Randy struck the victim, Alberto, on the head with a stone, causing him to collapse, after which Ricky jumped on the victim's abdomen. Thereafter, both petitioners hastily fled the crime scene. Such concurrent and successive acts, according to the OSG, demonstrate a common design and unity of purpose to kill the victim, thereby rendering them equally liable for the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><center><i>The Issue</i></center><br>The core issue to be resolved by the Court is whether the CA erred in not dismissing the case for violation of petitioners' right to speedy trial.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is meritorious.<br><br>In a Rule 45 petition, the jurisdiction of the Court is limited only to reviewing errors of law as the Court is not a trier of facts.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> As a rule, the Court is not duty-bound to analyze and weigh again the evidence considered in the proceedings below.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> The Court cannot therefore assume the role of trier of facts which, by law and jurisprudence, belongs to the lower courts. However, this rule is not without any exceptions. In the case of<i> Ditiangkin v. Lazada E-Services Philippines, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> the Court enumerated such exceptions:<br><blockquote>(1) when the factual findings of the Court of Appeals and the trial court are contradictory;<br>(2) when the conclusion is a finding grounded entirely on speculation, surmises, or conjectures;<br>(3) when the inference made by the Court of Appeals from its findings of fact is manifestly mistaken, absurd, or impossible;<br>(4) when there is a grave abuse of discretion in the appreciation of facts;<br>(5) when the Appellate Court, in making its findings, went beyond the issues of the case and such findings are contrary to the admissions of both appellant and appellee;<br>(6) when the judgment of the Court of Appeals is premised on a misapprehension of facts;<br>(7) <i>when the Court of Appeals failed to notice certain relevant facts which, if properly considered, would justify a different conclusion</i>;<br>(8) when the findings of fact are themselves conflicting;<br>(9) when the findings of fact are conclusions without citation of the specific evidence on which they are based; and<br>(10) when the findings of fact of the Court of Appeals are premised on the absence of evidence but such findings are contradicted by the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Emphasis supplied) </blockquote>It is a well settled rule that the factual findings of the trial court are accorded great weight and respect on appeal, especially when such findings are supported by substantial evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> It is only in exceptional circumstances, such as when the trial court overlooked material and relevant matters, that the Court, on review, will re-calibrate and evaluate the factual findings of the court below.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> This exception applies in the case at bar.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The constitutional right to speedy trial of petitioners was blatantly violated; thus, they should be acquitted</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>The right of an accused to "a speedy, impartial, and public trial" in criminal cases is guaranteed under Article III, Section 14(2)<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> of the Constitution. Its salutary objective is to assure that an innocent person may be free from the anxiety and expense of a court litigation or, if otherwise, of having his or her guilt determined within the shortest possible time compatible with the presentation and consideration of whatsoever defense he or she may interpose.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The right to speedy trial is deemed violated when the proceedings are attended by vexatious, capricious, and oppressive delays; when unwarranted postponement of the trial are requested and granted; or when, without cause or justifiable reason, an unreasonable period elapses without the case being brought to trial.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>The constitutional right to speedy trial was embodied and enforced through Republic Act No. 8493,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> otherwise known as the "Speedy Trial Act of 1998." Relevantly, Republic Act No. 8493 was instructive when it provided that the time limit for trial in criminal cases, except those subject to the Rules on Summary Procedure, or where the penalty prescribed by law does not exceed six months imprisonment, or a fine of PHP 1,000.00 or both, irrespective of other imposable penalties, shall not exceed a period of 180 days from the first day of trial, to wit:<br><blockquote>SECTION 6.<i> Time Limit for Trial</i>. â In criminal cases involving persons charged of a crime, except those subject to the Rules on Summary Procedure, or where the penalty prescribed by law does not exceed six (6) months imprisonment, or a fine of One thousand pesos (P1,000.00) or both, irrespective of other imposable penalties, the justice or judge shall, after consultation with the public prosecutor and the counsel for the accused, set the case for continuous trial on a weekly or other short-term trial calendar at the earliest possible time so as to ensure speedy trial. In no case shall the entire trial period exceed one hundred eighty (180) days from the first day of trial, except as otherwise authorized by the Chief Justice of the Supreme Court pursuant to Section 3, Rule 22 of the Rules of Court. </blockquote>Further, Section 7 of Republic Act No. 8493 provides that the "arraignment of an accused shall be held within [30] days from the filing of the information, or from the date the accused has appeared before the justice, judge or court in which the charge is pending, whichever date last occurs," and the "[t]rial shall commence within [30] days from arraignment as fixed by the court."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Additionally, the Court incorporated these guidelines into Rule 119 of the Revised Rules on Criminal Procedure, as well as the Revised Guidelines for [the] Continuous Trial of Criminal Cases in A.M. No. 15-06-10-SC.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Notwithstanding, the Court has consistently emphasized that a mere mathematical reckoning of the time involved is not sufficient to rule that an accused's right to speedy trial was violated.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The conduct of both the prosecution and the defense must be weighed.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Accordingly, in determining whether this right has been infringed, the Court applies the balancing test, which considers the following factors: (1) the length of the delay; (2) the reasons for the delay; (3) the accused's assertion of the right; and (4) the prejudice suffered by the respondent."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Now, to clearly assess the case at bar, the Court takes note of the incidents pertaining to the postponements of the trial:<br><br><table width="100%" border="1" cellpadding="3" cellspacing="0" bordercolor="#000000"> <tbody><tr bgcolor="#000000"> <td width="18%" valign="top"> <div align="CENTER"><b><font color="#FFFFFF">Date</font></b></div></td> <td width="31%" valign="top"> <div align="CENTER"><b><font color="#FFFFFF">Action Taken</font></b></div></td> <td width="51%" valign="top"> <div align="CENTER"><b><font color="#FFFFFF">Cause of Postponement </font></b></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">June 30, 2003 </div></td> <td valign="top"> <div align="LEFT">Information filed </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">September 9, 2003 </div></td> <td valign="top"> <div align="LEFT">Date of Arraignment </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">January 28, 2004 </div></td> <td valign="top"> <div align="LEFT">Scheduled Pre-Trial Conference </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Postponed because the Presiding Judge attended an Orientation Seminar. </div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 18, 2004 </div></td> <td valign="top"> <div align="LEFT">Scheduled Pre-Trial Conference </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Postponed due to the absence of the public prosecutor<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">March 17, 2004 </div></td> <td valign="top"> <div align="LEFT">Pre-Trial Conference commenced </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">July 5, 2004 </div></td> <td valign="top"> <div align="LEFT">Scheduled initial trial </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to July 26, 2004, due to the absence of the prosecution witness, Dr. Jose Marquez.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">July 26, 2004 </div></td> <td valign="top"> <div align="LEFT">Scheduled initial trial </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 13, 2004, due to the manifestation of the public prosecutor to give the mother of the victim ample time to collate receipts and evidence relative to the medical expenses.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 13, 2004 </div></td> <td valign="top"> <div align="LEFT">Scheduled initial trial </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to December 1, 2004, because the Presiding Judge was indisposed.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">December 1, 2004 </div> <div align="LEFT"></div></td> <td valign="top"> <div align="LEFT">Scheduled initial trial </div> <div align="LEFT"></div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 16, 2005, due to the manifestation of the public prosecutor that the first witness, who is the mother of the victim, failed to provide a summation of the expenses and receipts.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 16, 2005 </div></td> <td valign="top"> <div align="LEFT">Scheduled initial trial </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">The first witness, Evangeline, was presented.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">May 4, 2005 </div></td> <td valign="top"> <div align="LEFT">Scheduled cross-examination of Evangeline. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 3, 2005, due to the request of the public prosecutor who will be attending an urgent personal matter at the Sandiganbayan.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 3, 2005 </div></td> <td valign="top"> <div align="LEFT">Scheduled cross-examination of Evangeline </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 19, 2005, due to the unavailability of the Transcript of Stenographic Notes (TSN) dated February 16, 2005.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 19, 2005 </div></td> <td valign="top"> <div align="LEFT">Conclusion of the testimony of Evangeline.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">January 25, 2006 </div></td> <td valign="top"> <div align="LEFT">Direct Examination of the prosecution's second witness, Abigail.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">April 26, 2006 </div></td> <td valign="top"> <div align="LEFT">Conclusion of the testimony of Abigail.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup></div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 9, 2006 for the continuation of the presentation of evidence the prosecution. </div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 9, 2006 </div> <div align="LEFT"></div></td> <td valign="top"> <div align="LEFT">Presentation of evidence by the prosecution was postponed. </div> </td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 16, 2006 because the Presiding Judge was on sick leave.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></div> </td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 16, 2006 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witnesses, PC/Insp. Jose Arnel Marquez (PC/Insp. Marquez). </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 28, 2007, due to the absence of the prosecution witness and the counsel for the accused.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 28, 2007 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witness, PC/Insp. Marquez </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to May 9, 2007, due to the absence of the prosecution witness and the counsel for the accused.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">May 9, 2007 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witness, PC/Insp. Marquez </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to July 2, 2007 due to the absence of the prosecution witness.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">July 2, 2007 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witness, PC/Insp. Marquez </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to September 10, 2007, due to the unavailability of the public prosecutor.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">September 10, 2007 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witness, PC/Insp. Marquez. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to November 13, 2007, due to the absence of the prosecution witness. The counsel for the accused was also changed due to the repeated absence of Atty. Michael Perocho, hence, Atty. Allan Catmunan was appointed <i> counsel de officio</i>.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">November 13, 2007 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witness, PC/Insp. Marquez. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 25, 2008, due to the absence of the prosecution witness.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 25, 2008 </div></td> <td valign="top"> <div align="LEFT">Presentation of prosecution witness, PC/Insp. Marquez. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to May 19, 2008, since February 25, 2008 was declared as a non-working holiday<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">May 19, 2008 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 6, 2008, due to the unavailability of the court record.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 6, 2008 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to November 5, 2008, due to the manifestation of the public prosecutor for lack of notice to the private complainants of the case and unavailability of PC/Incp. Marquez.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">November 5, 2008 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to March 23, 2009, due to the unavailability of the PAO lawyer<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">March 23, 2009 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 12, 2009, due to unavailability of court records.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 12, 2009 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to March 5, 2010, due to lack of material time<sup style="COLOR: RGB(255, 0, 0);">[72]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">March 5, 2010 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to July 5, 2010, because the Presiding Judge had to attend the Philippine Women Judges Association Convention and Seminar.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">July 5, 2010 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 11, 2010, due to failure to send subpoena to the mother of the victim.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 11, 2010 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 19, 2010, due to lack of material time.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 19, 2010 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 14, 2011, due to lack of material time.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 14, 2011 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to May 10, 2011, because the Presiding Judge was indisposed.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">May 10, 2011 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 23, 2011, because the Presiding Judge was on sick leave.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 23, 2011 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness, the mother of the victim. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to November 22, 2011, due to the absence of the prosecution witness.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">November 22, 2011 </div> <div align="LEFT"></div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div> <div align="LEFT"></div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to April 17, 2012, because the Presiding Judge had a sudden unavoidable engagement.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup></div> </td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">April 17, 2012 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 7, 2012, due to the absence of prosecution witnesses, Guadalupe Versoza and Marilou Manalon, mother and sister of the victim, respectively, despite being notified multiple times.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 7, 2012 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to November 20, 2012, suspension of work due to inclement weather.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">November 20, 2012 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to April 15, 2013, because the Presiding Judge was on forfeitable leave.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">April 15, 2013 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to September 16, 2013, due to the absence of the prosecution witness.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">September 16, 2013 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 18, 2014, due to the absence of the prosecution witness.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 18, 2014 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 19, 2014, due to the absence of the public prosecutor.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 19, 2014 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 10, 2015, due to the absence of the new prosecution witness, PO1 Patricio Talavera.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 10, 2015 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to June 8, 2015, because the Presiding Judge was on forfeitable leave.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">June 8, 2015 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to December 7, 2015, because the public prosecutor was not around.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">December 7, 2015 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to June 6, 2016, considering that the Public Attorney's Office (PAO) lawyer assigned attended a Training Towards Accountability, Capacity, Building and Empowerment of Public Attorneys.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">June 6, 2016 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 11, 2016, because the Presiding Judge was on forfeitable leave.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 11, 2016 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to April 25, 2017, because the PAO lawyer assigned was on official business.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">April 25, 2017 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 29, 2017, due to the absence of the public prosecutor.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 29, 2017 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of prosecution witness. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to November 23, 2017, because the Presiding Judge was on sick leave.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">November 23, 2017 </div></td> <td valign="top"> <div align="LEFT">Conclusion of the presentation of the prosecution. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">The presentation of the defense was scheduled on April 23 and May 10, 2018.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 19, 2018 </div></td> <td valign="top"> <div align="LEFT">The RTC issued an Order<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> admitting the formal offer of evidence from the prosecution. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">May 10, 2018 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of witness for the defense. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to September 11, 2018, because the PAO lawyer assigned was attending another trial before Branch 79, RTC, Morong, Rizal.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">September 11, 2018 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of witness for the defense. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to February 19, 2019, because the public prosecutor was indisposed.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 19, 2019 </div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of witness for the defense. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to August 13 and October 14, 2019, upon request of petitioners.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">August 13, 2019 </div> <div align="LEFT"></div></td> <td valign="top"> <div align="LEFT">Scheduled hearing and presentation of witness for the defense. </div> </td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">Reset to October 14, 2019, because the Presiding Judge attended a briefing on Region IV Judges of newly created courts at the Supreme Court.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup></div> </td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">October 14, 2019 </div></td> <td valign="top"> <div align="LEFT">Randy testified. </div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">The next scheduled hearing was on November 26, 2019.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup></div></td> </tr> <tr> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT">February 18, 2020 </div></td> <td valign="top"> <div align="LEFT">The RTC rendered its Decision.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup></div></td> <td valign="top" bgcolor="#CCCCCC"> <div align="LEFT"></div><br></td> </tr> </tbody></table><br>It is appalling that the case took almost 17 years to be resolved by the RTC. While it is settled that the determination of inordinate delay is not susceptible to a mechanical formula, the Court has consistently held that the totality of the circumstances must be considered. These include the volume of evidence, and the simplicity or complexity of the issues raised.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> Even more, the causes of the delays must be properly laid out and evaluated.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> Here, the records reveal a pattern of systematic inefficiencies and prosecutorial lapses that are just inexcusable.<br><br>The Information against petitioners was filed on June 30, 2003. They were arraigned on September 9, 2003, almost three months later, which already violates Section 7 of Republic Act No. 8493, which mandates that an accused must be arraigned within 30 days from the filing of the information or from the date the accused appeared before the court.<br><br>Even more alarming is the course of the proceedings that followed. The Pre-trial Conference, which was intended to facilitate an expeditious trial, was postponed twice because of the unavailability of the Presiding Judge and the absence of the public prosecutor. The initial trial date was set for July 5, 2004, but was postponed due to the prosecution witnesses' absence. Consequently, trial only commenced on February 16, 2005âabout two years after the Information was filedâagain violating Section 7 of Republic Act No. 8493. The initial trial was rescheduled three times mainly because of the prosecution's fault.<br><br>From that point onward, the proceedings were marred by repeated delays, most of which was attributable to the prosecution. In contrast, in all of the postponements of the hearings, petitioners were present.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup><br><br>Notably, it was only on November 23, 2017, or over 14 years since the filing of the Information, that the prosecution finally rested its case. This<i> protracted delay</i> was caused by: (1) the repeated absence of prosecution witness; (2) the unavailability of court records and TSN; and (3) the frequent absences and unavailability of the public prosecutor, the Presiding Judge, and the assigned PAO lawyer. Again, throughout all these delays and resetting of the case, petitioners were present in court. In fact, even on occasions when their assigned PAO lawyer was unavailable, petitioners were present.<br><br>Given the circumstances, the Court deems it unjust and would be the height of injustice to put the fault on the petitioners for their alleged failure to assert their right to speedy trial at an earlier stage. Generally, the negligence of counsel binds the client, encompassing even mistakes in the application of procedural rules.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> Albeit, the application of this general rule is contingent upon the surrounding circumstances present in the given case, the Court, thus, recognizes established exceptions: (1) where reckless or gross negligence of counsel deprives the client of due process of law; (2) when its application will result in outright deprivation of the client's liberty or property; or (3) where the interests of justice so require."<sup style="COLOR: RGB(255, 0, 0);">[107]</sup> In such instances, the court is obliged to step in and accord relief to a party-litigant.<sup style="COLOR: RGB(255, 0, 0);">[108]</sup><br><br>The present case squarely falls under these exceptions. The failure of petitioners' counsel to timely invoke their constitutional right to a speedy trial before the RTC constitutes gross negligence, which directly led to the prolonged deprivation of petitioners' liberty and fundamental rights. Such negligence cannot be equated to petitioners' mere acquiescence to the delay or a voluntary waiver of the right. Petitioners, being laypersons unfamiliar with the intricacies of the law and court procedures, cannot be expected to assert and protect their legal rights with the same competence and diligence as members of the Bar. Without a final verdict from the court, petitioners remain ordinary citizens seeking justice through the legal system. Thus, to deny them the protection of their constitutional right on the sole basis of their counsel's negligence would be a grave injustice to the very essence of the courts of justice, which are mandated to dispense justice efficiently and fairly.<br><br>Time and again, this Court has fortified the constitutional guarantee of speedy trial, recognizing it as an indispensable safeguard against the oppressive delays of the justice system.<br><br>In<i> Lumanlaw v. Judge Peralta, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> the Court categorically ruled that the right to a speedy trial was violated when the RTC incurred an undue delay of one year, nine months, and four days merely to conduct the arraignment of the accused. The Court dismissed the Information, finding the delay unjustified, especially since it was primarily caused by the absence of the accused's counsel<i> de officio</i> and the failure of the jail warden to present the accused in court.<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> In so ruling, the Court stressed that "courts must strive to maintain a delicate balance between the demands of due process and the strictures of speedy trial, on the one hand; and, on the other, the right of the State to prosecute crimes and rid society of criminals."<sup style="COLOR: RGB(255, 0, 0);">[110]</sup><br><br>In a similar vein, the Court in the case of<i> Aytona v. Paule</i><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> found it necessary to depart from the conventional rule that the negligence of counsel binds the client, invoking the interests of justice as a higher consideration.<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> The Court recognized that the accused's right to a speedy trial was violated being the five-year delay in the proceedings was clearly attributable to the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup><br><br>In the recent case of<i> Galorio v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> the Court found that the prolonged delay of approximately 14 years, coupled with the prosecution's lack of diligence and the trial court's repeated procedural lapses, constituted a blatant violation of the accused's right to speedy trial. The Court emphasized that even if the accused did not assert the right at every opportunity, such omission is not fatal where the delay is inordinate and largely attributable to the State and the judiciary.<br><br>These precedents reinforce the principle that the courts must remain vigilant in ensuring that delays in the criminal justice process do not prejudice the accused, particularly when such delays are rooted in institutional shortcomings or official neglect.<br><br>Here, to the Court's dismay, petitioners were subjected to an unduly prolonged criminal trial, spanning over 14 years, with the primary causes of delay attributable to the court, its agentsâincluding the public prosecutors and presiding judgeâand the broader inefficiencies in the administration of justice. This excessive delay is not only unreasonable but also constitutionally<i> impermissible</i>. It must be emphasized that the prosecution rested its case on November 23, 2017, upon the submission of its Formal Offer of Evidence. This inordinate lapse of time, attributable not to petitioners but to repeated procedural lapses, repeated absences of the key court officers, and poor case management, constitutes a clear violation of petitioners' right to a speedy trial as guaranteed under Article III, Section 14(2) of the 1987 Constitution, and reinforced by Section 7 of Republic Act No. 8493. Regrettably, to repeat, the prosecution took more than 14 years to prosecute the case. The unjust delay surely violated petitioners right to a speedy trial.<br><br>To be sure, while the existence of a violation of the right to speedy trial is not determined solely by the sheer length of delay, the passage of an extraordinarily lengthy period, as in the case, inevitably demands heightened scrutiny by the courts. Indeed, such excessive delay cannot be viewed in isolation but must be weighed in conjunction with the reasons for the delay, the accused's assertion of their right, and the prejudice suffered as a result.<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> Absent such scrutiny, the Constitutional guarantee of speedy disposition of cases would be rendered hollow and illusoryâan empty promise devoid of substantive protection.<sup style="COLOR: RGB(255, 0, 0);">[116]</sup><br><br>The Court cannot simply close this case without addressing the inordinate delay that have come to light. The nearly 17 years it took the trial court to resolve this criminal case is not a result of the complexity of the issues or the volume of evidence in the case, but the cumulative, persistent neglect and inefficiency of the very officers tasked to ensure the expeditious administration of justice.<br><br>The records reveal that the public prosecutors assigned to the case repeatedly failed to appear at scheduled hearings, neglected to secure the presence of prosecution witnesses despite due notice, and manifested unpreparedness on multiple occasions. It is evident that the laxity and indifference of the public prosecutors are inexcusable for they directly infringed petitioner's constitutional right to speedy trial and caused the delay of the resolution of the criminal case for 14 years, solely on account of the prosecution.<br><br>Equally troubling is the conduct of the PAO counsel for petitioners. The frequent absences of petitioners' counsel, whether due to other court engagements or official functions, repeatedly disrupted the continuity of trial. More gravely, the petitioners' counsel failed to timely invoke petitioners' right to a speedy trial despite the multiple and evident breaches of statutory time limits. Verily, the inaction of petitioners' counsel effectively allowed the delay to persist and prejudiced petitioners.<br><br>The Court stresses that the lapses are not minor procedural missteps but grave derelictions of duty that undermine public trust in the criminal justice system. The right to a speedy trial is a shared responsibility among the prosecution, the defense, and the courts. When those entrusted with upholding this constitutional right fail in their obligationsâwhether by repeated absence, lack of preparation, or disregard for statutory mandatesâthey not only violate the rights of the accused but also the public's trust and confidence on the administration of justice.<br><br><b>FOR THESE REASONS</b>, the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The Decision dated July 13, 2022, and the Resolution dated January 16, 2023, of the Court of Appeals in CA-G.R. CR No. 44960 are <b>REVERSED</b> and<b> SET ASIDE</b>. Petitioners Randy Dela Cruz<i> y</i> Deguero and Ricky Vidanes<i> y</i> Osela are hereby<b> ACQUITTED</b> in Criminal Case No. 03-6050-M filed before Branch 80, Regional Trial Court, Morong, Rizal on the ground of violation of accused's right to speedy trial, without prejudice to any civil action which the private complainant/s may file against them. They are<b> ORDERED</b> immediately<b> RELEASED</b> from confinement unless they are being held for some other legal grounds.<br><br>Further, the Court directs Hon. Ma. Teresa C. Cruz-San Gabriel and Hon. Sheila Marie A. Ignacio, former Presiding Judges of Branch 80, Regional Trial Court, Morong, Rizal; Fiscal Wilfredo G. Oca, Fiscal Beppo Jerome Diloy, Fiscal Ferdinand Arabit, and Fiscal Brend Virgilio Vergara, for the prosecution; and Atty. Michael Perocho, Atty. Allan Catmunan, Atty. Isidro Pedron, and Atty. Janine Prelle Dacanay, for the defense, to<b> SHOW CAUSE</b> why they should not be held administratively liable for the inordinate delay in the resolution of Criminal Case No. 03-6050-M.<br><br>Let a copy of this Decision be furnished to the Director General of the Bureau of Corrections for immediate implementation. The Director General is directed to report the action he has taken to this Court within five days from receipt of this Decision.<br><br>Let entry of judgment be <b>ISSUED</b> immediately.<br><br><b>SO ORDERED</b>.<br><br><i>Caguioa (Chairperson), Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup><i> J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i><i>Rollo</i></i>, pp. 13-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 31-45. Penned by Associate Justice Gabriel F. Robeniol and concurred in by Associate Justices Mariene B. Gonzales-Sison and Michael P. Ong of the Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> RTC records, pp. 503-512. Penned by Presiding Judge Shiela Marie A. Ignacio.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> REV. PEN. CODE, art. 249 states:<blockquote>ARTICLE. <i>Homicide</i>. â Any person who, not falling within the provisions of article 246 shall kill another without the attendance of any of the circumstances enumerated in the next preceding article, shall be deemed guilty of homicide and be punished by reclusion temporal.<br></blockquote><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> TSN, Abigail Garcia, January 25, 2006, pp. 3-4, 6-8, 10. <i>See also</i> TSN, Abigail Garcia, April 26, 2006, p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> TSN, Evangeline Versoza, February 16, 2006, pp. 4-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> TSN, Randy Dela Cruz <i>y</i> Deguero, October 14, 2019, pp. 4-5, 7-9, 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> TSN, Ricky Vidanes <i>y</i> Osela, November 26, 2019, pp. 3-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 7, 17-18, 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> RTC records, pp. 503-512.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 512.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 511.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> CA <i><i>rollo</i></i>, pp. 13-14. <i>See</i> Notice of Appeal dated March 4, 2020.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 63-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 65, 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 113-116, 120-121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i><i>Rollo</i></i>, pp. 31-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> CA <i><i>rollo</i></i>, pp. 172-175.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i><i>Rollo</i></i>, pp. 46-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 22-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 111-114. <i>See</i> Comment on the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 114-116.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 117-118.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Heirs of Teresita Villanueva v. Heirs of Petronila Syquia Mendoza</b>, 810 Phil. 172, 177 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Gatan v. Vinarao</b>, 820 Phil. 257, 266 (2017), <i>citing</i> <b>Diokno v. Hon. Cacdac</b>, 553 Phil. 405, 428 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 930 Phil. 250 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 263, <i>citing</i> <b>Visayan Electric Company v. Alfeche</b>, 821 Phil. 971, 982 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Sorongon v. People</b>, 904 Phil. 438, 445 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. Badillos</b>, 832 Phil. 572, 585 (2018), <i>citing</i> <b>People v. Esteban</b>, 735 Phil. 663, 670-671 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> CONST. (1987), art. III., sec. 14(2) states:<br><blockquote>SECTION 14. (1) ...<br><br>(2) In all criminal prosecutions, the accused shall be presumed innocent until the contrary is proved, and shall enjoy the right to be heard by himself and counsel, to be informed of the nature and cause of the accusation against him, to have a speedy, impartial, and public trial, to meet the witnesses face to face, and to have compulsory process to secure the attendance of witnesses and the production of evidence in his behalf. However, after arraignment, trial may proceed notwithstanding the absence of the accused provided that he has been duly notified and his failure to appear is unjustifiable.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Magno v. People</b>, 828 Phil. 453, 462 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Almeda v. Office of the Sandiganbayan (Mindanao)</b>, 791 Phil. 129, 143 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Titled, "AN ACT TO ENSURE A SPEEDY TRIAL OF ALL CRIMINAL CASES BEFORE THE SANDIGANBAYAN, REGIONAL TRIAL COURT, METROPOLITAN TRIAL COURT, MUNICIPAL TRIAL COURT, AND MUNICIPAL CIRCUIT TRIAL COURT, APPROPRIATING FUNDS THEREFOR, AND FOR OTHER PURPOSES," approved on February 12, 1998.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Republic Act No. 8493 (1998), sec. 7 states:<br><blockquote>SECTION 7. <i>Time Limit Between Filing of Information and Arraignment and Between Arraignment and Trial</i>. â The arraignment of an accused shall be held within thirty (30) days from the filing of the information, or from the date the accused has appeared before the justice, judge or court in which the charge is pending, whichever date last occurs. Thereafter, where a plea of not guilty is entered, the accused shall have at least fifteen (15) days to prepare for trial. Trial shall commence within thirty (30) days from arraignment as fixed by the court.<br><br>If the accused pleads not guilty to the crime charged, he/she shall state whether he/she interposes a negative or affirmative defense. A negative defense shall require the prosecution to prove the guilt of the accused beyond reasonable doubt, while an affirmative defense may modify the order of trial and require the accused to prove such defense by clear and convincing evidence.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Promulgated April 25, 2017 and took effect on September 1, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>See</i> <b>Licaros v. Sandiganbayan</b>, 421 Phil. 1075, 1093 (2001), <i>citing</i> <b>Dela PeÃ±a v. Sandiganbayan</b>, 412 Phil. 921, (2001).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Villareal v. People</b>, 680 Phil. 527, 552 (2012), <i>citing</i> <b>People v. Tampal</b>, 314 Phil. 35 (1995).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Cagang v. Sandiganbayan</b>, 837 Phil. 815, 855 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> RTC records, p. 101, Order dated February 18, 2004.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 128, Order dated July 5, 2004.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 141.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>. at 148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 168.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 178.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 186.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 201.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 226.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 241.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 254.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 259.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 260.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>. at 263.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 267.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>. at 270.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>. at 273.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 279.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 281.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>. at 288.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id</i>. at 292.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at 293.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id</i>. at 295.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id</i>. at 301.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 307.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id</i>. at 312.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id</i>. at 317.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id</i>. at 324.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>. at 331.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id</i>. at 341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>. at 350.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>. at 358.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id</i>. at 367.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id</i>. at 377.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id</i>. at 360.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id</i>. at 391.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>. at 397.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id</i>. at 403.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id</i>. at 416.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id</i>. at 428.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id</i>. at 431.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id</i>. at 437.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id</i>. at 447.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id</i>. at 453.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Id</i>. at 468.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id</i>. at 475.<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id</i>. at 477.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id</i>. at 489.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id</i>. at 495.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id</i>. at 497.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id</i>. at 503-511.<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>Chingkoe v. Sandiganbayan</b>, 931 Phil. 62, 78 (2022), <i>citing</i> <b>Cagang v. Sandiganbayan</b>, <i>supra</i> note 48, at 880-882.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Rollo</i>, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <b>B.E. San Diego, Inc. v. Bernardo</b>, 844 Phil. 980, 985 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <b>Air Phils. Corp. v. Int'l. Business Aviation Services Phils., Inc.</b>, 481 Phil. 366, 381 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <b>Estrella v. SM Prime Holdings, Inc.</b>, 936 Phil. 388, 408 (2023), <i>citing</i> <b>Multi-Trans Agency Phils., Inc. v. Oriental Assurance Corp.</b>, 608 Phil. 478, 494 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> 517 Phil. 588 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id</i>. at 598-604.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Id</i>. at 598.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> 931 Phil. 681 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Id</i>. at 687.<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <i>Id</i>. at 693-694.<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> 951 Phil. 316 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <b>Alarilla v. Sandiganbayan</b>, 895 Phil. 542 (2021).<i> See also</i> <b>Cagang v. Sandiganbayan</b>, <i>supra</i> note 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> <b>Alarilla v. Sandiganbayan</b>, <i>id</i>.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

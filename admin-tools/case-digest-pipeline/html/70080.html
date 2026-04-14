@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 260664 - DEVELOPMENT BANK OF THE PHILIPPINES, REPRESENTED BY ITS GENERAL SANTOS CITY BRANCH HEAD, MARIELA LUZ T. CORTEZ, PETITIONER, VS. MANUEL TE, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70080' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 260664, August 18, 2025 ]</H2>
+			<H3>DEVELOPMENT BANK OF THE PHILIPPINES, REPRESENTED BY ITS GENERAL SANTOS CITY BRANCH HEAD, MARIELA LUZ T. CORTEZ, PETITIONER, VS. MANUEL TE, RESPONDENT.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court seeking the review of the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), where the CA affirmed the Order<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) which lifted the Order of Contempt against respondent Manuel L. Te (Te).<br><br><center><i>Factual Antecedents</i></center><br>On December 1, 2010, Development Bank of the Philippines (DBP) filed a Petition for Indirect Contempt<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> against Te before RTC Branch 39 in Polomolok, South Cotabato. The case was docketed as Special Civil Action No. 88-10.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>The indirect contempt action stemmed from the incidents of another civil case pending before the same court, docketed as Civil Case No. 347.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The civil case was filed in November 2001 by Te, in his capacity as attorney-in-fact for the plaintiffs Abdullah Abedin et al. (Abedin group), to recover from DBP 131 certificates of title and 34 other proofs of ownership covering their respective properties. The subject titles were previously surrendered by the Abedin group to DBP as security for their loan. Te also moved for the issuance of a writ of replevin.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>In the course of the proceedings for the civil case, the RTC issued the writ of replevin. DBP surrendered the certificates of title and other proofs of ownership to the sheriff, and in turn, the sheriff handed them to Te. Then, Te filed a motion to dismiss the civil case on the ground of the Abedin group's lack of interest to further prosecute the case.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On March 2, 2004, the RTC issued an Order<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> denying the motion to dismiss and requiring Te, as the Abedin group's attorney-in-fact, to surrender to the trial court the physical and legal custody of all the certificates of title and other proofs of ownership within 30 days from notice.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Te moved for the RTC's partial reconsideration of its Order. On October 11, 2004, the RTC issued another Order<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> denying the motion for partial reconsideration and reiterating its March 2, 2004 Order.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Despite the RTC's directives, Te supposedly refused to surrender all the certificates of title and other proofs of ownership before the trial court. This prompted DBP to file an action for indirect contempt against Te.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On April 16, 2014, the RTC rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> finding Te guilty of indirect contempt. The dispositive portion reads:<blockquote>IN LIGHT OF THE FOREGOING, the present PETITION is GIVEN DUE COURSE for reasons adverted above. Consequently, the Court declares respondent Manuel GUILTY of indirect contempt of court and sentences him to pay a fine of [PHP] 30,000.00 and imprisonment of [two] months or until he duly complies with the court ORDER dated 4 March 2004, in accordance with [Rule 71, Section 3(b) and (d) and Section 7] of the 1997 Rules of Civil Procedure. No cost.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </blockquote>On appeal, the CA affirmed the RTC's ruling.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Undeterred, Te elevated the case to the Court by way of a petition for review on<i> certiorari</i>. On September 14, 2016, the Court issued a Resolution denying the petition for failure to show any reversible error on the part of the appellate court in the assailed judgment.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Te moved for the Court's reconsideration, which was denied with finality in a Resolution dated June 18, 2018.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>The Court's ruling became final and executory on June 18, 2018, as evidenced by the Entry of Judgment<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> issued by the Court.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Later on, Te filed a Manifestation of Compliance<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> before the RTC, where he alleged that he was able to recover 12 out of the 131 certificates of titles and 34 proofs of ownership. He prayed that he be considered to have satisfactorily complied with the penalty against him, considering that he already retrieved some of the subject titles. He also emphasized that the March 2, 2004 RTC Order, which required the turnover of the subject titles to the trial court, was directed to the Abedin group and not to him.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In the July 17, 2020 Order,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> the RTC lifted the Order of Contempt against Te. The RTC found that Te's failure to return the titles does not constitute "willful disregard" of the RTC's order, since those titles were already returned to the actual landowners, which is a matter beyond his control.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The relevant portion of the said Order reads:<blockquote>Furthermore, it may not be amiss to point out: the circumstances herein collectively appreciated, while indeed the subject judgment herein has already attained finality, the Court may still exercise sound discretion whether to mete out the appropriate penalty impose [sic] or consider the Manifestation of Compliance as satisfactory and adequate.<br><br>IN LIGHT OF THE FOREGOING the Orders dated [March 2, 2004] and [April 16, 2004] (Contempt Order) are DEEMED COMPLIED WITH. Corollarily, the Order of Contempt issued against respondent Manuel Te is therefore LIFTED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </blockquote>DBP moved for the RTC's reconsideration, which was denied by the RTC on December 2, 2020.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Then, DBP filed a petition for<i> certiorari</i> before the CA, claiming that the RTC committed grave abuse of discretion when it lifted the Order of Contempt despite Te's failure to fully comply with the same. DBP further pointed out that since Te failed to comply with the said RTC Order, then the ruling holding him in contempt, which had already attained finality, shall stand pursuant to the doctrine of immutability of final judgments.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>On October 29, 2021, the CA rendered the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dismissing the petition for<i> certiorari</i> for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The CA held that the RTC did not modify a final judgment when it lifted the contempt order. Rather, the RTC only gave effect to the compliance made by Te.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>As to whether there was substantial compliance when Te delivered only 12 out of the 131 certificates of title and 34 proofs of ownership, the CA ruled that: (1) there is no clear showing, apart from DBP's assertions, as to how many certificates of title and other proofs of ownership were involved in the proceedings before the court<i> a quo</i>;<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> and (2) Te cannot be faulted if he is unable to fully comply with the order of the trial court inasmuch as he does not have custody of the remaining certificates of title and other proofs of ownership, nor has it been duly established that the said certificates and documents are in his possession.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>The CA also explained that in a petition for<i> certiorari</i> under Rule 65 of the Rules of Court, there must be a clear abuse of the authority vested in a tribunal, which must be so serious and grave to warrant the interference of the court to nullify or modify the challenged action and to undo the damage done. Here, the subject petition for<i> certiorari</i> did not identify specific acts constituting grave abuse of discretion; as DBP merely imputed errors in the RTC's interpretation of Te's compliance with its Order.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>DBP filed a Motion for Reconsideration (MR) before the CA, which was denied in the assailed CA Resolution.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Hence, this Petition,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> where petitioner essentially claimed that the CA committed grave abuse of discretion when it affirmed the ruling of the RTC which lifted the Order of Contempt. Petitioner averred that the RTC's ruling is a clear modification of the final judgment of the Court and is tantamount to a violation of the doctrine of immutability of judgments.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Moreover, petitioner further ascribed fault to the CA when it allegedly failed to consider the arguments raised by the petitioner in its MR, where petitioner allegedly refuted the grounds relied upon by the CA in the assailed Decision in affirming the RTC. Thus, petitioner reiterated that the RTC Order dated March 2, 2004 and Decision dated April 16, 2014 clearly directed respondent, not the Abedin group, to return the certificates of title and other proofs of ownership to the trial court, and that respondent had possession of all these certificates of title and proofs of ownership considering that he voluntarily distributed these to the plaintiffs without the RTC's permission.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>In his Comment,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> respondent primarily maintained that the RTC did not err when it lifted the Order of Contempt, considering that he had already complied with the RTC Order dated March 2, 2004.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> He further claimed that the reason for punishing him for contempt ceased to exist in view of the evidence he submitted and witnesses he presented during the hearing on his Manifestation with Compliance before the RTC. Finally, respondent argued that there was no modification of the terms of the final and executory ruling of the Court. He reiterated that he merely complied with what was directed of him and that the satisfaction of judgment was brought about by circumstances beyond his control.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br><center><i>Issue</i></center><br>The main issue for the Court's resolution is whether the CA committed grave abuse of discretion when it affirmed the RTC's ruling which lifted the judgment of indirect contempt against respondent.<br><br><center><i>Ruling of the Court</i></center><br>The petition is impressed with merit.<br><br>Contempt of court has been exhaustively discussed by the Court in <i>Lorenzo Shipping Corporation v. Distribution Management Association of the Philippines</i><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> in this manner:<blockquote>Contempt of court has been defined as a willful disregard or disobedience of a public authority. In its broad sense, contempt is a disregard of, or disobedience to, the rules or orders of a legislative or judicial body or an interruption of its proceedings by disorderly behavior or insolent language in its presence or so near thereto as to disturb its proceedings or to impair the respect due to such a body. In its restricted and more usual sense, contempt comprehends a despising of the authority, justice, or dignity of a court. The phrase contempt of court is generic, embracing within its legal signification a variety of different acts.<br><br>. . . .<br><br>Contempt of court is of two kinds, namely: direct contempt, which is committed in the presence of or so near the judge as to obstruct him in the administration of justice; and constructive or indirect contempt, which consists of willful disobedience of the lawful process or order of the court.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </blockquote>In<i> Lorenzo Shipping</i>, the Court differentiated the two classes of proceedings for contempt in this wise:<blockquote>Proceedings for contempt are<i> sui generis</i>, in nature criminal, but may be resorted to in civil as well as criminal actions, and independently of any action. They are of two classes, the criminal or punitive, and the civil or remedial.<i> A criminal contempt consists in conduct that is directed against the authority and dignity of a court or of a judge acting judicially, as in unlawfully assailing or discrediting the authority and dignity of the court or judge, or in doing a duly forbidden act</i>. A civil contempt consists in the failure to do something ordered to be done by a court or judge in a civil case for the benefit of the opposing party therein. It is at times difficult to determine whether the proceedings are civil or criminal. In general, the character of the contempt of whether it is criminal or civil is determined by the nature of the contempt involved, regardless of the cause in which the contempt arose, and by the relief sought or dominant purpose.<i> The proceedings are to be regarded as criminal when the purpose is primarily punishment</i>, and civil when the purpose is primarily compensatory or remedial. Where the dominant purpose is to enforce compliance with an order of a court for the benefit of a party in whose favor the order runs, the contempt is civil; where the dominant purpose is to vindicate the dignity and authority of the court, and to protect the interests of the general public, the contempt is criminal. Indeed, the criminal proceedings vindicate the dignity of the courts, but the civil proceedings protect, preserve, and enforce the rights of private parties and compel obedience to orders, judgments and decrees made to enforce such rights.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis supplied) </blockquote>Here, it is undisputed that the respondent had been found guilty of indirect contempt by the RTC when he failed to heed the directives of the trial court in the Order dated March 2, 2004. Moreover, the contempt proceedings are evidently civil in nature as DBP filed the indirect contempt case as a remedial measure to ensure Te's compliance with the said trial court order.<br><br>Having established the nature of the contempt proceedings in the instant case, the Court shall now determine whether the final and executory judgment rendering the contemnor guilty of indirect civil contempt may be lifted upon his or her obedience to the trial court's orders which rendered him or her liable for indirect contempt in the first place.<br><br>Under the doctrine of finality or immutability of judgments, a decision that has acquired finality becomes immutable and unalterable, and may no longer be modified in any respect, even if the modification is meant to correct erroneous conclusions of fact and law.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>This doctrine was reiterated in<i> Industrial Management International Development Corp v. NLRC</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> where the Court declared:<blockquote>Once a decision or order becomes final and executory, it is removed from the power or jurisdiction of the court which rendered it to further alter or amend it. It thereby becomes immutable and unalterable and any amendment or alteration which substantially affects a final and executory judgment is null and void for lack of jurisdiction, including the entire proceedings held for that purpose.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </blockquote>Further, in<i> Eusebio v. Civil Service Commission</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the Court held that the CA erred in reducing the fine imposed by the public respondent in a final and executory judgment which adjudged Eusebio guilty of indirect contempt. The Court emphasized that the authority to impose appropriate penalties for contemptuous conduct was properly exercised by the public respondent, and that such judgment, having attained finality, could no longer be disturbed. Accordingly, the Supreme Court modified the Court of Appeals' ruling and reinstated the original penalty imposed by the public respondent, thereby underscoring the binding nature of final and executory decisions.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>The ruling in<i> Eusebio</i> reinforces a fundamental tenet of procedural law: that a judgment which has attained finality is no longer subject to alteration, modification, or reversal, even by appellate courts, except under specific and narrowly defined exceptions. This principle is especially vital in cases involving judgments for indirect contempt, which are punitive in nature and rendered after due process.<br><br>In the present case, this Court previously affirmed the decisions of the RTC and the CA in G.R. No. 225250, which found respondent guilty of indirect contempt. Despite the finality of this judgment, the RTC gravely erred in issuing its Order dated July 17, 2020, which effectively nullified the contempt ruling by lifting it and removing the penalties previously imposed. The respondent's subsequent attempt to comply with the RTC's Order cannot operate to invalidate or undo a judgment that has long attained finality. While the RTC couched its ruling as a recognition of respondent's alleged compliance, its practical effect was to nullify a final judgment, an act that constitutes an impermissible modification. This directly contravenes the doctrine of finality or immutability of judgments.<br><br>As a result, the proceedings conducted by the RTC for the purpose of amending the dispositive portion of the final decision, specifically, the removal of the penalties imposed against respondent for his contemptuous acts, are void<i> ab initio</i> for lack of jurisdiction. The lower court has no authority to alter, revise, or disregard a final and executory ruling, particularly one which had been upheld by the Supreme Court, the highest tribunal of the land.<br><br>By affirming the RTC's unauthorized modification of a final and executory judgment, the CA likewise committed grave abuse of discretion. It is well-settled that grave abuse of discretion arises when a court or tribunal acts in a capricious, whimsical, arbitrary, or despotic manner, thereby amounting to an evasion of a positive duty or a virtual refusal to perform a legal obligation, and thereby equating to a lack or excess of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Here, the CA erroneously upheld an RTC Order that effectively altered a judgment that had long attained finality. Such action runs afoul with the doctrine of immutability of judgments, which mandates that once a judgment becomes final and executory, it can no longer be modified in any respect, even if the modification is meant to correct a perceived error. The CA's act of affirming the RTC's patently void order falls squarely within the ambit of grave abuse of discretion and warrants corrective action by this Court.<br><br>Consequently, this Court finds that the CA gravely abused its discretion in affirming the RTC's Order that unlawfully disturbed a final and executory judgment.<br><br><b>ACCORDINGLY,</b> the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The assailed Decision dated October 29, 2021 and Resolution dated March 16, 2022 of the Court of Appeals in CA-G.R. SP No. 10244-MIN, which affirmed the Order dated July 17, 2020 issued by Branch 39, Regional Trial Court, Polomolok, South Cotabato, are<b> REVERSED and SET ASIDE</b>.<br><br>Respondent Manuel Te is directed to<b> STRICTLY COMPLY</b> with the Orders dated March 2, 2004 and October 11, 2014 issued by Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><b>SO ORDERED."</b><br><br><i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda,</i> and <i>Marquez, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 31-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 11-19. The October 29, 2021 Decision in CA-G.R. SP No. 10244-MIN was penned by Associate Justice Richard D. Mordeno and concurred in by Associate Justices Evalyn M. Arellano-Morales and Alfonso C. Ruiz II of the Twenty-Third Division, Court of Appeals, Cagayan De Oro.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 21-22. The March 16, 2022 Resolution in CA-G.R. SP No. 10244-MIN was penned by Associate Justice Richard D. Mordeno and concurred in by Associate Justices Evalyn M. Arellano-Morales and Ana Marie T. Mas of the Special Former Twenty-Third Division, Court of Appeals, Cagayan De Oro.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 273-278. The July 17, 2020 Order in SPL Civil Case No. 88-10 was penned by Judge Eddie R. Rojas of Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Not attached to the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 13, 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 67-68, 118.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 13-14, 68, 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 134-136. The March 2, 2004 Order in Civil Case No. 347 was issued by Judge Eddie R. Rojas of Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 137-138. The October 11, 2004 Order in Civil Case No. 347 was issued by Judge Eddie R. Rojas of Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 138.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 67-71. The April 16, 2014 Decision in Civil Case No. 88-10 was penned by Judge Eddie R. Rojas of Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 116-126. The January 8, 2016 Decision in CA-G.R. CR No. 01220 was penned by Associate Justice Edgardo T. Lloren and concurred in by Associate Justices Rafael Antonio M. Santos and Ruben Reynaldo G. Roxas of the Twenty-Third Division, Court of Appeals, Cagayan De Oro.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 130. The September 14, 2016 Resolution in <b>G.R. No. 225250, Manuel L. Te v. People of the Philippines/Development Bank of the Philippines, represented by its General Santos Branch</b>, was issued by the First Division of the Court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 132-133. The Entry of Judgment in <b>G.R. No. 225250, Manuel L. Te v. People of the Philippines/Development Bank of the Philippines, represented by its General Santos Branch</b> was issued by the Clerk of Court through the Deputy Clerk of Court and Chief Judicial Records Officer, Atty. Basilia T. Ringol.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Not attached to the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i>, pp. 74, 274-276.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 273-278. The July 17, 2020 Order in SPL Civil Case No. 88-10 was penned by Judge Eddie R. Rojas of Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 277.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 278.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 279-283. The December 2, 2020 Order in SPL Civil Case No. 88-10 was issued by Judge Eddie R. Rojas of Branch 39, Regional Trial Court, Polomolok, South Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 11-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 15-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 21-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 31-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 42-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 45-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 197-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 217.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 217-224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 672 Phil. 1 (2011) [Per J. Benjamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Eusebio v. Civil Service Commission</b>, 869 Phil. 728, 738-739 (2020) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 387 Phil. 659 (2000) [Per J. Buena, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 667.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 869 Phil. 728 (2020) [Per J. Lazaio-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 738-744.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>United Coconut Planters Bank v. Looyuko</b>, 560 Phil. 581, 591-592 (2007) [Per J. Austria-Martinez, Third Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

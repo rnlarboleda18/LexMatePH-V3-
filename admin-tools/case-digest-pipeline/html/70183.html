@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276106 - JOEL PAZO SUAZO, PETITIONER, VS. TRI MEGAFORCE SECURITY SERVICES CORPORATION, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70183' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276106, August 20, 2025 ]</H2>
+			<H3>JOEL PAZO SUAZO, PETITIONER, VS. TRI MEGAFORCE SECURITY SERVICES CORPORATION, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">In labor cases, the Court reviews the legal correctness of the ruling of the Court of Appeals (CA) when it determines whether the labor tribunals gravely abused their discretion in deciding cases.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Relatedly, no grave abuse of discretion can be ascribed to these tribunals when their decisions are supported by substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>Furthermore, in representing their clients before courts, tribunals, or other government agencies, lawyers are duty-bound to correctly cite jurisprudence and avoid misquoting or misrepresenting the Court's decisions in their arguments.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Thus, the Court is well within its powers to investigate when it finds, in the course of resolving a case, that a lawyer may have misrepresented any law or legal authority in a submitted pleading.<br><br>The instant Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> assails the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the CA in CA-G.R. SP No. 179889, which dismissed the Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> filed by petitioner Joel Pazo Suazo (Suazo). Suazo ascribed grave abuse of discretion to the National Labor Relations Commission (NLRC) when it affirmed with modification the dismissal of his Complaint<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> for illegal dismissal against respondent Tri Megaforce Security Services Corporation (respondent).<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><center><b>The Facts</b></center><br>Respondent hired Suazo as a security guard in 2008. Suazo claimed that on February 10, 2022, he was on the last day of his tour of duty at the Edades Tower Garden and Villas (Edades Tower) in Makati City. Since then, respondent had not given him a new assignment despite his demands. Thus, on December 15, 2022, he filed a Complaint for constructive dismissal with claims for separation pay in lieu of reinstatement, backwages, overtime pay, holiday pay, holiday and rest day premiums, night shift differential pay, 13<sup>th</sup> month pay, service incentive leave pay, and prayer for damages and attorney's fees with the NLRC.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On the other hand, respondent claimed that it did not dismiss Suazo; rather, he allegedly last reported for work on February 8, 2022. Then, he informed respondent that he would be renewing his security license. Since then, Suazo had neither returned to work nor submitted a renewed license. Respondent also sent him three notices directing him to report to his new assignment, but Suazo never replied. Instead, he filed the Complaint.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br><center><b>The Labor Arbiter (LA) Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated February 20, 2023, the LA dismissed Suazo's Complaint for constructive dismissal but directed him to report to respondent within 10 days.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Furthermore, the LA granted Suazo's claims for 13th month pay and service incentive leave pay but denied the other money claims for lack of basis.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>According to the LA, Suazo was not constructively dismissed; rather, despite notice sent by respondent, Suazo failed to report for work. Granted, the LA held, that the first return to work order (RTWO) was sent to the wrong address which belonged to another employee, nonetheless, the second and third RTWOs, which were sent to Suazo's correct address, were also not delivered because Suazo had moved out and left no forwarding address with respondent. Thus, it was Suazo's fault that he did not receive the RTWOs.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> There being neither dismissal nor abandonment, the LA held that Suazo may return to work.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Suazo appealed the LA Decision to the NLRC,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> while respondent lodged a partial appeal<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> from the award of 13<sup>th</sup> month pay and service incentive leave pay.<br><br><center><b>The NLRC Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> dated April 28, 2023, the NLRC denied Suazo's appeal and partially granted respondent's appeal by reducing the monetary award.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The NLRC affirmed the LA in finding that there was no constructive dismissal. Notwithstanding the misspelling of the street name of Suazo's address in the two later RTWOs, records show that the delivery personnel of the Philippine Postal Corporation was able to locate the address; however, as earlier stated, the RTWOs were not delivered because Suazo bad moved out of the address.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On the other hand, the NLRC found that, as shown by the bank certifications presented by respondent, they had already paid Suazo's 13<sup>th</sup> month pay and service incentive leave pay for the years 2019-2021. Accordingly, it reduced Suazo's total monetary award accordingly.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Suazo moved for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> which the NLRC denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated May 31, 2023. This prompted him to file a Petition for <i>Certiorari</i>&nbsp;with the CA.<br><br><center><b>The CA Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated January 30, 2024, the CA dismissed Suazo's Petition.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The CA found the NLRC Decision to be supported by substantial evidence and thus could not ascribe grave abuse of discretion to the latter's ruling. The CA found that Suazo could not prove that respondent told him not to report for work after the last day of his tour of duty at Edades Tower. At the same time, respondent sent notices ordering him to return to work for his new assignment, which records show he failed to heed because he did not notify respondent of his new address. Thus, the CA saw no reason to annul or reverse the NLRC ruling.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Suazo moved to reconsider<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> which the CA denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated September 18, 2024. Hence this Petition, where Suazo insists that there was constructive dismissal because respondent failed to serve the RTWOs.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br><center><b>The Issue before the Court</b></center><br>The issue for the Court's resolution is whether the CA correctly ruled that the NLRC did not gravely abuse its discretion in holding that Suazo was not constructively dismissed.<br><br><center><b>The Court's Ruling</b></center><br>The Petition is without merit.<br><br><center><b>I</b></center><br>The Court's review in Rule 45 petitions is discretionary in nature. Thus, it may deny petition for review on <i>certiorari</i> that raises no special and important reasons warranting review.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Moreover, a petition that raises purely factual issues must also be dismissed because the Court is not authorized to review under the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Constructive dismissal, requiring as it does the examination and evaluation of the evidence on record, is a question of fact. As a rule, it is not reviewable in a Rule 45 petition. While there are exceptions to this rule, none can be found in this Petition. Moreover, in labor cases, the Court reviews the <i>legal correctness</i> of the appellate court's decision, particularly on whether there was grave abuse of discretion in the rulings of the labor tribunals. Case law has held that if the labor tribunals' ruling is based on substantial evidence, there is no grave abuse of discretion.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>This is the case here.<br><br>In finding no constructive dismissal, the labor tribunals consistently held that respondent repeatedly sent the RTWOs to the address provided by Suazo and that they were returned unserved because Suazo had moved out of the address. The LA correctly held that the unsuccessful delivery of the two most recent RTWOs cannot be taken against respondent, as it was Suazo who had moved out of the address without leaving a forwarding address. Contrary to Suazo's argument, this fact is amply supported by tracking receipts from the Philippine Postal Corporation that two of the RTWOs were undelivered because the addressee, Suazo, had moved out.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Finally, the NLRC's finding that a reduction of the monetary awards is in order because respondent had already paid Suazo his 13<sup>th</sup> month pay and service incentive leave pay for the years 2019-2021 is also grounded on substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> As the CA held, citing case law, factual findings of quasi-judicial agencies such as the NLRC are accorded respect when they are supported by substantial evidence, as they are here.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><center><b>II</b></center><br>To support his arguments, Suazo, through his counsel Atty. Rodolfo R. Ranion (Atty. Ranion), cited what appeared at first reading to be 18 decisions of the Court.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> The Court analyzed these decisions and the citations for each of them as Suazo provided, as well as the dates of their supposed promulgation. In doing so, the Court found that these decisions either do not exist, contain General Register (G.R.) Numbers for other unrelated cases and erroneous promulgation dates, pertain to cases that have no relation to the issues in this case or worse, or contain doctrines that <i>oppose</i> rather than <i>support</i> Suazo's arguments. To the Court, the number and frequency of these misquoted and misrepresented decisions merit a <i>motu proprio</i> institution of an administrative disciplinary complaint against Atty. Ranion pursuant to Canon VI, Section 2 of the Code of Professional Responsibility and Accountability (CPRA) for a possible violation of Canon II, Section 8 of the same Code, which prohibits lawyers from misleading the Court as to the existence or contents of, among others, any law or other legal authority.<br><br>Suazo's Petition presents three argumentsâeach of which contains a set of supposed Court decisions to support the argument. The Court discusses these decisions by order of each argument.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em><strong>First Argument: The CA erred in ruling that the RTWOs were validly served.</strong></em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Suazo's Petition cites five supposed Court decisions to support this argument.<br><br><b><i>1. Benguet Electric Cooperative v. Fianza</i></b><br><br>The Petition claims that this case was promulgated on November 17, 2010 and is registered as G.R. No. 170194.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Purportedly, this case involves an employee who was constructively dismissed after failing to receive her work assignments. Allegedly, the Supreme Court in this case held that "in the absence of evidence proving actual receipt of the notices, there is no valid return-to-work order, and the employee cannot be faulted for non-compliance."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>The G.R. number in this case does not pertain to any promulgated <i>decision</i> of the Court. Furthermore, none of the decisions or signed resolutions promulgated by the Court on November 17, 2010 refer to either Benguet Electric Cooperative or a certain "Fianza." Curiously, however, on <i>March 9, 2004</i>, the Court promulgated a decision in the case of <i>Benguet Electric Cooperative, et al. v. Josephine Fianza</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> with <i>G.R. No. 158606</i> and reported in the Philippine Reports, Volume 468, pages 980-999. While this case pertains to a claim of constructive dismissal, the issue was whether Josephine Fianza was demoted by the petitioner therein. Contrary to Suazo's Petition, the receipt of any RTWO was not in issue as there was no such order issued in that case. Worse, the Court ruled in favor of the employer and not the employee.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br><b><i>2. Yrasuegui v. Philippine Airlines, Inc.</i></b><sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>According to Suazo, in <i>Yrasuegui</i>, the employer, Philippine Airlines, Inc., claimed that it sent notices of reassignment and warnings to its employee to deny the claim of constructive dismissal. The Court allegedly ruled in favor of the employee, stating that service of notices must be clearly established and that mere claims of mailing do not suffice.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>However, no notices of reassignment or warnings were issued in <i>Yrasuegui</i>. Hence, the issue of mailing said notices was not, as it could not be, in issue. Instead, the main issue for the Court's resolution was whether the employee's continued failure to meet the employer's weight requirement for flight attendants is a valid ground for termination of employment. There, the Court ruled in favor of the employer.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br><b><i>3. Puyat v. CA</i></b><br><br>Suazo then cites the Court's supposed decision in a case that is allegedly registered as G.R. No. 130777 and promulgated on April 12, 2000.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> However, the G.R. number in this case does not pertain to any promulgated decision or signed resolution of the Court. Furthermore, none of the decisions or signed resolutions promulgated by the Court on April 12, 2000 refer to a certain "Puyat."<br><br><b><i>4. Shimizu Phils. Contractors, Inc. v. Callanta</i></b><sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Suazo's Petition cites the correct docket number for this case, <i>G.R. No. 165923</i>, but erroneously indicated that the decision was promulgated on October 30, 2009. In fact, the decision was promulgated on <i>September 29, 2010</i>. The Petition alleged that in <i>Shimizu Phils. Contractors, Inc.</i>, the employer claimed that it sent notices to its employee after the latter had abandoned his post. The Court allegedly ruled that the employer failed to substantiate its claim that it sent the notices by mail.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>The Petition again mischaracterizes the facts and ruling in <i>Shimizu Phils. Contractors, Inc.</i> The employee in that case did not abandon their post but was retrenched. Moreover, the Court held that the dismissal was legal and ruled in favor of the employer.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br><b><i>5. Santos v. San Miguel Corporation</i></b><sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Suazo next cites <i>Santos</i>, claiming that in this case, the employee was terminated for absence without leave. The employer claimed that it sent the employee several warnings through registered mail, which the employee denied receiving. The Court allegedly ruled that "in cases where the receipt of a notice is in question, the burden of proof lies with the employer, and failure to prove receipt nullified the employer's defense."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>However, <i>Santos</i> did not deal at all with the issue of mailing notices to employees. Rather, the Court resolved the issue of loss of confidence as a ground to dismiss an employee. In fact, the facts did not in any way indicate that the employer mailed notices to the employee.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup>&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><strong><em>Second Argument: The CA erred in affirming that Suazo was not constructively dismissed.</em></strong></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Suazo's Petition cites eight decisions to assail the CA's finding that Suazo was not placed on "floating" status and that the respondent presented sufficient evidence to prove that no constructive dismissal took place.<br><br><b><i>1. Pascua v. Bankwise, Inc.</i></b><br><br>The petition claims that this case was promulgated on February 28, 2011 and is registered as G.R. No. 177520.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The case allegedly involves an employee who was placed on "floating" status for more than six months. The Court purportedly held that the employee was constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The G.R. number in this case does not pertain to any promulgated decision or signed resolution of the Court. Moreover, none of the decisions or signed resolutions promulgated by the Court on February 28, 2011 involve any party named "Pascua" or "Bankwise, Inc." However, the Court promulgated a decision on the consolidated cases of <i>Pascua v. Bankwise, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> on <i>January 31, 2018</i>. The consolidated cases are registered as <i>G.R. No. 191460 and 191464</i>. There, the Court found <i>no constructive dismissal</i> because the employee submitted an "unconditional and categorical letter of resignation."<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Contrary to Suazo's argument, the Court absolved the employer from paying the employee's money claims.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><b><i>2. Blue Dairy Corporation v. NLRC</i></b><sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>The Petition erroneously cites that the decision in <i>Blue Dairy Corporation</i> was promulgated on February 9, 1999; when in fact, it was promulgated on <i>September 14, 1999</i>. Suazo alleged that the Court, faced with an employee who was placed on floating status for more than six months, held that the employee was constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>In fact, nowhere in the <i>Blue Dairy Corporation</i> decision was the issue of being placed on floating status discussed or even referred to. Instead, the case revolved whether the <i>transfer of an employee</i> amounted to constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br><b><i>3. Philippine Industrial Security Agency Corporation v. Aguinaldo</i></b><sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>The decision in <i>Philippine Industrial Security Agency Corporation</i> was not, as Suazo claims, promulgated on March 30, 2004;<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> rather, it was promulgated on June 15, 2005.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Like <i>Blue Dairy Corporation, Philippine Industrial Security Agency Corporation</i> is invoked in Suazo's Petition to claim that the factual backgrounds are similar. Allegedly, the case also involved an employee whose floating status lasted for more than six months, thus resulting in constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> This misrepresents the facts of the case.<br><br><i>Philippine Industrial Security Agency Corporation</i> dealt with a <i>transfer</i> of an employee that amounted to constructive dismissal. In no way was there a discussion on the floating status of an employee because the employee in that case was not placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br><b><i>4. Lim v. CA</i></b><br><br>Suazo then cites the Court's decision in "<i>Lim v. Court of Appeals</i>," purportedly registered as G.R. No. 138993 and promulgated on April 16, 2001. In the said case, the Court allegedly decided that the payroll records presented by the employer had no probative value because they were not authenticated.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>G.R. No. 138993 refers to the case of <i>Philippine Veterans Bank v. Hon. Estrella and Solid Homes, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> a civil case promulgated on <i>June 27, 2003</i> that had nothing at all to do with payroll records and their need for authentication.<br><br><b><i>5. Burgundy Realty Corporation v. Reyes</i></b><br><br>According to Suazo's Petition, this case was registered as G.R. No. 153962 and the Court's decision was promulgated on September 23, 2003. The Court allegedly decided that the documentary evidence presented by the employer to prove its employee's voluntary resignation could not be given any probative value since the employer failed to present independent proof of authenticity.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>The G.R. number in this case does not pertain to any promulgated decision or signed resolution of the Court. As well, there appears to be no decision or signed resolution promulgated by the Court on September 23, 2003 that resolves a case between a "Burgundy Realty Corporation" and a certain "Reyes."<br><br><b><i>6. Dela Cruz v. NLRC</i></b><sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>Suazo claims that <i>Dela Cruz</i> involved employment records and payroll sheets that were not properly authenticated and thus given no probative value by the Court and were deemed insufficient evidence.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>In truth, the Court made no such declaration in <i>Dela Cruz</i> because the case revolved around the issue of whether the NLRC erred in denying the employee's claim for back wages even though he was illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> The facts of that case did not indicate that payroll sheets were presented or were not authenticated.<br><br><b><i>7. Santos v. CA</i></b><br><br>Suazo cites the Court's decision in "<i>Santos v. CA</i>," a case allegedly registered as G.R. No. 160453 and promulgated on March 10, 2006.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> However, this G.R. number properly refers to the case of <i>Republic v. Santos III</i><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> a case thatâfar from dealing with the evidence presented to prove valid termination of an employee<sup style="COLOR: RGB(255, 0, 0);">[73]</sup>âresolved the issue of whether the drying up of a riverbed could be considered a form of accretion in property law. The Court held that it could not.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br><b><i>8. Heirs of Ureta, Sr. v. Heirs of Ureta</i></b><br><br>According to Suazo, the Court in <i>Heirs of Ureta, Sr.</i> held that mere presentation of documentary evidence does not automatically confer probative value. The case was allegedly registered as G.R. No. 185829 and the decision was promulgated on June 13, 2012.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>However, G.R. No. 185829 refers to the case of <i>Aliling v. Feliciano</i>,<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> promulgated on <i>April 25, 2012</i>, where the Court resolved, among others, the issue of whether the employee is probationary or regular.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Notably, the Court decided the case of <i>Heirs of Ureta, Sr. v. Heirs of Ureta</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> registered as <i>G.R. Nos. 165748 and 165930</i>, promulgated on September 14, 2011. None of the issues presented in that case and resolved by the Court revolved around the probative value of documentary evidence. Rather, the Court determined the intrinsic validity of the Deeds of Sale and Extra-Judicial Partition involved in the case.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup>&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em><strong>Third Argument: The CA erred in affirming the reduction of monetary awards due.</strong></em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br><b><i>1. Austria v. NLRC</i></b><sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>According to Suazo, the Court held in <i>Austria</i> that the employer failed to prove payment of service incentive leave pay and 13<sup>th</sup> month pay.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> However, this was not at all the issue in that case and the facts, as stated in the decision, did not in any way state that proof of payment of these claims was in issue. Rather, the Court resolved whether the employer may question the jurisdiction of the NLRC over an illegal dismissal case involving a religious organization after having participated in the labor proceedings, and whether the dismissal of a pastor was illegal.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br><b><i>2. Arriola v. Pilipino Star Ngayon</i></b><br><br>Suazo claims that the Court decided in <i>Arriola</i> that the employer failed to prove that it had paid its employee's 13<sup>th</sup> month pay and service incentive leave pay. He stated that the <i>Arriola</i> is registered as G.R. No. 164856 and promulgated on June 28, 2005.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>However, G.R. No. 164856 refers to the case of <i>Garcia v. Philippine Airlines, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> which resolved the issue of payment of salaries and employee claims vis-Ã -vis the employer's corporate rehabilitation, among others. Notably, the Court decided <i>Arriola v. Pilipino Star Ngayon, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> on <i>August 13, 2014</i>. This case is registered as <i>G.R. No. 175689</i> and did not involve proof of payment of 13<sup>th</sup> month pay and service incentive leave pay. Rather, it decided whether the complaint for illegal dismissal had prescribed and whether the employee was illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br><b><i>3. San Miguel Corporation v. NLRC</i></b><br><br>Suazo then cites the Court's alleged decision in a case that is registered as G.R. No. 101277 and promulgated on October 28, 1996.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> However, the G.R. number in this case does not pertain to any promulgated decision or signed resolution of the Court. Furthermore, none of the decisions or signed resolutions promulgated by the Court on October 28, 1996 refer to San Miguel Corporation as a party to a case.<br><br><b><i>4. G&amp;M Philippines v. Esguerra</i></b><br><br>As in the previous "decision," Suazo cites the Court's alleged decision in a case that is registered as G.R. No. 153789 and promulgated on July 17, 2006.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> Like in the previous case, the G.R. number in this case does not pertain to any promulgated decision or signed resolution of the Court. Further, none of the decisions or signed resolutions promulgated by the Court on July 17, 2006 refer to "G&amp;M Philippines" and "Esguerra" as parties to a case.<br><br><b><i>5. Maranaw Hotels and Resort Corporation v. NLRC</i></b><br><br>Although correctly cited, the proper title to this case is <i>Maranaw Hotels and Resort Corp. v. <b>Court of Appeals</b></i>.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> Furthermore, the decision was promulgated on January 20, 2009, and not March 17, 2006 as stated in the Petition.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> More importantly, the facts of the case did not give rise to the issue of proof of payment of 13<sup>th</sup> month pay and service incentive leave pay. Rather, the Court resolved whether the lack of authority of the signatory of the certification against forum shopping results in the dismissal of the petition, and whether the employer in that case engaged in forum shopping.<br><br>As stated earlier, the Court is disturbed by the sheer number of misquotations, mischaracterizations, and misrepresentations of its previous decisions committed by Suazo's counsel. It should be remembered that the Court's decisions form part of the law of the land<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> and misrepresenting the law is not only a punishable act under the CPRA but a violation of the Lawyer's Oath. To say the least, this kind of misrepresentation erodes the public's faith in the legal profession and lawyers' ability to effectively represent their client. At best, it shows shoddy legal research not befitting any lawyer worth their salt, and at worst, it evinces an intent to deceive the Court into ruling in a client's favor by inventing and misrepresenting case law to support one's arguments. This calls, then, for a thorough investigation by the Integrated Bar of the Philippines.<br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Decision dated January 30, 2024 and the Resolution dated September 18, 2024 of the Court of Appeals in CA-G.R. SP No. 179889 are hereby <b>AFFIRMED</b>.<br><br>Furthermore, and pursuant to Canon VI, Section 2 of the Code of Professional Responsibility and Accountability, the Court <i>motu proprio</i> institutes an administrative disciplinary complaint against Atty. Rodolfo R. Ranion, and thus, orders the same to be <b>DOCKETED</b> as a separate administrative case. Let this case be <b>REFERRED</b> and the records <b>TRANSMITTED</b> to the Integrated Bar of the Philippines for appropriate proceedings pursuant to Canon VI of the Code of Professional Responsibility and Accountability.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>See</i> <b>Buenaflor v. Stolt-Nielsen Philippines, Inc.</b>, 923 Phil. 790, 799 (2022) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>See id.</i> at 800.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> CODE OF PROFESSIONAL RESPONSIBILITY AND ACCOUNTABILITY, Canon II, sec. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 3-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 27-40. The January 30, 2024 Decision was penned by Associate Justice Geraldine C. Fiel-Macaraig and concurred in by Associate Justices Apolinario D. Bruselas, Jr. and Jennifer Joy C. Ong of the Fourth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 24-25. The September 18, 2024 Resolution was penned by Associate Justice Geraldine C. Fiel-Macaraig and concurred in by Associate Justices Apolinario D. Bruselas, Jr. and Jennifer Joy C. Ong of the Former Fourth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 52-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Id.at 226-233. The February 20, 2023 Decision in NLRC NCR Case No. 12-00494-22 was penned by Labor Arbiter Julio R. Gayaman of the National Labor Relations Commission, National Capital Region, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 242-249.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 253-261.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 265-280. The April 28, 2023 Decision in NLRC LAC No. 03-001048-23 was penned by Presiding Commissioner Joseph Gerard E. Mabilog and concurred in by Commissioners Agnes Alexis A. Lucero-De Grano and Donna Caluag Ramos of the Sixth Division, National Labor Relations Commission.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 279.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 273-275.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 276-278.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 281-287.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 293-294. The May 31, 2023 Resolution in NLRC LAC No. 03-001048-23 was penned by Presiding Commissioner Joseph Gerard E. Mabilog and concurred in by Commissioners Agnes Alexis A. Lucero-De Grano and Donna Caluag Ramos of the Sixth Division, National Labor Relations Commission.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 27-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at. 34-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 41-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 24-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 8-9.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> RULES OF COURT, rule 45, sec. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>Magno v. Career Philippines Shipmanagement, Inc.</b>, 942 Phil. 668, 679-680 (2023) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>Buenaflor v. Stolt-Nielsen Philippines, Inc.</b>, 923 Phil. 790, 799-800 (2022) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i>, p. 229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 276-278.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 37, <i>citing</i> <b>Emeritus Security and Maintenance Systems, Inc. v. Dailig</b>, 731 Phil. 319, 324-325 (2014) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo</i>, pp. 9-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 468 Phil. 980 (2004) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 999.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 590 Phil. 490 (2008) [Per J. R. Reyes, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, p. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 590 Phil. 490, 505-517 (2008) [Per J. R. Reyes, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, p. 10.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 646 Phil. 147 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, p. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Shimizu Phils. Contractors, Inc. v. Callanta</b>, 646 Phil. 147, 159-160 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 447 Phil. 264 (2003) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 447 Phil. 264, 277-278 (2003) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, p. 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 824 Phil. 846 (2018) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 848.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See id.</i> at 848, 859-863.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 373 Phil. 179 (1999) [Per J. Bellosillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, pp. 12-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Blue Dairy Corporation v. NLRC</b>, 373 Phil. 179 (1999) [Per J. Bellosillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 499 Phil. 215 (2005) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 499 Phil. 215 (2005) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 499 Phil. 215, 225-228 (2005) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Rollo</i>, p. 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 453 Phil. 45 (2003) [Per J. Callejo, Sr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, p. 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 359 Phil. 316 (1998) [Per J. Davide, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Rollo</i>, p. 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>See</i> 359 Phil. 316 (1998) [Per J. Davide, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Rollo</i>, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 698 Phil. 275 (2012) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>See rollo</i>, p.15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> 698 Phil. 275, 278 (2012) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 686 Phil. 889 (2012) [Per J. Velasco, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 903-909.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 673 Phil. 188 (2011) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 207-209.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 371 Phil. 340 (1999) [Per J. Kapunan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Rollo</i>, pp. 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>See</i> 371 Phil. 340 (1999) [Per J. Kapunan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Rollo</i>, p. 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> 596 Phil. 510 (2009) [Per J. Carpio Morales, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> 741 Phil. 171 (2014) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>See id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Rollo</i>, p. 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id.</i> at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 596 Phil. 491 (2009) [Per C.J. Puno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Rollo</i>, p. 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> CIVIL CODE, art. 8.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

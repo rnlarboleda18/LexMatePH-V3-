@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276422 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX276422,* ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70130' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276422, August 11, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX276422,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="justify"><p>The child is one of the "most important assets of the nation" and all efforts are "exerted by the State to promote [their] welfare and enhance [their] opportunities for a useful and happy life. Unfortunately, the child is also one of the most vulnerable victims of human trafficking. All those involved in the trafficking of personsâespecially minorsâmust be punished."<sup style="COLOR: RGB(255, 0, 0);">[1]</sup></p><p> This Court resolves the Appeal filed by XXX276422 assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals affirming with modification the Joint Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court, which found XXX276422 guilty beyond reasonable doubt of child pornography and qualified trafficking in persons.</p><p> Six Informations were filed before the Regional Trial Court against XXX276422 and her co-accused Clarita Gumobal Dumala (Dumala) charging them with the following offenses: (1) two counts of child pornography under Section 4(a) of Republic Act No. 9775 or the Anti-Child Pornography Act of 2009; (2) two counts of qualified trafficking in persons under Section 4(a), in relation to Section 6(d) of Republic Act No. 9208, or the Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364; and (3) two counts of other acts of child abuse under Section 10(a) of Republic Act No. 7610, or the Special Protection of Children Against Abuse, Exploitation and Discrimination Act.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> The accusatory portions of the Informations read:</p><p align="center"> <b>Criminal Case No. C-108373</b> <i><br> Child Pornography under Sec. 4(a), RA 9775</i> </p><blockquote> <p> That on or about February 23, 2019 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City, Metro Manila and within the jurisdiction of this Honorable Court, the abovenamed accused did then and there willfully, unlawfully[,] and feloniously use, persuade, induce, coerce[,] and groom her daughter [AAA276422], 11 years old, to perform in the creation or production or child pornography by making the child perform lascivious acts in front of a webcam or internet connected cameras and to engage in child prostitution, in exchange of money or profit, thereby making her own daughter a prostitute, to her damage and prejudice.</p> <p> CONTRARY TO LAW.</p> <p align="center"> <b>Criminal Case No. C-108374</b> <i><br> Child Pornography</i> </p> <p> That on or about February 23, 2019 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City, Metro Manila and within the jurisdiction of this Honorable Court, the above-named accused did then and there willfully, unlawfully[,] and feloniously use, persuade, induce, coerce[,] and groom her daughter [BBB276422], 5 years old to perform in the creation or production of child pornography by making the child perform lascivious acts in front of a webcam or internet connected cameras and to engage in child prostitution, in exchange of money or profit, thereby making her own daughter a prostitute, to her damage and prejudice.</p> <p> CONTRARY TO LAW.</p> <p align="center"> <strong>Criminal Case No. C-108375</strong><br> (Qualified Trafficking in Persons)</p> <p> That on or about February 23, 2019 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City, Metro Manila and within the jurisdiction of this Honorable Court, the above-named accused, conspiring together and mutually helping with one another, did then and willfully, unlawfully[,] and feloniously offer, provide, sell[,] and distribute via live pornographic videos [of] accused [XXX276422's] minor daughter namely[,] [AAA276422], 11 years old, to an undercover operative of the Anti-Trafficking in Persons Division, Internet Crimes Against Children Unit (ATIPD-ICAC) of the Philippine National Police, Camp Crame[,] Quezon City, for a fee to be wired to the name of accused Clarita Gumombal Dumala, through the use of computers, cellphone, internet[,] and other forms of information technology, using adult website <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxx</span> under the username 'cutemom' and via Skype under the username 'meyaw', thereby enticing/agreeing with the undercover operative to let the aforenamed minor do pornographic actions such as 'naked play pussy' and 'play finger pussin'(sic) in front of the internet connected cameras from the mentioned gadgets, to the damage and prejudice of the aforenamed minor-victim.</p> <p> CONTRARY TO LAW.</p> </blockquote> <p align="center"> <b>Criminal Case No. C-108376</b> <i><br> Qualified Trafficking in Persons</i> </p><blockquote> <p> That on or about February 23, 2019, in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City, Metro Manila and within the jurisdiction of this Honorable Court, the above-named accused, conspiring together and mutually helping with one another, did then and willfully, unlawfully[,] and feloniously offer, provide, sell[,] and distribute via live pornographic videos [of] accused [XXX276422's] minor daughter namely[,] [BBB276422], 5 years old, to an undercover operative of the Anti-Trafficking in Persons Division, Internet Crimes Against Children Unit (ATIPD-ICAC) or the Philippine National Police, Camp Crame[,] Quezon City, for a fee to be wired to the name of accused Clarita Gumombal Dumala, through the use of computers, cellphone, internet[,] and other forms of information technology, using adult website <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> under the username 'cutemom' and via Skype under the username 'meyaw', thereby enticing/agreeing with the undercover operative to let the aforenamed minor do pornographic actions such as 'naked play-pussy' and 'play finger pussin' (sic) in front of the internet connected cameras from the mentioned gadgets, to the damage and prejudice of the aforenamed [minor-victim].</p> <p> CONTRARY TO LAW.</p> <p align="center"> <b>Criminal Case No. C-108377</b> <i><br> Other Acts of Child Abuse</i></p> <p> That on or about the 23<sup>rd</sup> day of February 2019 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City, Metro Manila, and within the jurisdiction of this Honorable Court, the above-named accused, who is the biological mother of herein minor [AAA276422], 11 years old, and acting with grave abuse of authority and confidence did then and there willfully, unlawfully[,] and feloniously commit other acts of neglect, abuse, cruelty[,] or exploitation and other conditions prejudicial to the children's development, by then and there engaging said innocent minor daughter of hers to engage in prostitution by posing her in a webcam or video call via Skype and via adult website called <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> which acts conditions are prejudicial to the growth and development of said minor, and demeans, degrades[,] and debases the intrinsic worth and dignity of the latter.</p> <p align="justify"> CONTRARY TO LAW.</p> </blockquote> <p align="center"> <b>Criminal Case No. C-108378</b> <i><br> Other Acts of Child Abuse</i> </p><blockquote> <p> That on or about the 23<sup>rd</sup> day of February 2019 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City, Metro Manila, and within the jurisdiction of this Honorable Court, the above-named, accused, who is the biological mother of herein minor [BBB276427], 5 years old, and acting with grave abuse of authority and confidence, did then and there willfully, unlawfully[,] and feloniously commit other acts of neglect, abuse, cruelty[,] or exploitation and other conditions prejudicial to the children's development, by then and there engaging said innocent minor daughter of hers to engage in prostitution by posing her in a webcam or video call via Skype and via adult website called <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> which acts conditions are prejudicial to the growth and development of said minor, and demeans, degrades[,] and debases the intrinsic worth and dignity of the latter.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p> </blockquote> <p> Both XXX276422 and Dumala pleaded not guilty.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p> <p> The prosecution presented the following witnesses: Police Staff Sergeant (PSSg) Shirley M. Addamo; Police Lieutenant (PLT) Dennis A. Labrador; Police Major Michael T. Virtudazo (PMAJ Virtudazo); Patrolman Jovelan Alcantara, Jr.; Police Senior Master Sergeant (PSMS) Albert O. Bitoon; PLT Lalaine Paglinawan (PLT Paglinawan); PSSg Marichel Contemplo; AAA276422, one of the private complainants; and AAA276422's and BBB276422's brother.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Their testimonies are summarized as follows:</p> <p> On September 9, 2018, the National Criminal Investigation Services-Norway referred a case to the Philippine National Police-Women and Children Protection Center (PNP-WCPC), Camp Crame, Quezon City, relative to the investigation of a Norwegian suspect who "repeatedly requested child sexual abuses from a Filipino account name[d] 'cutemom,' later identified to be [XXX276422], on the website <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. The referral likewise stated that this 'cutemom' instructed her children to perform sexual live shows, i.e., removing clothes online and playing with their genitalia."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> Given this, PMAJ Virtudazo of the PNP-WCPC made an online account to pose as a potential customer.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> During the investigation, he successfully identified XXX276422's account in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span> as well as her residential address.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> He sent money twice to XXX276422 for a "show," once via Western Union in the sum of 225 Norwegian Krone and addressed to "Clarita," found in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>, Metro Manila, and the other through Cebuana Lhuillier Express Padala amounting to PHP 1,800.00.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> In an earlier private video chat, XXX276422 instructed BBB276422, her 5-year-old daughter, to undress.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> On seeing that BBB276422 was about to undress, PMAJ Virtudazo immediately turned off his camera.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> On February 23, 2019, the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City Police conducted a surveillance operation and confirmed XXX276422's identity and her house's location.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The police immediately organized a team and assigned undercover agents to conduct entrapment and rescue operations.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> PMAJ Virtudazo went online and had a video call with XXX276422 and AAA276422, her 11-year-old daughter.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> PMAJ Virtudazo asked XXX276422 what her daughter could do, and she said that AAA276422 "can go naked and show her private parts."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> While this was ongoing, the assaulting and arresting team went inside XXX276422's house after PMAJ Virtudazo gave the signal.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p> To avoid suspicion, PMAJ Virtudazo kept on chatting with XXX276422 and AAA276422 while remaining inside the van parked outside XXX276422's house.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> XXX276422's son opened the door for the assaulting and arresting team.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Upon hearing some people entering her home, XXX276422 turned off her camera.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> PMAJ Virtudazo likewise turned off his camera and followed the rest of the team.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> XXX276422 was arrested and the victims rescued.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> At this point, Dumala voluntarily entered the house and introduced herself as the one who received the money twice on XXX276422's account; she was also arrested.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The seizing team then secured the crime scene and took photographs.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> After the rescue operation, PLT Paglinawan and a social worker conducted the intake interview of AAA276422.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> AAA276422 narrated that her mother would ask her to undress in front of the camera and show her private parts to foreigners.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> At one time, she even urinated on the floor at the instruction of XXX276422.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> AAA276422 was aware that Dumala was the one who referred foreign clients to her mother, and that both would go to the bank together to get the money.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> XXX276422 would ask AAA276422 to do shows whenever she was off from school or during the weekends.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Aside from her, XXX276422 would also ask her younger sister, BBB276422; her classmates; or even her neighbors to do the shows.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> On the day of the incident, AAA276422 said that there was a possibility that she was to perform a show had it not been for the timely intervention of the police.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> AAA276422 also disclosed that XXX276422 also sent her pictures to foreigners, and that their father had no idea what XXX276422 was doing.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></p><p> The minor son of XXX276422, AAA276422's brother, corroborated AAA276422's testimony.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> He claimed that XXX276422 also instructs him to remove his clothes in front of the camera for male foreigners to see.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> He did this all inside XXX276422's room about four times.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Afterwards, XXX276422 would give him PHP 20.00.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Upon being asked if he knew why he was rescued, he answered "<i>si mama nag o-sex po</i>," which he explained as "<i>yung pinapakita po kami na nakahubad kami</i>."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> The social worker's report revealed that XXX276422 usually strips naked in front of the camera and her minor children would also be requested to do the same.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> AAA276422 said that she had been doing private shows for three years since money was involved.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> She reasoned "[<i>m</i>]<i>ay tip na ibibigay basta gawin ang mga ipinagagawa</i>."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> She said she trusted her mother because she had been doing it for years already.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></p><p> XXX276422's son also revealed that he would see AAA276422 and XXX276422 both naked in front of the computer camera.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></p><p> Meanwhile, Dumala was the sole witness for the defense.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> She denied the accusation against her and gave the following version of the facts: </p><p> On February 20, 2019, XXX276422 went to Dumala's house and asked the latter to accompany her to get her money for legal assistance at the Western Union in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The remittance was addressed to Dumala because XXX276422 had no identification card.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> After getting the money, they went home.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> On February 22, 2019, XXX276422 again went to Dumala's house and asked the latter to accompany her in getting her money at Cebuana Lhuillier, as the remittance was again addressed to Dumala.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></p><p> On February 23, 2019, between 6:00 to 7:00 a.m., two police officers arrested Dumala, telling her that she was being invited to the police station for receiving money on behalf of XXX276422.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> However, contrary to this, they went to XXX276422's house instead.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Upon arriving at XXX276422's house, she was already handcuffed while the police officers were rummaging through XXX276422's belongings in the presence of a barangay tanod.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Then, the police photographed Dumala.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p><p> Later, Dumala and XXX276422 were brought to Camp Crame.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The police officers informed Dumala that she and XXX276422 had been indicted for human trafficking.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Dumala told the police officers that she merely received money on behalf of XXX276422, who had no identification card, and that she did not know where the money came from.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></p><p> In its September 9, 2022 Joint Decision, the Regional Trial Court found XXX276422 guilty beyond reasonable doubt of one count of child pornography and two counts of qualified trafficking; the rest of the charges were dismissed.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The dispositive portion of the Joint Decision reads: </p><blockquote> <p> <b>WHEREFORE</b>, in view of the foregoing, judgment is hereby rendered:</p> <p align="justify"> <u>In Criminal Case No. C-108373</u></p> <p> Accused [XXX276422] is found GUILTY BEYOND REASONABLE DOUBT [of] Child Pornography under Section 4(a) of Republic Act No. 9775 and is hereby sentenced to suffer the penalty of imprisonment of fourteen (14) years, eight (8) months and one (1) day of <i>reclusion temporal</i> as minimum to twenty (20) years of <i>reclusion temporal</i> as maximum and to pay a fine of One million pesos (Php 1,000,000.00) </p> <p> Accused [XXX276422] is further ordered to pay the victim [AAA276422] moral damages in the amount of Five Hundred Thousand Pesos (P[hp] 500,000.00) and exemplary damages of One Hundred Thousand Pesos (P[hp] 100,000.00) with interest at the rate of six percent (6%) per annum from the date of finality of the decision until fully paid. </p> <p> <u>In Criminal Case No. C-108374</u></p> <p> Accused [XXX276422] is ACQUITTED of the charge [of] Child Pornography under Section 4(a) of Republic Act No. 9775 for failure of the prosecution to present evidence to establish guilt beyond reasonable doubt.</p> <p> <u>In Criminal Case No. C-108375</u></p> <p> Accused [XXX276422] is found GUILTY BEYOND REASONABLE DOUBT of the crime of [v]iolation of Section 4(a) in relation to Section 6(d) of Republic Act No. 9208 or the Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 or the Expanded Anti-Trafficking in Persons Act of 2012, and is hereby sentenced to suffer the penalty of life imprisonment and to pay a fine of One Million Pesos (P[hp] 1,000,000.00).</p> <p> Accused [XXX276422] is further ordered to pay the victim [AAA276422] moral damages in the amount of Five Hundred Thousand Pesos (P[hp] 500,000.00) and exemplary damages of One Hundred Thousand Pesos (P[hp] 100,000.00) with interest at the rate of six percent (6%) per annum from the date of finality of the decision until fully paid. </p> <p> Accused CLARITA GUMOMBAL DUMALA is ACQUITTED of the crime of [v]iolation of Section 4 (a) in relation to Section 6(d) of Republic Act No. 9208 or the Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 or the Expanded Anti-Trafficking in Persons Act of 2012 for insufficient evidence to establish guilt beyond reasonable doubt. She is hereby ordered released from detention unless held for some other lawful cause.</p> <p> <u>In Criminal Case No. C-108376</u></p> <p> Accused [XXX276422] is found GUILTY BEYOND REASONABLE DOUBT of the crime of [v]iolation of Section 4 (a) in relation to Section 6(d) of Republic Act No. 9208 or the Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 or the Expanded Anti-Trafficking in Persons Act of 2012, and is hereby sentenced to suffer the penalty of life imprisonment and to pay a fine of One Million Pesos (P[hp] 1,000,000.00).</p> <p> Accused [XXX276422] is further ordered to pay the victim [BBB276422] moral damages in the amount of Five Hundred Thousand Pesos (P[hp] 500,000.00) and exemplary damages of One Hundred Thousand Pesos (P[hp] 100,000.00) with interest at the rate of six percent (6%) per annum from the date of finality of the decision until fully paid.</p> <p> Accused CLARITA GUMOMBAL DUMALA is ACQUITTED of the crime of [v]iolation of Section 4 (a) in relation to Section 6(d) of Republic Act No. 9208 or the Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 or the Expanded Anti-Trafficking in Persons Act of 2012 for insufficient evidence to establish guilt beyond reasonable doubt. She is hereby ordered released from detention unless held for some other lawful [cause].</p> <p> <u>In Criminal Case No. C-108377 and C-108378</u></p> <p> The cases are DISMISSED for being superfluous.</p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p> </blockquote> <p> In convicting XXX276422 of child pornography, the Regional Trial Court "found credible the testimony of [AAA276422], who was only 11 years old when her mother was arrested, that she was performing lascivious acts for foreigners as ordered by her mother. These acts were made separately and distinctly from the qualified trafficking case."<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> The trial court also stated that AAA276422's testimony was "uncontroverted and further strengthened and corroborated by the testimony of her brother[.]"<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> In particular, the use of the terms "<i>pinapaharap</i>," "<i>pinapahubad</i>," "<i>pinapasayaw</i>," and "<i>pinapa-ihi</i>" show that AAA276422 "was induced by [XXX276422] in committing these actions and were not made out of [AAA276422's] own will and volition. All the elements of the crime have been established."<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></p><p> Meanwhile, in convicting XXX276422 of qualified trafficking in persons, the Regional Trial Court found: </p><blockquote> <p> [The prosecution had] successfully established that [XXX276422] maintained and exploited [AAA276422] by ordering her to strip naked and perform lascivious acts for paying customers. The testimony of [PMAJ] Virtudazo, coupled with the actual video taken of the transaction prove beyond reasonable doubt that [XXX276422] provided and offered [AAA276422] to him, knowing the lascivious nature of the acts which [AAA276422] was to perform.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></p> </blockquote> <p> Likewise, the prosecution was able to prove that XXX276422 "maintained and exploited [BBB276422], who was then five years old. There was also an actual screenshot of the child stripping off her clothes. PMAJ Virtudazo testified that he saw [BBB276422] stripping off her clothes upon her mother's instruction."<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> The trial court also noted that "[a]s early as February 7, 2019, [XXX276422] was already offering [BBB276422] to [PMAJ Virtudazo] and has shown [BBB276422] in their chat. [AAA276422] also confirmed that [XXX276422] peddled [BBB276422] in online sexual shows."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></p><p> Aggrieved, XXX276422 filed an Appeal before the Court of Appeals. The Court of Appeal's February 27, 2024 Decision<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> affirmed XXX276422's conviction as follows: </p><blockquote> <p> <b>WHEREFORE</b>, the Appeal is <b>DENIED</b>. The September 9, 2022 Joint Decision of the Regional Trial Court, Branch 1 â Family Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> City in Criminal Cases Nos. 108373, 108375 and 108376 finding accused-appellant [XXX276422] guilty beyond reasonable doubt of the crimes charged against her is AFFIRMED with MODIFICATION, in that in Criminal Case No. 108373, accused-appellant is sentenced to suffer the indivisible penalty of <i>reclusion perpetua</i>. As to Criminal Case Nos. 108375 and 108376, the fine is increased to PHP 2,000,000.00 for each count of Qualified Trafficking in Persons. </p> <p> Other dispositions stay. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p> </blockquote> <p> In convicting XXX276422, the Court of Appeals said that the Regional Trial Court was correct in convicting XXX276422 of child pornography and qualified trafficking in persons. In particular, the appellate court said all the elements for the two crimes were successfully proven by the prosecution beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p><p> For the crime of child pornography, the Court of Appeals said that it was proven that AAA276422 was a child as defined under Republic Act No. 9775, that AAA276422 was "used and induced by [XXX276422] to partake in a 'show' through a display of her private parts on the webcam,"<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> and that the "intended show was conducted with the use of a webcam, through Skype."<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> These showed the "intent of [XXX276422] to abuse [AAA276422] and engage in acts of child pornography by inducing the latter to exhibit her private parts to her clients contacted through the adult website [B]ongacam.com."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup></p><p> As to the crime of qualified trafficking in persons, the Court of Appeals said that XXX276422 definitely "recruited her children to provide sexual services online for a fee,"<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> that XXX276422 "took advantage of [AAA276422] and [BBB276422's] vulnerability and minority,"<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> and that the "trafficking of the victims by [XXX276422] was for purposes of prostitution."<sup style="COLOR: RGB(255, 0, 0);">[72]</sup></p><p> Thereafter, XXX276422 filed her Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> to which the Court of Appeals gave due course in its May 7, 2024 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> The case records were then elevated to this Court. </p><p> The Office of the Solicitor General, on behalf of the People of the Philippines, filed a Manifestation stating that it would no longer file a supplemental brief.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> The accused-appellant, through counsel, likewise filed a Manifestation stating that she would no longer file a supplemental brief.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> </p><p> The sole issue for this Court's resolution is whether accused-appellant XXX276422 is guilty beyond reasonable doubt of child pornography and qualified trafficking in persons. </p><p> We dismiss the Appeal. </p><p> Republic Act No. 9775, or the Anti-Child Pornography Act of 2009, Section 4(a), states: </p><blockquote> <p> Section 4. <i>Unlawful or Prohibited Acts</i> â It shall be unlawful for any person: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">To hire, employ, use, persuade, induce or coerce a child to perform in the creation or production of any form of child pornography[.]<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>In relation to this, Section 3(b) and (c)(5) of the same Republic Act states: </p> <blockquote> <p> Section 3. <i>Definition of Terms</i> â</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(b)</div></td> <td width="95%"><div align="justify">"Child pornography" refers to any representation, whether visual, audio, or written combination thereof, by electronic, mechanical, digital, optical, magnetic or any other means, of child engaged or involved in real or simulated explicit sexual activities. </div></td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td><div align="justify">"Explicit Sexual Activity" includes actual or simulated â</div></td> </tr> <tr valign="top"> <td><div align="justify">(5)</div></td> <td> <div align="justify">lascivious exhibition of the genitals, buttocks, breasts, pubic area and/or anus[.]<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>The same law defines a child under Section 3(a) as: </p> <blockquote> <p> Section 3. <i>Definition of Terms</i> â</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">"Child" refers to a person below eighteen (18) years of age or over, but is unable to fully take care of himself/herself from abuse, neglect, cruelty, exploitation or discrimination because of a physical or mental disability or condition. </div></td> </tr> </tbody></table> <p>For the purpose of this Act, a child shall also refer to: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">a person regardless of age who is presented, depicted or portrayed as a child as defined herein; and</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify">computer-generated, digitally or manually crafted images or graphics of a person who is represented or who is made to appear to be a child as defined herein.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> </div></td> </tr> </tbody></table> </blockquote> </blockquote> <p>The penalty for violating Section 4(a) or Republic Act No. 9775 is found in Section 15(b) of the same statute, which provides that "[a]ny person found guilty of violating Section 4(a), (b) and (c) of this Act shall suffer the penalty of <i>reclusion temporal</i> in its maximum period and a fine of not less than One million pesos (Php1,000,000.00) but not more than Two million (Php2,000,000.00)[.]"<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> </p> <p> However, as this Court has ruled in <i>Cadajas v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> "Sections 4 and 8 of R.A. No. 10175 both explicitly provide that the proper penalty to be imposed for child pornography committed through a computer system should be one degree higher than that provided for in R.A. No. 9775 under Section 15(b)."<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> One degree higher than the penalty of <i>reclusion temporal</i> is the indivisible penalty of <i>reclusion perpetua</i>.</p><p> In turn, Republic Act No. 9208, as amended by Republic Act No. 10364, defines trafficking in persons as follows: </p><blockquote> <p> Section 3. <em>Definition of Terms</em>. â As used in this Act: </p> <p> (a) Trafficking in Persons â refers to the recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person for the purpose of exploitation which includes at a minimum, the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs. </p> <p> The recruitment, transportation, transfer, harboring, adoption or receipt of a child for the purpose of exploitation or when the adoption is induced by any form of consideration for exploitative purposes shall also be considered as 'trafficking in persons' even if it does not involve any of the means set forth in the preceding paragraph.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup></p> </blockquote> <p> In relation to this, specific acts of trafficking in persons and qualified trafficking in persons are defined under the same statutes as: </p><blockquote> <p> Section 4. <i>Acts of Trafficking in Persons</i>. â It shall be unlawful for any person, natural or juridical, to commit any of the following acts: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">To recruit, obtain, hire, provide, offer, transport, transfer, maintain, harbor, or receive a person by any means, including those done under the pretext of domestic or overseas employment or training or apprenticeship, for the purpose of prostitution, pornography, or sexual exploitation[.]</div></td> </tr> </tbody></table> <p align="center">. . . .</p> <p> Section 6. <em>Qualified Trafficking in Persons</em>. â Violations of Section 4 of this Act shall be considered as qualified trafficking: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">When the trafficked person is a child[.]</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="center">. . . . </div></td> </tr> <tr valign="top"> <td><div align="justify">(d)</div></td> <td><div align="justify">When the offender is a spouse, an ascendant, parent, sibling, guardian or a person who exercises authority over the trafficked person or when the offense is committed by a public officer or employee[.]<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>The penalty for qualified trafficking in persons is found in Section 10(e) of Republic Act No. 9208, which states that "[a]ny person found guilty of qualified trafficking under Section 6 shall suffer the penalty of life imprisonment and a fine of not less than Two million pesos (P2,000,000.00) but not more than Five million pesos (P5,000,000.00)[.]"<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> </p> <p> In <i>Cadajas</i><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> this Court stated that one can be convicted for committing child pornography upon proof of the following: "(1) victim is a child; (2) victim was induced or coerced to perform in the creation or production of any form of child pornography; and (3) child pornography was performed through visual, audio or written combination thereof by electronic, mechanical, digital, optical, magnetic or any other means."<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> </p><p> Meanwhile, in <i>People v. Celis</i>,<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> this Court enumerated the following elements of trafficking in persons: </p><blockquote> <p> (1) The act of "recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders[;"]</p> <p> (2) The means used include "by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person[;"]</p> <p> (3) The purpose of trafficking includes "the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs[."]<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> (Citations omitted) </p> </blockquote> <p> The Court of Appeals and the Regional Trial Court correctly found accused-appellant guilty of child pornography and qualified trafficking in persons. </p><p> As to the child pornography charge, as aptly explained by the appellate court, all the elements had been successfully proven beyond reasonable doubt by the prosecution: </p><blockquote> <p> [<i>First</i>,] it was never controverted that [AAA276422] was only eleven years old at the time of the incident. This was established from her Certificate of Live Birth that was presented in evidence. Moreover, [XXX276422], being her mother, was aware of this fact. </p> <p> <i>Second</i>[, i]t is likewise clear from the records of this case that during the videochat with PMaj. Virtudazo, [who was] then posing as a paid client, [XXX276422] <b><i>used and induced</i></b> [AAA276422] to partake in a 'show' through a display of her private parts on the webcam. This is evident from their conversation, which the RTC quoted in its assailed Decision, as follows: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td width="5%"><div align="justify"></div><br></td> <td width="95%"><div align="justify">Before this d-day, what was the arrangement that you had with cute mom?</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">The arrangement that we had Your Honor was that cute mom will have her thirteen (13) years old daughter showing in cam naked.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">That is the arrangement. But how come there is another girl here, younger child?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, Your Honor. This younger child was the one who was first offered while we were chatting on bongacams Your Honor. So both of them were offered. It was this time during the operation, her thirteen (13) year old daughter was the one being offered.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Who is the older here, the one wearing blue or the one wearing white?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The one wearing white, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">At the time stamp 10:54 Your Honor[,] on the left side of the screen, there is [the] question from the witness, 'what can they do bb hey bb' and the answer of Meyaw is 'naked only one to you.' And then the answer of the witness 'hmmm' and the answer of Meyaw is 'for the paid you sent.' What does that mean?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">It's for the pay[ment] that I [ ] sen[t] to her, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">So how much for that?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">I think [there] was already a previous conversation about this. I just can't remember how much [that was], ma'am.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">You don't remember how much [ ] the transaction [amounted to]? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">I'm showing you your Sworn Statement. Can you please point to us where [ ] that particular conversation [was] w[h]ere you agreed on the price for this particular show? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Fifty (50) dollars, ma'am. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">[The w]itness[,] Your Honor[,] is referring to page 16 of his Sworn Statement[, the first box where a [screenshot] of the conversation sent by the accused at 8:57 a.m. 'I said to you yesterday fifty dollars naked.' </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">So your Fifty Dollars will give you one (a) naked child. Is that what you... </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Yes, Your Honor.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">At time stamp 13:30 Your Honor, on the left side of the screen was the conversation, 'no anything more not that I mean what do you mean you told me last time. I said to you 13 show you.' Let's start with 16:33 Your [H]onor please.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Okay, there is a conversation on Skype appearing on the left side where the question was, 'what can they do honey' and Meyaw answered, 'she naked for you.' Who is the for you? Who is the girl that you are referring to that [had] to be naked? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">The thirteen (13) year old, Your Honor. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">She will be waited (sic) for you. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">19:33 Your Honor. 'Next time one girl for you send again show pussy only that okay now.' </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">The show pussy message from the account Meyaw. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Yes, Your Honor. And then...</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">The witness asked from 21:30 'Can't you see them baby' and Meyaw answered 'no.' Why did she answer no? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Because at that time Your Honor she focused the camera [on] herself. That's why I sent a message that I can't see. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Okay.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">There is a message[,] Your Honor[,] coming from Meyaw 'no go outside because you too late.' What does that mean Mr. Witness? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">At this time Meyaw was waiting for me to go online and ready for the live show, ma'am. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">When you say because you too late, what does it mean? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">I think it was an interruption of [the] video call this time Your Honor.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Okay.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">At time stamp 23:10 the child started showing up and the focus was brought to her at 21:41. 'Hi what her name Jessica hello Jessica.'</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">And this is the Jessica that you paid for to have a show to be naked? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Yes, Your Honor. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">But at this point, the girl Jessica is not yet naked? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Yes, Your Honor.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Okay. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR: <b><u></u></b></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><b><u>You can hear the accused instructing the child from the background to change her position.</u> At this point, the child [lay] down. At this point, the team is already proceeding to the area where the accused and the children were located. At time stamp 24:56, the sound[,] Your Honor[,] coming from the background is [coming from the] operatives entering the house...</b> </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: <b></b></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><b>The banging noise.</b></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">FISCAL MASANGQUE-DEMORAR:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><b>Yes[,] Your Honor. And then the lights were turned off and then the video stopped.</b> </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">So Mr. Witness for clarification, at this point that you [paid for the] video, you send (sic) money to the accused already or not yet? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">I [already sent] One Thousand Eight Hundred (Php 1,800.00) Pesos equivalent Your Honor. I think it was locally sent by Western Union. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">So you already sent money and this girl Jessica was preparing to give you the show that you paid for? </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">WITNESS: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Yes, Your Honor. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">PMaj. Virtudazo further testified that during their conversation for a 'show,' [XXX276422] <b><i><u>offered and showed</u></i></b> him [AAA276422], proof that [XXX276422] used [AAA276422] for child prostitution[.]</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="center">. . . . </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">Even though she [was] not privy to the exchanges between [XXX276422] and PMAJ Virtudazo, [AAA276422], who ha[d] grown accustomed to the illicit transactions of her mother, also testified on how she was used by [XXX276422.]</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="center">. . . . </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">[AAA276422] further expounded on [this] during the clarificatory questions of the Court: </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">I have [a] few question[s]. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><i>Pag sinabi mong show anong ginagawa mo pag sinabing magso-show ka?</i></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">x x x </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><b><i><u>Yung ipapaharap po ako sa camera tapos papahuibad po sakin lahat ng damit ko, wala po akong suot kahit underwear, pati bra tapos duon ko po ginagawa yung mga request ng mga [f]oreigner, mga request po ng mga [f]oreigner tapos minsan po umiihi po ako sa sahig po ni Mama nung gumawa po ako ng show.</u></i></b></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Let the answer [to the] question[s] remain in the vernacular. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>So, gaano kadalas ang show na ito na sinasabi mo, sa isang Linggo, gano kadalas?</em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><em>Tuwing wala pong pasok. Sabado, Linggo, </em>your Honor.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em> Ito ba e-mag-isa ka lang nagso-show</em>[,]<em> o me kasama ka minsan?</em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><em>Ang marami po, magisa lang ako pero may kasama po akong magshow </em>your Honor.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>Yung sinasabi mong per ana kinukuha ng Mama mo kasama si Clarita, nakikita mo ba na nag-aabot ng pera si Mama mo ke Clarita? </em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><em>Hindi ko po nakikita, </em>your Honor. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>So, ang nakikita mo lang sumasama si Clarita sa Mama mo? </em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><em>Opo. </em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>Hanggang duon lang? </em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><em>Opo,</em> your Honor. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>Ngayon[,] yung pagre-refer ng kliyente sa Mama mo ni Clarita, yun narinig mo lang, na overhear mo ang pero hind mo talaga alam kung tungkol saan yung paguusap nila? </em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><em>Opo, </em>your Honor. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>Yung insidente nung </em>February 23, 2019<em> hindi ka nagshow? </em></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong><em>Hindi po pero kung hindi po dumating yung mga pulis hindi po ako nag show nun pero may </em>'tendency'<em> kung hindi po dumating yung mga pulis me </em>tendency<em> po na mag-show po ako sa oras pong yun at sa araw po na yun, </em>your Honor.</strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><em>Bakit sinabi mong </em>'tendency,'<em> ano yung</em> tendency<em>, ano ibig sabihin na </em>tendency? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><strong><em>Kasiguraduhan po na mangyayari po yung show, </em>your Honor. </strong></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td><div align="center">. . . . </div></td> </tr> </tbody></table> <p><i>Third</i>[,] the intended show was conducted with the use of a webcam, through Skype. The transaction between the poseur customer PMAJ Virtudazo and [XXX276422] leading to a supposed private show was likewise facilitated using the website bongacam.com. </p> <p align="center"> . . . . </p> <p> All told, the court<i> a quo</i> did not err in finding [XXX276422] guilty beyond reasonable doubt for violation of Section 4 (a) of [Republic Act] No. 9775.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup></p> </blockquote> <p> As to the charge of qualified trafficking in persons, the appellate court, in affirming the trial court, was likewise correct in saying that all the elements for this offense had been proven beyond reasonable doubt: </p><blockquote> <p> <i>First</i>[, XXX276422] <b><i>recruited</i></b> her children to provide sexual services online for a fee. To emphasize, the police officers, acting upon the referral of the National Crime Investigation Services â Norway, conducted surveillance operations to verify the report that [XXX276422] was engaged in the trafficking of her own children. After it was confirmed that, indeed, [XXX276422] was engaged in selling 'private shows' involving her minor children online, the police officers conducted an entrapment operation resulting in her arrest. </p> </blockquote> <p align="center"> . . . . </p><blockquote> <p> <i>Second</i>[, XXX276422] took advantage of [AAA276422] and [BBB276422's] vulnerability and minority. </p> <p> Under the <i>Travaux PrÃ©paratoires</i> to the Protocol to Prevent, Suppress and Punish Trafficking in Persons, a vulnerable person 'has no real and acceptable alternative but to submit to the abuse involved.'</p> </blockquote> <p align="center"> . . . . </p><blockquote> <p> Moreover, where the victim is a child, the criminal element of means to commit trafficking need not be established in evidence. It is sufficient that the fact of minority is established on record. Under Section 3 (b) of the law, a child is a person below 18 years of age or one who is over 18 but is unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition. </p> <p> <i>Third</i>, the prosecution established that the trafficking of the victims by [XXX276422] was for purposes of prostitution. Section 3 (c) of [Republic Act] No. 9208, as amended, defines prostitution as 'any act, transaction, scheme[,] or design involving the use of a person by another, for sexual intercourse or lascivious conduct in exchange for money, profit[,] or any other consideration.' To reiterate, the accused-appellants peddled the victims to poseur customers to engage in sexual activities in exchange for money. As testified [to] by PMaj. Virtudazo, [XXX276422] offered her minor daughters to render sexual services for a fee. This was corroborated by [AAA276422], who testified that she was already videochatting with PMaj. Virtudazo, with [the] expectation that she will provide sexual services to the poseur customer in exchange for the monetary consideration earlier sent to her mother and Clarita. </p> </blockquote> <p align="center"> . . . . </p><blockquote> <p> With respect to the presence of the qualifying circumstances, the minority of [AAA276422] and [BBB276422] were sufficiently alleged in the Informations. The prosecution likewise presented the Certificates of Live Birth of [AAA276422] and [BBB276422], which likewise established the ages of the victims, as well as their relation to [XXX276422], who was their mother. </p> <p> Verily, for the crime of trafficking in persons to be consummated, it is immaterial that sexual intercourse or lascivious acts had not taken place and that the victim consented thereto. The mere transaction consummated the crime. What is essential under the law is that a person is recruited and transported for the purpose of prostitution and other forms of sexual exploitation. Precisely, what the law aims to curtail is the act of recruiting or using, with or without consent, a fellow human being for sexual exploitation. The victim does not have to be actually subjected to prostitution or had sex with a client before the recruiters can be held criminally liable under the law. This entails punishing the acts themselves that would lead to prostituting the victims.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup></p> </blockquote> <p> For all these, the accused-appellant's guilt for the crime of child pornography and qualified trafficking in persons has been proven beyond reasonable doubt. The penalties of <i>reclusion perpetua</i> and life imprisonment were correctly imposed by the Regional Trial Court and was rightfully upheld by the Court of Appeals. </p><p> <b>ACCORDINGLY</b>, the Appeal is <b>DISMISSED</b>. The February 27, 2024 Decision of the Court of Appeals in CA-G.R. CR-HC No. 17235 is <b>AFFIRMED</b>. </p><p> Accused-appellant XXX276422 is found <b>GUILTY</b> beyond reasonable doubt of one count of child pornography and two counts of qualified trafficking in persons. In Criminal Case No. C-108373, she is sentenced to suffer the penalty of <i>reclusion perpetua</i> and ordered to <b>PAY</b> a fine of PHP 1,000,000.00 for the single count of child pornography. In Criminal Case Nos. C-108375 and C-108376, she is sentenced to suffer the penalty of life imprisonment and ordered to <strong>PAY</strong> a fine of PHP 2,000,000.00 each for the two counts of qualified trafficking in persons. </p><p> She is also <b>DIRECTED</b> to <b>PAY</b> the victim AAA276422 moral damages worth PHP 500,000.00 and exemplary damages in the amount of PHP 100,000.00 for the single count of child pornography in Criminal Case No. C-108373. In Criminal Case Nos. C-108375 and C-108376, accused-appellant is likewise directed to <b>PAY</b> the victims AAA276422 and BBB276422 moral damages worth PHP 500,000.00 each and exemplary damages in the amount of PHP 100,000.00 each for each of the two counts of qualified trafficking in persons. </p><p> All damages awarded shall be subject to interest at the rate of 6% per annum from the finality of this Decision until their full satisfaction.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup></p><p> <b>SO ORDERED.</b></p><p> <i>Lazaro-Javier, J. Lopez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 9208 and Republic Act No. 9775, the names of offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>People v. Daguno</b>, 872 Phil. 331, 334 (2020) [Per J. Inting, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i>, pp. 10-39. The February 27, 2024 Decision in CA-G.R. CR-HC No. 17235 was penned by Associate Justice Raymond Reynold R. Lauigan and concurred in by Associate Justices Pablito A. Perez and Maximo M. De Leon of the Court of Appeals, Special Seventeenth Division, Manila. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 43-71. The September 9, 2022 Joint Decision in Criminal Case Nos. C-108373, C-108374, C-108375, C-108376, C-108377, and C-108378 were penned by Presiding Barbara Aleli H. Briones of the Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span>.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 10-11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 11-13. </p><p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 13. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 14-15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <em>Id.</em> </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 15-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup><em> Id.</em> </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 43-71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 16-18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 18-19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 10-39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 23-37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 34. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 35. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 3-5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 75-79. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 80-84. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Republic Act No. 9775, sec. 4(a) (2009). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Republic Act No. 9775, sec. 3(b) and 3(c)(5). </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> Republic Act No. 9775, sec. 3(a). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Republic Act No. 9775, sec. 15(b). </p><p><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 915 Phil. 220 (2021) [Per J. J. Lopez, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 255. </p><p><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Republic Act No. 9208, sec. 3(a), as amended (2003). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[84]</sup> Republic Act No. 9208, sec. 4(a), 6(a), 6(d). </p><p><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Republic Act No. 9208, sec. 10(e). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> 915 Phil. 220 (2021) [Per J. J. Lopez, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 235. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 945 Phil. 794 (2023) [Per J. J. Lopez, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 810. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Rollo</i>, pp. 24-32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> at 34-36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <strong>People v. Jugueta</strong>, 783 Phil. 806 (2016) [Per J. Peralta, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

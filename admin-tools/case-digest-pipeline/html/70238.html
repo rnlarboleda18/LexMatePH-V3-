@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262146 - CAVINTI REALTY DEVELOPMENT CORPORATION, PETITIONER, VS. NERY CUSTODIO ABLAO AND MARIA CUSTODIO CUYA, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70238' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262146, October 27, 2025 ]</H2>
+			<H3>CAVINTI REALTY DEVELOPMENT CORPORATION, PETITIONER, VS. NERY CUSTODIO ABLAO AND MARIA CUSTODIO CUYA, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by Cavinti Realty Development Corporation <b>(Cavinti Realty)</b>. The Petition challenges the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 24, 2021, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated June 22, 2022, of the Court of Appeals<b> (CA)</b> in CA-G.R. SP No. 156683, which affirmed the orders of the Regional Trial Court<b> (RTC)</b> Branch 27, Santa Cruz, Laguna denying Cavinti Realty's Motion to Dismiss the Complaint filed by Nery Custodio Ablao<b> (Nery)</b> and Maria Custodio Cuya<b> (Maria)</b>.<br><br><center><b><i>The Facts</i></b></center><br>Nery and Maria are siblings who claim ownership over a 150,000-square-meter parcel of land located in Barangay Bigaa Kanluran, Talaongan, Cavinti, Laguna. The land was originally declared for tax purposes under Tax Declaration No. 18397 in the names of their grandparents, Spouses Zacarias Custodio<b> (Zacarias)</b> and Josefa Toque<b> (Josefa) (Spouses Custodio)</b>, who acquired it in 1925 through a<i> Kasulatan ng Pagbibiling Patuluyan</i>. The Spouses Custodio had one son, Pedro Custodio<b> (Pedro)</b>âthe father of Nery and Mariaâwho, together with his mother Josefa and his children (Nery, Maria, and their sibling Bonifacio), inherited the property upon Zacarias' death.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>In 1969, after Zacarias and Pedro had passed away, the surviving heirsâJosefa and her grandchildren Nery, Maria, and Bonifacioâsold approximately 60,990 square meters of the property to Dos Lagos Development Corporation<b> (Dos Lagos)</b> through a Deed of Absolute Sale, dated September 17, 1969. Notably, this sold portion represents only roughly six hectares out of the 15-hectare property. Nery and Maria maintain that the remaining portion of about 89,000 to 90,000 square meters was never sold to Dos Lagos and remained in their family's ownership and possession.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On May 7, 1980, Dos Lagos nevertheless succeeded in obtaining Original Certificate of Title<b> (OCT)</b> No. O-2159, issued pursuant to Decree No. N-177732 by the Registry of Deeds of Laguna, covering a much larger area than what it had purchased. The OCT encompassed three parcels of land with a total area far exceeding 60,990 square meters, including Lot No. 7863-B (146,453 square meters) and Lot No. 7863-A (157,377 square meters), among others. Nery and Maria allege that, through fraud or error, the OCT "illegally included" the unsold portion of about 90,000 square meters.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Dos Lagos subsequently subdivided and disposed of the property covered by its title. OCT No. O-2159 was cancelled, and Transfer Certificate of Title<b> (TCT)</b> No. T-90979 was issued for Lot 7863-B (146,453 square meters), while TCT No. T-90978 covered another portion of 90,000 square meters. Dos Lagos sold Lot 7863-Bâwhich encompassed most of the disputed unsold portionâto Cavinti Realty, resulting in the issuance of TCT No. T-252048 in Cavinti Realty's name. It also sold another portion, measuring 31,216 square meters, to Aerocom Investors &amp; Managers, Inc. <b>(Aerocom)</b>, now covered by TCT No. T-103891. Thus, Cavinti Realty and Aerocom became the registered owners of significant parts of the land that Nery and Maria claim as part of their inheritance.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Nery and Maria aver that they and their predecessors have remained in open, continuous, exclusive, and adverse possession of the subject property in the concept of owners since 1926. They only discovered that Dos Lagos had secured a Torrens title over the entire 15-hectare property, and that Cavinti Realty and Aerocom had acquired derivative titles over portions thereof, shortly before initiating legal action.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On October 7, 2014, Nery and Maria filed before the RTC of Santa Cruz, Laguna, a Complaint<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated September 2014, docketed as Civil Case No. SC-5633, against Cavinti Realty, Aerocom, Dos Lagos, the Register of Deeds of Laguna, and the Municipal Assessor of Cavinti. The Complaint, entitled "Cancellation of [OCT] No. O-2159; [TCT] Nos. T-252048, T-103891, T-90978, T-90979; Deed of Sale; Tax Declarations; and/or Judicial Partition plus Damages," alleged that the inclusion of the unsold 90,000-square-meter portion in OCT No. O-2159 was fraudulent.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>They prayed for the cancellation of OCT No. O-2159 and all derivative titles, including Cavinti Realty's TCT No. T-252048 and Aerocom's TCT No. T-103891, insofar as these covered the unsold portion. In the alternative, should the titles be upheld, they sought partition of the property so that the unsold portion would be segregated and reconveyed to them. They likewise claimed damages. In essence, their causes of action were: (a) annulment of Torrens titles and deeds of sale involving the disputed property; and (b) reconveyance of the portion allegedly belonging to them but registered in the names of Dos Lagos and its successors.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Cavinti Realty, on January 23, 2015 moved to dismiss the Complaint, arguing: (1) failure to state a cause of action against it; (2) prescription, as more than 34 years had lapsed since the issuance of Dos Lagos' title in 1980; and (3) its status as an innocent purchaser for value. Aerocom filed a similar motion.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Nery and Maria opposed, asserting that their Complaint sufficiently alleged a valid cause of action for reconveyance, and that their action was not barred by prescription because of their continued possession.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>In its April 17, 2017 Order,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> the RTC denied the Motions to Dismiss. It ruled that the allegations sufficiently constituted a cause of action, and that prescription was "unavailing" at that stage. While acknowledging that the alleged fraud was imputable to Dos Lagos, the RTC held that Cavinti Realty and Aerocom were indispensable parties as registered owners of portions of the disputed land. The RTC invoked the principle<i> nemo dat quod non habetâ </i>one cannot give what one does not haveânoting that Dos Lagos could not convey title to property it never validly acquired. Citing jurisprudence, it held that an action for reconveyance grounded on a void contract or conveyance is imprescriptible.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>On June 13, 2017, Cavinti Realty sought correction of the April 17, 2017 Order to specify the legal bases for the court's rulings. In its December 18, 2017 Order,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> the RTC enumerated the cases relied upon, including<i> Heirs of Ingjug-Tiro v. Casals</i>,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> which held that prescription does not bar reconveyance actions involving void sales. Cavinti Realty's Motion for Reconsideration was likewise denied by the Order<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated April 23, 2018, reiterating that an action for reconveyance based on an implied or constructive trust is imprescriptible if the rightful owner remains in possession.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Cavinti Realty elevated the matter to the CA via a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> under Rule 65, alleging grave abuse of discretion by the RTC. It reiterated its arguments on lack of cause of action, prescription under Section 32 of Presidential Decree No. 1529 and the Civil Code, and its status as an innocent purchaser for value.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>In its May 24, 2021 Decision,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the CA denied the Petition, upholding the RTC's rulings. The appellate court agreed that Cavinti Realty was an indispensable party, and that the action was not barred by prescription in view of the plaintiffs' allegation of continued possession. Citing<i> Francisco v. Rojas</i><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> and<i> Vda. De Gualberto v. Go</i>,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> it recognized that reconveyance actions based on implied or constructive trust are imprescriptible while the plaintiff remains in possession. It further ruled that Cavinti Realty's claim of good faith presented a factual issue inappropriate for resolution at the pleading stage. The CA also stressed that an order denying a motion to dismiss is interlocutory and generally not reviewable by<i> certiorari</i> absent grave abuse of discretion, which was not shown.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Cavinti Realty's Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> was denied in the CA's June 22, 2022 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Hence, Cavinti Realty filed the present Petition.<br><br>In this Petition, Cavinti Realty reiterates that: (1) the Complaint fails to state a cause of action against it; (2) it is not a proper party to be impleaded; and (3) the action is barred by prescription. It again invokes its status as an innocent purchaser for value. Nery and Maria, for their part, pray for affirmance of the CA's ruling, arguing that the Complaint sufficiently alleged a cause of action, that Cavinti Realty is an indispensable party, and that the action is imprescriptible given their continued possession and the void nature of the questioned inclusion in Dos Lagos' title.<br><br><center><b><i>The Issues</i></b></center><br>1. Does the Complaint sufficiently state a cause of action?<br><br>2. Is Cavinti Realty a real party-in-interest and an indispensable party in the action?<br><br>3. Is the Complaint barred by prescription?<br><br>In addressing these issues, the Court shall also consider Cavinti Realty's asserted status as an innocent purchaser for value and how this status may affect the cause of action and the availability of the remedy of reconveyance.<br><br><center><b><i>The Ruling of the Court</i></b></center><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Sufficiency of the Complaint: Cause of action for reconveyance</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>A cause of action is the act or omission by which a party violates the right of another. It requires the concurrence of three essential elements: (a) a legal right in favor of the plaintiff, (b) a correlative duty or obligation on the part of the defendant, and (c) an act or omission by the defendant in violation of the plaintiffs right.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> In testing the sufficiency of a complaint, under the 1997 Rules of Civil Procedure, when failure to state a cause of action was an allowed ground for a motion to dismiss, courts apply the "hypothetical admission" test:<i> assuming the truth of the facts alleged, can the court render a valid judgment in accordance with the relief demanded?</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> If, even taking all allegations as true, the complaint still shows no entitlement to relief as a matter of law, then it fails to state a cause of action and is dismissible at the outset.<br><br>Cavinti Realty maintains that the Complaint filed by Nery and Maria failed to establish a valid cause of action against it, as no wrongful act or omission is attributed to Cavinti Realty. The pleading itself identifies Dos Lagos as the party allegedly responsible for the fraudulent inclusion of the unsold portion in its title. In contrast, the Complaint is silent on any act of fraud or violation directly committed by Cavinti Realty. It bears emphasis that Cavinti Realty was not a party to the 1969 sale, nor did it have any prior dealings with Nery and Maria. At most, the Complaint merely shows that Cavinti Realty subsequently purchased the subject property for valuable consideration, relying on a title duly issued to Dos Lagos. On this basis, Cavinti Realty asserts that it is, at the very least, an innocent purchaser for value. It follows, therefore, that the third element of a cause of actionâan act or omission by the defendant in violation of the plaintiffs rightâis absent with respect to Cavinti Realty. The alleged fraud and error complained of, if at all, are traceable to Dos Lagos alone. Cavinti Realty thus argues that, having committed no wrongful act, it owes no obligation to Nery and Maria that could have been breached. Consequently, even assuming the factual allegations in the Complaint to be true, Nery and Maria would not be entitled to the cancellation of Cavinti Realty's title or to reconveyance, for Cavinti Realty acquired its title in good faith and under no cloud of specific wrongdoing.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>The Court is not convinced.<br><br>Cavinti Realty's argument misconstrues the nature of the cause of action pleaded by Nery and Maria, and the relief they seek. While it is true that the Complaint does not accuse Cavinti Realty of fraud, the absence of such allegation is not fatal in this instance because the cause of action is not one for damages based on the commission of fraud by the defendant. Rather, the Complaint essentially asserts a cause of action for reconveyance or recovery of property, founded on the claim that Nery and Maria are the rightful owners of a portion of land which ended up titled in the name of another through fraud or mistake. In an action for reconveyance of registered property, the plaintiff seeks to restore title to its rightful owner. The theory rests on the equitable principle that, notwithstanding the Torrens title in another's name, the title is infirm due to fraud, nullity of the transfer, or the existence of an implied trust. As between the original owner and the current titleholder, equity dictates that the original owner's right be recognized.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Crucially, to state a cause of action for reconveyance, it is not indispensable to allege that the present titleholderâCavinti Realtyâwas the party who directly committed the fraud or who personally violated the plaintiffs' rights. It is sufficient that the Complaint avers two essential elements:<i> first</i>, that the plaintiff has a legal claim of ownership over the property; and<i> second</i>, that the defendant currently holds title or possession of the same property in derogation of that claim. Put differently, if the Complaint asserts that the defendant's ownership is wrongfulâwhether because it is traced to a fraudulent transaction by a third party or because the instrument relied upon is voidâthe defendant's refusal to respect the plaintiffs' superior right and to return the property constitutes the actionable "omission."<br><br>In this case, Nery and Maria alleged that they inherited and continue to possess the disputed land, that they never sold the 90,000-square meter portion to any party, and that Cavinti Realty's title, as successor-in-interest of Dos Lagos, unlawfully includes this unsold portion. They thus pray for the nullification of Cavinti Realty's title, or at the very least, for the reconveyance and partition of the portion not sold. These allegations, taken together, necessarily imply that Cavinti Realty's continued holding of title over the property violates their right of ownership, even if Cavinti Realty was not the original fraudfeasor. Hypothetically accepting these allegations as true, the RTC could validly grant reconveyance or cancellation of title if the evidence supports Nery and Maria's ownership. Thus, the Complaint states a valid cause of action: the plaintiffs claim lawful ownership by inheritance and prescription; Cavinti Realty, as current titleholder, bears a correlative duty to respect that right; and Cavinti Realty's reliance on a defective or void inclusion in its chain of title operates as a denial of the plaintiffs' claim. This satisfies the elements of a cause of action. Indeed, as both the RTC and the CA found, the Complaint sufficiently pleads: (a) the plaintiffs' right as heirs and successors-in-interest of the original owners, with possession and documentary support; (b) the defendants' correlative duty not to claim property they did not lawfully acquire; and (c) the violation of that duty by reason of Dos Lagos' fraudulent registration and Cavinti Realty's subsequent withholding of the unsold portion. In sum, the Complaint presents a classic cause of action for reconveyance, where a portion of the plaintiffs' property was wrongfully registered under another's name.<br><br>Cavinti Realty's argument that it did nothing wrong and is a purchaser in good faith is a matter of defense on the merits, not a basis to dismiss the Complaint for insufficiency. The test of sufficiency of a complaint focuses solely on the factual allegations and whether, assuming it to be true, they entitle the plaintiffs to relief. Whether Cavinti Realty can later prove its status as an innocent purchaser for value, and thereby assert a superior equitable right, is a matter of evidence. At this stage, all allegations must be taken at face value, and doubts must be resolved in favor of the sufficiency of the pleading. The Court concurs with the CA that the Complaint does not concede Cavinti Realty's alleged good faith nor admit facts that would negate the plaintiffs' cause of action. The mere fact that the Complaint attributes fraud to Dos Lagos, rather than to Cavinti Realty, does not amount to an admission that Cavinti Realty's acquisition was<i> bona fide</i> and beyond challenge. On the contrary, Nery and Maria's allegation that they have been in open and continuous possession of the property could support a finding that Cavinti Realty was, or should have been, on notice of their adverse claim when it purchased the property. If proven, this would undermine Cavinti Realty's assertion of good faith. Whether such notice exists is a matter for trial, but the point is that the Complaint preserves the issue and does not foreclose it.<br><br>Cavinti Realty, in effect, urges the Court to examine its affirmative defenses, such as its claimed lack of knowledge of any defect in title and its reliance on the Torrens system, and to dismiss the Complaint outright before it has filed an answer and presented its evidence. This course of action is impermissible. It is a settled rule that in resolving a motion to dismiss for failure to state a cause of action, the Court may not receive evidence and must limit its inquiry to the four corners of the complaint. Dismissal is justified only when the complaint, on its face, clearly reveals a fact or defense that defeats the claim as a matter of law.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> In this case, the Complaint does not establish that Cavinti Realty's title is indefeasible. On the contrary, it asserts allegations that, if proven, would support a challenge to Cavinti Realty's title. Thus, there exists no basis to dismiss the case at the pleading stage.<br><br>Equally unavailing is Cavinti Realty's reliance on the distinction between "failure to state a cause of action" and "lack of cause of action." In <i>Apostolic Vicar of Tabuk, Inc. v. Spouses Sison</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> the Court clarified the distinction between failure to state a cause of action and lack of cause of action. Failure to state a cause of action pertains to the insufficiency of the allegations in the pleading, such that even if admitted as true, they do not establish a right to relief. In contrast, lack of cause of action refers to the insufficiency of the factual basis for the claim, which becomes evident only after the facts have been established through stipulations, admissions, or evidence presented. Procedurally, a motion to dismiss for failure to state a cause of action may be filed at the earliest stages of the proceedings under Rule 16 of the 1997 Rules of Court, or invoked as an affirmative defense in an answer. On the other hand, dismissal for lack of cause of action may be raised at any time after the factual issues have been resolved.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Cavinti Realty's position rests on the premise that, as an alleged innocent purchaser for value, it can never be held liable, and therefore the case should be dismissed outright. This argument misapprehends the law. Even granting that Cavinti Realty's defense may ultimately prevail at trial, such a determination concerns a lack of cause of actionâwhere the plaintiffs' evidence fails to establish a right to relief. That issue is properly raised either through a demurrer to evidence after trial has commenced or as an affirmative defense raised in the defendant's initial pleading, not through a pre-answer motion to dismiss.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>The only question now before the Court is whether the Complaint, on its face, sufficiently alleges a cause of action.<br><br>The Court rules that it does.<br><br>In<i> Asia Brewery, Inc. v. Equitable PCI Bank</i>,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> the Court emphasized that a complaint should not be dismissed for insufficiency if, admitting the truth of the facts alleged, the court can validly render judgment in accordance with the relief prayed for. Applied to the present case, and assuming as true Nery and Maria's allegations that they are the rightful owners of the disputed land and that Cavinti Realty's title wrongfully encroached upon their property, the RTC could plausibly order reconveyance of the land to Nery and Maria. This falls squarely within the remedies sought, and is sufficient to satisfy the test of sufficiency of cause of action.<br><br>To further elucidate, Philippine jurisprudence has long recognized implied or constructive trust as a legal basis for an original owner to seek reconveyance of property wrongfully registered in another's name. Article 1456<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of the Civil Code expressly provides that when property is acquired through fraud or mistake, the acquirer is deemed an implied trustee for the benefit of the true owner. The right to enforce this trust by means of reconveyance exists regardless of whether the current holder of title was the party who committed the fraud. Even an innocent transferee may be impleaded as a defendant in an action for reconveyance, for such actions are essentially equitable and<i> in personam</i>, designed to compel the current holder to transfer the property to the party with the superior right. The absence of bad faith on the part of the defendant may affect the scope of remedy or liability, particularly under the protective mantle of the Torrens system, but it does not defeat the RTC's jurisdiction to adjudicate claims of ownership.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Ultimately, the Complaint sufficiently alleges a justiciable controversy involving ownership and title to real property and seeks the remedies of cancellation of title and reconveyance. These allegations, if proven, warrant judicial determination. The CA, therefore, did not err in ruling that the complaint states a valid cause of action against Cavinti Realty.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Cavinti Realty as a real party-in-interest and indispensable party</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Cavinti Realty asserts that the CA erred when it sustained the Complaint on the ground that Cavinti Realty is a real party-in-interest. According to Cavinti Realty, the CA conflated two distinct procedural concepts. The challenge, it argues, was not one of non-joinder or misjoinder of parties, but rather the alleged absence of a cause of action. Yet, instead of addressing the sufficiency of the Complaint's averments, the CA upheld its viability by characterizing Cavinti Realty as an indispensable party.<br><br>The Court finds it necessary to clarify the distinction. The failure to state a cause of action concerns the adequacy of the factual allegations in the pleading, while the non-joinder of an indispensable party implicates a different procedural infirmity. These two defects are not interchangeable, and conflating them risks doctrinal confusion.<br><br>A real party-in-interest is one who stands to be benefited or injured by the judgment, or is entitled to the avails of the suit.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> An indispensable party is a party who has such an interest in the controversy that a final decree cannot be made without affecting that interest or leaving the situation in an inequitable state.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Jurisprudence defines indispensable parties as those who possess such an interest in the controversy that a final decree would necessarily affect their rights, so that the court cannot proceed without their presence. The presence of indispensable parties is mandatory; their absence renders all subsequent actions of the court null and void for want of authority.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>In actions for reconveyance or annulment of title, the registered owners of the disputed property are indisputably indispensable parties. It is the holder of the Torrens title whose rights are directly affected by its cancellation or transfer. As the Court held in<i> Spouses Aboitiz v. Spouses Po</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> property owners against whom an action for reconveyance is directed "are indispensable parties. No relief can be had, and the court cannot render a valid judgment, without them."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> By contrast, the participation of the original vendor or fraudfeasor, such as Dos Lagos, is not strictly indispensable. The controversy over ownership and entitlement to title may be resolved as between the original owner and the present titleholder. The seller may be a necessary party for the purpose of complete relief, for instance in accounting for damages or rents, but the absence of the seller does not bar the court from adjudicating the dispute over ownership. Indeed, the cited case clarifies that a seller is not an indispensable party in an action by the defrauded owner against the buyer for reconveyance.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> The indispensable party is the current registered owner who claims an interest in the propertyâin this case, Cavinti Realty.<br><br>In the present case, Nery and Maria properly impleaded Cavinti Realty. There is, therefore, no issue of non-joinder or improper joinder. Cavinti Realty's position appears to be that it should not have been joined at all, since no cause of action lies against it. The Court has already rejected this contention, finding the cause of action sufficient.<br><br>Even apart from that conclusion, procedural rules dictate Cavinti Realty's presence as a party. By the very allegations of the Complaint, Cavinti Realty has or asserts an interest in the land, being the registered owner of a substantial portion thereof. Any judgment in this case will necessarily affect its title. If Nery and Maria succeed, Cavinti Realty's title will be canceled or diminished. If Cavinti Realty prevails, its title will be confirmed. For this reason, Cavinti Realty is undeniably a real party-in-interest, specifically an interested defendant who stands to gain or lose depending on the judgment.<br><br>Moreover, Cavinti Realty's interest is so closely connected to the subject matter of the case that a final adjudication cannot be rendered without its participation. A judgment ordering reconveyance would be ineffectual if Cavinti Realty were not bound by it, while a judgment sustaining Cavinti Realty's title would prejudice Nery and Maria if issued in their absence. Cavinti Realty is, therefore, an indispensable party, and the RTC was correct in requiring that both Cavinti Realty and Aerocom remain as defendants, regardless of the alleged fraudulent acts of Dos Lagos.<br><br>The CA similarly emphasized Cavinti Realty's indispensable status to refute its claim that an innocent buyer should not be made a party. The CA correctly explained that even a purchaser in good faith must be impleaded when the relief sought necessarily affects that purchaser's title. The rules on joinder of parties do not provide that an innocent party cannot be sued; they ensure that all parties whose interests are directly affected are brought before the court. The question of liability is distinct from the question of joinder. In this case, Cavinti Realty's participation is not only proper but essential. The Complaint, in substance, seeks reconveyance and partition that would require transfer of portions of Cavinti Realty's titled land back to Nery and Maria. Without Cavinti Realty, there can be no complete determination of the issues and no final judgment that is effective, comprehensive, or complete.<br><br>It bears emphasis that the designation of Cavinti Realty as an indispensable party does not itself create a cause of action where none exists. What it does establish is that the case cannot be disposed of by simply dropping Cavinti Realty as a defendant. Cavinti Realty's reliance on<i> Heirs of Austino Mesina v. Heirs of Domingo Fian</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> is misplaced. That case distinguished between failure to state a cause of action, which is a ground under Rule 16<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> of the 1997 Rules of Court, and failure to join an indispensable party, which is governed by Rule 3, Section 7 of the same Rules. In the present controversy, there is no failure to join, for Cavinti Realty has already been impleaded. Moreover, the Court has determined that the Complaint states a valid cause of action. Both requisites are thus met: the pleading is sufficient on its face, and the indispensable parties, including Cavinti Realty, are before the Court. Even assuming that Cavinti Realty may ultimately be adjudged free from liability, it remains one whose interest will be affected by the court's action in the litigation and without whom no final determination of the case can be had. On that basis alone, Cavinti Realty must remain a party to the proceedings until final adjudication.<br><br>In sum, the CA did not err in refusing to dismiss the Complaint against Cavinti Realty. On the contrary, it correctly recognized that Cavinti Realty's inclusion as a defendant was proper and necessary, given the nature of the relief sought. The joinder of Cavinti Realty ensures the complete resolution of all possible issues and avoids the danger of multiple suits. To exclude Cavinti Realty would result in a judgment on ownership that does not bind the registered titleholder, a result the law does not countenance. The continued presence of Cavinti Realty as a party-defendant is therefore consistent with the settled doctrine on indispensable parties.<br><br>To the extent that Cavinti Realty asserts that its status as an innocent purchaser for value should exempt it from litigation altogether, such claim confuses matters of substantive right with questions of procedural standing. An innocent purchaser may eventually be shielded from dispossession under the protective mantle of the Torrens system, but this does not mean that such party is immune from suit when a third party asserts a superior claim of ownership. The courtroom remains the proper venue to adjudicate competing claims of title. Indeed, if Cavinti Realty's position were adopted, no action for reconveyance could ever prosper unless the plaintiff first alleged complicity in fraud on the part of the current titleholderâan untenable proposition that would effectively nullify the remedy of reconveyance in numerous instances. The law provides otherwise: one may sue the registered owner for reconveyance without alleging the latter's bad faith, since the action ultimately seeks to establish true ownership, not to punish tortious conduct.<br><br>Accordingly, the Court holds that Cavinti Realty is both a real party-in-interest, because its rights will necessarily be affected by the judgment, and an indispensable party, whose participation is required for a valid resolution of the controversy. The Complaint cannot be dismissed on the theory that Cavinti Realty was improperly joined. On the contrary, its joinder was essential, and the rulings of the RTC and the CA in maintaining Cavinti Realty as a party-defendant are procedurally and substantively correct.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Prescription and imprescriptibility: Effect of Presidential Decree No. 1529 and the Statute of Limitations</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The Court now addresses the issue of prescription, which Cavinti Realty vigorously invokes. It argues that Nery and Maria's action, instituted in 2014, was filed far too lateâ34 years after the issuance of Dos Lagos' title in 1980. Cavinti Realty relies on Section 32 of Presidential Decree No. 1529,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> otherwise known as the Property Registration Decree, which expressly imposes a time bar on challenges to decrees of registration. The relevant portion of the provision states:<br><blockquote>Section 32.<i> Review of decree of registration; Innocent purchaser for value. â</i> The decree of registration shall not be reopened or revised by reason of absence, minority, or other disability of any person adversely affected thereby, nor by any proceeding in any court for reversing judgments, subject, however, to the right of any person deprived of land or any interest therein by actual fraud to file in the proper Court of First Instance a petition for reopening and review of the decree within one year from and after the date of entry of such decree of registration, but in no case shall such petition be entertained by the court where an innocent purchaser for value has acquired the land or any interest therein whose rights may be prejudiced. Whenever the phrase "innocent purchaser for value" or an equivalent phrase occurs in this Decree, it shall be deemed to include an innocent lessee, mortgagee, or other encumbrancer for value.<br><br>Upon the expiration of said period of one year, the decree of registration and the certificate of title issued shall become incontrovertible. Any person aggrieved by such decree of registration may pursue his remedy by action for damages against the applicant or any other person responsible for the fraud. </blockquote>Under this provision, once an original decree of registration under the Torrens system is issued and the one-year period lapses, the decree may no longer be reopened or set aside, and the corresponding title becomes incontrovertible and indefeasible. The only exception lies within the one-year period, where an aggrieved party may petition for reopening upon proof that the decree was secured through actual fraud. Even then, such relief is unavailable if the rights of an innocent purchaser for value would be prejudiced. Beyond the one-year period, the sole recourse of an aggrieved party is confined to an action for damages against the party who perpetrated the fraud.<br><br>Cavinti Realty contends that Nery and Maria's present suit amounts to an attack on the 1980 decree of registration, which awarded ownership of the disputed property to Dos Lagos. Since their action was filed more than three decades after the decree became final, Cavinti Realty asserts that it is time-barred by Section 32. It further stresses that it purchased the property in good faith and for value, a circumstance that Section 32 specifically protects by foreclosing even an action within one year if the rights of an innocent purchaser would be impaired. For this reason, Cavinti Realty insists that Nery and Maria cannot recover the property nor nullify the titles at this late stage, and that their only possible remedy lies in an action for damages against Dos Lagos or those responsible for the alleged fraud.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>At first glance, Cavinti Realty's reliance on Section 32 appears valid. The Torrens system is designed to stabilize and quiet title to land, thereby ensuring certainty for purchasers. As this Court has emphasized, the real purpose of the Torrens system is to quiet title to land and stop any question of legality of the title except claims recorded in the certificate at time of registration or arising subsequent thereto.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> This principle is captured in the so-called<i> mirror doctrine</i>: every person dealing with registered land may rely on the correctness of the certificate of title without being required to look beyond it.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Consistent with this framework, a Torrens title becomes incontrovertible one year after the issuance of the decree. Even a title procured through fraud may serve as the root of a valid title in the hands of an innocent purchaser for value. These safeguards are intended to protect buyers who, in good faith, rely on clean titles, while cutting off stale claims and unregistered interests once the period has lapsed.<br><br>Yet, Philippine jurisprudence has also tempered these assurances with the demands of equity in cases of fraud. The courts have fashioned the action for reconveyance as a remedy. Although a decree of registration may no longer be annulled after one year, equity permits the true owner to demand reconveyance of the property, provided such action does not compromise the indefeasibility of title held by an innocent purchaser for value. Thus, where the property remains with the original fraudster or with one who cannot be deemed a purchaser in good faith, the rightful owner may seek reconveyance on the theory that the registered holder merely holds the property in trust. Such an action is not regarded as an attack on the decree itself, but as an<i> in personam </i>action directed at the titleholder. Conversely, where the property has already passed into the hands of an innocent purchaser for value, the law's policy of protecting such purchaser prevails. In that case, the true owner is confined to an action for damages against the perpetrators of the fraud.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> This doctrinal balance has been consistently affirmed in our jurisprudence.<br><br>Accordingly, two critical considerations will determine whether Nery and Maria's action is barred:<i> first</i>, whether the statute of limitations for an action for reconveyance, based on implied trust or fraud, has expired; and <i>second</i>, whether the property has already passed to an innocent purchaser for value, such that reconveyance would impermissibly prejudice a protected titleholder.<br><br>The general rule governing an action for reconveyance based on an implied or constructive trust, which usually arises when property is registered in another's name through fraud, is that it prescribes in 10 years from the issuance of the Torrens title. This is the point when the implied trust is deemed to have arisen. The 10-year period is derived from the ordinary prescriptive period for actions based on fraud or for enforcing a trust, consistent with Article 1144<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> of the Civil Code and Article 1456 on implied trusts.<br><br>There are, however, significant exceptions to the 10-year rule. The<i> first </i>exception arises when the plaintiff, who claims to be the original owner, remains in actual possession of the property. In such cases, the action partakes of the nature of one to quiet title and is deemed imprescriptible, or at the very least, cannot be barred by laches. The rationale is that a possessor asserting ownership need not bring an action in court until his or her possession is threatened or disturbed. The law does not compel one in peaceful and continuous possession to sue prematurely. As jurisprudence explains, "one who is in actual possession of a piece of land claiming to be the owner may wait until his possession is disturbed or his title is attacked before taking steps to vindicate his right," and in the meantime, prescription does not run against such possessor.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> This doctrine has been repeatedly affirmed, as in<i> Vda. De Gualberto v. Go</i><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> and the earlier case of<i> Development Bank of the Philippines v. Court of Appeals</i>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>A<i> second</i> exception applies when the challenged transaction or title is void<i> ab initio</i>. This occurs when a person purports to sell or register property that he never owned, in violation of the principle of<i> nemo dat quod non habet. </i>In such cases, the action to declare the nullity of the transaction is imprescriptible. The defense of prescription cannot validate a void title. In <i>Heirs of Romana Ingjug-Tiro v. Spouses Casals</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> for example, the Court held that a sale by some heirs that prejudiced the shares of other heirs without their consent was null and void, and that "being null and void, the sale [. . .] produced no legal effects whatsoever."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The Court further ruled that in actions for reconveyance predicated on a void<i> ab initio</i> conveyance, a claim of prescription is unavailing,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> since under Article 1410 of the Civil Code, "[t]he action or defense for the declaration of inexistence of a contract does not prescribe."<br><br>In the present case, Nery and Maria allege that the inclusion of the 90,000-square-meter unsold portion in Dos Lagos' title exceeded the authority of Dos Lagos to convey or register, as it never purchased that portion. To the extent that Cavinti Realty's title covers land never acquired by Dos Lagos from the Custodios, the title may be deemed rooted in a void transaction. Consequently, an action to reconvey or to declare nullity as to that portion would be imprescriptible under this doctrine.<br><br>A<i> third</i> exception concerns the protection of innocent purchasers for value. Even beyond the nature of the contract, jurisprudence recognizes that when no innocent purchaser for value is involved, the aggrieved original owner is not absolutely bound by the one-year limitation under Section 32 of Presidential Decree No. 1529. In<i> Francisco v. Rojas</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> the Court explained that after the lapse of the one-year period to reopen a decree, an action for reconveyance may still prosper within the 10-year period, or even beyond if the original owner remains in possession, provided that the property has not passed to the hands of an innocent purchaser for value.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> In<i> Yared v. Tiongco</i>,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> the Court likewise affirmed this principle:<br><blockquote>The Court agrees with the CA's disquisition that an action for reconveyance can indeed be barred by prescription. In a long line of cases decided by this Court, we ruled that an action for reconveyance based on implied or constructive trust must perforce prescribe in [10] years from the issuance of the Torrens title over the property.<br><br>However, there is an exception to this rule. In the case of<i> Heirs of Pomposa Saludares v. Court of Appeals</i>, the Court reiterating the ruling in <i>Millena v. Court of Appeals</i>, held that there is but one instance when prescription cannot be invoked in an action for reconveyance, that is, when the plaintiff is in possession of the land to be reconveyed. In Heirs of Pomposa Saludares. this Court explained that the Court in a series of cases, has permitted the filing of an action for reconveyance despite the lapse of more than [10] years from the issuance of title to the land and declared that said action, when based on fraud, is imprescriptible as long as the land has not passed to an innocent buyer for value. But in all those cases, the common factual backdrop was that the registered owners were never in possession of the disputed property. The exception was based on the theory that registration proceedings could not be used as a shield for fraud or for enriching a person at the expense of another.<br><br>In<i> Alfredo v. Borras</i>, the Court ruled that prescription does not run against the plaintiff in actual possession of the disputed land because such plaintiff has a right to wait until his possession is disturbed or his title is questioned before initiating an action to vindicate his right. His undisturbed possession gives him the continuing right to seek the aid of a court of equity to determine the nature of the adverse claim of a third party and its effect on his title. The Court held that where the plaintiff in an action for reconveyance remains in possession of the subject land, the action for reconveyance becomes in effect an action to quiet title to property, which is not subject to prescription.<br><br>The Court reiterated such rule in the case of<i> Vda. de Cabrera v. Court of Appeals</i>, wherein we ruled that the imprescriptibility of an action for reconveyance based on implied or constructive trust applies only when the plaintiff or the person enforcing the trust is not in possession of the property. In effect, the action for reconveyance is an action to quiet the property title, which does not prescribe.<br><br>Similarly, in the case of<i> David v. Malay</i> the Court held that there was no doubt about the fact that an action for reconveyance based on an implied trust ordinarily prescribes in [10] years. This rule assumes, however, that there is an actual need to initiate that action, for when the right of the true and real owner is recognized, expressly or implicitly such as when he remains undisturbed in his possession, the statute of limitation would yet be irrelevant. An action for reconveyance, if nonetheless brought, would be in the nature of a suit for quieting of title, or its equivalent, an action that is imprescriptible. In that case, the Court reiterated the ruling in <i>Faja v. Court of Appeals</i> which we quote:<br><blockquote>[. . .] There is settled jurisprudence that one who is in actual possession of a piece of land claiming to be owner thereof may wait until his possession is disturbed or his title is attacked before taking steps to vindicate his right, the reason for the rule being, that his undisturbed possession gives him a continuing right to seek the aid of a court of equity to ascertain and determine the nature of the adverse claim of a third party and its effect on his own title, which right can be claimed only by one who is in possession. No better situation can be conceived at the moment for Us to apply this rule on equity than that of herein petitioners whose mother, Felipa Faja, was in possession of the litigated property for no less than 30 years and was suddenly confronted with a claim that the land she had been occupying and cultivating all these years, was titled in the name of a third person. We hold that in such a situation the right to quiet title to the property, to seek its reconveyance and annul any certificate of title covering it, accrued only from the time the one in possession was made aware of a claim adverse to his own, and it is only then that the statutory period of prescription commences to run against such possessor.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> (Citations omitted) </blockquote></blockquote>In other words, the Torrens system cannot be invoked as a shield for fraud when the current holder of the title is the very party who committed the fraud or a transferee who is not in good faith. In such circumstances, the rightful owner's claim may still be enforced despite the lapse of time, subject only to the rules on possession and laches.<br><br>Applying these principles to the present case:<br><br>It is undisputed that Dos Lagos' title, OCT No. O-2159, was issued on May 7, 1980. Accordingly, the one-year period to challenge the decree lapsed in May 1981. Nery and Maria filed no action within that time; indeed, they may not have been aware of the registration or may not have exercised legal vigilance. Their Complaint was filed only in 2014, decades after both the one-year period and the 10-year prescriptive period had elapsed.<i> Prima facie</i>, therefore, the claim would appear time-barred if the statutory limitations were applied without exception. However, two pivotal allegations bring this case within the jurisprudential exceptions.<br><br><i>First</i>, Nery and Maria claim that they and their predecessors have been in continuous possession of the property in the concept of owner from before 1980 until the present. Both the RTC and the CA considered this fact crucial. Jurisprudence beginning with<i> Francisco</i> and earlier cases instructs that such possession, if proven, renders an action for reconveyance effectively imprescriptible. The CA properly applied the rule that an action for reconveyance based on implied or constructive trust does not prescribe if the claimant is in possession of the property. In<i> Vda. De Gualberto</i>, the Court further held that actual possession allows the claimant to wait until such possession is disturbed before resorting to litigation, since the right to reconveyance, in effect a quieting of title, does not prescribe in favor of the party in possession.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Here, Nery and Maria's possession was not seriously disputed at the pleading stage, and Cavinti Realty did not assert that it had ousted them. Its defense rested solely on its asserted paper title. On this basis, prescription cannot be deemed to have run against Nery and Maria.<br><br><i>Second</i>, the inclusion of the unsold portion in Dos Lagos' title is alleged to be beyond the seller's consent and therefore void. The records show that the Custodio heirs intended to sell, and in fact sold, only 60,990 square meters to Dos Lagos. Yet Dos Lagos secured registration over approximately 146,453 square meters (Lot 7863-B), together with other parcels, far exceeding what it had purchased. If substantiated, this would indicate an invalid registration as to the excess. The Court has consistently emphasized that registration does not vest title; it is merely evidence of ownership. The Torrens system, although it generally renders titles indefeasible after one year, does not confer a better title than what the registrant lawfully acquired.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> If Dos Lagos had no title to the excess 90,000 square meters, then its OCT was void insofar as it included that portion, and subsequent transfers would be equally void, except in favor of a bona fide purchaser for value. The principle of<i> nemo dat quod non habet</i>âthat one cannot convey what one does not ownâremains firmly embedded in property law. While land registration laws are protective of registered titles, they do not leave the true owner without remedy in cases of fraudulent or mistaken registration.<br><br>Taken together, these considerations support the conclusion that the present action is not barred by prescription. Nery and Maria's allegations of uninterrupted possession and the void character of the disputed transfer bring their case within the established exceptions recognized in<i> Francisco</i> and<i> Vda. De Gualberto</i>. The CA was therefore correct in so holding.<br><br>Cavinti Realty nonetheless contends that the CA misapplied<i> Francisco</i>. It points to<i> Francisco's</i> qualification that the imprescriptibility rule applies only if the property has not passed to an innocent purchaser for value. Cavinti Realty argues that the Complaint itself admitted its good faith purchase, thereby removing this case from the exception. This argument requires scrutiny. In<i> Francisco</i>, the Court indeed stated that despite the lapse of the 10-year period, reconveyance remains available if the plaintiff is in possession and the property is registered in the name of one who is not an innocent purchaser for value.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> The question, therefore, is whether Cavinti Realty may be considered such a purchaser.<br><br>This issue is factual in nature and cannot be resolved at the pleading stage. The Complaint did not expressly admit Cavinti Realty's good faith; it merely traced the chain of transfers. The determination of whether Cavinti Realty knew or ought to have known of the defect in Dos Lagos' title must be made after trial. If Cavinti Realty is ultimately proven to be a purchaser in good faith and for value, then the law, under Presidential Decree No. 1529 and prevailing Torrens doctrine, shields its title from reconveyance. In that event, Nery and Maria's recourse would lie in an action for damages against those responsible for the wrongful registration. The trial court would then be compelled to deny reconveyance against Cavinti Realty, consistent with the protective purpose of the Torrens system. Yet this possibility does not justify dismissing the Complaint at the outset. The potential success of Cavinti Realty's defense does not negate the sufficiency of the Complaint or bar the action on the ground of prescription, particularly in light of the possession alleged by Nery and Maria.<br><br>In sum, the Court affirms the CA's ruling that the action is not barred by prescription. By alleging continuous possession and the void nature of the registration, Nery and Maria's Complaint fall within recognized exceptions to the prescriptive periods. Since the case was filed as an ordinary civil action for reconveyance rather than as a petition to reopen the decree of registration, Section 32 of Presidential Decree No. 1529 does not automatically apply. It will be for the trial court, upon full trial, to determine (a) the truth of Nery and Maria's possession and claims, (b) whether Cavinti Realty can validly invoke the status of an innocent purchaser for value, and (c) the relief warranted under law and equity. At this stage, the Court merely holds that the RTC and the CA committed no grave abuse of discretion in refusing to dismiss the case on the ground of prescription. Their ruling is consistent with the jurisprudential exceptions designed to protect rightful owners who remain in possession of their property.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Cavinti Realty' status as an alleged innocent purchaser for value</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Central to Cavinti Realty's defense, and consistently interwoven with its submissions, is its claim as an "innocent purchaser for value." The Court addresses this argument directly, given its significance both to the cause of action and to the issue of prescription under Section 32 of Presidential Decree No. 1529.<br><br>In jurisprudence on the Torrens system, an "innocent purchaser for value" is defined as one who buys the property of another without notice that some other person has a right to or interest in it, and who pays a full and fair price for the same, at the time of purchase, or before receiving notice of the claim or interest of some other person in the property. Such a purchaser acquires the property free from prior equitable interests, and even if the seller's title was defective or obtained through fraud, the sale to an innocent purchaser may give rise to a valid and indefeasible title.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> This doctrine lies at the core of the Torrens system, whose principal aim is to ensure conclusiveness of land titles and stability in land transactions. Section 32 of Presidential Decree No. 1529 itself enshrines this principle by barring the reopening of a decree when the rights of an innocent purchaser would be impaired. The statute extends protection not only to purchasers but also to lessees, mortgagees, and encumbrancers for value. Thus, the Torrens system places a premium on the protection of good faith reliance upon the registry, even if this results in the displacement of an earlier equitable owner, who may seek redress only by way of damages.<br><br>Cavinti Realty asserts that it squarely falls within this definition. It purchased the property covered by TCT No. T-90979 (Lot 7863-B, 146,453 sq.m.) from Dos Lagos for valuable consideration at a time when the title was facially valid and bore no liens or encumbrances. Cavinti Realty stresses that it had no involvement in the alleged fraud committed by Dos Lagos in procuring the OCT, and that it had no transactions with Nery and Maria which might have alerted it to an adverse claim. Relying on the mirror doctrine, Cavinti Realty contends that it was entitled to presume the correctness of Dos Lagos' certificate of title without delving into the history of prior ownership. It further argues that allegations of fraud must be specifically pleaded and proved by clear and convincing evidence, citing<i> Leong v. See</i><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> and<i> Calma v. Lachica</i>,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> where the Court reaffirmed that the law safeguards innocent purchasers for value against unsubstantiated claims of fraud.<br><br>The fact that Cavinti Realty paid for value and obtained a title that appeared valid supports its assertion of being an innocent purchaser. However, whether it acted without notice of an adverse claim remains unresolved. The determination requires factual inquiry. It must be established whether Nery and Maria, or their predecessors, were in actual possession of the land at the time of Cavinti Realty's acquisition, and whether Cavinti Realty or its agents made the inquiries expected of a prudent buyer. Visible signs of occupation, such as residents, tenants, or improvements, are constructive notice of potential adverse claims. Settled doctrine holds that one who purchases property in the possession of persons other than the seller has a duty to investigate the rights of those occupants. Failure to do so bars the purchaser from claiming good faith.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>In their Complaint, Nery and Maria allege that they and their family have been in open, continuous, and adverse possession of the property since the time of their grandparents. If true, this would mean that their occupation was contemporaneous with Dos Lagos' registration in 1980 and its later sale to Cavinti Realty. A buyer inspecting such a large tract of rural land would have reasonably encountered Nery, Maria, and their family or their representatives. If Cavinti Realty ignored such possession, or failed to inquire despite clear signs of occupancy, then its claim of good faith would be fatally undermined. Conversely, if Cavinti Realty demonstrates that there were no visible occupants, or that it diligently investigated and reasonably concluded that Dos Lagos' title was unassailable, then its claim to innocence would be sustained.<br><br>The Court notes that this issue cannot be resolved on the pleadings alone. Cavinti Realty's assertion of good faith was not admitted in the Complaint; silence on that point is not tantamount to admission. On the contrary, Nery, Maria, and their family's allegation of open possession implicitly challenges Cavinti Realty's claim of innocence. The Court therefore affirms the CA's ruling that the status of Cavinti Realty as an innocent purchaser for value must be determined during trial.<br><br>To summarize, Cavinti Realty's claim of being an innocent purchaser for value is recognized as a potentially decisive factor, but it cannot be presumed or resolved at this stage. The Complaint was correctly not dismissed on the mere assertion of this defense. The case must proceed to trial so that the question of Cavinti Realty's good faith or lack thereof, may be fully determined. Only after such factual determination can the Court apply the appropriate legal consequences, whether by upholding Cavinti Realty's title and limiting respondents to damages, or by ordering reconveyance of the property, in whole or in part, to Nery and Maria if Cavinti Realty is shown not to be truly innocent or if equitable considerations so warrant.<br><br>In light of the foregoing, the Court is compelled to sustain the ruling of the CA. The Petition of Cavinti Realty must fail.<br><br>The Court emphasizes that the present Decision is confined to the sufficiency of the Complaint and the propriety of allowing the case to proceed. It does not make a final pronouncement on the parties' respective claims of ownership, which remain for the trial court to adjudicate upon full presentation of evidence. Cavinti Realty will have the opportunity to establish its defenses, including its alleged status as an innocent purchaser for value and the circumstances of its acquisition and title. Correspondingly, Nery and Maria will be afforded the chance to substantiate their claims of prior ownership, fraud, and continued possession. The Court rules only that Cavinti Realty is not entitled, as a matter of law, to the dismissal of the case at this preliminary stage. The Complaint sufficiently states a cause of action, Cavinti Realty is a proper and indispensable party, and the action is not barred by prescription on the face of the pleadings. Thus, the CA committed no reversible error in affirming the trial court's orders and dismissing Cavinti Realty's Petition for<i> Certiorari</i>.<br><br><b>ACCORDINGLY, </b>the Petition for Review on<i> Certiorari</i> is<b> DENIED</b>. The Decision, dated May 24, 2021, and the Resolution, dated June 22, 2022, of the Court of Appeals in CA-G.R. SP No. 156683 are<b> AFFIRMED</b>. The Orders dated April 17, 2017, December 18, 2017, and April 23, 2018 of Branch 27, Regional Trial Court, Santa Cruz, Laguna, in Civil Case No. SC-5633 are upheld. Civil Case No. SC-5633 shall proceed to trial on the merits until final resolution, with no further delay.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 8-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 34-51. Penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Raymond Reynold R. Lauigan of the Special Fifteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 69-79. Penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Raymond Reynold R. Lauigan of the Former Special Fifteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 36-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 414-416.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 413-417.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 416.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 417.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 471-475.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 476-482.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 373-377. Issued by Presiding Judge Cynthia R. MariÃ±o-Ricablanca of Branch 27, Regional Trial Court, Santa Cruz, Laguna.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 381-382. Issued by Presiding Judge Cynthia R. MariÃ±o-Ricablanca of Branch 27, Regional Trial Court, Santa Cruz, Laguna.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 415 Phil. 665 (2001) [Per J. Bellosillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, pp. 407-411. Issued by Presiding Judge Cynthia R. MariÃ±o-Ricablanca of Branch 27, Regional Trial Court, Santa Cruz, Laguna.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 410.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 341-372.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 345-369.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 34-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> 734 Phil. 122 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 502 Phil. 250 (2005) [Per J. Garcia, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, pp. 43-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 55-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 69-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>China Banking Corp. v. Court of Appeals</b>, 499 Phil. 770, 774-775 (2005) [Per J. Quisumbing, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>See</i> <b>Heirs of Sotto v. Palicte</b>, 726 Phil. 651 (2014) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 14-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>See</i> <b>Spouses Aboitiz v. Spouses Po</b>, 810 Phil. 123 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>Roa v. Spouses Sy</b>, 910 Phil. 219 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> 779 Phil. 462 (2016) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 469-470.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>See</i> <b>Roa v. Spouses Sy</b>, 910 Phil. 219, 226-228 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 809 Phil. 289 (2017) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Art. 1456. If property is acquired through mistake or fraud, the person obtaining it is, by force of law, considered a trustee of an implied trust for the benefit of the person from whom the property comes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>See</i> <b>Spouses Aboitiz v. Spouses Po</b>, 810 Phil. 123 (2017) [Per J. Leonen, Second Division]. <i>See also</i> <b>Hortizuela v. Tagufa</b>, 754 Phil. 499, 507-508 (2015) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> RULES OF COURT (1997), Rule 3, sec. 2 states:<br><blockquote>Sec. 2. <i>Parties in interest</i>. â A real party in interest is the party who stands to be benefited or injured by the judgment in the suit, or the party entitled to the avails of the suit. Unless otherwise authorized by law or these Rules, every action must be prosecuted or defended in the name of the real party in interest.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> RULES OF COURT (1997), Rule 3, sec. 7 states:<br><blockquote>Sec. 7. <i>Compulsory joinder of indispensable parties</i>. â Parties in interest without whom no final determination can be had of an action shall be joined either as plaintiffs or defendants.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>See</i> <b>Metropolitan Bank &amp; Trust Company v. Hon. Alejo</b>, 417 Phil. 303, 315-316 (2001) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 810 Phil. 123 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 166, <i>citing</i> <b>Spring Homes Subdivision Co., Inc. v. Spouses Tablada, Jr.</b>, 803 Phil. 668 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 708 Phil. 327 (2013) [Per J. Velasco Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> RULES OF COURT (1997), Rule 16, sec. 1 states:<br><blockquote>Sec. 1. <i>Grounds</i>. â Within the time for but before filing the answer to the complaint or pleading asserting a claim, a motion to dismiss may be made on any of the following grounds:<br><blockquote>(a) That the court has no jurisdiction over the person of the defending party;<br>(b) That the court has no jurisdiction over the subject matter of the claim;<br>(c) That venue is improperly laid;<br>(d) That the plaintiff has no legal capacity to sue;<br>(e) That there is another action pending between the same parties for the same cause;<br>(f) That the cause of action is barred by a prior judgment or by the statute of limitations;<br>(g) <i>That the pleading asserting the claim stales no cause of action</i>;<br>(h) That the claim or demand set forth in the plaintiffs pleading has been paid, waived, abandoned, or otherwise extinguished;<br>(i) That the claim on which the action is founded is enforceable under the provisions of the statute of frauds; and<br>(j) That a condition precedent for filing the claim has not been complied with. (Emphasis supplied)</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Presidential Decree No. 1529 (1978).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, pp. 16-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Cruz v. Court of Appeals</b>, 346 Phil. 506, 512 (1997) [Per J. Bellosillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Chua v. Republic</b>, 945 Phil. 152, 165-166 (2023) [Per J. Hernando, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Gatmaytan v. MISIBIS Land, Inc.</b>, 873 Phil. 791, 804-807 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> CIVIL CODE, art. 1144. The following actions must be brought within [10] years from the time the right of action accrues:<br><blockquote>(1) Upon a written contract;<br>(2) Upon an obligation created by law;<br>(3) Upon a judgment.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Development Bank of the Philippines v. Court of Appeals</b>, 387 Phil. 283 (2000) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 502 Phil. 250 (2005) [Per J. Garcia, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 387 Phil. 283 (2000) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 415 Phil. 665 (2001) [Per J. Bellosillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 673.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 734 Phil. 122 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 151-152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> 675 Phil. 608 (2011) [Per J. Villarama, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 615-618.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Vda. De Gualberto v. Go</b>, 502 Phil. 250, 262 (2005) [Per J. Garcia, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Gatmaytan v. MISIBIS Land, Inc.</b>, 873 Phil. 791, 805-806 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Francisco v. Rojas</b>, 734 Phil. 122, 151 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Aguirre v. Bombaes</b>, 895 Phil. 481, 487-488 (2021) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 749 Phil. 314 (2014) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 821 Phil. 607 (2017) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>See</i> <b>Heirs of Cudal v. Spouses Suguitan</b>, 880 Phil. 347, 360 (2020) [Per J. Reyes, Jr., First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 222972 - HERMOSA SAVINGS AND LOAN BANK, INC.,** REPRESENTED BY ITS STATUTORY LIQUIDATOR, PHILIPPINE DEPOSIT INSURANCE CORPORATION (PDIC), PETITIONER, VS. DEVELOPMENT BANK OF THE PHILIPPINES (DBP), RESPONDENT.
+
+R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70161' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SPECIAL THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 222972, August 06, 2025 ]</H2>
+			<H3>HERMOSA SAVINGS AND LOAN BANK, INC.,<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> REPRESENTED BY ITS STATUTORY LIQUIDATOR, PHILIPPINE DEPOSIT INSURANCE CORPORATION (PDIC), PETITIONER, VS. DEVELOPMENT BANK OF THE PHILIPPINES (DBP), RESPONDENT.<BR><BR>
+
+R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Court's Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated February 10, 2021 (assailed Decision), which granted the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> filed by petitioner Hermosa Savings and Loan Bank, Inc. (Hermosa Bank). The assailed Decision reversed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated February 26, 2015 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated February 15, 2016, respectively, of the Court of Appeals (CA) in CA-G.R. CV No. 98170.</p><p> The CA reversed the following Orders of the Regional Trial Court (RTC) of Makati City: (1) the Order dated April 30, 2010<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of Branch 136 (RTC-Branch 136); and (2) the Order dated October 18, 2011<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> of Branch 57 (RTC-Branch 57) in Civil Case No. 01-1438. The RTC Orders dismissed the Complaint for Sum of Money and Damages filed by respondent Development Bank of the Philippines (DBP) against Hermosa Bank and held that the subject matter fell within the exclusive jurisdiction of the liquidation court.</p><p align="center"> <i>The Antecedents</i> </p><p> On September 25, 2001, DBP filed a Complaint for Sum of Money and Damages against Hermosa Bank and its officers, namely Benjamin Cruz, Ligaya Cruz, Rodolfo Buenaventura, Librada Dio, Nilda Fajardo, and Lelaine Fernandez (collectively, defendants), docketed as Civil Case No. 01-1438. The case was initially raffled to RTC-Branch 136.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> DBP obtained a loan from the National Economic Development Authority via the Industrial Guarantee and Loan Fund (IGLF). DBP then made the proceeds available to participating financial institutions, including Hermosa Bank, by way of subsidiary loans.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p>DBP alleged the following: (1) on various dates, Hermosa Bank applied for and was granted loans by DBP under the IGLF Loan Facility; (2) Hermosa Bank failed to remit the amortizations due on these IGLF loans despite demands, which resulted in the loans being declared in default; (3) the Bangko Sentral ng Pilipinas (BSP) conducted a regular examination of Hermosa Bank and notified DBP of possible tampering and alteration of various loan documents and certificates of title of the loan collaterals; (4) DBP conducted its own investigation and discovered several fraudulent, deceitful, and unlawful acts in the preparation and execution of the loan and collateral documents; and (5) as of June 30, 2001, Hermosa Bank's outstanding balance under the DBP-IGLF Loan Facility was PHP 438,235,392.60.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Consequently, DBP prayed for the following reliefs: (1) the issuance of a writ of preliminary attachment <i>ex parte</i> against the properties of all defendants; and (2) a judgment ordering defendants to pay, jointly and severally, the amount of PHP 438,235,392.60, plus exemplary damages, attorney's fees, and cost of the proceedings.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> After DBP posted a bond, the RTC-Branch 136 issued a Writ of Preliminary Attachment on November 13, 2001. Accordingly, a Notice of Garnishment was served on Hermosa Bank. Subsequently, at the instance of Hermosa Bank, the Writ of Preliminary Attachment was lifted and discharged via the Order dated October 14, 2003 of RTC-Branch 136. However, the Writ was later reinstated pursuant to the Decision of the CA in CA-G.R. SP No. 84762.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> Thereafter, Hermosa Bank filed an Answer with Counterclaim. Defendant officers likewise filed their respective Answers with Counterclaim. The case was then set for preliminary conference.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Meanwhile, on February 5, 2005, the Monetary Board of the BSP ordered the closure of Hermosa Bank and placed it under receivership. Consequently, the Philippine Deposit Insurance Corporation (PDIC) was appointed as receiver.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> On June 7, 2005, the PDIC filed a Petition for Assistance in the Liquidation of Hermosa Bank. The Petition was raffled to Branch 5, RTC of Dinalupihan, Bataan (liquidation court), which gave due course to the Petition, and docketed the case as SP No. DH-025-05. Due to PDIC's Petition, Hermosa Bank's counsel withdrew its appearance. The Office of the General Counsel of the PDIC then entered its appearance and filed a Supplemental Answer<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated May 24, 2006, and Pre-Trial Brief in Civil Case No. 01-1438.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> Subsequently, defendants filed their respective Motions to Dismiss the Complaint for lack of jurisdiction. The defendant officers cited <i>Pacific Banking Corp. Employees Organization v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> and argued that the jurisdiction over DBP's money claims against Hermosa Bank lies with the liquidation court. For Hermosa Bank, it raised the same argument, but cited Section 30<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> of Republic Act No. 7653<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (The New Central Bank Act).<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p align="center"> <i>The Ruling of the RTC</i> </p><p> In the Order<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated October 6, 2008, RTC-Branch 136 granted the Motions to Dismiss and dismissed the Complaint for lack of jurisdiction. </p><p> However, in an Order<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated March 18, 2009, the RTC-Branch 136 granted DBP's Motion for Reconsideration and reinstated the Complaint. It held that because the Complaint was filed four years before the PDIC filed the liquidation proceedings in 2005, it retained its jurisdiction over the case.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p> Aggrieved, defendants filed separate Motions for Reconsideration of the Order dated March 18, 2009.</p><p> In its Order<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated April 30, 2010, RTC-Branch 136 again dismissed the Complaint for lack of jurisdiction. Thus, it discharged the writ of attachment and ruled that the writ gave DBP undue advantage over Hermosa Bank's other creditors.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> DBP moved for the reconsideration, which defendants opposed.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Meanwhile, RTC-Branch 136 was designated as a family court. As a result, the case was re-raffled to RTC Branch 57.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> In the Order<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated October 18, 2011, RTC-Branch 57 denied DBP's Motion for Reconsideration. It affirmed the rationale of the Order dated April 30, 2010 of RTC-Branch 136. Citing Section 10(b)<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> and 10(c)(5)<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> of Republic Act No. 3591 (PDIC Charter),<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> as amended by Republic Act No. 9302,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the court <i>a quo</i> held that Hermosa Bank's assets are deemed in <i>custodia legis</i> in the hands of PDIC, the receiver. Consequently, all claims against a closed bank should be exclusively lodged with the liquidation court to avoid multiplicity of suits.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p align="center"> <i>The Ruling of the CA</i> </p><p> In the Decision<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> dated February 26, 2015, the CA granted DBP's appeal, and accordingly, reversed the Orders dated April 30, 2010 and October 18, 2011 of RTC-Branch 136 and RTC-Branch 57, respectively. </p><p> It held that: (1) once jurisdiction is acquired, it is not lost at the instance of the parties but continues until the case is terminated; (2) the dismissal of the case against Hermosa Bank would necessarily result in the dismissal of the DBP's action against defendant officers, which could not be properly resolved by the liquidation court; (3) likewise, the cross-claim of PDIC against the defendant officers is beyond the jurisdiction of the liquidation court; and (4) the dismissal would be unjust and arbitrary because DBP would incur additional expenses to refile the complaint after it had already spent a considerable amount, i.e., PHP 4,877,123.30 as filing fees and PHP 250,000,000.00 as attachment bond.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> Finally, the CA reinstated the writ of attachment issued in favor of DBP. The appellate court reasoned that a writ of attachment continues until the debt is paid, a sale it had under execution issued on the judgment, the judgment is satisfied, or the attachment is discharged or vacated in some manner provided by law; however, none of these circumstances were present.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> The CA denied defendants' Motions for Reconsideration in the Resolution<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> dated February 15, 2016.</p><p> Unconvinced, Hermosa Bank filed a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> under Rule 45 of the Rules of Court.</p><p align="center"> <i>Proceedings before the Court</i> </p><p> In the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> dated February 10, 2021, the Court ruled in favor of Hermosa Bank. The dispositive portion of which reads: </p><blockquote> <p> WHEREFORE, the petition is GRANTED. The Decision dated February 26, 2015 and the Resolution dated February 15, 2016 of the Court of Appeals in CA-G.R. CV No. 98170 are REVERSED and SET ASIDE. </p> <p> The Orders dated April 30, 2010 of Branch 136 and October 18, 2011 of Branch 57, both of the Regional Trial Court, Makati City dismissing the complaint for sum of money and damages are REINSTATED without prejudice on the part of respondent Development Bank of the Philippines to file its claim before Branch 5, Regional Trial Court, Dinalupihan, Bataan acting as a liquidation court. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p> </blockquote> <p> Citing <i>Barrameda v. Rural Bank of Canaman, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the Court held that Section 30 of the New Central Bank Act gave the liquidation court exclusive jurisdiction to adjudicate disputed claims against a closed bank.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> The Court explained that the timing of DBP's Complaint was immaterial; what was crucial was that any execution of judgment would prejudice the bank's other depositors and creditors. The Court further held that the CA erred in finding that the liquidation court has no jurisdiction over defendant officers, even though they were sued in their personal capacities. Finally, the Court ordered the dissolution of the Writ of Preliminary Attachment.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p><p> Aggrieved, DBP filed its Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> <i>DBP's Arguments</i></p><p> In its Motion for Reconsideration, DBP argues that Section 30 of the New Central Bank Act, which formed the basis of the Court's ruling, was amended by Republic Act No. 11211.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></p><p> Prior to the amendment, Section 30 of the New Central Bank Act provides: </p><blockquote> <p> SECTION 30. <i>Proceedings in Receivership and Liquidation</i>. â Whenever, upon report of the head of the supervising or examining department, the Monetary Board finds that a bank or quasi-bank: </p> <p> (a) is unable to pay its liabilities as they become due in the ordinary course of business: <i>Provided</i>, That this shall not include inability to pay caused by extraordinary demands induced by financial panic in the banking community; </p> <p> (b) has insufficient realizable assets, as determined by the <i>Bangko Sentral</i>, to meet its liabilities; or</p> <p> (c) cannot continue in business without involving probable losses to its depositors or creditors; or</p> <p> (d) has willfully violated a cease and desist order under Section 37 that has become final, involving acts or transactions which amount to fraud or a dissipation of the assets of the institution; in which cases, the Monetary Board may summarily and without need for prior hearing forbid the institution from doing business in the Philippines and designate the Philippine Deposit Insurance Corporation as receiver of the banking institution. </p> <p> For a quasi-bank, any person of recognized competence in banking or finance may be designed as receiver. </p> <p> The receiver shall immediately gather and take charge of all the assets and liabilities of the institution, administer the same for the benefit of its creditors, and exercise the general powers of a receiver under the Revised Rules of Court but shall not, with the exception of administrative expenditures, pay or commit any act that will involve the transfer or disposition of any asset of the institution: <i>Provided</i>, That the receiver may deposit or place the funds of the institution in non-speculative investments. The receiver shall determine as soon as possible, but not later than ninety (90) days from take-over, whether the institution may be rehabilitated or otherwise placed in such a condition so that it may be permitted to resume business with safety to its depositors and creditors and the general public: <i>Provided</i>, That any determination for the resumption of business of the institution shall be subject to prior approval of the Monetary Board. </p> <p> <i>If the receiver determines that the institution cannot be rehabilitated or permitted to resume business in accordance with the next preceding paragraph, the Monetary Board shall notify in writing the board of directors of its findings and direct the receiver to proceed with the liquidation of the institution. The receiver shall:</i> </p> <p> <i>(1) file ex parte with the proper regional trial court, and without requirement of prior notice or any other action, a petition for assistance in the liquidation of the institution pursuant to a liquidation plan adopted by the Philippine Deposit Insurance Corporation for general application to all closed banks. In case of quasi-banks, the liquidation plan shall be adopted by the Monetary Board. Upon acquiring jurisdiction, the court shall, upon motion by the receiver after due notice, adjudicate disputed claims against the institution, assist the enforcement of individual liabilities of the stockholders, directors and officers, and decide on other issues as may be material to implement the liquidation plan adopted. The receiver shall pay the cost of the proceedings from the assets of the institution. </i></p> <p> <i>(2) convert the assets of the institution to money, dispose of the same to creditors and other parties, for the purpose of paying the debts of such institution in accordance with the rules on concurrence and preference of credit under the Civil Code of the Philippines and he may, in the name of the institution, and with the assistance of counsel as he may retain, institute such actions as may be necessary to collect and recover accounts and assets of, or defend any action against, the institution. The assets of an institution under receivership or liquidation shall be deemed in custodia legis in the hands of the receiver and shall, from the moment the institution was placed under such receivership or liquidation, be exempt from any order of garnishment, levy, attachment, or execution.</i> </p> <p> The actions of the Monetary Board taken under this section or under Section 29 of this Act shall be final and executory, and may not be restrained or set aside by the court except on petition for <i>certiorari </i>on the ground that the action taken was in excess of jurisdiction or with such grave abuse of discretion as to amount to lack or excess of jurisdiction. The petition for <i>certiorari</i> may only be filed by the stockholders of record representing the majority of the capital stock within ten (10) days from receipt by the board of directors of the institution of the order directing receivership, liquidation or conservatorship. </p> <p> The designation of a conservator under Section 29 of this Act or the appointment of a receiver under this section shall be vested exclusively with the Monetary Board. Furthermore, the designation of a conservator is not a precondition to the designation of a receiver. (Emphasis supplied) </p> </blockquote> <p> On March 1, 2019, Republic Act No. 11211 took effect and amended Section 30 of the New Central Bank Act, as follows: </p><blockquote> <p> SECTION 30. <i>Proceedings in Receivership and Liquidation</i>. â Whenever, upon report of the head of the supervising or examining department, the Monetary Board finds that a bank or quasi-bank: </p> <p> (a) has notified the <i>Bangko Sentral</i> or publicly announced a unilateral closure, or has been dormant for at least sixty (60) days or in any manner has suspended the payment of its deposit/deposit substitute liabilities, or is unable to pay its liabilities as they become due in the ordinary course of business: <i>Provided</i>, That this shall not include inability to pay caused by extraordinary demands induced by financial panic in the banking community; </p> <p> (b) has insufficient realizable assets, as determined by the <i>Bangko Sentral</i>, to meet its liabilities; or</p> <p> (c) cannot continue in business without involving probable losses to its depositors or creditors; or</p> <p> (d) has willfully violated a cease and desist order under Section 37 of this Act that has become final, involving acts or transactions which amount to fraud or a dissipation of the assets of the institution; in which cases, the Monetary Board may summarily and without need for prior hearing forbid the institution from doing business in the Philippines and designate the Philippine Deposit Insurance Corporation (PDIC) as receiver in the case of banks and direct the PDIC to proceed with the liquidation of the closed bank pursuant to this section and the relevant provisions of Republic Act No. 3591, as amended. The Monetary Board shall notify in writing, through the receiver, the board of directors of the closed bank of its decision. </p> <p> The actions of the Monetary Board taken under this section or under Section 29 of this Act shall be final and executory, and may not be restrained or set aside by the court except on petition for <i>certiorari</i> on the ground that the action taken was in excess of jurisdiction or with such grave abuse of discretion as to amount to lack or excess of jurisdiction. The petition for <i>certiorari</i> may only be filed by the stockholders of record representing the majority of the capital stock within ten (10) days from receipt by the board of directors of the institution of the order directing receivership, liquidation or conservatorship. The designation of a conservator under Section 29 of this Act or the appointment of a receiver under this section shall be vested exclusively with the Monetary Board. Furthermore, the designation of a conservator is not a precondition to the designation of a receiver. </p> <p> The authority of the Monetary Board to summarily and without need for prior hearing forbid the bank or quasi-bank from doing business in the Philippines as provided above may also be exercised over non-stock savings and loan associations, based on the same applicable grounds. For quasi-banks and non-stock savings and loan associations, any person of recognized competence in banking, credit or finance may be designated by the <i>Bangko Sentral</i> as a receiver. </p> </blockquote> <p> DBP contends that the foregoing amendment removed the liquidation court's exclusive jurisdiction to "adjudicate disputed claims against the institution, assist the enforcement of individual liabilities of the stockholders, directors and officers, and decide on other issues as may be material to implement the liquidation plan adopted." It insists that the applicable rules on liquidation of closed banks are found in the PDIC Charter,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> as further amended by Republic Act No. 10846.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> It is DBP's assertion that Section 12(a)<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> and Section 13(e)(9)<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> and (10),<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> as amended by Republic Act No. 10846<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> are the pertinent provisions on the liquidation of closed banks. These provisions require the continuation of actions already pending against the closed bank until a final decision is reached, even if the bank is subsequently placed under liquidation.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> It submits that these provisions, as amended, demonstrate the Legislature's intent to permit the continuation of those actions outside the liquidation court.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> It also argues that these provisions are procedural in nature, and thus, should be given retroactive effect for pending cases. </p><p> It further emphasizes the following circumstances: (1) DBP's Complaint was filed way back in 2001, long before Hermosa Bank was placed under liquidation in 2005; (2) DBP paid substantial filing fees of PHP 4,877,123.30; (3) Hermosa Bank and defendant officers already filed their respective Answers with Counterclaim; and (4) RTC-Branch 136 had already taken cognizance of the case and even issued a Writ of Preliminary Attachment, for which DBP paid a substantial attachment bond.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></p><p> DBP also reiterates that once a court acquires jurisdiction, it cannot be ousted by subsequent happenings or events and retains jurisdiction until it fully disposes of the case.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> Regarding its claim against defendant officers, DBP insists that the liquidation court cannot pass upon the personal liabilities of the officers because Civil Case No. 01-1438 is not just an ordinary civil suit. Rather, it serves as DBP's vehicle to recover the civil aspect arising from the related criminal cases filed against defendant officers, consisting of 40 counts of estafa, docketed as Criminal Case Nos. 03-534 to 573, titled, <i>People of the Philippines v. Benjamin Cruz</i>, which are pending before Branch 150, RTC of Makati City.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Citing <i>Carandang v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> it argues that a liquidation court exercises limited jurisdiction, that is, to assist the BSP in the liquidation of a closed bank. The liquidation court does not have the authority to order the directors and officers of a closed bank to settle their personal obligations arising from a crime.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> Lastly, DBP argues that the Writ of Preliminary Attachment issued in its favor should be reinstated. It stresses that the Writ of Preliminary Attachment was issued not only against the properties of Hermosa Bank but also against the properties of defendant officers and ensures satisfaction on the civil aspect arising from Criminal Case Nos. 03-534 to 573. In other words, the dissolution of the Writ of Preliminary Attachment would render any judgment in favor of DBP in Criminal Case Nos. 03-534 to 03-573 inutile.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> dated July 18, 2022, the Court required Hermosa Bank to file its comment on DBP's Motion for Reconsideration. </p><p> <i>Hermosa Bank's Arguments</i></p><p> In its Comment<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> dated December 22, 2022, Hermosa Bank maintains that the amendment to Section 30 of the New Central Bank Act did not divest the liquidation court of its exclusive jurisdiction to adjudicate disputed claims against closed banks.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </p><p> It also avers that Section 30 of the New Central Bank Act did not grant exclusive jurisdiction to the liquidation court to adjudicate disputed claims against a closed bank but merely prescribed what the receiver shall do after determining that the closed bank can no longer be rehabilitated and after receiving directive from the Monetary Board to proceed with the liquidation.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Moreover, it cited the cases of <i>Hernandez v. Rural Bank of Lucena, Inc</i>.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> and <i>Valenzuela v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> as bases of its argument of the exclusive jurisdiction of liquidation courts. </p><p> As to Section 13(e)(9) and (e)(10) of the PDIC Charter, as further amended by Republic Act No. 10846, Hermosa Bank contends that these provisions find no application on the issue of the exclusive jurisdiction of the liquidation court.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> It emphasizes that Section 13 of the PDIC Charter, as amended, pertains to the powers of a receiver and the effects of placing a bank under liquidation, without bearing to the jurisdiction of the liquidation court.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> According to Hermosa Bank, this provision contemplates a situation where a case involving a closed bank is already pending before a court prior to the establishment of a liquidation court. In such a situation, the pending action should be allowed to proceed, as the liquidation court has not yet been constituted.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> </p><p> It also opines that DBP should have instead considered Section 16(g)<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> and (h)<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> of the PDIC Charter, as amended, which now provides for the exclusive jurisdiction of the liquidation court to adjudicate claims against a closed bank,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> and which is also consistent with Section 1(c), Rule 3 of the New Rules on Liquidation of Closed Bank,<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> which provides that the liquidation court "shall have exclusive jurisdiction to adjudicate disputed claims against a closed bank, assist in the enforcement of individual liabilities of the stockholders, directors, and officers, and decide on all other issues as may be material to implement the Master Liquidation Plan."<sup style="COLOR: RGB(255, 0, 0);">[73]</sup></p><p> Hermosa Bank argues that a liquidation court has jurisdiction to decide on the validity of contracts entered into by a closed bank. <i>First</i>, the pronouncements in <i>Carandang</i> constitute an exception to the prevailing doctrine because of the unique factual circumstances in that case, which are entirely different from the present case. <i>Second</i>, DBP misquoted <i>Carandang</i>, as the Court never ruled therein that the liquidation court cannot pass on the validity of <i>all</i> contracts entered by a closed bank. <i>Third</i>, the powers of the liquidation court have evolved over time, starting from the ruling in <i>Hernandez</i>, through the enactment of subsequent laws, as well as the issuance of the New Rules on Liquidation. It points out that Republic Act No. 10846 categorically vests the liquidation court with exclusive jurisdiction to adjudicate disputed claims against closed banks, among others.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> </p><p> Further, Hermosa Bank maintains that the attachment of its properties violates Section 13(e)(3) of the PDIC Charter, as amended, and is prejudicial to the equal right of the depositors and creditors over its assets. The bank, citing the case of <i>Central Bank of the Philippines v. Morfe</i><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> maintains that its creditors, including DBP, are on equal footing with equal rights over its properties. It points out that none of the jurisprudence cited by DBP are applicable to the present case, as none of these cases involved a closed bank under liquidation.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> </p><p> Lastly, Hermosa Bank opines that the Writ of Preliminary Attachment in the case was issued as a security for the satisfaction of any judgment that may be recovered by DBP in Civil Case No. 01-1438; thus, it is inconceivable that an attachment in a civil case would extend to the satisfaction of a civil liability in a criminal action. What is more, this remedy is equally available to the complainants in criminal cases. Even assuming that the Writ of Attachment in Civil Case No. 01-1438 may be used to satisfy the civil liability of defendant officers in Criminal Case Nos. 03-534 to 03-573, still, this Writ can only be effective against their properties, not the properties of the bank.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </p><p align="center"> <i>The Issues</i> </p><p> The issues for the Court's resolution are: (1) whether the Court erred in ruling that the liquidation court exercises exclusive jurisdiction over all claims against a closed bank including those that are the subject of prior pending cases; (2) whether the liquidation court can pass upon the personal liabilities of defendant officers arising from a criminal offense; and (3) whether the Writ of Attachment should be reinstated. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The Court finds the Motion for Reconsideration unmeritorious. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The liquidation court has exclusive jurisdiction over disputed claims against Hermosa Bank</i> </div></td> </tr> </tbody></table> <p>DBP correctly argued that laws relating to the forms and methods of enforcing rights and obligations, and which do not create new rights or take away vested ones, as in the provisions of Republic Act No. 10846, are generally given retroactive effect.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> The rationale is that procedural laws aim to improve the administration of justice, and their application to pending cases does not typically impair substantive rights. Thus, even cases already pending in one court may be validly taken away and transferred to another if a law changes and specifies a particular court to try such cases, and no litigant can assert a vested right to have their case be heard by a particular court. </p><p> In <i>Tan, Jr. v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> the Court reiterated that the prospective application of statutes does not apply to procedural laws, including statutes that transfer jurisdiction to try certain cases from a court to a quasi-judicial tribunal; thus: </p><blockquote> <p> 9.17. Procedural laws. </p> <p> Procedural laws are adjective laws which prescribe rules and forms of procedure of enforcing rights or obtaining redress for their invasion; they refer to rules of procedure by which courts applying laws of all kinds can properly administer justice[.]</p> <p> . . . . </p> <p> Statutes regulating the procedure of the courts will be construed as applicable to actions pending and undetermined at the time of their passage. Procedural laws are retroactive in that sense and to that extent. The fact that procedural statutes may somehow affect the litigants' rights may not preclude their retroactive application to pending actions. The retroactive application of procedural laws is not violative of any right of a person who may feel that he is adversely affected. Nor is the retroactive application of procedural statutes constitutionally objectionable. The reason is that as a general rule no vested right may attach to, nor arise from, procedural laws. It has been held that "a person has no vested right in any particular remedy, and a litigant cannot insist on the application to the trial of his case, whether civil or criminal, of any other than the existing rules of procedure." </p> <p> <i>[A] statute which transfers the jurisdiction to try certain cases from a court to a quasi-judicial tribunal is a remedial statute that is applicable to claims that accrued before its enactment but formulated and filed after it took effect, for it does not create new nor take away vested rights. The court that has jurisdiction over a claim at the time it accrued cannot validly try the claim where at the time the claim is formulated and filed the jurisdiction to try it has been transferred by law to a quasi-judicial tribunal, for even actions pending in one court may be validly taken away and transferred to another and no litigant can acquire a vested right to be heard by one particular court</i>.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Emphasis supplied)</p> </blockquote> <p> Admittedly, while Republic Act No. 10846 has some substantive aspects, i.e., increased PDIC powers, changes in deposit insurance coverage among others, nevertheless, the provisions relating to the jurisdiction of the liquidation court and the procedure for claims in liquidation are procedural and remedial in nature, and thus, should be applied retroactively. </p><p> In addition, contrary to DBP's contention, the Legislature, in amending Section 12(a) and Section 13(e)(9) and (10) of the PDIC Charter through Republic Act No. 10846, did not divest the liquidation court of its <i>exclusive</i> jurisdiction to adjudicate disputed claims against closed banks. It likewise did not direct the continuation of proceedings against a closed bank before the original court until a final decision is reached despite the establishment of a liquidation court.</p><p> Section 12(a)<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> of the PDIC Charter, as further amended by Republic Act No. 10846, provides that the PDIC shall be designated as a receiver, and it shall proceed with the takeover and liquidation of the closed bank in accordance with the PDIC Charter. Notably, this provision has no relation to the jurisdiction of the liquidation court. Similarly, Section 13(e)(10)<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> is inapplicable in the case as it pertains to court decisions which have already attained finality at the time the bank is placed under liquidation by the Monetary Board. </p><p> Thus, among the provisions cited by DBP, the Court finds that the only relevant provision of the PDIC Charter, as further amended by Republic Act No. 10846, is Section 13(e)(9), which provides: </p><blockquote> <p> SECTION 13. . . </p> <p> . . . .</p> <p> (e) The placement of a bank under liquidation shall have the following effects: </p> <blockquote> <p> (9) Actions pending for or against the closed bank</p> <p> Except for actions pending before the Supreme Court, actions pending for or against the closed bank in any court or quasi-judicial body shall, upon motion of the receiver, be suspended for a period not exceeding one hundred eighty (180) days and referred to mandatory mediation. Upon termination of the mediation, the case shall be referred back to the court or quasi-judicial body for further proceedings[.]</p> </blockquote> </blockquote> <p> Indeed, the above-cited provision provides that upon termination of the mediation, the case shall be referred back to the court or quasi-judicial body for further proceedings. </p><p> However, as aptly argued by Hermosa Bank, this provision applies only to cases already pending <i>prior to the formal initiation of liquidation proceedings</i> of a closed bank. This is evident from the heading of Section 13, which expressly refers to the "Authorities of a Receiver and Effect of Placement of a Bank Under Liquidation." </p><p> On the other hand, once the receiver initiates conventional liquidation, Section 16 of the PDIC Charter, as further amended by Republic Act No. 10846, applies. Notably, the provisions pertaining to the consequences of a petition for assistance in the liquidation of a closed bank are the following: </p><p align="center"> CONVENTIONAL LIQUIDATION </p><p align="center"> . . . .</p><p align="center"> B. PETITION FOR ASSISTANCE IN THE <br>LIQUIDATION OF A CLOSED BANK </p><blockquote> <p> . . . .</p> <p> SECTION 16. . .</p> <p> (g) A petition for assistance in the liquidation is a special proceeding for the liquidation of a closed bank, and includes the declaration of the concomitant right of its creditors and the order of payment of their valid claims in the disposition of its assets. </p> <p> Any proceeding initiated under this section shall be considered in rem. Jurisdiction over all persons affected by the proceeding shall be <i>considered as acquired</i> upon publication of the order setting the case for initial hearing in any newspaper of general circulation in the Philippines. </p> <p> (h) <i>The liquidation court shall have exclusive jurisdiction to adjudicate disputed claims against the closed banks, assist in the enforcement of individual liabilities of the stockholders, directors and officers and decide on all other issues as may be material to implement the distribution plan adopted by the Corporation for general application to all closed banks</i>. (Emphasis supplied) </p> </blockquote> <p> From the foregoing, it is evident that once a petition for assistance in the liquidation of a closed bank is filed, the liquidation court exercises exclusive jurisdiction over pending actions against the bank, pursuant to Section 16(h) of the PDIC charter, as further amended by Republic Act No. 10846. </p><p> To the Court's mind, there is no conflict between Section 13(e)(9) and Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846. </p><p> To reiterate, Section 13(e)(9) applies early in the receivership phase, while Section 16(h) applies at a later stage, specifically when the bank enters conventional liquidation. Once conventional liquidation commences, the most critical provision, and the one decisively establishing exclusive jurisdiction, is Section 16(h). The centralization of all disputed claims in a specialized liquidation court with exclusive jurisdiction would ensure efficient and fair winding up of the bank's affairs.</p><p> Notably, the jurisdiction of the liquidation court under Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846, is broad and exclusive, without distinction as to the claims pending before other courts and quasi-judicial bodies. Consequently, it supersedes the jurisdiction of other courts and quasi-judicial bodies regarding claims against a closed bank, including cases that were initially suspended and mediated under Section 13(e)(9) and returned to the court of origin or quasi-judicial body, if they remain unresolved and become disputed claims during liquidation.</p><p> Notably, jurisdiction, once acquired, is generally retained until the case is fully resolved. However, this rule is not absolute and is subject to statutory exceptions. </p><p> One of those exceptions is Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846âa special law governing bank liquidation. It expressly vests the liquidation court with exclusive jurisdiction to adjudicate claims against closed banks and related issues, including the enforcement of liabilities of stockholders, directors and officers of a closed bank in the context of liquidation. To stress, jurisdiction over the subject matter is conferred by law,<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> not by a court's initial recognition of a case. </p><p> From the foregoing, even though DBP's case was filed before Hermosa Bank was placed under liquidation, the newly defined exclusive jurisdiction of the liquidation court under Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846, now governs. </p><p> Corollary thereto, on April 16, 2020, the Court promulgated the New Rules on Liquidation. Rule 3, Section 1(c) of the said Rules provides: </p><blockquote> <p> SECTION 1. <i>Nature of the Proceedings Initiated by the Filing of the PAL under These Rules</i>. â . . .</p> <p> . . . .</p> <p> c) Exclusive jurisdiction. â The [liquidation court] shall have <i>exclusive jurisdiction to adjudicate disputed claims against the closed bank, assist in the enforcement of individual liabilities of the stockholders, directors, and officers, and decide on all other issues as may be material to implement the Master Liquidation Plan</i>. (Emphasis supplied). </p> </blockquote> <p>In the case of <i>Cu v. Small Business Guarantee and Finance Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> the Court explained that judicial liquidation is intended to prevent multiplicity of actions against the insolvent bank. If there is a judicial liquidation of an insolvent bank, <i>all claims</i> against the bank should be filed in the liquidation proceedings. This holds true regardless of whether the claim is initially disputed in a court or agency before it is filed with the liquidation court.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> To rule otherwise would undermine the efficient and orderly liquidation process envisioned by the Legislature in enacting Republic Act No. 10846. </p> <table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The liquidation court's exclusive jurisdiction extends to DBP's claims against defendant officers and Hermosa Bank's crossclaim against them</i> </div></td> </tr> </tbody></table> <p>DBP also submits that the liquidation court cannot pass upon the personal liabilities of the bank officers arising from a criminal offense.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> In support thereof, it cited <i>Carandang</i>, where the Court purportedly declared that "a liquidation court has no jurisdiction to pass upon validity of <i>all</i> contracts."<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> </p><p> The Court is not persuaded. </p><p> The statement in <i>Carandang</i>, which DBP misquoted by adding the word "all," is merely an <i>obiter dictum</i> considering that none of the parties therein raised the issue of whether the liquidation court can rule on the validity of contracts. Instead, the issue in <i>Carandang</i> was whether the regular court or the liquidation court had jurisdiction over the real action involving the nullity of a real estate mortgage executed by petitioners therein in favor respondent bank, given that the subject property is located within the territorial jurisdiction of the regular court and outside the territorial jurisdiction of the liquidation court.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> </p><p> Likewise, contrary to DBP's contention, the Court ruled in <i>Carandang</i> that the liquidation court and the regular court have concurrent jurisdiction over the subject matter and that under the doctrine laid down in <i>Hernandez</i>, only one court should pass upon all the claims against the insolvent bank. There, the Court noted that although the Central Bank filed an answer in intervention reiterating lack of jurisdiction and at the same time upholding the authenticity of the mortgaged documents, it participated in the trial. Hence, the Court ruled that the accepted rule on concurrent jurisdiction does not apply because the filing of another action for nullification of the mortgage before the liquidation court after it was fully litigated below "is an action in futility" and "would only mean more inconvenience to the parties, entailing waste of more money and precious time."<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> </p><p> What is more, Hermosa Bank aptly raised that <i>Carandang</i> was promulgated back in 1988. Since then, the jurisdiction of liquidation court has evolved with the enactment of different laws, as well as the most recent New Rules on Liquidation. </p><p> Again, the scope of the exclusive jurisdiction of the liquidation court under Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846, covers (i) adjudication of disputed claims against the closed banks; (ii) <i>assistance to enforcement of individual liabilities of the stockholders, directors and officers of the closed bank</i>; and (iii) other issues as may he material to implement the distribution plan. </p><p> Incidentally, the liquidation court's jurisdiction to assist in the enforcement of individual liabilities of stockholders, directors and officers of the closed bank is mirrored in Rule 3," Section 1(c) of the New Rules on Liquidation that expressly grants the liquidation courts the power to "assist in the enforcement of individual liabilities of the stockholders, directors, and officers, and decide on all other issues as may be material to implement the Master Liquidation Plan."<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> </p><p> Undoubtedly, the liquidation court's exclusive jurisdiction extends to the claims of DBP and Hermosa Bank against defendant officers, as these claims relate to their duties and actions as officers of Hermosa Bank. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846, was not repealed by the passage of Republic Act No. 11211, amending Section 30 of the 1993 BSP Law</i> </div></td> </tr> </tbody></table> <p>As to the amendment of Section 30 of the New Central Bank Act through Republic Act No. 11211, a careful reading of the deliberations of the Senate Committee would reveal that the provisions pertaining to receivership of banks were stricken out <i>in view of the amendments to the PDIC Charter</i>. We quote the deliberation: </p><blockquote> <p> Ms. Samson: </p> <p> But before we go to our comments on the other two bills, I just want to go back to the amendments of Section 30, 31, and 31. Actually, the- The Presiding Officer: </p> <p> Thirty, 31, 32 Yes, ma'am. </p> <p> Ms. Samson: <br> Thirty, 31, 32 of the existing BSP Charter. </p> <p> . . . .<br> Ms. Samson: </p> <p> Section 12 of the working draft, So we noticed that there are a lot of items that were stricken out, and our proposal, our suggestion is to retain the stricken our portions of Section 30, <i>except that they should not be made applicable to banks. Because the 90-day receivership period for banks was already removed by virtue of the amendment to the PDIC Charter</i>. And the reason for our proposal to retain these portions is so that there will be a procedure for the receivership and liquidation of the other BSP-supervised or regulated institution because this is the only law where you can find these procedures[.]<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> (Emphasis supplied) </p> </blockquote> <p> It is a well settled rule that "implied repeal is disfavored."<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> In the absence of irreconcilable conflict between these two statutes, Section 30 of the New Central Bank Act, as amended by Republic Act No. 11211, must be read harmoniously with Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846. The removal of the provisions pertaining to receivership of banks should not be interpreted as repealing the grant of exclusive jurisdiction to liquidation courts in Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846. The more reasonable interpretation is that the Legislature intended to emphasize the role of the PDIC in the liquidation of banksâ it is their acknowledgment that these provisions were already provided for in the PDIC Charter, as further amended by Republic Act No. 10846. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The writ of preliminary attachment issued by RTC-Branch 136 on November 13, 2001, shall remain dissolved</i> </div></td> </tr> </tbody></table> <p>To reiterate, a writ of preliminary attachment is a provisional remedy to protect and preserve certain rights and interests pending final resolution of a case. Consequently, the writ of preliminary attachment issued against the properties of defendants no longer has a leg to stand on in view of the dismissal of Civil Case No. 01-1438.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> </p><p> What is more, the discharge of the writ of attachment issued against the properties of Hermosa Bank is consistent with jurisprudence and aligns with the legislative intent of Republic Act No. 10846, to ensure orderly liquidation and equitable distribution of assets in accordance with the Rules on Concurrence and Preference of Credits under the Civil Code or other laws.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup></p><p> Pertinent to the case is Section 13(e)(3) of the PDIC Charter, as further amended by Republic Act No. l 0846, to wit:</p><p align="center"> AUTHORITIES OF A RECEIVER AND EFFECTS<br> OF PLACEMENT OF A BANK UNDER LIQUIDATION </p><blockquote> <p> SECTION 13. . .<br> . . . .</p> <p> (e) The placement of a bank under liquidation shall have the following effects:</p> <p> "<i>Upon service of notice of closure as provided in Section 14 of this Act, all the assets of the closed bank shall Be deemed in custodia legis in the hands of the receiver, and as such, these assets may not be subject to attachment, garnishment, execution, levy or any other court processes.</i> A judge, officer of the court or any person who shall issue, order, process or cause the issuance or implementation of the garnishment order, levy, attachment or execution, shall be liable under Section 27 of this Act: Provided, however, That collaterals securing the loans and advances granted by the Bangko Sentral ng Pilipinas shall not be included in the assets of the closed bank for distribution to other creditors: Provided, further, That the proceeds in excess of the amount secured shall be returned by the Bangko Sentral ng Pilipinas to the receiver.</p> <p> <i>Any preliminary attachment or garnishment on any of the assets of the closed bank <b>existing at the time of closure</b> shall not give any preference to the attaching or garnishing party. <b>Upon motion of the receiver, the preliminary attachment or garnishment shall be lifted and/or discharged</b></i>. (Emphasis supplied)</p> </blockquote> <p> In sum, from the moment the notice of closure is served pursuant to Section 14(a)<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> of the PDIC Charter, as further amended by Republic Act No. 10846, all the assets of the bank are in <i>custodia legis</i> and are under the control of the PDIC. This status protects its assets from any new attachments, garnishments, levies, or executions. The imposition of a penalty under Section 27<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> of the PDIC Charter, as further amended by Republic Act No. 10846, to the judge, officer of the court or any person who shall issue, order, process or cause the issuance or implementation of the garnishment order, levy, <i>attachment</i>, or execution underscores the seriousness of the prohibition against the attachment of any of the assets of a bank placed under liquidation. While this section pertains to orders issued after closure, it reinforces the overall intent to protect the <i>custodia legis</i> status of the bank's assets. </p><p> As to existing attachments or garnishments at the time of closure, the law mandates that the pertinent court must lift and discharge any preliminary attachment or garnishment on any of the assets of the closed bank upon motion of the receiver. The receiver, tasked with managing and liquidating the bank's assets <i>for all creditors</i>, has the right and duty to file the necessary motion to lift, while the court is legally obligated to grant the motion. The purpose is simple: to ensure that no attaching party would have a head start in recovering their claims over other creditors of the bank under liquidation in terms of asset distribution. </p><p> Hence, Section 13(e)(3) of the PDIC Charter, as further amended by Republic Act No. 10846, effectively nullifies the preferential effect of a pre-existing preliminary attachment, ensuring a level playing field for the creditors of a closed bank. Consequently, the attaching creditor becomes a mere general unsecured creditor of the bank like its other creditors unless they have a legally recognized prior security unrelated to the preliminary attachment itself. The attached assets shall become part of the general pool of assets to be managed and distributed by the receiver in accordance with the Rules on Concurrence and Preference of Credits under the Civil Code or other laws.</p><p> Even prior to the enactment of Republic Act No. 10846, the Court in certain instances emphasized the <i>custodia legis</i> status of assets of a closed bank and discouraged the creation of preferences in favor of any general unsecured creditors.</p><p> In <i>Morfe</i>, the Court ruled that judgments from suits filed after the bank has been declared insolvent cannot be considered preferred credits, thus: </p><blockquote> <p> The aforequoted section 29 of the Central Bank's charter explicitly provides that when a bank is found to be insolvent, the Monetary Board shall forbid it to do business and shall take charge of its assets. The Board in its Resolution No. 350 dated February 18, 1969 banned the Fidelity Savings Bank from doing business. It took charge of the bank's assets. Evidently, one purpose in prohibiting the insolvent bank from doing business is to prevent some depositors from having an undue or fraudulent preference over other creditors and depositors.</p> <p> That purpose would be nullified if, as in this case, after the bank is declared insolvent, suits by some depositors could be maintained and judgments would be rendered for the payment of their deposits and then such judgments would be considered preferred credits under article 2244(14)(b) of the Civil Code.</p> <p> We are of the opinion that such judgments cannot be considered preferred and that article 2244(14)(b) does not apply to judgments for the payment of the deposits in an insolvent savings bank which were obtained after the declaration of insolvency.</p> <p> A contrary rule or practice would be productive of injustice, mischief and confusion. To recognize such judgments as entitled to priority would mean that depositors in insolvent banks, after learning that the bank is insolvent as shown by the fact that it can no longer pay withdrawals or that it has closed its doors or has been enjoined by the Monetary Board from doing business, would rush to the courts to secure judgments for the payment of their deposits.</p> <p> In such an eventuality, the courts would be swamped with suits of that character. Some of the Judgments would be default judgments. Depositors armed with such judgments would pester the liquidation court with claims for preference on the basis of article 2244(14)(b). Less alert depositors would be prejudiced. That inequitable situation could not have been contemplated by the framers of section 29.</p> <p> The <i>Rohr</i> case (supra) supplies some illumination on the disposition of the instant case. It appears in that case that the Stanton Trust &amp; Savings Bank of Great Falls closed its doors to business on July 9, 1923. On November 7, 1924 the bank (then already under liquidation) issued to William Rohr a certificate stating that he was entitled to claim from the bank $1,191.72 and that he was entitled to dividends thereon. Later, Rohr sued the bank for the payment of his claim. The bank demurred to the complaint. The trial court sustained the demurrer. <i>Rohr</i> appealed. In affirming the order sustaining the demurrer, the Supreme Court of Montana said:</p> <blockquote> <p> The general principle of equity that the assets of an insolvent are to be distributed ratably among general creditors applies with full force to the distribution of the assets of a bank. A general depositor of a bank is merely a general creditor, and, as such, is not entitled to any preference or priority over other general creditors.</p> <p> The assets of a bank in process of liquidation are held in trust for the equal benefit of all creditors, and one cannot be permitted to obtain an advantage or preference over another by an attachment, execution or otherwise. A disputed claim of a creditor may be adjudicated, but those whose claims are recognized and admitted may not successfully maintain action thereon. So to permit would defeat the very purpose of the liquidation of a bank whether being voluntarily accomplished or through the intervention of a receiver.</p> <p align="center">x x x</p> <p align="justify">The available assets of such a bank are held in trust, and so conserved that each depositor or other creditor shall receive payment or dividend according to the amount of his debt, and that none of equal class shall receive any advantage or preference over another.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> (Citations omitted)</p> </blockquote> </blockquote> <p> In <i>Spouses Lipana v. Development Bank of Rizal</i>,<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> the Court applied the doctrine laid down in <i>Morfe</i> even though the complaint was filed, and the attachment was made long before the respondent bank therein was declared insolvent by the Monetary Board, viz.:</p><p align="center"> II. </p><blockquote> <p> It is the contention of petitioners, however, that the placing under receivership of respondent bank long after the filing of the complaint removed it from the doctrine in the said Morfe case.</p> <p> This contention is untenable. The time of the filing of the complaint is immaterial. It is the execution that will obviously prejudice the other depositors and creditors. Moreover, as stated in the said Morfe case, the effect of the judgment is only to fix the amount of the debt, and not give priority over other depositors and creditors.</p> <p align="center"> III.</p> <p> Anent the contention of petitioners that the attachment of one of the properties of respondent bank was erased by virtue of the delayed receivership is to expand the power of the Central Bank, suffice it to say that in the case of Central Bank of the Philippines, et al. vs. Court of Appeals, et al. (Resolution of this Court dated September 17, 1984 in G.R. No. 33302), wherein the original plaintiff Algue Inc. was able to obtain a writ of preliminary attachment against the original defendant Island Savings Bank, this Court refused to recognize any preference resulting from such attachment and ruled that after a declaration of insolvency, the remedy of the depositors is to intervene in the liquidation proceedings.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup></p> </blockquote> <p> In the same vein, the attachment obtained from DBP in Civil Case No. 01-1438 would not result in any preference in its favor as against the other creditors of Hermosa Bank. Hence, the lifting of the writ of attachment as against the properties of Hermosa Bank is consistent with jurisprudence and the legislative intent behind Section 13(e)(3) of the PDIC Charter, as further amended by Republic Act No. 10846.</p><p> While the properties of Hermosa Bank are considered in <i>custodia legis</i>, the same is not true for the properties of defendant officers. Nonetheless, the dismissal of Civil Case No. 01-1438 for lack of jurisdiction inevitably results in the lifting of the Writ of Preliminary Attachment issued against the properties of defendant officers. Considering the auxiliary nature of an attachment, it cannot be maintained independent of the main action.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> This, however, is not sufficient ground for the Court to disregard Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846.</p><p> An "attachment is a mere provisional remedy to ensure the safety and preservation of the thing attached until the plaintiff can, by appropriate proceedings, obtain a judgment and have such property applied to its satisfaction,"<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> not to dictate which court will have jurisdiction over the case. Further, the posting of a bond was meant to protect the adverse party against all damages which one may sustain by reason of the attachment, if the attachment is wrongful.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> It does not create a vested right in favor of DBP to have the case resolved in RTC Branch 57 especially when law provides otherwise. If DBP believes that the grounds for preliminary attachment against the properties of defendant officers still exist, it is not precluded from seeking this remedy <i>in the liquidation court</i>, considering that the prohibition on garnishment, execution, levy or any other court processes only covers the assets of Hermosa Bank.</p><p> Last, the Court further acknowledges that DBP already paid a substantial amount in docket fees in Civil Case No. 01-1438. Still, these costs do not override the explicit jurisdictional provisions of a statute such as Section 16(h) of the PDIC Charter, as further amended by Republic Act No. 10846. Docket fees are paid for the court to acquire jurisdiction over a case.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> They do not guarantee that the case will remain in the same court regardless of supervening events which trigger the application of statutory provisions that affect jurisdiction. Any perceived unfairness in having to potentially pay docket fees again in the liquidation court is an inevitable consequence of the legislative framework established for bank liquidation and Rule 5, Section 2<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> of the New Rules on Liquidation.</p><p> <i>A final note</i></p><p> Applying the PDIC Charter, as further amended by Republic Act No. 10846, to all pending cases involving closed banks, regardless of when it was placed under liquidation by the Monetary Board, furthers the legislative purpose of creating a uniform, efficient, and specialized system for bank liquidation. It avoids a situation where some cases are handled under the old regime and others under the new law, leading to inconsistencies and potential inefficiencies. The intent is to consolidate all such matters in the liquidation court for streamlined resolution.</p><p> While acknowledging potential inconvenience on creditors with existing suits at the time of closure, the overarching public policy of ensuring efficient and speedy bank liquidation and protecting the financial system justifies the exclusive jurisdiction of the liquidation court. DBP is not being deprived of its claim; it is just directed to the legislatively mandated forum.</p><p> In fine, the Court finds no sound and substantial reason to reconsider its Decision dated February 10, 2021.</p><p> <b>ACCORDINGLY</b>, the Motion for Reconsideration is <b>DENIED with FINALITY</b>, and the assailed Decision dated February 10, 2021 of the Court is <b>AFFIRMED</b>. No further pleadings shall be entertained.</p><p> Let entry of judgment be issued immediately.</p><p> <b>SO ORDERED</b>.</p><p> <i>Leonen, SAJ. (Chairperson), Hernando,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J. Lopez</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional Member vice J. Singh, per Raffle dated February 1, 2023. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Hermosa Savings Bank &amp; Loan Association, Inc." </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 404-428. including attachment/s. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at. 369-378. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 11-37.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 38-48. Penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Manuel M. Barrios and Maria Elisa Sempio Diy of the Fourteenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 49-50. Penned by Associate Justice Ramon M. Bato, Jr., and concurred in by Associate Justices Manuel M. Barrios and Maria Elisa Sempio Diy of the Former Fourteenth Division Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 220-223. Penned by Presiding Judge Rico Sebastian D. Liwanag.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 225-227. Penned by Presiding Judge Honorio E. Guanlao, Jr.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 39.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 38-39. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 39.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 39-40. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 40. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 233-240.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 40.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 312 Phil. 578, 593-594 (1995) [Per J. Mendoza, Second Division]. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> SECTION 30. <i>Proceedings in Receivership and Liquidation</i>. - . . . </p><blockquote> <p> . . . .</p> <p> If the receiver determines that the institution cannot be rehabilitated or permitted to resume business in accordance with the next preceding paragraph, the Monetary Board shall notify in writing the board of directors of its findings and direct the receiver to proceed with the liquidation of the institution. The receiver shall: </p> <p> (1) file <i>ex parte</i> with the proper regional trial court, and without requirement of prior notice or any other action, a petition for assistance in the liquidation of the institution pursuant to a liquidation plan adopted by the Philippine Deposit Insurance Corporation for general application to all closed banks. In case of quasi-banks, the liquidation plan shall be adopted by the Monetary Board. Upon acquiring jurisdiction, the court shall, upon motion by the receiver after due notice, adjudicate disputed claims against the institution, assist the enforcement of individual liabilities of the stockholders, directors and officers, and decide on other issues as may be material to implement the liquidation plan adopted. The receiver shall pay the cost of the proceedings from the assets of the institution[.]</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Titled, "THE NEW CENTRAL BANK ACT." Approved on June 14, 1993. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, p. 266. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 266-267. Penned by Judge Rebecca R. Mariano. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 218-219. Penned by Acting Presiding Judge Rowena De Juan-Quinagoran. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 219. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 220-223. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 222. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 225. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 41, 224. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 225-227. Penned by Presiding Judge Honorio E. Guanlao, Jr. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> SECTION 10. . . </p><blockquote> <p> . . . .</p> <p> (b) The Corporation as receiver shall control, manage and administer the affairs of the closed bank. Effective immediately upon takeover as receiver of such bank, the powers, functions and duties, as well as all allowances remunerations and perquisites of the directors, officers, and stockholders of such bank are suspended, and the relevant provisions of the Articles of Incorporation and By-laws of the closed bank are likewise deemed suspended.</p> <p> The assets of the closed bank under receivership shall be deemed in <i>custodia legis</i> in the hands of the receiver. From the time the closed bank is placed under such receivership, its assets shall not be subject to attachment, garnishment, execution, levy or any other court processes. Therefore, a judge, officer of the court or any person who shall issue, order, process or cause the issuance or implementation of the writ of garnishment, levy, attachment or execution shall be liable under Section 21 hereof.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> SECTION 10(c). In addition to the powers of a receiver pursuant to existing laws, the Corporation is empowered to: </p><blockquote> <p> . . . .</p> <p> (5) collect loans and other claims of the closed bank, and for the purpose, modify, compromise or restructure the terms and conditions of such loans or claims as may be deemed advantageous to the interest of the creditors and claimants of the closed bank[.] </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> "AN ACT ESTABLISHING THE PHILIPPINE DEPOSIT INSURANCE CORPORATION, DEFINING ITS POWERS AND DUTIES AND FOR OTHER PURPOSES." Approved on June 22, 1963. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> "AN ACT AMENDING REPUBLIC ACT NUMBERED THREE THOUSAND FIVE HUNDRED NINETY-ONE, AS AMENDED, OTHERWISE KNOWN AS THE 'CHARTER OF THE PHILIPPINE DEPOSIT INSURANCE CORPORATION' AND FOR OTHER PURPOSES." Approved on July 27, 2004. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Rollo</i>, pp. 226-227. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 38-48. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 44-46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 49-50. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 11-37. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 369-378. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 377. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 650 Phil. 476 (2010) [ Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 486. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 375-376. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 404-428. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Titled, "An Act Amending Republic Act No. 7653, Otherwise Known as 'The New Central Bank Act,' And For Other Purposes." Approved on February 14, 2019. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Titled, "AN ACT ESTABLISHING THE PHILIPPINE DEPOSIT INSURANCE CORPORATION, DEFINING ITS POWERS AND DUTIES AND FOR OTHER PURPOSES." Approved on June 22, 1963.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Titled, "AN ACT ENHANCING THE RESOLUTION AND LIQUIDATION FRAMEWORK FOR BANKS, AMENDING FOR THE PURPOSE REPUBLIC ACT NO. 3591, AS AMENDED, AND OTHER RELATED LAWS." Approved on May 23, 2016. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> SECTION 12. (a) Whenever a bank is ordered closed by the Monetary Board, the Corporation shall be designated as receiver and it shall proceed with the takeover and liquidation of the closed bank in accordance with this Act. For this purpose, banks closed by the Monetary Board shall no longer be rehabilitated. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> SECTION 13. . . </p><blockquote> <p> . . . .</p> <p> (e) The placement of a bank under liquidation shall have the following effects:</p> <p> . . . .</p> <p> (9) Actions pending for or against the closed bank</p> <p> Except for actions pending before the Supreme Court, actions pending for or against the closed bank in any court or quasi-judicial body shall, upon motion of the receiver, be suspended for a period not exceeding one hundred eighty (180) days and referred to mandatory mediation. Upon termination of the mediation, the case shall be referred back to the court or quasi-judicial body for further proceedings.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (10) Final decisions against the closed bank </p><blockquote> <p> The execution and enforcement of a final decision of a court other than the liquidation court against the assets of a closed bank shall be stayed. The prevailing party shall file the final decision as a claim with the liquidation court and settled in accordance with the Rules on Concurrence and Preference of Credits under the Civil Code or other laws. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i>, pp. 407-408. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 405. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 412-413. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 409. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 414-415. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 243 Phil. 418 (1988) [Per J. Gancayco, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 417. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 419-420. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 430. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 439-466. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 440. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 442. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 171 Phil. 70, 82 (1978) [Per J. Aquino, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> 250 Phil 624, 631-632 (1988) [Per J. Paras, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo</i>, pp. 444. </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 445. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 446. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Republic Act No. 3591, sec. 16(g) states: </p><blockquote> <p>SECTION 16. . . </p> <p> . . . .</p> <p> (g) A petition for assistance in the liquidation is a special proceeding for the liquidation of a closed bank, and includes the declaration of the concomitant right of its creditors and the order of payment of their valid claims in the disposition of its assets.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Republic Act No. 3591, sec. 10(h) states: </p><blockquote> <p>SECTION 16. . . .</p> <p> . . . .</p> <p> (h) The liquidation court shall have exclusive jurisdiction to adjudicate disputed claims against the closed banks, assist in the enforcement of individual liabilities of the stockholders, directors and officers and decide on all other issues as may be material to implement the distribution plan adopted by the Corporation for general application to all closed banks.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Rollo</i>, pp. 444-445. </p><p><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> A.M. No. 19-12-02-SC. Approved on February 18, 2020. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 445. </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Rollo</i>, pp. 448-449. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> 159 Phil. 727 (1975) [Per J. Aquino, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Rollo</i>, pp. 449-459. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 459-463. </p><p><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>See</i> <b>Tan, Jr. v. Court of Appeals</b>, 424 Phil. 556, 568 (2002) [Per J. Puno, First Division]; <b>Fil-Estate Properties, Inc. v. Homena-Valencia</b>, 578 Phil. 331, 335 (2008) [Per J. Tinga, Special Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> 424 Phil. 556 (2002) [Per J. Puno, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 568-570. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> SECTION 12. (a) Whenever a bank is ordered closed by the Monetary Board, the Corporation shall be designated as receiver and it shall proceed with the takeover and liquidation of the closed bank in accordance with this Act. For this purpose, banks closed by the Monetary Board shall no longer be rehabilitated. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> SECTION 13. . . </p><blockquote> <p> (e) The placement of a bank under liquidation shall have the following effects:</p> <p> . . . .</p> <p> (10) Final decisions against the closed bank</p> <p> The execution and enforcement of a final decision of a court other than the liquidation court against the assets of a closed bank shall be stayed. The prevailing party shall file the final decision as a claim with the liquidation court and settled in accordance with the Rules on Concurrence and Preference of Credits under the Civil Code or other laws. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Velasquez, Jr. v. Lisondra Land, Inc.</b>, 880 Phil. 184, 192 (2020) [Per J. Lopez, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> 908 Phil. 24 (2021) [Per J. Lopez, J., Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 33, <i>citing</i> <b>Fil-Agro Rural Bank, Inc. v. VillaseÃ±or, Jr.</b>, 978 Phil. 280, 289 (2020) [Per J. Regalado, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Rollo</i>, p. 414. </p><p><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 417. </p><p><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Supra</i> note 57, at 422-423. </p><p><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 425. </p><p><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> NEW RULES ON LIQUIDATION OF CLOSED BANKS, Rule 3, sec. 1. </p><p><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> Deliberation of Senate Bill No. 1027 â An Act Amending Republic Act No. 7653, Otherwise Known as "The Central Bank Act," and for other purposes dated October 11, 2016, 17<sup>th</sup> Congress, 1<sup>st</sup> Session, Senate Committee on Banks, Financial Institutions and Currencies Joint with the Committee on Ways and Means. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>Remo v. Secretary of Foreign Affairs</b>, 628 Phil. 181, 192 (2010) [Per J. Carpio, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <b>Hermosa Savings and Loan Bank, Inc. v. Development Bank of the Philippines</b>, 896 Phil. 531, 540 (2021) [Per J. Inting, Third Division], <i>citing</i> <b>Lim, Jr. v. Sps. Lazaro</b>, 713 Phil. 356, 360 (2013) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>See</i> Section 13(c) of the PDIC Charter, as further amended by Republic Act No. 10846 which states: </p><blockquote> <p> (c) After the payment of all liabilities and claims against the closed bank, the Corporation shall pay surplus, if any, dividends at the legal rate of interest from date of takeover to date of distribution to creditors and claimants of the closed bank in accordance with the Rules on Concurrence and Preference of Credits under the Civil Code or other laws before distribution to the shareholders of the closed bank.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> SECTION 14. (a) Upon the designation of the Corporation as receiver of a closed bank, it shall serve a notice of closure to the highest-ranking officer of the bank present in the bank premises, or in the absence of such officer, post the notice of closure in the bank premises or on its main entrance. The closure of the bank shall be deemed effective upon the service of the notice of closure. Thereafter, the receiver shall takeover the bank and exercise the powers of the receiver as provided in this Act.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[96]</sup> SECTION 27. . . </p><blockquote> <p> . . . .</p> <p> Any restraining order or injunction issued in violation of this Section is void and no force and effect and any judge who has issued the same shall suffer the penalty of suspension of at least sixty (60) days without pay.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Supra</i> note 73, at 733-735. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[98]</sup> 238 Phil. 246 (1987) [Per J. Paras, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i> at 252-253. </p><p><sup style="COLOR: RGB(255, 0, 0);">[100]</sup><i> See</i> <b>Republic v. Estate of Lim, Sr.</b>, 611 Phil. 37, 51 (2009) [Per J. Velasco, Jr., Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i> at 59, <i>citing</i> <b>Sta. Ines Melale Forest Products Corp. v. Macaraig, Jr.</b>, 359 Phil 831, 855 (1998) [Per J. Puno, Second Division]; <b>Chuidian v. Sandiganbayan</b>, 402, Phil. 795, 817 (2001) [Per J. Ynares-Santiago, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>See</i> 1997 RULES OF COURT, Rule 57, sec. 4 which states: </p><blockquote> <p> SECTION 4. <i>Condition of applicant's bond</i>.- The party applying for the order must thereafter give a bond executed to the adverse party in the amount fixed by the court in its order granting the issuance of the writ, conditioned that the latter will pay all the costs which may be adjudged to the adverse party and all damages which he may sustain by reason of the attachment, if the court shall finally adjudge that the applicant was not entitled thereto. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>Apacible v. People</b>, 928 Phil. 754 (2022) [Per J. Lopez, J., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[104]</sup> SECTION 2. <i>Filing of Claims</i>. - Within a period of sixty (60) days from receipt of final notice of denial or disallowance by the Receiver or twenty (20) days from publication as provided for in Section 5 (d), Rule 4 of these Rules, whichever is later, the claimant shall, upon payment of the docket fee amounting to three percent (3%) of the claim, file a Verified Claim with the LC and furnish a copy thereof to the Receiver[.]</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

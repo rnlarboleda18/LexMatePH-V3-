@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 280165 - COMMISSIONER OF INTERNAL REVENUE AND LT COLLECTION ENFORCEMENT AGENCY, PETITIONERS, VS. SECOND DIVISION OF THE HON. COURT OF TAX APPEALS AND AMERICAN WIRE & CABLE CO., INC., RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70104' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 280165, August 04, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE AND LT COLLECTION ENFORCEMENT AGENCY, PETITIONERS, VS. SECOND DIVISION OF THE HON. COURT OF TAX APPEALS AND AMERICAN WIRE & CABLE CO., INC., RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> for <i>Certiorari</i> and Prohibition under Rule 65 of the Rules of Court assailing the Court of Tax Appeals (CTA) Second Division (CTA Division) Resolutions dated December 27, 2024,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and March 14, 2025,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> in CTA Case No. 11452. The petition was filed by the Commissioner of Internal Revenue (CIR), <i>represented by Bureau of Internal Revenue (BIR) Revenue Lawyers</i>. The assailed Resolutions allowed the suspension of collection of alleged deficiency taxes due from American Wire &amp; Cable Co., Inc. (American Wire), upon filing of a cash bond or posting of a surety bond.</p><p> On February 26, 2024, American Wire received<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> a Final Decision on Disputed Assessment (FDDA) demanding the payment of deficiency value-added tax (VAT) amounting to P30,164,500.83. <i>Before the lapse of the 30-day period to appeal the assessment to the CTA</i>,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> the CIR<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> proceeded to collect the alleged deficiency VAT amount through the issuance of a warrant of Distraint and/or Levy (WDL); American Wire received this on March 22, 2024.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> Thus, exactly on the last day of the 30-day appeal period or on March 27, 2024,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> American Wire filed a Petition for Review (with Urgent Motion a) To Lift Warrant of Distraint and or Levy and b) To Suspend the Collection of Taxes) before the CTA Division. </p><p> Thereafter, the CTA Division acted on the petition as follows: <i>First</i>, it caused the service of summons and required the CIR to file its Answer to the Petition for Review. <i>Second</i>, it ordered the CIR to comment on American Wire's <i>Urgent Motion a) To Lift Warrant of Distraint and or Levy and b) To Suspend the Collection of Taxes</i> (hereinafter referred to as "Motion to Suspend"). <i>Third</i>, it conducted a hearing on the Motion to Suspend after receiving the CIR's comment and opposition to the motion. <i>Fourth</i>, it required the CIR to comment on American Wire's Formal Offer of Evidence. <i>Fifth</i>, it submitted the Motion to Suspend for resolution after receiving the CIR's comment on the formal offer.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> In the Resolution dated December 27, 2024, the CTA Division granted American Wire's Motion to Suspend; it enjoined the tax authorities from implementing collection measures relative to the alleged VAT deficiency assessment and, in view of this suspension, required American Wire to comply with the bond requirement, viz.: </p><blockquote> <p> FOR THESE REASONS, without prejudice to the final outcome of the issues, in such a manner as not to render ineffectual and nugatory any judgment that will be rendered in this case, petitioner's Urgent Motion to Suspension of Collection of Taxes is hereby GRANTED, while its prayer to dispense with the bond requirement is hereby DEEMED WITHDRAWN. </p> <p> Respondent and any of his officers and/or employees are hereby ORDERED to CEASE and DESIST from committing any or all acts to collect the alleged deficiency taxes in the total amount of P30,164,500.83, as indicated in the FDDA and WDL. </p> <p> Accordingly, petitioner is hereby ORDERED to, within 10 days from receipt hereof, either (a) file CASH BOND equal to the principal amount of the deficiency taxes (i.e., basic deficiency taxes) or in the amount of P20,086,920.39, OR (b) post a SURETY BOND equivalent to 1.5 of the said amount or P30,130,380.59, in accordance with CTA En Banc Resolution No. 02-2015. </p> <p> . . . . </p> <p> Meanwhile, petitioner's Urgent Motion to Lift Warrant of Distraint and/or Levy is hereby HELD IN ABEYANCE, pending the final determination of the merits of the case. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p> </blockquote> <p> The CTA Division explained its reasons for allowing the suspension of collection of taxes as follows: </p><p> <i>First</i>, the Tax Code allows a 30-day period within which the taxpayer may appeal a disputed assessment to the CTA. However, the CIR, through his authorized representative, pursued collection measures against American Wire even before the lapse of the 30-day appeal period; this deprived the taxpayer of its statutory remedy of judicial appeal.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> The premature collection is contrary to the procedure laid down in the Tax Code and applicable revenue rules and regulations. Certainly, the interest of both the government and taxpayer are <i>jeopardized</i> when laws, rules, and regulations are not complied with by the same government officials tasked to implement them; rendering available remedies nugatory, as eventually, the implementation of the same falls under the mercy of the tax authorities.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> <i>Second</i>, under Revenue Memorandum Order No. 011-14, there are only two instances when a tax due becomes a delinquent account: (a) a self-assessed tax liability; or (b) a deficiency assessment, which has become final and executory. Further, in Revenue Memorandum Order No. 035-19, while the BIR is authorized to proceed with tax collection immediately, it may do so when the assessment has become final and executory. </p><p> However, the following established circumstances contradict the final and executory character of the subject assessment: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1.)</div></td> <td width="95%"><div align="justify">[American Wire] did not fail to timely file a request for reinvestigation against the FLD/FAN on July 10, 2023, well-within the 30-day period to protest from its date of receipt on June 9, 2023;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">2.)</div></td> <td><div align="justify">[American Wire] did not fail to timely file the supporting documents to its request for reinvestigation on September 8, 2023, well-within the 60-day period from filing of the request; and, </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">3.)</div></td> <td> <div align="justify">[American Wire] did not fail to timely appeal the decision denying its request for reinvestigation (<i>i.e</i>., FDDA) to this Court, when it filed the Petition for Review on March 27, 2024.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Consequently, the CIR was not yet authorized to implement any of the administrative and judicial remedies for tax collection; the WDL's issuance at this time is premature. </p> <p> The CIR moved for reconsideration but the CTA Division denied it in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated March 14, 2025. The CIR's motion was silent on the CTA Division's application of Revenue Memorandum Order Nos. 011-14 and 035-19; it failed to actually challenge the Resolution dated December 27, 2024 and the legal reasons behind it.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Hence, the CIR and the BIR LT Collection Enforcement Division, <i>represented by the BIR Litigation Division as counsel</i>, filed the present<i> certiorari</i> and prohibition petition. </p><p> The Petition is DISMISSED. </p><p> At the outset, the Court observes that the CIR was not represented by the Office of the Solicitor General (OSG) when it filed the present case. There is also no showing that the BIR Litigation Division was ever duly authorized by the OSG to represent the CIR and to file the instant petition. </p><p> It is the OSG's statutory mandate "<i>to represent the Government and its officers in the Supreme Court</i>, the Court of Appeals, and all other courts or tribunals <i>in all civil actions and special proceedings</i> in which the Government or any officer thereof in his official capacity is a party."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> In <i>Commissioner of Internal Revenue v. La Suerte Cigar &amp; Cigarette Factory</i>,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> the CIR's direct filing of a petition before this Court, absent the requisite authority or representation of the OSG, constituted a procedural defect tantamount to non-fulfillment of the mandatory verification requirement. The Court clarified: </p><blockquote> <p> Section 220 of the Tax Reform Act must not be understood as overturning the long-established procedure before this Court in requiring the Solicitor General to represent the interest of the Republic. <i>This Court continues to maintain that it is the Solicitor General who has the primary responsibility to appear for the government in appellate proceedings</i>.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p> </blockquote> <p> Pursuant to the pronouncement in <i>La Suerte</i>, the OSG and the BIR entered into a Memorandum of Agreement, which was communicated to all revenue officers and other concerned parties <i>via</i> Revenue Memorandum Circular No. 025-10.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> That representation of the CIR/BIR before this Court is <i>exclusive</i> to the OSG, particularly in petitions assailing CTA rulings, as pronounced in <i>La Suerte</i>, is clear from the very terms of said agreement: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">B.</div></td> <td colspan="4"><div align="justify">Handling Cases</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="4">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td colspan="4"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">2.</div></td> <td colspan="3"><div align="justify">Cases appealed before the <i>Regional Trial Courts, Court of Appeals and the Court of Tax Appeals En Banc</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">a.</div></td> <td colspan="2"><div align="justify">The OSG hereby <i>deputizes</i> BIR handling lawyers to: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">i.</div></td> <td width="80%"><div align="justify">Appear before the Courts; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">ii.</div></td> <td><div align="justify">Continue the prosecution/litigation of appealed tax cases before the Regional Trial Courts, Court of Appeals and the Court of Tax Appeals En Banc. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td colspan="3"><div align="justify">The BIR handling lawyer shall have the following responsibilities: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">i.</div></td> <td> <div align="justify">To appear before courts; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">ii.</div></td> <td> <div align="justify">To prepare all pleadings, motions, orders, decisions, resolutions, communications and other papers/ documents in connection with the case.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td colspan="2"><div align="justify">The BIR shall periodically submit a list of handling lawyers to the OSG for purposes of deputation.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">3.</div></td> <td colspan="3"><div align="justify">Cases appealed before the <i>Supreme Court</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">a.</div></td> <td colspan="2"><div align="justify"><i>The OSG handling Associate Solicitor shall be the lead lawyer and the BIR handling lawyer will turn over the case records to the former</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td colspan="2"> <div align="justify">Immediately upon receipt of the resolution of the Court of Tax Appeals En Banc denying the motion for reconsideration, <i>the BIR handling lawyer shall inform the OSG of such decision</i> and forward the entire case file to the OSG Associate Solicitor within two (2) days from receipt of the decision.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">c.</div></td> <td colspan="2"><div align="justify">The BIR shall prepare a summary of facts, to help assist the OSG to determine/evaluate whether the case should be pursued or not.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">d.</div></td> <td colspan="2"><div align="justify"><i>In case the OSG is of the opinion than the appeal before the Supreme Court should not be pursued, it shall inform the BIR of its position within ten (10) days from its receipt of the Decision, but it should be at least three (3) working days before the lapse of the period to appeal. In these cases, it shall be the responsibility of the OSG to file the necessary Motion for Extension of Time to File Petition for Review before the Supreme Court</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">e.</div></td> <td colspan="2"><div align="justify"><i>In the event that the OSG pursues an appeal before the Supreme Court, the OSG handling Associate Solicitor shall have the following responsibilities</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"><em>i.</em></div></td> <td><div align="justify"><i>To appear before the Supreme Court.</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"><em>ii.</em></div></td> <td><div align="justify"><i> To prepare all pleadings, motions, orders, decisions, resolutions, communications, etc. in connection with the case.</i></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"><em>iii.</em></div></td> <td><div align="justify"><i>To furnish copies thereof to the BIR handling lawyer, through registered mail.</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">f.</div></td> <td colspan="2"><div align="justify">In the prosecution/litigation of the appealed case, the handling lawyer of the Bureau should make himself/herself available for consultation with the OSG handling lawyer regarding the case. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">2.</div></td> <td colspan="3"><div align="justify">In case of favourable resolutions/decisions, the BIR handling lawyer is under obligation to obtain the necessary court orders for the enforcement of the decision/resolutions. Thus, in cases decided by the Supreme Court in BIR's favour, the Assistant Solicitor shall return the case records with the original final decision within fifteen (15) days from receipt thereof. (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> <p>Verily, the OSG may deputize BIR lawyers; however, the latter's authority does not extend to representation before this Court. When the CIR is aggrieved by CTA rulings, it cannot proceed to this Court on its own, without the OSG's approval. In case the OSG finds it proper to proceed to the Supreme Court, it shall remain as the lead lawyer. </p> <p> It has been held that a petition filed without the OSG's <i>imprimatur</i>, when it is required, shall be defective; it shall be dismissible based on this ground alone.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> While this rule was relaxed in <i>La Suerte</i>, the Court does not find any reason to do so in this case; the CIR/BIR is expected to observe the pronouncement in <i>La Suerte</i> and the guidelines set out in its own agreement with the OSG. </p><p> In any case, the grounds relied upon by the CIR to challenge the CTA Division resolutions cannot be addressed by <i>certiorari</i> and prohibition. </p><p> The CIR equates grave abuse on the part of the CTA Division with the tax court's supposed <i>misinterpretation of the law and tax regulations</i>. By itself, this mistake does not amount to grave abuse. </p><p> <i>Certiorari</i> and prohibition shall be allowed when it is demonstrated that the challenged acts were committed not merely by mistake, as a result of a misinterpretation of law or misappreciation of evidence; the petitioner must demonstrate that there was an <i>arbitrary, capricious, or whimsical exercise of judgment</i>, amounting to lack of jurisdiction. "The abuse of discretion must be patent and gross as to amount to an evasion of a positive duty or a virtual refusal to perform a duty enjoined by law, or to act at all in contemplation of law, as where the power is exercised in an arbitrary and despotic manner by reason of passion and hostility."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> It is settled that these remedies under Rule 65 of the Rules of Court shall be issued only to correct <i>errors of jurisdiction</i>; these shall be inappropriate when <i>errors or mistakes in the findings and conclusions of the lower court are concerned.</i><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Be that as it may, the Court does not find any grave abuse of discretion on the part of the CTA Division; there is no reason to annul the assailed Resolutions or enjoin their execution. </p><p> Although by exception to the no injunction of tax collection rule,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Section 11 of Republic Act No. 1125, as amended, gives the CTA authority to suspend the collection of taxes, <i>viz</i>.: </p><blockquote> <p> SECTION 11. Who May Appeal; Mode of Appeal; Effect of Appeal. â Any party adversely affected by a decision, ruling or inaction of the Commissioner of Internal Revenue, the Commissioner of Customs, the Secretary of Finance, the Secretary of Trade and Industry or the Secretary of Agriculture or the Central Board of Assessment Appeals or the Regional Trial Courts may file an appeal with the CTA within thirty (30) days after the receipt of such decision or ruling or after the expiration of the period fixed by law for action as referred to in Section 7(a)(2) herein. </p> <p> . . . . </p> <p> No appeal taken to the CTA from the decision of the Commissioner of Internal Revenue or the Commissioner of Customs or the Regional Trial Court, provincial, city or municipal treasurer or the Secretary of Finance, the Secretary of Trade and Industry or the Secretary of Agriculture, as the case may be, shall suspend the payment, levy, distraint, and/or sale of any property of the taxpayer for the satisfaction of his tax liability as provided by existing law: Provided, however, <i>That when in the opinion of the Court the collection by the aforementioned government agencies may jeopardize the interest of the Government and/or the taxpayer the Court any stage of the proceeding may suspend the said collection and require the taxpayer either to deposit the amount claimed or to file a surety bond for not more than double the amount with the Court.</i> (Emphasis supplied) </p> </blockquote> <p> In turn, Rule 10 of the Revised Rules of the CTA (RRCTA)<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> sets out the procedure in the issuance of a suspension. A party availing of this relief must make a request in its petition or separate motion before the tax court;<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> it must establish its entitlement thereto via affidavits and documentary evidence.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> In turn, the CTA is tasked to conduct a hearing on the request for suspension. In <i>Spouses Pacquiao v. Court of Tax Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> the Court emphasized the significance of a hearing in resolving a taxpayer's request for the suspension of collection of taxes: </p><blockquote> <p> In the conduct of its preliminary hearing, the CTA must balance the scale between the inherent power of the State to tax and its right to prosecute perceived transgressors of the law, on one side; and the constitutional rights of petitioners to due process of law and the equal protection of the laws, on the other. In case of doubt, the tax court must remember that as in all tax cases, such scale should favor the taxpayer, for a citizens right to due process and equal protection of the law is amply protected by the Bill of Rights under the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p> </blockquote> <p> In the present case, the assailed orders were adequately explained, in accordance with the conditions for suspension set out in Section 11 of Republic Act No. 1125, as amended, and issued after observing the procedure laid out in the RRCTA. These underscore the absence of arbitrariness or caprice on the part of the CTA Division. We have observed as follows: </p><p> <i>First</i>, its ruling was supported by facts and law. The CTA Division explained at length that the tax authorities' immediate resort to summary administrative remedies for collection after the issuance of the FDDA but <i>before the expiration of the 30-day period to appeal to the CTA</i> deprived American Wire the opportunity to dispute the assessment judicially. Such contravention of the law and rules jeopardized the interests of both the government and taxpayer. </p><p> <i>Second</i>, before issuing the suspension order, the CTA Division observed the procedure laid down in Rule 10 of the RRCTA. It ensured that the CIR was given the opportunity to oppose American Wire's Motion to Suspend, that a hearing was conducted for purposes of resolving said motion, and that the CIR also had the chance to comment on the taxpayer's formal offer of evidence on the motion. </p><p> That there was a <i>hearing</i> first before the Motion to Suspend was submitted for resolution only shows that the CTA Division carefully considered American Wire's grounds, as well as the CIR's counter-arguments, to determine whether suspension was warranted. </p><p> <i>Third</i>, as a direct consequence of suspension, the CTA Division required American Wire to post or file a bond. Accordingly, American Wire complied with this directive on January 31, 2025, which was noted by the CTA Division on February 18, 2025.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> "The purpose of the surety bond is to ensure that the tax due will be paid if and when the case is finally decided against the taxpayer."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> That the CTA Division did not dispense with the bond requirement only shows that the government's interest in this assessment case continues to be protected, despite the suspension order. </p><p> <b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> is <b>DISMISSED.</b> </p><p> <b>SO ORDERED.</b> </p><p> <i>Caguioa (Chairperson), Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-26. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 32-42. Signed by CTA Associate Justices Ma. Belen M. Ringpis-Liban, Maria Rowena A. Modesto-San Pedro, and Corazon G. Ferrer-Flores of the Second Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 45-47. Signed by CTA Associate Justices Ma. Belen M. Ringpis-Liban, Maria Rowena A. Modesto-San Pedro, and Corazon G. Ferrer-Flores of the Second Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 34. <i>See</i> Note 3 of the assailed Resolution dated December 27, 2024. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> TAX CODE (1997) as amended, sec. 228.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Through Jethro M. Sabariaga, OIC-Assistant Commissioner of Large Taxpayers Service.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, p. 34. <i>See</i> Note 2 of the assailed Resolution dated December 27, 2024.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 32. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> As provided in the Case History of CTA Case No. 11452. Available on the Court of Tax Appeals Official Website; <a href="https://cta.judiciary.gov.ph/history2">https://cta.judiciary.gov.ph/history2</a> Last Accessed on July 8, 2025.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 40-42. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 36.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 35. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 39. See Page 8 of the assailed Resolution dated December 27, 2025. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 45-47. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 45. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> ADM. CODE (1987), Book IV, Title III, Chapter 12, sec. 35(1). </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 433 Phil. 463, 467 (2002). </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> SUBJECT: Publishing the Full Text of the Memorandum of Agreement Between the BIR and the OSG (March 17, 2010). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>Republic v. "G" Holdings Inc.</b>, 512 Phil. 253, 261 (2005). </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>People v. Court of Tax Appeals-Third Division</b>, 929 Phil. 454, 473 (2022). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>Candelaria v. RTC, Br. 42, City of San Fernando</b>, 739 Phil. 1, 8-9 (2014). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> TAX CODE, sec. 218. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> A.M. No. 05-11-07-CTA, November 22, 2005. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> CTA RULES, Rule 8, sec. 3. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> CTA RULES, Rule 10, sec. 4. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 784 Phil. 220 (2016). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 255. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> As provided in the Case History of CTA Case No. 11452. Available on the Court of Tax Appeals Official Website; <a href="https://cta.judiciary.gov.ph/history2">https://cta.judiciary.gov.ph/history2</a> [Last Accessed on July 8, 2025]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Privatization and Management Office v. Court of Tax Appeals</b>, 849 Phil. 652, 664 (2019) </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

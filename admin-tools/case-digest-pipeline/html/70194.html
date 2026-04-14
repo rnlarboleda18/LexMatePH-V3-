@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. Nos. 246250-51 - ROXACO-ASIA HOSPITALITY CORPORATION [FORMERLY ROXACO-VANGUARD HOTEL CORP.],* PETITIONER, VS. GULF CANARY CONSTRUCTION AND DEVELOPMENT, INC. AND ASIA UNITED INSURANCE, INC., RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70194' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. Nos. 246250-51, September 29, 2025 ]</H2>
+			<H3>ROXACO-ASIA HOSPITALITY CORPORATION [FORMERLY ROXACO-VANGUARD HOTEL CORP.],<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PETITIONER, VS. GULF CANARY CONSTRUCTION AND DEVELOPMENT, INC. AND ASIA UNITED INSURANCE, INC., RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">The petitioner Roxaco-Asia Hospitality Corporation (Roxaco), formerly known as the Roxaco Vanguard Hotel Corporation, filed this Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> challenging the Court of Appeals (CA) Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which reversed the Final Award<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Construction Industry Arbitration Council (CIAC) Tribunal (CIAC Tribunal) and dismissed all of Roxaco's claims.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center><i>The Facts</i> </center><br>On June 30, 2014, Roxaco and Gulf Canary Construction and Development, Inc. (Gulf Canary) entered into a Memorandum of Agreement<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (MOA) for the construction of a 12-storey hotel with 199 rooms on an 848-square meter lot at 608 Quirino Avenue, ParaÃ±aque City.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Under the MOA, Gulf Canary, as the contractor, undertook, among others, to construct the hotel. In turn, Roxaco, as the employer, obligated itself, among others, to pay the contract price in the amount of PHP 219,822,703.36.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The MOA also required Roxaco to make a downpayment equivalent to 20% of the total contract price upon its execution.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Roxaco complied with this contractual obligation and paid the downpayment in the amount of PHP 45,638,494.74 on September 3, 2014.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Under the MOA, Roxaco and Gulf Canary also agreed to enter into a <i>FÃ©dÃ©ration Internationale des IngÃ©nieurs â Conseils</i> (FIDIC) Contract within 60 days from the MOA's execution.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Subsequently, Roxaco and Gulf Canary executed an Agreement, which extended this 60-day period for another 30 days.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> On September 17, 2014, the parties thus entered into and executed the FIDIC Conditions of Contract for Plant and Design Build for Electrical and Mechanical Plant, and for Building and Engineering Works, designed by Contractor â General Conditions, the Particular Conditions of Contract, and the Appendix to Conditions of Contract (FIDIC Contract).<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Moreover, under the MOA, Gulf Canary undertook to submit a performance bond equivalent to 30% of the total contract price or the amount of PHP 65,946,811.06. The MOA provided that the performance bond will answer for Gulf Canary's failure "to perform any obligation" under the MOA and under the FIDIC Contract (collectively, the Construction Contracts), or "upon the occurrence of any of the events and circumstances to be listed in the FIDIC Contract."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> In accordance with this, Gulf Canary submitted a Performance Bond,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated July 4, 2014, issued by Asia United Insurance, Inc. (Asia United) on July 4, 2014.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The Performance Bond provided that Asia United's liability will expire on July 8, 2015. In addition, it also stated that Asia United must be "notified in writing of any obligation thereunder not later than 15 days from said expiration date."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Further, under the MOA, the construction of the hotel must be completed by March 31, 2015 "unless an extension of time has been authorized and approved by the Employer in writing in accordance with the conditions stated in the FIDIC Contract."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>In accordance with the Construction Contracts, Roxaco and Gulf Canary proceeded with the construction works. Roxaco also appointed Pure Projects (Pure Projects) to act as project manager and perform the functions of an engineer under the FIDIC Contract. However, the construction was not completed on March 31, 2015, the stipulated completion date under the Construction Contracts.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>To mitigate the construction delay, Roxaco and Gulf Canary agreed to augment the latter's manpower and resources. Thus, Roxaco nominated Vision Properties Development Corporation (Vision) to serve as Gulf Canary's subcontractor to perform some of the works.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Significantly, Mike Armstrong, programme manager of Pure Projects, wrote a letter<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated March 16, 2015 (March 16, 2015 Letter) to Kenneth Jao, Gulf Canary's managing director, summarizing the points they discussed in a meeting held on March 13, 2015. The March 16, 2015 Letter stated in part:<br><blockquote>1. RVHC [Roxaco] will not terminate Gulf Canary under Sub-Clause 15.2 'Termination by the Employer.'<br><br>. . . .<br><br>5. Gulf Canary agrees to pay the difference between the original contract amount and the revised contract amount to complete the project. This amount will be provided by the Engineer under Sub-Clause 3.5 "Determinations."<br><br>6. Gulf Canary acknowledges they are unable to meet the date for Practical Completion under Sub-Clause 8.2 Time for Completion, under the Contract. This will result in a claim for damages by RVHC [Roxaco] under Sub-Clause 2.5 'Employer's Claims,' which takes into account Sub-Clause 8.7 'Delay Damages', calculated at the following rate, "1/10 of 1% of the Contract Price on the uncompleted remaining Works on every day of delay."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </blockquote>Despite the foregoing efforts, the construction delays persisted.<br><br>In this regard, Roxaco wrote a letter<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> to Asia United dated July 7, 2015, calling on the Performance Bond. The letter stated that Gulf Canary is in breach of its obligations. According to the letter, "it was apparent from its pace that the works under the Construction Contract would not be completed by the original completion date, and the extended work completion would be until January 31, 2016."<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Moreover, Roxaco asserted in the letter that despite the fact that the construction will be completed on January 31, 2016, Gulf Canary failed to deliver a new or extended performance bond which is a further breach of its obligations.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Thus, the letter stated:<br><blockquote>In light of the breach and/or continuing failure of the Principal to fully and faithfully perform its obligations, and in accordance with the Performance Bond, we are formally notifying you as the Surety that we are drawing and/or calling on your obligations under the said Performance Bond in the amount of [PHP 65,946,811,06].<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </blockquote>Asia United, however, did not respond to Roxaco's letter. This prompted Roxaco to send several demand letters to Asia United.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Roxaco terminated the Construction Contracts on September 18, 2015. At the time of the termination of the Construction Contracts, only 34.92% of the construction was completed. Roxaco then took over the construction and engaged Vision as the general contractor to rectify the defects in the works and to complete the construction of the hotel.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Roxaco, through Pure Projects, demanded that Gulf Canary pay for liquidated damages, the additional costs incurred for the rectification of defects, and the costs to complete the unfinished works. Roxaco sent Gulf Canary a demand letter on September 22, 2017, but Gulf Canary did not respond.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center> <i>The Ruling of the CIAC Tribunal </i> </center><br>Roxaco instituted a complaint before the CIAC against Gulf Canary and Asia United for their refusal to heed Roxaco's demand.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Roxaco claimed that Gulf Canary failed to complete the construction by March 31, 2015, the stipulated completion date under the Construction Contracts. Thus, Roxaco alleged that Gulf Canary breached its obligations and is liable to pay liquidated damages.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Moreover, Roxaco argued that it is entitled to the payment of costs it incurred to rectify Gulf Canary's defective works and of the costs for the completion of the hotel.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> In addition, Roxaco insisted that it is entitled to the recoupment of its downpayment in accordance with the Construction Contracts.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Roxaco thus sought the payment of liquidated damages, recoupment of the downpayment, rectification costs, attorney's fees, cost of completion of the project, costs of arbitration, and interest.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Gulf Canary raised counterclaims for the payment of moral damages, exemplary damages, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Gulf Canary's main contention was that there was no delay in the completion of the hotel because the parties agreed to extend the completion date from March 31, 2015 to January 31, 2016.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>For its part, Asia United argued that the contract secured by its Performance Bond was varied or novated without its knowledge and consent. This, according to Asia United, released it from liability.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> It also raised counterclaims for the payment of exemplary damages, attorney's fees, and costs of litigation.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In its Final Award, the CIAC Tribunal ruled in Roxaco's favor. The dispositive portion of the Final Award stated:<br><blockquote>WHEREFORE, the Tribunal hereby decides and awards in full and final disposition of this arbitration, as follows:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">(a) </td> <td colspan="2" valign="top">The Tribunals [sic] declares valid the termination of the Memorandum of Agreement dated [June 30, 2014] between Claimant [Roxaco] and Gulf Canary; </td> </tr> <tr> <td valign="top">&nbsp;</td> <td colspan="2" valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">The Tribunal declares that the Performance Bond issued by Asia United in favor of Claimant [Roxaco] was valid and subsisting at the time Claimant [Roxaco] served its notice of claim on the Performance Bond; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="90%" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">The Tribunal orders Gulf Canary to pay Claimant [Roxaco] the following amounts: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(i) </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 14,305,098.96 as and for liquidated damages; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(ii) </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 29,701,532.37 for recoupment of the down payment; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(iii) </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 16,964,878.38 for cost of rectification; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(iv) </div></td> <td valign="top"> <div align="JUSTIFY">Interest on each of the amounts stated in (i) to (ii) at the rate of 6% per annum from [September 22, 2017] until fully paid; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(v) </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 2,500,000.00 as and for attorney's fees; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(vi) </div></td> <td valign="top"> <div align="JUSTIFY">The costs of arbitration; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(vii) </div></td> <td valign="top"> <div align="JUSTIFY">Claimant's claim for cost of completion of the Project is hereby denied. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">The Tribunal declares and holds, Asia United jointly and severally liable with Gulf Canary in respect of items (i) and (vi) above up to the amount of the Performance Bond which is [PHP] 65,946,811.06. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(e) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">The Tribunal denies the counterclaims of Gulf Canary and Asia United for lack of merit. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(f) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">All other claims and reliefs not specifically resolved by this Final Award are deemed denied for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></div></td> </tr> </tbody></table></blockquote>Crucial to the CIAC Tribunal's ruling was its factual finding that the contractual completion date was not extended from March 31, 2015 to January 31, 2016. According to the CIAC Tribunal, there was no evidence proving that Gulf Canary complied with the specific conditions, provided in the Construction Contracts, for a valid extension of the completion date. Further, the CIAC Tribunal ruled that Gulf Canary was liable for the delays in the construction. Given this, Roxaco was justified in ultimately terminating the Construction Contracts and demanding the payment of liquidated damages.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>The CIAC Tribunal also concluded that Roxaco is entitled to the recoupment of its downpayment in accordance with the FIDIC Contract. The CIAC Tribunal found that the downpayment functioned as an "interest free loan which must be repaid through percentage deductions in the Payment Certificates during the Project."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>Finally, the CIAC agreed with Roxaco that Gulf Canary should pay the rectification costs which Roxaco incurred to remediate Gulf Canary's defective and substandard work.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>In determining the amounts for which Gulf Canary and Asia United should be held liable, the CIAC Tribunal based its award on the evidence presented during the arbitration proceedings.<br><br><center><i>The Ruling of the CA</i> </center><br>Gulf Canary and Asia United filed separate Rule 43 petitions for review under the Rules of Court, before the CA.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>The CA granted the petitions, reversed the Final Award, and ordered the dismissal of Roxaco's complaint in the CIAC.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The dispositive portion of the CA Decision reads:<br><blockquote><b>WHEREFORE</b>, the instant petitions for review are<b> GRANTED</b>. The assailed Final Award of the Construction Industry Arbitration Commission dated September 24, 2018 is<b> REVERSED and SET ASIDE.</b><br><br>Accordingly, Roxaco Vanguard Hotel Corporation's [Roxaco] complaint is<b> DISMISSED</b>.<br><br>The CIAC is hereby enjoined from implementing the disputed Final AWARD for reasons stated above.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis in the original) </blockquote>According to the CA, the rule is that the arbitral award of a CIAC tribunal is final and may not be appealed except on questions of law. In this regard, the CA took the view that the issues raised in the appeal were questions of law. In particular, the CA ruled that whether the completion date for the project was extended is a question of law because it required the analysis of the MOA and other documentary evidence.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Moreover, the CA also held that even assuming that the questions raised on appeal are factual, they fall within the exceptions which warrant a review of a CIAC arbitral award. The CA stated:<br><blockquote>Granting without conceding that the question raised by Gulf Canary is factual, still, this Court is not precluded from reviewing the findings of the Arbitral Tribunal on the matter. To recall, one of the exceptions to the general rule that the factual findings of the CIAC are final and conclusive is that where the arbitrators exceeded their powers, or so imperfectly executed them, that a mutual, final[,] and definite award upon the subject matter submitted to them was not made. To [Our] minds, this case falls within the said exception.<br><br>In the extant case, the construction arbitrators exceeded their power when they gave a cold shoulder on the implication of the various documents executed by the parties. Instead of giving credence to their contents, they utterly ignored the same and made a blanket approval of Roxaco's claim on the matter. The aforecited instruments which contain either an express or implied extension of the term of the construction contract could not have been overlooked if only their substance was appropriately considered.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </blockquote>The CA noted that there are specific requirements under the FIDIC Contract for the valid extension of the completion date. In particular, subÂ­-clause 20.1 of the FIDIC Contract states that Gulf Canary must give notice to Pure Projects, describing the circumstances giving rise to the claim for an extension of time. This notice must be given as soon as practicable and not later than 28 days from the time that Gulf Canary became aware of the event or circumstance. Under this sub-clause, if Gulf Canary fails to give the required notice within the 28-day period, the completion date shall not be extended.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>The CA then proceeded to explain:<br><blockquote> It is true that Gulf Canary failed to give the notice required under the FIDIC Conditions of Contract. Such requirement was, however, deemed waived by the simultaneous and subsequent acts of the contracting parties. To be sure, the various documents on record show that an extension of time was indeed authorized and allowed by Roxaco.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </blockquote>In arriving at its conclusion that Roxaco and Gulf Canary agreed to extend the completion date, the CA relied upon the following pieces of evidence:<br><br><i>First</i>, the minutes of the meeting held on March 13, 2015 stated that the parties agreed to take steps to accelerate the construction works and that these steps were to commence on March 18, 2015. According to the CA, "[t]his could not have been agreed upon if Roxaco adhered to the March 31, 2015 completion date[.]"<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br><i>Second</i>, the March 16, 2015 Letter from Pure Projects to Gulf Canary confirmed that Gulf Canary will not be terminated as a general contractor.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br><i>Third</i>, Roxaco's letter to Asia United dated July 7, 2015 stated that the completion date was January 31, 2016.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br><i>Fourth</i>, Roxaco and Gulf Canary admitted that the original term of the Performance Bond was extended from July 8, 2015 to January 31, 2016.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br><i>Fifth</i>, the Notices to Correct which Pure Projects sent to Gulf Canary were dated August 24, 2015, or barely five months after the stipulated March 31, 2015 completion date.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The CA then ultimately concluded that the CIAC Tribunal erred in granting Roxaco's claims against Gulf Canary and Asia United. The CA stated:<br><blockquote>In light of the foregoing, Gulf Canary could not have incurred delay, or failed to comply with the notices to correct, or abandoned the work when its services were terminated on September 18, 2015[,] considering that the project period had yet to expire on January 31, 2016. For this reason alone, Roxaco's complaint is dismissible.<br><br>Further, Roxaco's claim against the performance bond cannot prosper. Notably, Asia United's liability under the bond shall arise only when Gulf Canary defaulted in the performance of any of its obligations under the contract. As found, Gulf Canary's dismissal from the project was premature as it was made before the lapse of the extended completion date.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </blockquote>The petitioner Roxaco filed this Petition assailing the CA Decision. It raised the following arguments:<br><br><i>First</i>, the CA exceeded the scope of its judicial review when it reversed the CIAC Tribunal's finding that the completion date for the project was not extended. The petitioner disagreed with the CA's characterization of this issue as a question of law. It insisted that the question of whether the completion date was extended is a question of fact because it required a calibration of the evidence.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>The petitioner also did not agree with the CA's position that this issue can be considered as an exception to the general rule that the CA can only review questions of law in cases involving CIAC arbitral awards. According to the petitioner, the exceptions are stringent and contemplate only the narrowest of grounds. Thus, in the absence of grave abuse of discretion amounting to lack or excess of jurisdiction, the CA cannot conclude that the arbitrators exceeded their powers or so imperfectly executed them such that a mutual, final, and definite award was not made.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><i>Second</i>, the CIAC Tribunal's factual finding that the completion date was not extended is supported by substantial evidence and is consistent with the Construction Contracts and the law. The petitioner Roxaco further added that the CA, in relying on certain pieces of documentary evidence, took them out of context and thus made erroneous interpretations.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> It is clear from the evidence on record that the respondent Gulf Canary did not comply with the contractual requirements for the grant of an extension of the completion date.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br><i>Third</i>, the CA erred in summarily denying all of the petitioner's other claims, especially for the recoupment of its downpayment and the payment of rectification costs. These claims were based on provisions of the Construction Contracts which are separate and distinct from the issue as to the extension of the completion date. Moreover, the CIAC Tribunal categorically found that these claims were supported by substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>The respondent Gulf Canary filed its Comment (on the Petition for Review on<i> Certiorari</i>),<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> dated November 3, 2019. It argued the following points:<br><br><i>First</i>, the issue of whether the completion date for the project was extended is a question of law. This is because the documents and the facts relied upon to prove the extension did not "call for calibration or weighing of evidence because the documents supporting them are either admitted, submitted by the adverse party, or never denied as to existence and import."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br><i>Second</i>, even assuming that this issue is a question of fact, the CA had the authority to review it. The CIAC Tribunal was so partial to petitioner that it failed to discharge its functions properly. It purportedly disregarded the overwhelming evidence proving that petitioner and respondent Gulf Canary agreed to extend the completion date.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br><i>Third</i>, the respondent Gulf Canary is not liable for any purported delays in the project. These delays are attributable to the petitioner. As such, the petitioner had no real reason to terminate the MOA and the FIDIC Contract.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br><i>Fourth</i>, the CIAC Tribunal ignored the evidence proving that there was a "malicious motive" for the petitioner's decision to terminate the MOA and the FIDIC Contract. The respondent Gulf Canary asserts that the termination was triggered by its refusal to use magnesium boards and fiberglass toilets as suggested by Pure Projects, the project manager.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br><i>Finally</i>, the petitioner's witnesses in the arbitration proceedings were incompetent and had no personal knowledge because they became involved in the project after the termination of the MOA and the FIDIC Contract.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>For its part, the respondent Asia United filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> dated September 3, 2019. In its Comment, the respondent Asia United argued that the petitioner and Gulf Canary varied or novated the terms of the original construction contract without its consent and knowledge.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Specifically, the March 16, 2015 Letter showed that the petitioner and Gulf Canary agreed to variations in the Construction Contracts which are repugnant to the original agreement between the contractual parties. These alleged variations in the Construction Contracts, Asia United argued, discharged it from liability as a surety because it did not know nor consent to these changes.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>Asia United also stated that the CA correctly concluded that the completion date for the works was extended and that this conclusion is supported by the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>The petitioner also filed a Consolidated Reply (to Respondent Gulf Canary Construction and Development, Inc.'s Comment and Respondent Asia United Insurance Inc.'s Comment).<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br><center> <i>The Issue</i> </center><br>The issue for the Court's resolution is whether the CA correctly reversed and set aside the CIAC Tribunal's Final Award.<br><br><center> <i>The Ruling of the Court</i> </center><br>The Court reverses the CA.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>A CIAC arbitral award is, as a general rule, final and unappealable, subject to the narrowest of exceptions</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The Court reiterates and underscores the central role of the CIAC in construction disputes and the extent of the judiciary's review powers in cases involving the appeal of CIAC arbitral awards.<br><br>Section 19 of Executive Order No. 1008<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> or the Construction Industry Arbitration Law provides:<br><blockquote>Sec. 19. Finality of Awards. The arbitral award shall be binding upon the parties. It shall be final and inappealable except on questions of law which shall be appealable to the Supreme Court. </blockquote>Thus, the rule is that CIAC arbitral awards are final and cannot be appealed except where the appeal raises questions of law.<br><br>The Court has explained the import of Section 19, as well as its connection with other relevant rules and laws, in<i> Global Medical Center of Laguna, Inc. v. Ross Systems International, Inc</i>.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> In<i> Global Medical Center</i>, the Court reiterated that the rule that CIAC arbitral awards may only be reviewed on questions of law admits of exceptions, "with the standing litmus test that which pertain to either a challenge on the integrity of the arbitral tribunal, or otherwise an allegation of a violation of the Constitution or positive law."<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>To be sure, the central ruling in<i> Global Medical Center</i>âthat appeals of CIAC arbitral awards must be brought to this Court via Rule 45, in cases involving questions of law, and to the CA via Rule 65 in cases where there are factual issues involving grave abuse of discretionâhas prospective application and is inapplicable here. Nonetheless, the Court's extensive exposition of what factual issues in CIAC arbitral awards may be subject of judicial review, distilled from decades of jurisprudence, applies squarely in this case.<br><br>Jurisprudence has consistently identified the following as the exceptions to the rule that only questions of law may be reviewed in CIAC cases:<br><blockquote>(1) the award was procured by corruption, fraud[,] or other undue means; (2) there was evident partiality or corruption of the arbitrators or of any of them; (3) the arbitrators were guilty of misconduct in refusing to postpone the hearing upon sufficient cause shown, or in refusing to hear evidence pertinent and material to the controversy; (4) one or more of the arbitrators were disqualified to act as such under Section nine of Republic Act No. 876 and willfully refrained from disclosing such disqualifications or of any other misbehavior by which the rights of any party have been materially prejudiced; or (5) the arbitrators exceeded their powers, or so imperfectly executed them, that a mutual, final[,] and definite award upon the subject matter submitted to them was not made.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> </blockquote>The exceptions which allow for a review of the CIAC's factual findings are narrow and must not be interpreted to mean that mere disagreements as to the findings of an arbitral tribunal or even perceived errors in its findings of fact warrant judicial review. The Court will not allow the parties to relitigate factual issues already argued before and resolved by the CIAC.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>The Court explained in<i> Global Medical Center</i> that the above-mentioned grounds are "tribunal-centered" and not "fact-centered."<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> These exceptions which justify the review of a CIAC arbitral award's factual findings, "essentially challenge the integrity of the arbitral tribunal or the constitutionality or legality of the conduct of the arbitral process, and therefore warrant an entertainment of doubt with respect to the factual findings of said tribunal."<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> They are errors that fall under the concept of grave abuse of discretion and are, therefore, not merely errors of interpretation or judgment.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> The exception to the general rule that only questions of law may be reviewed in an appeal of a CIAC arbitral award is a narrow window as well as a high bar.<br><br>Summarizing the rules governing the review of CIAC arbitral awards, the Court said in<i> Global Medical Center</i>:<br><blockquote>In other words, the scenarios that will trigger a factual review of the CIAC's arbitral award must fall within either of the following sets of grounds:<br><br>(1)<i> Challenge on the integrity of the arbitral tribunal</i> ([i.e.], (i) the award was procured by corruption, fraud[,] or other undue means; (ii) there was evident partiality or corruption of the arbitrators or of any of them; (iii) the arbitrators were guilty of misconduct in refusing to postpone the hearing upon sufficient cause shown, or in refusing to hear evidence pertinent and material to the controversy; (iv) one or more of the arbitrators were disqualified to act as such under Section 9 of [Republic Act No.] 876 or "The Arbitration Law," and willfully refrained from disclosing such disqualifications or of any other misbehavior by which the rights of any party have been materially prejudiced; or (v) the arbitrators exceeded their powers, or so imperfectly executed them, that a mutual, final[,] and definite award upon the subject matter submitted to them was not made) and;<br><br>(2)<i> Allegation of the arbitral tribunal's violation of the Constitution or positive law</i>.<br><br>In addition to the prototypical examples that exceptionally trigger a factual review of the CIAC's arbitral awards, the Court here discerns the merit in adding the otherwise forgotten presumption that<i> factual findings of the CIAC arbitral tribunal may also be revisited by the Court upon an allegation that the arbitral tribunal committed an act that is violative of the Constitution or other positive laws</i>. To abate fears, the delimitation discerned in the Court's power to review factual findings of the CIAC shall in no way plausibly allow for a situation wherein the Court's hand is stayed from correcting a blatant constitutional or legal violation because the autonomy of the arbitral process is paramount. Contrarily, the Court underscores that the contracted or very limited grounds for alleging grave abuse of discretion on the part of the CIAC arbitral tribunal, however narrow, are still principally tethered to the courts' primary duty of upholding the Constitution and positive laws. The addition of the second ground makes plain that no amount of contracting or expanding grounds for grave abuse will ever be permitted to lay waste to the original purpose of the courts and their mandate to uphold the rule of law.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> (Emphasis supplied, citation omitted)</blockquote>Where a party alleges that the factual findings in a CIAC arbitral award are subject to judicial review because the CIAC arbitrators exceeded their powers, or so imperfectly executed them, that a mutual, final, and definite award upon the subject matter submitted to them was not madeâas in this caseâthis assertion must not pertain merely to the arbitrators' resolution of the issues but rather to the very integrity of the tribunal itself. This is no minor allegation and a party invoking it must satisfactorily show that the CIAC arbitrators were indeed compromised, impartial, or that their integrity could not be relied upon in a manner that will allow a fair determination of the dispute.<br><br>Thus, in ascertaining whether a CIAC arbitral award may be the subject of an appeal, there must first be a determination of whether the issue sought to be raised is a question of law or a question of fact. If the question is one of law, the arbitral award may be appealed. However, if the issue sought to be raised in the appeal is a question of fact, a further determination must be made as to whether the issue is "fact-centered," involving only a disagreement as to the tribunal's factual conclusions, or whether the issue goes into the integrity of the tribunal in a manner that constitutes grave abuse of discretion. A party may only seek judicial review of a factual issue in the latter scenario.<br><br>The strict confines of the judiciary's authority to review CIAC arbitral awards are rooted on the role of the CIAC and the importance of arbitration as a mechanism to resolve disputes in the construction industry.<br><br>The CIAC was created to facilitate the speedy disposition of construction disputes. In the construction industry, the ability to resolve disputes within a reasonable period is vital. As explained by the Court in <i>Global Medical Center</i>, an "unsettled dispute can easily run projects to the ground with serious delays and irreparable damage."<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Thus, it is essential to have a mechanism that allows for the speedy resolution of construction disputes as this enables the parties to plan ahead and move forward without being mired by the unfortunate but usual delays of court litigation.<br><br>Moreover, the CIAC allows parties to choose arbitrators from a roster of experts who are competent and able to fully understand the highly technical nature of disputes in the construction industry. In<i> Wyeth Philippines Inc.</i>, the Court said:<br><blockquote>The CIAC does not only serve the interest of speedy dispute resolution, it also facilitates<i> authoritative</i> dispute resolution. Its authority proceeds not only from juridical legitimacy but equally from technical expertise. The creation of a special adjudicatory body for construction disputes presupposes distinctive and nuanced competence on matters that are conceded to be outside the innate expertise of regular courts and adjudicatory bodies concerned with other specialized fields. The CIAC has the state's confidence concerning the entire technical expanse of construction, defined in jurisprudence as "referring to all on-site works on buildings or altering structures, from land clearance through completion including excavation, erection and assembly and installation of components and equipment."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> (Emphasis in the original, citations omitted) </blockquote>Thus, the limits of judicial review in relation to the CIAC are not mere matters of procedure. These limits arise from an essential policy choice in favor of vesting in the CIAC the authority to resolve construction disputes both because this encourages the speedy disposition of cases and because the CIAC possesses the expertise required to resolve complex and technical issues in the construction industry. The judiciary must, therefore, tread carefully in determining whether it may review the factual findings of the CIAC.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The main issue in this caseâwhether there was a valid extension of the completion date under the Construction Contractsâis a question of law </i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The CA granted respondents Gulf Canary's and Asia United's petitions based on its appreciation of the main issue in the parties' dispute, i.e., whether the petitioner and the respondent Gulf Canary agreed to extend the stipulated completion date for the project in the Construction Contracts. This issue is central to this case because if the parties did, in fact, agree to extend the completion date of the project, then the respondent Gulf Canary cannot be considered liable for delays in the construction. Corollary to this, the respondent Gulf Canary would not be liable to pay liquidated damages. Moreover, if the parties indeed agreed on an extension of the completion date, the validity of the petitioner's termination of the Construction Contracts and its claims for the recoupment of its downpayment and the payment of rectification costs are put into question.<br><br>The CA characterized the central issue in this case as a question of law. The Court agrees.<br><br>The differences between a question of fact and a question of law are well established. In<i> New Rural Bank of Guimba Inc. v. Abad</i>,<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> the Court said:<br><blockquote>We reiterate the distinction between a question of law and a question of fact. A question of law exists when the doubt or controversy concerns the correct application of law or jurisprudence to a certain set of facts; or<i> when the issue does not call for an examination of the probative value of the evidence presented, the truth or falsehood of the facts being admitted</i>. A question of fact exists when a doubt or difference arises as to the truth or falsehood of facts or<i> when the query invites calibration of the whole evidence considering mainly the credibility of the witnesses, the existence and relevancy of specific surrounding circumstances, as well as their relation to each other and to the whole, and the probability of the situation</i>.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> (Emphasis supplied, citation omitted) </blockquote>Further, in<i> Republic v. Vega</i>,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> the Court said that when a "petitioner asks for a review of the decisions made by a lower court<i> based on the evidence presented, without delving into their probative value but simply on their sufficiency to support the legal conclusions made, then a question of law is raised</i>."<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Thus, in<i> Vega</i>, the Court held that the issue of whether the evidence on record is sufficient to support the lower court's conclusion that the subject land is alienable and disposable is a question of law. It did not call for the examination of the probative value or credibility of the evidence but rather required the Court to ascertain if the lower court was justified in its finding as to the nature and character of the subject land. This, the Court concluded, is a question of law because it calls for a resolution of what the applicable law is to a given set of facts.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>To reiterate, the central issue resolved by the CA in the appeal was whether there was a valid extension of the completion date under the Construction Contracts. In resolving this issue, the CA examined if the evidence sufficed to arrive at the conclusion that there was indeed an extension of time and that the parties waived the requirements for a valid extension in the Construction Contracts. Significantly, the parties do not dispute that there was no written notice sent by the respondent Gulf Canary to petitioner as required under the Construction Contracts for the valid extension of the completion date. There is also no question as to the existence and authenticity of the evidence on record which the CA used as basis for its finding that the parties, in truth, agreed to the extension despite the respondent Gulf Canary's failure to comply with the contractual requirements. Ultimately, the issue that the CA had to resolve was whether these pieces of evidence signified the parties' intent to extend the completion date and to waive the requirements therefor in the Construction Contracts. Stated differently, the issue before the CA was what legal significance may be ascribed to these pieces of evidence. To answer this question, the CA did not have to reexamine the CIAC's appreciation of the evidence nor of their probative value. The CA only had to determine if the applicable law would warrant a finding that these pieces of evidence led to no other conclusion than that the parties agreed to extend the completion date. This, to the mind of the Court, is a question of law.<br><br>Nonetheless, the Court disagrees with the CA's conclusion that the parties agreed to the extension of the completion date and, for this purpose, waived the express requirements for a valid extension under the Construction Contracts.<br><br>Paragraph VIII of the MOA stated:<br><blockquote>VIII. <u>Construction Period</u><br><br>The construction of the Hotel shall be completed on [March 31, 2015], unless an extension of time has been authorized and approved by the Employer in writing in accordance with the conditions stated in the FIDIC Contract.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> </blockquote>Sub-Clause 20.1 of the FIDIC Contract, in turn, states:<br><blockquote>20.1 Contractor's Claims. If the Contractor considers himself to be entitled to any extension of the Time for Completion and/or any additional payment, under any Clause of these Conditions or otherwise in connection with the Contract,<i> the Contractor shall give notice to the Engineer, describing the event or circumstance giving rise to the claim. The notice shall be given as soon as practicable, and not later than 28 days after the Contractor became aware, or should have become aware, of the event or circumstance.<br><br>If the Contractor fails to give notice of a claim within such period of 28 days, the Time for Completion shall not be extended</i>, the Contractor shall not be entitled to additional payment, and the Employer shall be discharged from all liability in connection with the claim. Otherwise, the following provisions of this Sub-Clause will apply.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> (Emphasis supplied) </blockquote>Both the CA and the CIAC Tribunal agree that the respondent Gulf Canary did not give the petitioner any notice which complies with Sub-Clause 20.1 of the FIDIC Contract. Thus, in accordance with the express terms of the contract, the respondent Gulf Canary was not entitled to any extension.<br><br>The pieces of evidence which the CA considered as basis for its conclusion that the petitioner waived the notice requirement and authorized the extension of the completion date by no means signify any such waiver.<br><br>The rule is settled that for a waiver to be valid, the waiver must be "clear and unequivocal."<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> Further, there can be no implied waiver "when there is no clear, unequivocal[,] and decisive act showing such purpose."<sup style="COLOR: RGB(255, 0, 0);">[90]</sup><br><br>None of the evidence which the CA relied upon unequivocally and definitively show that the petitioner intended to waive the notice requirement under the FIDIC Contract. The Court reviews the legal significance of these pieces of evidence.<br><br>As to (a) the minutes of the meeting held on March 13, 2015, which showed that the parties agreed to take steps to accelerate the construction works, (b) the March 16, 2015 Letter where Pure Projects confirmed that the respondent Gulf Canary will not be terminated as the general contractor, (c) the notices of delay which Pure Projects sent to the respondent Gulf Canary on August 24, 2015, or after the stipulated completion date, and (d) the extension of respondent Asia United's Performance Bond from July 8, 2015 to January 31, 2016, none of these prove that the petitioner intentionally waived the notice requirement and agreed to extend the completion date.<br><br>The CA's conclusion appears to have arisen from its erroneous assumption that the petitioner would not have allowed the respondent Gulf Canary to continue with the construction works and would have instead terminated the Construction Contracts if the respondent Gulf Canary was indeed in delay in completing the project.<br><br>To be clear, under the Construction Contracts, the respondent Gulf Canary had the obligation to complete the construction of the hotel. While the period to complete the construction had a deadline through the stipulated completion date, the failure to meet this deadline did not automatically terminate the Construction Contracts, let alone oust the respondent Gulf Canary as the contractor and absolve it from any further obligation to complete the construction. Under the Construction Contracts, the inability to complete the project on the agreed completion date is only a breach of the respondent Gulf Canary's obligations which entitled the petitioner to claim delay damages.<br><br>This is clear in Sub-Clause 8.7 of the FIDIC Contract, which provided:<br><blockquote>8.7 Delay Damages.<i> If the Contractor fails to comply with Sub-Clause 8.2 [Time for Completion], the Contractor shall subject to Sub-Clause 2.5 [Employer's Claims] pay delay damages to the Employer for this default</i>. These delay damages shall be the sum stated in the Appendix to Tender, which shall be paid for every day which shall elapse between the relevant Time for Completion and the date stated in the Taking-Over Certificate. However, the total amount due under the Sub-Clause shall not exceed the maximum amount of delay damages (if any) stated in the Appendix to Tender.<br><br>These delay damages shall be the only damages due from the Contractor for such default, other than in the event of termination under Sub-Clause 15.2 [Termination by Employer] prior to completion of the Works.<i> These damages shall, not relieve the Contractor from his obligation to complete the Works, or from any other duties, obligations or responsibilities which he may have under the Contract</i>.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> (Emphasis supplied) </blockquote>Further, the MOA provided:<br><blockquote>XI. Guaranty, Warranty &amp; Penalties<br><br>. . . .<br><br>b. Penalties<br><br>i. <i>EMPLOYER will impose a penalty of 1/10 of 1% of the Contract Price on the uncompleted major balance of works on every day of delay</i>. It may deduct such amount from the unpaid balance of the Contract Price.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> (Emphasis supplied)</blockquote>Clearly then, under Sub-Clause 8.7 of the FIDIC Contract, it is possible to extend the stipulated completion date provided that the respondent Gulf Canary complied with the requirementsâi.e., there is a valid ground to request for an extension and there is notice to the petitioner within the period provided. If the completion date is validly extended, the respondent Gulf Canary will not be considered in delay nor liable to pay delay damages.<br><br>However, to reiterate, the respondent Gulf Canary's inability to complete the construction on the agreed completion date did not mean that the Construction Contracts were terminated and that the respondent Gulf Canary ceased to be the contractor such that all of its works must cease. It only meant that the respondent Gulf Canary was in default in its obligation to finish the construction in a timely manner and made it liable for delay damages. Its obligation to complete the work remained. Whether the petitioner would opt to terminate the contract because of this delay is a different matter and is subject to the petitioner's compliance with the requisites for a valid termination under the FIDIC Contract.<br><br>Thus, that the petitioner and the respondent Gulf Canary continued working to complete the construction even after the lapse of the stipulated completion date did not necessarily mean that the petitioner agreed to extend the completion date such that the respondent Gulf Canary would not be considered in delay and would not be liable for damages. It simply meant that the respondent Gulf Canary was expected to perform its obligation to complete the works, subject to its liabilities for delay under the Construction Contracts. This is clear from the very same March 16, 2015 Letter cited by the CA. The letter stated in part:<br><blockquote>6.<i> Gulf Canary acknowledges they are unable to meet the date for Practical Completion under Sub-Clause 8.2 Time for Completion, under the Contract. This will result in a claim for damages by RVHC [Roxaco] under Sub-Clause 2.5 'Employer's Claims,'</i> which takes into account Sub-Clause 8.7 'Delay Damages', calculated at the following rate, "1/10 of 1% of the Contract Price on the uncompleted remaining Works on every day of delay."<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> (Emphasis supplied) </blockquote>Similarly, the petitioner's and the respondent Gulf Canary's agreement to extend the respondent Asia United's Performance Bond is not equivalent to a valid extension of the completion date. The performance bond was intended to guarantee the respondent Gulf Canary's obligations under the Construction Contracts. It is a protection afforded to the petitioner during the life of the contract. Thus, as long as the construction was ongoing, the petitioner had the right to demand for an extension of the performance bond without necessarily agreeing that the stipulated completion date has been extended, thus absolving the respondent Gulf Canary for any delay.<br><br>The Court agrees with the petitioner's argument that its decision to find an opportunity to complete the works and minimize damage, through its agreement with the respondent Gulf Canary as to the measures to be taken to accelerate the construction, is consistent with Article 2203 of the Civil Code. Article 2203 reads:<br><blockquote>Article 2203. The party suffering loss or injury must exercise the diligence of a good father of a family to minimize the damages resulting from the act or omission in question. </blockquote>As to the petitioner's July 7, 2015 Letter to the respondent Asia United, the Court finds that this does not prove that the petitioner and the respondent Gulf Canary agreed to the extension of the completion date. As pointed out by the petitioner, the letter was sent for the specific purpose of calling on the respondent Asia United's Performance Bond, precisely because the respondent Gulf Canary breached its obligation. While the letter does mention that the date for the completion of the work was moved to January 31, 2016, the Court cannot conclude that this amounted to confirmation that the petitioner and the respondent Gulf Canary agreed to extend the stipulated completion date such that the respondent Gulf Canary was not in delay in the performance of its contractual obligations. The very import of the July 7, 2015 Letter was that the petitioner was calling on the Performance Bond specifically because of the respondent Gulf Canary's breach of its obligations. The petitioner stated in the said letter:<br><blockquote> As you may know, the completion date under the Construction Contract was June 1, 2015. In fact, as early as May 14, 2015, the Corporation (through its Project Manager) had instructed the Principal to extend the Performance Bond,<i> as it was apparent from its pace that the works under the Construction Contract would not he completed by the original completion date, and the extended work completion would be until January 31, 2016. However, the Principal [Gulf Canary] failed to deliver a new or an extended Performance Bond, which is a further breach of its obligations.<br><br>In light of the breach and/or continuing failure of the Principal to fully and faithfully perform its obligations, and in accordance with the Performance Bond, we are formally notifying you as the Surety that we are drawing and/or calling on your obligations under the said Performance Bond</i> in the amount of PHP 65,946,811.06.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> (Emphasis supplied) </blockquote>Given the foregoing, the Court concludes that the evidence on record do not suffice to support the respondent Gulf Canary's claim that the parties to the Construction Contracts agreed to an extension of the stipulated completion date. Further, considering that the CIAC Tribunal found that the respondent Gulf Canary did not comply with the notice requirement under Sub-Clause 20.1 of the FIDIC Contract for a valid extension of the completion dateâa finding that none of the parties contestâthe Court concludes that there was no such valid extension. The ruling of the CIAC Tribunal on this point is affirmed.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Whether the respondent Gulf Canary is liable for liquidated damages and whether the petitioner validly terminated the Construction Contracts are questions of fact</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>As there was no valid extension of the completion date, the respondent Gulf Canary may be held liable for the payment of delay damages if the delay in the completion of the works was attributable to it.<br><br>Here, the CIAC Tribunal examined the evidence and made factual findings which led to its conclusion that the respondent Gulf Canary was responsible for the delays. This, in turn, entitled the petitioner to the payment of delay damages in accordance with the FIDIC Contract.<br><br>This is a question of fact that this Court cannot review. To reiterate, the judicial review of a CIAC arbitral tribunal's factual findings is proper only under the following circumstancesâwhere there are issues pertaining to the integrity of the arbitral tribunal and where the arbitral tribunal committed acts in violation of the Constitution or the law.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> None of these exceptions are present here.<br><br>In justifying a review of the factual findings of the CIAC Tribunal, the CA reasoned that the CIAC arbitrators "exceeded their powers, or so imperfectly executed them, that a mutual, final and definite award"<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> was not made. According to the CA, this is because the CIAC Tribunal "gave a cold shoulder on the implication of the various documents executed by the parties" and instead gave a "blanket approval of Roxaco's claim."<sup style="COLOR: RGB(255, 0, 0);">[97]</sup><br><br>The CA thus invoked as an exception one of the prototypical examples, cited in jurisprudence, which would justify a review of the factual findings of a CIAC arbitral tribunal. Similarly, the respondent Gulf Canary argues in its Comment that the CIAC Tribunal was partial to the petitioner, which warranted a review of its factual findings.<br><br>The ground invoked by the respondent Gulf Canary and the CA is, as already discussed here and in other cases resolved by the Court, one which goes into the integrity of the tribunal itself. This does not merely pertain to questions as to the correctness of the tribunal's ruling but involves the fairness and impartiality of the arbitrators themselves. It is, certainly, a serious allegation that must not be made recklessly. Given the nature of this exception, a party invoking it must, it cannot be overemphasized, satisfactorily show that the CIAC arbitrators were indeed compromised, impartial, or that their integrity could not be relied upon in a manner that will allow a fair determination of the dispute.<br><br>The Court rules that neither the CA nor the respondent Gulf Canary had any sufficient basis to conclude that the CIAC Tribunal was partial to the petitioner. A fair perusal of the Final Award will show that the CIAC Tribunal considered the evidence on record and made a decision based on the facts and the law. In truth, the CA's and the respondent Gulf Canary's objections are rooted simply on the fact that they disagree with the CIAC Tribunal's appreciation of the credibility of the evidence and its application of the relevant laws to its factual findings.<br><br>That a party disagrees with the conclusions of an arbitral tribunal will not suffice to charge such a tribunal with partiality and warrant a judicial review of the arbitral award's factual findings. An essential characteristic of CIAC arbitration is its speedâa quality, which, unfortunately, is often absent in courts mired with clogged dockets and bureaucratic delays. Moreover, CIAC arbitral tribunals are credible and reliable because the CIAC has a built-in mechanism that allows the parties to choose their own arbitrators from a roster of experts in the field. If parties to an arbitration proceeding are allowed to constantly file appeals before the courts to challenge a CIAC arbitral tribunal's factual and legal findings on the pretext that the arbitral tribunal has integrity issues, the very system which makes CIAC arbitration efficient and reliable will be seriously undermined. This practice creates a low bar for what questions may be raised on appeal before the courts. In truth, such a system effectively relegates the CIAC to function as a first level court instead of the efficient and reliable arbitral tribunal that it was intended to be. This will jeopardize the CIAC's central role in construction dispute resolution. The Court cannot countenance this practice.<br><br>Thus, in the absence of any ground to review and reverse the CIAC Tribunal's finding that the respondent Gulf Canary caused the delay in the completion of the project, the Court cannot but affirm the Final Award on this point.<br><br>In the same vein, the Court holds that the CIAC Tribunal's ruling that the petitioner validly terminated the Construction Contracts is binding.<br><br>Sub-Clause 15.2 of the FIDIC Contract provides for the grounds for termination. It stated in part:<br><blockquote>15.2 Termination by Employer. The Employer shall be entitled to terminate the Contract if the Contractor:<br><br>. . . .<br><br>(d) fails to comply with Sub-Clause 4.2 [Performance Security] or with a notice under Sub-Clause 15.1 [Notice to Correct],<br><br>(e) abandons the Works or otherwise plainly demonstrates the intention not to continue performance of his [or her] obligations under the Contract,<br><br>(f) without reasonable excuse fails:<br><br>. . . .<br><br>(iii) to proceed with the Works in accordance with Clause 8 [Commencement, Delays and Suspension] or<br><br>(iv) to comply with a notice issued under Sub-Clause 7.5 [Rejection [or Sub-Clause 7.6 [Remedial Work], within 28 days after receiving it[.]<sup style="COLOR: RGB(255, 0, 0);">[98]</sup></blockquote>The petitioner terminated the Construction Contracts because of the respondent Gulf Canary's "failure to comply with a Notice to Correct, abandonment of Works, plain demonstration of intent not to continue performance of obligations under the Contract, and failure to proceed with the works."<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> The CIAC Tribunal, upon an examination of the evidence on record, concluded that the "factual antecedents for the grounds" are "well-documented."<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> This is a factual finding that this Court has no reason to reverse.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The CA erroneously dismissed the petitioner's claims which were not anchored, on the central issue of contract extension</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The CA erred in dismissing the petitioner's other claims that were not dependent on the resolution of the issue as to whether the parties agreed to the extension of the stipulated completion date.<br><br>First, the CIAC Tribunal granted the petitioner's claim for the recoupment of its downpayment. The resolution of this claim is not grounded on the existence of a valid extension of the completion date but involves an examination of the evidence.<br><br>The MOA provides that, upon its execution, the petitioner shall pay a downpayment in the amount of 20% of the contract price.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> In connection with this, Sub-Clause 14.2 of the FIDIC Contract stated:<br><blockquote>14.2 Advance Payment<br><br>The advance payment shall be repaid through percentage deductions in Payment Certificates. Unless other percentages are stated in the Appendix to Tender.<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">deductions shall commence in the Payment Certificate in which the total of all certified interim payments (excluding the advance payment and deductions and repayments of retention) exceeds [10%] of the Accepted Contract Amount less Provisional Sums; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">deductions shall be made at the amortization rate of one quarter (25%) of the amount of each Payment Certificate (excluding the advance payment and deductions and repayments of retention) in the currencies and proportions of the advance payment, until such time as the advance payment has been repaid.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup></div></td> </tr> </tbody></table></blockquote>The downpayment, termed as advance payment under the FIDIC Contract, is, as described by the CIAC Tribunal, an "interest-free loan" from the petitioner to the respondent Gulf Canary which, under the Construction Contracts, will be repaid through percentage deductions in the payment certificates during the life of the project.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> The petitioner claims that the respondent Gulf Canary never fully paid this loan because it never finished the project.<br><br>Whether the respondent Gulf Canary indeed paid the loan is a question of fact. Similarly, any amount which remained unpaid also requires an examination of the credibility of the evidence. The CIAC Tribunal, after carefully considering the evidence, found that, based on the respondent Gulf Canary's total billings, PHP 29,701,532.37 of the downpayment remains unpaid. In the absence of any showing that the CIAC Tribunal acted with partiality in arriving at this finding, the Court finds no reason to reverse this ruling.<br><br>Second, the petitioner also claims payment for its rectification costs. These rectification costs pertain to the expenses which the petitioner was forced to incur to rectify and remediate the respondent Gulf Canary's defective works. The issues involved here are whether the respondent Gulf Canary's work is, in fact, defective and whether the petitioner is entitled to the reimbursements of the costs it incurred in remediating these defects. These are issues independent of whether the stipulated completion date was validly extended.<br><br>Here, the CIAC Tribunal concluded, upon an examination of the evidence, that there were indeed defects in the construction and that these were attributable to the respondent Gulf Canary. The CIAC Tribunal also found that the petitioner's total rectification cost is PHP 16,964,858.38. These are findings of fact. The Court affirms the CIAC Tribunal findings on this point in the absence of any basis to review and reverse it.<br><br>Further, the CIAC Tribunal ruled that the petitioner is entitled to the reimbursement of its rectification costs in accordance with the Construction Contract. The Court affirms the CIAC Tribunal on this point. The CIAC Tribunal correctly concluded that the petitioner's claim finds basis in the terms of the MOA, which stated, in part:<br><blockquote>VI. Conditions<br><br>. . . .<br><br>Conditions<br><br>. . . .<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">c.</td> <td width="95%" valign="top"><i> If errors, omissions, ambiguities, inconsistencies, inadequacies[,] or other defects are found in the CONTRACTOR's design, they and the Works shall be corrected at the CONTRACTOR'S cost, notwithstanding any consent or approval under this Section VI</i>.</td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td colspan="2" valign="top">. . . . </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">l. </div></td> <td valign="top"> <div align="JUSTIFY">Subject to the provisions of the FIDIC Contract on Defects Liability, <i> the CONTRACTOR guarantees all work done and will be responsible for any reparations and costs incurred due to any defects in the works</i>, subject to the quality of the workmanship or materials used without expense to the EMPLOYER... </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">m. </div></td> <td valign="top"> <div align="JUSTIFY">CONTRACTOR shall be held liable for any structural failure, within fifteen (15) years of completion of the Hotel, due to defect in the design and construction of the Hotel.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>Moreover, the relevant provisions of the FIDIC Contract stated:<br><blockquote>4.1 Contractor's General Obligations. The Contractor shall design, execute[,] and complete the Works in accordance with the Contract,<i> and shall remedy any defect in the Works</i>. When completed, the Works shall be fit for the purposes for which the Works are intended as defined in the Contract.<br><br>. . . .<br><br>11.1 Completion of Outstanding Work and Remedying Defects. In order that the Works and Contractor's Documents, and each Section, shall be in the condition required by the Contract (fair wear and tear excepted) by the expiry date of the relevant Defects Notification Period or as soon as practicable thereafter, the Contractor shall:<br><br>. . . .<br><br>(c) complete any work which is outstanding on the date stated in a TakÂ­ing-Over Certificate, within such reasonable time as is instructed by the EnÂ­gineer, and<br><br>(d) <i>execute all work required to remedy defects or damage</i>, as may be notified by (or on behalf of) the Employer on or before the expiry date of the Defects Notification Period for the Works or Section (as the case may be).<br><br>. . . .<br><br>11.2 Cost of Remedying Defects.<i> All work referred to in sub-paragraph (b) of sub-clause 11.1 [Completion of Outstanding Work and Remedying Defects] shall be executed at the risk and cost of the Contractor</i>, if and to the extent that the work is attributable to:<br><br>. . . .<br><br>(e) the design of the Works, other than a part of the design for which the Employer is responsible (if any),<br><br>(f) Plant, Materials[,] or workmanship not being in accordance with the Contract,<br><br>(g) Improper operation or maintenance which was attributable to matÂ­ters for which the Contractor is responsible (under Sub-Clause 5.5 to 5.7 or otherwise), or<br><br>(h) Failure by the Contractor to comply with any other obligation.<br><br>If and to the extent that such work is attributable to any other cause, the Contractor shall be notified promptly by (or on behalf of) the Employer, and Sub-Clause 13.3 [Variation Procedure] shall apply.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> (Emphasis supplied) </blockquote>Thus, by the express terms of the Construction Contracts, which determine the petitioner's and the respondent Gulf Canary's rights and obligations as to each other, the respondent Gulf Canary is liable for the petitioner's rectification costs incurred in remediating its defective work. Considering that the CIAC Tribunal found that there were indeed defective works attributable to the respondent Gulf Canary, the latter is therefore bound to pay the petitioner for the costs of rectification, in the amount determined by the CIAC Tribunal based on the evidence.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The petitioner is not entitled to attorney's fees and costs of arbitration</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The Court, however, disagrees with the CIAC Tribunal's award of attorney's fees and cost of arbitration in the petitioner's favor.<br><br>Article 2208 of the Civil Code provides for the instances when attorney's fees and expenses of litigation may be awarded:<br><blockquote>Article 2208. In the absence of stipulation, attorney's fees and expenses of litigation, other than judicial costs, cannot be recovered, except:<br><br>(1) When exemplary damages are awarded;<br><br>(2) When the defendant's act or omission has compelled the plaintiff to litigate with third persons or to incur expenses to protect his or her interest;<br><br>(3) In criminal cases of malicious prosecution against the plaintiff;<br><br>(4) In case of a clearly unfounded civil action or proceeding against the plaintiff;<br><br>(5) Where the defendant acted in gross and evident bad faith in refusing to satisfy the plaintiffs plainly valid, just, and demandable claim;<br><br>(6) In actions for legal support;<br><br>(7) In actions for the recovery of wages of household helpers, laborers and skilled workers;<br><br>(8) In actions for indemnity under workmen's compensation and employer's liability laws;<br><br>(9) In a separate civil action to recover civil liability arising from a crime;<br><br>(10) When at least double judicial costs are awarded;<br><br>(11) In any other case where the court deems it just and equitable that attorney's fees and expenses of litigation should be recovered. </blockquote>The CIAC Tribunal awarded attorney's fees to the petitioner because it stated that "it was compelled to obtain the services of counsel in this case to protect its interest."<sup style="COLOR: RGB(255, 0, 0);">[106]</sup><br><br>The general rule is that attorney's fees cannot be recovered because no premium should be placed on the right to litigate. Attorney's fees can only be awarded when any of the grounds under Article 2208 of the Civil Code exists. The Court's power to award attorney's fees under Article 2208, however, "demands factual, legal, and equitable justification."<sup style="COLOR: RGB(255, 0, 0);">[107]</sup> In<i> President of Church of Jesus Christ of Latter Day Saints v. BTL Construction Corp.</i>,<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> the Court said:<br><blockquote>Even when a claimant is compelled to litigate with third persons or to incur expenses to protect his [or her] rights, still<b> attorney's fees may not be awarded where no sufficient showing of bad faith could be reflected in a party's persistence in a case other than an erroneous conviction of the righteousness of his [or her] cause</b>.<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> (Emphasis in the original) </blockquote>Here, the CIAC Tribunal made no finding that the respondents Gulf Canary and Asia United resisted the petitioner's claim in bad faith or that they did not defend their interests in earnest and merely refused to pay the claims without justifiable cause. A party to a dispute may be in error as to the merit of his or her arguments but that, in itself, does not justify holding such party liable for attorney's fees. Thus, the Court reverses the CIAC Tribunal as to the award of attorney's fees.<br><br>For the same reason, the Court deletes the award of costs of arbitration in the petitioner's favor. Section 15 of the CIAC Revised Rules of Procedure states:<br><blockquote>SECTION 16.5<i> Decision as to Costs of Arbitration</i>. â In the case of non-monetary claims or where the parties agreed that the sharing of fees shall be determined by the Arbitral Tribunal, the Final Award shall, in addition to dealing with the merits of the case, fix the costs of the arbitration, and/or decide which of the parties shall bear the cost(s) or in what proportion the cost(s) shall be borne by each of them. </blockquote>The Court finds no basis for the CIAC Tribunal's award of arbitration costs in the petitioner's favor. To reiterate, there is nothing in the records that would show that the respondents Gulf Canary and Asia United resisted the petitioner's claim and defended their interests in the arbitration proceeding out of some ill motive. That the CIAC Tribunal, as affirmed by this Court, ultimately ruled that the petitioner is entitled to its claims arising from the Construction Contracts does not necessarily mean that the respondents were in bad faith in defending against these claims.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The respondent Asia United is solidarity liable with the respondent Gulf Canary</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The respondent Asia United argues in its Comment that the petitioner and the respondent Gulf Canary varied the terms of the MOA without its knowledge and consent. This, the respondent Asia United asserts, extinguished its obligation under the Performance Bond.<sup style="COLOR: RGB(255, 0, 0);">[110]</sup><br><br>The respondent Asia United seems to anchor its argument on Article 1215 of the Civil Code which states that novation extinguishes the obligation of a solidary debtor.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> It also cites as basis for this assertion the March 16, 2015 Letter sent by Pure Projects to the respondent Gulf Canary, which purportedly narrated the alleged variations in the Construction Contracts.<br><br>However, the CIAC Tribunal already ruled on the probative weight of this letter. In the Final Award, the CIAC Tribunal stated that Pure Projects had no authority to modify the conditions of the MOA without the petitioner's consent and approval. Further, the CIAC Tribunal found merit in the petitioner's claim that it did not agree to "modify the terms and conditions of the Memorandum of Agreement."<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> Stated more simply, the CIAC Tribunal has already made a factual finding that no variation or novation of the MOA, or of the Construction Contract, was ever made. In addition, it concluded that the March 16, 2015 Letter cannot be the basis for any alleged modification in the terms of the Construction Contracts. The CIAC Tribunal's factual findings are binding on this point in the absence of any ground for this Court to review and reverse them.<br><br>Thus, the Court affirms the CIAC Tribunal's finding that the respondent Asia United is solidarily bound with the respondent Gulf Canary to the extent of the amount of the Performance Bond.<br><br><b>ACCORDINGLY</b>, the Court<b> GRANTS</b> the May 17, 2019 Petition for Review on<i> Certiorari</i>. The Court of Appeals March 27, 2019 Decision in CA-G.R. SP Nos. 157863 and 157866 is<b> REVERSED</b> and<b> SET ASIDE</b>.<br><br>The Construction Industry Arbitration Commission September 24, 2018 Final Award in CIAC Case No. 45-2017 is<b> AFFIRMED</b> with the <b>MODIFICATION</b> that the petitioner Roxaco-Asia Hospitality Corporation is not entitled to the payment of attorney's fees and costs of arbitration.<br><br>The monetary award shall earn legal interest at the rate of 6% per annum from the finality of this Decision until fully paid.<br><br><b>SO ORDERED. </b><br><br><i>Hernando</i><i><sup style="COLOR: RGB(255, 0, 0);">***</sup> (Acting Chairperson)</i><i>, Zalameda,</i> and <i>Marquez, JJ.,</i> concur.<br><i>Gesmundo,<sup style="COLOR: RGB(255, 0, 0);">**</sup> C.J. (Chairperson),</i> On official leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>Rollo</i>, pp. 331-332, Resolution dated July 8, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> Per Special Order No. 3224 dated September 15, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Id</i>. at 46-106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 9-25. The March 27, 2019 Decision in CA-G R. SP No. 157863 and 157866 was penned by Associate Justice Priscilla J. Baltazar-Padilla (a former member of the Court) and concurred in by Associate Justices Germano Francisco D. Legaspi and Ronaldo Roberto B. Martin of the Special Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 127-239. The September 24, 2018 Final Award in CIAC Case No. 45-2017 was signed by Chairman Dr. Ernesto De Castro and Co-Arbitrator Atty. Eduardo R. Ceniza. Co-arbitrator Atty. Julius A. Omilia dissented.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 266-280.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 274.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 177.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 282.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 283.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 278.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 296-297.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 296.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 274.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 139.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 323-325.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 324.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 326-327.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 326.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 327.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 143-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 151-190.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 149-150.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 134-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 195-196.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 205-206.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 237-238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 210-218.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 219-232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>. at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 56-63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 66-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 68-85.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 85-87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 366-400.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 371.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 372-382.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 380-383.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 383-389.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>. at 389-395.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 336-349.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>. at 341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 344-348.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 401-432.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Executive Order No. 1008 (1985).<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 902 Phil. 935 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at 959.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup><b> Wyeth Philippines, Inc. v. Construction Industry Arbitration Commission</b>, 874 Phil. 730, 760-761 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>R.V. Santos Company, Inc. v. Belle Corp.</b>, 696 Phil. 96, 114 (2012) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 902 Phil. 935, 987 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id</i>. at 989.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id</i>. at 960-961.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>. at 962.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Wyeth Philippines, Inc. v. Construction Industry Arbitration Commission</b>, 874 Phil. 730, 758 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> 584 Phil. 481 (2008) [Per C.J. Puno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>. at 487-488.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> 654 Phil. 511 (2011) [Per J. Sereno, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id</i>. at 518. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id</i>. at 519.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Rollo</i>, p. 274.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>. at 144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <b>Sanico v. Colipano</b>, 818 Phil. 981, 994 (2017) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <b>New Sampaguita Builders Construction v. Philippine National Bank</b>, 479 Phil. 483, 499 (2004), [Per J. Panganiban, Third Division], <i>citing</i> ARTURO M. TOLENTINO, COMMENTARIES AND JURISPRUDENCE ON THE CIVIL CODE OF THE PHILIPPINES VOL. I (3<sup>rd</sup> ed., 1990).<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id</i>. at 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id</i>. at 145.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id</i>. at 324.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id</i>. at 326-327.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>Global Medical Center of Laguna, Inc. v. Ross Systems International, Inc.</b>, 902 Phil. 935, 959 (2021) [Per J. Caguioa,<i> En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Rollo</i>, p. 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id</i>. at 231.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id</i>. at 149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id</i>. at 150.<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id</i>. at 220-221.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id</i>. at 221-222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Rollo</i>, p. 235.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <b>President of Church of Jesus Christ of Latter Day Saints v. BTL Construction Corp.</b>, 724 Phil. 354, 372 (2014) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id</i>. at 372.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Rollo</i>, p. 341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> CIVIL CODE, art. 1215: Novation, compensation, confusion or remission of the debt, made by any of the solidary creditors or with any of the solidary debtors, shall extinguish the obligation, without prejudice to the provisions of art. 1219.<br><br>The creditor who may have executed any of these acts, as well as he [or she] who collects the debt, shall be liable to the others for the share in the obligation corresponding to them.<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Rollo</i>, p. 213.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

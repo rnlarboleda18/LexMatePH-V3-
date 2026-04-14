@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 268419 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ABDUL AZIZ M. PANGANDAMAN, ESTELITO A. NIERVA, RUBEN A. BESMONTE, NEOFITO C. PERILLA, DIVINA GRACIA D. DANTES, CESAR L. BOCANOG AND MARIO D. ARIAS A.K.A. "MARLO," ACCUSED-APPELLANTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70153' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 268419, August 13, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ABDUL AZIZ M. PANGANDAMAN, ESTELITO A. NIERVA, RUBEN A. BESMONTE, NEOFITO C. PERILLA, DIVINA GRACIA D. DANTES, CESAR L. BOCANOG AND MARIO D. ARIAS A.K.A. "MARLO," ACCUSED-APPELLANTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">In graft and corruption cases, as with all criminal cases, the evidence for conviction must pass the test of moral certainty. Suspicions of corruption, absent concrete evidence, must never sway judgment. This is in line with the rudimentary principle that when there is reasonable doubt, the scales of justice shall tilt in favor of the accused.<br><br>This resolves an appeal from the Decision and Resolution of the Sandiganbayan Seventh Division dated June 9, 2023<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and July 26, 2023,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> respectively, convicting accused-appellants Abdul Aziz M. Pangandaman (Pangandaman), Estelito A. Nierva (Nierva), Ruben A. Besmonte (Besmonte), Neofito C. Perilla (Perilla), Divina Gracia D. Dantes (Dantes), Cesar L. Bocanog (Bocanog) and Mario D. Arias a.k.a. "Marlo" (Arias) for violations of Section 3(e) of Republic Act No. 3019, as amended, otherwise known as the Anti-Graft and Corrupt Practices Act.<br><br>The criminal cases arose from two contracts of procurement awarded by the Philippine National Railway (PNR) for the supply of Yakal wood bridge ties, joint ties and switch ties in the amount of more or less PHP 37,747,832.60 and PHP 9,387,148.23. The winning bidder offered and supplied "Larch wood" despite the specification of "Yakal" in the PNR board resolutions and bidding documents.<br><br><center><b>Factual Antecedents</b></center><br>In connection with the subject procurements, two Informations were filed against Junio Norberto Mella Ragragio (Ragragio), Rosendo Cea Calleja (Calleja) and the accused-appellants for violations of Section 3(e) of Republic Act No. 3019. The accusatory portion of the Informations read:<br><br><i>Criminal Case No. SB-17-CRM-2140 ["First Procurement"]:</i><br><blockquote>That on 7 March 2013, or sometime prior or subsequent thereto, in the City of Manila, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused public officers, namely:<b> Junio Norberto Mella Ragragio</b>, then General Manager (SG 29);<b> Estelito Aguila Nierva</b>, <b>Ruben Arsenue Besmonte</b>, then Department Managers (SG 26);<b> Neofito Cuison Perilla</b>, then Attorney V (SG 25);<b> Rosendo Cea Calleja</b> and<b> Abdul Aziz Mapandi Pangandaman</b>, then Division Managers (SG 23 &amp; 24); <b>Divina Gracia Duran Dantes</b>, then Asst. Department Manager (SG 25); Cesar Lasquite Bocanog and Mario a.k.a. Marlo Dator Arias, then Principal Engineers (SG 22), all of the Philippine National Railways (PNR), Manila, while in the performance of their official duties as such and committing the crime in relation to their office and taking advantage thereof, acting with manifest partiality, evident bad faith and/or gross inexcusable negligence, conspiring and confederating with one another, did then and there willfully, unlawfully and criminally give unwarranted benefits, preference or undue advantage to Nikka Trading with office address at Unit 1014 Cityland Herrera Tower, cor. Valero and Rufino streets, Salcedo Village, Bel-Air, Makati City by purchasing from Nikka Trading 9,090 pcs. Larch wood bridge ties, 428 pcs. Larch wood joint ties and 25 sets Larch wood switch ties in the amount of<b> THIRTY SEVEN MILLION SEVEN HUNDRED FORTY SEVEN THOUSAND EIGHT HUNDRED THIRTY TWO 60/100 (Php37,747,832.60)</b>, more or less, under Disbursement Voucher (DV) No. ENG-2013-02-283 dated March 4, 2013 and Veterans Bank Check No. 20579 dated April 26, 2013, while accused knew fully well that the Board Resolutions and all bidding documents required Yakal wood bridge ties, joint ties and switch ties, to the damage and injury of PNR or the Government in the aforementioned amount.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> (Emphasis in the original) </blockquote><i>Criminal Case No. SB-17-CRM-2141 ["Second Procurement"]:</i><br><blockquote>That on 7 March 2013, or sometime prior or subsequent thereto, in the City of Manila, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused public officers, namely:<b> Junio Norberto Mella Ragragio</b>, then General Manager (SG 29);<b> Estelito Aguila Nierva, Ruben Arsenue Besmonte</b>, then Department Managers (SG 26);<b> Neofito Cuison Perilla</b>, then Attorney V (SG 25);<b> Rosendo Cea Calleja</b> and<b> Abdul Aziz Mapandi Pangandaman</b>, then Division Managers (SG 23 &amp; 24); <b>Divina Gracia Duran Dantes</b>, then Asst. Department Manager (SG 25); <b>Cesar Lasquite Bocanog</b> and<b> Mario a.k.a. Marlo Dator Arias</b>, then Principal Engineers (SG 22), all of the Philippine National Railways (PNR), Manila, while in the performance of their official functions as such and committing the crime in relation to their office and taking advantage thereof, acting with manifest partiality, evident bad faith and/or gross inexcusable negligence, conspiring and confederating with one another, did then and there willfully, unlawfully and criminally, give unwarranted benefits, preference or undue advantage to Nikka Trading with office address at Unit 1014 Cityland Herrera Tower, cor. Valero and Rufino streets, Salcedo Village, Bel-Air, Makati City by purchasing from Nikka Trading 1,040 pcs. Larch wood bridge ties, 514 pcs. Larch wood joint ties and 16 sets Larch wood switch ties in the amount of<b> NINE MILLION THREE HUNDRED EIGHTY SEVEN THOUSAND ONE HUNDRED FORTY EIGHT 23/100 PESOS (Php9,387,148.23)</b>, more or less, under Disbursement Voucher (DV) No. ENG-2013-02-284 dated March 4, 2013 and Development Bank of the Philippines (DBP) Check No. 8603215 dated March 7, 2013, while accused knew fully well that the Board Resolutions and all bidding documents required Yakal wood bridge ties, joint ties and switch ties, to the damage and injury of PNR or the Government in the aforementioned amount.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (Emphasis in the original) </blockquote>A Hold Departure Order was issued against Ragragio, Calleja and the accused-appellants on November 17, 2017. They then posted their respective bonds for their provisional liberty.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>All the accused, except for Calleja, filed their respective Motions to Quash which were denied by the Sandiganbayan in a Resolution dated January 8, 2018. On the ground of inordinate delay, Calleja filed a separate Motion to Dismiss dated January 2, 2018. Calleja's Motion and the Motions for Reconsideration of the other accused were resolved by the Sandiganbayan in a Resolution dated February 26, 2018.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Upon arraignment, all the accused pleaded "not guilty" to the offenses charged.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> At the pre-trial, the parties entered into stipulations as reflected in the Pre-trial Order.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Trial then ensued.<br><br>The facts of the case, as culled from the Sandiganbayan Decision, are as follows:<br><br>At the time material to this case, the accused were public officers employed with the PNR. Ragragio was the General Manager of PNR. Nierva, Besmonte, Pangandaman, Dantes and Perilla were members of PNR-Bids and Awards Committee (BAC) while Bocanog and Arias were members of the PNR-BAC-Technical Working Group (TWG).<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Calleja was the Division Manager of the PNR's Budget and Cash Division.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The procurement of wood ties was authorized under PNR Board Resolution No. 89-2011. The said Board Resolution approved BAC Resolution Nos. 05-2011-Goods-Engineering which fixed the Approved Budget for the Contract (ABC) "for the procurement of Bridge Ties, Joint Ties, and Switch Ties" in the amount of P9,951,132.31 and BAC Resolution No. 06-2011-Goods-Engineering which fixed the ABC "for the supply of Yakal Wood Bridge Ties and Yakal Wood Switch Ties" in the amount of PHP 43,886,096.85. The Bid Opening for the first procurement was held on November 15, 2011 while the Bid Opening for the second procurement occurred on December 7, 2011.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Meanwhile, Executive Order No. 23 series of 2011 imposed a moratorium on the cutting and harvesting of timber in the natural and residual forests of the entire country. In view of the log ban, the BAC issued a Supplemental Bid Bulletin allowing offers of other kinds of wood besides Yakal. The impact of the log ban in the subject procurements was discussed in the pre-bid conference of the first procurement.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> During the pre-bid conference, some bidders signified that they would still be able to legally sell and deliver Yakal on the strength of authorizations secured prior to the effectivity of Executive Order No. 23, while others inquired on the possibility of delivering imported wood instead. To resolve the matter, the BAC proposed to amend the term "goods" to "Yakal wood or other species or kind of wood as long as it conforms to the mechanical and related properties," which the prospective bidders agreed to.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Two suppliers submitted their bids for the first procurement: Nikka Trading and Integrated Energy Systems and Resources Inc. (IESRI). The TWG submitted its bid evaluation report indicating that IESRI failed to pass and that Nikka Trading submitted the Lowest Calculated Bid.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>For the second procurement, only Nikka Trading submitted a bid containing both technical and financial components. Nikka Trading offered Larch Wood originating from China, particularly, "Bridge Ties 8"x8"x8' Larch Wood;" "Joint Ties 5"x10"x7' Larch Wood;" and "Switch Ties 6"x8" with various Larch Wood."<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>For both procurements, BAC recommended the award to supply "Yakal" wood to Nikka Trading, which the PNR Board of Directors approved. The Notice of Award, the Contract, and the Notice to Proceed likewise indicated the supply of "Yakal" wood.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>The Larch Wood ties delivered by Nikka Trading arrived at PNR on July 9, 2012 and August 13, 2012. Prior to the said delivery and after the execution of the contracts, PNR Engr. Gilbert Patulot traveled to China to assess the wood ties and subsequently submitted his report thereon.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The delivered Larch wood were then subjected to tests by the Forest Products Research and Development Institute of the Department of Science and Technology (FPRDI- DOST).<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Based on the tests done on the Larch wood samples, it was concluded that Larch wood is far inferior in strength and quality compared to Yakal and that it was not suitable for use as railroad ties.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Around June 2013, the PNR Engineering Department received several reports from Naga, Lucena and Hondagua Divisions indicating that cracks or splits were already seen in the larch wood ties only after a year or less of delivery.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In its Technical Evaluation Report dated January 7, 2013, the COA questioned the validity of the contract agreements due to several lapses committed by the agency.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The COA issued a Notice of Disallowance for the payments made to Nikka Trading, which it deemed irregular, as defined under COA Circular 2012-003, and in violation of the Implementing Rules and Regulations of Republic Act No. 9184. The Notice of Disallowance was affirmed by COA Decision No. 20 dated October 7, 2014.<br><br>The following were found liable under the Notice of Disallowance: (a) Ragragio, as signatory to the contract with Nikka Trading and other documents pertaining to the subject procurement; (b) BAC members Nierva, Besmonte, Perilla, Pangandaman, and Dantes, who were responsible for the procurement of Larch wood ties; (c) TWG members Bocanog and Arias, who issued the Bid Evaluation and Post Qualification Reports; and (d) Calleja who certified the availability of funds.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>After the prosecution rested its case, Ragragio, Calleja, Pangandaman, Arias, Bocanog and Perilla filed their respective Motions for Leave to File Demurrer to Evidence. In a Resolution dated June 3, 2020, the Sandiganbayan denied the motions for leave, finding sufficient evidence to sustain the cases.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>After the presentation of the witnesses and the offer of exhibits, the Sandiganbayan required the prosecution and the defense to file their respective Memoranda.<br><br>In its Memorandum before the Sandiganbayan, the prosecution averred that awarding the contract to Nikka Tradingâwho offered to supply Larch wood when the Board Resolution, bidding documents and contract spoke of Yakalâconstituted manifest partiality, evident bad faith, and gross inexcusable negligence. According to the prosecution, the defense of mistake in nomenclature is unacceptable considering the staggering amounts involved. Furthermore, the existence of a log ban and the issuance of the Supplemental Bid Bulletin cannot exculpate the accused from their violations. The prosecution insisted that the accused conspired to award the contract to Nikka Trading. As a result, the government suffered the amount paid to Nikka Trading because the items delivered were different from that intended to be procured.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>On the other hand, Pangandaman, Nierva, Arias, Bocanog and Perilla (Pangandaman et al.) argued that manifest partiality, evident bad faith, and gross inexcusable negligence were not proven by the prosecution. They also contend that the prosecution was unable to prove undue injury to the government and the fact that they conspired to commit the crimes charged. Citing that they were not motivated by corrupt intent, Pangandaman et al. insisted that their mistake of indicating "Yakal" instead of "Larch wood" in the bidding documents is not so grave a wrong as to constitute gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Besmonte and Dantes, for their part, maintained that as BAC members, they followed the bidding procedure set by Republic Act No. 9184 and its Implementing Rules and Regulation. They also argued that the Supplemental Bid Bulletins expanded the definition of "goods" to include other species of wood that were compliant with the required mechanical and related properties. Hence, Nikka Trading's offer was accepted as it complied with the eligibility and technical requirements. Furthermore, no unwarranted benefits, advantage or preference was given to Nikka Trading since there was no allegation or proof of overpricing, shortage of delivery, or fraud. They also emphasized that while the prosecution offered evidence to show damage to the delivered wood ties, they failed to allege and prove the extent of the actual damage suffered by the government.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>For his defense, Ragragio asserted that the allegations in the Information pertained to irregularities in the procurement process which he did not take part in. He also claimed that he had no participation in the preparation of the bid bulletins. Moreover, he could not be faulted for signing the contracts, Notices of Awards, and Notices to Proceed because these acts were purely ministerial as he did so only upon the directive of the PNR Board. As for the disbursement vouchers, he signed the same after the other concerned agencies had already made the necessary certifications.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Calleja similarly averred that he merely performed his ministerial duty when he certified the availability of funds. He also argued that the prosecution failed to prove that he conspired with his co-accused.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center><b>Ruling of the Sandiganbayan</b></center><br>The Sandiganbayan promulgated its Decision dated June 9, 2023, acquitting Ragragio and Calleja while finding the accused-appellants guilty beyond reasonable doubt. The dispositive portion reads:<br><blockquote>WHEREFORE, in<b> SB-17-CRM-2140</b>, accused<b> ABDUL AZIZ M. PANGANDAMAN, ESTELITO A. NIERVA, RUBEN A. BESMONTE, NEOFITO C. PERILLA, DIVINA GRACIA D. DANTES, CESAR L. BOCANOG, and MARIO a.k.a. "MARLO" D. ARIAS</b> are found<b> GUILTY</b> beyond reasonable doubt of violation of Sec. 3(e) of R.A. 3019 and are sentenced to suffer the indeterminate penalty of IMPRISONMENT of SIX (6) YEARS and ONE (1) MONTH as minimum to TEN (10) YEARS as maximum with perpetual disqualification to hold public office.<br><br>For failure of the prosecution to prove the guilt beyond reasonable doubt of accused<b> JUNIO NORBERTO M. RAGRAGIO</b> and<b> ROSENDO C. CALLEJA</b>, they are<b> ACQUITTED</b> of the crime of Violation of Sec. 3(e) of R.A. 3019.<br><br>Likewise, in<b> SB-17-CRM-2141</b>, accused<b> ABDUL AZIZ M. PANGANDAMAN, ESTELITO A. NIERVA, RUBEN A. BESMONTE, NEOFITO C. PERILLA, DIVINA GRACIA D. DANTES, CESAR L. BOCANOG, and MARIO a.k.a. "MARLO" D. ARIAS</b> are found <b>GUILTY</b> beyond reasonable doubt of violation of Sec. 3(e) of R.A. 3019 and are sentenced to suffer the indeterminate penalty of IMPRISONMENT of SIX (6) years and ONE (1) MONTH as minimum to TEN (10) YEARS as maximum with perpetual disqualification to hold public office.<br><br>For failure of the prosecution to prove the guilt beyond reasonable doubt of accused<b> JUNIO NORBERTO M. RAGRAGIO and ROSENDO C. CALLEJA</b>, they are<b> ACQUITTED</b> of the crime of Violation of Sec. 3(e) of R.A. 3019.<br><br>The bail bonds posted by the accused Ragragio and Calleja are ordered released subject to the usual accounting procedures. The Hold Departure Order issued by this Court on November 17, 2017 is set aside and the Order issued by the Bureau of Immigration incorporating the names of the accused in the Hold Departure List is ordered recalled and cancelled.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis supplied) </blockquote>The Sandiganbayan ruled that the prosecution was able to prove, beyond reasonable doubt, all the elements of Section 3(e) of Republic Act No. 3019. First, the public position of all the accused were stipulated upon during preÂ­-trial.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Second, in so far as the BAC and TWG members are concerned, the categorical specification of "Yakal" during the award and post-qualification became determinative of their gross inexcusable negligence. According to the Sandiganbayan, while the Supplemental Bid Bulletins struck out the elements of evident bad faith and manifest partiality, it emphasized the accused's gross inexcusable negligence for their careless disregard of their duties.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The Sandiganbayan also opined that, at the very least, it behooved the BAC and TWG members to determine during post-qualification that Larch wood conformed to the mechanical and related properties of Philippine woods.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Finally, as to the third element, Sandiganbayan held that because of "brazen defiance of procurement law," Nikka Trading derived unwarranted benefit, advantage, and preference from the subject transactions.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>In its Decision, the Sandiganbayan also noted that due to lack of quantifiable proof from the prosecution, the element of damage cannot be considered in this case. Other than the checks issued as payment for the goods procured, the prosecution had shown no other numerical value to gauge the amount of damage in these charges.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>As to their respective liability, the Sandiganbayan ruled that for the BAC and TWG members, their clear disregard of the process of post-qualification, after Larch wood has been considered, converted their oversight to gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Hence, on the ground of gross inexcusable negligence resulting in the discrepancy in the goods named in the procurement documents and the goods actually delivered, they were found liable under Section 3(e) of Republic Act No. 3019, as amended. As for accused Ragragio and Calleja, they were acquitted for the prosecution's failure to prove their participation in the conspiracy to award the contract to Nikka Trading.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Aggrieved by the Decision of the Sandiganbayan, separate Motions for Reconsideration were filed by Besmonte and Dantes and by Pangandaman et al. On July 26, 2023, the Sandiganbayan promulgated its Resolution<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> denying their Motions for Reconsideration.<br><br>Hence, this appeal.<br><br>On August 15, 2023, the records of the case were transmitted to the Court for its review.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> The Court directed the parties to file their respective briefs on December 6, 2023.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Besmonte and Dantes filed a separate Appellants' Brief<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> on June 21, 2024, while Pangandaman et al. filed their Appellants' Brief<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> on July 8, 2024. The Office of the Ombudsman (OMB), through the OSP, submitted its Consolidated Plantiff-Appellee's Brief<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> on September 6, 2024.<br><br><center><b>Issue</b></center><br>The sole issue for the Court's resolution is whether or not the accused-appellants, by conspiring and confederating with one another, violated Section 3(e) of Republic Act No. 3019, as amended.<br><br><center><b>Ruling of the Court</b></center><br>The appeal is meritorious.<br><br>It is settled that the violation of procurement laws does not<i> ipso facto </i>give rise to violation of Republic Act No. 3019. Even granting that there may be violations of the applicable procurement laws, this does not mean that the elements of Section 3(e) of Republic Act No. 3019 are already present as a matter of course.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> These are separate offenses whose distinct elements must be proven beyond reasonable doubt to warrant a conviction.<br><br>This is not to say, however, that a violation of procurement laws cannot result in an indictment for Section 3(e) of Republic Act No. 3019. This was made clear in Our ruling in<i> Martel v. People</i>:<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><blockquote>Thus, in order to successfully prosecute the accused under Section 3 (e) of R.A. 3019 based on a violation of procurement laws, the prosecution cannot<i> solely</i> rely on the fact that a violation of procurement laws has been committed. The prosecution must prove<i> beyond reasonable doubt</i> that: (1) the violation of procurement laws caused undue injury to any party, including the government, or gave any private party unwarranted benefits, advantage or preference, and (2) the accused acted with evident bad faith, manifest partiality, or gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis in the original) </blockquote>In other words, for a violation of procurement laws to give rise to a conviction for Section 3(e) of Republic Act No. 3019, such violation should have caused undue injury or have resulted in giving any private party unwarranted benefits, advantage or preference. Necessarily, evident bad faith, manifest partiality, or gross inexcusable negligence should also be proven.<br><br>Here, the Sandiganbayan held that the BAC and TWG's violation of procurement law amounted to gross inexcusable negligence which allowed Nikka Trading to derive unwarranted benefit, advantage, and preference from the subject transactions. In this regard, Pangandaman et al. maintain that the justifications used by the Sandiganbayan in concluding their commission of "gross inexcusable negligence" pertain to violations of Republic Act No. 9184 and not the anti-graft law<i> per se</i>. They believe that the violation of procurement laws was taken as the means by which they allegedly violated Section 3(e) of Republic Act No. 3019. However, since such violation of procurement laws was not specifically alleged in the Informations, they fault the assailed Decision for violating their right to due process. Furthermore, they argue that a violation of Republic Act No. 9184 does not necessarily translate to unwarranted benefit, advantage and preference as to constitute a violation of Section 3(e) of Republic Act No. 3019.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>While We agree that a conviction for violating Section 3(e) of Republic Act No. 3019 cannot be anchored solely on a violation of procurement laws, We cannot sustain the allegation that the accused-appellants' right to due process was violated.<br><br>In criminal cases, where the life and liberty of the accused is at stake, due process demands that the accused be informed of the nature and cause of the accusation against them. An accused cannot be convicted of an offense unless it is clearly charged in the Complaint or Information. The Information must describe the act with sufficient certainty in order that the accused may be apprised of the nature of the charge against him or her and to avoid any possible surprise that may lead to injustice.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>In<i> People v. Lab-eo</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> We explained that the test of sufficiency of Information is whether it enables a person of common understanding to know the charge against him, and the court to render judgment properly. The purpose is to allow the accused to fully prepare for his or her defense, precluding surprises during the trial. Hence, to successfully state the acts or omissions that constitute the offense, they must be described in intelligible terms with such particularity as to apprise the accused, with reasonable certainty, of the offense charged. For this purpose, the use of derivatives or synonyms or allegations of basic facts constituting the offense charged is sufficient.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>In this case, the Sandiganbayan found that the accused-appellants' violation of procurement laws amounted gross inexcusable negligence, warranting their conviction for Section 3(e) of Republic Act No. 3019. While there was no specific allegation for the violation of procurement laws in the Informations, this does not mean that such violation cannot serve as basis for a conviction of the anti-graft law.<br><br>The Rules of Court only require that the Information allege the ultimate facts constituting the elements of the crime charged. Hence, details that do not go into the core of the crime, while may be presented during trial, need not be included in the Information.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> In other words, an Information is adequate as long as the same sufficiently alleges the ultimate facts constituting the offense.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> This is satisfied if the narration of facts and circumstances adequately depict the crime and sufficiently apprise the accused of the nature and cause of the accusation against them.<br><br>Here, a plain reading of the Information shows that the allegations stated therein sufficiently apprised the accused-appellants that the crime charged against them was for violation of Section 3(e) of Republic Act No. 3019. The Informations clearly describe the acts constituting the crime chargedâthat the accused-appellants were public officers, who in the performance of their duties, acted with manifest partiality, evident bad faith and/or gross inexcusable negligence in giving unwarranted benefits to Nikka Trading by purchasing Larch wood ties despite knowing that the Board Resolutions and bidding documents required Yakal wood ties, to the damage and injury of the PNR or the government. Thus, while the violation of procurement laws may have been the basis for the finding of gross inexcusable negligence, there is no ambiguity in the allegations which prevented the accused-appellants from preparing their defense in relation to the violation of Section 3(e) of Republic Act No. 3019. Again, as long as the accused were able to prepare their defense and evidence based on the Information, the constitutional right to be informed of the nature and cause of accusation is satisfied.<br><br>To emphasize, the accused-appellants here were neither prosecuted nor indicted for offense other than that charged in the Informations. They were also given ample opportunity to present their case and to controvert the evidence of the prosecution. Furthermore, even assuming that there were averments of violations of procurement laws, this does not mean that the accused-appellants should be tried for violation of Republic Act No. 9184 and no other, especially if they are charged of an entirely different offense.<br><br>Therefore, since the accused-appellants were sufficiently appraised that they were charged for violation of Section 3(e) of Republic Act No. 3019, We find no violation of their right to due process.<br><br>With the above issue settled, We now determine whether there was indeed a violation of Section 3(e) of Republic Act No. 3019.<br><br>For an accused to be convicted under Section 3(e) of Republic Act No. 3019, the following elements must be established: (1) the accused must be a public officer discharging administrative, judicial, or official functions or a private individual acting in conspiracy with such public officers; (2) the accused acted with manifest partiality, evident bad faith, or gross inexcusable negligence; and (3) the action caused any undue injury to any party, including the government, or gave any private party unwarranted benefits, advantage, or preference in the discharge of his or her functions.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Here, there is no question as to the presence of the first element. The fact that the accused-appellants were public officers employed with the PNR was stipulated during pre-trial.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>As to the second element, jurisprudence instructs that Section 3(e) of Republic Act No. 3019 may be committed by means of<i> dolo</i>, that is through bad faith or manifest partiality, or by means of<i> culpa</i>, or through gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> These three modes are distinct from one another and the existence of any of them suffices to support a conviction.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>In this case, the Sandiganbayan found the accused-appellants liable on the ground of gross inexcusable. For their failure to meet the post-qualification requirements of the procurement law, the Sandiganbayan held that the accused-appellants acted in careless disregard of their duties.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> In so ruling, it rejected the contention that the continued reference to "Yakal" in the bidding documents is an honest oversight and a rookie mistake on the part of the accused-appellants.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>We disagree.<br><br>The acts of the accused-appellants do not demonstrate, beyond reasonable doubt, a level of negligence that can be characterized as "gross inexcusable negligence."<br><br>"Gross inexcusable negligence" refers to negligence characterized by the want of even the slightest care, acting or omitting to act in a situation where there is a duty to act, not inadvertently but willfully and intentionally, with conscious indifference to consequences insofar as other persons may be affected.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Under Section 3(e) of Republic Act No. 3019, gross inexcusable negligence does not require fraudulent intent or ill-will. A public officer is guilty of gross inexcusable negligence when there is a breach of duty that is committed flagrantly, palpably, and with willful indifference. In committing said breach, it must be proven that the public officer was inattentive, thoughtless, and careless.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>As applied here, while the PNR board resolutions and bidding documents indeed specified "Yakal," there is merit to the contention that the accused-appellants believed that Supplemental Bid Bulletins had the effect of enlarging the scope of classification of the wood subject of the procurement.<br><br>The Supplemental Bid Bulletins<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> are worded as follows:<br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td width="50%" valign="top"> <div align="CENTER"><b>08 November 2011&nbsp;</b></div><div align="CENTER"><b>(First Procurement)</b> </div></td> <td width="50%" valign="top"> <div align="CENTER"><b>29 November 2011</b></div><div align="CENTER"><b>(Second Procurement)</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">SECTION III. BID DATA SHEET 1.1 â page 9<b> <br></b></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"> NOTE: The "Goods" referred herein shall mean <b> Yakal Wood or other species or kind of wood as long as it conforms to the mechanical and related properties of Philippine woods</b> incorporated in Section VII. Technical Specifications, page 64 of the Bidding Document. </div></td> <td valign="top"> <div align="JUSTIFY">SECTION III. BID DATA SHEET 1.1 â page 9 of the Instruction to Bidders<b>&nbsp;</b></div><div align="JUSTIFY"><br></div><div align="JUSTIFY">NOTE: The "Goods" referred herein shall mean <b> Yakal Wood or other species or kind of wood as long as it conforms to the mechanical and related properties of Philippine woods</b> attached hereto as ANNEX "A". </div></td> </tr> </tbody></table><br>Under the 2009 Implementing Rules and Regulations of Republic Act No. 9184, the law applicable to the present case, supplemental/bid bulletins may be issued for purposes of clarifying or modifying any provision of the bidding documents:<br><blockquote>22.5.2. Supplemental/Bid Bulletins may be issued upon the procuring entity's initiative for purposes of clarifying or modifying any provision of the Bidding Documents at least seven (7) calendar days before the deadline for the submission and receipt of bids. Any modification to the Bidding Documents shall be identified as an amendment. </blockquote>At the time the biddings were conducted, Section 2 of Executive Order No. 23 imposed a moratorium on the cutting and harvesting of timber in the natural and residual forests of the entire country. Included in this ban was the cutting and harvesting of Yakal. Executive Order No. 23 was already in effect before the pre-bid conference of the first procurement. This prompted the BAC to issue a Supplemental Bid Bulletin allowing offers of other kinds of wood besides Yakal. This is why Nikka Trading offered only "Larch wood" in its bids.<br><br>In view of the Supplemental Bid Bulletins issued for the first and the second procurement, there is no mistake that Yakal will not be the only specie of wood that would be accepted for bidding. The accused-appellants thus have basis to believe that they can accept bids for other species of wood as long as they meet the criteria in the bidding documents. The Sandiganbayan, in its Decision, even recognized that "[t]he Supplemental Bulletins would have sufficiently induced the [accused-appellants] to entertain "other species or kind of wood as long as it conforms to the mechanical and related properties of Philippine woods, not just Yakal."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> In light of these circumstances, it is clear that Nikka Trading's offer of Larch wood matched the bid. Hence, the accused-appellants cannot be faulted for considering Larch wood in the bidding process.<br><br>The Sandiganbayan also faults the BAC and TWG members for not conducting the testing of the goods during post-qualification. According to the Sandiganbayan, even without a determination that indeed the offered Larch wood conformed to the mechanical and related properties of Philippine woods, particularly Yakal, Nikka Trading's bid easily passed the post-qualification and was declared the lowest calculated responsive bid for both procurements.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>Section 34 of Republic Act No. 9184 defines the process of post-qualification as the stage where the bidder with the Lowest Calculated Bid, in the case of Goods and Infrastructure Projects, or the Highest Rated Bid, in the case of Consulting Services, undergoes verification and validation whether the bidder has passed all the requirements and conditions as specified in the Bidding Documents.<br><br>Section 34.3(b)(iii) of the Implementing Rules and Regulations of Republic Act No. 9184 provides for the testing of the goods for procurement "in applicable cases." The provision reads:<br><blockquote>34.3. The post-qualification shall verify, validate, and ascertain all statements made and documents submitted by the bidder with the Lowest Calculated Bid/Highest Rated Bid, using non-discretionary criteria, as stated in the Bidding Documents. These criteria shall consider, but shall not be limited to, the following:<br><br>. . . .<br><br>b) Technical Requirements. To determine compliance of the goods, infrastructure projects, or consulting services offered with the requirements specified in the Bidding Documents, including, where applicable:<br>. . . .<br><br>iii) Verification and/or inspection and<b> testing of the goods/product, aftersales and/or maintenance capabilities, in applicable cases, for the procurement of goods</b>. . . (Emphasis supplied) </blockquote>The Government Procurement Policy Board (GPPB) NPM No. 114Â­-2013 clarified the conduct of post-qualification pursuant to Section 34 of the Implementing Rules and Regulations of Republic Act No. 9184. It provides that since the manner of verifying, validating, and ascertaining the statements made and documents submitted by the bidder is not prescribed in detail in Republic Act No. 9184 and its Implementing Rules and Regulations, the procuring entity may adopt internal procedures on how it will conduct the post-qualification in a manner that it deems effective in establishing the responsiveness of the bidder with the requirements. Thus, the adoption of an internal procedure on conducting post-qualification is within the discretion and accountability of the procuring entity to undertake.<br><br>In this case, it was admitted that testing was not conducted during the post-qualification of Larch wood offered by Nikka Trading. However, as testified to by accused-appellant Perilla, the General Conditions of the Contract provide that testing can be done prior to delivery or during delivery at the option of the procuring entity. According to Perilla, testing was not done during post-qualification because the BAC had no expertise or capability to do so.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Furthermore, as pointed out by the accused-appellants, in case the wood delivered by the supplier is substandard, the PNR is not without any protection because the end-user has the right to reject the delivery.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Believing that testing could be done upon delivery, the BAC through the TWG thus conducted post-qualification by checking and verifying documents but delegated the testing to the end-users.<br><br>Given the considerable latitude provided by law on how post-qualification could be conducted by the procuring entity, the accused-appellants may very well be wrong that testing can be done during delivery. Nevertheless, in making such mistake, they cannot be held grossly negligent. While they may have committed lapses in the post-qualification process, their actions and omissions cannot be characterized as a flagrant breach of duty bereft of even the slightest care.<br><br>The accused-appellants also sufficiently explained why, despite the issuance of the Supplemental Bid Bulletins, the bidding documents still indicated "Yakal." Atty. Tareeq Yahya Timbal A. Radjaie (Radjaie), the Head of the BAC Secretariat, testified that the BAC Resolutions indicated that the award was for the supply of "Yakal" because in preparing the draft, the BAC Secretariat merely copy-pasted earlier files pertaining to "Yakal." He attributed this to an oversight and called it a rookie mistake considering the BAC and its Secretariat then had no prior experience in actual bidding.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> It is also undisputed that it was the BAC Secretariat who prepared and finalized all the necessary documentation arising from the bidding process for the signature of the BAC.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>Proceeding therefrom, while the accused-appellants may have been negligent in signing the bidding documents that specified "Yakal," it is clear that they were not the direct cause of the error. More importantly, it was not established, beyond reasonable doubt, that they willfully and intentionally signed the erroneous documents, with conscious indifference to the consequences.<br><br>As it stands, there is doubt as to whether the appearance of the term "Yakal" in the bidding documents was intentional or a mere product of inadvertence, inexperience and honest mistake of the part of the accused-appellants. This doubt justifies the application of the<i> pro reo</i> principle and the equipoise rule. Where the evidence on an issue of fact is in question or there is doubt on which side the evidence weighs, the doubt should be resolved in favor of the accused. In the same vein, if inculpatory facts and circumstances are capable of two or more explanations, one consistent with the innocence of the accused and the other consistent with his guilt, then the evidence does not fulfill the test of moral certainty and will not justify a conviction.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>Finally, as to the third elementâthat the action caused undue injury or gave any private party unwarranted benefits, advantage, or preferenceâWe rule that this was also not established.<br><br>The third element refers to two separate acts that qualify as a violation of Section 3(e) of Republic Act No. 3019: undue injury and unwarranted benefits. In<i> Cabrera v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> We explained that an accused may be charged with the commission of either or both because the use of the disjunctive term "<i>or</i>" connotes that either act qualifies as a violation of the law.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>For the first mode, an accused is said to have caused undue injury to the government or any party when the latter sustains actual loss or damage, which must exist as a fact and cannot be based on speculations or conjectures.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> On the other hand, in order to be found guilty under the second mode, it suffices that the accused has given unjustified favor or benefit to another in the exercise of his official, administrative or judicial functions.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>The words "unwarranted," "advantage" and "preference" have been defined by the Court in this wise:<br><blockquote>The word "unwarranted" means lacking adequate or official support; unjustified; unauthorized or without justification or adequate reason. "Advantage" means a more favorable or improved position or condition; benefit, profit or gain of any kind; benefit from some course of action. "Preference" signifies priority or higher evaluation or desirability; choice or estimation above another.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> </blockquote>Here, the Sandiganbayan held that the element of damage cannot be considered due to the lack of quantifiable proof from the prosecution. Nonetheless, it concluded that the gross inexcusable negligence of the BAC and TWG members allowed Nikka Trading to derive unwarranted benefits from the subject procurements.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>We find no basis to sustain the Sandiganbayan's conclusion.<br><br>Public biddings are intended to minimize occasions for corruption and temptations to abuse discretion on the part of government authorities in awarding contracts. They are designed to ensure that the People get maximum benefits and quality services from the contracts entered into by the government.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>In this case, it was not proven that Nikka Trading was awarded the procurement contract without the benefit of a fair bidding system. To recall, the mode of procurement for both transactions was an open and public bidding. For the first procurement, the only other supplier who submitted a bid failed to pass. For the second procurement, only Nikka Trading submitted a bid containing both technical and financial components. Based on the evidence on record, there is also no showing that they derived pecuniary benefit from recommending for approval the bid of Nikka Trading. Thus, for both procurements, it cannot be said that the accused-appellants intentionally favored Nikka Trading over any other bidder.<br><br>To clarify, in the case of<i> Macairan v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> We held that the acts constituting the elements of a violation of Republic Act No. 3019 must be effected with corrupt intent, a dishonest design, or some unethical interest. In the present case, however, it was not necessary for the prosecution to prove the same. It is well to remember that in<i> Macairan</i>, the accused were charged of violating Republic Act No. 3019 through evident bad faith and manifest partiality. Thus, We ruled that it must be proven that the accused was motivated by malicious and corrupt intent to defraud the government.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>In contrast, the basis of the accused-appellants' conviction here is their purported "gross inexcusable negligence." When a violation of Section 3(e) of Republic Act No. 3019 is committed by means of<i> culpa</i>, no proof of malice is required. Stated differently, if the accused purportedly committed the crime through "gross inexcusable negligence," what the prosecution needs to prove is not malice<i> per se</i> but the fact the negligence of the accused is so gross that it borders on malice. The actions or omissions of the accused must evidence want of even the slightest care. Further, it must be proven that even without fraudulent intent, the accused committed the breach of duty flagrantly, palpably, and with willful indifference to consequences insofar as other persons may be affected.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>This is what the prosecution miserably failed to do. The prosecution failed to prove that in the conduct of the bidding process, the accused-appellants acted with gross inexcusable negligence resulting in the grant of unwarranted benefits, advantage or preference to Nikka Trading. The evidence in this case supports the probability that the accused-appellants acted based on their honest belief that the Supplemental Bid Bulletins expanded the definition of "goods" and as a result, Nikka Trading's offer complied with the eligibility and technical requirements. Therefore, in simply performing their duties, accused-appellants cannot be said to have given unwarranted benefits, advantage or preference to Nikka Trading.<br><br>Aside from failing to establish the elements of Section 3(e) of Republic Act No. 3019, the existence of a conspiracy was also not proven.<br><br>According to the Sandiganbayan, it is the element of conspiracy in the Informations which ties all the accused together. As earlier mentioned, the Sandiganbayan held that for the BAC and TWG members, their disregard of the process of post-qualification after Larch wood has been considered converted their perceived oversight to gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>We are not convinced.<br><br>Plainly, there is no proof in this case that the accused-appellants took part in a conscious community of design to commit the offenses charged. While direct proof is not necessary to establish conspiracy, the prosecution must show, with proof beyond reasonable doubt, that all participants performed overt acts with such closeness and coordination as to indicate a common purpose or design to commit the felony.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br>The indiscriminate use of the conspiracy theory may sweep into jail those who were not even aware that there was a plan to commit a crime. Thus, even if the conspiracy were one of silence and inaction arising from gross inexcusable negligence, it is essential that the prosecution proves that the breach of duty borders on malice and is characterized by flagrant, palpable and willful indifference to consequences insofar as other persons may be affected.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>Without mincing words, the accused-appellants' conviction cannot be based on an unsubstantiated allegation of conspiracy. The totality of the facts and circumstances here do not demonstrate, beyond reasonable doubt, that the accused-appellants were animated by a united purpose to defraud the government. To begin with, their actions or inactions do not even amount to gross inexcusable negligence so as to incriminate them in the alleged scheme to award the contract to Nikka Trading, in the absence of a well-grounded and reasonable belief that the accused-appellants aimed their acts towards the accomplishment of the same unlawful purpose, they cannot be found liable as conspirators.<br><br>All told, there is no basis to sustain the conviction.<br><br><b>ACCORDINGLY</b>, the Appeal is<b> GRANTED</b>. The Decision dated June 9, 2023, and the Resolution dated July 26, 2023, issued by the Sandiganbayan in Criminal Case Nos. SB-17-CRM-2140 and SB-17-CRM-2141, are hereby <b>REVERSED</b> and<b> SET ASIDE</b>. Accordingly, accused-appellants Abdul Aziz M. Pangandaman, Estelito A. Nierva, Ruben A. Besmonte, Neofito C. Perilla, Divina Gracia D. Dantes, Cesar L. Bocanog and Mario D. Arias a.k.a. "Marlo" are<b> ACQUITTED</b> for failure of the prosecution to prove their guilt beyond reasonable doubt.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 41-108. Signed by Associate Justice Ma. Theresa Dolores C. Gomez-Estoesta and concurred in by Zaldy V. Trespeses and Georgina D. Hidalgo.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 110-117.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 42-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 44-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 48-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 53-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 55-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 540.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 80-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 81-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 82-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 106-107<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 85-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 86-96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 96-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 102-103.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 101-105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 110-117.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 1-3. Signed by Executive Clerk of Court Atty. Isobel MPT. Solis.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 120-121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 134-170.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 355-448.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 532-561.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Sabaldan, Jr. v. Office of the Ombudsman for Mindanao, et al.</b>, 874 Phil. 144, 157 (2020) [Per J. J.C. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 895 Phil. 270 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 296.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, pp. 378-382.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>People v. Yap</b>, 947 Phil. 680, 713-714 (2023) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 424 Phil. 482 (2002) [Per J. Carpio, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Villarba v. Court of Appeals, et al.</b>, 874 Phil. 84, 105 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>People v. Sandiganbayan (Fourth Division), et al.</b>, 769 Phil. 378, 382 (2015) [Per J. Jardeleza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Lala</b>, 948 Phil. 305, 316 (2023) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Feliciano v. People</b>, 899 Phil. 138, 148 (2021) [Per J. Gaerlan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>People v. Marrero, G.R. No. 268342</b>, May 15, 2024 [Per J. Lazaro-Javier, Second Division] at 18. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i>, pp. 91-100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 100-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>People v. Estregan, G.R. No. 248699</b>, February 5, 2025 [Per J. Rosario, First Division] at 12. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Martel v. People</b>, 895 Phil. 270, 305 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Rollo</i>, p. 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 161-162.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 164.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>. at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Amanquiton v. People</b>, 612 Phil. 1253, 1264 (2009) [Per J. Corona, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 922 Phil. 178 (2019) [Per J. J.C Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Abubakar v. People</b>, 834 Phil. 435, 472 (2018) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Sison v. People</b>, 628 Phil. 573, 586 (2010) [Per J. Corona, Third Division]<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Rollo</i>, pp. 96-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Renales v. People</b>, 904 Phil. 456, 473 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> 899 Phil. 75 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Martel v. People</b>, 895 Phil. 270, 305 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Rollo</i>, pp. 102-103.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Macairan v. People</b>, 899 Phil. 75, 120 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Sistoza v. Desierto</b>, 437 Phil. 117, 139 (2002) [Per J. Bellosillo, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

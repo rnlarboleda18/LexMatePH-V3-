@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 246028 - BANGKO SENTRAL NG PILIPINAS AND THE MONETARY BOARD, PETITIONERS, VS. WERQUICK, INC., RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70129' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 246028, August 04, 2025 ]</H2>
+			<H3>BANGKO SENTRAL NG PILIPINAS AND THE MONETARY BOARD, PETITIONERS, VS. WERQUICK, INC., RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by the Bangko Sentral ng Pilipinas (BSP) and the Monetary Board (MB) impugns the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of Branch 57 of the Regional Trial Court of Makati City (RTC), which granted the petition for declaratory relief filed by respondent Werquick, Inc. (Werquick) and declared BSP Circular No. 942, series of 2017<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> (Circular No. 942) null and void.</p><p> Circular No. 942 introduced significant amendments to Section 4511N of the 2016 Manual of Regulations for Non-Bank Financial Institutions (2016 Manual of Regulations) pursuant to Republic Act No. 9160<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> or the Anti-Money Laundering Act, as amended, as well as Republic Act No. 7653<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> or the New Central Bank Act. The Circular addressed the operations and reporting obligations of non-bank entities engaged in remittance, money changing, and/or foreign exchange dealing (collectively referred to as money service businesses). <sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> In its petition for declaratory relief, Werquick claimed that its rights would be substantially affected by Circular No. 942 since it was engaged in the business of money remittance, and thus among the entities intended to be regulated by the BSP. Werquick claimed that the circular was void for going beyond and enlarging the provisions of the two laws, neither of which grants BSP and the MB any regulatory authority over money service businesses.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p align="center"> <b>Ruling of the RTC</b> </p><p> The RTC rendered the assailed Decision declaring Circular No. 942 as null and void.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> It held that money service businesses do not fall under any of the three classifications of entities within the scope of BSP's regulatory authority,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> as provided in Section 3 of Republic Act No. 7653, which states: </p><blockquote> <p> SEC. 3. <i>Responsibility and Primary Objective</i>. â The Bangko Sentral shall provide policy directions in the areas of money, banking, and credit. It shall have supervision over the operations of banks and exercise such regulatory powers as provided in this Act and other pertinent laws over the operations of <b>finance companies</b> and <b>non-bank financial institutions performing quasi-banking functions, hereafter referred to as quasi-banks, and institutions performing similar functions</b>[.]<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (Emphasis supplied) </p> </blockquote> <p> Moreover, no provision in Republic Act No. 9160, as amended by Republic Act No. 10365,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> confers regulatory powers upon the BSP over money service businesses or places these entities within the coverage of BSP's existing supervisory and regulatory powers.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> The RTC held that while Section 3(a)(1) of Republic Act No. 9160 mentions "remittance and transfer companies" under covered persons, such inclusion was supposedly anchored on the wrong premise that BSP already had authority over money service businesses.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> On that score, the RTC concluded that the "law cannot confirm a power that is inexistent and cannot vest authority through a mistaken presumption."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Section 1 of Republic Act No. 10365, which amended Section 3(a) of Republic Act No. 9160, provides: </p><blockquote> <p> SECTION 1. Section 3(a) of Republic Act No. 9160, is hereby amended to read as follows:</p> <p> (a) 'Covered persons', natural or juridical, refer to: </p> <blockquote> <p> (1) banks, non-banks, quasi-banks, trust entities, foreign exchange dealers, pawnshops, money changers, <b>remittance and transfer companies</b> and other similar entities and all other persons and their subsidiaries and affiliates <b>supervised or regulated by the Bangko Sentral ng Pilipinas (BSP)</b>[.] (Emphasis supplied) </p> </blockquote> </blockquote> <p align="center"> <b>The Petition before this Court</b> </p><p> Before this Court, BSP and MB now raise pure questions of law. They argue that Section 3 of Republic Act No. 7653 should be read in consonance with its Declaration of Policy under Section 1, which accords BSP sweeping authority over all matters concerning money, and its stability and integrity.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> This Section is quoted below: </p><blockquote> <p> SECTION 1. <i>Declaration of Policy</i>. â The State shall maintain a central monetary authority that shall function and operate as an independent and accountable body corporate in the discharge of its mandated responsibilities concerning money, banking and credit. In line with this policy, and considering its unique functions and responsibilities, the central monetary authority established under this Act, while being a government-owned corporation, shall enjoy fiscal and administrative autonomy. </p> </blockquote> <p> BSP and MB further assert that the inclusion of money service businesses in Section 3(a)(1) of Republic Act No. 10365 categorically recognizes them as among the institutions supervised or regulated by BSP.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> In addition, since 2005 and prior to the issuance of Circular No. 942, BSP had already performed regulatory functions over money service businesses through the issuance of Circular No. 471 and its integration in the 2016 Manual of Regulations. Notably, Werquick's previous registration with BSP and the subsequent cancellation of its license were under the auspices of said authority.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> Finally, BSP and MB argue that BSP's regulatory power over money service businesses has been expressly and formally affirmed by Section 2 of Republic Act No. 11211,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> which amends Section 3 of Republic Act No. 7653 to now read:<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><blockquote> <p> SEC. 3. <i>Responsibility and Primary Objective</i>. â The Bangko Sentral shall provide policy directions in the areas of money, banking, and credit. It shall have supervision over the operations of banks and exercise such regulatory and examination powers as provided in this Act and other pertinent laws over the quasi-banking operations of non-bank financial institutions. As may be determined by the Monetary Board, <b>it shall likewise exercise regulatory and examination powers over money service businesses</b>, credit granting businesses, and payment system operators. The Monetary Board is hereby empowered to authorize entities or persons to engage in money service businesses[.] (Emphasis supplied) </p> </blockquote> <p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Werquick echoes the RTC ruling that money service businesses are beyond the scope of BSP's authority under Section 3 of Republic Act No. 7653.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Werquick further argues that the inclusion of money service businesses under Covered Persons in Section 3(a)(1) of Republic Act No. 9160 does not give BSP <i>carte blanche</i> authority over them.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Rather, BSP's authority is limited to matters involving Republic Act No. 9160.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Finally, Werquick maintains that the promulgation of Republic Act No. 11211 does not validate Circular No. 942, which was invalid at the time of its passage.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> Thereafter, BSP and MB filed their Reply,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> essentially reiterating the arguments in their Petition. </p><p align="center"> <b>The Issue</b> </p><p> Succinctly put, the pivotal issue in the present case is whether or not BSP Circular No. 942 is valid. </p><p align="center"> <b>The Court's Ruling</b> </p><p> <b><i>The Petition is dismissed on the ground of mootness. </i></b></p><p> <i>Oclarino v. Navarro</i><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> edifyingly explains the mootness doctrine, viz.: </p><blockquote> <p> The existence of an actual case or controversy is a condition precedent for the court's exercise of its power of adjudication. An actual case or controversy exists when there is a conflict of legal rights or an assertion of opposite legal claims between the parties that is susceptible or ripe for judicial resolution. On the other hand, a moot and academic case is one that ceases to present a justiciable controversy by virtue of supervening events, so that a declaration thereon would be of no practical value.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> (Citations omitted) </p> </blockquote> <p> In retrospect, Werquick's challenge against the validity of Circular No. 942 came initially in the form of a petition for declaratory relief. A declaratory action seeks to obtain a judicial interpretation or determination of the validity of an instrument and to secure an authoritative statement of the parties' rights and obligations thereunder for their guidance in its enforcement or compliance.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The purpose of this action is not to settle issues arising from a purported breach; its very nature presupposes that no actual breach or violation has yet occurred.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Here, the issue regarding the validity of Circular No. 942 had already been rendered moot by the supervening enactment on February 14, 2019 of Republic Act No. 11211, and the issuance of subsequent BSP circulars in relation to the said law. </p><p> A brief review of the history of Republic Act No. 11211 will shed light on the foregoing disposition. </p><p> In 2017, the BSP issued Circular No. 942 in the wake of news regarding the Bangladesh Bank Heist, which took place the previous year. During that incident, a total of USD 81 million from the Bangladesh Bank's account with the Federal Reserve Bank of New York underwent successive transfers before reaching a local remittance company named PhilRem Service Corporation (PhilRem), which then delivered the same to its intended recipients.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> New and more stringent registration procedures and reporting obligations on money service businesses were thus imposed in accordance with Republic Act No. 9160. </p><p> Following the issuance of Circular No. 942, the Senate commenced deliberations on possible amendments to Republic Act No. 7653, with the aim of broadening the scope of BSP's regulatory power and of including money service businesses among the regulated entities.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> During the Senate deliberations, it was revealed that certain providers of financial services "[fell] into a crack" and "[did] not fall [under] any regulatory authority."<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Further acknowledging these legal fissures, then BSP Governor Amando M. Tetangco, Jr., discussed that BSP's oversight of money service businesses was confined, at that time, to the latter's compliance with Republic Act No. 9160, thus: </p><blockquote> <p> <b>SEN. DRILON.</b> Ah, item number one. All right. </p> <p> Oh yes, there are few questions I would like to raise, some clarificatory. For example, on Section 2 of the bill. The bill seeks to expand the coverage of the regulatory powers of the BSP to money service business, credit granting business and payment system of operators. This would include money changers? </p> <p> Yeah, can we have theâ Just for the record. </p> <p> <b>MR. TETANGCO.</b> That would include money changers. </p> <p> <b>SEN. DRILON. </b>Yeah. We have no problems with that. </p> <p> Now, credit granting facilities. Who are payment system operators? </p> <p> <b>MR. TETANGCO.</b> Like the MegaLink. </p> <p> <b>SEN. DRILON.</b> Sorry? </p> <p> <b>MR. TETANGCO.</b> The RTGS, the real-time gross settlement system, the electronic money issuers. </p> <p> <b>SEN. DRILON.</b> Would you have supervision presently over companies like PhilRem? </p> <p> <b>MR. TETANGCO.</b> It's not clear in the law, Mr. Chairman. The regulation, in as far as entities like that, the BSP only requires registration. </p> <p> <b>SEN. DRILON.</b> Uh-huh. </p> <p> <b>MR. TETANGCO.</b> But the BSP does not have supervisory power. </p> <p> <b>SEN. DRILON.</b> You mean they are not subject to regular annual examination? </p> <p> <b>MR. TETANGCO.</b> They are not, Mr. Chairman, Mr. Senator. </p> <p> <b>SEN. DRILON.</b> PhilRem, companies like PhilRem. </p> <p> And would an amendment such as this catch transactions like RCBC transaction which was recently the subject of so much public debate? </p> <p> <b>MR. TETANGCO.</b> Well, there'll be a mechanism to try and prevent or catch transactions of that nature, Mr. Chairman. </p> <p> <b>SEN. DRILON.</b> For the record, which government entity is now supervising money service businesses or is it SEC? </p> <p> <b>MR. TETANGCO. </b>I think there's no other entity at this point, Mr. Chairman, Mr. Senator. The BSP actually is looking into the money service businesses only in as far as their compliance with the anti-money laundering law provisions is concerned. </p> <p> <b>SEN. DRILON.</b> And you're looking into that as part of the Anti-Money Laundering Council? </p> <p> <b>MR. TETANGCO.</b> Well, there is an existing regulation, Mr. Chairman, that they would be registered with the BSP. </p> <p> <b>SEN. DRILON.</b> Uh-huh. </p> <p> <b>MR. TETANGCO. </b>And the basis for that is the AMLA, so that we can craft the creation and the establishment of money service businesses. </p> <p> <b>SEN. DRILON.</b> Do you have supervision over money changers, for example, to the same extent that you have supervision over the banks? </p> <p> <b>MR. TETANGCO.</b> We do not, Mr. Chairman, Mr. Senator. And that is precisely what we want to address. </p> <p> <b>SEN. DRILON.</b> So who supervises them at this point? Wala? They just get registered and then they just do their own thing, 11:00 is laissez faire? </p> <p> <b>MR. TETANGCO.</b> They get registered. They register with the local government unit. There's no regulatory authority that oversees the operations of these firms. </p> <p> <b>SEN. DRILON.</b> I could fully endorse such supervision by Bangko Sentral of these entities, Mr. Chairman.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></p> </blockquote> <p> In due course, Republic Act No. 11211 was enacted, which provides, among others, that BSP, as may be determined by the MB, shall exercise regulatory and examination powers over money service businesses, credit granting businesses, and payment system operators.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> Subsequently, in accordance with Republic Act No. 11211, BSP issued circulars relating to money service businesses, as well as updated versions of the 2016 Manual of Regulations. The latest edition of this Manual was released on December 31, 2021 and contains updates and amendments to regulations on quasi-banking and other non-banking financial institutions "to align with international standards and best practices to the extent feasible as well as adapt to the evolving financial landscape."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Part Nine, Section 901-N of this latest edition contains regulations specific to money service businesses and incorporates amendments introduced by Circular No. 942, as well as Circular No. 968, series of 2017<sup style="COLOR: RGB(255, 0, 0);">[36]</sup>; Circular No. 991, series of 2018<sup style="COLOR: RGB(255, 0, 0);">[37]</sup>; Circular No. 1039, series of 2019<sup style="COLOR: RGB(255, 0, 0);">[38]</sup>; Circular No. 1075, series of 2020<sup style="COLOR: RGB(255, 0, 0);">[39]</sup>; and Circular No. 1104, series of 2020.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> As the above circumstances illustrate, Republic Act No. 11211 and the latest manual of regulations for non-banking financial institutions were painted in the same broad brush of bureaucratic intent â to fill a vacuum in the then existing regulatory framework. With the categorical placement of money service businesses within the ambit of BSP, the present action for declaratory relief against the validity of Circular No. 942 becomes academic. </p><p> It is true that this Court has recognized certain exceptions to the mootness doctrine: (1) there was a grave violation of the Constitution; (2) the case involved a situation of exceptional character and was of paramount public interest; (3) the issues raised required the formulation of controlling principles to guide the Bench, the Bar and the public; and (4) the case was capable of repetition yet evading review.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> However, none of these exceptions obtain in the case at bench. </p><p> <b>ACCORDINGLY,</b> the Petition for Review on <i>Certiorari</i> is <b>DENIED</b> as the declaratory relief against the validity of Bangko Sentral ng Pilipinas Circular No. 942, series of 2017, has been rendered moot and academic by the enactment of Republic Act No. 11211 on February 14, 2019. </p><p> <b>SO ORDERED.</b> </p><p> <i>Caguioa (Chairperson), Inting</i>, and <i>Gaerlan, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 28-65.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 66-81. The March 20, 2019 Decision in R-MKT-18-01439-SC was rendered by Presiding Judge Honoria E. Guanlao, Jr. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Amendment to Section 4511N of the Manual of Regulations for Non-Bank Financial Institutions, January 20, 2017; <i>id.</i> at 82-103.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Approved on September 29, 2001. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Approved on June 14, 1993.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 66.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 67.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 81.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 73. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>See</i> <i>id.</i> at 72-73.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> AN ACT FURTHER STRENGTHENING THE ANTI-MONEY LAUNDERING LAW, AMENDING FOR THE PURPOSE REPUBLIC ACT NO. 9160, OTHERWISE KNOWN AS THE "ANTI-MONEY LAUNDERING ACT OF 2001", AS AMENDED (2013).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, p. 79.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 39. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 42. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 41. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> AN ACT AMENDING REPUBLIC ACT NUMBER 7653, OTHERWISE KNOWN AS "THE NEW CENTRAL BANK ACT," AND FOR OTHER PURPOSES (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, p. 56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 218-231. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 219-223. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 223-226. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 230. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 328-346. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> 863 Phil. 949, 954-955 (Resolution) (2019) [Per J. J. Reyes, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 954-955. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>See</i> <b>Republic v. Pryce Corporation, Inc.</b>, 937 Phil. 639, 642 (2023) [Per J. Zalameda, <i>En Banc</i>]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>See</i> <i>id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>See</i> <b>Rep. of the Phils. v. Bloomberry Resorts and Hotels, Inc. (Solaire)</b>, 881 Phil. 194, 196-198 (2020) [Per J. Carandang, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Senate Committee Report No. 26 (2017), 17<sup>th</sup> Congress, 1<sup>st</sup> Regular Session, Committees on Banks, Financial Institutions and Currencies; and Ways and Means, January 17, 2017. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Senate Committee on Banks, Financial Institutions and Currencies, and Committee on Ways and Means, September 13, 2016, p. 89. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Senate Committee on Banks, Financial Institutions and Currencies, and Committee on Ways and Means, September 5, 2016, pp. 24-27. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Republic Act No. 11211, sec. 2. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Bangko Sentral ng Pilipinas, Manual of Regulations for Non-Bank Financial Institutions (2021), Preface. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Extension of the Transitory Provision of Subsection 4511N.15 of MORNBFI, August 10, 2017. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Extension of the Transitory Provisions of Circular No. 938 dated 23 December 2016 and Subsection 4511N.16 of MORNBFT, January 26, 2018. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Amendments to the N and P Regulations of the Manual of Regulations for Non - Bank Financial Institutions, May 3, 2019. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Amendments to Regulations on Financial Audit of Non-Bank Financial Institutions, February 7, 2020. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Amendments to Regulations on Submission of Report on Crimes/Losses for Non-Bank Financial Institutions, November 7, 2020. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Ranada v. Office of the President</b>, 943 Phil. 164, 180 (2023) [Per J. Singh, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

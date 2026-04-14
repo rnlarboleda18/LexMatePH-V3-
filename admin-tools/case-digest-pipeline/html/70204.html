@@ -1,0 +1,619 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276117 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. HYO SOON KIM, XXX276117, AND YYY276117, ACCUSED,
+
+XXX276117 AND YYY276117, ACCUSED-APPELLANTS. 
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70204' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276117, October 22, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. HYO SOON KIM, XXX276117, AND YYY276117, ACCUSED,
+
+XXX276117 AND YYY276117, ACCUSED-APPELLANTS. <BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Court resolves the Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by XXX276117<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and YYY276117 assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) that found Hyo Soon Kim a.k.a. "Rocks" (Kim), XXX276117, and YYY276117 guilty beyond reasonable doubt of qualified trafficking in persons under Section 4(a) in relation to Section 3(b), (c), and (h), Section 6(a) and Section 10(c) of Republic Act No. 9208, or The Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364.</p><p align="center"> <b>Facts</b> </p><p> In an Information,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Kim, XXX276117, and YYY276117 were charged as follows: </p><blockquote> <p> That dates prior to and on March 15, 2018, in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span> and within the jurisdiction of this Honorable Court, the above-named accused, conspiring, confederating and mutually aiding one another, did then and there, willfully, unlawfully and feloniously, obtain, provide and offer [AAA276117], sixteen (16) years old, by her parents, herein accused [XXX276117] and [YYY276117], by taking advantage of her vulnerability by reason of her minority, poverty and their ascendancy over her, through pandering said [AAA276117] to their co-accused, Hyo Soon Kim, so that she can be engaged by said accused Hyo Soon Kim in lascivious conduct, by touching and kissing her breasts and sensitive parts of her body, in exchange for money, profit of any other benefits and consideration, to the damage and prejudice of alleged minor-victim [AAA276117].</p> <p> That the crime is qualified since it was committed against a minor, [AAA276117], who is sixteen (16) years old[.]</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p> </blockquote> <p> During arraignment, Kim, XXX276117, and YYY276117 entered pleas of not guilty to the charges.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> During pre-trial, the prosecution and the defense stipulated on the following: (1) the jurisdiction of the court over the case; (2) the minority of the complainant, being 16 years old at the time of the incident; (3) the authenticity of her Certificate of Live Birth<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and the fact that she was born on <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span>; (4) the fact that accused-appellants XXX276117 and YYY276117 are her parents; (5) the fact that the National Bureau of Investigation (NBI) agents were not armed with a Search Warrant or Warrant of Arrest at the time of the arrest of XXX276117 and YYY276117; and (6) the fact of coordination by the NBI <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> with <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span> Philippine National Police (PNP) and the authenticity of the following documents: (a) Coordination Letter, (b) Arrest Report/Booking Sheet, (c) Arrest and Information Sheet and Finger Print Card of accused-appellants.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Following this, Kim filed a Petition for Bail.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Bail hearings were conducted, during which the prosecution presented NBI Senior Agent Mark Santiago (SA Santiago) and AAA276117. After due proceedings, the Petition for Bail was denied. Kim sought reconsideration, but this was also denied in a Resolution.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> The trial subsequently commenced.</p><p> The prosecution called as witnesses SA Santiago, AAA276117, BBB276117, and NBI Supervising Agent Kristine Dela Cruz (SA Dela Cruz).<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> According to AAA276117, she is the child of XXX276117 and YYY276117. Her father, XXX276117, previously worked as a boatman in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and once served as a tour guide for Kim. Because of Kim's regular visits to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Kim and XXX276117 developed a friendship. Kim frequently visited her father at their home and socialized with him and his family members. She characterized Kim as generous, often treating her father and relatives and giving them small amounts of money.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> AAA276117 initially encountered Kim when she was in Grade 3. When AAA276117 was in Grade 5, she and her family moved from <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxxx</span>. Kim assisted AAA276117's family in building a "<i>kubo</i>," which became their new residence. He continued visiting them at their new location, and during each visit, Kim would give AAA276117 PHP 5,000.00, part of which she would give to her mother for household expenses, while keeping the remainder for herself and her siblings.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> Around November 2017, AAA276117's aunt, BBB276117, informed AAA276117 that Kim appeared to have romantic feelings for AAA276117. From that point forward, AAA276117 began feeling uncomfortable around Kim. On the same day she learned this information, she found herself alone with Kim in a room, where he confessed his feelings for her. This led her to start avoiding Kim.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> Kim increased the frequency of his visits and began staying overnight at their house. During drinking sessions, he would insist AAA276117 to sit next to him. Kim would then invite AAA276117 into the room, where he would inappropriately touch her private areas. When she resisted on one occasion, Kim became angry and left the house. To her dismay, her parents scolded her, explaining that Kim would withhold money when he was upset.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> After revealing his romantic interest in her, Kim began giving her larger sums of money, ranging from PHP 20,000.00 to PHP 40,000.00. He also gave her siblings amounts between PHP 100.00 to PHP 500.00.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Sometime in December 2017, Kim invited her family to dine at a restaurant in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. They traveled by jeepney with him sitting beside her. It was nighttime and he requested that the interior lights be turned off. He then placed his arm around her shoulder and touched her breasts. She was frightened. Upon arriving at the restaurant, she began crying and could not eat. When her aunts asked why she was crying, AAA276117 could not respond due to what had just occurred.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> In January 2018, while Kim was having another drinking session with AAA276117âs father, he again asked AAA276117 to sit beside him. He then invited AAA276117 to accompany him to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>, but she did not answer him. He again asked her to join him in the room, but she declined. Her parents told AAA276117 that she should go with Kim as he only wanted to talk to her. AAA276117 obliged, and once in the room, Kim told her that before taking her to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>, she should have sexual intercourse with him. She replied that she did not want to go to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> and left the room.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> In February 2018, AAA276117's father again asked her to enter the room with Kim as he wanted to talk to her. Once inside, Kim kissed AAA276117 on the lips, who pushed him away. Kim persisted in trying to kiss her, but she firmly refused. He then left the house angrily. AAA276117's parents scolded her again and warned her that she would suffer in poverty. Despite this, Kim still persisted in visiting them, always asking for AAA276117 to join him in the room. AAA276117 complied, fearing that she would be scolded by her parents. Kim then forcibly kissed her again. On one occasion, he attempted to lift her clothing but was unsuccessful. He also placed his hand over her pants, touching her vagina, then gave her PHP 20,000.00 on the same day. He would also ask her to lie down in bed while he positioned himself on top of her. AAA276117 would refuse and push him away during these instances.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> On March 5, 2018, Kim gave AAA276117 PHP 40,000.00, which was used to purchase household items. Kim then asked her if she wanted a birthday celebration, to which AAA276117 agreed. He then again invited her into the room and told her that AAA276117 must have sexual intercourse with him in exchange for the money for her birthday celebration. AAA276117 refused, and consequently, no celebration took place.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> In March 2018, they were once again in the room after a drinking session. Kim then forced her to touch his penis in an up-and-down motion. AAA276117 tried to pull away her hand, but he persisted. She then pushed him away. She wanted to leave the room, but he asked her to lie down with him briefly. She complied, and he embraced her while lying down in bed. Then she left the room.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> She stated that although she never told her parents about Kim's inappropriate behavior when they were alone in the room, her parents were aware that Kim was sexually harassing her because during drinking sessions, he would touch her in front of them, and they never intervened.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> Her final encounter with Kim occurred on March 15, 2018. Her mother asked her to come home because Kim was looking for her. When she arrived, she found Kim drinking with her father and relatives. Kim again asked her to sit beside him and then placed his hand on her lap. She stood up and used a book to cover her private area. After a few minutes, she left the drinking area and went to the room to sleep.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> She was later awakened when NBI agents entered their room. She was surprised when she found that Kim was sleeping beside her and embracing her. The NBI agents witnessed this and arrested him. She, along with her parents and Kim, were then taken to the NBI Headquarters in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> BBB276117 testified that she personally knew that her niece was being offered by AAA276117's parents to Kim because BBB276117 served as their interpreter. XXX276117 relied on her to translate what Kim was saying to them. XXX276117 and YYY276117 also asked her to persuade AAA276117 to have sexual intercourse with Kim so he would continue giving them money. BBB276117 confirmed that Kim had expressed his liking for AAA276117 and promised to throw her a birthday celebration, but she had to first have sexual intercourse with him.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> In February 2018, AAA276117 asked for BBB276117's help as she was scared that she might succumb to what Kim wanted from her. BBB276117 said AAA276117 felt partly compelled because Kim had promised to throw her a birthday party and promised to purchase a house for them. BBB276117 spoke with AAA276117's parents and other relatives, but they did not listen. XXX276117 even told her that she should not be concerned about AAA276117 as AAA276117 is not her child.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></p><p> BBB276117 acknowledged executing a <i>Sinumpaang Salaysay Ng Pag-uurong Ng Habla</i><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> explaining that she did so because she felt bad for her sister, YYY276117, and wanted to end the issue. She also stated that Kim persuaded her to sign the document for her sister's sake.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> On March 13, 2018, BBB276117 and AAA276117 went to the NBI Headquarters in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> to file a complaint for human trafficking against Kim, XXX276117 and YYY276117. She executed a <i>Sinumpaang Salaysay</i><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> to attest to and support the claims.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> In response to the complaint, the NBI formed a team consisting of several agents, including SA Santiago and SA Dela Cruz, along with Social Welfare Officer Elena May C. Romano (SWO Romano) from the Department of Social Welfare and Development (DSWD), to conduct a rescue operation for AAA276117.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p> That very same day, March 13, 2018, the team went to AAA276117's house, arriving at around 7:00 p.m. SA Santiago immediately noticed a group of men having a drinking session in front of the house. The group consisted of Kim and XXX276117, along with Victor, Kim's driver. SA Santiago also observed YYY276117 and her children inside the house. They were sleeping in one of the two rooms, with only a mattress on the floor. Another room contained a neatly made bed that was unoccupied.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> At around midnight, SA Santiago observed Kim stand up and enter the room where AAA276117 was sleeping. Kim attempted to wake AAA276117 but was unsuccessful. He then left the house appearing upset and spoke briefly with XXX276117. Subsequently, he departed for <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> On March 15, 2018, around 10:00 p.m., the team returned to AAA276117's house to continue their rescue operation. Similar to the previous day, Kim and XXX276117, along with Victor, were drinking in front of the house. YYY276117 and her children were all sleeping in one room. At 11:00 p.m., Kim went to the other vacant room where he slept. XXX276117 slept by the house entrance, outside the two rooms.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> Before midnight, SA Santiago observed Kim stand up and speak with XXX276117. After apparently reaching an understanding, Kim entered the other room where AAA276117 was sleeping and laid beside her. He then began touching her breast and vagina. Because of this, SA Santiago alerted the other team members, and they immediately entered the house to rescue AAA276117. Subsequently, Kim, XXX276117, and YYY276117 were arrested.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> SA Dela Cruz corroborated SA Santiago's testimony. She stated that she was part of the team and was assigned to remain in the vehicle and wait for SA Santiago's signal. Upon receiving the signal, she and the rest of the team entered the house to rescÂµe AAA276117. There, she observed Kim embracing and touching AAA276117's breast. SWO Romano then approached AAA276117 and brought her out of the room. After arresting Kim, XXX276117, and YYY276117, SA Dela Cruz assisted SWO Romano in comforting AAA276117. She later presented the video footage of the arrest and rescue operation in open court.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> The defense presented its own witnesses, including Kim; XXX276117; YYY276117; CCC276117, who is AAA276117's sister; Kim's driver Victor T. Mescallado (Victor); and Nancy M. Montilla (Nancy), a tour guide for Kim.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> Kim, XXX276117, and YYY276117 denied the charges against them.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Kim alleged that this case was filed to extort money from him. He said that on March 11, 2018, BBB276117 approached him and informed him that she was an NBI asset. She also demanded that he give her PHP 500,000.00 to avoid imprisonment. At that time, he thought that she was joking, so he dismissed it. Subsequently, he left and returned to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> On March 16, 2018, while detained at the NBI in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>, Kim said SA Santiago demanded PHP 3,000,000.00 from him. To negotiate with him and his wife, he brought a Korean national named Choung Ho Lee (Ho Lee). Later, they demanded PHP 10,000,000.00 from his wife. The next day, Ho Lee visited Kim's hotel to retrieve money from his cash box, which amounted to PHP 700,000.00. He then compelled Kim to sign an acknowledgment receipt for PHP 400,000.00. When questioned about the remaining PHP 300,000.00, Ho Lee claimed ignorance of its whereabouts.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> On May 10, 2018, BBB276117 appeared at the NBI Detention Center. She showed him a letter stating that AAA276117 would testify in his favor. BBB276117 then demanded PHP 2,000,000.00 from him. Kim, however, refused and BBB276117 left. Subsequently, he asked his lawyers to file charges against BBB276117 and the NBI agents.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> Kim confirmed meeting XXX276117 sometime in 2004 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span>. He said that from 2004 to 2017, he maintained contact with him and knew about his relocation to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>. He also confirmed visiting AAA276117's house on March-11, 12, 13, and 15, 2018. On those dates, he had drinking sessions withÂ· XXX276117 and others. On all these occasions, Victor accompanied him. After the drinking sessions ended, they would return to his hotel in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>. However, he could not recall whether he had stayed at AAA276117âs house instead of returning to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> on the night of March 15, 2018.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p><p> He denied that XXX276117 and YYY276117 solicited money from him. He admitted giving them small amounts of money, ranging from PHP 500.00 to PHP 1,000.00. He also said he gave AAA276117 and her siblings small amounts of money during his visits.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> Nancy, another tour guide for Kim, corroborated his extortion story. She testified that in July 2018, a certain BBB276117, approached Kim's wife, telling her that there was still a way to settle the case. Kim's wife and BBB276117 then went to the NBI Headquarters in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> where they met with BBB276117. BBB276117 initially demanded PHP 3,000,000.00 but reduced it to PHP 2,000,000.00, giving them a week to produce the money. Kim refused to comply with her demands. Nancy received no response when she relayed this information to BBB276117, but she heard BBB276117 over the phone saying, "<i>aba gusto pala ni Rocks makulong [nang] matagal!</i>"<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> Victor testified that on March 15, 2018, he was at AAA276117's house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxx</span> and had also been there on March 11, 12, and 13, 2018. He drove for Kim, who was staying at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span> in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>. He said Kim went to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> because Kim's friend XXX276117 called and asked him to visit.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> On March 11, 2018, Kim and Victor met with XXX276117 at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>. After, they proceeded to XXX276117's house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxx</span>, after buying beer and snacks. Kim and Victor returned to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxx</span> after their drinking spree. They did the same on March 12 and 13, 2018, but on March 14, 2018, when Victor waited outside the hotel, Kim did not appear. He thought that perhaps Kim was tired from drinking for three consecutive days.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p><p> The next day, March 15, 2018, they returned to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> and began drinking with the same group at around 4:00 p.m., while children were in the vicinity. Victor noticed that Kim seemed weary after consuming four to five cans of beer and he immediately fell asleep. BBB276117 and someone named Jeff carried him inside the house and brought him to the other room, while Victor went to his taxi to rest. XXX276117 and YYY276117 were already sleeping at that time.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </p><p> After two hours, NBI agents woke Victor up and pointed a gun at him. The NBI agents then searched his taxi. After a few minutes, he saw the handcuffed Kim being carried outside by the NBI agents. When Kim passed by him, Kim asked, "Did you do that?" to which Victor responded, "No, Sir. I cannot do that to you. You have been good to me. You and your family have been good to me." Then, they were all taken to the NBI Headquarters in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> Victor described the relationship between Kim, XXX276117, and YYY276117 as "friends" and noted that Kim was kind not only to them but to the entire family. He even gave money to their children.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> XXX276117 admitted that Kim visited their house on March 15, 2018, the day of their arrest. He said that Kim was drinking with his wife's nephews and brothers-in-law, and after the drinking session, he and his wife cleaned up. Kim slept in one of the two rooms of their house while his wife slept with their children in another room. XXX276117 then slept in the living room. At 11:00 p.m. the same day, he was arrested by NBI agents and taken to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p><p> XXX276117 denied offering AAA276117 to Kim and also clarified that he had no misunderstanding with her. However, he admitted having a prior altercation with BBB276117, a week before his arrest. He said they were playing "<i>tong-its</i>" and had a heated argument. Subsequently, BBB276117 told him, "<i>ipapakulong ko kayo</i>."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> He described Kim as a generous person because he gave him and his friends small amounts of money. According to him, Kim was aware about their transfer to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> through his sister, who used to accompany XXX276117 when he was still a tour guide in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>. He said Kim visited their house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> on March 11, 2018, contrary to his previous statement that Kim only came to their house once, on March 15, 2018. He said that Kim was with Victor on both dates. He admitted being surprised when Kim visited them in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> but did not bother asking him because he was not fluent in English. Finally, he claimed that AAA276117 was merely used and instructed by her aunt BBB276117 on what to tell the authorities.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> YYY276117 confirmed that Kim is a family friend of theirs, having known him for 15 years, from the time her husband served as Kim's tour guide in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>. She recalled that he used to visit their house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span>, as early as 2004, and that her then three daughters, including AAA276117, had met him. She also mentioned that she used to work as a laundrywoman while her husband was a tour guide, and their combined earnings were sufficient to meet their family's needs. She further stated that their neighbors liked him because he was friendly and would invite them for drinking sessions.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><p> In 2015, a year after the family's transfer to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Kim visited their family. They had not communicated with him since their move, so YYY276117 was surprised.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></p><p> On March 15, 2018, she was on her way home from work and running errands with her sister, BBB276117, when they noticed Kim in a taxi behind them. Upon reaching <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, she disembarked from the jeepney and entered the taxi. She inquired about Kim's purpose, and Victor explained that Kim had come to check on XXX276117 and BBB276117's relationship as XXX276117 and BBB276117 had a misunderstanding while playing "<i>tong-its</i>."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></p><p> Upon arriving home, YYY276117 prepared the table and chairs for the drinking session. XXX276117, her brother-in-law, and other siblings then joined Kim. She said that whenever Kim came to their house to drink, her children would only greet him and then go to her mother's house to play. The drinking session concluded at 8:00 p.m. XXX276117 woke her up to clean up the mess. She inquired about Kim's whereabouts, and her husband informed her that Kim was asleep in the other room due to his intoxication. She also mentioned that AAA276117 had slept in the same room with her and the other children.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p><p> Around 11:00 p.m., NBI agents burst into their house, startling everyone awake. YYY276117 found Kim in the same room, sleeping beside her children. She was shocked and could not utter a word as the NBI agents arrived. BBB276117 urged YYY276117 to get dressed, explaining that they would be going with the agents. BBB276117 tried to comfort YYY276117, telling her not to worry.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> At 4:00 a.m. the following day, they arrived at the NBI Headquarters in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>. YYY276117 alleged that Kim and XXX276117 had been harassed by NBI agents. SA Santiago told her to testify against Kim, but she refused because he had not done anything wrong to them. SA Santiago then struck her with a water bottle on her forehead. She claimed that she loves her daughter and claimed that she could not bear the thought of losing her.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> YYY276117 denied receiving money from Kim but admitted that her relatives received gifts and assistance from him. She also claimed that her children never spoke to him. She described AAA276117 as a kind but quiet person. While she acknowledged that AAA276117 was not a liar, she admitted that she hid things from them. Even when she asked if something was wrong, AAA276117 would simply respond, "<i>Inay do not worry. I am okay.</i>"<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> When asked how she felt upon hearing her testimony in open court, she said, "<i>Awang-awa po ako sa anak ko. May nangyayari na palang ganon, hindi ko pa alam</i>," and expressed anger towards the person who committed the acts to AAA276117.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p><p> She also clarified that she did not speak to Kim because she had only completed Grade 6 and could not speak English. Finally, the only time she reprimanded AAA276117 was when she discovered that AAA276117 had a boyfriend named <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </p><p> CCC276117 described Kim as kind and generous to their family and their neighbors, considering him part of their family.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></p><p> She testified that on March 15, 2018, at 4:00 p.m., she and her sister AAA276117 walked from school. Upon reaching home at around 5:00 p.m., she noticed Kim at their house with Victor, their father, and BBB276117, having a drinking session. By 8:00 p.m., she had gone to sleep with her mother and siblings, while her father chose to sleep in the living room. The next day, at 4:00 a.m., she was awakened by the sound of her parents being taken away, accompanied by AAA276117's cries. She was confused and saddened by the incident, insisting that her parents had not done anything wrong.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></p><p> On February 14, 2020, the RTC rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> convicting Kim, XXX276117, and YYY276117 of the crime of qualified trafficking in persons, with the following disposition: </p><blockquote> <p> WHEREFORE, premises considered, the Honorable Court finds accused Hyo Soon Kim @ "Rocks" and [XXX276117] guilty beyond reasonable doubt of the crime of Qualified Trafficking in Persons defined and penalized under Section 4 (a) in relation to Section 3(b) (c) (h), Section 6 (a) and Section 10 (e) of [Republic Act No.] 9208 (the Anti-Trafficking in Persons Act of 2003) as amended by [Republic Act No.] 10364 (the Expanded Anti-Trafficking in Persons Act of 2012) as principal by direct participation and each accused are hereby sentenced to suffer the penalty of life imprisonment and to pay fine in the amount of Two Million Pesos ([PHP] 2,000,000.00); while [YYY276117] is hereby found guilty beyond reasonable doubt of the crime of Qualified Trafficking in Persons defined and penalized under Section 4 (a) in relation to Section 3(b) (c) (h), Section 6 (a), Section 4-B and Section 10 (c) of [Republic Act No.] 9208 (the Anti-Trafficking in Persons Act of 2003) as amended by [Republic Act No.] 10364 (the Expanded Anti-Trafficking in Persons Act of 2012) as accomplice and is hereby sentenced to suffer the penalty of imprisonment of fifteen (15) years and a fine of Five Hundred Thousand Pesos ([PHP] 500,000.00). </p> <p> They are further ordered to pay [AAA276117] moral damages in the total amount of Five Hundred Thousand Pesos ([PHP] 500,000.00) and exemplary damages in the total amount of One Hundred Thousand Pesos ([PHP] 100,000.00) and the cost of suit, all with the corresponding interest of 6% per annum from the date of the finality of this decision until fully paid, to be shared by the accused as follows: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">a)</div></td> <td width="95%"><div align="justify">Kim and [XXX276117] shall pay [AAA276117] solidarily the amount of [PHP] 400,000.00 of the moral damages and the amount of [PHP] 80,000.00 of the exemplary damages, and subsidiarily for the liability of [AAA276117] in the amount of moral and exemplary damages.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">b)</div></td> <td><div align="justify">[YYY276117] shall pay [AAA276117] the amount of [PHP] 100,000.00 of the moral damages and [PHP] 20,000,00 of the exemplary damages and subsidiarily for the liability of Kim and [XXX276117] in the moral and exemplary damages. </div></td> </tr> </tbody></table> </blockquote> <p>The Jail Warden of Bureau of Jail Management and Penology (BJMP), <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> or his duly authorized representative is hereby ordered to transfer immediately accused Kim and [XXX276117] to the New Bilibid Prison (National Penitentiary), Muntinlupa City, while accused [YYY276117] to the Correctional Institute for Women, Mandaluyong City. Let a commitment order be issued for their immediate transfer. </p> <p> After the service of his sentence, accused Hyo Soon Kim a.k.a. "Rocks" is hereby ordered deported to his country of origin being a resident of Vancouver, Canada, unless he can show that he is a Filipino citizen. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p> </blockquote> <p> Dissatisfied with the verdict, Kim, XXX276117, and YYY276117 filed an appeal<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> before the CA. </p><p> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> the CA dismissed the appeal and affirmed the RTC's conviction for qualified trafficking in persons but modified the penalty for YYY276117 from accomplice to principal conspirator. The CA found that XXX276117 and YYY276117, the minor complainant's parents, conspired with Kim to "obtain, provide and offer" their 16-year-old daughter AAA276117 to Kim for sexual exploitation in exchange for money, taking advantage of her vulnerability due to her minority, poverty, and their parental authority over her. The CA rejected Kim's claims of extortion and drunkenness, finding that he was caught <i>in flagrante delicto</i> sexually exploiting AAA276117 during the NBI rescue operation, and that all three were guilty beyond reasonable doubt of the crime, with Kim and XXX276117 sentenced to life imprisonment and a PHP 2,000,000.00 fine each, while YYY276117's sentence was modified from 15 years to life imprisonment with the same fine. All of them were ordered to pay solidary damages of PHP 500,000.00 for moral damages and PHP 100,000.00 for exemplary damages to AAA276117.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> The CA disposed the case as follows: </p><blockquote> <p> WHEREFORE, premises considered, the instant appeal is DISMISSED for lack of merit. Accordingly, the Decision dated February 14, 2020 of the Family Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>, finding Hyo Soon Kim aka "Rocks", [XXX276117] and [YYY276117] guilty of the crime of Qualified Trafficking in Persons under Section 4 (a) in relation to Section 3 (b), (c), and (h), Section 6 (a) and Section 10 (e) of [Republic Act] No. 9208, as amended by [Republic Act] No. 10364, is AFFIRMED subject to the MODIFICATION that accused-appellant [YYY276117] is likewise sentenced to suffer the penalty of life imprisonment and a fine of Two Million Pesos ([PHP] 2,000,000.00). </p> <p> All accused-appellants shall be SOLIDARILY LIABLE to the minor complainant the amounts of [PHP] 500,000.00 as moral damages and [PHP] 100,000.00 as exemplary damages. </p> <p> Accused-appellants are likewise ORDERED to pay interest at the rate of six percent (6%) per annum from the time of finality of this decision until fully paid. </p> <p> The New Bilibid Prison (National Penitentiary) and the Correctional Institute for Women are DIRECTED to REPORT to this Court within five (5) days from receipt of this Decision whether accused-appellants are currently under their custody. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></p> </blockquote> <p> Kim filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> before the CA. However, before the CA acted on the motion, Kim died on May 20, 2023.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> The CA dismissed the motion in a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> and dismissed the criminal case against Kim because his death extinguished his criminal liability and civil liability <i>ex delicto</i>.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> </p><p> Hence, XXX276117 and YYY276117 file the instant appeal.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> </p><p align="center"> <b>Issue</b> </p><p> The issue in this case is whether the CA erred in affirming with modification the conviction of accused-appellants XXX276117 and YYY276117 for qualified trafficking in persons under Republic Act No. 9208, or The Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364. </p><p align="center"> <b>This Court's Ruling</b> </p><p> The appeal has no merit. </p><p> The CA correctly affirmed the conviction of accused-appellants for qualified trafficking in persons under Republic Act No. 9208, as amended by Republic Act No. 10364. </p><p> The accused-appellants were charged with violating Section 4(a) in relation to Section 3(b), (c), and (h) and Section 6(a) and 10(e) of Republic Act No. 9208, as amended. Section 4(a) provides that it shall be unlawful "to recruit, obtain, hire, provide, offer, transport, transfer, maintain, harbor, or receive a person by any means, including those done under the pretext of domestic or overseas employment or training or apprenticeship, for the purpose of prostitution, pornography, or sexual exploitation." The crime becomes qualified under Section 6(a) when "the trafficked person is a child," with child defined in Section 3(b) as a "person below [18] years of age or one who is over [18] but is unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition." </p><p> The elements of trafficking in persons were established in <i>People v. Casio</i>,<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> as follows: </p><blockquote> <p> The elements of trafficking in persons can be derived from its definition under Section 3(a) of Republic Act No. 9208, thus: </p> <p> (1) The act of "recruitment, transportation, transfer or harbouring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders." </p> <p> (2) The means used which include "threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another; and</p> <p> (3) The purpose of trafficking is exploitation which includes "exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </p> </blockquote> <p> The expanded definition under Republic Act No. 10364 broadened the prohibited acts to include "obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons," thus encompassing the specific conduct alleged in this case: </p> <blockquote> <p> Under Republic Act No. 10364, the elements of trafficking in persons have been expanded to include the following acts: </p> <p> (1) The act of "recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders;" </p> <p> (2) The means used include "by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person;" </p> <p> (3) The purpose of trafficking includes "the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs."<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> </p> </blockquote> <p> The prosecution established that accused-appellants engaged in "obtaining, providing, and offering" AAA276117 to Kim by exploiting her vulnerability through their position of authority and her family's economic circumstances. The evidence demonstrated a systematic pattern of conduct whereby Kim provided monetary support to AAA276117 and her family in exchange for sexual access to the minor, thus: </p><blockquote> <p> Pros. Gonzales: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td colspan="2">. . . . </td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">You stated in question and answer no. 25, "<i>Humihingi nga po sa akin and mga magulang sa akin para daw kumbinsihin si</i> [AAA276117] <i>na pumayag na makipagtalik sa</i> foreigner. <i>Kasi hindi daw sila binibigyan ng pera pag hindi pumapayag si</i> [AAA276117,"] do you recall making that statement? </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Can you tell us who exactly told you that? </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">They, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">When you say they to whom are you referring to?</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The parents, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Are you referring to [XXX276117] and [YYY276117]?</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></div></td> </tr> </tbody></table> </blockquote> <p>AAA276117's <i>Sinumpaang Salaysay</i>, goes into more detail about the horrendous acts done by Kim to her: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">4.</div></td> <td width="95%"><div align="justify">T: <em>[Maaari] mo bang sabihin kung ano ang maling ginagawa sa 'yo? </em></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Hinahawakan po niya ang maseselang bahagi ng aking katawan tulad ng dibdib, aking ari at mga hita. Pilit din po akong hinahalikan sa pisngi at labi.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">5.</div></td> <td><div align="justify">T: <em>Sino naman ang gumagawa sa'yo ng mga iyon? </em></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Si </em>ROCKS <em>po.</em> (Later identified as HYO SOON KIM, a Canadian National and born in South Korea)</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">6.</div></td> <td><div align="justify">T: <em>Sino si</em> Rocks?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Siya po ang</em> foreigner<em> na palaging pumupunta sa bahay namin.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">7.</div></td> <td><div align="justify">T:<em> Ano ang tunay na pangalan ni </em>Rocks?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Hindi ko po alam. Hindi niya po sinasabi. Noong kami po ay nakatira sa</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> <em>ay</em> CHRIS <em>ang pakilala niya sa amin at nang makalipat kami sa</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxx</span> <em>ay gusto niyang tawagin namin siya bilang</em> Rocks.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td><div align="justify">T: <em>Kailan at saan nangyari ang sinasabi mong panghahawak ni</em> Rocks <em>sa maseselang bahagi ng iyong katawan at paghalik sa 'yo?</em></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Nagsimula po ito noong</em> November 2017 <em>hanggang </em>March 2018 <em>sa</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">16.</div></td> <td><div align="justify">T: <em>[Maaari] mo bang isalaysay kung paano nagsimula na gawan ka ng mali ni</em> Rocks <em>tulad ng iyong nabanggit kanina?</em></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S:<em> Opo. Noong una mabait at mapagbigay siya sa aking pamilya. Kung bumisita siya sa amin ay halos 2 hanggang 3 beses kada linggo at inaabutan ako ng</em> [PHP 5,000.00] <em>kada bisita. Ibinibigay ko ang</em> [PHP 3,000.00 <em>hanggang</em> PHP 4,000.00] <em>dito sa aking inay panggastos sa bahay at ang natitira ay aking pinangbibili ng aking gamit at minsan ay laruan ng aking mga kapatid.</em> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">17.</div></td> <td><div align="justify">T: <em>Mabait at mapagbigay naman pala si</em> Rocks <em>sa inyong pamilya, paano mo nasabi na nagawan ka niya ng mali?</em></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Simula noong November 2017 nagbago ang tingin ko kay Rocks nang sinabihan niya ang mga Tita ko, isa na dito si</em> [BBB276117], <em>na may gusto sya sa 'kin. Noong araw din na iyon ay pinapasok ni </em>Rocks<em> sa kwarto na kaming dalawa lamang at nagtapat na may gusto nga ito sa 'kin. Dito na ako nag-umpisang umiwas sa kanya ngunit naging halos araw-araw na siyang bumibisita sa bahay para uminom at ako ay makita at makasama. </em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Napapadalas din ang pagtulog niya sa bahay kung saan gusto nito na ako ay makatabi, pinipilit din ako nito na tumabi sa kanyang inuupuan habang umiinom at makasama sa kuwarto para daw makipag-usap kung saan nagkakaroon siya ng pagkakataon na ako ay hipuan at hawakan sa maseselang bahagi ng aking katawan. Hindi ko gusto ang mga pinapagawa niya at kung ako'y tumatanggi nagagalit si Rocks at biglang umaalis ng bahay. Dito na ako pinapagalitan ni Inay at Itay.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">18.</div></td> <td><div align="justify">T: <em>Bakit nagagalit ang iyong Inay at Itay sa tuwing nagagalit sa 'yo si</em> Rocks?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Kapag galit po si</em> Rocks <em>ay hindi siya nakakapagbigay ng pera sa amin.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">19.</div></td> <td><div align="justify">T: <em>Magkano naman ang ibinibigay sa 'yo ni</em> Rocks?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Simula noong nakapagsabi na siya sa akin at aking pamilya na gusto niya ako, nakapagbigay sya ng </em>[PHP 20,000.00<em> at</em> PHP 40,000.00] <em>sa iba't ibang pagkakataon. Nagbibigay din siya ng tig</em>-100 <em>hanggang 500 sa mga batang kapatid ko tuwing bumibisita siya.</em></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">22.</div></td> <td><div align="justify">T: <em>[Maaari] mo bang isalaysay kung paano naulit-ulit ang mga maling ginawa sa yo ni</em> Rocks?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Opo. Bandang</em> December 2017 <em>nagyaya si</em> Rocks <em>sa aming pamilya na kumain sa</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Restaurant <em>sa bayan ng</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. <em>Nag-arkila si</em> Rocks <em>ng</em> jeep <em>at tinabihan niya ako habang nagbibiyahe. Gabi noon at pinapatay niya ang ilaw sa loob ng</em> jeep <em>at dito niya ako inakbayan at hinawakan ang aking dibdib. Hindi ko alam ang aking gagawin at takot na takot. Pagkarating ng</em> restaurant <em>ay iyak na lang ako ng iyak at hindi makakain. Tinanong ako ng aking mga Tita kung bakit ngunit hindi ko po ito kayang sabihin. </em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Bandang</em> January 2018 <em>habang nag-iinuman sila ni Itay at</em> Rocks <em>kasama ng iba pa ay tinawag ako ni</em> Rocks <em>para tumabi sa kanya. Nang makatabi ko siya niyaya niya ako sumama sa kanya sa</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> <em>para mamasyal ngunit hindi po ako umiimik dahil ayoko pong sumama. Niyaya niya akong muli pumasok ng kuwarto ng kaming dalawa lang ngunit tumanggi ako. Sinabihan ako ni Inay at Itay na pumayag na dahil makikipag-usap lang naman daw siya. Nang magkasama na kami ni</em> Rocks <em>sa kuwarto sinabi niya na bago niya ako dalhin sa</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> <em>ay dapat pumayag muna ako na makipagtalik sa kanya. Sumagot lang ako na "Ayokong pumunta ng</em> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>." <em>At lumabas na ako ng kuwarto.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Isang hapon ng</em> February 2018<em> kinausap ako ng Itay na pumasok ng kuwarto kasama si </em>Rocks <em>para muli makipag-usap dito. Dahil maguusap lang naman ay sumunod ako. Pagpasok ko doon ay pilit akong hinahalikan ni</em> Rocks <em>sa labi. Tinulak ko siya at pinilit tumayo sa kama. Pinilit niya naman akong umupo para mahalikan ngunit hindi talaga ako pumayag kaya lumabas siya ng kuwarto at umalis ng bahay na galit na galit. Dito ako pinagalitan ng matindi ni Inay at Itay at sinabi "Maghihirap ka na [AAA276117] kasi tumanggi ka!</em>"</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Matapos iyon ay napabalik din si</em> Rocks <em>sa pagdalaw sa bahay. Madalas na gusto niya na samahan ko siya sa loob ng kuwarto nang kaming dalawa lang. [Napilitan] po ako sumunod kay</em> Rocks <em>para hindi magalit si Inay at Itay. Minsan bandang</em> February 2018 <em>din habang magkasama kami dalawa sa kuwarto ay hinalikan niya ako sa pisngi at sapilitan hinalikan ako sa labi. Mayroon din pagkakataon na tinaas niya ang aking damit at dahil pinigilan kong maitaas niya ito ng husto ay tiyan ko lang ang kanyang nahaplos at nahalikan. Hinipuan din niya ako sa aking ari nang ipatong niya ang kanyang kamay sa ibabaw ng aking pantalon. Dito po nakapagbigay si</em> Rocks <em>sa akin ng</em> [PHP 20,000.00]. <em>Minsan naman ay pinahiga niya ako para matulog at dito niya ako dinaganan. Nagpumiglas ako at buong lakas ko siyang itinulak palayo sa akin.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Bago ang aking</em> birthday (March 5, 2018), <em>dito ibinigay sa 'kin ni</em> Rocks <em>ang</em> [PHP 40,000.00] <em>kung saan halos pinamili ito ng mga gamit sa bahay. Tinanong ako ni</em> Rocks <em>kung gusto ko magcelebrate ng aking</em> birthday. <em>Nang pumayag ako niyaya niya ako makipag-usap sa loob ng kuwarto. Dito na niya sinabi na bago siya gumastos sa aking</em> birthday <em>kailangang makipagtalik muna ako sa kanya. Hindi ako pum[a]yag kaya walang</em> celebration <em>na naganap</em>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Minsan noong</em> March 2018, <em>matapos siyang uminom, niyaya niya pumasok sa kuwarto para mag-usap pero hindi niya ako kinausap. Huhubarin niya sana ang kanyang pantalon ngunit pinigilan ko. Nang umupo ako sa kama[,] tumabi siya sa 'kin at [i]nilabas ang kanyang ari. Pilit niyang kinuha ang aking kamay at pinahawak ang kanyang ari. Habang pinipilit nitong hawakan [ko] [i]yon ay pinataas-baba pa nya ang aking kamay habang nakahawak sa ari nya. Pilit kong tinanggal ang aking kamay ngunit pinigilan niya ito. Dito ko na siya tinulak ng malakas. Napahiga na lang siya sa kama at dito na ako nagpaalam na lalabas ng kuwarto. Hindi niya ako pinayagan at gusto niya na tabihan ko siya sa paghiga kahit ilang minuto lang. Humiga ako sandali kung saan niyakap niya ako. Ilang sandali lang ay nagpaalam na ako at pinayagan naman niya akong lumabas ng kuwarto.</em></div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">27.</div></td> <td><div align="justify">T: <em>[Maaari] mo bang isalaysay kung ano ang nangyari noong</em> March 15, 2018?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">S: <em>Noong hapon ng</em> March 15, 2018, <em>pinauwi ako ni Inay dahil dumating si</em> Rocks <em>at hinahanap daw ako nito. Pag-uwi ko ay nadatnan ko</em> <em>si</em> Rocks <em>umiinom kasama ang Itay at ilang kamag-anak. Pinatabi ako ni </em>Rocks <em>sa kanya at unti-unti niyang inusog ang aking silya. Dito na siya nakakahawak sa aking hita kaya tumayo ako at kumuha ng libro para ipangharang sa bandang ari ko. Ilang sandali lamang ay nagpaalam na ako para matulog. Pumasok ako sa isang kuwarto namin at tumabi sa aking mga kapatid.</em></div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><em>Nagising na lang ako nang may mga nagpakilalang taga</em>-NBI<em> na pumasok sa aming bahay at aking kuwarto na aming tinutulugan. Nagulat din ako na katabi ko na si</em> Rocks <em>habang nakayakap sa akin banda sa dibdib. Nakita ito ng mga taga</em>-NBI<em> at hinuli nila si</em> Rocks. <em>Ako, kasama ng aking mga magulang, pati na rin si</em> Rocks <em>ay dinala sa opisina ng</em> NBI <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup></div></td> </tr> </tbody></table> </blockquote> <p>Significantly, under Republic Act No. 9208, as amended, there is no requirement to prove the "means'' element when the victim is a minor. In this case, AAA276117 was a minor as evidenced by her Certificate of Live Birth<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> and as stipulated by both the prosecution and the defense.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> As clarified in <i>People v. Villanueva</i>:<sup style="COLOR: RGB(255, 0, 0);">[83]</sup></p> <blockquote> <p> The recruitment, transportation, transfer, harboring or receipt of a child for the purpose of exploitation shall still be considered "trafficking in persons" even if it does not involve any of the means set forth in the first paragraph of Sec. 3 (a) of [Republic Act] No. 9208. Given that the person allegedly trafficked in the case at bar is a child, we may do away with discussions on whether or not the second element was actually proven.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> (Citation omitted)</p> </blockquote> <p> The concept of vulnerability in trafficking cases encompasses "those inherent, environmental, or contextual factors that increase the susceptibility of an individual or group to being trafficked," including "poverty, inequality, discrimination, and gender-based violenceâall of which contribute to creating economic deprivation and social conditions that limit individual choice and make it easier for traffickers and exploiters to operate."<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Accused-appellants clearly exploited AAA276117 's vulnerability arising from her age, poverty, and their parental authority over her. As her parents, accused-appellants should have protected AAA276117 from exploitation, yet they facilitated her abuse in exchange for financial benefits from Kim. </p><p> Further, the third element in trafficking in persons is the purpose of the trafficking, which includes "exploitation or <i>the prostitution of others or other forms of sexual exploitation</i>, forced labor or services, slavery, servitude, or the removal or sale of organs."<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Here, accused-appellants offered their own daughter, AAA276117, to Kim for Kim's sexual gratification. </p><p> More, the trafficking committed by accused-appellants must be modified.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Trafficking in persons is qualified if any of the circumstances in Republic Act No. 9208, as amended, are present, thus: </p><blockquote> <p> Section 6. <i>Qualified Trafficking in Persons</i>. â Violations of Section 4 of this Act shall be considered as qualified trafficking: </p> <blockquote> <p> (a) When the trafficked person is a <i>child</i>; </p> <p> . . . . </p> <p> (d) When the offender is a spouse, an ascendant, <i>parent</i>, sibling, guardian <i>or a person who exercises authority over the trafficked person</i> or when the offense is committed by a public officer or employee. (Emphasis supplied) </p> </blockquote> </blockquote> <p> Section 6(a) and (d) provides that a violation of Section 4 shall be considered qualified when: (1) the trafficked person is a <i>child</i>; and (2) the offender is a spouse, an ascendant, <i>parent</i>, sibling, guardian or <i>a person who exercises authority over the trafficked person</i> or when the offense is committed by a public officer or employee. </p><p> These circumstances are present here. Based on AAA276117's Certificate of Live Birth, she was born on March 5, 2002. Thus, she was only 16 years old at the time of the incidents with Kim ended. Accused-appellants also admitted that they are the parents of AAA276117. </p><p> The defense's reliance on affidavits of desistance fails under the express provisions of the law. Section 8 of Republic Act No. 9208, as amended by Republic Act No. 10364, specifically provides that "[c]ases involving trafficking in persons should not be dismissed based on the affidavit of desistance executed by the victims or their parents or legal guardians. Public and private prosecutors are directed to oppose and manifest objections to motions for dismissal." </p><p> The rationale for this prohibition is well-established, as explained in <i>People v. XXX</i>:<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> </p><blockquote> <p> [A]ffidavits of retraction can easily be secured from witnesses, usually through intimidation or for a monetary consideration. Recanted testimony is exceedingly unreliable. There is always a possibility that it will later be repudiated. Only when there exist special circumstances in the case, which when coupled with the retraction raise doubts as to the truth of the testimony or statements given, can retractions be considered and upheld.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> (Citation omitted) </p> </blockquote> <p> Further, the conspiracy among accused-appellants was clearly established through their coordinated conduct. As held in <i>Ferrer v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> "conspiracy exists where two or more persons come to an agreement concerning the commission of a felony and decide to commit the same. The essence of conspiracy is the unity of action and purpose."<sup style="COLOR: RGB(255, 0, 0);">[91]</sup></p><p> The evidence demonstrated that accused-appellants actively facilitated the exploitation of AAA276117 by repeatedly asking her to accompany Kim alone, allowing him to touch her inappropriately during drinking sessions, and even requesting AAA276117's own aunt to convince the victim to engage in sexual intercourse with him. This conduct goes beyond mere acquiescence and demonstrates active participation in the criminal scheme. </p><p> Further, the CA properly rejected the defense's denial, following the established principle in <i>People v. Gersamio</i><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> that denial is an inherently weak defense that cannot prevail over the positive and credible testimony of the prosecution witness that the accused committed the crime, thus: </p><blockquote> <p> As this Court has oft pronounced, both denial and <i>alibi</i> are inherently weak defenses that cannot prevail over the positive and credible testimony of the prosecution witness that the accused committed the crime. Thus, as between a categorical testimony, which has a ring of truth on one hand, and a mere denial and <i>alibi</i> on the other, the former is generally held to prevail. Moreover, for the defense of alibi to prosper, the appellant must prove that he was somewhere else when the offense was committed and that he was so far away that it was not possible for him to have been physically present at the place of the crime or at its immediate vicinity at the time of its commission.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> (Citation omitted) </p> </blockquote> <p> AAA276117's testimony was corroborated by other witnesses and remained consistent despite attempts at intimidation through the execution of recantation documents. More, Kim was undoubtedly at AAA276117's house at the time of the commission of the offense. </p><p> Regarding the warrantless arrest, any procedural objections were waived when the accused submitted to arraignment without objection. As established in <i>People v. Pepino</i>,<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> the illegal arrest of an accused is not sufficient cause for setting aside a valid judgment rendered upon a sufficient complaint after a trial free from error: </p><blockquote> <p> At any rate, the illegal arrest of an accused is not sufficient cause for setting aside a valid judgment rendered upon a sufficient complaint after a trial free from error. Simply put, the illegality of the warrantless arrest cannot deprive the State of its right to prosecute the guilty when all other facts on record point to their culpability. It is much too late in the day to complain about the warrantless arrest after a valid information had been filed, the accused had been arraigned, the trial had commenced and had been completed, and a judgment of conviction had been rendered against her.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> (Citation omitted) </p> </blockquote> <p> More, the CA was correct in reversing the RTC when it classified YYY276117 as merely an accomplice rather than a principal conspirator. The distinction was clarified in <i>People v. De Vera</i>:<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> </p><blockquote> <p> Conspirators and accomplices have one thing in common: they know and agree with the criminal design. Conspirators, however, know the criminal intention because they themselves have decided upon such course of action. Accomplices come to know about it after the principals have reached the decision, and only then do they agree to cooperate in its execution. Conspirators decide that a crime should be committed; accomplices merely concur in it. Accomplices do not decide whether the crime should be committed; they merely assent to the plan and cooperate in its accomplishment. Conspirators are the authors of a crime; accomplices are merely their instruments who perform acts not essential to the perpetration of the offense.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> </p> </blockquote> <p> The evidence established that accused-appellants actively participated in planning and facilitating the exploitation, making them co-conspirators rather than mere accomplices. </p><p> As for the proper penalty, Section 10(c) of Republic Act No. 9208, as amended by Republic Act No. 10364 provides that persons found guilty of qualified trafficking in persons shall suffer the penalty of life imprisonment and a fine of not less than PHP 2,000,000.00, but not more than PHP 5,000,000.00. The CA correctly sentenced accused-appellants to suffer the penalty of life imprisonment; <i>however, in light of the reprehensible and depraved acts committed by the parentsâaccused-appellantsâto their own minor daughter, this Court increases the fine to PHP 5,000,000.00</i>. </p><p> Further, the CA appropriately awarded substantial damages consistent with the Court's pronouncements. Following <i>People v. Hadja Jarma Lalli</i><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> and <i>People v. Nufrasir Hashim</i>,<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> this Court increased "the payment of damages in the crime of trafficking in persons from PHP 50,000.00 to PHP 500,000.00 as moral damages and PHP 50,000.00 to PHP 100,000.00 as exemplary damages."<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> These amounts reflect the gravity of trafficking crimes and serve both compensatory and deterrent purposes. This Court noted that trafficking "is an analogous case to the crimes of seduction, abduction, rape, or other lascivious acts. In fact, it is worse."<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> </p><p> Finally, the argument that the presence of family members would deter such conduct ignores established jurisprudence as correctly pointed out by the CA. As held in <i>People v. Lopez</i>:<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> </p><blockquote> <p> [L]ust is no respecter of time and place; it can be committed even in places where people congregate, in parks, along the roadsides, in school premises, in a house where there are other occupants, in the same room where other members of the family are also sleeping, and even in places which to many would appear unlikely or high risk venues for its commission.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> (Citation omitted) </p> </blockquote> <p> Clearly, the video evidence of the rescue operation demonstrated that the exploitation occurred precisely in such circumstances. </p><p> Thus, the convictions must be affirmed, with appropriate modifications to ensure all conspirators receive equal punishment and adequate damages are awarded to reflect the severity of this heinous crime against a vulnerable minor. </p><p> Further, in accordance with <i>People v. Jugueta</i>,<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> all of these amounts shall earn interest at the rate of 6% per annum from the date of finality of this Decision until full payment. </p><p> <b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b> for lack of merit. The December 28, 2022 Decision of the Court of Appeals in CA-G.R. CR-HC No. 14357 is <b>AFFIRMED with MODIFICATIONS</b>. Accused-appellants XXX276117 and YYY276117 are <b>GUILTY</b> beyond reasonable doubt of the crime of qualified trafficking in persons under Section 4(a) in relation to Section 3(b), (c); and (h), Section 6(a) and Section 10(c) of Republic Act No. 9208; as amended by Republic Act No. 10364. They are likewise sentenced to suffer the penalty of life imprisonment and <b>PAY</b> a fine of PHP 5,000,000.00 each. Both accused-appellants shall be <b>SOLIDARILY LIABLE to PAY</b> the minor complainant AAA276117 the amounts of PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages. All monetary awards shall earn interest of 6% per annum from date of finality of this Decision until full payment. </p><p> <b>SO ORDERED.</b> </p><p> <i>Leonen, SAJ., Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur. <i><br> Lazaro-Javier,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on official business. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> In line with the Amended Administrative Circular No. 83-2015, Republic Act No. 9208 of the Revised Penal Code, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 8-52. The December 28, 2022 Decision in CA-G.R. CR-HC No. 14357 was penned by Associate Justice Emily L. San Gaspar-Gito and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Alfonso C. Ruiz II of the Special Eleventh Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 59-92. The February 14, 2020 Decision in Criminal Case No. 18-23466 was penned by Judge Ismael H. Macasaet of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> RTC records, pp. 1-3. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 1-2.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 53; <i>rollo</i>, pp. 10, 60. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records, pp. 206-207. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 53-56; <i>rollo</i>, pp. 10, 60. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> RTC records, pp. 80-83.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 10, 61; The June 29, 2018 Resolution in Criminal Case No. 18-23466 was penned by Judge Ishmael H. Macasaet of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, pp. 10, 61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 11, 61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Id at 12; RTC records, p. 216. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, p. 12; RTC records, p. 217. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i>, p. 12; RTC records, pp. 217-218. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, p. 12; RTC records, p. 218. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, p. 13; RTC records, p. 218. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i>, p. 13; RTC records, p. 219. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <em>Id</em>. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i>, p. 14; RTC records, p. 219. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, p. 14; RTC records, pp. 219-220. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, p. 14; RTC records, p. 220. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, p. 14; RTC records, pp. 209-213. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, pp. 14-15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> RTC records, pp. 410-411. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> RTC records, pp. 209-213. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, p. 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 15-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 11, 68. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, pp. 16-17; TSN, Hyo Soon Kim, September 20, 2019, pp. 5-6. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 17; TSN, Hyo Soon Kim, September 20, 2019, pp. 6-7. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i>, p. 17; TSN, Hyo Soon Kim, September 20, 2019, pp. 8-11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, p. 17; TSN, Hyo Soon Kim, September 20, 2019, pp. 13-23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, p. 18; TSN, Nancy Moran Montilla, October 25, 2019, pp. 5-10. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, p. 18; TSN, Victor Mescallado, May 10, 2019, pp. 7-16. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, pp. 18-19; TSN, Victor Mescallado, May 10, 2019, pp. 7-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 19; TSN, Victor Mescallado, May 10, 2019, pp. 7-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i>, p. 19; TSN, XXX276117, September 13, 2019, pp. 4-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, p. 19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 19; TSN, XXX276117, September 13, 2019, pp. 4-41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 20; TSN, YYY276117, August 23, 2019, pp. 4-47. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i>, p. 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 20-21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 21; TSN, CCC276117, February 15, 2019, pp. 4-28. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, pp. 21-22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 59-92; RTC records, pp. 429-462. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo</i>, pp. 91-92. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> CA <i>rollo</i>, pp. 98-130. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, pp. 8-52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 51-52. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> CA <i>rollo</i>, pp. 361-381. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 413, 417. </p><p><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 416-419. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, pp. 3-5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 749 Phil. 458 (2014) [Per J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 472-473. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 474. </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> TSN, BBB276117, July 9, 2018, p. 13. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[80]</sup> RTC records, pp. 216-221. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> RTC records, pp. 206-207. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> RTC records, pp. 53-56; <i>rollo</i>, pp. 10, 60. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> 795 Phil. 349 (2016) [Per J. Perez, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 360. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Rollo</i>, p. 29; Abuse of a position of vulnerability and other "means" within the definition of trafficking in persons, United Nations Office on Drugs and Crime, <i>available at</i> <a href="https://www.unodc.org/documents/human-trafficking/2012/UNODC_2012_Issue_Paper_-_Abuse_of_a Position_of_Vulnerability.pdf">https://www.unodc.org/documents/human-trafficking/2012/UNODC_2012_Issue_Paper_-_Abuse_of_a Position_of_Vulnerability.pdf</a> (last accessed on September 29, 2025). </p><p><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Republic Act No. 9208 (2003), sec. 3. Anti-Trafficking in Persons Act of 2003. </p><p><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> RTC records, pp. 1-3. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 905 Phil. 791 (2021) [Per J. Hernando, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 810. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 925 Phil. 97 (2022) [Per J. Lazaro-Javier, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> at 120. </p><p><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> 763 Phil. 523 (2015) [Per J. Perez, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i> at 539. </p><p><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> 777 Phil. 29 (2016) [Per J. Brion, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i> at 47. </p><p><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> 371 Phil. 563 (1999) [Per J. Panganiban, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id.</i> at 585. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[98]</sup> 675 Phil. 126 (2011) [Per J. Carpio, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[99]</sup> 687 Phil. 516 (2012) [Per J. Sereno, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id.</i> at 527. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i> at 528. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[102]</sup> 431 Phil. 79 (2002) [Per J. Quisumbing, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id.</i> at 88. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[104]</sup> 783 Phil. 806 (2016) [Per J. Peralta, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

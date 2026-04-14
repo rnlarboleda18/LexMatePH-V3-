@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259589 (Formerly UDK-16849) - CHARLON FERNANDO Y ESMA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70090' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259589 (Formerly UDK-16849), July 29, 2025 ]</H2>
+			<H3>CHARLON FERNANDO <i>Y</i> ESMA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>For the retraction of a witness to constitute ground for new trial, it must be shown that: (1) the testimony of the retracting witness during trial is essential to the judgment of conviction such that its elimination would lead the trial judge to a different conclusion; (2) there exists special circumstances which, coupled with the retraction, raise doubt as to the truth of the testimony given by the retracting witness at the trial;<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and (3) there is no other evidence sustaining the judgment of conviction except said testimony.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup></p><p> Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> under Rule 45 of the Rules of Court challenging the Court of Appeals (CA) Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and Resolution,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> which respectively affirmed the Regional Trial Court (RTC) Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> convicting petitioner Charlon Fernando <i>y</i> Esma (Charlon) of carnapping and denied his Motion for New Trial.</p><p align="center"> <i>I</i> </p><p> Charlon was charged with carnapping under Republic Act No. 6539<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> in an Information,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> the accusatory portion of which reads: </p><blockquote> <p> That on or about [October 28, 2013], in the City of Olongapo, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, with intent to gain and without the knowledge and consent of complainant Francisco V. Combate, did then and there willfully, unlawfully[,] and feloniously take, steal, carry away [one] motor vehicle, described as follows, to wit:</p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="22%">MAKE/TYPE</td> <td width="9%">:</td> <td width="69%">Honda </td> </tr> <tr valign="top"> <td>Color </td> <td>:</td> <td>Blue</td> </tr> <tr valign="top"> <td>O.R. No.</td> <td>:</td> <td>420476490</td> </tr> <tr valign="top"> <td>Model </td> <td>:</td> <td>XRM</td> </tr> <tr valign="top"> <td>Reg. Plate No.</td> <td>:</td> <td>ID 6829</td> </tr> <tr valign="top"> <td>C.R. No. </td> <td>:</td> <td>4602886-4</td> </tr> </tbody></table> </blockquote> <p>valued at [PHP 102,816.00], to the damage and prejudice of the above-named complainant.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p> </blockquote> <p> Upon arraignment, Charlon entered a plea of not guilty. Thereafter, pre-trial and trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> The CA summarizes the facts as follows: </p><p align="center"> Version of the Prosecution </p><blockquote> <p> To prove the guilt of Charlon. . . the prosecution presented [two] witnesses: (1) Francisco Combate (Francisco); and (2) Darius Santos (Darius), and their testimonies are summarized as follows: </p> <p> At around 8:42 p.m. of October 28, 2013, Darius was outside his house. . . with his friends. . . They suddenly saw Charlon pushing a blue Honda XRM motorcycle with plate number IDX6829. Darius thought that Charlon was the cousin of Francisco and that Charlon was bringing Francisco's motorcycle to the repair shop. Charlon stopped underneath a lamp post. Upon seeing him, Darius and his friends told Charlon, <i>"Ikadyot mo na lang"</i> to get the motorcycle started and running. After boarding the motorcycle without being able to start it, Charlon sped away.</p> <p> On October 30, 2013, Jason [Combate], the son of Francisco, asked Darius if he saw his father's motorcycle. Darius answered that he saw the motorcycle being pushed by a male person. Francisco then called Darius to ask the latter to point to him who took the motorcycle. When Darius described the person to Francisco, the latter immediately recognized the culprit as Charlon so they proceeded to the place where Charlon was and Darius confirmed the same by pointing at Charlon. </p> <p> Francisco and Darius then went to the police station to file a formal complaint. While at the station, Francisco received a call informing him that his motorcycle was seen at Charlon's father's house in Sitio Payangan, Dinalupihan, Bataan. Unfortunately, they did not see the motorcycle when they arrived at the said place. </p> </blockquote> <p align="center"> Version of the Defense </p><blockquote> <p> To prove his defense, [Charlon] presented himself, James Mark Lopez (James), Dan Mark Fernando (Dan Mark), Luz Garcia (Luz), and Danilo Fernando, Jr. (Danilo), as witnesses. </p> <p> Around 6:00 p.m. of October 28, 2013, Charlon was with his cousin Dan Mark at the house of the latter's parents in Purok 4, New Cabalan, Olongapo City, because it was Dan Mark's birthday. Charlon brought a live duck as a gift to his cousin. They proceeded to Purok 7, New Cabalan, at the house of Dan Mark's parents-in-law, as the celebration [would] be held there. So Charlon cooked the duck in said house instead. Dan Mark's guests were Charlon, his friend James, his parents-in-law, and a few other guests. During the party, Charlon sat beside James and only got up to pee several times. He stayed at the party until 12:00 a.m. of the next day. </p> <p> Charlon and James left the party together aboard James' motorcycle. James dropped Charlon off at Purok 2, Calapati, where the latter boarded a brown public utility jeepney to get home to his house in Manggahan.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Citations omitted) </p> </blockquote> <p> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> the RTC found Charlon guilty beyond reasonable doubt of carnapping. It ruled that the prosecution was able to prove all the elements of the offense through the testimony of Darius, who served as the eyewitness to the crime. The decretal portion reads: </p><blockquote> <p> WHEREFORE, premises considered, the court finds CHARLON FERNANDO [<i>y</i>] ESMA guilty beyond reasonable doubt of Carnapping defined and penalized under Republic Act [No.] 6539[,] as amended[,] and hereby sentences him to suffer an indeterminate penalty of imprisonment ranging from [14] years and [eight] months, as minimum, to [17] years and [four] months, as maximum, and to pay the cost. </p> <p> . . . . </p> <p> SO DECIDED.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p> </blockquote> <p> In its assailed Decision, the CA affirmed the ruling of the RTC <i>in toto</i>.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> Undeterred, Charlon filed a Motion for New Trial<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> before the CA, alleging that the primary witness for the prosecution, Darius, had executed a <i>Salaysay ng Pag-urong</i><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Affidavit of Retraction) dated March 2, 2020, where the latter voluntarily sought the retraction of his previous statement before the RTC and declared that he did not see Charlon take the motorcycle of Francisco, that it was his aunt and uncle, Joan and Francisco, who taught him what to say to the investigating officers and the court, that he was still a minor at the time he testified, and that he was persuaded to lie before the court. </p><p> In denying the Motion for New Trial in its assailed Resolution, the CA ruled that the <i>Salaysay ng Pag-urong</i> is an affidavit of recantation, which it reluctantly finds to be sufficient ground for a new trial, absent any other newly discovered evidence. Even assuming that a new trial is ordered, this new testimony from Darius would hardly persuade a reversal since mere retraction by a witness does not necessarily vitiate the original testimony, if credible.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Hence, this Petition, arguing that the retraction made by the primary witness casts reasonable doubt on petitioner's guilt and that the CA committed grave abuse of discretion amounting to lack or excess of jurisdiction when it denied his Motion for New Trial on account of said recantation. </p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the Office of the Solicitor General, representing the People, averred that the Petition should be dismissed for failure to comply with Rule 45 of the Rules of Court, particularly for failing to attach material portions of the record and for raising factual issues that are beyond the ambit of a Rule 45 petition, and since the prosecution established all the elements of carnapping.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Further, the CA correctly denied the Motion for New Trial since the Affidavit of Retraction, executed after the CA affirmed petitioner's conviction, has no probative value and cannot be the basis for a new trial.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p align="center"> <i>II</i> </p><p> We have, in the past, suspended Our Rules to serve substantial justice considering: (a) matters of life, liberty, honor, or property; (b) the existence of special or compelling circumstances; (c) the merits of the case; (d) a cause not entirely attributable to the fault or negligence of the party favored by the suspension of the rules; (e) a lack of any showing that the review sought is merely frivolous and dilatory; and (f) that the other party will not be unjustly prejudiced thereby.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Considering that petitioner stands to be deprived of his liberty for a considerable amount of time, and recognizing the merit in his Petition, We deem it necessary to relax the application of procedural rules in the interest of substantial justice. </p><p> Rule 121, Section 2 of the Rules of Court provides only two grounds for a new trial: (1) errors of law or irregularities prejudicial to the substantial rights of the accused have been committed during the trial; and (2) new and material evidence has been discovered which the accused could not with reasonable diligence have discovered and produced at the trial and which, if introduced and admitted, would probably change the judgment. </p><p> Petitioner anchors his Motion for New Trial on the second ground, contending that Darius's new testimony to the effect that it was not petitioner whom he saw taking the motorcycle of Francisco, if introduced and admitted, would probably change the judgment of the lower court. </p><p> In <i>Reyes v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the Court <i>En Banc</i> laid down the parameters for the grant of a new trial on the ground of newly discovered evidence: </p><blockquote> <p> Settled is the rule that before a new trial may be granted on the ground of newly discovered evidence, it must be shown (a) that the evidence was discovered after the trial; (b) that such evidence could not have been discovered and produced at the trial even with the exercise of reasonable diligence; and (c) that it is material, not merely cumulative, corroborative, or impeaching and of such a weight that it would probably change the judgment if admitted. Evidence which merely seeks to impeach the evidence upon which the conviction was based, or <i>retractions of witnesses, will not constitute grounds for new trial, unless it is shown that there is no evidence sustaining the judgment of conviction except the testimony of the retracting witness</i>.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> As regards retractions of witnesses, <i>People v. Manigbas</i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> instructs: </p><blockquote> <p> Affidavits of recantation. . . after conviction are very unreliable, especially since they usually involve a confession of perjury. It is indeed a dangerous rule to set aside a testimony which has been solemnly taken before a court of justice in an open and free trial and under conditions calculated to discourage and forestall falsehood simply because the witnesses who had given them later on changed their minds. Such a rule constitutes a mockery of solemn trials and places the investigation of truth at the mercy of the unscrupulous. <i>Unless there be special circumstances, which, coupled with the retractions of the witness, really raise a doubt as to the truth of the testimony given by him at the trial and accepted by the trial judge, and only if such testimony is essential to the judgment of conviction, so much so that its elimination would lead the trial judge to a different conclusion, a new trial based on such retraction would not be justified</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis supplied)</p> </blockquote> <p> In summary, for the retraction of a witness to constitute ground for new trial, it must be shown that: (1) the testimony of the retracting witness during trial is essential to the judgment of conviction such that its elimination would lead the trial judge to a different conclusion; (2) there exists special circumstances which, coupled with the retraction, raise doubt as to the truth of the testimony given by the retracting witness at the trial; and (3) there is no other evidence sustaining the judgment of conviction except said testimony.</p><p> Without a doubt, Darius's testimony is essential to the judgment of conviction since it was he who identified petitioner as the supposed offender. Without it, the prosecution would have had no leg to stand on, and the trial judge would have come to a different conclusion. While private complainant testified that he owned the allegedly stolen motorcycle, his testimony was not indispensable to petitioner's conviction since he did not witness the taking and merely relied on the information Darius provided. Hence, there is no other evidence sustaining the judgment of conviction other than Darius's testimony. Finally, special circumstances exist which raise doubts as to the latter's truth. </p><p> First, in his <i>Salaysay ng Pag-Urong</i>, Darius averred the following: </p><blockquote> <p> 4. <b><i>Na ako lamang ay hinikayat ng aking tiyahin na si Joan Combate na ituro na si Charlon Fernando ang nakita ko na may dala-dala ng kanilang motorsiklo noong Oktubre 28, 2013;</i></b> </p> <p>5. <b><i>Na nakita ko nga na may kumuha ng nasabing motorsiklo ngunit hindi ito si Charlon Fernando kundi si alyas Balong Camisera;</i></b></p> <p>6. <b><i>Na hindi maituro ni Francisco Combate si alyas Balong Camisera dahil ito ay kilalang siga at pumapatay sa aming lugar;</i></b> </p> <p>7. <b><i>Na tinuruan ako ni Francisco Combate na ituro si Charlon Fernando na kumuha ng kanyang motorsiklo dahil sinabi niya sa akin na maraming kaso ang taong iyon at kilala na nangunguha ng motorsiklo. Siya po ang nagsabi sa akin kung ano ang dapat kong sabihin sa mga pulis ganun din sa korte;</i></b> </p> <p>8. <b><i>Nabanggit ko rin sa kanilang mag-asawa na hindi ako puedeng tumestigo dahil tiyahin at tiyuhin ko sila, pero wag ko daw na lang banggitin na kamag-anak ko sila;</i></b> </p> <p>9. <i>Hindi rin po totoo ang sinabi ko na sinabihan ko si Charlon Fernando na kadyutin na lang yung motorsiklo, dahil wala naman na ganoong pangyayari;</i> </p> <p>10. <i>Na ako ay menor de edad lamang noon, madaling maimpluwensiyahan kaya ako po ay nakapag sinungaling at ito po ay aking pinagsisisihan ng [sic] mabuti;</i> </p> <p>11. <i>Na ang nasabing motorsiklo ay nakita kong muli sa bahay nina Francisco Combate mga Agosto o Setyembre 2018 at tinanong ko sila tungkol doon subalit ito ay kanilang itinatatwa na iyon ang motorsiklo nila [sic] nawawala;</i> </p> <p>12. <i>Na ngayon po ako ay nasa hustong [sic] gulang na, at ako ay nakukunsensya sa aking nagawang pagkakamali at nais ko po itong itama kaya ito ay nasabi ko sa aking nanay at ganun na lamang ang kanyang panglulumo dahil daw sa akin ay may isang tao na nakakulong ng [sic] walang kasalanan;</i> </p> <p>13. <b><i>Na sa totoo po, hindi ko kilala si Charlon Fernando at doon ko lang siya nakita sa korte noong naglilitis. Sinabihan ako ni Francisco Combate na titigan kong mabuti si Charlon Fernando para maituturo ko siya pag ako na ay umupo sa husgado;</i></b> </p> <p> . . . .</p> <p> 16. <i>Na ako po ay hindi pinilit, inimpluensiyahan, pinangakuan o binayaran ng anuman upang gawin ang salaysay na ito</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis supplied) </p> </blockquote> <p> Second, private complainant himself testified that his basis for saying that it was petitioner who stole his motorcycle was that petitioner was the one who had a bad intention, which shows that he already surmised that petitioner was the perpetrator even before Darius identified him as such, to wit: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">What is your basis in saying that it was Charlon Fernando who stole it?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Because before my motorcycle was stolen <i>they were the ones who have bad intention</i>, ma'[a]m. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><i>You did not see Charlon Fernando actually take the motorcycle?</i></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>No, sir</i>.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> <p>Private complainant also testified that he brought Darius to petitioner's place to identify him, thus, showing the suggestiveness of the identification: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td colspan="2"><div align="justify">COURT:</div></td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">When you learned from Santos that it was the accused who stole your motorcycle, what did you do?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>I asked Santos to identify him and I brought him to the place where Charlon was. They were four in that place and I asked Santos who among the four</i>.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify"><i>Did Santos give the name of Charlon Fernando when he first reported it to you?</i></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>No, sir.</i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What did he tell you?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">He described the said person and [his] tattoo and it so happened that I knew this person, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify"><i>You have no other suspect in mind when Santos described the lead to you?</i></div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>None, sir</i>.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p>Third, petitioner's uncle, Danilo Fernando, Jr., testified that the Combate family has had a long-time grudge against their family, to wit: </p> <blockquote> <table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">And what maybe the reason if you know why Combate is alleging that it was your nephew who took away that motorcycle?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Because his family and my family have a [long-time] grudge</i>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p>The above testimony on the alleged grudge jibes with private complainant's December 13, 2013 affidavit<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> before the City Prosecution Office of Olongapo City. The pertinent portions thereof state: </p> <blockquote> <p> 1. <i><b>Na hindi imposible</b> na sila ang kumuha ng aking motorsiklo, ng [sic] araw na iyon ([October] 28, 2013) [b]atay sa kanilang mga sagot na sila'y nagsisipag[-]inuman. <b>Hindi malayo na magawa nila iyon [s]apagkat sila'y pawang mga lasing</b></i>.</p> <p> 2. <i>Ikalawa, ito po ay araw ng HALALANG [PAMBARANGAY]. Ito po, ay declared LIQUOR BAN, ayon sa kanila mismo UNDER OATH aminado sila nilabag nila ito. At sila'y laging mga lasing. Dito sa kanilang sagot napatunayan lang kung ano ang kanilang mga [pagkatao]. Napatunayan na sila'y walang mga takot at pawang mga lumalabag sa kautusan ng batas.</i> </p> <p>3. <em>Si CHARLON FERNANDO ay sinampahan namin ng kaso, [d]ahil sya mismo ang itinuro ng aming mga testigo, at ayon na rin sa mga pulis, <strong>[m]adalas siya ay suspek, [h]indi lamang nakakasuhan, sa maraming kadahilanan unang-una na po ang mga pananakot, [p]angha-harass at pagbabanta, [k]atulad ng mga ginagawa nila sa amin.</strong> May mga pagkakataon din po na ang aming testigo hinabol ng ilan na may suot na "BONET" upang maitago ang kanilang mga mukha. <strong>At kung bakit kami'y kanilang HINAHARAS, GINUGULO, TINATAKOT AT PINAGBABANTAAN, [k]asama ang kanyang ama, mga tiyuhin at mga pinsan na ito'y amin naman pong agad naipapa-blotter. At [k]ahuli-hulihan meron pa kaming kasalukuyang reklamo laban sa kanila na dinidinig na dito sa aming barangay, na intension pa nila kaming BALIKTARIN.</strong></em><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis supplied) </p> </blockquote> <p> The above circumstances, taken together with the fact that Darius's material testimony, if eliminated, would lead the trial judge to a different conclusion, justify the grant of a new trial. Considering the gravity of the penalty for carnapping, granting a new trial would better serve the ends of justice since it is better to liberate a guilty man than to unjustly keep in prison one whose guilt has not been proved by the required quantum of evidence.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> Under Rule VI, Section 3(c) of the 2009 Internal Rules of the CA, the CA may receive evidence in appeals in criminal cases where a new trial is granted on the ground of newly discovered evidence, pursuant to Rule 124, Section 12 of the Rules of Court. Hence, We deem it necessary to remand the case to the CA for proper disposition. </p><p> <b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The January 30, 2020 Decision and January 14, 2021 Resolution of the Court of Appeals in CA-G.R. CR No. 40276 are <b>REVERSED</b> and <b>SET ASIDE</b>. The Court of Appeals is <b>DIRECTED</b> to receive evidence and to render a new decision as may be warranted by the facts established by the whole evidence of record.</p><p> Let the records of this case be <b>REMANDED</b> to the Court of Appeals to accomplish this purpose.</p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>People v. Manigbas</b>, 109 Phil. 469, 477-478 (1960) [Per J. Gutierrez David, <i>En Banc</i>]. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <b>Reyes v. People</b>, 71 Phil. 598, 600-601 (1941) [Per J. Moran, <i>En Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 15-32.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 34-47. The January 30, 2020 Decision in CA-G.R. CR No. 40276 was penned by Associate Justice Perpetua Susana T. Atal-PaÃ±o and concurred in by Associate Justices Japar B. Dimaampao (now a Member of this Court) and Myra V. Garcia-Fernandez of the Third Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 57-59. The January 14, 2021 Resolution in CA-G.R. CR No. 40276 was penned by Associate Justice Perpetua Susana T. Atal-PaÃ±o and concurred in by Associate Justices Japar B. Dimaampao (now a Member of this Court) and Myra V. Garcia-Fernandez of the Former Third Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> RTC records, pp. 276-283. The March 30, 2017 Decision in Criminal Case No. 319-14 was penned by Presiding Judge Raymond C. Viray of Branch 75, Regional Trial Court, Olongapo City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Republic Act No. 6539 (1972), Anti-Carnapping Act of 1972.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records, pp. 1-2.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 1. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, p. 35.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 36-38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> RTC records, pp. 276-283. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 283.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, p. 46.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 48-51.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 52-55. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 58. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 140-163.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 144-154. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 156-159.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Sanchez v. Court of Appeals</b>, 452 Phil. 665, 674 (2003) [Per J. Bellosillo, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 71 Phil. 598 (1941) [Per J. Moran, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 600-601. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 109 Phil. 469 (1960) [Per J. Gutierrez David, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 477-478. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, pp. 52-53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> TSN, Francisco Combate, October 23, 2014, p. 6. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 8-9. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> TSN, Danilo Fernando, Jr., December 6, 2016, p. 8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> RTC records, pp. 20-21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>People v. Esmaquilan</b>, 325 Phil. 576, 583 (1996) [Per J. Romero, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

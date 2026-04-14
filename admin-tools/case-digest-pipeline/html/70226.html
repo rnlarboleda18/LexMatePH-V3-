@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 268309 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. TERESITA J. SOLIVA, ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70226' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 268309, August 06, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. TERESITA J. SOLIVA, ACCUSED-APPELLANT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is an ordinary appeal pursuant to Section 1 (a), Rule XI of the 2018 Revised Internal Rules of the Sandiganbayan, assailing the June 16, 2023 Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and July 20, 2023 Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Sandiganbayan, which found accused-appellant Teresita J. Soliva (Soliva) guilty of one count of violation of Article 217 of the Revised Penal Code in Criminal Case No. SB-19-CRM-0127 and 10 counts of violation of Article 218 of the Revised Penal Code in Criminal Case Nos. SB-19-CRM-0128 to 0137.</p><p align="center"> <b>Factual Antecedents</b> </p><p> Soliva was the Mayor of the Municipality of Remedios T. Romualdez (RTR), Agusan del Norte from 2001 to 2007.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> In relation to her unliquidated cash advances when she was mayor, the following Informations dated January 24, 2018, were filed against her: </p><blockquote> <p> <b>For SB-19-CRM-0127</b></p> <p> The Graft Investigation and Prosecution Officer, Office of the Ombudsman, accuses TERESITA J. SOLIVA, former Mayor of Remedios T. Romualdez, Agusan del Norte, of <b>violation of Article 217 of the [Revised Penal Code]</b>, committed as follows: </p> <blockquote> <p> That from 2004 to 2007, in Remedios T. Romualdez, Agusan del Norte, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, a high ranking officer, who by reason of the functions of her office is accountable for public funds she received, did there and then willfully, unlawfully, and feloniously take, appropriate or misappropriate or consent or permit, through abandonment or negligence, any other person to take public funds in the amount of <b>[PHP] 551,000.00</b>, to the damage and prejudice of the government in the said amount.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </p> </blockquote> <p> <b>For SB-19-CRM-0128</b></p> <p> The Graft Investigation and Prosecution Officer, Office of the Ombudsman, accuses TERESITA J. SOLIVA, former Mayor of Remedios T. Romualdez, Agusan del Norte, of <b>violation of Article 218 of the Revised Penal Code</b>, committed as follows: </p> <blockquote> <p> That in 2007 or shortly prior or subsequent thereto, Remedios T. Romualdez, Agusan del Norte, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, a high ranking officer, who by reason of the functions of her office is accountable for public funds she received, after being required by law and the Commission on Audit to render accounts in relation to the funds she received for the <b>Travelling Expenses under Cash Advance Disbursement Voucher No. 101- 2007-01-001, in the amount of [PHP] 50,000.00</b>, did there and then willfully, unlawfully, and feloniously fail to render accounts of the funds she received for a period of two months after such account should have been rendered, to the damage and prejudice of the government in the said amount. . .</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (Emphasis supplied)</p> </blockquote> </blockquote> <p> The nine other Informations corresponding to Criminal Case Nos. SB-19-CRM-0129 to 0137 are couched in the same language as SB-19-CRM-0128, except for particulars pertaining to the purpose of the cash advances, disbursement voucher numbers, and the amounts involved. These are summarized below: </p><table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="26%"><div align="center"><strong>Criminal Case No.</strong></div></td> <td width="27%"><strong>Purpose</strong></td> <td width="30%"><div align="center"><strong> Voucher No. </strong></div></td> <td width="17%"><div align="center"><strong>Amount</strong></div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0129 </div></td> <td>Travelling Expenses </td> <td><div align="center">101-2007-05-436 </div></td> <td><div align="right">PHP 6,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0130</div></td> <td>Travelling Expenses </td> <td><div align="center">101-2007-05-411</div></td> <td> <div align="right">PHP 20,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0131</div></td> <td> Travelling Expenses </td> <td><div align="center">101-2007-05-382 </div></td> <td><div align="right">PHP 11,000.00 </div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0132</div></td> <td>Peace and Order </td> <td><div align="center">101-2007-03-204</div></td> <td><div align="right">PHP 20,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0133</div></td> <td>Peace and Order </td> <td><div align="center">101-2007-03-182 </div></td> <td><div align="right">PHP 50,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0134</div></td> <td>Peace and Order </td> <td><div align="center">101-2007-02-154 </div></td> <td><div align="right">PHP 170,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0135</div></td> <td>Confidential and Intelligence Fund (CIF) Expenses</td> <td><div align="center">101-2007-02-083 </div></td> <td><div align="right">PHP 8,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0136</div></td> <td>Peace and Order </td> <td> <div align="center">101-227-02-072 </div></td> <td><div align="right">PHP 34,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0137</div></td> <td>Peace and Order</td> <td><div align="center">101-2007-01-058</div></td> <td><div align="right">PHP 70,000.00 </div></td> </tr> </tbody></table> <p> Three years before the abovementioned Informations were filed, the Municipal Accountant of RTR, Jerry John D. Galan (Galan), sent Soliva a demand letter dated April 29, 2015. The letter stated that Soliva still has unliquidated cash advances in the amount of PHP 987,666.58 as of February 2015. The letter also informed Soliva that cash advances that are no longer needed or has not been used for a period of two months must be returned to the collecting officer. Furthermore, all cash advances must be fully liquidated at the end of each year. With respect to Soliva's unliquidated cash advances, the letter stated that the same has run up to over seven years. Considering her monthly refund of PHP 1,000.00, it will supposedly take her 82 years to settle her account. Consequently, Galan directed her to settle her cash advances before the end of May 2015. Soliva, however, failed to comply with this demand.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> On May 8, 2015, the Office of the Ombudsman received a letter written by concerned citizens of the Municipality of RTR on the alleged anomalous cash advances of Soliva. The amount of PHP 991,668.00 allegedly remained unliquidated as of November 30, 2014. In the said letter, the citizens expressed their concern over the legality of such advances. This letter was referred by the Office of the Ombudsman-Mindanao to the Regional Director of the Commission on Audit (COA) Regional Office No. XIII, Butuan City (COA-Region XIII) for further investigation and appropriate action.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> Thereafter, Sally Y. Tiu-Ladaga (Tiu-Ladaga), the Audit Team Leader of COA-Region XIII, conducted an investigation on Soliva's cash advances. Another demand letter was sent to Soliva after the COA investigation. The demand letter dated June 8, 2015 stated that as of May 2015, Soliva's outstanding cash advance amounted to PHP 984,666.58 or a minimal reduction of PHP 3,000.00 against her February balance. It also warned Soliva that her failure to liquidate her cash advance is a valid ground to withhold her salary and benefits. Soliva was then directed to settle her obligation before June 2015.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> After the second demand letter was issued, Soliva was able to settle PHP 20,000.00 from her outstanding balance through payroll deduction. This reduced her unliquidated cash advances to PHP 971,668.58 as of September 30, 2015.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> On November 17, 2015, Tiu-Ladaga issued another demand letter to Soliva requiring her to settle her accountabilities within a period of 30 days. The letter was duly received by Soliva on November 20, 2015.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> She then made additional settlements totaling PHP 15,000.00, reducing her unliquidated cash advances to PHP 956,668.58. Of this amount, the only cash advances supported by cash advance vouchers amounted to PHP 551,000.00. The rest of the vouchers could not be found.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> In connection with Soliva's unsettled obligations, Tiu-Ladaga submitted an Evaluation Report on May 16, 2016 covering the period from July 2, 2004 to March 9, 2007.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> On August 23, 2016, Galan issued a Certification stating that as of August 15, 2016, the total unliquidated cash advance of Soliva was PHP 886,666.58.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> Following Soliva's failure to liquidate the said cash advances despite repeated demands, Tiu-Ladaga, on behalf of COA-Region XIII, filed an Affidavit of Complaint with Certificate of Non-Forum Shopping (Complaint) with the Office of the Ombudsman on September 9, 2016. The Complaint charged Soliva of Malversation of Public Funds or Property under Article 217 of the Revised Penal Code and Failure of Accountable Officer to Render Accounts under Article 218 of the same Code. Soliva was subsequently directed to submit a counter-affidavit which she failed to do.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> Based on its investigation, the Office of the Ombudsman found probable cause to file the aforementioned Informations with the Sandiganbayan.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Consequently, a hold-departure order was issued against Soliva on June 4, 2019<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and a warrant of arrest was issued on June 6, 2019. Thereafter, Soliva voluntarily surrendered and posted a bail bond for her provisional liberty.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> On August 27, 2019, Soliva entered a plea of "NOT GUILTY." On even date, the prosecution and defense jointly moved for the deferment of the pre-trial which the court granted.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Soliva then manifested that she intends to apply for a plea bargaining agreement with the prosecution. </p><p> On November 29, 2019, Soliva filed a "Manifestation," submitting to the Sandiganbayan a copy of a Certification issued by the Municipal Accountant of RTR dated October 22, 2019. The Certification stated that Soliva's unliquidated cash advances were already refunded through payroll deduction.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> For the purpose of plea-bargaining, Soliva's counsel repeatedly sought more time to secure a document from the COA. On the hearing set on October 16, 2020, Soliva also asked for sufficient time to secure a certification from the Municipal Accountant. However, despite the long delay on the conduct of the preliminary conference, no information was given regarding the purported documents. As a result, the Sandiganbayan decided to terminate the proceeding on March 10, 2021.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> Soliva was scheduled to submit on July 7, 2022 a Certification coming from the COA on her alleged payment of the civil aspect of the cases. Unfortunately, she again failed to present the evidence to court. The prosecution then manifested that it could no longer accommodate a plea bargaining agreement at that stage of the proceedings.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> The presentation of defense evidence was set on September 6, September 29, and October 13, 2022. However, no evidence was presented by the accused. The records also show that Soliva failed to appear before the Sandiganbayan on several occasions. She also failed to submit a Judicial Affidavit in support of her defense. In view of her repeated absences, the Sandiganbayan directed Soliva to personally appear and provide an update on her efforts to settle her obligation; otherwise, a warrant of arrest will be issued against her.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> On March 16, 2023, Soliva once again failed to appear before the Sandiganbayan. As a result, the Sandiganbayan deemed that she has waived her right to present evidence.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p> The prosecution, on the other hand, presented documentary evidence as well as the testimonies of Tiu-Ladaga and Galan. </p><p> Tiu-Ladaga testified that she was the Audit Team Leader of COA's Team R13-03, Local Government Sector at the time of the execution of the Affidavit of Complaint against Soliva. She was tasked to audit the accounts of the Local Government of RTR and render reports on unliquidated cash advances of government officials and employees. She explained during cross-examination that the basis of the Evaluation Report were the documents that their team reviewed during the evaluation process such as the disbursement vouchers, documents presented by the Municipal Accountant, and other supporting documents. She also stated that the audit findings in the Evaluation Report were the findings of the previous auditor. The said findings were also reported in the Annual Audit Report.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> According to Tiu-Ladaga, during the course of the audit, she examined Soliva's payments and payroll deduction. She itemized the deductions as follows: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1)</div></td> <td width="95%"><div align="justify">As of September 30, 2015, accused Soliva was able to satisfy the amount of Twenty Thousand Pesos ([PHP] 20,000.00) via payroll deduction, resulting in a reduction of her unliquidated cash advances to Nine Hundred Seventy-One Thousand Six Hundred Sixty-Eight Pesos and Fifty-Eight Centavos ([PHP] 971,668.58); and</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">2)</div></td> <td><div align="justify">As of November 2015, accused Soliva was able to settle the amount of Fifteen Thousand Pesos ([PHP] 15,000.00), leading to a decrease in her unliquidated cash advances to Nine Hundred Fifty-Six Thousand Six Hundred Sixty-Eight Pesos and Fifty- Eight Centavos ([PHP] 956,668.58).<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Tiu-Ladaga confirmed that despite the existence of outstanding cash advances in the amount of PHP 971,666.58 as of 2016, by reason of some deductions made by the accused, the malversation charge only pertains to the amount of unliquidated cash advances totaling PHP 551,000.00. Under the Evaluation Report, only the amount of PHP 551,000.00 was supported by disbursement vouchers and other documents. Tiu-Ladaga explained that she cannot support the entire outstanding cash advances which appear unliquidated.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p> <p> Lastly, she also testified that the balance of PHP 886,666.58 was based on the Certification dated August 23, 2016, issued by Municipal Accountant Galan.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> The prosecution next presented Galan who prepared and issued the demand letters dated April 29, 2015 and June 8, 2015. He explained that he issued the said demand letters because Soliva failed to settle her outstanding cash balances. During cross-examination, he claimed that he did not issue any certification indicating that Soliva had cleared all her cash advances.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> Galan also testified that he and Soliva had an agreement that they would deduct PHP 10,000.00 from her salary every month because the current deduction of PHP 1,000.00 per month would take her 82 years to settle her obligation. Galan mentioned that this agreement continued until Soliva was no longer elected.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Finally, Galan recalled that the latest unliquidated amount owed by Soliva was more than PHP 877,000.00.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> As no piece of evidence was offered by Soliva throughout the course of the trial, the case was submitted for judgment based solely on the prosecution's evidence.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> On March 16, 2023, the Sandiganbayan issued an Order directing the parties to submit their respective memoranda. The prosecution submitted the same on April 3, 2023 while the defense failed to submit any memorandum.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p align="center"> <b>Ruling of the Sandiganbayan</b></p><p> In its Decision dated June 16, 2023, the Sandiganbayan held that all the elements of the crimes Malversation of Public Funds under Article 217 of the Revised Penal Code and Failure of Accountable Officer to Render Accounts under Article 218 of the same Code were proven beyond reasonable doubt. The dispositive portion reads: </p><blockquote> <p> WHEREFORE, the judgment is hereby rendered as follows: </p> <p> 1. FOR <b>SB-19-CRM-0127</b> (MALVERSATION OF PUBLIC FUNDS, ARTICLE 217 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Malversation of Public Funds defined and penalized under Article 217 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of two (2) years, four (4) months and one (1) day of prision correccional, as minimum, to six (6) years and one (1) day of prision mayor, as maximum. In addition, she is hereby ordered to suffer perpetual special disqualification from holding any public office and to pay a fine in the amount of FIVE HUNDRED FIFTY-ONE THOUSAND PESOS ([PHP] 551,000.00). </p> <p> 2. FOR <b>SB-19-CRM-0128</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition. she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 3. FOR <b>SB-19-CRM-0129</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 4. FOR <b>SB-19-CRM-0130</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT. ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 5. FOR <b>SB-19-CRM-0131</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (l) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 6. FOR <b>SB-19-CRM-0132</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 7. FOR <b>SB-19-CRM-0133</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition. she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 8. FOR <b>SB-19-CRM-0134</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE)</p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 9. FOR <b>SB-19-CRM-0135</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 10. FOR <b>SB-19-CRM-0136</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine. </p> <p> 11. FOR <b>SB-19-CRM-0137</b> (FAILURE OF ACCOUNTABLE OFFICER TO RENDER ACCOUNT, ARTICLE 218 OF THE REVISED PENAL CODE) </p> <p> Finding accused Teresita Jugao Soliva <b>GUILTY</b> beyond reasonable doubt of the crime of Failure of Accountable Officer to Render Accounts defined and penalized under Article 218 of the Revised Penal Code. Consequently, she is hereby ordered to suffer the indeterminate prison term of four (4) months and one (1) day of arresto mayor as minimum to one (1) year, one (1) month and eleven (11) days of prision correccional as maximum. In addition, she is hereby ordered to pay the amount of FORTY THOUSAND PESOS ([PHP] 40,000.00) by way of fine.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis supplied) </p> </blockquote> <p> According to the Sandiganbayan, it was established that during Soliva's tenure as municipal mayor, she incurred unliquidated cash advances amounting to PHP 991,668.58. These were public funds sourced from the development funds of the Municipality of RTR. As of August 23, 2016, Soliva had in her possession unliquidated cash advances amounting to PHP 886,666.58. Thus, Soliva, an accountable officer entrusted with public funds who failed to account for the same, is guilty of malversation.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> The Sandiganbayan also stressed that the payment or reimbursement of the unliquidated cash advances is not a defense in malversation and may only affect the offender's civil liability.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> As to the 10 counts of violation of Article 218 of the Revised Penal Code, the Sandiganbayan held that Soliva was duty-bound to liquidate the same or to return the unutilized portion in accordance with existing COA rules and regulations.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The Sandiganbayan noted that per the Evaluation Report, Soliva's pending unliquidated cash advances remain unaccounted for despite the passage of more than a decade from her initial receipt thereof. Furthermore, despite her payments in September, October, and November 2015, she remained unable to fully liquidate her outstanding balance. Even assuming that she fully liquidated her cash advances on said dates, the prescribed period for liquidation has already elapsed.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> With Soliva's "clear and deliberate disregard" of her legal obligation to account for her outstanding cash balances, the Sandiganbayan ruled that that she is indeed guilty of 10 counts of violation of Article 218.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> Aggrieved, Soliva filed a Motion for Leave of Court to Avail Remedies with Reconsideration dated June 30, 2023. The Sandiganbayan issued an Order admitting said Motion. This allowed Soliva to avail of the post-judgment remedies under Rule 120, Section 6 of the Rules of Court. The prosecution then filed its Comment/Opposition thereto on July 7, 2023. </p><p> By Resolution promulgated on July 20, 2023, the Sandiganbayan found no sufficient basis to depart from its previous judgment of conviction. </p><p> Soliva then elevated the case to the Supreme Court through a Notice of Appeal.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p align="center"> <b>Issue</b></p><p> Whether or not the Sandiganbayan correctly convicted Soliva of Malversation under Article 217 of the Revised Penal Code and Failure of Accountable Officer to Render Accounts under Article 218 of the same Code. </p><p align="center"> <b>Ruling of the Court</b></p><p> The Appeal is without merit. </p><p> <b><i>Denial of Motion for New Trial is warranted</i></b></p><p> Soliva claims that after she was convicted of malversation, new evidence emerged showing that she made payments for her cash advances to the Municipality of RTR. She maintains that a Certification issued by the Municipal Accountant of RTR on March 14, 2023, states that she was able to pay PHP 219,622.03 from her outstanding balance through her terminal leave credits. The said certification can allegedly be considered as newly discovered evidence in her defense, thus, warranting a new trial. </p><p> The Sandiganbayan ruled, however, that the Certificationâassuming that it did existâcannot be considered as newly discovered evidence because the accused failed to exhibit due diligence in obtaining it prior to trial. Moreover, it lacks the capacity to function as exculpatory evidence due to its limited weight and evidentiary value.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> We agree with the Sandiganbayan. </p><p> Rule 121, Section 2(6) of the Revised Rules of Court provides that a new trial may be granted on the ground of newly discovered evidence, viz.: </p><blockquote> <p> SECTION 2. <i>Grounds for a new trial.</i> â The court shall grant a new trial on any of the following grounds: </p> <p> . . . . </p> <p> (b) That new and material evidence has been discovered which the accused could not with reasonable diligence have discovered and produced at the trial and which if introduced and admitted would probably change the judgment. </p> </blockquote> <p> While this remedy is available, courts are generally reluctant in granting this motion for it is presumed that the moving party has had ample opportunity to prepare his or her case carefully and to secure all the necessary evidence before the trial.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Considering that newly discovered evidence is material evidence, such evidence would, more often than not, mean the success or defeat of a party's campaign.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Thus, before this remedy is granted, the Court has laid down the following requisites which the movant must prove: (1) that the evidence was discovered after trial; (2) that such evidence could not have been discovered and produced at the trial even with the exercise of reasonable diligence; (3) that it is material, not merely cumulative, corroborative, or impeaching; and (4) the evidence is of such weight that it would probably change the judgment if admitted.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p><p> The applicant for new trial has the burden of showing that the new evidence he or she seeks to present has complied with the above requisites.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> If the alleged newly discovered evidence could have been very well presented by the applicant during the trial with the exercise of reasonable diligence, it cannot be considered newly discovered.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> In this case, Soliva alludes to a Certification dated March 14, 2023, which she allegedly attached to her Motion for Reconsideration dated June 30, 2023. The Sandiganbayan stressed, however, that no such document was attached to Soliva's Motion.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Consequently, the Sandiganbayan had no opportunity to consider, much less examine, the purported document. </p><p> Assuming <i>arguendo</i> that such Certification did exist, it was issued after the Informations were filed on January 24, 2018. The Sandiganbayan commenced its proceedings a year after the filing of said Informations. By March 16, 2023, Soliva was deemed to have waived her right to present evidence. Based on the dates alone, the subject Certification is technically new evidence. However, the motion for new trial still cannot prosper for failure of the document to meet the requisites for newly discovered evidence. </p><p> For the first and second requisites, it is obvious that the purported certification that she was able to pay a portion of her outstanding balance could have been secured at an earlier date and made available during the trial. It was known to Soliva that she can secure the said certification as shown by the fact that she repeatedly sought more time from the Sandiganbayan to allegedly obtain a certification from the COA and from the Municipal Accountant.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Even so, no such certification was presented before the Sandiganbayan. Soliva also waived her right to present evidence due to her failure to appear numerous times. Thus, to allow her to present evidence at this stage of the proceedings would deprive the prosecution of the right to meet such evidence.</p><p> Furthermore, the records do not at all show that diligent efforts were exerted by the accused in securing the said certification. Her repeated absences in the set hearings and her failure to present any form of evidence in her defense signifies her lack of diligence, if not her complete neglect, in securing any evidence that could exculpate her from her charges. </p><p> As We have emphasized in <i>Custodio v. Sandiganbayan</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the threshold question in resolving a motion for new trial based on newly discovered evidence is whether the proffered evidence is in fact a "newly discovered evidence which could not have been discovered by due diligence."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Due diligence, in this regard, is a phrase often equated with "reasonable promptness to avoid prejudice to the defendant."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> It contemplates that the defendant has acted reasonably and in good faith to obtain the evidence, in light of the totality of the circumstances and the facts known to him or her.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Clearly, Soliva failed to exercise reasonable diligence in producing the certificate. </p><p> With respect to the third and fourth requisites, assuming that the certification has weight and probative value, it is only evidence of Soliva's partial payment of the amount she failed to account for and liquidate. While it may show payment of her civil liability, it is not material in the sense that it could exculpate her from her criminal charges. At most, it can only affect the imposable fines. It does not carry such weight so as to change the outcome of the case. </p><p> Succinctly, there is no question that the alleged Certification could have been discovered and produced at the trial with the exercise of reasonable diligence. It is not newly discovered evidence but evidence that the accused failed to adduce through sheer neglect Thus, the motion for new trial should be denied. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td valign="top"><div align="justify"><b>Article 217 is <i>mala in se</i>; Article 218 is <i>mala prohibita</i></b> </div></td> </tr> </tbody></table> <p>On the substantive aspect, Soliva submits that the violations of Articles 217 and 218 of the Revised Penal Code are <i>mala in se</i>. As there was allegedly no evidence of her malicious intent for her failure to render an accounting, she argues that she cannot be held liable for the crimes charged as "no crime has been committed."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> On the other hand, the prosecution echoes the conclusions of the Sandiganbayan that Soliva knowingly and intentionally committed the crimes charged. The prosecution maintains that she intentionally did not liquidate her cash advances pursuant to the COA regulations and failed to rebut the <i>prima facie</i> presumption of malversation.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The prosecution also counters that the felony penalized under Article 218 of the Revised Penal Code is <i>mala prohibita</i>. Being <i>mala prohibita</i>, Soliva's failure to liquidate her cash advances, while not <i>wrong</i> in itself, is punishable because it is a prohibited act under the Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><p> Jurisprudence is replete with cases explaining the difference between the concept of <i>mala in se</i> and <i>mala prohibita</i>. In <i>Dungo v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> We made the following distinction: </p><blockquote> <p> Criminal law has long divided crimes into <b>acts wrong in themselves called acts <i>mala in se</i>; and acts which would not be wrong but for the fact that positive law forbids them, called acts <i>mala prohibita</i></b>. This distinction is important with reference to the intent with which a wrongful act is done. The rule on the subject is that <b>in acts <i>mala in se</i>, the intent governs; but in acts <i>mala prohibita</i>, the only inquiry is, has the law been violated?</b> When an act is illegal, the intent of the offender is immaterial. When the doing of an act is prohibited by law, it is considered injurious to public welfare, and the doing of the prohibited act is the crime itself.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (Emphasis supplied) </p> </blockquote> <p> To correct a common misconception, We must stress that not all crimes punishable by the Revised Penal Code are <i>mala in se</i>. In the same way, not all offenses punishable under special laws are <i>mala prohibita</i>.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p><p> To determine whether the crime is <i>mala in se </i>or <i>mala prohibita</i>, courts must examine the inherent immorality or vileness of the penalized act. If the punishable act or omission is immoral in itself, then it is a crime <i>mala in se</i>; on the contrary, if it is not immoral in itself, but there is a statute prohibiting its commission by reasons of public policy, then it is <i>mala prohibita</i>. Ultimately, whether or not a crime involves moral turpitude is a question of fact and frequently depends on all the circumstances surrounding the violation of the statute.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> <em>Mala in se</em> crimes presuppose that the person who did the felonious act had criminal intent to do so, whereas <i>mala prohibita</i> crimes do not require knowledge or criminal intent.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> In <i>mala prohibita</i> crimes, it is sufficient that there is a conscious intent to perpetrate the act prohibited by the special law. The essence of <i>mala prohibita</i> is voluntariness in the commission of the act constitutive of the crime.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> In other words, what must be proven is not criminal intent but the offender's intent to perpetrate the act. </p><p> The violation of Article 217 is a <i>mala in se</i> crime. It requires that the crime be committed intentionally (<i>dolo</i>) or by means of criminal negligence (<i>culpa</i>), which in law is equivalent to criminal intent. Malversation is committed by means of <i>dolo</i> when the act is accompanied by criminal intent, as when the offender misappropriated or converted public funds of property to one's personal use. On the other hand, it is committed by means of <i>culpa</i> in such instances as when the offender knowingly allowed another or others to make use of or misappropriate public funds or property.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></p><p> In contrast, the failure of Accountable Officer to Render Accounts under Article 218 of the Revised Penal Code is in the nature of <i>mala prohibita</i>. The failure to liquidate in accordance with the COA rules and regulations is not inherently immoral or wrong in itself. However, by reason of public policy, particularly the need for public funds to be duly accounted for, the failure to render accounts within the prescribed periods is penalized by law. </p><p> While intent to perpetrate the act is more easily discernible in cases of <i>refusal</i> or <i>delay</i>, considering that these usually involve a positive act, such intention is not readily apparent in cases of <i>failure</i>, such as violations of Article 218 of the Revised Penal Code. This is because the intent to fail cannot be immediately inferred from the mere occurrence of a failure to remit or pay. As such, whether a violation exists must be determined from the circumstances of each case.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>The elements of Malversation were proven beyond reasonable doubt</i></b> </div></td> </tr> </tbody></table> <p>Malversation is committed from the very moment the accountable officer misappropriates public funds and fails to satisfactorily explain his or her inability to produce said public funds.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Article 217 of the Revised Penal Code provides: </p><blockquote> <p> ART. 217. <i>Malversation of public funds or property</i>. â Presumption of malversation. â Any public officer who, by reason of the duties of his office, is accountable for public funds or property, shall appropriate the same, or shall take or misappropriate or shall consent, through abandonment or negligence, shall permit any other person to take such public funds or property, wholly or partially, or shall otherwise be guilty of the misappropriation or malversation of such funds or property, shall suffer: </p> <p> . . . . </p> <p> The failure of a public officer to have duly forthcoming any public funds or property with which he is chargeable, upon demand by any duly authorized officer, shall be prima facie evidence that he has put such missing funds or property to personal uses. </p> </blockquote> <p> Taken therefrom, the prosecution possesses the burden to prove the following essential elements of malversation: </p><ol><li> The offender is a public officer; <br><br> </li><li> The offender has custody or control of funds or property by reason of the duties of his office;<br><br> </li><li>The funds or property involved are public funds or property for which the offender is accountable; and<br><br> </li><li> The offender has appropriated, taken or misappropriated, or has consented to, or through abandonment or negligence, permitted the taking by another person of, such funds or property.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </li></ol> <p> In the case at bar, there is no dispute as to the presence of the first three elements. In fact, they have been stipulated by the parties during pre-trial: </p><ol><li> That whenever referred to, orally in writing, in the course of the proceedings, accused admits that she is the same person charged in the eleven (11) Informations; <br><br> </li><li> That at the time material to these cases, accused <b>Soliva is a public officer</b> holding the position of <b>Municipal Mayor of the Municipality of Remedios T. Romualdez, Agusan del Norte</b>; and <br><br> </li><li>That at the time material to these cases, accused Soliva is an <b>accountable officer of public funds and property</b>.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> (Emphasis supplied) </li></ol> <p> These stipulations aside, it is clear that as the Mayor of the Municipality of RTR, Agusan del Norte during the period relevant to the crimes charged, Soliva is a public officer as defined under Article 203 of the Revised Penal Code: </p><blockquote> <p> ART. 203. <i>Who are Public Officers</i>. â For the purpose of applying the provisions of this and the preceding titles of this book, any person who, by direct provision of the law, popular election or appointment by competent authority, shall take part in the performance of public functions in the Government of the Philippine Islands, or shall perform in said Government or in any of its branches public duties as an employee, agent or subordinate official, of any rank or class, shall be deemed to be a public officer. </p> </blockquote> <p> Within the purview of Article 217 of the Revised Penal Code, an accountable public officer is one who has custody or control of public funds or property by reason of the duties of his or her office.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> In <i>Sarion v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> We held that mayors are accountable officers for all government funds and property pertaining to their municipality.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></p><p> Likewise, in <i>People v. Pantaleon, Jr., et al</i>.,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> the Court held that a municipal mayor, being the chief executive of his respective municipality, is deemed an accountable officer, and is thus responsible for all the government funds within his or her jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> This accountability stems from Section 340 of the Local Government Code, which states: </p><blockquote> <p> Section 340. <i>Persons Accountable for Local Government Funds</i>. â Any officer of the local government unit whose duty permits or requires the possession or custody of local government funds shall be accountable and responsible for the safekeeping thereof in conformity with the provisions of this title. Other local officials, though not accountable by the nature of their duties, may likewise be similarly held accountable and responsible for local government funds through their participation in the use or application thereof.</p> </blockquote> <p> In addition, Section 102 of the Government. Auditing Code of the Philippines also states that municipal mayors are immediately and primarily responsible for public funds pertaining to their municipality, viz.:</p> <blockquote> <p> Section 102. <i>Primary and secondary responsibility</i>.â (1) The head of any agency of the government is <b>immediately and primarily responsible for all government funds and property pertaining to his agency</b>.</p> </blockquote> <p> Based on the foregoing, local government officials are accountable public officers either because of the nature of their functions, or on account of their participation in the use or application of public funds.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup></p><p> In this case, Soliva is undeniably an accountable officer by the very nature of her position as municipal mayor. There is also no question that in her capacity as municipal mayor, she had control and responsibility over public funds. More importantly, she is the ultimate recipient of the cash advances utilized by her office. </p><p> It was found that during Soliva's tenure as mayor, she incurred unliquidated cash advances amounting to PHP 991,668.58. These unliquidated cash advances are public funds belonging to the Municipality of RTR and earmarked for use by the said municipality. </p><p> With the first three elements of the crime established, We now go to the fourth element of Malversation. </p><p> In determining whether the offender has appropriated, taken or misappropriated public funds or property, the last paragraph of Article 217 of the Revised Penal Code finds relevance: </p><blockquote> <p> The failure of a public officer to have duly forthcoming any public funds or property with which he is chargeable, upon demand by any duly authorized officer, shall be prima facie evidence that he has put such missing funds or property to personal uses.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> </p> </blockquote> <p> Under this provision, it is presumed that the public officer has placed the missing funds to personal use if he or she cannot produce the funds upon demand of any duly authorized officer. While demand is not an element of malversation, it is a requisite for the application of the presumption.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> </p><p> An accountable officer, therefore, may be convicted of malversation even in the absence of direct proof of misappropriation as long as there is evidence of shortage in his or her accounts which the public officer is unable to explain.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> It must be stressed, however, that the presumption is only <i>prima facie</i>âit may be overcome by proof to the contrary. If the accountable officer adduces evidence showing that, in fact, he or she has not put said funds or property to personal use, then the presumption is destroyed.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup></p><p> Soliva failed to overthrow this presumption. In fact, she even admitted that she failed to present her evidence to rebut the <i>prima facie</i> case against her.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> She failed to return the subject cash advances upon demand which created the presumption that the funds were put to her personal use. She persistently failed to settle her unliquidated cash advances despite multiple demands and opportunities to settle the same. She also offered no explanation for her inability to account for the unliquidated cash advances. </p><p> Her principal defense was that she was allegedly able to make a partial restitution of her outstanding balance. However, this factual claim is not supported by evidence presented during trial. Even assuming that she did pay a portion of her outstanding balance, the crime was already consummated when she failed to account for the missing funds after demands were made on her. Despite her alleged restitution of the amounts due, it is settled that payment or reimbursement is not a defense in malversation.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> The payment, indemnification, or reimbursement of, or compromise on the amounts or funds malversed or misappropriated, after the commission of the crime, does not extinguish the accused's criminal liability.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> At best, it may only affect the offender's civil liability, and may be credited in his or her favor as a mitigating circumstance.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> </p><p> In sum, the prosecution was able to prove beyond reasonable doubt that Soliva knowingly and intentionally committed the crime of Malversation. Despite the fact that demand letters were duly received by Soliva, she deliberately ignored the periods within which she was required to settle her obligations. She made no effort to reply to the demands, let alone liquidate her cash advances on time. While there was no direct proof of misappropriation, there is clear evidence of her deliberate failure to liquidate the public funds which she did not bother to explain. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>The accused is guilty of violating Article 218 of the Revised Penal Code</i></b> </div></td> </tr> </tbody></table> <p>There are four elements of the crime under Article 218 of the Revised Penal Code. First, the offender is a public officer. Second, he or she must be an accountable officer for public funds or property. Third, the offender is required by law or regulation to render accounts to the COA, or to a provincial auditor. Fourth, the offender fails to render an account for a period of two months after such accounts should be rendered.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> </p><p> All these elements have been duly proven by the prosecution. As We have already explained, Soliva is a public officer who is accountable for public funds or property.</p><p> As to the third and fourth elements, the rules governing the liquidation of cash advances for intelligence and confidential funds, travel, and miscellaneous expenses are provided under COA Circular No. 2003-03 and COA Circular No. 97-002.</p><p> Under COA Circular No. 2003-03, all cash advances chargeable against the intelligence and/or confidential funds shall be liquidated within one month from the date of when the purpose of the cash advance was accomplished.</p><p> From the records of the case, the following cash advance received by Soliva was charged against the municipality's confidential and intelligence funds:<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> </p><table width="100%" border="1" cellspacing="0" cellpadding="4"> <tbody><tr valign="top"> <td width="20%"><div align="center">Criminal Case No.</div></td> <td width="12%"><div align="center">Date</div></td> <td width="18%"><div align="center">CA Voucher No. </div></td> <td width="22%"><div align="center">Journal Entry Voucher No.</div></td> <td width="11%"><div align="center">Check No.</div></td> <td width="17%"><div align="center">Amount</div></td> </tr> <tr valign="top"> <td><div align="center">SB-19-CRM-0135</div></td> <td><div align="center">02/08/07</div></td> <td><div align="center">101-2007-02-083</div></td> <td><div align="center">101-2007-02-083A</div></td> <td><div align="center">204325</div></td> <td><div align="center">PHP 8,000.00<sup style="COLOR: RGB(255, 0, 0);">[82]</sup></div></td> </tr> </tbody></table> <p>As for cash advances for travel, they must be liquidated within 60 days for foreign travel or 30 days for local travel, in accordance with COA Circular No. 97-002: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">5.1.3</div></td> <td width="95%"><div align="justify">Official Travel within sixty (60) days after return to the Philippines in the case of foreign travel or within thirty (30) days after return to his permanent official station in the case of local travel, as provided for in EO 248 and COA Circular No. 96-004.</div></td> </tr> </tbody></table> <p>Failure of the AO to liquidate his cash advance within the prescribed period shall constitute a valid cause for the withholding of his salary and the instruction of other sanctions as provided for under paragraphs 9.2 and 9.3 hereof. </p> </blockquote> <p> In this case, the following cash advances were received by Soliva for travel purposes: </p><table width="100%" border="1" cellpadding="4" cellspacing="0"> <tbody><tr valign="top"> <td width="19%"><div align="center">Criminal Case No.</div></td> <td width="11%"><div align="center">Date</div></td> <td width="18%"><div align="center">CA Voucher No. </div></td> <td width="22%"><div align="center">Journal Entry <br> Voucher No.</div></td> <td width="11%"><div align="center">Check No.</div></td> <td width="19%"><div align="center">Amount</div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0128</div></td> <td><div align="center">01/12/07</div></td> <td><div align="center">101-2007-01-001<br> </div></td> <td><div align="center">101-2007-01-001A</div></td> <td><div align="center">204251</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 50,000.00 </div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0129</div></td> <td><div align="center">05/31/07</div></td> <td><div align="center">101-2007-05-436<br> </div></td> <td><div align="center">101-2007-05-436A</div></td> <td><div align="center">208792</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 6,000.00 </div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0130</div></td> <td><div align="center">05/25/07</div></td> <td><div align="center">101-2007-05-411<br> </div></td> <td><div align="center">101-2007-05-411A</div></td> <td><div align="center">208771</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 20,000.00 </div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0131</div></td> <td><div align="center">05/11/07</div></td> <td><div align="center">101-2007-05-382<br> </div></td> <td><div align="center">101-2007-05-382A</div></td> <td><div align="center">208727</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 11,000.00<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> </div></td> </tr> </tbody></table> </div></td> </tr> </tbody></table> <p>As for cash advances for peace and order, they are also covered by COA Circular No. 97-002 which provides as follows: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">5.7</div></td> <td width="95%"><div align="justify">When a cash advance is no longer needed or has not been used for a period of two (2) months, it must be returned to or refunded immediately to the collecting officer. </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">5.8</div></td> <td><div align="justify">All cash advances shall be fully liquidated at the end of each year. Except for petty cash fund, the AO shall refund any unexpended balance to the Cashier/Collecting Officer who will issue the necessary official receipt. </div></td> </tr> </tbody></table> </blockquote> <p>The records show that from January to March 2007, Soliva incurred the following expenses for peace and order: </p> <p>&nbsp; </p> <table width="100%" border="1" cellpadding="4" cellspacing="0"> <tbody><tr valign="top"> <td width="19%"><div align="center">Criminal Case No.</div></td> <td width="11%"><div align="center">Date</div></td> <td width="18%"><div align="center">CA Voucher No. </div></td> <td width="22%"><div align="center">Journal Entry <br> Voucher No.</div></td> <td width="11%"><div align="center">Check No.</div></td> <td width="19%"><div align="center">Amount</div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0132</div></td> <td><div align="center">03/09/07</div></td> <td><div align="center">101-2007-03-204<br> </div></td> <td><div align="center">101-2007-03-204A</div></td> <td><div align="center">204449</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 20,000.00 </div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0133</div></td> <td><div align="center">03/07/07</div></td> <td><div align="center">101-2007-03-182<br> </div></td> <td><div align="center">101-2007-03-182A</div></td> <td><div align="center">204429</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 50,000.00 </div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td>SB-19-CRM-0134</td> <td><div align="center">02/26/07</div></td> <td><div align="center">101-2007-02-154</div></td> <td><div align="center">101-2007-02-154A</div></td> <td><div align="center">204396</div></td> <td><table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP170,000.00 </div></td> </tr> </tbody></table></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0136</div></td> <td><div align="center">02/06/07</div></td> <td><div align="center">101-2007-02-072<br> </div></td> <td><div align="center">101-2007-02-072A</div></td> <td><div align="center">204320</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 34,000.00 </div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="left">SB-19-CRM-0137</div></td> <td><div align="center">01/30/07</div></td> <td><div align="center">101-2007-01-058</div></td> <td><div align="center">101-2007-01-058A</div></td> <td><div align="center">204298</div></td> <td><div align="center"> <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">PHP 70,000.00<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> </div></td> </tr> </tbody></table> </div></td> </tr> </tbody></table> <p>As pointed out by the Sandiganbayan, for all the above expenses, 11 years have passed from the date of the last day of the period to liquidate to the date of the filing of the cases.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Under Article 218 of the Revised Penal Code, criminal liability attaches from the failure of the accountable officer to account for the funds entrusted to him or her within two months from the time after such accounts should be rendered. </p><p> Here, public funds were received by Soliva in the form of cash advances for intelligence and confidential funds, travel, and peace and order expenses which she was bound to account for under the law and pertinent COA rules and regulations. However, she failed to liquidate the same within the required periods. Per the Evaluation Report, Soliva's pending cash advances remained unaccounted for despite the passage of more than a decade from her receipt of the funds.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup></p><p> Considering that the violation of Article 218 is <i>mala prohibita</i>, the mere failure to account for the funds within the required period makes the accountable officer criminally liable. In this case, it cannot be said that Soliva did not intend to fail in rendering the accounts. Even after receiving three demand letters, she clearly disregarded her legal obligation to liquidate the cash advances despite multiple opportunities to do so. Instead of rectifying the situation, she made incomplete payments through payroll deduction after the required period for liquidation has already passed. She likewise failed to prove a justifiable cause for her failure to render the accounts.</p><p> All told, it is beyond doubt that Soliva is guilty of all 10 counts of Violation of Article 218 of the Revised Penal Code.</p><p> <b><i>The penalty</i></b></p><p> Republic Act No. 10951 was enacted during the pendency of the cases. Among others, it amended the imposable penalties for the violations of Articles 217 and 218 of the Revised Penal Code. Since the amendment is favorable to the accused, it shall be given retroactive application.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup></p><p> Under Article 217 of the Revised Penal Code, if the amount involved is more than PHP 40,000.00 but does not exceed PHP 1,200,000.00, the offender shall suffer the penalty of <i>prisiÃ³n mayor</i> in its minimum and medium periods. In all cases, persons guilty of malversation shall also suffer the penalty of perpetual special disqualification and a fine equal to the amount of the funds malversed or equal to the total value of the property embezzled. </p><p> On the other hand, a violation of Article 218 of the Revised Penal Code is penalized with <i>prisiÃ³n correccional</i> in its minimum period, or by a fine ranging from PHP 40,000.00 to PHP 1,200,000.00 or both. </p><p> In calculating the penalty to be imposed on Soliva, the Court notes that the Sandiganbayan failed to consider the mitigating circumstance of voluntary surrender. Voluntary surrender as a mitigating circumstance requires: (1) the accused has not been actually arrested; (2) the accused surrenders themselves to a person in authority or the latter's agent; and (3) the surrender is voluntary.</p><p> The essence of voluntary surrender is spontaneity and the intent of the accused to submit to the authorities, either because the accused acknowledges their guilt or because they wish to save the authorities the trouble and expense of placing them in custody.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> The facts of the case show that Soliva voluntarily surrendered after a warrant of arrest was issued on June 6, 2019. There was no need for law enforcement to actually find and capture her.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> Therefore, such mitigating circumstance must be appreciated in her favor in each of her charges. </p><p> For the violation of Article 217 of the Revised Penal Code, there being no aggravating circumstance and one mitigating circumstance, and applying the Indeterminate Sentence Law., the maximum penalty shall be taken from the minimum period of <i>prisiÃ³n mayor</i> in its minimum and medium periods or six years and one day to seven years and four months. The minimum period, which is one degree lower from the prescribed penalty, shall be taken from <i>prisiÃ³n correccional</i> medium to <i>prisiÃ³n correccional</i> maximum or two years, four months, and one day to six years. Thus, the penalty imposed by the Sandiganbayan which is an imprisonment term ranging from two years, four months, and one day of <i>prisiÃ³n correccional</i> as minimum, to six years and one day of <i>prisiÃ³n mayor</i> as maximum, is in accord with law. In addition, Soliva shall pay a fine in the amount malversed, which in this case is PHP 551,000.00, and suffer perpetual special disqualification from holding public office. </p><p> As for the 10 counts of violation of Article 218 of the Revised Penal Code, applying one mitigating circumstance and no aggravating circumstance to offset the same, the maximum penalty shall be taken from the minimum period of <i>prisiÃ³n correccional</i> or six months and one day to one year, one month, and 10 days. On the other hand, the minimum period shall be taken from the penalty next lower in degree which is <i>arresto mayor</i> maximum in any of its periods, the range of which is four months and one day to six months. In view thereof, Soliva is hereby sentenced to suffer an imprisonment of four months and one day of <i>arresto mayor</i>, as minimum, to six months and one day of <i>prisiÃ³n correccional</i> as maximum, and a fine of PHP 40,000.00 for each of the charges. </p><p> <b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b>. The Decision dated June 16, 2023 and the Resolution dated July 20, 2023 of the Sandiganbayan in Criminal Case Nos. SB-19-CRM-0127 to 0137, are hereby <b>AFFIRMED with the MODIFICATION </b>that for each count of violation of Article 218 of the Revised Penal Code, accused-appellant Teresita J. Soliva is <b>SENTENCED</b> to suffer an imprisonment of four months and one day of <i>arresto mayor</i>, as minimum, to six months and one day of <i>prision correccional</i> as maximum, and to <b>PAY</b> a fine of PHP 40,000.00.</p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa (Chairperson), Inting</i>, and <i>Dimaampao, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Id.</i> at 16-67.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 69-79. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 30. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 22. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 30-31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 31-32. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 32.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 33. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 26.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 26-27.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 27.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 27-28.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 28. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 29. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 36-39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 39-40. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 40. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 40-41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 62-66. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 43-46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 48-50. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 55-56. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 48-60. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 12-14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, pp. 76-77. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Custodio v. Sandiganbayan</b>, 493 Phil. 194, 204 (2005) [Per J. Puno, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Baylosis, Sr. v. People</b>, 556 Phil. 684. 690 (2007) [Per J. Velasco, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Ruiz v. People, G.R. Nos. 209073-74</b>, January 27, 2025 [Per J. Hernando, First Division]; <b>Kondo v. Civil Registrar General</b>, 872 Phil. 251, 260 (2020) [Per J. Lazaro-Javier, First Division]; <b>Ladines v. People</b>, 776 Phil. 75, 84-85 (2016) [Per J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Cabarlo v. People</b>, 537 Phil. 397, 405 (2006) [Per J. Ynares-Santiago, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Heirs of Barraquio v. Almeda, Inc.</b>, 933 Phil. 442, 481 (2023) [Per S.A.J. Leonen, Second Division], <i>citing</i> <b>Ybiernas v. Tanco-Gabaldon</b>, 665 Phil. 297, 311-312 (2011) [Per J. Nachura, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, p. 73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 27-30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 493 Phil. 194 (2005) [Per J. Puno, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 206. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, pp. 98-99. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 176-181. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 180-181. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 762 Phil. 630 (2015) [Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 658. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>People v. Ramoy</b>, 920 Phil. 656, 675 (2022) [Per J. Gaerlan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Dungo v. People</b>, 762 Phil. 630, 652 (2015) [Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>ABS-CBN Corp. v. Gozon</b>, 755 Phil. 709, 764 (2015) [Per J. Leonen, Second Division). </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>People v. Ramoy</b>, 920 Phil. 656, 673 (2022) [Per J. Gaerlan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>People v. Asuncion</b>, 922 Phil. 251, 277 (2022) [Per J. Rosario, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>People v. Talaue</b>, 893 Phil. 554, 570 (2021) [Per C.J. Peralta, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Venezuela v. People</b>, 826 Phil. 11, 28 (2018) [Per J. Reyes, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>People v. Reales, GR. Nos. 258182 &amp; 259950</b>, January 22, 2024 [Per J. Dimaampao, Third Division] at 22. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Rollo</i>, pp. 33-34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Torres v. People</b>, 672 Phil. 142, 151 (2011) [Per J. Peralta, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 899 Phil. 346 (2021) [Per J. Gaerlan, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 358. </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> 600 Phil. 186 (2009) [Per J. Brion, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 210. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Sarion v. People</b>, 899 Phil. 346, 357 (2021) [Per J. Gaerlan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> REVISED PENAL CODE, art. 217, as amended by Republic Act No. 10951 (2017). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>People v. Reales, G.R. Nos. 258182 &amp; 259950</b>, January 22, 2024 [Per J. Dimaampao, Third Division] at 23. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Navallo v. Sandiganbayan</b>, 304 Phil. 343, 353 (1994) [Per J. Vitug, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Quizo v. Sandiganbayan</b>, 233 Phil. 103, 108-109 (1987) [Per J. Fernan, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Rollo</i>, p. 98. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Perez v. People</b>, 568 Phil. 491, 520 (2008) [Per J. Reyes, R.T., Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>Venezuela v. People</b>, 826 Phil. 11, 27 (2018) [Per J. Reyes, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Campomanes v. People</b>, 540 Phil. 306, 315 (2006) [Per J. Carpio, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Rollo</i>, pp. 51-52. </p><p><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 50-52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 52-53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 50-56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 55-56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Republic Act No. 10951 (2017), sec. 100. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>PO2 Cambe v. People</b>, 913 Phil. 569, 596 (2021) [Per J. Lazaro-Javier, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Rollo</i>, p. 26. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

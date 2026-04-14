@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267379 - ANDREI SAGARINO, NICHOLETTE SAGARINO, PETITIONER, VS.  TOPLIS SOLUTIONS, INC., RESPONDENT. - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70164' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267379, October 15, 2025 ]</H2>
+			<H3>ANDREI SAGARINO, NICHOLETTE SAGARINO, PETITIONER, VS.  TOPLIS SOLUTIONS, INC., RESPONDENT.</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup><b>(Petition)</b> under Rule 45 of the Rules of Court filed by petitioner Andrei Nicholette Sagarino <b>(Andrei),</b> assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated July 29, 2022, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 3, 2023, of the Court of Appeals (CA) in CA-G.R. SP No. 168601. The CA annulled and set aside the Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated September 30, 2020, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated December 29, 2020, of the National Labor Relations Commission <b>(NLRC)</b> in NLRC LAC No. 02-000505-20, which ruled that Andrei was constructively dismissed by respondent Toplis Solutions, Inc. (TSI),<sup><font color="#ff0000">[6]</font></sup> and instead held that Andrei was merely placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br><center><b><i>The Facts</i></b></center><br>The case stemmed from a Complaint filed by Andrei against TSI, Azalea Hotels and Residences <b>(Azalea)</b>, Michelle Acosta <b>(Michelle),</b> Ryan Lomibao <b>(Ryan),</b> Japhet Edora <b>(Japhet),</b> and <b>Jen </b>Tan (Jen) (collectively, <b>TSI</b> et al.) for illegal dismissal, non-payment of 13th month pay, separation pay, and backwages with claim for damages, as well as attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Michelle, Ryan, Japhet, and Jen were employees of Azalea.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Andrei averred that she was hired by TSI and was assigned as Azalea's Front Office Supervisor<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> on a probationary basis for a monthly salary of PHP 15,000.00.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> The pertinent portion of Andrei's employment agreement reads:<br><br>This is to confirm your <b><u>PROBATIONARY EMPLOYMENT</u></b> under TOPLIS SOLUTIONS, INC. as Front Office Supervisor, effective on <u>March 28, 2019</u> pursuant to the terms and conditions of employment as defined and stated below: <br><ol><li>You will perform the duties and responsibilities assigned as Front Office Supervisor in whatever client or establishment to which you may be assigned by TOPLIS SOLUTIONS, INC. The means and methods by which you will perform your tasks shall be directly implemented and conveyed to you by a Toplis Supervisor and/or its authorized representative in the establishment concerned. <br><br>Your current assignment will be at <b>AZALEA HOTEL AND RESIDENCES - BAGUIO</b> with business address at 7 Leonard Wood Loop[,] Baguio City until you are transferred pursuant to the provisions of the next succeeding paragraphs. <br><br></li><li>The Company may exercise its prerogative to transfer you to another client upon (a) client's request for your relief or replacement for whatever reason; (b) change of [sic] the nature of work; (c) adjustment or change of working methods; (d) determining the place and manner of work where you will be most useful.<br><br></li><li>Whenever a client decides to request for relief or transfer of your services, or a cancellation or non-renewal of its contract of services with the company, the employer-employee relationship does not [sever] and you may be transferred, placed on temporary detail, or merely considered on leave until re-assignment with another client is available. <br><br>Pending re-assignment, you shall become part of the manpower pool of the company.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> (Emphasis in the original)</li></ol>In the performance of her duty as Front Office Supervisor, Andrei confronted guest service associate, Claudette Calatan <b>(Claudette),</b> and required the latter to submit documents relevant to her absence on July 30, 2019.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Claudette refused and told Andrei that she already communicated her reasons to their manager and to Michelle,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> a high-ranking officer of Azalea.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Andrei felt bypassed and disrespected by Claudette's actions.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On August 2, 2019, Jen instructed Andrei to report to work earlier than usual.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Upon arrival at Azalea, Andrei met Japhet, Jen, and Gretchen Durohom <b>(Gretchen),</b> TSI's Human Resources coordinator.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Believing this was her chance to recommend the suspension of Claudette due to her disrespectful behavior, Andrei was both shocked and dismayed<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> to instead be handed a "Notice of Pull Out" effective August 10, 2019.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> According to the notice, Andrei did not pass the standard performance evaluation and thus will be placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Andrei was also informed of her violations of the company code of ethics and Azalea's decision to return her to the TSI work pool.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Upon reviewing the documents attached to the Notice of Pull Out, Andrei discovered that her employee performance evaluation had been tampered with.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Andrei asserted that the attached employee performance evaluation reflected lower scores compared to the evaluation previously issued to her by Ryan.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> As a result of the events that transpired, Andrei filed the subject Complaint against TSI et al.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Andrei asserted that, at the time of her engagement, she was not informed of the standards required to qualify as a regular employee.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> As such, she contended that she should be considered a regular employee who may be terminated only for just or valid cause and in accordance with procedural due process.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> On this score, Andrei argued that TSI failed to meet both substantive and procedural requirements for a valid termination.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> According to Andrei, her dismissal was unlawful, citing the lack of substantive grounds for her termination.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> She also contended that she was deprived of due process.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> While she admitted that TSI has the sole valid management prerogative to terminate the services of employees, she argued that she was never given a chance to submit her answer or explanation to the alleged infractions she committed against the rules and policies of the company.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>TSI, for its part, asserted that it was a legitimate independent contractor, duly registered with the Department of Labor and Employment.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> It hired Andrei as a probationary employee, assigning her to Azalea as a Front Office Supervisor, in accordance with its service agreement contract<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> with the said company.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Thereafter, TSI was informed that Andrei had stopped reporting to work since August 10, 2019.<sup><font color="#ff0000">[35]</font></sup> Thus, on August 16, 2019, it sent an invitation to report<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> to Andrei, requesting a meeting to discuss the latter's employment status.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Subsequently, on August 19, 2019, TSI issued a "Notice of Pull Out" to Andrei, which she refused to sign.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Consequently, TSI sent a copy of the notice via registered mail.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>TSI maintained that Andrei was not illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Instead, she was a probationary employee who failed to meet the required employment standards of Azalea and was therefore placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> TSI claimed that there was no severance of the employer-employee relationship between it and Andrei, and pending Andrei's reassignment, she became part of the manpower pool of TSI.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> TSI even manifested during the Mandatory Conciliation and Mediation Conference that Andrei was merely pulled-out from Azalea and that she was required to report to work.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> However, Andrei refused to do the same.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Because of these reasons, TSI argued that Andrei had no valid cause of action against it, as her claim for illegal dismissal was filed prematurely.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> TSI also denied any allegations of tampering with Andrei's performance evaluation.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><center><b>The Ruling of the Labor Arbiter</b></center>,<br>In a Decision,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> dated December 9, 2019, Labor Arbiter Malcom P. Bacuso (Labor Arbiter) ruled that Andrei was a regular employee.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Labor Arbiter found that Andrei's employment contract with TSI did not contain any standards which could effectively guide her to become a regular employee after the period of six months.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> With no evidence that Andrei was informed of such standards, she was deemed a regular employee<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> who could only be terminated for a just or valid cause and with procedural due process.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>As a regular employee, Labor Arbiter ruled that Andrei was not given the required due process when her employment was terminated, resulting in her illegal dismissal.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Labor Arbiter also determined that Andrei's alleged low evaluation report was maliciously created, as evidenced by the alterations made thereto.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Furthermore, Labor Arbiter ruled that TSI had no real intention of placing Andrei on floating status because the Notice of Pull Out was undated and simply stated that Andrei refused to receive the same.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> For these reasons, Labor Arbiter ordered TSI and Azalea to jointly and severally pay for separation pay, backwages, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>TSI appealed to the NLRC, arguing that Labor Arbiter erred in ruling that Andrei was illegally dismissed and in holding both TSI and Azalea solidarily liable for the awards granted to Andrei.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><center><b>The Ruling of the NLRC</b></center><br>The NLRC affirmed Labor Arbiter's finding that Andrei was a regular employee.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> However, the NLRC ruled that Andrei was constructively dismissed on February 10, 2020, and not actually illegally dismissed from employment upon her pull out from Azalea on August 10, 2019.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> According to the NLRC, while TSI validly exercised its management prerogative to transfer Andrei, it was still remiss in its duty to redeploy Andrei during the pendency of the case or within the six-month period starting from August 10, 2019.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> The NLRC claimed that this is crucial because, while Andrei appeared to have prematurely filed a case for illegal dismissal, this does not necessarily relieve TSI of its duty to reinstate Andrei within the allowable floating period.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Thus, the NLRC modified Labor Arbiter's Decision in this wise:<blockquote><b>WHEREFORE,</b> premises considered, the appeal is hereby DISMISSED. Accordingly, the Decision[,] dated [December 9, 2019,] is hereby MODIFIED as follows:<br><br>1.&nbsp;&nbsp;&nbsp; Complainant was constructively dismissed on [February 10, 2020] and not actually illegally dismissed from employment upon her pull out from respondent Azalea Hotels and Residences on [August 10, 2019];&nbsp;<div align="JUSTIFY"><br></div><div align="JUSTIFY">2.&nbsp;&nbsp;&nbsp; The provisional computation of complainant's backwages shall commence only on [February 10, 2020];<br><br>3.&nbsp;&nbsp;&nbsp; The awards of backwages and separation pay shall be computed up to the finality of this Decision;&nbsp;</div><div align="JUSTIFY"><br></div>4.&nbsp;&nbsp;&nbsp; The computation of attorney's fees is hereby adjusted considering that complainant's constructive dismissal from employment took effect only on [February 10, 2020]; and <br><br>5.&nbsp;&nbsp;&nbsp; Our provisional computation up to [June 30, 2020] entitles the complainant not to the awards granted by the Office of the Labor Arbiter, but to the following:<br><br><table width="95%" Â ="" border="1" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="49%"><div align="center"><strong>Awards</strong></div></td> <td width="51%"><div align="center"><strong>Amounts </strong></div></td> </tr> <tr> <td><blockquote> <p>1. Full backwages<br>&nbsp;&nbsp; 1.1. Monthly Basic Wage <br>&nbsp;&nbsp; 1.2. Proportionate 13<sup>th </sup>Month Pay </p> </blockquote></td> <td><div align="center">[PHP] 76 , 375.00<br> [PHP] 70,500.00 <br> [PHP] 5 , 875 . 00</div></td> </tr> <tr> <td><blockquote> <p>2. Separation Pay </p> </blockquote></td> <td><div align="center">[PHPl 15 , 000.00 </div></td> </tr> <tr> <td><blockquote> <p><strong>SUB- TOTAL </strong></p> </blockquote></td> <td><div align="center"><strong>[PHPl 167,750.00 </strong></div></td> </tr> <tr> <td width="49%" valign="top"><blockquote> <p> 3. Attorney's Fees </p> </blockquote></td> <td><div align="center">PHP116 , 775.00 </div></td> </tr> <tr> <td valign="top"><blockquote> <p>Equivalent to [10%] of the total award. </p> </blockquote></td> <td><div align="center"></div><br></td> </tr> <tr> <td valign="top"><blockquote> <p><strong>GRAND TOTAL </strong></p> </blockquote></td> <td><div align="center"><strong>[PHP]</strong><strong></strong><strong> 184,525.00 </strong></div></td> </tr> </tbody></table><br>6.&nbsp;&nbsp;&nbsp; Respondent Toplis Solutions, Inc. is solely liable to pay complainant the foregoing awards. <br><br><b>SO ORDERED</b>.<sup><font color="#ff0000">[61]</font></sup> (Emphasis in the original)<br></blockquote></div><div align="JUSTIFY">TSI filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> which the NLRC denied in its Resolution,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> dated December 29, 2020.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>On September 24, 2021, the NLRC issued an Entry of Judgment,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> providing that the Decision of the Commission had become final and executory on March 2, 2021.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>Undeterred, TSI elevated the case, by way of a Petition for Certiorari<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> via Rule 65 of the Rules of Court, to the CA, arguing that the NLRC committed a capricious and whimsical exercise of judgment: (1) in declaring that Andrei was constructively dismissed on February 10, 2020 and not actually illegally dismissed from employment upon her pull out from Azalea on August 10, 2019; (2) in awarding full backwages and separation pay to Andrei; and (3) in ordering TSI to pay attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br><center><b>The Ruling of the CA</b></center><br>The CA, in its Decision,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> dated July 29, 2022, agreed that Andrei was hired as a regular employee of TSI.<sup><font color="#ff0000">[70]</font></sup> While the employment agreement indicated that Andrei was on "probationary employment," there was nothing in the records that proved that she was apprised of the reasonable standards by which her probationary employment was to be assessed.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Neither was there any showing that TSI exerted efforts to inform Andrei of such standards that would qualify her for regularization.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>The CA, however, disagreed with the NLRC's conclusion that Andrei was constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> The CA found that the evidence showed that Andrei was not dismissed but was instead placed on floating status, as clearly stated in the "Notice of Pull Out" issued by TSI.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> The CA emphasized that the law allows employers to place its employees on floating status for a period not exceeding six months.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> However, here, Andrei filed her illegal dismissal complaint just 19 days after being placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Thus, the CA concluded that, at the time of the filing of the complaint, there was no dismissal to speak of yet.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> The CA further ruled that the premature filing of the case deprived TSI of the legal opportunity to reassign Andrei to another client.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Additionally, the CA noted that TSI offered Andrei the chance to return to work during the Single Entry Approach (SENA) conference<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> and issued a return-to-work order after receiving Labor Arbiter's Decision.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Furthermore, the CA noted that TSI had sent Andrei an invitation to report to work as early as August 16, 2019, which directly contradicted the NLRC's finding that TSI had not offered Andrei a return to work or reassignment.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup><br><br>Given that no dismissal had occurred, the CA ruled that reinstatement was not warranted.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Instead, it declared that Andrei was entitled to return to work, and that TSI must accept her, as the employment relationship between them had never been severed.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Thus, the CA disposed of the case in this wise:<blockquote><b>WHEREFORE,</b> premises considered, the instant petrtion for [certiorari] is <b>GRANTED</b>. The Decision[,] dated September 30, 2020[,] and Resolution[,] dated December 29, 2020[,] of the National Labor Relations Commission in NLRC LAC No. 02-000505-20 are <b>ANNULLED</b> and <b>SET ASIDE.</b> Private respondent Andrei Nicholette A. Sagarino is <b>DIRECTED</b> to report for work within (10] days from notice.<sup><font color="#ff0000">[84]</font></sup> (Emphasis in the original)</blockquote>Andrei's Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> was denied by the CA, in its Resolution,<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> dated March 3, 2023.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Hence, this current Petition.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup><br><br>Andrei imputes error on the part of the CA in annulling and setting aside the Decision of the NLRC.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> Andrei posits that there was no real intention on the part of TSI to place her on floating status.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> Since she has been constructively dismissed, Andrei contends that Labor Arbiter and the NLRC correctly found TSI liable for backwages, separation pay, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup><br><b><br></b><i><center><b>Issues</b></center></i><br>1.&nbsp;&nbsp;&nbsp; Did the CA err in holding that Andrei was not constructively dismissed but was merely placed on floating status?<br><br>2.&nbsp;&nbsp;&nbsp; Did the CA err in deleting the award of damages in favor of Andrei, and instead ordering her to report for work within 10 days from notice?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Petition is meritorious.<br><br>At the outset, it must be emphasized that the issue of whether Andrei was merely placed on floating status, was thereafter asked to report back to work, and was not, therefore, constructively dismissed are questions of fact that are not the proper subjects of a petition for review under Rule 45 of the Rules of Court.<br><br>As a rule, only questions of law are reviewable by the Court.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> Because the Court is not a trier of facts, it is not duty-bound to analyze, review, and weigh the evidence all over again in the absence of any showing of any arbitrariness, capriciousness, or palpable error.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> Thus, in general, the factual findings of administrative or quasi-judicial bodies, including labor tribunals, are accorded great respect by the Court, as they are specialized to rule on matters falling within their jurisdiction, especially when these are supported by substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> This doctrine applies with greater force in labor cases since questions of fact presented therein are for the labor tribunals to resolve.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup><br><br>In labor cases, a Rule 45 petition is limited to reviewing whether the CA correctly determined the presence or absence of grave abuse of discretion and deciding other jurisdictional errors of the NLRC.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Career Philippines Shipmanagement, Inc. v. Serna,</i><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> citing<i> Montoya v. Transmed Manila Corp.</i><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> is instructive on the parameters of judicial review under Rule 45:<blockquote>As a rule, only questions of law may be raised in a Rule 45 petition. In one case, we discussed the particular parameters of a Rule 45 appeal from the CA's Rule 65 decision on a labor case, as follows:<br><br>In a Rule 45 review, we consider the correctness of the assailed CA decision, in contrast with the review for jurisdictional error that we undertake under Rule 65. Furthe1more, Rule 45 limits us to the review of questions of law raised against the assailed CA decision. In ruling for legal correctness, we have to review the CA decision in the same context that the petition for certiorari it ruled upon was presented to it; we have to examine the CA decision from the prism of whether it correctly determined the presence or absence of grave abuse of discretion in the NLRC decision before it, not on the basis of whether the NLRC decision on the merits of the case was correct. In other words, we have to be keenly aware that the CA undertook a Rule 65 review, not a review on appeal, of the NLRC decision challenged before it.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup></blockquote>After a careful examination of the records, the Court is constrained to reverse the Decision of the CA, which ultimately held that Andrei was not constructively dismissed but was merely placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> The reversal of the CA' s Decision is further justified by the absence of any explicit finding that the NLRC committed grave abuse of discretion in concluding that TSI constructively dismissed Andrei under the given circumstances.<br><br><i>Andrei is a regular employee of TSI</i><br><br>Our labor laws and the Constitution afford security of tenure to employees, ensuring that they have a reasonable expectation of stability and protection in their employment.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> Employees are guaranteed that they can only be terminated from service for a just and valid cause and when supported by substantial evidence after due process.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup><br><br>Security of tenure is enjoyed even by employees on probation,<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> thus, while they do not enjoy permanent status, they cannot be removed from their positions,<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> during the period of their probation, unless for just or authorized causes, or if they fail to qualify in accordance with reasonable standards made known by their employers at the time of the engagement.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup><br><br>Here, TSI alleged that Andrei was a probationary employee who failed to pass the required employment standards of Azalea.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> On the other hand, Andrei averred that she was a regular employee since TSI failed to inform her of the standards required for regular employment at the time of her engagement.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>Labor Arbiter, the NLRC, and the CA uniformly held that Andrei was TSI's regular employee<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> because of the lack of reasonable standards by which Andrei's probationary employment was to be assessed. <sup style="COLOR: RGB(255, 0, 0);">[109]</sup><br><br>The Court finds no cogent reason to disturb this factual finding of the labor tribunals and the CA, as it is in line with our labor laws and the prevailing jurisprudence on the matter.<br><br>A probationary employee is one who is placed on trial by an employer, during which the latter determines whether or not the former is qualified for permanent employment.<sup style="COLOR: RGB(255, 0, 0);">[110]</sup> The essence of probationary period of employment is explained by this Court in <i>Skyway O &amp; M Corp. v. Reinante,</i><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> thus:<blockquote>The essence of a probationary period of employment lies primordially in the purpose and objective of both the employer and employee during such period. On one hand, the employer observes the fitness, propriety and efficiency of a probationary employee in order to ascertain whether or not such person is qualified for regularization. The latter, on the other hand, seeks to prove to the former that he or she has the qualifications and proficiency to meet the reasonable standards for permanent employment.<sup style="COLOR: RGB(255, 0, 0);">[112]</sup></blockquote>It is primordial that at the start of the probationary period, the standards for regularization be made known to the probationary employee.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup> In <i>Sameer Overseas Placement Agency, Inc. v. Cabiles</i>,<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> this Court explained the rationale for establishing predetermined standards at the time of engagement, thus:<blockquote>The pre-determined standards that the employer sets are the bases for determining the probationary employee's fitness, propriety, efficiency, and qualifications as a regular employee. Due process requires that the probationary employee be informed of such standards at the time of his or her engagement so he or she can adjust his or her character or workmanship accordingly. Proper adjustment to fit the standards upon which the employee's qualifications will be evaluated will increase one's chances of being positively assessed for regularization by his or her employer.<sup style="COLOR: RGB(255, 0, 0);">[115]</sup></blockquote>Here, it is indisputable that Andrei was hired on a probationary basis, as evidenced by the employment agreement<sup style="COLOR: RGB(255, 0, 0);">[116]</sup> she signed with TSI. As the CA rightly pointed out, the agreement clearly specified that Andrei's employment was probationary.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> However, as correctly found by the CA and the labor tribunals, TSI failed to communicate the reasonable standards for regularization at the time of Andrei's employment. The mere inclusion of Andrei's duties and responsibilities as a Front Office Supervisor in the employment agreement is not sufficient. As the basis to determine a probationary employee's fitness, propriety, efficiency, and qualifications as a regular employee, the reasonable standards must allow the employee to accordingly adjust, should there be an adverse assessment in the performance of tasks.<sup style="COLOR: RGB(255, 0, 0);">[118]</sup> There should have been clear and reasonable standards upon which regularization was contingent.<sup style="COLOR: RGB(255, 0, 0);">[119]</sup> Since no standards were communicated to Andrei at the time of her engagement, she is considered a regular employee, as stipulated under the Amended Rules Implementing Books III and VI of the Labor Code,<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> which state:<blockquote>Section 6. <i>Permissible contracting or subcontracting. </i>- ...<div align="JUSTIFY"><br></div>. . . .<br><br>(d) In all cases of probationary employment, the employer shall make known to the employee the standards under which he will qualify as a regular employee at the time of his engagement. Where no standards are made known to the employee at that time, he shall be deemed a regular employee [.]<sup style="COLOR: RGB(255, 0, 0);">[121]</sup> (Emphasis supplied)<br></blockquote></div><div align="JUSTIFY"><i>Andrei was constructively dismissed <br>from employment</i><br><br>The CA found that Andrei was not dismissed from employment but was merely placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[122]</sup> The CA based its conclusion on the Notice of Pull Out issued by TSI to Andrei, which, in pertinent part, reads:<blockquote>This is to inform you that your company is constrained to issue a pull out memo, effective August 10, 2019, due to failure to pass the Standard Performance Evaluation of your assigned tasks. <br><br>At this juncture, you are advised that this pull out memo is not a pre-termination of your employment contract rather you are on a floating status pending your redeployment for a position that will fit your qualifications. <br><br>Further, let it be known to you, that while under PULL-OUT status, you are not entitled to your salary nor to any company benefit. However, rest assured that we will prioritize your redeployment and will immediately notify once there is available [sic] job position that will fit your qualifications.<sup style="COLOR: RGB(255, 0, 0);">[123]</sup></blockquote>According to the CA, the pull out was a valid exercise of TSI's management prerogative,<sup><font color="#ff0000">[124]</font></sup> particularly in this case, where TSI had a <i>bona fide</i> reason to reassign Andrei to another client.<sup><font color="#ff0000">[125]</font></sup> The CA further ruled that there was no constructive dismissal, noting that TSI offered Andrei the opportunity to return to work during the SENA conference and even sent her an invitation to report to work as early as August 16, 2019.<sup style="COLOR: RGB(255, 0, 0);">[126]</sup><br><br>This Court disagrees with the CA's findings and conclusions.<br><br>Placing employees on "floating status" or temporary "off-detail" is a valid management prerogative, typically exercised by security agencies reliant on service contracts.<sup style="COLOR: RGB(255, 0, 0);">[127]</sup> The Court explained the nature of "floating status," as understood in the context of security agencies, in the case of <i>Salvaloza v. National Labor Relations Commission</i>:<sup style="COLOR: RGB(255, 0, 0);">[128]</sup><blockquote>Temporary "off-detail" or "floating status" is the period of time when security guards are in between assignments or when they are made to wait after being relieved from a previous post until they are transferred to a new one. It takes place when the security agency's clients decide not to renew their contracts with the agency, resulting in a situation where the available posts under its existing contracts are less than the number of guards in its roster. It also happens in instances where contracts for security services stipulate that the client may request the agency for the replacement of the guards assigned to it even for want of cause, such that the replaced security guard may be placed on temporary "off-detail" if there are no available posts under the agency's existing contracts. During such time, the security guard does not receive any salary or any financial assistance provided by law. It does not constitute a dismissal, as the assignments primarily depend on the contracts entered into by the security agencies with third parties, so long as such status does not continue beyond a reasonable time. When such a "floating status" lasts for more than six [] months, the employee may be considered to have been constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[129]</sup></blockquote>Although the Labor Code does not contain a specific provision addressing "floating status" or temporary "off-detail" of employees, the Court, by analogy to Article 301 of the Labor Code, treats this situation as a form of temporary retrenchment or layoff.<sup><font color="#ff0000">[130]</font></sup> Article 301 of the Labor Code provides:<blockquote>Art. 301. [286]<i> When Employment Not Deemed Terminated.</i> - The <i>bona fide</i> suspension of the operation of a business or undertaking for a period not exceeding six [] months, or the fulfillment [sic] by the employee of a military or civic duty shall not terminate employment. In all such cases, the employer shall reinstate the employee to his former position without loss of seniority rights if he indicated his desire to resume his work not later than one [] month from the resumption of operations of his employer or from his relief from the military or civic duty.<sup style="COLOR: RGB(255, 0, 0);">[131]</sup></blockquote>Although primarily applied to security services, the concept of"floating status" or temporary "off-detail" extends to other industries.<sup style="COLOR: RGB(255, 0, 0);">[132]</sup><br><br>The floating status principle finds application in this case.<br><br>It is irrefutable that TSI is a legitimate independent contractor, with its operations dependent on client contracts. Consequently, the need to reassign Andrei is contingent upon the requirements of TSI's third-party clients and contractual obligations. In fact, Andrei's employment agreement with TSI highlights this when it provides:<blockquote>2. The Company may exercise its prerogative to transfer you to another client upon (a) client's request for your relief or replacement for whatever reason; (b) change of the nature of work; (c) adjustment or change of working methods; (d) determining the place and manner of work where you will be most useful.<sup style="COLOR: RGB(255, 0, 0);">[133]</sup><br></blockquote>Thus, here, it is within TSI's prerogative to place Andrei on floating status, especially since Azalea informed TSI that Andrei's services will no longer be extended.<sup style="COLOR: RGB(255, 0, 0);">[134]</sup> However, TSI's valid exercise of management prerogative in placing Andrei on floating status does not absolve it of its responsibility to reassign Andrei to another client.<br><br>TSI asserted that it did not neglect its duty to reassign Andrei to another client, highlighting that it consistently sent her invitations to report for work.<sup style="COLOR: RGB(255, 0, 0);">[135]</sup> TSI further averred that Andrei prematurely filed the illegal dismissal complaint, noting that only 19 days have passed since she was placed on floating status.<sup style="COLOR: RGB(255, 0, 0);">[136]</sup> The CA sided with TSI and held that the premature filing of the illegal dismissal case deprived TSI of the latitude given to it by law to reassign Andrei to another client.<sup style="COLOR: RGB(255, 0, 0);">[137]</sup> The CA also agreed with TSI's assertion that it offered Andrei several opportunities to return to work.<sup style="COLOR: RGB(255, 0, 0);">[138]</sup><br><br>The Court disagrees.<br><br>While a complaint for illegal dismissal filed prior to the lapse of the six-month period and/or the actual dismissal of the employee is generally considered as prematurely filed,<sup style="COLOR: RGB(255, 0, 0);">[139]</sup> nothing precludes the employers from giving the employee/s new assignments during the pendency of the case before the labor arbiter. An employer's failure to offer reinstatement or reassignment to an employee placed on floating status, even during the pendency of the labor dispute constitutes constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[140]</sup> As the Court explained in <i>MegaForce Security and Allied Services, Inc. v. Lactao:</i><sup style="COLOR: RGB(255, 0, 0);">[141]</sup><blockquote>Temporary "off-detail" or the period of time security guards are made to wait until they are transferred or assigned to a new post or client does not constitute constructive dismissal as their assignments primarily depend on the contracts entered into by the security agencies with third parties. Indeed, the Court has repeatedly recognized that "off-detailing" is not equivalent to dismissal, so long as such status does not continue beyond a reasonable time; when such a "floating status" lasts for more than six months, the employee may be considered to have been constructively dismissed. <br><br><i>However, in the present case, while the charge of illegal dismissal may have been premature because Lactao has not been given a new assignment or temporary "off-detail" for a period of seven days only when he amended his complaint, the continued failure of Mega.force to offer him a new assignment during the proceedings of the case before the LA and beyond the reasonable six-month period makes it liable for constructive dismissal.</i><sup style="COLOR: RGB(255, 0, 0);">[142]</sup> (Emphasis supplied; citations omitted)</blockquote>Here, although TSI, as agreed by the CA, asserted that it sent Andrei an invitation to report to work on August 16, 2019,<sup style="COLOR: RGB(255, 0, 0);">[143]</sup> offered her a chance to return during the SENA conference, <sup style="COLOR: RGB(255, 0, 0);">[144]</sup> and issued a notice for her to return on February 4, 2020,<sup><font color="#ff0000">[145]</font></sup> such notices do not suffice to alter Andrei's floating status. There is no proof that the notices state a specific client to which Andrei would be assigned, rendering them mere general return-to-work orders. As such, they do not absolve TSI of liability for constructive dismissal.<br><br>Section 5.2. of Department of Labor and Employment - Department Order No. 14, Series of 2001<sup style="COLOR: RGB(255, 0, 0);">[146]</sup> provides that return-to-work orders must include the following details:<blockquote>5.2. For every assignment of a security guard/personnel to a principal, the duty detail order shall contain the following, among others: <br><br>a.&nbsp;&nbsp;&nbsp; Description of job, work or service to be performed. <br><br>b.&nbsp;&nbsp;&nbsp; Hours and days of work, work shift and applicable premium, overtime and night shift pay rates.<br></blockquote>The specificity requirement for return-to-work orders is reflected in several cases ruled upon by this Court. On numerous occasions, the Court has emphasized that a new assignment must be made to a specific client. A general return-to-work order, without such specificity, is insufficient.<br><br>In <i>Padilla v. Airborne Security Service, Inc.,</i><sup style="COLOR: RGB(255, 0, 0);">[147]</sup> the Court ruled that the letters sent by respondents to petitioners, which required the latter to report to Airborne's head office did not suffice.<sup style="COLOR: RGB(255, 0, 0);">[148]</sup> The Court noted that the letters merely required petitioner to report to work and to explain why he had failed to report to the office.<sup style="COLOR: RGB(255, 0, 0);">[149]</sup> The letters did not identify any specific client to which petitioner was to be reassigned. Thus, the letters were, at best, nothing more than general return-to-work orders.<sup style="COLOR: RGB(255, 0, 0);">[150]</sup> Under the circumstances, the Court concluded that the CA gravely erred in ruling that petitioner was not constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[151]</sup><br><br>Similarly, in <i>Ador v. Jamila and Company Security Services, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[152]</sup> the Court held that petitioner was constructively dismissed after being placed on floating status from May 12, 2012 to April 11, 2013.<sup style="COLOR: RGB(255, 0, 0);">[153]</sup> The Court ruled that the three notices to report for work sent to petitioner were merely general return-to-work orders which did not specify the required details of his posting assignment.<sup style="COLOR: RGB(255, 0, 0);">[154]</sup><br><br>In <i>Hamid v. Gervasio Security and Investigation Agency, Inc.,</i><sup style="COLOR: RGB(255, 0, 0);">[155]</sup> the Court found that the notices to report issued to the petitioner did not state a specific client to which he would be deployed.<sup style="COLOR: RGB(255, 0, 0);">[156]</sup> The notices merely required petitioner to report to the security agency, and were, at best, nothing more than general return-to-work orders which did not toll the running of petitioner's floating status.<sup style="COLOR: RGB(255, 0, 0);">[157]</sup> The Court emphasized that what is required is for the employee to be deployed to a specific client and not merely recalled to the agency's office.<sup style="COLOR: RGB(255, 0, 0);">[158]</sup><br><br>Also, in <i>Ibon v. Genghis Khan Security Services,</i><sup style="COLOR: RGB(255, 0, 0);">[159]</sup> the Court held that respondent's letters, which required petitioner to report back to work and to explain why he failed to report to the office after inquiring about his posting status were insufficient to refute a finding of constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[160]</sup> Such notices were not deemed to be specific notices assigning petitioner to a particular client. As explained by this Court:<blockquote>Respondent could not rely on its letter requiring petitioner to report back to work to refute a finding of constructive dismissal. The letters, dated November 5, 2010 and February 3, 2011, which were supposedly sent to petitioner merely requested him to report back to work and to explain why he failed to report to the office after inquiring about his posting status. More importantly, there was no proof that petitioner had received the letters. <br><br>In <i>Tatel v. JLFP</i> Investigation [], the Court initially found that the security guard was constructively dismissed notwithstanding the employer's letter ordering him to report back to work. It expounded that in spite of the report-to-work order, the security guard was still constructively dismissed because he was not given another detail or assignment. On motion for reconsideration, however, the Court reversed its ruling after it was shown that the security guard was in fact assigned to a specific client, but the latter refused the same and opted to wait for another posting.<br><br>A holistic analysis of the Court's disposition in <i>JFLP Investigation</i> reveals that: [] an employer must assign the security guard to another posting within six [] months from his last deployment, otherwise, he would be considered constructively dismissed; and [] the security guard must be assigned to a specific or particular client. A general return-to-work order does not suffice. <br><br>In <i>Exocet Security and Allied Services Corporation v. Serrano</i> [], the Court absolved the employer even if the security guard was on a floating status for more than six [] months because the latter refused the reassignment to another client, to wit: <br><blockquote>In the controversy now before the Court, there is no question that the security guard, Serrano, was placed on floating status after his relief from his post as a VIP security by his security agency's client. Yet, there is no showing that his security agency, petitioner Exocet, acted in bad faith when it placed Serrano on such floating status. What is more, <b>the present case is not a situation where Exocet did not recall Serrano to work within the six-month period as required by law and jurisprudence. Exocet did, in fact, make an offer to Serrano to go back to work.</b> [... ] <br><br>Clearly, Serrano's lack of assignment for more than six months cannot be attributed to petitioner Exocet. On the contrary, records show that, as early as September 2006, or one month after Serrano was relieved as a VIP security, Exocet had already offered Serrano a position in the general security service because there were no available clients requiring positions for VIP security. Notably, even though the new assignment does not involve a demotion in rank or diminution in salary, pay, or benefits, <b>Serrano declined the position because it was not the post that suited his preference, as he insisted on being a VIP Security.</b> [... ]<br><br>Thus, it is manifestly unfair and unacceptable to immediately declare the mere lapse of the six-month period of floating status as a case of constructive dismissal, without looking into the peculiar circumstances that resulted in the security guard's failure to assume another post. This is especially true in the present case where the security guard's own refusal to accept a non-VIP detail was the reason that he was not given an assignment within the six-month period. The security agency, Exocet, should not then be held liable. <br></blockquote>Applying the foregoing to the present controversy, respondent should have deployed petitioner to a <b>specific</b> client within six [] months from his last assignment. The correspondences allegedly sent to petitioner merely required him to explain why he did not report to work. He was never assigned to a particular client. Thus, even if petitioner actually received the letters of respondent, he was still constructively dismissed because none of these letters indicated his reassignment to another client. Unlike in <i>Exocet Security</i> and <i>JFLP Investigation,</i> respondent is guilty of constructive dismissal because it never attempted to redeploy petitioner to a definite assignment or security detail.<sup style="COLOR: RGB(255, 0, 0);">[161]</sup> (Emphasis in the original; citations omitted)<br></blockquote>Thus, based on the foregoing, the Court is compelled to rule that TSI constructively dismissed Andrei. There is no evidence that Andrei was assigned to a specific client during the pendency of the labor case. At most, TSI issued general return-to-work orders, which did not interrupt the duration of Andrei's floating status.<br><br><i>Consequences of a finding of<br>constructive dismissal</i><br><br>Jurisprudence provides that the petitioner would ordinarily be entitled to reinstatement as a consequence of the finding of illegal dismissal.<sup style="COLOR: RGB(255, 0, 0);">[162]</sup> However, there are instances when reinstatement is no longer feasible.<sup style="COLOR: RGB(255, 0, 0);">[163]</sup> In <i>Hamid v. Gervasio Security and Investigation Agency, Inc.,</i><sup style="COLOR: RGB(255, 0, 0);">[164]</sup> citing <i>Dela Fuente v. Gimenez,</i><sup style="COLOR: RGB(255, 0, 0);">[165]</sup> the Court held that reinstatement is no longer feasible (a) when the former position of the illegally dismissed employee no longer exists; or (b) when the employer's business has closed down; or (c) when the employer-employee relationship has already been strained as to render the reinstatement impossible.<sup style="COLOR: RGB(255, 0, 0);">[166]</sup> The Court further considered reinstatement to be non-feasible when a "considerable time" has lapsed between the dismissal and the resolution of the case.<sup style="COLOR: RGB(255, 0, 0);">[167]</sup><br><br>Here, the Complaint for illegal dismissal was filed in 2019. Since five years had passed from the time Andrei filed her Complaint against TSI, this Court rules that reinstatement is no longer possible, especially given that Andrei has been specific in asking that she no longer be reinstated.<sup style="COLOR: RGB(255, 0, 0);">[168]</sup> Thus, instead of reinstatement, Andrei is granted separation pay of one month for every year of service until the finality of this Decision, with a fraction of a year of at least six months being counted as one whole year.<br><br>Finally, in conformity with prevailing jurisprudence,<sup style="COLOR: RGB(255, 0, 0);">[169]</sup> interest at the rate of 6% per annum from the date of the finality of this Decision until full payment should be imposed on the total monetary award.<br><br><b>FOR THESE REASONS,</b> the Petition for Review on <i>Certiorari</i> filed by petitioner Andrei Nicholette Sagarino is <b>GRANTED.</b> The Decision, dated July 29, 2022, and the Resolution, dated March 3, 2023, of the Court of Appeals in CA-G.R. SP No. 168601, are <b>REVERSED</b>. Accordingly, respondent Toplis Solutions, Inc. is <b>ORDERED</b> to <b>PAY</b> petitioner Andrei Nicholette Sagarino the following:<blockquote>(l) Full backwages and other benefits computed from the date petitioner's employment was illegally terminated until the date of the finality of this Decision;<br><br>(2)&nbsp;&nbsp;&nbsp; Separation pay computed from the date petlt10ner commenced employment until the date of the finality of this Decision at the rate of one month's salary for every year of service, with a fraction of a year of at least six months being counted as one whole year;<br><br>(3)&nbsp;&nbsp;&nbsp; Attorney's fees equivalent to 10% of the total award; and<br><br>(4)&nbsp;&nbsp;&nbsp; Interest of 6% per annum on all the monetary awards from the date of the finality of this Decision until full payment.<br></blockquote>The case is <b>REMANDED</b> to the Labor Arbiter to make a detailed computation of the amounts due to petitioner Andrei Nicholette Sagarino, which must be paid without delay, and for the execution of this Decision.<br><br><b>SO ORDERED.<br></b><br>Caguioa<i>, J., Chairperson,&nbsp; </i><i>Gaerlan, JJ., </i>concur.<br><i>Inting<sup style="COLOR: RGB(255, 0, 0);">*</sup> </i>and <i>Dimaampao <font color="#ff0000">*</font></i> <i>JJ.,</i> On official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><font color="#ff0000">*</font> On official business. <br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo,</i> pp. 9-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 27-39. Penned by Associate Justice Jaime Fortunato A. Caringal and concurred in by Associate Justices Ramon A. Cruz and Louis P. Acosta of the Tenth Division, Court of Appeals, Manila. <br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 40-42. Penned by Associate Justice Jaime Fortunato A. Caringal and concurred in by Associate Justices Ramon A. Cruz and Louis P. Acosta of the Former Tenth Division, Court of Appeals, Manila. <br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 49-59. Penned by Commissioner Gina F. Cenit-Escoto and concurred in by Presiding Commissioner Gerardo C. Nograles and Commissioner Ma. Minerva S. Paez-Collantes of the First Division, National Labor Relations Commission, Quezon City. <br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 60-61. Penned by Commissioner Gina F. Cenit-Escoto and concurred in by Presiding Commissioner Gerardo C. Nograles and Commissioner Ma. Minerva S. Paez-Collantes of the First Division, National Labor Relations Commission, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 54, 57. <br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 34-35. <br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 27. <br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 28. <br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 28. <br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 50. <br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 28-29. <br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 51. <br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 29. <br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 44. <br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 29. <br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 51. <br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 45-46. <br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[29] </sup><i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 45. <br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 29. <br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo,</i> p. 29. <br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Does not appear in the records of the case. <br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo,</i> p. 29. <br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 29-30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 43-48. <br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 30, 46. <br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 46. <br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 48. <br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id. </i>at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 57-58. <br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Does not appear in the records of the case. <br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo,</i> pp. 60-61. <br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 60. <br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 62-63. <br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 63. <br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Does not appear in the records of the case. <br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo,</i> p. 32. <br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 27-39. <br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 34. <br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 35. <br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 36-37. <br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 37. <br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 32. <br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Does not appear in the records of the case. <br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Rollo,</i> pp. 40-42. <br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id.</i> at 9-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 20. <br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> at 23. <br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Central Azucarera De Bais v. Heirs of Zuelo Apostol,</i> 828 Phil. 211,221 (2018) [Per J. Reyes, Jr., Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i> at 221-222. <br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id.</i> at 222. <br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Morales v. Central Azucarera De La Carlota, Inc., </i>931 PhiI. 516 (2022) [Per J. Leonen, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> 700 Phil. I (2012) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> 613 Phil. 696 (2009) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Career Philippines Shipmanagement, Inc. v. Serna,</i> 700 Phil. I, 9(2012) [Per J. Brion, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Rollo,</i> pp. 34-35. <br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Telus International Philippines, Inc. v. De Guzman,</i> 867 Phil. 270, 287(2019) [Per J. Hernando, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Jaso v. Metrobank &amp; Trust Co.,</i> 903 Phil. 203,213 (2021) [Per J. lnting, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Colegio San Agustin v. NLRC,</i> 278 Phil. 414, 419 (1991) [Per J. Medialdea, First Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Jaso v. Metrobank &amp; Trust Co.,</i> 903 Phil. 203, 213 (2021) [Per J. Inting, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Rollo,</i> p. 30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id.</i> at 19. <br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup>&nbsp; <i>Id.</i> at 34, 46, 52. <br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Skyway O &amp; M Corp. v. Reinante,</i> 860 Phil. 668, 674(2019) [Per J. lnting, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Id.</i> at 674-675.<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup><i> Jaso v. Metrobank &amp; Trust Co., 903</i> Phil. 203,210 (2021) [Per J. lnting, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> 740 Phil. 403 (2014) [Per J. Leonen, En Banc]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Id.</i> at 425. <br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> Does not appear in the records of the case. <br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> <i>Rollo,</i> p. 28. <br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <i>Sameer Overseas Placement Agency, Inc. v. Cabiles,</i> 740 Phil. 403(2014) [Per J. Leonen, En Banc]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[119]</sup><i> Tamson's Enterprises, Inc. v. Court of Appeals and Rosemarie L.&nbsp; Sy,</i> 676 Phil. 384,397 (2011) [Per J. Mendoza, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[120]</sup>&nbsp; Department of Labor and Employment Department Order No. 10,&nbsp; Amending the Rules Implementing Books Ill and VI of the Labor Code As Amended (1997).<br><br><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> Department of Labor and Employment Department Order No. 10, Amending the Rules Implementing Books Ill and VI of the Labor Code As Amended, sec. 6(d) (1997). <br><br><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <i>Rollo,</i> p. 34. <br><br><sup style="COLOR: RGB(255, 0, 0);">[123]</sup> <i>Id.</i> at 35. <br><br><sup style="COLOR: RGB(255, 0, 0);">[124]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[125]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[126]</sup> <i>Id.</i> at 37. <br><br><sup style="COLOR: RGB(255, 0, 0);">[127]</sup> <i>Samillano v. Valdez Security and Investigation Agency, Inc., </i>875 Phil. 440, 448 (2020) [Per J. J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[128]</sup> 650 Phil. 543 (20 I0) [Per J. Nachura, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[129]</sup> <i>Id.</i> at 557-558. <br><br><sup style="COLOR: RGB(255, 0, 0);">[130]</sup> <i>Superior Maintenance Services, Inc. v. Bermeo,</i> 844 Phil. 766, 771-772 (2018) [Per J. A. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[131]</sup> LABOR CODE, as renumbered in 2015, a1t. 301.<br><br><sup style="COLOR: RGB(255, 0, 0);">[132]</sup> <i>Telus International</i> <i>Philippines, Inc. v. De Cuzman, </i>867 Phil. 270,292(2019) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[133]</sup> <i>Rollo,</i> p. 36. <br><br><sup style="COLOR: RGB(255, 0, 0);">[134]</sup>&nbsp; <i>Id.</i> at 35. <br><br><sup style="COLOR: RGB(255, 0, 0);">[135]</sup> <i>Id.</i> at 29-30. <br><br><sup style="COLOR: RGB(255, 0, 0);">[136]</sup> <i>Id.</i> at 34. <br><br><sup style="COLOR: RGB(255, 0, 0);">[137]</sup> <i>Id.</i> at 37. <br><br><sup style="COLOR: RGB(255, 0, 0);">[138]</sup>&nbsp; <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[139]</sup> <i>Bognot v. PINIC International (Trading) Corporation/CD-R King,</i> 848 Phil. 771, 779-780 (2019) [Per J. J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[140]</sup>&nbsp; <i>MegaForce Security and Allied Services, Inc. v. Lactao,</i> 581 Phil. 100, 106 (2008) [Per J. Austria-Martinez, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[141]</sup> 581 Phil. I 00 (2008) [Per J. Austria--Martinez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[142]</sup> <i>Id.</i> at 106. <br><br><sup style="COLOR: RGB(255, 0, 0);">[143]</sup> <i>Rollo,</i> p. 37. <br><br><sup style="COLOR: RGB(255, 0, 0);">[144]</sup> <i>Id. </i><br><br><sup style="COLOR: RGB(255, 0, 0);">[145]</sup> <i>Id. </i><br><br><sup style="COLOR: RGB(255, 0, 0);">[146]</sup> Department of Labor and Employment Department Order No. 14, Guidelines Governing the Employment and Working Conditions of Security Guards and Similar Personnel in the Private Security Industry, sec. 5.2 (2001).<br><br><sup style="COLOR: RGB(255, 0, 0);">[147]</sup> 821 Phil. 482 (2017) [Per J. Leonen, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[148]</sup>&nbsp; <i>Id.</i> at 490.<br><br><sup style="COLOR: RGB(255, 0, 0);">[149]</sup><i> Id. </i><br><br><sup style="COLOR: RGB(255, 0, 0);">[150]</sup> <i>Id. </i><br><br><sup style="COLOR: RGB(255, 0, 0);">[151]</sup> Id. at 487. <br><br><sup style="COLOR: RGB(255, 0, 0);">[152]</sup> 152 876 Phil. 572 (2020) [Per J. Lazaro-Javier, First Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[153]</sup>&nbsp;<i> Id.</i> at 584. <br><br><sup style="COLOR: RGB(255, 0, 0);">[154]</sup> <i>Id.</i> at 589. <br><br><sup style="COLOR: RGB(255, 0, 0);">[155]</sup> 926 Phil. 602 (2022) [Per J. Gaerlan, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[156]</sup>&nbsp;<i>Id.</i> at 610. <br><br><sup style="COLOR: RGB(255, 0, 0);">[157]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[158]</sup>&nbsp;<i>Id.</i> at 609. <br><br><sup style="COLOR: RGB(255, 0, 0);">[159]</sup> 811 Phil. 250 (2017) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[160]</sup>&nbsp; Id. at 258.<br><br><sup style="COLOR: RGB(255, 0, 0);">[161]</sup> <i>Id.</i> at 258-260. <br><br><sup style="COLOR: RGB(255, 0, 0);">[162]</sup> <i>Hamid v. Gervasio Security and Investigation Agency, Inc.,</i> 926 Phil. 602, 611 (2022) [Per J. Gaerlan, Third Division). <br><br><sup style="COLOR: RGB(255, 0, 0);">[163]</sup> <i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[164]</sup> 926 Phil. 602 (2022) [Per J. Gaerlan, Third Division). <br><br><sup style="COLOR: RGB(255, 0, 0);">[165]</sup>&nbsp; 915 Phil. 517 (2021) (Per J. Zalameda, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[166]</sup> <i>Hamid v. Gervasio Security and Investigation Agency, Inc.,</i> 926 Phil. 602, 612 (2022) [Per J. Gaerlan, Third Division).<br><br><sup style="COLOR: RGB(255, 0, 0);">[167]</sup>&nbsp;&nbsp;<i>Id.</i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[168]</sup> Rollo, p. 23. <br><br><sup style="COLOR: RGB(255, 0, 0);">[169]</sup> <i>See Lara's Gift's &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.,</i> 929 Phil. 754, 765-767 (2022) [Per J. Leonen, En Banc].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

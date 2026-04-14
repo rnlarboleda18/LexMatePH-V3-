@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 264175 - REMIE LAGA&Ntilde;A ESPONJA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70131' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 264175, August 11, 2025 ]</H2>
+			<H3>REMIE LAGAÃA ESPONJA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="justify"><p>Article III, Section 14(2) of the Constitution provides that "[i]n all criminal prosecutions, the accused shall be presumed innocent until the contrary is proved[.]" To overcome this constitutional presumption, the prosecution must establish the accused's guilt beyond reasonable doubt. The courts have little choice but to acquit when the evidence provided by the prosecution is riddled with apparent contradictions. </p><p> This Court resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed under Rule 45 of the Rules of Court, praying that the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court Appeals be reversed and set aside. The assailed rulings of the Court of Appeals affirmed the Judgment<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court convicting Remie Esponja <i>y</i> LagaÃ±a (Esponja) of illegal possession of explosives in accordance with Section 3(1) of Presidential Decree No. 1866, as amended by Republic Act No. 8294 and Republic Act No. 9516. </p><p> In an Information dated February 23, 2015, Esponja was charged with a violation of Section 3(1) of Presidential Decree No. 1866, as amended by Republic Act No. 8294 and Republic Act No. 9516, which reads as follows: </p><blockquote> <p> The undersigned accuses REMIE LAGAÃA ESPONJA @ KABO with the crime of ILLEGAL POSSESSION OF EXPLOSIVE under sec. 3, 1<sup>st</sup> par. of PD 1866 as amended by R.A. No. 8294 &amp; R.A. No. 9516, which he committed as follows:</p> <p> That sometime on February 20, 2015, in the Municipality of Tulunan, Province of Cotabato, Philippines and within the jurisdiction of this Honorable Court, the said accused, did then and there, willfully, unlawfully, and feloniously have in his possession, custody and control one (1) unit APPLE type hand grenade, an explosive, with knowledge of its existence and its explosive character where the same is capable of causing injury or death to any person.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p> </blockquote> <p> On arraignment, Esponja pleaded not guilty to the crime charged. Thereafter, pre-trial and trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> The prosecution presented five witnesses: (1) Police Office II Johnrey Reporte (PO2 Reporte), (2) Police Officer III Ruel Belvis (PO3 Belvis), (3) Police Master Sergeant Marvin Mirambel (P/MSgt. Mirambel),<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (4) Police Master Sergeant Rodel Ajero (PO1 Ajero), and (5) Senior Police Officer I Lorenzo Guevarra (SPO1 Gueverra). They testified as follows:</p><p> On February 21, 2015, the Chief of Police of Tulunan, Cotabato directed PO2 Reporte and PO3 Belvis to conduct intelligence monitoring of Esponja who was subject of a warrant of arrest issued by the Municipal Circuit Trial Court of Makilala-Tulunan for discharge of firearm. Later that day, at approximately 9:30 a.m., PO2 Reporte and PO3 Belvis saw Esponja and his wife on board a motorcycle parked in front of a restaraunt at Crossing Sibsib, Tulunan. PO2 Reporte informed the Chief of Police who ordered them to arrest Esponja.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> PO2 Reporte and PO3 Belvis apprehended Esponja and seized his bag. PO2 Reporte sensed a spherical object inside the bag. Upon opening the bag, a hand grenade was discovered. PO2 Reporte reported that they confiscated an apple-type hand grenade from Esponja. Thereafter, P/Msgt. Mirambel was dispatched to the crime scene to prepare a receipt for the property seized.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> Esponja was consequently taken to the police station where PO2 Reporte marked the hand grenade and completed the inventory of confiscated materials, while P/MSgt. Mirambel took pictures. The hand grenade was transferred from PO2 Reporte to P/MSgt. Mirambel.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> The following day, P/MSgt. Mirambel turned over the confiscated hand grenade to the Philippine National Police Explosive and Ordnance Unit in Armas, Kidapawan City. There, PO1 Ajero got the package. In accordance with a court order, SPO1 Guevarra demilitarized the explosive and issued a Technical Evaluation Report.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> In his defense, Esponja rejected the charges against him and asserted that he was being framed. He claimed that he and his wife, Guiaria<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Pidtukasan (Guiaria), went to the public market in Barangay Sibsib, Tulunan on the morning of the incident. A police officer stopped them when he was parking his motorcycle and requested its registration. Then, a police officer in civilian clothes handcuffed his right hand. The policemen arrested Esponja despite his protests, claiming they had a valid arrest warrant for him. Esponja was then transported to the police station, which was 15 meters from the location of his arrest. There, the arresting officer turned over Esponja to a certain Insp. Fornan and SPO1 Mercado.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> After 15 minutes, Esponja was transported to the Tulunan Municipal Police Station and placed in a jail.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> Esponja alleged that he was never shown a copy of his arrest warrant between the time of his arrest and the trial. He claimed that the bag displayed by the prosecution during the trial belonged to his wife and that he was not carrying a bag at the time of his arrest. He added that he had never seen the hand grenade prior to the trial.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Guiaria and Zaliha Layugan corroborated his story that a man in civilian attire apprehended Esponja and a man in uniform took Guiaria's bag.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> In a Judgment,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> the Regional Trial Court convicted Esponja. It determined that the prosecution was able to prove the essential elements of the alleged crime when it presented testimonial and documentary evidence demonstrating the presence of the explosive and Esponja's possession of it. It found that the prosecution witnesses testified clearly that they served the warrant for Esponja's arrest for discharge of firearm. During this time, the hand grenade was discovered inside the bag, and PO2 Reporte marked it with his initials, "JAR," before turning it over to P/MSgt. Mirambel for safekeeping. It was further shown that Esponja had no license to possess a dangerous weapon.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> The dispositive part of the Regional Trial Court Judgment read: </p><blockquote> <p> <b>WHEREFORE</b>, the Court finds accused REMIE ESPONJA y LAGAÃA GUILTY beyond reasonable doubt of violation of Section 3 of PD No. 1866 as amended by R.A. 9516. He is hereby sentenced to suffer the penalty of Reclusion Perpetua.</p> <p> The Branch Clerk of Court is directed to turn-over the hand grenade subject to the Firearms and Explosive Office of the PNP th[r]ough the PNP Provincial Director.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p> </blockquote> <p> Aggrieved, Esponja appealed before the Court of Appeals. In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> the Court of Appeals affirmed Esponja's conviction. It affirmed that the prosecution adequately established the elements of the offense charged.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> It also ruled that the search of Esponja's bag was lawful because it occurred during a lawful arrest. Hence, the confiscated hand grenade was admissible as evidence.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Lastly, it held that the presumption of regularity in the performance of official duties of the police officers prevailed over Esponja's defense of denial and frame-up.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The dispositive portion of the Decision states: </p><blockquote> <p> <b>WHEREFORE</b>, the Appeal is <b>DENIED</b>. The Judgment of the Regional Trial Court, 12<sup>th</sup> Judicial Region, Branch 17, Kidapawan City, Cotabato, dated 9 June 2020, in Criminal Case No. 2786-2015, is hereby <b>AFFIRMED</b>.</p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup></p> </blockquote> <p> Esponja filed a Motion for Reconsideration, but the Court of Appeals denied it in a Resolution.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> Hence, Esponja filed this Petition.</p><p> Petitioner Esponja argues that the Court of Appeals erred in upholding his conviction notwithstanding the irregularities in the performance of the police officers' official duties. Petitioner asserts that there were significant discrepancies between the testimony of prosecution witnesses and the evidence presented. </p><p> In its Comment, public respondent Office of the Solicitor General asserts that the Petition is dismissible outright for raising factual issues which are not subject of a Petition for Review on<i> Certiorari</i> under Rule 45 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> It further claims that even if this Court were to look into the facts of the case, it would find that the Court of Appeals correctly affirmed the trial court's finding that petitioner is indeed guilty of illegal possession of an explosive.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> It contends that the prosecution successfully established the presence of all elements of the crime charged and that the seized item was properly marked and identified in court.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The public respondent adds that the Court of Appeals correctly affirmed the trial court's witnesses, which is entitled to great weight and prevails over accused's defense of denial.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> In a Letter dated May 27, 2025, Nelsie D. Loja, Head, Archives Unit, Court of Appeals, Cagayan de Oro City transmitted the original records, transcript of stenographic notes, exhibits, <i>rollo</i>, and others of CA-G.R. CR-HC No. 02635-MIN, in compliance with the Court's Resolution dated April 2, 2025.</p><p> The issue for this Court's resolution is whether petitioner Esponja is guilty beyond reasonable doubt of violating Section 3(1) of Presidential Decree No. 1866, as amended by Republic Act No. 8294 and Republic Act No. 9516.</p><p align="center"><strong> I</strong> </p><p> The presumption of innocence is enshrined in no less than our Constitution. Aside from the due process clause of the Constitution, which guarantees that no person shall be deprived of life, liberty, or property without due process of law,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Article III, Section 14(2) also provides that an individual accused of a crime shall be presumed innocent until proven guilty: </p><blockquote> <p> SECTION 14. . . . .</p> <p> (2) In all criminal prosecutions, the accused shall be presumed innocent until the contrary is proved, and shall enjoy the right to be heard by himself and counsel, to be informed of the nature and cause of the accusation against him, to have a speedy, impartial, and public trial, to meet the witnesses face to face, and to have compulsory process to secure the attendance of witnesses and the production of evidence in his behalf. However, after arraignment, trial may proceed notwithstanding the absence of the accused provided that he has been duly notified and his failure to appear is unjustifiable.</p> </blockquote> <p> This serves as the cornerstone of our justice system to guarantee that no one is unjustly punished before being proven guilty beyond reasonable doubt in court. <i>People v. Limpangog</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> discussed the significance of the presumption of innocence: </p><blockquote> <blockquote> <p> "The presumption of innocence . . . is founded upon the first principles of justice, and is not a mere form but a substantial part of the law. It is not overcome by mere suspicion or conjecture; a probability that the defendant committed the crime; nor by the fact that he had the opportunity to do so. Its purpose is to balance the scales in what would otherwise be an uneven contest between the lone individual pitted against the People and all the resources at their command. Its inexorable mandate is that, for all the authority and influence of the prosecution, the accused must be acquitted and set free if his guilt cannot be proved beyond the whisper of a doubt. This is in consonance with the rule that conflicts in evidence must be resolved upon the theory of innocence rather than upon a theory of guilt when it is possible to do so."</p> </blockquote> <p> Indeed, the State, aside from showing the existence of a crime, has the burden of correctly identifying the author of the crime. Both requisites must be "proved by the State beyond reasonable doubt on the strength of its evidence and without solace from the weakness of the defense. Thus, even if the defense of the accused may be weak, the same is inconsequential if, in the first place, the prosecution failed to discharge the onus on his identity and culpability. The presumption of innocence dictates that it is for the people to demonstrate guilt and not for the accused to establish innocence.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Citations omitted) </p> </blockquote> <p> Consequently, in every criminal case, the prosecution has the burden of proving an accused's guilt with proof beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> This imperative to sustain a conviction does not require absolute certainty but moral certainty or "that degree of proof which produces conviction in an unprejudiced mind."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The conviction of the accused "must rest on the strength of the prosecution's evidence and not on the weakness of the defense."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p>The requirement of proof beyond reasonable doubt is firmly established in our jurisprudence due to the inherent power disparity when an accused faces criminal prosecution. During a criminal proceeding, an accused's life, liberty, and property is put at jeopardy. Given that an accused, with limited resources, is up against the machinery of the government, the burden to warrant a finding of guilt is with the State. Thus, the State must prove every element of the crime charged with proof beyond reasonable doubt<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> to ensure that innocent person is not wrongfully accused and, worse, convicted.</p><p align="center"> <b>II</b> </p><p> It is well settled that the testimonies of witnesses are best discharged by the trial court and, in turn, its findings of facts are accorded great respect. The appellate court will generally not disturb these findings unless there are glaring errors, gross misapprehension of facts, or conclusions based on speculation or conjecture. This is primarily because it is the judge that is in the best position to observe the deportment of a witness upon testifying. Nonetheless, an appeal in a criminal case throws the entire case open for review.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Upon appeal, this court has the duty to correct, modify, or reverse errors committed by the lower courts.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> Petitioner was allegedly caught by the authorities in possession of an apple-type hand grenade. Consequently, he was charged with violating Section 3 of Presidential Decree No. 1866, as amended by Republic Act No. 9516, which provides: </p><blockquote> <p> SECTION 3. <i>Unlawful Manufacture, Sales, Acquisition, Disposition, Importation or Possession of an Explosive or Incendiary Device</i>. â The penalty of <i>reclusion perpetua</i> shall be imposed upon any person who shall willfully and unlawfully manufacture, assemble, deal in, acquire, dispose, import or possess any explosive or incendiary device, with knowledge of its existence and its explosive or incendiary character, where the explosive or incendiary device is capable of producing destructive effect on contiguous objects or causing injury or death to any person, including but not limited to, hand grenade(s), rifle grenade(s), 'pillbox bomb,' 'molotov cocktail bomb,' 'fire bomb,' and other similar explosive and incendiary devices.</p> </blockquote> <p> For one to be convicted of illegal possession of an explosive, two essential elements must be established: </p><blockquote> <p> (a) the existence of the subject firearm or explosive which may be proved by the presentation of the subject firearm or explosive or by the testimony of witnesses who saw accused in possession of the same, and (b) the negative fact that the accused had no license or permit to own or possess the firearm or explosive which fact may be established by the testimony or certification of a representative of the Philippine National Police Firearms and Explosives Unit that the accused has no license or permit to possess the subject firearm or explosive.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Citations omitted)</p> </blockquote> <p> In the present case, the Court of Appeals affirmed the Regional Trial Court's finding that the prosecution sufficiently established the presence of all the elements. It found that both testimonial and documentary evidence proved that: <i>first</i>, the apple-type hand grenade existed and was found in petitioner's bag; and <i>second</i>, that petitioner did not have a license or permit to own or possess such explosive.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> However, a close examination of the evidence on record will reveal that the prosecution failed to establish that the apple-type hand grenade identified and admitted into evidence was indeed the same object allegedly found inside the bag of petitioner.</p><p> Petitioner asserts that there were significant discrepancies between the testimony of prosecution witnesses and the evidence presented. Petitioner calls attention to the prosecution's Exhibits D to D-3, which were photographs of the bag holding the purported explosive,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> as well as the explosive itself.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> The photographs were stamped with the date and time "2015/02/21 (16:49, 16:57, 16:54, 16:58)". However, petitioner was apprehended at approximately 9:40 a.m. the day prior. This contradicts the testimony of PO2 Reporte. According to the testimony, the hand grenade was promptly transported to the police station after the arrest on February 20, 2015. After marking and photographing the grenade, they prepared its transmittal to the Explosives and Ordnance Unit. On the contrary, petitioner asserts that the hand grenades were never marked nor photographed in his presence, and that the real bag and hand grenade were never presented in court because the police officers were unable to account for their whereabouts.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></p><p> In its Comment, public respondent explained the sequence of events in handling the confiscated grenade as follows: </p><blockquote> <p> . . . .</p> <p> 9.4 Thereafter, the police officers brought petitioner to the police station, and had the incident blottered. There, <b>PO2 Reporte placed markings on the hand grenade and filled out the inventory of seized items while P/Msgt. Mirambel took photographs. PO2 Reporte turned over custody of the grenade to P/Msgt. Mirambel.</b></p> <p> 9.5 <b>The following day, P/Msgt. Mirambel submitted the seized hand grenade to the PNP Explosive and Ordnance Unit in Amas, Kidapawan City, as evidenced by the Transmittal/Turn Over of Recovered Suspected Explosive.</b> There, it was received by PO1 Rodel Ajero (PO1 Ajero) as designated by SPO1 Guevarra. Pursuant to a court order received by their office, SPO1 Guevarra demilitarized the grenade and issued a Technical Evaluation Report. During trial, he also identified pictures, marked as Exhibits "D" and "D-1" to "D-3."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis supplied)</p> </blockquote> <p> Public respondent explains that the discrepancy in the date marked on the photograph and the actual date of when the arrest happened is a mere technical error. It stated that the date imprinted on the pictures is not conclusive proof of the actual date and time they were taken as photos from a digital camera are subject to adjustment by the user.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></p><p> The explanation is not well-taken. The date imprinted on the exhibit directly contradicts the testimony of arresting officer PO2 Reporte. According to PO2 Reporte, after the arrest of petitioner and the seizure of the apple-type grenade on February 20, 2015, he immediately returned to the police station where the transmittal to the Explosive and Ordnance Division and the marking and photographing of the seized items took place.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">After preparing the receipt of property seized and signing thereof what happened next?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Immediately, together with the PNP personnel we returned to the Police Station, Sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">When you arrived at the police station what happened there? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The duty investigator prepared the transmittal to the Explosive and Ordnance Division. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Who is that again the duty investigator? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">PO3 Mira[m]bel, Ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">And then after that what happened?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">We took pictures and marking.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What came first the marking or picture taking?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">The marking, Your Honor. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Who made the marking? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">I, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></div></td> </tr> </tbody></table> </blockquote> <p>Given this narration, the date on the photo should have been February 20, 2015. Moreover, if it was indeed a mere technical error on the part of the person handling the digital camera, the law enforcement officers should have been prudent enough to ensure that all details reflected on the evidence are an accurate representation of what had transpired. In addition, the current situation also shows noncompliance with several provisions found in the 2011 Revised Edition of the Philippine National Police Criminal Investigation Manual (PNP Manual).</p> <p> The PNP Manual outlines the investigation procedures and the preservation of physical evidence from marking and handling of evidence to laboratory examination until its presentation in court. Chapter II, Item 2.2.3 of the PNP Manual provides: </p><blockquote> <p> 2.2.3 Investigation Procedure at the Crime Scene</p> <p> . . . .</p> <p> e. Markings of Evidence</p> <p> <i>Any physical evidence obtained must be marked or tagged before its submission to the evidence custodian.</i></p> <p> <i>These are information to ensure that the items can be identified by the collector at any time in the future.</i> This precaution will help immeasurably to establish the credibility of the collector's report or testimony and will effectively avoid any suggestions that the item has been misidentified.</p> <p> <i>Markings on the specimen must at least contain the following</i>:</p> <blockquote> <p> <i>1. Exhibit Case Number. <br> 2. Initials and or signature of the collecting officer. <br> 3. Time and date of collection.</i> </p> </blockquote> <p><i>NOTE: It is also important to note the place or location where the evidence was collected</i>.</p> <p> . . . .</p> <p> g. Preservation of Evidence</p> <p> <i>It is the investigator's responsibility to ensure that every precaution is exercised to preserve physical evidence in the state in which it was recovered/obtained until it is released to the evidence custodian</i>.</p> <p> . . . .</p> <p> i. Chain of Custody</p> <p> A list of all persons who came into possession of an item of evidence, continuity of possession, or the chain of custody, must be established whenever evidence is presented in court as an exhibit. <i>Adherence to standard procedures in recording the location of evidence, marking it for identification, and properly completing evidence submission forms for laboratory analysis is critical to chain of custody. Every person who handled or examined the evidence and where it is at all times must be accounted for</i>.</p> <p> As a rule, all seized evidence must be in the custody of the evidence custodian and deposited in the evidence room or designated place for safekeeping.</p> <p> . . . .</p> <p> j. Transmittal of Evidence to Crime Laboratory</p> <p> Proper handling of physical evidence is necessary to obtain the maximum possible information upon which scientific examination shall be based, and to prevent exclusion as evidence in court. Specimens which truly represent the material found at the scene, unaltered, unspoiled or otherwise unchanged in handling will provide more and better information upon examination. Legal requirements make it necessary to account for all physical pieces of evidence from the time it is collected until it is presented in court. With these in mind, the following principles should be observed in handling all types of evidence:</p> <ol><li> The evidence should reach the laboratory in same condition as when it was found, as much as possible.</li><li>The quantity of specimen should be adequate. Even with the best equipment available, good results cannot be obtained from insufficient specimens.</li><li>Submit a known or standard specimen for comparison purposes.</li><li>Keep each specimen separate from others so there will be no intermingling or mixing of known and unknown material. Wrap and seal in individual packages when necessary.</li><li><i>Mark or label each of evidence for positive identification as the evidence taken from a particular location in connection with the crime under investigation</i>.</li><li><i>The chain of custody of evidence must be maintained. Account for evidence from the time it is collected until it is produced in court. Any break in this chain of custody may make the material inadmissible as evidence in court</i>. (Emphasis supplied)</li></ol> </blockquote> <p> Here, the police officers who recovered the subject hand grenade from petitioner failed to comply with the above-mentioned provisions of the PNP Manual. The marking on the hand grenade lacks the specifications required under the PNP Manual. As stated, markings must include: (1) exhibit case number; (2) signature of the collecting officer; (3) time and date of confiscation; and (4) the place or location where the item was confiscated. However, the hand grenade bore only the markings "JAR", representing the initials of the arresting officer. Had the law enforcement agents adhered to the protocol outlined in the PNP Manual, there would be no doubt on the date and time the confiscation was made as the marking on the evidence itself would prevail. However, the confiscated object lacked a specified date and time; therefore, the date and time indicated in the photograph shall take precedence. This reveals a discrepancy between the date of the arrest (February 20, 2015) and the date on which the photographs of the items were made (February 21, 2015).</p><p> While conformity with the Philippine National Police's operational procedures is not required to find an accused guilty of a crime charged, these standards were established to ensure that investigation proceedings are conducted efficiently and effectively. By failing to follow their own rules, the law enforcement agents cast doubt on the identity and chain of custody of the seized item.</p><p> In addition, petitioner states that the first time he saw the grenade was during its presentation in trial. Moreover, PO2 Reporte acknowledged that they did not present the grenade to petitioner during the arrest, the confiscation of the seized item, and upon its marking and inventory. PO2 Reporte testified: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td colspan="2">ATTY. ANDOLANA:</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">Now, you admitted earlier that it was only in the police station that you did the marking as well as the showing of this alleged apple type hand grenade, is that correct? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Marking.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">It was not even shown at the time the accused was around? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">None.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">It was not even shown in the Police station in the presence of accused, the wife, and relatives?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, Your Honor.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">In other words, this was marked, shown by you and your superior Chief of police as well as the investigator? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Only the investigator.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></div></td> </tr> </tbody></table> </blockquote> <p>Unlike the confiscation of illegal narcotics, the seizure of illegal firearms or explosive does not require marking and photographing in the presence of the accused. Nonetheless, it contradicts human experience for law enforcement officers to refrain from presenting the contraband to the accused, even if only to ascertain whether it belonged to the accused or if they were aware of the presence of a grenade in their belongings. Furthermore, law enforcement officers would have undoubtedly shown the explosive to the accused when inquiring if they possessed a permit for it.</p> <p> It is on this basis that the Court finds that the conviction of petitioner should be reversed. These inconsistencies in the prosecution's evidence are sufficient to put the guilt of petitioner into question.</p><p> In <i>People v. Velasco</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the failure to establish an unbroken chain of custody brings serious doubt to the <i>corpus delicti</i> of the crime charged: </p><blockquote> <p> Simply stated, the prosecution was clearly unsuccessful in establishing an <b><i>unbroken chain of custody</i></b> of the allegedly confiscated fragmentation hand grenade, creating serious doubt as to the <i>corpus delicti</i> of the crime charged. </p> <p> Jurisprudence explains that the chain of custody rule requires that the admission of an exhibit be preceded by evidence sufficient to support a finding that the matter in question is what the proponent claims it to be. This would include testimony about every link in the chain, from the moment the item was picked up to the time it was offered in evidence, in such a way that every person who touched the exhibit would describe how and from whom it was received, where it was and what happened to it while in the witness' possession, the condition in which it was received and the condition in which it was delivered to the next link in the chain. These witnesses would then describe the precautions taken to ensure that there had been no change in the condition of the item and no opportunity for someone not in the chain to have possession of the same.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis in the original, citation omitted)</p> </blockquote> <p> Given the substantial discrepancies between the prosecution's documentary evidence and testimony, it is possible that the chain of custody of the confiscated objects was disrupted, rendering the prosecution's case problematic.</p><p> The Court of Appeals, in finding that the presumption of regularity in the performance of the police officers were warranted in this case, stated: </p><blockquote> <p> This Court upholds the presumption of regularity in the performance of official duties by the police officers involved in this case. The testimony of the police officers who apprehended the accused is usually accorded full faith and credit because of the presumption that they have performed their duties regularly. Full faith and credence are given to the narration of public officers who testify for the prosecution on the search and seizure <i>sans</i> any clear and convincing evidence that they were not properly performing their duty or that they were inspired by improper motive. The defense also was not able to show by clear and convincing evidence why the presumption should be overturned.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Citation omitted) </p> </blockquote> <p> However, the prosecution cannot seek refuge in the presumption of regularity in the performance of duties of law enforcement.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The Constitution's emphasis on the right to be presumed innocent cannot be undermined by merely applying the rule of presumption of regularity.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The burden of proof still lies with the prosecution to prove guilt beyond reasonable doubt, regardless of any presumption of regularity. In circumstances of reasonable doubt, the constitutionally protected presumption of innocence must prevail.</p><p> <b>ACCORDINGLY,</b> the Petition is <b>GRANTED</b>. The March 30, 2022 Decision and September 19, 2022 Resolution of the Court of Appeals in CA-G.R. CR-HC No. 02635-MIN are <b>REVERSED and SET ASIDE</b>. Petitioner Remie Esponja <em>y</em> LagaÃ±a is <b>ACQUITTED</b> for failure of the prosecution to prove his guilt beyond reasonable doubt and is ordered <b>RELEASED</b> from confinement, unless he is being held for some other legal grounds. </p><p> Let a copy of this Decision be furnished to the Director General of the Bureau of Corrections for immediate implementation. He is directed to report the action he has taken to this Court within five days from receipt of this Decision.</p><p> Let entry of judgment be issued immediately.</p><p> <b>SO ORDERED.</b></p><p> <i>Lazaro-Javier, J. Lopez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-17. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 19-31. The March 30, 2022 Decision in CA-G.R. CR-HC No. 02635-MIN was penned by Associate Justice Evalyn M. Arellano-Morales, and concurred in by Associate Justices Richard D. Mordeno and Ana Marie T. Mas, Twenty-Third Division, Court of Appeals, Cagayan de Oro. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 33-34. The September 19, 2022 Resolution in CA-G.R. CR-HC No. 02635-MIN was penned by Associate Justice Evalyn M. Arellano-Morales, and concurred with by Associate Justices Richard D. Mordeno and Ana Marie T. Mas, Former Twenty-Third Division, Court of Appeals, Cagayan de Oro.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 35-40. The June 9, 2020 Judgment in Criminal Case No. 2786-2015 was penned by Judge Arvin Sadiri B. Balagot of Branch 17, Regional Trial Court, Kidapawan City, Cotabato.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 4. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 21.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Referred to as "PO3 Mirambel" in some parts of the <i>rollo</i>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, p. 21. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 21-22. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 22. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Spelled as "Guiria" in some parts of the <i>rollo</i>. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> The full names of Insp. Fornan and SPO1 Mercado are not found in the <i>rollo</i>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, p. 23.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 24. <i>See also</i> <i>id.</i> at 35-40. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 25.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 40. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 19-31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 27.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 28.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 29.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 30-31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 33-34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 100. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 102. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 103. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 105. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> CONST., art. III, sec. 1 provides: </p><blockquote> <p> Section 1. No person shall be deprived of life, liberty, or property without due process of law, nor shall any person be denied the equal protection of the laws. </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 444 Phil. 691 (2003) [Per J. Panganiban, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 709-710. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>People v. Dela Cruz</b>, 857 Phil. 178, 188-189 (2019) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> RULES OF COURT, Rule 133, sec. 2. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>People v. Dela Cruz</b>, 857 Phil. 178, 190 (2019) [Per J. Leonen, Third Division], <i>citing</i> <b>People v. Lorenzo</b>, 633 Phil. 393, 401 (2010) [Per J. Perez, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Patula v. People</b>, 685 Phil. 376, 388 (2012) [Per J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>People v. Togon, Jr.</b>, 913 Phil. 51, 57 (2021) [Per J. Inting, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>People v. Morales</b>, 630 Phil. 215, 227 (2010) [Per J. Del Castillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. Velasco</b>, 860 Phil. 159, 166-167 (2019) [Per J. Caguioa, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, p. 27. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 11. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 12. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 98. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 860 Phil. 159 (2019) [Per J. Caguioa, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 167. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i>, pp. 29-30. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>People v. Dela Cruz</b>, 857 Phil. 178, 200 (2019) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Ordiz</b>, 862 Phil. 614, 634 (2019) [Per J. Caguioa, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

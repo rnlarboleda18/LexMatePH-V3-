@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 263904 - HON. BENJAMIN B. MAGALONG, AS MAYOR OF BAGUIO CITY AND IN LIEU OF THEN MAYORS MAURICIO G. DOMOGAN AND REINALDO A. BAUTISTA, JR.; ANTONIO L. TABIN, AS CITY ACCOUNTANT; AND, VARIOUS OFFICIALS AND EMPLOYEES OF BAGUIO CITY, PETITIONERS, VS. COMMISSION ON AUDIT; THE DIRECTOR, COMMISSION ON AUDIT, CORDILLERA ADMINISTRATIVE REGION; AND, THE AUDITOR&#039;S OFFICE, BAGUIO CITY, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70150' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 263904, July 25, 2025 ]</H2>
+			<H3>HON. BENJAMIN B. MAGALONG, AS MAYOR OF BAGUIO CITY AND IN LIEU OF THEN MAYORS MAURICIO G. DOMOGAN AND REINALDO A. BAUTISTA, JR.; ANTONIO L. TABIN, AS CITY ACCOUNTANT; AND, VARIOUS OFFICIALS AND EMPLOYEES OF BAGUIO CITY, PETITIONERS, VS. COMMISSION ON AUDIT; THE DIRECTOR, COMMISSION ON AUDIT, CORDILLERA ADMINISTRATIVE REGION; AND, THE AUDITOR'S OFFICE, BAGUIO CITY, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ZALAMEDA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">In this petition for<i> certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 64, in relation to Rule 65 of the Rules of Court, Mayor Benjamin B. Magalong, in lieu of then Mayors Mauricio G. Domogan and Reinaldo A. Bautista, Jr., City Accountant Antonio L. Tabin, and the officials and employees of Baguio City (Mayor Magalong et al.) seek to annul Decision No. 2018-432<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 21, 2018 and Resolution (Decision No. 2022-114)<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 24, 2022 of respondent Commission on Audit (COA) Proper, which affirmed the validity of Notice of Disallowance (ND) Nos. 2009-001-100 (2008),<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> 2009-002-100 (2008),<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and 2009-003-100 (2009)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (collectively, subject NDs). The subject NDs disallowed the payment of the cost of living allowance (COLA) to the officials and employees of Baguio City for the period of January 1, 1990 to March 16, 1999, in the total amount of PHP 63,719,087.25.<br><br><center><i>Antecedents</i></center><br>On May 26, 2008, the<i> Sangguniang Panlungsod</i> (SP) of Baguio, through Resolution No. 222, series of 2008, authorized the release of COLA, amelioration allowance, and equity allowance to the city's officials and employees on the basis of several Supreme Court cases, specifically:<i> De Jesus v. COA, Philippine International Trading Company (PITC) v. COA, Metropolitan Waterworks and Sewerage System (MWSS) v. Bautista</i>, and <i>National Tobacco Administration (NTA) v. COA</i>. Through Resolution No. 306, series of 2008, the SP directed the city's Local Finance Committee to pay COLA covering the period of January 1, 1990, to March 16, 1999.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>The Audit Team Leader (ATL) and the Supervising Auditor of the city subsequently questioned the legality of the disbursement of COLA due to lack of appropriation and for being violative of Department of Budget and Management (DBM) Local Budget Circular (LBC) No. 081-05 dated December 12, 2005. Consequently, the subject NDs were issued, as follows:<br><br><table width="100%" border="1" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="31%" valign="top"> <div align="CENTER"><b>ND No.</b> </div></td> <td width="32%" valign="top"> <div align="CENTER"><b>Date</b> </div></td> <td width="37%" valign="top"> <div align="CENTER"><b>Amount</b> </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">2009-001-100-(2008) </div></td> <td valign="top"> <div align="CENTER">July 5, 2009 </div></td> <td valign="top"> <div align="RIGHT">PHP 59,084,268.95 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">2009-002-100-(2008) </div></td> <td valign="top"> <div align="CENTER">July 15, 2009 </div></td> <td valign="top"> <div align="RIGHT">371,824.82 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">2009-003-100-(2009) </div></td> <td valign="top"> <div align="CENTER">July 22, 2009 </div></td> <td valign="top"> <div align="RIGHT">318,002.32 </div></td> </tr> <tr> <td colspan="2" valign="top"> <div align="CENTER"><b>Total</b> </div></td> <td valign="top"> <div align="RIGHT"><b>PHP 59,774,096.09</b><sup style="COLOR: RGB(255, 0, 0);">[8]</sup></div></td> </tr> </tbody></table></div><div align="JUSTIFY"><br></div><div align="JUSTIFY">Mayor Magalong et al. were held liable for their respective participation, <i>viz.</i>:</div><div align="JUSTIFY"><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td width="31%" valign="top"> <div align="CENTER"><b>Name</b> </div></td> <td width="32%" valign="top"> <div align="CENTER"><b>Position</b> </div></td> <td width="37%" valign="top"> <div align="CENTER"><b>Nature of participation</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Reinaldo A. Bautista, Jr. </div></td> <td valign="top"> <div align="JUSTIFY">Mayor </div></td> <td valign="top"> <div align="JUSTIFY">For approving the payment </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Antonio L. Tabin </div></td> <td valign="top"> <div align="JUSTIFY">City Accountant </div></td> <td valign="top"> <div align="JUSTIFY">For certifying the completeness of supporting documents </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Anna Marie Alfonso, et al. </div></td> <td valign="top"> <div align="JUSTIFY">Officials and employees of the city </div></td> <td valign="top"> <div align="JUSTIFY">As payees<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></div></td> </tr> </tbody></table><br>Aggrieved, then Mayor Reinaldo A. Bautista (Mayor Bautista) and Mr. Antonio L. Tabin (Tabin) appealed the subject NDs before the Regional Director (RD), COA-Cordillera Administrative Region (CAR), averring that the decisions of the Supreme Court in the above-mentioned cases entitle the officials and employees to COLA but their entitlement was only discontinued because of the issuance of DBM Corporate Circular No. (CCC) 10.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>In Decision No. 2012-3 dated January 27, 2012, the RD of COA-CAR denied the appeal and affirmed ND No. 2009-001-100 (2008), anchored on the ground that the payment of COLA lacks legal basis, citing the case of <i>Victoria C. Gutierrez, et al. v. DBM</i> dated March 18, 2010. The RD included Daniel T. Farinas, Rocky Thomas Balisong, Betty Lourdes F. Tabanda, Perlita L. Chan-Rondez, Nicasio M. Aliping Jr., Antonio R. Tabora Jr., Erdolfo V. Balajadia, Nicasio S. Palaganas, Isabelo B. Cosalan Jr., Richard A. Carino, Fred L. Bagbagen, Elaine Sambrano, Joel A. Alangsab, Gloria Isabel V. De Vera, and Galo D. Weygan, all members of the SP of Baguio, as persons liable for signing the resolution authorizing the payment of COLA.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>However, the decision was silent as to the disposition of ND Nos. 2009-002-100-(2008) and 2009-003-100-(2009).<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Eventually, COA-CAR rendered Decision No. 2015-004 dated 1 July 2014, denying the appeal of Mayor Bautista and Tabin, and affirming ND No. 2009-001-100-(2008), with an instruction to the Supervising Auditor (SA) to issue a Supplemental ND to the members of the SP of Baguio.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Thus, on May 6, 2015, then Mayor Mauricio G. Domogan (Mayor Domogan) filed a petition for review before the COA Proper. During the pendency of the Petition for Review, the COA-CAR issued Decision No. 2015-004-A dated May 20, 2015, amending Decision No. 2015-004 to include ND Nos. 2009-002-100 (2008) and 2009-003-100(2008) in its disposition.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Meanwhile, on April 16, 2015, the incumbent ATL of Baguio City corrected the amount indicated in ND No. 2009-001-100(2008) since the same was allegedly understated by PHP 3,944,991.16. Supplemental ND No. 2009-001-100 (2008)-A in the amount of PHP 63,719,087.25 was consequently issued on June 5, 2015, with the following persons held liable for their respective participation:</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td width="30%" valign="top"> <div align="CENTER"><b>Name </b></div></td> <td width="26%" valign="top"> <div align="CENTER"><b>Position </b></div></td> <td width="44%" valign="top"> <div align="CENTER"><b>Nature of Participation </b></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Reinaldo A. Bautista </div></td> <td valign="top"> <div align="JUSTIFY">Mayor </div></td> <td valign="top"> <div align="JUSTIFY">Approved the payment </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Antonio L. Tabin </div></td> <td valign="top"> <div align="JUSTIFY">City Accountant </div></td> <td valign="top"> <div align="JUSTIFY">Certified the completeness of supporting documents </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Anna Marie Alfonso, et al. </div></td> <td valign="top"> <div align="JUSTIFY">Officials and employees of the city </div></td> <td valign="top"> <div align="JUSTIFY">Received the payment </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Daniel T. FariÃ±as </div></td> <td rowspan="15" valign="top"> <div align="JUSTIFY">SP Members </div></td> <td rowspan="15" valign="top"> <div align="JUSTIFY">Approved Resolution Nos. 222 and 306, both series of 2008, which allowed the payment of COLA</div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Rocky Tomas Balisong </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Betty Lourdes F. Tabanda </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Perlita L. Chan-Rondez </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Nicasio M. Aliping, Jr. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Antonio R. Tabora, Jr. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Erdolfo V. Balajadia </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Nicasio S. Palaganas </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Isabelo B. Cosalan, Jr. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Richard A. CariÃ±o </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Fred L. Bagbagen </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Elaine Sembrano </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Joel A. Alangsab</div></td> </tr> <tr> <td valign="top"> Gloria Isabel F. De Vera </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Gal D. Wygan </div></td> </tr> </tbody></table></div><div align="JUSTIFY"><br></div><div align="JUSTIFY">Mayor Domogan, in his Manifestation dated June 26, 2015, averred that Decision No. 2015-004-A has no basis in law since COA-CAR already lost jurisdiction over the case upon the filing of the Petition for Review. He also insists that ND No. 2009-001-100(2008)-A is void for being issued after the rendered decision.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><i>Decision of the COA Proper</i></center><br>On December 21, 2018, the COA through Decision No. 2018-432, affirmed, with modification, the RD's ruling, to wit:<br><blockquote><b>WHEREFORE</b>, premises considered, the Petition for Review is hereby<b> DENIED.</b> Accordingly, Notice of Disallowance (ND) Nos. 2009-001-100-(2008) dated July 5, 2009; 2009-002-100-(2008) dated July 15, 2009; and 2009-003-100-(2009) dated July 22, 2009, all covering the payment of Cost of Living Allowance (COLA) to the officials and employees of Baguio City for the period of January 1, 1990 to March 16, 1999, in the total amount of [PHP] 59,774,096.09, are<b> AFFIRMED.</b> ND No. 2009-001-100(2008)-A is<b> MODIFIED </b>reducing the liability of Mayor Reinaldo A. Bautista and Mr. Antonio L. Tabin to [PHP] 3,944,991.16. The employees of the city, who were mere passive recipients of COLA, need not refund the benefits they received.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original) </blockquote>In upholding the disallowance, COA ruled that pursuant to Section 12 of Republic Act No. 6758,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> all allowances, except those enumerated therein, are deemed integrated in the standardized salary rates. Moreover, DBM LBC No. 081-05 is clear that the grant of COLA is prohibited. Thus, as of December 12, 2005, the issue on the integration of COLA had been resolved as far as local government units (LGUs) are concerned. The cases cited by petitioners involve a different DBM issuance, which does not cover LGUs.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Anent the issue of liability for the disallowed amounts, COA held that the officers who approved the grant of COLA and the resolutions directing payment of the same are solidarily liable for the disallowances. No presumption of good faith can be ascribed with the approving officers in view of their payment of COLA despite the issuance of DBM LBC No. 081-Â­05 two years prior. Meanwhile, the passive-recipients were absolved on the ground of good faith.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Finally, upon review of the records, COA found the Supplemental ND No. 2009-001-100 (2008)-A valid. Thus, to clarify the exact liability of all parties involved, COA explained the following: (1) under ND No. 2009-001Â­100 (2008)-A, Mayor Bautista and Mr. Tabin were liable only in the amount of PHP 3,944,991.16 since they were already held liable under ND Nos. 2009-001-100 (2008), 2009-002-100 (2008), and 2009-003-100 (2009); (2) employees who were mere passive recipients are absolved from liability; and (3) the SP members are liable for the total amount of PHP 63,719,087.25.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Mayor Magalong et al. moved for reconsideration on March 15, 2019, insisting that approving officers should be absolved of liability based on good faith.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On January 24, 2022, COA denied the same and affirmed its December 21, 2018 Decision with modification.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The COA affirmed the validity of the disallowance, but reversed the exoneration of the passive recipients. Citing<i> Madera v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> COA ruled that the passive recipients are required to return what they personally received applying the principles of unjust enrichment and<i> solutio indebiti</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The dispositive portion of COA's resolution reads:<br><blockquote><b>WHEREFORE</b>, the Motion for Reconsideration is hereby <b>DENIED</b> for lack of merit. The Commission on Audit Decision No. 2018-432 dated December 21, 2018 is hereby<b> AFFIRMED with MODIFICATION</b>, in that, the approving/ authorizing/certifying officers are solidarily liable to refund the amount disallowed; while the passive recipients are liable to refund the amount they received.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup>(Emphasis on the original) </blockquote>Hence, Mayor Magalong et al. filed the present Petition.<br><br><center><i>Issues</i></center><br>Petitioners raise the following issues in the present petition before the Court, thus:<br><blockquote><ol><li>WHETHER THE COMMISSION COMMITTED GRAVE ERROR IN MAINTAINING THE DISALLOWANCES DESPITE PETITIONERS' LEGAL BASES AND COMPLIANCE WITH DBM-LBC NO. 81, SERIES 2005, IN GRANTING "COLA" TO AFFECTED EMPLOYEES OF THE BAGUIO CITY LOCAL GOVERNMENT.<br><br></li><li>WHETHER THE COMMISSION COMMITTED GRAVE ERROR IN AMENDING ITS DECISION AS TO THE PASSIVE RECIPIENTS, WHEN PETITIONERS MOTION FOR RECONSIDERATION WAS ONLY ASKING THE DECEMBER 21, 2018 DECISION BE RECONSIDERED AS TO THE AUTHORIZING, APPROVING, AND CERTIFYING OFFICIALS.<br><br></li><li>WHETHER OR NOT PETITIONERS MAY BE HELD LIABLE TO REFUND THE AMOUNTS DISALLOWED.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></li></ol> </blockquote>Herein petitioners argue that they based the payment of COLA on the 2008 case of<i> MWSS v. Genaro Bautista</i>.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> They also maintain that the 2005 DBM-LBC No. 081-05 did not resolve the issues on the integration of the COLA.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Further, petitioners insist that COA's Decision as regards the passive recipients is already final since they only sought the reconsideration of the liability of the authorizing, approving and certifying officials.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Finally, petitioners contend that in as much the payment of COLA has legal basis, they should not be held liable. More importantly, given that more than a decade has passed since the payees received the amounts disallowed and considering the death of several original petitioners, it will be prejudicial for the remaining petitioners to shoulder the return of the amounts disallowed.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>In response to the above arguments, respondent, through the Office of the Solicitor General, asserted the following: (1) based on jurisprudence existing in 2008 and DBM LBC No. 081-05, it is clear that when the SP of Baguio passed its resolutions on May 26, 2008 approving the payment of COLA covering the period of January 1, 1990 to March 16, 1999, the grant of COLA was prohibited; (2) Section 7, Rule 37 of the Rules of Court on partial reconsideration is premised on the discretion of the court, whether it deems the issue under reconsideration severable from the rest, of the judgment; and (3) the certifying and authorizing officers did not exercise the diligence required and the passive recipients are not entitled to COLA; hence, petitioners were correctly held liable to refund the amounts received subject of the NDs.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><center><i>Ruling of the Court</i></center><br>WE PARTLY GRANT the Petition.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The payment of the COLA for the period of 1990 to 1999 was correctly disallowed</i></div></td> <td width="200" valign="top"><br></td> </tr> </tbody></table><br>As regards the validity of the disallowance, the Court finds that the grant of accrued COLA for the years 1990 to 1999 was correctly disallowed.<br><br>In<i> Torcuator v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> a case involving the same issue, the Court upheld the disallowance of the payment of COLA because said allowance was deemed already integrated in the compensation of government employees under Section 12 of Republic Act No. 6758. The Court further declared that said provision was self-executing, and thus, the absence of any DBM issuance was immaterial. The Court elucidated in <i>Lumauan v. Commission on Audit</i>, thus:<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><blockquote>[Republic Act] No. 6758 standardized the salaries received by government officials and employees. Sec. 12 thereof states:<br><blockquote>SECTION 12. Consolidation of Allowances; and Compensation. â All allowances, except for representation and transportation allowances; clothing and laundry, allowances; subsistence allowance of marine officers and crew on board government vessels and hospital personnel; hazard pay; allowances of foreign service personnel stationed abroad; and such other additional compensation not otherwise specified herein as may be determined by the DBM, shall be deemed included in the standardized salary rates herein prescribed. Such other additional compensation, whether in cash or in kind, being received by incumbents only as of July 1, 1989 not integrated into the standardized salary rates shall continue to be authorized.<br><br>Existing additional compensation of any national government official or employee paid from local funds of a local government unit shall be absorbed into the basic salary of said official or employee and shall be paid by the National Government. </blockquote><i>In Maritime Industry Authority v. [COA] (MIA)</i> the Court explained the provision of Sec. 12, to wit:<br><blockquote>The clear policy of Section 12 is "to standardize salary rates among government personnel and do away with multiple allowances and other incentive packages and the resulting differences in compensation among them." Thus, the general rule is that all allowances are deemed included in the standardized salary. However, there are allowances that may be given in addition to the standardized salary. These non-integrated allowances are specifically identified in Section 12, to wit:<ol><li>representation and transportation allowances;<br><br></li><li>clothing and laundry allowances;<br><br></li><li>subsistence allowance of marine officers and crew on board government vessels;<br><br></li><li>subsistence allowance of hospital personnel;<br><br></li><li>hazard pay; and<br><br></li><li>allowances of foreign service personnel stationed abroad.</li></ol>In addition to the non-integrated allowances specified in Sec. 12, the Department of Budget and Management is delegated the authority to identify other allowances that may be given to government employees in addition to the standardized salary. </blockquote>Pursuant to [Republic Act] No. 6758, DBM-CCC No. 10 was issued, which provided, among others, the discontinuance without qualification of all allowances and fringe benefits, including COLA, of government employees over and above their basic salaries. In 1998, the Court declared in the case of<i> De Jesus</i> that DBM-CCC No. 10 is without force and effect on account of its non-publication in the Official Gazette or in a newspaper of general circulation, as required by law. In 1999, DBM re-issued its DBM-CCC No. 10 in its entirety and submitted it for publication in the Official Gazette.<br><br>Thus, petitioners chiefly argue that since DBM-CCC No. 10 was invalidated and was re-published only in 1999, then the officers and employees of PWD may receive COLA and other fringe benefits for the period of 1992 to 1999.<br><br>The Court is not convinced.<br><br>As early as<i> Philippine International Trading Corporation</i> v. <i>[COA]</i>, the Court held that the nullification of DBM-CCC No. 10 in<i> De Jesus</i> does not affect the validity of [Republic Act] No. 6758, to wit:<br><blockquote>There is no merit in the claim of PITC that [Republic Act] No. 6758, particularly Section 12 thereof is void because DBM-Corporate Compensation Circular No. 10, its implementing rules, was nullified in the case of<i> De Jesus v. [COA]</i>, for lack of publication. The basis of COA in disallowing the grant of SFI was Section 12 of [Republic Act] No. 6758 and not DBM-CCC No. 10. Moreover, the nullity of DBM-CCC No. 10, will not affect the validity of [Republic Act] No. 6758. It is a cardinal rule in statutory construction that statutory provisions control the rules and regulations which may be issued pursuant thereto. Such rules and regulations must be consistent with and must not defeat the purpose of the statute. The validity of [Republic Act], No. 6758 should not be made to depend on the validity of its implementing rules. </blockquote>In<i> NAPOCOR Employees Consolidated Union, et al. v. National Power Corporation, et al.</i>, the Court reiterated that while DBM-CCC No. 10 was nullified in<i> De Jesus</i>, there is nothing in that decision suggesting or intimating the suspension of the effectivity of [Republic Act] No. 6758 pending the publication of DBM-CCC No. 10 in the Official Gazette.<br><br>In<i> Gutierrez</i>, the Court definitively ruled that COLA is integrated in the standard salary of government officials and employees under Sec. 12 of [Republic Act] No. 6758, to wit:<br><blockquote>The drawing up of the above list is consistent with Section 12 above. [Republic Act No.] 6758 did not prohibit the DBM from identifying for the purpose of implementation what fell into the class of "all allowances." With respect to what employees' benefits fell outside the term apart from those that the law specified, the DBM, said this Court in a case, needed to promulgate rules and regulations identifying those excluded benefits. This leads to the inevitable conclusion that until and unless the DBM issues such rules and regulations, the enumerated exclusions in items (1) to (6) remain exclusive. Thus so, not being an enumerated exclusion, COLA is deemed already incorporated in the standardized salary rates of government employees under the general rule of integration.<br><br><center>. . . .</center><br>Clearly, COLA is not in the nature of an allowance intended to reimburse expenses incurred by officials and employees of the government in the performance of their official functions. It is not payment in consideration of the fulfillment of official duty. As defined, cost of living refers to "the level of prices relating to a range of everyday items" or "the cost of purchasing those goods and services which are included in an accepted standard level of consumption." Based on this premise, COLA is a benefit intended to cover increases in the cost of living. Thus, it is and should be integrated into the standardized salary rates. </blockquote>In<i> MIA</i>, the Court emphasized that [Republic Act] No. 6758 deems all allowances and benefits received by government officials and employees as incorporated in the standardized salary, unless excluded by law or an issuance by the DBM. The integration of the benefits and allowances is by legal fiction.<br><br>It was also discussed therein that "[o]ther than those specifically enumerated in [Sec.] 12, non-integrated allowances, incentives, or benefits, may still be identified and granted to government employees. This is categorically allowed in Republic Act No. 6758. This is also in line with the President's power of control over executive departments, bureaus, and offices. These allowances, however, cannot be granted indiscriminately. Otherwise, the purpose and mandate of Republic Act No. 6758 will be defeated."<br><br>More recently, in<i> Zamboanga City Water District v. [COA] (ZCWD)</i>, it was declared by the Court that, in accordance with the<i> MIA</i> ruling, the COLA and Amelioration Allowance<i> (AA)</i> are already deemed integrated in the standardized salary, particularly, in local water districts.<br><br>Verily, the Court has consistently held that Sec. 12 of [Republic Act] No. 6758 is valid and self-executory even without the implementing rules of DBM-CCC No. 10. The said provision clearly states that all allowances and benefits received by government officials and employees are deemed integrated in their salaries. As applied in this case, the COLA, medical, food gift, and rice allowances are deemed integrated in the salaries of the PWD officers and employees. Petitioners could not cite any specific implementing rule, stating that these are non-integrated allowances. Thus, the general rule of integration shall apply.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Citations omitted) </blockquote>Petitioners' reliance on the pronouncement of the Court in<i> Philippine Ports Authority (PPA) Employees Hired After July 1, 1989 v. Commission on Audit</i><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> reiterated in<i> Metropolitan Waterworks and Sewerage System v. Bautista</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> that "employees of GOCC, whether incumbent or not, are entitled to COLA from 1989 to 1999, is misplaced."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The Court [already clarified], in<i> Maritime Industry Authority (MIA) v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> that the ruling in<i> Philippine Ports Authority (PPA) Employees Hired After July 1, 1989 v. Commission on Audit</i><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> only distinguished the benefits that may be received by government employees hired before and after the effectivity of Republic Act No. 6758. In fact, in<i> Republic v. Judge Cortez</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the Court made it clear that<i> Philippine Ports Authority (PPA) Employees Hired After July 1, 1989 v. Commission on Audit</i> "only applies if the compensation package of those hired before the effectivity of Republic Act No. 6758 actually decreased; or in case of those hired after, if they received a lesser compensation package as a result of the deduction of COLA." Such is not the situation [herein].<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>The same pronouncement was emphasized, yet again, by the Court in the case of<i> Lumauan v. COA</i>. <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> In said case, the Board of Directors granted COLA to Metropolitan Tuguegarao Water District employees through a Resolution passed in 2009, for payment of the same for the years 1992 to 1997. On<i> certiorari</i>, this Court upheld the disallowance and reiterated that COLA is deemed already integrated in the compensation of government employees under Section 12 of Republic Act No. 6758.<br><br>In view of the foregoing, the Court finds no grave abuse of discretion on the part of COA in disallowing the payment of accrued COLA for the years 1990 to 1999 in the aggregate amount of PHP 63,719,087.25.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>COA Decision No. 2018-432 already absolved petitioners-payees from their liability to return, and this has become final and executory</i></div></td> <td width="200" valign="top"><br></td> </tr> </tbody></table><br>At this juncture, We stress, however, that<i> in Decision No. 2018-432, the COA already absolved petitioners-payees from their liability to return</i> as follows:<br><blockquote>As to the employees who were mere passive recipients of the COLA, this Commission has held earlier that they were absolved from liability to refund the COLA they received. Hence, they need not refund the amount disallowed under ND No. 2009-001-100(2008)-A.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </blockquote>When Mayor Domogan moved for reconsideration on behalf of the approving and certifying officers, the COA resolved the same by reinstating the liability of petitioners-payees to return the amounts they received, applying the case<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> of<i> Madera</i> which explained that good faith does not serve to exonerate passive recipients of disallowed amounts since their liability is based on<i> solutio indebiti</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The Court explained:<br><blockquote>In<i> Madera</i>, the Court certainly exhorted COA to "take into consideration the pronouncements made herein to prevent future decisions that 'result [in] exempting recipients who are in good faith from refunding the amount received . . . [while] approving officers are made to shoulder the entire amount paid to the employees.'" However, the COA [CP]'s reinstatement of petitioners[-payees]' liability to return in this case was not proper compliance with this exhortation.<br><br>By unilaterally reversing its earlier decision exonerating petitioners[-payees], the COA [CP] violated the principle of immutability of judgments. The exoneration of petitioners as payees became final and executory upon the lapse of the period to appeal since [Mayor Domogan] no longer raised the same as an issue in the motion for reconsideration, and petitioners-payees themselves no longer filed their own motion, since the COA [CP] decision was in their favor. Petitioners[-payees]' exoneration must be deemed final and immutable especially considering that the inverse situationâwhere a COA decision is adverse to some parties, and the latter failed to timely move for reconsiderationâthe COA [CP] would have correctly dismissed any subsequent belated motion for reconsideration for having been filed out of time.<br><br>The COA [CP] likewise violated petitioners[-payees]' right to due process. Since they were not parties to the motion for reconsideration, petitioners[-payees] were not given any opportunity to contest the reinstatement of their liability based on the then-relatively new case of<i> Madera</i>.<br><br>A similar situation was the subject of the Court's decision in<i> Incumbent and Former Employees of the National Economic and Development Authority (NEDA) Regional Office (RO) XIII v. Commission on Audit (Incumbent and Former Employees of NEDA RO XIII)</i>. There, the Court explained that reinstating the payees' liability upon resolving a motion for reconsideration to which they were not parties, and which does not raise their liability as an issue to be resolved, is contrary to COA's own Rules of Procedure, which require that a motion for reconsideration specifically point out the findings which are not supported by evidence or law. If no motion for reconsideration compliant with this requirement is filed within 30 days from notice of the decision or resolution, the decision or resolution becomes final and executory. The Court also pointed out that COA is authorized to<i> motu proprio</i> exercise its power of review only in cases of automatic review under Rule V, Section 7 of the COA Rules of Procedure, where a COA director's decision modifying or altering the decision of an auditor is automatically elevated to the COA [CP]. Hence,<i> it is improper for the COA [CP] to motu proprio rule on a matter already settled in its original decision if it was not raised by the party moving for reconsideration. </i>Finally, the Court in<i> Incumbent and Former Employees of NEDA RO XIII </i>explained that the COA [CP]'s act of applying a new doctrine to unilaterally reinstate therein petitioners' liability violated their right to due process "since they were not given the opportunity to squarely and intelligently defend themselves from such new doctrine."<br><br>. . . .<br><br>Also, the Court, in the cases of<i> National Transmission Corporation v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Social Security System v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> and <i>Securities and Exchange Commission v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> explicitly stated that the exoneration of payees at the COA level, not having been subsequently raised as an error or issue before the Court upon Petition for <i>Certiorari</i>, became final and executory and could no longer be revisited even by the Court. The Court also says this in<i> Madera</i>, which is cited in the subject COA [CP] resolution in the instant case as basis for reinstating the petitioners-payees' liability. Hence, consistent with jurisprudence and due process, the rule in<i> Incumbent and Former Employees of NEDA RO XII</i> prevails:<i> COA's ruling on a party's liability to return disallowed amounts becomes final and executory when no longer timely contested or raised as an issue in a motion for reconsideration, and COA may not unilaterally reinstate the liabilities of those it has already exonerated, especially when the latter no longer have a chance to contest such reinstatement. </i><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </blockquote><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>Petitioners are excused from returning the disallowed amounts</i></div></td> <td width="200" valign="top"><br></td> </tr> </tbody></table><br><in<i> Madera, the Court promulgated the following rules on return of disallowed amounts,<i> viz.</i>:<br><blockquote><ol><li>If a Notice of Disallowance is set aside by the Court, no return shall be required from any of the persons held liable therein;<br><br></li><li>If a Notice of Disallowance is upheld, the rules on return are as follows:<br><br><ol type="a"><li>Approving and certifying officers who acted in good faith, regular performance of official functions, and with the diligence of a good father of the family are not civilly liable to return consistent with Section 38 of the Administrative Code of 1987;<br><br></li><li>Approving and certifying officers who are clearly shown to have acted in bad faith, malice, or gross negligence are, pursuant to Section 43 of the Administrative Code of 1987, solidarily liable to return only the net disallowed amount which, as discussed herein, excludes amounts excused under the following sections 2c and 2d.<br><br></li><li>Recipients â whether approving or certifying officers or mere passive recipients â are liable to return the disallowed amounts respectively received by them, unless they are able to show that the amounts they received were genuinely given in consideration of services rendered.<br><br></li><li><i>The Court may likewise excuse the return of recipients based on undue prejudice, social justice considerations, and other bona fide exceptions as it may determine on a case to case basis</i>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis supplied)</li></ol></li></ol> </blockquote>Rule 2d of<i> Madera</i> "requires that there be<i> bona fide</i> exceptions, such as circumstances which would cause undue prejudice to the recipients, or social justice considerations, such as when the disallowed amounts were meant to serve as much-needed financial assistance on the occasion of extraordinary and exigent circumstances."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>While the determination of whether<i> bona fide</i> exceptions exist is necessarily done on a case-by-case basis, in<i> Cagayan de Oro City Water District v. Commission on Audit (CDO Water District)</i>, the Court laid out some pointers on how such a determination may be done. The Court explained, thus:<br><blockquote>In sum, this Court pronounces the following considerations in determining whether or not a refund can be excused under Rule 2d of <i>Madera</i>:<ol><li>The Court shall evaluate the<i> nature and purpose of the disallowed allowances and benefits</i>. Recipients must prove with substantial evidence (1) the nature and purpose of disallowed allowances and benefits, and (2) the existence and truthfulness of its factual basis. Recipients of disallowed allowances and benefits proved to be granted for legitimate humanitarian and compelling grounds shall be excused from making a refund due to equity and social justice considerations.<br><br></li><li>The Court shall consider<i> the lapse of time between the receipt of the allowances and benefits, and the issuance of the notice of disallowance or any similar notice indicating its possible illegality or irregularity</i>. Absent any circumstances the Court may deem sufficient, the lapse of [three] years without any such notice shall be sufficient to excuse recipients from making a refund.</li></ol>However, this [three-year] period rule shall not apply in favor of persons found to have actively participated in fraudulent transactions, <i>i.e.</i>, those found culpable in Special Audits or Fraud Audits conducted by the COA.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </blockquote>Further to this, in<i> Velasquez v. Commission on Audit</i><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court found that the nature and purpose of the rice subsidy allowance and Kalampusan Award, in conjunction with the fact that 16 years had lapsed since the payees received the award, warranted excusing therein petitioners, as approving officers and recipients, from refunding the disallowed amounts, since requiring them to return these amounts would cause them undue prejudice.<br><br>In<i> Tiblani v. Commission on Audit</i><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> the Court found that the purpose of the Cost of Economy Measure Award (CEMA), coupled with the fact that 10 years had passed since the payees received the same, also necessitated discharging the payees from refund lest they suffer undue prejudiceâthis, especially since payees are non-managerial/ rank-and-file employees of the National Economic Development Authority and they had likely already spent the CEMA they received on the needs of their families.<br><br>With the foregoing guidelines and jurisprudential examples in mind, the Court excuses petitioners from the liability to refund on the basis of Rule 2d of<i> Madera</i>.<br><br>Here, as mentioned above, COLA is a benefit intended to cover increases in the cost of living.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> It bears stressing that 17 years had already passed since herein petitioners received the COLA. Petitioners' pointâthat in this time, they had already spent the COLA they received on the needs of their families, believing in good faith that they were entitled to it<sup style="COLOR: RGB(255, 0, 0);">[57]</sup>âis well-taken. Requiring them to return the disallowed amounts 17 years after such fact would cause them undue prejudice.<br><br>While the COA timely issued [the subject NDs in 2009],<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> within the three-year period as determined in<i> CDO Water District</i>, the Court finds that excusing petitioners from refund is still proper, as it is consistent with fairness and social justice. The three-year period, after all, is simply one guideline in applying lapse of time as a ground to excuse under Rule 2d. It does not preclude the Court from considering, in conjunction with lapse of time, other circumstances which make it proper to excuse recipients from returning the amounts they received.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>The Court also notes that petitioners are being required to refund the amount of PHP 63,719,087.25. This is not a small amount for an ordinary government employee to come up with. Given the death of some of the petitioners, it would be doubly difficult for those among petitioners who have already retired from the service and are no longer earning regular salaries.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> To the Court's mind, requiring individuals to pay this large amount of money in disregard of the harsh reality of our economy is outright injustice and defeats the already elusive ideal of social justice in the country.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Verily, anent petitioners-payees, aside from the above disquisition on the finality of judgment as to their liability, the Court thus excuses them from the liability to refund the amount received based on Rule 2d of<i> Madera</i>.<br><br>As to petitioners-officers, We likewise excuse their liability to return the disallowed amounts on the basis of Rule 2d of<i> Madera</i>, as explained above. Akin to petitioners-payees, requiring them to return the disallowed amounts 17 years after the fact would cause them undue prejudice. Additionally, it will be highly iniquitous to let the approving, authorizing, and certifying officers return the amounts they received while the rest of petitioners-payees go scot-free. Indeed, to order the officers to return said amounts will result in an inequitable and unjust situation where the officers, who are also payees-recipients, have a different civil liability while the rest of the payees-recipients are forgiven. To sanction such course of action would violate their right to equal protection.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>So too, the Court appreciates as a badge of good faith that petitioners-officers authorized the release of COLA to the city's officials and employees on the basis of several Supreme Court cases, specifically:<i> De Jesus v. COA</i>, <i>Philippine International Trading Company (PITC) v. COA, Metropolitan Waterworks and Sewerage System (MWSS) v. Bautista</i>, and<i> National Tobacco Administration (NTA) v. COA</i>,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> instead of granting the same groundlessly.<br><br>All told, petitioners would suffer undue prejudice should they be held liable to return the disallowed amounts.<br><br><b>ACCORDINGLY,</b> the petition is<b> PARTLY GRANTED</b>. Decision No. 2018-432 dated December 21, 2018 and Resolution (Decision No. 2022-Â­114) dated January 24, 2022 of respondent Commission on Audit, affirming the Notice of Disallowance Nos. 2009-001-100 (2008), 2009-001-100 (2008)-A, 2009-002-100 (2008), and 2009-003-100 (2009) are<b> AFFIRMED with MODIFICATION.</b> Pursuant to Rule 2d of<i> Madera v. Commission on Audit</i>, petitioners are excused from returning the disallowed amounts.<br><br><b>SO ORDERED. </b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Hernando, Inting, Gaerlan, Rosario, J. Lopez, Marquez, Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Caguioa</i><sup style="COLOR: RGB(255, 0, 0);">*</sup>&nbsp; and <i>Lazaro-Javier,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>JJ.,</i> on official business.<br>Dimaampao<sup style="COLOR: RGB(255, 0, 0);">**</sup>and <i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>JJ.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 25-36. The December 21, 2018 Decision No. 2018-432 was signed by Chairperson Michael G. Aguinaldo, and Commissioners Jose A. Fabia and Roland C. Pondoc of the Commission on Audit, Commonwealth Avenue, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 37-40. The January 24, 2022 Resolution (Decision No. 2022-114) was signed by Chairperson Michael Aguinaldo and Commissioner Roland C. Pondoc of the Commission on Audit, Commonwealth Avenue, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 43-87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 88-93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 94-97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 26-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 28-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Titled "An Act Prescribing a Revised Compensation and Position Classification System in the Government and for Other Purposes," approved on August 21, 1989.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 30-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 33-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 37-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 882 Phil. 744 (2020) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, pp. 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 572 Phil. 383 (2008) [Per J. Reyes, R.T., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 10-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 14-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 16-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 136-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> 849 Phil. 101 (2019) [Per J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Lumauan v. Commission on Audit</b>, 892 Phil. 183 (2020) [Per J. Hernando, <i>En Banc</i>] <i>citing</i> <b>Torcuator v. Commission on Audit</b>, 849 Phil. 101 (2019) [Per J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Lumauan v. Commission on Audit</b>, 892 Phil. 183, 189-193 (2020) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 193, <i>citing</i> <b>Philippine Ports Authority Employees Hired after July 1, 1989 v. Commission on Audit</b>, 506 Phil. 382 (2005) [Per Acting C.J. Panganiban, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 572 Phil. 383 (2008) [Per J. Reyes, R.T., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i><i>See</i></i> <b>Lumauan v. Commission on Audit</b>, 892 Phil. 183 (2020) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 193, <i>citing</i> <b>Maritime Industry Authority v. Commission on Audit</b>, 750 Phil. 288 (2015) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 193, <i>citing</i> <b>Philippine Ports Authority Employees Hired after July 1, 1989 v. Commission on Audit</b>, 506 Phil. 382 (2005) [Per Acting C.J. Panganiban, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 193, <i>citing</i><b> Republic v. Cortez</b>, 805 Phil. 294 (2017) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 892 Phil. 183 (2020) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Tiblani v. Commission on Audit, G.R. No. 263155</b>, November 5, 2024 [Per J. Caguioa, <i>En Banc</i>] <i>citing</i> <b>Madera v. Commission on Audit</b>, 882 Phil. 744 (2020) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>National Transmission Corp. v. Commission on Audit</b>, 904 Phil. 1065 (2021) [Per J. M.V. Lopez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Social Security System v. Commission on Audit</b>, 888 Phil. 892 (2020) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Securities and Exchange Commission v. Commission on Audit</b>, 900 Phil. 575 (2021) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Tiblani v. Commission on Audit, G.R. No. 263155</b>, November 5, 2024 [Per J. Caguioa, <i>En Banc</i>] at 20-Â­22. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court Website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Lumauan v. Commission on Audit</b>, 892 Phil. 183, 194 (2020) [Per J. Hernando, <i>En Banc</i>] <i>citing</i> <b>Madera v. Commission on Audit</b>, 882 Phil. 744 (2020) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Tiblani v. Commission on Audit, G.R. No. 263155</b>, November 5, 2024 [Per J. Caguioa, <i>En Banc</i>] at 15. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. <i>citing</i> <b>Cagayan de Oro City Water District v. Commission on Audit</b>, 900 Phil. 460 (2021) [Per J. Gaerlan, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 884 Phil 319 (2020) [Per J. Reyes, J. Jr. <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>G.R. No. 263155</b>, November 5, 2024 [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> <b>Lumauan v. Commission on Audit</b>, 892 Phil. 183, 192 (2020) [Per J. Hernando, <i>En Banc</i>] <i>citing</i> <b>Torcuator v. Commission on Audit</b>, 849 Phil. 101, 112 (2019) [Per J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Rollo</i>, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>See</i> <b>Tiblani v. Commission on Audit, G.R. No. 263155</b>, November 5, 2024 [Per J. Caguioa, <i>En Banc</i>] at 17. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Rollo</i>, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup><b> Tiblani v. Commission on Audit, G.R. No. 263155</b>, November 5, 2024 [Per J. Caguioa, <i>En Banc</i>] at 18. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>See</i> <b>Securities and Exchange Commission v. Commission on Audit</b>, 900 Phil. 575, 600-601 (2021) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo</i>, p. 26.</in<i></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

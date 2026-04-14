@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 275469 - KATHERINE CASSANDRA LI ONG, PETITIONER, VS. THE SENATE TRICOMM (HON. AQUILINO PIMENTEL III, CHAIRPERSON, COMMITTEE ON JUSTICE AND HUMAN RIGHTS; HON. RISA HONTIVEROS,  CHAIRPERSON, COMMITTEE ON WOMEN, CHILDREN, FAMILY RELATIONS, AND GENDER EQUALITY; AND HON. RAFFY TULFO, CHAIRPERSON, COMMITTEE ON PUBLIC SERVICES) AND HOUSE OF REPRESENTATIVES QUADCOMM (HON. ROBERT ACE BARBERS, LEAD CHAIRPERSON, COMMITTEE ON DANGEROUS DRUGS; HON. JOSEPH STEPHEN PADUANO, CHAIRPERSON, COMMITTEE ON PUBLIC ACCOUNTS; HON. DAN FERNANDEZ, CHAIRPERSON, PUBLIC ORDER, SAFETY, AND ACCOUNTABILITY; HON. BENNY ABANTE, CHAIRPERSON, COMMITTEE ON HUMAN RIGHTS), RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70075' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 275469, May 06, 2025 ]</H2>
+			<H3>KATHERINE CASSANDRA LI ONG, PETITIONER, VS. THE SENATE TRICOMM (HON. AQUILINO PIMENTEL III, CHAIRPERSON, COMMITTEE ON JUSTICE AND HUMAN RIGHTS; HON. RISA HONTIVEROS,  CHAIRPERSON, COMMITTEE ON WOMEN, CHILDREN, FAMILY RELATIONS, AND GENDER EQUALITY; AND HON. RAFFY TULFO, CHAIRPERSON, COMMITTEE ON PUBLIC SERVICES) AND HOUSE OF REPRESENTATIVES QUADCOMM (HON. ROBERT ACE BARBERS, LEAD CHAIRPERSON, COMMITTEE ON DANGEROUS DRUGS; HON. JOSEPH STEPHEN PADUANO, CHAIRPERSON, COMMITTEE ON PUBLIC ACCOUNTS; HON. DAN FERNANDEZ, CHAIRPERSON, PUBLIC ORDER, SAFETY, AND ACCOUNTABILITY; HON. BENNY ABANTE, CHAIRPERSON, COMMITTEE ON HUMAN RIGHTS), RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Petition for <i>Certiorari</i> and Prohibition<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed directly with this Court by Katherine Cassandra Li Ong (Ong) against the Senate Tricomm (Hon. Aquilino Pimentel III, Chairperson, Committee on Justice and Human Rights; Hon. Risa Hontiveros, Chairperson, Committee on Women, Children, Family Relations, and Gender Equality; and Hon. Raffy Tulfo, Chairperson, Committee on Public Services) and the House of Representatives (HOR) Quadcomm (Hon. Robert Ace Barbers, Lead Chairperson, Committee on Dangerous Drugs; Hon. Joseph Stephen Paduano, Chairperson, Committee on Public Accounts; Hon. Dan Fernandez, Chairperson, Public Order, Safety, and Accountability; and Hon. Benny Abante, Chairperson, Committee on Human Rights) seeking for an injunction enjoining the respondents from violating Ong's constitutional rights in conducting inquiries in aid of legislation.<br><br><i>The Instant Petition filed by Ong</i><br><br>Ong averred that sometime in August 2024, the HOR Quadcomm conducted hearings in aid of legislation regarding illegal Philippine Offshore Gaming Operators (POGOs), among others.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> On August 5, 2024, Rep. Aurelio Gonzalez, Jr. delivered a privilege speech linking Ong to the operation of illegal POGOs.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> However, he alleged that Ong had left the country on July 11, 2024 through normal and legal channels.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>A motion was subsequently made citing Ong in contempt, and the Speaker of the HOR approved the order for her arrest and detention.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On August 22, 2024, Ong, under the custody of the National Bureau of Investigation (NBI), was brought from Indonesia to the Philippines and then to the NBI Building in Quezon City. The next day, Ong underwent inquest proceedings for obstruction of justice and violation of Section 45(h) of Commonwealth Act No. 613.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Ong continued to be detained by the NBI. Cases were also filed against her for harboring a fugitive under Presidential Decree No. 1829<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> and disobedience to summons of the National Assembly under the Revised Penal Code which were pending with the Pasay City Metropolitan Trial Court.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On August 26, 2024, custody over Ong was transferred from the NBI to the HOR.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On August 27, 2024, Ong, through counsel, sent a letter<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> to the chairpersons of the Senate Tricomm expressing that she has opted to decline testifying before the body, citing the right to remain silent and right against self-incrimination.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On August 28, 2024, Ong was directed to appear before the HOR Quadcomm, but through her lawyers, she submitted a letter to the chairpersons of the HOR Quadcomm invoking her right to remain silent and right against self-incrimination. When she attended the hearing, she initially refused to answer questions, until she eventually responded after allegedly being physically separated and prevented from approaching her lawyer.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Ong was again called to testify before the HOR Quadcomm on September 4, 2024, but the hearing was interrupted due to a medical emergency, as she was rushed to a hospital and confined there. Prior to the interruption, Ong claimed that she was being subjected to humiliating and incriminating questions during the hearing, as seen in video recordings and screenshots saved in a storage device attached to the instant Petition.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On September 9, 2024, Ong was invited by the Senate Tricomm to a hearing, but was unable to attend as she was still confined in the hospital. Ong's lawyers allegedly sent a letter to the Senate Tricomm invoking her right to remain silent.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Subsequently, Ong filed the present Petition. Invoking the expanded powers of judicial review of this Court, she argues that the requisites of judicial review are met in this case. She also contends that direct resort to this Court is justified in view of exceptionally compelling reasons and the threat to her fundamental constitutional rights.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>On the merits, Ong invokes her right to remain silent and right against self-incrimination. She contends that these rights are applicable in her case as she is under the custody of the HOR and the questions propounded to her pertained to her participation in a crime and exceeded the permissible inquiries on information for crafting proposed legislation. She asserts that in pressuring and influencing her into giving information, the members of the HOR Quadcomm abused their powers and exceeded their jurisdiction in conducting inquiries in aid of legislation.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Further, Ong adds that the Senate Tricomm "appear[s] to be following the misguided lead of the [HOR Quadcomm]" and must be stopped from doing so.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Ong thus sought the issuance of a temporary restraining order (TRO) and/or injunction, claiming she is entitled to injunctive relief.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Ong also moves for oral arguments to be conducted, and commits to file a supplemental petition with the submission of other documents and an explanation of the context of the video recording attached in relation to her arguments.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Ong prays for the following reliefs in the instant Petition:<blockquote>WHEREFORE, premises considered, it is most respectfully prayed<br>that:<blockquote><ol><li>A Temporary Restraining Order or Preliminary Injunction be issued ENJOINING the Respondent Committees, their agents or factors or any one acting under their orders, from doing any act and thing violative of the Constitutional rights of the Petitioner to remain silent, from incriminating herself and to have the advice of counsel in every step of the proceedings; including but not limited to, a proscription from exerting any undue pressure and influence, committing any acts or intimidation or threats of verbal, mental or psychological abuse against Petitioner, or any acts of a punitive nature resulting from her invocation of her aforesaid Constitutional rights, threats of any sanctions against her lawyer for the exercise of his profession of counseling Petitioner, as may be determined by this Honorable Court in the exercise of its sound judgment, during the pendency of this case; and<br><br></li><li>Thereafter, after such proceedings as this Court may deem proper, make such Injunction PERMANENT.</li></ol></blockquote>Petitioner further prays for such other reliefs and remedies as this Honorable Court may deem just and equitable in the premises.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></blockquote>On October 1, 2024, this Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> directing the Senate Tricomm and HOR Quadcomm to comment on the instant Petition, and for Ong to submit an electronic copy of the Petition and a verified declaration. Ong complied with the said requirement in a Compliance with Manifestation.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><i>Comment/Opposition filed by the Senate Tricomm</i><br><br>The Senate Tricomm, represented by the Office of the Senate Legal Counsel, filed its Comment/Opposition.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Countering Ong's allegations, the Senate Tricomm narrates that on November 21, 2022, Senator Risa Hontiveros (Sen. Hontiveros) delivered a privilege speech about an operation involving the rescue of Filipinos on the border of Myanmar and Thailand who were victims of trafficking by a Chinese group.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Then, the following Proposed Senate Resolutions were filed:<blockquote><table width="100%" border="1" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="20%"><div align="center">Date</div></td><td width="20%"><div align="center">PSR No.</div></td><td width="20%"><div align="center">Senator</div></td><td width="40%"><div align="center">Title</div></td></tr><tr valign="top"><td><div align="center">May 8, 2023</div></td><td><div align="center">595</div></td><td><div align="center">Senator Grace Poe (Sen. Poe)</div></td><td><div align="justify">Resolution Urging the Appropriate Senate Committee/s to Conduct an Inquiry, in Aid of Legislation, on the Alleged Human Trafficking and Cyber Fraud Operations in the Clark Sun Valley Hub Corporation Inside the Clark Freeport Zone with the End in View of Eliminating Human Trafficking in Cyber Fraud Industries in the Country.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></div></td></tr><tr valign="top"><td><div align="center">May 15, 2023</div></td><td><div align="center">611</div></td><td><div align="center">Senator Sherwin Gatchalian (Sen. Gatchalian)</div></td><td><div align="justify">Resolution Directing the Appropriate Senate Committee to Conduct an Inquiry, in Aid of Legislation, on the Human Trafficking Inside the Clark Freeport Zone which are being Linked to Philippine Offshore Gaming Operators (POGO), with an End View of Crafting a Legislation or Policy Recommendation, as may be necessary.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></div></td></tr><tr valign="top"><td><div align="center">November 6, 2023</div></td><td><div align="center">853</div></td><td><div align="center">Sen. Gatchalian</div></td><td><div align="justify">Resolution Directing the Appropriate Senate Committee to Conduct an Inquiry, in Aid of Legislation, on the Involvement of an Internet Gaming Licensee of the Philippine Amusement and Gaming Corporation (PAGCOR) on the Alleged Crimes or Offenses, Particularly Prostitution, Human Trafficking, Torture, Kidnapping for Ransom, and Online Scams, with an End View of Crafting a Legislation or Policy Recommendation, as may be necessary.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></div></td></tr><tr valign="top"><td><div align="center">March 19, 2024</div></td><td><div align="center">977</div></td><td><div align="center">Sen. Gatchalian</div></td><td><div align="justify">Resolution Directing the Appropriate Senate Committee to Conduct an Inquiry, in Aid of Legislation, on the Alleged Human Trafficking, Serious Illegal Detention, and Physical Abuse and Torture in the Premises of an Internet Gan1ing Licensee of the Philippine Amusement and Gaming Corporation (PAGCOR) in Tarlac, with an End View of Crafting a Legislation or Policy Recommendation, as may be necessary.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></div></td></tr></tbody></table></blockquote>The first public hearing on the abovementioned privilege speech and Proposed Senate Resolutions was conducted on May 7, 2024 by the Senate Committee on Women, Committee on Migrant Workers, and the Committee on Public Order and Dangerous Drugs. In these hearings, Ong's name was linked to the raided facilities of POGOs in Pampanga and Tarlac.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>On May 21, 2024, Sen. Gatchalian filed PSR No. 1032<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> entitled "Resolution Directing the Appropriate Senate Committee to Conduct an Inquiry, in Aid of Legislation, on the Alleged Human Trafficking and Involvement in Scamming Activities, Violating the Cybercrime Prevention Act of 2012, Within Multinational Village in ParaÃ±aque City, with an End View of Crafting a Legislation or Policy Recommendation, as may be necessary."<br><br>On July 3, 2024, the Senate Committee on Women issued a <i>Subpoena Ad Testificandum</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> signed by Sen. Hontiveros and approved by Senate President Francis G. Escudero. However, when service of the <i>subpoena</i> was attempted, the administration staff of Ong's listed residence refused to receive it as she was allegedly not in the list of residents or tenants.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>On August 19, 2024, Sen. Hontiveros, in her privilege speech, uncovered that Alice Guo or Guo Hua Ping, the Mayor of Bamban, Tarlac, left the Philippines on July 17, 2024 together with Ong, among others. Thereafter, the Senate Tricomm was constituted composing of the Senate Committee on Justice, Committee on Women, and Committee on Public Services.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>On August 26, 2024, Ong, who was apprehended in Indonesia and under the custody of the NBI, was subsequently placed under the custody of the HOR.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The Senate Tricomm conducted public hearings on August 27, 2024 and September 5, 2024, where Ong was not present.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Ong appeared and testified before the Senate Tricomm on September 17, 2024. She also appeared during the hearing on October 8, 2024, but the Senate Tricomm was unable to ask her questions due to lack of time.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In response to the instant Petition, the Senate Tricomm avers that Ong failed to adhere to the principle of hierarchy of courts, and that she failed to justify the exceptions to this rule. Ong likewise prematurely filed the instant Petition even before appearing or testifying before the Senate Tricomm. It emphasizes that the plain, speedy, and adequate remedy that Ong should have first availed of is spelled out in the Senate's Rules of Procedure Governing Inquiries in Aid of Legislation, and that is the administrative remedy of challenging the jurisdiction of the committee.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>More, the Senate Tricomm argues that the hearings were conducted in accordance with the constitutional requirements for a valid legislative inquiry. Particularly, the hearings were conducted pursuant to the privilege speech of Sen. Hontiveros regarding the escape of Alice Guo or Guo Hua Ping where she also met Ong, with the view of determining measures pertaining to passports and other related matters. Further, the invitations and <i>subpoena</i> issued to Ong were conducted pursuant to the various Senate resolutions of Sen. Poe and Sen. Gatchalian. It contends that the authority of Congress to make laws extends to the responsibility of overseeing their implementation, in order to assess if they were executed accordingly, and to determine if necessary amendments are needed.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The Senate Tricomm further avers that the hearings were conducted in accordance with duly published rules of procedure. More, the constitutional rights of Ong were accorded respect, as in fact the transcripts showed that the senators displayed cordial behavior, and it was Ong who was not showing sufficient respect for the proceedings in view of her disrespectful answers to the questions. Further, Ong was informed of the subject matter of the inquiry prior to her attendance. It argues that Ong's invocation of the right to remain silent is misplaced as she cannot merely invoke her right to remain silent only from the mere assumption that answering would violate her right against selfÂ­-incrimination. For the inquiry to be valid, Congress needed only to show that the question is "pertinent to the matter under inquiry."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Finally, the Senate Tricomm argues that Ong is not entitled to a TRO or preliminary injunction as "[t]here [was] no material or substantial invasion of her rights."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br><i>Comment filed by the HOR Quadcomm</i><br><br>The HOR Quadcomm, through the Office of the Solicitor General (OSG), filed its Comment.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>It narrates that the House Committee on Public Order and Safety and the Committee on Games and Amusements initially conducted a <i>motu proprio</i> inquiry in aid of legislation into the unlawful activities linked to POGOs, with a view to recommending corrective measures. In connection with this, Ong was invited as resource person during the hearings on July 23, July 31, and August 7, 2024, but she did not attend.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>Then, the HOR adopted House Resolution No. 1880<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> authorizing the HOR Quadcomm to jointly conduct investigation in relation to, among others, the illegal activities related to POGOs.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br>&nbsp;<br>Ong was again invited as a resource person for the hearing on August 16, 2024,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> but she failed to appear without providing any reason for her absence.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Hence, the HOR Quadcomm issued a Contempt Order,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> citing her in contempt for refusal to obey summons without legal excuse and ordered her detention.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Ong was subsequently arrested in Indonesia and was returned to the Philippines. On August 26, 2024, the NBI turned over her custody to the HOR, which then ordered her detention at the Correctional Institute for Women, Mandaluyong City. On August 28, 2024, she appeared during the HOR Quadcomm hearing, but earlier expressed her refusal to testify in a letter addressed to the HOR Quadcomm. During the hearing, she invoked her right to remain silent and right against self-incrimination, which led to her being cited in contempt by the HOR Quadcomm. She later responded to the queries, leading to the lifting of this contempt order, although the contempt order issued prior to this hearing was still in effect.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>On September 4, 2024, Ong appeared before the HOR Quadcomm, but the hearing was interrupted when she was rushed to the hospital.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>The HOR Quadcomm argues that the instant Petition violated the doctrine of hierarchy of courts, and Ong failed to specifically point out which of the exceptions apply to her case.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>The HOR Quadcomm also contends that the instant Petition raised factual questions which should have been first brought before courts a quo instead of directly with this Court. It points out that the statement in the instant Petition that Ong will endeavor to present evidence at a future time is an admission that it raises factual issues.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Further, the HOR Quadcomm notes that Ong failed to allege the details that led to her being cited in contempt, or the instances when she invoked the right to remain silent and right against self-incrimination during the inquiries, and as such, failed to present an actual case or controversy for this Court to resolve. Ong also did not allege the questions asked of her where she invoked her right against self-incrimination, or attach a copy of the transcript to point out the specific questions where her rights have supposedly been violated.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br>&nbsp;<br>As to the video recordings attached by Ong to the instant Petition, the HOR Quadcomm counters that these footages were not properly authenticated, and at any rate, are incomplete and inaccurate representation of the proceedings. Also, these are factual matters that require trial.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>The HOR Quadcomm also argues that it has the power to cite individuals in contempt. It points out that Ong did not assail the power of Congress to conduct the inquiries in aid of legislation and did not question the reason why she was summoned to the inquiries.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>Also, in conducting these inquiries, Ong's due process rights were respected. Ong failed to cite any portion of the inquiries where she was deprived of her right to be heard. Notably, she was even invited by the HOR Quadcomm to an executive session where she would be given an opportunity to answer all the questions that she refused to answer.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>More, Ong's argument that the rights of a person under custodial investigation are applicable to inquiries in aid of legislation is misplaced. She has no blanket right to refuse to answer or testify completely. The proceedings are not in the nature of custodial investigations. As such, the rights invoked by Ong do not apply in the subject inquiries.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>At any rate, the HOR Quadcomm argues that Ong failed to point out which questions exposed her to criminal prosecution or liability to support her general allegations that the questions were incriminatory.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Also, contrary to Ong's allegations, she was not deprived of her right to counsel. During the hearing, her counsel can be heard dictating to her each time a question was asked, and despite warning from the committee, her counsel was never removed from the hearing room.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Finally, the HOR Quadcomm avers that the conduct of oral arguments is unnecessary, as this Court is not a trier of facts and petitioner has the duty to allege facts with certainty and submit all relevant documents to the Petition. As such, conducting oral arguments to make up for the admitted lack of thoroughness in the instant Petition should not be allowed.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br><i>After Filing of the Petition and Comments</i><br><br>In the meantime, Ong was detained at the Correctional Institute for Women in Mandaluyong City since September 25, 2024.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>On February 27, 2025, the HOR Quadcomm filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> informing this Court that on December 12, 2024, it issued the Lifting of Contempt and Detention Orders<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> and the Release Order<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> in favor of Ong after the proper medical examination.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>On December 16, 2024, Ong underwent the prescribed medical examination, after which the HOR issued a Medical Certificate<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> stating that Ong had "essentially normal physical examination findings at the time."<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Then, Ong was released from the custody of the HOR.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>The sole issue for this Court's resolution is whether to grant the Petition for <i>Certiorari</i> and Prohibition filed by petitioner Ong.<br><br><center><b>This Court's Ruling</b></center><br>The instant Petition should be dismissed, and the other reliefs sought should be denied.<br><br>To begin, petitioner failed to justify her direct resort with this Court. The doctrine of hierarchy of courts provides that "although this Court, the CA, and the RTC have concurrent original jurisdiction over petitions for <i>certiorari, prohibition, mandamus, quo warranto</i>, and <i>habeas corpus</i>, parties are directed, as a rule, to file their petitions before the lower-ranked court. Failure to comply is sufficient cause for the dismissal of the petition."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> There are several recognized exceptions to this rule:<blockquote>(1) when there are genuine issues of constitutionality that must be addressed at the most immediate time;<br>(2) when the issues involved are of transcendental importance;<br>(3) cases of first impression;<br>(4) the constitutional issues raised are better decided by the Court;<br>(5) exigency in certain situations;<br>(6) the filed petition reviews the act of a constitutional organ;<br>(7) when petitioners rightly claim that they had no other plain, speedy, and adequate remedy in the ordinary course of law that could free them from the injurious effects of respondents' acts in violation of their right to freedom of expression; [and]<br>(8) the petition includes questions that are "dictated by public welfare and the advancement of public policy, or demanded by the broader interest of justice, or the orders complained of were found to be patent nullities, or the appeal was considered as clearly an inappropriate remedy."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></blockquote>The instant Petition quotes the first, second, third, fourth, seventh, and eighth exceptions without specifying how any of those exceptions actually apply to the instant case. On this score alone, petitioner's invocation of the exceptions to the doctrine of hierarchy of courts is unconvincing.<br><br>This Court has previously ruled that invocation of transcendental importance as an exception to the doctrine of hierarchy of courts requires that "the resolution of factual issues was not necessary for the resolution of the constitutional issue/s" and that "there were no disputed facts and the issues involved were ones of law."<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Here, notably, petitioner failed to allege which questions implicated the rights that she alleges were violated by the legislative inquiries. In resolving an argument of whether an exception to the doctrine of hierarchy of courts is present, this Court remarked that "without clear and specific allegations of facts, the Court cannot rule on the rights and obligations of the parties. [. . .] This is more apparent in petitions which require resolution of factual issues that are indispensable for the cases' proper disposition."<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>Thus, for failure to comply with the doctrine of hierarchy of courts and the insufficient invocation of any of its recognized exceptions, the instant Petition is already dismissible.<br><br>Even on the merits, the instant Petition should be dismissed. This Court finds that petitioner's main arguments invoking her right to remain silent, right against self-incrimination, and right to counsel, are untenable.<br><br>The power of the Legislature to conduct inquiries in aid of legislation has consistently been affirmed by this Court. In <i>Ong v. Senate of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> We stated that "[t]he Legislature's power of inquiry, being broad, encompasses everything that concerns the administration of existing laws as well as proposed or possibly needed statutes."<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>This power, which was implied in the 1935 and 1973 Constitutions, was made express in Article VI, Section 21 of the 1987 Constitution, as follows:<blockquote>Section 21. The Senate or the House of Representatives or any of its respective committees may conduct inquiries in aid of legislation in accordance with its duly published rules of procedure. The rights of persons appearing in or affected by such inquiries shall be respected.</blockquote>Jurisprudence confirms that this power is available to the Senate and HOR, including their respective committees.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>In relation to this, the power of the Legislature to cite a person in contempt is impliedly granted in the 1987 Constitution, as it is an inherent power that arises by implication in order to allow the Legislature to perform its duties effectively.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> This Court has also affirmed the implicit power of the Legislature to arrest a witness, as it is "necessary to carry out the coercive process of compelling attendance, testimony, and production of documents relevant and material in a legislative inquiry."<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>The power of the Legislature to conduct inquiries in aid of legislation and the concomitant powers discussed above shall be subject to the following limitations: (1) the inquiry must be "in aid of legislation;" (2) the inquiry must be conducted in accordance with its duly published rules of procedure; and (3) the rights of persons appearing in or affected by such inquiries shall be respected.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>Here, without challenging the validity of the inquiry being conducted, petitioner invokes the right to remain silent, right against self-incrimination, and her right to counsel. This position is erroneous.<br><br>In <i>In re Sabio v. Senator Gordon</i>,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> this Court emphasized that the right against self-incrimination may be invoked only when the incriminating question is asked:<blockquote>Anent the right against self-incrimination, it must be emphasized that this "right maybe invoked by the said directors and officers of Philcomsat Holdings Corporation only when the incriminating question is being asked, since they have no way of knowing in advance the nature or effect of the questions to be asked of them." That this right may possibly be violated or abused is no ground for denying respondent Senate Committees their power of inquiry. The consolation is that when this power is abused, such issue may be presented before the courts[.]<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Citation omitted)</blockquote>Here, it appears that petitioner broadly invokes her right against self-Â­incrimination as she posits that the proceedings with the respondents are in the nature of a custodial investigation. Petitioner is mistaken.<br><br>In <i>Standard Chartered Bank v. Senate Committee on Banks</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> this Court emphasized that resource persons or witnesses in a legislative inquiry are not accused in a criminal proceeding:<blockquote>As regards the issue of self-incrimination, the petitioners, officers of SCB-Philippines, are not being indicted as accused in a criminal proceeding. They were summoned by respondent merely as resource persons, or as witnesses, in a legislative inquiry. As distinguished by this Court â<blockquote>An accused occupies a different tier of protection from an ordinary witness. Whereas an ordinary witness may be compelled to take the witness stand and claim the privilege as each question requiring an incriminating answer is shot at him, an accused may altogether refuse to take the witness stand and refuse to answer any and all questions.</blockquote>Concededly, this right of the accused against self-incrimination is extended to respondents in administrative investigations that partake of the nature of or are analogous to criminal proceedings. The privilege has consistently been held to extend to all proceedings sanctioned by law; and to all cases in which punishment is sought to be visited upon a witness, whether a party or not.<br><br>However, in this case, petitioners neither stand as accused in a criminal case nor will they be subjected by the respondent to any penalty by reason of their testimonies. Hence, they cannot altogether decline appearing before respondent, although they may invoke the privilege when a question calling for an incriminating answer is propounded.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> (Citations omitted)</blockquote>Thus, it is clear that the right against self-incrimination may only be invoked in legislative inquiry when a specific question implicating such right is propounded.<br><br>Here, as pointed out by respondent HOR Quadcomm, petitioner broadly invokes the right against self-incrimination without specifying which questions called for an incriminating answer. Video recordings of the purported portions of the hearing in a storage device were made to the instant Petition, but these are unverified and unauthenticated. Petitioner also admits the lack of contextualization of these video recordings as she undertook to file a supplemental petition to purportedly explain the context of these video recordings in relation to the arguments in the instant Petition.<br><br>Meanwhile, this Court has previously stated that "[t]he right to be assisted by counsel can only be invoked by a person under custodial investigation suspected for the commission of a crime and, therefore, attaches only during such custodial investigation."<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Thus, We have ruled that persons who were invited as resource persons to a legislative inquiry cannot invoke their right to counsel.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br>Likewise, there is no merit in the issuance of a TRO or writ of preliminary injunction, as the bare allegations of the instant Petition failed to establish a <i>prima facie</i> evidence to warrant such relief.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>Petitioner's prayer for the conduct of oral arguments should also be denied, as the relevant arguments raised in the pleadings were already sufficiently passed upon by this Court as discussed above.<br><br><b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> and Prohibition is <b>DISMISSED</b>. The prayer for the issuance of a temporary restraining order and/or writ of preliminary injunction and the Motion to Set the Case for Oral Arguments are <b>DENIED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, M. Lopez, Gaerlan, Rosario, Dimaampao, Marquez</i>, and <i>Kho, Jr., JJ.</i>, concur.<br><i>Leonen</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>SAJ.</i>, on official leave.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The Philippine Immigration Act of 1940.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Penalizing Obstruction of Apprehension and Prosecution of Criminal Offenders (1981).<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, pp. 9-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 32-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 11, 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 10, 11, 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 11-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 12-17<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 17-18, 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 55-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 55, 63-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 97-140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 98, 141-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 99, 149-151.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 99, 152-154.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 99, 155-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 99-100, 158-160.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 100, 161-163.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 101, 164-166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 101, 167.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 101-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 103-104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 106-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 112-115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 115-122, 125-126, 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 172-228.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 175, 229-231.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 232-233.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 176.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 177.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 237-238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 177.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> 177-178.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 178.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 182-184.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 184-189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 193-195.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 195-196.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 198-200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 201-202.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 202-206, 209-210.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 211-212.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 212.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 217-219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 261.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 248-256.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 257-258.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 259-260.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 249.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 262.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 249, 260.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>GIOS-SAMAR, Inc. v. Dept. of Transportation and Communications</b>, 849 Phil. 120, 167 (2019) [Per J. Jardeleza, <i>En Banc</i>]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 172-173, <i>citing</i> <b>The Diocese of Bacolod v. Commission on Elections</b>, 751 Phil. 301, 331-335 (2015) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>GIOS-SAMAR, Inc. v. Dept. of Transportation and Communications</b>, 849 Phil. 120, 175-176 (2019) [Per J. Jardeleza, <i>En Banc</i>]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Bayyo Association. Inc. v. Tugade</b>, 944 Phil. 316, 334 (2023) [Per J. Singh, <i>En Banc</i>]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 938 Phil. 929 (2023) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 944. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 946.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 946-947.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 947<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 949.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> 533 Phil. 687 (2006) [Per J. Sandoval-Gutierrez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 717.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 565 Phil. 744 (2007) [Per J. Nachura, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 763-764.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Philcomsat Holdings Corp. v. Senate</b>, 688 Phil. 260, 265 (2012) [Per J. Perlas-Bernabe, <i>En Banc</i>]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>See</i> <b>Heirs of Kukungan Timbao v. Enojado</b>, 945 Phil. 42, 67 (2023) [Per C.J. Gesmundo, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

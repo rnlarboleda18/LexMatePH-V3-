@@ -2,7 +2,145 @@
  * IndexedDB / codex cache buster: bump when `/api/codex/versions` article body shape changes
  * so `lexCache.swr('codals', …)` does not keep serving stale `content_md` after deploy.
  */
-export const CODAL_LEXCACHE_REVISION = '_codexfmt3';
+export const CODAL_LEXCACHE_REVISION = '_codexfmt8';
+
+/**
+ * E-Library / bad exports sometimes emit one table header cell per line (`| Name` only has one `|`).
+ * `shieldGfmTables` and remark-gfm then skip those lines, so the underscore row becomes the table header.
+ * Merge those rows into a single GFM header row (and repair similar 5-column subscriber headers).
+ */
+export function repairRccBrokenIncorporatorPipeHeaders(md) {
+    if (md == null || md === '') return md;
+    let t = String(md).replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+    // 3-column: one pipe per line
+    t = t.replace(
+        /(^|\n)\|\s*Name\s*\n\|\s*Nationality\s*\n\|\s*Residence\s*(?=\n\|)/g,
+        '$1| Name | Nationality | Residence |',
+    );
+
+    // 5-column subscriber block (split cells)
+    t = t.replace(
+        /(^|\n)\|\s*Name of Subscriber\s*\n\|\s*Nationality\s*\n\|\s*No\.\s*of Shares Subscribed\s*\n\|\s*Amount Subscribed\s*\n\|\s*Amount Paid\s*(?=\n\|)/gi,
+        '$1| Name of Subscriber | Nationality | No. of Shares Subscribed | Amount Subscribed | Amount Paid |',
+    );
+
+    // Floating labels (no leading pipes) immediately before a 3-column pipe row (not already fixed)
+    t = t.replace(
+        /(^|\n)Name\s*\n\s*Nationality\s*\n\s*Residence\s*\n\s*(?!\|\s*Name\s*\|)(?=\|[^\n]+\|[^\n]+\|[^\n]+\n\|)/gm,
+        '$1| Name | Nationality | Residence |\n| --- | --- | --- |\n',
+    );
+
+    // IN WITNESS: year placeholder sometimes rendered as "20 in the" after HTML strip
+    t = t.replace(/(IN WITNESS WHEREOF[^\n]+?)(\b20)\s+(in the City\/Municipality)/gi, '$1$2____ $3');
+
+    return t;
+}
+
+/**
+ * GFM pipe tables must not have blank lines between rows. Ingested sources sometimes insert
+ * an extra newline between the header row and the `|---|` row (or between body rows), which
+ * breaks remark-gfm table parsing.
+ */
+export function collapseBlankLinesInPipeTables(md) {
+    if (md == null || md === '') return md;
+    const lines = String(md).replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+    const isPipeRow = (line) => {
+        const t = String(line).trim();
+        return t.startsWith('|') && (t.match(/\|/g) || []).length >= 2;
+    };
+    const out = [];
+    let i = 0;
+    while (i < lines.length) {
+        if (!isPipeRow(lines[i])) {
+            out.push(lines[i]);
+            i++;
+            continue;
+        }
+        while (i < lines.length && isPipeRow(lines[i])) {
+            out.push(lines[i]);
+            i++;
+        }
+        if (i < lines.length && lines[i].trim() === '') {
+            let j = i;
+            while (j < lines.length && lines[j].trim() === '') j++;
+            if (j < lines.length && isPipeRow(lines[j])) {
+                i = j;
+                continue;
+            }
+        }
+    }
+    return out.join('\n');
+}
+
+/**
+ * GFM pipe tables use single newlines between rows. ArticleNode's enumeration preprocessor
+ * inserts `\n\n` before markers like `(a)` or `2.` — that can split a table across "paragraph"
+ * segments so remark-gfm never sees a valid table (pipes render as plain text).
+ *
+ * Replace each contiguous pipe-table block with a one-line placeholder, run preprocessors,
+ * then restore placeholders.
+ */
+export function shieldGfmTables(md) {
+    if (md == null || md === '') {
+        return { protectedText: md, restore: (s) => s };
+    }
+    const text = collapseBlankLinesInPipeTables(String(md).replace(/\r\n/g, '\n').replace(/\r/g, '\n'));
+    const lines = text.split('\n');
+    const tables = [];
+    const out = [];
+    let i = 0;
+    /** Lenient: many DB rows omit the trailing `|`; still treat as a GFM table row. */
+    const isPipeTableLine = (line) => {
+        const t = line.trim();
+        if (!t.startsWith('|')) return false;
+        const pipes = (t.match(/\|/g) || []).length;
+        if (pipes >= 2) return true;
+        // One leading pipe, rest is cell text (e.g. "| Name" from broken SC exports)
+        return pipes === 1 && /\|\s*\S/.test(t);
+    };
+    while (i < lines.length) {
+        const raw = lines[i];
+        if (isPipeTableLine(raw)) {
+            const block = [];
+            let j = i;
+            while (j < lines.length) {
+                const L = lines[j];
+                if (L.trim() === '') {
+                    let k = j + 1;
+                    while (k < lines.length && lines[k].trim() === '') k++;
+                    if (k < lines.length && isPipeTableLine(lines[k])) {
+                        j = k;
+                        continue;
+                    }
+                    break;
+                }
+                if (!isPipeTableLine(L)) break;
+                block.push(L);
+                j++;
+            }
+            if (block.length >= 2) {
+                tables.push(block.join('\n'));
+                out.push(`\uFFF1GFMTBL${tables.length - 1}\uFFF2`);
+                i = j;
+                continue;
+            }
+        }
+        out.push(raw);
+        i++;
+    }
+    const protectedText = out.join('\n');
+    const restore = (s) => {
+        if (s == null) return s;
+        let t = String(s);
+        for (let idx = 0; idx < tables.length; idx++) {
+            const ph = `\uFFF1GFMTBL${idx}\uFFF2`;
+            t = t.split(ph).join(tables[idx]);
+        }
+        return t;
+    };
+    return { protectedText, restore };
+}
 
 /**
  * Legacy `/api/codex/versions` rows embedded "## Book…" / "## Title…" plus `Article N.`
@@ -17,7 +155,7 @@ export function stripLegacyCodexArticleRunIn(contentMd, articleNum) {
     const escapedNum = String(articleNum).trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
     const leadBlock = new RegExp(
-        '^\\s*Article\\s+' +
+        '^\\s*(?:Article|Section)\\s+' +
             escapedNum +
             '\\.\\s*' +
             '(?:\\*\\*[^*]+?\\*\\*\\s*-\\s*)?' +
@@ -26,7 +164,7 @@ export function stripLegacyCodexArticleRunIn(contentMd, articleNum) {
     );
     let out = md.replace(leadBlock, '').trimStart();
 
-    const dupLead = new RegExp('^\\s*Article\\s+' + escapedNum + '\\.\\s+', 'i');
+    const dupLead = new RegExp('^\\s*(?:Article|Section)\\s+' + escapedNum + '\\.\\s+', 'i');
     for (let i = 0; i < 4 && dupLead.test(out); i++) {
         out = out.replace(dupLead, '').trimStart();
     }

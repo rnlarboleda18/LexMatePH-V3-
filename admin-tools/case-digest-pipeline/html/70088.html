@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 264003 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ARTEMIO QUE CHAN, ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70088' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 264003, July 14, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ARTEMIO QUE CHAN, ACCUSED-APPELLANT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is an Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> which assails the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 26, 2022, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated October 24, 2022, of the Seventh Division, Sandiganbayan in SB-18-CRM-0537 that found Mayor Artemio Que Chan (accused-appellant) guilty beyond reasonable doubt of the crime of Falsification of Public Document defined and penalized under Article 171, paragraph 2 of the Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p align="center"> <i>The Antecedents</i> </p><blockquote> <table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="6%"><div align="justify"><em>I.</em></div></td> <td width="94%"><div align="justify"><em>SB-18-CRM-0537 in<br> the Sandiganbayan</em></div></td> </tr> </tbody></table> </blockquote> <p>Accused-appellant, in his official capacity as the Municipal Mayor of Pozorrubio, Pangasinan, was indicted for Falsification of Public Document. The accusatory portion of the Information<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated April 25, 2018, is as follows: </p> <blockquote> <p> That on March 26, 2015, or sometime prior or subsequent thereto, in Pozorrubio, Pangasinan, Philippines, and within the jurisdiction of this Honorable Court, accused Artemio Que Chan, a public officer, being the Mayor of Pozorrubio, Pangasinan, taking advantage of his official position and committing the crime herein charged in relation to his office, did then and there willfully, unlawfully, and feloniously falsify the Certificate of Marriage, a public document, by causing it to appear that he solemnized the marriage of Andy D. Dela Rosa and Mary Jane H. Jovellanos on March 26, 2015[,] at the Office of the Municipal Mayor of Pozorrubio, when in truth and in fact, it was Kelvin Tong Chan who officiated the marriage ceremony. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p> </blockquote> <p> Upon arraignment, petitioner entered a plea of "Not Guilty" to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> Trial ensued.</p><p> During the pre-trial, among others, the parties made the following stipulations: <i>(1)</i> that accused-appellant was the Municipal Mayor of Pozorrubio, Pangasinan; <i>(2)</i> that he admitted the existence, authenticity, and due execution of the Certificate of Marriage<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> of Andy Siapno Dela Rosa (Andy) and Mary Jane Hugo Jovellanos (Mary Jane) (collectively, the contracting parties); <i>(3)</i> that the contracting parties were married on March 26, 2015, at the Municipal Hall of Pozorrubio, Pangasinan; <i>(4)</i> that in the contracting parties' Certificate of Marriage which was registered in the Office of the Civil Registrar General, accused-appellant stated that he solemnized the marriage; <i>(5)</i> that accused-appellant signed both the Certification of the Solemnizing Officer and the Affidavit of Solemnizing Officer contained in the marriage certificate; <i>(6)</i> that the accused-appellant admitted the authenticity and genuineness of his signatures on the Certificate of Marriage and the Affidavit of Solemnizing Officer contained in the marriage certificate; and <i>(7)</i> that the Affidavit of Solemnizing Officer was subscribed and sworn to before the Municipal Registrar of Pozorrubio, Pangasinan, Rolando T. Igoy, on March 26, 2015.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p align="center"> <i>Version of the Prosecution</i> </p><p> On March 26, 2015, the contracting parties were scheduled to be married in a civil ceremony at the Municipal Hall of Pozorrubio, Pangasinan. The following were present during the ceremony: Jesus De Leon (Jesus),<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> a close relative and a municipal employee; Councilor Miguel Abalos (Councilor Miguel),<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> principal sponsor and witness; and witnesses Cesario Layos, Josie Ferrer, Raul Lambino,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Gilda Ligot, Manny Oligan, Evelyn Villafania, Joel Gamboa, Jovelito Catungal, Dante De Vera, Rosalinda Bustillo, Jesus De Leon, Editha Pasalo, Tita Lucas, Frudencio Fernandez, and Marissa Cruz.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> Before the start of the ceremony, the staff from accused-appellant's office made the witnesses sign the Certificate of Marriage. Thereafter, Vice-Mayor Kelvin T. Chan (VM Chan) arrived and announced that he would officiate the wedding as a representative of his father, herein accused-appellant. However, accused-appellant signed the space provided for the solemnizing officer in the official copy of the subject Certificate of Marriage.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> One of the principal sponsors, Jesus, testified that while they were waiting for accused-appellant's arrival, the Office of the Mayor staff asked him and the other principal sponsors to sign the Certificate of Marriage; they obliged. According to him, VM Chan arrived and officiated the wedding ceremony, as evidenced by a photograph showing the former acting as the solemnizing officer.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Another principal sponsor, Councilor Miguel, corroborated Jesus' testimony. According to him, an employee from the Office of the Mayor asked him to sign the Certificate of Marriage as a principal witness. During the ceremony, accused-appellant did not appear. Instead, VM Chan officiated the ceremony.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p align="center"> <i>Version of the Defense</i> </p><p> Accused-appellant initially filed a Motion to File Demurrer to Evidence with Leave of Court. However, the Sandiganbayan denied it and directed him to present his evidence in defense.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> He narrated as follows: </p><p> On March 26, 2015, accused-appellant reported for work, and his staff reminded him about the scheduled wedding ceremony. Before the start of the ceremony, he received a call about a medical emergency concerning his mother. Immediately, he informed the contracting parties of his situation and asked them if he could solemnize the wedding immediately. The contracting parties agreed, and the ceremony was conducted. He signed the Marriage Certificate in the presence of the contracting parties, his staff, and VM Chan. As he was about to leave, the contracting parties requested a simple wedding ceremony as their relatives and sponsors started to arrive. However, he apologized and said that he had already performed the wedding ceremony. At that point, he excused himself and left the Municipal Hall.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> Accused-appellant admitted that he officiated some marriages without witnesses when he was in a hurry. Furthermore, he cannot confirm whether the names of the witnesses stated in the subject Marriage Certificate were the same individuals who appeared before him. If there were no rush, he would officiate the wedding ceremony for about 20 to 35 minutes; if he were in a hurry, it would take around 10 minutes.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> VM Chan corroborated his father's testimony. On March 26, 2015, he visited accused-appellant at his office to ask about the status of his (VM Chan) grandmother. Thereat, he saw accused-appellant in the act of solemnizing a marriage. He heard him ask the contracting parties if they took each other as husband and wife; they answered in the affirmative. Thereafter, accused-appellant informed them that he would have to leave soon because of an emergency. As soon as the guests arrived, the contracting parties requested a wedding ceremony from accused-appellant. Accused-appellant declined because he had already solemnized the marriage. Instead, VM Chan performed an informal ceremony in front of the guests.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> Lastly, VM Chan acknowledged that he signed the Joint Counter-Affidavit<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated September 21, 2016, where he admitted that he solemnized the marriage of the contracting parties in good faith.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><blockquote> <table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="6%"><em>II.</em></td> <td width="94%"><em>OMB-L-A-16-0389 in <br> the Ombudsman </em></td> </tr> </tbody></table> </blockquote> <p>Meanwhile, in a Decision<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated August 24, 2017, the Office of the Ombudsman found the accused-appellant and VM Chan liable for Simple Dishonesty and Simple Misconduct, respectively, in OMB-L-A-16-0389. The Office of the Ombudsman suspended them from office without pay for three months. Thus: </p> <blockquote> <p> WHEREFORE, finding substantial evidence, respondent Artemio Que Chan is found administratively liable for Simple Dishonesty for which he is meted the penalty of SUSPENSION FROM OFFICE WITHOUT PAY FOR THREE MONTHS; and respondent Kelvin Tong Chan is found administratively liable for Simple Misconduct for which he is meted the penalty of SUSPENSION FROM OFFICE WITHOUT PAY FOR THREE MONTHS, pursuant to Section 10, Rule III, Administrative Order No. 07, as amended by Administrative Order No. 17, in relation to Section 25 of Republic Act No. 6770. </p> <p> In case the penalty of Suspension can no longer be enforced due to respondents' separation from the service, the penalty shall be converted into a FINE equivalent to respondents' respective salaries for Three Months payable to the Office of the Ombudsman, and may be deducted from respondents' retirement benefits, accrued leave credits, or any receivables from their office. </p> <p> The Honorable Secretary, Department of Interior and Local Government, is hereby directed to implement this Decision immediately upon receipt thereof pursuant to Section 7, Rule III of Administrative Order No. 07, as amended by Administrative Order No. 17 (Ombudsman Rules of Procedure) in relation to Memorandum Circular No. 1, series of 2006 dated 11 April 2006, and to promptly inform this Office of the action taken thereon. </p> <p> The charges for Grave Misconduct, Serious Dishonesty, and Conduct Prejudicial to the Best Interest of the Service are DISMISSED. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p> </blockquote> <p> Aggrieved, the contracting partiesâAndy and Mary Janeâfiled a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated January 11, 2018. </p><p> In its Order<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated March 14, 2018, the Ombudsman granted the Motion and reversed its earlier Decision. Accordingly, it ordered the dismissal of the accused-appellant from the service and the suspension of VM Chan for one year, viz.: </p><blockquote> <p> WHEREFORE, the Motion for Reconsideration filed by complainants Andy S. Dela Rosa and Mary Jane H. Jovellanos is GRANTED and the Decision dated August 24, 2017 and approved on October 25, 2017 is SET ASIDE. </p> <p> Respondent Artemio Q. Chan is found liable for Serious Dishonesty for which he is meted the penalty of DISMISSAL FROM THE SERVICE with cancellation of eligibility, forfeiture of retirement benefits and perpetual disqualification for re-employment in the Government Service pursuant to Section 10, Rule III, Administrative Order No. 07, as amended by Administrative Order No. 17, in relation to Section 25 of Republic Act No. 6770. </p> <p> In case the penalty of Dismissal can no longer be enforced due to respondent's separation from the service, the penalty shall be converted into a FINE equivalent to respondent's salary for one (1) year payable to the Office of the Ombudsman, and may be deducted from respondent's retirement benefits, accrued leave credits, or any receivables from [his] office. The accessory penalties attached to the principal penalty of Dismissal shall continue to be imposed. </p> <p> Respondent Kelvin Tong Chan is found administratively liable for Conduct Prejudicial to the Best Interest of the Service and Simple Misconduct for which he is meted the penalty of SUSPENSION FROM OFFICE WITHOUT PAY FOR ONE YEAR, pursuant to Section 10, Rule III, Administrative Order No. 07, as amended by Administrative Order No. 17, in relation to Section 25 of Republic Act No. 6770. </p> <p> In case the penalty of Suspension can no longer be enforced due to respondent's separation from the service, the penalty shall be converted into a FINE equivalent to respondent's salary for six (6) months payable to the Office of the Ombudsman, and may be deducted from respondent's retirement benefits, accrued leave credits, or any receivables from his office. </p> <p> The Honorable Secretary, Department of Interior and Local Government, is hereby directed to implement this ORDER immediately upon receipt thereof pursuant to Section 7, Rule III of Administrative Order No. 07, as amended by Administrative Order No. 17 (Ombudsman Rules of Procedure) in relation to Memorandum Circular No. 1, series of 2006 dated 11 April 2006 and to promptly inform this Office of the action taken hereon. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p> </blockquote> <p> Aggrieved, only accused-appellant filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> which the Ombudsman partially granted in its Order<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated December 1, 2021. It decreed as follows: </p><blockquote> <p> WHEREFORE, premises considered, the Motion for Reconsideration filed by respondent Artemio Que Chan is PARTIALLY GRANTED and the Order dated 14 March 2018 is MODIFIED. Respondent Artemio Que Chan is found liable for Simple Dishonesty and meted the penalty of SUSPENSION FROM THE SERVICE FOR THREE (3) MONTHS WITHOUT PAY. </p> <p> It is noted that respondent-movant has fully served the said penalty of Suspension pursuant to this Office's Decision dated 24 August 2017 from 27 February 2018 to 27 May 2018 and reassumed his office on 28 May 2018 as reflected in his Service Record and submitted Compliance Report from the Department of Interior and Local Government issued on 28 May 2018. Thus, the penalty of SUSPENSION FROM THE SERVICE FOR THREE (3) MONTHS WITHOUT PAY imposed against respondent Artemio Que Chan has been FULLY COMPLIED. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p> </blockquote> <p> In fine, accused-appellant, as discussed above was charged with Falsification of Public Documents under Article 171, paragraph 2, of the Revised Penal Code before the Sandiganbayan in SB-18-CRM-0537. </p><p> Ultimately, the prosecution contended that accused-appellant provided inconsistent statements about his involvement in the wedding ceremony. In particular, in his Joint Counter-Affidavit, he alleged that VM Chan represented him during the wedding of the contracting parties due to an emergency involving his mother. However, he subsequently retracted this statement and asserted that he was the one who officiated the marriage. Additionally, two witnesses for the prosecution positively identified VM Chan as the individual who officiated the wedding.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> In his defense, accused-appellant asserted that he indeed officiated the marriage of the contracting parties but had to leave due to a medical emergency. He averred that VM Chan conducted a subsequent, purely ceremonial wedding after his exit. He also raised concerns about the reliability of the photographs submitted as evidence. He contended that they were not adequately authenticated; they do not capture the actual solemnization, and essential witnesses were absent from them.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p align="center"> <i>The Ruling of the Sandiganbayan</i> </p><p> In the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated August 26, 2022, the Sandiganbayan found accused-appellant guilty beyond reasonable doubt of the crime charged, the dispositive portion of which states: </p><blockquote> <p> WHEREFORE, in view of the foregoing, Accused ARTEMIO QUE CHAN is found GUILTY beyond reasonable doubt of the crime of Falsification of Public Document defined and penalized under Article 171, paragraph 2 of the Revised Penal Code and is imposed an indeterminate penalty of TWO (2) YEARS, FOUR (4) MONTHS, and ONE (1) DAY of <i>prision correccional</i> as minimum to EIGHT (8) YEARS AND ONE (1) DAY of <i>prision mayor</i> as maximum. The accessory penalties of temporary absolute disqualification for public office and that of perpetual special disqualification from the right of suffrage are likewise imposed. </p> <p> The Accused is likewise directed to pay FINE in the amount of FIVE THOUSAND PESOS ([PHP] 5,000.00). </p> <p> Upon finality of judgment, let copy of this Decision be furnished the Commission on Elections. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p> </blockquote> <p> The Sandiganbayan noted that two of the principal sponsors of the wedding categorically stated that accused-appellant did not solemnize the contracting parties' marriage.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Further, accused-appellant's defense that Jesus and Councilor Miguel were absent when he solemnized the marriage lacked merit. It was contradicted by the contracting parties' Certificate of Marriage, which showed that accused-appellant personally solemnized the marriage in front of the witnesses, including Jesus and Councilor Miguel.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> It also held that accused-appellant was bound by his admissions in his affidavits before the office of the Ombudsman that it was VM Chan who solemnized the contracting parties' marriage.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> The Sandiganbayan partly granted accused-appellant's Motion for Reconsideration in the assailed Resolution<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> dated October 4, 2022. </p><p> Accordingly, the mitigating circumstance of voluntary surrender may be considered in favor of accused-appellant because he voluntarily surrendered to the Pozorrubio Police Station on October 25, 2018, before the implementation of the warrant of arrest earlier issued, as established by the police station's Spot Report on Voluntary Surrender of Wanted Person.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> The <i>fallo</i> of the assailed Resolution states: </p><blockquote> <p> WHEREFORE, in view of the foregoing, the Motion for Reconsideration filed by Accused Artemio Que Chan is DENIED insofar as the prayer for a reversal of judgment is made. However, the prayer for the appreciation of the mitigating circumstance of voluntary surrender to be considered in the application of the penalty is granted. </p> <p> Thus, the Decision finding Accused Que Chan guilty of the violation of Article 171[,] paragraph 2 of the Revised Penal Code is MODIFIED to: </p> <blockquote> <p> WHEREFORE, in view of the foregoing, Accused ARTEMIO QUE CHAN is found GUILTY beyond reasonable doubt of the crime of Falsification of Public Document defined and penalized under Article 171, paragraph 2 of the Revised Penal Code and is imposed an indeterminate penalty of SIX (6) MONTHS AND ONE (1) DAY of <i>prision correccional</i> as minimum to SIX (6) YEARS AND ONE (1) DAY of <i>prision mayor</i> as maximum. The accessory penalties of temporary absolute disqualification for public office and that of perpetual special disqualification from the right of suffrage are likewise imposed. </p> <p> The Accused is likewise directed to pay FINE in the amount of FIVE THOUSAND PESOS ([PHP] 5,000.00). </p> <p> Upon finality of judgment, let copy of this Decision be furnished the Commission on Elections. </p> <p> SO ORDERED. </p> </blockquote> <p>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p> </blockquote> <p> Aggrieved, accused-appellant elevated the matter through this Appeal.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> Accused-appellant insists that the Sandiganbayan erred in convicting him of the crime charged despite the failure of the prosecution to prove his guilt beyond reasonable doubt. While VM Chan admitted that he concluded the contracting parties' marriage, he did not solemnize the same.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p align="center"> <i>The Issue</i> </p><p> The core issue to be resolved in the case is whether the Sandiganbayan erred in finding accused-appellant guilty beyond reasonable doubt of Falsification of Public Document. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> Accused-appellant was charged with Falsification of Public Document under Article 171, paragraph 2 of the Revised Penal Code, alleging that he falsely represented himself as the officiating officer in the marriage of Andy and Mary Jane. According to the prosecution, however, VM Chan officiated the marriage. </p><p> The defense, on the other hand, countered that petitioner performed the legal acts required for the solemnization of the subject marriage while VM Chan merely delivered an informal ceremony. </p><p> The Court <i>acquits</i> accused-appellant on the ground of reasonable doubt. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Solemnization of Marriage under the Family Code</i> </div></td> </tr> </tbody></table> <p>Under Article 3<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> of the Family Code of the Philippines, a valid marriage requires the fulfillment of both essential and formal requisites. The formal requisites are as follows: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%">(1)</td> <td width="95%">The presence of the contracting parties;</td> </tr> <tr> <td>(2)</td> <td>A valid marriage license, except in certain exceptional cases; and</td> </tr> <tr> <td>(3)</td> <td>The marriage must be solemnized by an authorized solemnizing officer.</td> </tr> </tbody></table> </blockquote> <p>In turn, the solemnization of marriage entails the following specific acts by the solemnizing officer: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">The personal appearance of the parties before the solemnizing or the officiating officer;</div></td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify">The personal declaration of consent from each party to take each other as husband or wife; </div></td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td><div align="justify">The declaration by the solemnizing or the officiating officer that the parties are now husband and wife.</div></td> </tr> </tbody></table> </blockquote> <p>The requirements highlight the solemnizing officer's critical function in validating the contracting parties' marriage. Solemnization entails an act performed by an officer with legal authority and responsibility, which <i>cannot</i> be transferred or substituted. The law emphasizes the role of the solemnizing officer in verifying the legality of the marriage, mainly through the process of obtaining the consent of the parties involved. Consent must be unequivocally expressed as the fundamental element of a valid marriage before an authorized official who solemnizes marriages. </p> <p> In this instance, accused-appellant posed the necessary questions regarding consent to the contracting parties and officially proclaimed them as husband and wife following the law. In his Judicial Affidavit<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> June 18, 2021, accused-appellant said: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">7.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td width="90%"><div align="justify">Where were you [M]r. [W]itness on March 26, 2015, around 8:00 AM?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td> <div align="justify">I reported for work at the Municipal's Office in Pozorrubio, Pangasinan. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What happened if any while you were at the Municipal Hall, Mr. witness?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">I was reminded of my schedule for the day, one of which was the scheduled wedding of complainants Andy S. Dela Rosa and Mary Jane H. Jovellanos at 10:00 o'clock in the morning.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">9.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What happened next, Mr. witness?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">Before 10 o'clock in the morning, I received a call from our residence informing me about the medical emergency of my mother, who was 94 years old that time.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">10.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What did you do upon learning of such information about your mother, Mr. witness? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td> <div align="justify">I requested my staff to check whether the parties to be wed at 10 o'clock in the morning were already present so I can solemnize their wedding before I leave the office.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">11.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was the response of your staff, Mr. [W]itness? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">The staff informed me that the parties Andy Dela Rosa and Mary Jane H. Jovellanos were already at the Municipal Hall.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">12.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What did you do when you learned that they were already at the Municipal Hall, Mr. [W]itness? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">I called for Andy Dela Rosa and Mary Jane H. Jovellanos thru my staff, and explained to them that I have to immediately solemnize their wedding because I urgently need to leave the municipal hall due to my mother's medical condition at that time, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">13.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was the reaction of the parties when you told them that you were going to immediately solemnize their marriage.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">They acceded sir and allowed me to solemnize their marriage in the presence of two (2) witnesses sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">14.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What steps did you undertake after the parties acceded and allowed you to solemnize their marriage, [M]r. [W]itness?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify"><em>I went over their documents attached to the certificate of cohabitation and thereafter, I asked the parties to face each other and to hold each other's hands, after which I asked them if they take each other as husband and wife.</em></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">15.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was their response?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify"><em>They both responded in the affirmative, and so I declared them as husband and wife and signed the Marriage Certificate in their presence</em>.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p>In his Judicial Affidavit<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> dated January 14, 2021, VM Chan corroborated his father's statements as follows: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">6.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td width="90%"><div align="justify">What happened if any while you were at the Municipality, Mr. witness? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">Around 10:00 in the morning, I went to the Mayor's Office at the Municipality of Pozorrubio, Pangasinan to see the Mayor to confirm the information I received about my grandmother, sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">7.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What transpired when you arrived at the Mayor's office, Mr. witness?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">I was not able to immediately approach the Mayor because I saw him solemnizing the marriage of a couple inside his office, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Which part of the marriage ceremony did you witness?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">The mayor asked them if they take each other as husband and wife. And after they both responded in affirmative, the Mayor declared them as husband and wife, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">9.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What happened after the Mayor declared them as husband and wife? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">He told them that he needs to immediately leave the office because of the emergency call pertaining to his 94-year-old ailing mother (my grandmother) but he will sign the Marriage Certificate in their presence before he leaves.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">10.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was the response of the private complainants?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">They requested for a simple ceremony from the Mayor before he left since their relatives and sponsors had already arrived and they were all dressed up for the wedding. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">11.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was the Mayor's reply?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">He explained to them that he already solemnized the wedding and apologized to them for not being able to perform the requested wedding ceremony, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">12.</div></td> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was the reaction of the private complainants, Mr. witness?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A:</div></td> <td><div align="justify">The private complainant requested me to do an informal ceremony instead, since I was there with them and the Mayor was about to leave the Office, sir.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> <p>These steps are<i> sufficient</i> to fulfill the legal act of solemnization as outlined in the Family Code.</p> <p> The Court shall explain. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Insufficiency of the Evidence for Falsification and Presumption of Regularity</i> </div></td> </tr> </tbody></table> <p>The charge of Falsification under Article 171 of the Revised Penal Code requires the prosecution to establish the following elements: (a) that the offender is a public officer, employee, or notary public; (b) that the offender takes advantage of his or her official position; and (c) that the offender falsifies a document by committing any of the acts enumerated under Article 171 of the Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </p><p> Accused-appellant was charged under Article 171, paragraph 2 of the Revised Penal Code, i.e., causing it to appear that persons have participated in any act or proceeding when they did not so participate. This paragraph requires that: (a) the offender is a public officer, employee, or notary public; (b) the offender takes advantage of his official position; (c) the offender caused it to appear in a document that the person/s participated in an act or proceeding; and (d) that the person/s did not participate in the act or proceeding.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> Here, the prosecution <i>failed</i> to prove the <i>second</i>, <i>third</i>, and <i>fourth elements</i>. The Marriage Certificate for the contracting parties shows accused-appellant's name as the officiating or solemnizing officer, as he carried out the necessary acts of solemnization: eliciting consent and proclaiming the parties as husband and wife. </p><p> In our criminal justice system, a significant principle is that the core of a crime lies in the wrongful intent (<i>dolo</i>), which is indispensable for its existence. A person cannot be convicted of falsifying a public document if their actions are made in good faith. <i>Actus non facit reum, nisi mens sit rea</i>âa crime cannot occur if the intent of the individual carrying out the alleged act is innocent.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> Criminal intent, or <i>mens rea</i>, must be demonstrated in felonies committed through <i>dolo</i>, such as falsification. Such intent refers to a mental state which is evidenced by a person's explicit actions. Therefore, the actions of accused-appellant must have indicated, with moral certainty, his intention to distort the truth before the Court can hold him criminally liable. In instances of falsification, the Court has determined that the criminal intent to distort the truth is absent in cases where: (1) the accused did <i>not</i> gain from the falsification; and (2) no harm was inflicted on either the government or a third party.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> The Court explained in one case: </p><blockquote> <p> From the foregoing coupled with the fact that the town of Guindulman suffered no damage and even gained on the project (the cost of the boulders actually delivered was [PHP] 18,285.00 but Murillo was paid only [PHP] 13,455.00) plus the additional fact that the alleged complaining witness mentioned in the informations suffered no damage whatsoever and were in fact awarded no indemnity, it is obvious that the falsifications made by the petitioners were done in good faith; there was no criminal intent. "The maxim is, <i>actus non facit reum, nisi mens rea</i> â a crime is not committed if the mind of the person performing the act complained of be innocent." . . . There can be no conviction for falsification of a public document in the absence of proof that the defendants "maliciously perverted the truth with wrongful intent of injury the complaining witness." . . . Thus the learned Mr. Justice Ramon C. Aquino has said, "there is no falsification of a public document if the acts of the accused are consistent with good faith. Thus, it has been held that 'a conviction for falsification of a public document by a private person will not be sustained when the facts found are consistent with good faith on the part of the accused. In other words, although the accused altered a public document or made a misstatement or erroneous assertion therein, he would not be guilty of falsification as long as he acted in good faith and no one was prejudiced by the alteration or error.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Citations omitted). </p> </blockquote> <p> The lack of malice or deliberate misconduct is essential in this matter. Accused-appellant, as the officiating officer, must have <i>deliberately</i> and <i>knowingly</i> provided false statements or information in the Certificate of Marriage to mislead. In this regard, the prosecution was <i>unsuccessful</i>. The purported inaccurate entries in the contracting parties' Certificate of Marriage are not false. Although the solemnization of the contracting parties' marriage may have been rushed and hurried, this does not mean that accused-appellant did not fulfill his solemn duty as the officiating officer. The entries, created without malice or intentional wrongdoing, do <i>not</i> amount to falsification. They can be considered to possess some degree of truth rather than being a blatant and deliberate lie. </p><p>Although accused-appellant delegated or assigned certain tasks related to the wedding to VM Chan, this does <i>not</i> imply that he falsified the Marriage Certificate for the contracting parties. VM Chan's role in delivering advice to the contracting parties, though a significant part of the marriage ceremony, was merely a <i>symbolical</i> aspect of the event and did <i>not</i> usurp the mayor's legal authority and position. His participation, notably, occurred only <i>after</i> the legally binding solemnization performed by accused-appellant. VM Chan testified: </p><blockquote> <p>PROS. TAN</p> <p>. . . . </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">I've been reading your Affidavit, Sir, and you've stated here in Question and Answer No. 14 â "What transpired after that, Mr. Witness?" </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">You stated: Answer â "<em>I performed a simple informal ceremony in the Municipal Hall but I did not solemnize the wedding of the private Complainants</em>." Is that right?</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, Sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">What do you mean that you did not solemnize the wedding of the private complainants?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Because when I arrived in the Office of the Mayor, I witnessed the part where it was said "I now announce you husband and wife". And when I got there, so when I heard the Mayor saying/declaring them as husband and wife, so the wedding was already finished.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">So that is what you meant when you say you did not solemnize the wedding, that is what you meant?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, sir[.]<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">PROS. TAN</div></td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">Sir Kelvin, you were the one here depicted wearing a checkered shirt?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, Sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">You were also the one talking to the husband and wife here?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, Sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">And to your recollection, what is this informal ceremony comprised of, what did you do in this informal ceremony?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">First of all, I went inside to ask for an apology because the Mayor went ahead, second, I only gave an advice to the newly weds because they requested one from me for an informal ceremony for the picture taking because their parents, guests and sponsors were already there.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">You did ask them if they would take each other as husband and wife or no?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, Sir.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </div></td> </tr> </tbody></table> </blockquote> <p> The Joint Counter-Affidavit filed with the Ombudsman mentioned that the municipal mayor, accused-appellant, had to leave due to an urgent medical emergency involving his 94-year-old mother. Given the emergency, VM Chan took over the proceedings believing that he was acting within his duties and in good faith. It is crucial to emphasize, however, that this Joint Counter-Affidavit was <i>never</i> submitted as part of accused-appellant's judicial affidavit in the Sandiganbayan proceedings. Because it was not formally included, it cannot be the subject of cross-examination and cannot be treated as evidence herein. Any reliance on this document within the Sandiganbayan proceedings would be procedurally unsound. Under the circumstances, the accusations against accused-appellant should be assessed <i>strictly</i> within the framework of evidence that has been properly admitted and subjected to judicial scrutiny by the Sandiganbayan. Rule 115 of the Revised Rules on Criminal Procedure provides: </p> <blockquote> <p> SECTION 1. <i>Rights of accused at the trial</i>. â In all criminal prosecutions, the accused shall be entitled to the following rights: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">To be presumed innocent until the contrary is proved beyond reasonable doubt.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td> <div align="justify">To be informed of the nature and cause of the accusation against him.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td><div align="justify">To be present and defend in person and by counsel at every stage of the proceedings, from arraignment to promulgation of the judgment. The accused may, however, waive his presence at the trial pursuant to the stipulations set forth in his bail, unless his presence is specifically ordered by the court for purposes of identification. The absence of the accused without justifiable cause at the trial of which he had notice shall be considered a waiver of his right to be present thereat. When an accused under custody escapes, he shall be deemed to have waived his right to be present on all subsequent trial dates until custody over him is regained. Upon motion, the accused may be allowed to defend himself in person when it sufficiently appears to the court that he can properly protect his rights without the assistance of counsel.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"><em>(d)</em></div></td> <td><div align="justify"><i>To testify as a witness in his own behalf but subject to cross-examination on matters covered by direct examination. His silence shall not in any manner prejudice him.</i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(e)</div></td> <td><div align="justify">To be exempt from being compelled to be a witness against himself.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(f)</div></td> <td><div align="justify">To confront and cross-examine the witnesses against him at the trial. Either party may utilize as part of its evidence the testimony of a witness who is deceased, out of or cannot with due diligence be found in the Philippines, unavailable, or otherwise unable to testify, given in another case or proceeding, judicial or administrative, involving the same parties and subject matter, the adverse party having the opportunity to cross-examine him.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(g)</div></td> <td><div align="justify">To have compulsory process issued to secure the attendance of witnesses and production of other evidence in his behalf. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(h)</div></td> <td><div align="justify">To have speedy, impartial and public trial.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(i)</div></td> <td><div align="justify">To appeal in all cases allowed and in the manner prescribed by law. (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> </blockquote> <p>In any case, given that accused-appellant facilitated the exchange of consent between the contracting parties, the marriage was validly solemnized before he left, irrespective of any<i> subsequent actions</i> by the vice-mayor. Here, there is no evidence of any intent to deceive or cause harm by accused-appellant. </p> <p> Besides, the Family Code does <i>not</i> dictate a specific and rigid format for conducting a marriage. The Family Code is flexible regarding the format of the marriage ceremonies. Rather, it is essential that the solemnizing officer <i>personally</i> obtains the couple's consent and announces them as husband and wife. In this situation, accused-appellant did ask whether the contracting parties accepted each other as husband and wife; they replied in the affirmative. This action constitutes the formal exchange of matrimonial consent, which is the essence of a marriage ceremony. </p><p> Lastly, there is no evidence that accused-appellant derived any benefit from the purported falsification. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The confusion surrounding the solemnization of marriage</i> </div></td> </tr> </tbody></table> <p>Ordinary people incorrectly associate certain ceremonial aspects of the wedding, like delivering a homily or offering advice, with the act of solemnization itself. This misunderstanding stems from the cultural, religious, and sentimental importance placed on these elements, which often obscure the legal aspects of a marriage ceremony. </p><p> In particular, the moment when marriage advice is shared is frequently considered one of the most unforgettable parts of a wedding ceremony. This is especially true in religious or community-centered weddings, where the guidance or homily provided by the solemnizing officer is seen as a form of spiritual or moral support for the couple. For those unfamiliar with marriage as a legal process, this visible and audible offering of advice may seem to be the solemnizing officer's main or even only role. This, in turn, results in the misconception that it constitutes the actual solemnization of the marriage. </p><p> However, although these elements encompass the ceremonial significance of marriage, they neither substitute for nor can they replace the requisites and legal procedures stated in the Family Code. </p><p> The prosecution argued that VM Chan was the actual solemnizing officer because he provided the homily or advice to the contracting parties during the wedding ceremony. However, as previously mentioned, delivering the homily or offering advice to the contracting parties does <i>not</i> equate to the legal act of solemnization as defined by the Family Code. These "informal" ceremonial components are <i>not</i> mandated by law nor adequate to constitute a legitimate solemnization of marriage; they are supplementary or ancillary to the solemnization process. Also, the fact that accused-appellant admitted to sometimes officiating weddings in haste does not equate to falsification. There was no deliberate intent to deceive, especially as the ceremony had indeed taken place. </p><p> To highlight, the basis for accused-appellant's acquittal is reasonable doubt, which essentially indicates that the evidence presented by the prosecution was<i> insufficient</i> to establish accused-appellant's guilt beyond a level of moral certainty â a certainty that persuades and satisfies the reason and conscience of those who must decide. It is evidence that convinces the court while considering the presumption of innocence, thereby <i>excluding</i> every reasonable conclusion except for the one it aims to support. An acquittal grounded in reasonable doubt can prevail even if there are doubts about the accused's innocence, as a criminal conviction relies on the strength of the prosecution's evidence rather than the weaknesses of the defense. Suppose the incriminating facts and circumstances can be explained in two or more ways, with one consistent with the accused's innocence and another with his guilt, it only means that the evidence does <i>not</i> meet the criteria of moral certainty and is therefore<i> inadequate</i> to uphold a conviction. Therefore, any evidence that benefits the accused must be considered.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> <b>ACCORDINGLY</b>, the Appeal is <b>GRANTED</b>. The Decision dated August 26, 2022, and the Resolution dated October 24, 2022, of the Sandiganbayan in SB-18-CRM-0537 are <b>REVERSED</b> and <b>SET ASIDE</b>. Accused-appellant Artemio Que Chan is <b>ACQUITTED</b> of Falsification of Public Document, defined and penalized under Article 171, paragraph 2 of the Revised Penal Code. </p><p> In case he posted a bail bond for his provisional liberty, the same is <b>ORDERED CANCELLED</b> and should be <b>RETURNED</b> to him within five days from notice. </p><p> Let entry of judgment be <b>ISSUED</b> immediately. </p><p> <b>SO ORDERED. </b></p><p><i>Gaerlan</i> and <i>Dimaampao, JJ</i>., concur. <i><br> Caguioa<sup style="COLOR: RGB(255, 0, 0);">*</sup>, Acting C.J. (Chairperson), </i>see concurring opinion. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Per Special Order No. 3207 dated July 11, 2025. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-7. <i>See</i> Notice of Appeal dated November 4, 2022. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 10-53. Penned by Associate Justice Ma. Theresa Dolores C. Gomez-Estoesta and concurred in by Associate Justices Zaldy V. Trespeses and Georgina D. Hidalgo of the Seventh Division Sandiganbayan, Quezon City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 56-69. Penned by Associate Justice Ma. Theresa Dolores C. Gomez-Estoesta and concurred in by Associate Justices Zaldy V. Trespeses and Georgina D. Hidalgo of the Seventh Division, Sandiganbayan, Quezon City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> ARTICLE 171. <i>Falsification by Public Officer, Employee or Notary or Ecclesiastic Minister</i>. - The penalty of <i>prisiÃ³n mayor</i> and a fine not to exceed 5,000 pesos shall be imposed upon any public officer, employee, or notary who, taking advantage of his official position, shall falsify a document by committing any of the following acts:</p> <blockquote> <p> . . . .<br> 2. Causing it to appear that persons have participated in any act or proceeding when they did not in fact so participate[.] </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, pp. 225-226. </p><p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 225. </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 10-11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> SB records, vol. 1, pp. 237-238. </p><p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, pp. 11-12. <i>See also</i> Joint Stipulation of Facts dated March 6, 2019, <i>id.</i> at 229-238. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> SB records, vol. 1, pp. 1-7. <i>See</i> Judicial Affidavit of Jesus De Leon dated April 16, 2018. </p><p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 12-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 64-69. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, pp. 13-14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 23-24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 26-27. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 27-28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> SB records, vol. 1, pp. 255-264. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i>, p. 28. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 367-374. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 372-373. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 378-388. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 398-406. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 403-404. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 407-414. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 423-428. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 426. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 31-32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 10-53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 51-52. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 38-40. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 56-69. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 66. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 68-69. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 3-6. <i>See</i> Notice of Appeal dated November 22, 2022. <i>See</i> also Appellant's Brief dated July 26, 2023, <i>id.</i> at 86-132. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 100. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> ARTICLE 3. The formal requisites of marriage are:</p><blockquote><p> (1) Authority of the solemnizing officer; <br>(2) A valid marriage license except in the cases provided for Chapter 2 of this Title; and <br>(3) A marriage ceremony which takes place with the appearance of the contracting parties before the solemnizing officer and their personal declaration that they take each other as husband and wife in the presence of not less than two witnesses of legal age.</p></blockquote><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> SB records, vol. 1, pp. 94-99. <i>See</i> Judicial Affidavit of Artemio Q. Chan dated June 18, 2025. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 95. <i>See</i> Judicial Affidavit, Artemio Q. Chan, June 18, 2025, p. 2. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 82-87. <i>See</i> Judicial Affidavit of Kelvin Tong Chan dated January 14, 2021. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 83. <i>See</i> Judicial Affidavit, Kelvin Tong Chan, January 14, 2021, p. 2. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>Regidor, Jr. v. People</b>, 598 Phil. 714, 732 (2009). </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Santos, Jr. v. People</b>, 586 Phil. 54, 58-59 (2008). </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Relucio v. CSC</b>, 440 Phil. 981, 989 (2002); <b>Amora, Jr. v. Court of Appeals</b>, 200 Phil. 777, 783 (1982); <b>U.S. v. Catolico</b>, 18 Phil. 504, 507 (1911). </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Malabanan v. Sandiganbayan</b>, 815 Phil. 183, 202 (2017). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>See</i> <b>Amora, Jr. v. CA</b>, <i>supra</i> note 50, at 782-783. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> TSN, Kelvin Tong Chan, February 10, 2021, pp. 21-22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> TSN, Kelvin Tong Chan, February 10, 2021, p. 39. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Dizon v. People</b>, 524 Phil. 126, 145-146 (2006). (Citations omitted) <br><br></p><hr align="center" width="60%" size="1" noshade="noshade"> <p align="center"><b><br>CONCURRING OPINION</b> </p> <p><b>CAGUIOA, <i>J</i>.:</b></p> <p> "<i>While it should be the common desire of bench and bar that crime is not left unpunished, it is no less important, if not more so, that the innocent be shielded from hasty prosecution and rash conviction</i>."<sup style="COLOR: RGB(255, 0, 0);">[1]</sup></p> <p> Accused-appellant Artemio Que Chan (Artemio), in his capacity as then Municipal Mayor of Pozorrubio, Pangasinan, was charged with Falsification of Public Document, defined and penalized under Article 171(2)<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Revised Penal Code (RPC) for allegedly making it appear in the Certificate of Marriage that he solemnized, the marriage of Andy Siapno Dela Rosa and Mary Jane Hugo Jovellanos (together, Sps. Dela Rosa), when it was the Municipal Vice Mayor, Kelvin Tong Chan (Kelvin), who supposedly officiated the marriage ceremony. The Sandiganbayan, in its assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 26, 2022, and Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 24, 2022 in Criminal Case No. SB-18-CRM-0537, found Artemio guilty of the crime charged. </p><p> The <i>ponencia</i> grants the appeal and acquits Artemio on the ground of reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Contrary to the prosecution's claims, the records show that Artemio carried out the necessary acts of solemnizationâeliciting consent and proclaiming the parties as husband and wife.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Meanwhile, Kelvin's act of delivering marital advice to the contracting parties, was merely a symbolical aspect of the event, done after the legally binding solemnization performed by Artemio.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> I fully concur with the <i>ponencia</i> in the acquittal of Artemio. I write separately only to underscore the grave errors of the Sandiganbayan in allowing this case to prosper <b>despite the utter lack of legal basis for prosecution under the facts established on record</b>ârevealing a patent disregard of the accused's constitutional rights and a profound misunderstanding of the most elementary tenets of criminal law and judicial responsibility. </p><p> <b><i>The legal proceeding constituting<br> marriage under the Family Code in <br> relation to Article 171(2) of the RPC</i></b> </p><p> In Falsification of Public Documents under Article 171(2) of the RPC, the prosecution must prove the existence of the following elements: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">that the offender is a public officer, employee, or notary public; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify">that he takes advantage of his official position;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td> <div align="justify">that he falsifies a document by causing it to appear that persons have participated in any act or proceeding; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(4)</div></td> <td><div align="justify">that such persons did not in fact so participate in the proceeding.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></div></td> </tr> </tbody></table> </blockquote> <p>The crux of the controversy in this caseâand where the Sandiganbayan committed its first palpable errorâis as to the "proceeding" that Artemio supposedly falsified. The Sandiganbayan erroneously treated the entire wedding event as a single, continuous act to which Artemio must be privy, grossly failing to discern that the "proceeding" contemplated under Article 171(2) of the RPC refers only specifically to the legally operative act of solemnization. </p> <p> As early as 1929, the Marriage Law<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> provided that the ceremony of marriage shall consist of the personal declaration by the contracting parties, in the presence of a solemnizing officer and of two witnesses of legal age, that they take each other as husband and wife. No particular form, rite, or religious ceremony was required: </p><p align="center"> <b>CHAPTER I</b> <i><br> Marriage Requisites</i> </p><blockquote> <p> . . . .</p> <p> SECTION 3. <i>Mutual Consent</i>. â No particular form for the ceremony of marriage is required, but the parties with legal capacity to contract marriage must <b>declare, in the presence of the person solemnizing the marriage and of two witnesses of legal age, that they take each other as husband and wife</b>. This declaration shall be set forth in an instrument in triplicate, signed by signature or mark by the contracting parties and said two witnesses and attested by the person solemnizing the marriage. (Emphasis supplied) </p> </blockquote> <p> In 1949, the above provision was entirely replicated in the New Civil Code of the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> This principle was reaffirmed in 1987 with the enactment of the Family Code,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> which adopted the same provisionâvirtually unchangedâand which continues to govern the solemnization of marriages today. The pertinent portion of Article 6 of the Family Code provides: </p><blockquote> <p> ARTICLE 6. No prescribed form or religious rite for the solemnization of the marriage is required. It shall be necessary, however, for the contracting parties to <b>appear personally before the solemnizing officer and declare in the presence of not less than two witnesses of legal age that they take each other as husband and wife</b>. This declaration shall be contained in the marriage certificate which shall be signed by the contracting parties and their witnesses and attested by the solemnizing officer. (Emphasis supplied) </p> </blockquote> <p> In turn, Article 3(3) of the Family Code mirrors Article 6 and particularly defines a "<b><i>marriage ceremony</i></b>" as that "which takes place with the appearance of the contracting parties before the solemnizing officer and their personal declaration that they take each other as husband and wife in the presence of not less than two witnesses of legal age." </p><p> In recognition of the foregoing, the Court, in <i>Ronulo v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> emphasized that the rule has always been clear that no prescribed form of religious rite for the solemnization of the marriage is required. What is pertinent is that the minimum requirements constituting a marriage ceremony are met: </p><blockquote> <p> <i>First</i>, the personal appearance of the contracting parties before a solemnizing officer; and</p> <p> <i>Second</i>, their declaration in the presence of not less than two witnesses that they take each other as husband and wife.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p> </blockquote> <p> Contextualizing the foregoing in Article 171(2) of the RPC, the term "proceeding" refers to the marriage ceremonyâthe event that produces legal consequences under the law. More specifically, this proceeding is that which satisfies the above two requirements, and the fact of which is attested to by the solemnizing officer in the public document that is the certificate of marriage. </p><p> In this case, the records reveal that two distinct events took place on March 26, 2015âthe first conducted by then Mayor Artemio, and the second by then Vice Mayor Kelvin, after the former left to attend to a medical emergency involving his (Artemio's) mother.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The first was the legally binding act of solemnization, when the couple personally appeared before Artemio and declared their mutual consent to marry.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The second was merely a perfunctory social gesture when Kelvin delivered marital advice upon the couple's request.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> The Sandiganbayan's fundamental error lay in conflating the two acts: it equated the symbolic gestures performed by Kelvin with the marriage ceremony already conducted by Artemio. On that flawed premise, the Sandiganbayan concluded that Artemio took no part in the marriage proceedings, imputed falsity to his attestations in the marriage certificate, and convicted him under Article 171(2) of the RPC. In doing so, the Sandiganbayan demonstrated its grave misapprehension of Articles 3 and 6 of the Family Code. By confusing the social with the legal, the Sandiganbayan conjured falsification where the law recognizes none. </p><p> Such disregard of codified and firmly established principles of law evokes the Court's reminder in <i>Salcedo v. Bollozos</i>:<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><blockquote> <p> A patent disregard of simple, elementary and well-known rules constitutes gross ignorance of the law. Judges are expected to exhibit more than just cursory acquaintance with laws and procedural rules. They must know the law and apply it properly in good faith. They are likewise expected to keep abreast of prevailing jurisprudence. For, a judge who is plainly ignorant of the law taints the noble office and great privilege vested in him.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> (Citation omitted) </p> </blockquote> <p> To reiterate, what the law demands is simple: the precise moment when mutual consent is personally declared before the solemnizing officer and witnesses constitutes the legally operative <i>proceeding</i> of marriage. The Sandiganbayan's failure to apply this fundamental and long-settled principle exposes an alarming ignorance of the most basic precepts of family lawâone that warrants the Court's express admonition. </p><p> <b><i>The Sandiganbayan disregarded <br> fundamental doctrines of criminal<br> law and due process</i></b> </p><p> A more glaring lapse, if not outright injustice, committed by the Sandiganbayan lies in its selective appreciation of the evidence on record, its inversion of the burden of proof to the accused, and its uncritical reliance on the prosecution's tenuous circumstantial evidenceâall in clear violation of the constitutional presumption of innocence.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> It is a cardinal principle in criminal law that the prosecution has the burden of proving the guilt of the accused beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> It is the primordial duty of the prosecution to present its side with clarity and persuasion, so that conviction becomes the only logical and inevitable conclusion, with moral certainty.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> If the prosecution fails to discharge its heavy burden, then it is not only the right of the accused to be freed, it becomes the Court's constitutional duty to acquit him.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> Noteworthy in the present controversy is that Sps. Dela Rosa, the very parties whose marriage is at issue, executed a <i>Manifestation and/or Motion</i><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated September 2018 withdrawing their complaint against Artemio, and attesting that they were merely tricked into signing the document.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Sps. Dela Rosa's <i>Manifestation</i> was even recognized by the Sandiganbayan and reproduced in its <i>Decision</i> dated August 26, 2022, the pertinent portions of which read: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">2.</div></td> <td width="95%"><div align="justify">They are not aware that what they signed is a Complaint-Affidavit against [Artemio]. If truth be told, <b>they were tricked into signing the said Complaint-Affidavit because they thought that the document presented to them is about their marriage and nothing more;</b></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">3.</div></td> <td><div align="justify">When they were brought to Urdaneta City, Pangasinan, where they were made to sign a document, it was represented to them that there is a problem regarding their marriage and that document they are signing is for its correction only; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">4.</div></td> <td><div align="justify">They never asked somebody to prepare an affidavit-complaint against [Artemio] as <b>they never intended to file any case against him in relation to the celebration of their marriage before his Office. As a matter of fact, they recognized the validity of their marriage</b>; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">5.</div></td> <td><div align="justify">They do not understand the contents of the affidavit[-]complaint that they were made to sign in Urdaneta City, Pangasinan. They do not possess the proper education to make such affidavit-complaint; </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td><div align="justify">They were surprised when they received a letter from [the Sandiganbayan], because of the situation, they were prompted to see a lawyer who explained to them the contents of the letter. It was only at that moment that they became aware that what they were made to sign is a Complaint-Affidavit against [Artemio]; </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">10.</div></td> <td><div align="justify">From the circumstances attendant to herein complainants' situation, it appears that through misrepresentation and trickery, they unknowingly signed a Complaint-Affidavit, the contents, its effects[,] and legal consequences [were] not fully explained; </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">12.</div></td> <td><div align="justify">At most, the persons who approached them took advantage of their ignorance and lack of proper education, thus, they easily persuaded them to sign a document the contents, legal effects[,] and consequences are unknown to them; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">13.</div></td> <td><div align="justify">It could be said that <b>the statements contained in the ComplaintÂ­ Affidavit and the subsequent pleadings filed at their instances are not theirs as they were fruits of misrepresentation and trickery</b>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p>Sps. Dela Rosa reiterated these assertions in their <i>Sinumpaang Salaysay</i><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated September 18, 2018, which the Sandiganbayan likewise reproduced in its appealed Decision.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The significant portions of Sps. Dela Rosa's <i>Sinumpaang Salaysay</i> read:</p> <blockquote> <p> Kami ay ikinasal noong March 26, 2015 sa Munisipyo ng Pozorrubio, Pangasinan at bago pa nag umpisa ay nandoon naman talaga si Mayor Chan at kinausap pa nga kaming magnobyo at nobya. </p> <p> Mga dalawang ling[g]o pagkatapos ng kasal ay nilapitan kami ni Kgd. Gloria Salcedo, Ana Marie Sales at Kgd. Abalos at sinabi sa amin ni Kgd. Salcedo na hindi daw valid an[g] aming kasal at mayroong pinapirmahan sa amin iyon kundi sinabi tungkol lang daw sa kasal [namin] na invalid para maayos at hiningi[ ]din sa amin ang mga pictures [namin] noong kasal [namin]. </p> <p> Dinala kami sa Urdaneta City, Pangasinan at <b>pinapirma kami doon pero hindi nila sinasabi kung ano ang mga papeles na pinirmahan [namin]</b>. </p> <p> <b>Nalaman na[ ]lang [namin] na ang pinirmahan naming papeles ay kaso pala na isinampa nila kay [Artemio.]</b> </p> <p> . . . . </p> <p> Ginawa [namin] itong salaysay na ito upang <b>hingiin sa mga awtoridad na iatras nila ang aming mga pinirmahang papeles kontra kay [Artemio] dahil hindi naman [namin] sya ikinaso o sinampahan ng anumang kaso sa Ombudsman o sa Piskalya.</b> </p> <p> <b>Lalong-lalo na ipinahayag [namin] na hindi naman [namin] kinukuwestiyon ang aming kasal, ayaw [namin] itong ipagwalang-bisa at hindi [namin] sinasabi o pinapayagang ituring na ito ay invalid</b>.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis supplied) </p> </blockquote> <p> Despite Sps. Dela Rosa's categorical disavowal of any intent to file a criminal caseâand, worse, their sworn manifestation that they were deceived into executing the complaintâthe Sandiganbayan, instead of treating these revelations as red flags demanding serious judicial scrutiny, took no effort to consider them. Far from acknowledging the significance of these attestations, the Sandiganbayan dismissed Sps. Dela Rosa's statements outright, characterizing the couple as merely having "sung a different tune"<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> and "vacillating"<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> in their position. </p><p> This cavalier treatment of Sps. Dela Rosa's sworn retractions was a serious abdication of judicial duty. In discounting the testimony of the very parties whose supposed injury formed the basis of the criminal charge, the Sandiganbayan deliberately ignored the most direct and credible evidence before it, preferring instead to rely on the secondary accounts of other prosecution witnessesâincluding the <i>kagawad</i> whom the spouses themselves accused of trickery and deceit.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> In <i>Corpuz, Jr. v. People</i><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (<i>Corpuz</i>), the accused municipal mayor was likewise charged with falsification of public documents for allegedly delegating the task of solemnizing marriages to the municipal registrar. The husbands concerned in that case testified that it was the mayor himself who officiated their marriages. Accordingly, the Court acquitted the mayor, finding that the prosecution's evidence rested on speculation rather than proof, and emphasized that when the facts admit of more than one reasonable interpretationâone consistent with guilt and another with innocenceâour Constitution commands that doubt be resolved in favor of the accused: </p><blockquote> <p> [N]one of the testimonial and documentary evidence offered by the prosecution was able to dispute the presumption of regularity of an official function and authenticity and due execution of the public instruments issued by petitioner as the Municipal Mayor, which may only be overcome by clear and convincing evidence to the contrary. As can be gleaned from the narration of facts provided by the trial court, there is <b>no showing that an actual appearance by the concerned parties (spouses Pascual and spouses Asuncion) before petitioner as their solemnizing officer did not occur or happen</b>. Looking into the evidence presented, the only patent conclusion that can be derived from the prosecution's evidence, as admitted by the witnesses for the defense, is that <b>both couples appeared before Thelmo O. Corpuz, Sr., for the sole purpose of receiving marriage counseling and/or marriage rehearsals, nothing more</b>. </p> <p> . . . . </p> <p> . . . <b>[I]t has been consistently ruled that "[c]ourts must judge the guilt or innocence of the accused based on facts and not on mere conjectures, presumptions, or suspicions."</b> It is iniquitous to base petitioner's guilt on the presumptions of the prosecution's witnesses for the Court has, time and again, declared that if the inculpatory facts and circumstances are capable of two or more interpretations, one of which being consistent with the innocence of the accused and the other or others consistent with his guilt, then the evidence in view of the constitutional presumption of innocence has not fulfilled the test of moral certainty and is thus insufficient to support a conviction. </p> <p> In sum, the circumstantial evidence presented by the prosecution in this case failed to pass the test of moral certainty necessary to warrant petitioner's conviction. Accusation is not synonymous with guilt. Not only that, <b>where the inculpatory facts and circumstances are capable of two or more explanations or interpretations, one of which is consistent with the innocence of the accused and the other consistent with his guilt, then the evidence does not meet or hurdle the test of moral certainty required for conviction</b>. Accordingly, the prosecution failed to establish the elements of falsification of public documents. With the prosecution having failed to discharge its burden of establishing petitioner's guilt beyond reasonable doubt, this Court is constrained, as is its bounden duty when reasonable doubt persists, to acquit him.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> Had the Sandiganbayan faithfully adhered to the foregoing principles as reinforced in <i>Corpuz</i>, it would have readily reached the same conclusionâthat Artemio must be acquitted. Regrettably, however, even as it cited <i>Corpuz</i>, the Sandiganbayan strained to draw a distinction on the tenuous ground that the husbands therein testified in open court, whereas the spouses in the present case merely executed a manifestation and affidavit.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>This distinction, however, is immaterial. In both instances, the statements of the parties whose marriages were in question formed part of the record and deserved careful judicial evaluation.</b> </p><p> In truth, the biggest parallel between <i>Corpuz</i> and this case lies in the Sandiganbayan's failure to assess the totality of the evidence. Rather than weighing the record in its entirety, the Sandiganbayan engaged in a selective appreciation of evidence: focusing on peripheral accounts instead of the primary declarations that should have guided its judgment. This fragmented approach led to an erroneous finding of falsification, to the great prejudice of the accused. </p><p> Once again, the Sandiganbayan demonstrated a grave misunderstanding not only of the governing law, but of the constitutional guarantee that every accused is presumed innocent until proven guilty. Courts of law are not bound to speculate when the evidence before them is clear. When the very parties allegedly aggrieved acknowledge that the marriage was validly solemnized and that no falsity attended its documentation, the indispensable elements of falsification are absent. Consequently, the continued prosecution of the accused under such circumstances ceases to be a pursuit of justiceâit becomes persecution. <b>That the Sandiganbayan proceeded under these circumstances constitutes a serious dereliction of its constitutional duty to safeguard the rights of the accused.</b> </p><p> The sacred adjudicatory powers entrusted to the courts by no less than the Constitution itself cannot be equated to mere guesswork, but must rest on strong and solid application of the law and due appreciation of evidence. For only then will the Judiciary be true to its mandate to dispense justice and equity.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> All told, this Court cannot, and will not, turn a blind eye to the grave dereliction of duty committed by the Sandiganbayan. Had it exercised its functions with the rigor demanded of its office, it would have promptly dismissed this case, which rested on defective and withdrawn accusations as well as a clear misappreciation of the law. The Sandiganbayan must thus be chastised for allowing this prosecution to prosper, for in doing so, it not only squandered valuable judicial time and resources but also subjected the accused to years of needless anxiety and stigma. Worse, in so proceeding, the Sandiganbayan diminished respect for its processes and eroded its credibility as a specialized tribunal tasked with upholding fairness and accountability in public service. </p><p> Accordingly, I <b>CONCUR</b> with the <i>ponencia</i> and vote to <b>ACQUIT</b> accused-appellant Artemio Que Chan. <br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Salvacion v. Sandiganbayan</b>, 226 Phil. 604, 610 (1986) [Per J. Cruz, <i>En Banc</i>]. (Emphasis supplied) <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> REV. PEN. CODE, art. 171, par. 2 which reads:</p> <blockquote> <p> ARTICLE 171. <i>Falsification by Public Officer, Employee or Notary or Ecclesiastic Minister</i>. â The penalty of <i>prision mayor</i> and a fine not to exceed 5,000 pesos shall be imposed upon any public officer, employee, or notary who, taking advantage of his official position, shall falsify a document by committing any of the following acts:</p> <p> . . . .</p> <p> 2. Causing it to appear that persons have participated in any act or proceeding when they did not in fact so participate[.]</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 10-53. Penned by Associate Justice Ma. Theresa Dolores C. Gomez-Estoesta and concurred in by Associate Justices Zaldy V. Trespeses and Georgina D. Hidalgo of the Seventh Division, Sandiganbayan, Quezon City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 56-69. Penned by Associate Justice Ma. Theresa Dolores C. Gomez-Estoesta and concurred in by Associate Justices Zaldy V. Trespeses and Georgina D. Hidalgo of the Seventh Division, Sandiganbayan, Quezon City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Ponencia</i>, pp. 11 and 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <b>People v. Partisala</b>, 922 Phil. 675, 686 (2022) [Per J. Hernando, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Act No. 3613, December 4, 1929. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> CIVIL CODE, art. 55 which reads: </p><blockquote> <p> ART. 55. No particular form for the ceremony of marriage is required, but the parties with legal capacity to contract marriage must declare, in the presence of the person solemnizing the marriage and of two witnesses of legal age, that they take each other as husband and wife. This declaration shall be set forth in an instrument in triplicate, signed by signature or mark by the contracting parties and said two witnesses and attested by the person solemnizing the marriage. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> FAMILY CODE OF THE PHILIPPINES, Executive Order No. 209, July 6, 1987. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> 738 Phil. 206 (2014) [Per J. Brion, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 215. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Ponencia</i>, pp. 17-18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>See</i> <i>id.</i> at 13, 17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 637 Phil. 27 (2010) [Per J. Brion, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 44. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>See</i> CONST., art. III, sec. 14(2). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>Ambagan, Jr. v. People</b>, 771 Phil. 245, 271 (2015) [Per J. Velasco, Jr., Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Amanquiton v. People</b>, 612 Phil. 1253, 1260 (2009) [Per J. Corona, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>People v. Wagas</b>, 717 Phil. 224, 227-228 (2013) [Per J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i>, pp. 418-420. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 418-419; <i>see also</i> <i>id.</i> at 16-17, Sandiganbayan Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 16-17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 421-422. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 17-18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 421. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 15, Sandiganbayan Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>See</i> <i>id.</i> at 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 800 Phil. 781 (2016) [Per J. Perez, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 800-801, 803-804. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> <i>rollo</i>, pp. 15-17, Sandiganbayan Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>AAA261422 v. XXX261422</b>, 949 Phil. 236, 249 (2023) [Per J. Lazaro-Javier, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

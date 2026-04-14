@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 228564 - MILAGROSA VILLAREY KUSK, PETITIONER, VS. TORBEN KUSK AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70120' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 228564, August 13, 2025 ]</H2>
+			<H3>MILAGROSA VILLAREY KUSK, PETITIONER, VS. TORBEN KUSK AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="justify"><p>When psychological incapacity under Article 36 of the Family Code is invoked as basis for declaring a marriage void <i>ab initio</i>, it must be substantiated with clear and convincing evidence.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> No psychiatric report is necessary, nor is the psychiatric evaluation of the allegedly incapacitated spouse indispensable.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Instead, parties are required to demonstrate that an enduring part of their or their spouse's personality renders them incapable of performing their essential marital obligations through the totality of evidence.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup></p><p> This Court resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Court of Appeals in CA-G.R. CV No. 106277, which affirmed the Decision of Branch 89, Regional Trial Court, Quezon City denying the Petition for Declaration of Nullity of Marriage filed by Milagros Villarey Kusk (Milagrosa).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> Milagrosa met Torben Kusk (Torben) through her friend Baby Anderson (Baby), who visited the Philippines from Denmark sometime in June 1992. While they were at the house of Milagrosa's sister in Quezon City, Baby promised Milagrosa that she would introduce her to a good man.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> In July of the same year, Torben phoned Milagrosa, and introduced himself as a friend of Baby. In the same month, Torben flew to the Philippines to visit Milagrosa. They met at the Philippine Village Hotel in Pasay City and had a long talk, where Torben expressed his intention to marry Milagrosa and provide her with a good life. Milagrosa, then 31 years old and with a child from another man, was enticed by Torben's promise, and agreed to go with him to Denmark.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> On August 10, 1992, Milagrosa was granted a Danish visa. She went to Denmark and started living with Torben. In November 1992, they got married. A day after they got married, Torben boxed Milagrosa in the face while he was drunk. It was the first time Torben hit her but he apologized the day after.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> On July 25, 1993, Milagrosa and Torben migrated to the Philippines and started a small business. Over the next two years, Torben acquainted himself with new individuals and became more familiar with the local environment. He also began frequenting bars and typically returned home between 3 to 5 a.m.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> On April 2, 1995, Torben arrived drunk at their home at 3 a.m. and slapped Milagrosa on the face. Milagrosa went to the East Avenue Medical Center in Quezon City at 10 a.m. to get a medical examination. The next day she reported the incident to the Women's Desk of the Philippine National Police in Camp Caringal, Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> In September 1995, and after learning of the complaint filed against him by Milagrosa, Torben left her and never returned to their home.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> Almost 10 years after Torben left her, Milagrosa attempted to look for him by going to the Danish Embassy, but she failed to get any information. In 2007, she found out that Torben was still in the Philippines and living with different women.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> On December 11, 2009, Milagrosa filed a Petition for Declaration of Nullity of Marriage under Article 36 of the Family Code of the Philippines before the Regional Trial Court.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> In her Petition, Milagrosa alleged that prior to filing her case, she sought the professional help of a clinical psychologist, who conducted an interview with her.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The psychologist's report found that Torben was suffering from passive aggressive personality disorder with underlying antisocial personality disorder, "which is mainly manifested by his pervasive pattern of negativistic attitudes and passive resistance to the demands of his environment[,] coupled by his apparent lack of ability to conform to the social norm; thus, deforming his concepts and perceptions of a responsible other half of his spouse."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Meanwhile, Milagrosa was found to be suffering from narcissistic personality disorder. The report also indicated that the psychological incapacities of Torben and Milagrosa had been existing even before their marriage,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> and were incurable and permanent.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Lastly, Milagrosa alleged that they have no conjugal property.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p><p> During the trial, Milagrosa presented herself and Dr. Nedy Tayag (Dr. Tayag), the clinical psychologist who made the psychological report. Torben did not participate in any stage of the proceedings.</p><p> The Regional Trial Court issued a Decision denying Milagrosa's Petition.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> It held that the evidence presented by Milagrosa did not show that Torben's psychological incapacity was "grave, incurable, and has juridical antecedence."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> It held that the psychological report "merely concluded that [Torben] was incompetent, unreliable[,] and incapacitated to fulfill his duties as husband to [Milagros]."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> There was no showing that his incompetence, his being physically violent, and his womanizing and financial irresponsibility were linked to his psychological disorder.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The court also disclaimed the findings of Dr. Tayag, as she never interviewed Torben and merely acquired information about him through Milagrosa.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The dispositive portion of the August 12, 2015 Decision read: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the petition for the declaration of absolute nullity of marriage based on respondent's psychological incapacity filed by petitioner MILAGROSA VILLAREY KUSK against respondent TORBEN KUSK is hereby <b>DENIED</b> for lack of merit.</p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p> </blockquote> <p> Milagrosa filed a Motion for Reconsideration, but it was denied by the Regional Trial Court in an Order dated November 4, 2015.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> Milagrosa filed an appeal before the Court of Appeals, but it was denied in a Decision promulgated on December 1, 2016.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The dispositive portion read: </p><blockquote> <p> <b>WHEREFORE</b>, in the light of the foregoing, the instant appeal is <b>DENIED</b>. The assailed Decision dated August 12, 2015 and the Order dated November 4, 2015 by the Quezon City Regional Trial Court, Branch 89, in Civil Case No. Q-09-66158, are hereby AFFIRMED.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p> </blockquote> <p> The Court of Appeals held that the alleged irresponsibility and violent nature of Torben do not constitute psychological incapacity. While his violence may be considered as abnormal behavior, this, in itself, is not equivalent to psychological incapacity. The court stressed that there must be a link between the acts of psychological incapacity and the psychological disorder.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Milagrosa supposedly failed to show this link, or that the psychological incapacity existed even before they were married.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The court added that Milagrosa failed to elaborate on her allegation that Torben was irresponsible. Instead, her testimony supposedly showed that Torben was a good provider until he began going to bars and clubs, getting drunk, and womanizing.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The Court of Appeals also explained that based on the evidence and the testimony of Milagrosa, her main reason for marrying Torben was for money, and she became dissatisfied when the life she wanted did not materialize. To the court, her dissatisfaction was not enough reason to allow the nullity of her marriage to Torben based on psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p> On December 22, 2016, Milagrosa filed a Petition for Review on<em> Certiorari</em> before this Court.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> On January 30, 2017, this Court released a Resolution requiring respondent Torben to file a comment.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> On July 24, 2017, the Court noted that the January 30, 2017 Resolution was returned and unserved. Consequently, petitioner Milagros was required to submit the correct and present address of respondent within ten days of receipt.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> On September 18, 2017, petitioner filed a Compliance stating that the address previously submitted to the Court was the correct address of respondent known to petitioner.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Since respondent could no longer be found, petitioner resorted to serve the summons by way of publication as evidenced by an Affidavit of Publication dated April 22, 2010 executed by the General Manager of Feedback Publishing.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> On November 22, 2017, this Court issued a Notice stating that a copy of the January 30, 2017 Resolution will instead be served to the Philippine Honorary Consulate General in Copenhagen, Denmark.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Despite service to the Consulate, respondent did not file any comment.</p><p> On July 23, 2018, the Court issued a Show Cause Order requiring respondent to explain why he should not be held in contempt for his failure to comply with its January 30, 2017 Resolution, to no avail.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> On September 7, 2020, this Court impleaded the Republic of the Philippines as party respondent considering that the Petition is one for declaration of nullity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> Petitioner Milagrosa claims that the Court of Appeals committed grave abuse of discretion when it affirmed the Regional Trial Court's finding that neither respondent Torben nor herself was psychologically incapacitated to enter a marriage.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> She asserts that both of them failed to meet the marital obligations of a spouse<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> and that the psychological report sufficiently proved the root causes, juridical antecedence, gravity, and incurability of their psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Citing <i>Kalaw v. Fernandez</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> petitioner asserts that the Court "should not brush aside the opinions of the expert witnesses on the ground that their conclusions were solely based on the petitioner's version of events."<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> She further states that the totality of evidence presented shows that the psychological incapacities of the parties are grave, incurable and rooted in their respective histories.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Ultimately, petitioner prays that a decree of nullity of marriage be issued.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> The Office of the Solicitor General counters that petitioner is not entitled to a review of the assailed Decision, as she raised questions of fact and not questions of law as allowed under Rule 45. Public respondent asserts that petitioner is asking for a review of the facts and evidence by requesting that this Court review the ruling of the lower courts regarding the presence of psychological incapacity in accordance with Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Lastly, the Office of the Solicitor General asserts that even if this Court were to review the facts of the case, the records would, at most, support only legal separation under Article 55(1) of the Family Code, and not annulment.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></p><p> The primary issue for this Court's resolution is whether the marriage between petitioner Milagrosa and respondent Torben is void <i>ab initio</i> due to psychological incapacity. Subsumed in this issue is whether the expert opinion on a party's psychological incapacity is competent evidence if it is solely based on collateral information from the petitioning spouse.</p><p> We grant the Petition.</p><p> Petitioner has sufficiently proven that both parties were psychologically incapacitated to fulfill their essential marital obligations. Therefore, the marriage is declared void <i>ab initio</i>.</p><p align="center"> <b>I</b> </p><p> Under Article 36 of the Family Code, a marriage entered into by a person who is psychologically incapable of fulfilling essential marital obligations is null and void: </p><blockquote> <p> ARTICLE 36. A marriage contracted by any party who, at the time of the celebration, was psychologically incapacitated to comply with the essential marital obligations of marriage, shall likewise be void even if such incapacity becomes manifest only after its solemnization.</p> </blockquote> <p> The essential marital obligations between husband and wife are embraced in Articles 68 to 71 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> These obligations include mutual love, fidelity, support, and ultimately, shared responsibility for the care and upbringing of the family. These duties aim to protect and&nbsp; strengthen all marriages which are constitutionally regarded as an inviolable social institution.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Nevertheless, the Family Code provides specific circumstancesâsuch as Article 36âthat would lead to the annulment of a marriage if such obligations are not met.</p><p> The import of Article 36 was first laid down in <i>Santos v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> wherein the Court defined psychological incapacity as a "mental (not physical) incapacity that causes a party to be truly incognitive of the basic marital covenants that concomitantly must be assumed and discharged by the parties to the marriage."<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> It further stated that the "psychological incapacity" must be the "most serious cases of personality disorders clearly demonstrative of an utter insensitivity or inability to give meaning and significance to the marriage." This definition led to the landmark case of <i>Republic v. Court of Appeals and Molina</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> where the Court provided guidelines in deciding cases of psychological incapacity: </p><blockquote> <p> (1) The burden of proof to show the nullity of the marriage belongs to the plaintiff. Any doubt should be resolved in favor of the existence and continuation of the marriage and against its dissolution and nullity. . .</p> <p> (2) The root cause of the psychological incapacity must be (a) medically or clinically identified, (b) alleged in the complaint, (c) sufficiently proven by experts and (d) clearly explained in the decision. . .</p> <p> (3) The incapacity must be proven to be existing at "the time celebration" of the marriage. . .</p> <p> (4) Such incapacity must also be shown to be medically or clinically permanent or incurable. Such incurability may be absolute or even relative only in regard to the other spouse, not necessarily absolutely against everyone of the same sex. . .</p> <p> (5) Such illness must be grave enough to bring about the disability of the party to assume the essential obligations of marriage. . .<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></p> </blockquote> <p> However, through the years, the Court has admitted that the <i>Molina</i> guidelines turned out to be too restrictive, thus, resulting in only a handful of annulments since the inception of Article 36. In <i>Ngo Te v. Yu-Te</i>:<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> </p><blockquote> <p> In hindsight, it may have been inappropriate for the Court to impose a rigid set of rules, as the one in <i>Molina</i>, in resolving all cases of psychological incapacity. Understandably, the Court was then alarmed by the deluge of petitions for the dissolution of marital bonds, and was sensitive to the [Office of the Solicitor General's] exaggeration of Article 36 as the "most liberal divorce procedure in the world." The unintended consequences of <i>Molina</i>, however, has taken its toll on people who have to live with deviant behavior, moral insanity and sociopathic personality anomaly, which, like termites, consume little by little the very foundation of their families, our basic social institutions. Far from what was intended by the Court, <i>Molina</i> has become a strait-jacket, forcing all sizes to fit and be bound by it. Wittingly or unwittingly, the Court, in conveniently applying <i>Molina</i>, has allowed diagnosed sociopaths, schizophrenics, nymphomaniacs, narcissists and the like, to continuously debase and pervert the sanctity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Citations omitted)</p> </blockquote> <p> This was reiterated in <i>Kalaw</i>: </p><blockquote> <p> The [<i>Molina</i>] guidelines have turned out to be rigid, such that their application to every instance practically condemned the petitions for declaration of nullity to the fate of certain rejection. But Article 36 of the Family Code must not be so strictly and too literally read and applied given the clear intendment of the drafters to adopt its enacted version of "less specificity" obviously to enable "some resiliency in its application." Instead, every court should approach the issue of nullity "not on the basis of a <i>priori</i> assumptions, predilections or generalizations, but according to its own facts" in recognition of the verity that no case would be on "all fours" with the next one in the field of psychological incapacity as a ground for the nullity of marriage; hence, every "trial judge must take pains in examining the factual milieu and the appellate court must, as much as possible, avoid substituting its own judgment for that of the trial court."<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> (Citation omitted)</p> </blockquote> <p> Although the Court acknowledged that the <i>Molina</i> guidelines were unduly restrictive, the tendency to strictly implement them remained. The Petition before us is one of those cases wherein the lower courts relied on the <i>Molina</i> guidelines to reach the assailed Decisions. Nevertheless, while this case was pending, the Court, in <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> revisited and refined the requirements to obtain a successful annulment under Article 36. The changes were aimed to strike a balance between protecting the sanctity of marriage and providing a fair legal process for those seeking annulment. The modifications are summarized as such: </p><blockquote> <p> First, <i>Tan-Andal</i> determined that the appropriate quantum of proof in psychological incapacity cases is clear and convincing evidence.</p> <p> Second, <i>Tan-Andal</i> categorically abandoned the second guideline in <i>Molina</i> requiring the psychological incapacity to be medically or clinically identified and sufficiently proven by experts. Rather, the Court requires "proof of a person's 'personality structure' which makes it impossible for them to understand and comply with their marital obligations."</p> <p> Third, <i>Tan-Andal</i> restated the three characteristics of psychological incapacity: juridical antecedence, incurability, and gravity.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> (Citations omitted)</p> </blockquote> <p> The three requirements of (a) gravity, (b) juridical antecedence, and (c) incurability were briefly explained in <i>Georfo v. Republic of the Philippines</i>:<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p><blockquote> <p> Juridical antecedence is established by showing that the psychological incapacity exists at the time of the celebration, even if it only manifests during the marriage. It may be proven by "testimonies describing the environment where the supposedly incapacitated spouse lived that may have led to a particular behavior."</p> <p> . . . .</p> <p> Incurability must be viewed in the legal, not medical, sense. Veering away from the medical orientation, the third <i>Molina</i> guideline was amended. Psychological incapacity is not a medical illness which can be cured: it must be "so enduring and persistent with respect to a specific partner and contemplates a situation where the couple's respective personality structures are so incompatible and antagonistic that the only result of the union would be the inevitable and irreparable breakdown of the marriage."</p> <p> To satisfy the requirement of incurability, there must be a showing of an "undeniable pattern of such persisting failure to be a present, loving, faithful, respectful, and supportive spouse [that] must be established so as to demonstrate that there is indeed a psychological anomaly or incongruity in the spouse relative to the other."</p> <p> The requirement on the gravity of the psychological incapacity was retained, which must be "caused by a genuinely psychic cause." It must not be mere "mild characterological peculiarities, mood changes, occasional emotional outbursts," nor "mere refusal, neglect[,] difficulty, much less ill will."<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> (Citations omitted)</p> </blockquote> <p> Applying the above, this Court finds that the marriage between Milagrosa and Torben is void on the ground of psychological incapacity.</p><p align="center"> <b>II</b> </p><p> Through the psychological report, petitioner showed that both she and Torben were psychologically incapacitated to fulfill their responsibilities as spouses. However, both the Regional Trial Court and the Court of Appeals held that Milagrosa failed to establish that the alleged psychological incapacities of both parties were grave, incurable, and have juridical antecedence.</p><p> This Court disagrees.</p><p> The totality of evidence proved that the petitioner and private respondent were psychologically incapable to comply with their marital duties.</p><p> First, petitioner established by clear and convincing evidence that both she and private respondent lacked the mental capacity to perform the obligations of their marriage. This was apparent in their inability to communicate effectively and resolve their conflicts to maintain a stable relationship. Additionally, expert testimony confirmed the presence of deep-seated psychological issues that rendered them unable to perform their marital obligations from the very start of their marriage.</p><p> In the psychological evaluation conducted by Dr. Tayag, she reported that both Milagrosa and Torben experienced psychological incapacities which led to their marriage's eventual demise. Milagrosa's narcissistic personality disorder was evident in: (a) her inability to adjust and respond to her environment; (b) her habitual demand for excessive admiration; and (c) her sense of entitlement, which led her to dominate in relationships and insist her own ways.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Milagrosa's condition, according to Dr. Tayag, was a result of her upbringing in her formative years, being raised by a lenient father and an overly tolerating mother. Being the youngest child, Milagrosa was accustomed to getting her own way.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Dr. Tayag reported: </p><blockquote> <p> Clinically, petitioner was found suffering from a psychological impairment termed as Narcissistic Personality Disorder[,] which is mainly characterized by grandiosity, need for admiration[,] and lack of empathy. Such caused her a total impairment in her functioning and an inability to adjust and respond to her environment especially in terms of heterosexual interactions. She is indeed a person whose main concern is herself[,] as to how she can improve the things that she already has and how she can obtain those that she has not[,] even to the point of exploiting people. She merely used her husband for her own advantage as she thought the man would give her everything she aspires for in life[,] including affluence, comfort[,] and security of the future. . . Throughout her union with respondent, she proved herself to be someone strong and dominating that she wanted him to submit to her demands and act in the way she expected him to. Such striking sense of entitlement that she has frequently caused a serious fight between them[,] especially when she could not manipulate her husband with regards (sic) to his behavior. And since her husband is certainly more prevailing than her, their wrangle often ended in her seemingly pitiful disposition that it always appear[ed] that she was the one being mistreated. And coupled with that highly prerogative character is her habitual demand for excessive admiration in that she frequently sought for special treatment from her husband[,] though it was definitely far from the reality as respondent is likewise a man with a self-absorbed nature. . .<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></p> </blockquote> <p> On the other hand, Dr. Tayag diagnosed Torben with passive aggressive personality disorder, characterized by: (a) his pervasive pattern of negativistic attitudes and passive resistance to the demands of his environment; and (b) his evident inability to conform to social norms, distorting his understanding of a responsible spouse. According to Dr. Tayag, Torben's condition was a result of the critical years of his development, where both his parents acted as disciplinarians who imposed numerous boundaries, hindering their children from asserting themselves.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Dr. Tayag observed: </p><blockquote> <p> On the other hand, respondent was likewise found suffering from a distinct type of psychological disorder known as Passive Aggressive Personality Disorder with underlying Antisocial Personality Disorder[,] which is mainly manifested by his pervasive pattern of negativistic attitudes and passive resistance to the demands of his environment coupled by his apparent lack of ability to conform to the social norm; thus, deforming his concepts and perceptions of a responsible other half of his spouse. During his marital stint with petitioner, respondent proved [himself] to be an incompetent, unreliable[,] and incapacitated man to fulfill his duties to his wife. He displayed such obvious lack of aptitude to live up to his uttered vows by intentionally keeping [himself] to be inefficient in responding to his roles as a husband. He frequently subjected petitioner to anger [through] his ill-advised behaviors which would likewise be the wick for him to demonstrate his sullen and argumentative nature. . . A grave womanizer, he loves having relationship with different women that even during those times while he was still living with his wife, he often hang out in bars together with several women. He is totally irresponsible in that throughout his union with petitioner, he never shouldered their finances but squandered all his money for his vices and women.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></p> </blockquote> <p> Dr. Tayag, in her psychological report, determined that the conditions of the spouses were grave and incurable and had been present well before their marriage: </p><blockquote> <p> Petitioner's and respondent's personality aberrations are deemed to be severe, serious, grave, permanent[,] and chronic in proportion and are incurable by any form of clinical intervention. It started early in their lives and such have been deeply ingrained within their system and have become an integral part of their structure[,] thereby causing them to be maladaptive, inflexible[,] and functionally impaired especially in terms of heterosexual interactions.</p> <p> The psychological incapacity of both petitioner and respondent is characterized by juridical antecedence as it was found to have existed prior to the time they contracted marriage though such only manifest[ed] after. Their marriage was not built on mutual love, trust, respect, and commitment; thus, causing them to have such unfavorable marital union. Reconciliation between parties is definitely impossible.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></p> </blockquote> <p> Moreover, the personalities of Milagrosa and Torben were found to be so incompatible that their marital union was beyond repair. It was the clinical psychologist's learned opinion that the downfall of the spouses' marriage was undoubtedly caused by their inability to fulfill their duties to each other.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Milagrosa and Torben were both found to be too immature and self-centered to grasp their marital roles.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Their dynamic created a toxic cycle in their relationship, where Milagrosa's need for control and admiration clashed with Torben's self-absorbed tendencies.</p><p> The manifestations of their disorders persisted throughout their marriage. Milagrosa, who suffered from narcissistic personality disorder, was incapable of empathetic behavior and focused only on her needs and desires. She admitted in open court that she married Torben for financial stability and not for love or affection. Her inflated self-perception and sense of entitlement resulted in her consistently demanding much of Torben and pushing him to his limits.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Torben, on the other hand, struggled with passive-aggressive and antisocial disorder. Misunderstandings frequently occurred due to his inability to effectively communicate with Milagrosa. He opted to seek solace in alcohol and other women as he frequented nightclubs, instead of resolving the conflicts with his wife. This led him to physically abuse Milagrosa when intoxicated. He first raised his hand against his wife the night of their wedding in November 1992 and continued to do so until their final altercation in 1995. This was the last straw for Milagrosa, prompting her to go to the authorities to report her husband's actions. Subsequently, Torben fled the family home, never to return.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup></p><p> Milagrosa never saw Torben after that fateful day. Despite extensive efforts by petitioner and the courts, Torben has remained unresponsive and could not be contacted even with the assistance of the Embassy of Denmark.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Three decades have passed since their last encounter. This is surely indicative that Torben has no intention of reconciling with Milagrosa.</p><p> The lower courts noted that during the proceedings before the Regional Trial Court, Torben failed to provide any evidence or even appear as a witness. Instead, the evidence presented consisted mostly of testimonies of Milagrosa and Dr. Tayag, who penned the psychological report. In her Petition for Review on <i>Certiorari</i>, Milagrosa puts emphasis on the admissibility and credibility of the findings made by Dr. Tayag.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> However, the lower courts stressed that the psychological report was solely based on the interview Dr. Tayag conducted on Milagrosa, while Torben was not interviewed at all.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup></p><p> At this juncture, it is significant to note that the psychological or medical examination of a respondent spouse is not required as a condition for the declaration of nullity of marriage, as psychological incapacity is to be determined through all the evidence presented.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Nonetheless, the psychological examination of Dr. Tayag must be given probative value as an expert's opinion.</p><p> Dr. Tayag, a clinical psychologist at the National Center for Mental Health,<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> is qualified to conduct a psychological evaluation of private respondent. In <i>Tan-Andal</i>, while a psychological evaluation would be more comprehensive if all parties were personally assessed, the absence of a party's participation does not render the psychological report useless. The Court held that a psychologist's assessment is obtained through their skill and expertise rather than their personal familiarity of the parties involved, thus:<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> </p><blockquote> <p> It is true that Dr. Garcia gave the expert opinion â which, we reiterate, is no longer required but is considered here given that it was offered in evidence â without having to interview Mario. Even Dr. Garcia herself admitted during cross-examination that her psychiatric evaluation would have been more comprehensive had Mario submitted himself for evaluation. However, the Court of Appeals erred in discounting wholesale Dr. Garcia's expert opinion because her methodology was allegedly "unscientific and unreliable."</p> <p> Unlike ordinary witnesses who must have personal knowledge of the matters they testify on, expert witnesses do not testify in court because they have personal knowledge of the facts of the case. The credibility of expert witnesses does not inhere in their person; rather, their testimony is sought because of their special knowledge, skill, experience, or training that ordinary persons and judges do not have. Rule 130, Section 49 of the Rules of Court on the opinion of expert witness provides:</p> <blockquote> <p> SECTION 49. <i>Opinion of expert witness</i>. â The opinion of a witness on a matter requiring special knowledge, skill, experience or training which he is shown to possess, may be received in evidence.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> (Citations omitted)</p> </blockquote> </blockquote> <p> Moreover, in <i>Santos-Gantan v. Gantan</i>,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> expert testimony, particularly the testimony of a psychologist, need not rely on a personal examination of the allegedly psychologically incapacitated spouse: </p><blockquote> <p> <i>Camacho-Reyes v. Reyes</i> ordains that the non-examination of one of the parties will not automatically render as hearsay or invalidate the findings of the examining psychiatrist or psychologist, since marriage, by its very definition, necessarily involves only two (2) persons. As such, the totality of the behavior of one spouse during the cohabitation and marriage is generally and genuinely witnessed mainly by the other.</p> <p> The absence of such personal examination is not fatal so long as the totality of evidence sufficiently supports a finding of psychological incapacity. Consequently, petitioner bears the burden of proving the gravity, juridical antecedence, and incurability of respondent spouse's psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> (Citations omitted)</p> </blockquote> <p> Thus, notwithstanding Torben's total lack of participation, Dr. Tayag's expertise and experience provide substantial weight to the determination of psychological incapacity.</p><p> All told, the evidence presented by Milagrosa convincingly demonstrate that both she and Torben were psychologically incapable of fulfilling their essential marital obligations. Both parties were unable to comply with the basic marital covenants, such as the mutual obligation to live together, observe love, respect, and fidelity, and render help and support to each other. "Such psychological incapacity is enough to declare the nullity of [their marriage] even if such incapacity becomes manifest only after its solemnization."<sup style="COLOR: RGB(255, 0, 0);">[82]</sup></p><p> <b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The December 1, 2016 Decision of the Court of Appeals in CA-G.R. CV No. 106277 is <b>REVERSED and SET ASIDE</b>. The marriage of petitioner Milagrosa Villarey Kusk and Torben Kusk is declared <b>VOID</b> <i>ab initio</i> on the ground of psychological incapacity.</p><p> <b>SO ORDERED.</b></p><p> <i>Lazaro-Javier, J. Lopez, Kho, Jr.,</i> and <i>Villanueva, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Tan-Andal v. Andal,</b> 902 Phil. 558, 591-592, 608 (2021) [Per J. Leonen, <i>En Banc</i>]. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <b>Georfo v. Republic, G.R. No. 246933</b>, March 6, 2023 [Per J. Leonen, Second Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>Datu v. Datu, G.R. No. 209278</b>, 910 Phil. 436, 453 (2021) [Per J. Leonen, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 3-19. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 20-32. The Decision dated December 1, 2016 was penned by Associate Justice Franchito N. Diamante and concurred in by Associate Justices Carmelita Salandanan Manahan and Japar B. Dimaampao (now a Member of this Court) of the Eighth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 50-57. The Decision dated August 12, 2015 in Civil Case No. Q-09-66158 was penned by Presiding Judge Cecilyn E. Burgos-Villavert of Branch 89, Regional Trial Court, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 20.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 21. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 21, 40.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 21. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 33-36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 34. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 35. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 50-57. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Id at 54. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 57. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 66. The Order was penned by Presiding Judge Cecilyn E. Burgos-Villavert of Branch 89, Regional Trial Court, Quezon City. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 20-32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 32. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 26. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 28. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 28-29. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 30-31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 3-19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 68. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 70. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 72. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 76. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 82. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 114. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 9. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 10. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 750 Phil. 482 (2015) [Per J. Del Castillo, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, p. 14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 147. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 150. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> ARTICLE 68. The husband and wife are obliged to live together, observe mutual love, respect and fidelity, and render mutual help and support. </p><p> ARTICLE 69. The husband and wife shall fix the family domicile. In case of disagreement, the court shall decide.&nbsp;</p><p>The court may exempt one spouse from living with the other if the latter should live abroad or there are other valid and compelling reasons for the exemption. However, such exemption shall not apply if the same is not compatible with the solidarity of the family.</p><p> ARTICLE 70. The spouses are jointly responsible for the support of the family. The expenses for such support and other conjugal obligations shall be paid from the community property and in the absence thereof, from the income or fruits of their separate properties. In case of insufficiency or absence of said income or fruits, such obligations shall be satisfied from the separate properties.</p><p> ARTICLE 71. The management of the household shall be the right and the duty of both spouses. The expenses for such management shall be paid in accordance with the provisions of Article 70.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> CONST., art. XV, sec. 2. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 310 Phil. 21 (1995) [Per J. Vitug, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 40. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 335 Phil. 664 (1997) [Per J. Panganiban,<i> En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 676-678. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 598 Phil. 666 (2009) [Per J. Nachura, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 695-696. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 750 Phil. 482, 499-500 (2015) [Per J. Del Castillo, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 902 Phil. 558 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Yokogawa-Tan v. Tan, G.R. No. 254646</b>, October 23, 2023, [Per J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>G.R. No. 246933</b>, March 06, 2023 [Per J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 13. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo</i>, p. 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 46-48. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 46-47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 43-44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 9, 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Marcos v. Marcos</b>, 397 Phil. 840, 850 (2000) [Per J. Panganiban, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Republic v. Tanyag-San Jose</b>, 545 Phil. 725-738 (2007) [Per J. Carpio-Morales, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 610-611 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 888 Phil. 141 (2020) [Per J. Lazaro-Javier, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 152-153. </p><p><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 158. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 215129 - LAPUY BATTALION EMPLOYEES AGRARIAN REFORM BENEFICIARIES COOPERATIVE (LABEARBCO), REPRESENTED BY ITS CHAIRMAN, MARCOS ENDRINA, PETITIONER, VS. ENRICA O. BABAO, JULIUS ANTONIUS BABAO CO, MARIA ROSALIE BABAO CO, MARIA CONCEPTION BABAO CO, JOSEPHINE BABAO CO, MARIA ELENA BABAO CO, ANTHONY CRIS CO, ENRICO TAJANLANGIT, ANA RICA C. CACHO, MAR VINCE EMMANUEL C. REYES, AND JOHN LEE VINCENT C. REYES, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70190' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 215129, September 29, 2025 ]</H2>
+			<H3>LAPUY BATTALION EMPLOYEES AGRARIAN REFORM BENEFICIARIES COOPERATIVE (LABEARBCO), REPRESENTED BY ITS CHAIRMAN, MARCOS ENDRINA, PETITIONER, VS. ENRICA O. BABAO, JULIUS ANTONIUS BABAO CO, MARIA ROSALIE BABAO CO, MARIA CONCEPTION BABAO CO, JOSEPHINE BABAO CO, MARIA ELENA BABAO CO, ANTHONY CRIS CO, ENRICO TAJANLANGIT, ANA RICA C. CACHO, MAR VINCE EMMANUEL C. REYES, AND JOHN LEE VINCENT C. REYES, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before Us is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by petitioner Lapuy Battalion Employees Agrarian Reform Beneficiaries Cooperative (LABEARBCO), assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), which annulled and set aside the Orders<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Provincial Agrarian Reform Adjudicator (PARAD).<br><br><center><i>The Facts</i> </center><br>Manuel P. Babao (Manuel), the predecessor-in-interest of herein respondents Enrica O. Babao (Enrica), Julius Antonius Babao Co, Maria Rosalie Babao Co, Maria Conception Babao Co, Josephine Babao Co, Maria Elena Babao Co, Anthony Cris Co, Enrico Tajanlangit, Ana Rica C. Cacho, Mar Vince Emmanuel C. Reyes, and Johnlee Vincent C. Reyes (Enrica et al.), was the registered owner of two parcels of land embraced in Transfer Certificate of Title (TCT) No. T-1460 and TCT No. T-561 with an area of 413,439 and 210,025 square meters, respectively. Both parcels of land are situated in Lapuy, Tigatto, Davao City (subject properties).<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>When Manuel died on July 10, 1984, the subject properties were transferred to his wife, Rosa Ong Chua (Chua), and daughter, Enrica.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Sometime in 1989, the Department of Agrarian Reform (DAR) Davao City sent a notice to Chua informing her that the subject properties will be covered by the Comprehensive Agrarian Reform Program (CARP). Thereafter, Chua immediately applied for a deferment of the coverage for a period of 10 years, which was favorably acted upon by the DAR. Thus, Chua was granted a 10-year deferred period, set to expire on June 15, 1998.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On June 10, 1996, Chua died intestate, leaving Enrica as the sole heir of the subject properties. When the deferred period expired on June 15, 1998, the DAR, through the Municipal Agrarian Reform Officer (MARO) of Buhangin District, Davao City, sent a new Notice of Coverage to Enrica informing her that the land covered by TCT No. T-561 will be placed under the CARP. On October 12, 1998, another Notice of Coverage was sent to Enrica, placing the land covered by TCT No. T-1460 under the CARP.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On March 3, 1999, Enrica executed a Deed of Extrajudicial Settlement of the Estate of Manuel, adjudicating and distributing the subject properties in favor of Enrica and her children.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>The execution of the aforesaid deed prompted the DAR to file a complaint (2003 case) before the DARAB Office of the Provincial Adjudicator against Enrica et al. for annulment of the extrajudicial settlement of estate, docketed as DARAB Case No. XI-1783-DC-2003. Enrica et al. opposed the complaint and assailed the jurisdiction of the DARAB. They maintained that the Regional Trial Courts (RTC) had jurisdiction to nullify the extrajudicial settlement of estate and cancel the resultant titles thereto.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>After due proceedings, the PARAD rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> on September 5, 2003 (PARAD Decision), declaring the Deed of Extrajudicial Settlement by the heirs of Manuel null and void. The PARAD likewise directed the Register of Deeds, Davao City to reinstate TCT No. T-561 and TCT No. 1460 in the name of Manuel, and to cancel all its derivative titles.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Enrica et al. failed to appeal the same; hence, the PARAD Decision became final and executory. The DAR then filed a Motion for Execution before the PARAD, which granted a Writ of Execution to implement its decision.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On April 9, 2008, the PARAD Sheriff reported that the Register of Deeds failed to act on the Writ of Execution due to the uncertainty of the certificates of title to be cancelled.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On May 14, 2008, the DAR filed a Motion for the Issuance of an Alias Writ of Execution, specifying therein the derivative titles to be cancelled pursuant to the PARAD Decision.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>On May 22, 2008, the PARAD denied the DAR's Motion on the ground that the derivative titles issued to other persons, which were not parties to the case, could not be cancelled without a direct proceeding instituted for that purpose.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> The DAR filed a Motion for Reconsideration, which the Regional Agrarian Reform Adjudicator (RARAD) denied.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>This prompted the DAR to file another case before the PARAD against Enrica et al., Jaime Babado, Gunie B. Cornelio, Gloriosa Vicera, Gerino Macrohon, Manuel Co, Jesus Enrie Co, Lorenzo T. Ng, and the Register of Deeds of Davao City, docketed as DARAB Case No. XI-2057-DC-2008 for the cancellation of the derivative titles of TCT No. 561 and TCT No. T-1460 (hereinafter referred to as the 2008 case).<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Enrica et al. reiterated their opposition, claiming that only the RTCs can effectively nullify the extrajudicial settlement of estate and cancel its derivative titles.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On January 12, 2011, the RARAD issued an Order<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (January 12, 2011 Order) directing the consolidation of DARAB Case No. X1-1783-DC-2003 with DARAB Case No. XI-2057-DC-2008, and the implementation of the September 5, 2003 PARAD Decision.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Aggrieved, Enrica et al. filed a Notice of Appeal on February 9, 2011.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On February 14, 2011, the RARAD issued an Order denying the Notice of Appeal due to Enrica et al.'s failure to send copies of the Notice to the DARAB, as required under the DARAB Rules of Procedure.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Upon receipt of the Order, Enrica et al. immediately furnished the DARAB with copies of the notice of appeal, and at the same time filed an Omnibus Motion<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> with attached appeal memorandum<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> before the RARAD, to set aside and reconsider the Order.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>On March 22, 2011, the RARAD issued the second assailed Order denying Enrica et al.'s Omnibus Motion.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Aggrieved, Enrica et al. filed a Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> under Rule 65 of the Rules of Court before the CA, where they alleged that the RARAD acted without or in excess of its jurisdiction when it denied their Notice of Appeal without appreciating the grounds relied upon in their Omnibus Motion, and when it took cognizance of the case for annulment of the extrajudicial settlement of the estate of Manuel notwithstanding its lack of jurisdiction thereon.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>On December 11, 2013, the CA issued the assailed Decision granting Enrica et al.'s petition. The dispositive portion of which reads:<br><blockquote>WHEREFORE, the petition for<i> certiorari</i> is GRANTED. The [January 12], 2011, [February 14, 2011] and [March 22], 2011 Orders of the Provincial Agrarian Reform Adjudication Board is hereby annulled and set aside.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </blockquote>The CA ruled that in acting on the second case filed by the DAR for the cancellation of the derivative titles of TCT No. 561 and TCT No. T-1460, the RARAD issued an Order directing the implementation of the September 5, 2003 Decision and declared the said derivative titles null and void without giving the other respondents the opportunity to be heard.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>In so doing, the RARAD in effect treated the second case as a mere motion to implement the final and executory September 5, 2003 Decision without giving the other respondents who were not impleaded in the same decision the opportunity to be first heard.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The RARAD assumed jurisdiction over the second case filed by the DAR for the cancellation of the derivative titles issued in the name of Enrica et al. notwithstanding the fact that it has no jurisdiction to annul certificates of title issued in the name of the other respondents, since this will constitute a collateral attack on the title.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>LABEARBCO filed a Motion for Reconsideration, maintaining that the RARAD did not gravely abuse its discretion when it denied the Notice of Appeal based on the DARAB Rules. This was denied by the CA in the second Assailed Resolution.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Hence, this Petition.<br><br>The petitioner contends that there was no grave abuse of discretion on the part of the RARAD when it issued the Order dated February 14, 2011 denying respondents' Notice of Appeal for their failure to furnish copies of the same because the denial was warranted under Rule XIV, Section 1 of the 2003 DARAB Rules of Procedure.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> The petitioner further asserts that the CA erred when it set aside the Order dated January 12, 2011 despite the fact that the same was not assailed in the Petition for<i> Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In a Resolution, the Supreme Court required the respondents to file a Comment on the Petition.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> In their Comment,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the respondents substantially reiterated the findings of the CA. In its Reply,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the petitioner merely reiterated the arguments in its petition.<br><br><center><i>The Court's Ruling</i> </center><br>We affirm the Decision and Resolution of the CA.<br><br>In<i> Pascual v. Burgos, et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> We defined grave abuse of discretion in this wise:<br><blockquote>By grave abuse of discretion is meant such capricious and whimsical exercise of judgment as is equivalent to lack of jurisdiction. The abuse of discretion must be grave as where the power is exercised in an arbitrary or despotic manner by reason of passion or personal hostility and must be so patent and gross as to amount to an evasion of positive duty or to a virtual refusal to perform the duty enjoined by or to act at all in contemplation of law.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </blockquote>Based on the foregoing, the CA correctly ruled that the RARAD acted with grave abuse of discretion as there were apparent and obvious flaws in the conduct of the proceedings.<br><br>Without giving the other respondents in the 2008 case, DARAB Case No. XI-2057-DC-2008, who were not impleaded in the 2003 case, DARAB Case No. XI-1783-DC-2003, the opportunity to be heard, the RARAD ordered on January 12, 2011 the consolidation of the two cases and directed that the September 5, 2003 PARAD Decision be implemented and that the derivative titles of TCT No. T-561 and TCT No. 1460 be declared null and void.<br><br>The RARAD, in effect, treated the second case as a mere motion to implement the September 5, 2003 PARAD Decision without giving the other respondents, who were not impleaded in the decision, the opportunity to be first heard.<br><br>Settled is the principle that a person cannot be prejudiced by a ruling rendered in an action or proceeding in which they were not made a party, as ruled in<i> Green Acres Holdings, Inc. v. Cabral</i>:<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><blockquote>The principle that a person cannot be prejudiced by a ruling rendered in an action or proceeding in which [they were] not made a party conforms to the constitutional guarantee of due process of law. In<i> MuÃ±oz v. Yabut, Jr</i>., this Court ruled:<br><blockquote>An action for declaration of nullity of title and recovery of ownership of real property, or re-conveyance, is a real action but it is an action<i> in personam</i>, for it binds a particular individual only although it concerns the right to a tangible thing.<i> Any judgment therein is binding only upon the parties properly impleaded</i>.<br><br>Since they were not impleaded as parties and given the opportunity to participate in Civil Case No. Q-28580, the final judgment in said case cannot bind BPI Family and the spouses Chan. The effect of the said judgment cannot be extended to BPI Family and the spouses Chan by simply issuing an alias writ of execution against them.<i> No [person] shall be affected by any proceeding to which he is a stranger, and strangers to a case are not bound by any judgment rendered by the court. In the same manner, a writ of execution can be issued only against a party and not against one who did not have [their] day in court. Only real parties in interest in an action are bound by the judgment therein and by writs of execution issued pursuant thereto</i>.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis in the original, citations omitted) </blockquote> </blockquote>The RARAD assumed jurisdiction over the 2008 case filed by the DAR for the cancellation of the derivative titles issued in the name of respondents notwithstanding the fact that the same amounts to a collateral attack on the said titles.<br><br>In<i> Hortizuela v. Tagufa</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> this Court differentiated a direct attack from a collateral attack on a title, to wit:<br><blockquote>The Court is not unmindful of the principle of indefeasibility of a Torrens title and Section 48 of P.D. No. 1528 where it is provided that a certificate of title shall not be subject to collateral attack. A Torrens title cannot be altered, modified or cancelled except in a direct proceeding in accordance with law.<i> When the Court says direct attack, it means that the object of an action is to annul or set aside such judgment, or enjoin its enforcement. On the other hand, the attack is indirect or collateral when, in an action to obtain a different relief, an attack on the judgment or proceeding is nevertheless made as an incident thereof</i>.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied) </blockquote>To recall, the 2003 case sought the annulment of the extrajudicial settlement of estate of Manuel, which adjudicated and distributed the properties in favor of Enrica and her children. The PARAD annulled the extrajudicial settlement of estate in its September 5, 2003 Decision, and directed the Register of Deeds, Davao City to reinstate TCT No. T-561 and TCT No. 1460 in the name of Manuel, and to cancel all its derivative titles. This Decision became final and executory due to the respondents' failure to timely appeal the same.<br><br>On the other hand, the 2008 case filed by the DAR was a response to the PARAD's denial of its motion to implement the September 5, 2023 Decision since the derivative titles issued to other persons, who were not parties to the 2003 case, could not be cancelled without a direct proceeding instituted for that purpose. Thus, the DAR sought the cancellation of the derivative titles of TCT No. 561 and TCT No. T-1460 and impleaded the respective owners of the derivative titles.<br><br>However, instead of deciding the 2008 case on the merits, the RARAD, in its January 12, 2011 Order, ordered the consolidation of the two cases and likewise directed the implementation of the September 5, 2023 Decision. The RARAD treated the 2008 case as a mere motion to implement the September 5, 2023 Decision.<br><br>As correctly observed by the CA, the practical effect of the RARAD's Order was the annulment of the derivative titles of other persons who were never impleaded in the 2003 case. This constituted a collateral attack on their titles since the relief sought in the 2003 case was the annulment of the extrajudicial settlement of estate and not the cancellation of the said derivative titles.<br><br>From the foregoing, the RARAD gravely abused its discretion. As correctly ruled by the CA, the RARAD has no jurisdiction to entertain the action for cancellation of certificate of titles issued to third persons. Hence, all proceedings rendered in DARAB Case No. XI-1783-DC-2003 are declared void.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><b>ACCORDINGLY,</b> the Petition for Review on<i> Certiorari</i> is <b>DENIED. </b> The December 11, 2013 Decision and September 23, 2014 Resolution of the Court of Appeals in CA-G.R. SP No. 04191-MIN are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Hernando<sup style="COLOR: RGB(255, 0, 0);">**</sup> (Acting Chairperson), Zalameda,</i> and <i>Marquez, JJ.,</i> concur.<br><i>Gesmundo,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>C.J. (Chairperson),</i> on official leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Per Special Order No. 3224 dated September 15, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i> at 48-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 62-75. The December 11, 2013 Decision in CA-G.R. SP No. 04191-MIN was penned by Associate Justice Jhosep Y. Lopez (now a Member of this Court) and concurred in by Associate Justices Edgardo A. Camello and Henri Jean Paul B. Inting (now a Member of this Court) of the Twenty-Second Division, Court of Appeals, Cagayan De Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 76-82. The September 23, 2014 Resolution in CA-G.R. SP No. 04191-MIN was penned by Associate Justice Henri Jean Paul B. Inting (now a Member of this Court) and concurred in by Associate Justices Edgardo A. Camello and Pablito A. Perez of the Special Former Twenty-Second Division, Court of Appeals, Cagayan De Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 99-102, 105-109, 110-113. The January 12, 2011, February 14, 2011, and March 22, 2011 Orders in DARAB Case No. XI-2057-DC-08, respectively, were penned by Regional Agrarian Reform Adjudicator Norberto P. Sinsona of the Office of the Provincial Agrarian Reform Adjudicator, Department of Agrarian Reform Adjudication Board, Davao City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 63-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Not attached to the <i>rollo</i> or records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, p. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 103-104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 64-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 105-109.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 110-113.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 114-116.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 117-132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 99-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 83-98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 76-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 137-138.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 139-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 318-320.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 776 Phil. 167 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 185.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 710 Phil. 235 (2013) [Per J. Villarama, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 250-251.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 754 Phil. 499 (2015) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 506.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, p. 74.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

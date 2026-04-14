@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 278327 - OLIVER PILORIN, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70175' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 278327, October 08, 2025 ]</H2>
+			<H3>OLIVER PILORIN, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated June 27, 2023 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 6, 2024 of the Court of Appeals (CA) in CA- G.R. CR L-IC No. 14996, which upheld the Judgment<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated March 10, 2020 and the Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated September 28, 2020 of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> (RTC) in Criminal Case Nos. 46-2007FC and 80-2007FC. The RTC, <i>inter alia,</i> found petitioner Oliver Pilorin (Pilorin) guilty beyond reasonable doubt of the crime of qualified trafficking in persons as defined and penalized under Section 4(a) in relation to Sections 6(a) and 10(c) of Republic Act No. 9208, otherwise known as the Anti-Trafficking in Persons Act of 2003.<br><br><center><b>The Facts</b></center><br>This case stemmed from two separate Informations<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> filed before the RTC, particularly charging (a) Pilorin and Dahlia Griffin (Griffin) with qualified trafficking in persons and (b) Pilorin, Griffin, and Edward Dumangas (Dumangas) with violation of Section 5(c) of Republic Act No. 7610, otherwise known as the Special Protection of Children Against Abuse, Exploitation and Discrimination Act. The accusatory portions of the Informations respectively read:<br><br><center><b>Criminal Case No. 46-2007FC</b><br>(Violation of Section 5(c) of Republic Act No. 7610)</center><blockquote>That on or about the 25<sup>th</sup> day of July, 2006, in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, conspiring, confederating together and mutually helping with one another, did then and there willfully, unlawfully and feloniously, for money or deriving profit therefrom, engaged and employ [AAA278327, BBB278327, CCC278327, DDD278327],<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> who are still minors, to work as entertainers and or employees of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, a place or establishment serving as a cover or which engages in prostitution, to the damage and prejudice of the said [AAA278327, BBB278327, CCC278327, DDD278327].<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br><center><b>Criminal Case No. 80-2007FC</b><br>(Qualified Trafficking in Persons)</center><br>That on or about the 25<sup>th</sup> of July, 2006, in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the said accused, conspiring, confederating together and mutually helping with [sic] one another, did then and there willfully, unlawfully and feloniously, harbor, receive, maintain, and hire [AAA278327, BBB278327, CCC278327, DDD278327] to engage in prostitution.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></blockquote>The prosecution alleged that in the evening of July 24, 2006, then 14- year-old AAA278327, together with her friends, CCC278327 and DDD278327 (collectively, AAA278327 et al.), both of whom were also minors at the time, agreed to go to a disco bar. While they were waiting for a jeepney, Pilorin, who was then driving a taxi, stopped in front of AAA278327 et al. and offered them a ride. AAA278327 et al. initially refused but when Pilorin offered to ferry them for free, they agreed and rode the taxi. Pilorin then took AAA278327 et al. to a <i>lugawan</i> in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, fed them, then offered them jobs as waitstaff in a certain resto-bar wherein their would-be employer would take care of their documentary requirements. After eating, Pilorin took AAA278327 et al. to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> where they were made to wait for their would-be employer.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The next day, July 25, 2006, Pilorin took AAA278327 et al. to a hut near <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, a resto-bar that Griffin owns, and introduced them to Griffin as his recruits. When Griffin asked them their ages, they responded that all of them were already 18 years old, as instructed by Pilorin. Griffin then led them to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar where AAA278327 and CCC278327 were each given a two-piece outfit consisting of a brassiere and a short wrap-around skirt to wear. When they asked to go home first to ask permission from their parents, Griffin and Pilorin prevented them from leaving, and instead, endorsed them to Dumangas, Griff Bar's manager, who in turn made them dance on stage and entertain the resto-bar's customers. According to AAA278327, Dumangas would get angry at them whenever they performed poorly.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>For the next few days, AAA278327, together with CCC278327, was made to wear skimpy clothing, dance on stage with other women, and sit with <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar's customers, i.e.,<i>"ka-table"</i>. AAA278327 was also made to go out with customers who paid a "bar-fine" amounting to PHP 1,500.00 and then brought to hotels where they sexually abused her. Despite AAA278327 et al. 's eagerness to leave <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar and go home, they could not do so because they did not have money for transportation. Eventually, and with the help of CCC278327's cousin, AAA278327 et al. were rescued from <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In defense, Griffin admitted to being the owner of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, while Dumangas clarified that he was just a disc jockey at the resto-bar. Nonetheless, they denied the accusations against them. They maintained that on July 28, 2006, AAA278327 et al. came to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar to apply for jobs, particularly as guest relations officers (GROs). Griffin claimed that when she asked for AAA278327 et al. for their birth certificates, they told her that they did not have such copies with them, so she told them to come back with copies of their birth certificates. Griffin added that later, Dumangas told her that AAA278327 et al. came back to apply as GROs, so she told Dumangas to check their requirements. When Dumangas checked with AAA278327 et al., they still failed to bring copies of their birth certificates so Griffin disallowed them to work at the resto-bar. Finally, Griffin and Dumangas asserted that given their narration, they were surprised that AAA278327 et al. would file criminal cases against them.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>For his part, Pilorin also denied the accusations against him. He averred that on July 25, 2006, he was waiting in line at a taxi bay when two girls and the group told him to bring them to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. During the taxi ride, the group, among other things, asked for his help to look for jobs but Pilorin told them that he did not know of any job offers, so he could not help them. Later, the group requested Pilorin to drop them off in front of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, to which Pilorin agreed. Similar with Griffin and Dumangas, Pilorin claimed that he was surprised when criminal charges were filed against him.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br><center><b>The RTC Ruling</b></center><br>In a Judgment<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated March 10, 2020, the RTC ruled as follows: First, in Criminal Case No. 46-2007FC, the RTC found Griffm and Dumangas guilty beyond reasonable doubt of violation of Section 5(c) of Republic Act No. 7610, and accordingly, sentenced each of them to suffer the penalties of imprisonment for an indeterminate period of 10 years of <i>prision mayor,</i> as minimum, to 16 years, five months, and 10 days of <i>reclusion temporal,</i> as maximum, and a fine of PHP 20,000.00; and ordered each of them to pay AAA278327 the amounts of PHP 20,000.00 as civil indemnity, PHP 20,000.00 as moral damages, and PHP 20,000.00 as exemplary damages. On the other hand, Pilorin was acquitted. Second, in Criminal Case No. 80- 2007FC, the RTC found Pilorin and Griffm guilty beyond reasonable doubt of qualified trafficking in persons, and accordingly, sentenced each of them to suffer the penalties of life imprisonment and a fine of PHP 2,000,000.00.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>In so ruling, the RTC found that Pilorin, Griffin, and Dumangas clearly acted in concert with one another, considering that: (a) Pilorin made AAA278327 et al. job offers as waitstaff, brought them to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar despite knowing that they were minors, and introduced them to Griffin; (b) despite AAA278327 et al. being unable to prove their claim that they were already of age, Griffin made AAA278327 dress up, wear make-up, dance on the resto- bar's stage, sit with customers, then allowed such customers to bring her out of the resto-bar and into hotel rooms where she was sexually abused; and (c) Dumangas managed <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar and would get upset whenever AAA278327 refused to dance on stage. Given the foregoing circumstances, the RTC made the following conclusions: First, in Criminal Case No. 46-2007FC, Griffin and Dumangas, as the owner and the manager of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, respectively, violated Section 5(c) of Republic Act No. 7610 and must be held criminally liable therefor; on the other hand, since Pilorin is neither the owner nor the manager of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, he could not be said to have violated such legal provision. Second, in Criminal Case No. 80-2007FC, since only Griffin and Pilorin were charged with qualified trafficking in persons, then they are the only ones who could be convicted of such crime.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Griffin and Dumangas jointly filed a Motion for Reconsideration, while Pilorin separately filed his own Motion for Reconsideration, with both Motions assailing their respective convictions. On the other hand, the prosecution moved for partial reconsideration seeking monetary awards in AAA278327's favor in Criminal Case No. 80-2007FC. In an Order<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated September 28, 2020, the RTC denied the Motions of Pilorin, Griffin, and Dumangas, while it granted the prosecution's Motion. Accordingly, the RTC ordered Pilorin and Griffin to jointly and severally pay AAA278327 the amounts of PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages, both with legal interest at the rate of 6% per annum from finality of the ruling until full payment.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Aggrieved, Pilorin, Griffin, and Dumangas all appealed to the CA.<br><br><center><b>The CA Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated June 27, 2023, the CA: (a) upheld the RTC ruling <i>in toto</i> insofar as Criminal Case No. 80-2007FC is concerned; and (b) affirmed the RTC ruling in Criminal Case No. 46-2007FC with modification, adjusting the indeterminate prison sentence of Griffin and Dumangas to eight years and one day of <i>prision mayor,</i> as minimum, to 17 years, four months, and one day of <i>reclusion temporal,</i> as maximum.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Essentially upholding the RTC's findings, the CA held that it was proven beyond reasonable doubt that: (a) Griffin and Pilorin recruited and brought AAA278327, who was just a minor at the time, to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar under the pretext of job employment, but AAA278327 was instead forced to engage in prostitution and further subjected to sexual exploitation; and (b) Griffin and Dumangas, as the owner and the manager, respectively, of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, had derived profit and advantage from AAA278327's sexual exploitation.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Only Pilorin moved for reconsideration which the CA denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated December 6, 2024. Hence, this Petition questioning his conviction for qualified trafficking in persons in Criminal Case No. 80- 2007FC.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><center><b>The Issue Before the Court</b></center><br>The issue before the Court is whether Pilorin is guilty beyond reasonable doubt of qualified trafficking in persons.<br><br><center><b>The Court's Ruling</b></center><br>Prefatorily, the Court notes that Pilorin elevated the matter before the Court through a Rule 45 Petition for Review on <i>Certiorari.</i> As a general rule, appeals of criminal cases shall be brought to the Court by filing a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court; however, and as an exception, an appeal on the CA's decision shall be made by a mere notice of appeal in cases wherein the CA imposed the penalty of "<i>reclusion perpetua,</i> life imprisonment or a lesser penalty."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In this case, Pilorin clearly availed of a wrong mode of appeal by filing a petition for review on <i>certiorari</i> despite having been sentenced by the lower courts to suffer, among others, the penalty of life imprisonment. Be that as it may, and since the instant case involves Pilorin's liberty, the Court deems it proper to treat the Petition as an ordinary appeal to resolve the substantive issue at hand with finality.<br><br>This preliminary matter having been settled, the Court rules that Pilorin's criminal liability for qualified trafficking in persons must be sustained, as will be explained hereunder.<br><br>At the outset, it is well to point out that as per the Information in Criminal Case No. 80-2007FC, the crime was committed in 2006. As such, the applicable law is Republic Act No. 9208 in its original form, i.e., before amendments were introduced by Republic Act No. 10364 and Republic Act No. 11862. On this score, relevant provisions of Republic Act No. 9208, particularly Sections 3(a), 3(b), 4(a), 6(a), and 10(b), respectively read:<br><blockquote>Section 3. <i>Definition of Terms.</i> - As used in this Act:<br><br>(a) <i>Trafficking in Persons</i> - refers to the recruitment, transportation, transfer or harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders by means of threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person for the purpose of exploitation which includes at a minimum, the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs.<br><br>The recruitment, transportation, transfer, harboring or receipt of a child for the purpose of exploitation shall also be considered as "trafficking in persons" even if it does not involve any of the means set forth in the preceding paragraph.<br><br>(b) <i>Child</i> - refers to a person below eighteen (18) years of age or one who is over eighteen (18) but is unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition.<br><br>. . . .<br><br>Section 4. <i>Acts of Trafficking in Persons</i>. - It shall be unlawful for any person, natural or juridical, to commit any of the following acts:<br><br>(a) To recruit, transport, transfer; harbor, provide, or receive a person by any means, including those done under the pretext of domestic or overseas employment or training or apprenticeship, for the purpose of prostitution, pornography, sexual exploitation, forced labor, slavery, involuntary servitude or debt bondage;<br><br>. . . .<br><br>Section 6. Qualified Trafficking in Persons. - The following are considered as qualified trafficking:<br><br>(a) When the trafficked person is a child;<br><br>. . . .<br><br>Section 10. <i>Penalties and Sanctions.</i> - The following penalties and sanctions are hereby established for the offenses enumerated in this Act:<br><br>(c) Any person found guilty of qualified trafficking under Section 6 shall suffer the penalty of life imprisonment and a fine of not less than Two million pesos (P2,000,000.00) but not more than Five million pesos (P5,000,000.00)[.]</blockquote>In <i>People v. Peek,</i><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the Court <i>En Banc</i> elucidated on qualified trafficking in persons, including its elements, as follows:<br><blockquote>In order to prosecute violations of Section 4 of RA 9208 ... the prosecution must establish: (1) the <b>act</b> of recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders; (2) the <b>means</b> used include by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person; and (3) the <b>purpose</b> of trafficking includes the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs.<br><br>Subsequently, under Section 3 (a), paragraph 2 of RA 9208 ... when the trafficked victim is a child, it is considered as trafficking in persons even if it does not involve any of the <b>means</b> stated above. In relation thereto, a child is defined under Section 3 (b) of the same Act as a person below 18 years of age or one who is over 18 but unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition. Thus, in such cases, it is enough that the following was established by the prosecution: (a) the trafficked victim was a <b>child;</b> (b) the <b>act</b> of recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders; and (c) the <b>purpose</b> of trafficking includes the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs.<br><br>Moreover, under Section 6 (a) of RA 9208, as amended, the crime of trafficking in persons is <b>qualified</b> when the trafficked victim is a <b>child</b>.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup>(Emphasis in the original)</blockquote>In this case, the Court agrees with the findings of the lower courts that all the elements of qualified trafficking in persons have been proven beyond reasonable doubt.<br><br>First, AAA278327's birth certificate explicitly indicates that she was born on February 7,1992. As such, it is undisputed that on the dates pertinent to this case, i.e., July 2006, she was a 14-year-old minor.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Second, Pilorin and Griffin, in concert with one another, recruited and brought AAA278327 to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar on the pretext of a legitimate job employment. Third, the real purpose of bringing AAA278327 to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar is to make her engage in prostitution and sexual exploitation. AAA278327's testimony in this regard is telling:<br><blockquote><table Â ="" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="5%" valign="top">Q: </td><td width="95%"><div align="justify">Where were you finally brought by accused [Pilorin]?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">One of the bars in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">Can you recall the name of the place or the establishment?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify"><span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q:</td><td> <div align="justify">And what was your reaction when you know that you were brought to the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">I was surprised.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">Why were you surprised?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">When we entered the place, we saw naked women.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">You said the Pilorin told you that you will meet your employer, whom did you meet when you reached <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Dahlia Griffin.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What happened after you meet [sic] with [Griffin]?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">[Pilorin] introduced us to her. We stayed in the hut.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">Were you introduced by [Pilorin] to [Griffin]?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">He introduced us to her and told us that she is the owner of the club.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q:</td><td><div align="justify">You said "we", can you tell us who were the other persons who were introduced to [Griffin]?</div></td></tr><tr><td valign="top">A:</td><td> <div align="justify">[CCC278327] and [Aniceto].</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">So there were three of you?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Yes ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What kind of work you are supposed to do at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">According to [Pilorin] as a waitress.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">You testified that you were introduced to Dahlia and she would be your employer, what, if any, did Dahlia say to you with respect to your work?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">She asked us how old are we.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">And what was your reply?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">We answered that were are already 18 [years old] because that was the instruction of [Pilorin].</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q:</td><td> <div align="justify">What was the response of [Griffin] when you said [that you were] 18 [years old]?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">She was asking the date of our birth.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What was your reply?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">It was [CCC278327] who asked and she was not able to answer that is why she laughed and [Griffin] told that she will take care of the papers.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What else did [Griffin] tell you?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">No more ma'am, she just asked us to dress up.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What kind of wear you should do?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">2-piece ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">Where did this 2-pieces [sic] come from?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">She asked someone working in the bar to get [them].</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">When you said <i>"pinakuha niya po",</i> who made that instruction?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">[Griffin].</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">Do you have with you the particular bra or 2-pieces [sic] that you were asked to wear?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Yes ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . . </td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">When this article of clothings [sic] were brought, you testified that you were asked to wear [them], will you know who wear [sic] the other articles?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">The other bra is [sic] worn by [CCC278327] while the other bra I wore the following day.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">So you were asked to wear these articles of clothing, the string bra and wrapped around, what were your reactions], when you were asked to wear that clothing?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">I was surprised, ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">Why were you surprised?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Because I did not expect to wear that bra but we were asked to wear that.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What was your response after you were asked to stay and see what you were expected to do?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">We told them that we will go home and we will ask permission.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What was their response?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">They did not agree and told us to just wear the clothing.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What happened after that they did not agree for you to go home?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">We were forced to wear those garments.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">After you wore the garments, what happened?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">She asked somebody to put make up on us.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What happened after you were [sic] the make-up?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">We were asked to go to the bar.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What did you do in the bar?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">We were asked to dance.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What part of the bar were you asked to dance?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">[On] the stage.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q:</td><td> <div align="justify">And you said that you were asked to dance at the stage, who dance[d] with you?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">[CCC278327].</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . . </td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">How long did you dance in the stage?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">3 songs.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">And what happened after the 3 songs were over?</div></td></tr><tr><td valign="top">A:</td><td> <div align="justify">[Griffin] asked me to sit in the table of one Filipino customer.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What did you do when you were asked to sit in the table of a Filipino customer?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">I was just ask[ed] to drink.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What kind of drink were you asked to drink?</div></td></tr><tr><td valign="top">A:</td><td> <div align="justify">Juice with tequila.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q:</td><td> <div align="justify">At that time you were there dancing and entertaining customers, do you recall if you were ask[ed] to seat [sic] in a table and entertain customers?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Yes with an American.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What happened to this American?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">He also took me out in bar fine.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q:</td><td> <div align="justify">Did you know how much is the bar fine?</div></td></tr><tr><td valign="top">A:</td><td> <div align="justify">[PHP] 1,500.00.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What is the bar fine for?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify"><i>Para sasama sa labas.</i></div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">How much of the bar fine would go to you?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Half, ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">So the American [paid] you [PHP] 1,500.00 to take you out?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Yes in Blue Rock.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">You and the American only?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">Yes ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What happened in Blue Rock?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify">I was again brought inside the room.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q: </td><td><div align="justify">What happened inside the room?</div></td></tr><tr><td valign="top">A: </td><td><div align="justify"><i>Ginalaw [niya] po ako.</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup></div></td></tr></tbody></table></blockquote>As the CA aptly observed, AAA278327's positive and candid testimony established that Pilorin and Griffin, in conspiracy with one another, took advantage of her vulnerability and minority. Particularly, they lured her into a purported legitimate job as a waitstaff, but once she was already in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bar, she was forced to dance on stage wearing skimpy clothing; entertain the resto-bar's guests; and worse, engage in prostitution and sexual exploitation. Clearly, all the elements of qualified trafficking in persons have been proven beyond reasonable doubt.<br><br>In a final, desperate plea to escape criminal liability, Pilorin points out that as explicitly stated in the Judgment dated March 10,2020 of the RTC, the judge who rendered the ruling was not the same judge who presided in taking AAA278327's testimony.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Pilorin then posits that given this fact, the judge that rendered the ruling was unable to determine whether AAA278327's testimony is worthy of belief and credible on material points.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> However, the Court is unable to subscribe to his view. As case law instructs, "the validity of a judgment is not rendered erroneous solely because the judge who heard the case was not the same judge who rendered the decision. In fact, it is not necessary for the validity of a judgment that the judge who penned the decision should actually hear the case in its entirety, for [they] can merely rely on the transcribed stenographic notes taken during the trial as the basis for [their] decision,"<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> as in this case.<br><br>in sum, the Court sustains Pilorin's conviction for the crime of qualified trafficking in persons. As regards his criminal penalties and civil liabilities <i>ex delicto,</i> suffice it to say that the lower courts correctly sentenced him to suffer the penalties of life imprisonment and a fine of PHP 2,000,000.00, and ordered him to pay AAA278327 the amounts of PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages, all with legal interest at the rate of 6% per annum from finality of this Decision until full payment, as the foregoing are in accord with prevailing jurisprudence on the matter.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><b>ACCORDINGLY,</b> the Petition is <b>DISMISSED.</b> The Decision dated June 27, 2023 and the Resolution dated December 6, 2024 of the Court of Appeals in CA-G.R. CR HC No. 14996 are <b>AFFIRMED</b> <i>in toto.</i> Oliver Pilorin is found <b>GUILTY</b> beyond reasonable doubt of the crime of qualified trafficking in persons as defined and penalized under Section 4(a) in relation to Sections 6(a) and 10(c) of Republic Act No. 9208, otherwise known as the Anti-Trafficking in Persons Act of 2003. He is sentenced to suffer the penalties of life imprisonment and a fine of PHP 2,000,000.00. He is likewise ordered to pay the victim, AAA278327, the amounts of PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages, all with legal interest at the rate of 6% per annum from finality of this Decision until full payment.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ., (Chairperson)</i> and <i>Villanueva, J.,</i> concur.<br><i>Lazaro-Javier</i> and <i>Lopez, J., JJ.,</i> On official business.<br><br><br><hr width="60%" size="1" noshade="" align="LEFT"><sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated Acting Chief Justice per Special Order No. 3223 dated September 15, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1] </sup><i>Rollo,</i> pp. 13-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2] </sup><i>Id.</i> at 40-65. Penned by Associate Justice Rex Bernardo L. Pascual and concurred in by Associate Justices Myra V. Garcia-Femandez and Tita Marilyn B. Payoyo-Villordon of the Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3] </sup><i>Id.</i> at 150-156. Penned by Associate Justice Rex Bernardo L. Pascual and concurred in by Associate Justices Myra V. Garcia-Fernandez and Tita Marilyn B. Payoyo-Villordon of the Former Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4] </sup><i>Id.</i> at Assisting Judge Ma. Cristina J. Mendoza-Pizarro of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5] </sup><i>Id.</i> at 97-102. Penned by Acting Presiding Judge Gemma Theresa B. Hilario-Logronio of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><font color="#FF0000"><sup>[6]</sup></font><i> Id.</i> at 66-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7] </sup>The identity of the victims or any information which could establish or compromise their identity, as well as those of their immediate family or household members shall be withheld pursuant to Republic Act No. 7610, entitled "An Act Providing for Stronger Deterrence and Special Protection Against Child Abuse, Exploitation and Discrimination, and for Other Purposes," approved on June 17, 1992; Republic Act No. 9262, entitled "An Act Defining Violence Against Women and Their Children, Providing for Protective Measures for Victims, Prescribing Penalties Therefore, and for Other Purposes," approved on March 8, 2004; and Section 40 of A.M. No. 04-10-11-SC, otherwise known as the "Rule on Violence against Women and Their Children' (November 15, 2004). (See footnote 4 in <i>People v. Cadano, Jr.,</i> 729 Phil. 576,578 <sup style="COLOR: RGB(255, 0, 0);">[2014] </sup>[Per J. Perlas-Beraabe, Second Division], citing <i>People v. Lomaque,</i> 710 Phil. 338, 342 <sup style="COLOR: RGB(255, 0, 0);">[2013] </sup>[Per J. Brion, Second Division]. See also Amended Administrative Circular No. 83-2015, entitled "Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances," dated September 5, 2017.)<br><br><sup style="COLOR: RGB(255, 0, 0);">[8] </sup><i>Rollo,</i> p. 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9] </sup><i>Id.</i> at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10] </sup><i>Id.</i> at 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11] </sup><i>Id.</i> at 46-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12] </sup><i>Id.</i> at 47-48. <i>See also id.</i> at 68-70, 73-77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13] </sup><i>Id.</i> at 44-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14] </sup><i>Id.</i> at 72-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15] </sup><i>Id.</i> at 66-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16] </sup><i>Id.</i> at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17] </sup><i>Id.</i> at 73-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18] </sup><i>Id.</i> at 97-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19] </sup><i>Id.</i> at 102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20] </sup><i>Id.</i> at 40-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21] </sup><i>Id.</i> at 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22] </sup><i>Id.</i> at 49-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23] </sup><i>Id.</i> at 150-156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24] </sup><i>Id.</i> at 13-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25] </sup>RULES OF COURT, Rule 122, sec. 3(e), in relation to Rule 124, sec. 13(c).<br><br><sup style="COLOR: RGB(255, 0, 0);">[26] </sup>G.R. No. 256452, February 25, 2025 [Per J. Kho, Jr., <i>En Banc</i>],<br><br><sup style="COLOR: RGB(255, 0, 0);">[27] </sup><i>Id.,</i> citations omitted.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28] </sup><i>See rollo,</i> pp. 67-68<br><br><sup style="COLOR: RGB(255, 0, 0);">[29] </sup><i>Rollo,</i> pp. 52-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30] </sup><i>Id.</i> at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31] </sup><i>Id.</i> at 19 -22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32] </sup><i>Kummer v. People,</i> 717 Phil. 670, 68 (2013) [Per J. Brion, Second Division], <i>citing People v. Cadley,</i> 469 Phil. 515, 524 (2004) [Per J. Carpio Morales, Third Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[33] </sup><i>People v. Peek,</i> G.R. No. 256452, February 25, 2025 [Per J. Kho, Jr., <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

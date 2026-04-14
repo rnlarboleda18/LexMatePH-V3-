@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262112 - ETERNAL EDUCATION PLANS, INC., PETITIONER, VS. CHARMEL J. KINTANAR, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70074' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262112, May 19, 2025 ]</H2>
+			<H3>ETERNAL EDUCATION PLANS, INC., PETITIONER, VS. CHARMEL J. KINTANAR, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Assailed in this Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court are the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 27, 2021 and the Amended Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 19, 2022 of the Court of Appeals (CA) in CA-G.R. CV No. 111558, affirming the dismissal of the complaint for specific performance<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> filed by respondent Channel J. Kintanar (Kintariar) against petitioner Eternal Education Plans, Inc. (petitioner). The dismissal of the complaint was ordered by Branch 142, Regional Trial Court, Makati City (RTC) through a Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated November 10, 2017.<br><br><center><b>The Facts</b></center><br>Kintanar is the transferee of an Educational Program Agreement (preÂ­-need plan) provided by petitioner. She acquired the pre-need plan from her friend, Glenda L. Ares (Ares), who bought the pre-need plan on August 2, 1990. The pre-need plan has a maturity date of August 2, 2006, and a gross price of PHP 12,820.00 payable in 20 installments of PHP 461.00 each. After acquiring the pre-need plan, Kintanar continued paying the installments until completion.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In June 2010, she sought to collect under the pre-need plan by demanding the full amount of her daughter's college tuition fees. Petitioner, however, only paid her at the prevailing rate for non-exclusive schools as of 2006, when the pre-need plan matured. Thus, Kintanar filed a complaint before the RTC.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Petitioner initially moved to dismiss the complaint on the ground of lack of jurisdiction, citing Section 55<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> of Republic Act No. 9829,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> or the PreÂ­-need Code of the Philippines. According to petitioner, it is the Insurance Commission that has exclusive jurisdiction over the complaint. The RTC denied the motion, ruling that under paragraph XXVIII of the pre-need plan, all causes of action arising from the parties' agreement shall be filed exclusively with the courts of Makati City. Trial then ensued.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br><center><b>The RTC Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated November 10, 2017, the RTC denied the complaint for lack of merit. Similarly, it also denied all counterclaims for lack of legal and factual bases.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Aggrieved, Kintanar elevated the case to the CA.<br><br><center><b>The CA Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated May 27, 2021, the CA ruled that the complaint must be dismissed, but for different grounds. Invoking its power to consider grounds not assigned as errors but affecting subject matter jurisdiction, as held in <i>Heirs of Loyola vs. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> the appellate court ruled that, as earlier argued by petitioner in its motion to dismiss, jurisdiction over the complaint belonged to the Insurance Commission under Section 55 of Republic Act No. 9829. Accordingly, the CA annulled and set aside the RTC's decision, rendering a new decision dismissing the complaint <i>without prejudice</i> to the filing by the parties of the appropriate action before the proper agency.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Petitioner moved to reconsider, arguing that the dismissal of the complaint should be <i>with prejudice</i>, which the CA denied in an Amended Resolution<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> dated July 29, 2022; hence this Petition, to which Kintanar filed her Comment<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated July 11, 2024.<br><br><center><b>The Issue Before the Court</b></center><br>The Court resolves whether the CA erred in dismissing the complaint without prejudice on the ground of lack of jurisdiction.<br><br><center><b>The Court's Ruling</b></center><br>The Petition is denied.<br><br><center><b>I</b></center><br>Petitioner claims that the CA has decided a question of substance not theretofore determined by the Court.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Specifically, the CA held that between the civil courts and the Insurance Commission, it is the latter that has the primary and exclusive power over actions for specific performance seeking to enforce payment and refund under a pre-need plan. True, a survey of related jurisprudence shows that this specific jurisdictional issue has not yet reached the Court. Exercising its discretionary review,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> however, the Court finds no reversible error on the part of the CA on the issue of jurisdiction.<br><br>Petitioner concedes that Section 55 of Republic Act No. 9829 gives the Insurance Commission <i>primary and exclusive power</i> to adjudicate any and all claims involving pre-need plans. Contrary to its earlier argument that the RTC had no jurisdiction over the complaint, petitioner now argues that the RTC properly assumed jurisdiction because: (1) the complaint is one for specific performance, jurisdiction over which belongs to the civil courts, and not a "claim" under Republic Act No. 9829; (2) Republic Act No. 9829 does not preclude the civil courts from assuming jurisdiction over claims against preÂ­-need plans, as its Section 59 provides that the rights and remedies under the Pre-need Code shall be <i>in addition</i> to any and all other rights and remedies under existing laws; and (3) the Insurance Commission does not have jurisdiction over Kintanar's complaint for damages; thus, for the CA to sanction the filing of the claim with the Insurance Commission and action for damages with the civil court would result in the splitting of Kintanar's causes of action. Given these, petitioner finally argues that the RTC Decision must be upheld because Kintanar failed to prove that she is entitled to damages and reimbursement of the difference between what petitioner paid her and the actual amount of her daughter's tuition fees.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>These arguments may be summarized in three propositions: <i>first</i>, the action for specific performance is not a "claim involving a pre-need plan" within the Commission's jurisdiction; <i>second</i>, assuming that it is, the power of the Commission to adjudicate such claims is not exclusive; and <i>third</i>, jurisdiction over the complaint belongs to the RTC because the Insurance Commission does not have the power to adjudicate Kintanar's claim for damages. These are all erroneous.<br><br><i>First</i>, the action involved in this case is a claim involving a pre-need plan. Accordingly, Section 55 of Republic Act No. 9829 provides that jurisdiction over the action belongs <i>primarily and exclusively</i> to the Insurance Commission. Case law defines a "claim" as a cause of action or a demand for money or property.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> While Kintanar sought to exact petitioner's performance of its obligations under the pre-need plan, the performance prayed for comes in the form of full payment or reimbursement of the tuition fees paid. Essentially, it is a demand for money to which she claims to be entitled <i>under a pre-need plan</i>.<br><br><i>Second</i>, while petitioner is correct that the rights and remedies provided by Republic Act No. 9829 shall be <i>in addition to any and all other rights and remedies under existing laws</i>, as provided in Section 59, it erred in arguing that the Commission's power to adjudicate claims involving pre-need plans is not exclusive. Section 59 does not dilute the <i>primary and exclusive power</i> of the Insurance Commission over claims involving pre-need plans. To sanction petitioner's interpretation of Sections 55 and 59 is to permit an inconsistency in the statute. It is also a needless inconsistency. Section 55 is clear that the Insurance Commission's power over claims is primary and exclusive. The fundamental rule is that "when the law is clear and unambiguous, it should be applied as written."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Thus, Section 59's reference to "all <i>other</i> rights and remedies that exist under existing laws" can only mean those rights and remedies provided under other laws that are <i>not</i> claims involving pre-need plans. This reading of the law gives effect to both provisions and harmonizes them.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br><i>Finally</i>, petitioner is incorrect that the CA decision sanctions the splitting of causes of actionâthat it allows Kintanar to litigate her claim before the Commission while her action for damages would be heard by the civil courts. To make this argument, petitioner claims that the Commission has no jurisdiction over the claim for moral and exemplary damages and attorney's fees. This is equally erroneous.<br><br>In <i>Sto. Tomas v. Del Valle</i>,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> the Court ruled that administrative agencies such as the Housing and Land Use Regulatory Board have the power to adjudicate claims for moral and exemplary damages since they are purely incidental to the principal relief sought. The Court held:<blockquote>Statutes conferring powers on administrative agencies must be liberally construed to enable them to discharge their assigned duties in accordance with the legislative purpose. In addition, it is settled in jurisprudence that when an administrative agency or body is conferred quasi-judicial functions, all controversies relating to the subject matter pertaining to its specialization are deemed to be included within the jurisdiction of said administrative agency or body. Split jurisdiction is not favored.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>Thus, the Insurance Commission is empowered to adjudicate Kintanar's claim for moral and exemplary damages, as well as attorney's fees, arising as they do from her claim under the pre-need plan she acquired from petitioner. There is, therefore, no need for the actions to be split, in case Kintanar files the action with the Insurance Commission.<br><br><center><b>II</b></center><br>Judgments rendered by tribunals without jurisdiction are void.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> In this case, the CA correctly held that the RTC Decision must be vacated, without prejudice to the refiling of the action with the Insurance Commission. Indeed, the RTC Decision has and ought to have no legal effect, as it sprung from a court that had no power to hear the case.<br><br>However, during the deliberations of this case, Senior Associate Justice Marvic M.V.F. Leonen (Senior Associate Justice Leonen) and Associate Justice Amy C. Lazaro-Javier (Associate Justice Lazaro-Javier) observed that the litigation between the parties on this issue has been ongoing since 2010. Considering this already protracted length of time, the amount of the claim, and the costs of pursuing another legal remedy through the Insurance Commission, both justices proposed that the case be resolved on the merits by the Court. Senior Associate Justice Leonen observed that strict adherence to the rule on jurisdiction may result in defeating Kintanar's cause of action.<br><br>Relevantly, Associate Justice Lazaro-Javier pointed out that the available evidence on record could already aid the Court in ruling on this case on the merits in order to put an end to the protracted litigation.<br><br>The Court agrees. The trial and appellate court records have been elevated,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> enabling the Court to rule on the substantive merits of the complaint filed by Kintanar.<br><br>The parties have fully ventilated their arguments and evidence before the trial court and the appellate court. It would not strain the imagination to conclude that were Kintanar to file the appropriate action before the Insurance Commission, the parties would duplicate not only their efforts but their arguments and pieces of evidence as well. The losing party in that case would likely appeal and repeat the process that led the parties to this Court. Thus, the Court allows a review of the case on the merits on considerations of judicial economy.<br><br>In <i>Westfall v. Locsin</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> the Court defined judicial economy:<blockquote>Judicial economy refers to "efficiency in the operation of the courts and the judicial system; especially the efficient management of litigation so as to minimize duplication of effort and to avoid wasting the judiciary's time and resources." <i>The norm of judicial economy aims to prevent duplicating the efforts of the parties and the courts.</i> The Court has refused to remand cases for further proceedings when the parties have been given ample opportunities to argue their positions. Besides, it is highly probable that, upon remand, the case would eventually reach this Court again. (Citations omitted; emphasis supplied)</blockquote>The norm of judicial economy has also allowed the Court to consider a complaint for quieting of title as one for annulment of judgment, which effectively prevented a party from duplicating their efforts since the complaint primarily sought the annulment of a judgment for want of jurisdiction. In <i>Reburiano v. De Vera</i>:<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><blockquote>While it was erroneous for Reburiano to file a complaint for quieting of title instead of a petition for annulment of judgment, her intention in filing the complaint is clear. Reburiano's purpose is to question the partially void judgment of the MTC. <i>In the interest of justice and equity, and in keeping with the policy of the State to promote speedy and impartial justice and unclog court dockets, the complaint for quieting of title Reburiano filed with the intention of assailing the partially void judgment of the MTC shall be considered a petition for annulment of judgment pursuant to Rule 47 of the Rules.</i> Rather than duplicating the efforts of the parties and the court in trying the issues together in another action, the Court hereby resolves the issues raised and awards what rightfully belongs to each party in the interest of judicial economy.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis supplied)</blockquote><center><b>III</b></center><br>Kintanar's complaint for specific performance with damages seeks to compel petitioner to pay the full amount of tuition fees that she paid for her daughter, who started college in 2010. She relies on the Acceptance and Guarantee clause in the pre-need plan, which states:<blockquote><u>IV. ACCEPTANCE AND GUARANTEE</u><br><br>In consideration of the full payment of the Gross Pre-need Plans stated in the Educational Plan Application and his fulfillment of the other terms and conditions of this Educational Program Agreement (EPA), ETERNAL EDUCATIONAL PLANS, INC. guarantees to pay to the College or University the tuition or other standard school fees as or when they fall or become due IRRESPECTIVE OF FUTURE COST, upon notification of acceptance of enrollment of the Scholar in the duly certified Philippine College or institution as contracted by the Sponsor.<br><br>It is also agreed upon that EEPI shall carry the purpose and will of the SPONSOR that no cash be paid in lieu of the SPONSOR's Educational Program contracted for, except as may be otherwise stated herein.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></blockquote>Petitioner argues that Kintanar is entitled to coverage at the prevailing rate at the time of the maturity of the pre-need plan, which was in August 2, 2006. Because Kintanar's daughter started college in 2010, petitioner believes that the Deferred Availment clause in the pre-need plan applies, which states:<blockquote><u>XXI. DEFERRED AVAILMENT OF BENEFITS</u><br><br>Upon written request made by the SPONSOR and the Scholar before or during the availment period of the educational benefit and with valid cause or grounds, such as serious illness on the part of the Scholar, the period of availment may be deferred to a later date, subject to the approval of ETERNAL EDUCATION PLANS, INC.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></blockquote>According to petitioner, Kintanar failed to make a written request for deferment; thus, petitioner did not and could not give its approval. It likewise argues that, as the transferee of an existing pre-need plan, Kintanar should have informed petitioner that she was intending to avail of the benefits at a later time. Petitioner also invoked the Change of Scholar clause in the preÂ­-need plan, which states that in case the new scholar is younger than or the same age as the original Scholar, then the existing company guidelines shall prevail. Finally, petitioner posits that Kintanar is estopped from alleging a later maturity date since it is written on the first page of the pre-need plan that the maturity date shall be on August 2, 2006.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>It is important to emphasize that, as raised by the parties, Kintanar was not the original owner of the pre-need plan; rather, she is a transferee thereof, as she purchased it from Ares. Thus, the Transfer clause in the pre-need plan is relevant as well. It provides:<blockquote>XVI. <u>TRANSFER</u><br><br>Except for the Insurance Benefits, the SPONSOR may transfer his rights and obligations under this Agreement to another SPONSOR (called TRANSFEREE) who is a resident of the Philippines and within ETERNAL EDUCATION PLANS Marketing Area, in writing and in proper form, subject to the following conditions:<br><br>1. The plan is up-to-date in installment payments at the date of transfer;<br><br>2. All payments made by the Transferor, less administrative or handling charges, shall be credited to the New Plan as downpayment and/or advanced installment payments;<br><br>3. A New Plan Application Form duly filled up and signed by the Transferee together with the transfer fee, shall be submitted subject to the approval of ETERNAL EDUCATION PLANS, INC.;<br><br>4. The Transferee shall be considered a New Applicant for purposes of Insurance Coverages, subject to the underwriting requirements under the Group Life Insurance Master Policy entered into by ETERNAL EDUCATION PLANS, INC. and as stated in Article XIV of this Plan Agreement;<br><br>5. Provided, that the Period of Insurance Coverages for the New Sponsor (TRANSFEREE) who has qualified under the requirements of the said Insurance Master Policy and the other terms and conditions of this Plan Agreement shall be equivalent to the remaining relevant insurance age of the TRANSFEROR;<br><br>6. In case of such transfer, and a New Scholar is designated, Article XVII below shall hereby apply.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></blockquote>Regarding item 6 of the Transfer clause, Article XVII or the Change of Scholar clause provides:<blockquote>XVII. <u>CHANGE OF SCHOLAR</u><br><br>1. Change may be effected subject to Article VII.<br><br>2. The change may be allowed as many times, provided that the maturity and availment of the Plan benefits shall not extend beyond 5 years from the maturity date of the original plan.<br><br>3. In relation to the High School Educational Benefit, only the remaining coverage unavailed of by the original Scholar can be enjoyed by the New Scholar;<br><br>4. If the New Scholar is younger than or is of the same age as the original Scholar, the existing company guidelines shall prevail.<br><br>5. If the New Scholar is older or is in a higher grade than the original Scholar, previous payments less administrative costs shall be credited as downpayment or advance installment on the Current Gross Pre-Need Price based on the present age or qualification of the New Scholar.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></blockquote>Regarding item 1 of the Change of Scholar clause, Article VII of the policy provides:<blockquote>VII. <u>MATURITY OF EDUCATIONAL PROGRAM AGREEMENT</u><br><br>1. <u>HIGH SCHOOL PROGRAM</u><br><br>&nbsp;. . . .<br><br>2. <u>COLLEGE PROGRAM</u><br><br>Provided that the Scholar designated herein by the SPONSOR has not been admitted to Grade 6 and is below 11 years old as of the date of issue or re-issue of the EPA, the EPA shall have reached maturity when the Scholar acquires eligibility to enter College or upon his enrollment in a postÂ­ high school vocational course in lieu thereof or has attained his 17<sup>th</sup> birthday, whichever comes first.<br><br>In case the Scholar is over eleven (11) years old or has been enrolled beyond Grade 6 for the College Program, and the Scholar, under the High School Program is over 8 years old or has been enrolled beyond Grade 2, the maturity of the EPA shall be on the date indicated [on] the face of the EPA.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></blockquote>The Court finds that petitioner is obliged to fulfill its guarantee to Kintanar that it shall pay the college tuition fees of Kintanar's child irrespective of future cost. Hence, its refusal to pay any amount beyond the prevailing rate as of the August 2, 2006 maturity date is a breach of the provisions of the policy.<br><br>A close reading of the provisions of the policy supports this conclusion. <i>First</i>, as a transferee of the policy, Kintanar is entitled to designate a new Scholar, which she did when she named her daughter as the new Scholar upon transfer of the policy in 1990. This designation is subject to Article VII<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of the policy on the maturity of the pre-need plan, which states that, for College Programs, if the Scholar is below 11 years old, the maturity date shall be when the Scholar acquires eligibility to enter college or upon their enrollment in a post-high school vocational course, or has reached their 17<sup>th</sup> birthday, whichever comes first. When Kintanar acquired the pre-need plan on August 2, 1990, her daughter was only three years old, having been born on July 8, 1993.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Thus, the maturity date under the conditions in Article VII should apply. Kintanar's daughter reached her 17<sup>th</sup> birthday on July 8, 2010. Thus, this is the maturity date under the pre-need plan, there being no evidence that she acquired eligibility to enter college or enrolled in a post-high school vocational course before such date. It is also significant here to state that the pre-need plan imposes obligation on the part of the transferee to make a request in writing for the fixing of a different maturity date.<br><br>The Court notes that under these clauses, this scenario does not amount to an <i>extension of the original maturity date</i> nor a <i>deferment of availment of benefits that must be made in writing</i>, as petitioner argues. In fact, the policy states that designations of a new scholar can be made as many times, the only limitation being that it shall not extend beyond five years from the original maturity date.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Thus, the pre-need plan allows for the fixing of a different maturity date when a new Scholar is designated. In this case, the new maturity date is well within the five-year limit, which falls on August 2, 2011.<br><br>The Court also agrees with Kintanar that the Deferred Availment clause does not apply here. That clause does not apply to <i>transfers of policies</i>, nor does it apply to the <i>designation of a new scholar</i>. Instead, clear from its provision is the fact that such clause applies only when the sponsor seeks to delay the availment of benefits for the Scholar on valid grounds such as a scholar's illness.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Here, the availment of benefits is not deferred. Rather, the designation of a new Scholar resulted in a later maturity date.<br><br><i>Second</i>, and in relation to the first point, the Court does not agree that Kintanar is estopped from claiming a different maturity date because the date "August 2, 2006" is indicated on the face of the pre-need plan. Kintanar claimed that she was assured that the maturity date will be adjusted accordingly.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The Court recognizes that she did not present evidence to prove this claim. However, considering the terms of the pre-need plan, which clearly provide that the designation of a new Scholar allows a different maturity date, the Court holds that the "August 2, 2006" notation resulted in an ambiguity.<br><br>The Court construes the ambiguity strictly against petitioner.<br><br>Relevantly, insurance contracts such as this pre-need plan are contracts of adhesion.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> These contracts are prepared by the insurer and leave little room for negotiation. These contracts are on a take it or leave it basis, so to speak, on the part of the insured.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> For this reason, any ambiguity in the contract is construed strictly against the insured.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Thus, the Court considers the provisions of the policy as controlling over the notation on its face.<br><br>Thus, since Kintanar's daughter commenced her college education well within the maturity date, petitioner is obliged to pay her college tuition or other standard school fees as or when they fall or become due <i>irrespective of future cost</i>.<br><br><center><b>IV</b></center><br>Having established that petitioner is liable to pay for the college tuition fees and other standard fees incurred by Kintanar regarding her daughter's university education, the Court proceeds to determine whether Kintanar presented sufficient evidence to prove these fees.<br><br>The Court rules that she has. It holds that the assessment of school fees<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> issued by the University of San Carlos for Kintanar's daughter sufficiently proved that a scholar under petitioner's pre-need plan has incurred college tuition fees and that such fees have become due.<br><br>Petitioner objected to the admission of these assessments into evidence, arguing that they are not evidence of payments made by Kintanar to her daughter's school.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> To the Court, however, and as stated earlier, these assessments prove that such fees have already become due and must be paid by petitioner under the pre-need plan.<br><br>At the same time, the fact that these assessments, spanning from 2010 to 2013, indicate no unpaid balance for the previous semester, inform the Court that these fees are paid. Kintanar herself admits that petitioner shouldered part of these fees; she is only asking, therefore, for the amounts she herself paid to make up for the difference. According to Kintanar's evidence, the total amount of her daughter's college education amount to PHP 263,550.00. Of this, petitioner shouldered PHP 111,016.08, while she paid PHP 192,067.45.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Considering that she, as sponsor, is entitled to full payment of these fees from petitioner, the Court finds that petitioner is liable to pay her the balance of PHP 192,067.45.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>On the award of damages and attorney's fees, the Court finds for petitioner. In breach of contract, moral damages are recoverable where the breach was wanton, reckless, malicious or in bad faith, oppressive or abusive.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The Court finds no evidence to show that petitioner's breach was of such a nature. Instead, the Court finds that petitioner's breach was not founded on an oppressive or reckless desire to evade its obligations under the pre-need plan; instead, it was grounded on its mistaken belief as to the extent of its obligations, specifically, the rate or amount of the fees it should pay for based on its erroneous determination of the maturity date.<br><br>There being no ground to award moral damages, it must follow that no exemplary damages may be awarded in this case.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> In <i>The Philippine American Life and General Insurance v. Soriano</i>,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> the Court held that certain requirements must be present before exemplary damages are awarded:<blockquote>(1) They may be imposed by way of example or correction only in addition, among others, to compensatory damages, and cannot be recovered as a matter of right, their determination depending upon the amount of compensatory damages that may be awarded to the claimant;<br><br>(2) The claimant must first establish his right to moral, temperate, liquidated or compensatory damages; and<br><br>(3) The wrongful act must be accompanied by bad faith, and the award would be allowed only if the guilty party acted in a wanton, fraudulent, reckless, oppressive or malevolent manner.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote>The evidence on record shows that petitioner did not act in this manner.<br><br>The Court also finds no reason to award attorney's fees. The circumstances in which such an award is proper, provided in Article 2208 of the Civil Code,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> are not present here.<br><br>Finally, following case law,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the total amount of petitioner's liability shall earn legal interest at the rate of 6% per annum, from the date of finality of this Decision until full payment.<br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Decision dated May 27, 2021 and the Amended Resolution dated July 29, 2022 of the Court of Appeals in CA-G.R. CV No. 111558 are <b>AFFIRMED IN PART</b>, insofar as they vacate the Decision of Branch 142, Regional Trial Court of Makati City in Civil Case No. 14-213 dated November 10, 2017 for being issued without jurisdiction.<br><br>Further, the Complaint for Specific Performance with Damages filed by respondent Charmel J. Kintanar against petitioner Eternal Education Plans, Inc., is <b>PARTLY GRANTED</b>. Eternal Education Plans, Inc. is hereby <b>LIABLE</b> to <b>PAY</b> Charmel J. Kintanar the amount of PHP 192,067.45 representing the balance of college tuition fees under Policy Contract No. 007466 A. This amount shall earn legal interest at the rate of 6% per annum, from the date of finality of this Decision until full payment.<br><br>The claim for moral damages, exemplary damages, and attorney's fees are <b>DENIED</b>.<br><br>Finally, Eternal Education Plans, Inc.'s counterclaim is likewise <b>DENIED</b> for lack of merit.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier</i>, and <i>M. Lopez, JJ.</i>, concur.<br><i>J. Lopez</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 34-53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 15-21. Penned by Associate Justice Maria Elisa Sempio Diy with Associate Justices Fernanda Lampas Peralta (now Presiding Justice) and Carlito B. Calpatura of the Second Division, Court of Appeals, Manila, concurring.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 28-29. Penned by Associate Justice Maria Elisa Sempio Diy with Associate Justices Fernanda Lampas Peralta (now Presiding Justice) and Carlito B. Calpatura of the Former Second Division, Court of Appeals, Manila, concurring.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Not attached to the <i>rollo</i>. <i>See id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Not attached to the <i>rollo</i>. <i>See id.</i> at 15. Penned by Acting Presiding Judge Phoeve C. Meer of Branch 142, Regional Trial Court, Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> PRE-NEED CODE, sec. 55 states:<blockquote><i>Claims</i>. â The Commission shall have the primary and exclusive power to adjudicate any and all claims involving pre-need plans. If the amount of benefits does not exceed One hundred thousand pesos (P100,000.00), the decision of the Commission shall be final and executory.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Republic Act No. 9829 (2009), An Act Establishing the Pre-need Code of the Philippines.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Not attached to the <i>rollo</i>. <i>See id.</i> at 15. Penned by Acting Presiding Judge Phoeve C. Meer, of Branch 142, Regional Trial Court, Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 15-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> 803 Phil. 143 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, pp. 18-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 28-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 129-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> RULES OF COURT, Rule 45, sec. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 40-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Almazan v. Bacolod</b>, 904 Phil. 355, 366 (2021) [Per J. Gaerlan, First Division], <i>citing</i> <b>Green Acres Holdings, Inc. v. Cabral</b>, 710 Phil. 235, 257-258 (2013) [Per J. Villarama, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>Philippine Chamber of Commerce and Industry v. Department of Energy</b>, 891 Phil. 607, 632 (2021) [Per J. Leonen, <i>En Banc</i>], <i>citing</i> <b>CIR v. Apo Cement Corp.</b>, 805 Phil. 441, 460 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 632, <i>citing</i> <b>National Tobacco Administration v. COA</b>, 370 Phil. 793 (1999) [Per J. Purisima, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 860 Phil. 679 (2019) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 689.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>See</i> <b>Sebastian v. Sps. Cruz</b>, 807 Phil. 738, 743 (2017) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 117. Court's Resolution dated November 13, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>G.R. No. 250763</b>, April 16, 2024 [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 877 Phil. 880 (2020) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 900-901.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> RTC records, Vol. I, p. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 56-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 179. <i>See</i> Judicial Affidavit of Channel J. Kintanar.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 11, Clause XVII.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> Clause XXI.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 179.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Malayan Insurance Co., Inc. v. Philippines First Insurance Co., Inc.</b>, 690 Phil. 621, 638 (2012) [Per J. Reyes, Second Division] <i>citing</i> <b>Eternal Gardens Memorial Park Corporation v. Philippine American Life Insurance Company</b>, 574 Phil. 161, 172 (2008) [Per J. Velasco, Jr., Second Division], <i>citing</i> <b>Malayan Insurance Corp. v. CA</b>, 336 Phil. 977, 989 (1997) [Per J. Romero, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>See</i> <b>Floirendo v. Metropolitan Bank and Trust Company</b>, 558 Phil. 654, 662 (2007) [Per J. Sandoval-Â­Gutierrez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Malayan Insurance Co., Inc. v. Philippines First Insurance Co., Inc.</b>, 690 Phil. 621, 638 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> RTC records, Vol. II, pp. 36-45, Exhs. "M" to "V" for Kintanar.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 104-105. <i>See</i> Petitioner's Comment to Kintanar's Formal Offer of Evidence.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 46. Exh. "W" for Kintanar.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Professional Academic Plans, Inc. v. Crisostomo</b>, 493 Phil. 492, 506 (2005) [Per J. Callejo, Sr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>G.R. No. 240320</b>, May 22, 2024 [Per J. Dimaampao, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> <i>citing</i> <b>Aleta v. Sofitel Philippine Plaza Manila</b>, 933 Phil. 97, 119 (2023) [Per S.A.J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> CIVIL CODE, art. 2208. In the absence of stipulation, attorney's fees and expenses of litigation, other than judicial costs, cannot be recovered, except:<blockquote>(1) When exemplary damages are awarded;<br><br>(2) When the defendant's act or omission has compelled the plaintiff to litigate with third persons or to incur expenses to protect his interest;<br><br>(3) In criminal cases of malicious prosecution against the plaintiff;<br><br>(4) In case of a clearly unfounded civil action or proceeding against the plaintiff;<br><br>(5) Where the defendant acted in gross and evident bad faith in refusing to satisfy the plaintiff's plainly valid, just and demandable claim;<br><br>(6) In actions for legal support;<br><br>(7) In actions for the recovery of wages of household helpers, laborers and skilled workers;<br><br>(8) In actions for indemnity under workmen's compensation and employer's liability laws;<br><br>(9) In a separate civil action to recover civil liability arising from a crime;<br><br>(10) When at least double judicial costs are awarded;<br><br>(11) In any other case where the court deems it just and equitable that attorney's fees and expenses of litigation should be recovered.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754, 765-766 (2022) [Per Acting C.J. Leonen, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

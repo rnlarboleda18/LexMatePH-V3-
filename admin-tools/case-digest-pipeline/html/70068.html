@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262376 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX262376 AND YYY262376,* ACCUSED-APPELLANTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70068' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262376, April 02, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX262376 AND YYY262376,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, M., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">The joint conviction of accused-appellants XXX262376 and YYY262376 for violations of the Anti-Trafficking in Persons Act, the Anti-Child Abuse Law, and the Anti-Child Pornography Act in the Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Court of Appeals (CA) is the subject of review in this appeal.<br><br><center><b>ANTECEDENTS</b></center><br>XXX262376 and YYY262376 were charged with qualified trafficking, child abuse, and child pornography under the following Informations:<br><blockquote><u>Criminal Case No. R-11-06466-CRmv: Qualified Trafficking in Persons under Section 4(e) in relation to Sections 6(a), 6(d), and 10 of Republic Act No. 9208</u><br><br>That sometime in the month of January 2008 until the 1<sup>st</sup> day of June 2011 at Sitio <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Barangay <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Municipality of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Province of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused [YYY262376] and [XXX262376], conspiring, confederating and mutually helping with one another, being the natural and biological parents of the minor victims, by means of taking advantage of the victims' vulnerability and giving them benefits to achieve the consent of the minor victims to work for them by doing explicit sexual activities and obscene acts in the internet, and for the purpose of exploitation, such as child pornography and other forms of sexual exploitations, did then and there willfully, unlawfully and deliberately harbor, maintain and engage on pornography namely; [AAA262376], 9 years old, MINOR; [BBB262376], 3 years old, MINOR; [CCC262376], 13 years old, MINOR, niece of accused [XXX262376] and thereafter maintain the said minor victims to perform child pornography, to the damage and prejudice of the minor victim.<br><br>That the crime was attended by the qualifying circumstances of minority of the complainants and the offenders are the parents of the minor victims.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br><u>Criminal Case No. R-LLP-11-06467-CR: Other Acts of Child Abuse under Section 10(a) of Republic Act No. 7610</u><br><br>That on or about the 1<sup>st</sup> day of June 2011 and/or subsequent and prior thereto at Sitio <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Barangay <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Municipality of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Province of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused [YYY262376] and [XXX262376], conspiring, confederating and mutually helping with one another, being the natural and biological parents of the minor victims, did then and there willfully, unlawfully, knowingly and feloniously committed any other acts of child abuse, cruelty or exploitation or to be responsible for other conditions prejudicial to the child's development when they used their minor children to engage in child pornography and maintain their house in such unhealthy environment in the presence of [EEE262376] 15 years old MINOR, causing emotional and psychological trauma on the said victim, such acts of child abuse, cruelty or other condition is prejudicial to the child's physical, mental, social and emotional growth and development.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br><u>Criminal Case No. R-11-06468-CRmv: Using or inducing, a child to perform in the creation or production of child pornography under Section 4(a) of Republic Act No. 9775</u><br><br>That on or about the 1<sup>st</sup> day of June 2011 and/or subsequent and prior thereto at Sitio <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Barangay <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Municipality of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Province of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines and within the jurisdiction of this Honorable Court, the above named accused [YYY262376] and [XXX262376] conspiring, confederating and mutually helping with one another, being the natural and biological parents of the minor victims, did then and there willfully, unlawfully use and induce their children namely; [AAA262376], 9 years old, MINOR; [BBB262376], 3 years old, MINOR; and [CCC262376], 13 years old, MINOR, niece of accused [XXX262376], to perform in the creation or production of child pornography, to the damage and prejudice of the minor victim.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </blockquote>XXX262376 and YYY262376 were also indicted under Sections 4(g)<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and 4(c)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of Republic Act No. 9775. However, these charges were eventually dismissed by the trial court.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>During arraignment, accused-appellants pleaded not guilty for all charges. Thereafter, joint trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br><i>Version of the Prosecution</i><br><br>The case stemmed from a report received by Cebu Vice Governor Agnes Almendras-Magpale, co-chair of the Cebu Provincial Women's Commission (PWC) and Provincial Council for the Welfare of Children (PCWC), about a couple using their children for sexually explicit acts online. To assist in the investigation, National Bureau of Investigation (NBI) Special Investigator Jedidah Hife (SI Hife), coordinated with the U.S. Department of Homeland Security, Immigration and Customs Enforcement (ICE). Acting attachÃ© of the United States (U.S.) Embassy in Manila Eric McLoughlin (AttachÃ© McLoughlin) contacted the ICE Cyber Crimes Center (C3) in Fairfax, Virginia, U.S., to investigate the email addresses sexygirlpretty@yahoo.com and like.star73@yahoo.com.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> ICE C3 reported that both were created in the Philippines, and sexygirlpretty@yahoo.com listed the screen name <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>@hotmail.com, an email created in Cebu.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On May 30, 2011, the National Bureau of Investigation (NBI) applied for and was granted Search Warrant No. 1346-05-3011-13 (the Search Warrant), which was implemented on June 1, 2011 with the assistance of two barangay officials.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> When the police operatives barged into the accused-appellants' home, AAA262376, BBB262376, and CCC262376 were naked on the bed and in front of a computer webcam, DDD262376 and XXX262376 were also inside the bedroom, while YYY262376 was in the sala. <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> EEE262376 was eating his breakfast in front of the TV.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>During the search, Special Agent Christopher Harvey (Special Agent Harvey) took photos of the computer's monitor screen. He noted that the computer to which the webcam was connected was still operating and showed several open Yahoo boxes, namely, a communication box, a user box, and a video streaming box. The video streaming box showed the images of the naked children with its border stating broadcasting â 2 viewer(s)." The chat boxes had written communication stating, among others, "show me the girls from the back," "what is that???," "BUZZ!!!", and "cheaters."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Special Agent Harvey then began to disassemble the computer system. In the process, he saw a penis-shaped sex toy and a Western Union receipt.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The seized computer hard drive was sent to the ICE C3. Special Agent Matthew Swenson (Special Agent Swenson), the Computer Forensics Agent and the National Program Manager of ICE C3, conducted the forensic examination. He was able to (a) confirm that the hard drive was owned by XXX262376; (b) recover a picture of a white Caucasian male, a webcam chat window, and two images of a young girl wearing a bra;<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and (b) retrieve several solicitations for cybersex involving children ages 3, 10, 12, and 13.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>On the other hand, ICE C3 issued summons to Western Union for all the dealings made by XXX262376 and YYY262376.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The resulting report shows that there have been 55 transactions where money was sent to YYY262376 from various countries totaling USD 3,976.06, while XXX262376 was involved with 125 money transfers for a total sum of USD 4,641.54.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> These were corroborated by Mr. Emerson Catalan, Area Supervisor of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxx</span> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>, who testified that XXX262376 and YYY262376 collected money transfers from the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Six children were rescued on June 1, 2011: (a) EEE262376, 15 years old; (b) DDD262376, 11 years old; (c) AAA262376, 9 years old; (d) <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, 6 years old; (e) BBB262376, 3 years; and (f) CCC262376, 13 years old.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> They were immediately brought to the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>. Dr. Naomi N. Poca (Dr. Poca), a medical specialist on child protection, conducted the children's medical examinations and forensic interviews.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Dr. Poca first examined EEE262376, who made significant disclosures about his parents' income source. She then referred EEE262376 to Ms. Rosemarie Gonato (Ms. Gonato), the resident psychologist, for emergency debriefing and initial psychological evaluation.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Per Ms. Gonato, EEE262376 narrated that he was eating breakfast in front of the TV when the NBI operatives barged into their house. While he was angry and terrified, he also felt relief that his siblings' abuse was finally over. EEE262376 started seeing his siblings naked in front of the computer before June 1, 2011. There were occasions when he saw a male foreigner naked and touching his private parts in the computer screen. His sisters, DDD262376 and AAA262376, would perform naked and touch their private parts. He also saw his mother naked in front of the computer while his father collected the payment from the foreign viewers.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> While EEE262376 executed an affidavit, he was reluctant to testify against his parents.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Ms. Gonato opined that EEE262376's chronic exposure to the sexually explicit acts have a harmful and adverse impact on his cognitive, affective, and social functioning.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Among the rescued children, only CCC262376 testified against XXX262376 and YYY262376. She recounted that she began participating in "Soling" as early as 2009, when she was just 12 years old. She described "Soling" as the act of going naked and performing obscene sexual acts for foreigners. This includes spreading her legs, showing her buttocks, touching her breasts or genitalia, stimulating another child's breasts or genitalia, or playing with a sex toy. CCC262376 testified that it was her <i>Tiya</i> XXX262376 who first taught her to do "Soling," although sometimes DDD262376 would also teach her. Whenever she performed "Soling," CCC262376 would receive PHP 150.00.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><i>Version of the Defense</i><br><br>XXX262376 testified that since December 2010, she and YYY262376 charged neighbors to use their computer and internet. They also collected money from Western Union for Rica Ocoy, Charlene Baguio, and a certain "Janice," without knowing the purpose of the transfers.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Regarding the June 1, 2011 operation, XXX262376 explained that their computer and internet were on because DDD262376 was playing games. Meanwhile, CCC262376, AAA262376, BBB262376, and DDD262376 were naked as they were about to take a bath when armed men entered their house.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Finally, she claimed the cases were filed due to a property dispute with their neighbor, Baltazar Arsenal (Arsenal). When they cut off Arsenal's internet, he and his NBI friend "Jeddah" fabricated the charges.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>For YYY262376, he narrated that on June 1, 2011, he was at home with his family when NBI operatives barged in, ransacked their belongings, and took photographs before arresting him. He corroborated XXX262376's testimony about their conflict with Arsenal, claiming Arsenal provided false information that led to this setup.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br><center><b><i>Ruling of the Trial Court</i></b></center><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the RTC found XXX262376 and YYY262376 guilty of qualified trafficking in persons under Republic Act No. 9208,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> other conditions prejudicial to the child's development under Republic Act No. 7610,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> and publishing, offering, selling, etc. any form of child pornography under Republic Act No. 9775.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> The trial court fully credited CCC262376's testimony, finding no signs of undue influence or coercion. Further, her account was corroborated by other prosecution witnesses.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>For qualified trafficking in persons, the trial court found that the prosecution was able to establish that XXX262376 and YYY262376 abused their power over the victims to force them to perform "Soling" for profit. On the charge of other conditions prejudicial to the child's development, the trial court held that XXX262376 and YYY262376 maintained an unhealthy environment prejudicial to the mental, social, and emotional growth of their minor child EEE262376 when they engaged in obscene and lewd acts with their other minor children in their own home.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> The trial court relied on Ms. Gonato's testimony who explained the adverse effect of this setup to EEE262376's growth and development.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>With respect to publishing, offering, selling, etc. any form of child pornography, the trial court ruled that XXX262376 and YYY262376 offered pornography involving their minor children, AAA262376, BBB262376, and CCC262376, to foreigners on the internet.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>However, the trial court dismissed the two other charges of child pornography because it found that the elements of these charges (i.e. Sections 4(a) and 4(g) of Republic Act No. 9775) are essentially included in the elements of qualified trafficking in persons; thus, double jeopardy applies.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The dispositive portion of the Decision provides:<br><blockquote>WHEREFORE, based on the foregoing evidence, findings, discussions, and pertinent laws:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"><div align="JUSTIFY"> 1) </div></td> <td width="95%" valign="top"><div align="JUSTIFY"> On <i> Qualified Trafficking in Persons under Section 4(e) in relation to Sections 6(a) and (d) and Section 10(c) of R.A. 9208</i><b> (Crim. Case No. R-11-06466-CRmv)</b>, the Court finds the accused [XXX262376] and [YYY262376] guilty beyond reasonable doubt and hereby sentences them to life imprisonment and a fine of Two Million Pesos ([PHP] 2,000,000.00), without being eligible for parole under <i> Act No. 4103 (Indeterminate Sentence Law)</i> in accordance with <i> Section 3 of Republic Act No. 9346.</i> </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY"> By way of civil liability, accused [XXX262376] and [YYY262376] are hereby ordered to solidarily pay [PHP] 500,000.00 to each of the minor victims, as moral damages under <i> Paragraph 3, Article 2219 of the Civil Code of the Philippines</i>, and [PHP] 500,000.00 to each of the minor victims as exemplary damages in order to deter others from committing the same heinous crime. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"> 2) </div></td> <td valign="top"><div align="JUSTIFY"> On <i> Other Acts of Child Abuse for Violation of Section 10[a] of R.A. 7610</i> <b>(Crim. Case No. R-LLP-11-06467-CR)</b>, the Court finds the accused [XXX262376] and [YYY262376] guilty beyond reasonable doubt of <i>"Other Acts of Child Abuse"</i> by being responsible for circumstances prejudicial to their child's (EEE262376) development. Each of the accused is hereby imposed with the indeterminate penalty of 5 years of <i>prision correccional</i> as minimum up to twelve (12) years of <i>prision mayor</i> as the maximum. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"></div><br></td> <td valign="top"><div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY"> By way of civil liability, accused [XXX262376] and [YYY262376] are hereby ordered to solidarily pay the following sums:</div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY"> <ol type="a"> <li> [PHP] 200,000.00 in favor of [EEE262376], as moral damages under <i> Paragraph 3, Article 2219 of the Civil Code of the Philippines;</i> and </li> <li> [PHP] 200,000.00 in favor of [EEE262376], as exemplary damages in order to deter others from committing the same shockingly lascivious crime.</li></ol></div></td></tr><tr><td valign="top"><br></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"> 3) </div></td> <td valign="top"><div align="JUSTIFY"> On Using or inducing a child to perform in the creation or production of child pornography in Violation of Section 4(a) of RA 9775 <b> (Crim. Case No. R-11-06468-CRmv) and</b> </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"> 4) </div></td> <td valign="top"><div align="JUSTIFY"> On knowingly Permitting one's child to participate in child pornography in Violation of Section 4(g) of RA 9775 <b> (Crim. Case No. R-11-06470-CRmv)</b>, the Court hereby dismisses these 2 cases on the ground of double jeopardy with the conviction of both accused in <i> Criminal Case No. RLLP-06466</i> for <i> Qualified Trafficking in Persons</i> under Section 4(e) <i> in relation to Sections 6(a) and (d) and Section 10(c) of R.A. 9208 </i> which necessarily included [he indispensable elements of these 2 cases; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY"> 5) </div></td> <td valign="top"><div align="JUSTIFY"> On Offering, transmitting, and broadcasting any form of child pornography in Violation of Section 4(c) of RA 9775 <b> (Crim. Case No. R-11-06469-CRmv)</b>, the Court finds the accused [XXX262376] and [YYY262376] guilty beyond reasonable doubt. Each of the accused is hereby sentenced to an indeterminate penalty of 12 years of <i>prision mayor</i> as minimum up to 20 years of <i>reclusion temporal</i> as maximum. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY"> By way of civil liability, accused are hereby ordered to solidarily pay the following:</div></td></tr><tr><td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"><div align="JUSTIFY">&nbsp; </div></td> <td valign="top"><div align="JUSTIFY"> <ol type="a"> <li> Moral damages in the amount of [PHP] 200,000.00 to each of the minor victims in view of the lascivious nature of the offense committed by the accused to which <i> Section(3), Article 2219 of the Civil Code of the Philippines</i> applies; <br><br></li> <li> Exemplary damages in the amount of [PHP] 200,000.00 to each minor victim in order to deter others from committing the same lascivious offense. </li> </ol> </div></td> </tr> </tbody></table>SO ORDERED in Chambers, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, Cebu, on July 21, 2018.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </blockquote>XXX262376 and YYY262376 elevated the case to the CA. In their Brief,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> XXX262376 and YYY262376 asserted that the prosecution was unable to prove their guilt beyond reasonable doubt.<br><br><i>First</i>, there were inconsistencies between CCC262376's Judicial Affidavit and her testimony in court. In her Judicial Affidavit, CCC262376 indicated that it was XXX262376 who taught, her "Soling," on the other hand, in her testimony, she identified DDD262376. None of the prosecution witnesses testified that they personally saw XXX262376 and YYY262376 harbor the victims for exploitation.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br><i>Second</i>, XXX262376 and YYY262376 could not be convicted of conditions prejudicial to the child's development due to the prosecution's failure to present EEE262376. Instead, they relied on Ms. Gonato, who only relayed EEE262376's account. In fact, it was the raiding team who caused EEE262376's trauma. EEE262376 even admitted he missed his parents and doesn't want to testify against them.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br><i>Third</i>, the prosecution failed to prove that the accused-appellants personally offered their children's sexual services to foreigners online for a fee. The chat messages retrieved do not confirm XXX262376's involvement. The prosecution cannot rely on EEE262376's affidavit as it was not identified in court.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br><i>Finally</i>, the Search Warrant was improperly and irregularly implemented because (1) the search was not conducted in front of XXX262376 and YYY262376, but rather before two barangay officials; and (2) the NBI operatives barged in the house of XXX262376 and YYY262376 without announcing their purpose.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><center><b><i>Ruling of the Court of Appeals</i></b></center><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the CA affirmed XXX262376 and YYY262376's conviction for all three charges with modification as to the penalties. For qualified trafficking in persons, the appellate court held that there is no inconsistency between CCC262376's Judicial Affidavit and her court testimony, as she stated that both DDD262376 and XXX262376 taught and ordered her to do "Soling." The appellate court also highlighted that CCC262376's testimony was strongly corroborated by other prosecution witnesses.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>The CA affirmed the trial court's findings on the charge of conditions prejudicial to the child's development. Given the small size of the accused-appellants' home, it is likely EEE262376 was aware of and exposed to their illegal activities. Thus, XXX262376 and YYY262376 committed child abuse by creating an unhealthy environment detrimental to EEE262376's growth.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> EEE262376's testimony was not essential for conviction, as Ms. Gonato's testimony, corroborated by other witnesses, was sufficient.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Lastly, the appellate court found ample evidence that XXX262376 and YYY262376 published and offered child pornography involving their minor children and niece. CCC262376 testified that XXX262376 taught and ordered her to perform "Soling" for foreigners, which was supported by Special Agent Harvey's testimony on what he saw on XXX262376 and YYY262376's computer.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>With respect to the alleged irregularity of the implementation of the warrant, the CA held that given the small size of the crime scene, it is highly improbable that XXX262376 and YYY262376 were unable to witness the search.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The dispositive portion of the assailed Decision states:<br><blockquote><b>WHEREFORE</b>, the Decision dated July 21, 2018, of the Regional Trial Court, Seventh Judicial Region, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> city in Criminal Case Nos. R-11-06466-CRmv, R-LLP-11-06467-CR, and R-11-06469-CRmv is AFFIRMED with MODIFICATION.<ol><li>In Criminal Case No. R-11-06466-CRmv, accused-appellants [XXX262376] and [YYY262376] are found guilty beyond reasonable doubt for Qualified Trafficking in Persons under Section 4(e) in relation to Sections 6(a) and (d) and Section 10 (c) of RA 9208, and they are sentenced to suffer the penalty of life imprisonment and a fine of Two Million Pesos ([PHP] 2,000,000.00), and ordered to pay each victim the amount of P500,000.00 as moral damages, and P100,000.00, as exemplary damages.<br><br></li><li>In Criminal Case No. R-LLP-11-06467-CR, accused-appellants [XXX262376] and [YYY262376] are found guilty beyond reasonable doubt of violation of Section 10(a) of RA 7610, and they are sentenced to suffer the indeterminate penalty of six (6) years of <i>prision correccional</i> as minimum, to eight (8) years of<i> prision mayor</i> as maximum, and ordered to pay the victims the amount of P20,000.00 as moral damages and [PHP] 20,000.00 as exemplary damages; and<br><br></li><li>In Criminal Case No. R-11-06469-CRmv, accused-appellants [XXX262376] and [YYY262376] are found guilty beyond reasonable doubt of violation of Section 4(c) of RA 9775, and they are sentenced to suffer the penalty of imprisonment of twelve (12) years of<i> prision mayor</i> as minimum, to twenty (20) years of <i>reclusion temporal</i> as maximum, and ordered to pay the victims the amount of [PHP] 50,000.00 as moral damages and [PHP] 50,000.00 as exemplary damages; and<br><br>All damages shall earn interest at [6%] from the time of the finality of this decision, until fully paid.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[53]</sup></li></ol></blockquote>Hence, this appeal.<br><br><center><b>RULING</b></center><br>We affirm accused-appellants XXX262376 and YYY262376's conviction.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The prosecution proved accused-appellants' guilt beyond reasonable doubt for qualified trafficking in persons under Section 4(c) in relation to Section 6(a) and (d) of Republic Act No. 9208</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>At the onset, we note that the law in force at the time of the commission of the alleged offense was Republic Act No. 9208, before its amendment:<br><br>Section 3(a) of Republic Act No. 9208 defines "Trafficking in Persons" viz.:<br><blockquote>(a)<i> Trafficking in Persons</i> â refers to the recruitment, transportation, transfer or harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders by means of threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the persons, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person for the purpose of exploitation which includes at a minimum, the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs. </blockquote>In<i> People v. Casio</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court defined the elements of trafficking in persons under Republic Act No. 9208:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The <i> act</i> of "recruitment, transportation, transfer or harbouring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders." </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">The <i> means</i> used which include "threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another; and <br></div></td></tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">The <i> purpose</i> of trafficking is exploitation which includes "exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></div></td> </tr> </tbody></table></blockquote>Here, accused-appellants were charged with qualified trafficking in persons under Section 4(e) in relation to Section 6(a) and (d) of Republic Act No. 9208:<br><blockquote>Section 4. Acts of Trafficking in Persons. â It shall be unlawful for any person, natural or juridical, to commit any of the following acts:<br><br>. . . .<br><br>(e) To maintain or hire a person to engage in prostitution or pornography<br><br>. . . .<br><br>Section 6. Qualified Trafficking in Persons. â The following are considered as qualified trafficking:<br><br>(a) When the trafficked person is a child;<br><br>. . . .<br><br>(d) When the offender is an ascendant, parent, sibling, guardian, or a person who exercises authority over the trafficked person who exercises authority over the trafficked person or when the offense is committed by a public officer or employee. </blockquote>Thus, the following elements must be established: (1) that the victim is a minor or the offender is an ascendant, sibling, or person with authority over the victim; and (b) that the accused maintained or hired the victim to engage in prostitution or pornography. Republic Act No. 9208 defines pornography as "any representation, through publication, exhibition, cinematography, indecent shows, information technology, or by whatever means, of a person engaged in real or simulated explicit sexual activities or any representation of the sexual parts of a person for primarily sexual purposes."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Upon a judicious review of the records of the case, the Court finds that all the elements of qualified trafficking were duly established by the prosecution.<i> First</i>, it is undisputed that the victims, AAA262376, BBB262376, and CCC262376 are all minors, evidenced by their Certificates of Live Birth.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br><i>Second</i>, the prosecution's testimonial and documentary evidence prove that the accused-appellants utilized their minor children and niece for pornography through the performance of "Soling" online. "Soling" is the act of going naked in front of the camera and performing obscene acts such as spreading one's legs, showing the buttocks, touching the breasts or genitalia, stimulating each other's breasts or genitalia, or playing with a sex toy.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> It is a form of child pornography as defined under Republic Act No. 9208.<br><br>CCC262376's Judicial Affidavit details the participative acts of each accused-appellant. XXX262376 ordered and taught the minor victims to perform "Soling," communicated with foreign clients online, and claimed payments through Western Union and PayPal. YYY262376 cooperated by operating the computer, sometimes typing and communicating with clients, and also claiming payments. The pertinent provision of CCC262376's Judicial Affidavit is reproduced below:<br><blockquote>14. Q What do you mean by Soling?<br>A It means we go naked in front of the camera while typing with Americans who send us dollars.<br><br>15. Q Who are you referring to when you said We?<br>A I am referring to DDD262376, AAA262376, and BBB262376.<br><br>16. Q Do you know who sent the money through Western Union?<br>A The American who watched the 'Soling'<br><br>. . . .<br><br>38. Q By the way, how old were you when you started doing the 'soling'?<br>A Almost 12 years old.<br><br>39. Q Around what year was that when you started doing the 'Soling'?<br>A Mid of 2009.<br><br>40. Q Who first taught you how to do the 'soling?'<br>A My Tiya XXX262376. DDD262376 also taught me how to do the 'soling'.<br><br>. . . .<br><br>47. Q Who typed in the computer during those times you did the 'Soling?'<br>A Tiya XXX262376, and there were times Tiyo YYY262376 and DDD262376 typed in the computer. When DDD262376 typed, Tiyo YYY262376 was the one who got the money from Western Union or Pay Pal sent by the foreigners.<br><br>. . . .<br><br>55. Q Who opened the computer in the early morning of June 1, 2011 in preparation for the 'soling'?<br>A It was Tiyo YYY262376.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup></blockquote>Further, the alleged inconsistency in CCC262376's Judicial Affidavit and testimony is more apparent than real since she clarified that DDD262376 and XXX262376 taught her how to perform "Soling."<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>We stress that the task of assigning values to the testimonies of witnesses and weighing their credibility is best left to the trial court, which forms its first-hand impressions as witnesses testify before it.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> As a rule, the findings and conclusions of trial courts on the credibility of witnesses enjoy a badge of respect because they have the advantage of observing the demeanor of witnesses as they testify.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> It will not be disturbed absent any showing that the trial court overlooked certain facts and circumstances which could substantially affect the outcome of the case.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Here, the trial court gave "full faith and credence"<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> to CCC262376's testimony, concurred in by the appellate court.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> We find no cogent reason to depart from this rule.<br><br>Accused-appellants' flimsy attempts to evade conviction by blaming their neighbors and claiming that their children were just about to take a bath when the NBI stormed in fail to persuade. These defenses of denial and alibi cannot prevail over CCC262376's clear and direct testimony, corroborated by the other prosecution witnesses. Positive identification, when categorical and consistent and without any showing of ill motive on the part of the eyewitness testifying on the matter, prevails over a denial.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Aside from their bare allegations, the accused-appellants failed to present any other proof or witness to support their version of events.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>As to the penalty imposed, Republic Act No. 9208 provides:<br><blockquote>SECTION 10.<i> Penalties and Sanctions.</i>â The following penalties and sanctions are hereby established for the offenses enumerated in this Act:<br><br>. . . .<br><br>(c) Any person found guilty of qualified trafficking under Section 6 shall suffer the penalty of life imprisonment and a fine of not less than Two million pesos ([PHP] 2,000,000.00) but not more than Five million pesos ([PHP] 5,000,000.00); </blockquote>Thus, the courts<i> a quo</i> correctly sentenced accused-appellants with life imprisonment and a fine of PHP 2,000,000.00. We likewise affirm the appellate court's removal of the phrase "without being eligible for parole under Act No. 4103, in accordance with Section 3 of Republic Act No. 9346." According to A.M. 15-08-02-SC,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> the qualification of "without eligibility for parole" shall only be used to emphasize that the accused should have been sentenced to suffer the death penalty had it not been for Republic Act No. 9346.<br><br>Finally, we concur with the award of PHP 500,000.00 for each victim as moral damages, and the modification of exemplary damages to PHP 100,000.00.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> These civil liabilities shall earn interest at the rate of 6% per annum from the finality of judgment until full payment.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>Accused-appellants are guilty beyond reasonable doubt for Other Conditions Prejudicial to the Child's Development under Article VI, Section 10(a) of Republic Act No. 7610</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>In<i> De Vera y Ante v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> this Court held that the act of masturbating in the presence of a minor is already considered as a condition prejudicial to the development of a child, punished under Article VI, Section 10(a) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> What more in this case, where the accused-appellants utilized their minor victims for sexual and obscene acts in the presence of their young child, EEE262376. Ms. Gonato exhaustively discussed the effects of these illegal acts on EEE262376's development in her testimony:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">Direct Examination by Prosecutor Lolita Lomanta: </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="95%" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">You stated that the purpose of the follow up therapy and counseling sessions was to determine if witnessing his siblings perform explicit sexual activities would have some effects on him, as a psychologist based on your training and experience, would you consider witnessing explicit sexual activities a form of sexual abuse? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, actually witnessing sexual explicit acts or pornographic materials is a form of sexual abuse, it is a form of non contact sexual abuse. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">You said that the follow up therapy and counseling sessions is supposed to determine whether witnessing sexual explicit activities would have some effects, now based on the counseling and therapy follow up sessions conducted, did you see effects of such exposure on EEE262376? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">It was evident in the later sessions that EEE262376 manifested feelings of guilt, powerlessness, hopelessness and sadness. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What would be the significance of these feeling of powerlessness and sadness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">These feelings if there will be no intervention and they become panic and could lead to other serious problems like depression.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup></div></td> </tr> </tbody></table></blockquote>Despite these, accused-appellants make much about the failure of the prosecution to present EEE262376. This is absurd. We note that EEE262376 himself did not want to testify against his parents.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> For the prosecution to force EEE262376 to testify against his will would simply compound abuse and damage done to him. Moreover, the Family Code explicitly provides that a child cannot be compelled to testify against his parents.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>In any case, EEE262376's testimony is not indispensable. Ms. Gonato herself personally examined EEE262376, and her testimony was based on her professional opinion drawn from EEE262376's narration. Further, had it not been for accused-appellants' illegal activities, the NBI raid would not have happened in the first place.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>With respect to the imposable penalty, Section 10(a) of Republic Act No. 7610 prescribes the penalty of <i>prision mayor</i> in its minimum period, which has a period of six years and one day to eight years. However, Section 31(c) of Republic Act No. 7610 commands that the penalty "shall be imposed in its<b> maximum period</b> if the offender is an ascendant, parent . . ." The three periods of<i> prision mayor</i> in its minimum period are six years and one day to six years and eight months, for the minimum period; six years, eight months and one day to seven years and four months, for the medium period; and seven years, four months and one day to eight years, for the maximum period.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Here, the Information properly alleged and the prosecution duly proved that the accused-appellants were EEE262376's parents. Thus, the indeterminate penalty of six years minimum to eight years maximum is proper.<br><br>As to the civil liabilities, we also affirm the award of moral and exemplary damages of PHP 20,000.00 each. Moreover, pursuant to Republic Act No. 7610, Section 31(f),<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> we impose the fine of PHP 15,000.00. These shall earn interest at the rate of 6% percent per annum from the finality of judgment until full payment.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The elements of publishing offering, selling, etc. any form of child pornography under Section 4(c) of Republic Act No. 9775 are present in this case. </i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Lastly, the accused-appellants assail their conviction under Section 4 of Republic Act No. 9775. However, we deem it proper to<i> first</i> discuss the nature of the crime charged in relation to both Republic Act No. 9775 and Republic Act No. 10175, otherwise known as the Cybercrime Prevention Act of 2012.<br><br>Republic Act No. 10175 expressly punishes that acts already punished under Republic Act No. 9775, with the addition of increasing the imposable penalty:<br><blockquote>SECTION 4.<i> Cybercrime Offenses.</i> â The following acts constitute the offense of cybercrime punishable under this Act:<br><br>. . . .<br><br>(c) Content-related Offenses:<br><br>. . . .<br><br>(2) Child Pornography. â The unlawful or prohibited acts defined and punishable by Republic Act No. 9775 or the Anti-Child Pornography Act of 2009, committed through a computer system:<i> Provided</i>, That the penalty to be imposed shall be (1) one degree higher than that provided for in Republic Act No. 9775. </blockquote>In<i> Disini v. Secretary of Justice</i>,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> we held that Republic Act No. 10175 merely expanded the coverage of Republic Act No. 9775 to cover acts of child pornography committed in the cyberspace. We also recognized that Republic Act No. 9775 already punishes acts of child pornography through the use of "electronic, mechanical, digital, optical, magnetic, or any other means."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Thus, in cases where the accused used a computer system to commit acts of child pornography, the government may choose to prosecute the accused either under Republic Act No. 9775 or Republic Act No. 10175:<br><blockquote><b>It seems that the above merely expands the scope of the Anti-Child Pornography Act of 2009 (ACPA) to cover identical activities in cyberspace. In theory, nothing prevents the government from invoking the ACPA when prosecuting persons who commit child pornography using a computer system. Actually, ACPA's definition of child pornography already embraces the use of "electronic, mechanical, digital, optical, magnetic or any other means." Notably, no one has questioned this ACPA provision. </b><br><br>Of course, the law makes the penalty higher by one degree when the crime is committed in cyberspace. But no one can complain since the intensity or duration of penalty is a legislative prerogative and there is rational basis for such higher penalty. The potential for uncontrolled proliferation of a particular piece of child pornography when uploaded in the cyberspace is incalculable.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> (Emphasis supplied) </blockquote>In this case, while the accused-appellants can be charged under Republic Act No. 10175, it appears that the prosecution opted to charge them under Republic Act No. 9775. Not only was the Information filed against them captions as a "violation of Section 4(a) of Republic Act No. 9775," the Information also failed to state that the act of child pornography was committed "through a computer system"âan element that would put the case under the ambit of Section 4(a)(c)(2) of Republic Act No. 10175. Thus, this Court will review the accused-appellants criminal liability under Republic Act No. 9775.<br><br>Republic Act No. 9775 declares it unlawful for any person to "publish, offer, transmit, sell, distribute, broadcast, advertise, promote, export or import any form of child pornography." Child pornography is defined as "any representation, whether visual, audio[,] or written combination thereof, by electronic, mechanical, digital, optical, magnetic[,] or any other means, of a child engaged or involved in real or simulated explicit sexual activities."<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Explicit sexual activity includes actual or simulated "lascivious exhibition of the genitals, buttocks, breasts, pubic area[,] and/or anus."<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br>Thus, in order to be convicted under Section 4(c) of Republic Act No. 9775, the prosecution must prove the following: (a) that the victim is a child; (b) there is a representation of a child engaged in or involved in explicit sexual activity; (c) that the accused "offered," "transmitted," or "broadcasted" such representation. For the third element, a review of the legislative records show that the legislature intended for Republic Act No. 9775 to cover instances similar to the case at bar, or "cam-to-cam chatting:"<br><blockquote>Senator Cayetano: . . . . Again, I just would like to point out an illustration. I understand that other than websites, <b>child pornography is also commonly passed on or transmitted through e-mails or personal cam-to-cam chatting.</b> This would be covered by the term "broadcasting." Would that be correct?<br><br>Senator Madrigal: Broadcasting, transmission, e-mailing, I suppose we can even be more specific and use whatever is the more current computer jargon-pasting, clipping, I do not know. We can be specific, Mr. President. There is no problem.<br><br>Senator Cayetano: Thank you. I just wanted to be sure that that is covered.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> (Emphasis supplied) </blockquote>There is no doubt that the accused-appellants satisfied all the elements of Section 4(c) of Republic Act No. 9775.<i> First</i>, the victims are minors.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Second</i>, "Soling," as described by CCC262376, is a form of child pornography.<i> Third</i>, the accused-appellants offered and transmitted the minor victim's performance of "Soling" through chatting with the foreign clients.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><br>Special Agent Swenson testified that he discovered chat messages appearing to be solicitations for cybersex upon a digital examination of the hard drive which was recovered from accused-appellants' computer:<br><blockquote>5.Q - How about the chat messages, briefly describe the chat messages you found?<br>A - The chat messages recovered from both Facebook live chat and the Yahoo! Messenger program appeared to be solicitations for cybersex shows. The chat messages discussed the transfer of money via the Western Union money exchange service in return for children of various ages to show their naked bodies on a webcam. The children were described as being of ages 3, 10, 12, and 13. There were other chat messages of this nature that were recovered from the forensic image.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> </blockquote>Special Agent Harvey, who was present when the Search Warrant was effected, testified that upon entry to the accused-appellants' bed room, he observed that accused-appellants' minor children were naked on the bed in front of the webcam of the computer, and the computer was clearly turned on. There were also several Yahoo boxes, including a video streaming box and a chat box:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="8%" valign="top"> <div align="JUSTIFY">30. Q: </div></td> <td width="92%" valign="top"> <div align="JUSTIFY">What did you observe in the open boxes which you identified as Yahoo boxes? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">There was a video streaming box that was open and I saw images of the naked children in the box and that the border of the box stated 'broadcasting - 2 Viewer(s).' </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY"></div><div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">32. Q: </div></td> <td valign="top"> <div align="JUSTIFY">So what happened to the open video streaming box after you unplugged the cord of the webcam from the computer? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">The open video streaming box turned black in the center. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">33. Q: </div></td> <td valign="top"> <div align="JUSTIFY">What else did you observe in the open boxes on the computer screen, if any? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I also observed one profile box or user box. The box had several screen names saved under the category 'clients' as well as under the category 'friends' </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">34. Q: </div></td> <td valign="top"> <div align="JUSTIFY">Other than the profile box or user box, what else did you see, if any? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I also saw several communication or chat boxes. These boxes had written communications inside. In fact, one chat box to the right of the video streaming box, as I viewed it, had written communication inside stating 'show me the girls from the back', 'what is that???', 'BUZZI!!', 'cheaters.' [sic]<sup style="COLOR: RGB(255, 0, 0);">[89]</sup></div></td> </tr> </tbody></table></blockquote>In light of these overwhelming evidence, the accused-appellants fail to convince this Court that the prosecution "did not present a scintilla of evidence" to prove otherwise.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> With respect to penalty, Republic Act No. 9775 provides:<br><blockquote>SECTION 15.<i> Penalties and Sanctions.</i> âThe following penalties and sanctions are hereby established for offenses enumerated in this Act:<br><br>(b) Any person found guilty of violating Section 4 (a), (b) and (c) of this Act shall suffer the penalty of<i> reclusion temporal</i> in its maximum period and a fine of not less than One million pesos (Php1,000,000.00) but not more than Two million pesos (Php2,000,000.00);<br><br>. . . .<br><br>Section 16.<i> Common Penal Provisions</i>. â<br><br>(a) If the offender is a parent, ascendant, guardian, step-parent or collateral relative within the third degree of consanguinity or affinity or any person having control or moral ascendancy over the child, the penalty provided herein shall be in its maximum duration;<i> Provided</i>, That this provision shall not apply to Section 4(g) of this Act; </blockquote>We modify the penalty imposed by the courts<i> a quo</i>. <i>Reclusion temporal</i> in its maximum period is 17 years, four months, and one day to 20 years. Applying the Indeterminate Sentence law, the maximum penalty shall be taken from the maximum period of<i> reclusion temporal</i> in its maximum period, and the minimum shall be from<i> reclusion temporal</i> in its medium period. Thus, this Court finds its proper to impose the indeterminate penalty of 15 years minimum to 20 years maximum. Moreover, we impose the fine of PHP 2,000,000.00 each.<br><br>We affirm the award of moral and exemplary damages of PHP 50,000.00 each. These shall earn interest at the rate of 6% percent per annum from the finality of judgment until full payment.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup><br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>There is no irregularity in the implementation of the search warrant. </i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Nowhere in the records was it stated that the assault team did not comply with the requirement of announcing their presence before entry. We note that there is a disputable presumption that official duty has been regularly performed. This presumption stands unless contradicted and overcome by other evidence,<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> as in this case.<br><br>Furthermore, SI Hife sufficiently discussed that while XXX262376 was not present inside the bedroom during the search, she was still able to witness it given the small space. Hence, the search was still done in the presence and within the view of the occupants:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">Pros. Lomanta: </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Why did you not ask [XXX262376] to get inside the bedroom the whole time the team was doing the search? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div> <div align="JUSTIFY"></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">She was not asked anymore to get inside the bedroom because the bedroom was small and we were five (5) in the bedroom. [XXX262376] could see what the technical search team was doing because it was a small room and there was a big door.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup></div></td> </tr> </tbody></table></blockquote>In fact, the NBI ensured compliance by including two barangay officials in order to view the search.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup><br><br>More importantly, accused-appellants never assailed the evidence retrieved from the implementation of the search warrant. These objections were belatedly raised on appeal and thus, are deemed waived.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup><br><br><b>ACCORDINGLY</b>, the appeal is<b> DENIED.</b> The Decision of the Court of Appeals dated October 28, 2021 in CA-G.R. CR HC No. 03417 is <b>AFFIRMED</b> with<b> MODIFICATION.</b><br><br>In Criminal Case No. R-11-06466-CRmv, accused-appellants XXX262376 and YYY262376 are found<b> GUILTY</b> beyond reasonable doubt for qualified trafficking in persons under Section 4(e) in relation to Sections 6(a) and (d) and Section 10(c) of Republic Act No. 9208, and they are sentenced to suffer the penalty of life imprisonment and a fine of PHP 2,000,000.00, and<b> ORDERED</b> to<b> PAY</b> each victim the amount of PHP 500,000.00 as moral damages and PHP 100,000.00, as exemplary damages.<br><br>In Criminal Case No. R-LLP-11-06467-CR. accused-appellants XXX262376 and YYY262376 are found<b> GUILTY</b> beyond reasonable doubt of violation of Section 10(a) of Republic Act No. 7610, and they are sentenced to suffer the indeterminate penalty of six years of<i> prision correccional</i> as minimum, to eight years of<i> prision mayor</i> as maximum, and<b> ORDERED</b> to <b>PAY</b> the victim the amount of PHP 20,000.00 as moral damages, PHP 20,000.00 as exemplary damages. Accused-appellants are likewise imposed a fine of PHP 15,000.00.<br><br>In Criminal Case No. R-11-06469-CRmv, accused-appellants XXX262376 and YYY262376 are found<b> GUILTY</b> beyond reasonable doubt of violation of Section 4(c) of Republic Act No. 9775, and they are sentenced to suffer the penalty of imprisonment of 15 years of<i> reclusion temporal</i> as minimum to 20 years of<i> reclusion temporal</i> as maximum and a fine of PHP 2,000,000.00, and<b> ORDERED</b> to<b> PAY</b> the victims the amount of PHP 50,000.00 as moral damages and PHP 50,000.00 as exemplary damages.<br><br>All damages awarded shall earn legal interest at the rate of 6% per annum from the finality of this Decision until full payment.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier, J. Lopez,</i> and <i>Kho, Jr., JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 7610, Special Protection of Children Against Abuse, Exploitation and Discrimination Act, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-61. The October 28, 2021 Decision in CA-G.R. CR HC No. 03417 was penned by Associate Justice Nancy C. Rivas-Palmones with the concurrence of Associate Justices Pamela Ann Abella Maxino and Lorenza R. Bordios of the Nineteenth Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 12-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <b>Section 4.</b> Unlawful or Prohibited Acts. - It shall be unlawful for any person:<br><blockquote>. . . .<br>(g) For a parent, legal guardian or person having custody or control of a child to knowingly permit the child to engage, participate or assist in any form of child pornography;<br>. . . .</blockquote><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <b>Section 4.</b> <i>Unlawful or Prohibited Acts.</i> - It shall be Unlawful for any person:<br><blockquote>. . . .<br>(c) To publish offer, transmit, sell, distribute, broadcast, advertise, promote, export or import any form of child pornography<br>. . . .<br></blockquote><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, pp. 142-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>id</i>. at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 77-78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 75-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 74-75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 64-159. The July 21, 2018 Decision in Crim. Case No. R-11-06466-CRmv, Crim. Case No. R-LLP-11-06467-CR, Crim. Case No. R-11-06468-CRmv. Crim. Case No. R-11-06470-CRmv, and Crim. Case No. R-11-06469-CRmv was penned by Presiding Judge Ferdinand T. Rafanan of Branch<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Cebu.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Republic Act No. 9208 (2003), An Act To Institute Policies To Eliminate Trafficking In Persons Especially Women And Children, Establishing The Necessary Institutional Mechanisms For The Protection And Support Of Trafficked Persons, Providing Penalties For Its Violations, And For Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Republic Act No. 7610 (1992), An Act Providing For Stronger Deterrence And Special Protection Against Child Abuse, Exploitation And Discrimination, Providing Penalties For Its Violation, And For Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Republic Act No. 9775 (2009), An Act Defining The Crime Of Child Pornography, Prescribing Penalties Therefor And For Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 151-156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 142-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 157-159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> CA <i>rollo</i>, pp. 30-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 43-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 50-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 52-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 54-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, pp. 11-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 57-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 60-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 749 Phil. 458 [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 472-473.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Republic Act No. 9208 (2003), sec. 3(h), Anti-Trafficking in Persons Act of 2003.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Rollo</i>, p. 104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 115-118.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at p. 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>People v. Del Rosario</b>, 657 Phil. 635, 642 (2011) [Per J. Nachura, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>People v. Lacaden</b>, 620 Phil. 807, 819 (2009) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>People v. Regaspi</b>, 768 Phil. 593, 598 (2015) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, p. 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>. at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>People v. Agcanas</b>, 674 Phil. 626-636 (2011) [Per J. Sereno, <i>En Banc</i>], <i>citing</i> <b>People v. Caisip</b>, 352 Phil. 1058, 1065 (1999) [Per J. Romero, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, p. 130-132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Guidelines for the Proper Use of the Phrase "Without Eligibility for Parole" in Indivisible Penalties dated August 4, 2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>People v. XXX</b>, 835 Phil. 1083, 1096 (2018) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Nacar v. Gallery Frames</b>, 716 Phil. 267 (2013) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> 894 Phil. 550, 557-559 [Per J. Delos Santos, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> SECTION 10. <i>Other Acts of Neglect, Abuse, Cruelty or Exploitation and Other Conditions Prejudicial to the Child's Development</i>. â<br><br>(a) Any person who shall <b>commit any other acts of child abuse, cruelty or exploitation or be responsible for other conditions prejudicial to the child's development</b> including those covered by Article 59 of Presidential Decree No. 603, as amended, but not covered by the Revised Penal Code, as amended, shall suffer the penalty of <i>prision mayor</i> in its minimum period. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Rollo</i>, pp. 53-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id</i>. at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> FAMILY CODE, art. 215 states:<br><blockquote>Art. 215. No descendant shall be compelled, in a criminal case, to testify against his parents and grandparents, except when such testimony is indispensable in a crime against the descendant or by one parent against the other.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Rosaldes v. People</b>, 745 Phil. 77, 92 (2014) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Republic Act No. 7610 (1992), Special Protection of Children Against Abuse, Exploitation and Discrimination Act, sec. 31 provides:<br><blockquote>. . . .<br>A fine to be determined by the court shall be imposed and administered as a cash fund by the Department of Social Welfare and Development and disbursed for the rehabilitation of each child victim, or any immediate member of his family if the latter is the perpetrator of the offense.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Nacar v. Gallery Frames</b>, 716 Phil. 267, 282 (2013) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 727 Phil. 28 (2014) [Per J. Abad, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Republic Act No. 9775 (2009), sec. 3(b), Anti-Child Pornography Act of 2009.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>. at 107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Republic Act No. 9775 (2009), sec. 3(b).<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> Republic Act No. 9775 (2009), sec. 3(c).<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Records of the Senate, Volume II, August 6, 2008 Session, p. 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Rollo</i>, p. 104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id</i>. at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>. at 58 and 151.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id</i>. at 154-156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> CA <i>rollo</i>, p. 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Nacar v. Gallery Frames</b>, 716 Phil. 267 (2013) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>DOST Secretary v. COA</b>, 837 Phil. 193, 208 (2018) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> TSN, Special Investigator Jedidah Hife, July 29, 2011, p. 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> RULES OF COURT, Rule 126, sec. 8 provides:<br><blockquote>Section 8. Search of house, room, or premise to he made in presence of two witnesses. â No search of a house, room, or any other premise shall be made except in the presence of the lawful occupant thereof or any member of his family or in the absence of the latter, two witnesses of sufficient age and discretion residing in the same locality. (7a)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>People v. Magayon</b>, 885 Phil. 579, 605-606 (2020) [Per Lazaro-Javier, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

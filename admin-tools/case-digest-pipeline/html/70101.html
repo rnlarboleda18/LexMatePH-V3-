@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256634 - FOREST HILLS GOLF AND COUNTRY CLUB, INC., PETITIONER, VS. SECURITIES AND EXCHANGE COMMISSION - COMPANY REGISTRATION AND MONITORING DEPARTMENT, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70101' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256634, July 25, 2025 ]</H2>
+			<H3>FOREST HILLS GOLF AND COUNTRY CLUB, INC., PETITIONER, VS. SECURITIES AND EXCHANGE COMMISSION - COMPANY REGISTRATION AND MONITORING DEPARTMENT, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Forest Hills Golf and Country Club, Inc. (FHGCCI) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 25, 2021 of the Court of Appeals (CA) in CA-G.R. SP No. 162961. The CA affirmed with modification the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 23, 2019, of the Securities and Exchange Commission (SEC) <i>En Banc</i> in SEC <i>En Banc</i> Case No. 06-14-334.<br><br><center><i>The Antecedents</i></center><br>FHGCCI is a domestic corporation that was registered with the SEC on June 29, 1995.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> On August 6, 2013, FHGCCI filed an application for the approval of its Amended By-Laws with the SEC's Company Registration and Monitoring Department (SEC-CRMD).<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Some of the pertinent amendments are as follows:<blockquote><table width="100%" border="1" cellpadding="3" cellspacing="0"><tbody><tr><td width="20%"><div align="center"><strong>Number</strong></div></td><td width="80%"><div align="center"><strong>Provision</strong></div></td></tr><tr valign="top"><td><div align="justify">Article VI, Section 6.7</div></td><td><div align="justify">Section 6.7 ELIGIBILITY TO VOTE. Subject to the suspension of voting rights during the first five (5) years from the formal turn over of the project by the developer to [FHGCCI], only bona fide individual Regular Members and the duly designated and accepted nominees of juridical entities <u>as defined under Article II hereof</u>, all of whom shall be in good standing, shall have the right to vote at any meeting of the members.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></div></td></tr><tr valign="top"><td><div align="justify">Article VI, Section 6.9</div></td><td><div align="justify">Section 6.9 QUORUM. Except in those cases where the law otherwise provides, the presence in person or by proxy of at least a majority of the <u>Regular Members in good standing</u> shall constitute a quorum for the transaction of business. In the absence of a quorum, the presiding officer at such meeting or the Secretary thereof, or a majority of the voting members attending or represented at the meeting, may adjourn such meeting; provided, however, that the said meeting shall be automatically reset to the fifth (5<sup>th</sup>) business day immediately following without any further need for notice.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></div></td></tr><tr valign="top"><td><div align="justify">Article XVI, Section 16.3</div></td><td><div align="justify">Section 16.3 AMENDMENT. The provisions of these By-Laws may be amended or repealed by a majority vote of the Board of Directors and of <u>all Regular members in good standing</u> at a regular or special meeting called for the purpose.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></div></td></tr></tbody></table></blockquote>In a meeting with FHGCCI on October 22, 2013, the SEC-CRMD denied the proposed amendments for being contrary to Section 6 of Batas Pambansa Blg. 68, <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> or "The Corporation Code of the Philippines" (Corporation Code). Section 6 states that "no share may be deprived of voting rights except those classified and issued as 'preferred' or 'redeemable' shares, unless otherwise provided in this Code."<br><br>In a letter dated November 5, 2013, FHGCCI asked the SEC-CRMD to reconsider its ruling on the ground that it is a non-stock corporation and that it is allowed to limit the voting rights of its members under Section 89 of the Corporation Code.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>In response, the SEC-CRMD issued a Letter-Order<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated May 2, 2014, maintaining that FHGCCI is a stock corporation and that it is prohibited from restricting the voting rights of its shareholders.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Thus, FHGCCI filed a Memorandum Appeal with the SEC <i>En Banc</i>.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><center><i>The Ruling of the SEC En Banc</i></center><br>The SEC <i>En Banc</i> denied the Appeal in its Decision<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated July 23, 2019, the <i>fallo</i> of which states:<blockquote><b>WHEREFORE</b>, premises considered, the Memorandum on Appeal is hereby <b>DENIED</b>. The Letter-Order of the CRMD dated 2 May 2014 is hereby AFFIRMED.<br><br><b>FOREST HILLS is directed to amend</b> its Articles of Incorporation to indicate that it is a <u>stock</u> corporation, within a period <b>not exceeding one (1) year</b> from receipt of this Decision.<br><br>Let a copy of this Decision be furnished the Company Registration and Monitoring Department for information and appropriate action.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original)</blockquote>The SEC <i>En Banc</i> declared that FHGCCI is a stock corporation. <i>First</i>, the SEC <i>En Banc</i> observed that FHGCCI's Articles of Incorporation provides that it is a "non-profit stock corporation," which goes against legal principle and common sense. <i>Second</i>, it noted that FHGCCI issues shares of stock and was, therefore, authorized to distribute profits to its members because the power to declare dividends is inherent in a common share. <i>Third</i>, it added that the provision in FHGCCI's Articles of Incorporation that the corporation is not allowed to distribute dividends to its member is not determinative as to whether it is a stock or non-stock corporation. The SEC <i>En Banc</i> noted that aside from having access to the club facilities, the shareholders of FHGCCI receive ownership interest over its assets. Thus, it concluded that FHGCCI's shareholders have an inchoate right to the assets of the corporation. <i>Fourth</i>, the SEC <i>En Banc</i> opined that FHGCCI's shares are investments as they appreciate or depreciate in value. The monetary value and property rights attached to a golf and country club shares are fundamental to the existence of the corporation. <i>Finally</i>, the SEC <i>En Banc</i> concluded that FHGCCI's structure is a circumvention of the law.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>FHGCCI thus filed a Petition for Review under Rule 43<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of the Rules of Court with the CA.<br><br><center><i>The Ruling of the CA</i></center><br>The CA affirmed the ruling of the SEC <i>En Banc</i> with modification in its Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated May 25, 2021, to wit:<blockquote><b>WHEREFORE</b>, the instant petition is <b>DENIED</b>. The 23 July 2019 Decision of the Securities and Exchange Commission is <b>AFFIRMED</b> WITH MODIFICATION as follows:<blockquote><b>WHEREFORE</b>, premises considered, the Memorandum on Appeal is hereby <b>DENIED</b>. The Letter-Order of the CRMD dated 2 May 2014 is hereby <b>AFFIRMED</b>.<br><br>FOREST HILLS is directed to amend its Articles of Incorporation <b>by deleting any and all provisions inconsistent with it being a</b> stock corporation, within a period not exceeding one (1) year from receipt of this<br><br>Let a copy of this Decision be furnished the Company Registration and Monitoring Department for information and appropriate action.<br><br><b>SO ORDERED.</b></blockquote>Costs against petitioner.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original)</blockquote><i>First</i>, the CA clarified that the issue of whether FHGCCI is a stock or non-stock corporation was not squarely raised in previous proceedings involving FHGCCI. Therefore, any statement regarding this matter is <i>obiter dictum</i>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><i>Second</i>, the CA shared the observation of the SEC <i>En Banc</i> that FHGCCI declared in its Articles of Incorporation that it is a stock corporation.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><i>Third</i>, it is undisputed that FHGCCI issues transferable certificates of stock to interested parties. Once a stock is issued, the shareholder has access to the club's facilities. The value of the share shall increase or decrease depending on the market forces. FHGCCI's assets shall be distributed to its members upon its dissolution. Thus, contrary to FHGCCI's declaration that it is non-profit, the CA agreed with the SEC <i>En Banc</i> that FHGCCI is engaged in profit-making because the shares were issued not merely to set up the management and control of the corporation. The CA found no reason to disturb the findings of the SEC <i>En Banc</i>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><i>Fourth</i>, the CA concurred with the view of the SEC <i>En Banc</i> that non-profit stock corporations cannot be allowed to exist as a stock corporation which is necessarily established for profit.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br><i>Finally</i>, the CA ruled that the SEC <i>En Banc</i>'s directive to FHGCCI to amend its Articles of Incorporation is superfluous. Instead, FHGCCI must delete the provisions in its Articles of Incorporation that are inconsistent with its nature as a stock corporation.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>FHGCCI filed the instant Petition before the Court to question the foregoing rulings of the CA.<br><br><center><i>FHGCCI's Arguments</i></center><br><i>First</i>, petitioner explains that a stock corporation must have capital stock divided into shares <i>and</i> must be authorized to distribute to holders of such shares, dividends or allotments of the surplus profits on the basis of the shares held. If one of these requisites is absent, then it is a non-stock corporation. Petitioner contends that since it is not authorized to distribute dividends under its Articles of Incorporation, it cannot be considered a stock corporation. The mere fact that it has shares of stock is insufficient to establish that it is a stock corporation because neither the Corporation Code nor Republic Act No. 11232,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> or the "Revised Corporation Code of the Philippines" (Revised Corporation Code), prohibit a non-stock corporation from issuing shares to its members.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br><i>Second</i>, petitioner avers that the mere presence of profit does not destroy the character of a non-stock corporation as such. Moreover, the access of petitioner's members to its facilities is consistent with its primary purpose and that any increase in the value of their shares is not tantamount to dividends, which are declared out of the unrestricted retained earnings of a corporation, and not through the sale of shares of stock. As to the distribution of the assets of petitioner to its members upon its dissolution, this is expressly allowed under the Corporation Code.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><i>Finally</i>, petitioner submits that a non-stock corporation cannot be converted into a stock corporation by merely amending its Articles of Incorporation and By-Laws. Further, petitioner points out that the CA did not identify the provisions in its Articles of Incorporation that are supposedly inconsistent with stock corporations. Also, the directive of the CA will not only violate the right of petitioner's members to form associations for purposes that are not contrary to law under Article III, Section 8 of the 1987 Constitution,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> but also impair the obligation of petitioner to its members under its Articles of Incorporation and By-Laws.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br><center><i>SEC-CRMD's Arguments</i></center><br>Respondent filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> pursuant to the Resolution<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> of the Court dated September 29, 2021.<br><br><i>First</i>, respondent points out that the Petition failed to show special and important reasons warranting the exercise of the Court's discretionary appellate jurisdiction. The factual findings of the SEC <i>En Banc</i> that were affirmed by the CA are entitled to great respect, if not finality, by the courts considering the special knowledge and expertise of the SEC over matters falling within its jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><i>Second</i>, respondent maintains that the CA is correct that petitioner is a stock corporation. Its own Articles of Incorporation provide that it is a stock corporation. Petitioner also has capital stock divided into shares. The authority to declare dividends is inherent in a common share, though corporations may stipulate that no dividends will be declared or paid. Notably, petitioner has a Board of Directors instead of a Board of Trustees.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><i>Third</i>, though petitioner's Articles of Incorporation prohibits the distribution of dividends, it is engaged in a business for profit because the sale of its proprietary certificates together with the issuance of common shares entitles the investor to profit from it.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><i>Finally</i>, respondent claims that the directive to amend petitioner's Articles of Incorporation is consistent with the legal mandate of the SEC under Republic Act No. 8799, or "The Securities Regulation Code," to regulate corporations and ensure that they comply with pertinent laws.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><center><i>The issue</i></center><br>The issue is whether the CA is correct in ruling that petitioner is a stock corporation.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is meritorious.<br><br>Preliminarily, it must be noted that the present case arose from the proceedings before the SEC on the amendment of FHGCCI's By-Laws. The SEC-CRMD correctly held that as a general rule, courts must accord great weight to the findings of the SEC as it undoubtedly has the expertise over matters within its jurisdiction. However, the rule is not ironclad and judicial interference is allowed in several well-recognized exceptions, to wit: (1) whenever the factual findings of the administrative agency or tribunal are not supported by evidence; (2) where the findings are vitiated by fraud, imposition, or collusion; (3) where the procedure which led to the factual findings is irregular; (4) when palpable errors are committed; or (5) when a grave abuse of discretion, arbitrariness, or capriciousness is manifest.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In the present case, the Court deems it proper to review the rulings of the SEC <i>En Banc</i> and the CA because their conclusions were palpably erroneous for lacking support in evidence and for being contrary to the relevant laws and jurisprudence, as further discussed below.<br><br>The crux of the controversy in the case is whether petitioner is a stock or non-stock corporation. The classes of corporation, namely, stock and non-stock, are defined in Section 3 of the Corporation Code:<blockquote>SECTION 3. <i>Classes of Corporations</i>. â Corporations formed or organized under this Code may be stock or non-stock corporations. Corporations which have capital stock divided into shares and are authorized to distribute to the holders of such shares dividends or allotments of the surplus profits on the basis of the shares held are stock corporations. All other private corporations are non-stock corporations.</blockquote>The Revised Corporation Code, which took effect on February 23, 2019,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> retained the foregoing definition.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Under Section 3 of the Corporation Code and the Revised Corporation Code, two requisites must concur before a corporation can be classified as a stock corporation, i.e., <i>first</i>, it has capital stock divided into shares, and <i>second</i>, it is authorized to distribute to the holders of such shares dividends or allotments of the surplus profits on the basis of the shares held.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> The use of the word "and" in Section 3 suggests that the two requisites are cumulative, rather than alternative.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> If only one requisite is present, the corporation cannot be properly classified as a stock corporation.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Thus, the Court held in <i>Collector of Internal Revenue v. Club Filipino, Inc. de Cebu</i><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> that the respondent therein is a non-stock corporation despite having capital stock that are divided into shares:<blockquote>Moreover, for a stock corporation to exist, two requisites must be complied with, to wit: (1) a capital stock divided into shares and (2) an authority to distribute to the holders of such shares, dividends or allotments of the surplus profits on the basis of the shares held (sec. 3, Act No. 1459).<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> In the case at bar, <i>while the respondent Clubs, capital stock is divided into shares, nowhere in its articles of incorporation or by-laws could be found an authority for the distribution of its dividends or surplus profits. Strictly speaking, it cannot; therefore, be considered a stock corporation, within the contemplation of the corporation law</i>.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis supplied)</blockquote>The Court is constrained by the provisions of Section 3 of the Corporation Code and the Revised Corporation Code.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> To reiterate, a stock corporation must not only have capital shares but must also be authorized to distribute dividends to the holders of these shares. Failure to satisfy both requisites means that a corporation is non-stock if it does not distribute any part of its income to its members,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> even though it issues shares of stock to its members.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Whether non-stock corporations, especially golf or country clubs, should be prohibited from having shares of stock to ensure consistency with its intended purpose is best raised before the legislature and not before the judiciary.<br><br>It is undisputed that petitioner has capital stock divided into shares. Hence, there is no question as to the presence of the first requisite for petitioner to be considered a stock corporation. What is contentious is the presence of the second requisite.<br><br>A stock corporation must be authorized to distribute dividends or allotments of surplus profits to its stockholders. In contrast, under Section 87<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> of the Corporation Code, which was substantially retained in Section 86<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> of the Revised Corporation Code, a non-stock corporation is "one where no part of its income is distributable as dividends to its members, trustees, or officers[.]" Further, a non-stock corporation must be for charitable, religious, educational, professional, cultural, fraternal, literary, scientific, social, civic service, or similar purposes, like trade, industry, agricultural and like chambers, or any combination thereof.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>In the present case, the primary purpose of petitioner under its Articles of Incorporation is as follows:<blockquote>To promote the social, recreational and athletic activities on a nonÂ­-profit basis among its members, the main objective and undertaking of which will be the construction and maintenance of a golf course, tennis courts, swimming pools, and other indoor and outdoor related sports and recreational facilities.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></blockquote>The foregoing is consistent with the nature of a non-stock corporation as it is not for profit but for social and recreational purposes. The Articles of Incorporation of petitioner further provides as follows:<blockquote>4. No profit shall inure to the benefit of any member. Hence, no dividend shall at any time be declared and/or paid. Members shall be entitled only to a pro-rata share of the assets of the Corporation at the time of its dissolution or liquidation.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote>Considering that petitioner is expressly prohibited from declaring or paying dividends to its members, it cannot be classified as a stock corporation.<br><br>Still, the SEC <i>En Banc</i> and the CA ruled that petitioner is a stock corporation because it supposedly operates for profit notwithstanding the above-quoted provision in its Articles of Incorporation. They also determined that petitioner effectively distributes income to its members as the latter can earn from the increase in the value of the shares and are entitled to a pro-rata share in the assets of petitioner upon its dissolution.<br><br>The Court does not agree with the SEC <i>En Banc</i> and the CA.<br><br>The provision in petitioner's Articles of Incorporation that grants its members a <i>pro-rata</i> share in the corporation's assets upon its dissolution is not contrary to the Corporation Code or the Revised Corporation Code, which pertinently provide:&nbsp;<blockquote><table width="100%" border="1" cellpadding="3" cellspacing="0"><tbody><tr valign="top"><td width="50%"><div align="center"><strong>Corporation Code </strong></div></td><td width="50%"><div align="center"><strong>Revised Corporation Code</strong></div></td></tr><tr valign="top"><td><div align="justify">SECTION 94. <i>Rules of Distribution</i>. â In case of dissolution of a non-stock corporation in accordance with the provisions of this Code, its assets shall be applied and distributed as follows:</div>&nbsp;<div align="justify">1. All liabilities and obligations of the corporation shall be paid, satisfied and discharged, or adequate provision shall be made therefor;<br><br>2. Assets held by the corporation upon a condition requiring return, transfer or conveyance, and which condition occurs by reason of the dissolution, shall be returned, transferred or conveyed in accordance with such requirements;&nbsp;<br><br>3. Assets received and held by the corporation subject to limitations permitting their use only for charitable, religious, benevolent, educational or similar purposes, but not held upon a condition requiring return, transfer or conveyance by reason of the dissolution, shall be transferred or conveyed to one or more corporations, societies or organizations engaged in activities in the Philippines substantially similar to those of the dissolving corporation according to a plan of distribution adopted pursuant to this Chapter;<br><br><i>4. Assets other than those mentioned in the preceding paragraphs, if any, shall be distributed in accordance with the provisions of the articles of incorporation or the by-laws, to the extent that the articles of incorporation or the by-laws, determine the distributive rights of members, or any class or classes of members, or provide for distribution; and</i>&nbsp;<br><br>5. In any other case, assets may be distributed to such persons, societies, organizations or corporations, whether or not organized for profit, as may be specified in a plan of distribution adopted pursuant to this Chapter.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></div> </td><td><div align="justify">SECTION 93. <i>Rules of Distribution</i>. â The assets of a nonstock corporation undergoing the process of dissolution for reasons other than those set forth in Section 139 of this Code shall be applied and distributed as follows:</div>&nbsp; &nbsp;<div align="justify">(a) All liabilities and obligations of the corporation shall be paid, satisfied and discharged, or adequate provision shall be made therefor;</div>&nbsp;<div align="justify">(b) Assets held by the corporation upon a condition requiring return, transfer or conveyance, and which condition occurs by reason of the dissolution, shall be returned, transferred or conveyed in accordance with such requirements;<br><br>(c) Assets received and held by the corporation subject to limitations permitting their use only for charitable, religious, benevolent, educational or similar purposes, but not held upon a condition requiring return, transfer or conveyance by reason of the dissolution, shall be transferred or conveyed to one (1) or more corporations, societies or organizations engaged in activities in the Philippines substantially similar to those of the dissolving corporation according to a plan of distribution adopted pursuant to this Chapter;</div>&nbsp;<div align="justify"><i>(d) Assets other than those mentioned in the preceding paragraphs, if any, shall be distributed in accordance with the provisions of the articles of incorporation or the bylaws, to the extent that the articles of incorporation or the bylaws determine the distributive rights of members, or any class or classes of members, or provide for distribution; and</i><br><br>(e) In any other case, assets may be distributed to such persons, societies, organizations or corporations, whether or not organized for profit, as may be specified in a plan of distribution adopted pursuant to this Chapter.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></div></td></tr></tbody></table></blockquote>Considering that the assets of non-stock corporations may be distributed to its members upon its dissolution, then petitioner's distribution of its assets to its members upon its dissolution cannot be used to justify a conclusion that petitioner is a stock corporation. Verily, Section 87 of the Corporation Code and Section 86 of the Revised Corporation Code prohibit a non-stock corporation from distributing its <i>income</i> as <i>dividends</i> to its members, trustees, or officers, <i>not</i> the distribution of its remaining assets to its members upon dissolution. The two cannot be lumped together as they pertain to different matters and were clearly treated as discrete and distinct transactions under the foregoing laws.<br><br>Although the distribution to stockholders of a corporation's assets upon dissolution has been commonly termed as "<i>liquidating dividends</i>," the same is a misnomer. In <i>Wise &amp; Co., Inc. v. Meer</i>,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> the Court explained that a distribution in liquidation of the corporation's assets, which is a return to the stockholders of the value of their stock upon a surrender of their interest in the corporation, is <i>distinguishable</i> from a dividend paid by a going concern corporation out of corporate profits when declared by the directors in their discretion, which is in the nature of a recurrent return upon the stock. Dividends are declared by a corporation that is a <i>going concern</i> to its stockholders, who do not lose their shares of stock in the process and may look to future returns upon the same stock; in contrast, a distribution of assets upon the corporation's <i>dissolution</i> necessarily terminates or wipes out the stockholdings of the stockholders, who lose all their interest in the dissolved corporation.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Dividends represent <i>profits</i> realized by the stockholders from their shares, but in dissolution, the stockholders may either realize a gain or suffer a <i>loss</i>, depending on the assets that they receive in relation to the value of their shares.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>Anent the shares of stock of petitioner, the potential profit that its members may earn from the sale thereof is too speculative to be the basis for ruling that petitioner operates for profit.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> There is no guarantee that the shares of stock of petitioner may increase in value. Its members may likewise lose whatever they paid for these shares should it decrease in value. Further, there is no evidence showing that petitioner has actively pursued this supposed profit-making scheme.<br><br>It should be emphasized that a corporation is presumed to have acted within the powers granted to it,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> while its directors and corporate officers may be reasonable presumed to have performed their duties and functions in accordance with the laws.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> It was therefore the burden of respondent to establish that petitioner was operating for profit and was acting contrary to its declared non-profit purpose for the social, recreational, and athletic activities of its members. That petitioner is primarily being operated for its members to profit from the sale of their stockholdings in the corporation or from the distribution of the corporation's assets upon dissolution is unsupported by any evidence and appears to be nothing more than pure speculation.<br><br>Consequently, the Court cannot agree with the CA and the SEC <i>En Banc</i> that petitioner is a stock corporation, notwithstanding the statement in its Articles of Incorporation that it is a "non profit stock corporation."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> The nature of petitioner as a stock or non-stock corporation is not determined by the nomenclature or term used by its incorporators in characterizing it, but by the applicable statutes <i>vis-Ã -vis</i> all the provisions in its Articles of Incorporation and By-Laws, as well as evidence of its actual practice.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Petitioner is a non-stock corporation based on its purpose under its Articles of Incorporation and the clear prohibition against the distribution of dividends to its members, as well as the dearth of evidence establishing that it is primarily engaged in profit-making for its members.<br><br>Under Section 88<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> of the Revised Corporation Code, which is substantially the same as Section 89<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> of the Corporation Code, non-stock corporations are allowed to limit the voting rights of its members. Therefore, there is no reason to disallow the amendments to the By-Laws of petitioner restricting the voting rights of its members as it is a non-stock corporation. There being no other objection to the amendments apart from the erroneous classification of petitioner as a stock corporation, it must be allowed.<br>&nbsp;<br>Notably, petitioner only prayed in its Petition that the proposed amendments to its By-Laws "be DECLARED valid insofar as it provides that the voting rights shall be limited to Regular Members in good standing."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> However, the proposed amendments to the By-Laws of petitioner are not limited to the voting rights of its members.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> The SEC nonetheless disapproved all the amendments because it ruled that petitioner is a stock corporation. As such, the Court deems it prudent to remand the case to the SEC <i>En Banc</i> so that it may evaluate all the proposed amendments of petitioner, bearing in mind that it is a non-stock corporation. For its part, petitioner should consider amending its Articles of Incorporation to properly reflect its classification as a non-stock corporation.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Decision dated May 25, 2021 of the Court of Appeals in CA-G.R. SP No. 162961 is <b>REVERSED</b> and <b>SET ASIDE</b>. The case is <b>REMANDED</b> to the Securities and Exchange Commission <i>En Banc</i> to determine whether the proposed amendments of the By-Laws of petitioner Forest Hills Golf and Country Club, Inc. are lawful in consideration of its classification as a non-stock corporation and to approve it accordingly.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Hernando, Zalameda, Gaerlan, Rosario, J. Lopez, Marquez, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Caguioa</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official business but left a concurring opinion.<br><i>Lazaro-Javier</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on official business.<br><i>Dimaampao</i>,<sup style="COLOR: RGB(255, 0, 0);">***</sup> <i>J.</i>, on leave.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">****</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business but left a concurring opinion.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">****</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 19-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 57-64. The May 25, 2021 Decision in CA-G.R. SP No. 162961 was penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Ramon A. Cruz and Bonifacio S. Pascua of the Special Twelfth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 95-108. The July 23, 2019 Decision in SEC <i>En Banc</i> Case No. 06-14-334 was signed by Chairperson Emilio B. Aquino and Commissioners Antonieta F. Ibe, Ephyro Luis B. Amatong, Javey Paul D. Francisco, and Kelvin Lester K. Lee of the Securities and Exchange Commission <i>En Banc</i>, Pasay City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 95.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 58, 96-97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 172, Amended By-Laws. (Underlining in the original) The quoted provision in the CA Decision, the Amended By-Laws itself is slightly different, <i>id.</i> at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 173. (Underlining in the original)<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 191. (Underlining in the original)<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Approved on May 1, 1980.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 9, 97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 126-128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 127-128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 95-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 108. (Underlining in the original)<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 104-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 66-94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup>&nbsp;<i>Id.</i> at 7-l4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 12-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Approved on February 20, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, pp. 31-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 36-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Sec. 8. The right of the people, including those employed in the public and private sectors, to form unions, associations, or societies for purposes not contrary to law shall not be abridged.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 43-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 318-355.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 307.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 325-330.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 331-336.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 337-344.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 345-350.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Ateneo De Manila University v. Court of Appeals</b>, 229 Phil. 128, 133 (1986) [Per J. Gutierrez, Jr., Second Division]. <i>See also</i> <b>Department of Finance-Revenue Integrity Protection Service v. Ventura</b>, 935 Phil. 347, 359, 361 (2023) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Ago Realty &amp; Development Corp. v. Dr. Ago</b>, 865 Phil. 797, 816 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Sec. 3. <i>Classes of Corporations</i>. â Corporations formed or organized under this Code may be stock or nonstock corporations. Stock corporations are those which have capital stock divided into shares and are authorized to distribute to the holders of such shares, dividends, or allotments of the surplus profits on the basis of the shares held. All other corporations are nonstock corporations.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Republic v. City of ParaÃ±aque</b>, 691 Phil. 476, 484 (2012) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> <b>Mohammad v. Sec. Guevarra</b>, 951 Phil. 925, 934 (2024) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Republic v. City of ParaÃ±aque</b>, 691 Phil. 476, 484(2012) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 115 Phil. 310 (1962) [Per J. Paredes, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> ACT No. 1459 (1906), or "The Corporation Law," sec. 3 states:<blockquote>SECTION 3. <i>Corporations may be public or private</i>. Public corporations are those formed or organized for the government of a portion of the state. Private corporations are those formed for some private purpose, benefit, aim, or end, as distinguished from public corporations, which have for their purpose the general good and welfare. Private corporations are divided into stock corporations and nonstock corporations. Corporations which have a capital stock divided into shares and are authorized to distribute to the holders of such shares dividends or allotments of the surplus profits on the basis of the shares held are stock corporations. All other private corporations are nonstock corporations.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Collector of Internal Revenue v. Club Filipino, Inc. de Cebu</b>, 115 Phil. 310, 314-315 (1962) [Per J. Paredes, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> There are previous cases involving golf clubs that are non-stock corporations but have shares of stock:<blockquote>In <b>Valley Golf &amp; Country Club, Inc. v. Vda. de Caram</b>, 603 Phil. 219, 235 (2009) [Per J. Tinga, Second Division], the Court observed that "[e]ven though Valley Golf is a non-stock corporation, as evinced by the fact that it is not authorized to distribute to the holder of its shares dividends or allotments of the surplus profits on the basis of shares held, the Golf Share has an assigned value reflected on the certificate of membership itself."<br><br>And in <b>Calatagan Golf Club, Inc. v. Clemente, Jr.</b>, 603 Phil. 295, 307-308 (2009) [Per J. Tinga, Second Division], the Court held that "[a] non-stock corporation like Calatagan is not exempt from that obiligation in its treatment of its members. The obligation of a corporation to treat every person honestly and in good faith extends even to its shareholders or members, even if the latter find themselves contractually bound to perform certain obligations to the corporation. A certificate of stock cannot be a charter of dehumanization."</blockquote><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Republic v. City of ParaÃ±aque</b>, 691 Phil. 476, 484 (2012) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Collector of Internal Revenue v. Club Filipino, Inc. de Cebu</b>, 115 Phil. 310, 314-315 (1962) [Per J. Paredes, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> CORP. CODE, sec. 87 states:<blockquote>Sec. 87. <i>Definition</i>. â For the purposes of this Code, a non-stock corporation is one where no part of its income is distributable as dividends to its members, trustees, or officers, subject to the provisions of this Code on dissolution: <i>Provided</i>, That any profit which a non-stock corporation may obtain as an incident to its operations shall, whenever necessary or proper, be used for the furtherance of the purpose or purposes for which the corporation was organized, subject to the provisions of this Title.<br><br>The provisions governing stock corporation, when pertinent, shall be applicable to non-stock corporations, except as may be covered by specific provisions of this Title.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> REV. CORP. CODE, sec. 86 states:<blockquote>Sec. 86. <i>Definition</i>. â For purposes of this Code and subject to its provisions on dissolution, a non-stock corporation is one where no part of its income is distributable as dividends to its members, trustees, or officers: <i>Provided</i>, That any profit which a nonstock corporation may obtain incidental to its operations shall, whenever necessary or proper, be used for the furtherance of the purpose or purposes for which the corporation was organized, subject to the provisions of this Title.<br><br>The provisions governing stock corporations, when pertinent, shall be applicable to nonstock corporations, except as may be covered by specific provisions of this Title.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> CORP. CODE, sec. 88 states:<blockquote>Sec. 88. <i>Purposes</i>. â Non-stock corporations may be formed or organized for charitable, religious, educational, professional, cultural, fraternal, literary, scientific, social, civic service, or similar purposes, like trade, industry, agricultural and like chambers, or any combination thereof, subject to the special provisions of this Title governing particular classes of non-stock corporations.</blockquote>REV. CORP. CODE, sec. 87 similarly states:<blockquote>Sec. 87. <i>Purposes</i>. â Nonstock corporations may be formed or organized for charitable, religious, educational, professional, cultural, fraternal, literary, scientific, social, civic service, or similar purposes, like trade, industry, agricultural and like chambers, or any combination thereof, subject to the special provisions of this Title governing particular classes of nonstock corporations.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i>, p. 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Emphasis supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Emphasis supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 78 Phil. 655 (1947) [Per J. Hilado, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 671-672.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 668-669.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>See</i> <b>Collector of Internal Revenue v. Club Filipino, Inc. de Cebu</b>, 115 Phil. 310, 314-315 (1962) [Per J. Paredes, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>University of Mindanao, Inc. v. Bangko Sentral ng Pilipinas</b>, 776 Phil. 401, 433 (2016) [Per J. Leonen, Second Division], <i>citing</i> <b>Coleman v. Hotel de France Co.</b>, 29 Phil. 323 (1915) [Per J. Carson, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Lee Hiong Wee v. Dee Ping Wee</b>, 526 Phil. 739, 759 (2006) [Per J. Garcia, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 130.<br><br>KNOW ALL MEN BY THESE PRESENTS:<blockquote>THAT WE, who are of legal age, and a majority of whom are residents of the Philippines, have this day voluntarily associated ourselves together for the purpose of forming a non-profit stock corporation under the laws of the Republic of the Philippines.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>See</i> <b>Begino v. ABS-CBN Corp.</b>, 758 Phil. 467, 479 (2015) [Per J. Perez, First Division]; <b>Lao v. Court of Appeals</b>, 341 Phil. 230, 244 (1997) [Per J. Panganiban, Third Division]; <b>Japitana v. Hechanova</b>, 90 Phil. 747, 750 (1952) [Per J. Padilla, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Sec. 88. <i>Right to Vote</i>. â The right of the members of any class or classes to vote may be limited, broadened, or denied to the extent specified in the articles of incorporation or the bylaws. Unless so limited, broadened, or denied, each member, regardless of class, shall be entitled to one (1) vote.<br><br>Unless otherwise provided in the articles of incorporation or the by-laws, a member may vote by proxy, in accordance with the provisions of this Code. The by-laws may likewise authorize voting through remote communication and/or <i>in absentia</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Sec. 89. <i>Right to Vote</i>. â The right of the members of any class or classes to vote may be limited, broadened or denied to the extent specified in the articles of incorporation or the by-laws. Unless so limited, broadened or denied, each member, regardless of class, shall be entitled to one vote.<br><br>Unless otherwise provided by the articles of incorporation or the by-laws, a member may vote by proxy in accordance with the provisions of this Code.<br><br>Voting by mail or other similar means by members of non-stock corporations may be authorized by the by-laws of non-stock corporations with the approval of, and under such conditions which may be, prescribed by, the Securities and Exchange Commission.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Rollo</i>, p. 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> For example, Section 2.2 of the Amended By-Laws, sec. 2.2 states:<blockquote>Sec. 2.2 CLUB MEMBERSHIP. Membership in the Club is a privilege. A holder of share of stock of the Club is not ipso facto a member of the Club. He must file an application for membership <u>which</u> must be approved in accordance with the provisions hereof, <u>and pay the Membership Activation Fee under Section 13.7 hereof</u>. The mere purchase of a share does not qualify a person for membership. Only by the favorable action of the Board of Directors may a person be admitted to membership, subject to the limitations provided in Section 2.4 hereof. <u>For the avoidance of doubt, juridical entities are not qualified to be members of the Club. Only natural persons may qualify for admission into membership in the Club.</u> <i>Id.</i> at 162. (Underlining in the original). <i>See also</i> Sections 2.1, 2.3.2, 2.3.5, 2.5, 4.1, 7.2, 7.3, 7.4, 7.7, 12.1, 13.1, 13.6, 13.7, 13.8, and 14.2. <i>Id.</i> at 161-192.<br><br></blockquote><hr align="center" width="60%" size="1" noshade=""><br><center><b>CONCURRING OPINION</b></center><br><b>CAGUIOA, <i>J.</i></b>:<br><br>The <i>ponencia</i> grants the Petition, reverses the assailed Court of Appeals Decision and remands the instant case to the Securities and Exchange Commission <i>En Banc</i> for the determination of whether the proposed amendments in the by-laws of petitioner Forest Hills Golf and Country Club, Inc. (FHGCCI) are lawful, in consideration of FHGCCI's non-stock classification.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>In resolving to grant the Petition, the <i>ponencia</i> finds that FHGCCI is a non-stock corporation as it lacks the element of distribution of dividends,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which is one of the two concurrent requirements of a stock corporation, i.e., (1) capital stock divided into shares and (2) authority to distribute to shareholders dividends or allotments of surplus profits.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>On the question of whether non-stock corporation such as golf and country clubs should be prohibited from having shares of stock to ensure consistency with its purpose, the <i>ponencia</i> finds that such must be raised with the legislature, and not be speculated on by the judiciary.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>Finally, the <i>ponencia</i> resolves that FHGCCI's purpose of "promot[ing] social, recreational[,] and athletic activities on a non-profit basis" is consistent with its non-profit objective, and that its Articles of Incorporation also provide that "[n]o profit shall inure to the benefit of any member . . . no dividend shall at any time be declared and/or paid. Members shall be entitled only to a proÂ­-rata share of the assets of the Corporation at the time of its dissolution or liquidation."<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On the foregoing findings, I concur with a note on some reservations as to the ruling's classification of FHGCCI as a non-stock corporation.<br><br>Particularly, while I agree that FHGCCI here is a non-stock corporation: (i) the <i>ponencia</i> must be clear that the consequence of its true classification as a non-stock corporation entails a full revision of its Articles of Incorporation, to remove any and all provisions that lend it a color of a stock corporation or a hybrid of the same, chief of which is the existence of its capital stock and its issuance of stocks to shareholders. For while it is recognized that the hybrid non-profit stock corporation may have previously existed owing to a standing misapplication of the Corporation Code provision, this is as good a time as any for the clarification of the same, i.e., that when a corporation is non-stock, it cannot possess the two concurring requisites of a non-stock corporationâit cannot issue stocks <i>and</i> it cannot distribute dividends.<br><br>On the matter of the <i>ponencia</i>'s finding that FHGCCI is a non-stock corporation because it lacks one of the two concurrent requisites of a stock corporation, I contrarily opine that Section 3 of the Corporation Code can be more clearly interpreted in such a manner that finds a corporation which is non-stock cannot possess either of the two concurrent requisites. Such reading would avoid the scenario such as the one FHGCCI finds itself in this case, where a corporation can have stocks (the first requisite) but not have the authority to distribute assets (the second requisite).<br><br>As well, on the point of finding that the hybrid nature of golf and country clubs as non-stock corporations can be best addressed and clarified by the legislature, I submit that there is, instead, no need for such a referral to the legislative body, since the perceived conceptual contradiction in the form of a "non-profit stock corporation" is not a contradiction that was created or contemplated by the provisions of the Corporation Code, but was a result of a flawed application and interpretation of the same.<br><br>Consequently, the Court is not precluded from clarifying and correcting such a confusion, as it is given the opportunity to do precisely that in the instant case. I submit, therefore, that FHGCCI, in its classification as nonÂ­stock, must also fully align its corporate attributes to that of a non-stock corporation, including the evident removal of any feature that would confuse it as a non-stock, in accordance with the Corporation Code.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>See id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>See id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 11.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

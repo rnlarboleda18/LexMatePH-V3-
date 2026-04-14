@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267896 - MARK JOEL MORALES Y BRONOLA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70208' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267896, August 20, 2025 ]</H2>
+			<H3>MARK JOEL MORALES <I>Y</I> BRONOLA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Rules of Court assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated November 8, 2022, of the Court of Appeals (CA) in CA-G.R. CR. No. 44927 which affirmed <i>in toto</i> the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated December 19, 2019, and Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated February 5, 2020, of Branch 42, Regional Trial Court (RTC), Manila in Criminal Case No. 17-335925 that found Mark Joel Morales <i>y</i> Bronola (petitioner) guilty beyond reasonable doubt of the crime of <i>Estafa</i> under Article 315, paragraph 2(a)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the Revised Penal Code.<br><br>Assailed also is the Resolution<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> dated July 4, 2023, which denied petitioner's Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> dated December 1, 2022.<br><br><center><i>The Antecedents</i></center><br>The case stemmed from an Information charging petitioner with the crime of <i>Estafa</i> under Article 315, paragraph 2(a) of the Revised Penal Code. The accusatory portion of the Information<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated April 17, 2017, reads as follows:<blockquote>That [on] or about and during the period comprised from September 3, 2015 to May 19, 2016, inclusive, in the City of Manila, Philippines, the said accused, conspiring and confederating together and helping one another, did then and there willfully, unlawfully and feloniously defraud one CATHERINE M. FACTOR-KOURA in the following manner, to wit:<br><br>The said accused, by means of false manifestations and fraudulent representations which they made to said CATHERINE M. FACTOR-KOURA prior to or even simultaneous with the commission of the fraud, to the effect that the latter is assured of a seat as a Party List representative of ANG CHINOY Partylist in the May 2016 National Election provided she would pay the amount of Php15,800,000.00, and that they could facilitate the return of the said amount if the said Party List would not win in the election, induced and succeeded in inducing said CATHERINE M. FACTOR-KOURA to give and deliver, as in fact she gave and delivered to the said accused the amount of Php15,800,000.00 on the strength of said manifestations and representations, said accused well knowing that the same were false and fraudulent and were made solely to obtain, as the said ANG CHINOY Partylist which the said accused represented was not accredited by COMELEC and did not qualify in the election, thus they did not obtain the amount of Php15,800,000.00, which amount once in their possession, with intent to defraud, misappropriated, misapplied and converted the same to their own personal use and benefit, to the damage and prejudice of said CATHERINE M. FACTOR-KOURA in the aforesaid amount of Php15,800,000.00, Philippine Currency.<br><br>Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></blockquote>Upon arraignment, petitioner and his co-accused: Edwin H. AniÃ±on (Edwin) and Armando Almo Co <i>alias</i> "Bobby" (Armando) entered their pleas of "Not Guilty" to the charge.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Petitioner is on bail.<br><br>Subsequently, despite the Hold Departure Order<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> issued by the RTC, Armando absconded and departed from the Philippines. Consequently, the RTC proceeded with the trial <i>in absentia</i> as regards Armando.<br><br><center><i>Version of the Prosecution</i></center><br>Private complainant Catherine M. Factor-Koura (Catherine) testified as follows:<br><br>Sometime in April 2015, Catherine sought assistance for the importation of goods from Japan into the Philippines from a certain Ernesto "Ka Ernie" Natividad (Natividad). Eventually, Natividad introduced her to Edwin who eventually became her consultant in her company, JPHILS Global Training Corporation (JPHILS), in July 2015.<br><br>Much later, Catherine confided to Edwin her intention to pursue a congressional seat through a party-list system. She disclosed to Edwin that she had been previously offered two separate opportunities to obtain a party-list nominationâthe first offer required a payment of PHP 150 million while the second offer required a PHP 75 million payment. However, she did not pursue her interest for a congressional seat anymore upon Edwin's advice that no arrangement of a refund was guaranteed in case of failure to secure a congressional seat.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>In the meantime, Edwin relayed her intention for a Congressional seat to petitioner, who manifested that he was acquainted with Armando who had strong connections with the Commission on Elections (COMELEC). Petitioner then facilitated a meeting for Catherine and Armando.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br>&nbsp;<br>In August 2015, Edwin officially introduced Catherine and her sister, Cheryl-Lyn P. Munoz (Cheryl), to petitioner and Armando in a meeting held at the UCC Cafe Burgos Circle, Bonifacio Global City, Taguig City. During the meeting, Edwin informed Catherine and Cheryl that petitioner and Armando are associated with a party-list organization known as "Ang Chinoy," which was seeking accreditation from the COMELEC to participate in the May 2016 National Elections. In support of the legitimacy of the organization, Armando presented to Catherine a copy of the Certificate of Incorporation,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Articles of Incorporation,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and By-Laws<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of Ang Chinoy Association Phils., Inc. (Ang Chinoy).<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Catherine asked Edwin about the background of petitioner and Armando; the latter responded by telling her that petitioner was his former colleague in the Bureau of Customs who has connections with the National Bureau of Investigation, while Armando is a businessman who has strong connections with the COMELEC. Edwin also mentioned to Catherine that petitioner and Armando were his business partners.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Subsequently, Catherine, together with her husband, Makoto Koura, and her sister Cheryl met with Edwin, petitioner, Armando, and Gilbert Garcia (Gilbert), at a Japanese restaurant in Fisher Mall, Quezon City. During the meeting, petitioner's group encouraged Catherine to secure a congressional seat through the party-list system. Armando offered her a guaranteed nomination under the Ang Chinoy Party-list in exchange for the sum of PHP 15 million and assured her that should the party-list fail to win in the elections, her investment would be reimbursed in full. On Edwin's advice, Catherine negotiated a staggered payment arrangement with Armando. Armando ultimately accepted the staggered payment.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>On September 3, 2015, JPHILS, represented by Catherine, and Ang Chinoy, represented by Armando, executed a Memorandum of Agreement<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (MOA). In the MOA, the parties acknowledged that Ang Chinoy was still in the process of obtaining accreditation from the COMELEC. Pursuant to the agreement, JPHILS undertook to fund Ang Chinoy's projects and platforms in the amount of PHP 15 million under the guise of a joint venture. Significantly, the MOA included a "repayment of funds" clause, which assured JPHILS that in the event the joint venture failed, Ang Chinoy would reimburse the full amount. In compliance therewith, Catherine remitted payments to Armando as follows: PHP 1,500,000.00 on September 3, 2015;<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> PHP 1 million on September 14, 2015;<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> PHP 4 million on October 14, 2015;<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> and PHP 8.5 million on October 27, 2015.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Beyond the agreed PHP 15 million covered by the MOA, Catherine asserted that Armando asked her to provide additional amounts for a total of PHP 2 million, which she paid in installments on April 6, 2016,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> May 19, 2016,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> and July 25, 2016.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>However, the COMELEC denied the accreditation of Ang Chinoy.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Still, Armando assured Catherine that she will be the nominee of another party-listâAKAP Party-list. Later on, Armando assured her with another party-listâAnak Central Party-list (ACP).<br><br>On December 3, 2015, Armando managed to have Catherine and petitioner sign a Certificate of Candidacy (CoC) at Lemongrass Restaurant, EDSA Shangri-La, Mandaluyong City. Thereafter, Catherine exchanged emails with Armando regarding the updates on her candidacy and campaign materials which included the application of ACP before the COMELEC with her as first nominee and petitioner as second nominee. On the side, Catherine and her husband accompanied Armando on a trip to the United States to visit the latter's mother.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>On December 26, 2015, Catherine personally went to the COMELEC and learned that neither Ang Chinoy nor AKAP Party-list were accredited. While ACP was listed as a registered entity, neither her name nor petitioner's name appeared among its nominees.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Catherine immediately demanded from Armando the enforcement of the money-back guarantee of the MOA through text message and email but received no response.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Cheryl corroborated the testimony of Catherine. She testified that she accompanied her sister, Catherine, to the three meetings the latter had with the group of Edwin, petitioner, and Armando. She recalled that Catherine was offered a seat in Congress through a party-list system; that Armando told Catherine that she had to pay money for a seat in Congress; that if she does not get a seat, her money will be returned to her; and that Armando even assured Catherine of a money-back guarantee.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Cheryl further testified that petitioner was supposed to work with Catherine.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><center><i>Version of the Defense</i></center><br>Petitioner denied that he participated in any agreement to defraud Catherine. He testified as follows:<br><br>Sometime in August 2015, Edwin introduced him to Catherine. Edwin referred Catherine to him considering that Catherine was looking for a seat in Congress through a party-list. At that time, he was affiliated with Ang Chinoy, a non-stock agricultural corporation, together with Armando, Gilbert, Andrea C. Garcia (Andrea), and Edgar H. Villanueva (Edgar).<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Petitioner merely referred Catherine's inquiries to Armando, who subsequently agreed to meet with her. During their meetings, Armando was the one who explained the organization's objectives and its pending application for party-list accreditation with the COMELEC. His presence in the meetings was solely in his capacity as one of the members of the non-stock corporation and as the nominated second nominee for the intended party-list.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Petitioner admitted having facilitated a meeting between Catherine and Armando, with the assistance of Edwin.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> But it was Armando who offered Catherine a congressional nomination under the party-list group in exchange for the amount of PHP 15 million which Catherine eventually paid in installments. Thereafter, the group designated Catherine as Vice President of Ang Chinoy; Armando as President; petitioner as Secretary; Andrea as Director; Edgar as Treasurer; and Gilbert as Auditor.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Petitioner insisted that he had no direct involvement in any financial transaction with Catherine and did not receive any portion of the amounts she paid. He asserted that all dealings were conducted solely between Armando and Catherine. His involvement with the party-list was motivated by his own political aspiration, having accepted the position of second nominee as offered by Armando. He personally contributed the amount of PHP 2 million to the endeavor, upon Armando's assurance that the party-list would be financially supported by members of the Chinese community.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In the Decision<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> dated December 19, 2019, the RTC found petitioner and Armando guilty of the crime of <i>Estafa</i>, as defined and penalized under Article 315, paragraph 2(a) of the Revised Penal Code. However, it acquitted Edwin. The dispositive portion of the RTC Decision reads as follows:<blockquote>WHEREFORE, the Court finds accused Mark Joel Bronola Morales and Armando Almo Co GUILTY beyond reasonable doubt of the crime of <i>Estafa</i> under Article 315 paragraph 2(a) of the Revised Penal Code. Each is hereby sentenced to suffer the penalty of two (2) years of <i>prision correccional</i> as minimum to fourteen (14) years of <i>reclusion temporal</i> as maximum.<br><br>Further, accused Mark Joel Bronola Morales and Armando Almo Co are hereby ordered to indemnify private complainant jointly and severally the amount of Seventeen (Php17,000,000.00) Million Pesos.<br><br>Accused Edwin Herrera Aninon, on the other hand, is hereby ACQUITTED for failure of the Prosecution to prove his guilt beyond reasonable doubt.<br><br>Considering that accused Armando Almo Co jumped bail, let the judgment be entered into the criminal docket of this Court.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></blockquote>The RTC held that the prosecution was able to establish all the elements of the crime of <i>Estafa</i> under Article 315, paragraph 2(a) of the Revised Penal Code. It ruled that the prosecution ably proved Armando 's guilt beyond reasonable doubt. It found that Armando promised Catherine a winning seat in Congress through a party-listâinitially identified as Ang Chinoy, then later AKAP Party-list, and finally ACPâin exchange for the amount of PHP 15 million. Armando made Catherine believe of the existence of Ang Chinoy when he showed her the General Information Sheet and Articles of Incorporation of Ang Chinoy which included her as Vice President. Despite Ang Chinoy's failure to secure accreditation from the COMELEC, Armando still continued to mislead Catherine by assuring her that ACP was accredited and even showed her a Certification from the COMELEC. Moreover, Armando had her sign a Certificate of Candidacy and assured her that ACP would win. All the false pretenses never materialized, and Catherine suffered financial loss in the total amount of PHP 17 million.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>As regards petitioner, the RTC found him to have acted in concert with Armando in the commission of the crime. It held that the inclusion of petitioner's name in the Articles of Incorporation, his nomination as second nominee, and his act of signing the CoC induced Catherine to trust Armando and fell for the scheme.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>The RTC acquitted Edwin and held that the pieces of evidence presented did not meet the quantum of evidence required to prove that he conspired to defraud Catherine.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Aggrieved, petitioner appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>On appeal, petitioner asserted that the RTC erred in finding that there was conspiracy between him and Armando. Petitioner argued that the RTC failed to appreciate the doctrine of <i>in pari delicto</i>, asserting that Catherine's willingness to pay a sum in exchange for a congressional seat constituted inducement to commit election offenses, and thus, it barred her from recovering or seeking criminal liability against him.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Petitioner maintained that the RTC lacked factual and legal basis to convict him of Estafa. He emphasized that it was Armando alone who transacted with Catherine, received the monetary consideration, and promised the money-back guarantee. Petitioner further alleged that he was similarly situated with Catherine, having been offered a congressional seat as second nominee and having contributed the amount of PHP 2 million for the same objective.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> dated November 8, 2022, the CA affirmed <i>in toto</i> the ruling of the RTC. It held that petitioner raised for the first time on appeal his theory of inducement of election offenses which the appellate court cannot take cognizance as it would be violative of due process. It further held that petitioner's invocation of the doctrine of <i>in pari delicto</i> was misplaced because it is a doctrine principally applicable in civil cases.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>In sustaining the conviction of petitioner, the CA ruled that the prosecution ably proved the element of fraud in <i>Estafa</i> in that petitioner and his co-accused Armando succeeded in making Catherine believe that she would obtain a congressional seat through the party-list system in the 2016 National Elections. It noted that the inclusion of a money-back guarantee in the parties' MOA induced Catherine to part with her money. Thus, it concluded that the false pretenses employed by petitioner and Armando were sufficient to establish the element of fraud in the commission of <i>Estafa</i>.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Aggrieved, petitioner filed a motion for reconsideration, but the CA denied it in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> dated July 4, 2023.<br><br>Hence, the Petition for Review on <i>Certiorari</i>.<br><br>Petitioner contends as follows:<br><br>The courts <i>a quo</i> erred in finding that he conspired with Armando in defrauding Catherine. The prosecution failed to discharge the burden of proving the existence of conspiracy beyond reasonable doubt. In particular, the evidence on record does not establish the essential requisites of conspiracy, namely: a common criminal design, a unity of intent, and coordinated action toward the accomplishment of an unlawful objective.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>There was no showing that he entered into any agreement with Armando for the purpose of defrauding Catherine. Neither was there proof of any overt act on his part indicating a shared intent to commit a felony. The prosecution failed to demonstrate the existence of a community of criminal purpose between himself and Armando that would justify the imputation of collective criminal liability.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>He did not harbor any intent to deceive or induce Catherine into parting with her money. He was similarly situated with Catherine in that he, too, was led to believe in the legitimacy of the party-list endeavor. In fact, he had contributed the sum of PHP 2 million to support the same initiative.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>Finally, he was not privy to any financial transaction between Catherine and Armando. Neither did he benefit from their financial transaction. He categorically denies receiving any portion of the funds turned over by Catherine, asserting that it was Armando alone who negotiated the terms of the arrangement, received the monetary consideration, made representations regarding the party-list nomination, and the purported money-back guarantee.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br><center><i>The Issue</i></center><br>The core of contention before the Court is whether the CA erred in finding petitioner guilty beyond reasonable doubt of the crime of <i>Estafa</i> defined and penalized under Article 315, paragraph 2(a) of the Revised Penal Code.<br><br><center><i>The Ruling of the Court</i></center><br>The petition is meritorious.<br><br>Generally, a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court is limited to reviewing errors of law. However, there are exceptions wherein the Court may delve into factual issues: "(1) when the factual findings of the Court of Appeals and the trial court are contradictory; (2) when the conclusion is a finding grounded entirely on speculation, surmises, or conjectures; (3) when the inference made by the Court of Appeals from its findings of fact is manifestly mistaken, absurd, or impossible; (4) when there is a grave abuse of discretion in the appreciation of facts; (5) when the Appellate Court, in making its findings, went beyond the issues of the case and such findings are contrary to the admissions of both appellant and appellee; (6) when the judgment of the Court of Appeals is premised on a misapprehension of facts; (7) <i>when the Court of Appeals failed to notice certain relevant facts which, if properly considered, would justify a different conclusion</i>; (8) when the findings of fact are themselves conflicting; (9) when the findings of fact are conclusions without citation of the specific evidence on which they are based; and (10) when the findings of fact of the Court of Appeals are premised on the absence of evidence but such findings are contradicted by the evidence on record."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup>&nbsp;<br><br>The factual findings of the trial court, as affirmed by the CA, are accorded great weight and respect, and thus, it is only in exceptional circumstances that the Court will re-calibrate and evaluate the factual findings on review. Here, the CA failed to appreciate certain relevant facts which, if properly considered, would lead to a different conclusion.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The prosecution failed to prove beyond reasonable doubt the existence of conspiracy between petitioner and Armando</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It is a long-standing doctrine in criminal law that conspiracy is never presumed.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Jurisprudence has consistently held that mere association or companionship, or mere presence at the scene of the crime, is insufficient to establish conspiracy.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> It must be emphasized that conspiracy transcends passive presence and requires affirmative proof of intentional participation in a common design.<br><br>Under Article 8 of the Revised Penal Code, "conspiracy exists when two or more persons come to an agreement concerning the commission of a felony and decide to commit it." Accordingly, for conspiracy to be established, the prosecution must prove the following elements with the same degree of certainty as the crime itself: "(1) two or more persons came to an agreement; (2) the agreement concerned the commission of a felony; and (3) the execution of the felony was decided upon."<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>While direct evidence is not indispensable in proving conspiracy, the same may be inferred from the conduct of the accused before, during, and after the commission of the crime, provided such conduct clearly and convincingly indicates a common criminal purpose or design.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Nonetheless, any inference of conspiracy must be drawn from overt acts that demonstrate concerted action or unity of purpose.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Mere knowledge, acquiescence, or approval to cooperate, without active participation, does not constitute conspiracy.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>In ruling that petitioner conspired with Armando, the RTC simply held that petitioner participated in the sham strategy by portraying the appearance that both he and Catherine will be declared nominee of ACP by signing a certificate of candidacy along with Catherine; and that petitioner gave her a ballpen with the remarks, "Cong. Cathy Factor," engraved therein. These circumstances, while perhaps suggestive of involvement in a common political objective, are insufficient to establish that petitioner and Armando acted in concert to defraud the private complainant.<br><br>However, the totality of the evidence on record fails to show that petitioner engaged in any act that would evince a community of criminal design with Armando. Petitioner's role was limited to introducing Catherine to Armando and being present in some meetings. It was Armando who exclusively curated and orchestrated the alleged scheme to facilitate private complainant's congressional bid through a party-list, as well as received all the payments. The prosecution's own evidence, the email correspondences,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> and testimonial declarations, point to Armando as the sole transacting party, <i>viz.</i>:<blockquote><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2"><div align="justify">ATTY. GUILLEN:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">In these checks Ms. Witness, these checks represent your payment made to Armando Co?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes for the party list.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">If you may read Ms. Witness, pay to the order of what name?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Armando Co.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">All the checks?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, ma'am.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">ATTY. HIRANO:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">We stipulate Your Honor that the money given by the complainant was handed to Mr. Armando Co for the 15 million.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">WITNESS:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">17 million were given to Mr. Armando Co.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">ATTY. HIRANG:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">For the 17 million Your Honor.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . . </div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did you ask them what party list was "nakalaan"?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I asked sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what was the answer given to you?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">It was sent to me through email yung AKAP na meron syang application sa Comelec tapos nakalagay dun sa inemail nya yung name ko as first nominee, and Mark Joel Morales as the second nominee and Bobby Co as the third nominee, so I trusted the group, so kung ano ang pini-feed nilang information sa akin, naniniwala ako kasi para naman kaming magkakapatid during that time.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Who in particular sent you the email Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td> <div align="justify">It's Armando Co.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did you make any verification with the Commission on Elections as to the veracity of the Information given to you by accused Armando Co?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">No sir, because I only relied to the information given by them.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">So you never made any verification with the Comelec?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">No, not until natapos yung election ako nag-verify so I make an overseas call to [petitioner] through viber na sinabi ko sa kanya na bakit hindi pangalan natin yung nakalaga[y] duon sa ACP, bakit ibang tao gayung pinapirma nyo naman ako ng application.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">When was the last time you were able to talk to accused Armando Co?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Through email, December 2016.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did you ever ask him to refund the expenses?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Many times, sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">How many times?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">From May 2016 onward, lagi ko ng sinasabi, sabi nya maghintay ka na lang kasi di pa naman tapos ang counting, ang sabi nya meron kasi tayong penalty sa Comelec, so kelangan nating bayaran yun para mabigyan tayo ng ibang party list and that is already end of May 2016 and Edwin knows that and Mark Joel Morales knows that, it is not unknown to them.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did the accused Armando Co promised you to refund your expenses?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td> <div align="justify">Many times I was promised but he did not fulfill it.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did he put his promise in writing?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes sir.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">SACP MENDOZA:</div></td></tr><tr valign="top"><td colspan="2"><div align="justify">Your Honor, that is the reason why the complainant filed the case, because she's charging the accused, because the accused promised that they will do all the processing. She is not the one [who] personally went to the COMELEC to file those documents, Your Honor. Because it was the group of the [accused] who prepared these documents. That is why she filed the case, because she was misrepresented.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">THE COURT:</div></td></tr><tr valign="top"><td colspan="2"><div align="justify">The court will allow, she is under cross.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">A:</div></td></tr><tr valign="top"><td colspan="2"><div align="justify">We did not go to the COMELEC nor did I personally go [to] the COMELEC. Instead, [it's] A1mando Co who asked Mark Joel Morales to let me sign the Certificate of Candidacy application in Shangrila. I gave to him my Certificate of Candidacy and they told me that they will file and I checked [with] the COMELEC, no Ang Tsinoy or AKAP were registered. Only ACP was registered, but my name was not written there.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></div></td></tr></tbody></table></blockquote>In sum, petitioner's acts before, during, and after the alleged commission of the crime do not rise to the level of active cooperation or concerted effort necessary to establish conspiracy. Absent clear proof of a prior agreement and coordinated execution of a deceitful plan between petitioner and Armando, the existence of conspiracy cannot be sustained.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>As to petitioner's participation, the prosecution was not able to establish all the elements of the crime of Estafa defined and penalized under Article 315, paragraph 2(a) of the Revised Penal Code</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Article 315, paragraph 2(a) of the Revised Penal Code provides:<blockquote>ART. 315. <i>Swindling (estafa)</i>. â Any person who shall defraud another by any of the means mentioned hereinbelow shall be punished by:<br><br>. . . .&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1.</div></td><td colspan="2"><div align="justify">By means of any of the following false pretenses or fraudulent acts executed prior to or simultaneously with the commission of the fraud:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify">(a)</div></td><td width="90%"><div align="justify">By using a fictitious name, or falsely pretending to possess power, influence, qualifications, property, credit, agency, business or imaginary transactions; or by means of other similar deceits.</div></td></tr></tbody></table><br>. . . .</blockquote>The Court has long established the elements of <i>Estafa</i> by means of deceit: "(1) that there must be a false pretense, fraudulent act or fraudulent means; (2) that such false pretense, fraudulent act or fraudulent means must be made or executed prior to or simultaneously with the commission of the fraud; (3) that the offended party must have relied on the false pretense, fraudulent act or fraudulent means, that is, he was induced to part with his money or property because of the false pretense, fraudulent act or fraudulent means; and (4) that as a result thereof, the offended party suffered damage."<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>The prosecution failed to prove beyond reasonable doubt all the elements of the crime of <i>Estafa</i> under Article 315, paragraph 2(a) of the Revised Penal Code as against petitioner.<br><br>To recall, the accusation of false pretense and fraudulent misrepresentation on the part of petitioner was premised on his involvement in the incorporation of Ang Chinoy, his designation as second nominee under the AKAP Party-list, his act of jointly signing a CoC with Catherine, his inaction to dissuade Catherine from transacting with Armando, and his alleged remarks concerning Catherine's campaign efforts.<br><br>However, these acts, taken individually or collectively, do not, by themselves, constitute false pretenses or fraudulent misrepresentations within the contemplation of Article 315, paragraph 2(a). In the case of <i>Spouses Dulay v. People of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> the Court reiterated the definition of deceit "<i>as the false representation of a matter of fact whether by words or conduct, by false or misleading allegations, or by concealment of that which should have been disclosed which deceives or is intended to deceive another so that he shall act upon it to his legal injury</i>."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> While fraud is a generic term which embraces "all multifarious means which human ingenuity can devise, and which are resorted to by one individual to secure an advantage over another by false suggestions or by suppression of truth and includes all surprise, trick, cunning, dissembling and any unfair way by which another is cheated."<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Deceit or fraud, as an element of <i>Estafa</i>, must be the determining cause that induced the offended party to part with his or her money or property. It must be established that the accused employed false representations or deceitful conduct prior to, or simultaneous with, the commission of the fraud, and that the offended party relied on such representations in making his or her disposition.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>Here, petitioner's mere association with the entities involved, or his passive participation in the political or organizational activities, cannot be equated to a deliberate intent to deceive. In particular, there was no showing that petitioner made any direct representations to Catherine regarding the legitimacy of the party-list, the certainty of her congressional nomination, or the return of her investment. Neither was there evidence that petitioner orchestrated, facilitated, or was privy to the terms and conditions of the financial arrangements between Catherine and Armando.<br><br>Absent clear and convincing proof of any fraudulent inducement or affirmative misrepresentation attributable to petitioner, the element of deceit is lacking. As such, one of the essential requisites of <i>Estafa</i> not having been proven, petitioner's conviction cannot be sustained.<br><br>Time and again, the Court has been consistent with its pronouncement that the prosecution has the primordial duty to present its case with clarity and persuasion, to the end that conviction becomes the only logical and inevitable conclusion.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> In the event of the prosecution's failure to discharge this burden, the constitutional presumption of innocence accorded to the accused remains unrefuted, thereby the exoneration of the accused of the crime charged against him or her must be granted as a matter of right.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>As regards the criminal liability of Armando, it bears emphasis that the exoneration of a co-accused does not <i>ipso facto</i> absolve the remaining accused from criminal liability.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> Jurisprudence is replete with pronouncements that the acquittal of one accused does not automatically extend to others, especially when their respective participation in the crime is distinct and supported by separate and independent evidence.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Ergo</i>, the acquittal of one accused is not a bar to the conviction of his co-accused if the evidence warrants such conviction.<br><br>In the instant case, while the prosecution failed to establish beyond reasonable doubt the existence of conspiracy or deceit on the part of the petitioner, the totality of the evidenceâincluding the testimony and documentary evidence such as email correspondences, receipts, and the complainant's unequivocal identification of Armando as the recipient of the fundsâclearly points to Armando as the principal architect and direct perpetrator of the fraudulent scheme. He was the one who made the misrepresentations regarding the complainant's supposed nomination to a party-list, orchestrated the execution of the purported documents, induced Catherine to part with her money under false pretenses, and repeatedly assured her of results he knew would not materialize.<br><br>Furthermore, the checks issued by Catherine were all made payable directly to Armando, and her efforts to recover the sums advanced were persistently directed to him alone. Armando's refusal to return the money despite repeated demands, coupled with the absence of a legitimate political outcome bolsters the conclusion that his acts were imbued with fraudulent intent.<br><br>Thus, even as the Court finds insufficient basis to hold petitioner criminally liable, the same conclusion cannot be drawn in favor of Armando. His independent and overt acts, as substantiated by the evidence on record, sufficiently satisfy all the essential elements of <i>Estafa</i> under Article 315, paragraph 2(a) of the Revised Penal Code. Accordingly, his criminal liability remains unaffected by the petitioner's acquittal and must be adjudged based on his own culpable conduct as proven beyond reasonable doubt.<br><br><i>Civil Liability</i><br><br>As to the civil liability of petitioner, it must be underscored that the dismissal of a criminal case does not <i>ipso facto</i> result in the extinction of the civil liability of the accused.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Jurisprudence recognizes specific instances where the civil liability may subsist notwithstanding an acquittal, namely: "(a) the acquittal is based on reasonable doubt; (b) the court declares that the liability of the accused is only civil; and (c) the civil liability of the accused does not arise from or is not based upon the crime of which the accused is acquitted."<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> It is likewise well-established that the quantum of proof needed to sustain civil liability is preponderance of evidence, which is the "evidence which is more convincing to the court as worthy belief than that which is offered in opposition thereto."<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br>Upon review of the records of the case, the required quantum of proof was not met to sustain the civil liability of petitioner. It must be noted that Catherine unequivocally testified during trial that Armando solely received the entire amount of the PHP 17 million payments she made. Notably, none of the acknowledgement receipts submitted before the trial court indicate that petitioner ever received, directly or indirectly, in the absence of any competent and credible evidence linking petitioner to the receipt or misappropriation of the subject funds, civil liability cannot be imputed to him based on mere association or passive involvement.<br><br>The Court likewise takes this occasion to address the assertion that Catherine is barred by the doctrine of <i>in pari delicto</i>, considering that the transaction involved the payment of money in exchange for a Congressional seat through the party-list system.<br><br>In the case of <i>Gonzalo v. Tarnate, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> the Court stressed that in cases of <i>in pari delicto</i> "no action arises, in equity or at law, from an illegal contract; no suit can be maintained for its specific performance, or to recover the property agreed to be sold or delivered, or the money agreed to be paid, or damages for its violation; and where the parties are <i>in pari delicto</i>, no affinnative relief of any kind will be given to one against the other."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup><br><br>The rule is that where the contract is illegal and constitutes a criminal offense, and both patties are <i>in pari delicto</i> or 'in equal fault,' the courts will leave them where they are found. This doctrine rests on the maxim <i>ex dolo malo non oritur action</i>, "no action arises from a wrongful cause,"<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> and is designed to discourage illegal agreements by refusing judicial aid to either party.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>Undoubtedly, contracts that have for their object the trafficking of public office by unlawful means or the manipulation of electoral processes are void for being contrary to public policy. They are not only tainted with illegality from inception, but also subvert democratic processes and erode public trust in the electoral system.<br><br>All told, as both Catherine and Armando stand on equal footing in terms of culpability for the illegal transaction, the doctrine of <i>in pari delicto</i> bars Catherine from recovering the amount she paid to Armando.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Decision dated November 8, 2022, and the Resolution dated July 4, 2023, of the Court of Appeals in CA-G.R. CR No. 44927 are <b>REVERSED</b> and <b>SET ASIDE</b> insofar as Petitioner Mark Joel Morales <i>y</i> Bronola is concerned. He is hereby <b>ACQUITTED</b> of the crime of <i>Estafa</i> under Article 315, paragraph 2(a) of the Revised Penal Code in Criminal Case No. 17-335925 filed with Branch 42, Regional Trial Court, Manila.<br><br>On the other hand, the conviction of Armando Almo Co <i>alias</i> "Bobby" is <b>AFFIRMED WITH MODIFICATION</b> in that the award of civil liability in the amount of PHP 17 million is <b>DELETED</b>.<br><br>Let entry of judgment be issued immediately.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 7-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> RULES OF COURT, Rule 45:<blockquote>Section 1. <i>Filing of petition with Supreme Court</i>. â A party desiring to appeal by <i>certiorari</i> from a judgment or final order or resolution of the Court of Appeals, the Sandiganbayan, the Regional Trial Court or other courts whenever authorized by law, may file with the Supreme Court a verified petition for review on <i>certiorari</i>. The petition shall raise only questions of law which must be distinctly set forth.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> CA <i>rollo</i>, pp. 113-128. Penned by Associate Justice Rex Bernardo L. Pascual and concurred in by Associate Justices Tita Marilyn B. Payoyo-Villordon and Angelene Mary W. Quimpo-Sale of the Special Eleventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 42-55. Penned by Presiding Judge Dinnah C. Aguila-Topacio.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> RTC records, pp. 834-835.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> REV. PEN. CODE, art. 315:<blockquote>ARTICLE 315. <i>Swindling</i> (<i>Estafa</i>). â Any person who shall defraud another by any of the means mentioned hereinbelow shall be punished by:<br><br>. . . .&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">2.</div></td><td colspan="2"><div align="justify">By means of any of the following false pretenses or fraudulent acts executed prior to or simultaneously with the commission of the fraud:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify">(a)</div></td><td width="90%"><div align="justify">By using fictitious name, or falsely pretending to possess power, influence, qualifications, property, credit, agency, business or imaginary transactions, or by means of other similar deceits.</div></td></tr></tbody></table><br>. . . .</blockquote><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, pp. 57-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> CA <i>rollo</i>, pp. 132-136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> RTC records, pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 29 and 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> RTC records, pp. 486-487.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> RTC records, p. 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 18-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 23-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, p. 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 44-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> RTC records, pp. 381-383.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 341-A-342.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 343.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 344.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 338.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 339.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 340.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>See</i> COMELEC Certification dated August 18, 2017, <i>id.</i> at 346.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> TSN, Catherine M. Factor-Kuora, October 25, 2017, pp. 32-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> TSN, Catherine M. Factor-Kuora, May 17, 2018, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> TSN, Catherine M. Factor-Kuora, October 25, 2017, pp. 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> TSN, Cheryl-lyn P. MuÃ±oz, November 23, 2017, pp. 10, 13-17, and 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> TSN, Mark Joel Morales, April 15, 2019, p. 10 and 14. <i>See also</i> Counter-Affidavit of Mark Joel Morales, RTC records, p. 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> TSN, Mark Joel Morales, April. 15, 2019, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>See</i> General Information Sheet, RTC records, pp. 120-124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> TSN, Mark Joel Morales, April 15, 2019, pp. 10-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, pp. 42-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 48-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 49-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> Notice of Appeal dated March 3, 2020, RTC records, pp. 836-837.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 46-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 49-53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> CA <i>rollo</i>, pp. 113-128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, pp. 34-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 36-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 57-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 15-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 18-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>Ditiangkin v. Lazada E-Services Philippines. Inc.</b>, 930 Phil. 250, 263 (2022), <i>citing</i> <b>Visayan Electric Company v. Alfeche</b>, 821 Phil. 971, 982 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>People v. Lababo</b>, 832 Phil. 1056, 1075 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>People v. De Guzman</b>, 905 Phil. 378, 388 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>People of the Philippines v. Abarratigue</b>, 933 Phil. 296, 310 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See</i> <b>People v. Domingo</b>, 905 Phil. 378, 387 (2021), <i>citing</i> <b>People v. Lago</b>, 411 Phil. 52, 59 (2001).<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> <b>Peopie v. Olidan, G.R. No. 263920</b>, August 14, 2024, <i>citing</i> <b>People v. Lababo</b>, <i>supra</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>People v. De Guzman</b>, <i>supra</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> RTC records, pp. 43-47 and 379-380.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> TSN, Catherine Factor Kuora, October 25, 2017, pp. 22-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> TSN, Catherine Factor Kuora, October 25, 2017, pp. 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> TSN, Catherine Factor Kuora, October 25, 2017, pp. 22-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> TSN, Catherine Factor-Kuora, May 17, 2018, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Arriola v. People</b>, 871 Phil. 585, 606-607 (2020); <b>People v. Aquino</b>, 842 Phil. 627, 635-636 (2018); <b>Gabionza v. Court of Appeals</b>, 586 Phil. 606, 618 (2008).<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> 910 Phil. 1 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 10, <i>citing</i> <b>Alcantara v. Court of Appeals</b>, 462 Phil. 72, 89 (2003).<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>People v. Mateo</b>, 819 Phil. 545, 555-556 (2017), <i>citing</i> <b>People v. Menil</b>, 394 Phil. 433, 452 (2000).<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>See</i> <b>Sy v. People</b>, 632 Phil. 276, 283-284 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>People v. Jampas</b>, 610 Phil. 652, 670 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Paguirigan v. People, G.R. No. 255308</b>, February 12, 2024, <i>citing</i> <b>Vide People v. Ramirez, Jr.</b>, 475 Phil. 631, 649-650 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>People v. Dulay</b>, 561 Phil. 764, 770 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>See</i> <b>People v. Uganap</b>, 411 Phil. 320, 333-334 (2001), <i>citing</i> <b>People v. Arlalejo</b>, 389 Phil. 131 (2000).<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i>, <i>citing</i> <b>Matobato v. People of the Philippines</b>, 919 Phil. 805, 808-809 (2022), <i>further citing</i> <b>Dayap v. Sendiong</b>, 597 Phil. 127, 141 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>BP Oil and Chemicals International Philippines, Inc. v. Total Distribution &amp; Logistic Systems, Inc.</b>, 805 Phil. 244, 262 (2017), <i>citing</i> <b>Raymundo v. Lunaria</b>, 590 Phil. 546, 553 (2008).<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 724 Phil. 198 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 206, <i>citing</i> <b>Relloza v. Gaw Chec Hun</b>, 93 Phil. 827, 831 (1953).<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <b>Pajuyo v. Court of Appeals</b>, 474 Phil. 557, 584 (2004), <i>citing</i> <b>Top-Weld Manufacturing, Inc. v. Eced, S.A., IRTI, S.A.</b>, 222 Phil. 424 (1985).<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

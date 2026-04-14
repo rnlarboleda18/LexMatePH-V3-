@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth, useUser } from '@clerk/clerk-react';
 
 const SubscriptionContext = createContext(null);
@@ -6,7 +6,7 @@ const SubscriptionContext = createContext(null);
 const TIER_ORDER = ['free', 'amicus', 'juris', 'barrister'];
 
 const FEATURE_REQUIREMENTS = {
-  // Amicus unlocks unlimited daily usage
+  // Amicus unlocks unlimited daily usage (see TRACK_USAGE_FEATURE_TO_UNLIMITED)
   case_digest_unlimited: 'amicus',
   bar_question_unlimited: 'amicus',
   flashcard_unlimited: 'amicus',
@@ -24,6 +24,14 @@ const FEATURE_REQUIREMENTS = {
 
   // Barrister only
   lexify: 'barrister',
+};
+
+/** POST /api/track-usage `feature` → `canAccess` / FEATURE_REQUIREMENTS key (Amicus+ skips metering). */
+export const TRACK_USAGE_FEATURE_TO_UNLIMITED = {
+  case_digest: 'case_digest_unlimited',
+  bar_question: 'bar_question_unlimited',
+  flashcard: 'flashcard_unlimited',
+  case_digest_download: 'case_digest_download_unlimited',
 };
 
 const TIER_LABELS = {
@@ -61,8 +69,8 @@ function getTestTierOverride() {
 }
 
 export function SubscriptionProvider({ children }) {
-  const { getToken, isSignedIn } = useAuth();
-  const { user } = useUser();
+  const { getToken, isSignedIn, isLoaded } = useAuth();
+  const { user, isLoaded: userLoaded } = useUser();
   const [tier, setTier] = useState('free');
   const [status, setStatus] = useState('inactive');
   const [expiresAt, setExpiresAt] = useState(null);
@@ -73,39 +81,65 @@ export function SubscriptionProvider({ children }) {
   const [upgradeContext, setUpgradeContext] = useState(null);
   const [testTier, setTestTier] = useState(() => getTestTierOverride());
 
-  // ── Step 1: Check admin PURELY from Clerk's user object (no backend needed) ──
-  useEffect(() => {
-    if (!user) {
-      setIsAdmin(false);
-      return;
-    }
-    const emails = user.emailAddresses || [];
-    const admin = isAdminEmail(emails);
-    if (admin) {
-      console.log('[Subscription] 🔑 Admin access granted for:', user.primaryEmailAddress?.emailAddress);
-      setIsAdmin(true);
-      setTier('barrister');
-      setStatus('active');
-      setLoading(false);
-    }
-  }, [user]);
+  // Incremented to schedule a retry when getToken() returns null on cold start.
+  const [tokenRetry, setTokenRetry] = useState(0);
+  const retryTimerRef = useRef(null);
+  const userRef = useRef(user);
+  userRef.current = user;
 
-  // ── Step 2: Fetch from backend (for non-admin users) ──────────────────────────
-  const fetchSubscriptionStatus = async () => {
+  const fetchSubscriptionStatus = useCallback(async () => {
     if (!isSignedIn) {
       setTier('free');
       setStatus('inactive');
       setIsAdmin(false);
+      setSubscriptionSource(null);
+      setExpiresAt(null);
       setLoading(false);
       return;
     }
-    // Already determined admin via Clerk — skip the potentially failing API call
-    if (isAdmin) {
+
+    const u = userRef.current;
+    if (!u) return;
+
+    const emails = u.emailAddresses || [];
+    const clerkAdmin = isAdminEmail(emails);
+    if (clerkAdmin) {
+      console.log('[Subscription] 🔑 Admin access granted for:', u.primaryEmailAddress?.emailAddress);
+      setIsAdmin(true);
+      setTier('barrister');
+      setStatus('active');
       setLoading(false);
       return;
     }
+
+    setIsAdmin(false);
+
     try {
+      setLoading(true);
       const token = await getToken();
+
+      if (!token) {
+        // Clerk session is active but the JWT isn't ready yet (common on cold start).
+        // Schedule a retry with exponential backoff (up to ~16 s, 5 attempts).
+        setTokenRetry((n) => {
+          const attempt = n + 1;
+          if (attempt > 5) {
+            console.warn('[Subscription] getToken() still null after 5 retries; giving up.');
+            setLoading(false);
+            return n;
+          }
+          const delay = Math.min(500 * Math.pow(2, n), 16000); // 500 ms, 1 s, 2 s, 4 s, 8 s…
+          console.warn(`[Subscription] getToken() returned null; retry ${attempt} in ${delay}ms`);
+          clearTimeout(retryTimerRef.current);
+          retryTimerRef.current = setTimeout(() => setTokenRetry(attempt), delay);
+          return n;
+        });
+        return;
+      }
+
+      // Token obtained — clear any pending retry.
+      clearTimeout(retryTimerRef.current);
+
       const res = await fetch('/api/subscription-status', {
         headers: { 'X-Clerk-Authorization': `Bearer ${token}` },
       });
@@ -118,6 +152,7 @@ export function SubscriptionProvider({ children }) {
         setExpiresAt(data.expires_at || null);
         setSubscriptionSource(data.subscription_source || null);
         setIsAdmin(backendAdmin);
+        setTokenRetry(0);
         console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
       } else {
         console.warn(`[Subscription] Backend API failed (${res.status}). Using test tier: ${testTier || 'free'}`);
@@ -129,11 +164,19 @@ export function SubscriptionProvider({ children }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [isSignedIn, getToken, testTier]);
 
   useEffect(() => {
-    fetchSubscriptionStatus();
-  }, [isSignedIn, isAdmin]);
+    // Wait until both Clerk auth and user are fully loaded.
+    if (!isLoaded || !userLoaded) return;
+    if (isSignedIn && !user) return;
+    void fetchSubscriptionStatus();
+  // tokenRetry re-runs the effect when a scheduled retry fires.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoaded, userLoaded, isSignedIn, user?.id, tokenRetry, fetchSubscriptionStatus]);
+
+  // Cleanup pending retry timers on unmount.
+  useEffect(() => () => clearTimeout(retryTimerRef.current), []);
 
   // Effective tier takes admin override first, then test tier, then real tier
   const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);

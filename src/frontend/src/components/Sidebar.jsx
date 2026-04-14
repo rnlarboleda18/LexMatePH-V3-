@@ -20,7 +20,7 @@ const TIER_BG = {
 };
 
 const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onToggleLexCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
-    const { tier, tierLabel, openUpgradeModal, isAdmin } = useSubscription();
+    const { tier, tierLabel, openUpgradeModal, isAdmin, loading } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
 
     return (
@@ -77,33 +77,43 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
 
             {/* Subscription Tier Badge */}
             <SignedIn>
-                <div className={`mb-3 mt-1 flex items-center gap-3 rounded-xl border p-3 shadow-sm backdrop-blur-sm ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}>
-                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
-                        <TierIcon size={16} />
+                {loading ? (
+                    <div className="mb-3 mt-1 flex items-center gap-3 rounded-xl border-2 border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-slate-800/60 p-3 shadow-sm animate-pulse">
+                        <div className="w-8 h-8 rounded-lg bg-slate-300 dark:bg-slate-700 shrink-0" />
+                        <div className="flex-1 space-y-1.5">
+                            <div className="h-2.5 w-20 rounded bg-slate-300 dark:bg-slate-700" />
+                            <div className="h-2 w-14 rounded bg-slate-200 dark:bg-slate-600" />
+                        </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                        <p className={`text-xs font-extrabold ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} uppercase tracking-wide`}>
-                            {isAdmin ? 'Administrator' : `${tierLabel} Plan`}
-                        </p>
-                        {isAdmin && (
-                            <p className="text-[10px] text-rose-600 dark:text-rose-400 font-bold italic">Unlimited Access</p>
-                        )}
-                        {!isAdmin && tier === 'free' && (
-                            <p className="text-[10px] text-gray-400 dark:text-gray-500">Limited access</p>
-                        )}
-                        {!isAdmin && tier === 'barrister' && (
-                            <p className="text-[10px] text-amber-600 dark:text-amber-400">Full access</p>
+                ) : (
+                    <div className={`mb-3 mt-1 flex items-center gap-3 rounded-xl border p-3 shadow-sm backdrop-blur-sm ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}>
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
+                            <TierIcon size={16} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                            <p className={`text-xs font-extrabold ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} uppercase tracking-wide`}>
+                                {isAdmin ? 'Administrator' : `${tierLabel} Plan`}
+                            </p>
+                            {isAdmin && (
+                                <p className="text-[10px] text-rose-600 dark:text-rose-400 font-bold italic">Unlimited Access</p>
+                            )}
+                            {!isAdmin && tier === 'free' && (
+                                <p className="text-[10px] text-gray-400 dark:text-gray-500">Limited access</p>
+                            )}
+                            {!isAdmin && tier === 'barrister' && (
+                                <p className="text-[10px] text-amber-600 dark:text-amber-400">Full access</p>
+                            )}
+                        </div>
+                        {!isAdmin && tier !== 'barrister' && (
+                            <button
+                                onClick={() => openUpgradeModal()}
+                                className="shrink-0 px-2 py-1 rounded-lg text-[10px] font-bold text-white bg-gradient-to-r from-blue-500 to-indigo-600 shadow-sm hover:opacity-90 transition-opacity"
+                            >
+                                Upgrade
+                            </button>
                         )}
                     </div>
-                    {!isAdmin && tier !== 'barrister' && (
-                        <button
-                            onClick={() => openUpgradeModal()}
-                            className="shrink-0 px-2 py-1 rounded-lg text-[10px] font-bold text-white bg-gradient-to-r from-blue-500 to-indigo-600 shadow-sm hover:opacity-90 transition-opacity"
-                        >
-                            Upgrade
-                        </button>
-                    )}
-                </div>
+                )}
             </SignedIn>
 
             <button

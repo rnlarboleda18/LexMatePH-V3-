@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 278582 - MA. GLADYS CRUZ-STA. RITA, LORNA T. DY, ALEXANDER P. JAPON, MARINA DEL ROSARIO, MONICA R. LEGASPI, MARCIANA B. GUINTO, AND NATIONAL POWER CORPORATION RECIPIENT-BENEFICIARIES, PETITIONERS, VS. COMMISSION ON AUDIT, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70252' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 278582, April 22, 2025 ]</H2>
+			<H3>MA. GLADYS CRUZ-STA. RITA, LORNA T. DY, ALEXANDER P. JAPON, MARINA DEL ROSARIO, MONICA R. LEGASPI, MARCIANA B. GUINTO, AND NATIONAL POWER CORPORATION RECIPIENT-BENEFICIARIES, PETITIONERS, VS. COMMISSION ON AUDIT, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LAZARO-JAVIER, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY"><dl><dt>This Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the following dispositions of the Commission on Audit (COA):<br><br></dt><dd>1) Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 24, 2022, upholding the Notice of Disallowance (ND) on the payment of PHP 34,047,188.03 for the benefit of the members of the Power Generation Employees Association, Inc.-National Power Corporation (PGEA-NPC) and affirming the liabilities of the certifying and approving officers, and the beneficiaries; and<br><br>2) Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 7, 2023, denying petitioners' Motion for Reconsideration.</dd></dl><center><b>Antecedents</b></center><br>On July 21, 2015, the Audit Team Leader (ATL) and Supervising Auditor (SA) issued, for lack of factual and legal bases, ND No. NPC-15-008(14)<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> on the payments of Group Hospitalization and Life Insurance Plan (GHLIP) premiums of the members of the PGEA-NPC in the total amount of PHP 34,047,188.03 for the period April 1, 2014 to March 31, 2015, viz.:<br><br>(a) the payments were contrary to Section 28(b) of Commonwealth Act No. 186,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> as amended by Republic Act No. 4968,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> which provides that "no insurance or retirement plans shall be created by any employer. Any supplementary retirement or pension plan heretofore in force in any government office, agency, or instrumentality or corporation owned or controlled by the government, are hereby declared inoperative or abolished: <i>Provided</i>, That the rights of those who are already eligible to retire thereunder shall not be affected;"<br><br>(b) the payments violated COA Resolution No. 2005-001<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> dated February 3, 2005 which explicitly prohibits the securing of health insurance from private insurance agencies, since the government already provides the health insurance of its employees through the Philippine Health Insurance Corporation (PHIC); and<br><br>(c) the subject expenditure, being a personnel benefit/incentive, cannot be charged against the 30% Maintenance and Other Operating Expenses savings pursuant to Section 7.1.2. of Department of Budget and Management (DBM) Budget Circular No. 2013-4<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> dated November 25, 2013.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>As a result of ND No. NPC-15-008(14), the following individuals (Cruz-Sta. Rita et al.) were pronounced liable:<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br><table width="100%" border="1" cellpadding="2" cellspacing="0"> <tbody><tr> <td width="36%" valign="top"> <div align="CENTER"><b>Name</b> </div></td> <td width="37%" valign="top"> <div align="CENTER"><b>Position/Designation</b> </div></td> <td width="27%" valign="top"> <div align="CENTER"><b>Nature of Participation</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Petitioner Ma. Gladys Cruz-Sta. Rita (Cruz-Sta. Rita) </div></td> <td valign="top"> <div align="JUSTIFY">President and Chief Executive Officer </div></td> <td valign="top"> <div align="JUSTIFY">Approved the transaction </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Petitioner Lorna T. Dy (Dy) </div></td> <td valign="top"> <div align="JUSTIFY">Vice-President Administration and Finance </div></td> <td valign="top"> <div align="JUSTIFY">Approved the&nbsp; Disbursement&nbsp; Vouchers </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Petitioner Alexander P. Japon (Japon) </div></td> <td valign="top"> <div align="JUSTIFY">Senior Department Manager </div></td> <td rowspan="3" valign="top"> <div align="JUSTIFY">Certified Availability of funds </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Petitioner Monica R. Legaspi (Legaspi) </div></td> <td valign="top"> <div align="JUSTIFY">Manager, Disbursement Accounts Monitoring Division </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Petitioner Marina Del Rosario (Del Rosario) </div></td> <td valign="top"> <div align="JUSTIFY">Section Chief </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Petitioner Marciana B. Guinto (Marciana) </div></td> <td valign="top"> <div align="JUSTIFY">Manager, Human Resource Department </div></td> <td valign="top"> <div align="JUSTIFY">Certified that expenses were necessary, lawful and authorized<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></div></td> </tr> </tbody></table><br>Too, the beneficiaries or passive-recipient employees were found liable for the return of the amounts received by them.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On appeal, Cruz-Sta. Rita et al. narrated the events which led to the grant of the questioned benefits, viz.:<br><br>a) On November 26, 2013, the NPC and the PGEA, the duly-registered and certified employees' organization of NPC, signed a Collective Negotiation Agreement (CNA) for 2013-2016. Under Section 2 thereof, the existing Labor Management Consultative Committee (LMCC) was vested with the responsibility to "discuss, agree, and prioritize other employee benefits upon approval of both parties" and to "agree on the initiation of any program devoted to work productivity, and other analogous issues, among others."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>b) On November 25, 2013, DBM issued Budget Circular No. 2013-4, which apportioned the savings of the NPC. It allowed 30% of the savings to be allocated for the improvement of working conditions,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> viz.:<br><blockquote>7.1. An Employees' Organization-Management Consultative Committee or a similar body composed of representatives from the management and the accredited employees' organization shall determine if the agency or organizational unit is qualified for the grant of the CNA incentive based on compliance with the requirement under this Circular. If qualified, the Committee shall review the agency's financial records at the end of the fiscal year, and submit recommendations on the following, for approval of the agency head:<br><br><table width="100%" Â ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><div align="JUSTIFY">7.1.1.</div></td> <td colspan="2"><div align="JUSTIFY">The total amount of savings [. . .]</div></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td colspan="2"><div align="JUSTIFY"></div><br></td> </tr> <tr> <td><div align="JUSTIFY">7.1.2.</div></td> <td colspan="2"><div align="JUSTIFY">The apportioned amount of savings, to cover the following items:</div></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td colspan="2"><div align="JUSTIFY"></div><br></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td width="8%"><div align="JUSTIFY">50% -</div></td> <td width="87%"><div align="JUSTIFY">for the CNA Incentive;</div></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY">30%-<br><br></div></td> <td> <div align="JUSTIFY">for the improvement of working conditions and other programs, and/or to be added as part of the CNA Incentive; and</div></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY">20% -</div></td> <td><div align="JUSTIFY">for NGAs, to be reverted to the General Fund;</div></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td colspan="2"><div align="JUSTIFY">- for LGUs, to be reverted to the General Funds;</div></td> </tr> <tr> <td><div align="JUSTIFY"></div><br></td> <td colspan="2"><div align="JUSTIFY">- for GOCCs and GFIs, to be reverted to the Corporate Funds.</div></td> </tr> </tbody></table></blockquote>c) A comprehensive review of NPC's financial records established an unencumbered savings of PHP 195.587 million for 2013, which was allocated in accordance with said Budget Circular No. 2013-4:<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr> <td width="5%" valign="top">&nbsp;</td><td width="8%" valign="top"> <div align="JUSTIFY">50% - </div></td> <td width="87%" valign="top"> <div align="JUSTIFY">PHP 97.794 million for the CNA incentive; </div></td> </tr> <tr> <td valign="top">&nbsp;</td><td valign="top"> <div align="JUSTIFY">30% - </div></td> <td valign="top"> <div align="JUSTIFY">PHP 53.757 million for the improvement of working conditions and other programs and/or to be added as part of the CNA incentive; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td><td valign="top"> <div align="JUSTIFY">20% - </div></td> <td valign="top"> <div align="JUSTIFY">PHP 39.118 million to be reverted to the corporate funds. </div></td> </tr> </tbody></table></blockquote>d) On December 17, 2013, the NPC Board issued Resolution No. 2013-Â­25, approving the grant of a CNA Incentive for Fiscal Year 2013 in the total amount of PHP 54.780 million or PHP 25,000.00 each employee, the maximum amount that could be allocated per qualified employee under the subject DBM Circular. The incentive covered 2,406 employees of NPC (full entitlement for 2,097 active employees as of December 31, 2013 and<i> pro rata </i>for 309 employees, separated between January 1, 2013 to December 21, 2013). The balance of the 50% savings, amounting to PHP 43.014 million, was reverted to the corporate funds.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Based on the foregoing narrative, Cruz-Sta. Rita et al. argued that the payment of GHLIP premiums was made in accordance with the subject DBM Circular and with the imprimatur of the LMCC, hence, these payments should not be considered as an irregular expenditure.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br><center><b>Ruling of the COA Corporate Government Sector-Cluster 3</b></center><br>By Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated June 27, 2016, the Director of Cluster 3-Public Utilities of the Commission on Audit-Corporate Government Sector denied the appeal. Thus:<br><blockquote><b>WHEREFORE</b>, premises considered, the herein Appeal is <b>DENIED</b>. Accordingly, Notice of Disallowance (ND) No. NPC 15-008(14) dated July 21, 2015, covering the payment of Group Hospitalization and Life Insurance Premiums of PGEA-NPC members for the period April 1, 2014 to March 31, 2015 in the amount of [PHP] 34,047,188.03 is hereby <b>AFFIRMED</b>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original)</blockquote>It was ruled that the payment of premiums for the members of GHLIP was a form of additional allowance and compensation which directly contravened COA Resolution No. 2005-001.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><center><b>Ruling of the COA<i> En Banc</i></b></center><br>By its assailed Decision dated January 24, 2022, the COA<i> En Banc </i>denied the subsequent petition for review of Cruz-Sta. Rita et al. and affirmed the ruling of the COA Corporate Government Sector-Cluster 3, viz.:<br><blockquote><b>WHEREFORE,</b> the Petition for Review of Ms. Gladys Cruz-Sta. Rita, Ms. Lorna T. Dy, Mr. Alexander P. Japon, Ms. Monica R. Legaspi, Ms. Marina Del Rosario and Ms. Marciana B. Guinto, all of the National Power Corporation (NPC), of Commission on Audit Corporate Government Sector-Cluster 3 Decision No. 2016-26 dated June 27, 2016 is hereby <b>DENIED. </b> Accordingly, Notice of Disallowance No. NPC 15-008(14) dated July 24, 2015, on the payment of premiums for the Group Hospitalization and Life Insurance Plan (GHLIP) of the National Power Corporation employees to the Power Generation Employees Association, for the period April 1, 2014 until March 31, 2015, in the amount of [PHP] 34,047,188.03 is <b>AFFIRMED. </b><br><br>The Audit Team Leader and the Supervising Auditor are directed to verify the participation of the members of the Board of NPC who issued Resolution No. 2013-25 series of 2013 on the payment of GHLIP; and the Chairperson and members of the Labor Management Consultative Committee (LMCC) who issued LMCC Resolution No. 2014-001 dated March 21, 2014 authorizing Power Generation Employees Association to enter into a Contract with Insular Life Assurance Company, and issue a Supplemental ND, if warranted.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original) </blockquote>Citing Section 12 of Republic Act No. 6758,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the COA treated the premium payments for GHLIP as illegal expenditures. It ruled that under the aforesaid provision, all allowances and compensation of government personnel are consolidated into the standardized salary of the employees. The procurement of GHLIP for the benefit of the PGEA-NPC members provides an additional compensation to employees that was not included in the exception from the general rule of integration. The authority to receive additional compensation, not integrated into the standardized salary rates, pertains only to those being received by incumbents as of July 1, 1989 and not to those hired afterwards. Here, it was not shown that the employees who received the GHLIP were incumbents as of July 1, 1989.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The COA further ruled that under COA Circular No. 2012-003<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated October 29, 2012 premium payments for health insurance of government officials and employees without prior authority from the Office of the President shall be considered as an irregular expenditure, such as in this case.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>As for the liability of NPC's officers, the COA ordained that their invocation of good faith must fail since an express prohibition under the rules was violated.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Finally, the beneficiaries must return the amounts received by them, consistent with the principles of unjust enrichment and<i> solutio indebiti </i>under the Civil Code.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>By its assailed Resolution dated December 7, 2023, the COA denied Cruz-Sta. Rita et al.'s Motion for Reconsideration for failure to raise any new matter or sufficient ground to set aside or modify its Decision dated January 24, 2022.<br><br><center><b>The Present Petition</b></center><br>Cruz-Sta. Rita et al. now seek affirmative relief via the present Petition for<i> Certiorari</i> under Rule 64 in relation to Rule 65 of the Rules of Court. They charge COA with grave abuse of discretion for affirming the questioned ND No. NPC-15-008(14) despite their assertion that NPC is not covered by Republic Act No. 6758;<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> the GHLIP is not considered as a "new benefit," but one of the programs implemented for the improvement of working conditions in the NPC;<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> the approving and certifying officers believed in good faith that the payments were made in accordance with law, thus, they should not be liable for the return thereof;<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> and the principle of unjust enrichment does not apply to passive-recipients of the GHLIP premiums, hence, they should not be made liable to return the same.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br><center><b>Issues</b></center><br><i>First</i>, was the issuance of ND No. NPC-15-008(14) on the payments of GHLIP premiums proper?<br><br><i>Second</i>, are the certifying and approving officers of the NPC liable to return the amounts paid as GHLIP premiums? and<br><br><i>Third</i>, are the passive-recipients or beneficiaries of the GHLIP premiums also liable to return the amounts corresponding to the payments of their GHLIP premiums?<br><br><center><b>Our Ruling</b></center><br>At the outset, We emphasize anew that the COA is the guardian of public funds, vested by the Constitution with broad powers over all accounts pertaining to government revenue and expenditures and the use of public funds and property including the exclusive authority to define the scope of its audit and examination, establish the techniques and methods for such review, and promulgate accounting, and auditing rules and regulations.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Time and again, the Court has pronounced that the COA is constitutionally endowed with enough latitude to determine, prevent, and disallow the illegal, irregular, unnecessary, excessive, extravagant, or unconscionable expenditures of government funds. The exercise of this audit power is among the constitutional mechanisms that give life to the check and balance system inherent in our form of government.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> In recognition of such constitutional empowerment, the Court has generally sustained the decisions or resolutions of the COA in deference to its expertise in the implementation of the laws it has been entrusted to enforce, unless such decision or resolution is tainted with grave abuse of discretion amounting to lack or excess of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Here, the records are bereft of any showing that the COA acted with grave abuse of discretion amounting to lack or excess of jurisdiction in disallowing the amounts pertaining to the payments of GHLIP premiums of NPC employees.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Benefits received by NPC employees are not exempt from Salary Standardization Law</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Cruz-Sta. Rita et al. posit that NPC is not covered by the Salary Standardization Law (SSL) since after the enactment thereof, Republic Act No. 7648 or the "Electric Power Crisis Act" (EPCA) was also enacted, authorizing the President of the Philippines to upgrade the compensation of NPC employees at rates comparable to those prevailing in privately-owned power utilities. Pursuant to the EPCA, President Fidel V. Ramos (President Ramos) issued Memorandum Order No. 198, or "Directing and Authorizing the Upgrading of Compensation of Personnel of the National Power Corporation at Rates Comparable with those Prevailing in Privately-Owned Power Utilities and for other purposes" which established a different position classification and compensation plan for NPC employees, effective January 1, 1994.<br><br>We are unconvinced.<br><br>When erstwhile President Ramos assumed the presidency in 1992, he was welcomed by a crippling power crisis throughout the country prompting him to seek emergency powers from Congress. The EPCA granted him emergency powers to address the electric power crisis that had disrupted the country's economic and social life and assumed the nature and magnitude of a public calamity.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Section 5, paragraph 2 thereof provides that the "President <i>may</i> upgrade the compensation of the personnel of the NAPOCOR at rates comparable to those prevailing in privately-owned power utilities to take effect upon approval by congress of the NAPOCOR's budget for 1994." Memorandum Order No. 198 stemmed from this emergency power by the President, viz.:<br><blockquote><b>WHEREAS, </b>the Congress has, in addressing the crisis, enacted Republic Act No. 7648, otherwise known as the "Electric Power Crisis Act of 1993", empowering the President of the Philippines to, among other things, upgrade the compensation of employees and corporate officials of the National Power Corporation (NPC) at rates comparable with those prevailing in privately-owned power utilities to take effect upon approval by Congress of the NPC's budget for 1994 [.] (Emphasis in the original) </blockquote>By its nature, the emergency power of the President is temporary as provided under Article VI, Section 23(2) of the Constitution:<br><blockquote>In times of war or other national emergency, the Congress may, by law, authorize the President,<i> for a limited period</i> and subject to such restrictions as it may prescribe, to exercise powers necessary and proper to carry out a declared national policy. Unless sooner withdrawn by resolution of the Congress, such powers shall cease upon the next adjournment thereof. (Emphasis supplied) </blockquote>It ordains that any law passed by virtue thereof should be "for a limited period." "Limited" has been defined to mean "restricted; bounded; prescribed; confined within positive bounds; restrictive in duration, extent or scope." Emergency, in order to justify the delegation of emergency powers, "must be temporary or it cannot be said to be an emergency."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Accordingly, Section 7 of the EPCA underscored of duration of said emergency power, viz.:<br><blockquote>Section 7.<i> Duration of Grant of Powers</i>. - The authority granted to the President under this Act shall subsist, be valid and<i> effective for a period of one (1) year</i> from the effectivity of this Act, unless sooner withdrawn by a resolution of Congress, without prejudice to rights and benefits that may have been vested, and culpabilities and liabilities that may have been incurred. (Emphasis supplied) </blockquote>In other words, the EPCA did not carve out a permanent exception from the coverage of the SSL. It was only meant to address the power crisis faced by the country at the time.<br><br>As a brief historical background, the NPC was created under Commonwealth Act No. 120 on November 3, 1936 as a non-stock government corporation. It was later on converted into a stock corporation wholly owned by the government by virtue of Republic Act No. 2641 or "An Act Converting the National Power Corporation into a Stock Corporation, Amending for the Purpose Commonwealth Act Numbered One Hundred Twenty."<br><br>In June 2001, Republic Act No. 9136 or the "Electric Power Industry Reform Act of 2001" (EPIRA) was enacted to provide a framework for the restructuring of the electric power industry, including the privatization of the assets of NPC, the transition to the desired competitive structure, and the definition of the responsibilities of the various government agencies and private entities.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Accordingly, the EPIRA specifically exempted salaries and benefits of employees of the National Transmission Corporation (TRANSCO), Power Sector Assets and Liabilities Management Corporation (PSALM), and the Energy Regulatory Commission (ERC) from the coverage of the SSL, viz.:<br><blockquote>Section 17.<i> Exemption from the Salary Standardization Law</i>. â The salaries and benefits of employees in the TRANSCO shall be exempt from Republic Act No. 6758 and shall be fixed by the TRANSCO Board.<br><br>. . . .<br><br>Section 39.<i> Compensation and Other Emoluments for ERC Personnel</i>. â The compensation and other emoluments for the Chairman and members of the Commission and the ERC personnel shall be exempted from the coverage of Republic Act No. 6758, otherwise known as the "Salary Standardization Act." For this purpose, the schedule of compensation of the ERC personnel, except for the initial salaries and compensation of the Chairman and members of the Commission, shall be submitted for approval by the President of the Philippines. The new schedule of compensation shall be implemented within six (6) months from the effectivity of this Act and may be upgraded by the President of the Philippines as the need arises:<i> Provided</i>, That in no case shall the rate be upgraded more than once a year.<br><br>. . . .<br><br>Section 54.<i> Exemption from the Salary Standardization Law</i>. â The salaries and benefits of employees in the PSALM Corp. shall be exempt from Republic Act No. 6758 and shall be fixed by the PSALM Corp. Board.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </blockquote>Section 63 of the EPIRA provided that salaries of NPC employees "shall continue to be exempt" from SSL. Unlike the express provision for TRANSCO, PSALM, and ERC, it was merely a clause inserted in the provision concerning the separation benefits to be awarded to officials and employees affected by the restructuring of the electricity industry and privatization of NPC assets, viz.:<br><blockquote>SECTION 63.<i> Separation Benefits of Officials and Employees of Affected Agencies</i>. - National Government employees displaced or separated from the service as a result of the restructuring of the electricity industry and privatization of NPC assets pursuant to this Act, shall be entitled to either a separation pay and other benefits in accordance with existing laws, rules or regulations or be entitled to avail of the privileges provided under a separation plan which shall be one and one-half month salary for every year of service in the government:<i> Provided, however</i>, That those who avail of such privileges shall start their government service anew if absorbed by any government-owned successor company. In no case shall there be any diminution of benefits under the separation plan until the full implementation of the restructuring and privatization.<br><br>Displaced or separated personnel as a result of the privatization, if qualified, shall be given preference in the hiring of the manpower requirements of the privatized companies.<br><br><i>The salaries of employees of NPC shall continue to be exempt from the coverage of Republic Act No. 6758, otherwise known as "The Salary Standardization Act."</i><br><br>With respect to employees who are not retained by NPC, the Government, through the Department of Labor and Employment, shall endeavor to implement re-training, job counseling, and job placement programs.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis supplied) </blockquote>Too, unlike the all-encompassing exemption for TRANSCO, PSALM, and ERC employees, the law ordained that only the<i> salary</i> of an NPC employee is excluded from the SSL.<br><br>In interpreting the provisions of the EPIRA, the plain-meaning rule of statutory construction applies. When the law is clear and free from any doubt or ambiguity, there is no room for construction or interpretation. There is only room for application. As the statute is clear, plain, and free from ambiguity, it must be given its literal meaning and applied without attempted interpretation. This is known as the plain-meaning rule or<i> verba legis</i>. It is expressed in the maxim,<i> index animi sermo</i>, or "speech is the index of intention." Further, there is the maxim<i> verba legis non est recedendum</i>, or from the words of a statute there should be no departure."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>The clear wording of Section 63 of the EPIRA means that<i> only the salary</i> of NPC employees is exempt from the SSL. If Congress had intended the other benefits of NPC employees to be exempt, it would have explicitly stated so, as it did in the case of TRANSCO, PSALM, and ERC employees.<br><br>Therefore, there is no legal basis to exempt the benefits received by NPC employees from the SSL in a manner broader than what the law specifically provides. If the legislature had intended a more expansive exemption for NPC employees' benefits, it could have crafted a provision similar to those found in the laws governing other entities like TRANSCO, PSALM, or ERC. The fact that no such provision exists for NPC employees suggests that the legislature did not intend to exempt their full range of benefits from the SSL.<br><br>Under Rule 33, Section 3(e) of EPIRA's Implementing Rules and Regulations, "salary," refers to the basic pay including the 13th month pay received by an employee pursuant to his appointment,<i> excluding</i> per diems, bonuses, overtime pay, honoraria, allowances, and any other emoluments received in addition to the basic pay under existing laws.<br><br>Here, the subject of ND No. NPC-15-008(14) is the payment of GHLIP premiums, a benefit that was separate and distinct from the salary of NPC employees. As such, this benefit is subject to the coverage of the SSL.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Payment of premiums of the GHLIP is an irregular expenditure</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>We affirm the findings of the COA that payment of premiums of the GHLIP is an irregular expenditure under Section 28(b) of Commonwealth Act No. 186, as amended by Republic Act No. 4968 and COA Resolution No. 2005-001, which clearly and categorically proscribe the procurement of private health insurance for government employees, viz.:<br><blockquote>COA Resolution No. 2005-001<br><br>[T]hat the procurement of private health insurance by any agency or instrumentality of the government is an irregular expenditure and constitutes unnecessary use of public funds which cannot be countenanced by this Commission.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Section 28(b) of Commonwealth Act No. 186, as amended by [Republic Act No. 4968]<br><br>[N]o insurance of retirement plan for officers or employees shall be created by any employer. Any supplementary retirement or pension plan heretofore in force in any government office, agency, or instrumentality or corporation owned or controlled by the government, are hereby declared inoperative or abolished; Provided, That the rights of those who are already eligible to retire thereunder shall not be affected.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </blockquote>While the subject DBM Circular No. 2013-4 dated November 25, 2013 allows additional incentives for the improvement of working conditions and other programs, it should not be construed and stretched in a manner that violates existing laws and issuances.<br><br>Accordingly, the power of the NPC Board of Directors to issue resolutions increasing the benefits and allowances of its employees is not a carte blanche authority.<br><br>In <i>Intia, Jr. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> We ruled that the discretion of the Board of Philippine Postal Corporation on the matter of personnel compensation is not absolute, as the same must be exercised in accordance with the standards laid down by law, i.e., its compensation system, including the allowances granted by the Board, must strictly conform with that provided for other government agencies under Republic Act No. 6758.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>In<i> Philippine Charity Sweepstakes Office Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> We emphasized the limits of the power of the Board of Directors to grant benefits and additional incentives, viz.:<br><blockquote>The PCSO Board's power to fix the salaries of employees is not plenary and unfettered.<br><br>. . . .<br><br>The PCSO Board has the duty to ensure that, in exercising its power to fix the salaries and determine the reasonable allowances, benefits, and other incentives of PCSO's employees, the pertinent budgetary legislation laws and rules are observed to the letter. It may not grant additional salaries, incentives, and benefits unless all the laws relating to these disbursements are complied with.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </blockquote>More, the grant of benefits by the Board is subject to the approval of the president under COA Circular No. 2012-003 dated October 29, 2012. Otherwise, these benefits shall be deemed as irregular expenditures. Here, there was no proof that NPC obtained a prior approval from the president.<br><br>In<i> Securities and Exchange Commission</i> [SEC] <i>v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> We held that the amounts disbursed by the SEC to cover the premiums for health care insurance of its personnel for the years 2010 and 2011 were properly disallowed for violating existing laws and issuances.<br><br>Similarly, in<i> Philippine Institute for Development Studies v. Pulido Tan</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> We ruled that the COA properly disallowed the amounts paid to PhilamCare for the health premiums of employees of Philippine Institute for Development Studies, as there is already a health program available to all government employees through the PHIC. It is deemed an irregular expenditure constituting unnecessary use of public funds.<br><br>Indeed, the disallowance of amounts by COA relating to health premiums for government employees is not a novel issue. Any attempt to circumvent these issuances must fail. The law must be upheld.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Liability of certifying and approving officers of NPC</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Government officers who are directly responsible for the unlawful expenditure of public funds may be held civilly liable under Book VI, Section 43 of the Administrative Code in relation to Book I, Sections 38 and 39 of the same code, viz.:<br><blockquote><center>BOOK VI</center><br>Section 43.<i> Liability for Illegal Expenditures</i>. â Every expenditure or obligation authorized or incurred in violation of the provisions of this Code or of the general and special provisions contained in the annual General or other Appropriations Act shall be void.<i> Every payment made in violation of said provisions shall be illegal and every official or employee authorizing or making such payment, or taking part therein</i>, and every person receiving such payment shall be jointly and severally liable to the Government for the full amount so paid or received.<br><br>Any official or employee of the Government knowingly incurring any obligation or authorizing any expenditure in violation of the provisions herein, or taking part therein, shall be dismissed from the service, after due notice and hearing by the duly authorized appointing official. If the appointing official is other than the President and should he fail to remove such official or employee, the President may exercise the power of removal.<br><br><center>BOOK I</center><br>Section 38.<i> Liability of Superior Officers</i>. â (1) A public officer shall not be civilly liable for acts done in the performance of his official duties, unless there is a clear showing of bad faith, malice or gross negligence.<br><br>. . . .<br><br>Section 39.<i> Liability of Subordinate Officers</i>. â No subordinate officer or employee shall be civilly liable for acts done by him in good faith in the performance of his duties. However, he shall be liable for willful or negligent acts done by him which are contrary to law, morals, public policy and good customs even if he acted under orders or instructions of his superiors. (Emphasis supplied) </blockquote>These provisions were subsequently applied in the rules of return pronounced in<i> Madera v. Commission on Audit</i>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>In<i> Madera</i>, the Court laid down the rules on the return of disallowed amounts, as well as the rules to determine the liability of the approving and certifying officers, viz.:<br><blockquote>1. If a Notice of Disallowance is set aside by the Court, no return shall be required from any of the persons held liable therein.<dl><dt>2. If a Notice of Disallowance is upheld, the rules on return are as follows:<br><br></dt><dd>a. Approving and certifying officers who acted in good faith, in regular performance of official functions, and with the diligence of a good father of the family are not civilly liable to return consistent with Section 38 of the Administrative Code of 1987;<br><br>b. Approving and certifying officers who are clearly shown to have acted in bad faith, malice, or gross negligence are, pursuant to Section 43 of the Administrative Code of 1987, solidarity liable to return only the net disallowed amount which, as discussed herein, excludes amounts excused under the following Sections 2c and 2d.<br><br>c. Recipients â whether approving or certifying officers or mere passive recipients â are liable to return the disallowed amounts respectively received by them, unless they are able to show that the amounts they received were genuinely given in consideration of services rendered.<br><br>d. The Court may likewise excuse the return of recipients based on undue prejudice, social justice considerations, and other [bona fide] exceptions as it may determine on a [case-to-case] basis.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </dd></dl></blockquote>We affirm the liability of Cruz-Sta. Rita et al. as approving officer. Despite the patent illegality of the transaction, she still granted the same. The clear contravention of existing laws and issuances negates her claim of good faith.<br><br>The failure of approving officers to observe all these issuances cannot be deemed a mere lapse consistent with the presumption of good faith. Rather, even if the grant of the incentive award were not for a dishonest purpose as they claimed, the patent disregard of the issuances of the President and the directives of the COA amounts to<i> gross negligence</i>, making them liable for the refund thereof.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>We likewise affirm the liability of Dy as the one who approved the disbursement voucher.<i> Magaso Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> pronounced that the signatories in a disbursement voucher may raise questions and demand additional documents, if necessary.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Clearly, therefore, the certifiers and approvers are expected to review the documents and not merely sign them perfunctorily. By certifying the propriety of the supporting documents of the disbursement voucher, the signatories attest to its entirety, which necessarily includes compliance with existing laws. The same is true with Marciana, who certified that the expenses were "necessary, lawful, and authorized."<br><br>We, however, absolve Japon, Legaspi, and Del Rosario from liability, as their roles were limited to certifying the availability of fundsâa perfunctory and ministerial function.<br><br>In<i> Abrigo v. Commission on Audit-Proper</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> We held that those performing ministerial duties may be excused from the solidary liability to return. The duty to certify the availability of funds and the completeness of signatures and supporting documents prior to payment is merely ministerial. There is no room to refuse to perform these duties if the documents were indeed complete and cash was available.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>In<i> Perez Aguinaldo</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> We absolved the certifying officer from liability as his participation is limited to merely certifying the completeness and propriety of the supporting documents and availability of cash. "<i>This act cannot be considered as essential to or part of the underlying policy-making or decision-making of the</i> [<i>corporation</i>] <i>that paved the way to the premature illegal release of the CNA incentives</i>. <i>In fact, there are no such findings by the COA in the case. </i>"<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>The payee-recipients shall return the amounts received by them</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Under the<i> Madera Rules on Return</i>, good faith is immaterial. It cannot be invoked to excuse passive recipients from returning the amounts received by them, applying the principles of<i> solutio indebiti</i> and unjust enrichment.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>These principles are anchored on Article 2154 of the Civil Code, which provides that if something is received and unduly delivered through mistake when there is no right to demand it, the obligation to return the thing arises. <i>Solutio indebiti</i> is an equitable principle which prevents undue fiscal leakage that may take place if the government is unable to recover from passive recipients amounts corresponding to a properly disallowed transaction.<br><br>The<i> Madera Rules on Return</i>, however, provide an exception that excuses the return of disallowed amounts, i.e., when the Court determines that undue prejudice would result, social justice considerations, or other bona fide exceptions apply, on a case by case basis.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><i> Abellanosa Commission on Audit</i><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> further clarified the requisites to be excused from return, as provided in Rule 2(c) of the<i> Madera</i> Rules:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">the personnel incentive or benefit has proper basis in law but is only disallowed due to irregularities that are merely procedural in nature; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">the personnel incentive or benefit must have a clear, direct, and reasonable connection to the actual performance of the payeeârecipient's official work and functions for which the benefit or incentive was intended as further compensation.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></div></td> </tr> </tbody></table></blockquote>The exception is not meant to cover compensation not authorized by law or those granted against salary standardization laws. Ultimately, it is only in highly exceptional circumstances, after taking into account all factors (such as the nature and purpose of the disbursement, and its underlying conditions) that the civil liability to return may be excused. For indeed, it was never the Court's intention for Rules 2(c) and 2(d) of<i> Madera</i> to be a jurisprudential loophole that would cause the government fiscal leakage and debilitating loss.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>Guided by these standards, the Court finds no exceptional reasons to excuse the beneficiaries from returning these amounts. The payments of the questioned expenditure was not simply a procedural irregularity; it was a clear defiance of explicit and unequivocal provisions of existing laws and COA issuances. Too, the disallowed amounts pertain to benefits that have no clear, direct, and reasonable connection to the actual performance of work of the beneficiaries.<br><br>In<i> Power Sector Assets and Liabilities Management Corporation v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> the disallowed amounts were also related to medical benefits and medical assistance. The recipient-employees were directed to return the amounts received, since none of the exceptions laid down in <i>Madera</i> were present.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>Indeed, the nature of the benefits received by the employees does not dictate if the case should fall under the exceptions under<i> Madera</i>. Instead, it must be examined further under the more specific and limited application found in<i> Abellanosa</i>. The clarification made in<i> Abellanosa</i> acts as a filtering mechanism to prevent the misuse and abuse of the exceptional circumstances outlined in<i> Madera</i>. In other words, while exceptions to the<i> Madera Rules on Return</i> exist, they are narrowly defined and do not extend to cases of clear and deliberate non compliance with the law, as here.<br><br>Indeed, this is just another opportunity for the Court to reinforce anew strict adherence to rules and issuances relating to fiscal responsibility, ensuring that public funds are safeguarded and not unduly lost due to misinterpretation of regulations and negligence of government officers.<br><br><b>ACCORDINGLY,</b> the Petition is<b> PARTLY GRANTED</b>. The Decision dated January 24, 2022 in Commission on Audit Decision No. 2022Â­-269, and the Resolution dated December 7, 2023 in Commission on Audit CP Case No. 2024-048, are<b> AFFIRMED WITH MODIFICATION,</b> as follows:<br><br>1. The disallowance of amounts covered by Notice of Disallowance No. NPC-15-008(14) is<b> AFFIRMED</b>;<br><br>2. The liability of Ma. Gladys Cruz-Sta. Rita, Lorna T. Dy, and Marciana B. Guinto as approving officers is<b> AFFIRMED.</b><br><br>3. The certifying officers Alexander P. Japon, Monica R. Legaspi, and Marina Del Rosario, who merely attested to the availability of funds pertaining to Notice of Disallowance No. NPC-15-008(14), are <b>EXONERATED</b> from liability; and<br><br>4. The liability of passive recipients to return the amounts received in connection with the disallowed amounts covered by Notice of Disallowance No. NPC-15-008(14) is<b> AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Inting, Zalameda, M. Lopez, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez,</i> and <i>Kho, Jr., JJ.</i>, concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup><i>&nbsp;J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 31-39. Signed by Chairperson Michael G. Aguinaldo, Commissioner Roland C. Pondoc, and Commission Secretary Bresilo Sabaldan.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 40-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Otherwise known as the "Government Service Insurance Act," (1936).<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> An Act Amending Further Commonwealth Act Numbered One Hundred and Eighty-Six, as Amended (1967).<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Prohibition from Securing Health Care Insurance from Private Insurance Agencies (2005).<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Guidelines on the Grant of Collective Negotiation Agreement (CNA) Incentive for FY-2013.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, pp. 5-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 8-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 12-A-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 43-49. Signed by Director Rufina S. Laquindanum.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Compensation and Position Classification Act of 1989, otherwise known as the <i>Salary Standardization Law</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i>, pp. 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Updated Guidelines for the Prevention and Disallowance of Irregular, Unnecessary, Excessive, Extravagant, and Unconscionable Expenditures.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, p. 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 11-12-A.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 12-A-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 16-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 19-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Yap v. Commission on Audit</b>, 633 Phil, 174, 189 (2010) [Per J. Leonardo-De Castro, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Domato-Togonon v. Commission on Audit</b>, 907 Phil. 54, 63 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Madera v. Commission on Audit</b>, 882 Phil. 744, 783 (2020) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Republic Act No. 7648 (1993), sec. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Araneta v. Dinglasan</b>, 84 Phil. 368, 376 (1949) [Per J. Tuason, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Republic Act No. 9136, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Republic Act No. 9136, Electric Power Industry Reform Act of 2001.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Republic Act No. 9136, Electric Power Industry Reform Act of 2001.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Bolos v. Bolos</b>, 648 Phil. 630, 637 (2010) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 366 Phil. 273 (1999) [Per J. Romero, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 293.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 919 Phil. 970 (2022) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 974-975.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>G.R. No. 251615</b>, July 25, 2023 [Notice, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>G.R. No. 200838</b>, April 21, 2015 [Notice, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 882 Phil. 744 (2020) [Per J. Caguioa,&nbsp;<i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 817-818.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Casal v. Commission on Audit</b>, 538 Phil. 634, 644 (2006) [Per J. Carpio Morales, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 932 Phil. 885 (2023) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 893.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 921 Phil. 1067 (2022) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 1085-1086.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 935 Phil. 552 (2023) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 562.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 882 Phil. 744, 748 (2020) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Small Business Corporation v. Commission on Audit</b>, 900 Phil. 551, 572 (2021) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 890 Phil. 413 (2020) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 430.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 433.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 908 Phil. 723 (2021) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 738.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

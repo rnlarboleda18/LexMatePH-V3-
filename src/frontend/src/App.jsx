@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '@clerk/clerk-react';
+import { useUser, useAuth } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, Search } from 'lucide-react';
 import Fuse from 'fuse.js';
 import Layout from './components/Layout';
@@ -16,6 +16,7 @@ import FeaturePageShell from './components/FeaturePageShell';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarSubject } from './utils/subjectNormalize';
+import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage';
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
@@ -64,8 +65,9 @@ const PATH_TO_MODE = Object.fromEntries(
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
-  const { showUpgradeModal, closeUpgradeModal, tier, canAccess } = useSubscription();
+  const { showUpgradeModal, closeUpgradeModal, tier, canAccess, openUpgradeModal } = useSubscription();
   const { user } = useUser();
+  const { getToken, isSignedIn } = useAuth();
 
   // --- Hooks ---
   const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions();
@@ -78,6 +80,48 @@ function App() {
     subjectCounts: flashcardSubjectCounts,
   } = useFlashcardConcepts();
   const { selectedCase: globalSelectedCase, selectCase: selectGlobalCase, closeModal: closeGlobalCaseModal } = useGlobalCaseModal();
+
+  const selectGlobalCaseGuarded = useCallback(
+    (next) => {
+      if (next == null) {
+        selectGlobalCase(next);
+        return;
+      }
+      void (async () => {
+        const usage = await consumeFreeTierUsage({
+          feature: 'case_digest',
+          getToken,
+          isSignedIn,
+          canAccess,
+        });
+        if (!usage.allowed) {
+          notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
+          return;
+        }
+        selectGlobalCase(next);
+      })();
+    },
+    [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess],
+  );
+
+  const tryOpenBarQuestion = useCallback(
+    (q) => {
+      void (async () => {
+        const usage = await consumeFreeTierUsage({
+          feature: 'bar_question',
+          getToken,
+          isSignedIn,
+          canAccess,
+        });
+        if (!usage.allowed) {
+          notifyUsageBlocked(usage, openUpgradeModal, 'bar_question_unlimited');
+          return;
+        }
+        setSelectedQuestion(q);
+      })();
+    },
+    [getToken, isSignedIn, openUpgradeModal, canAccess],
+  );
 
   // --- URL ↔ mode mapping ---
   const navigate = useNavigate();
@@ -367,9 +411,21 @@ function App() {
       [selected[i], selected[j]] = [selected[j], selected[i]];
     }
 
-    setFlashcardQuestions(selected);
-    setFlashcardIndex(0);
-    setFlashcardState('active');
+    void (async () => {
+      const usage = await consumeFreeTierUsage({
+        feature: 'flashcard',
+        getToken,
+        isSignedIn,
+        canAccess,
+      });
+      if (!usage.allowed) {
+        notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');
+        return;
+      }
+      setFlashcardQuestions(selected);
+      setFlashcardIndex(0);
+      setFlashcardState('active');
+    })();
   };
 
   const handleToggleQuiz = () => {
@@ -379,7 +435,20 @@ function App() {
 
   const handleNextFlashcard = () => {
     if (flashcardIndex < flashcardQuestions.length - 1) {
-      setFlashcardIndex(prev => prev + 1);
+      void (async () => {
+        const usage = await consumeFreeTierUsage({
+          feature: 'flashcard',
+          getToken,
+          isSignedIn,
+          canAccess,
+        });
+        if (!usage.allowed) {
+          notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');
+          setFlashcardState('setup');
+          return;
+        }
+        setFlashcardIndex((prev) => prev + 1);
+      })();
     } else {
       setFlashcardState('setup');
     }
@@ -491,7 +560,7 @@ function App() {
                     >
                       <SupremeDecisions
                         externalSelectedCase={globalSelectedCase}
-                        onCaseSelect={selectGlobalCase}
+                        onCaseSelect={selectGlobalCaseGuarded}
                       />
                     </div>
                   )}
@@ -525,7 +594,7 @@ function App() {
                             setSelectedCodalCode(id);
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
-                          onCaseSelect={selectGlobalCase}
+                          onCaseSelect={selectGlobalCaseGuarded}
                           subscriptionTier={tier}
                         />
                       </Suspense>
@@ -723,7 +792,7 @@ function App() {
                                         type="button"
                                         onClick={() => {
                                           setShowBarSuggestions(false);
-                                          setSelectedQuestion(q);
+                                          tryOpenBarQuestion(q);
                                         }}
                                         className="w-full px-3 py-2.5 text-left transition-colors hover:bg-amber-50 dark:hover:bg-amber-900/20"
                                       >
@@ -755,7 +824,7 @@ function App() {
                               key={q.id}
                               question={q}
                               searchQuery={searchTerm}
-                              onClick={() => setSelectedQuestion(q)}
+                              onClick={() => tryOpenBarQuestion(q)}
                             />
                           ))}
                       </div>
@@ -839,7 +908,7 @@ function App() {
             key={globalSelectedCase.id}
             decision={globalSelectedCase}
             onClose={closeGlobalCaseModal}
-            onCaseSelect={selectGlobalCase}
+            onCaseSelect={selectGlobalCaseGuarded}
           />
         </Suspense>
       )}
@@ -872,12 +941,12 @@ function App() {
               hasPrev={idx > 0}
               onNext={() => {
                 if (idx < currentList.length - 1) {
-                  setSelectedQuestion(currentList[idx + 1]);
+                  tryOpenBarQuestion(currentList[idx + 1]);
                 }
               }}
               onPrev={() => {
                 if (idx > 0) {
-                  setSelectedQuestion(currentList[idx - 1]);
+                  tryOpenBarQuestion(currentList[idx - 1]);
                 }
               }}
             />

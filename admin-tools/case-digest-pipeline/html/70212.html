@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272550 - AURELIO DELA CRUZ NALICA III,* PETITIONER, VS. JEBSEN** MARITIME, INC., HAPAG-LLOYD AKTIENGESELLSHAFT*** AND/ OR VIVIAN CATALINA CRISTOBAL, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70212' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272550, August 18, 2025 ]</H2>
+			<H3>AURELIO DELA CRUZ NALICA III,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PETITIONER, VS. JEBSEN<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> MARITIME, INC., HAPAG-LLOYD AKTIENGESELLSHAFT<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP> AND/ OR VIVIAN CATALINA CRISTOBAL, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Due process is the bedrock of labor law, especially in cases involving seafarers whose health and livelihood are often placed at risk in the performance of their duties. In this regard, the company-designated physician's issuance of a final and conclusive medical assessment is not, by itself, sufficient. The Certificate of Final Medical Assessment must be final, conclusive, and definiteânot vague or provisionalâand must be issued within the required period. More importantly, the same must be fully and properly explained to the seafarer. It is only when the seafarer is adequately informed of the nature, implications, and consequences of the medical assessment that he can be truly deemed to have been apprised of his condition. Anything less is a denial of his right to due process, which the law cannot permit.</p><p> Before this Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 5, 2023 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated February 29, 2024 of the Court of Appeals (CA) in CA-G.R. SP No. 172584, which reversed and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated September 20, 2021 and Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated January 14, 2022 of the Panel of Voluntary Arbitrators of the National Conciliation and Mediation Board (NCMB) in MVA-045-RCMB-NCR-073-03-03-2020 and awarded herein petitioner Aurelio Dela Cruz Nalica III (Aurelio) disability benefits equivalent to Grade 9 rating under the Philippine Overseas Employment Administration-Standard Employment Contract (POEA-SEC).</p><p align="center"> <b>Antecedents</b> </p><p> The case originated from a Notice to Arbitrate filed by Aurelio before the NCMB on September 20, 2019, wherein he sought total and permanent disability benefits, moral and exemplary damages, and attorney's fees against Jebsens Maritime, Inc. (Jebsens), Hapag-Lloyd Aktiengesellschaft, and Vivian Catalina Cristobal (Vivian; collectively Jebsens et al.). Following this, the parties executed a Submission Agreement, thereby formally submitting the case to voluntary arbitration. As efforts to reach an amicable settlement proved unsuccessful, the parties were directed to file their respective position papers.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> In his Position Paper dated January 14, 2021, Aurelio stated that on July 24, 2018, he signed an employment contract with Jebsens to serve as 2<sup>nd</sup> Engineer on board CMS Osaka Express for its foreign principal Hapag-Lloyd Aktiengesellschaft for six months plus or minus one, with a basic monthly salary of USD 1,388.00.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> Before being hired, Aurelio underwent the required pre-employment medical examination and was declared "fit for duty." Thus, he then boarded the vessel and fully performed his duties and responsibilities.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> On November 28, 2018, an oil spill occurred at the main engine and leaked, which reached the vessel's lower deck. Aurelio was ordered to clean the oil and to perform a safety inspection at the lower deck to ensure that all machineries were in good running condition. However, while cleaning the greasy floor, he stumbled on an uneven surface. He then swiftly used his right arm to reach and hold a metal railing to prevent his fall. Unfortunately, the sudden motion of Aurelio's right arm, coupled by the overstretching of his right shoulder, caused him excruciating pain. Nevertheless, he tolerated the pain and continued his work.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> The following day, Aurelio experienced an intensification of the sharp, stabbing pain in his right shoulder. Concerned about his condition, he reported it to the Chief Mate, who advised him to take pain relievers. However, the medication provided only temporary relief, as his condition showed no signs of improvement. Due to the vessel's distance from any port, an offshore medical consultation was not feasible. Left with limited options, Aurelio continued taking pain relievers and applied hot compresses to his shoulder in an attempt to manage the pain.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> In December 2018, while the vessel was undergoing its bunkering procedure, Aurelio was ordered to continue working for nearly nine hours despite experiencing pain and discomfort in his right shoulder. The nature of the operation demanded constant vigilance and meticulous care to avoid any fire hazards or oil spills, leaving him with insufficient breaks throughout the task. </p><p> On January 2, 2019, Aurelio was finally referred to an offshore clinic, where he underwent physical examinations and an X-ray. However, to his disappointment, he was not informed of the results and was simply instructed to return to the vessel. Still confused, Aurelio sought clarification from the Captain, who only told him that he was scheduled for another offshore consultation at Velocity Urgent Care. On January 5, 2019, he was referred to the said clinic in Virginia, United States of America. Following the evaluation, a Medical Report dated January 5, 2019 was issued, indicating the diagnosis: "Pain in right Shoulder (M25.511 â No Workup)."<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> The report further noted that while Aurelio was considered fit to work, he was restricted to "left-handed duty only,"<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> and advised to ". . . remain off the ship until evaluation by orthopedics and until his shoulder is pain free."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Unfortunately, Aurelio was not permitted to remain in the hospital and was instructed to continue working until a reliever could board the vessel. On January 15, 2019, he was finally repatriated for medical reasons. The following day, he reported to Jebsens et al. and requested a post-employment medical examination. He was referred to the company-designated physician at Ship Health, Inc., the company's accredited clinic. He was subsequently advised to undergo physical therapy and further treatment at the company-designated hospital, Manila Doctors Hospital, which he dutifully complied with. Despite undergoing therapy, Aurelio's condition showed no improvement.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> To his surprise, Aurelio was later informed by the company-designated physician that his treatment had been terminated. When he sought an explanation, he was simply told to direct his concerns to Jebsens et al. He also requested a copy of the final medical assessment, but the physician declined and instructed him to obtain it from Jebsens et al.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Determined to understand his actual medical condition, Aurelio's family sought the opinion of an independent medical expert, Dr. Manuel Fidel M. Magtira (Dr. Magtira). After conducting a series of tests and evaluations, Dr. Magtira recommended a Magnetic Resonance Imaging (MRI) of Aurelio's right shoulder. The MRI results stated: "IMPRESSION: CONSIDER POSSIBILITY OF AVASCULAR NECROSIS OF THE RIGHT HUMERAL HEAD, SUGGEST CLINICAL CORRELATION."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Upon reviewing the MRI findings and conducting a physical examination, Dr. Magtira issued a Medical Report dated July 4, 2019, concluding that Aurelio was suffering from "total and permanent unfitness for sea duty."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Aurelio also sought to opinion of orthopedic surgeon Dr. Domingo A. Chua, Jr. (Dr. Chua). After several medical examinations, Dr. Chua declared in his Medical Report<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated July 5, 2019 that Aurelio suffers from "total and permanent unfitness for sea duty."<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Upon learning of his true medical condition, Aurelio formally requested the payment of his total and permanent disability benefits from Jebsens et al., but his request was denied. Consequently, in a Letter<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated July 17, 2019, Aurelio informed Jebsens et al. of the medical findings issued by Dr. Magtira and Dr. Chua. He also reiterated his request for a third medical opinion and asked to be furnished a copy of the final assessment made by the company-designated physician. Despite this, Jebsens et al. remained unresponsive. Aurelio sent a follow-up letter, but it was likewise ignored.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> On the other hand, Jebsens et al., in their Position Paper dated January 4, 2021, averred that on January 2, 2019, Aurelio consulted with a doctor in the port of Jacksonville, USA, where he raised concerns of "right shoulder pain."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The attending physician, Dr. Raudel Garcia (Dr. Garcia), initially diagnosed Aurelio with "strain, right shoulder."<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> After conducting MRI, Dr. Garcia diagnosed Aurelio with "strain of unspecified muscle, fascia and tendon at shoulder and upper arm level, right arm, initial encounter, elevated BP reading w/o diagnosis of HTN."<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> Aurelio was repatriated in the port of Balboa, Panama on January 12, 2019. He arrived in the Philippines on January 15, 2019. Thereafter, he was referred to Ship Health, Inc. After the initial physical examination, the company-designated physician diagnosed him: "Right Shoulder (+) tenderness and swelling; (+) pain on end-range of abduction and external rotation; (+) good grip; (+) pulses full and equal."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The company-designated physician then recommended Aurelio to undergo six sessions of physical therapy. Eventually, the company-designated physician issued a final disability grading embodied in the Medical Report dated June 25, 2019.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> On June 26, 2019, Jebsens et al. arranged a meeting with Aurelio where he was informed of the cessation of his treatment based on the company-designated physician's assessment of Grade 9, and was offered the corresponding amount of USD 13,060.00 pursuant to the POEA-SEC.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> On July 23, 2019, Aurelio's counsel showed Jebsens et al. the findings of Dr. Magtira and stated that the disability compensation should be based on the Collective Bargaining Agreement (CBA), since Aurelio suffered an "accident" while performing his duties on board the vessel. Aurelio's counsel also manifested their intention to undergo a third doctor referral. However, the third doctor assessment did not push through because Aurelio was not amenable to the proposed parameters of Jebsens et al.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p><p align="center"> <b>Ruling of the Panel of Voluntary Arbitrators</b> </p><p> In the its Decision dated September 20, 2021, the Panel of Voluntary Arbitrators (PVA) ruled in favor of Aurelio. The dispositive portion of which reads: </p><blockquote> <p><b>WHEREFORE</b>, premises considered, judgment is hereby rendered finding respondents <b>JEBSEN MARITIME INC. and/or HAPAG-LLOYD AKTIENGESELLSCHAFT and/or JOSHUA ALBERT S. GABOR</b> (SIC) jointly and severally liable to pay complainant <b>AURELIO C. NALICA III</b> the amount of <b>ONE HUNDRED SEVENTY THOUSAND AND FIVE HUNDRED TWELVE U.S. DOLLARS (US$170,512.00)</b> representing his total and permanent disability benefits, and attorney's fees equivalent to ten percent (10%) of the judgment award. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original) </p> </blockquote> <p> The PVA held that the Final Disability Assessment was issued 196 days from repatriation which is beyond the 120-day period. Further, the final medical report issued by the company-designated physician is not categorical and definite as it does not contain a certification whether Aurelio is "fit to work." Thus, Aurelio is entitled to permanent total disability benefits by operation of law.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> Jebsens et al. sought reconsideration, but the same was denied.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p align="center"> <b>Ruling of the Court of Appeals</b> </p><p align="justify"> The CA, in the assailed Decision, granted Jebsens et al.'s petition and reversed and set aside the Decision and Resolution of the PVA of the NCMB. The dispositive portion of the assailed Decision reads: </p><blockquote> <p> <b>WHEREFORE</b>, the Petition is <b>GRANTED</b>. The assailed <i>Decision</i> dated 20 September 2021 and <i>Resolution</i> dated 14 January 2022 of the Panel of Voluntary Arbitrators of the National Conciliation and Mediation Board, in MVA-045-RCMB-NCR-073-03-03-2020, are <b>SET ASIDE</b>. Petitioners Jebsens Maritime, Inc., Hapag-Lloyd Aktiengesellschaft, and Vivian Catalina Cristobal are hereby <b>ORDERED</b> to pay, jointly and severally, respondent Aurelio Dela Cruz Nalica III disability benefits equivalent to Grade 9 rating under the POEA-SEC. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Emphasis in the original) </p> </blockquote> <p> Foremost, it held that the 120-day period of treatment was validly extended. The company-designated physician had sufficient justifications to extend the diagnosis and treatment of Aurelio from 120 days to 240 days. The 120-day period would have fallen on May 16, 2019. However, on May 11, 2019, Aurelio still claimed that he had right shoulder pain as stated in the Medical Report dated May 11, 2019. Accordingly, the company designated physician recommended Aurelio to undergo six sessions of physical therapy, follow-up with the Physiatry service on May 14, 2019, and follow-up with the Orthopedic Shoulder Surgery service on May 29, 2019. Consequently, the company-designated physician issued on June 25, 2019, the final medical assessment. The same was received by Aurelio through his counsel on July 31, 2019, which was still within the 240-day period.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> The CA also held that the final medical assessment of the company-designated physician is definitive and conclusive, and Aurelio was informed of the same. The Medical Report dated June 25, 2019, which was received by Aurelio, through his counsel on July 31, 2019, contains the final and definitive disability assessment of Aurelio's medical condition.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The said Medical Report reads:</p><p align="center"> FINAL DISABILITY GRADING </p><p> </p><blockquote> <p> Mr. Nalica is a 49-year-old male from Marikina City.</p> <p> Diagnosis: <br> â¢ <b>Adhesive Capsulitis, right shoulder</b> <br> â¢ <b>s/p Steroid injection of right shoulder (April 1, 2019-Manila)</b> <br> â¢ <b>s/p 7 sets of physical therapy (6 sessions each)</b></p> <p> IF ENTITLED and IF NEEDED, the disability grading that is closest to the present functional capacity of the patient, based on the <b>Amended POEA Contract, Section 32</b> (Schedule of Disability or Impediment for injuries Suffered and Diseases Including Occupational diseases or Illness Contracted), <b>Shoulder and Arm is a Grade 9 (NINE) disability for Ankylosis or one shoulder, the shoulder blade remaining mobile</b>. </p> <p> Prepared by: <br> (sgd.) <br> Shiphealth Medical Team/ A. Agustin, MD/RMD<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis supplied) </p> </blockquote> <p> Evidently, the company-designated physician declared a final disability of Grade 9 based on the POEA-SEC and Aurelio's functional capacity. Moreover, the findings of the company-designated physician prevail over the findings of Aurelio's personal doctors.</p><p> Finally, Aurelio is not entitled to the more beneficial compensation under the CBA. For the CA, Aurelio failed to prove by substantial evidence that his medical condition arose from an accident while he was on board the vessel.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> Aurelio moved for reconsideration. However, the CA denied the same for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> Hence, the Petition before this Court. </p><p align="center"> <b>The Petition</b> </p><p> In the present Petition, Aurelio argues that for a company-designated physician to avail the extended 240-day period, he or she must perform some complete and definite medical assessment to show that the illness still requires medical attendance beyond 120 days. Here, there was no reason or explanation given by the company-designated physician to justify his extension of his medical treatment beyond 120 days. Aurelio was merely required to return for re-evaluation on May 29, 2019, which was the 132<sup>nd</sup> day of medical treatment. Thereafter, Aurelio was treated until June 25, 2019, the 159<sup>th</sup> day of medical treatment, wherein Aurelio was simply diagnosed to be suffering from Grade 9 disability. Nevertheless, assuming that the extended 240 days treatment period was justified, Jebsens et al. and their company-designated physician abandoned their medical treatment on June 25, 2019, because Aurelio's medical condition remain unresolved.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> Further, the company-designated physician did not furnish Aurelio a copy of the final assessment after the discontinuation of his medical treatment on June 25, 2019. Neither did the physician explain to him his actual medical condition and the consequent effect of his disability to his work as a seafarer. A copy of the alleged final medical report was received by Aurelio through counsel only on July 29, 2019, because he already secured the services of his counsel.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> As further argued, Jebsens et al. failed and refused to refer Aurelio for a third medical opinion. In this case, since Aurelio was not furnished a copy of the final assessment by the company-designated physician and the fact that the latter failed to explain to him his actual medical condition and the consequent effect of his medical condition to his work as a seafarer, under the law, there is no need for him to comply with the mandatory requirement of initiating the referral for a third medical opinion. Nevertheless, in good faith, Aurelio initiated the referral. Jebsens et al., however, refused as they required additional and unnecessary conditions in the conduct of a third medical opinion.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> In addition to his arguments, Aurelio avers that disability due to injury arising from accident while on board the vessel on account of employment is work-related, hence, compensable. Aurelio's injury was the result of an accident while he was in the performance of his official work on board Jebsens et al.'s vessel. Upon embarkation, Aurelio was physically fit. He was able and healthy until he suffered the accident, which caused his injuries leading to his repatriation for medical reason. Thus, it is indubitable that Aurelio's disability due to his medical condition causing his repatriation is work-related as it arose from injury due to accident.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> Lastly, Aurelio argues that he suffered from total and permanent disability. Both Dr. Magtira and Dr. Chua declared Aurelio to have suffered from total permanent disability due to his medical condition and now permanently unfit in any capacity for further sea duties. Despite medical attention and therapy given to Aurelio, he still suffers pain from the same medical condition caused by his accident while on board Jebsens et al.'s vessel. This greatly affected his physical capacity to work on board a sea vessel, rendering him incapable of performing his occupation as seaman safely and efficiently. As to the Final Medical Report, the same must include a certification that a seafarer remains fit to work as seafarer, otherwise such assessment is to be considered merely an interim disability assessment. Likewise, the Final Medical Report was not categorical as the company-designated physician used the phrase "IF ENTITLED. . . to Grade 9" as he is not certain whether Aurelio is entitled to a Grade 9 disability rating.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> <b>Jebsens et al.'s Comment</b></p><p> In their Comment,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Jebsens et al. foremost argue that there is no evidence presented by Aurelio to reinforce his account of the claimed accident. The vessel's medical logbook shows that Aurelio reported right shoulder pain on November 19, 2018 without any claim that it was due to any accident on board. He did not even mention that he figured in an accident to any of the physicians who examined him. There is no record of him reporting said condition on November 28, 2018, the date that he allegedly overstretched his right shoulder.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> As to Dr. Magtira's Medical Report, a plain reading of the same shows that it was rendered only after a single consult. The findings find no support from the results of the MRI that preceded it. At any rate, Dr. Magtira admitted in his medical report that "no matter what is done, most cases of shoulder pain slowly resolves if given enough time to get better." On the other hand, Dr. Chua's Medical Report, aside from being belatedly furnished to Jebsens et al., also suffers from the same fatal defects as that of Dr. Magtira's diagnosis.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></p><p> Anent the referral to a third doctor, Aurelio's deliberate act of vacating, without justifiable reason, the pending negotiation for third doctor referral should be taken against him.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> It was further argued that Aurelio still required further medical treatment beyond the initial 120 days, thus, sufficiently justifying the extension of the treatment period to 240 days. Likewise, the final assessment was complete. The company-designated physician is permitted to declare the seafarer as either fit to work or suffering from permanent disability, be it partial or total, at any time within the 120/240-day period.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p><p> <b>Aurelio's Reply</b></p><p> In his Reply,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Aurelio reiterates that due process and fair play declare that he not only be informed of his actual medical condition but he should be furnished with the final assessment to properly evaluate the veracity and truthfulness of the assessment. There is no proof that Aurelio was given copies of all his medical reports. Further, not only that Aurelio's right to due process was violated by Jebsens et al. when they refused and failed to furnish him a copy of the final assessment, they also failed and refused to refer Aurelio for a third medical opinion considered mandatory.</p><p> It was again reiterated that disability due to injury arising from accident while on board the vessel on account of employment is work-related, hence, compensable. In addition, Aurelio suffers from total and permanent disability. Partial disability assessments given by the company-designated physicians must be definitive and must include a certification that the seafarer remains fit to work as seafarer. </p><p align="center"> <b>Ruling of this Court</b> </p><p> After a perusal of the records of this case, this Court finds the petition partly meritorious.</p><p> At the outset, it must be emphasized that it is a well-established rule that only questions of law may be entertained in a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court. As this Court is not a trier of facts, it is not obliged to re-evaluate or re-assess the evidence on record. Nonetheless, there are recognized exceptions to this rule, such as when: (1) the conclusion is grounded on speculations, surmises or conjectures; (2) the inference is manifestly mistaken, absurd or impossible; (3) there is grave abuse of discretion; (4) the judgment is based on a misapprehension of facts; (5) the findings of fact are conflicting; (6) there is no citation of specific evidence on which the factual findings are based; (7) the findings of absence of facts are contradicted by the presence of evidence on record; (8) the findings of the CA are contrary to those of the trial court; (9) the CA manifestly overlooked undisputed facts that if properly considered, would justify a different conclusion; (10) the findings of the CA are beyond the issues of the case; and (11) such findings are contrary to admissions of both parties.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></p><p> In this case, this Court is constrained to revisit the factual findings due to the presence of two exceptions: the CA clearly overlooked undisputed facts which, if properly appreciated, would warrant a different outcome; and its findings are in direct conflict with those of the PVA.</p><p> Proceeding now to the discussion on the merits, We address the substantive issues raised and examine the applicable laws and jurisprudence in light of the established facts. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>The company-designated physician failed to issue a final, conclusive, and definite medical assessment within the prescribed periods</i></b> </div></td> </tr> </tbody></table> <p>In disability compensation, it is not the injury which is compensated, but rather it is the incapacity to work resulting in the impairment of one's earning capacity. Total disability refers to an employee's inability to perform his or her usual work. It does not require total paralysis or complete helplessness. Permanent disability, on the other hand, is a worker's inability to perform his or her job for more than 120 days, or 240 days if the seafarer required further medical attention justifying the extension of the temporary total disability period, regardless of whether or not he or she loses the use of any part of his body.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> The seafarer's entitlement to disability benefits is governed by the law, the parties' contracts, and the medical findings. Under Section 20(A) of the POEA-SEC, the employer must compensate the seafarer for work-related injuries and illnesses subject to conditions. The seafarer must timely report to the company-designated physician upon repatriation. In contrast, Section 20(B) of POEA-SEC provides that it is the primary responsibility of a company-designated physician to determine the disability grading or fitness to work of seafarers.</p><p> This Court in the case of <i>Elburg Shipmanagement Phils., Inc. v. Quioge, Jr</i>.,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> had laid down the rules governing claims for permanent and total disability, to wit: </p><ol><li> The company-designated physician must issue a final medical assessment on the seafarer's disability grading within a period of 120 days from the time the seafarer reported to him; <br><br></li><li>If the company-designated physician fails to give his assessment within the period of 120 days, without any justifiable reason, then the seafarer's disability becomes permanent and total; <br><br></li><li>If the company-designated physician fails to give his assessment within the period of 120 days with a sufficient justification (e.g. seafarer required further medical treatment or seafarer was uncooperative), then the period of diagnosis and treatment shall he extended to 240 days. The employer has the burden to prove that the company-designated physician has sufficient justification to extend the period; and <br><br></li><li> If the company-designated physician still fails to give his assessment within the extended period of 240 days, then the seafarer's disability becomes permanent and total, regardless of any justification.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></li></ol> <p> The company-designated physician must timely issue a final disability assessment within the 120/240-day period. Otherwise, the opinions of the company-designated and the independent physicians are rendered irrelevant because the seafarer is already conclusively presumed to be suffering from a work-related permanent and total disability, and thus, is entitled to the benefits corresponding thereto.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></p><p> To be conclusive, the medical assessments or reports should be complete and definite to afford the appropriated disability benefits to seafarers. There must also be sufficient bases to support the assessment.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> A final and definite disability assessment is necessary in order to truly reflect the true extent of the sickness or injuries of the seafarer and his or her capacity to resume work as such. Otherwise, the corresponding disability benefits awarded might not be commensurate with the prolonged effects of the injuries suffered.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></p><p> To revisit, the Final Medical Report dated June 25, 2019 states as follows:</p><p align="center"> <b>FINAL DISABILITY GRADING</b> </p><blockquote> <p> Mr. Nalica is a 49-year-old male from Marikina City. </p> <p>Diagnosis: <br> â¢ <b>Adhesive Capsulitis, right shoulder</b> <br> â¢ <b>s/p Steroid injection of right shoulder (April 1, 2019-Manila)</b> <br> â¢ <b>s/p 7 sets of physical therapy (6 sessions each)</b></p> <p> IF ENTITLED and IF NEEDED, the disability grading that is closest to the present functional capacity of the patient, based on the <b>Amended POEA Contract, Section 32</b> (Schedule of Disability or Impediment for injuries Suffered and Diseases Including Occupational diseases or Illness Contracted), <b>Shoulder and Arm is a Grade 9 (NINE) disability for Ankylosis or one shoulder, the shoulder blade remaining mobile</b>.</p> <p> Prepared by: <br> (sgd.) <br> Shiphealth Medical Team/ A. Agustin, MD/RMD<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (Emphasis in the original)</p> </blockquote> <p> This Court finds that the final medical report issued by Jebsens et al.'s company-designated physician falls short of the standards required for a conclusive and definitive assessment. Far from providing clarity, it lacks the precision and finality demanded by lawârendering it insufficient to serve as a valid basis for denying the seafarer's rightful claims.</p><p> In the case of <i>Grossman v. North Sea Marine Services Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> this Court emphasized that in order to be conclusive, the final and definite disability assessment should not only inform the seafarers of their fitness or non-fitness to resume their duties, as well as the perceived level or rating of their disability, or whether such illness is work-related; likewise, it should no longer require any further action on the part of the company-designated physician and it is issued by him or her after he or she have exhausted all possible treatment options within the periods allowed by law. More importantly, it should sufficiently explain and justify a finding of non-work relation that could preclude the seafarer's claim for disability benefits.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></p><p> A medical assessment that does not reflect the true extent of the seafarer's sickness or injury and his or her capacity to resume work is incomplete and indefinite. This type of assessment must be ignored and set aside.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> A final and definite disability assessment is necessary in order to truly reflect the true extent of the sickness or injuries of the seafarer and his or her capacity to resume work as such.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></p><p> Further, in <i>Island Overseas Transport Corporation v. Beja</i>,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> the fact that the company-designated physician merely indicated in the final assessment that the patient is suffering from impediment Grades 10 and 13 disability without any justification or clear indication on how the physician reached such conclusion made the final assessment tentative and unreliable for purposes of finally determining a seafarer's disability.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></p><p> Furthermore, in the case of <i>Chan v. Magsaysay Maritime Corp</i>.,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> this Court held that the medical assessment issued by the company-designated physician cannot be considered complete, final, and definite as it did not show how the disability assessment was arrived at. The assessment merely stated that Aurelio had attained maximum medical treatment and declared his or her disability at Grade 10. A declaration of disability in the medical assessment, without more, cannot be considered complete, final, and definite.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></p><p> In this case, a closer scrutiny of the issued final assessment reveals a glaring absence of explanation as to how the company-designated physician arrived at his conclusion. No rationale is offered, no medical reasoning laid bare. Worse, there is a deafening silence on whether Aurelio is fit to resume his regular duties as a seafarer. In light of these omissions, this Court finds that the Medical Report dated June 25, 2019 fails to meet the standards of a final and definitive medical assessment. It is, at best, a hollow formalityâone that cannot withstand the scrutiny of due process. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>Due Process Demands More Than Paper: The Need for Timely and Meaningful Disclosure of Medical Assessments</i></b> </div></td> </tr> </tbody></table> <p>In addition, and of critical importance, it is not enough that the company-designated physician issues a final, conclusive, and definitive medical assessment on paper. The mere existence of such a document does not satisfy the demands of due process. The assessment must be properly and timely communicated to the seafarerâclearly explained in a manner he can understand, and delivered within the period prescribed by law. Anything less reduces the process to a hollow ritual, depriving the seafarer of the very information he needs to safeguard his rights, seek a second opinion, or challenge an unjust finding. Without proper and timely disclosure, the assessment is nothing more than an empty pronouncement, and the seafarer is left in the darkâunheard, uninformed, and ultimately, denied of justice. </p><p> To recall, the Medical Report dated June 25, 2019âpurportedly containing the Final Medical Assessmentâwas received by Aurelio, through counsel, only on July 31, 2019, more than a month after it was supposedly issued. Strikingly, even during the meeting arranged by Jebsens et al. on June 26, 2019, where Aurelio was merely told that his treatment would cease and offered compensation, the assessment itself was never given to him. The records are devoid of any indication that Aurelio was ever fully and dearly informed of his medical condition and the impact it would have on his capacity to resume work as a seafarer. The effect of this failure by Jebsens et al. to properly furnish Aurelio a copy of his medical certificate militates gravely against Jebsens et al.'s cause. Without the proper notice, Aurelio was not given the opportunity to properly evaluate his medical assessment.</p><p> Even if the final medical assessment was issued within the 240-day period, if it was not properly communicated and explained to the seafarer, the assessment is not valid and binding. The seafarer is entitled to permanent and total disability benefits by operation of law.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></p><p> Thus, consistent with the ruling of this Court in <i>Gere v. Anglo-Eastern Crew Management Phils., Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> to ensure compliance with due process and the proper implementation of the POEA-SEC, it is not enough that the company-designated physician merely "issues"<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> a final medical assessment; the assessment must also be properly "given"<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> or delivered to the seafarer. This entails more than the preparation of a written reportâit requires that the seafarer be fully and clearly informed of their medical condition, including the results of examinations, treatment history, diagnosis, prognosis, and any assigned disability grading. Effective communication of this assessment is essential.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup></p><p> Proper notice is a fundamental element of due process. Hence, the assessment must be personally received by the seafarer, or if personal service is not practicable, delivered through other means permitted under the applicable rules. Absent such notice, the seafarer is deprived of the opportunity to understand, evaluate, or contest the findings. Crucially, without proper delivery, the mechanism for resolving disputes through referral to a third doctor cannot be validly initiated.</p><p> If the company-designated physician fails to issue and properly deliver the final assessment within the mandated period (120 or 240 days, depending on the circumstances), the seafarer's disability is deemed total and permanent by operation of law. An employer cannot rely on an undisclosed or undelivered assessment to defeat the seafarer's claim for benefits.</p><p> The referral process to a third doctorâintended to resolve conflicting assessmentsâmay only be triggered once the seafarer has been properly and timely notified of the final medical assessment. In the absence of such notice, the referral mechanism remains dormant and cannot be invoked as a defense against the seafarer's entitlement. Due process demands no less. </p><p> As a caveat, this Court is not unmindful of situations where a seafarer may deliberately refuse to receive the company-designated physician's final, conclusive, and definitive medical assessment, or evade any attempt to be informed of the details and implications of their medical conditionâall in an effort to circumvent the law and unjustly claim total and permanent disability benefits. In such instances, a denial of due process cannot be imputed. However, for this exception to apply, the records must clearly establish that the final medical assessment was timely issued within the prescribed period and that the company, or through the company-designated physician, made diligent, good faith efforts to communicate and explain the assessment to the seafarer. It must be evident that despite these efforts, the seafarer willfully refused to receive or acknowledge the assessments. </p><p> Accordingly in this case, there being no final and definite assessment of Aurelio's fitness to work or permanent disability and since his disability remains unresolved, which thus precludes him from pursuing his usual work as a seafarer, his disability has, by operation of law, become total and permanent.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> As such, there was no impetus to seek a neutral third doctor.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>Aurelio cannot claim disability benefits under the CBA for failure to prove the accident</i></b> </div></td> </tr> </tbody></table> <p>Nevertheless, Aurelio is only entitled to compensation under the POEA-SEC, and not compensation under the CBA. As provided for in the parties' employment contract, the vessel is covered by a CBA entitled "GIS COLLECTIVE BARGAINING AGREEMENT CBA No. F2724." The said CBA directs the payment of disability compensation to seafarers suffering from permanent disability as a result of an accident while in the employment of the company. </p><p> Time-honored is the rule that whoever claims entitlement to benefits provided by law should establish his right thereto by substantial evidence which is more than a scintilla; real and substantial, and not merely apparent. It was incumbent upon Aurelio to prove his allegation that his injuries were caused by accidents on board the vessel. His failure to do so certainly resulted to his non-entitlement to the benefits he was seeking for under the CBA.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup></p><p> In this case, however, Aurelio failed to provide sufficient proof that his injury was caused by an accident. His claim rests solely on his recollection that he allegedly met an accident while cleaning an oil spill on November 19, 2018. This assertion finds no support in the vessel's medical logbook, which does not record any accident related to his right shoulder pain. More, none of the medical reports make reference to any accident. To this Court, Aurelio's bare allegation, uncorroborated by objective evidence, is self-serving and cannot be given probative weight. Hence, Aurelio cannot claim benefits under the CBA. As such, his entitlement to disability benefits is governed by the POEA-SEC and relevant labor laws, which are deemed written in his contract of employment.</p><p> <b><i>Aurelio is entitled to Attorneyâs Fees</i></b> </p><p> This Court finds that Aurelio is likewise entitled to attorney's fees. Article 2208(8) of the Civil Code provides that attorney's fees are recoverable in actions for indemnity under the workmen's compensation and employer's liability laws. Where an employee was forced to litigate, and as a result, incur expenses to protect his or her rights and interests, a monetary award by way of attorney's fees is justified under Article III of the Labor Code; Section 8, Rule VIII, Book III of its Implementing Rules. Considering that Aurelio was forced to litigate to protect his right and interest under the POEA-SEC, the award of attorney's fees is proper. </p><p> Moreover, in line with prevailing jurisprudence,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> all monetary awards due shall earn legal interest at the rate of 6% per annum from the date of finality of this Decision until fully paid. </p><p> <b>ACCORDINGLY</b>, the present Petition for Review on <i>Certiorari</i> is hereby <b>PARTIALLY GRANTED</b>. The Decision dated October 5, 2023 and the Resolution dated February 29, 2024 of the Court of Appeals in CA-G.R. SP No. 172584 are hereby <b>REVERSED</b> and <b>SET ASIDE</b>. Respondents Jebsen Maritime, Inc., Hapag-Lloyd Aktiengesellshaft, and/or Vivian Catalina Cristobal are hereby <b>ORDERED jointly and severally to pay</b> petitioner Aurelio Dela Cruz Nalica III the following: </p><p> 1. total permanent disability benefits in the amount of USD 60,000.00 or its equivalent in Philippine currency at the time of payment; and </p><p>2. 10% of the total monetary award as attorney's fees. </p><p> All monetary awards due shall earn legal interest at the rate of 6% per annum from the date of finality of this Decision until fully paid. </p><p> <b>SO ORDERED</b>. </p><p><i>Caguioa (Chairperson), Inting</i>, and <i>Dimaampao, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup>J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Aurelio C. Nalica III" in some parts of the <em>rollo</em>. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also spelled as "Jebsens" in some parts of the <em>rollo</em>. </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also spelled as "Aktiengesellschaft" in some parts of the <em>rollo</em>.</p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 42-100. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-32. Penned by Associate Justice Alfredo D. Ampuan and concurred in by Associate Justices Zenaida T. Galapate-Laguilles and Michael P. Ong of the Special Special 13<sup>th</sup> Division of the Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 34-36. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 433-466. Signed by Chairman MVA Leticia E. Sablan, and Member MVA Gregorio C. Biares, Jr., and dissenting opinion by MVA Gregorio B. Sialsa.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 490-491. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 9. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 9-10.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 10. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 11. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 10-11. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 192-193. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 194-195. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 196-197. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 13. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 15-16. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 19-23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 23-28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 315. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 28-31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 60-62. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 62-69. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 69-73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 74-75. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 75-80. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 662-712. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 674-686. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 686-692. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 692-694. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 694-706. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 713-742. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Dionio v. ND Shipping Agency and Allied Services, Inc.</b>, 838 Phil. 953, 965-966 (2018) [Per J. Gesmundo, Third Division]; <b>Deocariza v. Fleet Management Services Philippines, Inc.</b>, 836 Phil. 1087, 1097 (2018) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Talaugon v. BSM Crew Service Centre Phils., Inc.</b>, 861 Phil. 962, 972 (2019) [Per J. Lazaro-Javier, Second Division]; <b>Orient Hope Agencies Inc. v. Jara</b>, 832 Phil. 380, 405 (2018) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 765 Phil. 341 (2015) [Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 362-363. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Pelagio v. Philippine Transmarine Carriers Inc.</b>, 848 Phil. 808, 816-817 (2019) [Per J. Perlas-Bernabe, Secod Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Salonga v. Solvang Philippines, Inc.</b>, 896 Phil. 565 (2021) [Per J. Inting, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Talaugon v. BSM Crew Services Centre Phils., Inc.</b>, 861 Phil. 962, 972 (2019) [Per J. Lazaro-Javier, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i>, p. 315. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 932 Phil. 637 (2022) [Per J. Kho, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 651. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Skanfil Maritime Services, Inc. v. Centeno</b>, 922 Phil. 797, 809 (2022) [Per J. Lopez, M., Third Division], <i>citing</i> <b>Ampo-on v. Reinier Pacific International Shipping, Inc.</b>, 853 Phil. 483, 492 (2019) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Salas v. Transmed Manila Corp.</b>, 874 Phil. 201, 212 (2020) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> 774 Phil. 332 (2015) [Per J. Del Castillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 348. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 872 Phil. 1061 (2020) [Per J. Del Castillo, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 1078. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>See</i> <b>Ampolitod v. Top Ever Marine Management Phils., Inc.</b>, 954 Phil. 733 (2024) [Per J. Gaerlan, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 830 Phil. 695 (2018) [Per J. Reyes, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 705. </p><p><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 711. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 706. </p><p><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Grossman v. North Sea Marine Services Corporation</b>, 932 Phil. 637, 655 (2022) [Per J. Kho, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Gere v. Anglo-Eastern Crew Management, Inc.,</b> 830 Phil. 695, 711 (2018) [Per J. Reyes, Jr., Second Division], <i>see also</i> <b>Benhur Shipping Corporation v. Riego</b>, 921 Phil. 962, 964 (2022) [Per CJ. Gesmundo, First Division], and <b>United</b> <b>Philippines Lines, Inc. v. Ramos</b>, 899 Phil. 192-193 (2021) [Per J. Caguioa, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Philippine Transmarine Carriers, Inc. v. Manzano</b>, 899 Phil. 43, 51-52 (2021) [Per J. Gaerlan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754 (2022) [Per J. Leonen, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

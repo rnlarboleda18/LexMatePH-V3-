@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267111 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. THE COURT OF TAX APPEALS AND HOTEL SPECIALIST [TAGAYTAY], INC., RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70128' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267111, August 06, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. THE COURT OF TAX APPEALS AND HOTEL SPECIALIST [TAGAYTAY], INC., RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 65 of the Rules of Court assailing the CTA <i>En Banc</i>'s Resolutions promulgated on October 12, 2022,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and March 16, 2023,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> in consolidated cases CTA EB Nos. 2084 and 2092. In the assailed resolutions, the CTA <i>En Banc</i> granted the request of the Office of the Solicitor General (OSG) to receive an amount equal to 5% of the total compromise amount paid by herein private respondent Hotel Specialist [Tagaytay], Inc. (HSTI).</p><p> For the Court's review is the scope of the CTA <i>En Banc</i>'s authority to direct the Commissioner of Internal Revenue (CIR) to remit a portion of the proceeds from a court-approved compromise agreement to the OSG.</p><p align="center"> <i>The Antecedents</i> </p><p> This case stemmed from an assessment issued by the CIR, finding HSTI liable for deficiency income tax, value-added tax (VAT), withholding tax on compensation (WTC), expanded withholding tax (EWT) relative to taxable year 2009. </p><p> HSTI protested the assessment administratively and judicially. The case was docketed as CTA Case No. 9349. </p><p> On January 18, 2019, the CTA Special Second Division (CTA Division) affirmed the CIR's assessment, ordering HSTI to pay an aggregate amount of PHP 27,777,586.05, comprised of deficiency income tax of PHP 17,350,792.92, deficiency VAT of PHP 9,780,127.69, deficiency EWT of PHP 542,523.63, and deficiency WTC of PHP 104,141.81, inclusive of surcharge and interest. </p><p> The case eventually reached the CTA <i>En Banc</i> via the parties' respective petitions for review. However, the CTA <i>En Banc</i> denied both petitions and affirmed the CTA Division's ruling. </p><p> Thereafter, HSTI and the Bureau of Internal Revenue (BIR) executed a Judicial Compromise Agreement (JCA),<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> wherein HSTI offered the amount of PHP 7,288,481.52 (Compromise Amount) as full and final settlement of the tax assessment case, which the BIR accepted. Upon the parties' joint motion, the CTA <i>En Banc</i> approved the JCA in a Judgment Based on Compromise<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> promulgated on April 19, 2022.</p><p> The OSG moved for partial reconsideration<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the Judgment Based on Compromise, insisting that it was entitled to 5% of the total compromise amount for having represented the CIR before the CTA, as mandated by Section 11(i) of Republic Act No. 9417.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p align="center"> <i>The Ruling of the CTA En Banc</i> </p><p> In the first assailed resolution, the CTA <i>En Banc</i> ruled in favor of the OSG. The court <i>a quo</i> recognized that the Solicitor General has the primary responsibility to appear for the government in appellate proceedings. However, by virtue of a Memorandum of Agreement (MOA) dated May 17, 2010, the OSG had deputized lawyers from the BIR to litigate the appeal before the CTA <i>En Banc</i>. </p><p> Nevertheless, based on the pronouncement in <i>Republic v. Viaje</i>,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> the deputization did not divest the OSG of control over the case; neither did the deputized special attorney become the counsel of record. Furthermore, the CTA <i>En Banc</i> held that the OSG's entitlement to 5% of the total monetary award, representing total deficiency taxes paid, was already settled in <i>Kepco Philippines Corporation v. Commissioner of Internal Revenue</i>.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Thus, it disposed as follows: </p><blockquote> <p> WHEREFORE, the Office of the Solicitor General's "<i>Ex Abudanti Ad Cautelam</i> Motion for Partial Reconsideration" is hereby GRANTED. Accordingly, the Bureau of Internal Revenue is DIRECTED TO REMIT to the Office of the Solicitor General 5% of the total compromise amount paid by Hotel Specialist (Tagaytay), Inc. pursuant to their Judicial Compromise Agreement. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p> </blockquote> <p> Aggrieved, the CIR moved for reconsideration. </p><p> In the second assailed resolution, the CTA <i>En Banc</i> upheld the OSG's entitlement to 5% of the total compromise amount. It rejected the CIR's theory that the OSG shall be entitled to a success fee only if it actively participated in the litigation, and that such entitlement does not apply when the case was settled via court-approved compromise agreement in which the OSG had no involvement, as in the present case. The CTA<i> En Banc</i> underscored that the OSG's entitlement includes monetary awards resulting from court-approved compromise agreements.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> Hence, the CIR filed the present <i>certiorari</i> petition. </p><p align="center"> <i>Petitioner CIR's Arguments</i> </p><p> The CIR imputes grave abuse of discretion on the part of the CTA <i>En Banc</i> in directing the remittance of an amount equal to 5% of the compromised amount in favor of the OSG. It opines that allowing this would be the height of injustice for every Filipino that its hard-earned money paid to the government would be taken solely for the benefit of the OSG who have never participated in the case. It explains as follows: </p><p> <i>First</i>, the OSG did not act as its counsel before the CTA; neither did it actively participate in the proceedings therein. It asserts that lawyers from the BIR's own Litigation Division appeared before the CTA and represented the CIR in said proceedings.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> <i>Second</i>, the OSG's entitlement to a success fee pursuant to Section 11(i) of Republic Act No. 9417 is contingent upon its active participation in securing a favorable judgment that yielded a monetary award. The CIR maintains that the present case involved a disputed assessment, not an action for the recovery of a monetary claim. It defines the term "monetary award," as contemplated in Section 11(i) of Republic Act No. 9417, as a reimbursement, return or restoration of money to the OSG's client which, in the case, is the BIR. The CIR points out that the compromise amount, representing deficiency taxes due from HSTI, does not redound to the BIR's benefit because it is payable to the government, not to the BIR directly.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> It, thus, concludes that the OSG is not so entitled here because, in the first place, the case did not involve any monetary award.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p align="center"> <i>The OSG's Counter-Arguments</i> </p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the OSG counters as follows: </p><p> <i>First</i>, the instant Rule 65 petition is the wrong remedy. The proper remedy to assail a decision promulgated by the CTA <i>En Banc</i> is a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court, pursuant to Section 11 of Republic Act No. 9282 and Section 1, Rule 16 of the Revised Rules of the CTA (RRCTA).<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> <i>Second</i>, the CIR failed to implead the OSG, which is an indispensable party, considering that the subject matter of the present action directly concerns the OSG' s entitlement to a portion of the compromise amount. The CIR's failure renders the petition procedurally infirm.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> <i>Third</i>, the alleged errors on the part of the CTA <i>En Banc</i> do not constitute grave abuse of discretion. In any case, a judgment clearly founded on law and jurisprudence does not meet the higher standard of grave abuse of discretion, an essential requisite for the issuance of a writ of <i>certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p align="center"> <i>The Issues</i> </p><p> Based on the parties' submissions, the Court restates the issues for resolution as follows: <i>First</i>, is a Rule 65 petition the proper remedy to question the CTA <i>En Banc</i>'s directive to remit a portion of the compromise amount to the OSG? <i>Second</i>, did the CIR's failure to implead the OSG render the instant petition fatally defective? <i>Third</i>, in any case, did the CTA <i>En Banc</i> commit grave abuse of discretion when it directed the CIR to remit 5% of the compromise amount in favor of the OSG? </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The Court resolves to dismiss the petition. </p><p> The present petition is fatally flawed. Not only is a Rule 65 petition the wrong remedy, but the CIR also failed to allege <i>bona fide</i> imputations of grave abuse on the part of the CTA <i>En Banc</i> in issuing the assailed Resolutions. Further, the CIR challenges the OSG's court-ordered entitlement but neglected to implead it in the present petition. In any case, the CTA <i>En Banc</i> was authorized to direct the remittance of a portion of the compromise amount to the OSG, pursuant to Section 11(i) of Republic Act No. 9417. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>A petition for certiorari under Rule 65 is the wrong remedy</i>. </div></td> </tr> </tbody></table> <p>It is basic that <i>certiorari</i> proceedings are resorted to only when there is no other plain, speedy, or adequate remedy available.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Here, the CIR challenges the CTA <i>En Banc</i>'s resolutions, finding in favor of the OSG's entitlement to a success fee. It is clear under the Republic Act No. 1125, as amended,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> and the RRCTA,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> that the party adversely affected by a ruling rendered by the CTA <i>En Banc</i> may pursue an appeal by <i>certiorari</i> under Rule 45. The availability of the remedy proscribes the resort to <i>certiorari</i> proceedings under Rule 65. </p><p> Neither is there any reason to be liberal in the Court's application of the rules and to treat the instant petition as a Rule 45 petition. The CIR utilized the full 60-day period allowed under Rule 65 to file the present petition after it received the second assailed resolution on March 20, 2023. Certainly, the filing is well-beyond the applicable reglementary period under Rule 45.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> It even appears from the circumstances that the present petition is an attempt to take the place of a lost appeal.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The CIR did not implead the OSG, the real party in interest</i>. </div></td> </tr> </tbody></table> <p>The action originated from an assessment case, which, later on, was settled through a Judgment Based on Compromise. However, the primary issue being raised by the CIR here has nothing to do with the merits of the compromise. It questions the CTA <i>En Banc</i>'s directive to remit a portion of the compromise amount to the OSG, which falls outside the compromise's terms and conditions. </p><p> To be sure, the CIR opposes the OSG's entitlement to a portion of the compromise amount, as compensation for legal services rendered. In other words, the CIR's cause of action is against the OSG, not HSTI. </p><p> Failure to implead the real party in interest also renders the petition defective. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The CTA En Banc did not commit grave abuse of discretion</i>. </div></td> </tr> </tbody></table> <p>At the outset, it is dear that the arguments raised by petitioner are not <i>bona fide</i> imputations of grave abuse of discretion. At best, they concern errors of judgment, which cannot be the subject of <i>certiorari</i> proceedings. </p><p> Be that as it may, the Court finds no grave abuse of discretion on the part of the CTA <i>En Banc</i>. </p><p> To recall, after the promulgation of the Judgment Based on Compromise, the OSG moved for the remittance of 5% of the compromise amount. It was still within the CTA <i>En Banc</i>'s jurisdiction to act upon and rule favorably on the motion, as held in <i>De Tolentino v. Hon. Escalona</i>,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> viz.: </p><blockquote> <p> Then again, it is well-settled that a claim for attorney's fees may be asserted either in the very action in which the services in question have been rendered, or in a separate action. If the first alternative is chosen, <i>the Court may pass upon said claim, even if its amount were less than the minimum prescribed by law for the jurisdiction of the court over the subject-matter of the case, so long as the main action is within the jurisdiction of said court, upon the theory that the right to recover attorney's fees is but an incident of the case in which the services of counsel have been rendered</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Italics supplied)</p> </blockquote> <p> In any case, the CIR cannot deprive the OSG of its entitlement to 5% of the compromise amount.</p><p> <i>First</i>, as explained, by the CTA <i>En Banc</i>, this is supported by law (i.e., Section 11(i) of Republic Act No. 9417) and jurisprudence (i.e., <i>Kepco</i>).</p><p> <i>Second</i>, the CIR's theory that only the BIR lawyers were the ones who actively represented petitioner throughout the proceedings is erroneous; it ignores that, in the first place, the BIR lawyers' authority to represent the CIR in CTA proceedings is <i>merely derivative</i> from the OSG's mandate as the "principal law officer and legal defender of the Government," which includes representation of the CIR "sued in [its] official capacity in all cases brought before the CTA in the exercise of its appellate jurisdiction."<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> Verily, the OSG is empowered to deputize legal officers of government bureausâsuch as BIR lawyers through a MOA<sup style="COLOR: RGB(255, 0, 0);">[27]</sup>â"to assist the Solicitor General and appear or represent the Government in cases involving their respective offices, brought before the courts and exercise supervision and control over such legal officers with respect to such cases."<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> However, as settled in <i>Viaje</i>, the OSG shall continue to exercise supervision and control over such legal officers.</p><p> <strong><big>ACCORDINGLY</big></strong>, the Petition for <i>Certiorari</i> is <b>DISMISSED</b>. </p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa (Chairperson), Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <br> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-16. Denominated as "Petition for Review on <i>Certiorari</i>" in the petition. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 24-30. Penned by Associate Justice Jean Marie A. Bacorro-Villena and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, and Maria Rowena Modesto-San Pedro; Associate Justice Marian Ivy F. Reyes-Fajardo (on leave); Associate Justice Lanee S. Cui-David inhibited.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 32-38. Penned by Associate Justice Jean Marie A. Bacorro-Villena and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Maria Rowena Modesto-San Pedro, Marian Ivy F. Reyes-Fajardo, Lanee S. Cui-David, and Corazon G. Ferrer-Flores.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 45-50. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 56-59. Penned by Associate Justice Jean Marie A. Bacorro-Villena and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. CastaÃ±eda, Jr., Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Maria Rowena Modesto-San Pedro, and Marian Ivy F. Reyes-Fajardo. Associate Justice Lanee S. Cui-David inhibited. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 7 and 82. Denominated as an "<i>Ex Abudanti Ad Cautelam</i> Motion for Partial Reconsideration." </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Titled, "An Act to Strengthen the Office of the Solicitor General, by Expanding and Streamlining its Bureaucracy, Upgrading Employee Skills and Augmenting Benefits, and Appropriating Funds Therefor and For Other Purposes, approved on March 30, 2007.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> 779 Phil. 405 (2016).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> 878 Phil. 244 (2020). </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, p. 29. (Emphasis omitted) </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 27-29. (Emphasis omitted) </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 9. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 10. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 9-10. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 110-134.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 116-117.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 121-122.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 125.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <b>Republic v. Court of Appeals</b>, 379 Phil. 92, 97 (2000).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Republic Act No. 1125, sec. 19, as amended by Republic Act No. 9262.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> RRCTA, Rule 16, sec. 1.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>See</i> <b>Republic v. Court of Appeals</b>, <i>supra</i> note 19, at 98.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <b>Commissioner of Internal Revenue v. Court of Tax Appeals (Third Division)</b>, 843 Phil. 178, 189 (2018).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 136 Phil. 13 (1969).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 18.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> RRCTA, Rule 9, sec. 10. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Revenue Memorandum Circular No. 025-10, March 17, 2010.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Presidential Decree No. 478, sec. 1(h), Office of the Solicitor General. Approved on June 4, 1974. </p> </div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

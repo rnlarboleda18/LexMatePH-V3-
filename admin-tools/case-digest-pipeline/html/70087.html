@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 280515 - MATT ERWIN V. FLORIDO, PETITIONER, VS. JAN RAPHAEL O. PASILLAO, MANOLO DE LEON PANGANIBAN, NORITA C. VICTOR, JAY-AR C. VICTOR, MARK A. PARDI&Ntilde;AS, AND THE COMMISSION ON ELECTIONS, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70087' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 280515, August 12, 2025 ]</H2>
+			<H3>MATT ERWIN V. FLORIDO, PETITIONER, VS. JAN RAPHAEL O. PASILLAO, MANOLO DE LEON PANGANIBAN, NORITA C. VICTOR, JAY-AR C. VICTOR, MARK A. PARDIÃAS, AND THE COMMISSION ON ELECTIONS, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by petitioner Matt Erwin V. Florido (Florido), assailing the Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Commission on Elections<i> <i>En Banc</i></i> (COMELEC<i> <i>En Banc</i></i>) which affirmed the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the COMELEC First Division (COMELEC Division). The COMELEC Division granted the Petition for Disqualification against Florido for committing vote-buying, an election offense under Section 261(a)(1) of Batas Pambansa Bilang 881 (Batas Pambansa Blg.), or the Omnibus Election Code (OEC). Florido was a candidate for Representative for the Third District of Quezon Province in the May 12, 2025 National and Local Elections (2025 NLE).<br><br><center><b>Facts</b></center><br>Jan Raphael O. Pasillao, Manolo De Leon Panganiban, Norita C. Victor, Jay-Ar C. Victor, and Mark A. PardiÃ±as, (Pasillao et al.) are registered voters and residents of Buenavista, Quezon.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>On April 5 and 6, 2025, Ricky Anyayahan, Florido's representative, invited Pasillao et al. to attend a gathering in Catanauan, Quezon Province. Pasillao et al. were not informed of the event's purpose, but they were promised food and transportation. When they arrived, they signed an attendance sheet and were served meals and drinks. During the assembly, Florido delivered a speech explicitly soliciting votes and urging support for his candidacy. His staff, wearing red campaign shirts, also spoke and held a candle-lighting ceremony as a symbolic show of support. Subsequently, the attendees were called individually to receive a red campaign shirt and a brown envelope which contained a PHP 1,000.00 bill. Florido personally greeted them and shook their hands. Pasillao et al. were transported back home after the event.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On April 11, 2025, Pasillao et al. filed a Petition for Disqualification against Florido for the position of Member of the House of Representatives for the Third District of Quezon Province in the 2025 NLE.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> In their Petition, Pasillao et al. asserted that the provision of transportation, food, drinks, campaign shirts, and cash constituted vote-buying intended to influence their electoral choice.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>In response, Florido contended that Pasillao et al. were campaign volunteers attending an internal orientation and that the PHP 1,000.00 given was a cash advance for campaign-related expenses, held in trust and subject to liquidation. He denied providing transportation or meals, and claimed that any food was leftover and shared among volunteers. He also argued that the shirts were official volunteer uniforms and not election propaganda.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On April 30, 2025, the COMELEC Division rendered its Resolution holding that Florido committed vote-buying, which merited his disqualification under Section 68(a) of the OEC.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>The COMELEC Division found substantial evidence that the event attended by Pasillao et al. was not internal and exclusive to the campaign staff and volunteers of Florido. Contrary to Florido's claims, the attendees were not part of his official volunteer groupâthey were not included in the group chat for volunteers, were excluded from meal provisions, and were treated merely as participants. The COMELEC Division emphasized that the event was clearly intended to secure electoral support. To achieve this, material considerations such as free transportation, meals, drinks, t-shirts, and PHP 1,000.00 in cash were distributed. Florido also did not specifically deny that he campaigned and openly solicited votes during the said event. More, the lack of proper record-keeping regarding the distribution of the cash further undermined his defense that the funds were operating expenses for volunteers. Based on these findings, the COMELEC Division concluded that Florido committed vote-buying in violation of the OEC, leading to his disqualification.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The dispositive portion of the COMELEC Division's Resolution is quoted below:<br><blockquote>ACCORDINGLY, the Commission (First Division) GRANTS the Petition to Disqualify Respondent MATT ERWIN V. FLORIDO as candidate for the position of Member, House of Representatives, Third District, Quezon Province for the May 12, 2025 National and Local Elections.<br><br>Furthermore, forward the records of the Petition to the Law Department for the conduct of preliminary investigation for violation of Section 261(a) of the Omnibus Election Code.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </blockquote>On April 30, 2025, Florido, through counsel, received via electronic mail (email) a copy of the COMELEC Division's Resolution.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On May 5, 2025, Florido filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> which the COMELEC<i> <i>En Banc</i></i> denied in its assailed Resolution. The dispositive portion of the COMELEC<i> <i>En Banc</i></i>'s Resolution states:<br><blockquote>WHEREFORE, premises considered, the Commission (<i><i>En Banc</i></i>) RESOLVED, as it hereby RESOLVES, to DENY the Motion for Reconsideration of MATT ERWIN V. FLORIDO dated 04 May 2025. The Resolution of the Commission (First Division) dated 30 April 2025 is hereby AFFIRMED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </blockquote>On May 9, 2025, Florido, through counsel, received a copy of the COMELEC<i> <i>En Banc</i></i>'s, Resolution via electronic mail from the Office of the Clerk of the COMELEC.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Subsequently, on May 15, 2025, the COMELEC <i><i>En Banc</i></i> issued a Certificate of Finality<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and Entry of Judgment,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> which declared the COMELEC<i> <i>En Banc</i></i>'s Resolution as final and executory.<br><br>On June 9, 2025, Florido filed the present Petition for<i> Certiorari</i> where he asserts that the COMELEC committed grave abuse of discretion in ruling that he is guilty of vote-buying under Section 261(a)(1) of the OEC.<br><br>Conversely, Pasillao et al. filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> contending that the present Petition for<i> Certiorari</i> should be dismissed outright for having been filed beyond the reglementary period.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>This Court resolves the following issues:<br><br><i>First</i>, whether the present Petition for<i> Certiorari</i> is filed within the reglementary period; and<br><br><i>Second</i>, whether the COMELEC committed grave abuse of discretion in ruling that Matt Erwin V. Florido is guilty of vote-buying under Section 261(a)(1) of the OEC.<br><br><center><b>This Court's Ruling</b></center><br>The Petition lacks merit.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The Petition for Certiorari was filed out of time</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>To determine the timeliness of the present Petition, the applicable legal framework includes Article IX-A, Section 7 of the Constitution and Rule 64, Section 3, in relation to Rule 65 of the Rules of Court.<br><br>Article IX-A, Section 7 of the Constitution states:<br><blockquote>SECTION 7. Each Commission shall decide by a majority vote of all its Members any case or matter brought before it within sixty days from the date of its submission for decision or resolution. A case or matter is deemed submitted for decision or resolution upon the filing of the last pleading, brief, or memorandum required by the rules of the Commission or by the Commission itself. Unless otherwise provided by this Constitution or by law, any decision, order, or ruling of each Commission may be brought to the Supreme Court on [<i>certiorari</i>] by the aggrieved party within thirty days from receipt of a copy thereof. </blockquote>Article IX-A, Section 7 of the Constitution provides that, unless otherwise specified by the Constitution or by law, any decision, order, or ruling issued by the COMELEC may be challenged by the aggrieved party before this Court by filing a petition for<i> certiorari</i> within 30 days from receipt of the decision.<br><br>Along this line, this Court established a distinct procedural rule under Rule 64, which is exclusively applicable to constitutional commissions, such as the COMELEC. Rule 64, Section 3 of the Rules of Court, states:<br><blockquote>Section 3. Time to file petition. â The petition shall be filed within thirty (30) days from notice of the judgment or final order or resolution sought to be reviewed. The filing of a motion for new trial or reconsideration of said judgment or final order or resolution, if allowed under the procedural rules of the Commission concerned, shall interrupt the period herein fixed. If the motion is denied, the aggrieved party may file the petition within the remaining period, but which shall not be less than five (5) days in any event, reckoned from notice of denial. </blockquote>Under Rule 64, Section 3 of the Rules of Court, a petition must be filed strictly within 30 days from receipt of the judgment, final order, or resolution being challenged. If a motion for new trial or reconsideration is filed, the running of the 30-day period is interrupted. If the motion is denied, the petitioner has only the remaining balance of the original 30-day period to file the petition, which in no case shall be less than five days from notice of the denial.<br><br>In<i> Pates v. COMELEC</i>,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> this Court clarified that Rule 64 is distinct from Rule 65, especially in the prescribed period for filing petitions for <i>certiorari</i>. In<i> Pates</i>, this Court explained:<br><blockquote>Rule 64, however, cannot simply be equated to Rule 65 even if it expressly refers to the latter rule. They exist as separate rules for substantive reasons as discussed below. Procedurally, the most patent difference between the two â [i.e.,] the exception that Section 2, Rule 64 refers to â is Section 3 which provides for a special period for the filing of petitions for<i> certiorari </i>from decisions or rulings of the COMELEC<i> en banc</i>. The period is 30 days from notice of the decision or ruling (instead of the 60 days that Rule 65 provides), with the intervening period used for the filing of any motion for reconsideration deductible from the originally-granted 30 days (instead of the fresh period of 60 days that Rule 65 provides).<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </blockquote>Clearly, Rule 64 and Rule 65 are distinct and separate provisions. The most notable difference lies in the prescribed period for filing petitions for <i>certiorari</i>. Under Rule 64, a petition must be filed within 30 days from notice of the judgment or final order of the COMELEC. This period is interrupted only by the filing of a motion for reconsideration, and upon its denial, the petitioner may file the petition within the remaining balance of the original 30-day period, which must not be less than five days. In contrast, Rule 65 allows a 60-day period for filing, and under the "fresh period rule," the entire 60 days commences from notice of the denial of the motion for reconsideration. This Court, in<i> Pates</i>, made it clear that this fresh period rule does not apply to petitions under Rule 64, reinforcing the strict and limited timeline for assailing decisions of constitutional commissions such as the COMELEC.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Similarly, in<i> Mayor Villanueva v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> this Court underscored that "the fresh-period rule does not apply to petitions for <i>certiorari</i> under Rule 64 of the Rules of Court."<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> In<i> Villanueva</i>, this Court clarified:<br><blockquote>The period cannot be reckoned from the date of notice of the second assailed resolution as this is merely a denial of the preliminary recourse (identified in Rule 64, Section 3 as the "motion for new trial or reconsideration") from the initial ruling, which is the "decision, order, or ruling" contemplated by the Constitution. This is precisely the reason why Rule 64, Section 3 suspends the running of the thirty-day period upon the filing of such preliminary recourse, and restarts the period once the aggrieved party is notified of the action thereon.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </blockquote>Indeed, in<i> Mayor Villanueva</i>, this Court explained that the second assailed resolution, which denies the motion for reconsideration, is not the operative decision contemplated by the Constitution. Instead, it is only a denial of a preliminary recourse. Consequently, the 30-day period resumes from the date of notice of the denial, and the petitioner may only use the remaining balance of the original period, which must not be less than five days. This procedural design reflects the constitutional intent to resolve COMELEC cases swiftly, preserving the integrity and finality of electoral processes.<br><br>Here, the chronology of material dates shows:<ol><li>On April 30, 2025<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> â COMELEC Division issued its Resolution;<br><br></li><li>On April 30, 2025<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> â petitioner, through counsel, received via email a copy of COMELEC Division's Resolution;<br><br></li><li>On May 5, 2025<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> â petitioner filed a Motion for Reconsideration;<br><br></li><li>On May 9, 2025<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> â COMELEC<i> <i>En Banc</i></i> issued its assailed Resolution, which denied petitioner's Motion for Reconsideration;<br><br></li><li>On May 9, 2025<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> â petitioner, through counsel, received a copy of the COMELEC<i> <i>En Banc</i></i>'s Resolution via electronic mail from the Office of the Clerk of COMELEC;<br><br></li><li>On June 9, 2025<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> â petitioner filed the present Petition for <i>Certiorari</i>.</li></ol>In this case, the computation of the period to file a petition for<i> certiorari </i>under Rule 64, in relation to Rule 65, of the Rules of Court begins on April 30, 2025, when the petitioner received COMELEC Division's Resolution. Rule 64 provides a strict 30-day period to file such a petition, subject to interruption if a motion for reconsideration is timely filed. The petitioner filed a Motion for Reconsideration on May 5, 2025, which interrupted the running of the 30-day period. By that time, five days had already elapsedâfrom May 1 to May 5âleaving the petitioner with 25 days remaining.<br><br>On May 9, 2025, COMELEC<i> <i>En Banc</i></i> issued its Resolution which denied petitioner's Motion for Reconsideration, and the petitioner received notice of the denial on the same day. Following the rule laid down in<i> Pates </i>and<i> Villanueva</i>, the remaining 25-day period resumed from the date of receipt of the denial, which was May 9, 2025. Counting 25 calendar days from May 9 leads to<i> June 3, 2025</i> as the<i> last day</i> to file the petition for<i> certiorari</i>.<br><br>Here, the petitioner filed the present Petition on<i> June 9, 2025</i>âsix days beyond the reglementary 30-day period. This delay rendered the Petition fatally defective, which merits its outright dismissal.<br><br>Notably, a decision becomes final and executory by operation of law, which means that it automatically takes effect once the reglementary period to file an appeal or the appropriate remedy lapses, unless such legal recourse is timely filed in accordance with the rules.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> It is a well-established rule that once a decision becomes final, it is deemed immutable and unalterable. This means it can no longer be modified in any way, even to correct factual or legal errors, regardless of whether the change is sought by the court that issued it or even by this Court. Although exceptions to this rule exist, petitioner has failed to show that the present case falls under any of those recognized exceptions.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The petitioner failed to show that the COMELEC committed grave abuse of discretion amounting to lack or excess of jurisdiction in issuing its assailed Resolution</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>At this juncture, this Court takes judicial notice of the fact that petitioner did not win in the 2025 NLE.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Even so, to dispel any reservations, this Court shall resolve the substantive issue raised in the present Petition.<br><br>In a petition for<i> certiorari</i> filed under Rule 64, in relation to Rule 65 of the Rules of Court, the main issue is whether the respondent tribunal acted with grave abuse of discretion amounting to lack or excess of jurisdiction in issuing the challenged resolution.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Jurisprudence explains the term "grave abuse of discretion" in this wise:<br><blockquote>The term "grave abuse of discretion" is defined as a capricious and whimsical exercise of judgment so patent and gross as to amount to an evasion of a positive duty or a virtual refusal to perform a duty enjoined by law, as where the power is exercised in an arbitrary and despotic manner because of passion or hostility. Grave abuse of discretion arises when a court or tribunal violates the Constitution, the law or existing jurisprudence. And as a matter of policy, this Court will not interfere with the resolutions of the COMELEC unless it is shown that it had committed grave abuse of discretion. Thus, in the absence of grave abuse of discretion, a Rule 64 petition will not prosper.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (Citations omitted) </blockquote>In Our jurisdiction, grave abuse of discretion refers to a capricious, arbitrary, or whimsical exercise of judgment that equates to an evasion of a legal duty, or a refusal to perform one. This standard is invoked when a court or tribunal violates the Constitution, statutory law, or established jurisprudence. A petition for<i> certiorari</i> under Rule 64, in relation to Rule 65, in cases involving constitutional commissions like the COMELEC, serves as the remedy to correct such abuse.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Conversely, grave abuse of discretion is not present when the court or tribunal's decision is supported by a legal basis and substantial evidence, and when it acts within its jurisdiction.<i> Certiorari</i> is not a remedy for mere errors of judgment. As a matter of policy, this Court exercises restraint in reviewing COMELEC decisions, intervening only when there is a clear showing of grave abuse of discretion. Thus, if the COMELEC's resolution has factual and legal basis, a Rule 64 petition will not prosper.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>In this case, the COMELEC found that petitioner committed vote-buying, an election offense, under Section 261(a)(1) of Batas Pambansa Blg. 881, or the OEC. The said provision states:<br><blockquote>Sec. 261. Prohibited Acts. â The following shall be guilty of an election offense:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Vote-buying and vote-selling. â (1) Any person who gives, offers or promises money or anything of value, gives or promises any office or employment, franchise or grant, public or private, or makes or offers to make an expenditure, directly or indirectly, or cause an expenditure to be made to any person, association, corporation, entity, or community in order to induce anyone or the public in general to vote for or against any candidate or withhold his vote in the election, or to vote for or against any aspirant for the nomination or choice of a candidate in a convention or similar selection process of a political party.</div></td> </tr> </tbody></table></blockquote></blockquote>In<i> Rodriguez v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> this Court explained that the following must be established to prove vote-buying:<br><blockquote>The offense of vote-buying is defined in Section 261(a)(1). The offender commits one of these acts: (1) gives, offers or promises money or anything of value; (2) gives or promises any office or employment, franchise or grant, public or private; (3) makes or offers to make an expenditure, directly or indirectly; and (4) cause an expenditure to be made to any person, association, corporation, entity, or community. It is imperative for the prosecution of the offenses of vote-buying to show intent: (1) to induce anyone or the public in general to vote for or against any candidate or withhold his vote in the election, or (2) to vote for or against any aspirant for the nomination or choice of a candidate in a convention or similar selection process of a political party.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </blockquote>Guided by these legal principles, vote-buying under Section 261(a)(1) of the OEC is committed when the following elements concur:<br><blockquote><i>First</i>, there must be an act of giving, offering, or promising money, employment, franchise, or any material consideration, whether directly or indirectly;<br><br><i>Second</i>, such act must be committed for the purpose of inducing a person or the public to vote for or against any candidate, or to withhold their vote altogether;<br><br><i>Third</i>, the act must occur within the election period as defined by law;<br><br><i>Fourth</i>, the intent to influence the electoral choice must be evident; and<br><br><i>Lastly</i>, the recipient of the inducement must be a registered voter or any person capable of influencing the vote of others. </blockquote>In the instant case, petitioner maintains that private respondents served exclusively as campaign volunteers. Accordingly, the material consideration extended to them was not intended to influence their electoral choices, but was instead held in trust for campaign expenses and subject to liquidation.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Be that as it may, COMELEC Division reached a contrary conclusion and declared that private respondents were not campaign volunteers of the petitioner.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> This determination was anchored on the following considerations:<br><blockquote>[Petitioner's] own pieces of evidence belie the claim that [private respondents] are his volunteers. First, the invitation to the orientation was extended by Lourdes De Luna-Pasatiempo via a message to a Facebook Group named,<i> Puso at Pagtataya</i>, on 05 April 2025 at 7:14 PM. However, [private respondents] were personally invited by one Ricky Anyayahan. In the case of [private respondents] Norita C. Victor, Jay-Ar C. Victor, and Mark A. PardiÃ±as, the invitation was extended only on 06 April 2025, the day of the event itself. Second, [petitioner's] own key witness declared that the meal given to the [private respondents] were leftover lunch of the volunteers.<br><br>. . . .<br><br>Clearly, [private respondents] are not part of the circle of the volunteers. They were not members of the group chat exclusive to the volunteers, were excluded in the provisioning of meals, and were treated as mere participants.<br><br>The presence of the [private respondents] who are not volunteers shows that the event is not exclusive. We are more convinced that the orientation, or at least a part of it, is intended to secure supporters and votes for [petitioner]. And to secure such support, material considerations were distributed.<br><br>. . . .<br><br>Considering that [private respondents] are not volunteers of [petitioner], the claim that the red t-shirt is a uniform and that the [PHP] 1[,]000.00 bill is a cash advance necessarily fails. Notably, the volunteers were asked to sign a logbook to show receipt of campaign materials such as leaflets, posters, and shirts. However, the distribution of t-shirt to the [private respondents] and the release of cash advance of [PHP] 1,000.00 are undocumented. It is unbelievable for an organization that thrives on donations to fail to account the release of funds by, at the very least, a record to whom the said cash advances were released. This lack of accounting belies [petitioner's] claim that the monies were given with the obligation to liquidate.<br><br>We are convinced that these material considerations were given by [petitioner] through the volunteers purposely to seek [private respondents'] support and votes. The campaign speech of [petitioner] and the candle lighting, acts intended to influence and induce voters, are followed by the distribution of t-shirts and money. [Petitioner's] knowledge and tacit consent of the distribution of the material consideration are very apparent by his presence and active participation before (campaign speech) and after shaking the hands and taking photographs with the [private respondents] the distribution.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </blockquote>In its findings against petitioner, COMELEC determined that private respondents were not campaign volunteers of petitioner based on several indicators: (i) they were not part of the volunteers' exclusive group chat; (ii) they were invited only on the day of the event; and (iii) they were excluded from logistical provisions such as meals. The petitioner's own witness confirmed that the food given to private respondents was merely leftover lunch intended for actual volunteers. These facts led COMELEC to conclude that private respondents were mere participants, not volunteers, and that the event was not exclusive to campaign staff, but aimed at securing electoral support.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Consequently, COMELEC found that the distribution of material considerations, such as red t-shirts and PHP 1,000.00 cash, was neither documented nor subjected to liquidation, contrary to the petitioner's claim that these were campaign-related advances. The absence of records, such as logbook entries or receipts, undermined petitioner's defense and suggested that the funds were given to influence electoral choices. COMELEC emphasized that petitioner's presence and active participation in the event, including delivering a campaign speech and engaging with private respondents during and after the distribution, demonstrated his knowledge and tacit consent. These acts, coupled with the timing and undocumented nature of the distributions, supported the finding that vote-buying occurred, in violation of Section 261(a)(1) of the OEC.<br><br>Evidently, COMELEC laid out a clear factual and legal basis for its conclusion. The absence of grave abuse of discretion is manifest where a tribunal adheres to applicable laws, and anchors its findings on substantial evidence. Given that COMELEC's Resolution was reached through a reasoned evaluation of facts, applicable laws and pertinent jurisprudence, it cannot be said to have acted arbitrarily or capriciously. Consequently, petitioner failed to show that COMELEC committed grave abuse of discretion amounting to lack or excess of jurisdiction in issuing its assailed Resolution.<br><br><b>ACCORDINGLY</b>, the Petition for<i> Certiorari</i> is<b> DISMISSED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, Dimaampao, Marquez, Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 361-365. The May 9, 2025 Resolution in SPA No. 25-052 (DC) was approved by Chairperson George Erwin M. Garcia and Commissioners Aimee P. Ferolino, Rey E. Bulay, Ernesto Ferdinand P. Maceda, Jr., Nelson J. Celis, Maria Norina S. Tangaro-Casingal, and Noli R. Pipo of the <i>En Banc</i>, Commission on Elections, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 230-240. The April 30, 2025 Resolution in SPA No. 25-052 (DC) was approved by Presiding Commissioner Aimee P. Ferolino and Commissioners Ernesto Ferdinand P. Maceda, Jr., and Maria Norina S. Tangaro-Casingal of the First Division, Commission on Elections, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 230.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 230-231.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 374.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 231.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 233.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 238-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 241-285.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 364.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 358.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 358-359.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 360.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 372-380.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 372.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> 609 Phil. 260 (2009) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 265-266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 265.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> 944 Phil. 356 (2023) [Per J. Gaerlan, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 361.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 363.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, p. 230.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 241.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 361.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 358.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Brgy. Chairman Chua v. COMELEC</b>, 838 Phil. 619, 628 (2018) [Per J. Reyes, A., Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 628-629.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 2025 National Election results available at <a href="https://2025electionresults.comelec.gov.ph/">https://2025electionresults.comelec.gov.ph/</a> (last accessed on July 8, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Albania v. COMELEC</b>, 810 Phil. 470, 477 (2017) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 932 Phil. 1143 (2023) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 1156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, pp. 48-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 237.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 237-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

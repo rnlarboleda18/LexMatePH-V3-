@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277419 - FERNANDO "DING" F. DIAZ, PETITIONER, VS. COMMISSION ON ELECTIONS, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70138' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277419, October 28, 2025 ]</H2>
+			<H3>FERNANDO "DING" F. DIAZ, PETITIONER, VS. COMMISSION ON ELECTIONS, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Petition for <i>Certiorari </i>with Extremely Urgent Prayer for the Issuance of a Temporary Restraining Order and/or Writ of Preliminary Injunction<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the November 6, 2024 Omnibus Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Commission on Elections (COMELEC), Second Division, and the November 29, 2024 Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the COMELEC <i>En Banc</i>, which declared petitioner Fernando "Ding" Fabian Diaz (Diaz) a nuisance candidate and consequently cancelled his Certificate of Candidacy (COC).</p><p align="left"> <i>Factual Antecedents</i> </p><p> On October 7, 2024, Diaz filed a COC<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> for the position of senator for the May 12, 2025 National and Local Elections. </p><p> On October 15, 2024, the COMELEC Law Department, <i>motu proprio</i>, lodged a Petition to Declare [Diaz] a Nuisance Candidate<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> pursuant to Section 69 of the Omnibus Election Code (OEC) and Rule 24, Section 4 of the COMELEC Rules of Procedure, as amended by COMELEC Resolution No. 11046.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> The COMELEC Law Department posited that Diaz is a nuisance candidate because he filed his COC to put the election process in mockery or disrepute.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> It stressed that the Senate is a training ground for national leaders, such that senators must have a national outlook of the problems that beset the country. However, there is an absence of even a modicum of indication as to Diaz's ideology, political ideas, or platforms of government necessary for a senator's national constituency.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> The COMELEC Law Department argued that Diaz's behavior during his public appearance for the filing of the COCs at the COMELEC Law Department's Offsite Office in Manila Hotel showed his lack of concrete plans and a clear platform of government and demonstrated the unseriousness of his candidacy. Moreover, Diaz had failed to secure a senatorial seat in the 2022 National and Local Elections, and was also previously declared a nuisance candidate by final judgment for the 2016 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Finally, despite being a candidate for the accredited political party <i>Partido Pilipino Sa Pagbabago</i> (PPP), and was issued a Certificate of Nomination and Acceptance (CONA) by said party,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Diaz, nonetheless, failed to present his or his political party's legitimate political ideology and advocacy.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> In his October 18, 2024 Answer,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Diaz argued that the COMELEC Law Department failed to cite valid grounds when it declared him a nuisance candidate notwithstanding the continuing recognition given by COMELEC itself to PPP as an accredited political party. Moreover, his being PPP's sole senatorial bet enabled PPP to comply with COMELEC's requirement to field a national candidate; to hold otherwise would be to thwart fulfillment of the farmer's undertaking.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> Diaz also claimed that the COMELEC Law Department's presumptions were based only on his responses to the media's questions on a single event and that in any case, his criticism of the government in such interview was not a ground for disqualification, but rather a fundamental right. Finally, considering that the Constitution provides for equal access to opportunity for public office; then the COMELEC Law Department should not discount his bona fide intention to run for office or immediately disqualify federalism advocates and good governance crusaders like him, simply because he is not from among those popular media personalities or coming from economically or politically viable sectors.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> <i>Ruling of the COMELEC Division</i></p><p> In its November 6, 2024 Omnibus Resolution, the COMELEC Second Division consolidated the petition against Diaz with nine other cases filed by the COMELEC Law Department, considering a common question of law. The dispositive portion of the ruling reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the Commission (Second Division) <b>RESOLVED</b>, as it hereby <b>RESOLVES</b> to <b>GRANT</b> the Petitions. The Certificates of Candidacy of <b>CELESTE ILAO AGUILAR, ANTONIO ABRIL PAR, EDUARDO QUIRINO BAUTISTA, MIGUELINO LANIC CATURAN, ISMAEL CATILOC BAJO, HERNANDO BAROGA BRUCE, JOEL ABATONON APOLINARIO, ROBERTO SONTOSIDAD SEMBRANO, FERNANDO FABIAN DIAZ,</b> and <b>OMAR MANAGSA TOMANONG</b> are hereby <b>CANCELLED.</b> </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original) </p> </blockquote> <p> The COMELEC Second Division concurred with the Law Department's assessment that such candidates filed their COCs to put the election process in mockery or disrepute, and that they had no bona fide intention to run for office.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> According to the COMELEC Division, said candidates filed their COCs merely to gain attention or to promote personal agendas without a serious commitment to public service.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The candidates' behavior during the filing of their COCs reflected a lack of serious intent, capability, or suitability for public office. Such absence of a true intention to govern was manifest considering that none of these candidates, including Diaz, had a clearly defined agenda or policy positions, and were lacking a coherent message, concrete plans, or viable solutions. Resultantly, the COMELEC Division ordered the cancellation of all of their COCs.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> On November 8, 2024, Diaz filed his Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> <i>Ruling of the COMELEC En Banc</i> </p><p> In a November 29, 2024 Resolution, the COMELEC <i>En Banc</i> ruled against Diaz's Motion for Reconsideration for lack of merit. The dispositive portion reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the Commission (<i>En Banc</i>) <b>RESOLVED</b>, as it hereby <b>RESOLVES,</b> to <b>DENY</b> this Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original) </p> </blockquote> <p> The COMELEC <i>En Banc</i> found no cogent reason to depart from the assailed Omnibus Resolution because the arguments raised in the Motion were a mere rehash of the positions already raised.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> On December 5, 2024, the Clerk of the Commission issued a Certificate of Finality<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> and an Entry of Judgment<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> for the November 29, 2024 Resolution. </p><p> Aggrieved, Diaz sought recourse from this Court through the present Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> filed on December 17, 2024, charging the COMELEC with grave abuse of discretion for declaring him a nuisance candidate. </p><p> Diaz essentially argues that the assailed rulings have effectively shifted the burden of proof upon him when jurisprudence has established that it is the COMELEC Law Department which should adduce substantial evidence in support of its petition to declare someone a nuisance candidate. There was absolutely no explanation how he supposedly committed such mockery or has enmeshed the electoral process in disrepute by the mere filing of his COC.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> Diaz also disputes his alleged lack of a bona fide intention to run for senator, and lack of national outlook, by referencing his nomination as the official candidate by PPP, a political party accredited by the COMELEC itself. He insists that despite his being declared a nuisance candidate in 2016, he was nonetheless allowed to run for the same position in 2022.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> In a January 28, 2025 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> We required the COMELEC to file a Comment, which it duly complied with through the Office of Solicitor General.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p><p align="center"> <i>Our Ruling</i> </p><p> This petition could have been dismissed outright primarily on the ground of mootness, in particular due to the conclusion of the 2025 National and Local Elections. When a petition ceases to present a justiciable controversy by virtue of supervening events, such that an adjudication of the case or a declaration on the issue would be of no practical value or use, courts generally decline to assume jurisdiction over such case or dismiss it on the ground of mootness because the judgment will not serve any useful purpose or have any practical legal effect, or can no longer be enforced.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> The election and proclamation of the 12 senators-elect who received the highest number of votes,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> has rendered nugatory the reliefs sought by Diaz in his petition, i.e., the reversal of the COMELEC Resolutions that cancelled his COC and consequently, his inclusion in the list of candidates vying for the national position of senator. </p><p> Be that as it may, the rule on mootness admits of exceptions, such that the Court may still render judgment if it finds that there is a grave violation of the Constitution or that the case is capable of repetition yet evading review.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> There are times when although the dispute has disappeared, it nevertheless cries out to be resolved. Justice demands for this Court to act not only for the vindication of an outraged right, though gone, but for the guidance of and as restraint upon the future.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> After all, the Court has the symbolic function of educating the bench and the bar on the extent of protection given by Constitutional guarantees.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> This case is a good example of an exception from the mootness principle. </p><p> We, thus, deem it proper to exercise Our power of judicial review here, as there is reason to believe that the COMELEC will apply the same standards with respect to other aspiring candidates, and that the same issue on nuisance candidates will likely arise in future elections.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> Indeed, the Constitution guarantees equal access to opportunities for public service.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> However, the Court has likewise settled that this does not guarantee a constitutional right to run for or hold public office. Thus, to run for public office is still a mere privilege and is always subject to the limitations imposed by law.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> One of the means to disqualify an aspiring public servant is through a declaration that he or she is a nuisance candidate.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Section 69 of the OEC provides: </p><blockquote> <p> Section 69. <i>Nuisance candidates</i>. â The Commission on Elections may <i>motu proprio</i> or upon a verified petition of an interested party, refuse to give due course to or cancel a certificate of candidacy if it is shown that said certificate has been filed to put the election process in mockery or disrepute or to cause confusion among the voters by the similarity of the names of the registered candidates or by other circumstances or acts which clearly demonstrate that the candidate has no [bona fide] intention to run for the office for which the certificate of candidacy has been filed and thus prevent a faithful determination of the true will of the electorate. </p> </blockquote> <p> In <i>Pamatong v. COMELEC</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the Court explained why nuisance candidates are prohibited from running for public office: </p><blockquote> <p> The State has a compelling interest to ensure that its electoral exercises are rational, objective, and orderly. Towards this end, the State takes into account the practical considerations in conducting elections. Inevitably, the greater the number of candidates, the greater the opportunities for logistical confusion, not to mention the increased allocation of time and resources in preparation for the election. These practical difficulties should, of course, never exempt the State from the conduct of a mandated electoral exercise. At the same time, remedial actions should be available to alleviate these logistical hardships, whenever necessary and proper. Ultimately, a disorderly election is not merely a textbook example of inefficiency, but a rot that erodes faith in our democratic institutions. </p> <p> . . . . </p> <p> The organization of an election with [bona fide] candidates standing is onerous enough. To add into the mix candidates with no serious intentions or capabilities to run a viable campaign would actually impair the electoral process. This is not to mention the candidacies which are palpably ridiculous so as to constitute a one-note joke. The poll body would be bogged by irrelevant minutiae covering every step of the electoral process, most probably posed at the instance of these nuisance candidates. It would be a senseless sacrifice on the part of the State.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p> </blockquote> <p> But while the law clearly provides for the COMELEC's authority to, on its own initiative, declare a nuisance candidate, the same must be exercised in compliance with the demands of due process.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> In <i>Timbol v. COMELEC</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the respondent electoral body was found to have committed grave abuse of discretion when it denied due course to a COC without affording the candidate a fair and reasonable opportunity to explain their side of the controversy, as the same is an essential element of procedural due process.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> Significantly, in addition to the right to an opportunity to be heard, the COMELEC Rules of Procedure, as amended, likewise recognizes that implicit to procedural due process, decisions must clearly and distinctly set forth the facts and law on which it is based: </p><p align="center"> RULE 18 <i><br> Decisions</i> </p><blockquote> <p> SECTION 1. <i>Procedure in Making Decisions</i>. â The conclusions of the Commission in any case submitted to it for decision <i>en banc</i> or in Division shall be reached in consultation before the case is assigned by raffle to a Member for the writing of the opinion of the Commission or the Division and a certification to this effect signed by the [Chairperson] or the Presiding Commissioner, as the case may be, shall be incorporated in the decision. Any Member who took no part, or dissented, or abstained from a decision or resolution must state the reason therefor. <i>Every decision shall express therein clearly and distinctly the facts and the law on which it is based</i>. (Emphasis supplied) </p> </blockquote> <p> In <i>Seares, Jr. v. National Electrification Administration Board</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the Court expounded on the right of a litigant under Article VIII, Section 14 of the Constitution, to be informed of the facts and law on which decisions of courts and administrative tribunals are based: </p><blockquote> <p> In <i>Yao v. Court of Appeals</i>, the Court emphasized that "[t]he parties to a litigation should be informed of how it was decided, with an explanation of the factual and legal reasons that led to the conclusions of the court," [viz.]: </p> <p> [. . . .] </p> <blockquote> <p> Faithful adherence to the requirements of Section 14, Article VIII of the Constitution is indisputably a paramount component of due process and fair play. It is likewise demanded by the due process clause of the Constitution. The parties to a litigation should be informed of how it was decided, with an explanation of the factual and legal reasons that led to the conclusions of the court. The court cannot simply say that judgment is rendered in favor of X and against Y and just leave it at that without any justification whatsoever for its action. The losing party is entitled to know why he[/she] lost, so he[/she] may appeal to the higher court, if permitted, should he[/she] believe that the decision should be reversed. A decision that does not clearly and distinctly state the facts and the law of which it is based leaves the parties in the dark as to how it was reached and is precisely <i>prejudicial</i> to the losing party, who is unable to pinpoint the possible errors of the court for review by a higher tribunal. </p> <p> [. . . .] </p> <p> Also, in <i>Ang Tibay v. Court of Industrial Relations</i>, the Court enumerated the components of administrative due process, among them, "[The tribunal or officer] should, in all controversial questions, render its decision in such a manner that the parties to the proceeding can know the various issues involved, and the reasons for the decision rendered. The performance of this duty is inseparable from the authority conferred upon it."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Citations omitted) </p> </blockquote> </blockquote> <p> In <i>Seares</i>, the Court found that petitioner's right to due process was infringed when the deciding board failed to pinpoint which of the acts allegedly committed by petitioner exactly pertained to the first, second, or third infraction charged. What the board simply did was to make a swift shotgun statement that based on the results of a commissioned audit report, petitioner was held to have committed three infractions, with absolutely no effort at all to discuss each infraction, let alone an attempt to draw a one-on-one correspondence with the supposed evidence or factual findings on record. The Court held that this left petitioner groping in the dark when he appealed his case as he had to second guess which factual findings supposedly corresponded to which infraction. As a result, this unjustly hampered petitioner's ability to fully and intelligently frame and focus his defense and appeal.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> In the present case, a perusal of respondent COMELEC's assailed Omnibus Resolution would show that the same likewise merely contains a haphazard, shotgun, generalized statement that Diaz is among those who may be considered as nuisance candidates supposedly based on "a careful review and scrutiny of the records of each case."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The November 6, 2024 Omnibus Resolution of the COMELEC Second Division is reproduced below: </p><blockquote> <p> After careful review and scrutiny of the records of each case, this Commission (Second Division) is inclined to rule that the Respondents filed their COCs merely to gain attention or to promote personal agendas without a serious commitment to public service. It is obvious that all the Respondents had no clear intent or capability to campaign. The Respondents filed their COCs mainly to draw attention to themselves, promote a general advocacy, or to simply be noticed in the political sphere. </p> <p> The Respondents' behavior during the filing of their COCs reflects a lack of serious intent, capability, or suitability for public office. They tend to make exaggerated or humorous promises that are blatantly unrealistic or irrelevant to the national position they seek. Such actions suggest that they are not genuinely aiming to serve the public. It is also worth emphasizing that none of the Respondents have clearly defined agenda or policy positions. They lack a coherent message, concrete plans, or viable solutions for the issues they would have face if elected. This raises a red flag, indicating an absence of any true intention to govern. </p> <p> Lacking a genuine intent to seriously participate in the elections as candidates, this Commission (Second Division) has no choice but to declare the Respondents as nuisance candidates.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p> </blockquote> <p> As in <i>Seares</i>, the above Division ruling is bereft of any attempt to discuss the facts vis-Ã -vis the evidence on record and was sorely lacking any effort to establish a correlation between the factual and legal findings. </p><p> Other than a barrage of doctrines on the definition of nuisance candidates and the purpose for their prohibition, as well as a sweeping statement of how the decision was supposedly based on scrutiny of the records, the assailed ruling only makes all-encompassing conclusions that Diaz is among those who were merely seeking attention, but did not have a bona fide intention to run for elected office. There was no explanation, let alone any specific citation, as to the acts or omissions Diaz was supposedly guilty of committing, which has led the electoral body to inescapably determine that he merely filed his COC to make a mockery of the election process or cause its disrepute. </p><p> Worse, Diaz was merely bundled with all other respondent candidates. While there is no legal obstacle to the consolidation of cases for efficiency of resolution, there was, nonetheless, disservice and therefore prejudice here, where all named candidates were lumped into one group, all supposedly lacking any serious intent, capability, or suitability for public office, but without any elaboration as to the precise circumstances or behavior that became indicative of such disqualification. </p><p> That Diaz was left in the dark and prevented from making a more focused or strategic appeal is shown by his reiteration of the point-by-point defenses he offered in his Answer to the COMELEC Law Department's Petition.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> He has repeatedly raised in his Motion for Reconsideration to the COMELEC <i>En Banc</i> and in his Petition before this Court, his membership in an accredited political party, his history as a candidate in previous national elections, and his appeal against being prejudged on the basis of a supposed sole media interview, as grounds to dispute the charge of being a nuisance.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Notably, these were disregarded and left not addressed by the Division ruling. Neither can Diaz find solace in the COMELEC <i>En Banc</i>'s November 29, 2024 Resolution, considering that the same summarily dismissed the appeal as being a mere rehash of the arguments raised, as supposedly already having been "incisively examined by the Commission (Second Division)."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> Considering the utter failure to observe due process in accordance with the form and substance mandated by the Constitution, particularly, for Diaz to be informed of how the case was decided, and the factual and legal bases for the same, the decision is resultantly void and deemed legally inexistent.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p><p> The lack of evidentiary underpinnings in the COMELEC's assailed rulings is bolstered by Diaz's assertion that the burden of proof was unduly shifted upon him to establish that he was <i>not</i> a nuisance candidate. </p><p> In <i>Marquez v. COMELEC</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> the Court, however, has already settled that it is the COMELEC Law Department which should adduce evidence in support of its petition to declare a respondent a nuisance candidate, not the other way around. The Court elaborated, thus: </p><blockquote> <p> In administrative cases, such as election cases, the burden of proof falls on the complainant. When the complainant fails to show in a satisfactory manner the facts upon which he[/she] bases his[/her] claims, the respondent is under no obligation to prove his[/her] exception or defense. To repeat, the burden is upon the COMELEC to prove, by substantial evidence, that the candidacy of Marquez falls within any of the [three] grounds provided in Section 69 of the Omnibus Election Code. </p> <p> To be sure, allegation without more, is not evidence.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Citations omitted) </p> </blockquote> <p> A perusal of the COMELEC Law Department's Petition would show that its allegations were not only unsubstantiated, but were also gross misapprehensions. </p><p> First, the COMELEC Law Department's claim that Diaz had no outlook, ideology, political ideas, or platform of government that was necessary for the national constituency of senators was solely anchored on Diaz's behavior during a singular media interview.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Plainly, the same cannot be regarded as credible since the hyperlink to the supposed recorded livestream is no longer existing on YouTube, as of writing, and therefore cannot be ascertained. </p><p> Even assuming that the reproduction of Diaz's interview in the COMELEC's Petition is verifiable as an accurate representation of the former's message, a closer reading of the same still belies the COMELEC Law Department's assertion that Diaz did not have a platform of government which would demonstrate the seriousness of his candidacy. The portion of Diaz's supposed message is reproduced below: </p><blockquote> <p> <i>[A]lam po ninyo ang akin pong exposure, naging buhay na saksi po ako sa pag baba ng antas ng pamumuhay ng mga Filipino, sa pag daan po ng maraming taon, pag daan po ng ilang mga pangulo at mga administrasyon, [nasaksihan] ko po kung pano ang [F]ilipinas at mga Filipino mula sa isang mas mataas na antas ng pag galang na binibigay ng ibang bansa, ng mga [mamamayan] ng ibang bansa sa ngayon po, hindi na po iyon ang degree of respectability na inuukol nila sa ating mga kababayan. </i></p> <p> <em>Napakarami po ang suliranin na kinakaharap po natin sa kasalukuyan, parang napakahirap na pong bigyan ng pagpapahalaga dahil lahat po ay mahalaga, hindi na po natin kayang prioritize. </em><b><i>Pero para sa akin ang higit po na dapat po nating harapin ay ang atin pong mga namumuno sa ating bayan, ang mga namumuno sa atin na pinababayaan po ang kanilang tungkulin at responsibilidad na manungkulan ng tapat sa karaniwang mamamayan</i></b>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Emphasis supplied) </p> </blockquote> <p> Unfortunately, the COMELEC Law Department narrowed in and focused on Diaz's declarationâthat there were many problems, but would be difficult to prioritize only oneâas being indicative of his apparent lack of concrete plans for the nation. However, such assessment completely puts the message out of context, especially since the second part of Diaz's message may be alternatively understood as referring to themes of anti-corruption and good governance. This concretely disputes the COMELEC Law Department's assertion that there was "[an] absence of even a modicum of indication as to [Diaz's] propensity to serve the public."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> </p><p> Second, although the COMELEC Law Department itself acknowledged that Diaz was running for senator under the PPP, it then asserted that the same does not automatically establish the seriousness of his candidacy, "especially so that he failed to present his own legitimate political ideology and advocacy, or that of his political party."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> It even attached the October 7, 2024 CONA<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> designating Diaz as PPP's candidate for senator and the former accepting the same, in support of such claim. </p><p> The COMELEC Law Department is mistaken. In <i>Marquez</i>, the Court determined that non-membership alone in a political party is insufficient to declare respondent as a nuisance candidate. Where bona fide intent is already apparent when a candidate ably demonstrates that he or she is serious in running for office, the Court there found that there were other circumstances to show the seriousness of one's candidacy.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> However, the Court's pronouncement in <i>Marquez</i> can hardly imply the converse interpretation that membership in a registered or accredited political party is still not demonstrative of the candidate's ideology or platform.</p><p> In <i>Sinaca v. Mula</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> the Court had to rule upon the validity of a substitution involving an originally independent candidate who then became the nominee of a political party. It noted the fact that therein petitioner was the nominee of the subject political party, as evidenced by a CONA and that this presupposed that he was a bona fide member of said party. The Court then had occasion to discuss the significance of a certificate of candidacy declaring such affiliation in a political party, viz.: </p><blockquote> <p> A certificate of candidacy is in the nature of a formal manifestation to the whole world of the candidate's political creed or lack of political creed. It is a statement of a person seeking to run for a public office certifying that he[/she] announces his[/her] candidacy for the office mentioned and that he[/she] is eligible for the office, the name of the political party to which he[/she] belongs, if he[/she] belongs to any, and his[/her] post-office address for all election purposes being as well stated. </p> <p> The certificate of candidacy of EMMANUEL permitted the placing of his name before the electorate. It constituted an authorized badge, which the voter could scrutinize before casting his[/her] ballot. Thus, with the declaration of EMMANUEL in his certificate of candidacy that he is affiliated with the LAKAS party, he was effectively voted by the electorate not as an independent candidate, but as a member of the LAKAS party. <i>His allegation in the certificate of candidacy as to political party to which he belongs is sufficient to make the electorate conscious of the platform of the said political party.</i> </p> <p> <i>As the official candidate of an organized political party, he is bound by the party's rule. He owes loyalty to the party, its tenet and its policies, its platforms and programs of government. To the electorate he represents the party, its principles, ideals and objectives.</i><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> In <i>Uy, Jr. v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> the Court also found grave error in the COMELEC's declaration of therein respondent as a nuisance candidate on the ground of lack of political experience. The Court elaborated on the implications of respondent's membership in a political party, viz.: </p><blockquote> <p> Foremost, Frederico's membership in NUP is <i>not trivial and weighs heavily against a finding of nuisance candidacy</i>. The law defines a political party as "<i>an organized group of persons pursuing the same ideology, political ideas or platforms of government</i>." Here, NUP's<i> registration as a political party means it has met all the criteria under the law</i>. The [COMELEC] even verified NUP's government programs and extent of constituency. [<i>Corollary</i>,] <i>the nomination of Frederico and his acceptance as NUP's official candidate meant that he embodies the party's ideals and principles which he is obliged to carry out and represent to the electorates.</i> Indeed, Frederico enjoyed NUP's full logistical, financial, and organizational support in his candidacy. Frederico's lack of political experience also does not undermine his seriousness in running for public office. Absent contrary evidence, Frederico's candidacy can hardly be considered a sham since bad faith is a factual issue that is never presumed. In any case, the Court had ruled that the candidate's [bona fide] intention to run for public office is neither subject to any property qualifications nor dependent upon membership in a political party, popularity, or degree of success in the elections.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> In this case, the COMELEC Law Department does not question the due execution of Diaz's COC and CONA, since they even attached the same to their Petition. Diaz's COC clearly declares that he is the official nominee of PPP for senator and the same is accompanied by a CONA.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Thus, Diaz is presumed to possess, embody, and share the ideology, platform, or programs of government of the accredited political party he represents, consistent with what he has stated in his Answer that it is for the pursuit of "good governance, and the eventual shift to the Federal structure of government. . . [as well as] matters which constitute the [six] dimensions of national security."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p><p> Thus, it was never Diaz's burden, as there was no legal requirement, to establish his <i>own</i> ideology or that of his political party, in order to prove that he was <i>not</i> a nuisance. If at all, it was incumbent upon the COMELEC Law Department to demonstrate with sufficient evidence how and why he apparently did not possess such qualification of bona fide intent to run for office. </p><p> Accordingly, this Court "should not allow the COMELEC to perfunctorily invoke the evil caused by nuisance candidates, without adequate proof to support a conclusion that a candidate is a nuisance in the first place."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Considering the foregoing circumstances, the Court finds that the COMELEC exercised its judgment in an arbitrary, capricious, or whimsical manner when it adjudged Diaz as a nuisance candidate based on unsupported grounds and flimsy evidence. </p><p> At this juncture, it must be emphasized that the Court has acknowledged the COMELEC's legitimate objective in weeding out candidates who have not evinced a bona fide intention to run for office from the electoral process. However, the Court has similarly reminded that any measure designed to accomplish said objective should not be arbitrary and oppressive, and should not contravene the Republican system ordained in our Constitution.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> It bears reiterating that while the COMELEC cannot be faulted for zealously scrutinizing the qualifications of candidates for elective posts, it is enjoined to be more circumspect in the pursuit of its mandate.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></p><p> <b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> is <b>PARTLY GRANTED</b>. The November 6, 2024 Omnibus Resolution of the COMELEC Second Division in SPA No. 24-079 (DC) (MP) and the November 29, 2024 Resolution of the COMELEC <i>En Banc</i> are <b>NULLIFIED</b> for being issued with grave abuse of discretion. </p><p> The prayers of Fernando "Ding" F. Diaz for the reversal of the cancellation of his Certificate of Candidacy and the inclusion of his name in all the official ballots as a candidate for Senator for the May 12, 2025 National and Local Elections, are <b>DECLARED MOOT</b>. His prayer for a Temporary Restraining Order is likewise <b>DENIED.</b> </p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Lazaro-Javier, Inting, Gaerlan, Dimaampao, Marquez</i>, and <i>Singh, JJ</i>., concur. <i><br> Zalameda,<sup style="COLOR: RGB(255, 0, 0);">*</sup> Rosario,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J. Lopez</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Kho, Jr.,<sup style="COLOR: RGB(255, 0, 0);">*</sup> JJ</i>., on official business. <i><br> Villanueva,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on official leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-23. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 24-32. The November 6, 2024 Omnibus Resolution in SPA Nos. 24-067, 24-068, 24-069, 24-079, and 24-080 (DC) (MP) was resolved by Presiding Commissioner Marlon S. Casquejo, and Commissioners Rey E. Bulay and Nelson J. Celis of the Second Division, Commission on Elections, Intramuros, City of Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 35-40. The November 29, 2024 Resolution in SPA No. 24-079 (DC) (MP) was decided by Chairman George Erwin M. Garcia and Commissioners Socorro B. Inting, Marlon S. Casquejo, Aimee P. Ferolino, Rey E. Bulay, Ernesto Ferdinand P. Maceda, Jr., and Nelson J. Celis of the Commission on Elections <i>En Banc</i>, Intramuros, City of Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> COMELEC <i>rollo</i>, p. 13.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 1-12.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 3. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 6. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 7. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 7-8.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 14.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 8-9.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 18-21.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 18-19.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 19-20.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 30-31. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 41-46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> COMELEC <i>rollo</i>, pp. 74-75. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 76. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, pp. 1-23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 9-11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 11-14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 60. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 63-87. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Marquez v. Commission on Elections</b>, 861 Phil. 667, 677 (2019) [Per J. Jardeleza, <i>En Banc</i>], <i>citing</i> <b>Huibonhoa v. Guisande, G.R. No. 197474</b>, January 10, 2019 [Notice, First Division]. <i>See</i> <b>International Service for the Acquisition of Agri-Biotech Applications, Inc. v. Greenpeace Southeast Asia (Philippines)</b>, 791 Phil. 243, 259 (2016) [Per J. Perlas-Bernabe, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Live Updates: Proclamation of 2025 senatorial race winners</i>, INQUIRER.NET, May 17, 2025, available at <a href="https://www.inquirer.net/444227/live-updates-proclamation-of-2025-senatorial-race-winners/">https://www.inquirer.net/444227/live-updates-proclamation-of-2025-senatorial-race-winners/</a> (last accessed on September 29, 2025). </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Marquez v. Commission on Elections</b>, 924 Phil. 179, 188 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>], <i>citing</i> <b>International Service for the Acquisition of Agri-Biotech Applications, Inc. v. Greenpeace Southeast Asia (Philippines)</b>, 791 Phil. 243, 259 (2016) [Per J. Perlas-Bernabe, <i>En Banc</i>], <i>further citing</i> <b>Belgica v. Ochoa, Jr.</b>, 721 Phil. 416, 522 (2013) [Per J. Perlas-Bernabe, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Javier v. Commission on Elections</b>, 228 Phil. 193, 211 (1986) [Per J. Cruz, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Salonga v. PaÃ±o</b>, 219 Phil. 402, 432 (1985) [Per J. Gutierrez, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Marquez v. Commission on Elections</b>, 924 Phil. 179, 189 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>]; <b>Marquez v. Commission on Elections</b>, 861 Phil. 667, 683 (2019) [Per J. Jardeleza, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> CONST., art. II, sec. 26.</p><blockquote><p> SECTION 26. The State shall guarantee equal access to opportunities for public service, and prohibit political dynasties as may be defined by law. </p></blockquote><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Marquez v. Commission on Elections</b>, 861 Phil. 667, 686 (2019) [Per J. Jardeleza, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Teves v. Commission on Elections</b>, 936 Phil. 205, 220 (2023) [Per J. Lopez, J., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 470 Phil. 711 (2004) [Per J. Tinga, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 719-721. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Teves v. Commission on Elections</b>, 936 Phil. 205, 220 (2023) [Per J. Lopez, J., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 754 Phil. 578 (2015) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 588. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 916 Phil. 91 (2021) [Per J. Lazaro-Javier, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 111-112. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 112. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, p. 30. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 30-31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> COMELEC <i>rollo</i>, pp. 18-19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, pp. 11-15, 18, 41-44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Seares, Jr. v. National Electrification Administration Board</b>, 916 Phil. 91, 113 (2021) [Per J. Lazaro-Javier, First Division], <i>citing</i> <b>Republic v. Legaspi, Sr.</b>, 686 Phil. 100, 116 (2012) [Per J. Perez, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 924 Phil. 179 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 192-193. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> COMELEC <i>rollo</i>, pp. 7-8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 7. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 9. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Marquez v. Commission on Elections</b>, 924 Phil. 179, 199 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 373 Phil. 896 (1999) [Per C.J. Davide, Jr., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 908-909. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 945 Phil. 446 (2023) [Per J. Lopez, M., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 475. </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> COMELEC <i>rollo</i>, pp. 13-14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Uy, Jr. v. Commission on Elections</b>, 945 Phil. 446, 477 (2023) [Per. J. Lopez, M., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Marquez v. Commission on Elections</b>, 861 Phil. 667, 694 (2019) [Per J. Jardeleza, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Marquez v. Commission on Elections</b>, 924 Phil. 179, 199 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

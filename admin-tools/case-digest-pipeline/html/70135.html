@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 269743 - TERESITA CALLIZA BARBA, PETITIONER, VS. LOCAL CIVIL REGISTRARS OF MANILA AND OF CEBU CITY, THE NATIONAL STATISTICS OFFICE [NOW THE PHILIPPINE STATISTICS AUTHORITY], AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70135' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 269743, August 18, 2025 ]</H2>
+			<H3>TERESITA CALLIZA BARBA, PETITIONER, VS. LOCAL CIVIL REGISTRARS OF MANILA AND OF CEBU CITY, THE NATIONAL STATISTICS OFFICE [NOW THE PHILIPPINE STATISTICS AUTHORITY], AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">A person who is legitimated by the subsequent marriage of their parents, when those parents did not have any impediment to marry at the time of their conception, may use their father's surname.<br><br>This Court resolves a Petition for Review on Certiorari<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, filed by Teresita Calliza Barba (Teresita). The Petition assails the Court of Appeals' Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> which reversed and set aside the Regional Trial Court's Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> ordering: (1) the changing of the names of Vicente Calliza (Vicente) to Romeo Calliza Barba, and Rito Domagtoy Calliza (Rito) to Remegio Calliza Barba; (2) the entry of Apolinario Barba (Apolinario) as their father; and (3) the entry of July 21, 1961 as their parents' date of marriage in their respective birth records.<br><br>Teresita is Vicente and Rito's mother. Vicente was born on February 14, 1957 and baptized on February 14, 1958, while Rito was born on May 26, 1960 and baptized on April 26, 1961.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Thereafter, on July 21, 1961, Teresita and Apolinario got married.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> It appeared from that point forward that Vicente began using the name "Romeo Calliza Barba" and Rito used the name "Remegio Calliza Barba" in their school and employment records.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The four of them lived together until Apolinario's death in 1986.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On February 25, 2015, Teresita filed a petition with the Regional Trial Court seeking to change the names of Vicente and Rito and the correction of their birth records.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Teresita and Vicente testified in support of the petition,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> with no opposition or objection from any other party or person.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On April 25, 2018, the Regional Trial Court granted the petition. The dispositive portion of the Decision stated:<br><blockquote>WHEREFORE, finding the petition to be meritorious and the allegations therein duly substantiated, the same is hereby GRANTED. The Local Civil Registrar is hereby directed to change the name of Vicente Calliza to Romeo Calliza Barba and to enter the name of father Apolinario Barba and the date of marriage of parents July 21, 1961 in their records of birth. Likewise, the Local Civil Registrar of Cebu City is directed to change the name of Rito [Domagtoy] Calliza to Remegio Calliza Barba and to enter the name of father Apolinario Barba and the date of marriage of parents, July 21, 1961 to his birth record.<br><br>Furnish a copy of this Decision to the Office of the Local Civil Registrar of Manila, Office of the Local Civil Registrar of Cebu City, the petitioners, the petitioner's counsel and the Office of the Philippine Statistics General, Philippine Statistics Authority, Malate, Manila.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </blockquote>On appeal, the Court of Appeals reversed the trial court's decision and dismissed the petition. The dispositive portion of the October 27, 2022 Decision stated:<br><blockquote>WHEREFORE, premises considered, the appeal is GRANTED. The Decision dated April 25, 2018 of the Regional Trial Court, Branch 18, Cebu City, in SP. Proc. No. 20472-CEB, is REVERSED and SET ASIDE. Judgment is rendered DISMISSING the petition.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </blockquote>At the outset, the Court of Appeals pointed to many defects on the face of the petition.<br><br>First, the petition had not been filed by the proper parties, namely, Vicente and Rito, who were the ones whose birth records sought correction. Citing<i> Republic v. Marcos</i>,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> the appellate court noted that this was contrary to the requirement in Rule 103, Sections 1 and 2 of the Rules of Courtâthat the petition should be signed and verified by the person desiring to change their name.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Second, Rito was not a resident of Cebu City, where the petition was filed before the trial court, despite the requirement in Rule 103, Section 1 that such a petition must be filed in the province where the petitioner is residing for at least three years prior to filing, or the City of Manila.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Third, the order published in compliance with Rule 103, Section 3 failed to state the purpose or cause of the filing of the petition.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The Court of Appeals agreed with Teresita that the issue in this case is Vicente and Rito's alleged legitimation, not their illegitimacy.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> However, the fact of legitimation was not sufficiently proved under the applicable law.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The appellate court noted that, during the year Teresita and Apolinario married, the prevailing law was the Civil Code, which stated that only recognized natural children and those declared natural children by final judgment may be legitimated.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Moreover, the Court of Appeals found that there was no proof that Apolinario acknowledged Vicente and Rito, or recognized that they were his children, while he was still alive<sup style="COLOR: RGB(255, 0, 0);">[21]</sup>âthe baptismal certificates were only proof that the baptisms were conducted on those dates, and could not be conclusive proof of filiation.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> No birth record, will, statement before a court of record, or authentic writing by Apolinario were presented to the trial court.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Further, Apolinario and Teresita's marriage also could not prove that Teresita's children were Apolinario's.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>To the Court of Appeals, even the retroactive application of the Family Code to Vicente and Rito's case could not grant them the legitimation they sought, as only "natural children" could be legitimated.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> It then held that Teresita was unable to present competent evidence of Vicente and Rito's filiation in accordance with Article 172 of the Family Code. Moreover, Apolinario's death barred the establishment of their nonmarital filiation.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Teresita's motion for reconsideration was denied by the appellate court on August 3, 2023.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Hence, this Petition for Review was filed.<br><br>Petitioner claims that Vicente and Rito's legitimation were proved by sufficient evidence to satisfy the requirements in the Civil Code. She points to Apolinario's name in their baptismal records and his presence at their baptisms as a "clear and unequivocal acknowledgement of paternity[.]"<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> There was no need for Vicente and Rito to secure a final judgment on their legitimation, as the Family Code applies in their case.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Moreover, Vicente and Rito were entitled to change their first names as they had been habitually and continuously known by those names.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>This Court ordered respondents to comment on the Petition for Review on May 20, 2024,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> which they did on September 25, 2024 through the Office of the Solicitor General.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> In their Comment, respondents argue that the Court of Appeals correctly dismissed the petition. First, because the petition failed to comply with the jurisdictional requirements of Rule 103 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Second, the action had already prescribed since Apolinario, the putative father, had already died.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Finally, the fact of legitimation had not been established as Vicente and Rito's father was unknown.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>The sole issue to be resolved in this case is whether the petition for the change of name of Vicente Calliza and Rito Domagtoy Calliza, and the correction of their birth records to state the name of their father and the date of their parents' marriage, should be granted.<br><br>At the outset, if what petitioner had sought was the change of her children's given names to the ones they had used, then the petition should have been granted outright.<br><br>When a person has continuously and habitually used a name their entire life, and it is not shown that the change of name is for an illegal purpose or to avoid the law, then the petition for their change of name may be granted.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Here, the Regional Trial Court found that Vicente and Rito had used the names "Romeo" and "Remegio" their entire lives,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> and respondents have failed to show that allowing them to change their given names would prejudice the State or any other person.<br><br>However, petitioner not only sought the change of given names of Vicente and Rito, but also the name of the father, and the date of marriage of the mother and father in their birth records.<br><br>Clearly, these other two entries in their birth certificates cannot be changed in a Rule 103 petition. A Rule 103 petition only pertains to changes in names.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> As such, the applicable rule in this case is Rule 108, which governs the cancellation or correction of entries in the civil registry.<br><br>Thus, we find that the Court of Appeals erred in finding that the defects in the petition, as they pertain to procedure under Rule 103, were fatal to petitioner's cause.<br><br>A petitioner is "any person interested in any act, event, order[,] or decree concerning the civil status of persons" contemplated under Rule 108, Section 1 on who may file the petition, unlike Rule 103 which requires that the person changing their name be the petitioner. Here, petitioner also substantially complied with the jurisdictional requirements of an adversarial proceeding under Rule 108, namely, the impleading of indispensable parties as well as the civil registries involved.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> As narrated by the Regional Trial Court:<br><blockquote>Finding the petition to be sufficient in form and substance, the Court issued an Order dated May 20, 2015, setting the instant petition for initial hearing on November 25, 2015, at 8:30 in the morning before this Court and for the said Order to be published in a newspaper of general circulation in the Cities and Province of Cebu, once a week for three (3) consecutive weeks, the last publication to be made at least four (4) months prior to the date set for initial hearing. Copies of said Order were likewise furnished to the petitioner, his counsel, the Local Civil Registrars of Manila and Cebu City and the Honorable Solicitor General, Manila.<br><br>. . . .<br><br>The Court directed the Court Interpreter to announce thrice in open Court if there was any oppositor to the petition. After three (3) public announcements were made with no one interposing any objection, the Court declared having acquired jurisdiction over the instant petition.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </blockquote>As the Court of Appeals noted, there were also no other heirs to Apolinario's estate<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> who would have been prejudiced or adversely affected by the proceedings.<br><br>At the time of their births, Vicente and Rito were nonmarital children. Subsequently, however, their mother and their putative father Apolinario got married. There is no indication that petitioner and Apolinario had any impediment to marry each other at the time of either children's conception.<br><br>Legitimation is a privilege<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> granted to natural children defined in Article 269 of the Civil Code, namely those "[c]hildren born outside wedlock of parents who, at the time of the conception of the former, were not disqualified by any impediment to marry each other[.]" When the parents of the natural children marry each other, the acknowledgment of those children by their parents does not require judicial approval.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Yet, under the Civil Code, the acknowledgment must be in the record of birth, will, or some other public document.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Admittedly, the only extant documents presented were baptismal certificates bearing Apolinario's name as the father, which are not public documents for the purpose of the acknowledgment in the Civil Code.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Nonetheless, Article 266 further provides that even in the absence of a public document, marital filiation may be proved by "continuous possession of status of a legitimate child[.]"<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>There is no doubt that Vicente and Rito continuously possessed the status of being petitioner and Apolinario's marital children. Both used the surname "Barba" during their schooling and employment, even while they were living under the same roof as Apolinario.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> It does not appear that, at any point, Apolinario objected to their use of his surname, or in his lifetime made any representations that the children that petitioner bore him were also not his own. Respondents, through the Office of the Solicitor General, also failed to present any evidence to that effect.<br><br>The present case is in stark contrast with<i> Rodriguez v. Reyes</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> where this Court found that Juan Vilota (Vilota) had not been proved to have acknowledged and legitimated Luciano, as the identity of his father was unknown for years, his mother was not widowed, and Luciano did not bear Vilota's surname.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Here, on the contrary, Vicente and Rito bore Apolinario's surname their whole life, apparently without objection from the man in question, and he had even consented to be named as their father in their baptismal records. As pointed out by petitioner:<br><blockquote>If Apolinario was not the biological father of Vicente and Rito, he would not have consented to have his name listed as their father on their baptismal records, nor would he have publicly stood as their father during the baptism ceremony. The Certificates of Birth and Baptism of Vicente and Rito shows that Romeo (Vicente) and Remigio (Rito) are the "Child[ren]" of "Apolinario Barba" and "Teresita Calleza[.]" For many people, the act of publicly presenting oneself as the children's father in front of the solemnizing officer and witnesses is a clear indication of acknowledging paternity. Apolinario's willingness to be identified as the father of Vicente and Rito during such a significant life event was a clear and unequivocal acknowledgment of paternity. This is not just a private admission but a public declaration made in a formal, ceremonial, and communal context.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Citations omitted) </blockquote>The ruling in<i> Tongoy v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> is instructive:<br><blockquote>It is time that WE [sic], too, take a liberal view in favor of natural children who, because they enjoy the blessings and privileges of an acknowledged natural child and even of a legitimated child, found it rather awkward, if not unnecessary, to institute an action for recognition against their natural parents, who, without their asking, have been showering them with the same love, care and material support as are accorded to legitimate children. The right to participate in their father's inheritance should necessarily follow.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </blockquote>Being the legitimated children of Apolinario and Teresita, Vicente and Rito are entitled to bear the surnames of their father and mother.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Throughout their life, they have done so, perhaps at times even to their own inconvenience. The inclusion of the name of their father, as well as the date of marriage of their parents, in their birth records only reflect self-evident facts as proved in the trial court. The purpose of the petition was to harmonize the civil record with the evident facts of their filiation with their father, and thus, was correctly granted by the Regional Trial Court.<br><br>Nonetheless, there is a final caveat. There is no showing in the records that Rito, an indispensable party to the proceedings, was ever impleaded or that he actually participated. While his school and employment records were presented in court, he did not appear to have testified as to the circumstances on the use of his name during his lifetime. Based on the records before this Court, no document was presented to show his consent or assent to the change of his name; Vicente's testimony that Rito, too, sought a change in name, is at most hearsay. His non-inclusion and non-participation cannot be excused by the fact of the publication of the petition during the proceedings in the trial court, and as such, the change of name granted here cannot be extended to him, without prejudice to him filing the appropriate petition or initiating the appropriate proceedings at a later date.<br><br><b>FOR THESE REASONS,</b> the Petition for Review on Certiorari is <b>PARTIALLY GRANTED</b>. The October 27, 2022 Decision and August 3, 2023 Resolution of the Court of Appeals, Cebu City in CA-G.R. CV No. 06904 are<b> REVERSED</b> and<b> SET ASIDE</b>. The April 25, 2018 Decision of Branch 18, Regional Trial Court, Cebu City in SP Proc. No. 20472-CEB is <b>REINSTATED</b> with<b> MODIFICATION</b> that the change of name of Rito Domagtoy Calliza to Remegio Calliza Barba is<b> DENIED</b>.<br><br><b>SO ORDERED."</b><br><br><i>Lazaro-Javier, J. Lopez, Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 83-115. The October 27, 2022 Decision in CA-G.R. CV No. 06904 was penned by Associate Justice Bautista G. Corpin, Jr. and concurred in by Associate Justices Mercedita G. Dadole-Ygnacio and Eleuterio L. Bathan of the Twentieth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 129-133. The August 3, 2023 Resolution in CA-G.R. CV No. 06904 was penned by Associate Justice Bautista G. Corpin, Jr. and concurred in by Associate Justices Mercedita G. Dadole-Ygnacio and Eleuterio L. Bathan of the Twentieth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 58-61. The April 25, 2018 Decision in SP. PROC No. 20472-CEB was penned by Presiding Judge Gilbert P. Moises of the 7<sup>th</sup> Judicial Region, Branch 18, Regional Trial Court, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 27 and 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> 261 Phil. 319 (1990) [Per J. GriÃ±o-Aquino, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, pp. 91-93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 93-94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 94-96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 96-97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 100-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 106-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 112-113.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 30-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 141.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 150-153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 154-160.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 160-161.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See</i> <b>Alanis III v. Court of Appeals</b>, 890 Phil. 74 (2020) [Per J. Leonen, Third Division]; <b>Alfon v. Republic</b>, 186 Phil. 600 (1980) [Per J. Abad Santos, Second Division]; <b>Republic v. Bolante</b>, 528 Phil. 328 (2006) [Per J. Garcia, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo</i>, pp. 60-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Republic v. Coseteng-Magpayo</b>, 656 Phil. 550, 555 (2011) [Per J. Carpio Morales, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 556-557.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, pp. 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>De Santos v. Hon. Angeles</b>, 321 Phil. 562, 580 (1995) [Per J. Romero, En Banc].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Colorado v. Court of Appeals</b>, 219 Phil. 558, 567 (1985) [Per J. Cuevas, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> CIVIL CODE, art. 265.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Madridejo v. De Leon</b>, 55 Phil. 1 (1930) [Per J. Villa-Real, En Banc].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> CIVIL CODE, art. 266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, p. 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 97 Phil. 659 (1955) [Per J. J.B.L. Reyes, En Banc].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 208 Phil. 95 (1983) [Per J. Makasiar, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> CIVIL CODE, art. 264(1).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

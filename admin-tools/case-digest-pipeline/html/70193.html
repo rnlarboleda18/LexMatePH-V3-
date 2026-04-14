@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277280 - FRANCIS LEO ANTONIO MARCOS, PETITIONER, VS. COMMISSION ON ELECTIONS, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384054d8d135a07c1c6ae8f3d3d88a9d' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384054d8d135a07c1c6ae8f3d3d88a9d' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70193' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277280, September 30, 2025 ]</H2>
+			<H3>FRANCIS LEO ANTONIO MARCOS, PETITIONER, VS. COMMISSION ON ELECTIONS, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for<i> Certiorari</i> with Extremely Urgent Prayer for the Issuance of a Temporary Restraining Order<b> (TRO)</b> and/or <i>Status Quo Ante</i> Order and/or Preliminary Injunction<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><b> (Petition)</b> under Rule 64 in relation to Rule 65 of the Rules of Court filed by Francis Leo Antonio Marcos<b> (Francis)</b>, assailing the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated November 29, 2024 of the Commission on Elections<i> En Banc</i><b> (COMELEC<i> En Banc</i>)</b> in SPA No. 24Â­-001 (DC) (MP). The COMELEC<i> En Banc</i> denied Francis' Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and affirmed the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated November 18, 2024, of the COMELEC Second Division, declaring Francis a nuisance candidate and cancelling his Certificate of Candidacy for the position of Senator in the May 12, 2025 National and Local Elections. Upon this Court's issuance of a TRO preventing COMELEC from declaring Francis a nuisance candidate, a Motion to Intervene with Urgent Prayer to Lift the Temporary Restraining Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> was filed by the movant-intervenor, Maria Imelda "Imee" Romualdez Marcos <b>(Sen. Imee).</b> Francis subsequently withdrew his candidacy, and in a Resolution, dated February 25, 2025, the Court ordered him to show cause why he should not be cited in contempt of court.<br><br><center><b><i>The Facts</i></b></center><br>On October 8, 2024, Francis, through his authorized representative, Atty. Jonie Caroche<b> (Atty. Jonie)</b>, filed his Certificate of Candidacy for the position of Senator in the May 12, 2025 National and Local Elections<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> as an independent candidate,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> indicating that he is a businessman.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Francis previously ran for a Senate seat in the May 9, 2022 National and Local Elections,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> and received a total of 4,477,024 votes.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On October 16, 2024, the COMELEC Law Department<b> (Law Department)</b> filed, on its own initiative, a Petition<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> to declare Francis a nuisance candidate and asked that the COMELEC deny due course to or cancel Francis' Certificate of Candidacy.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Noting Francis' lack of political affiliation and his alleged absence of ideology, political beliefs, or governmental platform,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> the Law Department alleged that Francis' Certificate of Candidacy was filed to put the election process in mockery or disrepute.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Further, the Law Department argued that Francis was not serious in his candidacy<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> because he did not personally file his Certificate of Candidacy at the Law Department Offsite Office at the Manila Hotel,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and instead, opted to have Atty. Jonie submit the Certificate of Candidacy on his behalf.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The Law Department also contended that Francis' surname, which is similar to that of Sen. Imee, could lead to confusion among voters.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Given these reasons, the Law Department asserted that it is the COMELEC's bounden duty to refuse to give due course to and/or cancel Francis' Certificate of Candidacy.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On October 21, 2024, the COMELEC Second Division directed Francis to file a verified Answer<i> cum</i> Memorandum to the Petition.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In his Answer<i> cum</i> Memorandum,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated October 28, 2024, Francis argued that the Law Department's Petition is barred by<i> res judicata</i>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Francis emphasized that, in SPA No. 21-038, the COMELEC Second Division dismissed a substantially similar Petition against his 2021 candidacy.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Francis noted that in a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated December 14, 2021, the COMELEC Second Division has ruled that he is not a nuisance candidate, and thus, eligible to run as senator in the May 9, 2022 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Furthermore, Francis alleged that he has substantial public support, proven track record, and active engagement in Philippine society that demonstrate a clear<i> bona fide</i> intent to run for public office.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> He noted his record of community service and public engagement, including the "<i>Mayaman</i> Challenge," a philanthropic initiative that mobilizes resources and support for underprivileged communities across the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> He also asserted that he has a platform of government focused on education and agriculture, which he has highlighted several times on his social media channels.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> He also cited his placement in COMELEC and Social Weather Stations <b>(SWS</b>) surveys in 2022, along with his social media following, as proof of public support.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Moreover, Francis defended his use of an authorized representative to file his Certificate of Candidacy, arguing that the COMELEC's own rules and regulations explicitly permit such filings.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Therefore, the fact that he filed his Certificate of Candidacy through Atty. Jonie does not demonstrate a lack of seriousness about his candidacy.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Francis also argued that the COMELEC has no legal basis to disqualify a candidate solely due to similarity of surname with another candidate.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Francis also noted his compliance with campaign finance reporting requirements after the 2022 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Ultimately, Francis asserted that the COMELEC failed to demonstrate that he meets the definition of a "nuisance candidate."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In its November 18, 2024 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> the COMELEC Second Division granted the Law Department's Petition and declared Francis a nuisance candidate.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The COMELEC Second Division held that Francis' actions and statements, when taken collectively, demonstrate a lack of<i> bona fide</i> intention to run for the position of senator.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Thus, the COMELEC Second Division concluded that Francis' candidacy cannot be taken seriously.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> The dispositive portion of the Second Division's Resolution states:<br><blockquote><b>WHEREFORE</b>, premises considered, the Petition is <b>GRANTED</b>. Respondent <b>FRANCIS LEO ANTONIO MARCOS</b> is hereby <b>DECLARED</b> a <b>NUISANCE CANDIDATE.</b><br><br>Accordingly, the Certificate of Candidacy filed by <b>FRANCIS LEO ANTONIO MARCOS</b> for the position of Senator in the [May 12, 2025] National and Local Elections ["2025 NLE"] is hereby <b>DENIED DUE COURSE AND CANCELLED. </b><br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original) </blockquote>Francis filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> which the COMELEC<i> En Banc</i> denied on November 29, 2024.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> A copy of the November 29, 2024 Resolution was sent to Francis' counsel, via e-mail, at 4:20 in the afternoon of the same date.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Francis obtained true copies of the said Resolution on December 3, 2024.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>On December 5, 2024, the COMELEC<i> En Banc</i> issued a Certificate of Finality and Entry of Judgment,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> declaring its November 29, 2024 Resolution final and executory.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The pertinent portions of the Certificate of Finality read:<br><blockquote>[. . . .]<br><br><b>WHEREAS,</b> Section 9 of<i> COMELEC Resolution No. 11046 </i>provides that a Resolution or Final Order is deemed final and executory if, in case of a Division ruling, no motion for reconsideration is filed within the reglementary period, or the motion for reconsideration is denied in accordance with the preceding paragraph, or in case of rulings of the Commission<i> En Banc</i>, no restraining order is issued by the Supreme Court within five [] days from receipt of the Resolution or Final Order.<br><br><b>WHEREAS,</b> the records show that there is no restraining order issued by the Supreme Court within five [] days from receipt of the parties of the<i> Resolution</i> that would preclude the aforementioned<i> Resolution</i> of this Commission (<i>En Banc</i>) from being final and executory.<br><br><b>NOW THEREFORE,</b> in view of the foregoing, the<i> Resolution</i> of the Commission (<i>En Banc</i>) promulgated on [November 29, 2024] is hereby declared <b>FINAL</b> and <b>EXECUTORY. </b><br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Emphasis in the original) </blockquote>On December 6, 2024, Francis filed the present Petition,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> where he argues that the COMELEC Second Division and the COMELEC<i> En Banc</i>: (1) gravely abused their discretion amounting to lack or excess of jurisdiction in declaring him a nuisance candidate;<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (2) violated his constitutional right to due process when he was not afforded a hearing to present evidence that he is not a nuisance candidate;<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (3) violated his constitutional right to equal protection when he was singled out based on subjective and unfounded reasons;<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> and (4) erred in disregarding the principle of<i> res judicata</i>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> For these reasons, Francis prays that the November 29, 2024 Resolution of the COMELEC<i> En Banc</i> be declared null and void.<br><br>Francis further prays for the issuance of a<i> Status Quo Ante</i> Order, a TRO, and/or a Writ of Preliminary Injunction to enjoin the COMELEC from excluding his name from the official ballots for the May 12, 2025 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> He argues that it is crucial to issue a TRO and/or Writ of Preliminary Injunction to avert serious and irreparable harm to his constitutional right to run for public office.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> According to Francis, the scales of justice and fairness strongly favor the grant of the requested provisional reliefs.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> He asserts that the inclusion of his name on the ballot will not significantly harm the public or other candidates.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Conversely, the exclusion of his name will lead to the irreversible disenfranchisement of his supporters and the permanent loss of his constitutional right to run for office.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Without the injunctive relief, Francis contends that any action or resolution on the Petition by this Court will be for naught.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>Acting on Francis' Petition, the Court<i> En Banc</i> issued a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> dated January 21, 2025, which, among others, issued a TRO enjoining the COMELEC from implementing the assailed Resolution and from excluding Francis' name from the official ballots for the May 12, 2025 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> The January 21, 2025 Resolution also required the COMELEC to file a comment on Francis' Petition within a non-extendible period of five days from notice of the Court's Resolution.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>On January 22, 2025, Sen. Imee filed a Motion to Intervene.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> The Motion, which was received by this Court on January 23, 2025, asserts that Francis' actual name is Norman Magusin y Antonio.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> To prove this assertion, Sen. Imee attached a copy of the Branch 28, Metropolitan Trial Court of Manila's Judgment,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> convicting "Norman Mangusin y Antonio<i> alias</i> Francis Leo Marcos y Antonio" of Illegal Use of Alias, punishable under Sections 1 and 3 of Commonwealth Act No. 142, as amended by Republic Act No. 6085.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>Sen. Imee argues that by filing his Certificate of Candidacy under the name "Francis Leo Marcos,"<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Francis was trying to cause confusion upon the electorate and was intentionally making a mockery of the election process.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Since the voters may fall for Francis' alleged ploy in falsely using "Marcos" as his family name, and may mistakenly vote for him instead of Sen. Imee, the latter argues that she has sufficient legal interest in the matter and must be allowed to intervene.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Sen. Imee also contends that Francis is not entitled to a TRO and prays that the TRO issued by this Court on January 21, 2025 be lifted.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>On January 23, 2025, the COMELEC, through the Office of the Solicitor General<b> (OSG)</b>, filed a Manifestation in lieu of Comment,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> in compliance with the Court's Resolution, dated January 21, 2025.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> In its Manifestation, the COMELEC noted that on even date, Francis filed a Statement of Withdrawal of his candidacy as Senator for the May 12, 2025 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> With the withdrawal of Francis' candidacy, the COMELEC contends that the Petition is moot and academic.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>On January 24, 2025, Francis' counsel, Atty. Jonie, filed a Manifestation and Urgent Motion,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> asserting that he was neither consulted nor informed about Francis' public declaration of withdrawal.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> He prayed, among others, that he be granted a reasonable period of five working days within which to establish communication with Francis and to secure proper, unequivocal instructions regarding the reported withdrawal.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> He also prayed that the Court maintains the full force and effect of the TRO issued on January 21, 2025, pending the proper resolution of the matter.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>On January 27, 2025, the COMELEC, through the OSG, filed a Supplemental Manifestation to its Manifestation in Lieu of Comment, dated January 23, 2025,<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> informing the Court that pursuant to Rule 60 of COMELEC Resolution No. 11045, the COMELEC<i> En Banc</i>, through Resolution No. 11097-B, dated January 24, 2025, resolved to give due course to Francis' Statement of Withdrawal, and consequently, considered Francis' Certificate of Candidacy in the May 12, 2025 National and Local Elections as withdrawn.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> The COMELEC<i> En Banc</i>, through Resolution No. 11097-B, also directed the COMELEC Law Department to amend the senatorial candidates' database to delete the name of Francis for the position of senator in the May 12, 2025 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> The Printing Committee was also directed to proceed with the printing of official ballots for the 2025 elections based on the amended candidates' database and Certified List of Candidates.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>In a Resolution, dated February 25, 2025, the Court ordered Francis to show cause, within 72 hours from notice, why he should not be cited in contempt of court for his actions that tend to bring the Court's processes into disrepute or disrespect.<br><br>On April 8, 2025, Francis submitted his Compliance,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> where he expressed his "deepest apologies to the Supreme Court for any impression of disrespect or disregard for its authority that [his] withdrawal may have caused just two days after the issuance of the [TRO] preventing the [COMELEC] from declaring [him] a nuisance candidate in the 2025 National Elections."<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> He further stated that "[he] hold[s] the Supreme Court in the highest regard and [is] truly grateful for the Justice's thoughtful consideration of [his] case."<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>Francis stated that his decision to withdraw was motivated by a sincere commitment to the public interest and a desire to avoid unnecessary government expenditure.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> He averred that he felt an overwhelming sense of responsibility to avoid placing a financial burden on the nation upon learning that ballot printing had commenced, and that the inclusion of his name would cause significant delays and costs.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>Further, he asserted that following the Court's issuance of a TRO in his favor, he began receiving threatening phone calls from unknown individuals, warning him to withdraw his candidacy or face serious consequences.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> He claimed that the resulting fear, anxiety, and impaired judgment under extreme duress led to his abrupt withdrawal from the race, a decision made without the benefit of legal counsel.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> He later came to recognize that his actions were premature and did not adhere to the proper procedural framework established by the Supreme Court. In light of these circumstances, he respectfully urges the Court to view his actions as driven by a genuine, though mistaken, desire to serve the country and protect his own life.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup><br><br><center><b><i>The Issues</i></b></center><ol><li>Is the Petition moot and academic?<br><br></li><li>Should Francis be held guilty of indirect contempt?</li></ol><center><b><i>The Ruling of the Court</i></b></center><br><i>The case is moot and academic</i><br><br>To recall, on January 23, 2025, the COMELEC, through the OSG, informed the Court, via Manifestation in lieu of Comment, that Francis has withdrawn his candidacy for the position of Senator in the May 12, 2025 National and Local Elections.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> A copy of Francis' Statement of Withdrawal<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> was attached to the said Manifestation.<br><br>Francis' withdrawal of his candidacy rendered the Petition, which sought to determine whether the COMELEC committed grave abuse of discretion in declaring Francis a nuisance candidate, moot, and academic.<br><br>A case is moot when a supervening event has terminated the legal issue between the parties, such that this Court is left with nothing to resolve.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> The Court, in<i> Department of Trade and Industry v. Toyota Balintawak, Inc. and Toyota Motor Phils. Corp.</i>,<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> explained the concept of mootness as follows:<br><blockquote>[A] case or issue is considered moot and academic when it ceases to present a justiciable controversy by virtue of supervening events, so that an adjudication of the case or a declaration on the issue would be of no practical value or use. In such instance, there is no actual substantial relief which a petitioner would be entitled to, and which would be negated by the dismissal of the petition. Courts generally decline jurisdiction over such case or dismiss it on the ground of mootness.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> (Citations omitted) </blockquote>The rationale underlying the principle of mootness is expounded by the Court in<i> Agbayani, Jr. v. Director or Whoever is in Charge of the Manila City Jail</i>:<sup style="COLOR: RGB(255, 0, 0);">[94]</sup><br><blockquote>The principle on mootness traces its roots from the express constitutional decree that judicial power â with which the Supreme Court (and all other courts that may be established by law) is vested â includes the duty to<i> "settle actual controversies"</i> "involving rights which are legally demandable and enforceable." While judicial power has been expanded under the present Constitution by including the power to "determine whether or not there has been a grave abuse of discretion" on the part of any branch or instrumentality of the Government, it remains that judicial power must be based on an<i> actual case or controversy</i> at whose core is the existence of a right which is legally demandable and enforceable. Without this core element of<i> actual case or controversy</i>, courts have no jurisdiction to act.<br><br>Case law defines<i> actual case or controversy</i> as one "that is appropriate or ripe for determination,<b> not conjectural or anticipatory</b>, lest the decision of the court would amount to an advisory opinion. The power does not extend to hypothetical questions since any attempt at abstraction could only lead to dialectics and barren legal question and to sterile conclusions unrelated to actualities.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> (Citations omitted, emphasis in the original) </blockquote>Nonetheless, when a case or an issue becomes moot, jurisprudence provides that the Court will still rule on the case when any of the following circumstances is present:<i> first</i>, there is a grave violation of the Constitution; <i>second</i>, the exceptional character of the situation and the paramount public interest are involved;<i> third</i>, when the constitutional issue raised requires formulation of controlling principles to guide the bench, the bar, and the public; and<i> fourth</i>, the case is capable of repetition yet evading review.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> However, the application of the exceptions is subject to a strict test.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> As explained by the Court in<i> Agbayani, Jr. v. Director or Whoever is in Charge of the Manila City Jail</i>:<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><blockquote>Because the existence of an<i> actual case or controversy</i> is an indispensable requirement in the exercise of judicial power, courts, including the Court, should be very cautious in conducting a review of an otherwise moot petition. Indeed,<b> "where an issue is moot on its face, the application of any of the exceptions should be subjected to a strict test because it is a deviation from the general rule.</b> The Court should carefully<b> test the exceptions to be applied from the perspectives both of <i>legality and practical effects</i></b> and show by these standards that<b> the issue absolutely requires to be resolved.</b> Consequently,<i> any exception that the Court has recognized to the rule on mootness must be justified only by an implied recognition that a continuing controversy exists</i>.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> (Citations omitted, emphasis in the original) </blockquote>None of the exceptions are present here. With the withdrawal of Francis' candidacy, there is no longer a continuing controversy, and any declaration on the subject would be of no practical value. To resolve the case would be a useless exercise and will result in an opinion on a hypothetical situation.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The TRO issued on January 21, 2025 is lifted; the Court will no longer act upon Sen. Imee's Motion to Intervene</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Considering that the Petition has become moot, this Court lifts the TRO issued on January 21, 2025. Under the circumstances, there is no threat of grave injustice or irreparable injury against Francis, and he will not be prejudiced by any subsequent actions of the COMELEC.<br><br>The Court also notes that Francis' counsel, Atty. Jonie, failed to submit any document to justify the continuation of the TRO's effect, despite having requested a reasonable period of five days to establish communication with Francis. Further, since the lifting of the TRO is one of the principal reliefs sought in Sen. Imee's Motion to Intervene, and the same has already been effected, the Court finds it unnecessary to resolve the said Motion.<br><br><i>Francis is guilty of indirect contempt</i><br><br>Jurisprudence defines contempt of court as a willful disregard or disobedience of a public authority.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> In its broad sense, contempt is a disregard of, or disobedience to, the rules or orders of a legislative or judicial body or an interruption of its proceedings by disorderly behavior or insolent language in its presence or so near thereto as to disturb its proceedings or to impair the respect due to such a body.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> In its restricted and more usual sense, contempt comprehends a despising of the authority, justice, or dignity of a court.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> The phrase "contempt of court" is generic, embracing within its legal signification a variety of different acts.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup><br><br>In<i> Tallado v. Racoma</i>,<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> the Court discussed the nature of and rationale behind the courts' authority to penalize contempt of court, stressing its importance in protecting the proper functioning and respect of the judicial system:<br><blockquote>The power to punish for contempt is inherent in all courts, and need not be specifically granted by statute. It lies at the core of the administration of a judicial system. Indeed, there ought to be no question that courts have the power by virtue of their very creation to impose silence, respect, and decorum in their presence, submission to their lawful mandates, and to preserve themselves and their officers from the approach and insults of pollution.<b> The power to punish for contempt essentially exists for the preservation of order in judicial proceedings and for the enforcement of judgments, orders, and mandates of the courts, and, consequently, for the due administration of justice. The reason behind the power to punish for contempt is that respect of the courts guarantees the stability of their institution; without such guarantee, the institution of the courts would be resting on a very shaky foundation</b>.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> (Emphasis supplied; citations omitted) </blockquote>One of the two types of contempt is indirect contempt, which is committed out of the presence of the court.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup> Indirect contempt involves conduct that is directed against the dignity and authority of the court or a judge acting judicially.<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> It is an act obstructing the administration of justice which tends to bring the court into disrepute or disrespect.<sup style="COLOR: RGB(255, 0, 0);">[109]</sup><br><br>Section 3, Rule 71 of the Rules of Court provides that any of the following acts may be punished for indirect contempt:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Misbehavior of an officer of a court in the performance of his official duties or in his official transactions; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY"><b>Disobedience of or resistance to a lawful writ, process, order, or judgment of a court</b>, including the act of a person who, after being dispossessed or ejected from any real property by the judgment or process of any court of competent jurisdiction, enters or attempts or induces another to enter into or upon such real property, for the purpose of executing acts of ownership or possession, or in any manner disturbs the possession given to the person adjudged to be entitled thereto; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">Any abuse of or any unlawful interference with the processes or proceedings of a court not constituting direct contempt under section 1 of this Rule; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td valign="top"> <div align="JUSTIFY"><b>Any improper conduct tending, directly or indirectly, to impede, obstruct, or degrade the administration of justice;</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(e) </div></td> <td valign="top"> <div align="JUSTIFY">Assuming to be an attorney or an officer of a court, and acting as such without authority; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(f) </div></td> <td valign="top"> <div align="JUSTIFY">Failure to obey a subpoena duly served; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(g) </div></td> <td valign="top"> <div align="JUSTIFY">The rescue, or attempted rescue, of a person or property in the custody of an officer by virtue of an order or process of a court held by him.<sup style="COLOR: RGB(255, 0, 0);">[110]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>By abruptly withdrawing his candidacy just days after the Court issued a TRO at his own request, Francis not only undermined the integrity of the electoral process, but also trifled with the processes of this Court. In doing so, he effectively obstructed and demeaned the administration of justice.<br><br>In seeking the Court's understanding, Francis claimed that he felt an overwhelming sense of duty to spare the nation unnecessary financial burden upon learning that ballot printing had commenced, asserting that the inclusion of his name would cause significant delays and additional costs.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup><br><br>The Court is not convinced.<br><br>Francis should have considered the consequences of his actions long before he filed a Petition challenging the COMELEC's Resolution which declared him a nuisance candidate. Even more critically, he ought to have reflected on those consequences before withdrawing his candidacy after securing the very injunctive relief he had urgently sought from this Court. One cannot simply bend the legal system to suit his personal whims. To allow individuals to act without regard for the procedural safeguards of the Judiciary is to invite disorder, undermine the rule of law, and set a dangerous precedent of chaos over order. Here, Francis' actions reveal a flagrant disrespect for the authority of this Court, constituting indirect contempt. He recklessly abused the Court's processes and tested the limits of the Court's patience. His act of filing a Petition before this Court, seeking injunctive relief, followed by the withdrawal of his candidacy, days after the Court issued a TRO, demonstrates a brazen trifling with the Court's processes and an unpardonable imposition on its precious time. His conduct not only erodes public confidence in the integrity of the electoral process, but also diminishes the dignity and respect owed to judicial authority, effectively making a mockery of both institutions. The Court will not tolerate such conduct.<br><br>It is established that while the Court's power to cite persons in contempt must be exercised with restraint, it should, nonetheless, be wielded to ensure the infallibility of justice where the defiance or disobedience is patent and contumacious that there is an evident refusal to obey.<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> An individual will face contempt if their actions undermine the respect owed to judicial authority. Speaking for the Court, in<i> Re: Post of Atty. Erwin Erfe on Social Media Accusing the Court of Judicial Tyranny</i>,<sup style="COLOR: RGB(255, 0, 0);">[113]</sup> it was declared:<br><blockquote>Time and again, the Court, when confronted with actions and statements that tend to promote distrust and undermine public confidence in the Judiciary, has not hesitated to wield its inherent power to cite persons in contempt. In so doing, the Court preserves the Judiciary's honor and dignity and the trust and confidence of the public which is critical for the stability of democratic government.<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> (Citations omitted) </blockquote>To invoke the Court's authority, consume its time, and secure the relief sought, only to abruptly abandon course without observing the proper legal processes, constitutes a blatant act of disrespect toward the Court and a disregard for the solemnity of its proceedings. The Court emphasizes that any act of disrespect toward the Judiciary strikes at the heart of its authority and undermines the very foundation of trust upon which our legal system stands. The Court cannot overstate the paramount importance of preserving public trust in the Judiciary, particularly, in this Court. If the people lose confidence in the Court, the last bastion to which they turn for justice and the protection of their rights, they may believe that justice is no longer attainable through lawful means. Such a loss of faith does not merely weaken institutions; it invites disorder and fuels lawlessness. The Court cannot, and will not allow that to happen. It must ensure that every action that tends to promote distrust and undermine public confidence in the Judiciary is met with due and deliberate consequence, lest the authority of the Judiciary be eroded.<br><br><i>Appropriate penalty</i><br><br>Section 7, Rule 71 of the Rules of Court provides the penalty for indirect contempt. It reads:<br><blockquote>Sec. 7.<i> Punishment for indirect contempt.</i> â If the respondent is adjudged guilty of indirect contempt committed against a Regional Trial Court or a court of equivalent or higher rank, he may be punished by a fine not exceeding thirty thousand pesos or imprisonment not exceeding six [] months, or both [.]<sup style="COLOR: RGB(255, 0, 0);">[115]</sup></blockquote>In imposing penalty for indirect contempt, the Court, in<i> Webb v. Gatdula</i>,<sup style="COLOR: RGB(255, 0, 0);">[116]</sup> declared:<br><blockquote>Corollary to its power of contempt, courts have the inherent power to impose a penalty that is reasonably commensurate with the gravity of the offense. This penalty must be exercised on the preservative and corrective principle, not for vindicatory or retaliatory purpose.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> </blockquote>Here, given Francis' blatant disregard for the authority and processes of the Court, it is deemed proper to impose upon him a fine in the amount of PHP 30,000.00.<br><br><b>ACCORDINGLY,</b> the Petition for<i> Certiorari</i> with Extremely Urgent Prayer for the Issuance of a Temporary Restraining Order and/or Status<i> Quo Ante</i> Order and/or Preliminary Injunction, filed by Petitioner Francis Leo Antonio Marcos, is<b> DISMISSED</b> for mootness. The Temporary Restraining Order issued by this Court on January 21, 2025 is<b> LIFTED.</b><br><br>Francis Leo Marcos is found<b> GUILTY</b> of<b> INDIRECT CONTEMPT </b>of the Supreme Court. Accordingly, the Court orders him to pay a<b> FINE</b> of <b>PHP 30,000.00</b>, within<b> 10 days</b> from the finality of this Decision.<br><br><b>SO ORDERED. </b><br><br><i>Leonen, Acting C.J., Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Gesmundo,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>C.J.,</i> on official leave.<br><i>Caguioa,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.,</i> on official business.<br><i>Kho, Jr.,</i><sup style="COLOR: RGB(255, 0, 0);">***</sup> <i>J.,</i> no part.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> Took no part due to his prior participation in the Commission of Elections, Second Division.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 46-52. Signed by Chairman George Erwin M. Garcia and Commissioners Socorro B. Inting, Marlon S. Casquejo, Aimee P. Ferolino, Rey E. Bulay, Ernesto Ferdinand R. Maceda, Jr., and Nelson J. Celis of the Commission on Elections <i>En Banc</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 127-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 37-45. Signed by Presiding Commissioner Marlon S. Casquejo and Commissioners Rey E. Bulay and Nelson J. Celis of the Commission on Elections, Second Division.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 161-165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 61-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 62, 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 78-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 90-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 113-119. Signed by Presiding Commissioner Socorro B. Inting and Commissioner Antonio T. Kho, Jr. (now a Member of the Court) of the Commission on Elections, Second Division.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 116.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 103.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 40-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 37-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 44-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 127-132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 140, 144-146.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 146.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 150-152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 150-151.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 150.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 161-165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 162.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 171-183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 182.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>. at 162.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 163.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>. at 164.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 219-222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>. at 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at 227-230.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id</i>. at 228.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id</i>. at 229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id</i>. at 240-242.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id</i>., Compliance, dated April 8, 2025, Annex A.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id</i>. at 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id</i>. at 223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Express Telecommunications Co., Inc. (EXTELCOM) v. AZ Communications, Inc.</b>, 877 Phil. 44, 53 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> 948 Phil. 335 (2023) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id</i>. at 346.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> 957 Phil. 532 (2024) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id</i>. at 556-557.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Department of Trade and Industry v. Toyota Balintawak, Inc. and Toyota Motor Phils. Corp.</b>, 948 Phil. 346 (2023) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup><b> Agbayani, Jr. v. Director or Whoever is in Charge of the Manila City Jail</b>, 957 Phil. 532, 557 (2024) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id</i>. at 557.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <b>Express Telecommunications, Co., Inc. (Extelcom) v. AZ Communications, Inc.</b>, 877 Phil. 44, 58 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <b>Province of Maguindanao del Norte v. Bureau of Local Government Finance</b>, 949 Phil. 377 (2023) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <b>Lorenzo Shipping Corporation, et al. v. Distribution Management Association of the Philippines, et al.</b>, 672 Phil. 1, 10 (2011) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <b>Tallado v. Racoma</b>, 929 Phil. 40, 58 (2022) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> 929 Phil. 40 (2022) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Id</i>. at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> RULES OF COURT, Rule 71, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Rollo</i>, pp. 240-242; Compliance, dated April 8, 2025, Annex A.<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <b>Webb v. Gatdula, et al.</b>, 863 Phil. 292, 327-328 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> 951 Phil. 663 (2024) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <i>Id</i>. at 665.<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> RULES OF COURT, Rule 71, sec. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> 863 Phil. 292 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> <i>Id</i>. at 328.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 273935 - DENISE ELLISON M. VI&Ntilde;A, PETITIONER, VS. STEPHANIE OTEYZA TY, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70071' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 273935, August 18, 2025 ]</H2>
+			<H3>DENISE ELLISON M. VIÃA, PETITIONER, VS. STEPHANIE OTEYZA TY, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Nonmarital children<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> may, use the surname of their father if the father expressly recognized their filiation through the record of birth appearing in the civil register, or through an admission in a public document or private handwritten instrument made by the father.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>This resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> under Rule 45 of the Rules of Court, assailing the September 13, 2023 Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and the May 17, 2024 Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Court of Appeals. The Court of Appeals partially granted Stephanie Oteyza Ty's (Stephanie) appeal. It affirmed the June 30, 2021 Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> and October 15, 2021 Order<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> of the Regional Trial Court denying Stephanie's petition for adoption, but granted the prayer for change of name and ordered the Local Civil Registrar of Makati City and the Philippine Statistics Authority to cancel Brandon Tyler Ty ViÃ±a's (Brandon) certificate of live birth and to issue a new one with the name "Brandon Tyler Ty."<br><br>This case originated from a petition for adoption captioned, "In the Matter of the Adoption of Brandon Tyler Ty ViÃ±a with Application for Change of Name to Brandon Tyler Ty,"<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> filed by Stephanie before the Regional Trial Court of Makati City to adopt her son Brandon.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Brandon was born on January 19, 2013.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> According to Stephanie, she is the biological mother of Brandon while petitioner Denise Ellison M. ViÃ±a (Denise) is the biological father of Brandon.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>After Brandon was born, Stephanie and Denise got married on March 17, 2013.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> However, their marriage was eventually declared null and void due to the lack of authority of the solemnizing officer.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Consequently, Brandon was declared a nonmarital child and Stephanie was granted sole parental authority over Brandon.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Stephanie decided to adopt Brandon. She sought the consent of Denise who signed the Affidavit of Consent.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>According to Stephanie, Brandon knew that Denise was his father. She also allowed Denise to visit and communicate with Brandon.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Stephanie testified that she initiated the petition for adoption because she wanted Brandon to have the rights of a legitimate child. She was aware that Denise would be stripped of his legal rights over Brandon as a result of the adoption.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Stephanie claimed that Denise was not concerned with Brandon's welfare and only gave support whenever he wanted.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> When asked regarding the parental obligations performed by Denise, Stephanie acknowledged that in addition to financial support, he would also visit and spend time with Brandon.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>During the cross-examination, Stephanie stated that she assumed that Brandon would automatically be legitimized upon marrying Denise.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> She also admitted that when she asked Denise to sign the Affidavit of Consent, she merely told him that the document was for the legitimization of Brandon.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On April 22, 2019, Denise filed his Opposition to the Petition for Adoption, together with a Repudiation and Withdrawal of Affidavit of Consent.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>According to Denise, Stephanie only wanted to sever his relationship with Brandon and did not consider Brandon's best interest.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> He claimed that there was no compelling reason to change Brandon's last name and that it would only amount to declaring that he had no father, which would expose him to shame and ridicule.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Denise also averred that he was not given the opportunity to examine the contents of the Affidavit of Consent as Stephanie hurriedly asked him to sign the document without telling him that it will be used in adoption proceedings.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Denise also did not appear before the notary public who notarized the affidavit.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Denise asserted that since 2015 he had been giving financial support to Stephanie for the expenses of Brandon as shown by several receipts and deposit slips.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Ruby De Guzman, the court social worker, did not give any recommendation for this adoption case considering that Denise opposed the petition for adoption. She emphasized that an affidavit of consent from the biological parent is necessary for the adoption to proceed.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The Regional Trial Court denied the petition for adoption because of the lack of consent from Denise, who is the biological father of Brandon.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The dispositive portion of the Regional Trial Court's Decision reads:<blockquote><b>WHEREFORE</b>, in view of the foregoing, this Petition for Adoption is <b>DENIED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis in the original)</blockquote>Stephanie's Motion for Reconsideration was also denied by the Regional Trial Court in its October 15, 2021 Order.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Aggrieved, Stephanie filed an appeal with the Court of Appeals, which partially granted her petition.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> The Court of Appeals affirmed the Decision and Order of the Regional Trial Court, denying the Petition for Adoption on the ground that Denise, the biological father of Brandon, did not give his consent to the adoption.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> However, the Court of Appeals granted Stephanie's prayer to change Brandon's name from "Brandon Tyler Ty ViÃ±a" to "Brandon Tyler Ty" on the ground that nonmarital children shall use the surname of their mother pursuant to Article 176 of the Family Code, as amended by Republic Act No. 9255.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The dispositive portion of the Court of Appeals' Decision reads:<blockquote><b>WHEREFORE</b>, premises considered, the <i>Appeal</i> filed by petitioner-appellant Stephanie Oteyza Ty on 22 October 2021 under Rule 41 of the Rules of Court is <b>PARTLY GRANTED</b>.<br><br>The <i>Decision</i> and <i>Order</i> rendered by the Regional Trial Court, Branch 144, Makati City on 30 June 2021 and 15 October 2021 in Case No. R-MKT-18-05059-SP, denying petitioner-appellant Stephanie Oteyza Ty's <i>Petition for Adoption</i>, are <b>AFEIRMED</b>.<br><br>The Local Civil Registrar of Makati City and the Philippine Statistics Authority are <b>ORDERED</b> to cancel Brandon Tyler Ty ViÃ±a's Certificate of Live Birth with Registry No. 2013-0756, and to issue a new one with his name appearing thereon as "Brandon Tyler Ty."<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis in the original)</blockquote>In its May 17, 2024 Resolution, the Court of Appeals denied Denise's Motion for Partial Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Hence, this Petition was filed by Denise where he claims that the Court of Appeals erred in partially granting Stephanie's appeal. He argues that the matter of the change of name was not raised as an issue on appeal<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> and should be subject of a separate court proceeding.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> He adds that the change of surname will not redound to the best interest of the minor.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>In her Comment,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> respondent countered that the Court of Appeals did not err in acting upon the change of name since it was an incidental relief sought in the petition for adoption.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Furthermore, the Court of Appeals did not err in granting the change of name in the absence of an affidavit to use the surname of the father as required by the Revised Implementing Rules and Regulations of Republic Act No. 9255<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> and citing <i>Barcelote v. Republic</i>.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>The sole issue to be resolved is whether the Court of Appeals erred in granting respondent Stephanie Oteyza Ty's prayer to change the name of her minor child from Brandon Tyler Ty ViÃ±a to Brandon Tyler Ty.<br><br>The Petition is meritorious.<br><br><center><b>I</b></center><br>The application for change of name is an incidental relief sought in the petition for adoption. Respondent herself emphasizes that "the petition [she] filed before the trial court involves the incidental relief of change of surname, should the petition for adoption be granted."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> "Incidental" means â<blockquote>"<i>contingent upon or pertaining to something that is more important; that which is necessary, appertaining to, or depending upon another known as the principal." Incidental is synonymous with "accessory, accidental, added, additional, allied, associated, attendant.</i>"<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Citation omitted)</blockquote>Naturally so, because under Article 189<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> of Executive Order No. 209 or the Family Code of the Philippines, a necessary effect of adoption is that the adopted acquires the right to use the surname of the adopter. Further, under Article 365 of the Civil Code<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> "[a]n adopted child shall bear the surname of the adopter." Thus, "the change of the surname of the adopted child is more an incident rather than the object of adoption proceedings."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>The law allows the change of the surname of the adopted as a natural and necessary consequence of the adoption granted.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Reversibly, the denial of the petition for adoption forecloses any need to act upon the application for change of name, the same being only contingent upon the main action and deriving its jurisdictional support therefrom. Hence, the Court of Appeals erred in proceeding to grant the change of name despite its affirmance of the denial of the petition for adoption.<br><br>In this instance, the proper remedy for respondent is to file a petition for change of name under Rule 103 of the Rules of Court.<blockquote>The official name of a person whose birth is registered in the civil register is the name appearing therein. If a change in one's name is desired, this can only be done by filing and strictly complying with the substantive and procedural requirements for a special proceeding for change of name under Rule 103 of the Rules of Court, wherein the sufficiency of the reasons or grounds therefor can be threshed out and accordingly determined.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></blockquote>It must be stressed, however, that the grant of a change of name is conditioned upon strict compliance with all jurisdictional requirements and proof of proper and compelling reasons supporting the change requested. As held in <i>Republic v. Hernandez</i>:<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><blockquote>[A] petition for change of name being a proceeding <i>in rem</i>, impressed as it is with public interest, strict compliance with all the requisites therefor in order to vest the court with jurisdiction is essential, and failure therein renders the proceedings a nullity.<br><br>It must likewise be stressed once again that a change of name is a privilege not a matter of right, addressed to the sound discretion of the court which has the duty to consider carefully the consequences of a change of name and to deny the same unless weighty reasons are shown. Before a person can be authorized to change his name, that is, his true or official name or that which appears in his birth certificate or is entered in the civil register, he must show proper and reasonable cause or any convincing reason which may justify such change.<br><br>Jurisprudence has recognized, <i>inter alia</i>, the following grounds as being sufficient to warrant a change of name: (a) when the name is ridiculous, dishonorable or extremely difficult to write or pronounce; (b) when the change results as a legal consequence of legitimation or adoption; (c) when the change will avoid confusion; (d) when one has continuously used and been known since childhood by a Filipino name and was unaware of alien parentage; (e) when the change is based on a sincere desire to adopt a Filipino name to erase signs of former alienage, all in good faith and without prejudice to anybody; and (f) when the surname causes embarrassment and there is no showing that the desired change of name was for a fraudulent purpose or that the change of name would prejudice public interest.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Citations omitted)</blockquote><center><b>II</b></center><br>The Court of Appeals' approval of the change of name is not only procedurally flawed but also lacked legal basis.<br><br>Article 176 of the Family Code, as amended by Republic Act No. 9255, provides guidance on the use of surname by a nonmarital child:<blockquote>Article 176. Illegitimate children shall use the surname and shall be under the parental authority of their mother, and shall be entitled to support in conformity with this Code. However, illegitimate children may use the surname of their father if their filiation has been expressly recognized by the father through the record of birth appearing in the civil register, or when an admission in a public document or private handwritten instrument is made by the father. Provided, the father has the right to institute an action before the regular courts to prove non-filiation during his lifetime. The legitime of each illegitimate child shall consist of one-half of the legitime of a legitimate child.</blockquote>In granting respondent's prayer to change Brandon's name from "Brandon Tyler Ty ViÃ±a" as appearing on his certificate of live birth to "Brandon Tyler Ty," the Court of Appeals merely cited Article 176 of the Family Code, as amended, without any discussion on how the cited provision applied to Brandon.<br><br>The Court of Appeals seemed to have ignored the second sentence of Article 176, which permits nonmarital children to use the surname of their father provided that the father expressly recognized their filiation through the record of birth appearing in the civil register, or through an admission in a public document or private handwritten instrument made by the father. There was no mention that petitioner did not recognize his filiation with Brandon for the Court of Appeals to grant the prayer for change of name.<br><br>Respondent herself stated in her appeal before the Court of Appeals that Brandon was a nonmarital child, being born before she got married to petitioner.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> As a nonmarital child at the time he was born, Brandon should have used the surname of his mother pursuant to Article 176 of the Family Code, as amended. However, the fact that Brandon was able to use the surname of his father means that petitioner expressly recognized his filiation with Brandon.<br><br>That petitioner recognized his filiation with Brandon is strengthened by the fact that petitioner vehemently opposed respondent's petition for adoption with an application for Brandon's change of name. Respondent also never alleged that petitioner did not recognize his filiation with Brandon. The records reveal that Brandon was aware that petitioner was his father.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Petitioner also provided financial support for Brandon and was allowed to visit and spend time with his child.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>Considering that Article 176 of the Family Code allows nonmarital children to use the surname of their father, provided that the father made an express recognition of their filiation, then there would have been no reason for the Court of Appeals to have granted respondent's prayer for her minor child's change of name.<br><br>Respondent's contention regarding the absence of an affidavit to use the surname of the father as required by the Revised Implementing Rules and Regulations of Republic Act No. 9255<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> is misplaced. The Rules<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> apply to nonmarital children whose births were unregistered or previously registered under the surname of the mother. Here, the child's birth certificate is already registered under the surname of the father, and it is the mother who now wants to change the surname of her child after her marriage with the father was nullified.<br><br>Likewise, <i>Barcelote v. Republic</i><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> invoked by respondent is not squarely on point with this case. There, the Court upheld the cancellation of the birth certificates of the two nonmarital children because they were registered by the biological father, without the participation or consent of the mother, in violation of Act No. 3753 requiring the signature of the mother in her children's birth certificates. No such fact appears in this case.<br><br><b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The September 13, 2023 Decision and the May 17, 2024 Resolution of the Court of Appeals in CA-G.R. CV No. 117879 are <b>PARTLY REVERSED</b> and <b>SET ASIDE</b>, insofar as they granted the change of name from "Brandon Tyler Ty ViÃ±a" to "Brandon Tyler Ty."<br><br><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> In <i>Aquino v. Aquino</i>, 918-A Phil. 371 (2021) [Per J. Leonen, <i>En Banc</i>], this Court used the term "nonmarital child" in place of "illegitimate child" to refer to the status of a child whose parents are not married to each other.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> FAMILY CODE, art. 176, as amended by Republic Act No. 9255.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 10-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 25-39. The Decision in CA-G.R. CV No. 117879 was penned by Associate Justice Zenaida T. Galapate-Laguilles and concurred in by Associate Justice Alfredo D. Ampuan and Associate Justice Selma Palacio Alaras of the Thirteenth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 41-42. The Resolution was penned by Associate Justice Zenaida T. Galapate-Laguilles and concurred in by Associate Justice Alfredo D. Ampuan and Associate Justice Selma Palacio Alaras of the Former Thirteenth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 44-54. The Decision in R-MKT-18-05059-SP was penned by Judge Liza Marie R. Picardal-Tecson of Branch 144, Regional Trial Court, Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 55-56. The Order in R-MKT-18-05059-SP was penned by Judge Liza Marie R. Picardal-Tecson of Branch 144, Regional Trial Court, Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 26. In other parts of the <i>rollo</i>, the date is March 17, 2010.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 55-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 36-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 37. FAMILY CODE, art. 176, as amended by Republic Act No. 9255, states:<br><br>Article 176. Illegitimate children shall use the surname and shall be under the parental authority of their mother, and shall be entitled to support in conformity with this Code. However, illegitimate children may use the surname of their father if their filiation has been expressly recognized by the father through the record of birth appearing in the civil register, or when an admission in a public document or private handwritten instrument is made by the father. Provided, the father has the right to institute an action before the regular courts to prove non-filiation during his lifetime. The legitime of each illegitimate child shall consist of one-half of the legitime of a legitimate child.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 220-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 220-221.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 221-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 815 Phil. 664 (2017) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Municipality of Tupi v. Faustino</b>, 860 Phil. 363, 383-384 (2019) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> ARTICLE 189. Adoption shall have the following effects:<blockquote>(1) For civil purposes, the adopted shall be deemed to be a legitimate child of the adopters and both shall acquire the reciprocal rights and obligations arising from the relationship of parent and child, including the right of the adopted to use the surname of the adopter;<br><br>(2) The parental authority of the parents by nature over the adopted shall terminate and be vested in the adopters, except that if the adopter is the spouse of the parent by nature of the adopted, parental authority over the adopted shall be exercised jointly by both spouses; and<br><br>(3) The adopted shall remain an intestate heir of his parents and other blood relatives. (39(1)a, (2)a, (3)a, PD 603)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> CIVIL CODE, art. 365; Republic Act No. 386 (1949).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Republic v. Court of Appeals</b>, 284-A Phil. 643, 658 (1992) [Per J. Regalado, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Republic v. Hernandez</b>, 323 Phil. 606, 621-623 (1996) [Per J. Regalado, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 622-623.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 606.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 636-638.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 221-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Rules and Regulations Governing the Implementation of Republic Act No. 9255, OCRG Administrative Order No. 01-04, (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 815 Phil. 664 (2017) [Per J. Carpio, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

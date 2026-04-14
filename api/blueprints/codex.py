@@ -7,6 +7,7 @@ from psycopg2.extras import RealDictCursor
 import re
 import gzip
 from db_pool import get_db_connection, put_db_connection
+from utils.clerk_auth import get_authenticated_user_id
 
 codex_bp = func.Blueprint()
 
@@ -443,6 +444,54 @@ def get_codex_amendments(req: func.HttpRequest) -> func.HttpResponse:
 
 @codex_bp.route(route="codex/jurisprudence", auth_level=func.AuthLevel.ANONYMOUS)
 def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
+    # ── Subscription gate: Juris+ required ────────────────────────────────────
+    TIER_ORDER = ['free', 'amicus', 'juris', 'barrister']
+    REQUIRED_TIER = 'juris'
+
+    auth_header = (
+        req.headers.get("X-Clerk-Authorization") or req.headers.get("Authorization") or ""
+    ).strip()
+
+    if not auth_header:
+        return func.HttpResponse(
+            json.dumps({"error": "Authentication required", "required_tier": REQUIRED_TIER}),
+            mimetype="application/json", status_code=401,
+        )
+
+    clerk_id, auth_error = get_authenticated_user_id(req)
+    if auth_error or not clerk_id:
+        return func.HttpResponse(
+            json.dumps({"error": "Unauthorized", "detail": auth_error}),
+            mimetype="application/json", status_code=401,
+        )
+
+    gate_conn = None
+    try:
+        gate_conn = get_db_connection()
+        with gate_conn.cursor() as cur:
+            cur.execute(
+                "SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s",
+                (clerk_id,),
+            )
+            row = cur.fetchone()
+            user_tier = (row[0] if row else "free") or "free"
+            is_admin = (row[1] if row else False) or False
+        if not is_admin and TIER_ORDER.index(user_tier) < TIER_ORDER.index(REQUIRED_TIER):
+            return func.HttpResponse(
+                json.dumps({
+                    "error": "Juris subscription required",
+                    "required_tier": REQUIRED_TIER,
+                    "current_tier": user_tier,
+                }),
+                mimetype="application/json", status_code=403,
+            )
+    except Exception as gate_err:
+        logging.warning("codex/jurisprudence tier check error (allowing through): %s", gate_err)
+    finally:
+        if gate_conn:
+            put_db_connection(gate_conn)
+    # ──────────────────────────────────────────────────────────────────────────
+
     provision_id = req.params.get('provision_id')
     statute_id = req.params.get('statute_id')
     subject_filter = req.params.get('subject')

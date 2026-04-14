@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 255335 - MARIA VICTORIA NATIVIDAD-FLORENTINO, PETITIONER, VS. ANTONIO G. FLORENTINO, JR., RESPONDENT.[G.R. No. 255636] PEOPLE OF THE PHILIPPINES, PETITIONER, VS. ANTONIO G. FLORENTINO, JR., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70200' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 255335, August 27, 2025 ]</H2>
+			<H3>MARIA VICTORIA NATIVIDAD-FLORENTINO, PETITIONER, VS. ANTONIO G. FLORENTINO, JR., RESPONDENT.<BR><BR>[G.R. No. 255636]<BR><BR> PEOPLE OF THE PHILIPPINES, PETITIONER, VS. ANTONIO G. FLORENTINO, JR., RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court are separate Petitions for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by the People of the Philippines, represented by the Office of the Solicitor General (OSG), and by Maria Victoria Natividad-Florentino (Victoria). In both Petitions, the Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated July 3, 2019. and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 12, 2021, of the Court of Appeals (CA) in CA-G.R. SP No. 132689 are being assailed.<br><br>At the center of controversy is the question of whether the pendency of a Petition for declaration of nullity of marriage constitutes a prejudicial question that would warrant the suspension of the criminal proceedings for bigamy against Antonio G. Florentino, Jr. (Antonio).<br><br>Antonio entered into a marriage with Marilou Jarmin (Marilou) on May 18, 1984, solemnized by then Municipal Mayor of Sta. Rosa, Laguna, Cesar E. Nepomuceno. This first marriage is evidenced by a Marriage Contract (first marriage). Antonio, however, claims that the marriage ceremony never took place and that he and Marilou merely signed a Marriage Contract without solemnization. In support, Antonio presented the testimony of his childhood friend Pol Natividad (Pol), one of those who signed as witnesses in the Marriage Contract.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>Thereafter, Marilou left for the United States of America and Antonio allegedly lost all contact with her. He avers that they never consummated the marriage, never lived together, and never registered their Marriage Contract with the civil registry.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>Fifteen years later, Antonio sought to marry Victoria, an old acquaintance, and Pol's sister. Believing he was free to marry, Antonio and Victoria married on November 8, 1999, solemnized by Hon. Cesar D. Santamaria, Presiding Judge of the Metropolitan Trial Court of Makati City (second marriage). They lived together as husband and wife.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In January 2011, Victoria verified Antonio's marital status with the National Statistics Office (NSO). A Certification was issued by the NSO stating that Antonio had contracted two marriages: first with Marilou on May 18, 1984, in Sta. Rosa, Laguna, and second with Victoria on November 8, 1999 in Makati City.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Subsequently, Victoria left the conjugal home, asserting that Antonio had concealed his prior marriage from her. Antonio, on the other hand, maintains that Victoria knew of his previous marriage and that he had already explained that the first marriage was never registered.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On April 19, 2012, Antonio filed a petition for Declaration of Absolute Nullity of Marriage against Marilou, docketed as Civil Case No. 12-327 before Branch 144 of the Regional Trial Court (RTC) of Makati City. Shortly thereafter, on May 22, 2012, Victoria filed a criminal complaint for bigamy against Antonio. The criminal case for bigamy was docketed as Criminal Case No. 12-1476 and raffled to Branch 61 of the RTC of Makati City.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On September 24, 2013, Antonio filed a Motion to Suspend Proceedings and Defer Arraignment in Criminal Case No. 12-1476, invoking the pendency of his Petition for Declaration of Nullity as a prejudicial question to the bigamy case.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br><center><b>Ruling of the RTC</b></center><br>The RTC issued a Resolution dated November 23, 2012 denying Antonio's motion as follows:<blockquote><b>WHEREFORE</b>, for sheer dearth of merit, the instant "Petition To Suspend Proceedings and Defer Arraignment" of the herein accused Antonio G. Florentino, Jr. (Mr. Florentino) is hereby <b>DENIED</b>.</blockquote>Accordingly, let the arraignment of the accused herein be held on 28 January 2013 at eight-thirty o'clock in the morning.<br><br>Serve copies of this Resolution to all concerned.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Emphasis in the original)<br><br>Antonio moved for reconsideration but was likewise denied. Hence, he filed a Petition for <i>Certiorari</i> before the CA.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br><center><b>Ruling of the CA</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated September 28, 2018, the CA ruled that the RTC correctly denied Antonio's Motion to Suspend Proceedings and Defer Arraignment. The CA explained that the pendency of the civil action for declaration of nullity of marriage is not a ground to suspend the proceedings on the criminal case for bigamy.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Thus, the CA disposed as follows:<blockquote><b>WHEREFORE</b>, premises considered, the instant "Petition for <i>Certiorari</i> with Prayer for Preliminary Injunction and Temporary Restraining Order" filed by petitioner Antonio G. Florentino, Jr. is hereby <b>DENIED</b>. Costs against petitioner.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original)</blockquote>Undeterred, Antonio filed a Motion for Reconsideration, contending that a judicial declaration of nullity was unnecessary as the first marriage was void for lack of a solemnizing officer.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> The CA found merit in this argument and reversed its earlier Decision, to wit:<blockquote><b>WHEREFORE</b>, premises considered, the "Motion for Reconsideration (Re: Decision Dated 28 September 2018)" filed by petitioner Antonio G. Florentino, Jr. is <b>GRANTED</b>. Our September 28, 2018 Decision is <b>RECALLED</b> and <b>SET ASIDE</b>. Accordingly, the petition for <i>certiorari</i> under Rule 65 of the 1997 Rules of Civil Procedure filed by petitioner is <b>GRANTED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original)</blockquote>In its Amended Decision dated July 3, 2019, the CA ruled that (1) the absence of a solemnizing officer rendered the marriage void <i>ab initio</i>; and (2) that the pending petition for nullity constituted a prejudicial question warranting the suspension of the bigamy proceedings.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Aggrieved, the OSG and Victoria filed their respective Motions for Reconsideration. Both motions were denied by the CA in its Resolution dated January 12, 2021.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>The OSG and Victoria filed their respective Petitions for Review on <i>Certiorari</i>, which were docketed as G.R. No. 255335<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> and G.R. No. 255636,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> respectively. The Court then ordered the consolidation of the petitions.<br>&nbsp;<br>Pursuant to Resolution<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated September 28, 2022, Antonio filed his Comment.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Meanwhile, Victoria<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> and the OSG<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> filed their respective Replies.<br><br><center><b>Ruling of the Court</b></center><br>The Court resolves to partially grant the Petitions.<br><br>Rule 111, Section 7 of the Revised Rules of Criminal Procedure defines a prejudicial question thru its elements:<blockquote><b>Section 7.</b> <i>Elements of prejudicial question</i>. â The elements of a prejudicial question are: (a) the previously instituted civil action involves an issue similar or intimately related to the issue raised in the subsequent criminal action, and (b) the resolution of such issue determines whether or not the criminal action may proceed.</blockquote>Accordingly, a prejudicial question arises when a civil action involves facts intimately related to those raised in a criminal case such that the resolution of the former is determinative of the latter. The rationale behind this principle is to avoid conflicting decisions between tribunals and to prevent the unnecessary burden of criminal prosecution when the resolution of a civil issue could render such prosecution moot.<br><br>Procedurally, Rule 111, Section 6 of the Rules of Court provides the proper mechanism for invoking a prejudicial question:<blockquote><b>Section 6.</b> <i>Suspension by reason of prejudicial question</i>. â A petition for suspension of the criminal action based upon the pendency of a prejudicial question in a civil action may be filed in the office of the prosecutor or the court conducting the preliminary investigation. When the criminal action has been filed in court for trial, the petition to suspend shall be filed in the same criminal action at any time before the prosecution rests.</blockquote>Thus, upon proper determination that a prejudicial question exists, the trial court is duty-bound to suspend the criminal proceedings and await the final resolution of the related civil action.<br><br>Not every civil action, however, gives rise to a prejudicial question.<br>&nbsp;<br>The existence of a civil case involving a similar issue does not automatically qualify as a prejudicial question. The law requires dependencyâthat is, the necessity that the civil case must first be resolved before the criminal case can proceed.<br><br>Bigamy cases and petitions for declaration of nullity of marriage are clear examples. While the issues in both the civil case for declaration of nullity of marriage and the criminal case for bigamy are closely relatedâboth dealing with the validity of the first marriageâthey are not so intertwined as to be interdependent.<br><br>A second marriage contracted while a prior valid marriage subsists renders the party criminally liable for bigamy under Article 349 of the Revised Penal Code, which provides:<blockquote>Art. 349. <i>Bigamy</i>. â The penalty of <i>prision mayor</i> shall be imposed upon any person who shall contract a second or subsequent marriage before the former marriage has been legally dissolved, or before the absent spouse has been declared presumptively dead by means of a judgment rendered in the proper proceedings.</blockquote>In any case, even if the validity of the first marriage is questioned, the criminal case for bigamy proceeds independently. The validity of the first marriage may be incidentally litigated as a defense in the criminal case, without the need to suspend the criminal proceedings pending the outcome of a civil action.<br><br>In <i>Pulido v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the Court abandoned its earlier restnct1ve precedents and adopted a more liberal view. The Court ruled that a void <i>ab initio</i> marriage can be used as a defense in bigamy even without a separate judicial declaration of absolute nullity. Guided by the retroactive effects of a void <i>ab initio</i> marriage, the legislative intent of Article 40<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> of the Family Code, and the fundamental rules of construction governing penal laws, the Court made the following pronouncement:<blockquote><b>After a careful consideration, this Court is constrained to abandon our earlier rulings that a judicial declaration of absolute nullity of the first and/or second marriages cannot be raised as a defense by the accused in a criminal prosecution for bigamy. <u>We hold that a judicial declaration of absolute nullity is not necessary to prove a void <i>ab initio</i> prior and subsequent marriages in a bigamy case. Consequently, a judicial declaration of absolute nullity of the first and/or second marriages presented by the accused in the prosecution for bigamy is a valid defense, irrespective of the time within which they are secured.</u></b><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis in the original)</blockquote>In effect, the parties are not required to obtain a judicial declaration of absolute nullity to raise it as a defense in a bigamy case. Also in <i>Pulido</i>, the Court clarified that the rule applies to all marriages celebrated under the Civil Code and the Family Code alike. With these, the Court affirmed that Article 40 of the Family Code did net amend Article 349 of the Revised Penal Code, and hence, did not deny the accused the right to collaterally attack the validity of a void <i>ab initio</i> marriage in a criminal prosecution for bigamy.<br><br>In other words, the accused in a criminal case for bigamy may assert during trial that the first marriage was void <i>ab initio</i>, therefore, no crime of bigamy was committed. Such defense, however, must be established through evidence in the criminal proceedings and shall be competently resolved by the trial cou1i without awaiting the resolution of a pending civil case for declaration of nullity. The criminal action for bigamy can proceed independently. Meanwhile, the existence of a pending civil action for declaration of nullity does not suspend the criminal case.<br><br>Applying these principles to the case of Antonio, the alleged <i>void ab initio</i> character of his first marriage shall properly be raised as a defense, not as a bar to prosecution.<br><br>All the more, the criminal action must proceed in order for the accused. Antonio, to substantiate his defense of nullity before the trial court. In resolving this, it is within the competence of the trial court to receive evidence and adjudicate on the matter of the validity of the first marriage. Consequently, the pendency of his civil action for declaration of nullity is rendered irrelevant to the continuation of the prosecution for bigamy.<br><br>Allowing the mere filing of a petition for nullity to suspend criminal prosecution would create a dangerous precedent that would enable delay or evasion of liability simply by initiating civil proceedings.<br><br>At the heart of these rules is a Constitutional and societal value: the inviolability of marriage. As enshrined in Article XV, Section 2 of the Constitution, "[m]arriage, as an inviolable social institution, is the foundation of the family and shall be protected by the State."<br>&nbsp;<br>The Court must let the criminal case for bigamy proceed, for when the law is circumvented by delay, the very institution it seeks to protect is betrayed. Marriage must be undone by law, not by strategy. Justice, too, must not be postponed by pretense. In the face of an invoked defense, the courtsânot a procedural detourâremain the proper forum for truth.<br><br><b>ACCORDINGLY</b>, the Petitions for Review on <i>Certiorari</i> are <b>PARTIALLY GRANTED</b>. The Amended Decision dated July 3, 2019 and the Resolution dated January 12, 2021 of the Court of Appeals in CA-G.R. SP No. 132689 are <b>REVERSED</b> and <b>SET ASIDE</b>. Branch 61 of the Regional Trial Court of Makati City is <b>DIRECTED</b> to proceed with dispatch with the proceedings of Criminal Case No. 12-1476 in accordance with law.<br><br><b>SO ORDERED.</b><br><br><i>Inting</i> and <i>Dimaampao, JJ.</i>, concur.<br><i>Caguioa (Chairperson), J.</i>, see concurring opinion.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i> (<b>G.R. No. 255335</b>), pp. 9-46; <i>Rollo</i> (<b>G.R. No. 255636</b>), pp. 19-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> (<b>G.R. No. 255335</b>), pp. 48-55. Penned by Associate Justice Maria Elisa Sempio Diy and concurred in by Presiding Justice Romeo F. Barza and Associate Justice Elihu A. YbaÃ±ez of the Former First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 58-62. Penned by Associate Justice Maria Elisa Sempio Diy and concurred in by Presiding Justice Ramon R. Garcia and Associate Justice Elihu A. YbaÃ±ez of the Special Former First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 64-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 44-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 58-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 9-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i> (<b>G.R. No. 255636</b>), pp. 19-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 146-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i> (<b>G.R. No. 255335</b>), pp. 166-183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 216-244.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 233-244.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> 908 Phil. 573 (2021) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Article 40. The absolute nullity of a previous marriage may be invoked for purposes of remarriage on the basis solely of a final judgment declaring such previous marriage void.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Pulido v. People</b>, 908 Phil. 573, 599 (2021) [Per J. Hernando, <i>En Banc</i>].<br><br><hr align="center" width="60%" size="1" noshade=""><br><div align="center"><b>CONCURRING OPINION</b><br></div><br><b>CAGUIOA, <i>J.</i>:</b><br><br>For one to be held liable for bigamy, the prosecution must prove: (a) that the offender has been legally married; (b) that the first marriage has not been legally dissolved, or in case his or her spouse is absent, the absent spouse could not yet be presumed dead according to the Civil Code; (c) that he or she contracts a second or subsequent marriage; and (d) that the second or subsequent marriage has all the essential requisites for validity.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Accordingly, if the defense can prove that the first or subsequent marriages are void <i>ab initio</i>, liability for bigamy cannot arise.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>The question in the instant case is this: should a petition for declaration of nullity of marriage that is still pending with the courts be considered a prejudicial question to a related bigamy case?<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>I concur with the <i>ponencia</i> that it should not.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>For a civil action to be considered prejudicial to a criminal case to warrant the suspension of the latter until the final resolution of the former, the following requisites must be present: (1) the civil case involves facts intimately related to those upon which the criminal prosecution would be based; (2) in the resolution of the issue or issues raised in the civil action, the guilt or innocence of the accused would necessarily be determined; and <b>(3) jurisdiction to try said question must be lodged in another tribunal</b>.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>In the present case, the third element is lacking. As held in the landmark case of <i>Pulido v. People</i><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (<i>Pulido</i>), the criminal court in a bigamy case has jurisdiction to pass upon the validity of the first and/or subsequent marriages because it is essential to the determination of the guilt of the accused.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br><i>Pulido</i> involved a bigamy case filed on December 4, 2007 against a certain Luisito G. Pulido (Luisito), who contracted two marriages: first, with private complainant therein, Nora S. Arcon on September 5, 1983; and second, with Rowena U. Baleda on July 31, 1995. In his defense, Luisito insisted that he cannot be held liable for bigamy because both marriages were null and void due to the lack of a valid marriage license and lack of a marriage ceremony, respectively. In acquitting Luisito, the Court adopted the view that "the parties are not required to obtain a judicial declaration of absolute nullity of a void ab initio first and subsequent marriages in order to raise it as a defense in a bigamy case."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Thus, "a void <i>ab initio</i> marriage can be used as a defense in bigamy even without a separate judicial declaration of absolute nullity."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Consequently, the Court declared in <i>Pulido</i> that the criminal court in a bigamy case also has jurisdiction to pass upon the validity of the first and/or subsequent marriages because the same is essential to the determination of guilt of the accused, <i>viz.</i>:<blockquote>Moreover, as aptly pointed out by Justice Caguioa, the Court, reading together the provisions of the Civil Code and Article 40 of the Family Code, held in <i>NiÃ±al</i> and reiterated in <i>CariÃ±o v. CariÃ±o</i> that a void <i>ab initio</i> marriage can be subject of a collateral attack even in a criminal case:<blockquote>. . . .<br><br><u><b>However, other than for purposes of remarriage, no judicial action is necessary to declare a marriage an absolute nullity. For other purposes, such as but not limited to determination of heirship, legitimacy or illegitimacy of a child, settlement of estate, dissolution of property regime, or a criminal case for that matter, the court may pass upon the validity of marriage even in a suit not directly instituted to question the same so long as it is essential to the determination of the case. This is without prejudice to any issue that may arise in the case.</b></u> When such need arises, a final judgment of declaration of nullity is necessary even if the purpose is other than to remarry. The clause "on the basis of a final judgment declaring such previous marriage void" in Article 40 of the Family Code connotes that such final judgment need not be obtained only for purpose of remarriage.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (Citations omitted, emphasis supplied)</blockquote></blockquote>In my Concurring Opinion in <i>Pulido</i>, I espoused that the accused may present testimonial and/or documentary evidence aside from a judicial decree of nullity to support its defense of an invalid first and/or subsequent marriages, to wit:&nbsp;<br><blockquote>Having established that the nullity of a void <i>ab initio</i> marriage is a valid defense in Bigamy, the question now is this: Is a separate judicial decree of nullity necessary before an accused may raise such defense in a Bigamy case?<br><br><b>My answer is no. An accused may raise the nullity of his or her void marriage in the same criminal proceeding and the criminal court shall have jurisdiction to rule on the issue as it is determinative of the guilt or innocence of the accused.</b><br><br>As discussed, void and voidable marriages are not identical. Unlike valid or voidable marriage, a void <i>ab initio</i> marriage is inexistent and no judicial decree is necessary to establish its invalidity. The nullity of a void <i>ab initio</i> marriage may be attacked directly by filing an action attacking the validity thereof or collaterally in any proceeding where the issue of its validity is essential to the resolution of the case. The Court in a catena of cases has been very clear about this distinction.<br><br>In <i>NiÃ±al v. Bayadog</i> the Court clarified that:<blockquote>. . . [v]oidable and void marriages are not identical. A marriage that is annullable is valid until otherwise declared by the court; whereas a marriage that is void <i>ab initio</i> is considered as having never to have taken place and cannot be the source of rights. The first can be generally ratified or confirmed by free cohabitation or prescription while the other can never be ratified. A voidable marriage cannot be assailed collaterally except in a direct proceeding while a void marriage can be attacked collaterally . . .</blockquote>Similarly, in <i>De Castro v. Assidao-De Castro</i>, the Court held that "[t]he validity of a void marriage may be collaterally attacked . . . in a suit not directly instituted to question the validity of said marriage, so long as it is essential to the determination of the case. However, evidence must be adduced, testimonial or documentary, to prove the existence of grounds rendering such a marriage an absolute nullity." Again, in <i>Castillo v. De Leon-Castillo</i>, the Court reiterated that "being nonexistent, a void marriage can be collaterally attacked, while a voidable marriage cannot be collaterally attacked[.]"<br><br><b>Accordingly, a separate judicial decree of nullity is not necessary before an accused may raise the nullity of his [or her] marriage as a defense in a prosecution for Bigamy. An accused may raise the nullity of his [or her] void marriage in the same criminal proceeding by presenting testimonial and documentary evidence proving the nullity of his or her marriage, and the criminal court shall have jurisdiction to rule on the issue because its resolution will determine the guilt or innocence of the accused.</b><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Citations omitted, emphasis supplied)</blockquote>In fine, since the criminal court in a bigamy case has jurisdiction to pass upon the validity of the first and/or subsequent marriages, jurisdiction over the issue is not lodged in another tribunal. Therefore, not all elements of a prejudicial question are present. Accordingly, I concur with the <i>ponencia</i> that a pending case for declaration of nullity of marriage case cannot be considered a bar to the prosecution of the related bigamy case.<br><br>Furthermore, it bears noting that this ruling accords with the rule of lenity, as it is most favorable to the accused. It is a well-entrenched principle that penal laws are to be construed strictly against the State and liberally in favor of the accused. Hence, in the interpretation of a penal statute, the courts are bound to exercise careful scrutiny and adopt a construction that safeguards the rights of the accused.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Specifically, if the criminal courtâon the basis of its own assessment of the testimonial and documentary evidence presented by the accusedâfinds the first and/or subsequent marriages void <i>ab initio</i>, the accused must be acquitted of bigamy. Such judgment of acquittal shall be final and irreversible, regardless of the outcome of the civil case for declaration of nullity of marriage. A subsequent denial by the civil court of the petition for declaration of nullity of the first and/or subsequent marriages cannot affect the acquittal of the accused; otherwise, his or her constitutional right against double jeopardy would be violated.<br><br>On the other hand, even if already convicted by the criminal court, the accused may still be acquitted of bigamy should the civil court later find his or her first and/or subsequent marriages void <i>ab initio</i>. As held in <i>Pulido</i>, "a judicial declaration of absolute nullity of the first and/or subsequent marriages obtained by the accused in a separate proceeding, irrespective of the time within which they are secured, is a valid defense in the criminal prosecution for bigamy."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Accordingly, the accused may be acquitted on appeal on the basis of a subsequent declaration by the civil court that his or her first and/or subsequent marriages are null and void.<br><br>In all, since a pending petition for declaration of nullity of marriage is not deemed a prejudicial question to the related bigamy case, the accused is afforded more than one opportunity to prove his or her innocence.<br><br><b>FOR THESE REASONS</b>, I concur that a pending petition for declaration of nullity of marriage should not be considered a prejudicial question to the related bigamy case.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Pulido v. People</b>, 908 Phil. 573, 581 (2021) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>See id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Ponencia</i>, p. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 5-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <b>Sabandal v. Tongco</b>, 419 Phil. 13, 17 (2001) [Per J. Pardo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Supra</i> note 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 641-642.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 618.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 609.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> J. Caguioa, Concurring Opinion, <i>id.</i> at 633-634.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <b>People v. Sullano</b>, 827 Phil. 613, 625 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <b>Pulido v. People</b>, <i>supra</i> note 1, at 615.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

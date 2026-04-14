@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277514 - CHARLES "DB" SAVELLANO Y SERRANO, PETITIONER, VS. RONALD V. SINGSON AND THE COMMISSION ON ELECTIONS, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70199' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277514, November 11, 2025 ]</H2>
+			<H3>CHARLES "DB" SAVELLANO <i>Y</i> SERRANO, PETITIONER, VS. RONALD V. SINGSON AND THE COMMISSION ON ELECTIONS, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for <i>Certiorari </i>with Prayer for Issuance of Temporary Restraining Order, Writ of Preliminary Injunction and Other Injunctive Reliefs<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 20, 2024, the Commission on Elections (COMELEC) <i>En Banc</i> in SPA No. 24-060 (DC), which affirmed the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 11, 2024 of the COMELEC First Division. The COMELEC declared petitioner Charles "DB" Savellano (Savellano) a nuisance candidate and cancelled his certificate of candidacy (COC).</p><p align="center"> <b>The Facts</b> </p><p> Savellano and private respondent Ronald V. Singson (Singson) are candidates for representative of the First District of Ilocos Sur in the 2025 National and Local Elections (NLE) on May 12, 2025.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> As they stated in their respective COCs, their names shall appear in the official ballots as: </p><blockquote> <p> "SINGSON, RONALD (NPC)"<br> "CHARLES DB SAVELLANO"</p> </blockquote> <p> Savellano chose "DB" as his nickname.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> On October 16, 2024, Singson filed a petition before the COMELEC to declare Savellano a nuisance candidate under Section 69<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of Batas Pambansa Blg. 881.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> He claimed that the name "Charles DB Savellano" will confuse the electorate because of its similarity to the nickname of Singson's opponent in the previous election, Deogracias Victor "DV" Savellano (DV Savellano). At the same time, Savellano also allegedly lacked a <i>bona fide</i> intention to run for public office, given his absence from campaign events and his lack of media interviews. This shows that he has no intent to engage with the electorate or take on the responsibilities of public office. Savellano also does not have a known history of public service, has no resources or political support, and has not released any election-related materials to inform the electorate of his candidacy.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> Savellano answered on November 7, 2024, arguing that the similarity of a candidate's name to that of someone who is not a currently registered candidate is not a ground to declare a nuisance candidacy. He also regarded Singson's arguments on his absence from campaign events and media interviews, as well as his lack of resources or political support, as erroneous, since they appear to impose a property requirement. He posited that one's <i>bona fide</i> intention to run for public office should not be measured by one's resources, nor membership of any political party or even one's chances of winning the elections. He pointed out that the campaign period for the position they both seek commences on March 28, 2025; thus, he cannot be faulted for following the COMELEC's calendar and refraining from engaging in campaign-related events before then.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p align="center"> <b>The COMELEC Rulings</b> </p><p> In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> dated December 11, 2024, the COMELEC First Division granted Singson's Petition. Savellano was declared a nuisance candidate and his COC for representative of the First District of Ilocos Sur was cancelled.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> The COMELEC First Division conceded that Section 69 of Batas Pambansa Blg. 881 and COMELEC Resolution No. 11046<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> require that to be declared a nuisance candidate, the candidate must have filed a COC to cause confusion among the voters by the similarity of their name with a <i>registered candidate</i>. While this is not the case here, it nonetheless held that Savellano's use of "DB Savellano," which is similar to "DV Savellano," shows his lack of genuine intent to run for public office. It gave credence to the nine affidavits Singson presented, from residents in the locality. These residents stated that they knew DV Savellano to be a candidate in the previous election and that they were confused by the candidacy of someone named "DB Savellano" since the names are too similar. The COMELEC First Division also noted that several witnesses stated that they know Savellano by other names or nicknames, such as "Swaker" or "Charlie," but not "DB."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Further, Savellano, according to the COMELEC First Division, has not demonstrated a concrete plan to campaign and engage meaningfully with the electorate. The Division also affirmed Singson's argument that Savellano lacked a sufficient political machinery to wage an election campaign. This showed that he lacked a genuine intention to run for public office.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> Savellano moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> prompting the COMELEC First Division to elevate the matter to the COMELEC <i>En Banc</i>.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated December 20, 2024, the COMELEC En Banc denied Savellano's Motion for Reconsideration arid affirmed the ruling of its First Division.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p> The COMELEC <i>En Banc</i> found no basis to overturn the First Division's ruling. It noted that the use of "DB Savellano" resulted in actual confusion among the voters between Savellano and the previous candidate DV Savellano. It also affirmed that his lack of a concrete plan or initiative to launch a campaign, coupled with his relative anonymity shows a lack of genuine intent to run for public office.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Hence, this Petition. </p><p align="center"> <b>The Issues Before the Court</b> </p><p> The Court resolves whether the COMELEC gravely abused its discretion in declaring petitioner a nuisance candidate and cancelling his COC. </p><p> Petitioner argues that the similarity of his name to that of someone who is not a registered candidate for any position in the 2025 NLE is not a ground to declare him a nuisance candidate, since Batas Pambansa Blg. 881 and COMELEC Resolution No. 11046 state that it is the confusion that results from the similarity of names between <i>registered candidates</i> that is a ground to declare a nuisance candidate.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> Petitioner also insists that the COMELEC gravely abused its discretion in ruling that he has no genuine intent of running for public office. He points out that the grounds raised by the COMELECâi.e., that he is an independent candidate who does not have a sufficient political machinery, that he is not financially capable of mounting a successful political campaign, and that he has not been visible as a candidate through campaign events or interviewsâhave all been declared by this Court as irrelevant to a <i>bona fide</i> intention to run for public office. These grounds also appear to impose a property or financial requirement on candidates, which the Court also declared as improper grounds from which such an intention may be inferred. He also reiterates that his absence from campaign events is due to his observance of the campaign period set by the COMELEC itself. For the COMELEC then to take his absence from campaign events before that period is tantamount to punishing him from complying with election regulations.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> Further, petitioner claims that he possesses all the qualifications required for the position of representative of the First District of Ilocos Sur.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> Finally, petitioner points out that certain circumstances have transpired or are imminent showing that his name is in danger of not being included in the official ballot for the 2025 NLE. The COMELEC has announced that it will commence printing of the official ballots in January 2025. Unless injunctive relief is granted, there is a real chance, according to petitioner, that he will lose the opportunity to be fielded as a candidate and to participate in the 2025 NLE. Thus, he prays that the Court issue a Temporary Restraining Order and/or a Writ of Preliminary Injunction directing the COMELEC to cease and desist from implementing the assailed resolutions and to observe the status quo between the parties prevailing before the issuance of the assailed resolutions.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> On January 14, 2025, the Court granted petitioner's prayer for injunctive relief and issued a TRO prohibiting the COMELEC from declaring him a nuisance candidate. It also ordered the COMELEC to file its comment to the Petition. </p><p> On January 20, 2025, the COMELEC filed its Comment,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> arguing that it did not gravely abuse its discretion in declaring petitioner a nuisance candidate. In making this declaration, the COMELEC did not rely on the fact that petitioner's nickname "DB" is similar to "DV Savellano," but rather on the fact that petitioner chose this nickname even though he is not known as "DB" in the locality. To the COMELEC, this shows petitioner's intention to undermine the integrity of the electoral process and lack of genuine intention to run for public office.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The COMELEC also denies imposing a property qualification on candidates, pointing out that it was petitioner's wholesale failure to show any concrete plan to launch a district-wide campaign, his relative anonymity in politics, and absence of any sincere demonstration to engage with the electorate meaningfully that betray his lack of a <i>bona fide</i> intention to be elected into office.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Finally, to the COMELEC, these two grounds are factual determinations that fall within its authority. Absent any finding that it arrived at these facts despotically, whimsically, or with hostility, it may not be found to have gravely abused its discretion.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Private respondent Singson also filed his Comment,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> essentially agreeing with the COMELEC's factual and legal conclusions. </p><p align="center"> <b>The Court's Ruling</b> </p><p> <i>The Petition is granted</i>. </p><p align="center"> <b>I</b> </p><p> The Court's review of COMELEC's final orders and resolutions is confined to determining whether these orders or resolutions were issued with grave abuse of discretion. In doing so, the Court is guided by the specific meaning of grave abuse of discretion as entrenched in jurisprudence:<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><blockquote> <p> "Grave abuse of discretion," under Rule 65, has a specific meaning. It is the arbitrary or despotic exercise of power due to passion, prejudice or personal hostility; or the whimsical, arbitrary, or capricious exercise of power that amounts to an evasion or refusal to perform a positive duty enjoined by law or to act at all in contemplation of law. For an act to be struck down as having been done with grave abuse of discretion, the abuse of discretion must be patent and gross.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p> </blockquote> <p> For this reason, the Court stays its hand from reviewing errors of judgment ascribed to the COMELEC. Rather, the remedy of <i>certiorari</i> exists solely to correct errors of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> In this case, and as will be explained in this Decision, the Court finds that in declaring petitioner a nuisance candidate, the COMELEC gravely abused its discretion that effectively amounted to lack of jurisdiction. In <i>De Alban v. COMELEC</i>,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the Court recognized that the COMELEC's power to declare nuisance candidacies must be anchored on substantial evidence. If not, such a declaration is tainted with grave abuse of discretion.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p align="center"> <b>II</b> </p><p> Batas Pambansa Blg. 881 provides that there is a nuisance candidacy when it is shown: (a) that a COC has been filed to put the election process in mockery or disrepute; (b) that a COC has been filed to cause confusion among the voters by the <i>similarity of the names of the registered candidates</i>; or (c) by other circumstances or acts which clearly demonstrate that the candidate has no <i>bona fide</i> intention to run for the office for which the certificate of candidacy has been filed and thus prevent a faithful determination of the true will of the electorate. </p><p> These grounds share a common trait: they are all intentions that a candidate may have for filing a COC that is <i>diametrically opposed to a genuine intention of running for public office</i>. The first purpose is to mock the electoral process; the second is to confuse the voters; and the third is a catch-all provision for circumstances and acts that show a lack of <em>bona fide</em> intention. The COMELEC, aware that it cannot invoke the second ground because the similarity of names is not between registered candidates, nonetheless invokes the confusion that is purportedly created by the use of "DB" as a nickname and subsumes it under the catch-all provision, ruling that in seeking to confuse the voters, petitioner lacked a genuine intention to run for public office. </p><p> The Court agrees with the COMELEC that the deliberate use of a nickname for the purpose of confusing the electorateâ<i>whether the similarity is between registered candidates or not</i>âis indicative of a lack of <i>bona fide</i> intention to run for public office. Indeed, where a candidate uses a nickname in order to confuse voters as to the candidate's identity or to cause confusion that prevents a faithful determination of the true will of the electorate, this intention to confuse supplants a genuine intention to run for public office. </p><p> However, the similarity between nicknames alone is not sufficient evidence of this intent. Thus, COMELEC argues in its Comment to the Petition that it declared petitioner a nuisance candidate not merely because his nickname and surname are similar to "DV Savellano." It was, instead, the "totality of the circumstances"<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> that demonstrated petitioner's lack of <i>bona fide</i> intention to run for public office. To the COMELEC, this includes the fact that Savellano opted to use "DB" as his nickname when the evidence showed that he is known by other nicknames like "Swaker" and "Charlie," and that from the similarly worded affidavits submitted by private respondent from residents of the locality, it was clear that his nickname resulted in actual confusion among some of the voters. In so ruling, the COMELEC held that the use of a nickname that causes confusion among voters by its similarity to the name of another person who is not a current candidate demonstrates a lack of genuine intention to run for the elections.</p><p> The Court disagrees. </p><p> As COMELEC's own records indicate, petitioner himself indicated in his COC that his name should appear on the ballot as "CHARLES DB SAVELLANO."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> This is markedly different from the name of the previous candidate "Deogracias Victor 'DV' Savellano." If the true intent is to confuse the voters as to petitioner's identity, then the choice to include petitioner's complete name rather than emphasize the nickname goes against this intention, which weakens COMELEC's legal conclusion.</p><p> The Court also cannot consider the similarly worded Affidavits<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> from residents as substantial evidence of the lack of genuine intent. <i>First</i>, these residents stated that "DB" and "DV" were confusingly similar. There was no indication that the affiants were aware that petitioner's complete first name, nickname, and last name will appear on the ballot. <i>Second</i>, these voters were aware that "DV Savellano" was a candidate in the <i>previous</i> election, which effectively dispelled any confusion that DV Savellano is also running in the election. To the Court, then, the evidence on record simply do not support COMELEC's conclusion that Savellano did not have a <i>bona fide</i> intention of running for public office. </p><p> Apart from the use of the nickname, the COMELEC faults petitioner for failing to demonstrate a "genuine desire to engage meaningfully with the electorate" by not presenting a platform of government or political ideology or a "propensity for public service."<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Because petitioner is allegedly not known in politics, it was incumbent upon him to "take initiative to engage with the electorate in meaningful ways and demonstrate his commitment to public service."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Finally, the COMELEC cited petitioner's lack of sufficient "political machinery" and the absence of "any concrete plan to launch a district-wide campaign."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> As proof of this, private respondent presented no evidence. Instead, he only narrated that he has not seen petitioner give any interviews to the media and has not been present in any campaign events. </p><p> Allegations with no supporting substantial evidence do not have merit. While the Court understands that a candidate who acts in such a way as to disregard the electoral process or to undermine the significance of sincerely mounting a campaign arguable has no genuine intent in running for public office, this should not be taken to mean that the mere invocation of these supposed acts is enough to declare such candidate a nuisance candidate. As stated earlier, the Court in <i>De Alban</i> emphasized the burden of proof in these cases, which is substantial evidence. </p><p> Additionally, petitioner offered an explanation for why he has not yet engaged in any campaigning or engagement with the electorate apart from filing his COC: the campaign period has not started yet. Following COMELEC's own rules, the campaign period for local officials is set to start on March 28, 2025. To fault petitioner for not taking part in any campaign events or activities to boost his candidacy when the COMELEC itself has set the calendar for these activities would doubtless be unfair and run contrary to COMELEC's own rules. </p><p> All told, the COMELEC committed grave abuse of discretion in declaring Savellano a nuisance candidate despite having no substantial evidence for its declaration. As such, its Resolutions on this case must be annulled. </p><p> <b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The Resolution of the Commission on Elections <i>En Banc</i> dated December 20, 2024 and the Resolution of the Commission on Elections First Division dated December 11, 2024 in SPA No. 24-060 (DC), which declared petitioner Charles "DB" Savellano a nuisance candidate and cancelled his certificate of candidacy, are hereby <b>ANNULLED</b> and <b>SET ASIDE</b>. </p><p> His certificate of candidacy is hereby <b>ORDERED</b> to be <b>REINSTATED</b> and he is <b>DECLARED</b> a candidate for representative for the First District of Ilocos Sur in the May 12, 2025 National and Local Elections. </p><p> Finally, the Temporary Restraining Order issued by the Court on January 14, 2025 is hereby <b>MADE PERMANENT</b>. </p><p> <b>SO ORDERED.</b> </p><p> <i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Zalameda, Rosario, J. Lopez, Dimaampao, Marquez, Singh</i>, and <i>Villanueva, JJ</i>., concur. <i><br> Hernando<sup style="COLOR: RGB(255, 0, 0);">*</sup></i> and <i>Lazaro-Javier,<sup style="COLOR: RGB(255, 0, 0);">*</sup> JJ</i>., on official business. <i><br> Inting<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup></i> and <i>Gaerlan,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> JJ</i>., no part. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business <p><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> No part </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> No part </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-38. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 61-67. Signed by Chairperson George Erwin M. Garcia and Commissioners Socorro B. Inting, Marlon S. Casquejo, Aimee P. Ferolino, Rey E. Bulay, Ernesto Ferdinand P. Maceda, Jr., and Nelson J. Celis.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 45-58. Signed by Presiding Commissioner Socorro B. Inting, and Commissioners Aimee P. Ferolino and Ernesto Ferdinand P. Maceda, Jr.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, p. 46.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Section 69. <i>Nuisance candidates.</i> â The Commission may, <i>motu proprio</i> or upon a verified petition of an interested party, refuse to give due course to or cancel a certificate of candidacy if it is shown that said certificate has been filed to put the election process in mockery or disrepute or to cause confusion among the voters by the similarity of the names of the registered candidates or by other circumstances or acts which clearly demonstrate that the candidate has no bona fide intention to run for the office for which the certificate of candidacy has been filed anti thus prevent a faithful determination of the true will of the electorate.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> OMNIBUS ELECTION CODE (1985). </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, pp. 46-47.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 45-56. </p><p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 55. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Rules of Procedure on the Filing of: (1) Petition to Deny Due Course to or Cancel Certificate of Candidacy; (2) Petition to Declare a Nuisance Candidate; and (3) Petition for Disqualification in Connection with the 2025 National and Local Elections Including the Bangsamoro Autonomous Region in Muslim Mindanao Parliamentary Elections (2024). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, pp. 51-53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 53-55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 68-86. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 89. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 61-67. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 65. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Id at 64-65. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 10-15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 16-30. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 21-22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 30-32. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 169-182. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 172-175. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 176-179. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 11-12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 156-165. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Beluso v. Commission on Elections</b>, 635 Phil. 436, 443 (2010) [Per J. Peralta, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Asilo v. Judge Gonzales-Betic</b>, 956 Phil. 1, 11 (2024) [Per C.J. Gesmundo, First Division], <i>citing</i> <b>Madrigal Transport, Inc. v. Lapanday Holdings Corporation</b>, 479 Phil. 768, 778 (2004) [Per J. Panganiban, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 921 Phil. 524 (2022) [Per J. M. Lopez, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 546-547. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 174. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 101-111. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 179. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

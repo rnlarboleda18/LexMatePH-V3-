@@ -1,7 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 
 const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, onSelectRatio, paragraphFilter }) => {
+    const { getToken } = useAuth();
     const [groupedLinks, setGroupedLinks] = useState({});
     const [availablePonentes, setAvailablePonentes] = useState([]);
     const [ponenteFilter, setPonenteFilter] = useState('');
@@ -15,11 +17,14 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
             setLoading(true);
             setError(null);
             try {
-                // Construct URL
                 let url = `/api/codex/jurisprudence?statute_id=${statuteId}&provision_id=${articleNum}`;
                 if (subject) url += `&subject=${subject}`;
 
-                const res = await fetch(url);
+                let token = null;
+                try { token = await getToken(); } catch (_) { /* ignore */ }
+                const headers = token ? { 'X-Clerk-Authorization': `Bearer ${token}` } : {};
+
+                const res = await fetch(url, { headers });
                 if (!res.ok) throw new Error("Failed to fetch jurisprudence");
 
                 const data = await res.json();
@@ -67,6 +72,8 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
         };
 
         fetchLinks();
+    // getToken is a stable function reference from Clerk — safe to omit
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [articleNum, statuteId, subject, paragraphFilter]);
 
     if (!articleNum) return null;

@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 265058 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. MARK REY P. PA&Ntilde;OSA, ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70077' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 265058, July 28, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. MARK REY P. PAÃOSA, ACCUSED-APPELLANT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Brought before this Court for review via this Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> is the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA) upholding the conviction of accused-appellant Mark Rey P. PaÃ±osa (Mark Rey) for the crime of murder, in CA G.R. CR-HC No. 02579-MIN. Mark Rey was charged with murder in an Information,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> the inculpatory averments of which read: </p><blockquote> <p> That in the afternoon of July 22, 2017 or thereabout in the Municipality of Mutia, Zamboanga del Norte, within the jurisdiction of this Honorable Court, the above-named accused, with intent to kill by means of treachery, abuse of superior strength, cruelty and with evident premeditation, did then and there willfully, unlawfully and feloniously kill RAVEN V. RIVERA with no chance of the victim to defend herself in a sudden and unexpected manner, tended to ensure the execution of the crime, without any danger to the person of the accused by inflicting several injuries upon the victim in the different parts of her body and fatally strangled her neck that caused her instantaneous death as shown by the victim's Medico-Legal Report, that as a result of the commission of the said crime, the heirs of the herein victim suffered damages in the amount to be proven in court. </p> <p> CONTRARY TO LAW[.]<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p> </blockquote> <p> At his arraignment, Mark Rey pled not guilty to the charge hurled against him.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> The prosecution presented the following witnesses during the trial: 1) Analou Rivera Mosquera (Analou), the mother of Raven V. Rivera (Raven); 2) Police Superintendent Alex Rodriguez Uy (Dr. Uy); 3) Fermencio Guirra (Fermencio); and 4) Police Staff Sergeant Riclu Acbayan (Sergeant Acbayan). </p><p> Analou narrated that on March 17, 2017, Raven began living with Mark Rey in Buenasuerte, Mutia, Zamboanga del Norte. Raven was 16 years old when Mark Rey asked for her hand in marriage. Following their engagement, Analou saw Mark Rey only three times; the last visit was on her birthday on July 9, 2017, when both he and Raven came to visit her in Sibutad. Mark Rey left that evening purportedly because he did not like staying there, but Raven stayed with her mother for a week. During such time, Raven had swimming and disco activities with her friends.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> According to Analou, Mark Rey sent a text message to Raven on July 17, 2017, asking her to return home on her own as he had been involved in an accident and would be unable to fetch her. Analou read the message on Raven's mobile phone and felt that something was amiss in the couple's relationship. Analou advised Raven to resolve any issues they had and to reach out to her if they encountered any problems. Later that day, Raven left for Mutia, and that was the last time Analou saw her alive.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> On the evening of July 22, 2017, Analou received a call informing her that Raven had committed suicide. Analou and her husband immediately went to PiÃ±an Hospital, where they saw Raven's lifeless body. When Mark Rey's mother and sister informed her that Raven had taken her own life, Analou was stunned. She struggled to understand why Raven would do such a thing. Analou felt the need to talk to Mark Rey. However, when she spoke with him the following day, he denied having any knowledge of the incident.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> Unconvinced that her daughter committed suicide, Analou sought help from the police, who recommended that an autopsy be conducted. On August 1, 2017, Dr. Uy conducted the autopsy.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> When he testified, Dr. Uy admitted having performed the autopsy at Gamalinda Funeral Homes in Dapitan City on August 1, 2017, shortly after his arrival from Manila. He described his findings, including a contusion on Raven's right eye and a round contusion on her right cheek, which he believed could have been caused by a blunt instrument, such as wood or a knuckle of a hand.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Additionally, Dr. Uy made the following findingsâ </p><blockquote> <p> There was <u>ligature mark caused by constriction</u> manifested by a darker color [on] the face than [on] the body â¦ noticed two loops ... demonstrated by tying a rope from the back to front then to the back of the neck and then crisscrossing on the right ... the <u>cause of death could not be by "hanging" but strangulation</u> because of the absence of the inverted V mark, absence of post mortem lividity of the legs, absence of Tardieu spots, no deformity or elongation of the neck, and the hyoid bone was not fractured ... a horizontal mark on the neck measuring 18 cm, hyoid bone was intact and livor mortis was concentrated ... the injuries were inconsistent with "hanging" ... the victim died while lying down. </p> <p> [F]ound internal injuries [on] her chest and abdomen. Intestines and mesentery (where blood vessels are located) of the abdomen were bloody and hemorrhagic which means that "something was done." Muscles in the neck were very dark. Trachea and esophagus were congested. Stomach was empty which indicates that the victim died in the afternoon or night[ ]time.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p> </blockquote> <p> Meanwhile, Fermencio testified that he was a close neighbor of Mark Rey in Buenasuerte, Mutia, living five to seven meters away from his family. On the afternoon of July 22, 2017, Fermencio was at home when Mary Joy PaÃ±osa (Mary Joy), the sister of Mark Rey, came to him and ask for help. She claimed that Raven had taken her own life. Fermencio immediately went to the PaÃ±osa residence and found Raven's lifeless body lying on a mat. Fermencio could not revive Raven despite efforts to do so. Several other people and neighbors were present, including Mark Rey, who was holding Raven. Raven was brought to the hospital even if Fermencio told the family that she was already dead.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> Fermencio narrated further that earlier that morning, he saw Raven taking a bath outside their house. Around 3:00 or 4:00 in the afternoon, he saw her buying brown sugar. Shortly after, he was called for assistance. He also recalled hearing an argument between Raven and Mark Rey at around 10:00 a.m. Rivera wanted to attend the <i>Araw ng Mutia</i> celebration but PaÃ±osa did not allow her.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Finally, Sergeant Acbayan testified that on July 22, 2017, he received a report from Mary Joy regarding a suicide incident. He responded promptly and went to the scene. Upon arrival, he, and his team investigated and discovered a rope tied to a beam, approximately ten feet above the ground, in the middle of the room. The victim had already been taken to the hospital.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> In an effort to secure Mark Rey's acquittal, the defense presented him as a witness along with Mary Joy, Erlito Sisi (Erlito), and Estrella Racho (Estrella). It espoused the following version of facts: </p><p> Mark Rey was the live-in partner of Raven for four months, beginning March 2017. On July 22, 2017, he was with Mary Joy, Rey Anthony Bengua (Rey), and Raven. According to Mark Rey, it was raining that day, so they decided to have porridge. After eating, Mary Joy went outside to wash her clothes, while Rey left to go home. Meanwhile, Raven went inside their room.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> Around 5:00 p.m., Mark Rey went to their room to sleep, but found the door locked. He knocked repeatedly, but Raven did not respond. Concerned, he climbed the door to see what Raven was doing. To his shock, he discovered Raven hanging from a rope. Panicked, he shouted, "<i>Te! Tabang, Te, kay gahikog si [Raven]!</i>" Mark Rey then climbed over the door, entered the room, and untied Raven from the rope. By then, Raven's face had already turned pale, and her eyes were closed.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> Mary Joy corroborated her brother's testimony, recounting that while she was washing clothes, she heard his shout and quickly rushed to the room. Upon entering, she saw Raven hanging.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Meanwhile, Erlito and Estrella, who were also neighbors of Mark Rey and Raven, went to the room. Upon arrival, they saw Mark Rey cradling Raven in his arms, visibly crying. Erlito attempted to massage Raven in an effort to revive her, but it was clear that she was already lifeless, so they decided to take her to the hospital. While massaging her, Erlito did not see any visible bruises.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> In due course, Branch 8, Regional Trial Court, Dipolog City (RTC), found Mark Rey guilty beyond reasonable doubt of murder.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The RTC disposed in this wise: </p><blockquote> <p> <b>WHEREFORE,</b> premises considered, the accused [<b>PAÃOSA</b>], is found <b>GUILTY</b> beyond reasonable doubt of murder and sentenced to suffer the penalty of <i>reclusion perpetua</i> without eligibility for parole. He is ordered to pay the heirs of Raven V. Rivera [PHP] 100,000 as civil indemnity, [PHP] 100,000.00 as moral damages, and [PHP] 100,000.00 as exemplary damages. </p> <p> Accused shall pay an interest of six percent (6%) [per annum] on the aggregate amount of the monetary awards computed from the time of finality of this Decision until full payment. </p> <p> The herein accused shall be credited the period of his detention (i.e. April 25, 2018) in accordance with existing laws and procedures. </p> <p> COSTS against the accused. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original) </p> </blockquote> <p> In ruling against Mark Rey, the RTC determined that the prosecution had proven beyond reasonable doubt that he was responsible for Raven's death, primarily based on the compelling testimony of Dr. Uy, the medico-legal officer who conducted the autopsy.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> The RTC was fully convinced that Mark Rey strangled Raven to death, with the cause of death classified as "asphyxia secondary to strangulation," ruling out the possibility of suicide. This conclusion was based on the expert testimony of Dr. Uy, who provided a detailed explanation of his post mortem examination during the trial, along with other circumstantial evidence presented by the prosecution witnesses. According to the RTC, Dr. Uy's findings, particularly regarding the victim's injuries, were inconsistent with the defense's claim of innocence. Dr. Uy also identified other internal and external injuries on Raven's body, further disproving the defense's argument.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Mark Rey appealed to the CA,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> primarily arguing that his conviction was erroneous as the prosecution relied heavily on circumstantial evidence to secure a guilty verdict, with no eyewitnesses to the incident.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> As it happened, the CA affirmed Mark Rey's conviction, ruling that although there was no eyewitness who directly identified Mark Rey as Raven's killer, the circumstantial evidence presented, when considered as a whole, was sufficient to support and justify his conviction beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The CA likewise highlighted that the findings from the police crime laboratory made it clear that Raven could not have died by suicide or caused her own death by hanging.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Furthermore, the CA emphasized that Dr. Uy's post mortem examination confirmed the cause of Raven's death as asphyxia due to ligature strangulation, thereby eliminating suicide as the cause of death.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> The CA's discourse on Mark Rey's unusual behavior both during and after the discovery of his partner's death is quite tellingâ </p><blockquote> <p> <i>First</i>, his sister tried to impress upon the trial court that [Mark Rey] did everything to save the victim, but Mary Joy's portrayal of her brother's innocence is ridiculous - that when she entered the room, a hysterical [Mark Rey] was already cradling [Raven], <i>at the same time</i> trying to loosen and remove the rope from her neck. How did [Mark Rey] have the superhuman strength to do all of this without using any chair, furniture, or ladder to bring the already lifeless Raven[] down to the floor? </p> <p> <i>Second</i>, when Analou reached PiÃ±an hospital after having been informed of her daughter's death, [Mark Rey] was nowhere to be found; only his mother, Nancy, and sister, Mary Joy, were there. According to [Mark Rey] himself, he followed a stranger's advice to leave his dead girlfriend in the hospital. If he truly loved his partner and was innocent of the crime, he would have had the courage to face her forlorn mother and explain to her, in detail, the tragic loss of her beloved child. His unexplained flight is clearly an indication of guilt. The guilty flee when no man pursueth but the innocent are as bold as a lion. </p> <p> The Court also finds a very telling inconsistency in Mary Joy's testimony. She claimed that the door to the room where [Raven] allegedly locked herself in was initially locked. She was doing the laundry and when she heard her brother's scream for help, she rushed back to the house. However, the room remained locked because, according to Mary Joy, her brother climbed over the gap between the wall and ceiling to allegedly save [Raven]. Yet, when Mary Joy shouted for her brother to open the door, [Mark Rey] did open the door for her, and rushed back to carry the "hanging" [Raven]. </p> <p> To <i>Our</i> mind, this situation is quite confusing â did [Mark Rey] leave [Raven] "hanging" for several seconds while he ran to open the locked door for Mary Joy? No one in the right mind would, not even for a split second, leave a person hanging from a rope, at the threshold of death, just to open a locked door. If he was truly in the middle of a life or death emergency, assuming that he was indeed carrying [Raven] to prevent the pull of gravity from killing her, [Mark Rey] could've instead screamed for his sister to just kick the door in, as it was made of light materials anyway, but according to Mary Joy, he literally ran to open the door for her while [Raven] was "hanging"? The question remains: did Mary Joy really see [Raven] "hanging" when she entered the room, as she initially claimed, or was this all an elaborate and fabricated lie to push for her brother's innocence? Regardless of what Mary Joy's version of the incident may be, her claims have been debunked by scientific evidence, and by no stretch of <i>Our</i> imagination can her painted scenario be considered believable.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p> </blockquote> <p> Professing his innocence, Mark Rey now seeks a reversal of the judgment of conviction from the Court through this Appeal.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> In compliance with the April 19, 2023 Resolution<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> of the Court, the Office of the Solicitor General manifested that in lieu of supplemental brief, it was adopting its Appellee's Brief submitted before the CA. </p><p align="center"> <b>The Court's Ruling</b> </p><p> In cases of disputed death, such as when it is unclear whether the cause was suicide or homicide/murder, the <b>circumstances surrounding the death</b> become pivotal in determining the truth. </p><p> <i>People v. Lignes</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> is instructiveâ </p><blockquote> <p> It is a settled rule that circumstantial evidence is sufficient to support a conviction, and that direct evidence is not always necessary. This Court has recognized the reality that in certain cases, due to the inherent attempt to conceal a crime, it is not always difficult to obtain direct evidence. </p> <p> . . . . </p> <p> No general rule can be laid down as to the quantity of circumstantial evidence which in any case will suffice. All the circumstances proved must be consistent with each other, consistent with the hypothesis that the accused is guilty, and at the same time inconsistent with the hypothesis that he is innocent, and with every other rational hypothesis except that of guilt. </p> <p> It has been said, and we believe correctly, that the circumstances proved should constitute an <b>unbroken chain which leads to one fair and reasonable conclusion which points to the accused, to the exclusion of all others, as the guilty person</b>. From all the circumstances, there should be a combination of evidence which in the ordinary and natural course of things, leaves no room for reasonable doubt as to his guilt. Stated in another way, where the inculpatory facts and circumstances are capable of two or more explanations, one of which is consistent with innocence and the other with guilt, the evidence does not fulfill the test of moral certainty and is not sufficient to convict the accused.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Emphasis supplied; citation omitted) </p> </blockquote> <p> Lignes further teaches that the Rules of Court itself recognizes that circumstantial evidence is sufficient for conviction, under certain circumstances.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></p><p> Rule 133, Section 4 of the Rules on Evidence provides: </p><blockquote> <p> Section 4. <i>Circumstantial evidence, when sufficient</i>. â Circumstantial evidence is sufficient for conviction if: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">There is more than one circumstance;</div></td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td><div align="justify">The facts from which the inferences are derived are proven; and</div></td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td><div align="justify">The combination of all the circumstances is such as to produce a conviction beyond reasonable doubt.</div></td> </tr> </tbody></table> </blockquote> </blockquote> <p>In the case at bench, the Court finds that the prosecution established several circumstances, which, when considered together, lead to the conclusion that Mark Rey is responsible for Raven's death. </p> <p> <i>First,</i> on the morning of July 22, 2017, Fermencio, a close neighbor of Mark Rey and Raven, overheard the couple arguing because Raven wanted to attend the <i>Araw ng Mutia</i> celebration, but Mark Rey refused to allow her to go.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Fermencio further testified that he saw Mark Rey slap Raven during the argument.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> He also noted that the fight continued into the afternoon, and he was able to witness the entire confrontation because the window to the room where the couple was fighting was open.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> <i>Second</i>, the ten-foot distance from the beam to the ground, in contrast with Raven's height of 170 cm, raises doubts about her ability to tie the rope to a beam twice her height without using something to climb on. Sergeant Acbayan, the police officer who responded promptly after receiving a report from Mary Joy about the incident, testified that upon investigating the room where Raven's body was found, there was no bench or any furniture inside that could have been used by the victim to reach the high beam and tie the rope.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> <i>Third</i>, as observed by the CA, given the gap between the room's wall and ceiling, it seems logically impossible that Raven could have climbed up to the window or bridging area and forcefully propelled herself onto the beam so she could tie the rope to hang herself to death, without Mark Rey or Mary Joy hearing any noise. Furthermore, the striking blue color of the rope that Raven supposedly used would have been highly visible to anyone inside the small house, as the beam from which the rope hung could be seen from any vantage pointâthis is because the walls of the house did not extend all the way to the ceiling.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> <i>Lastly, and perhaps the most compelling piece of evidence</i>, are the post mortem findings of Dr. Uy, the medico-legal officer who conducted the autopsy on Raven's body. His findings revealed that the cause of her death was "strangulation" and not hanging. The Medico-Legal Report<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> stated: </p><blockquote> <p> <b>POST-MORTEM FINDINGS</b></p> <p> â¦.</p> <p> <b>HEAD AND NECK</b></p> <ol><li> Contusion, right orbital region . . .</li><li> Contusion, right maxillary region . . .</li><li> Ligature mark around the neck measuring 18x1cm direction was horizontal from the posterior to anterior going again to posterior and its (<i>sic</i>) below the hyoid bone, there is a crisscross mark at the right lateral posterior neck a second ligature mark same direction as the first one measuring 16x1cm, making a double at the anterior neck region. </li></ol> <p> Internal findings: no scalp hematoma and fracture of the skull was noted . . . but at the neck region, the strapped muscle[s] are contused while the trachea and esophagus were hemorrhagic and congested. </p> <p> CHEST AND ABDOMEN</p> <ol><li> Contusion, right chest region . . . </li></ol> <p> Internal findingsâ there is hemorrhage and congestive [sic] of the intestine and mesentery. </p> <p> . . . . </p> <p> <b>COD</b>- Strangulation<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p> </blockquote> <p> Dr. Uy likewise testified in court to shed light on the aforementioned medical findingsâ </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td width="95%"><div align="justify">So[,] when you saw the ligature mark and you observed that it was a double loop, crisscross, what was your conclusion or your opinion regarding these marks?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Strangulation, ma'am. And also, ma'am, the other difference between strangulation and hanging is the position of the victim. I saw that the entire leg has no post mortem lividity. <i>Kasi ang "hanging," pagnakabitay ka, ang gravity ng dugo ay pababa. Hindi na aakyat 'yan kasi nakasara. Hindi na maka-circulate and one thing, in hanging, there is a tardieu spot</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So[,] what is the significance of tardieu spot?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Minsan makikita ito sa dengue, lagnat, pero ito ay hindi. Wala siyang dengue. Isa sa mga significance niyan ang bursting of the blood vessel kasi hindi na makaakyat. So, ang pressure niya ay pababa</i>. The blood is liquid. <i>Diba kapag may breakage, doon siya lalabas. Iyon ang nangyari sa balat niya, ma'am.</i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">You mean to say, there were tardieu spots or absence of tardieu spot?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Absence of tardieu spots.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">So, absence of tardieu spots?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">So[,] it's not hanging. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So[,] you're saying that the victim did not die by hanging. So, what was her possible position at the time of death?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Nakita ko sa likod niya may maraming post mortem lividity, 'yung livor mortis. The importance of livor mortis is the position of the dead body. It is where the blood would stay because it will no longer circulate. Ibig sabihin, ang nangyari diyan ay habang nakatali 'to ay nakahiga siya.</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, you are saying that, when she was strangled, she was lying down?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Lying down, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">So[,] it's not possible that she was hanging from the top using a rope? And you said this because not only with the ligature mark that you saw, but also because of the absence of tardieu spots and also the livor mortis which is concentrated at the back of the victim? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am, and also in hanging, the injury will be above or below the hyoid bone. <i>So may breakage 'yan pagkatapos ang leeg kapag nakabitay ay mahaba.</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Which one is elongated?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">The neck, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">But in this case, there was none? There was no deformity on the neck? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">None, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about the hyoid bone you mentioned earlier?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">There is no fracture, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">If it is death by hanging or if she hanged (<i>sic</i>) herself, then the hyoid bone will be fractured? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">In this case, what happened to her hyoid bone?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Intact, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Okay. Now, since this is an autopsy, you also made some internal findings. By internal findings, you mean what?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Sa autopsy, <i>hindi lang external ang titingnan natin kundi pati na rin sa loob. Kasi sa loob, dito natin makukumpirma kung tama ang hinala natin</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So[,] in this case, what did you find out when you opened the body of this victim?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">They hyoid bone is not fractured and then <i>madugo</i> talaga ang dito. And also, when I opened up the body, I found out the intestine and mesentery of the abdomen is bloody, haemorrhagic. So, it means that something was done.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Was it not because she was already embalmed that caused the injury of her stomach?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, ma'am. The abdomen is clear if there is no injury.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So[,] the injury in the abdomen was not caused by the embalming procedure?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">. . . . </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">And while the trachea and esophagus were haemorrhagic and congested. So, what do you mean by that?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The trachea is the airway and esophagus is the tube that connects the throat to the stomach.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">Haemorrhagic and congested. Please explain that in [layperson's] term. </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Madugo 'yong lalamunan kaya ibig sabihin ay nagkaroon talaga ng injury sa lalamunan niya, ma'am</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">How about the congested, when you say congested? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Pulang-pula tapos namaga</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Now, is that consistent also with hanging?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Madalas sa hanging, ma 'am dito ang injury.</i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What is that?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Hyoid bone and there's also an injury in the trachea and more injury I the stapped muscle. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So[,] that made you conclude that it was strangulation and not by hanging?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Because these injuries were noted and these are inconsistent with hanging?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">And you also opened the chest and abdomen of the victim?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, you said in your findings contusion, right chest region. . . what must have caused this contusion?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Caused by blunt instrument, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, for example, if a person is hanged, can this be incurred or can this injury be sustained?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">. . . .</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, you said that there was a haemorrhage and congestion of the intestine and mesentery. So, as a doctor, what does that tell you?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">That is an injury known as countercoup injury. <i>Ang countercoup injury, kunwari sinuntok ka dito pero wala kang makikitang pasa kundi nasa loob</i>[.]</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>. . . . </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">But did you find any external injuries on her abdomen?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, ma'am. <i>Kaya po binuksan natin ang katawan ng tao para makita natin kung may mga circumstantial evidence of injury doon sa loob.</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, in her case, you did not find any in her abdomen?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Kaya nga po, ma'am[,] <i>may countercoup injury.</i></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, the assailant, what did he do with the victim that caused the internal injury?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Maybe boxing, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, that's the only possible way that a person would be able to sustain his kind of internal injury?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>'Yon lang ata, ma'am[,] kasi kung kahoy ang ginamit ay siguro makikita natin kasi malaking contusion niyan</i>. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Okay. So, if it's a fist, it may not lead an external mark? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">If it's a fist or hand? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Common sa suntukan yan, ma'am. Walang injury sa labas pero masakit. Pero noong inano ko ay matigas ang tiyan</i>. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So if it's hard, what does that tell you?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">There is an injury inside, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>. . . . </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, considering, Doc[,] that you conducted the autopsy [on] August 1, 2017 and accordingly, she died on July 22, 2017. Does the length of time have an effect on the result of your autopsy?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">How about the medicine that was injected to the body caused by embalming? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">The formalin, ma'am?</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Yes. </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Hindi makakaapekto po maliban lang kung ang kukunin natin ay DNA or ang probable cause ng kamatayan ay poisoning, ma'am</i>.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, what was your conclusion?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td> <div align="justify">Strangulation, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">What was used by the assailant in strangulating [sic] the victim?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Nakita ko ang ligature mark ay may groovings. So, rope ang ginamit nito</i>. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">. . . . </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, based on the concentration of the blood at the back, what was your conclusion again? </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">That she died lying down. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">You also mentioned the absence of a tardieu spot. </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">Yes, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">Where can you find tardieu spot if it's a suicide?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">At the legs and thighs. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">. . . You did not find any?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">None, ma'am. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2">....</td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">So, aside from these marks, ligature marks, liver mortis, no other significant injuries were found?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">None, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td> <div align="justify">So, that made you conclude that it was by strangulation. </div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify"><i>Oo, ma'am[,] at saka 'yong abdomen kasi walang magpapakamatay na madugo ang tiyan at ang 'yang injuries sa mata at maxillary</i>. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q:</div></td> <td><div align="justify">So, what made you think that this is not a suicide?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">: <i>Ma'am, magtatanong ako sa inyo. Kung magsu-suicide ka ba, kailangan ba may black eye?</i><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p> There is nothing in the record to suggest that Dr. Uy had any improper motive to falsify his medical findings regarding Raven's death or to undermine Mark Rey's claim of innocence. As found by the RTC and affirmed by the CA, Dr. Dy's testimony is deserving of full faith and credit. His clear, consistent, and straightforward statements demonstrate the hallmarks of credibility. </p> <p> Thus, based on the results of the autopsy and the testimony of Dr. Uy, an expert witness whose opinion warrants the Court's respect and significant weight, the apparent absence of any manifestation (except the ligature mark) of hanging â such as an inverted V-shape mark, post mortem lividity of the legs, tardieu spots, deformity or elongation of the neck, injury of the hyoid bone or vertebral injury â along with other surrounding circumstances, <i>strongly indicate that this was <b>not</b> a case of suicide by hanging</i>. These factors decisively rule out the possibility of suicide, as claimed by Mark Rey. </p><p> Given the circumstances, the presumption of innocence that once shielded Mark Rey, is now shattered by the overwhelming weight of the physical and testimonial evidence against him. The circumstances laid bare before this Court form an unbroken chain, each link pointing inexorably toward one undeniable conclusion: <b><i>he is responsible for Raven's tragic death</i></b>. </p><p> <i>The next query leaps to the eye: is Mark Rey guilty of murder?</i> </p><p> Murder is defined and punished by Article 248 of the Revised Penal Code, viz.â </p><blockquote> <p> ARTICLE 248. Murder. â Any person who, not falling within the provisions of Article 246 shall kill another, shall be guilty of murder and shall be punished by <i>reclusion perpetua</i> to death, if committed with any of the following attendant circumstances: </p> <blockquote> <p> 1. With treachery, taking advantage of superior strength, with the aid of armed men, or employing means to weaken the defense or of means or persons to insure or afford impunity. </p> <p> 2. In consideration of a price, reward[,] or promise. </p> <p> 3. By means of inundation, fire, poison, explosion, shipwreck, stranding of a vessel, derailment[,] or assault upon a street car or locomotive, fall of an airship, by means of motor vehicles, or with the use of any other means involving great waste and ruin. </p> <p> 4. On occasion of any of the calamities enumerated in the preceding paragraph, or of an earthquake, eruption of a volcano, destructive cyclone, epidemic, or any other public calamity. </p> <p> 5. With evident premeditation. </p> <p> 6. With cruelty, by deliberately and inhumanly augmenting the suffering of the victim, or outraging or scoffing at his person or corpse. </p> </blockquote> </blockquote> <p> In its ruling, the RTC concluded that the crime was committed with the qualifying circumstances of abuse of superior strength and treachery, ratiocinating as follows: </p><blockquote> <p> [Raven] was weaker in built as she was only 16 and frail (as she was already pregnant that time) while [Mark Rey] was older and a strong man. Comparing their built and sex, [Mark Rey] possesses indeed a superior strength. </p> <p> [Raven] was caught off guard when Mark Rey finally used a rope to wrap it around in her neck twice and then finally strangled her to death. She was there inside the room trying to take some rest while relieving herself emotionally from the violent tendencies of [Mark Rey]. The swiftness by which the attack was carried gave out the victim no chance at all to evade when the accused beat her and finally strangled her with the rope nearby. To the mind of this court, this is still treachery. The fact that the victim was facing the accused when he hit her with his fist on her eye, cheek and abdomen and then strangled her is of no consequence. Even a frontal attack could be treacherous when unexpected and on an unarmed victim who would be in no position to repel the attack or avoid it. On said premises, this court hereby rules that indeed the crime of murder was committed. </p> <p> A man who professes love to a woman and who believes him to be her lover but then finally kills her, is treachery. A woman who even leaves her home to join his lover surely would not expect that she would suffer such a tragic fate. This is treachery to the utmost. Believing that [Mark Rey] really loved her, [Raven] did not really expect that he would kill her by strangulation. But perhaps, too much love, indeed, killed her.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></p> </blockquote> <p> <b><i>The Court could not agree less.</i></b> </p><p> In the case of <i>People v. MiraÃ±a</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> this Court explicated thatâ </p><blockquote> <p> [F]or abuse of superior strength to be properly appreciated as a qualifying circumstance, it must be shown that the advantage of superior strength was purposely and consciously sought by the assailant. </p> <p> Abuse of superior strength is present whenever there is a notorious inequality of forces between the victim and the aggressor, assuming a situation of superiority of strength notoriously advantageous for the aggressor selected or taken advantage of by him in the commission of the crime. The fact that there were two persons who attacked the victim does not per se establish that the crime was committed with abuse of superior strength, there being no proof of the relative strength of the aggressors and the victims. <b>The evidence must establish that the assailants purposely sought the advantage, or that they had the deliberate intent to use this advantage. To take advantage of superior strength means to purposely use excessive force out of proportion to the means of defense available to the person attacked. The appreciation of the aggravating circumstance depends on the age, size, and strength of the parties</b>.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis in the original; citation omitted) </p> </blockquote> <p> In the case at bench, the prosecution failed to present evidence that Mark Rey deliberately sought to exploit any advantage of superior strength. The testimonies of the witnesses, taken as a whole, do not establish that he consciously used his age, size, or strength to facilitate the commission of the crime. In fact, the significant disparity between the physical attributes of Raven and Mark Rey was not clearly demonstrated. Simply noting that Raven was younger and physically weaker than Mark Rey is insufficient to establish the qualifying circumstance of abuse of superior strength. </p><p> Meanwhile, with regard to the qualifying circumstance of treachery, the following elements must be established: (a) the employment of means of execution which gives the person attacked no opportunity to defend or retaliate; and, (b) said means of execution were deliberately or consciously adopted.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Evidently, both elements must be present. </p><p> However, in this case, neither element was proven by the prosecution. The facts presented indicate that the killing was more a consequence of a sudden impulse triggered by a prior argument, rather than a planned or deliberate action. There is no treachery when the assault is preceded by a heated exchange of words between the accused and the victim; or when the victim is aware of the hostility of the assailant towards the former.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> Since abuse of superior strength and treachery were not proved beyond reasonable doubt, this Court holds and so rules that <b><i>Mark Rey can only be held liable for homicide</i></b>. </p><p> Pursuant to Article 249 of the Revised Penal Code, the penalty for homicide is <i>reclusion temporal</i>. In the absence of any modifying circumstance, the penalty shall be imposed in its medium period. Applying the Indeterminate Sentence Law, the penalty next lower in degree is <i>prision mayor</i> with a range of six years and one day to 12 years. </p><p> Thus, applying the Indeterminate Sentence Law, the maximum penalty will be selected from the above range, with the minimum penalty being selected from the range of the penalty one degree lower than <i>reclusion temporal</i>, which is <i>prision mayor</i> [six years and one day to 12 years]. Hence, the indeterminate sentence of eight years and one day of <i>prision mayor</i>, as minimum, to 14 years, eight months, and one day of <i>reclusion temporal</i>, as maximum, should be hereby imposed. </p><p> Finally, in view of the downgrading of the crime to homicide, the Court's ruling in <i>People v. Jugueta</i><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> directs that the damages awarded be modified to civil indemnity and moral damages only, of PHP 50,000.00 each. </p><p> It is doctrinal that all damages awarded to the heirs of Raven should earn legal interest at the rate of six percent per annum from the date of finality of this Decision until full payment. </p><p> <b>ACCORDINGLY</b>, the Appeal is <b>PARTIALLY GRANTED</b>. Accused-appellant Mark Rey P. PaÃ±osa is adjudged GUILTY of homicide, for which he is <b>SENTENCED</b> to suffer the indeterminate penalty of eight years and one day of <i>prision mayor</i>, as minimum, to 14 years, eight months, and one day of<i> reclusion temporal</i>, as maximum. </p><p> Accused-appellant Mark Rey P. PaÃ±osa is further <b>ORDERED</b> to <b>PAY</b> the heirs of Raven V. Rivera the amount of PHP 50,000.00 as civil indemnity and PHP 50,000.00 as moral damages. All monetary awards shall earn interest at the legal rate of 6% per annum from the date of the finality of this Decision until fully paid. </p><p> <b>SO ORDERED.</b> </p><p><i>Inting<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup></i> and <i>Gaerlan, JJ</i>., concur. <i><br> Caguioa<sup style="COLOR: RGB(255, 0, 0);">*</sup> (Chairperson), J</i>., on official business. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J.</i>, on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Acting Chairperson.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-8. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2] </sup><i>Id.</i> at 10-33. The December 20, 2021 Decision was penned by Associate Justice Loida S. Posadas-Kahulugan, with the concurrence of Associate Justices Edgardo A. Camello and Anisah B. Amanodin-Umpa of the Twenty-First Division, Court of Appeals, Cagayan de Oro City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> RTC records, pp. 1-2. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 1.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 58-60. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> TSN, Analou Rivera Mosquera, February 18, 2019, pp. 3-6. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 6. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 7-8. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 8.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> TSN, P/Supt. Alex Rodriguez Uy, March 18, 2019, pp. 6-7.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> RTC records, p. 124, RTC Decision. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> TSN, Fermencio Guirra, June 3, 2019, pp. 3-6. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 6-7.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> TSN, PSS Riclu B. Acbayan, July 2, 2019, pp. 3-4.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 18-19, Judicial Affidavit of Mark Rey PaÃ±osa.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 20-21.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 26-29, Judicial Affidavit of Mary Joy PaÃ±osa. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 37-38, Judicial Affidavit of Erlito Sisi; <i>id.</i> at 42-43. Judicial Affidavit of Estrella Racho. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 123-133. The April 13, 2020 Decision was penned by Judge Ric S. Bastasa. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 133. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 130-131. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 135-137. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> CA <i>rollo</i>, pp. 26-30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, p. 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 30-31. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 4-8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 47-48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 874 Phil. 530 (2020) [Per C.J. Peralta, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 539-540; 541. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <i>id.</i> at 540. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> TSN, Fermencio Guirra, June 3, 2019, p. 7. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Records</i>, p. 9, Judicial Affidavit of Fermencio Guirra. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> TSN, PSS Riclu B. Acbayan, July 2, 2019, p. 5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> RTC records, p. 93. Exhibit B-5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 90. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> TSN, P/Supt. Alex Rodriguez Uy, March 18, 2019, pp. 11-17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> RTC records, p. 133. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>People v. MiraÃ±a</b>, 831 Phil. 215 (2018) [Per J. Martires, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>See</i> <i>id.</i> at 226. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> <b>People v. SPO2 Menil</b>, 855 Phil. 352, 361 (2019) [Per J. Caguioa, Second Division]. (Citation omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 362. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 783 Phil. 806 (2016) [Per J. Peralta, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

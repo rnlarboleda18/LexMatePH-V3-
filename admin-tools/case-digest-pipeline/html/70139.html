@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 223845 - JOSELLER M. GUIAO, PETITIONER, VS. PHILIPPINE AMUSEMENT AND GAMING CORPORATION, PHILIPPINE CHARITY SWEEPSTAKES OFFICE AND THE OFFICE OF THE PRESIDENT, RESPONDENTS.
+
+R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70139' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 223845, October 07, 2025 ]</H2>
+			<H3>JOSELLER M. GUIAO, PETITIONER, VS. PHILIPPINE AMUSEMENT AND GAMING CORPORATION, PHILIPPINE CHARITY SWEEPSTAKES OFFICE AND THE OFFICE OF THE PRESIDENT, RESPONDENTS.<br><br>
+
+R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN,<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP> ACTING C.J.:</STRONG></p>
+			
+			<p><div align="justify"><p>The Philippine Sports Commission plays a vital role in advancing the nation's sports programs, improving our athletes' performance on the international stage, and fostering the development of our youth. The agency's creation finds support in no less than the Constitution, and its funding is mandatory and statutory in nature. The Philippine Amusement and Gaming Corporation (PAGCOR) and Philippine Charity Sweepstakes Office (PCSO) cannot refuse to carry out their statutory obligations.</p><p> In its Decision dated May 28, 2024, this Court granted the Petition for <i>Mandamus</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of Joseller M. Guiao (Guiao). The Court directed PAGCOR to account and remit the full amount of 5% of its gross income per annum from 1993 to present in favor of the Philippine Sports Commission. Additionally, the Court ordered PCSO to account and remit to the Philippine Sports Commission the 30% representing the charity fund of the proceeds of six sweepstakes or lottery draw per annum, including its lotto draws, for the years 2006 to present.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup></p><p> As recalled from the facts of the Petition, on April 26, 2016, Guiao, then a member of the House of Representatives and vice chairperson of the House Committee on Youth and Sports Development, filed a Petition for <i>Mandamus</i> under Rule 65 of the Rules of Court to compel PAGCOR and PCSO to remit funds to the Philippine Sports Commission in accordance with Section 26 of Republic Act No. 6847, also known as the Philippine Sports Commission Act.</p><p> The Petition alleged that the PAGCOR and PCSO failed to comply with the funding requirements outlined in Section 26 of Republic Act No. 6847. The relevant section of Section 26 provides that "thirty percent (30%) representing the charity fund of the proceeds of six (6) sweepstakes or lottery draws per annum" for PCSO and "five percent (5%) of the gross income of the PAGCOR" are to be remitted to the Philippine Sports Commission and will form part of the National Sports Development Fund.</p><p> Guiao argued that the government agencies grossly violated their duty to implement the law, causing lack of funding for sports development projects, which constitutes exceptional and compelling circumstances to justify resort to this Court.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Specifically, Guiao alleged that PAGCOR recommended Memoranda to the Office of the President on November 10, 1993<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and February 20, 1995, which reduced the share of the Philippine Sports Commission from PAGCOR's earnings. Both Memoranda were approved by the Office of the President, effectively reducing the 5% share of the Philippine Sports Commission to a mere 2.1375%.</p><p> Guiao likewise asserted that PCSO failed to remit the required 30% to the Philippine Sports Commission, which represents the charity fund and the proceeds of six sweepstakes or lottery draws annually, in violation of Section 26 of Republic Act No. 6847, since 2006. Nevertheless, PCSO remitted quantities to the Philippine Sports Commission in the form of "donation" in 2009, 2010, 2012, 2013, and 2015. Those years are the sole exception.</p><p> PAGCOR opposed the Petition, claiming that deductions for 5% franchise tax and 50% national government share from its gross income are first made before remitting to the Philippine Sports Commission, thus the latter is not entitled to its entire 5% gross income. PCSO, on the other hand, argued that Guiao lacked legal capacity to file the Petition and that he violated the principles of hierarchy of courts and exhaustion of administrative procedures. Lastly, PCSO claims that a relevant provision of the law mandated PCSO to remit funds from sweepstakes drawings alone, with the exclusion of other lottery activities. </p><p> Guiao submitted a Consolidated Reply, arguing that he had legal standing to file the Petition and that this Court had jurisdiction over the <i>mandamus</i> petition given the compelling interests involved. He emphasized that the lack of funds from government entities under Section 26 of Republic Act No. 6847 has caused the plight of Philippine sports. </p><p> In their Memoranda, all parties reiterated their previous arguments. Both PAGCOR and PCSO reiterated Guiao's lack of legal standing to file the Petition and stated that the charter of the Philippine Sports Commission gives it the jurisdiction to sue and enforce its rights. PCSO likewise stated that even if Guiao had <i>locus standi</i> to file the Petition, <i>mandamus</i> cannot lie against it as Guiao's assertion that the Philippine Sports Commission's allocations should include online lottery draws has no legal basis.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Moreover, it asserted that PCSO's remittance of funds to the Philippine Sports Commission was not ministerial.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> In a Decision dated May 28, 2024, the Court granted the Petition for <i>Mandamus</i>. The Court found that <i>mandamus</i> is proper given the transcendental importance of the issue. The Philippine Sports Commission's funding directly affects the advancement of the nation's sports programs, our athletes' ability to progress in the international forum, and the development of our youth. Given the significant role of sports in nation building, petitioner's direct resort to this Court through a Petition for <i>Mandamus</i> is justified. </p><p> It was also found that petitioner has legal standing in his capacity as a legislator as the underfunding of the Philippine Sports Commission is an interference with the legislature's power of the purse. The improper remittance to the Philippine Sports Commission is a violation of both statute and constitution. Consequently, both PAGCOR and PCSO were found to have violated Section 26 of Republic Act No. 6847 in their remittances to the Philippine Sports Commission. </p><p> Respondent PAGCOR filed a Motion for Reconsideration arguing that petitioner Guiao violated the rules on hierarchy of courts and the exhaustion of administrative remedies by going directly to the Supreme Court. It asserted that the order to remit the full amounts to the Philippine Sports Commission should be applied prospectively. In its Supplemental Motion for Reconsideration, it added that requiring a retroactive application of the assailed Decision will lead to an over remittance to their other obligations and overpayment of their income tax. </p><p> PCSO likewise filed a Motion for Reconsideration maintaining that the language of Section 26 of Republic Act No. 6847 clearly sourced the Philippine Sports Commission's allocations solely from PCSO's sweepstakes draws. It also reiterated that it has never been remiss in its duty to remit to the Philippine Sports Commission pursuant to Republic Act No. 6847. </p><p align="center"> <b>I</b> </p><p> The Motions for Reconsideration of PAGCOR and PCSO are denied as the basic issues raised have been duly considered and passed upon by this Court in its May 28, 2024 Decision. </p><p> First, PAGCOR reiterates its arguments that petitioner Guiao violated the rules on hierarchy of courts and the exhaustion of administrative remedies in going directly to the Supreme Court. This has been extensively addressed in the assailed Decision. </p><p> The rule on hierarchy of courts will not prevent this Court from assuming jurisdiction when "the redress desired cannot be obtained in the appropriate courts or where exceptional and compelling circumstances justify availment of a remedy within and calling for the exercise of this Court's primary jurisdiction."<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> While this Court shares concurrent jurisdiction over writs of <i>certiorari</i> and <i>mandamus</i> with the Regional Trial Court and the Court of Appeals, the instant controversy involves significant legal questions that deserve direct recourse to this Court. </p><p> In the same vein, jurisprudence has established exceptions in the application of the doctrine of exhaustion of administrative remedies.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> In this case, it is undisputed that both respondents are members of the Executive branch and are directly under the control and supervision of the Office of the President. It would be a futile exercise to require petitioner to first seek recourse from the Office of the President given that the Memoranda followed by PAGCOR had been approved by the same office. </p><p> Moreover, the relaxation of procedural rules is justified given the exceptional circumstances present in this case. The Philippine Sports Commission plays a crucial role in advancing the nation's sports programs, enhancing our athletes' performance on the international stage, and fostering the development of our youth. The allegations of manifest contravention of this agency's funding is a constitutionally significant issue that deserves this Court's attention. </p><p> Second, PAGCOR maintains that the legislature intended to prioritize the payment of franchise tax and the income share of the national government before remittance to the Philippine Sports Commission is made. However, these assertions of PAGCOR are not substantiated by the relevant laws. PAGCOR's remittance is mandated in Section 26 of Republic Act No. 6847 as "five percent (5%) of the gross income of [PAGCOR]." The wording of the law is clear and unqualified, it does not state that the computation of the 5% is arrived at after deducting the franchise tax. This is contrast with Section 6 of Republic Act No. 7648,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> which states that PAGCOR shall allocate "10% of its annual aggregate gross earnings for the next five (5) years as subsidy to the [National Power Corporation]: <i>Provided</i>, That such percentage allocation shall be based on gross revenue after deducting the five percentum (5%) franchise tax and the fifty percentum (50%) income share of the National Government." While the subsidy coming from PAGCOR for the National Power Corporation should be remitted only after the shares for franchise tax and the national government have been deducted, the same instruction is absent for the share of the Philippine Sports Commission. Hence, the assertions of PAGCOR are interpretations not found within the law. </p><p> Lastly, PAGCOR argues that the doctrine of operative fact should be applied, as it merely executed the president's memorandum by remitting to the Philippine Sports Commission.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> The doctrine of operative fact is a legal principle that recognizes that a statute or executive issuance that is subsequently declared unconstitutional may have legal consequences prior to its revocation.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> This is an exception to the general rule that unconstitutional laws are null and invalid from their inception.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> As a matter of fair play and equity, the effects of the unconstitutional law or administrative issuance are left undisturbed under the doctrine. </p><p> In view of this, PAGCOR claims that the retroactive application of this Court's decision would put undue burden on it. It contends that other than Republic Act No. 6847 and Republic Act No. 7648, other laws affect PAGCOR's income such as Republic Act No. 9513<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> mandating that the Renewable Energy Trust Fund shall be funded from the 1.5% of the net annual income of PAGCOR,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> and Republic Act No. 7309,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> which mandates that PAGCOR remit to the Board of Claims 1% of its net income.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> PAGCOR asserts that since it has already complied with these other obligations in good faith, its remittance of 5% to the Philippine Sports Commission as the assailed Decision orders will result in an over remittance of the statutory shares under Republic Act No. 9513 and Republic Act No. 7309.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> It adds that the retroactive application of the assailed Decision will result to an overpayment of PAGCOR's corporate income tax that was already remitted to the Bureau of Internal Revenue.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p> Based on these scenarios, PAGCOR insists that applying the doctrine of operative fact is appropriate in the spirit of equity and fair play.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> PAGCOR's arguments are untenable. </p><p> The doctrine of operative fact is not always appropriate, and its application is contingent upon the unique circumstances of each case.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> In <i>Araullo v. Aquino</i>,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> the Court declared that the doctrine "cannot apply to the authors, proponents and implementors of the DAP, unless there are concrete findings of good faith in their favor by the proper tribunals determining their criminal, civil, administrative and other liabilities."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> It was held: </p><blockquote> <p> Nonetheless, as Justice Brion has pointed out during the deliberations, <b>the doctrine of operative fact does not always apply, and is not always the consequence of every declaration of constitutional invalidity.</b> It can be invoked only in situations where the nullification of the effects of what used to be a valid law would result in inequity and injustice; but where no such result would ensue, the general rule that an unconstitutional law is totally ineffective should apply. </p> <p> In that context, as Justice Brion has clarified, the doctrine of operative fact can apply only to the PAPs that can no longer be undone, and whose beneficiaries relied in good faith on the validity of the DAP, but cannot apply to the authors, proponents and implementors of the DAP, unless there are concrete findings of good faith in their favor by the proper tribunals determining their criminal, civil, administrative and other liabilities.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> Thus, PAGCOR's adherence to the president's memorandum does not serve as sufficient justification for applying the doctrine in this instance. </p><blockquote> <p> As a rule of equity, the doctrine of operative fact can be invoked only by those who relied in good faith on the law or the administrative issuance, prior to its declaration of nullity. Those who acted in bad faith or with gross negligence cannot invoke the doctrine. Likewise, those directly responsible for an illegal or unconstitutional act cannot invoke the doctrine. He who comes to equity must come with clean hands, and he who seeks equity must do equity. Only those who merely relied in good faith on the illegal or unconstitutional act, without any direct participation in the commission of the illegal or unconstitutional act, can invoke the doctrine.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (Citations omitted) </p> </blockquote> <p> PAGCOR itself admitted that they recommended the erroneous interpretation of remittances to the Philippine Sports Commission to the Office of the President. It made its proposal despite the clear mandate in legislation. Therefore, PAGCOR cannot rely on the doctrine of good faith, as they were directly involved in proposing the incorrect interpretation. This admission undermines their claim to have acted in good faith and without direct participation in the invalid Memorandum of the Office of the President. Legislative intent must be derived primarily from the words of the law itself, not from the historical practices or self-serving interpretations of the administrative agency. </p><p> Furthermore, PAGCOR's assertion that complying with the assailed Decision will result in "over remittance" to the other government agencies is a mischaracterization of the nature of its statutory obligations. The remittances under Republic Act No. 9513, Republic Act No. 7309, and Republic Act No. 6847 are distinct and independent allocations of income mandated by law. PAGCOR's compliance with their statutory responsibility to remit to one agency should not be conditioned on their prior remittance to a separate and distinct agency. Even if belated payment of what is due to the Philippine Sports Commission would indeed cause over remittance to another agency due to changes in the reported net income for a specific year, this would not justify PAGCOR's noncompliance with their obligation. </p><p> Similarly, the argument concerning PAGCOR's potential overpayment of corporate income tax is speculative and does not exempt PAGCOR from its obligation to remit the correct statutory amounts. Furthermore, since remittances from previous years have not yet been paid, these amounts can be considered as deductions on the year they are actually remitted. Section 34(A) of the National Internal Revenue Code provides: "There shall be allowed as deduction from gross income all the ordinary and necessary expenses paid or incurred during the taxable year in carrying on or which are directly attributable to, the development, management, operation and/or conduct of the trade, business or exercise of a profession." Since expenses are deductible in the taxable year when they are either "paid or incurred," and the remittances are yet to be paid, the deductions should be claimed in the year the remittance are made. This would avoid the need to amend past returns or seek refunds which are barred by the two-year prescription under Section 229 of the National Internal Revenue Code. </p><p> While the prospective application of the assailed Decision may cause inconvenience and added expenditures to PAGCOR, its prolonged improper remittances caused direct harm to the Philippine Sports Commission and its beneficiaries. Financial and accounting difficulty on the part of respondents is not sufficient justification to forget about the legal obligations. Nevertheless, this Court acknowledges that the amount that PAGCOR is being directed to remit is substantial; thus, this Court authorizes that the remittances for years 1993 to the present be made in installment over 10 years. </p><p align="center"> <b>II</b> </p><p> Similar to the stance taken by PAGCOR, PCSO merely reiterated its past arguments. Primarily, it asserts that the language of Republic Act No. 6847 clearly intended that the allocations for the Philippine Sports Commission should be sourced exclusively from PCSO's sweepstakes operations. To support this, PCSO emphasizes the deliberations of the Joint Committee on Youth and Sports and Appropriations regarding House Bill No. 4284, the precursor of Republic Act. No. 6847.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> It repeats that lottery draws could not have been intended as a source for Section 26 since such draws were not yet in existence when the law was enacted. </p><p> However, as extensively explained in the assailed Decision, this argument does not hold water. The express language of the statute must be interpreted to apply not only to circumstances existing at the time of the law's enactment, but to circumstances that arise even after its passage.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> This is consistent with the general principle that statutes operate prospectively, unless the contrary is stated.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> In addition, it is an established rule that when the law does not distinguish, the courts should not distinguish. We reiterate the Latin maxim "<i>ubi lex non distinguit, nec nos distinguere debemus</i>."<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> This entails that the general phrase "sweepstakes or lottery draws" must be read as a general category encompassing all such fundraising mechanisms, rather than merely isolated components. To draw a distinction between "sweepstakes" and "lottery" in order to limit the application of the statute would be to introduce an exception not found in the law.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> It is crucial for the courts to interpret the law based on its plain language and not create distinctions where none exist. Legislative intent must be derived primarily from the words of the statute itself. The discussions in the House of Representatives may provide context, but it may not supply a difference in terms that were not distinguished in the law. </p><p> PCSO additionally argues that it has consistently complied with its statutory duty to remit the prescribed share of sweepstakes revenues to the Philippine Sports Commission through various memoranda of agreement executed with the latter. To illustrate this, PCSO submitted a Report of Releases/Remittances to the Philippine Sports Commission covering the period from calendar year 2006 to 2024 prepared by its Accounting and Budget Department.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The report contains a table outlining PCSO's remittances to the Philippine Sports Commission from calendar years 2006 to 2024 and the corresponding legal basis for such remittances. The table demonstrates that PCSO has remitted a total amount of PHP 119,592,528.08 to the Philippine Sports Commission from 2006 to 2024 pursuant to the terms of various memoranda between the two agencies. PCSO asserts that under Section 26 of Republic Act No. 6847, the share of Philippine Sports Commission amounts to only PHP 79,627,318.38. Thus, they donated PHP 39,965,209.70 more than that was expected of them based on the law. </p><p> While the Court notes and appreciates PCSO's submission of this report, this by itself does not suffice to establish compliance with the statutory requirement. PCSO must demonstrate, by competent evidence, that the remitted amount corresponds to 30% of the <i>net proceeds</i> of six sweepstakes or lottery draws per annum, as mandated by law. Should PCSO be able to establish such equivalence, the Court may consider the remittances as substantial compliance with the statutory obligation. The interpretation advanced by PCSO that its obligations may be satisfied based on memoranda with the Philippine Sports Commission, or by reference to fixed sums different from those mandated by Republic Act No. 6847, cannot be sustained. </p><p> <b>ACCORDINGLY</b>, the Motion for Reconsideration is <b>DENIED WITH FINALITY</b>, the basic issues raised therein having been duly considered and passed upon by this Court. The Order of the Court in its May 28, 2024 Decision is affirmed. </p><p> This Court reiterates that both the Philippine Amusement and Gaming Corporation and the Philippine Charity Sweepstakes Office are <b>ORDERED</b> to submit a detailed account of the annual amounts owed to the Philippine Sports Commission and actual remittances made each year, from 1993 to present for PAGCOR, and from 2006 to present for PCSO. The balance of the remittances due may be paid over a period of 10 years. </p><p> <b>SO ORDERED.</b> </p><p> <i>Hernando, Inting, Zalameda, Gaerlan, Rosario, Dimaampao, Marquez, Kho, Jr.</i>, and <i>Villanueva, JJ</i>., concur. <i><br> Gesmundo,<sup style="COLOR: RGB(255, 0, 0);">*</sup> C.J</i>., on official leave. <i><br> Caguioa,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Lazaro-Javier,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J. Lopez</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> JJ</i>., on official business. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Acting Chief Justice per Special Order No. 3223 dated September 15, 2025.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 32-53.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 10.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 6-8.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 14.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 301. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 310. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <b>Agan, Jr. v. Philippine International Air Terminals Co., Inc.</b>, 450 Phil. 744, 805 (2003) [Per J. Puno, <i>En Banc</i>] <i>citing</i> <b>Santiago v. Vasquez</b>, 291 Phil. 664 (1993) [Per J. Regalado, <i>En Banc</i>]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <b>Province of Zamboanga Del Norte v. Court of Appeals</b>, 396 Phil. 790, 718-719 (2000) [Per J. Pardo, First Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Republic Act No. 7648 (1993), Electric Power Crisis Act. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 507-508. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <b>Commissioner of Internal Revenue v. San Roque Power</b>, 719 Phil. 137, 158 (2013) [Per J. Carpio, En <i>Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 157-158.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Republic Act No. 9513 (2008), Renewable Energy Act. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Renewable Energy Act, sec. 28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Republic Act No. 7309 (1992), An Act Creating a Board of Claims Under the Department of Justice for Victims of Unjust Imprisonment or Detention and Victims of Violent Crimes and for Other Purposes. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Republic Act No. 7309 (1992), sec. 9. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, p. 509. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 511. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 513. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>Araullo v. Aquino III</b>, 737 Phil. 457, 625 (2014) [Per J. Bersamin, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> 737 Phil. 457 (2014) [Per J. Bersamin, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 625. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> J. Carpio, Separate Opinion in <b>Araullo v. Aquino III</b>, 737 Phil. 457, 658 (2014) [Per J. Bersamin, En <i>Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, pp. 493-495. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> CIVIL CODE, art. 4 states: "Laws shall have no retroactive effect, unless the contrary is provided." </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> CIVIL CODE, art. 4. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Villanueva v. People</b>, 876 Phil. 855, 865 (2020) [Per J. Delos Santos, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>National Housing Authority v. Roxas</b>, 772 Phil. 26, 34-35 (2015) [Per J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, p. 501. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

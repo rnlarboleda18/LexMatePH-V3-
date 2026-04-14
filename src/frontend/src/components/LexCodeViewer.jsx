@@ -6,7 +6,11 @@ import LexCodeStream from './LexCodeStream';
 import LexCodeJurisSidebar from './LexCodeJurisSidebar';
 import { toTitleCase } from '../utils/textUtils';
 import { lexCache } from '../utils/cache';
-import { CODAL_LEXCACHE_REVISION, stripLegacyCodexArticleRunIn } from '../utils/codalMarkdown';
+import {
+    CODAL_LEXCACHE_REVISION,
+    repairRccBrokenIncorporatorPipeHeaders,
+    stripLegacyCodexArticleRunIn,
+} from '../utils/codalMarkdown';
 import { useSubscription } from '../context/SubscriptionContext';
 import Fuse from 'fuse.js';
 import { useDebounce } from '../hooks/useDebounce';
@@ -78,6 +82,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     const codeKey = (shortName || '').toUpperCase();
     const codeTitle = codeTitleMap[codeKey]?.title || shortName || '';
     const codeSubtitle = codeTitleMap[codeKey]?.subtitle || null;
+    /** RA 11232 uses Sections in the statute; DB column remains article_num. */
+    const codalProvisionLabel = codeKey === 'RCC' ? 'Section' : 'Article';
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -417,7 +423,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     }, [activeAmendmentArticle?.article_num, setActiveAmendmentArticle, setActiveJurisArticle]);
 
     const handleJurisprudenceClick = useCallback((articleNum, paragraphIndex) => {
-        // Gate: Amicus+ only
+        // Gate: Juris+ only
         if (!canAccess('codex_linked_cases')) {
             openUpgradeModal('codex_linked_cases');
             return;
@@ -480,7 +486,10 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     const articles = (json.articles || []).map((a) => {
                         const num = a.article_num ?? a.article_number ?? a.key_id;
                         const raw = a.content_md || a.content || '';
-                        const clean = stripLegacyCodexArticleRunIn(raw, num);
+                        let clean = stripLegacyCodexArticleRunIn(raw, num);
+                        if ((shortName || '').toUpperCase() === 'RCC') {
+                            clean = repairRccBrokenIncorporatorPipeHeaders(clean);
+                        }
                         return { ...a, content: clean, content_md: clean };
                     });
                     return { ...json, articles };
@@ -534,13 +543,15 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             stack.push(newNode);
                         });
 
-                        // 2. Build Article Label
-                        let label = `Article ${art.article_number}`;
+                        // 2. Build provision label (Section for RCC, Article for other codals)
+                        let label = `${codalProvisionLabel} ${art.article_number}`;
                         if (art.article_number === '0' || !art.article_number) label = 'Preamble';
 
                         // Try to find title in content if not provided by backend
                         if (!art.article_title) {
-                            const titleMatch = artBody.match(/^(?:\*\*)?(Article\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i);
+                            const titleMatch = artBody.match(
+                                /^(?:\*\*)?((?:Article|Section)\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i
+                            );
                             if (titleMatch && titleMatch[1]) {
                                 label = titleMatch[1].trim();
                                 if (label.length > 65) label = label.substring(0, 65) + '...';
@@ -576,7 +587,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                  // Just use it as is, or strip Rule part if we want just section
                                  tocLabel = `${cleanNum}: ${cleanTitle}`;
                             } else {
-                                tocLabel = `Article ${cleanNum}: ${cleanTitle}`;
+                                tocLabel = `${codalProvisionLabel} ${cleanNum}: ${cleanTitle}`;
                             }
                         } else if (!hasWordPrefix && (cleanNum === '0' || !cleanNum)) {
                             tocLabel = 'Preamble';
@@ -1148,8 +1159,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                         const titleText =
                                             art.article_title ||
                                             (art.article_number
-                                                ? `Article ${art.article_number}`
-                                                : 'Article');
+                                                ? `${codalProvisionLabel} ${art.article_number}`
+                                                : codalProvisionLabel);
                                         const rawSnippet = (art.content || art.content_md || '')
                                             .replace(/[#*`_~]/g, '')
                                             .trim()
@@ -1230,10 +1241,18 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             {/* Mobile Overlay for Right Sidebar */}
             {(activeJurisArticle || activeAmendmentArticle) && (
                 <div
-                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start justify-end bg-black/50 p-4 backdrop-blur-md top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
+                    className="lg:hidden fixed inset-0 z-[540] flex items-center justify-center bg-black/60 animate-in fade-in duration-200"
+                    style={{
+                        backdropFilter: 'blur(16px)',
+                        WebkitBackdropFilter: 'blur(16px)',
+                        paddingTop: 'max(env(safe-area-inset-top, 0px), 0.5rem)',
+                        paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 0.5rem)',
+                        paddingLeft: 'max(env(safe-area-inset-left, 0px), 0.5rem)',
+                        paddingRight: 'max(env(safe-area-inset-right, 0px), 0.5rem)',
+                    }}
                     onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
                 >
-                    <div className="w-80 h-[82vh] flex flex-col glass bg-white dark:bg-slate-900 rounded-xl border border-white/40 dark:border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-right duration-300">
+                    <div className="lex-modal-card glass relative flex flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45">
                         {activeJurisArticle && (
                             <LexCodeJurisSidebar
                                 articleNum={activeJurisArticle}

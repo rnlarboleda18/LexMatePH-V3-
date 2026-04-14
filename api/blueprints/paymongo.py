@@ -5,6 +5,7 @@ import logging
 import hashlib
 import hmac
 import time
+import uuid
 import psycopg
 import requests
 
@@ -45,6 +46,46 @@ FREE_TIER_DAILY_LIMITS = {
     "flashcard": 5,
     "case_digest_download": 5,
 }
+
+
+def _request_has_auth_header(req: func.HttpRequest) -> bool:
+    h = (req.headers.get("X-Clerk-Authorization") or req.headers.get("Authorization") or "").strip()
+    return bool(h)
+
+
+def _read_json_body(req: func.HttpRequest) -> dict:
+    """Parse JSON body; Azure sometimes returns {} from get_json() even when a body exists."""
+    body = None
+    try:
+        body = req.get_json()
+    except Exception:
+        body = None
+    if isinstance(body, dict) and body:
+        return body
+    raw = req.get_body()
+    if raw:
+        try:
+            text = raw.decode("utf-8") if isinstance(raw, (bytes, bytearray)) else str(raw)
+            parsed = json.loads(text)
+            if isinstance(parsed, dict):
+                return parsed
+        except Exception:
+            pass
+    return body if isinstance(body, dict) else {}
+
+
+def _normalize_anonymous_usage_id(raw) -> str | None:
+    """Return canonical lowercase UUID string, or None if invalid."""
+    if raw is None:
+        return None
+    s = str(raw).strip()
+    if not s:
+        return None
+    try:
+        return str(uuid.UUID(s)).lower()
+    except (ValueError, AttributeError, TypeError):
+        return None
+
 
 ADMIN_EMAILS = [
     "rnlarboleda@gmail.com",
@@ -480,16 +521,18 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
 # ─────────────────────────────────────────────────────────────────────────────
 @paymongo_bp.route(route="track-usage", methods=["POST"])
 def track_usage(req: func.HttpRequest) -> func.HttpResponse:
-    """Track free-tier daily usage. Returns {allowed, used, limit}."""
-    clerk_id, error = get_authenticated_user_id(req)
-    if error:
-        return func.HttpResponse(
-            json.dumps({"error": "Unauthorized"}),
-            mimetype="application/json", status_code=401
-        )
+    """Track free-tier daily usage. Returns {allowed, used, limit}.
+
+    Authenticated: Clerk Bearer in X-Clerk-Authorization or Authorization.
+    Anonymous (same free caps): JSON body must include ``anonymousId`` (a UUID).
+    Rows are stored with ``clerk_id = 'anon:<uuid>'``.
+
+    If a Bearer header is present but invalid/expired, a valid ``anonymousId`` in
+    the body still counts as anonymous (avoids blocking guests with stray headers).
+    """
     try:
-        body = req.get_json()
-        feature = body.get("feature", "").strip()
+        body = _read_json_body(req)
+        feature = (body.get("feature") or "").strip()
 
         if feature not in FREE_TIER_DAILY_LIMITS:
             return func.HttpResponse(
@@ -499,48 +542,128 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
 
         limit = FREE_TIER_DAILY_LIMITS[feature]
 
-        with _get_db() as conn:
-            with conn.cursor() as cur:
-                # Get current tier and admin status
-                cur.execute("SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s", (clerk_id,))
-                row = cur.fetchone()
-                tier = (row[0] if row else "free") or "free"
-                is_admin = (row[1] if row else False) or False
+        clerk_id = None
+        if _request_has_auth_header(req):
+            clerk_id, _auth_error = get_authenticated_user_id(req)
 
-                # Admin or Paid users are always allowed
-                if is_admin or tier != "free":
-                    return func.HttpResponse(
-                        json.dumps({"allowed": True, "used": 0, "limit": -1, "tier": tier, "is_admin": is_admin}),
-                        mimetype="application/json", status_code=200
-                    )
+        if clerk_id:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s", (clerk_id,))
+                    row = cur.fetchone()
+                    tier = (row[0] if row else "free") or "free"
+                    is_admin = (row[1] if row else False) or False
 
+                    if is_admin or tier != "free":
+                        return func.HttpResponse(
+                            json.dumps(
+                                {"allowed": True, "used": 0, "limit": -1, "tier": tier, "is_admin": is_admin}
+                            ),
+                            mimetype="application/json", status_code=200,
+                        )
 
-                # Count today's usage
-                cur.execute("""
-                    SELECT COUNT(*) FROM usage_logs
-                    WHERE clerk_id = %s AND feature = %s
-                      AND created_at >= CURRENT_DATE
-                      AND created_at < CURRENT_DATE + INTERVAL '1 day'
-                """, (clerk_id, feature))
-                used = cur.fetchone()[0]
+                # Free tier: serialize per (clerk_id, feature) so rapid parallel opens cannot exceed the daily cap.
+                with conn.transaction():
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "SELECT pg_advisory_xact_lock(hashtext(%s::text))",
+                            (f"{clerk_id}|{feature}",),
+                        )
+                        cur.execute(
+                            """
+                            SELECT COUNT(*) FROM usage_logs
+                            WHERE clerk_id = %s AND feature = %s
+                              AND created_at >= CURRENT_DATE
+                              AND created_at < CURRENT_DATE + INTERVAL '1 day'
+                            """,
+                            (clerk_id, feature),
+                        )
+                        used = cur.fetchone()[0]
 
-                if used >= limit:
-                    return func.HttpResponse(
-                        json.dumps({"allowed": False, "used": used, "limit": limit, "tier": "free"}),
-                        mimetype="application/json", status_code=200
-                    )
+                        if used >= limit:
+                            return func.HttpResponse(
+                                json.dumps({"allowed": False, "used": used, "limit": limit, "tier": "free"}),
+                                mimetype="application/json", status_code=200,
+                            )
 
-                # Log the usage
-                cur.execute(
-                    "INSERT INTO usage_logs (clerk_id, feature) VALUES (%s, %s)",
-                    (clerk_id, feature)
-                )
-                conn.commit()
+                        cur.execute(
+                            "INSERT INTO usage_logs (clerk_id, feature) VALUES (%s, %s)",
+                            (clerk_id, feature),
+                        )
 
                 return func.HttpResponse(
                     json.dumps({"allowed": True, "used": used + 1, "limit": limit, "tier": "free"}),
-                    mimetype="application/json", status_code=200
+                    mimetype="application/json", status_code=200,
                 )
+
+        anon = _normalize_anonymous_usage_id(body.get("anonymousId") or body.get("anonymous_id"))
+        if anon:
+            usage_key = f"anon:{anon}"
+
+            with _get_db() as conn:
+                with conn.transaction():
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "SELECT pg_advisory_xact_lock(hashtext(%s::text))",
+                            (f"{usage_key}|{feature}",),
+                        )
+                        cur.execute(
+                            """
+                            SELECT COUNT(*) FROM usage_logs
+                            WHERE clerk_id = %s AND feature = %s
+                              AND created_at >= CURRENT_DATE
+                              AND created_at < CURRENT_DATE + INTERVAL '1 day'
+                            """,
+                            (usage_key, feature),
+                        )
+                        used = cur.fetchone()[0]
+
+                        if used >= limit:
+                            return func.HttpResponse(
+                                json.dumps(
+                                    {
+                                        "allowed": False,
+                                        "used": used,
+                                        "limit": limit,
+                                        "tier": "free",
+                                        "anonymous": True,
+                                    }
+                                ),
+                                mimetype="application/json", status_code=200,
+                            )
+
+                        cur.execute(
+                            "INSERT INTO usage_logs (clerk_id, feature) VALUES (%s, %s)",
+                            (usage_key, feature),
+                        )
+
+                return func.HttpResponse(
+                    json.dumps(
+                        {
+                            "allowed": True,
+                            "used": used + 1,
+                            "limit": limit,
+                            "tier": "free",
+                            "anonymous": True,
+                        }
+                    ),
+                    mimetype="application/json", status_code=200,
+                )
+
+        if _request_has_auth_header(req):
+            return func.HttpResponse(
+                json.dumps({"error": "Unauthorized"}),
+                mimetype="application/json", status_code=401,
+            )
+
+        return func.HttpResponse(
+            json.dumps(
+                {
+                    "error": "anonymousId (UUID) required in JSON body when not signed in",
+                }
+            ),
+            mimetype="application/json", status_code=400,
+        )
 
     except Exception as e:
         logging.error(f"track_usage error: {e}")

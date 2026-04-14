@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 246751 - FELIPE T. TERANIA, PETITIONER, VS. VIRJEN SHIPPING CORPORATION, NISSHO SHIPPING CO., LTD., AND/OR LEONARDO JIMENO, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70225' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 246751, August 20, 2025 ]</H2>
+			<H3>FELIPE T. TERANIA, PETITIONER, VS. VIRJEN SHIPPING CORPORATION, NISSHO SHIPPING CO., LTD., AND/OR LEONARDO JIMENO, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Assailed in this Petition for Review on Certiorari<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court are the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 25, 2018 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated April 10, 2019 of the Court of Appeals (CA) in CA-G.R. SP No. 153018, which set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated July 14, 2017 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated September 25, 2017 of the Office of the Panel of Voluntary Arbitrators (PVA) of the National Conciliation and Mediation Board (NCMB) in Case No. MVA-086-RCMB-NCR-302-11-12-2016 on the ground of lack of jurisdiction, and remanded petitioner Felipe T. Terania's (Terania) claim for disability benefits to the National Labor Relations Commission (NLRC).</p><p align="center"> <b>The Facts</b> </p><p> This case stemmed from a Complaint<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> for total and permanent disability benefits, moral and exemplary damages, and attorney's fees filed by Terania against Virjen Shipping Corporation (VSC), a local manning agent and Nissho Shipping Co., Ltd. (NSCL; collectively, respondents), its foreign principal. </p><p> On June 16, 2012, Terania signed a nine-month Contract of Employment with VSC to serve as boatswain onboard the vessel M.T. Nichioh, which was approved by the Philippine Overseas Employment Agency (POEA).<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The contract expressly incorporated the provisions of the "Current ITF Collective Agreement."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> On July 22, 2012, Terania was deployed to the assigned vessel and commenced his employment. </p><p> While on duty on March 26, 2013, Terania claimed to have experienced a severe fever that prevented him from attending a scheduled meeting. Two days after, he experienced dizziness while giving instructions to other crew members. The incident was reported to the chief officer, after which his superior measured his blood pressure and found it to be abnormally elevated at 168/108 mmHg. Terania was eventually sent to a medical facility where he was diagnosed with hypertension and vertigo. Because of these findings, his attending doctor decided to repatriate him. Terania was repatriated on April 6, 2013 and was referred to the company-designated physician in NGC Medical Specialist Clinic, Inc. The company-designated physician diagnosed Terania with hypertension and vertigo. Then, on June 18, 2013, the company-designated physician found Terania "cleared fit to go back to work."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Despite the clearance from the company-designated physician, Terania complained of recurring dizziness, severe headache, and other symptoms. Thus, he requested VSC to continue his treatment. On July 22, 2013, Terania was informed that VSC needed the approval of NSCL.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> After several follow-ups, he was notified on August 28, 2013 that NSCL decided to not extend any medical assistance to him. </p><p>On April 23, 2014, Terania sought medical help from Dr. Antonio C. Pascual (Dr. Pascual), a cardiologist in the Philippine Heart Center. After undergoing Electrocardiogram, on February 16, 2016 Terania was found to have "[s]inus rhythm; [l]eft anterior hemiblock and [p]ersistent posterobasal forces." A few days after, he was diagnosed with stage 1 hypertensive heart disease<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> and declared as "Medically Unfit to Work." </p><p> This prompted Terania to demand from VSC the payment of total and permanent disability benefits, but such efforts proved futile. Thus, he filed the Complaint on March 28, 2016 before the Sub-Regional Arbitration Branch of the NLRC in Iloilo City, docketed as SRAB Case No. VI-OFW(M)-16-03-0028.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> In an Order dated June 30, 2016, the Labor Arbiter (LA) referred the case to the NCMB due to Terania's representation that a collective bargaining agreement (CBA) existed between the parties. </p><p> For their part, respondents questioned the NCMB's jurisdiction over the case. Nevertheless, they admitted to engaging Terania as boatswain onboard the vessel M.T. Nichioh under a nine-month POEA-approved contract dated June 16, 2012.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> According to respondents, Terania complained of low grade fever, headaches, and dizziness on March 26, 2013. He was treated onboard but was subsequently repatriated for further evaluation. Upon arrival in Manila, Terania was referred to the company-designated physician where he was diagnosed with hypertension and vertigo, as evidenced by the initial Medical Report dated April 8, 2013. After a series of evaluations and treatments, a Medical Report dated June 18, 2013 was issued by the company-designated physician finding that Terania was fit to return to work effective June 18, 2013. On the same day, Terania signed and executed a Certificate of Fitness to Work dated June 18, 2013, which contains a provision releasing respondents from any liability.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p align="center"> <b>The PVA Ruling</b> </p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated August 4, 2017, the PVA found Terania to be suffering from a total and permanent disability, and thus, entitled to commensurate benefits. Accordingly, the PVA ordered respondents to pay Terania USD 60,000.00, or its Philippine peso equivalent, plus 10% thereof as attorney's fees, while all other claims were denied for lack of jurisdiction or merit.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> The PVA rejected respondents' assertion that the NLRC had exclusive jurisdiction over the present case. It clarified that since Terania's employment was covered by a CBA, the case properly fell within the jurisdiction of voluntary arbitration in accordance with Section 29 of the POEA-Standard Employment Contract (POEA-SEC). As for Terania's claim for disability benefits, the PVA found that Terania is deemed to be suffering from a total and permanent disability because Terania's medical condition persisted for more than 240 days without him being able to return to his previous occupation as a seafarer. It further opined that it could. not award to Terania the amount of USD 93,154.00 under the CBA considering the said award is only appropriate in cases of accidents. Since no such accident occurred during Terania's employment, the PVA found it appropriate to award the amount of USD 60,000.00 pursuant to the POEA-SEC. <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Respondents moved for reconsideration, but it was denied by the PVA through a Resolution<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated September 25, 2017. Aggrieved, they filed a Petition for Review before the CA. </p><p align="center"> <b>The CA Ruling</b> </p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> dated October 25, 2018, the CA set aside the PVA ruling on the ground of lack of jurisdiction. Accordingly, it remanded the case to the NLRC for a resolution on the merits with dispatch.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> The CA explained that the determinative factor in establishing the jurisdiction of the NCMB is the CBA's explicit provision on referral to a grievance machinery. While the CA acknowledged that a copy of the CBA was submitted as evidence, it took cognizance of the fact that Article 34 thereof referenced a "SHIPBOARD DISPUTES PROCEDURE," purportedly attached as an annex. However, Terania failed to produce a copy of this annex. In its absence, the CA found itself bereft of any basis to determine the applicability, scope, and procedural framework of the purported grievance machinery embedded in the CBA. Consequently, the CA ruled that where ambiguity exists as to whether the parties had indeed agreed to submit their dispute to a grievance machinery, such uncertainty necessarily casts doubt on whether the same dispute was intended to be resolved through voluntary arbitration. In the absence of a clear and definitive agreement, the CA held that the NCMB lacked jurisdiction over the case.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> Displeased, Terania filed a Motion for Reconsideration, which was denied by the CA in its Resolution dated April 10, 2019;<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> hence, this Petition.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p align="center"> <b>The Issue Before the Court</b> </p><p> The issue for the Court's resolution is whether the CA correctly ruled that the NCMB has no jurisdiction over the case. </p><p align="center"> <b>The Court's Ruling</b> </p><p> The Petition lacks merit. </p><p> Jurisdiction is the power of a court, tribunal, or officer to hear, try, and decide a case.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Jurisdiction over the subject matter is conferred by law. It is determined by the allegations in the complaint based on the character of the relief sought.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Voluntary arbitration refers to the mode of settling labor-management disputes in which the parties select a competent, trained, and impartial third person who is tasked to decide on the merits of the case and whose decision is final and executory.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Case law also states that voluntary arbitration takes place when referral of a dispute by the parties is made, <i>pursuant to a voluntary arbitration clause in their CBA</i>, to an impartial third person for a final and binding resolution.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Relatedly, the jurisdiction of voluntary arbitrators (VAs) and PVAs is found under Articles 274 and 275 of the Labor Code, which state: </p><blockquote> <p> ART. 274. <i>Jurisdiction of Voluntary Arbitrators and Panel of Voluntary Arbitrators</i>. â The Voluntary Arbitrator or panel of Voluntary Arbitrators shall have original and exclusive jurisdiction to hear and decide all unresolved grievances arising from the interpretation or implementation of the Collective Bargaining Agreement and those arising from the interpretation or enforcement of company personnel policies referred to in the immediately preceding article. Accordingly, violations of a Collective Bargaining Agreement, except those which are gross in character, shall no longer be treated as unfair labor practice and shall be resolved as grievances under the Collective Bargaining Agreement. For purposes of this article, gross violations of Collective Bargaining Agreement shall mean flagrant and/or malicious refusal to comply with the economic provisions of such agreement. </p> <p> The Commission, its Regional Offices and the Regional Directors of the Department of Labor and Employment shall not entertain disputes, grievances or matters under the exclusive and original jurisdiction of the Voluntary Arbitrator or panel of Voluntary Arbitrators and shall immediately dispose and refer the same to the Grievance Machinery or Voluntary Arbitration provided in the Collective Bargaining Agreement. </p> <p> ART. 275. <i>Jurisdiction over other Labor Disputes</i>. â The Voluntary Arbitrator or panel of Voluntary Arbitrators, <i>upon agreement of the parties</i>, shall also hear and decide all other labor disputes including unfair labor practices and bargaining deadlocks. (Emphasis supplied) </p> </blockquote> <p> Section 29 of the POEA-SEC on dispute settlement procedures reads: </p><blockquote> <p> In cases of claims and disputes arising from this employment, the parties covered by a collective bargaining agreement shall submit the claim or dispute to the original and exclusive jurisdiction of the voluntary arbitrator or panel of voluntary arbitrators. If the parties are not covered by a collective bargaining agreement, the parties may at their option submit the claim or dispute to either the original and exclusive jurisdiction of the National Labor Relations Commission (NLRC), pursuant to Republic Act (RA) 8042 otherwise known as the Migrant Workers and Overseas Filipinos Act of 1995, as amended, or to the original and exclusive jurisdiction of the voluntary arbitrator or panel of arbitrators. If there is no provision as to the voluntary arbitrators to be appointed by the parties, the same shall be appointed from the accredited voluntary arbitrators of the National Conciliation and Mediation Board of the Department of Labor and Employment.</p> </blockquote> <p> Compulsory arbitration has been defined both as "the process of settlement of labor disputes by a government agency which has the authority to investigate and to make an award which is binding on all the patties," and "as a mode of arbitration where the parties are compelled to accept the resolution of their dispute through arbitration by a third party."<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> While a VA is not part of the governmental unit or labor department's personnel, said arbitrator renders arbitration services provided for under labor laws.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Generally, the VA is expected to decide only those questions expressly delineated by the submission agreement. Nevertheless, the VA can assume that he has the necessary power to make a final settlement since arbitration is the final resort for the adjudication of disputes. In other words, the jurisdiction of the VA is principally contingent upon the terms mutually agreed upon by the parties. While these adjudicative powers may, in some cases, extend beyond the original terms, their scope remains confined to the objective of reaching a final settlement.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> In this case, petitioner argues that the CA erred in ruling that the NCMB had no jurisdiction over his Complaint since his claim does not involve a "SHIPBOARD DISPUTE" and his employment was covered by a CBA. </p><p> Petitioner's contentions have no merit. </p><p> In <i>Viviero v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the Court categorically ruled that neither public officials nor tribunals may arrogate unto themselves jurisdiction absent a clear and express conferment by law. In the same vein, parties may not, by their own fiat, bestow upon VAs the original and exclusive jurisdiction properly vested in LAs over unfair labor practices, termination disputes, and claims for damages, in the absence of an express agreement in order for Article 262 (now Article 275) of the Labor Code to apply. The Court emphasized that voluntary arbitration is mandatory in character if there is a <i>specific agreement</i> between the parties to that effect. In this respect, CBA must explicitly delineate the procedure for the submission of termination disputes to a VA or PVA, and the parties are bound to adhere to such agreed mechanism.</p><p> <i>Viviero</i> thus underscores the indispensable need for the production of the pertinent document to determine whether the grievance mechanisms stipulated in the CBA have been complied with, or whether the party invoking them is indeed covered thereby. This doctrine finds reinforcement in <i>Corcoro, Jr. v. Magsaysay Mol Marine, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> where the Court explainedâalbeit brieflyâthat absent a grievance machinery under the CBA with respect to disability claims, jurisdiction properly lies with the NLRC, not with the VA.</p><p> Applying these principles, although petitioner presented a CBA, the Court finds it wanting in that it fails to contain any express stipulation regarding the referral of disputes to the grievance machinery, and thereafter, to voluntary arbitration. Compounding this deficiency is the incomplete nature of the CBA itself, as its annexes and appendices, which presumably elaborate on its procedural mechanisms, were not produced in evidence. As the CA aptly observed, the CBA contains the following provision: </p><blockquote> <p> Article 34: Shipboard Disputes Procedure</p> <p> When disputes concerning the interpretation of this agreement might arise, it would be proceeded in accordance with the "<i>SHIPBOARD DISPUTES PROCEDURE - IBF MEMBERS" of the IBF Operational Agreement Annex 2</i>.</p> </blockquote> <p> Yet, glaringly absent from the records is Annex 2, or any document bearing the title "Shipboard Disputes Procedure," rendering indeterminate the very procedure that petitioner seeks to invoke. Notably, the document invoked by petitioner, being private in character, requires proof of its due execution and authenticity,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> which he failed to establish. This omission leaves a gap in reference to the specific document being mentioned, leading to uncertainty regarding the applicability, scope, and procedures of the grievance machinery that petitioner is relying on. As a result, there is an ambiguity surrounding the parties' agreement, complicating the determination of their intentions and the procedural requirements that should be observed. This raises significant concerns about how the dispute should be resolved. Consequently, doubt is inevitably sown as to whether a valid submission agreement for disability claims was ever perfected between the parties of the CBA, and whether petitioner duly complied with the procedure attendant thereto.</p><p> It must be stressed. that "[i]t is an oft-repeated rule that in labor cases, as in other administrative and quasi-judicial proceedings, 'the quantum of proof necessary is substantial evidence, or such amount of relevant evidence which a reasonable mind might accept as adequate to justify a conclusion.' 'The burden of proof rests upon the party who asserts the affirmative of an issue."'<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> "[I]n the hierarchy of evidentiary values, 'proof beyond reasonable doubt is placed at the highest level, followed by clear and convincing evidence, preponderance of evidence, and substantial evidence, in that order.' Thus, substantial evidence is the least demanding."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </p><p> In fine, the Court concurs with the CA's finding that the ambiguity surrounding whether the parties mutually agreed to submit their dispute to a grievance machinery casts serious doubt on whether voluntary arbitration was the proper mode of dispute resolution. Absent a clear, unequivocal agreement reflected in the CBA, the NCMB could not rightfully assume jurisdiction over Terania's claims. </p><p> Given that petitioner initially lodged his complaint with the NLRC, and that it was the LA's erroneous appraisal that led to its referral to the NCMB, he should not be prejudiced by the latter's misstep. The Court affirms the CA Decision that the case must be remanded to the NLRC for prompt resolution. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated October 25, 2018 and the Resolution dated April 10, 2019 of the Court of Appeals in CA-G.R. SP. No. 153018 is <b>AFFIRMED</b>.</p><p> This case is <b>REMANDED</b> to the National Labor Relations Commission, to which this case has been first filed by petitioner and is hereby ordered to proceed with dispatch.</p><p> <b>SO ORDERED.</b></p><p><em>Zalameda,<sup style="COLOR: RGB(255, 0, 0);">*</sup> Rosario</em>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> and <em>Villanueva, JJ</em>., concur. <br> <em>Leonen, SAJ. (Chairperson)</em>, see dissenting opinion. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional member per raffle dated November 2, 2022. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional member per raffle dated November 2, 2022. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 9-38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 43-55. Penned by (Now a member of this court) Associate Justice Jhosep Y. Lopez and concurred in by Associate Justices Rosmari D. Carandang (now a retired Member of the Court) and (Now a member of this court) Amy C. Lazaro-Javier of the Third Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 41-42. Penned by Penned by Associate Justice Jhosep Y. Lopez and concurred in by Associate Justices Edwin D. Sorsogon and (Now a member of this court) Henri Jean Paul B. Inting of the Special Former Third Division.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> CA <i>rollo</i>, pp. 116-130.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> CA <i>rollo</i>, pp. 55-56. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Not attached to the <i>rollo</i>. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, pp. 22-23.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> CA <i>rollo</i>, p. 336. The Current ITF Collective Agreement, brought into force by Special Agreement between the International Transport Worker's Federation and Nissho Shipping Co., Ltd. represented by Virjen Shipping Corporation provided that should the ITF and this company enter into a further Special Agreement, the ITF Collective Agreement brought into force by that Special Agreement shall, from the date on which the further Special Agreement is made, govern this contract.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, pp. 23-24.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 25.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 27. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 66. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 67-68. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> CA <i>rollo</i>, 115-130. Signed by MVA Cenon Wesley P. Gacutan and AVA Allan Montano, with AVA George A. Eduvala submitting a Concurring and Dissenting Opinion.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 123. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 122-123. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 55-56. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, 43-55. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 54-55.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 53-54.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Supra</i> note 1. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>Anama v. Citibank, N.A. (formerly First National City Bank)</b>, 822 Phil. 630, 639 (2017) [Per J. Jardeleza, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>Padlan v. Sps. Dinglasan</b>, 707 Phil. 83, 91 (2013) [Per J. Peralta, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> LABOR CODE. sec. 1(d), Rule II NCMB, Revised Procedural Guidelines in the Conduct of Voluntary Arbitration Proceedings (2005). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Luzon Development Bank v. Association of Luzon Development Bank Employees, et al.</b>, 319 Phil. 262, 266 (1995) [Per J. Romero, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>LUDO &amp; LUYM Corporation v. Saornid</b>o, 443 Phil. 554, 561-562 (2003) [Per J. Quisumbing, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Goya, Inc. v. Goya Inc. Employees Union-FFW</b>, 701 Phil. 645, 657 (2013) [Per J. Peralta, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 398 Phil. 158 (2000) [Per J. Bellosillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 879 Phil. 369 (2020) [Per J. Carandang, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> RULES OF COURT, Rule 132, sec. 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Valencia v. Classique Vinyl Products Corporation</b>, 804 Phil. 492, 504 (2017) [Per J. Del Castillo, First Division], <i>citing</i> <b>Tenazas v. R. Villegas Taxi Transport</b>, 731 Phil. 217, 229 (2014) [Per J. Reyes, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>JR Hauling Services v. Solamo</b>, 886 Phil. 842, 858-859 (2020) [Per J. Hernando, Second Division]. (Citations omitted) <br><br></p><p> </p><hr align="center" width="60%" size="1" noshade="noshade"><br><p align="center"><b>DISSENTING OPINION</b> </p> <p><b>LEONEN, <i>SAJ</i>:</b> </p> <p> I dissent. </p><p> In my view, the National Conciliation and Mediation Board (NCMB), through the Voluntary Arbitrators (VA) or Panel of Voluntary Arbitrators (PVA) has original and exclusive jurisdiction. </p><p> Jurisdiction is conferred by law, and not by the agreement of the parties.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Article 274 of the Labor Code states: </p><blockquote> <p> ART. 274. [261] Jurisdiction of Voluntary Arbitrators and Panel of Voluntary Arbitrators. â The Voluntary Arbitrator or panel of Voluntary Arbitrators <i>shall have original and exclusive jurisdiction to hear and decide all unresolved grievances arising from the interpretation or implementation of the Collective Bargaining Agreement</i> and those arising from the interpretation or enforcement of company personnel policies referred to in the immediately preceding article. Accordingly, violations of a Collective Bargaining Agreement, except those which are gross in character, shall no longer be treated as unfair labor practice and shall be resolved as grievances under the Collective Bargaining Agreement. For purposes of this article, gross violations of Collective Bargaining Agreement shall mean flagrant and/or malicious refusal to comply with the economic provisions of such agreement. </p> <p> The Commission, its Regional Offices and the Regional Directors of the Department of Labor and Employment shall not entertain disputes, grievances or matters under the exclusive and original jurisdiction of the Voluntary Arbitrator or panel of Voluntary Arbitrators and shall immediately dispose and refer the same to the Grievance Machinery or Voluntary Arbitration provided in the Collective Bargaining Agreement.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> (Emphasis supplied) </p> </blockquote> <p> Meanwhile, Article 275 of the Labor Code states: </p><blockquote> <p> ART. 275. [262] Jurisdiction over other Labor Disputes. â The Voluntary Arbitrator or panel of Voluntary Arbitrators, <i>upon agreement of the parties</i>, shall also hear and decide all other labor disputes including unfair labor practices and bargaining deadlocks.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> (Emphasis supplied) </p> </blockquote> <p> Article 274 of the Labor Code clearly provides the original and exclusive jurisdiction of the VA or PVA to hear and decide all unresolved grievances arising from the interpretation or implementation of the Collective Bargaining Agreement (CBA), among others.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> Moreover, Section 29 of the Philippine Overseas Employment Agency Standard Employment Contract (POEA-SEC) states that "[i]n cases of claims and disputes arising from this employment, the parties covered by a collective bargaining agreement shall submit the claim or dispute to the original and exclusive jurisdiction of the voluntary arbitrator or panel of voluntary arbitrators."<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The same section even stresses that "[i]f there is no provision as to the voluntary arbitrators to be appointed by the parties, the same shall be appointed from the accredited voluntary arbitrators of the National Conciliation and Mediation Board of the Department of Labor and Employment."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> As to the National Labor Relations Commission (NLRC), Article 224 of the Labor Code grants the Commission original and exclusive jurisdiction in cases involving unfair labor practice, termination disputes, money claims with reinstatement, claims for damages, legality of strikes and lockouts, and other monetary claims exceeding PHP5,000.00.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> By agreement of the parties, as embodied in their CBA, disputes can be submitted to the VA, which are ordinarily under the NLRC's original and exclusive jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Hence, Article 275 carves out an exception to Article 224 of the Labor Code, provided that there is "unequivocal language that petitioners and respondent union conform to the submission of termination disputes and unfair labor practices to voluntary arbitration."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> I submit that the majority revisit the ruling in <i>Vivero v. Court of Appeals (Vivero)</i>.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> My reading of the doctrine on the requirement that an express stipulation in the CBA for the determination of the VA's jurisdiction is in relation to Article 275 of the Labor Code, and not the original and exclusive jurisdiction conferred to the VA under Article 274.</p><p> In <i>Vivero</i>, this Court looked at the nature of the grievance between the parties to determine jurisdiction. After finding that it involved a termination dispute that was generally reserved by the Labor Code to the NLRC, this Court examined the CBA to determine whether there is an express provision that refers the dispute to the VA. After finding that resort to the VA with respect to termination disputes is discretionary on the parties, this Court held that the petitioner validly exercised their option to file the complaint before the Labor Arbiter. </p><p> Additionally, I submit that the majority reconsider the interpretation of the ruling in <i>Corcoro v. Magsaysay Mol Marine, Inc.</i> (<i>Corcoro</i>).<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> The majority is of the view that that in this case "the Court explainedâalbeit brieflyâthat, absent a grievance machinery under the CBA with respect to disability claims, jurisdiction properly lies with the NLRC, not with the VA."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Aside from being obiter dictum, a closer reading of <i>Corcoro</i> shows that the parties waived the proceedings before the panel of voluntary arbitrators. </p><p> Here, the parties have an existing CBA. The subject matter of the dispute is petitioner's entitlement to total and permanent disability benefits as prescribed under the CBA. Applying Article 274 of the Labor Code, it is the VA who has original and exclusive jurisdiction over the dispute and not the NLRC. The failure to submit in evidence the exact grievance machinery of the parties, as reflected in Annex 2 of the Shipboard Dispute Procedure, does not divest the VA's jurisdiction over disputes involving the interpretation and implementation of the parties' CBA, as prescribed by the Labor Code. </p><p> Given the CBA between the parties, the NLRC correctly referred the dispute to the NCMB through the VA, who has jurisdiction over the dispute on petitioner's entitlement to total and permanent disability benefits. </p><p> <b>ACCORDINGLY</b>, I vote to <b>GRANT</b> the Petition for Review on <i>Certiorari</i>.<br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Ley Construction and Development Corporation v. Sedano</b>, 817 Phil. 209 (2017) [Per J. Perlas-Bernabe, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> LABOR CODE OF THE PHILIPPINES, art. 274. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 275. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 274. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> 2010 POEA-SEC, sec. 29. It states:</p> <blockquote> <p> In cases of claims and disputes arising from this employment, the parties covered by a collective bargaining agreement shall submit the claim or dispute to the original and exclusive jurisdiction of the voluntary arbitrator or panel of voluntary arbitrators. If the parties are not covered by a collective bargaining agreement, the parties may at their option submit the claim or dispute to either the original and exclusive jurisdiction of the National Labor Relations Commission (NLRC), pursuant to Republic Act (RA) 8042 otherwise known as the Migrant Workers and Overseas Filipinos Act of 1995, as amended, or to the original and exclusive jurisdiction of the voluntary arbitrator or panel of arbitrators. If there is no provision as to the voluntary arbitrators to be appointed by the parties, the same shall be appointed from the accredited voluntary arbitrators of the National Conciliation and Mediation Board of the Department of Labor and Employment.</p> <p> The Philippine Overseas Employment Administration (POEA) shall exercise original and exclusive jurisdiction to hear and decide disciplinary action on cases, which are administrative in character, involving or arising out of violations of recruitment laws, rules and regulations involving employers, principals, contracting partners and Filipino seafarers.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> LABOR CODE OF THE PHILIPPINES, art. 224. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <b>Vivero v. Court of Appeals</b>, 398 Phil. 158 (2000) [Per J. Bellosillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <b>San Miguel Corp. v. National Labor Relations Commission</b>, 325 Phil. 401 (1996) [Per J. Hermosisima, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> 398 Phil. 158 (2000) [Per J. Bellosillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <b>G.R. No. 226779</b>, August 24, 2020 [Per J. Carandang, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Ponencia</i>, p. 7.</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

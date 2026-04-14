@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267675 - JORGE JOAQUIN V. SANTOS, PETITIONER, VS. CAROLINE H. SANTOS, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70148' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267675, May 20, 2025 ]</H2>
+			<H3>JORGE JOAQUIN V. SANTOS, PETITIONER, VS. CAROLINE H. SANTOS, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, M., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">A husband and wife who seek legal separation from each other invoke converse rather than identical reliefs. Each spouse claims to be the sole innocent party in a marriage where only the other has given a ground for legal separation. For this reason, one spouse's action for legal separation against the other does not automatically bar the respondent-spouse from filing their own petition for legal separation on the basis of<i> litis pendentia</i>.<br><br>This resolves a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the March 18, 2021 and May 24, 2023<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Resolutions of the Court of Appeals (CA) in CA-G.R. SP No. 168314. The assailed Resolutions dismissed Jorge Joaquin V. Santos's (Jorge) Rule 65 petition for being the wrong remedy to question the trial court's dismissal of his petition for legal separation<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> on the grounds of<i> litis pendentia</i> and deliberate forum shopping.<br><br><center><i>Facts</i></center><br>Jorge and respondent Caroline Santos (Caroline) were married on July 7, 1996 and had three children during their marriageâNiki, Sam, and Jake. In 2006, Jorge began to suspect that Caroline was having an affair with one Paco Magsaysay and possibly other men, causing the once-happy couple to fight almost every day. In 2008, Caroline was diagnosed with the sexually transmitted disease<i> chlamydia</i>. Jorge got tested as well, but his result was negative.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>On March 25, 2014, Caroline filed<i> Civil Case No. 14-400-CV</i>, a Petition for Legal Separation with Application for Provisional Order of Child Custody and Spousal and Child Support<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> before Branch 144 of the Regional Trial Court (RTC) of Makati City, on the grounds of Jorge's repeated "physical, emotional and economic abuse" against her and their three children,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> and Jorge's alleged illicit relationship with one Lenny Delos Santos since 2006.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Caroline's Petition described how Jorge withheld financial support<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and cursed at and hit their children.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In his Answer, Jorge countered that Caroline herself had committed sexual infidelity. Thus, even assuming that Caroline's allegations against him were true, she is not entitled to the relief of legal separation.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Sometime in 2015, while Caroline's Petition was still being tried, Jorge came to know of Caroline's affair with a married man, a certain Juan Tomas Cuenca (Juanto).<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> He was able to confirm this information from his hired private investigators,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> as well as through their youngest son Jake, who would often see Caroline and Juanto together and who once discovered their lewd text exchanges.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> The events prompted Jorge to file two criminal cases for adultery against Caroline and Juanto in February 2016.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> A month later, Caroline filed a criminal complaint against Jorge for violation of Republic Act No. 9262,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> which was dismissed by the city prosecutor.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Meanwhile, acting on Jorge's demurrer to evidence in<i> Civil Case No. 14-400-CV</i>, Branch 136, RTC of Makati City issued an Order dated July 10, 2019, dismissing Caroline's petition for legal separation.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The trial court ruled that Caroline failed to sufficiently prove Jorge's repeated violence or grossly abusive conduct towards her or their children.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>When Caroline appealed the dismissal of her legal separation case, Jorge filed his own Petition for Legal Separation,<i> Civil Case No. R-MKT-20-01893-CV</i>,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> with Branch 3-FC, RTC, Makati City. Jorge alleged that Caroline engaged in illicit sexual relationships<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> and inflicted physical harm and is abusive towards their son Jake.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Caroline sometimes hit Jake<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> and exposed the child to her extramarital affairs by introducing her boyfriend to family members and bringing him to school events. Caroline's act of normalizing her adulterous relationship not only caused embarrassment and anxiety to their children, but also disrespected the sanctity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Notably, his Certification against Forum Shopping disclosed that he had pending criminal cases against Caroline for adultery.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>In her Answer with Compulsory Counterclaims<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> to Jorge's Petition, Caroline pointed out that Jorge himself was guilty of acts which are grounds for legal separation.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Hence, he is not entitled to the relief sought. By way of affirmative defense, Caroline argued that her Petition for Legal Separation then pending review before the CA constituted<i> litis pendentia</i>, which renders Jorge's Petition dismissible. In addition, Jorge committed forum shopping by splitting his cause of action against Caroline among the two pending legal separation cases and two criminal cases for adultery.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Branch 3-FC, RTC, Makati City ruled in favor of Caroline, finding that both<i> litis pendentia</i> and forum shopping were obtained in this case in light of Caroline's first legal separation petition, which was then on appeal before the CA. The trial court observed that Jorge's allegations in his Answer in the first legal separation case are the same grounds used in his action for legal separation against Caroline. The RTC dismissed Jorge's Petition for Legal Separation with prejudice<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> and subsequently denied Jorge's Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Aggrieved, Jorge filed a Rule 65 Petition with the CA,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> which was dismissed outright for being the wrong remedy. In the assailed March 18, 2021 Resolution, the CA held that the Makati RTC's Order dismissed Jorge's Petition with prejudice,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> thus, it should have been questioned via an ordinary appeal under Rule 41 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The CA likewise denied Jorge's Motion for Reconsideration in the assailed May 24, 2023 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>As for the first legal separation case filed by Caroline against Jorge, the CA eventually dismissed the Petition with finality.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The CA ruled that Caroline's allegations of repeated physical violence against Jorge were not backed by substantial evidence or had legally prescribed.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><center><i>Issue</i></center><br>Jorge now appeals, raising the sole issue of whether the trial court committed grave abuse of discretion when it dismissed his Petition for Legal Separation with prejudice on the grounds of<i> litis pendentia</i> and willful violation of the rules on forum shopping.<br><br>Jorge asserts the following:<i> First</i>, the second legal separation case was not barred by the first on the basis of<i> litis pendentia</i>, because the first case only dealt with the issue of whether Caroline was entitled to a judicial decree of legal separation, while the second case would resolve whether Jorge was entitled to a decree of legal separation. In this regard, Jorge emphasizes that he never admitted that he and Caroline were guilty of grounds for legal separation. On the contrary, he maintained his innocence as the sole wronged spouse in both the first and second cases.<br><br><i>Second</i>, not all of the elements of<i> litis pendentia</i> were present. While he admits that there is identity in the parties involved in the first and second legal separation cases,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Jorge points out that the primary ground for legal separation in Caroline's Petition is his alleged repeated physical violence against Caroline and abuse of their three children. His defense is that Caroline had committed sexual infidelity with Paco Magsaysay and, thus, she is not entitled to the relief sought. On the other hand, Jorge's Petition for Legal Separation against Caroline, the second action, was based on her subsequent sexual infidelity with a different man, Juanto Cuenca, and her repeated abuse of their son Jake. Therefore, there is no identity of rights asserted and reliefs sought; nor would a final decision on the first case bar the second one based on<i> res judicata</i>.<br><br><i>Third</i>, assuming Jorge committed forum shopping by filing a Petition for Legal Separation while Caroline's legal separation case against him was pending appeal, this does not constitute willful disregard of the rules that calls for dismissal with prejudice. His failure to mention Caroline's Petition for Legal Separation in his certificate of non-forum shopping was in good faith, since he believed that he only had to include those cases which he himself initiated in court. To bolster this argument, Jorge points out that he disclosed the criminal cases he filed against Caroline for adultery in the same certification.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br><center><i>Ruling</i></center><br>We grant the Petition.<br><br>The sole question raised in this case is one purely of law and within the scope of a Rule 45 petition for review; that is, whether one spouse's petition for legal separation against the other bars the respondent spouse from filing his or her own petition for legal separation based on<i> litis pendentia</i>. Resolving this issue necessarily touches on the related issue of whether Jorge committed deliberate forum shopping by filing the present case. In determining whether a party violated the rule against forum shopping, the most important factor to consider is whether the elements of<i> litis pendentia</i> concur.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>To start, the Court rules that one spouse's petition for legal separation against the other does not constitute<i> litis pendentia</i> which bars the latter spouse from filing his or her own petition for legal separation. The very nature of legal separation precludes<i> litis pendentia</i> from setting in when two spouses file legal separation cases against each other.<br><br>Nevertheless, for reasons of public policy to be discussed below, we hold that henceforth, while a legal separation case is pending before a court, should the respondent-spouse file his or her own legal separation case against the petitioner-spouse, the succeeding case should be dismissed without prejudice, until the first case filed has been resolved with finality, whether or not on its merits.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>Litis pendentia did not obtain between the first and second legal separation cases; only the first requisite was present</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>As affirmed by recent case law,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><i> litis pendentia</i> refers to a situation where another action is pending between the same parties for the same cause of action, such that the second action becomes unnecessary and vexatious.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Its three requisites are (1) identity of the partiesâor the interest they representâin both actions; (2) identity of rights asserted and relief prayed for, the relief being founded on the same facts; and (3) identity between the two cases such that judgment in one, regardless of which party is successful, would amount to<i> res judicata</i> in the other.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>The underlying principle of<i> litis pendentia</i> is that a party is not allowed to vex another more than once regarding the same subject matter and for the same cause of action. This is founded on the public policy that an issue should not be the subject matter of controversy in multiple courts to avoid possible conflicting judgments. Consequently, a party cannot split up a single cause of action into several suits because the whole cause must be determined in one action.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In this case, We agree that only the first requisite of<i> litis pendentia </i>which is the identity of parties is present since the two cases both involve Jorge and Caroline. Notably, the second and third requisites are lacking because there is no identity in the rights and reliefs they asserted, and there is no such identity in the two cases such that judgment in one would, regardless of which party wins, amount to<i> res judicata</i> in the other. Thus, it was erroneous for the RTC to have ruled that:<br><blockquote>The court also notes that the grounds for legal separation raised in the [first] case are the same in the instant case, to wit:<br><blockquote>. . . .<br><br>3.4. As will be proven in trial as may be necessary, [Caroline] was suspected to and proven to have an intimate or illicit relationship with other people during the marriage.<br><br>3.5. [Caroline] also repeatedly verbally abused and constantly nagged [Jorge].<br><br>3.6 [Jorge] reserve[d] the right to elaborate on the abuses of [Caroline] so as not to prejudice any possible reconciliation between the parties. </blockquote>The only difference is that in the [first] case, [Jorge] asked the court to dismiss the [first] case filed by [Caroline] . . . , while in this case he now asks the court to grant his prayer for legal separation. Indeed, this case is based on essentially the same causes of action as in the [first] case. Clearly then, the requisites of<i> litis pendentia</i> are present.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </blockquote>Contrary to the RTC's conclusion that<i> litis pendentia</i> existed as Jorge's causes of action against Caroline in the first case were likewise his causes of action against her in the second case, the record shows that the grounds for legal separation raised by each spouse against the other are different. Jorge's Answer in the first legal separation case emphasized the issue that Paco was Caroline's alleged paramour, while Juanto and Caroline's relationship was the subject of the second case, which further alleged her grossly abusive conduct towards their son Jake.<br><br>In truth, the grounds for each spouse's petition against the other were irrelevant to determining whether<i> litis pendentia</i> was obtained.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>In legal separation cases filed against each other, spouses assert converse rather than identical rights and reliefs; thus, the second requisite is absent</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Here, Jorge and Caroline never asserted identical rights or prayed for identical reliefs as required under the second element of<i> litis pendentia</i>. Rather, the spouses asserted reciprocal causes of action against each other, each claiming to be the innocent spouse in a marriage warranting legal separation under the relevant provisions of the Family Code.<br><br>In Caroline's Petition for Legal Separation against Jorge, she prayed to be declared legally separated from Jorge as the allegedly innocent spouse prejudiced by the subsistence of her marriage to him. The right or relief she sought from the RTC was not just a decree of legal separation, but all its legal consequences, i.e. the right to live away from Jorge;<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> the dissolution and liquidation of their absolute community and the exclusion of Jorge as the offending spouse from any share of profits;<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> custody of a minor child;<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Jorge's disqualification from inheriting from Caroline by intestate succession and automatic revocation of any disposition in his favor previously made in her will;<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the right to revoke her donations to him and his designation as the beneficiary of her insurance policy;<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the right of third parties to revoke any donation<i> propter nuptias</i> made in his favor;<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> and the sole right to be supported after final judgment.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Jorge, in turn, could only deny the charges against him<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and raise the defense that even assuming he were guilty of any of them, Caroline herself had committed sexual infidelity and thus, was not entitled to any of the reliefs she sought.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> His cause of action against Caroline then was in defense of the subsistence of their marriage and absolute community and is asking for the denial of Caroline's Petition for Legal Separation against him.<br><br>On the other hand, in Jorge's Petition for Legal Separation or the second case, his asserted right or cause of action was that of an allegedly innocent spouse prejudiced by Caroline as an offending spouse and by his subsisting marriage with her. The reliefs he prayed for were the same reliefs prayed for by Caroline, because they are the reliefs to which all innocent spouses are entitled upon a decree of legal separation. But they were by no means the same rights or reliefs he asserted or could have asserted in the first legal separation case, where he was being charged as the respondent/offending spouse. There, he was arguing in defense of their marriage rather than for their legal separation. Too, Jorge was prohibited from agreeing or compromising on any ground for legal separation.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Indeed, where a finding that the petitioner-spouse was also guilty of a ground for legal separation, the same would have resulted in the denial of the Petition rather than a judicial decree of legal separation in his favor, pursuant to Article 56(4) of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>Clearly, Jorge could not have prayed for the same relief as Caroline,<i> i.e. </i>legal separation, in the first legal separation case. As such, there was no identity of the rights asserted and relief prayed for by Jorge in the first and second legal separation case, although both cases revolved around the same sets of facts.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The first and second cases do not pass the test of identity, or the third requisite</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>The third requisite of<i> litis pendentia</i>âidentity between the two cases such that judgment in one, regardless of which party is successful, would amount to<i> res judicata</i> in the other â also did not obtain in this case. The third requisite or the so-called "test of identity," dictates that:<br><blockquote>A plea of the pendency of a prior action is not available unless the prior action is of such a character that, had a judgment been rendered therein on the merits, such a judgment would be conclusive between the parties and could be pleaded in bar of the second action.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </blockquote>Using the test of identity as metric, we hold that there can be no identity of rights asserted and reliefs sought between two spouses' suits for legal separation against each other such that judgment in one, regardless of which party is successful, would amount to<i> res judicata</i> in the other. This is because the legal provisions unique to actions for legal separation militate against and effectively preclude such a scenario from arising.<br><br>The Family Code bars courts from decreeing legal separation based on a stipulation of facts or confession of judgment; the grounds for legal separation must be positively proved.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> It prohibits parties from obtaining a judicial decree of legal separation where both spouses have given a ground for legal separation or colluded to obtain a decree of legal separation, and mandates that courts deny the petition for legal separation when such prohibitions do obtain.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> In addition, A.M. No. 02-11-11-SC prohibits the parties from compromising on any ground for legal separation,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> requires that the respondent-spouse file an answer and, in case the respondent-spouse fails to do so, does not declare the respondent-spouse in default, but instead orders the public prosecutor to investigate whether collusion exists between the spouses<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> and renders the petition dismissible.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>In short, the law always defaults to the continuity and integrity of marriage and absolute community of property. Additional safeguards ensure that legal separation is resorted to only for the most worthy of reasons.<br><br>These safeguards are meant to bolster the underpinning State policy of preserving marriage as an inviolable social institution<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> and the foundation of the Filipino family.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Thus, in our jurisdiction, actions for legal separation are necessarily adversarial. If not the petitioner-spouse, the prosecuting attorney assigned to a legal separation case is required to appear, see the suit through in behalf of the State, and ensure that no evidence is suppressed or fabricated by the spouses to the end of achieving a mutually sought legal separation.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> And even if a judicial decree of legal separation were mutually sought by the spouses, the legal provisions governing its incidents and consequences require that there be only one "winning" or innocent spouse and one "losing" or offending spouse, and this must be determined during trial. In the event that neither spouse is innocent, the law dismisses the petition for legal separation and protects the integrity of the marriage and community of property.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>To better understand how the test of identity applies to cases of legal separation, we now look at the five scenarios which may theoretically arise between the first and second legal separation cases filed by Caroline and Jorge:<br><br>(1) Caroline loses the first legal separation case for failure to discharge her burden that Jorge gave a ground for legal separation. This decision on the merits leaves Jorge free to tile his own legal separation case, since the first case disposed solely the issue of Caroline's entitlement to legal separation. It did not resolve the issue of whether Jorge was an innocent spouse entitled to legal separation.<br><br>(2) Caroline loses the first legal separation case because of a finding that she herself gave a ground for legal separation and thus, did not come to court with clean hands.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Again, this judgment on the merits leaves Jorge free to file his own legal separation case, since the first case disposed only the issue of Caroline's entitlement to legal separation. It did not resolve the issue of whether Jorge was an innocent spouse entitled to legal separation.<br><br>(3) Caroline loses the first legal separation case. While she established that Jorge gave a ground for legal separation, Jorge was able to prove any of the affirmative defenses under Article 56 of the Family Code except the defense of prescription, to wit:<br><blockquote>Art. 56. The petition for legal separation shall be denied on any of the following grounds:<br><br>(1) Where the aggrieved party has condoned the offense or act complained of;<br>(2) Where the aggrieved party has consented to the commission of the offense or act complained of;<br>(3) Where there is connivance between the parties in the commission of the offense or act constituting the ground for legal separation;<br>(4) Where both parties have given ground for legal separation;<br>(5) Where there is collusion between the parties to obtain decree of legal separation; or<br>(6) Where the action is barred by prescription. </blockquote>Such a decision on the merits bars Jorge from filing his own legal separation case, since the first case resolved his non-entitlement to the relief of legal separation granted to an innocent spouse.<br><br>(4) Caroline loses the first legal separation case because Jorge was able to prove that her cause of action with regard to the ground for legal separation she raised has prescribed. This leaves Jorge free to file his own legal separation case, since the first case disposed solely the issue of Caroline's entitlement to legal separation. It did not resolve the issue of whether Jorge was an innocent spouse entitled to legal separation.<br><br>(5) Caroline wins the legal separation case. Whether or not Jorge raised the affirmative defense that Caroline was also guilty of a ground for legal separation, Jorge is barred from filing a second legal separation case, because the spouses are already legally separated, and because he has himself given ground for legal separation and will not come to court with clean hands.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>The first scenario applies in this case. When Caroline's legal separation case against Jorge was dismissed with finality in 2021,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> it did not completely bar Jorge's cause of action in the second legal separation case. To recall, the RTC and the CA dismissed Caroline's Petition because she failed to prove Jorge's alleged grossly abusive conduct and alleged infidelity.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> When Jorge filed the second legal separation case, the twin issues of whether Caroline was guilty of any ground for legal separation and whether Jorge was entitled to the remedy of legal separation had not been resolved. Thus, the third requisite of <i>litis pendentia</i>âthat the identity between the pending actions, with respect to the parties, rights asserted and reliefs prayed for, such that any judgment rendered on one action will, regardless of which is successful, amount to<i> res judicata</i> in the action under considerationâis absent.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>Jorge did not commit willful forum shopping in filing the second legal separation case</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Considering that there was<i> no litis pendentia</i> in this case, it is clear that Jorge is not guilty of willful forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>Forum shoppingâas opposed to mere failure to comply with the rule on certification of forum shoppingâ"is committed by a party who institutes two or more suits involving the same parties for the same cause of action, either simultaneously or successively, on the supposition that one or the other court would make a favorable disposition or increase a party's chances of obtaining a favorable decision or action."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> It is prohibited because "it trifles with the courts, abuses their processes, degrades the administration of justice, and adds to already congested court dockets."<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>We find that Jorge did not commit forum shopping, considering that the elements of<i> litis pendentia</i> were not present between the first and second legal separation case, and that the final judgment in the first legal separation case would not have, as it did not in fact, amount to<i> res judicata</i> in the second.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> While his omission of the first legal separation case from his Certification against Forum Shopping violated Rule 7, Section 5 of the Rules of Court, we agree with Jorge that this would only have resulted in the dismissal without prejudice of his Petition,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> a rule of procedure we forego in favor of substantial justice and resolving the case on its merits.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>Similarly, the criminal case for adultery Jorge instituted against Caroline before the second legal separation case did not bar Jorge from filing, or the trial court from proceeding to try, the second legal separation case, although the judge of course retains the discretion to stay the proceedings as it deems necessary.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> It is settled that a civil action for legal separation based on sexual infidelity may proceed ahead of or simultaneously with a criminal action for adultery or concubinage for the same act, even if both the civil and criminal actions arise from or are related to the same offense.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> This is because a petition for legal separation is not a civil action to enforce the civil liability arising from the offense proscribed by the Rules of Criminal Procedure.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Rather, it is aimed at the conjugal rights of the spouses and their relations to each other and intended to obtain the right to live separately from one's spouse, with all the legal consequences of legal separation.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>Neither does the doctrine of prejudicial question apply, considering that (1) the second legal separation case was filed after the criminal case was already instituted, and (2) sexual infidelity was only one of the two grounds that Jorge raised to substantiate his Petition for Legal Separation from Caroline.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>While not barred by litis pendentia, legal separation cases subsequently filed by the respondent-spouse in a pending legal separation case are henceforth barred for public policy reasons</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Although we find that the pendency and finality of the first legal separation case did not preclude Jorge's filing of the second legal separation case due to<i> litis pendencia</i> or<i> res judicata</i>, this Court rules that, henceforth, for reasons of public policy, while one spouse's legal separation case against the other is still being tried, the respondent-spouse's own legal separation case subsequently filed by him or her, shall be dismissed<b> without prejudice</b>, subject to the final resolution of the first or preceding case.<br><br>As already observed, the State policy underpinning the legal provisions on legal separation is the complete preservation of marriage as a social institution and foundation of the family, including the marital obligations of all spouses to live together, support each other and exercise joint custody over their children, which obligations a decree of legal separation suspends. Proof that the spouses colluded to obtain legal separation warrants not the relief they mutually seek, but a dismissal of the case and the continuity of their marriage, leaving marital obligations and communal property intact.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>It is therefore clear that two spouses cannot both ask for legal separation at the same time, despite each one having a right to duly demand and prove their entitlement to it against each other.<br><br>The ruling We lay down today is separate and distinct from the existing rule that the respondent-spouse in the first legal or previously filed legal separation case must already raise all grounds for legal separation for which the petitioner-spouse may be guilty of at the time of the first case pursuant to the omnibus motion rule,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> as we note Jorge did in his Answer to Caroline's Petition for Legal Separation against him.<br><br>The respondent-spouse or prosecuting attorney, in case of default, must raise all grounds for legal separation for which die petitioner-spouse may be guilty of in his or her answer or during trial, because this is a ground for dismissal of the petition, either under the<i> clean hands doctrine</i> or because the trial court finds in due course that both spouses have given ground for legal separation in contravention of Article 56(4) of the Family Code. On the other hand, if the respondent fails to raise these grounds in the first legal separation case, the spouses may be found guilty of collusion under Article 56(5) which will result in the dismissal of the first legal separation case, while the second or subsequent legal separation case will be barred by <i>res judicata</i> by conclusiveness of judgment.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>For these reasons, it was grave abuse of discretion for the RTC Branch 3-FC of Makati City to dismiss the second legal separation case with prejudice of the basis of <i>litis pendentia</i> and willful forum shopping, and a reversible error for the CA to dismiss Jorgeâs Petition for <i>Certiorari</i> under Rule 65 on the same ground.<br><br>In sum, when a spouse files a legal separation case while another is already pending against them, the subsequent case should be dismissed without prejudice based on public policy considerations, although not technically barred by <i>litis pendentia</i>. This approach is aligned with the statutory framework governing legal separation and upholds the Stateâs policy of preserving marriage, which is designed to prevent both spouses from simultaneously seeking legal separation.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Resolutions dated March 18, 2021 and May 24, 2023 of the Court of Appeals in CA-G.R. SP No, 168314 are <b>REVERSED</b>. The Petition for Legal Separation docketed as Civil Case No. R-MKT-20-01893-CV filed by petitioner Jorge Joaquin V. Santos is <b>REMANDED</b> to the court of origin for further proceedings.<br><br><b>SO ORDERED. </b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Zalameda, Dimaampao,</i> and <i>Kho, Jr., JJ.,</i> concur.<br><i>Hernando,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on official business but joined the dissent of J. Lazaro-Javier.<br><i>Lazaro-Javier, J.,</i> with dissent.<br><i>Inting,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.,</i> on official business but left a concurring vote.<br>Gaerlan,<sup style="COLOR: RGB(255, 0, 0);">***</sup> on official leave.<br><i>Rosario</i><sup style="COLOR: RGB(255, 0, 0);">****</sup> and <i>Marquez,</i><sup style="COLOR: RGB(255, 0, 0);">****</sup> <i>JJ.,</i> on official leave but left a concurring vote.<br><i>J. Lopez,</i><sup style="COLOR: RGB(255, 0, 0);">*****</sup> <i>J.,</i> on official business.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">******</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business but joined the dissent of J. Lazaro-Javier.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business but left a concurring vote.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">****</sup> On official leave but left a concurring vote.<br><br><sup style="COLOR: RGB(255, 0, 0);">*****</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">****</sup> On official leave but left a concurring vote.<br><br><sup style="COLOR: RGB(255, 0, 0);">******</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 60-63, 68. The Resolutions dated March 18, 2021 and May 24, 2023 (the last page of the Resolution containing the dispositive portion may have been inadvertently not appended in the <i>rollo</i>) in CA-G.R. SP No. 168314 were penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Raymond Reynold R. Lauigan of the Special Sixteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 165-169, 203-206. The Orders dated December 7, 2020 and January 5, 2021 were penned by Presiding Judge Robert Victor C. Marcon of Branch 3-FC, Regional Trial Court, Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 14-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 17, 207-221.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Id at 210. <i>See</i> FAMILY CODE, art. 55(1)<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 209-210. <i>See</i> FAMILY CODE, art. 55(8).<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 209-210, 213. <i>See</i> FAMILY CODE, art. 55(8).<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 210, 212.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>See</i> FAMILY CODE, art. 56(4) which states: "The petition for legal separation shall be denied on any of the following grounds: . . . (4) Where both parties have given ground for legal separation[.]"<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 17, 136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 18, 137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 18, 146. Jorge's Petition for Review states that the criminal information was filed with Branch 216, Regional Trial Court, Quezon City while the Certification against Forum Shopping in his Petition for Legal Separation states that the same was filed with the Branch 42, Regional Trial Court, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Titled "The Anti-Violence Against Women and Their Children Act of 2004."<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i>, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 222-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 224-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 132-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 139. <i>See</i> FAMILY CODE, art. 55(8).<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 141. <i>See</i> FAMILY CODE, art. 55(1).<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 141-142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 146-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 149-164.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 152-155. <i>See</i> FAMILY CODE, art. 56(4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 156-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 165-169. The Order dated December 7, 2020 in Case No. R-MKT-20-01893-CV was penned by Presiding Judge Robert Victor C. Marcon of Branch 3-FC, Regional Trial Court, Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 203-206.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 69-109.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> RULES OF COURT, Rule 41, sec. 1(g) in relation to Rule 7, sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 66-68. The last page of the Resolution containing the dispositive portion may have been inadvertently not appended in the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> The Decision dated June 22, 2021 in CA-G.R. No. CV-114001 was penned by then CA Presiding Justice Remedios A. Salazar-Fernando and concurred in by Associate Justices Pedro B. Corales and Alfredo D. Ampuan of the First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, pp. 65-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Lajave Agricultural Management and Development Enterprises, Inc. v. Spouses Javellana</b>, 842 Phil. 1119, 1130 (2018) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Seloza v. Onshore Strategic Assets (SPV-AMC), Inc.</b>, 886 Phil. 452, 463 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Yap v. Chua</b>, 687 Phil. 392, 400 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. <i>See also</i> <b>De Pedro v. Romasan Development Corporation</b>, 748 Phil. 706 (2014) [Per J. Leonen, Second Division], <i>citing</i> <b>Guevara v. BPI Securities Corporation</b>, 530 Phil. 342, 358-359 (2006) [Per J. Chico-Nazario, First Division]; <b>Jaban v. City of Cebu</b>, 467 Phil. 458, 471 (2004) [Per J. Callejo, Sr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Lajave Agricultural Management and Development Enterprises, Inc. v. Spouses Javellana</b>, 842 Phil. 1119, 1129 (2018) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 204-205.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> FAMILY CODE, art. 63(1).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> FAMILY CODE, art. 63(2).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> FAMILY CODE, art. 63(3).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> FAMILY CODE, art. 63(4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> FAMILY CODE, art. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> FAMILY CODE, art. 86(4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> FAMILY CODE, art. 198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>See</i> FAMILY CODE, art. 60, which prohibits a decree of legal separation based upon a stipulation of facts or a confession of judgment. <i>See also</i> A.M. No. 02-11-11-SC, March 4, 2003, Re: Proposed Rule on Legal Separation, secs. 13 and 5(b), the latter of which additionally prohibits the court from declaring the respondent spouse in default ever, if he or she did not file an answer to the petition for legal separation despite service of summons.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> FAMILY CODE, art. 56(4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> A.M. No. 02-11-11-SC, March 4, 2003, Re: Proposed Rule on Legal Separation, sec. 13(3).<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> FAMILY CODE, art. 56. The petition for legal separation <i>shall be denied on any of the following grounds</i>:<br><blockquote>(1) Where the aggrieved party has condoned the offense or act complained of;<br>(2) Where the aggrieved party has consented to the commission of the offense or act complained of;<br>(3) Where there is connivance between the parties in the commission of the offense or act constituting the ground for legal separation;<br><i>(4) Where both parties have, given ground for legal separation; </i><br>(5) Where there is collusion between the parties to obtain decree of legal separation; or<br>(6) Where the action is barred by prescription. (Emphasis supplied)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Valencia v. Court of Appeals</b>, 331 Phil. 590, 604 (1996) [Per J. Panganiban, Third Division], <i>citing</i> <b>Hongkong &amp; Shanghai Banking Corp. v. Aldecoa &amp; Co.</b>, 30 Phil. 255, 275 (1915) [Per J. Trent, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> FAMILY CODE, art. 60(1). <i>See</i> A.M. No. 02-11-11-SC, sec. 14(b).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> FAMILY CODE, art. 56(1).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> A.M. No. 02-11-11 -SC, sec. 13(3).<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at sec. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at sec. 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> CONST., art. XV, sec. 2. <i>See also</i> FAMILY CODE, art. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>See</i> CONST., art. XV, sec. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> FAMILY CODE, art. 60(2); A.M. No. 02-11-11-SC, secs. 6(c) and 10(2).<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> FAMILY CODE, art. 56(4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Clavecilla v. Clavecilla</b>, 937 Phil. 488, 503 (2023) [C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>. at 224-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>See</i> <b>Tanyag v. Tanyag</b>, 914 Phil. 150 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Heirs of Mampo v. Morada</b>, 888 Phil. 583, 592-593 (2020) [Per J. Caguioa, First Division]; <b>City of Taguig v. City of Makati</b>, 787 Phil. 367, 383 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>. at 593.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>See</i> <b>Zamora v. Quinan, Jr.</b>, 821 Phil. 1000, 1017 (2017) [Per J. Peralta, Second Division], <i>citing</i> <b>Yap v. Chua</b>, 687 Phil. 392, 398 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Rollo</i>, p. 41. <i>See</i> also RULES OF COURT, Rule 7, sec. 5; <b>Spouses Melo v. Court of Appeals</b>, 376 Phil. 204 (1999) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Malixi v. Baltazar</b>, 821 Phil. 423, 439-440 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>See</i> <b>People v. Camenforte</b>, 903 Phil. 549, 569 (2021) [Per J. Caguioa, First Division], <i>citing</i> <b>Quiambao v. Osorio</b>, 242 Phil. 441 (1988) [Per J. Fernan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Gandionco v. PeÃ±aranda</b>, 239 Phil. 692, 696 (1987) [Per J. Padilla, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> RULES OF COURT, Rule 111, secs. 1 and 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>Gandionco v. PeÃ±aranda</b>, 239 Phil. 692, 696 (1987) [Per J. Padilla, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Rollo</i>, p. 140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> FAMILY CODE, art. 56(4)<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> RULES OF COURT, Rule 15, sec. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <b>Republic v. Yu</b>, 519 Phil. 391, 397 (2006) [Per J. Quisumbing, Third Division].</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>DISSENT</b></center><br><b>LAZARO-JAVIER,<i> J.</i>:</b><br><br>On March 25, 2014, respondent Caroline H. Santos (Caroline) filed a petition for legal separation docketed as Civil Case N. 14-400-CV against petitioner Jorge Joaquin V. Santos (Jorge). She averred that Jorge committed repeated physical, emotional, and economic abuse against her and their children, and was engaged in an<b> illicit relationship.</b> In his answer, Jorge countered that Caroline herself had committed<b> sexual infidelity</b>, and thus, was not entitled to a decree of legal separation.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Acting on Jorge's demurrer to evidence, the Regional Trial Court (RTC), Branch 136, Makati City dismissed Caroline's petition per its Order dated July 10, 2019. Caroline, consequently, went on appeal to the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>While the appeal was pending, Jorge filed his own petition for legal separation docketed as Civil Case No. R-MKT-20-01893-CV and raffled to Branch 3, RTC, Makati City. In his petition, Jorge mentioned<b> once again</b> that Caroline was engaged in<b> illicit sexual relationships</b>. He alleged that in 2015, he hired private investigators who reported to him that Caroline was having an affair with a certain Juan Tomas Cuenca.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Prior to that, however, he suspected that as early as 2006, Caroline was already having an affair with another man named Paco Magsaysay, and possibly other men, too.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> He also stated that Caroline was abusive towards their son.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> For her part, Caroline submitted her answer with counterclaims and argued that Jorge committed forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>By Order dated December 7, 2020, Branch 3, RTC, Makati City dismissed Jorge's petition with prejudice on ground of forum shopping considering that it was filed even though Caroline's appeal was still pending before the Court of Appeals. Jorge assailed the dismissal through a petition for<i> certiorari</i> before the Court of Appeals, which likewise dismissed the same for being an improper remedy. According to the appellate court, Jorge should have resorted to an appeal, not a petition for<i> certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Dissatisfied, Jorge later filed the present petition for review on <i>certiorari</i>. The Majority now holds that Jorge did not commit forum shopping as there is no<i> litis pendentia</i> between the twin cases for legal separation.<br><br>I respectfully dissent.<br><br>Here, Jorge practically raised the same issue on sexual infidelity against Caroline in his own petition for legal separation and filed the case while Caroline's appeal before the Court of Appeals was pending resolution. Ultimately, both spouses sought identity of interests, that is to live separately and to resolve their property relations accordingly. Jorge's subsequent filing of a petition for legal separation based on identical grounds and relief, indeed, merited the dismissal of his petition as properly ruled by Branch 3, RTC, Makati City, not a remand of the case to the court of origin which the Majority proposes.<br><br>I expound.<br><br>The Family Code provides the effects of a decree of legal separation, thus: (1) the spouses shall be entitled to live separately from each other, but the marriage bonds shall not be severed;<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (2) the absolute community or the conjugal partnership shall be dissolved and liquidated, but the offending spouse shall have no right to any share of the net profits earned by the absolute community or the conjugal partnership;<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> (3) the custody of the minor children shall be awarded to the innocent spouse, subject to the provisions of Article 213 of the Family Code;<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (4) the offending spouse shall be disqualified from inheriting from the innocent spouse by intestate succession and provisions in favor of the offending spouse made in the will of the innocent spouse shall be revoked by operation of law;<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (5) the innocent spouse may revoke donations he or she made in favor of the offending spouse, as well as the designation of the latter as beneficiary in any insurance policy;<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> (6) donors may revoke any donation<i> propter nuptias</i> made in favor of the offending spouse;<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> and (7) the offending spouse may be ordered to give support to the innocent spouse.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Here, when Caroline and Jorge filed their respective petitions for legal separation, they were asserting the same rights, i.e., the rights of an innocent spouse, and claiming the same relief, i.e., the legal consequences of a decree of legal separation. Plain and simple, both wanted to live separately and divide their assets and liabilities.<br><br>As it was, Jorge raised Caroline's infidelity as a defense in the first petition, claiming that Caroline was not entitled to the relief she prayed for, i.e., a decree of legal separation. He, therefore, prayed that Caroline's petition be dismissed, but soon thereafter, he filed his own petition for legal separation.<br><br>On this score, the Majority maintains that Jorge could not have properly asked for a decree of legal separation in the first petition as he was limited to denying the charges against him and raising the defense that Caroline was not entitled to any of the remedies she sought.<br><br>In so ruling, the Majority suggests that a spouse, who is a respondent in a legal separation case, but has his or her own ground for legal separation, would have to argue against the decree of legal separation in the first case and pray anew for legal separation in another. Courteously, this situation is not only absurd, but also results in unnecessary and vexatious duplicity of suits.<br><br>To be sure, Jorge was not precluded from asserting his right as an innocent spouse in the case for legal separation initiated by Caroline. Denying the allegations against him and claiming other grounds for legal separation are not mutually exclusive. While the Family Code prohibits spouses from colluding to obtain a decree of legal separation,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> nothing in the said law or the applicable rules<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> prohibits the respondent-spouse from claiming to be an innocent spouse and asserting his or her own right to obtain said decree. Notably, neither the Family Code nor the applicable rules<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> bars the respondent-spouse from filing a counterclaim in a petition for legal separation.<br><br>Too, there is certainly no collusion in asserting one's own right to secure a decree of legal separation while denying the grounds raised by another therefor. In<i> Puyat v. Puyat</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the Court held that the mutual desire to have a marriage declared void does not, by itself, amount to collusion. Similarly, the mere mutual desire for the decree of legal separation, without any agreement to commit an act that may warrant the said decree, is not a ground for the denial of the petition. Notably, Article 56 of the Family Code provides the grounds for the denial of a petition for legal separation, viz.:<br><blockquote>Article 56. The petition for legal separation shall be denied on any of the following grounds:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Where the aggrieved party has condoned the offense or act complained of; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">Where the aggrieved party has consented to the commission of the offense or act complained of; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">Where there is connivance between the parties in the commission of the offense or act constituting the ground for legal separation; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(4) </div></td> <td valign="top"> <div align="JUSTIFY">Where both parties have given ground for legal separation; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(5) </div></td> <td valign="top"> <div align="JUSTIFY">Where there is collusion between the parties to obtain decree; or </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(6) </div></td> <td valign="top"> <div align="JUSTIFY">Where the action is barred by prescription. </div></td> </tr> </tbody></table></blockquote>Indeed, Article 56 does not preclude spouses from simultaneously asking for a decree of legal separation, particularly in situations where both claim to be the innocent spouse.<b> What it prohibits is the grant of legal separation when both parties are found to have committed any of the grounds therefor</b>.<br><br>In fact, hearing the grounds for legal separation raised by the spouses against each other in the same proceeding will enable the trial court to evaluate the evidence in its entirety for the purpose of carrying out a just resolution of the case. Thus, where the court finds that both parties committed a ground for legal separation, the court could at once deny the petition pursuant to Article 56(4) of the Family Code.<br><br>Meanwhile, Article 56(4) of the Family Code ordains that the following must necessarily be proved to be entitled to a decree of legal separation:<b><i> first, </i></b>the respondent-spouse committed a ground for legal separation; and<b><i> second, </i></b>the petitioner-spouse did not commit a ground for legal separation.<br><br>Notably, in the two legal separation cases, both Caroline and Jorge brought to the fore the issue of sexual infidelity by one against the other. In the same vein, both parties asserted that they have approached the court with clean hands, each invoking the equitable maxim that one who seeks equity must do equity. In particular,<b> Jorge raised these points as an affirmative defense in his answer to the first petition. But he later brought them up again in his own petition for legal separation</b>. Indeed, a single issue cannot be litigated in more than one forum. As held in<i> Mendiola v. Court of Appeals</i>:<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><blockquote>The similarity between the two causes of action is only too glaring.<i> The test of identity of causes of action lies not in the form of an action but on whether the same evidence would support and establish the former and the present causes of action. The difference of actions in the aforesaid cases is of no moment</i>. In Civil Case No. 58713, the action is to enjoin PNB from foreclosing petitioner's properties, while in Civil Case No. 60012, the action is one to annul the auction sale over the foreclosed properties of petitioner based on the same grounds.<i> Notwithstanding a difference in the forms of the two actions, the doctrine of res judicata still applies considering that the parties were litigating for the same thing, i.e. lands covered by TCT No. 27307 and more importantly, the same contentions and evidence as advanced by herein petitioner in this case were in fact used to support the former cause of action</i>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis supplied) </blockquote>Relatedly, the Majority discusses five scenarios which may theoretically arise from the two legal separation cases filed by Caroline and Jorge. The third scenario provides, viz.:<br><blockquote>Caroline loses the first legal separation case. While she established that Jorge gave a ground for legal separation, Jorge was able to prove any of the affirmative defenses under Article 56 of the Family Code except the defense of prescription, to wit: . . .<br><br><b>Such decision on the merits bars Jorge from filing his own legal separation case, since the first case resolved his non-entitlement to the relief of legal separation granted to an innocent spouse.</b><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis supplied) </blockquote>On the other hand, the fifth scenario provides:<br><blockquote>Caroline wins the legal separation case. Whether or not Jorge raised the affirmative defense that Caroline was also guilty of a ground for legal separation,<b> Jorge is barred from filing a second legal separation case, </b>because the spouses are already legally separated, and<b> because he has himself given ground for legal separation and will not come to court with clean hands.</b><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis supplied) </blockquote>In both these scenarios presented in the Majority, the resolution of the first legal separation case bars Jorge from filing the second case. Respectfully, these scenarios precisely show that there is an identity of issues between the two legal separation cases.<br><br>In any case, the Majority posits that the applicable scenario did not bar Jorge from filing the second petition for legal separation, thus:<br><blockquote>Caroline loses the first legal separation case for failure to discharge her burden that Jorge gave a ground for legal separation. This decision on the merits leaves Jorge free to file his own legal separation case, since the first case disposed solely the issue of Caroline's entitlement to legal separation. It did not resolve the issue of whether Jorge was an innocent spouse entitled to legal separation.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </blockquote>On this score, it bears noting anew that when the second legal separation case was initiated, the first case was still pending before the Court of Appeals. Parenthetically, when Jorge filed his petition for legal separation, he could not have ascertained that the Court of Appeals would dispose of the first case in a manner that would purportedly leave him "free to file his own legal separation case", as the Majority has described. The first petition for legal separation could have been resolved otherwise, and Jorge would have been barred from filing the second petition.<br><br>This is where the Majority and this dissent differ.<br><br>As it was, Jorge deliberately committed forum shopping when he filed the second petition. He cannot simply brush off his liability for forum shopping by claiming that in any case, he disclosed the pending criminal cases he filed against Caroline for adultery. Conversely, Jorge demonstrated marked diligence in opposing Caroline's petition for legal separation in Civil Case No. N. 14-400-CV filed in 2014. He actively participated in the proceedings by: (a) filing an answer wherein he protested Caroline's alleged extramarital affair; and (b) submitting a demurrer to evidence, asserting that Caroline had failed to substantiate the statutory grounds for legal separation. Jorge, thereafter, filed the subsequent petition for legal separation despite knowledge on Caroline's pending appeal before the Court of Appeals. These acts, taken together, demonstrate a clear intent to circumvent procedural rules and to secure favorable rulings through multiple avenues which is inconsistent with the good faith requirement in litigation. His act of deliberate and willful forum shopping warranted the dismissal of his petition<b> with prejudice</b> in accordance with Rule 7, Section 5 of the Rules of Court as correctly ruled by Branch 3, RTC, Makati City. Further, by abusing court processes, direct contempt of court is present here.<i> Alliance of Non-Life Insurance Workers of the Philippines v. Mendoza</i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> elucidates:<br><blockquote>Thus, the CA did not commit an error in outrightly dismissing petitioner's petition. It must be remembered that the acts of a party or his counsel, clearly constituting willful and deliberate forum shopping shall be ground for the summary dismissal of the case with prejudice, and shall constitute direct contempt, as well as be a cause for administrative sanctions against the lawyer. Also, SC Circular No. 28-91 states that the deliberate ling of multiple complaints by any party and his counsel to obtain favorable action constitutes forum shopping and shall be a ground for summary dismissal thereof and shall constitute direct contempt of court, without prejudice to disciplinary proceeding against the counsel and the ling of a criminal action against the guilty party. In<i> Spouses Arevalo v. Planters Development Bank</i>, this Court further reiterated that once there is a finding of forum shopping, the penalty is summary dismissal not only of the petition pending before this Court, but also of the other case that is pending in a lower court. </blockquote>To be sure, the Court must not permit litigants to litigate the same controversy all over again and needlessly waste time, efforts, and resources. Such conduct is antithetical to the principles of equity and fair play, and is unbecoming of a litigant who claims innocence and good faith. Thus, Jorge and his counsel should be ordered to show cause why they should not be held in contempt for availing of multiple judicial remedies founded on substantially similar facts and raising substantially similar forms of relief from different courts pursuant to Rule 7, Section 5 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br><i>A final word</i>. In faithful adherence to the State's fundamental policy of preserving the sanctity of marriage, it must be emphasized that legal separation proceedings are governed by stringent and specialized rules, reflecting their extraordinary and solemn character. These procedural safeguards are designed to ensure that legal separation is granted only upon clear and compelling justification. The prohibition against forum shopping serves as a critical mechanism in this regard, precluding the simultaneous litigation of identical issues in separate proceedings. This not only safeguards judicial economy and consistency, but more importantly, fortifies the marital institution against undue disruption. Accordingly, the Court must neither compel nor tolerate duplicative litigation, and should bear the responsibility to forestall protracted legal conflict that would otherwise exacerbate the very marital strife the law seeks to resolve judiciously.<br><br><b>ACCORDINGLY</b>, I vote to<b> DENY</b> the petition.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, p. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 3-4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Family Code, art. 63, par. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Family Code, art. 63, par. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Family Code, art. 63, par. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Family Code, art. 63, par. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Family Code, art. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Family Code, art. 86, par. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Family Code, art. 198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Family Code, art. 56, par. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> A.M. No. 02-11-11-SC, March 4, 2003.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 906 Phil. 143 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> 327 Phil. 1156 (1996) [Per J. Hermosisima, First Division], as cited in <b>Casil v. Court of Appeals</b>, 349 Phil. 187 (1998) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 1166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Ponencia</i>, pp. 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 879 Phil. 574 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> RULES OF COURT, Rule 7, sec. 5. Certification against forum shopping. â The plaintiff or principal party shall certify under oath in the complaint or other initiatory pleading asserting a claim for relief, or in a sworn certification annexed thereto and simultaneously filed therewith: (a) that he has not theretofore commenced any action or filed any claim involving the same issues in any court, tribunal or quasi-judicial agency and, to the best of his knowledge, no such other action or claim is pending therein; (b) if there is such other pending action or claim, a complete statement of the present status thereof; and (c) if he should thereafter learn that the same or similar action or claim has been filed or is pending, he shall report that fact within five (5) days therefrom to the court wherein his aforesaid complaint or initiatory pleading has been filed.<br><br>Failure to comply with the foregoing requirements shall not be curable by mere amendment of the complaint or other initiatory pleading but shall be cause for the dismissal of the case without prejudice, unless otherwise provided, upon motion and after hearing. The submission of a false certification or nonÂ­compliance with any of the undertakings therein shall constitute indirect contempt of court, without prejudice to the corresponding administrative and criminal actions. If the acts of the party or his counsel clearly constitute willful and deliberate forum shopping, the same shall be ground for summary dismissal with prejudice and shall constitute direct contempt, as well as a cause for administrative sanctions.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

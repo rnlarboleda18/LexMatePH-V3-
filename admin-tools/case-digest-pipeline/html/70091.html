@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259916 - EDUARDO ILAYAT Y BUENO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70091' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259916, July 25, 2025 ]</H2>
+			<H3>EDUARDO ILAYAT <I>Y</I> BUENO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY"> Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated June 1, 2021 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 17, 2022, of the Court of Appeals (CA) in CA-G.R. CR No. 44252 which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated September 24, 2019, of Branch 16, Regional Trial Court (RTC), Ilagan City, Isabela in Criminal Case No. 5629. The RTC found Eduardo Ilayat <i>y</i> Bueno (petitioner) guilty beyond reasonable doubt of Homicide penalized under Article 249<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Revised Penal Code.<br><br><center><i>The Antecedents</i></center><br>The case stemmed from an Information<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> charging petitioner with Homicide, the accusatory portion of which reads:<blockquote>That on or about the 23<sup>rd</sup> day of January 2011, in the [M]unicipality of Benito Soliven, province of Isabela, Philippines, and within the jurisdiction of this Honorable Court, the said accused, with intent to kill and without any just motive, did then and there, willfully, unlawfully, and feloniously, assault, attack, and stab with a kitchen knife one Efren Cortez, Jr. <i>y</i> Agus, inflicting upon him, stab wound, LVQ, complete fracture of anterior 12<sup>th</sup> rib, which directly caused his death.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></blockquote>Upon arraignment, petitioner entered a plea of "not guilty" to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Petitioner interposed self-defense. Thus, reverse trial ensued.<br>&nbsp;<br>Petitioner testified that on January 23, 2011, at around 8:30 p.m., he and Alberto Macuroy, Jr. (Alberto) were walking towards his house when his wife called him through his phone. Petitioner answered his wife's call. Warlito Ganado (Warlito), who was near petitioner and Alberto, told them that they were being noisy; he then pushed them from behind.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Petitioner told Warlito to stop bothering them. Thereafter, he removed his knife from its scabbard. Upon seeing the knife, Warlito ran away while shouting, "He has a knife!" Petitioner and Alberto then left the area.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>After that, four men suddenly attacked petitioner.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> One of the attackers was the victim, Efren Agus, Jr.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> (Efren), who grabbed him by the neck and choked him; thus, causing him to fall on the ground. While petitioner was on the ground, the other men kept on kicking and punching him. To defend himself, petitioner aimlessly swung his knife until it hit Efren. The other men continued to kick him, but he was able to escape and run away. He reached Mario Casinding's (Mario) house and sought shelter.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Later on, several police officers arrived at Mario's house. He then surrendered himself to the police officers.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>The prosecution disproved petitioner's assertion of self-defense and narrated its version.<br><br>On January 23, 2011, at around 8:00 p.m., petitioner and Alberto were on their way to petitioner's house<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> after a drinking session.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Warlito was also in the area. While walking, petitioner received a call from his wife. As he was talking loudly to his wife, Warlito told him, "You are noisy." Petitioner got irritated and uttered, "What do you want?" Then, Warlito replied, "It's up to you what you want." Warlito's retort angered petitioner; thus, he drew his knife. As a result, Warlito ran away and shouted, "He has a knife!"<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Petitioner and Alberto then continued on their way. However, some bystanders accosted them, including the victim, Efren. Efren and petitioner fought and wrestled.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Unfortunately, petitioner was able to swing the knife towards Efren and hit him on his chest.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Ronaldo Agustin (Ronaldo) separated petitioner from Efren while Allan de Guzman (Allan) took hold of Efren. After a while, petitioner fled. Allan then brought Efren to a hospital where he was later pronounced dead on arrival.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The father of the victim, Efren Agus, Sr., testified that he incurred expenses in the amount of PHP 59,000.00 for the wake and funeral of his son.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In the Decision dated September 24, 2019, the RTC found petitioner guilty beyond reasonable doubt of Homicide. It sentenced him to suffer the penalty of imprisonment ranging from six years of <i>prision correccional</i>, as minimum, to eight years and one day of <i>prision mayor</i>, as maximum.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> It likewise ordered petitioner to pay Efren's heirs PHP 59,000.00 as actual damages, PHP 30,000.00 as moral damages, and PHP 50,000.00 as death indemnity.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The RTC ruled that petitioner failed to prove the elements of self-defense. It found that the petitioner was the cause of the melee as testified by Alberto and the prosecution witnesses. The RTC, however, considered two mitigating circumstances: intoxication on petitioner's part and positive provocation on the part of Efren.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Aggrieved, petitioner appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In the assailed Decision dated June 1, 2021, the CA denied the appeal and affirmed the RTC Decision, with modification in that it awarded the amount of PHP 25,000.00 as temperate damages in lieu of actual damages and increased the award for moral damages to PHP 50,000.00.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The CA held that the prosecution proved all the elements of homicide beyond reasonable doubt. It concurred with the factual findings of the RTC and upheld the presence of the following mitigating circumstances: intoxication and sufficient provocation.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Petitioner moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> but the CA denied it in its Resolution dated March 17, 2022.<br><br>Hence, the instant Petition.<br><br>Petitioner avers that the CA erred in ruling that he failed to establish the elements of self-defense. He insists that during the incident, he had every reason to believe that his life was in danger considering that the victim, Efren, and his cohorts suddenly attacked him. He asserts that it was Efren and his cohorts who were the unlawful aggressors. Efren even choked him to the extent that his tongue had already come out.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Because he was acting on the instinct of self-preservation, he found it reasonably necessary to use the only instrument available to him, the knife. Thus, he acted in self-defense.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> respondent, through the Office of the Solicitor General, prays that the Petition be denied for lack of merit. It asserts that the instant Petition raises a question of fact which is not the proper subject of a petition for review on <i>certiorari</i>. A reexamination of the RTC's finding on the absence of the elements of self-defense is clearly a question of fact rather than law.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Even for the sake of argument that a question of fact is allowed, petitioner still failed to prove the justifying circumstance of self-defense.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><center><i>The Issue</i></center><br>Whether the CA correctly affirmed petitioner's conviction for Homicide.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is without merit.<br><br>Preliminary, an appeal in criminal cases throws the whole case open for review, and the Court is mandated to rule on errors as may be found in the judgment appealed from, even if unassigned.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The appeal confers upon the appellate court full jurisdiction to examine records, revise the judgment appealed from, and even increase the penalty.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Guided by the foregoing, the Court affirms petitioner's conviction for Homicide.<br><br>Petitioner invokes self-defense and argues that the unlawful aggressor during the incident was the victim, Efren.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> In raising the plea of self-defense, petitioner admits that he killed Efren due to the latter's aggression.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>The Court is not convinced.<br><br>An admission of self-defense "frees the prosecution from the burden of proving that the accused committed the act charged against him or her."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> "The burden is shifted to the accused to prove that his or her act was justified."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>To prove self-defense, the accused must establish the following essential elements: "(1) unlawful aggression on the part of the victim; (2) reasonable necessity of the means employed to prevent or repel such aggression; and (3) lack of sufficient provocation on the part of the person defending himself or herself."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> In <i>People v. Lalap</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the Court explained:<blockquote>To successfully invoke self-defense, there must have been an unlawful and unprovoked attack that endangered the life of the accused, who was then forced to inflict severe wounds upon the assailant by employing reasonable means to resist the attack.<br><br>The claim of self-defense must rely, first and foremost, on proof of unlawful aggression on the part of the victim. Unlawful aggression is a <i>conditio sine qua non</i> for upholding the justifying circumstance of selfÂ­-defense; if there is nothing to prevent or repel, the other two requisites of self-defense will have no basis. If no unlawful aggression is proved, no self-defense may be successfully pleaded.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> (Citations omitted)&nbsp;</blockquote>Here, petitioner and his witness, Alberto, could not even agree on how and when the supposed unlawful aggression started. As the RTC aptly ruled:<blockquote>From the above-statements, two essential claims run counter to each other. One, Eduardo said that he met Efren Cortez, Jr. <i>y</i> Agus [<i>sic</i>] with companion and suddenly, Efren Cortez, Jr. <i>y</i> Agus [sic] choked him. On the other hand, Alberto Macuroy clearly stated that it was the men of Efren who ran after them and Eduardo was caught by four (4) men reason for which [sic] melee ensued. Two, in Eduardo's statement, unlawful aggression against him started when Efren, Jr. choked him[,] however, in Macuroy's story, unlawful aggression started when they were pushed to a corner and continued to become a melee. These contradictions are substantial making it short to establish clear and convincing proof to justify the killing of Efren, Jr.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></blockquote>Simply told, it was petitioner who was being <i>unruly</i>, brandishing a knife, and endangering the life and limbs of innocent persons. Records reveal that Efren, the barangay officials, and some bystanders, <i>pacified</i> the petitioner. Despite the presence of the barangay officials, petitioner continued to react violently.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Thus, Efren grappled with petitioner. Unfortunately, in the course of the melee, petitioner stabbed Efren in the chest, causing his death.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Thus, given that the core element of unlawful aggression was not proven, petitioner's claim of self-defense falls, and his criminal liability for Homicide, defined and penalized under Article 249 of the Revised Penal Code, stands.<br><br>"The elements of Homicide are the following: (a) a person was killed; (b) the accused killed him/her without any justifying circumstance; (c) the accused had the intention to kill, which is presumed; and (d) the killing was not attended by any of the qualifying circumstances of murder, or by that of parricide or infanticide."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>The prosecution was able to establish all of the elements specified above: (1) that petitioner killed Efren when he raised self-defense;<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (2) that the prosecution witnesses positively and categorically identified petitioner as the person who stabbed Efren and caused the latter's death; (3) that petitioner had the intention to kill the victim, as shown in the wound on Efren's chest; and (4) that the killing was not attended by any qualifying circumstances of Murder, Parricide, or Infanticide.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>The testimony of the prosecution witnesses was not tainted with any ill motive in instituting the case against petitioner or implicating him in a serious crime. The defense is bereft of evidence that the prosecution witnesses were motivated to testify against petitioner by reasons other than their intention to get justice for the death of Efren.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Still, the RTC and the CA ruled that Efren and the bystanders sufficiently provoked petitioner to kill Efren.<br><br>The Court does not agree.<br><br>Under Article 13, paragraph 4 of the Revised Penal Code, criminal liability may be mitigated if there is sufficient provocation on the part of the offended party that immediately preceded the complained act. For the accused to avail himself or herself of this mitigating circumstance, he or she must prove "<i>that the alleged provocation originated from the offended party</i>."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>As a mitigating circumstance, "sufficient provocation is any unjust or improper conduct or act of the victim adequate enough to excite a person to commit a wrong, which is accordingly proportionate in gravity."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> For provocation on the victim's part to mitigate the crime, it "must be sufficient and should immediately precede the act of the offender."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>In <i>People v. Racal</i>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> the Court discussed the elements of sufficient provocation as a mitigating circumstance, to wit:<blockquote>For sufficient provocation under Article 13, paragraph 4 of the Revised Penal Code of the Philippines to apply, three requisites must be present:<blockquote>a) provocation must be sufficient;<br>b) it must be immediate to the commission of the crime; and<br>c) it must originate from the offended party.</blockquote>"Sufficient" according to jurisprudence means adequate to excite a person to commit the crime and must accordingly be proportionate to its gravity . . . . [I]t is not enough that the provocating act be unreasonable or annoying. Certainly, calling a person gay as in this case is not the sufficient provocation contemplated by law that would lesser the liability of the accused.<br><br>"Immediate" on the other hand means that there is no interval of time between the provocation and the commission of the crime. Hence, in one case . . . the Supreme Court ruled that provocation occurring more than one hour before the stabbing incident is not immediate . . . . Per admission of the defense witnesses, the taunting done by the victim occurred days before the stabbing incident hence the immediacy required by law was absent. The lapse of time would have given the accused [chance] to contemplate and to recover his serenity enough to refrain from pushing through with his evil plan.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Citations omitted)</blockquote>Petitioner alleges that Efren's group started the scuffle by grabbing and choking, and then kicking and punching him. However, Efren did not in any way provoke petitioner into a fight that fateful night. There was no argument or physical struggle that ensued between them before petitioner stabbed him. Efren's group was just innocently walking along the road when petitioner suddenly surfaced and acted unruly. In other words, they were simply acting to <i>de-escalate</i> an otherwise intense and potentially lethal situation not knowing that Efren himself would become the victim of petitioner's acts.<br><br>Even the medical certificates<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> and testimony of the attending physicians affirmed that the injuries of petitioner were merely <i>superficial</i> and <i>slight</i>. Dr. Reynaldo Badua, Surgeon at the Governor Faustino N. Dy, Sr. Memorial Hospital, testified:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify"><u>COURT</u>:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">How did you consider the nature of the injuries being sustained by the patient Eduardo Ilayat?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">I think it is like a slight physical injury.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">With that kind of injuries, how many days will it take to be healed?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">For that kind or injury, it's about one (1) week.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Good Doctor, may we call it as superficial wounds?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And the possibility of having been inflicted on the neck was, as you say, through human scratch?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Doctor, I have here in this medical certificate your diagnosis. Kindly read for us the written notes here, Doctor.</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Abrasions wherein maybe due to human scratch, in the neck, the leg, and the scapular area at the back.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></div></td></tr></tbody></table></blockquote>Dr. Cherry Lou Tapales, the Municipal Health Officer of Rural Health Unit of Benito Soliven, Isabela, corroborated the above-quoted testimony, viz.:<blockquote><u>ATTY. CLARAVALL TO THE WITNESS ON DIRECT-EXAMINATION</u>:<div align="justify"><br>. . . .</div><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">To proceeding to the case at bar, are you familiar with one Eduardo Ilayat, the accused in this case?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Why do you know him?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">He was brought to me for medical examination last January 24, 2011.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">You said, he was brought to you. Who brought this Eduardo Ilayat to you doctor for medical examination?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">I could not remember, maybe he was brought by the mother or the police.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And what happened when he came to your office?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">So, the findings of my examination was, there was an abrasion at the right auxiliary area and another abrasion at the right knee.</div></td></tr><tr valign="top"><td><br></td><td><br></td></tr><tr valign="top"><td colspan="2"> <div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">You have your findings here, doctor, there is an abrasion.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">What is the meaning of that doctor, in layman's term, what is that, doctor?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Gasgas or scratch.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">How many abrasion did you see?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Two (2), sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">You said abrasions that you noted. How long will these abrasions heal?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Few days to one (1) week.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>COURT</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">How did you consider the nature of the injuries that you noted on the body of the patient Eduardo Ilayat?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td> <div align="justify">Those are only mild injuries, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">You mean, they are minor injuries?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, Your Honor.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></div></td></tr></tbody></table></blockquote>Verily, the mitigating circumstance of sufficient provocation should not be appreciated in favor of petitioner. In the absence of evidence as to how the quarrel arose, petitioner is not entitled to the mitigating circumstance of sufficient provocation.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>As regards the RTC's finding of the alternative circumstance of intoxication, the Court finds that petitioner is also not entitled to it as an alternative mitigating circumstance.<br><br>Under Article 15<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> of the Revised Penal Code, the alternative circumstance of intoxication shall be treated as a mitigating circumstance when the offender proves that his intoxication is not (a) habitual or (b) subsequent to a plan to commit a felony; otherwise, it shall be treated as an aggravating circumstance.<br><br>Notably, during the deliberations of the case, Associate Justice Alfredo Benjamin S. Caguioa pointed out that notwithstanding the straightforward language of the Revised Penal Code, the Court has ruled in several cases that before intoxication can be appreciated as a mitigating circumstance, the accused must also prove that at the time of the commission of the crime, he has taken such quantity of alcoholic drinks as to blur his reason and deprive him of a certain degree of control.<br><br>In <i>People v. Boduso</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> the Court, citing <i>People v. Noble</i>,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> ruled in this wise:<blockquote>We cannot, however, consider the application of the mitigating circumstance of intoxication. In order that an accused may be entitled to the mitigating circumstance of intoxication, it must be shown that (a) at the time of the commission of the criminal act, he has taken such quantity of alcoholic drinks as to blur his reason and deprive him of a certain degree of control, (b) that such intoxication is not habitual, or subsequent to the plan to commit the felony.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></blockquote>The pronouncement in <i>Boduso</i> was subsequently reiterated in <i>People v. Bautista</i>,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Licyayo v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>People v. Mondigo</i>,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Bacerra v. People</i>.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>While the Court in the aforementioned cases ruled that the offenders failed to prove that their mental faculties were diminished when they committed the crimeâimplying that proof of diminished or impaired willpower is necessary for intoxication to be considered a mitigating circumstanceâa review of the factual circumstances of the cases shows that the accused failed to prove that they were indeed intoxicated.<br><br>In <i>Boduso</i>, it was proved that accused only had a bottle of beer. In <i>Mondigo</i>, it was mentioned that accused had about three to four bottles of beer. In <i>Bautista, Licyayo</i>, and <i>Bacerra,</i> what was only mentioned was that therein accused had a drinking spree or session. In other words, what was simply alleged, or proven in these cases, was that accused consumed alcohol.<br>&nbsp;<br>Thus, the Court finds it necessary to settle the apparent inconsistency between the Revised Penal Code and existing cases.<br><br><i>First</i>, before the alternative circumstance of intoxication can be considered, the fact of intoxication must first be clearly established. To establish this fact, there must be evidence of acts or circumstances indicative of intoxication, i.e., <i>slurred speech, stumbling, or a swaying walk</i>, other than mere consumption of alcohol. Neither is the quantity of consumed alcoholic drinks sufficient proof of the fact of intoxication, as the alcohol tolerance for each person may differ. In other words, proof of alcohol intake alone, regardless of quantity, does not <i>ipso facto</i> equate to intoxication.<br><br><i>Second</i>, once the fact of intoxication is established from the factual milieu of the case or proved by the prosecution or the accused, the court is mandated to appreciate it as an aggravating circumstance when the intoxication is habitual or intentional; and mitigating circumstance when it is not habitual or subsequent to the plan to commit the felony. There is no need for the accused to prove that the alcoholic drinks affected his/her mental faculties before he/she can avail himself/herself of it as a mitigating circumstance.<br><br>Here, the conclusion of the RTC that petitioner was intoxicated was merely based on his testimony that he had a drinking spree with his friends, including Alberto. However, a judicious review of the testimony of petitioner does not show that he was intoxicated:<blockquote><u>COURT DURING THE CROSS-EXAMINATION OF PETITIONER</u>:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q:</div></td><td width="95%"><div align="justify">And what did you drink, if any?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Only one (1) 4x4, Your Honor, but we were not able to consume its content, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And what time did you finish drinking?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">About 9:00 o'clock, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Is that 4x4 gin?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Can you tell this court how many bottles of 4x4 gin did you consume?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td> <div align="justify">One (1) bottle only, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">You are very sure of that?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And you were able to consume that one (1) bottle?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">The content of the 4x4 gin was not yet consumed when I asked permission to leave, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td> <div align="justify">How many of you again participated in drinking that 4x4 gin?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Me, Alberto Macuroy and I don't know the others. Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">More or less how many of you?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">All in all, Your Honor, we're six (6).</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And you started at 5:00 o'clock and you finished at 9:00 o'clock?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">After 9:00 o'clock, what did you do?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">I asked permission to go home, Your Honor.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></div></td></tr></tbody></table></blockquote></blockquote>From the foregoing, there is no doubt that petitioner consumed liquor. However, without <i>independent proof</i> of the fact of intoxication, the Court finds that the RTC incorrectly concluded that the petitioner was intoxicated when he stabbed Efren.<br><br>On the contrary, petitioner was fully aware of the details when the incident happened, i.e., that Warlito pushed him and told him that they were noisy, that the victim and some bystanders accosted him, and that he stabbed the victim in self-defense.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Verily, absent proof of the fact of intoxication, the Court cannot consider it as a mitigating circumstance in his favor.<br><br>As to the penalty, "Article 249 of the Revised Penal Code provides that the crime of Homicide is penalized with <i>reclusion temporal</i>, the range of which is from 12 years and one day to 20 years."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Under the Indeterminate Sentence Law, the Court shall sentence the accused to an indeterminate sentence, the maximum term of which shall be that which, in view of the attending circumstances, could be properly imposed under the rules of the Revised Penal Code, and the minimum term of which shall be within the range of the penalty next lower to that prescribed by the Revised Penal Code for the offense.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Article 64, paragraph 1 of the Revised Penal Code reads:<blockquote>Art. 64. <i>Rules for the Application of Penalties Which Contain Three Periods</i>. â In cases in which the penalties prescribed by law contain three periods, whether it be a single divisible penalty or composed of three different penalties, each one of which forms a period in accordance with the provisions of articles 76 and 77, the courts shall observe for the application of the penalty the following rules, according to whether there are or are not mitigating or aggravating circumstances:<blockquote><ol><li>When there are neither aggravating nor mitigating circumstances, they shall impose the penalty prescribed by law in its medium period.</li></ol></blockquote></blockquote>Applying the foregoing, one degree lower than <i>reclusion temporal</i> is <i>prision mayor</i>, which has a medium period of eight years and one day to 10 years. On the other hand, the medium period of <i>reclusion temporal</i> is 14 years, eight months, and one day to 17 years and four months.<br><br>Pursuant to the Indeterminate Sentence Law and there being no modifying circumstance present, it is proper to sentence petitioner to suffer the penalty of imprisonment for the indeterminate period of eight years and one day of <i>prision mayor</i>, as minimum, to 14 years, eight months, and one day of <i>reclusion temporal</i>, as maximum.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Finally, in conformity with jurisprudence, petitioner is directed to pay the heirs of Efren: PHP 50,000.00 as civil indemnity; PHP 50,000.00 as moral damages; and PHP 50,000.00 as temperate damages<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> (for failure of the prosecution to provide documentary evidence to substantiate the expenses of PHP 59,000.00).<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>All damages awarded to the heirs of the victim, Efren shall earn legal interest at the rate of 6% per annum from the date of the finality of this Decision until full payment.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated June 1, 2021, and the Resolution dated March 17, 2022, of the Court of Appeals in CA-G.R. CR No. 44252 are <b>AFFIRMED</b> with <b>MODIFICATION</b>. Petitioner Eduardo Ilayat <i>y</i> Bueno is found <b>GUILTY</b> beyond reasonable doubt of Homicide penalized under Article 249 of the Revised Penal Code in Criminal Case No. 5629 filed before Branch 16, Regional Trial Court, Ilagan City, Isabela. He is sentenced to suffer the indeterminate penalty of eight years and one day of <i>prision mayor</i>, as minimum, to 14 years, eight months, and one day of <i>reclusion temporal</i>, as maximum. He is, likewise, <b>ORDERED</b> to <b>PAY</b> the heirs of Efren Agus, Jr. the following amounts: PHP 50,000.00 as temperate damages, PHP 50,000.00 as civil indemnity, and PHP 50,000.00 as moral damages. All the damages awarded shall earn legal interest at the rate of 6% per annum from the date of the finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Hernando, Zalameda, Gaerlan, Rosario, J. Lopez, Marquez, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Caguioa</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Lazaro-Javier</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>JJ.</i>, on official business but left a concurring vote.<br><i>Dimaampao</i><sup style="COLOR: RGB(255, 0, 0);">***</sup> and <i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">****</sup> <i>JJ.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business but left a concurring vote.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business but left a concurring vote.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">****</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 33-47. The Decision was penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Myra V. Garcia-Fernandez and Carlito B. Calpatura of the Special Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 49-50. The Resolution was penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Myra V. Garcia-Fernandez and Carlito B. Calpatura of the Former Special Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 73-79. The RTC Decision was penned by Judge Isaac R. De Alban.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Art. 249. <i>Homicide</i>. â Any person who, not falling within the provisions of article 246 shall kill another without the attendance of any of the circumstance enumerated in the next preceding article, shall be deemed guilty of homicide and be punished by <i>reclusion temporal</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> RTC records, pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> The Information refers to the victim as "Efren Cortez, Jr. <i>y</i> Agus." However, records of the case consistently show his name as "Efren Agus, Jr." and refer to his father, a prosecution witness, as "Efren Agus, Sr." <i>See rollo</i>, pp. 34, 36, 74, 79, 83, 85, 126, 131. But <i>see rollo</i>, pp. 73, 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> CA <i>rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 43-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 99-105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 20-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 23-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 119-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 124-125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 126-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Gelig v. People</b>, 640 Phil. 109, 112, 115 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>People v. Olpindo</b>, 919 Phil. 1024, 1046-1047 (2022) [Per C.J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, pp. 21-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 23-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>People v. Antonio</b>, 869 Phil. 773, 784 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>People v. Lalap</b>, 904 Phil. 812, 820 (2021) [Per J. Inting, Third Division], <i>citing</i> <b>Casilac v. People</b>, 870 Phil. 888, 900 (2020) [Per J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, p. 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 13, 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Anisco v. People</b>, 890 Phil. 772, 782 (2020) [Per J. Delos Santos, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, pp. 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Gumawid v. People</b>, 921 Phil. 746, 755 (2022) [Per J. Inting, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Licyayo v. People</b>, 571 Phil. 310, 324 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Racal</b>, 817 Phil. 665, 683 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>PO2 Cruz v. People</b>, 882 Phil. 484, 501 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 817 Phil. 665 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 683-684.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> RTC records, pp. 11-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> TSN, Dr. Reynaldo Badua, March 22, 2012, pp. 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> TSN, Dr. Cherry Lou Tapales, March 22, 2012, pp. 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Licyayo v. People</b>, 571 Phil. 310, 327 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> ART. 15. <i>Their concept</i>. â Alternative circumstances are those which must be taken into consideration as aggravating or mitigating according to the nature and effects of the crime and the other conditions attending its commission. They are the relationship, intoxication and the degree of instruction and education of the offender.<br><br>The alternative circumstance of relationship shall be taken into consideration when the offended party is the spouse, ascendant, descendant legitimate, natural, or adopted brother or sister, or relative by affinity in the same degrees of the offender.<br><br>The intoxication of the offender shall be taken into consideration as a mitigating circumstance when the offender has committed a felony in a state of intoxication, if the same is not habitual or subsequent to the plan to commit said felony; but when the intoxication is habitual or intentional it shall be considered as an aggravating circumstance.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 158 Phil. 273 (1974) [Per J. Antonio, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> 77 Phil. 93 (1946) [Per J. Tuason, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 285.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 468 Phil. 173 (2004) [Per. J. Carpio-Morales, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 571 Phil. 310 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> 567 Phil. 361 (2008) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 812 Phil. 25 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> TSN, Eduardo Ilayat, February 27, 2014, pp. 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, pp. 14-15, 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Anisco v. People</b>, 890 Phil. 772, 785 (2020) [Per J. Delos Santos, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Act No. 4103 (1933), sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>People v. Cortez</b>, 844 Phil. 1086, 1097 (2018) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>People v. Jugueta</b>, 783 Phil. 806, 852 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Rollo</i>, p. 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>People v. Jugueta</b>, 783 Phil. 806, 854 (2016) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

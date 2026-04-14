@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 275125 - CIVIL SERVICE COMMISSION, PETITIONER, VS. SHEILA V. SOLIVA, RESPONDENT.  D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70100' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 275125, July 30, 2025 ]</H2>
+			<H3>CIVIL SERVICE COMMISSION, PETITIONER, VS. SHEILA V. SOLIVA, RESPONDENT.<BR><BR>  D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Court resolves the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by the Civil Service Commission (CSC), through the Office of the Solicitor General assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA). The CA granted the Petition<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> filed by Sheila V. Soliva (Sheila) and, consequently, dismissed the Complaint filed by Krystelle Rose Sarmen-Soliva (Krystelle) against Sheila. In its Decision, the CA reversed the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the CSC that found Sheila guilty of disgraceful and immoral conduct and conduct prejudicial to the best interest of the service on the ground of <i>res judicata</i>. </p><p> Joemar Soliva<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (Joemar) and Maria Lilane Sarmen-Soliva (Lilane), the mother of Krystelle, were married on July 22, 1980 and they had three children.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> On June 4, 1985, Joemar entered another marriage with a certain Marissa A. Cabungcal (Marissa) and they also had three children.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> On May 13, 1998, Joemar entered into another marriage with Sheila, and subsequently had a child with her.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Marissa then filed a Complaint with the CSC Regional Office VI (CSC RO VI) for disgraceful and immoral conduct against Sheila. At that time, Sheila was a teacher assigned at Bungsuan National High School, Dumarao, Capiz.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> In a Decision, the CSC RO VI<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> found Sheila administratively liable and imposed the penalty of one year suspension.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> Then, Lilane filed a Complaint with the Department of Education (DepEd) Regional Office VI (DepEd RO VI) for immorality and conduct prejudicial to the best interest of the service.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> On January 17, 2013, the DepEd RO VI issued a ruling finding Sheila administratively liable and imposed the penalty of dismissal from the service subject to the confirmation of the DepEd Secretary.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> The DepEd Secretary issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> modifying the ruling and finding Sheila administratively liable for conduct prejudicial to the best interest of the service.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> However, as to the penalty to be imposed, the DepEd Secretary applied Section 50 of the Revised Rules on Administrative Cases in Civil Service, finding that although Sheila's conviction was rendered by two different offices in two different years, these are convictions of administrative charges for the same act, and "the penalty to be imposed should be that corresponding to the most serious charge and the rest shall be considered as aggravating circumstances.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Thus, it concluded that "the [CSC RO VI] has imposed the maximum penalty of one (1) year suspension [as] the penalty for Conduct Prejudicial to the Best Interest of the Service, [which] may just be considered as aggravating circumstance and thus, deemed to have been served by respondent."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The dispositive portion of the Resolution provides: </p><blockquote> <p> WHEREFORE, premises considered, the Decision dated January 17, 2013 of the Regional Office, DepEd Region VI, is hereby MODIFIED. Respondent SHEILA C. VENUS is hereby found guilty of Conduct Prejudicial to the Best Interest of the Service.</p> <p> Considering that Respondent Shiela C. Venus has served the maximum penalty of one (1) year suspension imposed by the Civil Service Commission (CSC) due to her conviction of Disgraceful and Immoral Conduct, she is hereby deemed to have served the penalty for Conduct Prejudicial to the Best Interest of the Service.</p> <p> SO RESOLVED.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p> </blockquote> <p> In 2014, a Complaint<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> was also filed by Krystelle with the CSC RO VI against Sheila for immorality and conduct prejudicial to the best interest of the service.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Krystelle alleged that Sheila continued to have an amorous relationship with Joemar despite her prior conviction for a similar administrative offense by the CSC RO VI and the DepEd.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> She added that Sheila continued to use Soliva as her surname and moved in with Joemar in the house where Krystelle and her siblings live, causing Krystelle and her siblings to move out.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p> In Decision No. 180001,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> the CSC RO VI found Sheila, who was at that time a Head Teacher in Bungsuan National High School, Dumarao, Capiz, administratively liable for disgraceful and immoral conduct and conduct prejudicial to the best interest of the service. Considering that the case was her second administrative offense, the CDC RO VI imposed the penalty of dismissal from the service and forfeiture of retirement benefits as follows: </p><blockquote> <p> WHEREFORE, Sheila C. Venus-Soliva, Head Teacher, Bungsuan National High School, Dumarao, Capiz, is found guilty of Disgraceful and Immoral Conduct (Immorality) and Conduct Prejudicial to the Best Interest of the Service. Considering that the present charge constitutes her second offense of Disgraceful and Immoral Conduct and Conduct Prejudicial to the Best Interest of the Service, the penalty of DISMISSAL from the service is meted upon the respondent with the accessory penalties of forfeiture of retirement benefits (except accrued leave credits/terminal benefits and personal contributions to the GSIS, if any), cancellation of eligibility, perpetual disqualification from holding public office and bar from taking Civil Service Examinations.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p> </blockquote> <p> Sheila filed a Motion for Reconsideration, which was denied by the CSC RO VI in a Resolution.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> Sheila filed a Petition for Review with the CSC, which was denied in a Decision.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The CSC ruled that there is no <i>res judicata</i> between the present complaint and the earlier case filed against Sheila with the CSC as it was based on Sheila's cohabitation with Joemar after the conviction under the first administrative case.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The dispositive portion of the CSC Decision reads: </p><blockquote> <p> WHEREFORE, the Petition for Review of Sheila C. Venus-Soliva, Head Teacher, Bungsuan National High School, Dumarao, Capiz, is hereby DISMISSED. Accordingly, Decision No. 180001 dated January 5, 2018 of the Civil Service Commission Regional Office (CSC RO) VI, Iloilo City, finding Venus-Soliva guilty of Disgraceful and Immoral Conduct and Conduct Prejudicial to the Best Interest of the Service and imposing upon her the penalty of dismissal from the service with the accessory penalties of cancellation of eligibility, perpetual disqualification from holding public office, bar from taking the civil service examination, and forfeiture of retirement benefits, except her accrued/terminal leave benefits and personal contributions to the Government Service Insurance System, if any; and Resolution No. 180148 dated June 11, 2018, denying her Motion for Reconsideration, are AFFIRMED.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p> </blockquote> <p> Aggrieved, Sheila filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> with the CA. In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the CA reversed the CSC ruling and dismissed the complaint against Sheila: </p><blockquote> <blockquote> <p> WHEREFORE, premises considered, the petition is GRANTED. The Decision No. 210166 dated June 30, 2021 of the Civil Service Commission, affirming the Decision dated January 5, 2018; and Resolution dated June 11, 2018 of the Civil Service Commission, Regional Office â VI is REVERSED and SET ASIDE. Accordingly, the Complaint filed against petitioner, docketed as CSC Case No. CSCRO6-D-14-135, before the Civil Service Commission â Regional Office VI, is hereby DISMISSED.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p> </blockquote> </blockquote> <p> In so ruling, the CA concluded that the Complaint filed against Sheila had already been barred by prior judgment. Deviating from the CSC's findings, the CA found that there was also an identity of causes of action. It found that the same facts or evidence would sustain both the prior complaint by which Sheila was already found liable, and the present complaint, as "they are essentially based on the same set of facts."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The CA reasoned: </p><blockquote> <p> True, respondent emphasized that the instant case centers on the continued amorous relationship of petitioner to her father Joemar and presents an additional set of evidence in the form of photos depicting the petitioner with Joemar and their child. Nevertheless, We hold that the issue of petitioner's continued presence in the life of Joemar while the latter was still alive is merely an incident of the main narrative of petitioner and Joemar's relationship, a matter that has already been decided with finality twice, and for which petitioner had already paid.</p> <p> Truly, <i>res judicata</i> exists because all its elements are present, including the identity of causes of action. If one takes away the main narrative of petitioner and the late Joemar Soliva's relationship, respondent's complaint would have no leg to stand on.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p> </blockquote> <p> The CSC and Krystelle filed their respective Motions for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> but these were denied by the CA in a Resolution.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> Hence, the CSC filed the instant Petition.</p><p> The CSC maintains that not all the elements of <i>res judicata</i> were present between the present complaint filed by Krystelle, and the previous cases that found Sheila administratively liable. It pointed out that the CSC and the CA disagreed only on the issue of whether there was identity of causes of action. The CSC contends that there was no identity of causes of action because the CSC Decision was based on the illicit continuous cohabitation of Sheila with Joemar even after the earlier findings of administrative liability. Even if the acts subject of the earlier and the present cases arose from the sole illicit relationship, these are separate acts and thus must be treated as distinct offenses giving rise to separate causes of action.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> The CSC adds that the earlier cases and the present case cannot be sustained by the same set of evidence, as the acts alleged in the present complaint have yet to be committed at the time the previous cases were filed. Particularly, the CSC points out that the previous administrative convictions were rendered on June 10, 2022 and January 17, 2013, while the present case arose from an event occurring on December 14, 2013. As such, the circumstances in the present case could not have been considered in the earlier administrative cases.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> As such, the CSC advocates that Sheila's blatant disregard of her prior administrative convictions and subsequent illicit acts are separate causes of action, and should likewise be penalized.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> The CSC asserts that the act of maintaining the same illicit relations after a finding of administrative liability is a separate infraction that gives rise to a separate cause of action.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> The CSC added that Sheila is a head teacher in a public high school, and by virtue of her position and profession, good moral character is a continuing requirement and a higher ethical and moral standard of conduct is expected.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></p><p> In her Comment,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Sheila maintained that <i>res judicata</i> is applicable in this case.</p><p> Sheila states that the evidence presented to prove cohabitation with Joemar does not tend to show that she is living an immoral life, as the photos are a manifestation of Joemar's love for their daughter.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> She argues that these photos are "snapshots of the memories of [Joemar] and [Sheila] with their daughter and are not evidence of living an immoral life."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p><p> Sheila adds that the DepEd Secretary's pronouncement declaring that her act of contracting marriage with Joemar did not constitute disgraceful and immoral conduct, is conclusive upon all the parties.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></p><p align="center"> <b>This Court's Ruling</b> </p><p> This Court denies the Petition for Review on <i>Certiorari</i>. </p><p> The concept of <i>res judicata</i> "precludes parties from relitigating issues actually litigated and determined by a prior and final judgment."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></p><p> Jurisprudence confirms that the concept of <i>res judicata</i> is applicable to administrative cases as well.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> The elements of <i>res judicata</i> are as follows: </p><blockquote> <p> (1) the judgment sought to bar the new action must be final; (2) the decision must have been rendered by a court having jurisdiction over the subject matter and the parties; (3) the disposition of the case must be a judgment on the merits; and (4) there must be as between the first and second action, identity of parties, subject matter, and causes of action.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Citation omitted)</p> </blockquote> <p> Here, the parties only dispute the element that there is an identity of causes of action, as the other elements are not controverted by the parties.</p><p> The CA found that there was an identity in the causes of action because the administrative complaints are based on the same set of facts, and that respondent's "continued presence in the life of Joemar while the latter was still alive is merely an incident of the main narrative of [respondent] and Joemar's relations."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The CA theorizes that "if one takes away the main narrative of respondent and Joemar's relationship, [respondent]'s complaint would have no leg to stand on."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> Petitioner, on the other hand, argues that there was no identity of causes of action because its Decision was based on the illicit continuous cohabitation of respondent with Joemar occurring after the earlier administrative cases,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> as notably, the acts alleged in the present complaint have yet to be committed at the time the previous cases were filed and thus, could not have been considered in the earlier administrative cases.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> This Court finds that there is identity of causes of action.</p><p> In <i>Philippine College of Criminology, Inc. v. Bautista</i>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> We emphasized that for the element of identity of causes of action to be met, absolute identity is not required: </p><blockquote> <p> Identity of causes of action does not mean absolute identity. Otherwise, a party could easily escape the operation of <i>res judicata </i>by changing the form of the action or the relief sought. The test to determine whether the causes of action are identical is to ascertain whether the same evidence will sustain both actions, or whether there is an identity in the facts essential to the maintenance of the two actions. If the same facts or evidence would sustain both, the two actions are considered the same, and a judgment in the first case is a bar to the subsequent action.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></p> </blockquote> <p> We also confirmed in that case that the ultimate test in determining the presence of identity of cause of action is the same evidence test, which provides: </p><blockquote> <p> It is a settled rule that the application of the doctrine of <i>res judicata</i> to identical causes of action does not depend on the similarity or differences in the forms of the two actions. A party cannot, by varying the form of the action or by adopting a different method of presenting his case, escape the operation of the doctrine of <i>res judicata</i>. The test of identity of causes of action rests on whether the same evidence would support and establish the former and the present causes of action.</p> <p> We held in <i>Esperas v. The Court of Appeals </i>that the ultimate test in determining the presence of identity of cause of action is to consider whether the same evidence would support the cause of action in both the first and the second cases. Under the same evidence test, when the same evidence support and establish both the present and the former causes of action, there is likely an identity of causes of action.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></p> </blockquote> <p> The present administrative case for immorality and conduct prejudicial to the best interest of the service is based on the continued amorous relationship and cohabitation of respondent and Joemar.</p><p> Notably, the Complaint in the instant case is already the third administrative case filed against respondent in relation to her relationship with Joemar.</p><p> To recall, the first case and the instant case was filed with the CSC RO VI and CSC, respectively, while the second case was filed with the DepEd. In that second case, the DepEd acknowledged in its Decision that the administrative charge that it resolved was for the same act as in the first case.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></p><p> More, the CSC RO VI stated in its Decision that the Complaint in the instant case "is anchored on the alleged continuous relationship which [respondent] maintains with [Joemar] despite her conviction for similar offense of Immorality and Conduct Prejudicial to the Best Interest of the Service by both the [CSC and DepEd]."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> This is confirmed by the CSC, which stated in its Decision that the complaint "is anchored on the alleged continued illicit relationship of [respondent] with [Joemar], despite her previous conviction by the [CSC and DepEd].<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Verily, the instant case is but a continuation of the previous cases where judgments were already rendered and penalties were already imposed upon and served by the respondent.</p><p> As such, the same facts or evidence in the present case, involving the continuation of respondent's relationship with Joemar, would sustain the prior complaints by which respondent was already found liable and the complaint in the instant case, which were based on the same relationship.</p><p> Thus, the CA did not commit reversible error in ruling that the Complaint in the instant case was barred by <i>res judicata</i>. </p><p> As a consequence of the finding that the Complaint in the instant case should be dismissed due to <i>res judicata</i>, this Court need not delve into the arguments raised in respondent's Comment that pertain to whether the evidence tends to prove the charges of immorality and conduct prejudicial to the best interest of the service. At any rate, these are questions of fact which this Court generally does not entertain in a petition for review on<i> certiorari</i> under Rule 45 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The February 28, 2023 Decision and the May 31, 2024 Resolution of the Court of Appeals in CA-G.R. CEB SP No. 15103 are <b>AFFIRMED</b>. The Complaint filed by Krystelle Rose Sarmen-Soliva against Sheila V. Soliva for immorality and conduct prejudicial to the best interest of the service is <b>DISMISSED</b>. </p><p> <b>SO ORDERED.</b></p><p> <em>Lazaro-Javier, Kho, Jr</em>., and <em>Villanueva, JJ</em>., concur. <em><br> Leonen, SAJ.</em>, see separate concurring opinion. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-50. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 32-43. The February 28, 2023 Decision in CA-G.R. CEB SP No. 15103 was penned by Associate Justice Jacinto G. Fajardo, Jr. and concurred in by Associate Justices Marilyn B. Lagura-Yap and Rogelio G. Largo of the Nineteenth Division, Court of Appeals, Cebu City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 46-47. The May 31, 2024 Resolution in CA-G.R. CEB SP No. 15103 was penned by Associate Justice Jacinto G. Fajardo, Jr. and concurred in by Associate Justices Marilyn B. Lagura-Yap and Rogelio G. Largo of the Nineteenth Division, Court of Appeals, Cebu City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> CA <i>rollo</i>, pp. 5-32. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 34-42. The June 30, 2021 Decision No. 210166 was penned by Commissioner Aileen Lourdes A. Lizada and concurred in by Chairperson Alicia dela Rosa-Bala of the Civil Service Commission.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Also referred to as "Jose Mariano F. Soliva" in some parts of the <i>rollo</i> and records.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, p. 34. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> CA <i>rollo</i>, pp. 120.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 120-133. Dated June 10, 2002.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 132. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 34. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> CA <i>rollo</i>, pp. 138-143. Dated November 15, 2013. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 142.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 142-143.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 143. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Dated October 15, 2014. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i>, p. 36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 35. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> CA <i>rollo</i>, pp. 61-71. Dated January 5, 2018. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 73-74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 34-42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 5-32. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 32-43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 40-42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> CA <i>rollo</i>, pp. 321-331, 351-363. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, pp. 46-47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 17-19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 19-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 21-22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 22-24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 54-63. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 59-60. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 60. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 60-61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Federal Land, Inc. v. Northlander Real Estate and Dev't., Inc.</b>, 916 Phil. 138, 148 (2021) [Per J. Leonen, Third Division]. (Citation omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Civil Service Commission v. Alfonso</b>, 607 Phil. 60, 72 (2009) [Per J. Nachura, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Federal Land, Inc. v. Northlander Real Estate and Dev't., Inc.</b>, 916 Phil. 138, 148 (2021) [Per J. Leonen, Third Division]. <b>Aniban ng Nagkakaisang Mamamayan ng Hacienda Dolores (ANMHD/ANIBAN), Inc. v. FL Properties and Management Corp.</b>, 934 Phil. 46, 76-77 (2023) [Per J. Leonen, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 42. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 19-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 873 Phil. 1014 (2020) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 1026, <i>citing</i> <b>Heirs of Arania v. Intestate Estate of Sangalang</b>, 822 Phil. 643, 666-667 (2017) [Per J. Martires, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Philippine College of Criminology, Inc. v. Bautista</b>, 873 Phil. 1014, 1025-1026 (2020) [Per J. Leonen, Third Division], <i>citing</i> <b>Riviera Golf Club, Inc. v. CCA Holdings, B.V.</b>, 760 Phil. 655, 666-667 (2015) [Per J. Brion, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> CA <i>rollo</i>, pp. 142-143. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup><b> Cardenas v. People</b>, 917 Phil. 163, 176 (2021) [Per J. Inting, Second Division]. <br><br></p><hr align="center" width="60%" size="1" noshade="noshade"> <div align="center"><b><br></b></div><div align="center"><b>SEPARATE CONCURRING OPINION</b></div> <p> <b>LEONEN, <i>S.A.J</i>.:</b></p><p> I concur with the <i>ponencia</i> that the petition should be denied as <i>res judicata</i> bars the filing of the present case. However, it must be added that the established facts negate any finding that respondent Sheila V. Soliva committed either gross immorality or conduct prejudicial to the best interest of the service.</p><p> The principle of <i>res judicata</i> is broken down into the two concepts of bar by prior judgment and conclusiveness of judgment,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> consistent with Rule 39, Section 47 (b) and (c) of the Rules of Court. In <i>Spouses Aboitiz v. Spouses Po</i>:<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> </p><blockquote> <p> <i>Res judicata</i> in the concept of bar by prior judgment proscribes the filing of another action based on "the same claim, demand, or cause of action." It applies when the following are present: (a) there is a final judgment or order; (b) it is a judgment or order on the merits; (c) it was "rendered by a court having jurisdiction over the subject matter and parties"; and (d) there is "identity of parties, of subject matter, and of causes of action" between the first and second actions.</p> <p> <i>Res judicata</i> in the concept of conclusiveness of judgment applies when there is an identity of issues in two (2) cases between the same parties involving different causes of action. Its effect is to bar "the relitigation of particular facts or issues" which have already been adjudicated in the other case. In <i>Calalang v. Register of Deeds of Quezon City</i>:</p> <blockquote> <p> The second conceptâconclusiveness of judgmentâstates that a fact or question which was in issue in a former suit and was there judicially passed upon and determined by a court of competent jurisdiction, is conclusively settled by the judgment therein as far as the parties to that action and persons in privity with them are concerned and cannot be again litigated in any future action between such parties or their privies, in the same court or any other court of concurrent jurisdiction on either the same or different cause of action, while the judgment remains unreversed by proper authority. It has been held that in order that a judgment in one action can be conclusive as to a particular matter in another action between the same parties or their privies, it is essential that the issue[s] be identical. If a particular point or question is in issue in the second action, and the judgment will depend on the determination of that particular point or question, a former judgment between the same parties or their privies will be final and conclusive in the second if that same point or question was in issue and adjudicated in the first suit. Identity of cause of action is not required but merely identity of issues.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> (Citations omitted)</p> </blockquote> </blockquote> <p> The present case regarding respondent's having acted with gross immorality or conduct prejudicial to the best interest of the service is barred by <i>res judicata</i>. </p> <p> To be barred by <i>res judicata</i>, the following elements must be established: "(1) the former judgment is final; (2) it is rendered by a court having jurisdiction over the subject matter and the parties; (3) it is a judgment or an order on the merits; (4) there is â between the first and the second actions â identity of parties, of subject matter, and of causes of action."<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> The first and second elements exist because two tribunals with jurisdiction over the subject matter and the parties rendered final judgments on the merits against respondent. Joemar Soliva's (Joemar) second wife, Marissa A. Cabungcal, filed a complaint for disgraceful and immoral conduct before the Civil Service Commission Regional Office VI which resulted in respondent's suspension for one year. Joemar's first wife, Maria Liliane Sarmen-Soliva, filed a subsequent complaint before the Department of Education Regional Office VI, which led to its November 15, 2013 Resolution ruling that respondent was guilty of conduct prejudicial to the best interest of the service. However, as respondent had already served the one year suspension imposed by the Civil Service Commission Regional Office VI, she was deemed to have served the penalty for conduct prejudicial to the best interest of the service.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> Respondent was penalized after both tribunals' finding on the merits that she was guilty of the assailed conduct, which is the third element. </p><p> The fourth element is likewise present. There is identity of parties, subject matters, and causes of action between the two prior cases and the present case. The complainants in the first two cases were the previous wives of Joemar, while the complainant of the present case is Krystelle Sarmen-Soliva (Krystelle), Joemar's daughter from his first wife. The subject matter of all three complaints is Joemar's marriage with respondent, and the cause of action is respondent's alleged administrative violations.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Hence, <i>res judicata</i> through prior judgment applies. </p><p> Although the issue on whether respondent is liable for gross immorality or conduct prejudicial to the best interest of the service has been rendered moot through the application of <i>res judicata</i>, I believe it is important to clarify that respondent's actions are not sanctionable.</p><p> Krystelle claims that respondent should be held administratively liable for immorality and conduct prejudicial to the best interest of the service for: (a) her continued affair with Joemar, Krystelle's father, despite the rulings of the Civil Service Commission Regional Office VI and the Department of Education Regional Office VI; (b) her use of Joemar's surname "Soliva"; and (c) her residence in Joemar's house where Krystelle and her siblings also lived, causing them to move out.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> To determine whether a conduct is disgraceful or immoral, this Court will "[consider] the totality of the circumstances surrounding the conduct; and [assess] the said circumstances vis-a-vis the prevailing norms of conduct, i.e., what the society generally considers moral and respectable, are necessary."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> On the other hand, conduct prejudicial to the best interest of the service involve "acts/omissions of public officers and employees, regardless of their relation or connectionâor non-relation or non-connectionâto the performance of official duties that are contrary to these constitutional principles tarnish the image or integrity of the public service[.]"<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Juxtaposing the definitions provided against the assailed actions negate a finding that respondent acted with gross immorality or conduct prejudicial to the best interest of the service. Respondent is Joemar's third wife, and they were married on May 13, 1998.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The facts are bereft of any allegations that the marriage was invalid, void, or suffered from any impediment. Thus, absent proof to the contrary, respondent and Joemar's marriage must be upheld.</p><p> Both the Civil Service Commission Regional Office VI and the Department of Education Regional Office VI penalized respondent for her relationship with Joemar.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> However, these rulings do not affect the validity of their marriage. As Joemar's wife, respondent is well within her rights to engage in the very actions Krystelle assails, and should not be punished for it.</p><p> <b>ACCORDINGLY</b>, I vote to <b>DENY</b> the Petition. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Sanggacala v. National Power Corporation</b>, 907 Phil. 344, 356 (2021) [Per J. Leonen, Third Division]. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> 810 Phil. 123, 152-153 (2017) [Per J. Leonen, Second Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 152-153.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <b>Perez v. Sandiganbayan</b>, 934 Phil. 104, 148 (2023) [Per J. Leonen, Second Division], <i>citing</i> <strong>City of </strong><b>Taguig v. City of Makati</b>, 787 Phil. 367 (2016) [Per J. Leonen, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Ponencia</i>, pp. 1-2. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 1.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 3. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <b>Union School International v. Dagdag</b>, 843 Phil. 858, 867 (2018) [Per J. Tijam, First Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <b>Nicolas, Sr. v. Task Force Abono-Field Investigation Office</b>, 944 Phil. 582, 627 (2023) [Per J. Kho, Jr., Second Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Ponencia</i>, p 2. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 2-3. </p> </div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

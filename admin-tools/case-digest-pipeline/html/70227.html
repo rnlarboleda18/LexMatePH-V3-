@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 229065 - REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. THE SANDIGANBAYAN (2ND DIVISION)* AND HEIRS OF BENJAMIN ("KOKOY") ROMUALDEZ, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70227' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 229065, November 03, 2025 ]</H2>
+			<H3>REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. THE SANDIGANBAYAN (2<SUP>ND</SUP> DIVISION)<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> AND HEIRS OF BENJAMIN ("KOKOY") ROMUALDEZ, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">At the crosshairs of this Petition for<i> Certiorari</i> with Prayer for the Issuance of a Temporary Restraining Order and/or Preliminary Injunction<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by petitioner Republic of the Philippines (Republic), through the Presidential Commission on Good Governance (PCGG), are the Resolutions dated May 23, 2016<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and September 14, 2016<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Sandiganbayan in Civil Case No. 0035, which granted the "Urgent Motion to Order the Plaintiff to Comply with the Resolution of the Honorable Court dated August 31, 2007 and Pending Compliance Thereof to Suspend the Filing of Defendants' Responsive Pleading"<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (Urgent Motion) filed by respondents heirs of Benjamin "Kokoy" Romualdez (heirs of Romualdez); and denied the Republic's motion for reconsideration thereof, respectively.<br><br><center><b>The Facts</b></center><br>The instant case has its genesis in the Complaint for recovery of ill-gotten wealth initiated by the Republic in July 1987<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> against Benjamin "Kokoy" Romualdez (Romualdez), the predecessors-in-interest of the heirs of Romualdez, docketed before the Sandiganbayan as Civil Case No. 0035. In view of ostensible ambiguities in the Complaint, the heirs of Romualdez<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> filed a motion for bill of particulars on July 26, 1991. Whereupon, the Republic filed the Amended Complaint dated January 17, 1997 (Second Amended Complaint), impleading several companies which are possibly cronies of the Marcoses and or Romualdezes.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> In due course, the Republic filed its Second Amended Complaint (Third Amended Complaint), which was admitted by the Sandiganbayan through its Resolution dated October 8, 2001. The Third Amended Complaint addressed the matters raised by the heirs of Romualdez in their motion for bill of particulars.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>However, instead of submitting their responsive pleading thereto, the heirs of Romualdez filed a motion for the production and inspection of documents, which was granted by the Sandiganbayan through the Resolution dated August 31, 2007,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> viz.:<br><blockquote><dl><dt>WHEREFORE, in the light of all the foregoing, the Court hereby GRANTS the motion and accordingly orders the [Republic] to produce or allow the [heirs of Romualdez] to inspect the following requested documents:<br><br></dt><dd>1) The official records which were used as the basis for the filing of the Third Amended Complaint and upon which the verification that the allegations in said Third Amended Complaint are true and correct is based;<br><br>2) The official records which were used as basis for the issuance of writs of sequestration against the properties listed in Annex "A" of the Third Amended Complaint; and,<br><br>3) Official records which were used for the inclusion of the [heirs of Romualdez] who are alleged to have acted in conspiracy and collaboration with herein defendants in this case, and other documents and evidence relied upon as the basis for the dropping of some original defendants in this case.</dd></dl>The [heirs of Romualdez] are further granted a period of thirty (30) days from the production or inspection of those documents within which to file their responsive pleading. In this respect, the [heirs of Romualdez] are hereby ordered to make the proper manifestation to the Court as to when the production or inspection of documents has been completed or terminated.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </blockquote>After a series of postponements, the heirs of Romualdez were permitted on May 9, 2014 to peruse the voluminous documents from the PCGG's vault. All the same, the heirs of Romualdez requested that the inspection be moved to another date because they wanted to see the originals of the official records. Thus, the inspection was reset to June 26, 2014. Much to the Republic's dismay, the heirs of Romualdez abruptly terminated the proceedings and filed a Motion to Dismiss<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> on the ground that while they were allowed to inspect the official records supporting the causes of action in the Third Amended Complaint, the same were just photocopies. Hence, such documents were inadmissible by virtue of the Best Evidence Rule under Rule 130, Section 3 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On November 20, 2014, the Sandiganbayan denied the heirs of Romualdez's Motion to Dismiss,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> ruling that their postulations actually bear on the admissibility of the Republic's evidence. In this context, it would be untimely to rule on the admissibility of the official records which were utilized as the cornerstone of the Third Amended Complaint since they were not yet formally offered as evidence. Likewise, the claim of the heirs of Romualdez that the official records in PCGG's possession were photocopies did not constitute a ground to dismiss the Third Amended Complaint.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>The heirs of Romualdez subsequently moved for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> of the November 20, 2014 Resolution of the Sandiganbayan. Contrary to what was indicated in the Verification and Certification executed by PCGG Commissioner Herminio A. Mendoza (Commissioner Mendoza), they avouched that the declarations in the Third Amended Complaint could not have been grounded on his personal knowledge since he was merely an official of the PCGG. As a result, the Sandiganbayan can only consider the documentary evidence in PCGG's custody and not Commissioner Mendoza's testimony. In this light, the heirs of Romualdez asserted that the Republic should be directed to produce the originals of the official records or to lay the basis for using secondary evidence in the instant case; otherwise, the Third Amended Complaint must be dismissed.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated January 4, 2016, the Sandiganbayan denied the heirs of Romualdez's Motion for Reconsideration, stressing that Commissioner Mendoza's statements in the Verification and Certification simply served as an assurance that the asseverations contained in the Third Amended Complaint were made in good faith, or were true and correct and not merely speculative. The Sandiganbayan also emphasized that it was premature to rule on the admissibility of the Republic's documentary evidence.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Unflustered, the heirs of Romualdez filed their Urgent Motion, praying that the Republic be enjoined to comply with the August 31, 2007 Resolution of the Sandiganbayan and that the period to file their responsive pleading to the Third Amended Complaint be suspended in the meantime.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The Republic registered its opposition thereto, avowing that the heirs of Romualdez expressed their disinterest in inspecting the official records when they moved to dismiss the Third Amended Complaint. Moreover, to allow another inspection would unnecessarily prolong the instant proceedings, which the Sandiganbayan should not countenance.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In the interstice, the Republic filed motions to declare several defendants in Civil Case No. 0035âincluding the heirs of Romualdezâin default,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> as well as to conduct separate trials.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On June 6, 2016, the Sandiganbayan promulgated the<i> first</i> impugned Resolution granting the heirs of Romualdez's Urgent Motion, thusly:<br><blockquote>PREMISES CONSIDERED, the "Urgent Motion to Order the [Republic] to Comply with the Resolution of the Honorable Court dated August 31, 2007 and Pending Compliance thereof to Suspend the Filing of [the heirs of Romualdez's] Responsive Pleading" dated January 26, 2016, filed by [the heirs of Romualdez], is hereby GRANTED.<br><br>Both the [Republic] and the [heirs of Romualdez] are hereby ORDERED to: (a) notify the [C]ourt in writing as to the date and time they had mutually agreed upon for the conduct of the production and inspection of documents; and (b) for the [heirs of Romualdez] to file their responsive pleading within a period of thirty (30) days from the production and inspection of those documents. The [heirs of Romualdez] are hereby ordered to make the proper manifestation to the Court as to when the production or inspection of documents has been completed or terminated.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </blockquote>The Sandiganbayan elucidated that courts are given wide latitude in granting motions for discovery to enable parties to prepare for trial or otherwise settle the controversy prior thereto.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Aggrieved, the Republic filed its Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> insisting that it had complied beforehand with the August 31, 2007 Resolution of the Sandiganbayan when it readily made available to the heirs of Romualdez all the official records relevant to the Third Amended Complaint on May 9, 2014 and June 26, 2014. As it happened, they abandoned their inspection on their own volition since the Republic did not present the originals and moved instead for the dismissal of the Third Amended Complaint, which was ultimately denied by the Sandiganbayan.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Further, there was no rhyme or reason in suspending the period within which the heirs of Romualdez ought to file their answer because the Third Amended Complaint already addressed the matters raised in their motion for bill of particulars. Put differently, they only need to look within the four corners of the Third Amended Complaint to intelligently prepare their answer.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> All told, the Republic beseeched the Sandiganbayan to impel the heirs of Romualdez to file their responsive pleading with dispatch or risk being declared in default.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Via the<i> second</i> challenged Resolution, the Sandiganbayan ingeminated the ratiocination in its May 23, 2016 Resolution that courts were afforded much leeway in matters of discovery.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The Sandiganbayan also warned the Republic that its continued defiance of the August 31, 2007 Resolution may justify a citation for contempt. By the same token, the unwillingness or refusal of the heirs of Romualdez to inspect the documents presented by the Republic may be deemed as a waiver of their right to do so.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Accordingly, the Republic's bid for reconsideration was brushed aside as follows:<br><blockquote><b>PREMISES CONSIDERED,</b> [the Republic]'s "Motion for Reconsideration (To the Resolution [P]romulgated on June 6, 2016) dated June 23, 2016 is hereby DENIED for lack of merit.<br><br><b>FOR THE LAST TIME, BOTH PARTIES</b> are hereby ORDERED to: (a) comply with the Resolution of the Court dated August 31, 2007; (b) notify the [C]ourt in writing, not later than January 18, 2017 as to the date and time they had mutually agreed upon for the conduct of the production and inspection of documents; (c) to make the proper manifestation to the Court as to when the production or inspection of documents has been completed or terminated; and (d) for the [heirs of Romualdez] to file their responsive pleading within a period of thirty (30) days from the production and inspection of those documents.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis in the original)</blockquote><center><b>The Present Petition</b></center><br>Through the present recourse, the Republic ascribes grave abuse of discretion on the part of the Sandiganbayan when it practically allowed a second production and inspection of the official records listed in its August 31, 2007 Resolution and suspended the period for the heirs of Romualdez to file their answer to the Third Amended Complaint. In particular, the Republic contends that the great latitude given to courts in granting or denying discovery must not extend to cases where discovery is sought to delay court proceedings. On this score, it had already made available to the heirs of Romualdez all the pertinent official records. Consequently, their Urgent Motion would serve no other purpose than to arbitrarily derail the proceedings before the Sandiganbayan.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The Republic also highlights that the heirs of Romualdez previously filed a motion for bill of particulars on July 26, 1991, which was definitely settled when the Sandiganbayan admitted its Third Amended Complaint through the Resolution dated October 8, 2001. Certainly, the heirs of Romualdez were afforded sufficient opportunity to file their answer thereto. Upon this point, the Republic harps on the premise that while the period to file a responsive pleading may be stayed when a party moves for a bill of particulars, nothing in the Rules of Court allows the suspension of such period in cases where a party avails of any mode of discovery. In any case, the evidentiary basis of the factual milieu contained in the Third Amended Complaint may be inquired into only after the answer is filed or during pre-Â­trial when the issues are joined.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Fulminating against the Republic's imputations, the heirs of Romualdez insist that there was no satisfactory compliance with the Sandiganbayan's August 31, 2007 Resolution because the Republic only presented photocopies of the official records listed therein. While the Republic claimed that it is prepared to present the originals in its possession, it failed to do so during the scheduled inspection.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The heirs of Romualdez also point out the Republic's previous avowal that it already laid out all documents in its possession before them. In this regard, they posit that Commissioner Mendoza's verification was anchored on photocopies, which documents are the only ones shown to them by PCGG. Ergo, such verification fell short of the requirement set forth in Rule 7, Section 4 of the Rules of Court., i.e., that the contents of the document are true and correct based on<i> authentic</i> records. Considering that the Republic presented mere photocopies, the heirs of Romualdez asseverate that it would be an exercise in futility for them to examine such documents and prepare their responsive pleading based thereon as they are inadmissible under the Best Evidence Rule.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>In sum, the heirs of Romualdez maintain that while the Republic has allowed the inspection of the official records which serve as the foundation of the Third Amended Complaint, its persistent refusal to show the originals thereof pursuant to the Best Evidence Rule warrants the dismissal of the Third Amended Complaint as against them in Civil Case No. 0035.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><center><b>Recent Developments in Civil Case No. 0035</b></center><br>On October 1, 2024, the Sandiganbayan issued a Resolution disposing certain motions filed by both parties, in this wise:<br><blockquote><b>FOR THESE REASONS,</b> the Court hereby rules as follows:<ol><li>[The Republic]'s<i> Motion to Suspend Inspection of Documents</i> is hereby<b> DENIED</b>. The PCGG is<b> DIRECTED </b>to produce the subject documents and to allow [the] [h]eirs of Benjamin Romualdez to inspect the same.<br><br></li><li>[The Republic] and [the] [h]eirs of Benjamin Romualdez are <b>DIRECTED</b> to set the date(s) of the said inspection, not exceeding seven days, within the month of October 2024.<br><br></li><li>[The] [h]eirs of Benjamin Romualdez are<b> DIRECTED</b> to conduct their inspection of the subject documents on the date(s) agreed upon by the parties. They are given until November 15, 2024 within which to file their Answer to the <i>Third Amended Complaint</i>.<br><br></li><li>[The] [h]eirs of Benjamin Romualdez's<i> Motion to Dismiss the Third Amended Complaint</i> is hereby<b> DENIED</b>.</li></ol><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Emphasis in the original) </blockquote>On December 6, 2024, the heirs of Romualdez manifested that they were able to inspect the subject documents at the PCGG's office on November 25, 2024.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Significantly, through the June 26, 2025 Resolution in Civil Case No. 0035, the Sandiganbayan dismissed the Third Amended Complaint as against the heirs of Romualdez and Juliette Gomez Romualdez (Juliette) on the ground of inordinate delay, viz.:<br><blockquote><b>FOR THESE REASONS,</b> the motions are resolved as follows:<ol><li>Defendants [Juliette] and [the heirs of Romualdez's]<i> Motion to Admit Reply</i> dated March 12, 2025 is<b> denied</b> for being a prohibited pleading;<br><br></li><li>Defendants [Juliette] and [the heirs of Romualdez's]<i> Motion to Dismiss </i>dated February 3, 2025 is<b> granted</b> for violation of their constitutional right to speedy disposition of cases; and<br><br></li><li>[The Republic]'s<i> Third Amended Complaint</i> dated January 22, 1988, albeit filed on February 14, 1997, is hereby<b> dismissed with prejudice </b>as to the aforenamed defendants [Juliette] and [the heirs of Romualdez].</li></ol><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original) </blockquote><center><b>The Issue</b></center><br>Stripped of embellishments, the crux of the instant controversy is whether the Sandiganbayan committed grave abuse of discretion when it issued the May 23, 2016 and September 14, 2016 Resolutions in Civil Case No. 0035, effectively allowing the heirs of Romualdez to inspect anew the documents listed in the August 31, 2007 Resolution and holding in abeyance the period for them to file their responsive pleading to the Third Amended Complaint.<br><br><center><b>The Court's Ruling</b></center><br><i>The Petition is dismissed on the ground of mootness.</i><br><br>Prefatorily, it is hornbook doctrine that the pivotal issue in a<i> certiorari </i>petition under Rule 65 of the Rules of Court is whether the respondent tribunal acted with grave abuse of discretion amounting to lack or excess of jurisdiction in issuing the repugned decision or resolution.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The phrase "grave abuse of discretion" pertains to the capricious or whimsical exercise of judgment that is patent and gross as to amount to an evasion of positive duty or a virtual refusal to perform a duty enjoined by law.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Grave abuse of discretion exists in the following cases: (1) where there are palpable errors of jurisdiction; (2) where there is a violation of the Constitution, the law, or jurisprudence; (3) where there is a gross misapprehension of facts or evidence;<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> and (4) where the act was executed whimsically, capriciously or arbitrarily, out of malice, ill will, or personal bias.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Withal, the writ of<i> certiorari</i> is not issued to correct every single error that may have been committed by lower courts and tribunals. It is a remedy particularly to keep them within the bounds of their jurisdiction. In our judicial system, the writ is issued to prevent lower courts and tribunals from perpetrating grave abuse of discretion in excess of their jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> As well, the writ requires that there is no appeal or any other plain, speedy, and adequate remedy available to correct the error. Therefore,<i> certiorari</i> may not lie if the error can be the subject of an ordinary appeal.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>In the present case, the Sandiganbayan issuances in question essentially exhorted the Republic to comply with the directive in the August 31, 2007 Resolution to produce the official records upon which the Republic's Third Amended Complaint is anchored. Plain as day, the oppugned Resolutions are <i>interlocutory</i> in nature, or that which does not dispose of the case and does not end the tribunal's task of adjudicating the parties' contentions.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> To this end, the appropriate remedy against an interlocutory order is not an appeal, but a special civil action for<i> certiorari</i> under Rule 65 of the Rules of Court, subject only to a showing of grave abuse of discretion.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br><i>After judicious scrutiny of the records of this case, the Court rules and so holds that the Republic's certiorari petition has been rendered moot and academic owing to recent developments in Civil Case No. 0035. </i><br><br>In<i> Hagedorn v. House of Representatives</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the Court succinctly explicated on how a case transforms into a moot and academic oneâ<br><blockquote>[A] moot and academic case is one that ceases to present a justiciable controversy by virtue of supervening events, so that a declaration thereon would be of no practical use or value. A case becomes moot when there are no longer any adverse legal interests to speak of,<b> nor any specific relief that petitioner may obtain</b>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis supplied, citations omitted) </blockquote>Under the foregoing circumstances, it is axiomatic that courts of justice generally decline jurisdiction and no longer resolve questions in which no actual interests are involved.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Elsewise stated, a case is no longer justiciable when mooted since the relief that the court may grant will be rendered useless, as if it is ruling on a matter that is theoretical.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>To be sure, the rule on mootness is subject to the following exceptions: (1) there is a grave violation of the Constitution; (2) the exceptional character of the situation and the paramount public interest is involved; (3) when the constitutional issue raised requires formulation of controlling principles to guide the bench, the bar, and the public; and (4) the case is capable of repetition yet evading review.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br><i>A ruling on the merits of the Republic's Rule 65 Petition in the present case will not serve any practical value. </i><br><br><i>For one</i>, the inspection of the official records subject of the Sandiganbayan's August 31, 2007 Resolution in Civil Case No. 0035 actually transpired on November 25, 2024.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><i> For another</i>, the Third Amended Complaint was dismissed as against the heirs of Romualdez and Juliette due to inordinate delay.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> These incidents inevitably mooted the main issue in the present case, i.e., whether the Sandiganbayan gravely abused its discretion when it echoed the injunction in its August 31, 2007 Resolution for the Republic to produce the official records upon which the Third Amended Complaint was based for inspection by the heirs of Romualdez and concomitantly suspended the period for the heirs of Romualdez to submit their responsive pleading thereto. Besides, none of the aforementioned exceptions to the mootness rule are attendant in this case.<br><br>Given the above disquisitions, it is beyond cavil that the Court is precluded from further exercising its jurisdiction sans a justiciable controversy. Perforce, the Court is constrained to dismiss the instant<i> certiorari </i>petition for mootness.<br><br><i>A final cadence</i>. The Court's ruling in the case at bench is strictly confined to the Republic's challenge against the Sandiganbayan's act of issuing the May 23, 2016 and September 14, 2016 Resolutions in Civil Case No. 0035. At this stage, the Court discerns no cogent reason to delve into the validity of the dismissal of the Third Amended Complaint as against the heirs of Romualdez and Juliette.<br><br><b>ACCORDINGLY, </b> the Petition for<i> Certiorari</i> is <b>DISMISSED. </b><br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting,</i> and <i>Gaerlan, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Based on the caption of the Sandiganbayan Resolutions in question, they were rendered by the Fifth Division, not the Second Division.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 30-35. The May 23, 2016 Resolution was penned by Associate Justice Roland B. Jurado, with the concurrence of Associate Justices Rafael R. Lagos and Ma. Theresa V. Mendoza-Arcega of the Fifth Division, Sandiganbayan. Promulgated on June 6, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 52-59. The September 14, 2016 Resolution was penned by Associate Justice Roland B. Jurado, with the concurrence of Associate Justices Sarah Jane T. Fernandez and Maria Theresa V. Mendoza-Arcega of the Fifth Division, Sandiganbayan. Promulgated on October 10, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 87-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> According to the Republic, the Complaint was originally filed on July <b>30</b>, 1987, see <i>id</i>. at 7). On the other hand, the heirs of Romualdez alleged that the Complaint against their predecessor-in-interest was filed on July <b>31</b>, 1987, <i>see</i> <i>id</i>. at 235.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The Petition did not disclose when the Heirs of Benjamin "Kokoy" Romualdez substituted him in Civil Case No. 0035.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The Supreme Court upheld the Sandiganbayan's September 18, 1989 Resolution, directing the Republic to implead additional defendants in Civil Case No. 0035. <i>See</i> <b>Republic v. Sandiganbayan</b>, 280 Phil. 339, 358-359 (1991) [Per J. Paras, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, pp. 216, 224, Memorandum filed by the Republic.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 216.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Cited in the May 23, 2016 Resolution in Civil Case No. 0035. <i>See</i> <i>id</i>. at 30-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 66-70. Dated July 7, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 216-217.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 71-77. The November 20, 2014 Resolution in Civil Case No. 0035 was penned by Associate Justice Roland B. Jurado, with the concurrence of Associate Justices Teresita V. Diaz-Baldos and Ma. Theresa Dolores C. Gomez-Estoesta of the Fifth Division, Sandiganbayan. Promulgated on November 21, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 78-81, Motion for Reconsideration dated December 22, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 83-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 85-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 93-94, Opposition (To Defendant Heirs of Benjamin "Kokoy" Romualdez' Urgent Motion to Order the Plaintiff to Comply, etc. dated January 26, 2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 98-112, Motion to Declare Defendants in Default dated February 5, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 113-137, Motion for Leave to Conduct Separate Trials dated February 5, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 36-49. Dated June 23, 2016,<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 37-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 40-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 220-222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 223-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 238-239, Memorandum filed by the heirs of Romualdez.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 239-242, 254.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 246-249.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Lifted from the December 16, 2024 Resolution in Civil Case No. 0035, penned by Associate Justice Sarah Jane T. Fernandez, and concurred in by Associate Justices Michael Frederick L. Musngi and Kevin Narce B. Vivero of the Sixth Division, Sandiganbayan, pp. 1-2. This pinpoint citation refers to the copy of the Resolution uploaded to the Sandiganbayan website. <i>See also</i> <i>rollo</i>, pp. 354-355, Minutes of the Proceedings Held on October 1, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> The June 26, 2025 Resolution in Civil Case No. 0035 was penned by Associate Justice Kevin Narce B. Vivero, with the concurrence of Associate Justices Lord A. Villanueva, Arthur O. Malabaguio, and Juliet M. Manalo-San Gaspar of the Special Sixth Division, Sandiganbayan, p. 12. Associate Justice Sarah Jane T. Fernandez, dissented. This pinpoint citation refers to the copy of the Resolution uploaded to the Sandiganbayan website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> <b>PMAJ Arturo v. PGEN Albayalde, G.R. No. 250804</b>, February 25, 2025 [Per J. M. Lopez, <i>En Banc</i>] at 20. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>See</i> <b>Ortigas v. Court of Appeals</b>, 951 Phil. 223, 229 (2024) [Per J. Lazaro-Javier, Second Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Neunzig v. Court of Appeals, G.R. No. 260983 [Formerly UDK No. 17529]</b>, February 10, 2025 [Per J. Inting, Third Division] at 13. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>See</i> <b>Tellez v. Spouses Joson</b>, 960 Phil. 515, 523 (2024) [Per J. Kho, Jr., Second Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>See</i> <b>Senate of the Philippines v. Executive Secretary Medialdea</b>, 924 Phil. 814, 827 (2022) [Per J. Lazaro-Javier, <i>En Banc</i>]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> <b>Reliable Industrial and Commercial Security Agency, Inc. v. Court of Appeals</b>, 910 Phil. 65, 71 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>See</i> <b>Integrated Credit and Corporate Services, Co. v. Labrador</b>, 943 Phil. 581, 589 (2023) [Per C.J. Gesmundo, First Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>See</i> <i>id</i>. at 591. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>G.R. No. 275800</b>, April 22, 2025 [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 5-6. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>Reyes v. Sandiganbayan, G.R. Nos. 232323 &amp; 243411</b>, February 4, 2025 [Per J. M. Lopez, <i>En Banc</i>] at 6. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>See</i> <b>Foundation for Economic Freedom v. Energy Regulatory Commission</b>, 958 Phil. 1, 38 (2024) [Per J. Leonen, <i>En Banc</i>]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>See</i> <b>Reyes v. Sandiganbayan, G.R. Nos. 232323 &amp; 243411</b>, February 4, 2025 [Per J. M. Lopez, <i>En Banc</i>] at 6. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>See</i> December 16, 2024 Resolution in Civil Case No. 0035, penned by Associate Justice Sarah Jane T. Fernandez, and concurred in by Associate Justices Michael Frederick L. Musngi and Kevin Narce B. Vivero of the Sixth Division, Sandiganbayan, p. 3. This pinpoint citation refers to the copy of the Resolution uploaded to the Sandiganbayan website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>See</i> June 26, 2025 Resolution in Civil Case No. 0035 was penned by Associate Justice Kevin Narce B. Vivero, with the concurrence of Associate Justices Lord A. Villanueva, Arthur O. Malabaguio, and Juliet M. Manalo-San Gaspar of the Special Sixth Division, Sandiganbayan, p. 12. Associate Justice Sarah Jane T. Fernandez, dissented. This pinpoint citation refers to the copy of the Resolution uploaded to the Sandiganbayan website.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

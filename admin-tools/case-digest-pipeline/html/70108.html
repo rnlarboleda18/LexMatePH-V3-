@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 263916 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. SONOMA SERVICES, INC., RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70108' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 263916, August 18, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. SONOMA SERVICES, INC., RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by the Commissioner of Internal Revenue (CIR), through the Office of the Solicitor General, assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 24, 2022, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated October 17, 2022, of the Court of Tax Appeals (CTA) <i>En Banc</i> in CTA EB No. 2467. The CTA <i>En Banc</i> affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 1, 2020, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated March 2, 2021, of the CTA Third Division in CTA Case No. 9808 that ordered the CIR to refund or issue a tax credit certificate for PHP 4,993,000.00 to Sonoma Services, Inc. (SSI), representing its excess and unutilized creditable withholding tax (CWT) for calendar year (CY) 2015.</p><p align="center"> <i>The Antecedents</i> </p><p> The case stemmed from SSI's claim for refund of excess and unutilized CWT for CY 2015.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> On April 13, 2016, respondent SSI filed its original Annual Income Tax Return (AITR) for CY 2015 through the Electronic Filing and Payment System (EFPS) of the Bureau of Internal Revenue (BIR). On April 25, 2016, SSI filed an Amended AITR, likewise through the EFPS. The Amended AITR reported an overpayment in the amount of PHP 4,993,000.00, for which SSI indicated its option to be refunded. Subsequently, SSI filed an administrative claim for refund of the said amount with BIR Revenue District Office No. 50.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> The CIR's inaction on the administrative claim prompted SSI to file a Petition for Review with the CTA on April 11, 2018. The case was docketed as CTA Case No. 9808.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> Summons was issued to the CIR. On May 22, 2018, the CIR filed a Manifestation with Motion to Admit Answer which the CTA granted in a Resolution dated June 5, 2018.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> On July 3, 2018, SSI filed its Pre-Trial Brief and submitted the Judicial Affidavit of its witness, Krystal E. Gamit (Gamit). The CIR, in turn, filed his Pre-Trial Brief on August 1, 2018.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The Pre-Trial Conference ensued on August 9, 2018.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> On August 29, 2018, SSI filed a Motion To Commission an Independent Certified Public Accountant (ICPA), attaching the Judicial Affidavit of Ms. Ma. Milagros F. Padernal (ICPA Padernal), which the CTA granted. On the same date, the parties submitted their Joint Stipulation of Facts and Issues which the CTA approved. In an Order dated September 19, 2018, the case was transferred from the CTA First Division to the Third Division. The CTA Third Division issued a Pre-Trial Order on October 5, 2018.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> Trial commenced on October 16, 2018, wherein SSI presented its witness, Gamit. On October 18, 2018, SSI submitted the ICPA Report together with a USB thumb drive containing the soft copies of the supporting schedules and exhibits which the CTA admitted into the records. On November 20, 2018, SSI presented ICPA Padernal, who testified on the contents of her ICPA Report.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> On December 20, 2018, SSI filed its Formal Offer of Evidence. After the CIR filed his Comment/Opposition thereto, the CTA Third Division admitted SSI's documentary evidence.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> During the hearing on August 6, 2019, the CIR manifested that he would not be presenting any evidence. The parties then agreed to submit their respective memoranda. The CIR informed the tax court that he would adopt his Answer as his Memorandum. SSI filed its Memorandum on October 15, 2019.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p align="center"> <i>The Ruling of the CTA Third Division</i> </p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> dated October 1, 2020, the CTA Third Division granted SSI's Petition for Review. The dispositive portion of the Decision reads: </p><blockquote> <p> WHEREFORE, in view of the foregoing, the present Petition for Review is hereby GRANTED. Accordingly, respondent [Commissioner of Internal Revenue] is hereby ORDERED TO REFUND OR TO ISSUE A TAX CREDIT CERTIFICATE in the amount of [PHP] 4,993,000.00 in favor of petitioner, representing its excess and unutilized CWT for CY 2015.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p> </blockquote> <p> The CTA Third Division found that SSI proved its compliance with the requisites for granting a CWT refund.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> It ruled that both the administrative claim (filed on September 7, 2017) and the judicial claim (filed on April 11, 2018) were filed within the two-year prescriptive period, which was reckoned from the filing of the Amended AITR on April 25, 2016.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p><p> The CTA Third Division also found that SSI had properly exercised its option for a refund in its AITR and did not carry over the amount to succeeding taxable periods.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> Moreover, the CTA Third Division found the claim to be fully substantiated. As proof of withholding, SSI presented BIR Forms No. 2307, which reflected a total CWT of PHP 4,993,000.00 from management fees amounting to PHP 33,420,000.00.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The CTA Third Division confirmed that this income was fully traced to SSI's official receipts, books of account, and general ledger, which was duly reported in its CY 2015 Audited Financial Statements and Amended AITR.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> The CTA Third Division further verified that SSI's prior year's excess tax credits amounting to PHP 9,061,123.00 were fully accounted for by SSI.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> It noted that, based on the ICPA Report, the amount was composed of the following: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="58%" valign="top"><i>Particulars</i></td> <td valign="top"><div align="right"><i>Amount (PHP)</i></div></td> <td>&nbsp;</td> </tr> <tr> <td valign="top">CY 2011 CWT</td> <td width="25%" valign="top"><div align="right">219,355.05</div></td> <td width="17%">&nbsp;</td> </tr> <tr> <td valign="top">CY 2004 CWT reinstated in 2013</td> <td valign="top"><div align="right">4,357,499.04</div></td> <td>&nbsp;</td> </tr> <tr> <td valign="top">CY 2013 adjustment to reduce the CY 2010 tax credits </td> <td valign="top"><div align="right">(380,481.09) </div></td> <td>&nbsp;</td> </tr> <tr> <td valign="top">CY 2014 CWT</td> <td valign="top"><div align="right">4,864,750.00</div></td> <td>&nbsp;</td> </tr> <tr> <td valign="top"><i>Total Prior Year's Excess Tax Credits</i></td> <td valign="top"><div align="right"><i>9,061,123.00</i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup></div></td> <td>&nbsp;</td> </tr> </tbody></table> </blockquote> <p>In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated March 2, 2021, the CTA Third Division denied the CIR's Motion for Reconsideration. It rejected the CIR's argument that the BIR Forms No. 2307 were inadmissible for being hearsay and ruled that said forms, executed under the penalty of perjury, are competent proof of withholding and do not require the testimony of the person who executed them.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p> <p> Aggrieved, the CIR elevated the matter to the CTA <i>En Banc</i>, docketed as CTA EB No. 2467.</p><p> In his Petition for Review, the CIR argued that the CTA Third Division erred in granting the refund because: (1) SSI failed to present the Summary Alphalist of Withholding Taxes at Source (SAWT) and Monthly Alphalist of Payees (MAP), as prescribed under Revenue Regulation No. 2-98 (RR No. 2-98),<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> as amended by Revenue Regulation No. 2-2006 (RR No. 2-2006);<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (2) SSI failed to present the payor-withholding agents to validate the fact of withholding and remittance; and (3) the BIR Forms No. 2307, having been identified only by ICPA Padernal, should not have been given probative value for being hearsay evidence.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p align="center"> <i>The Ruling of the CTA En Banc</i> </p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated May 24, 2022, the CTA <i>En Banc</i> affirmed the ruling of the CTA Third Division. It held that the non-submission of the SAWT and MAP does not <i>ipso facto</i> result in the denial of a refund claim, as the governing regulation, RR No. 2-2006, merely imposes a fine for such non-submission.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The CTA <i>En Banc</i> also dismissed the CIR's hearsay argument, reiterating the established doctrine that BIR Forms No. 2307 are sufficient proof of withholding and are admissible without the testimony of the payors, provided they are complete and executed under the penalties of perjury.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Finally, the CTA <i>En Banc</i> admonished the CIR's counsel for raising issues that have long been settled by jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></p><p> Undaunted, the CIR filed a Motion for Reconsideration, arguing that: (a) SSI's administrative and judicial claims for refund were filed out of time because the two-year prescriptive period should be reckoned from the monthly remittance of the CWTs; (b) the CTA Third Division erred in not requiring the presentation of BIR Forms No. 2307 to prove SSI's prior year's excess credits; and (c) SSI failed to comply with the requirements under RR No. 2-98 by not presenting the SAWT and MAP.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> The CTA <i>En Banc</i> denied the CIR's Motion for Reconsideration in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated October 17, 2022. It resolved the Motion by declaring that: (a) SSI's claims were timely filed, as the two-year prescriptive period is reckoned from the filing date of the final adjusted return; (b) the non-submission of the SAWT and MAP is not a valid ground for the outright denial of a refund claim; and (c) the CIR's objection regarding the proof of prior year's excess credits was raised too late in the proceedings and was therefore deemed waived. Nevertheless, it found that the said credits were meticulously traced and supported by evidence.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> Hence, the present Petition.</p><p align="center"> <i>The Arguments of the CIR</i> </p><p> The CIR, in his Petition, argues that the CTA <i>En Banc</i> committed reversible error in affirming the refund. </p><p> <i>First</i>, the CIR contends that SSI failed to comply with the mandatory requirements under RR No. 2-98, as amended by RR No. 2-2006. He insists that SSI's failure to present the SAWT and MAP should result in the outright denial of the claim. He posits that the language of the regulations makes their submission a condition precedent for a refund claim which is not cured by the mere payment of a penalty.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> <i>Second</i>, the CIR avers that SSI failed to present the BIR Forms No. 2307 to substantiate its prior year's excess tax credits of PHP 9,061,123.00.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> He argues that the CTA Third Division erred in relying solely on the findings of ICPA Padernal without requiring the presentation of the corresponding certificates themselves.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> <i>Finally</i>, the CIR invokes the doctrine that tax refunds are in the nature of tax exemptions and, as such, must be strictly construed against the taxpayer, who bears the burden of proving entitlement thereto.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p align="center"> <i>The Arguments of SSI</i> </p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> SSI contends that the Petition is devoid of merit and that the arguments raised are mere reiterations of those already considered and correctly resolved by the CTA <i>En Banc</i>.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> <i>First</i>, SSI argues that there is no basis for the CIR's assertion that the presentation of the SAWT and MAP is an indispensable requirement for a refund claim. SSI maintains that it has met the three established evidentiary requirements for CWT refunds: (1) the claim was filed within the two-year prescriptive period; (2) the fact of withholding was established by BIR Forms No. 2307; and (3) the income upon which the taxes were withheld was included in its ITR. Based on RR No. 2-98 and prevailing jurisprudence, such as <i>Commissioner of Internal Revenue v. Asian Transmission Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> SSI asserts that the BIR Form No. 2307 is sufficient proof of withholding, and proof of actual remittance by the withholding agent is not required. It echoes the CTA <i>En Banc</i>'s ruling that nothing in RR No. 2-2006 mandates the denial of a refund claim for failure to submit the SAWT and MAP.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p><p> <i>Second</i>, SSI submits that it has sufficiently proven the existence of its prior year's excess credits. It points out that ICPA Padernal examined the relevant documentary evidence and confirmed that the prior year's excess credits were duly substantiated. Specifically, ICPA Padernal verified that the schedules of CWT prepared by SSI (Exhibits P-35, P-37, and P-39) were fully supported by the original BIR Forms No. 2307 for CYs 2004, 2011, and 2014 (Exhibits P-36, P-38, and P-40, respectively). SSI posits that the CIR's reliance on the CTA <i>En Banc</i> Decision in <i>Zuellig Pharma Corporation v. CIR</i> in CTA EB Case No. 1793 is misplaced. Unlike in <i>Zuellig</i>, the BIR Forms No. 2307 in the instant case were formally offered as evidence and verified by ICPA Padernal.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></p><p align="center"> <i>The Issues</i> </p><p> The issues for the resolution of the Court are: (1) whether the CTA <em>En Banc</em> erred in ruling that the non-submission of the SAWT and MAP is not fatal to a claim for refund of excess and unutilized creditable withholding tax; and (2) whether the CTA <i>En Banc</i> erred in ruling that respondent sufficiently proved its entitlement to its prior year's excess tax credits. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The Petition is bereft of merit. </p><p> The Petition hinges on two central issues: <i>first</i>, whether the non-submission of the SAWT and MAP is fatal to a claim for a tax credit or a refund of CWT; and <i>second</i>, whether SSI sufficiently proved its entitlement to prior year's excess tax credits.</p><p> The Court shall address these issues in turn.</p><p> At the outset, it must be clarified that not all claims for tax refund are in the nature of tax exemptions and consequently construed strictly against the taxpayer. In <i>Commissioner of Internal Revenue v. Fortune Tobacco Corp</i>.,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> the Court distinguished claims based on a tax exemption or refund statute and those based on the quasi-contract of <i>solutio indebiti</i>: </p><blockquote> <p> [T]he Commissioner's contention that a tax refund partakes the nature of a tax exemption does not apply to the tax refund to which Fortune Tobacco is entitled. <i>There is parity between tax refund and tax exemption only when the former is based either on a tax exemption statute or a tax refund statute</i>. Obviously, that is not the situation here. Quite the contrary, Fortune Tobaccos claim for refund is premised on its erroneous payment of the tax, or better still the government's exaction in the absence of a law. </p> <p> Tax exemption is a result of legislative grace. And he who claims an exemption from the burden of taxation must justify his claim by showing that the legislature intended to exempt him by words too plain to be mistaken. The rule is that tax exemptions must be strictly construed such that the exemption will not be held to be conferred unless the terms under which it is granted clearly and distinctly show that such was the intention. </p> <p> <i>A claim for tax refund may be based on statutes granting tax exemption or tax refund. In such case, the rule of strict interpretation against the taxpayer is applicable as the claim for refund partakes of the nature of an exemption, a legislative grace, which cannot be allowed unless granted in the most explicit and categorical language</i>. The taxpayer must show that the legislature intended to exempt him from the tax by words too plain to be mistaken. </p> <p> <i>Tax refunds (or tax credits), on the other hand, are not founded principally on legislative grace but on the legal principle which underlies all quasi-contracts abhorring a person's unjust enrichment at the expense of another</i>. The dynamic of erroneous payment of tax fits to a tee the prototypic quasi-contract,<i> solutio indebiti,</i> which covers not only mistake in fact but also mistake in law. </p> <p> The Government is not exempt from the application of <i>solutio indebiti</i>. Indeed, the taxpayer expects fair dealing from the Government, and the latter has the duty to refund without any unreasonable delay what it has erroneously collected. If the State expects its taxpayers to observe fairness and honesty in paying their taxes, it must hold itself against the same standard in refunding excess (or erroneous) payments of such taxes. It should not unjustly enrich itself at the expense of taxpayers. And so, <i>given its essence, a claim for tax refund necessitates only preponderance of evidence for its approbation like in any other ordinary civil case</i>. </p> <p> Under the Tax Code itself, apparently in recognition of the pervasive quasi-contract principle, a claim for tax refund may be based on the following: (a) erroneously or illegally assessed or collected internal revenue taxes; (b) penalties imposed without authority; and (c) <i>any sum alleged to have been excessive or in any manner wrongfully collected</i>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> The dichotomy between a claim for tax refund founded on a statutory grant and one predicated on the principle of <i>solutio indebiti</i> was outlined by the Court in <i>Fortune Tobacco</i>. A claim for tax refund based on a specific statute granting tax exemption or refund partakes of the nature of a tax exemption. As such, it is a mere legislative grace, viewed as a derogation of the State's sovereign power of taxation. Hence, the doctrine of <i>strictissimi juris</i> finds application.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> In stark contrast, a claim for refund that is premised on the taxpayer's erroneous payment of tax or the government's illegal exaction thereof is not founded on legislative grace but on the time-honored principle of <i>solutio indebiti</i>. Consequently, where the claim for refund is based on <i>solutio indebiti</i>, the taxpayer must simply establish his claim with the quantum of proof required in ordinary civil cases, i.e., preponderance of evidence.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> In fine, the determinative factor is the very source of the right being invoked by the taxpayer. If the claim is anchored upon a specific legislative grant, the taxpayer must establish his right thereto with unerring clarity. If, however, the claim arises from an erroneous payment or illegal exaction by the State, the taxpayer need only establish his claim by a preponderance of evidence, as the claim is rooted not in privilege, but in the fundamental tenet of equity that the State shall not unjustly enrich itself at the expense of its taxpayers. </p><p> As in the case of <i>Fortune Tobacco</i>, SSI's claim for refund of excess and unutilized CWT was not based on a specific statutory grant of exemption or refund. Rather, it was based on the Tax Code's provision on erroneously paid or illegally collected taxes and governed by the principle of <i>solutio indebiti</i>. Hence, like any other ordinary civil case, SSI only needs to prove its claim by preponderance of evidence.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></p><p> In <i>Commissioner of Internal Revenue v. Philippine Bank of Communications</i>,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> the Court laid down the requisites for claiming a tax credit or a refund of CWT: (a) the claim must be filed with the CIR within the two-year period from the date of payment of the tax; (b) it must be shown on the return that the income received was declared as part of the gross income; and (c) the fact of withholding must be established by a copy of a statement duly issued by the payor to the payee showing the amount paid and the amount of the tax withheld.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> Applying these principles to the present case, the burden is on SSI to substantiate its claim for refund of excess and unutilized CWT for CY 2015 by preponderance of evidence. </p><p> Notably, the arguments of the CIR primarily assail two points: <i>first</i>, SSI's compliance with the third requisiteâthe establishment of the fact of withholdingâand <i>second</i>, its substantiation of prior year's excess credits, which is crucial for computing any excess and unutilized CWT. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The non-submission of the SAWT and MAP is not fatal to SSI's claim</i> </div></td> </tr> </tbody></table> <p>The CIR's primary contention is that SSI's failure to present the SAWT and MAP is fatal to its claim, allegedly being mandatory requirements under RR No. 2-98, as amended by RR No. 2-2006. </p><p> The Court disagrees. </p><p> A careful reading of RR No. 2-2006 reveals that it mandates the submission of the SAWT by the payee-claimant and the MAP by the payor-withholding agent <i>as attachments to their respective tax returns filed with the BIR</i>: </p><blockquote> <p> SECTION 2. <i>Mandatory Submission of Summary Alphalist of Withholding Agents of Income Payments Subjected to Creditable Withholding Taxes (SAWT) by the Payee/ Income Recipient and of Monthly Alphalist of Payees (MAP) Subjected to Withholding Tax by the Withholding Agent/Income Payor <b>as Attachment to their Filed Returns</b></i> - . . . <br> . . . .</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">D.</div></td> <td colspan="2"><div align="justify">Returns required to be filed with SAWT and Certificate of Creditable Tax Withheld at Source </div></td> </tr> <tr valign="top"> <td><div align="justify">1.</div></td> <td width="38%"><div align="justify">BIR Form No. 1701Q </div></td> <td width="57%"> <div align="justify">Individual Quarterly Income Tax Return</div></td> </tr> <tr valign="top"> <td><div align="justify">2.</div></td> <td><div align="justify">BIR Form No. 1701 </div></td> <td><div align="justify">Individual Annual Income Tax Return</div></td> </tr> <tr valign="top"> <td><div align="justify">3.</div></td> <td><div align="justify">BIR Form No. 1700</div></td> <td><div align="justify">Individual Annual Income Tax Return for Compensation<br> Income Earners (for those required to file an ITR)</div></td> </tr> <tr valign="top"> <td><div align="justify">4.</div></td> <td><div align="justify">BIR Form No. 1702Q</div></td> <td><div align="justify">Corporate Quarterly Income Tax Return </div></td> </tr> <tr valign="top"> <td><div align="justify">5.</div></td> <td><div align="justify">BIR Form No. 1702</div></td> <td><div align="justify">Corporate Annual Income Tax Return</div></td> </tr> <tr valign="top"> <td><div align="justify">6.</div></td> <td><div align="justify">BIR Form No. 2550Q</div></td> <td><div align="justify">Quarterly VAT Return</div></td> </tr> <tr valign="top"> <td><div align="justify">7.</div></td> <td><div align="justify">BIR Form No. 2550M</div></td> <td><div align="justify">Monthly VAT Declaration</div></td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td><div align="justify">BIR Form No. 2551M</div></td> <td><div align="justify">Monthly Percentage Tax Return</div></td> </tr> <tr valign="top"> <td><div align="justify">9.</div></td> <td><div align="justify">BIR Form No. 2553 </div></td> <td><div align="justify">Percentage Tax Return under Special Laws </div></td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . <br></div><div align="justify"><br></div></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">E.</div></td> <td colspan="2"><div align="justify">Returns required to be filed with MAP:</div></td> </tr> <tr valign="top"> <td><div align="justify">1.</div></td> <td><div align="justify">BIR Form No. 1601-E -</div></td> <td><div align="justify">Monthly Remittance Return of Creditable Income Taxes Withheld (Expanded Withholding Tax)</div></td> </tr> <tr valign="top"> <td><div align="justify">2.</div></td> <td><div align="justify">BIR Form No. 1601-F -</div></td> <td><div align="justify">Monthly Remittance Return of Final Taxes Withheld</div></td> </tr> <tr valign="top"> <td><div align="justify">3.</div></td> <td><div align="justify">BIR Form No. 1600</div></td> <td><div align="justify">Monthly Remittance Return of Value Added Tax and Other Percentage Taxes (Under RAs 1051, 4649, 8241 and 8424)</div></td> </tr> </tbody></table> </blockquote> <p>Nowhere in the regulation are payee-claimants required to attach the SAWT or the MAP of their payor-withholding agents to their administrative or judicial claim for refund.</p> <p> Moreover, Section 5<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> of RR No. 2-2006 establishes an escalating penalty system for non-compliance, beginning with administrative fines and progressing to criminal prosecution for willful or repeated violations. As astutely observed by both the CTA Third Division and <i>En Banc</i>, the regulation does not, however, prescribe the outright denial of a refund claim. Moreover, the evidence on record fails to establish SSI's alleged non-compliance. Critically, SSI's failure to present its SAWT as evidence at trial is not proof of its failure to attach it to the pertinent tax returns.</p><p> Furthermore, the obligation to submit the MAP rests squarely with the payor-withholding agent, not the payee-claimant. Section 2(C) of RR No. 2-2006 is unequivocal on this point, stating: </p><blockquote> <p> C. Persons required to submit Monthly Alphalist of Payees (MAP)</p> <p> 1. All withholding agents enumerated under Sections 2.57.3, 4.114, 5.116 of Revenue Regulations No. 2-98, as amended, who are required to withhold and remit taxes withheld and have not more than ten income payees-income recipient per return period are strictly required to submit MAP in electronic copy in a 3.5 inch floppy diskette following the format to be prescribed by the BIR; </p> <p> 2. All withholding agents enumerated under Sections 2.57.3, 4.114, 5.116 of Revenue Regulations No. 2-98, as amended, who are required to withhold and remit taxes withheld and have more than ten (10) income payees-income recipient per return period are strictly required to submit MAP in electronic copy in a 3.5 inch floppy diskette following the format to be prescribed by the BIR; </p> <p> 3. All taxpayers remitting taxes withheld thru the EFPS, regardless of the number of income payees/income recipient, are strictly required to attach an electronic copy of the MAP to the electronic return. </p> </blockquote> <p> In <i>Phil. Airlines, Inc. v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court held that the duty to remit the tax lies with the payor-withholding agent and should not prejudice the claim of the payee-claimant. In case of failure of the withholding agent to remit the taxes, the BIR's cause of action is against the payor-withholding agent.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The Court also stressed in <i>PAL</i> that the government should not misuse technicalities to keep money it is not entitled to.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The Court faulted the BIR for imposing a burden on the taxpayer that was not only absent from the law but was also practically impossible for the taxpayer to meet.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p><p> By the same token, the failure of the payor-withholding agents to submit their MAP as an attachment to their tax returnsâa duty that is theirs aloneâis not a valid ground to deny the tax credit or refund claim of the payee. To hold otherwise would be to punish the payee for the omission of another party over whom it has no control. In case of the failure of the payor-withholding agents to submit their MAP, the CIR should take action against non-compliant withholding agents, rather than placing the onerous consequence of their inaction upon the compliant payee-claimant who has already suffered the deduction of the tax from its income.</p><p> Furthermore, the CIR's position requiring SSI to produce the MAPs from its various payor-withholding agents is untenable for two reasons:</p><p> <i>First</i>, the governing regulation, RR No. 2-2006, does not require payor-withholding agents to furnish copies of their MAPs to payees.</p><p> <i>Second</i>, it raises serious data privacy concerns. As the central repository of all tax filings, the BIR is the only entity that can cross-reference a payee's claim against a payor's remittance data without breaching the privacy of other taxpayers. Compelling a payee-claimant to produce the MAPs of its payor-withholding agents to claim a tax refund or credit necessitates a disclosure from the payor-withholding agent that violates the principles of proportionality and purpose limitation under Republic Act No. 10173, or the Data Privacy Act of 2012. Such a requirement would grant the payee-claimant access to the sensitive financial information of every other taxpayer on the alphalist. This disclosure is not only excessive and unnecessary to verify the withholding for a single payee, but it also occurs without the consent of the other payees. Crucially, a far less intrusive mechanism already exists: BIR Form No. 2307 serves this exact verification purpose without violating the privacy rights of any third party.</p><p> The CIR's reliance on Section 2.58.3(B) of RR No. 2-98 is misplaced. The provision states: </p><blockquote> <p> SECTION 2.58.3. Claim for Tax Credit or Refund. â . . .</p> <p> (B) Claims for tax credit or refund of any creditable income tax which was deducted and withheld on income payments shall be given due course only when it is shown that the income payment has been declared as part of the gross income and <i>the fact of withholding is established by a copy of the withholding tax statement duly issued by the payor to the payee</i> showing the amount paid and the amount of tax withheld therefrom. Proof of remittance is the responsibility of the withholding agent[.] (Emphasis supplied) </p> </blockquote> <p> The "<i>withholding tax statement</i>" referred to in Section 2.58.3(B) of RR No. 2-98 is BIR Form No. 2307â<i>a certificate issued by the payor-withholding agent to the payee-claimant</i>ânot the SAWT or the MAP which are defined under Section 2(A) of RR No. 2-2006 as follows: </p><blockquote> <p> A. Summary Alphalist of Withholding Agents of Income Payments Subjected to Withholding Tax (SAWT) and Monthly Alphalist of Payees (MAP) defined</p> <p> Summary Alphalist of Withholding Agents/Payors of Income Payments subjected to Creditable Withholding tax at source (SAWT) Annex "A" is a <i>consolidated alphalist of withholding agents from whom income was earned or received and subjected to withholding tax to be submitted <b>by the payee-recipient of income</b> as attachment to its duly filed return</i> for a given period which Summary List contains a summary of information showing, among others, total amounts of income/gross sales/gross receipts and claimed tax credits taken from all Certificates of Creditable Withholding Tax at Source (BIR Form No. 2307) issued by the payors of income payment. </p> <p> Monthly alphalist of payees (MAP) annex "b" is <i>a consolidated alphalist of in- come earners from whom taxes have been withheld by the payor of income for a given return period</i> and in whose behalf, the taxes were remitted. It contains a summary of information on taxes withheld and remitted through the monthly remittance returns (BIR Form Nos. 1601-E, 1601-F, 1600 showing, among others, total amounts of income/ gross sales/gross receipts and taxes withheld and remitted[.] (Emphasis supplied) </p> </blockquote> <p> These definitions clearly establish that the SAWT is prepared by the payee-claimant for submission to the BIR with its own tax returns, while the MAP is prepared by the payor-withholding agent for submission to the BIR with its own tax returns. Therefore, neither document qualifies as a statement "<i>duly issued by the payor to the payee</i>." </p><p> From the foregoing, the Court finds that SSI's failure to present and formally offer its SAWT and the MAPs of its payor-withholding agents as evidence is not fatal to its claim for refund. This finding affirms the CTA <i>En Banc</i>'s holding that non-submission of the SAWT and MAP is not a valid ground for the outright denial of a refund claim. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>SSI's prior year's excess tax credits were sufficiently substantiated</i> </div></td> </tr> </tbody></table> <p>It is a settled doctrine that a petition for review on <i>certiorari</i> under Rule 45 is limited to questions of law<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> because the Court is not a trier of facts.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> A question of law involves a dispute as to what the law is on a certain state of facts, while a question of fact concerns the truth or falsity of the alleged facts. The key test is whether the Court can resolve the issue without reviewing the evidence presented, in which case, it is a question of law; otherwise, it is a question of fact.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> Moreover, the findings of the CTA, a highly specialized court created to review tax cases and conduct trial <i>de novo</i>, are entitled to the highest respect.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p><p> The CIR's argument that SSI failed to prove its prior year's excess tax credits is a question of fact and are thus beyond the scope of a review under Rule 45. While this rule of deference admits of exceptions,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> none are present in the case at bar. </p><p> The CTA, with the aid of the court-commissioned ICPA, made a factual finding that the prior year's excess credits were fully substantiated. Notably, ICPA Padernal traced SSI's prior year's excess tax credits, amounting to PHP 9,061,123.00, back to CYs 2004, 2011, and 2014; thus, only the BIR Forms No. 2307 corresponding to these years are material to the present claim. </p><p> As pointed out by SSI, the schedules of CWT (Exhibits P-35, P-37, and P-39) were fully supported by the original BIR Forms No. 2307 for CYs 2004, 2011, and 2014 (Exhibits P-36, P-38, and P-40, respectively).<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Crucially, these BIR Forms No. 2307 (Exhibits P-36, P-38, and P-40) were not merely reviewed by ICPA Padernal and included in her ICPA Report as alleged by the CIR; they were formally offered by SSI and duly admitted into evidence by the CTA in a Resolution dated February 21, 2019.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p> Upon SSI's presentation of the BIR Forms No. 2307 in support of its prior year's excess tax credits from CYs 2004, 2011, and 2014, the burden of evidence shifts to the CIR to prove that (1) the certificate is not complete; (2) it is false; or (3) it was not issued regularly.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> The CIR had every opportunity to inspect and contest this evidence during the trial but failed to do so. The factual findings of the CTA, therefore, stand. </p><p> In sum, SSI has successfully discharged its burden of proving its entitlement to the claimed refund by preponderance of evidence. Thus, the Court finds that the CTA <i>En Banc</i> committed no reversible error in affirming the assailed Decision and Resolution of the CTA Third Division, granting SSI's claim in the amount of PHP 4,993,000.00. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is hereby <b>DENIED</b>. The Decision dated May 24, 2022, and the Resolution dated October 17, 2022, of the Court of Tax Appeals <i>En Banc</i> in CTA EB No. 2467 are <b>AFFIRMED</b>. </p><p> <b>SO ORDERED</b>. </p><p> <em>Caguioa (Chairperson), Gaerlan</em>, and <em>Dimaampao, JJ</em>., concur. <em><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup></em><em> J.,</em> on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 17-43.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 45-57. Penned by Presiding Associate Justice Roman G. Del Rosario and concurred in by Associate Justices Juanito C. CastaÃ±eda, Jr., Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, Maria Rowena Modesto-San Pedro, Marian Ivy F. Reyes-Fajardo, and Lanee S. Cui-David of the Court of Tax Appeals <i>En Banc</i>, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup><i> Id.</i> at 59-71. Penned by Presiding Associate Justice Roman G. Del Rosario and concurred in by Associate Justices Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, Marian Ivy F. Reyes-Fajardo, and Lanee S. Cui-David of the Court of Tax Appeals <i>En Banc</i>, Quezon City. Associate Justice Maria Rowena Modesto-San Pedro was on leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 90-112. Penned by Associate Justice Maria Rowena Modesto-San Pedro and concurred in by Associate Justices Erlinda P. Uy and Ma. Belen M. Ringpis-Liban of the Third Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 130-133. The March 2, 2021 Resolution in CTA Case No. 9808 was signed by Associate Justices Maria Rowena Modesto-San Pedro, Erlinda P. Uy and Ma. Belen M. Ringpis-Liban of the Third Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 91.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 92. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 93. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 90-112. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 111. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 95. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 98-100. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 97-98. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 100-102. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 130-133. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 131-l32. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Prescribes the regulations to implement Republic Act No. 8424 relative to the Withholding on Income subject to the Expanded Withholding Tax and Final Withholding Tax, Withholding of Income Tax on Compensation, Withholding of Creditable Value-Added tax and Other Percentage Taxes. Issued on May 17, 1998. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Prescribes the mandatory attachments of the Summary Alphalist of Withholding Agents of Income Payments Subjected to Tax Withheld at Source to tax returns with claimed tax credits due to Creditable Tax Withheld at Source and of the Monthly Alphalist of Payees whose income received have been subjected to withholding tax to the withholding tax remittance return filed by the withholding agent/payor of income payments. Issued on January 5, 2006. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 116-122. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 45-57. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 53-54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 54-55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 55. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 60. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 59-71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 61-69. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 23-30, Petition. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 35-37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 169-185. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 171. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 655 Phil. 186 (2011). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, pp. 172-176. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 177-180. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 581 Phil. 146 (2008). </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 166-168. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 166-167. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 167-168. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See also</i> <b>Tullett Prebon (Philippines), Inc. v. Commissioner of Internal Revenue</b>, 956 Phil. 78, 85 (2024), <i>citing</i> <b>Commissioner of Internal Revenue v. Univation Motor Phils., Inc.</b>, 851 Phil. 1078, 1090 (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 920 Phil. 93 (2022). </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 101, <i>citing</i> <b>Commissioner of Internal Revenue v. Mirant (Philippines) Operations Corp.</b>, 667 Phil. 208, 223 (2011), <i>further citing</i><strong> Commissioner of Internal Revenue v. Far East Bank &amp; Trust Company (now Bank of the Philippine Islands)</strong>, 629 Phil. 405, 412 (2010). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> SECTION 5. <i>Penalty Provision</i>. - In accordance with the provisions of the NIRC of 1997, a person who fails to file, keep or supply a statement, list, or information required herein on the date prescribed therefore shall pay, upon notice and demand by the CIR, an administrative penalty of One Thousand Pesos (P1,000) for each such failure, unless it is satisfactorily shown that such failure is due to reasonable causes and not due to willful neglect. For this purpose, the failure to supply the required information shall constitute a single act or omission punishable thereof. However, the aggregate amount to be imposed for all such failures during the year shall not exceed Twenty Five Thousand Pesos (P25,000). </p><p> In addition to the imposition of administrative penalty, willful failure by such person to keep any record and to supply the correct and accurate information at the time required herein, shall be subject to the criminal penalty under the relevant provisions of the Tax Code of 1997, upon conviction of the offender. </p><p> The imposition of any of the penalties under the Tax Code of 1997 and the compromise of the criminal penalty on such violations, notwithstanding, shall not in any manner relieve the violating taxpayer from the obligation to submit the required documents. </p><p> Finally, the corresponding administrative penalty shall be imposed on every violation of the provisions of these Regulations, upon due notice and demand by the CIR. A subpoena duces tecum for the submission of the required documents shall be issued on the second offense. A third offense shall set the motion for a criminal prosecution of the offender. </p><p> In cases where a violation hereof is allowed to be compromised, the submission of the unsubmitted lists should always form part of the obligation of the taxpayer to be embodied in the compromise agreement. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 823 Phil. 1043 (2018). </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 1077, 1081. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 1088. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 1089. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> RULES OF COURT, Rule 45, sec. 1. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>See</i> <b>Meralco Industrial Engineering Services Corp. v. National Labor Relations Commission</b>, 572 Phil. 94, 117 (2008). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Republic v. Caraig</b>, 887 Phil. 827, 838 (2020), <i>citing</i> <b>Leoncio v. De Vera</b>, 569 Phil. 512, 516 (2008), <i>further citing</i> <b>Binay v. OdeÃ±a</b>, 551 Phil. 681, 689 (2007). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> <b>Commissioner of Internal Revenue v. Philippine Airlines, Inc.</b>, 806 Phil. 358, 372 (2017). </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Commissioner of Internal Revenue v. Toledo Power Company</b>, 940 Phil. 201, 223-224 (2023). </p><blockquote> <p> 1) When the conclusion is a finding grounded entirely on speculation, surmises or conjectures; 2) when the inference made is manifestly mistaken, absurd or impossible; 3) Where there is a grave abuse of discretion; 4) When the judgment is based on a misapprehension of facts; 5) When the findings of fact are conflicting; 6) When the CTA, in making its findings, went beyond the issues of the case and the same is contrary to the admissions of both petitioner and respondent; 7) the findings of the CTA En Banc are contrary to those of the CTA Division; 8) When the findings of fact are conclusions without citation of specific evidence on which they are based; 9) When the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondents; and 10) the finding of fact of the CTA is premised on the supposed absence of evidence and is contradicted by the evidence on record.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo</i>, p. 180. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 92-93. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>See</i> <b>Commissioner of Internal Revenue v. Philippine National Bank</b>, 744 Phil. 299, 310 (2014). </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

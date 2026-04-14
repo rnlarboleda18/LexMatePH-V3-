@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 270449 - F.F. CRUZ & COMPANY, INC., PETITIONER, VS. NMC CONTAINER LINES, INC., RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70224' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 270449, August 11, 2025 ]</H2>
+			<H3>F.F. CRUZ & COMPANY, INC., PETITIONER, VS. NMC CONTAINER LINES, INC., RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LAZARO-JAVIER, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Petition for Review on <i>Certiorari</i><sup style="color: rgb(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court seeks to reverse the following dispositions of the Court of Appeals in CA-G.R. CV No. 118813, viz.: </p><blockquote><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1)</div></td><td width="95%"><div align="justify">Decision<sup style="color: rgb(255, 0, 0);">[2]</sup> dated May 31, 2023, reversing the trial court's disposition and accordingly directing petitioner F.F. Cruz &amp; Company, Inc. (F.F. Cruz) to execute a deed of sale of the subject property in favor of respondent NMC Container Lines, Inc. (NMC); and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">2)</div></td><td><div align="justify">Resolution<sup style="color: rgb(255, 0, 0);">[3]</sup> dated September 29, 2023, denying the motion for reconsideration of F.F. Cruz. </div></td></tr></tbody></table><p align="center"><b>Antecedents</b></p></blockquote><p> On August 28, 2003, NMC and F.F. Cruz entered into a contract of lease (the first lease contract) over the property of F.F. Cruz in Mandaue City denominated as Lot 5-A, a portion of Lot 5 and covered by Transfer Certificate of Title No. 37629. The lease was for five years and two months, or from September 1, 2003 until October 31, 2008.<sup style="color: rgb(255, 0, 0);">[4]</sup> </p><p> Section 11 of the first lease contract (the subject provision) provided NMC a "lease-purchase option," viz.: </p><blockquote><p> 11. LEASE-PURCHASE OPTION. [NMC] shall have the first option to purchase Lot 5-A and/or Lot 5-B at any time but such option/s to be declared not later than 2 years before the intended date of purchase. Price is fixed at [Eleven Thousand Pesos (PHP 11,000.00)] per square meter inclusive of VAT. Downpayment shall be 20% and the balance payable in 20 quarterly payments with 10% interest per annum on the diminishing balance. Title to the property shall be issued or transferred in the name of [NMC] after completion of payment. Twenty (20) percent of the total lease payment received shall be credited to [NMC] as part of the downpayment of the purchase cost. The documentary stamp tax (DST) and transfer fee shall be for [NMC's] account. Capital gains tax and VAT shall be for [F.F. Cruz's] account.<sup style="color: rgb(255, 0, 0);">[5]</sup></p></blockquote><p> According to NMC, the subject provision gave it the option to purchase Lot 5-A and/or Lot 5-B (the subject property), which it should exercise not later than two years before the intended date of purchase.<sup style="color: rgb(255, 0, 0);">[6]</sup> Purportedly as consideration for the said option to purchase, F.F. Cruz was granted the right to choose which improvements to appropriate for itself by the end of the lease. Section 4 of the first lease contract stated, viz.: </p><blockquote><p> 4. IMPROVEMENTS. At the end of the lease[,] all improvements introduced by [NMC] shall be removed from the premises by [NMC] unless [F.F. Cruz] desires some structures to be left as is.<sup style="color: rgb(255, 0, 0);">[7]</sup> </p></blockquote><p> On January 19, 2008, or before the expiration of the first lease contract, the parties entered into a second contract of lease of even date (the second lease contract), extending the lease for another 10 years or from March 1, 2008 until February 28, 2018.<sup style="color: rgb(255, 0, 0);">[8]</sup> The second lease contract contained the following whereas clause, viz.: </p><blockquote><p> WHEREAS, both parties agree that all other provisions/agreements in the existing contract be upheld and will remain in effect except for the following changes in [ ] terms and conditions herein enumerated below[.]<sup style="color: rgb(255, 0, 0);">[9]</sup> </p></blockquote><p> In its Letter<sup style="color: rgb(255, 0, 0);">[10]</sup> dated May 5, 2015, NMC gave F.F. Cruz notice that it was exercising its option to purchase the subject property, at the agreed purchase price, on May 4, 2017, or two years thereafter.<sup style="color: rgb(255, 0, 0);">[11]</sup></p><p> By Letter<sup style="color: rgb(255, 0, 0);">[12]</sup> dated June 1, 2015, F.F. Cruz, through its Chief Executive Officer Aida Cruz-Chinloy (CEO Cruz-Chinloy), denied the existence of an option to purchase in favor of NMC. In the alternative, it asserted that the subject provision had already expired. F.F. Cruz further informed NMC that it had no intention to sell the subject property.<sup style="color: rgb(255, 0, 0);">[13]</sup> </p><p> On April 28, 2017, representatives of both parties met to discuss the matter. Likewise, NMC delivered to F.F. Cruz a Letter<sup style="color: rgb(255, 0, 0);">[14]</sup> of even date bearing as attachments a draft deed of sale of the subject property and checks representing the downpayment. However, CEO Cruz-Chinloy refused to receive the tender of payment.<sup style="color: rgb(255, 0, 0);">[15]</sup> </p><p> Not long after, NMC sent anew the same Letter<sup style="color: rgb(255, 0, 0);">[16]</sup> dated April 28, 2017 with attachments. On the part of F.F. Cruz, CEO Cruz-Chinloy sent another Letter<sup style="color: rgb(255, 0, 0);">[17]</sup> dated May 3, 2017 to NMC, declining once again NMC's tender of payment which was purportedly based on a perceived option, which had expired or is unripe or voidable.<sup style="color: rgb(255, 0, 0);">[18]</sup> </p><p> NMC thereafter caused the annotation of an affidavit of adverse claim on the title of the subject property.<sup style="color: rgb(255, 0, 0);">[19]</sup> Too, it sent another Letter<sup style="color: rgb(255, 0, 0);">[20]</sup> dated May 29, 2017 addressed to the counsel of F.F. Cruz, reiterating that NMC's exercise of its purported option to purchase the subject property is in accordance with the terms of the contracts of lease.<sup style="color: rgb(255, 0, 0);">[21]</sup></p><p> Nonetheless, F.F. Cruz again responded<sup style="color: rgb(255, 0, 0);">[22]</sup> that the subject property is not open for sale or any kind of disposition. Further, there can be no valid or actionable tender of payment as there is no due and demandable obligation to speak of. It also returned the documents, including the checks to NMC.<sup style="color: rgb(255, 0, 0);">[23]</sup> </p><p> Consequently, NMC filed a complaint for specific performance<sup style="color: rgb(255, 0, 0);">[24]</sup> against F.F. Cruz before the Regional Trial Court, City of Manila. It alleged that F.F. Cruz may be compelled to comply with its binding obligation under the subject provision. The option contract was supported by a consideration,<sup style="color: rgb(255, 0, 0);">[25]</sup> but even assuming that the same had no separate valid and valuable consideration, the subject provision stands as a valid offer to sell the property.<sup style="color: rgb(255, 0, 0);">[26]</sup> </p><p> In its answer,<sup style="color: rgb(255, 0, 0);">[27]</sup> F.F. Cruz countered that: <i>first</i>, the complaint should be dismissed outright for failure to state a cause of action as the subject provision was not an option but a grant of the right of first refusal since it was not supported by a separate consideration; <i>second</i>, Mr. Felipe F. Cruz (Mr. Cruz) was not authorized by the corporation to grant the option to purchase; <i>third</i>, NMC can only exercise the alleged "option" two years before the expiration of the first lease contract; <i>fourth</i>, even assuming that an option contract existed, the "option" was allegedly not carried over to the second lease contract because there was again no separate consideration to support the option; <i>fifth</i>, applying the principle of <i>rebus sic stantibus</i>, the circumstances contemplated by the subject provision, including the price at which the subject property will be sold and the terms of payment, were no longer applicable at the time the second lease contract was entered into; and <i>sixth</i>, the subject provision cannot be considered as a standing offer to sell.<sup style="color: rgb(255, 0, 0);">[28]</sup> </p><p> In its reply and answer to counterclaim,<sup style="color: rgb(255, 0, 0);">[29]</sup> NMC maintained that the subject provision did not confer a right of first refusal but an option to purchase which was supported by a valuable consideration. It timely and validly exercised the option to purchase the subject property. Thus, a binding contract of sale had been perfected between the parties. And finally, the principle of <i>rebus sic stantibus</i> does not apply to the case.<sup style="color: rgb(255, 0, 0);">[30]</sup> </p><p align="center"><b>Ruling of the Regional Trial Court</b> </p><p> By Decision<sup style="color: rgb(255, 0, 0);">[31]</sup> dated February 21, 2022, Branch 15, Regional Trial Court, Manila dismissed the complaint for failure of NMC to establish a cause of action for specific performance against F.F. Cruz.<sup style="color: rgb(255, 0, 0);">[32]</sup> </p><p> The trial court found that: <i>first</i>, NMC failed to sufficiently prove that an option contract existed between the parties, much less, that F.F. Cruz violated the terms thereof. The option granted to NMC had no consideration distinct from the purchase price of the subject property, thus, the option was not perfected;<sup style="color: rgb(255, 0, 0);">[33]</sup> <i>second</i>, NMC failed to timely exercise its option and notify F.F. Cruz of its acceptance thereof. The period within which to exercise the option corresponded to the period of the first lease contract which expired on October 31, 2008, long before NMC manifested its decision to exercise the option on May 5, 2015;<sup style="color: rgb(255, 0, 0);">[34]</sup> and <i>third</i>, the subject provision could not have been carried over to the second lease contract because at the time it was executed, the option already ceased to exist. Citing the case of <i>MaÃ±as v. Nicolasora</i>,<sup style="color: rgb(255, 0, 0);">[35]</sup> the trial court held that the provisions of the second lease contract only referred to the terms which are germane to NMC's use of the property; lastly, if the parties truly intended an offer to sell, it should have been reduced in writing in compliance with the Statute of Frauds.<sup style="color: rgb(255, 0, 0);">[36]</sup> </p><p align="center"><b>Ruling of the Court of Appeals</b> </p><p> On NMC's appeal, the Court of Appeals reversed the foregoing disposition per its Decision<sup style="color: rgb(255, 0, 0);">[37]</sup> dated May 31, 2023, in this wise: </p><blockquote><p><b>WHEREFORE</b>, the appeal is <b>GRANTED</b>. The February 21, 2022 Decision of the Regional Trial Court, National Capital Judicial Region, Branch 15, Manila, in Civil Case No. R-MNL-17-06287-CV is hereby <b>REVERSED</b> and <b>SET ASIDE</b>, except for the non-award of damages against both parties. </p><p> The complaint for specific performance of plaintiff-appellant NMC Container Lines, Inc. against defendant-appellee F.F. Cruz &amp; Co., Inc. is <b>GRANTED</b>. The latter is hereby <b>DIRECTED</b> to comply with its obligations under the Lease Contracts dated August 28, 2003 and January 19, 2008, particularly the option to purchase the subject properties. Consequently, defendant-appellee F.F. Cruz &amp; Co., Inc. is <b>DIRECTED</b> to execute the corresponding Deed of Sale over the subject properties after payment of the full purchase price by plaintiff-appellant NMC Container Lines, Inc. in the amount agreed upon in the August 28, 2003 Lease Contract. </p><p><b>SO ORDERED</b>.<sup style="color: rgb(255, 0, 0);">[38]</sup> (Emphasis in the original) </p></blockquote><p> Preliminarily, the Court of Appeals found that the trial court characterized the subject provision as an option to purchase and not to exercise the right of first refusal. Since F.F. Cruz did not appeal this finding of the trial court, it can no longer assail the same.<sup style="color: rgb(255, 0, 0);">[39]</sup></p><p> While the appellate court agreed that the option to purchase was unsupported by a separate and distinct consideration,<sup style="color: rgb(255, 0, 0);">[40]</sup> it ruled that the said option remained to be an offer to sell which if duly accepted, would produce a perfected contract of sale. The appellate court further ruled that the option/offer to sell was expressly carried over to the second lease contract. Since F.F. Cruz has not withdrawn its offer to sell when NMC signified its intention to purchase, a contract was consequently perfected.<sup style="color: rgb(255, 0, 0);">[41]</sup> </p><p> By its Resolution<sup style="color: rgb(255, 0, 0);">[42]</sup> dated September 29, 2023, the Court of Appeals denied the motion for reconsideration of F.F. Cruz. </p><p align="center"><b>The Present Petition</b> </p><p> F.F. Cruz now seeks affirmative relief from the foregoing dispositions of the Court of Appeals. It essentially argues that: </p><p><i>First</i>, it cannot be faulted for not appealing the finding of the trial court on the nature of the subject provision since the relevant discussion of the trial court thereon ultimately led to a ruling in its favor.<sup style="color: rgb(255, 0, 0);">[43]</sup> As appellee, it has every right to argue against NMC's appeal and maintain its position that no option to purchase existed, but only an option to exercise the right of first refusal.<sup style="color: rgb(255, 0, 0);">[44]</sup> </p><p><i>Second</i>, the Court of Appeals failed to appreciate the weight of the term "first option" in characterizing the arrangement between the parties. The term allegedly denotes a right of first refusal.<sup style="color: rgb(255, 0, 0);">[45]</sup> Too, the "first option" granted to NMC did not have a consideration separate and distinct from the purchase price of the subject property, hence it cannot be considered as a binding agreement between the parties.<sup style="color: rgb(255, 0, 0);">[46]</sup> </p><p><i>Third</i>, assuming that the option contract did exist, Mr. Cruz, the signatory to both lease contracts, did not have the authority to dispose of corporate properties on his own.<sup style="color: rgb(255, 0, 0);">[47]</sup></p><p><i>Fourth</i>, the Court of Appeals erred in holding that the subject provision was carried over to the second lease contract for the following reasons: (1) as ruled by the trial court, to deem the option contract as a carry over provision to the second lease contract would violate the Statute of Frauds;<sup style="color: rgb(255, 0, 0);">[48]</sup> (2) the renewal or extension of an option contract requires another consideration;<sup style="color: rgb(255, 0, 0);">[49]</sup> (3) the extension of an option contract cannot be implied;<sup style="color: rgb(255, 0, 0);">[50]</sup> (4) applying the principle of <i>rebus sic stantibus</i>, the parties could not have intended to retain the stipulated price of the subject property and carry the same over to the second lease contract;<sup style="color: rgb(255, 0, 0);">[51]</sup> (5) the alleged "option" should have been exercised only until October 31, 2006, or two years before the end of the first lease contract; and (6) the whereas clauses of the second lease contract, which contained the so-called carry over clause, did not determine the contractual rights and obligations of the parties.<sup style="color: rgb(255, 0, 0);">[52]</sup> </p><p> In its Comment,<sup style="color: rgb(255, 0, 0);">[53]</sup> NMC sets forth its refutation synthesized as follows: </p><p><i>One</i>, for its failure to appeal the trial court's decision, F.F. Cruz cannot be permitted to assail the finding therein that the subject provision was an option contract.<sup style="color: rgb(255, 0, 0);">[54]</sup> </p><p><i>Two</i>, the subject provision is indeed an option to purchase, and not just to exercise the right of first refusal. The subject provision, which F.F. Cruz freely entered into, already contains the terms of the sale, including the price certain, the period to exercise the option to purchase, the terms of payment, and even the parties liable for the applicable taxes. Too, the term "right of first refusal" does not even appear in the subject provision.<sup style="color: rgb(255, 0, 0);">[55]</sup> </p><p><i>Three</i>, the second lease contract expressly provides that save for certain terms and conditions, all other provisions/agreements in the first lease contract, including the subject provision, remain in effect. By claiming that the subject provision was not carried over, F.F. Cruz is asking the Court to modify the contracts of lease, which is certainly prohibited by law and jurisprudence. Too, the principle of <i>rebus sic stantibus</i> finds no application in this case, as inflation cannot be considered as an unforeseen event.<sup style="color: rgb(255, 0, 0);">[56]</sup> Even the prior, contemporaneous, and subsequent acts of the parties confirmed that they intended all the provisions of the first lease contract, which were not altered or amended by the second lease contract, to be carried over thereto.<sup style="color: rgb(255, 0, 0);">[57]</sup> Mr. Cruz, then President of F.F. Cruz, was duly authorized to execute on behalf of the company all contracts or agreements which it may enter into. Having received the benefits from the contracts of lease, F.F. Cruz is estopped from impugning the authority of Mr. Cruz to enter into said contracts.<sup style="color: rgb(255, 0, 0);">[58]</sup> </p><p><i>Four</i>, even assuming that the subject provision is not supported by a separate consideration, it still stands as an offer to purchase the subject property. With the timely and valid exercise of the option to purchase, a contract of sale was perfected. In fact, the contract is arguably in its consummation stage. At any rate, it was sufficiently established that there was a separate and valuable consideration for the option to purchase.<sup style="color: rgb(255, 0, 0);">[59]</sup> </p><p><i>Five</i>, the contracts of lease were unambiguous, clear, and categorical. But in any case, any perceived ambiguity should be construed against F.F. Cruz, as the party who prepared the contract. F.F. Cruz's interpretation of the contracts of lease defies logic and the law.<sup style="color: rgb(255, 0, 0);">[60]</sup> </p><p align="center"><b>Our Ruling</b> </p><p> We reverse. </p><p> At its core, the dispute concerns the determination of the obligations of F.F. Cruz under the contracts of lease, i.e., whether it has an existing legal obligation to sell the subject property to NMC. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><b><i>The case involves an option, not a right of first refusal</i></b> </div></td></tr></tbody></table><p>F.F. Cruz argues that the subject provision bore a mere right of first refusal while NMC asserts that it was an option. On this score, both courts below held that the subject provision provided NMC an option to purchase the subject property, and not to exercise a mere right of first refusal. </p><p> We agree with the lower courts. An option is a contractual grant of the privilege to buy or sell, within an agreed time and at a determined price.<sup style="color: rgb(255, 0, 0);">[61]</sup> On the other hand, a right of first refusal is a contractual grant of first refusal over a property to be sold.<sup style="color: rgb(255, 0, 0);">[62]</sup> </p><p> In <i>Polytechnic University of the Philippines v. Golden Horizon Realty Corporation</i>,<sup style="color: rgb(255, 0, 0);">[63]</sup> the Court distinguished the two concepts, viz.: </p><blockquote><p> An option is a contract by which the owner of the property agrees with another person that the latter shall have the right to buy the former's property at a fixed price within a certain time. <i>It is a condition offered or contract by which the owner stipulates with another that the latter shall have the right to buy the property at a fixed price within a certain time, or under, or in compliance with certain terms and conditions</i>; or which gives to the owner of the property the right to sell or demand a sale. It binds the party, who has given the option, not to enter into the principal contract with any other person during the period designated, and, within that period, to enter into such contract with the one to whom the option was granted, if the latter should decide to use the option. </p><p> Upon the other hand, a right of first refusal is a contractual grant, not of the sale of a property, but of the first priority to buy the property in the event the owner sells the same. <i>As distinguished from an option contract, in a right of first refusal, while the object might be made determinate, the exercise of the right of first refusal would be dependent not only on the owner's eventual intention to enter into a binding juridical relation with another but also on terms, including the price, that are yet to be firmed up</i>.<sup style="color: rgb(255, 0, 0);">[64]</sup> (Emphasis supplied) </p></blockquote><p> Here, the subject provision was in the nature of an option. NMC was granted an option to purchase the subject property under terms and conditions already agreed upon, thus: </p><blockquote><p> 11. LEASE-PURCHASE OPTION. [NMC] shall have the first option to purchase Lot 5-A and/or Lot 5-B at any time but such option/s to be declared not later than 2 years before the intended date of purchase. Price is fixed at [Eleven Thousand Pesos (PHP 11,000.00)] per square meter inclusive of VAT. Downpayment shall be 20% and the balance payable in 20 quarterly payments with 10% interest per annum on the diminishing balance. Title to the property shall be issued or transferred in the name of [NMC] after completion of payment. Twenty (20) percent of the total lease payment received shall be credited to [NMC] as part of the downpayment of the purchase cost. The documentary stamp tax (DST) and transfer fee shall be for [NMC's] account. Capital gains tax and VAT shall be for [F.F. Cruz's] account.<sup style="color: rgb(255, 0, 0);">[65]</sup> </p></blockquote><p> Citing <i>Equatorial Realty Development, Inc v. Mayfair Theater, Inc</i>.,<sup style="color: rgb(255, 0, 0);">[66]</sup> F.F. Cruz nonetheless asserts that the term "first option," as used in the subject provision denotes a right of first refusal. Thus, only when it decides to sell that NMC would have the first priority to purchase the subject property under terms that the seller is willing to accept.<sup style="color: rgb(255, 0, 0);">[67]</sup> </p><p> True, a right of first refusal is sometimes referred to as a "first option."<sup style="color: rgb(255, 0, 0);">[68]</sup> But in <i>Equatorial</i>, the pertinent provision therein clearly provided that the lessee would be given an exclusive option to purchase the property if the lessors desire to sell the property. Too, the terms of the purchase, including the purchase price, were yet to be finalized.<sup style="color: rgb(255, 0, 0);">[69]</sup> </p><p> In stark contrast, the terms of the purchase of the subject property here were already fixed by the subject provision itself, i.e., the purchase price, terms of payment, and even the parties liable for the resulting taxes were already determined. The purchase of the subject property was not conditioned on F.F. Cruz's eventual intention to sell the same. The mere usage of the term "first," instead of "absolute," to characterize the option granted to NMC does not mean that F.F. Cruz must still eventually decide to sell the subject property before NMC can exercise its option to purchase the same. As can be clearly inferred from the wording of the subject provision, F.F. Cruz had already decided to offer the sale of the subject property to NMC under the terms and conditions stated therein. All that was left for the perfection of the sale was NMC's acceptance of the same within the period provided therefor. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><b><i>An option requires a separate and distinct consideration to be a perfected contract</i></b> </div></td></tr></tbody></table><p>This, notwithstanding, no option contract was perfected here. An option contract must necessarily have all the essential requisites of a contract to be perfected, i.e., subject matter, consent, and consideration.<sup style="color: rgb(255, 0, 0);">[70]</sup> Particular to the third essential requisite, the consideration must be distinct from the purchase price of the property. Absent separate consideration, no option contract is perfected. Relevantly, the second paragraph of Article 1479 of the Civil Code provides, viz.: </p><blockquote><p> An accepted unilateral promise to buy or to sell a determinate thing for a price certain is binding upon the promissor <i>if the promise is supported by a consideration distinct from the price</i>. (Emphasis supplied) </p></blockquote><p> The consideration may be anything of value. However, when the written contract does not state the consideration for the option, the grantee bears the burden of proving the existence of a separate consideration for the option.<sup style="color: rgb(255, 0, 0);">[71]</sup> <i>Philippine National Oil Company (PNOC) v. Keppel Philippines Holdings, Inc</i>.<sup style="color: rgb(255, 0, 0);">[72]</sup> discusses: </p><blockquote><p> As earlier mentioned, the consideration for an option contract does not need to be monetary and may be anything of value. However, <b>when the consideration is not monetary, the consideration must be clearly specified as <i>such</i> in the option contract or clause</b>. </p><p> . . . . </p><p><b>When the written agreement itself does not state the consideration for the option contract, the offeree or promisee bears the burden of proving the existence of a separate consideration for the option.</b> The offeree cannot rely on Article 1354 of the Civil Code, which presumes the existence of consideration, since Article 1479 of the Civil Code is a specific provision on option contracts that explicitly requires the existence of a consideration distinct from the purchase price.<sup style="color: rgb(255, 0, 0);">[73]</sup> (Emphasis in the original) </p></blockquote><p> Here, NMC points to Section 4 of the first lease contract which granted F.F. Cruz the option to retain the improvements introduced by NMC at the end of the lease as the alleged consideration for its option to purchase. However, Section 4 did not provide that the right granted therein was the consideration for NMC's option to purchase. Verily, neither the subject provision nor the rest of the first lease contract clearly specified the consideration for the option granted to NMC. </p><p> In fact, both courts below concurrently found that NMC indeed failed to prove that the option to purchase was supported by a separate consideration. As underscored by the Court of Appeals, Section 4 of the first lease contract was patterned after Article 1678<sup style="color: rgb(255, 0, 0);">[74]</sup> of the Civil Code, which already gave lessors the right to appropriate the improvements introduced on their properties after due payment therefor. Section 4, therefore, shall be read in conjunction with Article 1678, i.e., upon the termination of the lease, F.F. Cruz had the right to retain the improvements on the subject property <i>after due payment therefor</i>.<sup style="color: rgb(255, 0, 0);">[75]</sup> Parenthetically, as a right already granted by law, Section 4 cannot be regarded as the consideration for the subject provision. </p><p> We find no cogent reason to differ from these findings of the lower courts. Absent a separate consideration therefor, the option contract was not perfected. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><b><i>The option, although unsupported by a separate consideration, was an offer that, if duly and timely accepted, would have ripened into a perfected contract</i></b> </div></td></tr></tbody></table><p>In any event, an option which is unsupported by a separate consideration remains an offer, that, if duly accepted, perfects into a contract. Article 1324 of the Civil Code ordains: </p><blockquote><p> When the offerer has allowed the offeree a certain period to accept, <i>the offer may be withdrawn at any time before acceptance by communicating such withdrawal</i>, e<b>xcept when the option is founded upon a consideration, as something paid or promised</b>. (Emphasis supplied) </p></blockquote><p> Reconciling Articles 1324 and 1479 of the Civil Code, <i>Sanchez v. Rigos</i><sup style="color: rgb(255, 0, 0);">[76]</sup> explains that an option, unsupported by a distinct consideration, is an offer which, if accepted, ripens into a perfected contract: </p><blockquote><p><i>In other words, since there may be no valid contract without a cause or consideration, the promisor is not bound by his promise and may, accordingly, withdraw it. Pending notice of its withdrawal, his accepted promise partakes, however, of the nature of an offer to sell which, if accepted, results in a perfected contract of sale</i>. </p><p> This view has the advantage of avoiding a conflict between Articles 1324âon the general principles on contracts-and 1479âon salesâof the Civil Code, in line with the cardinal rule of statutory construction that, in construing different provisions of one and the same law or code, such interpretation should be favored as will reconcile or harmonize said provisions and avoid a conflict between the same. Indeed, the presumption is that, in the process of drafting the Code, its author has maintained a consistent philosophy or position.<sup style="color: rgb(255, 0, 0);">[77]</sup> (Emphasis supplied) </p></blockquote><p> In <i>PNOC</i>, the Court held that <i>Sanchez</i> remains a controlling doctrine, viz.: </p><blockquote><p> The Constitution itself declares that "no doctrine or principle bf law laid down by the court in a decision rendered <i>en banc</i> or in division may be modified or reversed except by the court sitting en banc." <i>Sanchez v. Rigos</i> was an <i>en banc</i> decision which was affirmed in 1994 in <i>Asuncion v. CA</i>, also an <i>en banc</i> decision, while the decisions citing the <i>Southwestern Sugar</i> doctrine are all division cases. Based on the constitutional rule (as well as the inherent logic in reconciling Civil Code provisions), there should be no doubt that <b><em>Sanchez v. Rigos</em> remains as the controlling doctrine</b>. </p><p><i>Accordingly, when an option to buy or to sell is not supported by a consideration separate from the purchase price, the option constitutes as an offer to buy or to sell, which may be withdrawn by the offeror at any time prior to the communication of the offeree's acceptance</i>. When the offer is duly accepted, a mutual promise to buy and to sell under the first paragraph of Article 1479 of the Civil Code ensues and the parties' respective obligations become reciprocally demandable.<sup style="color: rgb(255, 0, 0);">[78]</sup> (Emphasis in the original; citations omitted) </p></blockquote><p> Applying <i>Sanchez</i> here, we hold that the subject provision was an offer for the sale of the subject property under the terms and conditions stated therein. Consequently, had NMC accepted the offer while the same was subsisting, a contract for the sale of the subject property would have been perfected and F.F. Cruz shall be bound to perform its obligations under the sale. But the problem is when NMC finally accepted the offer to sell, it was no longer subsisting as will be further shown in the succeeding discussion. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><b><i>The subject provision was not carried over to the second lease contract</i></b> </div></td></tr></tbody></table><p>To recall, the subject provision was only expressly contained in the first lease contract, which was effective from September 1, 2003 until October 31, 2008. At the time NMC first expressed its acceptance of the offer, or on May 5, 2015, the prevailing contract was already the second lease contract. The same did <i>not</i> contain the subject provision or an offer similar thereto. But it contained a whereas clause which, if read alone, provided that all other provisions of the first lease contract shall be upheld and will remain in effect. </p><p> The question: <b>was the subject provision carried over to the second lease contract?</b> </p><p> F.F. Cruz posits that the subject provision was not carried over to the second lease contract. For one, the "carry over clause" was only part of the whereas clauses of the second lease contract.<sup style="color: rgb(255, 0, 0);">[79]</sup> If the parties really intended to carry over the subject provision, the same would have been incorporated in the body of the second lease contract.<sup style="color: rgb(255, 0, 0);">[80]</sup> For another, the subject provision was already extinguished when NMC signified its intent to exercise the same.<sup style="color: rgb(255, 0, 0);">[81]</sup> </p><p> On the other hand, NMC counters that the second lease contract expressly provided that "both parties agree that all other provisions/ agreements in the existing contract [or the first lease contract] shall be upheld and will remain in effect."<sup style="color: rgb(255, 0, 0);">[82]</sup> </p><p> We find for F.F. Cruz. </p><p> That the extension of the lease was expressly provided for by the parties is indubitable. The point of dispute hinges on the scope of this extension and the interpretation of the fourth whereas clause of the second lease contract, viz.: </p><blockquote><p> WHEREAS, both parties agree that <i>all other provisions/agreements to the existing contract be upheld and will remain in effect except for the following changes in terms and conditions</i> herein enumerated below[.]<sup style="color: rgb(255, 0, 0);">[83]</sup> (Emphasis supplied) </p></blockquote><p> But this clause should not be read in isolation. It should be reconciled with the rest of the contract. </p><p> Article 1374 of the Civil Code states that the various stipulations of a contract shall be interpreted together, attributing to the doubtful ones that sense which may result from all of them jointly. Too, settled is the rule in contract interpretation that the intention of the parties may be ascertained by looking into the words they used to reflect their intention in their contract, that is <i>all</i> the words and not just a particular word or two, and words in context, not standing alone.<sup style="color: rgb(255, 0, 0);">[84]</sup> Thus, to determine the terms and conditions of the first lease contract that the parties actually intended to extend to the second lease contract, these contracts shall be read as a whole. </p><p> Notably, the first lease contract covered not only the lease of the subject property, but also other special agreements or arrangements between the parties, including the subject provision or the so-called option to purchase. </p><p> Relatedly, the fourth whereas clause of the second lease contract provided that <i>all</i> other provisions of the first lease contract were to be upheld. Nonetheless, the other whereas clauses shed clarity on the intent of the parties in executing the second lease contract. The first three whereas clauses stated, viz.: </p><blockquote><p> WHEREAS, [F.F. Cruz] and [NMC] have an existing CONTRACT OF LEASE <i>for the rental of a parcel of land owned by [F.F. CRUZ], known as LOT 5-A, situated in the barrio of SUBANGDAKU &amp; POBLACION, City of MANDAUE, island of Cebu with an area of EIGHTEEN THOUSAND SIX HUNDRED THIRTY SEVEN (18,637) SQUARE METERS</i>; </p><p> WHEREAS, the existing CONTRACT OF LEASE is valid until 31 October 2008 and [NMC] wishes to amend/extend the contract for another TEN (10) YEARS to commence on 01 March 2008 until 28 February 2018; </p><p> WHEREAS, [F.F. Cruz] agrees to give [NMC] an extension of TEN (10) YEARS starting on 01 March 2008 to 28 February 2018[.]<sup style="color: rgb(255, 0, 0);">[85]</sup> (Emphasis supplied) </p></blockquote><p> While the first whereas clause referred to the first lease contract, it referred to the same only insofar as it provided for the lease of the subject property, i.e., the <i>rental</i> of the subject property. It did not refer to the other special agreements or arrangements unrelated to the lease of the subject property. </p><p> Another. The rest of the second lease contract only referred to the terms and conditions of the lease, i.e., the leased area, the rental rate, and the period of lease. Even Section 4, which contemplated a possible agreement between the parties to construct a private port or pier, concerned itself with the effects of said agreement to the existing lease of the subject property, thus: </p><blockquote><p> 4. In the event that both parties agree to pursue the construction of the private port/pier, this contract of lease will be superseded or replaced by a new 25[-]year lease contract which will commence when the pier facility becomes operational. The amount of lease for the pier facility will then be added to the then existing rental rates for the lease of the PROPERTY.<sup style="color: rgb(255, 0, 0);">[86]</sup></p></blockquote><p> The logical conclusion therefore is that the parties intended to extend only the lease of the subject property. Consequently, all other provisions of the first lease contract <i>that relate to the lease</i> were carried over to the second lease contract. Clearly, the subject provision was not among these provisions, meaning it was not carried over. To be sure, if the parties truly intended to extend or carry it over, such intention would have been expressly provided therein. </p><p> In <i>Dizon v. Court of Appeals</i>,<sup style="color: rgb(255, 0, 0);">[87]</sup> the Court held that an implied renewal of a lease does not include an option to purchase, as it is not germane to the lessee's continued use of the property leased, thus: </p><blockquote><p> In this case, there was a contract of lease for one (1) year with option to purchase. The contract of lease expired without the private respondent, as lessee, purchasing the property but remained in possession thereof. Hence, there was an implicit renewal of the contract of lease on a monthly basis. <i>The other terms of the original contract of lease which are revived in the implied new lease under Article 1670 of the New Civil Code are only those terms which are germane to the lessee's right of continued enjoyment of the property leased</i>. Therefore, an implied new lease does not <i>ipso facto</i> carry with it any implied revival of private respondent's option to purchase (as lessee thereof) the leased premises. The provision entitling the lessee the option to purchase the leased premises is not deemed incorporated in the impliedly renewed contract because it is alien to the possession of the lessee. Private respondent's right to exercise the option to purchase expired with the termination of the original contract of lease for one year. The rationale of this Court is that: </p><blockquote><p> This is a reasonable construction of the provision, which is based on the presumption that when the lessor allows the lessee to continue enjoying possession of the property for fifteen days after the expiration of the contract he is willing that such enjoyment shall be for the entire period corresponding to the rent which is customarily paid â in this case up to the end of the month because the rent was paid monthly. Necessarily, if the presumed will of the parties refers to the enjoyment of possession the presumption covers the other terms of the contract related to such possession, such as the amount of rental, the date when it must be paid, the care of the property, the responsibility for repairs, etc. But no such presumption may be indulged in with respect to special agreements which by nature are foreign to the right of occupancy or enjoyment inherent in a contract of lease.<sup style="color: rgb(255, 0, 0);">[88]</sup> (Emphasis supplied) </p></blockquote></blockquote><p> As discussed by the Court, from the lessee's continued possession of the leased property after the expiration of the lease with the lessor's acquiescence thereto, the will of the parties to continue the lease is presumed. This presumption necessarily covers the terms of the contract related to such possession. Conversely, it does not include the special agreements which are not germane to the lessee's continued possession of the property. </p><p> True, the present case concerns the extension of a lease based on the express agreement of the parties. But again, the second lease contract provided that the parties only intended to extend the lease. As in <i>Dizon</i>, therefore, the extension of the first lease contract only covered provisions that are germane to the continued lease of the subject property. To be sure, when the period of the first lease contract expired, the subject provision is likewise extinguished. It was not carried over to the second lease contract. </p><p> To repeat, had the parties truly intended the extension or carry over of the subject provision, the same should have been expressly and particularly stipulated. NMC cannot simply rely on a general carry over provision in the second lease contract considering the purpose thereof. The second lease contract shows that the parties intended to extend the lease of the subject property. The extension should therefore be limited to just thatâthe continued lease of the subject property. Nothing more. So must it be. </p><p><b>ACCORDINGLY,</b> the Petition for Review is <b>GRANTED</b>. The Decision dated May 31, 2023 and Resolution dated September 29, 2023 of the Court of Appeals in CA-G.R. CV No. 118813 are <b>REVERSED</b> and <strong>SET ASIDE</strong>. The complaint for specific performance of respondent NMC Container Lines, Inc. against petitioner F.F. Cruz &amp; Company, Inc. is <b>DISMISSED</b> for lack of merit. </p><p><b>SO ORDERED.</b> </p><p><i>Leonen, SAJ. (Chairperson), J. Lopez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur. <br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><sup style="color: rgb(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 26-90. <p><sup style="color: rgb(255, 0, 0);">[2]</sup> <i>Id.</i> at 108-133. Penned by Associate Justice Perpetua Susana T. Atal-PaÃ±o and concurred in by Associate Justices Germano Francisco D. Legaspi and Maximo M. De Leon, Special Seventh Division, Court of Appeals, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> at 135-140. Penned by Associate Justice Perpetua Susana T. Atal-PaÃ±o and concurred in by Associate Justices Germano Francisco D. Legaspi and Maximo M. De Leon, Former Special Seventh Division, Court of Appeals, Manila. </p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> <i>Id.</i> at 109.</p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Id.</i> at 509. </p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> <i>Id.</i> at 109.</p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> <i>Id.</i> at 511. </p><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <i>Id.</i> at 540. </p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> <i>Id.</i> at 110. </p><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Id.</i> at 541. </p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <i>Id.</i> at 947-949. </p><p><sup style="color: rgb(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[17]</sup> <i>Id.</i> at 958. </p><p><sup style="color: rgb(255, 0, 0);">[18]</sup> <i>Id.</i> at 110, 789. </p><p><sup style="color: rgb(255, 0, 0);">[19]</sup> <i>Id.</i> at 789. </p><p><sup style="color: rgb(255, 0, 0);">[20]</sup> <i>Id.</i> at 1002-1003. </p><p><sup style="color: rgb(255, 0, 0);">[21]</sup> <i>Id.</i> at 1002. </p><p><sup style="color: rgb(255, 0, 0);">[22]</sup> <i>Id.</i> at 1013-1014. </p><p><sup style="color: rgb(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[24]</sup> <i>Id.</i> at 901-917. </p><p><sup style="color: rgb(255, 0, 0);">[25]</sup> <i>Id.</i> at 908-910. </p><p><sup style="color: rgb(255, 0, 0);">[26]</sup> <i>Id.</i> at 912. </p><p><sup style="color: rgb(255, 0, 0);">[27]</sup> <i>Id.</i> at 2196-2221. </p><p><sup style="color: rgb(255, 0, 0);">[28]</sup> <i>Id.</i> at 110-111. </p><p><sup style="color: rgb(255, 0, 0);">[29]</sup> <i>Id.</i> at 2325-2362. </p><p><sup style="color: rgb(255, 0, 0);">[30]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[31]</sup> <i>Id.</i> at 579-600. Penned by Presiding Judge Eduardo Ramon R. Reyes. </p><p><sup style="color: rgb(255, 0, 0);">[32]</sup> <i>Id.</i> at 600. </p><p><sup style="color: rgb(255, 0, 0);">[33]</sup> <i>Id.</i> at 593-594. </p><p><sup style="color: rgb(255, 0, 0);">[34]</sup> <i>Id.</i> at 595-596. </p><p><sup style="color: rgb(255, 0, 0);">[35]</sup> 870 Phil. 13, 28 (2020) [Per J. Leonen, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[36]</sup> <i>Rollo</i>, pp. 596-598. </p><p><sup style="color: rgb(255, 0, 0);">[37]</sup> <i>Id.</i> at 108-133. </p><p><sup style="color: rgb(255, 0, 0);">[38]</sup> <i>Id.</i> at 132. </p><p><sup style="color: rgb(255, 0, 0);">[39]</sup> <i>Id.</i> at 115-118. </p><p><sup style="color: rgb(255, 0, 0);">[40]</sup> <i>Id.</i> at 118-124. </p><p><sup style="color: rgb(255, 0, 0);">[41]</sup> <i>Id.</i> at 127-130. </p><p><sup style="color: rgb(255, 0, 0);">[42]</sup> <i>Id.</i> at 135-140. </p><p><sup style="color: rgb(255, 0, 0);">[43]</sup> <i>Id.</i> at 48-50. </p><p><sup style="color: rgb(255, 0, 0);">[44]</sup> <i>Id.</i> at 52-56. </p><p><sup style="color: rgb(255, 0, 0);">[45]</sup> <i>Id.</i> at 56-57, 76-77. </p><p><sup style="color: rgb(255, 0, 0);">[46]</sup> <i>Id.</i> at 78. </p><p><sup style="color: rgb(255, 0, 0);">[47]</sup> <i>Id.</i> at 64-66. </p><p><sup style="color: rgb(255, 0, 0);">[48]</sup> <i>Id.</i> at 69-70. </p><p><sup style="color: rgb(255, 0, 0);">[49]</sup> <i>Id.</i> at 70. </p><p><sup style="color: rgb(255, 0, 0);">[50]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[51]</sup> <i>Id.</i> at 78-81. </p><p><sup style="color: rgb(255, 0, 0);">[52]</sup> <i>Id.</i> at 81-82. </p><p><sup style="color: rgb(255, 0, 0);">[53]</sup> <i>Id.</i> at 778-893. </p><p><sup style="color: rgb(255, 0, 0);">[54]</sup> <i>Id.</i> at 829-830. </p><p><sup style="color: rgb(255, 0, 0);">[55]</sup> <i>Id.</i> at 830-839. </p><p><sup style="color: rgb(255, 0, 0);">[56]</sup> <i>Id.</i> at 839-851. </p><p><sup style="color: rgb(255, 0, 0);">[57]</sup> <i>Id.</i> at 851-853. </p><p><sup style="color: rgb(255, 0, 0);">[58]</sup> <i>Id.</i> at 863-866. </p><p><sup style="color: rgb(255, 0, 0);">[59]</sup> <i>Id.</i> at 867-882. </p><p><sup style="color: rgb(255, 0, 0);">[60]</sup> <i>Id.</i> at 882-891. </p><p><sup style="color: rgb(255, 0, 0);">[61]</sup> <b>Spouses Co v. Court of Appeals</b>, 371 Phil. 445, 452 (1999) [Per J. Gonzaga-Reyes, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[62]</sup> <b>Rosencor Development Corporation v. Inquing</b>, 406 Phil. 565, 577-578 (2001) [Per J. Gonzaga-Reyes, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[63]</sup> 629 Phil. 462 (2010) [Per J. Villarama, Jr., First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[64]</sup> <i>Id.</i> at 474. </p><p><sup style="color: rgb(255, 0, 0);">[65]</sup> <i>Rollo</i>, p. 509. </p><p><sup style="color: rgb(255, 0, 0);">[66]</sup> 332 Phil. 525 (1996) [Per J. Hermosisima, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[67]</sup> <i>Rollo</i>, p. 57. </p><p><sup style="color: rgb(255, 0, 0);">[68]</sup> 332 Phil. 525, 250 (1996) [Per J. Hermosisima, <em>En</em> <i>Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[69]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[70]</sup> CIVIL CODE, art. 1318. There is no contract unless the following requisites concur: </p><blockquote><p> (1) Consent of the contracting parties; <br> (2) Object certain which is the subject matter of the contract;<br> (3) Cause of the obligation which is established.</p></blockquote><p><sup style="color: rgb(255, 0, 0);">[71]</sup> <b>Philippine National Oil Company v. Keppel Philippines Holdings, Inc.</b>, 791 Phil. 64, 84 (2016) [Per J. Brion, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[72]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[73]</sup> <i>Id.</i> at 83-84. </p><p><sup style="color: rgb(255, 0, 0);">[74]</sup> CIVIL CODE, art. 1678. If the lessee makes, in good faith, useful improvements which are suitable to the use for which the lease is intended, without altering the form or substance of the property leased, the lessor upon the termination of the lease shall pay the lessee one-half of the value of the improvements at that time. Should the lessor refuse to reimburse said amount, the lessee may remove the improvements, even though the principal thing may suffer damage thereby. He shall not, however, cause any more impairment upon the property leased than is necessary. </p><p> With regard to ornamental expenses, the lessee shall not be entitled to any reimbursement, but he may remove the ornamental objects, provided no damage is caused to the principal thing, and the lessor does not choose to retain them by paying their value at the time the lease is extinguished.</p><p><sup style="color: rgb(255, 0, 0);">[75]</sup> <i>Rollo</i>, pp. 122-124. </p><p><sup style="color: rgb(255, 0, 0);">[76]</sup> 150-A Phil. 714 (1972) [Per C.J. Concepcion, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[77]</sup> <i>Id.</i> at 723-724. </p><p><sup style="color: rgb(255, 0, 0);">[78]</sup> <b>PNOC v. Keppel Philippines Holdings, Inc.</b>, 791 Phil. 64, 90 (2016) [Per J. Brion, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[79]</sup> <i>Rollo</i>, p. 81-82. </p><p><sup style="color: rgb(255, 0, 0);">[80]</sup> <i>Id.</i> at 75. </p><p><sup style="color: rgb(255, 0, 0);">[81]</sup> <i>Id.</i> at 70-71. </p><p><sup style="color: rgb(255, 0, 0);">[82]</sup> <i>Id.</i> at 843. </p><p><sup style="color: rgb(255, 0, 0);">[83]</sup> <i>Id.</i> at 511. </p><p><sup style="color: rgb(255, 0, 0);">[84]</sup> <b>Development Bank of the Philippines v. Sta. Ines Melale Forest Products Corporation</b>, 805 Phil. 58, 81 (2017) [Per J. Leonen, Second Division], <i>citing</i> <b>Fernandez v. Court of Appeals</b>, 248 Phil. 806-818 (1988) [Per J. Feliciano, <i>En Banc</i>]; <i>see also</i> <b>The Insular Life Assurance Company, Ltd. v. Court of Appeals</b>, 472 Phil. 11, 23 (2004) [Per J. Austria-Martinez, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[85]</sup> <i>Rollo</i>, p. 511. </p><p><sup style="color: rgb(255, 0, 0);">[86]</sup> <i>Id.</i> at 512. </p><p><sup style="color: rgb(255, 0, 0);">[87]</sup> 361 Phil. 963 (1999) [Per J. Austria-Martinez, First Division], <i>citing</i> <b>Dizon v. Magsaysay</b>, 156 Phil. 232-237 (1974) [Per C.J. Makalintal, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[88]</sup> <i>Id.</i> at 975-976. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

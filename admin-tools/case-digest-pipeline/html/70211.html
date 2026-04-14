@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 261212 - SPOUSES RENATO AND ESTER CAPISTRANO, PETITIONERS, VS. LAVERNE REALTY AND DEVELOPMENT CORPORATION, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70211' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 261212, August 13, 2025 ]</H2>
+			<H3>SPOUSES RENATO AND ESTER CAPISTRANO, PETITIONERS, VS. LAVERNE REALTY AND DEVELOPMENT CORPORATION, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This resolves the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by petitioners Renato and Ester Capistrano (spouses Capistrano) praying for the reversal of the June 14, 2021 Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and June 6, 2022 Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. SP No. 166098. The CA annulled the August 9, 2018<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and March 11, 2020<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Orders of Branch 224, Regional Trial Court (RTC) of Quezon City which granted the spouses Capistrano's Urgent Omnibus Motion to Quash the Writ of Possession and Sheriff's Notice to Vacate issued in favor of respondent Laverne Realty and Development Corporation (Laverne Realty).<br><br><center><b>Antecedents</b></center><br>On September 27, 2007, the City Treasurer of Quezon City sold at a public auction for tax delinquency a 1,000-square-meter parcel of land located at No. 5 Pearl Street, Fairview Capitol, Quezon City covered by Transfer Certificate of Title (TCT) No. 18395 (subject property), registered in the name of Renato Capistrano, married to Ester Capistrano. Laverne Realty emerged as the highest bidder with a bid of PHP 500,000.00.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Consequently, on November 27, 2007, a Certificate of Sale was issued in favor of Laverne Realty. The spouses Capistrano failed to redeem the subject property within the one-year period of redemption. Thus, on October 7, 2008, the City Treasurer of Quezon City issued a Final Bill of Sale in favor of Laverne Realty.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On November 23, 2009, Laverne Realty filed a Petition for Confirmation of the Final Bill of Sale and Entry of New Certificate of Title<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (Petition for Confirmation of Sale) in its favor, pursuant to Section 75 of Presidential Decree No. 1529 or the Property Registration Decree.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The case was docketed as LRC Case No. Q-28511 (09).<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Later, Laverne Realty amended its Petition for Confirmation of Sale.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On March 16, 2010, the RTC issued an Order setting the case for initial hearing on May 26, 2010. The RTC directed the Order/Notice of Hearing to be served on the spouses Capistrano, Register of Deeds of Quezon City, Secretary of Department of Environment and Natural Resources, Land Registration Authority, Office of the Solicitor General, and Quezon City Prosecutor's Office. The RTC further ordered the posting of the Notice at the main entrance of the Quezon City Hall and the bulletin board of the Office of the Clerk of Court, RTC, Quezon City for 30 days prior to the initial hearing. There being no opposition, the trial proceeded <i>ex-parte</i>.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>During the hearing on July 22, 2011, Laverne Realty formally offered its evidence, which the RTC admitted.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br>&nbsp;<br>On December 5, 2011, the RTC rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> confirming the Final Bill of Sale in favor of Laverne Realty, to wit:<blockquote>WHEREFORE, premises considered, judgment is hereby issued:<br><br>1) Ordering the registered owner, Renato Capistrano or any person withholding the owner[]s duplicate of TCT No. 18395 <u>to surrender</u> within fifteen (15) days from receipt of this Decision to the Register of Deeds of Quezon City the said owner's duplicate copy of TCT No. 18395;<br><br>2) In case the person withholding the duplicate certificate is not amenable or if for any reason the outstanding owner's duplicate certificate cannot be delivered, the Court orders the Register of Deeds of Quezon City to annul the owner's duplicate of TCT No. 18395 and to issue a new certificate of title in lieu thereof;<br><br>3) Confirming the Final Bill of Sale due to the failure of the registered owner to exercise his right of redemption[.]<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></blockquote>The RTC Decision became final and executory per Certificate of Finality issued on July 5, 2012. Pursuant thereto, on June 25, 2015, the Register of Deeds of Quezon City issued TCT No. 004-2015011233 in favor of Laverne Realty.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Subsequently, Laverne Realty filed before the RTC a Motion for Issuance of Writ of Possession on the ground that the title to the subject property previously covered by TCT No. 18395 had been cancelled and a new title, TCT No. 004-2015011233 was issued in its name.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>On April 14, 2016, the RTC granted the motion.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Correspondingly, on July 13, 2016, the RTC issued a writ of possession in favor of Laverne Realty.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On November 2, 2017, the spouses Capistrano filed an Urgent Omnibus Motion<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> to quash the writ of possession and the Sheriff's notice to vacate. The spouses Capistrano beseeched the RTC to stop the implementation of the writ pending resolution of their Omnibus Motion. They argued that the writ of possession was improvidently issued as it did not fall under the allowable grounds for the issuance of a writ of possession, such as: (i) land registration proceedings under Section 17 of Republic Act No. 496; (ii) judicial foreclosure when the debtor is in possession of the mortgaged realty and no third person had intervened; and (iii) extrajudicial foreclosure of a real estate mortgage under Section 7 of Republic Act No. 3135, as amended by Republic Act No. 4118. Moreover, they claimed that the RTC never acquired jurisdiction over their person since they were not served with summons in the proceedings for the confirmation of sale.<br><br>Shortly thereafter, on November 7, 2017, the spouses Capistrano filed a Supplement to the Urgent Omnibus Motion,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> pointing out that the notice of delinquency and warrant oflevy were sent to No. 98 Villareal, Gulod, Quezon City, which is not their correct address, that being No. 89 Villareal, Gulod, Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On August 9, 2018, the RTC<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> granted the spouses Capistrano's Urgent Omnibus Motion. The RTC declared that the instant case does not fall under the jurisprudentially allowed instances for issuing a writ of possession and is beyond the ambit of its earlier December 5, 2011 Decision. The RTC stressed that orders pertaining to the execution of judgments must substantially conform to the dispositive portion of the decision sought to be executed. It may not vary, or go beyond, the terms of the judgment it seeks to enforce. The dispositive portion of the August 9, 2018 Order<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> reads:<blockquote><b>WHEREFORE</b>, premises considered, the O1m1ibus Motion to Quash the Writ of Possession and Sheriff's Notice to Vacate are hereby <b>granted</b>. Accordingly, the Writ of Possession issued by this Court dated July 13, 2016 and the Sheriff's Notice to Vacate issued pursuant thereto are set aside.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis in the original)</blockquote>After a lapse of more than one year, on August 30, 2019,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Laverne Realty filed a Motion for Reconsideration with Motion to Implement Writ of Possession.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Laverne Realty justified the belated filing of its motion for reconsideration claiming that its counsel, Atty. Jude Amadeus R. Marfil (Atty. Marfil), never received the August 9, 2018 Order and was surprised to see it in the RTC's files only on August 15, 2019. Atty. Marfil further alleged that the August 9, 2018 Order was shown to have been received by a certain "Perry Lozano," who is not employed by his law office, or duly authorized to receive correspondence on his behalf. Further, Atty. Marfil insisted that since he actually received the August 9, 2018 Order only on August 15, 2019, Laverne Realty had 15 days, or until August 30, 2019 to file its motion for reconsideration. On the merits, Laverne Realty alleged that the spouses Capistrano failed to make the deposit required under Section 267 of the Local Government Code (LGC) when it filed its Urgent Omnibus Motion.<br><br><center><b>Assailed RTC Order</b></center><br>On March 11, 2020, the RTC denied the Motion for Reconsideration with Motion to Implement Writ of Possession.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The RTC held that said Motion was filed late and faulted Laverne Realty's counsel for failing to devise a system to ensure the timely receipt of mail matters. Likewise, the RTC dismissed the Motion on the merits declaring that the requirement of a deposit under Section 267 of the LGC only pertains to initiatory actions assailing the validity of tax sales, and thus, the Urgent Omnibus Motion to Quash the Writ of Possession and the Sheriff's Notice to Vacate does not fall within such requirement. Moreover, the RTC emphasized that the writ of possession may not be granted since it was not included among the reliefs prayed for by Laverne Realty in its Petition for Confirmation of Sale. The RTC disposed of the Motion for Reconsideration as follows:<blockquote><b>WHEREFORE</b>, premises considered, the <i>Motion for Reconsideration with Motion to Implement Writ of Possession</i> dated August 30, 2019 is <b>denied</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original)</blockquote>Aggrieved, Laverne Realty filed a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> seeking to nullity the March 11, 2020 Order<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> of the RTC. Interestingly, it did not question the August 9, 2018 Order before the CA.<br><br><center><b>Ruling of the CA</b></center><br>On June 14, 2021, the CA rendered the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> granting the Petition for <i>Certiorari</i>. The CA held that the RTC gravely abused its discretion when it ruled that a writ of possession may only be issued in the four instances it mentioned. The CA likewise disagreed with the RTC that the writ of possession was beyond the ambit of the December 5, 2011 Decision. The CA opined that Laverne Realty, as the new owner of the subject property, may apply for a writ of possession Additionally, the CA stressed that the spouses Capistrano may no longer attack the proceedings in LRC Case No. Q-28511 (09) since the decision therein has attained finality. Finally, the CA declared that although Laverne Realty merely assailed the March 11, 2020 Order that denied the reconsideration of the August 9, 2018 Order, it would be proper to annul both Orders to give sense to its ruling. The decretal portion of the CA Decision reads:<blockquote><b>WHEREFORE</b>, the petition for certiorari is <b>GRANTED</b>. The Orders dated 11 March 2020 and 9 August 2018 of the Regional Trial Court, National Capital Judicial Region, Branch 224, Quezon City, are <b>SET ASIDE</b>. The Writ of Possession dated 13 July 2016 and the Sheriff's Notice to Vacate are reinstated.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis in the original)</blockquote>Dissatisfied with the ruling, the spouses Capistrano sought reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> which the CA denied in its June 6, 2022 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Undeterred, the spouses Capistrano filed the instant Petition for Review on <i>Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><center><b>Issues</b></center><br>At the outset, the spouses Capistrano point to procedural defects and serious infirmities that should have warranted the outright dismissal of the Petition for Certiorari filed by Laverne Realty before the CA. <i>First</i>, they question the Verification due to the failure of Alexander Catolos (Catolos), Laverne Realty's representative, to expressly attest to all the matters required by Rule 7, Section 4 of the 2019 Rules of Civil Procedure.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Second</i>, they assert that the Secretary's Certificate does not specifically authorize Catolos to execute the Certification of Non-Forum Shopping.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Third</i>, they assert that the August 9, 2018 RTC Order has long attained finality due to Laverne Realty's failure to timely file a motion for reconsideration against the same.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>On the merits, the spouses Capistrano argue that the CA erred in declaring that the RIC gravely abused its discretion.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> They aver that the RTC was correct in ruling that the writ of possession was bereft of legal basis, was not included in the reliefs sought in the Petition for Confirmation of Sale, and was beyond the ambit of the December 5, 2011 Decision.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Finally, the spouses Capistrano assert that the proceedings in LRC Case No. Q-28511 (09), including the issuance of the Writ of Possession and Sheriff's Notice to Vacate, are null and void since they were never summoned or impleaded in the said case, in stark violation of their right to due process.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>On the other hand, Laverne Realty counters that the Verification in its Petition for <i>Certiorari</i> substantially complies with the Rules since it contains an assurance that Catolos "[has] read the same and the contents thereof which are true and correct of [his] own personal knowledge and on the basis of authentic documents/records."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Similarly, it retorts that the Secretary's Certificate authorizes Catolos to "sign and represent the Corporation ... [and] to do any and all legal acts for [its] proper representation."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> It contends that such general authority includes the act of signing the Certification of Non-Forum Shopping. Moreover, it justifies the late filing of its Motion for Reconsideration against the August 9, 2018 Order on the belated notice of its counsel. It likewise urges that the person who received said Order was never employed in Atty. Marfil's law office.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> As to the merits of the case, Laverne Realty avers that a writ of possession may be issued in favor of the purchaser in a public auction for tax delinquency.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> It further ripostes that the writ of possession did not go against the disposition in the December 5, 2011 Decision and emanates from its right of ownership over the subject property.<br><br><center><b>Ruling of the Court</b></center><br><i>The Petition is granted.</i>&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Petition for Certiorari suffers from a defective Verification and lacks a Statement of Material Dates</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The orderly administration of justice will never be achieved without proper compliance with the procedural rules. Procedural rules exist to eliminate arbitrariness, caprice, and whimsicality in the dispensation of justice.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Likewise, they prevent needless delays and ensure the orderly and expeditious dispatch of judicial business.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>In availing a petition for <i>certiorari</i> to nullify the ruling of a lower court or tribunal, Rule 65 requires that the petition must be verified and contain a sworn certification against forum shopping:<blockquote>Section 1. <i>Petition for certiorari</i>. â When any tribunal, board or officer exercising judicial or quasi-judicial functions has acted without or in excess of its or his jurisdiction, or with grave abuse of discretion amounting to lack or excess of jurisdiction, and there is no appeal, or any plain, speedy, and adequate remedy in the ordinary course of law, a person aggrieved thereby may file a <b>verified petition</b> in the proper court, alleging the facts with certainty and praying that judgment be rendered annulling or modifying the proceedings of such tribunal, board or officer, and granting such incidental reliefs as law and justice may require.<br><br>The petition shall be accompanied by a certified true copy of the judgment, order or resolution subject thereof, copies of all pleadings and documents relevant and pertinent thereto, and <b>a sworn certification of non-forum shopping</b> as provided in the third paragraph of section 3, Rule 46. (Emphasis supplied)</blockquote>Particularly, Rule 7, Section 4 of the Revised Rules of Court states that pleadings are verified by an affidavit that contains the following key attestations:<blockquote>Section 4. <i>Verification</i>. â Except when otherwise specifically required by law or rule, pleadings need not be under oath or verified.<br><br>A pleading is verified by an affidavit of an affiant duly authorized to sign said verification. The authorization of the affiant to act on behalf of a party, whether in the form of a secretary's certificate or a special power of attorney, should be attached to the pleading, and shall allege the following attestations:<br><br>(a) The allegations in the pleading are true and correct based on his or her personal knowledge, or based on authentic documents;<br><br>(b) The pleading is not filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation; and<br><br>(c) The factual allegations therein have evidentiary support or, if specifically so identified, will likewise have evidentiary support after a reasonable opportunity for discovery. The signature of the affiant shall further serve as a certification of the truthfulness of the allegations in the pleading.<br><br>A pleading required to be verified that contains a verification based on "information and belief," or upon "knowledge, information and belief," or lacks a proper verification, shall be treated as an unsigned pleading.<br><br>In addition, every petition for <i>certiorari</i> must be accompanied by a sworn certification against forum shopping:<blockquote>Section 3. <i>Contents and filing of petition; effect of non-compliance with requirements</i>. â The petition shall contain the full names and actual addresses of all the petitioners and respondents, a concise statement of the matters involved, the factual background of the case, and the grounds relied upon for the relief prayed for.</blockquote>In actions filed under Rule 65, the petition shall further indicate the material dates showing when notice of the judgment or final order or resolution subject thereof was received, when a motion for new trial or reconsideration, if any, was filed when notice of the denial thereof was received. (<i>Cir. No. 39-98</i>)<br><br>It shall be filed in seven (7) clearly legible copies together with proof of service thereof on the respondent with the original copy intended for the court indicated as such by the petitioner, and shall be accompanied by a clearly legible duplicate original or certified true copy of the judgment, order, resolution, or ruling subject thereof, such material portions of the record as are referred to therein, and other documents relevant or pertinent thereto. The certification shall be accomplished by the proper clerk of court or by his duly authorized representative, or by the proper officer of the court, tribunal, agency or office involved or by his duly authorized representative. The other requisite number of copies of the petition shall be accompanied by clearly legible plain copies of all documents attached to the original.<br><br><b>The petitioner shall also submit together with the petition a sworn certification that he has not theretofore commenced any other action involving the same issues in the Supreme Court, the Court of Appeals or different divisions thereof, or any other tribunal or agency; if there is such other action or proceeding, he must state the status of the same; and if he should thereafter learn that a similar action or proceeding has been filed or is pending before the Supreme Court, the Court of Appeals, or different divisions thereof, or any other tribunal or agency, he undertakes to promptly inform the aforesaid courts and other tribunal or agency thereof within five (5) days therefrom.</b><br><br>The petitioner shall pay the corresponding docket and other lawful fees to the clerk. of court and deposit the amount of P[HP] 500.00 for costs at the time of the filing of the petition.<br><br>The failure of the petitioner to comply with any of the foregoing requirements shall be sufficient ground for the dismissal of the petition. (Emphasis supplied)&nbsp;</blockquote>It cannot be gainsaid that the rules on verification and certification against forum shopping are not empty formalities but serve important purposes. On the one hand, verification provides an assurance that the allegations in the pleading are true and correct based on personal knowledge, or authentic documents, and that the pleading is not filed to harass, cause unwarranted delay, or unnecessarily increase the cost of litigation, and that the factual allegations in the pleading are backed by evidentiary support or, will have sufficient evidentiary support after a reasonable opportunity for discovery. Meanwhile, the certificate against forum shopping ensures the orderly administration of justice by preventing litigants from pursuing simultaneous remedies in different fora.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Although both procedural requisites are imperative, jurisprudence treats the non-compliance with the rules on verification more liberally than those in forum shopping. This distinction is highlighted in <i>Altres v. Empleo</i>:<sup style="COLOR: RGB(255, 0, 0);">[50]</sup>&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1)</div></td><td width="95%"><div align="justify">A distinction must be made between non-compliance with the requirement on or submission of defective verification, and non-compliance with the requirement on or submission of defective certification against forum shopping.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">2)</div></td><td><div align="justify">As to verification, non-compliance therewith or a defect therein does not necessarily render the pleading fatally defective. The court may order its submission or correction or act on the pleading if the attending circumstances are such that strict compliance with the Rule may be dispensed with in order that the ends of justice may be served thereby.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">3)</div></td><td><div align="justify"><strong>Verification is deemed substantially complied with when one who has ample knowledge to swear to the truth of the allegations in the complaint or petition signs the verification, and when matters alleged in the petition have been made in good faith or are true and correct.</strong></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">4)</div></td><td><div align="justify">As to certification against forum shopping, non-compliance therewith or a defect therein, unlike in verification, is generally not curable by its subsequent submission or correction thereof, unless there is a need to relax the Rule on the grow1d of ["]substantial compliance["] or presence of ["]special circumstances or compelling reasons.["]</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">5)</div></td><td><div align="justify">The certification against forum shopping must be signed by all the plaintiffs or petitioners in a case; otherwise, those who did not sign will be dropped as parties to the case. Under reasonable or justifiable circumstances, however, as when all the plaintiffs or petitioners share a common interest and invoke a common cause of action or defense, the signature of only one of them in the certification against forum shopping substantially complies with the Rule.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">6)</div></td><td><div align="justify">Finally, the certification against forum shopping must be executed by the party-pleader, not by his counsel. If, however, for reasonable or justifiable reasons, the party-pleader is unable to sign, he must execute a Special Power of Attorney designating his counsel of record to sign on his counsel of record to sign on his behalf.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> ( Emphasis supplied)</div></td></tr></tbody></table></blockquote>Anent the verification requirements, <i>Altres</i> provides that "verification is deemed substantially complied with when one who has ample knowledge to swear to the truth of the allegations in the complaint or petition signs the verification, and when matters alleged in the petition have been made in good faith or are true and correct."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Altres</i> further underscores that non-compliance with the verification requirement may be excused and remedied by the re-submission or correction of the verification to serve the ends of justice.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>It bears stressing however that <i>Altres</i> was promulgated before the amendment of the Rules on Civil Procedure. Back then, Rule 7, Section 4 of the 1997 Rules of Civil Procedure required a simple assurance "that the affiant has read the pleading and that the allegations therein are true and correct of his [or her] knowledge and belief.:"<blockquote><b>Section 4. <i>Verification</i>.</b> â Except when otherwise specifically required by law or rule, pleadings need not be under oath, verified or accompai1ied by affidavit.<br><br>A pleading is verified by an affidavit that the affiant has read the pleading and that the allegations therein are true and correct of his knowledge and belief<br><br>A pleading required to be verified which contains a based on "information and belief," or upon "knowledge, information and belief," or lacks a proper verification, shall be treated as an unsigned pleading. (Emphasis supplied)</blockquote>In stark contrast, the amended Rules adds essential matters that affiants must attest to, such as that the pleading is not filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation; and that the factual allegations have evidentiary support or will have evidentiary support after a reasonable opportunity for discovery. In addition, as compared to the old Rules, the veracity of the allegations may likewise be assessed on the basis of authentic records, depending on the circumstances of the case. Evidently, with the advent of the new Rules, the simple assurance that the affiant has read the pleading and that the allegations therein are true and correct based on the affiant's personal knowledge may no longer suffice as substantial compliance.<br>&nbsp;<br>As applied to the case at bar, Catolos's affirmance that he has read the Petition for <i>Certiorari</i> and that the contents thereof are true and correct, of his own personal knowledge and on the basis of authentic documents/records<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> may no longer suffice as substantial compliance. It bears noting that the Petition for <i>Certiorari</i> dated September 17, 2020, was filed after the amendment of the Rules of Civil Procedure. Allowing a substantial compliance solely on the assurance that the allegations in the pleading are true and correct based on the affiant's personal knowledge will render inutile the amendments in the Rules of Civil Procedure and the Court's attempts to ensure that pleadings are not used as instruments of injustice to harass or burden litigants, delay cases, or trifle with court processes.<br><br>Concededly, non-compliance or a defect in the verification does not automatically render the pleading fatally defective. In fact, the court may order the correction of the verification to better serve the ends of justice.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Unfortunately, however, the CA, instead of giving Laverne Realty the chance to rectify its defective Verification, simply glossed over such flaw.<br><br>Harping on another procedural defect in the Petition for <i>Certiorari</i>, the spouses Capistrano question the absence of a specific authority vested on Catolos to sign the Certification of Non-Forum Shopping.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> In its defense, Laverne Realty retorts that the Secretary's Certificate confirms that Catolos is vested with the authority to "sign and represent the Corporation in the Petition for <i>Certiorari</i> filed before the Court of Appeals," and "to do any and all legal acts for the proper representation" of Laverne Realty.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>Notably, Catolos, being the President of Laverne Realty, is presumed authorized to sign the certification of non-forum shopping on behalf of said corporation.<br><br>In <i>Hutama-RSEA/Super Max Phils., J.V. v. KCD Builders Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> this Court declared that the president of the corporation is presumed to have authority to sign the certification of non-forum shopping:<blockquote>It is true that the power of a corporation to sue and be sued is lodged in the board of directors that exercises its corporate powers. However, it is settled â and we have so declared in numerous decisions â <b>that the president of a corporation may sign the verification and the certification of non-forum shopping</b>.<br>&nbsp;<br>In <i>Ateneo de Naga University v. Manalo</i>, [W]e held that the lone signature of the University President was sufficient to fulfill the verification requirement, because such officer had sufficient knowledge to swear to the truth of the allegations in the petition.<br><br>In <i>People's Aircargo and Warehousing Co., Inc. v. CA</i>, [W]e held that in the absence of a charter or by law provision to the contrary, the president of a corporation is presumed to have the authority to act within the domain of the general objectives of its business and within the scope of his or her usual duties. Moreover, even if a certain contract or undertaking is outside the usual powers of the president, the corporation's ratification of the contract or undertaking and the acceptance of benefits therefrom make the corporate president's actions binding on the corporation.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (Emphasis supplied; citations omitted)</blockquote>In the same vein, <i>Rural Bank of Candelaria, Inc. v. Banluta</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> affirmed the authority of the corporate president to sign the certification of non-forum shopping sans board resolution:<blockquote>In filing a suit, jurisprudence has allowed the president of a corporation to sign the verification and certification of non-forum shopping even without a board resolution as said officer is presumed to have sufficient knowledge to swear to the truth of the allegations in the complaint or petition. Hence, as correctly argued by petitioner, Manikan can file the petition and sign the certification and verification thereof for and on behalf of petitioner without the need of a board resolution.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> (Citations omitted)</blockquote>Remarkably, in <i>Cagayan Valley Drug Corporation v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> this Court enumerated the corporate officers who may sign the verification and certification of non-forum shopping even without a board resolution:<blockquote><b>Corporate powers exercised through board of directors</b><br><br>It must be borne in mind that Sec. 23, in relation to Sec. 25 of the Corporation Code, clearly enunciates that all corporate powers are exercised, all business conducted, and all properties controlled by the board of directors. A corporation has a separate and distinct personality from its directors and officers and can only exercise its corporate powers through the board of directors. Thus, it is clear that an individual corporate officer cannot solely exercise any corporate power pertaining to the corporation without authority from the board of directors. This has been our constant holding in cases instituted by a corporation.<br>&nbsp;<br>In a slew of cases, however, [We] have recognized the authority of some corporate officers to sign the verification and certification against forum shopping. In [<i>Mactan-Cebu International Airport Authority v. CA</i>], [W]e recognized the authority of a general manager or acting general manager to sign the verification and certificate against forum shopping; in [<i>Pfizer v. Galan</i>], [W]e upheld the validity of a verification signed by an ["]employment specialist["] who had not even presented any proof of her authority to represent the company; in <i>Novelty Philippines, Inc., v. CA</i>, [W]e ruled that a personnel officer who signed the petition but did not attach the authority from the company is authorized to sign the verification and non-forum shopping certificate; <b>and in Lepanto Consolidated Mining Company v. WMC Resources International Pty. Ltd, (<i>Lepanto</i>), we ruled that the Chairperson of the Board and President of the Company can sign the verification and certificate against non-forum shopping even without the submission of the board's authorization</b>.<br><br>In sum, we have held that the following officials or employees of the company can sign the verification and certification without need of a board resolution: (1) the Chairperson of the Board of Directors, (2) <b>the President of a corporation</b>, (3) the General Manager or Acting General Manager, (4) Personnel Officer, and (5) an Employment Specialist in a labor case.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> (Emphasis supplied; citations omitted)</blockquote>Hence, considering that Catolos is the President of Laverne Realty, there can be no doubt on his authority to sign the certification of non-forum shopping on behalf of said corporation.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The August 9, 2018 Order had become final and executory due to Laverne Realty's failure to timely file a motion for reconsideration against said Order</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It is an elementary rule of procedure that a party aggrieved by the ruling of a court may file a motion for reconsideration of the judgment or final resolution within 15 days from notice thereof, with proof of service on the adverse party.<br><br>As borne by the records, Laverne Realty, through one Perry Lozano, received the August 9, 2018 Order on August 22, 2018. Consequently, Laverne Realty had 15 days, or until September 6, 2018 within which to file its Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> However, it belatedly filed its Motion for Reconsideration on August 30, 2019.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br>&nbsp;<br>Escaping the cudgels of its procedural mishap, Laverne Realty denies that Perry Lozano is connected with Atty. Marfil's law firm. Likewise, it claims that Atty. Marfil discovered the August 9, 2018 Order in the RTC's files only on August 15, 2019. Thus, it adamantly insists that the 15-day period to file its motion for reconsideration should be reckoned from August 15, 2019.<br><br>This Court is not convinced.<br><br>Finding that lawyers have often failed to file pleadings on time due to claims of non-receipt of mail matters, this Court has time and again, admonished lawyers to devise a system for their prompt receipt of judicial notices and pleadings. Counsels are warned to create a system to ensure the receipt of all mail matters. Otherwise, if every shortcoming of a counsel, or the messengerial staff would be considered a ground to excuse a litigant's failure to comply with the Rules of Court, court proceedings would become indefinite, tentative, and subject to reopening at any time by the mere subterfuge of replacing counsel.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Rules on procedure should never depend on the singular convenience of a party.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>Save for its bare repudiation, Laverne Realty offers no evidence to support its disavowal of receipt. It did not proffer any proof to establish that Perry Lozano is not connected with the firm. Besides, it is unacceptable that Atty. Marfil waited for one year to check on the status of the case.<br><br>To stress, the negligence of a counsel binds the client as any act performed by a counsel within the scope of his or her general or implied authority is regarded as an act of his or her client. Hence, the mistake or negligence that results in the rendition of an unfavorable judgment against the client binds the latter. Although the rule is subject to exceptions as where the reckless or gross negligence of the counsel deprives the client of due process of law or results in the outright deprivation of the client's liberty or property, or where the interest of justice so requires,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> none of these circumstances are present.<br><br>In any event, Laverne Realty is equally blameworthy. Inasmuch as counsels are duty-bound to faithfully handle their clients' cases, clients are likewise urged to be diligent in monitoring the status of their cases. They must keep in touch with their counsel to receive constant updates and sporadically inquire about the status and progress of their case. They cannot idly sit back, relax, and await the outcome of their case. Similarly, it is their responsibility, together with their counsel, to devise a system for the receipt of intended mail.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> After all, the finality of a decision is a jurisdictional event that cannot be made to depend on the convenience of parties.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>Plainly, Laverne Realty's lackadaisical attitude is inexcusable. Consequently, due to its failure to timely file a motion for reconsideration, the August 9, 2018 Order, which set aside the writ of possession and sheriffs notice to vacate, has become final and executory, and may no longer be questioned.<br><br>Worse, in an attempt to escape detection, Laverne Realty simply assailed in its Petition for <i>Certiorari</i>, the March 11, 2020 Order, which denied its Motion for Reconsideration of the August 9, 2018 Order.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Oddly, it did not question the main resolution. Further concealing its mishap, Laverne Realty did not include a statement of material dates showing when the notice of the final order was received, when it filed a motion for reconsideration against the same, and when it received the notice of the denial thereof, in stark violation of Rule 46, Section 3 of the Rules of Court. This omission in itself would have warranted the outright denial of the Petition for <i>Certiorari</i>. It is unfortunate that the CA disregarded this ruse.<br><br>Admittedly, in special instances, this Court has relaxed the rigid application of the Rules to serve the ends of justice. However, liberality may not be invoked in the face of a wanton disregard of the Rules thereby causing needless delays.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Utter disregard of the Rules cannot just be rationalized by harking on the policy of liberal construction.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> This Court finds no compelling reason to extend a modicum of leniency in favor of Laverne Realty.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The sale of the subject property and the consequent issuance of the writ of possession are null and void</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Significantly, strict adherence to the statutes governing tax sales is imperative since the sale of land at a public auction for tax delinquency is in derogation of the property and due process rights of the registered owner.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> As such, to ensure the protection of taxpayers and to allay any suspicion of collusion between the buyer and the public officials, the LGC provides a stringent manner in which tax sales shall be conducted. Particularly, Section 258 thereof mandates that the notice of levy on real property must be sent to the delinquent owner of the real property or to the persons with legal interest therein:<blockquote><b>Section 258.</b> <i>Levy on Real Property</i>. â After the expiration of the time required to pay the basic real property tax or any other tax levied under this Title, real property subject to such tax may be levied upon through the issuance of a warrant on or before, or simultaneously with, the institution of the civil action for the collection of the delinquent tax. The provincial or city treasurer, or a treasurer of a municipality within the Metropolitan Manila Area, as the case may be, when issuing a warrant of levy shall prepare a duly authenticated certificate showing the name of the delinquent owner of the property or person having legal interest therein, the description of the property, the amount of the tax due and the interest thereon. The warrant shall operate with the force of a legal execution throughout the province, city or a municipality, within the Metropolitan Manila Area. <b>The warrant shall be mailed to or served upon the delinquent owner of the real property or person having legal interest therein, or in case he is out of the country or cannot be located, the administrator or occupant of the property.</b> At the same time, written notice of the levy with the attached warrant shall be mailed to or served upon the assessor and the Registrar of Deeds of the province, city or municipality within the Metropolitan Manila Area where the property is located, who shall annotate the levy on the tax declaration and certificate of title of the property, respectively.<br><br>The levying officer shall submit a report on the levy to the sanggunian concerned within ten (10) days after receipt of the warrant by the owner of the prope1iy or person having legal interest therein. (Emphasis supplied)</blockquote>Relatedly, jurisprudence underscores that tax delinquency sales are <i>in personam</i> proceedings that require prior actual notice to the delinquent taxpayer, in addition to the requirements of advertisement and publication. The burden of proving compliance with the validity of the proceedings leading up to the tax delinquency sale is incumbent upon the buyer or the winning bidder.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> Otherwise, the sale of the real property is invalid and will not make its purchaser the new owner.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>In this case, the Statement of Delinquency, Final Notice of Delinquency, and warrant of Levy were sent to No. 98 Villareal, Gulod, Quezon City, when the correct address of the spouses Capistrano is No. 89 Villareal, Gulod, Quezon City, as clearly indicated in TCT No. 18395 and in Tax Declaration No. D-04-0111581.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Lamentably, this seemingly innocuous typographical error robbed the spouses Capistrano of their property without due process of law.<br><br>Interestingly, this is not the first case wherein the notice and warrant of levy were sent to the wn.mg address. In <i>Genato Investments, Inc. v. Barrientos</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> a case that also involved Laverne Realty, the notice and warrant of levy were sent to an inexistent office. Such mishap led this Court to rule that Laverne Realty, as the purchaser in the public auction for tax delinquency, did not acquire any valid right to petition the trial court for the cancellation of the owner's title and take possession of the latter's property considering, among others, that the owner was never made aware of the levy and delinquency sale of its property by the city.<br><br>In <i>Cruz and Heirs of Cruz v. City of Makati</i>,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> another unfortunate case involving Laverne Realty, the notice of billing statements was sent to the wrong address (Unit 1407 instead of Unit 407), and the owners did not receive a warrant of levy. This Court characterized such scheme as a "barefaced robbery" and stringently warned against unscrupulous practices of sending notices of levy to the wrong address:<blockquote>The Court must protect private property owners from undue application of the law authorizing the levy and sale of their properties for non-payment of the real property tax. This power of local government units is prone to great abuse, in that owners of valuable real property are liable to lose them on account of irregularities committed by these local government units or officials, done intentionally with the collusion of third parties and with the deliberate unscrupulous intent to appropriate these valuable properties for themselves and profit therefrom. These unscrupulous parties can commit a simple, seemingly irrelevant technicality such as deliberately sending billing statements, notices of delinquency and levy to wrong addresses under the guise of typographical lapses, as what happened here and in the <i>Genato Investments</i> case and then proceed with the levy and auction sale of these valuable properties without the knowledge and consent of the owners. Before the owners realize it, their precious properties have already been confiscated and sold by the local government units or officials to so-called "innocent third parties" who are in fact their cohorts in the unscrupulous scheme. This is barefaced robbery that the Court cannot sanction.<br><br>Having disposed of the case in the foregoing manner, the Court finds unnecessary to tackle the procedural issues and the lapses committed by petitioners in the prosecution of their case. The public interest involved here mandates that technicalities should take a backseat to the substantive issues. There is a grave danger that taxpayers may unwittingly lose their real properties to unscrupulous local government units, officials, or private individuals or entities as a result of an irregular application of the LGC provisions authorizing the levy and delinquency sale of real property for non-payment of the real property tax. This is a reality that cannot be ignored. For this reason, the Court must excuse petitioners for their procedural lapses, as it must address instead the issue of irregular conduct of levies and delinquency sales of real properties for non-payment of the real property tax, which is alarming considering that of the two cases that this Court is made aware of, there appears to be one common denominator, and that is the respondent herein, Laverne Realty and Development Corporation. Needless to state, petitioners are liable to lose their property without due process of law to Laverne which was previously involved in an irregular sale conducted under similar circumstances.<br><br>The Court constantly warns of the possible abuse of this taxing power. The premise is that no presumption of regularity exists in any administrative action which results in depriving a taxpayer of his property; due process of law must be followed in tax proceedings, because a sale of land for tax delinquency is in derogation of private property and the registered owner's constitutional rights.<br><br>The public auction of land to satisfy delinquency in the payment of real estate tax derogates or impinges on property rights and due process. Thus, the steps prescribed by law are mandatory and must be strictly followed; if not, the sale of the real property is invalid and does not make its purchaser the new owner. Strict adherence to the statutes governing tax sales is imperative not only for the protection of the taxpayers, but also to allay any possible suspicion of collusion between the buyer and the public officials called upon to enforce the laws.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Citations omitted)</blockquote>In <i>Cruz</i>, the absence of proof that actual notice was sent to the delinquent taxpayer, among other violations of the LGC, rendered the sale null and void even though it was preceded by proper advertisement or publication.<br><br>Adopting a similar strict stance, in <i>Filinvest Development Corporation v. Del Rosario</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> this Court ruled that the failure to comply with the posting requirements and the absence of actual receipt of the various notices and warrant of levy by the registered owner of the property or a person having legal interest therein will render the tax sale null and void. Consequently, the purchaser in such null and void tax sale cannot be considered the new owner of the property, and thus, shall not be issued a new transfer certificate of title in his or her name.<br><br>On this score, it bears stressing that the December 5, 2011 Decision of the RTC confirming the Final Bill of Sale in favor of Laverne Realty is void. It cannot be gainsaid that the spouses Capistrano were never summoned or impleaded in the said case, in violation of their right to due process. Following jurisprudential tenets, such as that laid in <i>Genato Investments, Inc.</i>, Laverne Realty, as the purchaser in the public auction for tax delinquency, never acquired any valid right to petition the trial court for the cancellation of the owner's title and take possession of the spouses Capistrano's property. Thus, the doctrine of immutability of judgments may not serve as an excuse to enforce the December 5, 2011 Decision, which is clearly void. In view of the nullification of the December 5, 2011 Decision, the Final Bill of Sale executed on October 7, 2008 as well as TCT No. 004-2015011233 issued in favor of Laverne Realty must perforce be cancelled.<br><br>It must likewise be noted that the August 9, 2018<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> and March 11, 2020<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> RTC Orders that granted the spouses Capistrano's Urgent Omnibus Motion to Quash the Writ of Possession and Sheriff's Notice to Vacate issued in favor of Laverne Realty fail to expressly declare the September 27, 2007 public auction sale void. Thus, this Court clarifies that said auction sale is null and void for being conducted in violation of the stringent requirements of the LGC. However, the nullification of the auction sale shall be without prejudice to the right of the City Treasurer of Quezon City to collect the unpaid realty taxes of the spouses Capistrano that have accrued during the pendency of this case. Meanwhile. the amount paid by Laverne Realty in the auction sale must likewise be returned to it, lest the local government be unjustly enriched.<br><br>Indeed, this Court will not turn a blind eye against schemesâcommitted wittingly or unwittinglyâthat transgress the provisions of the LGC precisely enacted to protect persons from being deprived of their properties without due process of law. The records clearly show that the proper address of the spouses Capistrano was indicated in TCT No. 18395 and in Tax Declaration No. D-04-0111581. All that was left to do was to accurately copy the same and ensure that the required notices relative to the tax sale were sent to the proper address. Failing in this regard, the sale of the subject property and the consequent issuance of the writ of possession in favor of Laverne Realty are declared null and void.<br><br>All told, the CA erred in nullifying the August 9, 2018 Order of the RTC quashing the Writ of Possession and Sheriff's Notice to Vacate for a multitude of reasons. <i>First</i>, the Petition for <i>Certiorari</i> should not have been given due course for having a defective verification and for failing to state the material dates in the case. <i>Second</i>, the August 9, 2018 Order was already final and executory due to Laverne Realty's failure to timely seek a reconsideration thereof. <i>Third</i> and most importantly, the tax sale is null and void since the spouses Capistrano were not notified of the final notice of delinquency and warrant of levy, thereby depriving them of their property without due process of law. Perforce, the writ of possession in favor of Laverne Realty must be quashed. Ultimately, this Court will not be duped by devious attempts to resuscitate cases that have long attained finality. Neither will it allow innocent owners to be robbed of their property without due process of law.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The June 14, 2021 Decision and June 6, 2022 Resolution of the Court of Appeals in CA-G.R. SP No. 166098 are <b>REVERSED</b> and <b>SET ASIDE</b>.<br><br>The September 27, 2007 tax delinquency sale covering the property registered under Transfer Certificate of Title No. 18395 in the name of Renato Capistrano, married to Ester Capistrano, is hereby declared <b>VOID</b>. Likewise, the December 5, 2011 Decision of Branch 224, Regional Trial Court of Quezon City is declared <b>VOID</b>, along with the (i) the Final Bill of Sale executed on October 7, 2008 in favor of Laverne Realty and Development Corporation; and (ii) Transfer Certificate of Title No. 004-2015011233 in the name of Laverne Realty and Development Corporation.<br><br>The City Treasure of Quezon City is <b>DIRECTED</b> to <b>RETURN</b> to Laverne Realty and Development Corporation the amount of PHP 500,000.00, with legal interest of 6% per annum from the date of finality of this Decision until full payment.<br><br>The foregoing is without prejudice to the right of the City Treasurer of Quezon City to avail itself of all the remedies available to it for the collection of any unpaid real estate tax on the subject property which may have accrued during the pendency of this case.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting</i>, and <i>Dimaampao, JJ.</i>, concur.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 146-154. Penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Ramon A. Cruz and Alfredo D. Ampuan of the Twelfth Division, Court of Appeals, Manila. <i>Id.</i> at 170-171. Penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Ramon A. Cruz and Alfredo D. Ampuan of the Former Twelfth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 170-171. Penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Ramon A. Cruz and Alfredo D. Ampuan of the Former Twelfth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 70-71. Penned by Judge Catherine P. Manodon.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 90-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 12 &amp; 147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 36 &amp; 147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 35-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> PRESIDENTIAL DECREE No. 1529, Sec. 75.<br><br>Section 75. <i>Application for new certificate upon expiration of redemption period</i>. Upon the expiration of the time, if any, allowed by law for redemption after registered land has been sold on execution taken or sold for the enforcement of a lien of any description, except a mortgage lien, the purchaser at such sale or anyone claiming under him may petition the court for the entry of a new certificate of title to him.<br><br>Before the entry of a new certificate of title, the registered owner may pursue all legal and equitable remedies to impeach or annul such proceedings.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 147 &amp; 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 39-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 44-47. Penned by Judge Tita Marilyn Payoyo-Villordon.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 46-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 49-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 12 &amp; 148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 72-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 90-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 93-121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 146.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 146-154.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 156-168.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 170-171.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 11-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 26-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 181.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 186.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>China Banking Corporation v. St. Francis Square Realty Corporation</b>, 926 Phil. 614, 639 (2022) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Reyes v. Rural Bunk of San Rafael (Bulacan) Inc., et al.</b>, 921 Phil. 670, 680 (2022) [Per J. Hernando, Second Division], <i>citing</i> <b>Tible &amp; Tible Company, Inc. v. Royal Savings and Loan Association</b>, 574 Phil. 20, 37 (2008) [Per J. Reyes, R.T., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Tendenilla v. Purisima</b>, 916 Phil. 431, 443 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> 594 Phil. 246 (2008) [Per J. Carpio Morales,&nbsp;<i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 261-262.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 181.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Altres v. Empleo</b>, 594 Phil. 246 (2008) [Per J. Carpio Morales, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i>, p. 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 628 Phil. 52 (2010) [Per J. Nachura, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 921 Phil. 585 (2022) [Per J. Gaerlan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 593-594.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 568 Phil. 572 (2008) [Per J. Velasco. Ir., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 580-581.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, p. 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Estrella, et al. Tri-City Landholdings, Inc.</b>, 936 Phil. 338, 408-409 (2023) [Per J. Lopez, J., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Government of the Kingdom of Belgium v. Court of Appeals</b>, 574 Phil. 380, 392-393 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Estrella, et al. v. Tri-City Landholdings, Inc.</b>, 936 Phil. 338, 408 (2023) [Per J. Lopez, J., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Senit v. People</b>, 776 Phil. 372, 382-383 (2016) [Per J. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Rivera v. Court of Appeals</b>, 568 Phil. 401, 419 (2008) [Per J. Azcuna, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Rollo</i>, pp. 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Government of the Kingdom of Belgium v. Court of Appeals</b>, 574 Phil. 380, 392 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>LustaÃ±a v. Jimena-Lazo</b>, 504 Phil. 682, 684 (2005) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Filinvest Development Corporation v. Nilo Del Rosario</b>, 910 Phil. 781, 794 (2021) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Caballero v. Laverne Realty and Development Corporation, et al.</b>, 946 Phil. 596, 612 (2023) [Per J. Caguioa, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 602.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Rollo</i>, p. 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 739 Phil. 642 (2014) [Per J. Perez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> 840 Phil. 92 (2018) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 109-110.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 910 Phil. 781 (2021) [Per J. Carandang, Third Division].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 90-92.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

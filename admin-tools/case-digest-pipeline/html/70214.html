@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259885 - IONICS EMS, INC., PETITIONER, VS. HON. ARTURO V. NOBLEJAS [IN HIS OFFICIAL CAPACITY AS PRESIDING JUDGE OF THE REGIONAL TRIAL COURT OF CALAMBA CITY (BRANCH 105)] AND AIR LIQUIDE PHILIPPINES, INC., RESPONDENTS. D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70214' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259885, August 27, 2025 ]</H2>
+			<H3>IONICS EMS, INC., PETITIONER, VS. HON. ARTURO V. NOBLEJAS [IN HIS OFFICIAL CAPACITY AS PRESIDING JUDGE OF THE REGIONAL TRIAL COURT OF CALAMBA CITY (BRANCH 105)] AND AIR LIQUIDE PHILIPPINES, INC., RESPONDENTS.<BR><BR> D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Ionics EMS Inc. (petitioner) assailing the Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated March 21, 2022, of Branch 105, Regional Trial Court (RTC), Calamba City in S.P. Case No. 1786-2021-C. The RTC designated Atty. Danilo C. Cunanan (Atty. Cunanan) as the sole arbitrator for the case.</p><p align="center"> <i>The Antecedents</i> </p><p> The case stemmed from a Petition<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> for arbitration and designation of arbitrator filed by Air Liquide Philippines Inc. (ALPI) against petitioner.</p><p> ALPI alleged that it entered into an Agreement<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> with petitioner to supply, sell, and deliver liquid nitrogen for a period of five years, effective June 30, 2011 (Agreement). It is subject to automatic renewal, unless terminated by either party upon a written notice six months prior to the intended termination.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The Agreement also provided an arbitration clause pursuant to Republic Act No. 876, stating that "in case of any dispute or difference arising between ALPI and [petitioner] as to the construction of the contract, or the rights, duties and obligations of either party thereunder..., every such dispute or matter in difference shall be settled by a single arbitrator."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> Petitioner did not send a written notice to terminate at least six months prior to the expiry date on May 12, 2016. Thus, the Agreement was deemed automatically renewed for another five years, or until July 14, 2021.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> On November 21, 2017, petitioner sent ALPI a Notice of Contract Termination, which the latter opposed. On July 30, 2018, petitioner reiterated its intentions to terminate the Agreement.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> ALPI then served a Demand Letter dated December 14, 2020, for the payment of PHP 2,424,000.00 representing the price of the unconsumed liquid nitrogen with the monthly fee covering November 2018 to December 2019. The dispute remained unresolved by the parties.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Accordingly, ALPI served upon petitioner a Demand for Arbitration dated May 4, 2021.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Petitioner did not respond; thus, ALPI filed with the RTC a Petition<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> to refer the case to arbitration.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p align="center"> <i>The Ruling of the RTC</i> </p><p> In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated March 21, 2022, the RTC granted the Petition and designated Atty. Cunanan as the sole arbitrator. The dispositive portion of the Resolution states: </p><blockquote> <p> WHEREFORE, premises considered, the [P]etition is GRANTED. Pursuant to Section 8 of [Republic Act] No. 876, this Court DESIGNATES ATTY. DANILO C. CUNANAN from the roster of trained arbitrators of the Philippine Dispute Resolution Center, Inc. as the sole arbitrator for the case. </p> <p> Accordingly, the parties are DIRECTED to appear before Atty. Cunanan for arbitration proceedings pursuant to their arbitration agreement. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p> </blockquote> <p> The RTC noted that petitioner refused to nominate its desired arbitrator while ALPI failed to nominate one. Thus, it applied Section 8(c)<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> of Republic Act No. 876<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and appointed Atty. Cunanan, an arbitrator from the Philippine Dispute Resolution Center, Inc. (PDRC), as the sole arbitrator for the case.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> Hence, petitioner filed the instant Petition before the Court. </p><p align="center"> <i>The Petitioner's Arguments</i> </p><p> Petitioner argues in the main that the appointing authority in an <em>ad hoc</em> arbitration is the president of the Integrated Bar of the Philippines (IBP), and not the Regional Trial Court, following Rule 6.1 of the Special Rules of Court on Alternative Dispute Resolution (Special ADR Rules), which the Court approved in A.M. No. 07-11-08-SC.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> Petitioner likewise prays for the issuance of a temporary restraining order (TRO) and/or a <i>status quo</i> order to enjoin the implementation of the assailed Resolution.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p><p> Notably, in an Order<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated June 15, 2022, the Court issued a TRO against the assailed RTC Resolution. </p><p align="center"> <i>ALPI's Arguments</i> </p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> ALPI asserts that petitioner's filing of a petition for <i>certiorari</i> before the Court is a wrong remedy, being a prohibited pleading and is in violation of the principle of hierarchy of courts.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> ALPI also avers that Rules 4.6 and 6.9 of the Special ADR Rules expressly prohibit the filing of a motion for reconsideration, an appeal, or a petition for <i>certiorari</i> to assail a court order appointing an arbitrator.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Citing <i>Cagayan de Oro Water District v. Judge Pasal</i>,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> ALPI contends that the proper remedy for the parties is to proceed with the arbitration and let the arbitrator decide any issues regarding its own jurisdiction, including the validity of the appointment of the arbitrator.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> Moreover, ALPI moves to lift the TRO issued in favor of petitioner, arguing that the circumstances warranting it are absent.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p align="center"> <i>The Issues</i> </p><p> The issues to be resolved are as follows: (1) whether the instant Petition for <i>Certiorari</i> before the Court is the proper remedy to assail the authority of the RTC to appoint an arbitrator; and (2) whether the RTC committed grave abuse of discretion when it appointed Atty. Cunanan as the arbitrator. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The Petition has no merit. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The remedy of certiorari is improper to assail the authority of the RTC to appoint an arbitrator</i> </div></td> </tr> </tbody></table> <p>Rule 6.9 of A.M. No. 017-11-08-SC, or the Special ADR Rules, states: </p><blockquote> <p> RULE 6.9. <i>Relief against court action</i>. â <i>If the court appoints an arbitrator, the order appointing an arbitrator shall be immediately executory and shall not be the subject of </i>a motion for reconsideration, appeal or<i> certiorari</i>. An order of the court denying the petition for appointment of an arbitrator may, however, be the subject of a motion for reconsideration, appeal or certiorari. (Emphasis supplied) </p> </blockquote> <p> Notwithstanding the express prohibition on the filing of a petition for <i>certiorari</i> under the Special ADR Rules, petitioner harps on the existence of peculiar circumstances that warrant an exception to the strict application of the rules of procedure, particularly in the case of "procedural voids." </p><p> The Court disagrees. </p><p> Petitioner is mistaken to rely on <i>Go v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> where the Court discussed the concept of procedural void. </p><p> In <i>Go</i>, the MTCC indefinitely suspended the proceedings in an ejectment case. To assail such interlocutory order of suspension, to which the remedy of appeal is unavailable, therein respondent filed a petition for <i>certiorari</i>, a prohibited pleading under Section 19(g) of the Revised Rules on Summary Procedure, before the RTC. The Court upheld the propriety of such pleading; thus: </p><blockquote> <p> Based on the foregoing, <i>private respondent was literally caught</i> "between Scylla and Charybdis" <i>in the procedural void</i> observed by the Court of Appeals and the RTC. Under these extraordinary circumstances, <i>the Court is constrained to provide it with a remedy</i> consistent with the objective of speedy resolution of cases. </p> <p> . . . . </p> <p> Private respondent herein filed an appeal to question the interlocutory order. This recourse was upheld by the RTC and the CA in order to fill a "procedural void." We affirm the ruling of both the trial and the Court of Appeals. We hold, however, that the appeal should instead be treated as a petition for certiorari under Rule 65. An appeal ordinarily entails a longer process which negates an expeditious resolution. </p> <p> Petitioners posit that if such "procedural void" exists, no remedy is sanctioned by law, and the courts thus have no power to provide one. Petitioners aver that the defect lies in the law and can only be remedied by the legislature. </p> <p> This argument is unacceptable. <i>First</i>, at issue in this case is not a law passed by the legislature, but procedural rules promulgated by the Supreme Court. Section 5, Article VIII of the Constitution, categorically allows the Court to lay down rules concerning, among others, procedure in all courts. <i>Second, courts are</i> "<i>empowered, even obligated, to suspend the operation of the rules</i>," when a rule "deserts its proper office as an aid to justice and becomes its great hindrance and chief enemy such that <i>rigid application thereof frustrates rather than promotes substantial justice</i>." Thus, it has been held that "the <i>power of this Court to suspend its own rules or to except a particular case from [their] operations whenever the purposes of justice require it, cannot be questioned</i>."<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> In the case, the alleged procedural void does not exist. </p><p> As ALPI correctly argued, the remedy of petitioner is to allow the arbitration to proceed and let the arbitrator decide any issues regarding its own jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> In this regard, the competence-competence doctrine has, time and again, been upheld by the Court as a fundamental principle of arbitration. In <i>Cagayan de Oro Water District v. Judge Pasal</i>,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> the Court held: </p><blockquote> <p> Under the <i>principle of competence-competence</i>, the <i>arbitral tribunal has the first opportunity to rule on whether it has jurisdiction to decide a dispute submitted for its resolution</i>. In other words, whether the trial court acted in grave abuse of discretion or otherwise grievously erred in directing COWD and Rio Verde to submit to arbitration is for the arbitral tribunal itself to determine, not the Court.</p> <p> . . . . </p> <p> To repeat, <i>only after the arbitral tribunal shall have already ruled on the issue of jurisdiction may the aggrieved party seek judicial recourse against submitting itself to the process of arbitration</i>. Leapfrogging the judicial process in clear defiance of the Special Rules on ADR violates the principle of competence-competence and the State policy to actively promote the use of alternative modes of dispute resolution.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> In other words, petitioner should have first allowed the court-appointed arbitrator to rule on its own jurisdiction before seeking judicial recourse. </p><p> <i>Nonetheless</i>, despite the impropriety of the Petition, the Court finds that in the interest of judicial economy, sufficient reasons compel the Court to take cognizance of the Petition, as an exception to the principle of hierarchy of courts. </p><p> In <i>Gacad v. Judge Corpuz</i>,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the Court elucidated on the principle of hierarchy of courts in this wise: </p><blockquote> <p> We stress that the <i>direct filing of this petition in this Court is in disregard of the doctrine of hierarchy of courts</i>. Although the Court has concurrent jurisdiction with the CA in issuing the writ of <i>certiorari, direct resort is allowed only when there are special, extraordinary, or compelling reasons that justify the same</i>. The Court enforces the observance of the hierarchy of courts in order to free itself from unnecessary, frivolous, and impertinent cases and, thus, afford time for it to deal with the more fundamental and more essential tasks that the Constitution has assigned to it. Hence, absent any special, important, or compelling reason herein, petitioner's failure to observe the hierarchy of courts warrants the dismissal of his petition. </p> <p> . . . . </p> <p> However, the doctrine on hierarchy of courts is not an ironclad rule. This <i>Court has entertained direct recourse to this Court as an exception to the rule in exceptional cases as when there are compelling reasons</i> clearly set forth in the petition, or when what is raised is a pure question of law. The Court has likewise enumerated the other specific instances when direct resort to the Court may be allowed, to wit: (a) when there are genuine issues of constitutionality that must be addressed at the most immediate time; (b) when the issues involved are of transcendental importance; (c) <i>cases of first impression</i>; (d) when the constitutional issues raised are best decided by this Court; (e) when the time element presented in this case cannot be ignored; (f) when the petition reviews the act of a constitutional organ; (g) when there is <i>no other plain, speedy, and adequate remedy in the ordinary course of law</i>; (h) when public welfare and the advancement of public policy so dictates, or when <i>demanded by the broader interest of justice</i>; (i) when the orders complained of are patent nullities; and (j) when appeal is considered as clearly an inappropriate remedy.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis supplied; citation omitted) </p> </blockquote> <p> Similarly, the Court has recognized<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the applicability of this principle to cases within the ambit of arbitration. Further, the Court finds that the issue raised is a question of first impression. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>No grave abuse of discretion in the order of the RTC appointing Atty. Cunanan as the arbitrator</i> </div></td> </tr> </tbody></table> <p>Even on the merits, the Petition remains infirm. </p><p> A resolution of the issue regarding the RTC's authority to appoint an arbitrator entails a review of the seemingly inconsistent provisions of Republic Act No. 876 (Arbitration Law) and Republic Act No. 9285, or the "Alternative Dispute Resolution Act" (ADR Act). </p><p> Section 8 of the Arbitration Law reads: </p><blockquote> <p> SECTION 8. <i>Appointment of arbitrators</i>. â If, in the contract for arbitration or in the submission described in section two, provision is made for a method of naming or appointing an arbitrator or arbitrators, such method shall be followed; <i>but if no method be provided therein the Court of First Instance shall designate an arbitrator or arbitrators</i>.</p> <p> The Court of First Instance shall appoint an arbitrator or arbitrators, as the case may be, in the following instances: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">If the parties to the contract or submission are unable to agree upon a single arbitrator; or</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td><div align="justify">If an arbitrator appointed by the parties is unwilling or unable to serve, and his successor has not been appointed in the manner in which he was appointed; or</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td><div align="justify">If either party to the contract fails or refuses to name his arbitrator within fifteen days after receipt of the demand for arbitration; or</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(d)</div></td> <td> <div align="justify">If the arbitrators appointed by each party to the contract, or appointed by one party to the contract and by the proper Court, shall fail to agree upon or to select the third arbitrator.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(e)</div></td> <td><div align="justify">The court shall, in its discretion appoint one or three arbitrators, according to the importance of the controversy involved in any of the preceding cases in which the agreement is silent as to the number of arbitrators.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(f)</div></td> <td><div align="justify">Arbitrators appointed under this section shall either accept or decline their appointments within seven days of the receipt of their appointments. In case of declination or the failure of an arbitrator or arbitrators to duly accept their appointments the parties or the court, as the case may be, shall proceed to appoint a substitute or substitutes for the arbitrator or arbitrators who decline or failed to accept his or their appointments. (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> </blockquote> <p>On the other hand, Section 26 of the ADR Act reads: </p> <blockquote> <p> SECTION 26. <i>Meaning of "Appointing Authority."</i> â "Appointing Authority" as used in the Model Law shall mean the person or institution named in the arbitration agreement as the appointing authority; or the regular arbitration institution under whose rules the arbitration is agreed to be conducted. <i>Where the parties have agreed to submit their dispute to institutional arbitration rules</i>, and unless they have agreed to a different procedure, they shall be <i>deemed to have agreed to procedure under such arbitration rules</i> for the selection and appointment of arbitrators. <i>In ad hoc arbitration</i>, the <i>default appointment of an arbitrator shall be made by the National President of the Integrated Bar of the Philippines (IBP) or his duly authorized representative</i>. (Emphasis supplied) </p> </blockquote> <p> In the instant case, the Agreement<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> did not provide for the method of appointment of an arbitrator. Section 11.5 of the Agreement of the parties reads: </p><blockquote> <p> 11.5. In the case of any dispute or difference arising between ALPI and the Customer as to the construction of the contract or the rights, duties and obligations of either party thereunder or any matter arising out or concerning the same, every such dispute or matter in difference shall be settled by a single arbitrator. The <i>arbitrator shall be in accordance with Republic Act No. 876 otherwise known as "the Arbitration Law"</i>. The arbitration proceedings including the making of the award shall take place in Metro Manila, Philippines.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (Emphasis supplied) </p> </blockquote> <p> Parenthetically, it is well-settled that an arbitration agreement is in the nature of a contract. As such, the agreement of the parties which is not contrary to law, morals, public order, and public policy must be respected, and not intruded upon nor changed by the courts. In the case of <i>Dupasquier v. Ascendas (Philippines) Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the Court gave an elaborate instruction on the nature of arbitration agreements; thus: </p><blockquote> <p> It must be remembered that <i>arbitration is a matter of contract</i> and the parties cannot be obliged to submit any dispute to arbitration, in the absence of their consent to submit thereto. The parties may lay their rights and liabilities in relation to the parties' resort to arbitration in the contract. As any other agreements, the <i>parties have freedom to establish such stipulations, clauses, terms and conditions as they may deem convenient, provided they are not contrary to law, morals, good customs, public order and public policy</i>. The parties may, therefore, agree as to the submission of the disputes to arbitration, the forum of arbitration, the subject of arbitration and the termination of their arbitration agreement.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> Equally settled is that the obligations arising from contracts have the force of law between the parties and should be complied with in good faith.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Verily, as the parties specifically stipulated that Republic Act No. 876 is to govern their arbitration agreement, they are bound by their agreement and must comply with it in good faith. </p><p> In insisting on the applicability of Republic Act No. 9285, petitioner argues that the procedure on the appointment of an arbitrator under Republic Act No. 876 has been superseded by Republic Act No. 9285.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> It further argues that since the demand of ALPI to arbitrate was made on May 4, 2021, it is the new and later law which must govern their agreement.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></p><p> However, a plain reading of Republic Act No. 9285 shows otherwise. </p><p> Admittedly, the repealing clause of Republic Act No. 9285 reads: </p><blockquote> <p> SECTION 54. <i>Repealing Clause</i>. â All laws, decrees, executive orders, rules and regulations which are inconsistent with the provisions of this Act are hereby repealed, amended or modified accordingly. </p> </blockquote> <p> Nevertheless, Section 32 thereof expressly states: </p><blockquote> <p> SECTION 32. <i>Law Governing Domestic Arbitration</i>. â <i>Domestic arbitration shall continue to be governed by Republic Act No. 876</i>, otherwise known as "The Arbitration Law" as amended by this Chapter. The term "domestic arbitration" as used herein shall mean an arbitration that is not international as defined in Article (3) of the Model Law. </p> </blockquote> <p> In <i>Mecano v. Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> the Court underscored the oft-repeated principle in statutory construction that repeals by implication are not favored; thus: </p><blockquote> <p> Lastly, it is a <i>well-settled rule of statutory construction that repeals of statutes by implication are not favored</i>. The presumption is against inconsistency and repugnancy for the legislature is presumed to know the existing laws on the subject and not to have enacted inconsistent or conflicting statutes. </p> <p> This Court, in a case, explains the principle in detail as follows: "<i>Repeals by implication are not favored, and will not be decreed unless it is manifest that the legislature so intended</i>. As laws are presumed to be passed with deliberation with full knowledge of all existing ones on the subject, it is but reasonable to conclude that <i>in passing a statute it was not intended to interfere with or abrogate any former law relating to some matter</i>, unless the repugnancy between the two is not only irreconcilable, but also clear and convincing, and flowing necessarily from the language used, unless the later act fully embraces the subject matter of the earlier, or unless the reason for the earlier act is beyond peradventure renewed. Hence, <i>every effort must be used to make all acts stand and if, by any reasonable construction, they can be reconciled, the later act will not operate as a repeal</i> of the earlier.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> Here, the intention of the legislature not to repeal Republic Act No. 876 can easily be inferred by the express provision of Republic Act No. 9285 which acknowledges the continued application of the former law. </p><p> Moreover, this inconsistency may further be answered by a resolution of the effect brought about when a law, cited in the agreement or contract of the parties, is later repealed or amended. </p><p> The Court has previously recognized that decisions of American courts on statutory construction have persuasive value. Thus, in a case, the Court held that "a statute ought not to receive a construction making it act retroactively, unless the words are so clear, strong, and imperative that no other meaning can be annexed to them, or unless the intention of the legislature cannot be otherwise satisfied".<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Thus, it is the original law <i>as cited</i>, and not <i>as amended</i>, particularly in cases wherein reference was made to the <i>specific law</i>, which reflects the true intent of the parties. This conclusion likewise finds support in foreign jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> In other words, if the parties intended to refer to Republic Act No. 876 as it is presently amended by Republic Act No. 9285, they <i>could</i> have stipulated on "arbitration laws of the Philippines" to refer to the collective laws of arbitration as they presently stand. Instead, at the time of the agreement when Republic Act No. 9285 was already<i> very much in effect</i>, the parties <i>particularly</i> referred, in laying down <i>specifically</i> the <i>method of appointment of the arbitrator</i> to Republic Act No. 876. </p><p> In any case, the mere invocation of Republic Act No. 9285 as the governing law, as insisted upon by petitioner, will not outright result into the designation of the IBP President as the appointing authority. </p><p> Section 26 of Republic Act No. 9285 states that the "appointing authority, as used in the Model Law, shall mean the person or institution <i>named in the arbitration agreement as the appointing authority</i>".</p><p> On the other hand, the arbitration agreement of the parties states that "the <i>arbitrator shall be in accordance with</i> Republic Act No. 876 otherwise known as the "Arbitration Law".</p><p> Verily, notwithstanding the effectivity of Republic Act No. 9285, the RTC is still the designated as the <i>appointing authority</i> per the agreement of the parties. </p><p> <i>Second</i>, petitioner insists that since at the time of their agreement, Republic Act No. 9285 was already applicable, now settled to be applicable <i>alongside</i> Republic Act No. 876, it is this law which must apply. Petitioner is mistaken. </p><p> The Court has time and again given deference to the stipulations entered into by parties, respecting the principle of autonomy of contracts. In <i>Bricktown Development Corp. v. Amor Tierra Development Corp</i>.,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> the Court held: </p><blockquote> <p> A contract, once perfected, has the force of law between the parties with which they are bound to comply in good faith and from which neither one may renege without the consent of the other. The <i>autonomy of contracts allows the parties to establish such stipulations, clauses, terms and conditions as they may deem appropriate provided only that they are not contrary to law, morals, good customs, public order or public policy.</i> The standard norm in the performance of their respective covenants in the contract, as well as in the exercise of their rights thereunder, is expressed in the cardinal principle that the parties in that juridical relation must act with justice, honesty and good faith.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> Here, the Court finds that there is nothing contrary to law, morals, good customs, public order, or public policy for the parties to cite an <i>older</i> law to govern their arbitration agreement. </p><p> Finally, the Court must emphasize that if indeed petitioner truly believed that Republic Act No. 9285 repealed Republic Act No. 876, then it should not have given its consent to such. </p><p> As such, for the foregoing reasons, and considering principles of equity and good faith, petitioner is now estopped from claiming the lack of jurisdiction of the appointing authority it clearly agreed to when it signed the arbitration agreement with ALPI. </p><p> All told, the Petition for <i>Certiorari</i> must be denied for failure of the petitioner to ascribe grave abuse of discretion amounting to lack or excess of jurisdiction in the assailed Resolution of the RTC, which the Court finds to be anchored soundly on law and jurisprudence. </p><p> <b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> is <b>DENIED</b>. The Resolution dated March 21, 2022, issued by respondent Presiding Judge Arturo V. Noblejas of Branch 105, Regional Trial Court, Calamba City in S.P. Case No. 1786-2021-C is <b>AFFIRMED</b>. The Temporary Restraining Order issued by the Court on June 15, 2022 is <b>LIFTED</b>. </p><p> <b>SO ORDERED.</b> </p><p> <i>Caguioa (Chairperson), Hernando,<sup style="COLOR: RGB(255, 0, 0);">*</sup> Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional Member vice J. Singh, per Raffle dated February 1, 2023. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-45.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 46-51. Penned by Presiding Judge Arturo V. Noblejas.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 53-67.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 68-77.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 56.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 47. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 46. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 56-57.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 53-67. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 58.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 46-51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> SECTION 8. <i>Appointment of arbitrators</i>. - If, in the contract for arbitration or in the submission described in section two, provision is made for a method of naming or appointing an arbitrator or arbitrators, such method shall be followed; but if no method be provided therein the [Regional Trial Court] shall designate an arbitrator or arbitrators. </p><p> The [Regional Trial Court] shall appoint an arbitrator or arbitrators, as the case may be, in the following instances:</p><p> . . . .</p><p> (c) If either party to the contract fails or refuses to name his arbitrator within fifteen days after receipt of the demand for arbitration[.]</p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Titled, "AN ACT TO AUTHORIZE THE MAKING OF ARBITRATION AND SUBMISSION AGREEMENTS, TO PROVIDE FOR THE APPOINTMENT OF ARBITRATORS AND THE PROCEDURE FOR ARBITRATION IN CIVIL CONTROVERSIES, AND FOR OTHER PURPOSES." Approved on June 19, 1953. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, p. 51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 20, 22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 37-39. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 171-173. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 174-205. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 175. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 182. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 914 Phil. 403, 414 (2021). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, p. 183. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 197. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 358 Phil. 214 (1998). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 224-225. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 183. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Supra</i> note 24. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 419-420. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 927 Phil. 259 (2022). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 264-265. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>People's Air Cargo and Warehousing Co., Inc. v. Judge Mendiola</b>, 634 Phil. 111 (2010). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, pp. 68-77. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 72. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 857 Phil. 498 (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 514. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>IP E-Game Ventures, Inc. v. Tan</b>, 906 Phil. 514, 521 (2021); CIVIL CODE, art. 1159. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, p. 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 290-A Phil. 272 (1992). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Universal Corn Products Inc. v. Rice and Corn Board</b>, 127 Phil. 473 (1967). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Palermo v. Stockton Theatres, Inc.</i>, 32 Cal. 2d 53, 59-60, 195 P.2d 1, 5 (1948); <i>Thoits v. Byxbee</i>, 34 Cal. App. 226, 231 (Dist. Ct. App. 1917); <i>Rancho Santa Anita, Inc. v. Arcadia</i>, 20 Cal. 2d 319, 321-322, 125 P.2d 475, 477 (1942); <i>Vallejo &amp; N. R. Co. v. Reed Orchard Co</i>., 177 Cal. 249, 254, 170 P. 426, 428 (1918); <i>Thoits v. Byxbee</i>, 34 Cal. App. 226, 231 (Dist. Ct. App. 1917). </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 309 Phil. 119 (1994). </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

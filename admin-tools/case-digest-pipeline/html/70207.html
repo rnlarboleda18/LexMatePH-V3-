@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 257731 - EPHRAIM N. NABUAB, PETITIONER, VS. BSM CREW SERVICE CENTRE PHILIPPINES, INC., BERNHARD SCHULTE SHIPMANAGEMENT (SINGAPORE) PTE. LIMITED AND/OR CAPT. RUEL A. TABLE,* RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70207' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 257731, August 13, 2025 ]</H2>
+			<H3>EPHRAIM N. NABUAB, PETITIONER, VS. BSM CREW SERVICE CENTRE PHILIPPINES, INC., BERNHARD SCHULTE SHIPMANAGEMENT (SINGAPORE) PTE. LIMITED AND/OR CAPT. RUEL A. TABLE,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This is a Petition for Review of the September 18, 2020 Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and the October 19, 2021 Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA) in CA-G.R. SP No. 157597. The matter originated from a seafarer's disability claim filed by petitioner Ephraim N. Nabuab (Nabuab) against respondents BSM Crew Service Centre Philippines, Inc., (BSM), Bernhard Schulte Shipmanagement (Singapore) Pte. Limited (BSS), and Capt. Ruel A. Table (Table).</p><p> BSM is a Philippine entity engaged in the recruitment of seafarers for foreign ship management agencies. Table is the president of BSM. BSS is a client and foreign principal of BSM.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup></p><p> On September 4, 2015, BSS hired Nabuab as a motorman on board the BSM-manned oil tanker <i>High Enterprise</i>, on a nine-month contract under the International Bargaining Forum-All Japan Seamen's Union-Associated Marine Officers and Seamen's Union of the Philippines (IBF-JSU/AMOSUP-IMMAJ) Collective Bargaining Agreement (CBA).<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Sometime in December 2015, Nabuab allegedly suffered an accident on board the vessel <i>en route</i> to Europe. According to him, he was pulling off a one-square-meter piece of metal flooring weighing 50-70 kilograms when the vessel rolled due to huge waves. As a result, he lost balance, slipped, and hit his right shoulder on a metal post. He was given ice and medicines to soothe the pain.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> On January 5, 2016, Nabuab was examined at a clinic in Rotterdam, the Netherlands, where he was diagnosed with "bursitis: shoulder impingement syndrome".<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> He was repatriated to the Philippines on May 26, 2016, eight days before the conclusion of his contract.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> On May 30, 2016, he underwent post-employment medical evaluation at BSM's designated clinic.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> On June 22, 2016, he underwent arthroscopic subacromial decompression and debridement on his right shoulder. Thereafter, he underwent physiotherapy.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> On August 31, 2016, BSM's designated clinic gave Nabuab an interim disability assessment of Grade 11 for weakness of one arm.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> His therapy and evaluation continued.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> On September 16, 2016, Nabuab was declared fit to work.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Objecting to the assessment, Nabuab consulted two other doctors, who both reported that he was unfit for seafaring work.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> His right shoulder MRI returned the following impression: supraspinatus and subscapularis tendinosis with partial tears; subacromial-subdeltoid and subcoracoid-subscapularis bursal effusions/ bursitis; bicipital tendon sheath effusion/tenosynovitis; mild degenerative changes, acromioclavicular joint and humeral head; superior labral degeneration or slap 1 lesion; and minimal gleno-humeral joint effusion.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> On the basis of these assessments, Nabuab wrote to BSM to protest the alleged non-disclosure of the final medical assessment and to request for a third-doctor referral.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> BSM replied that it duly informed him of the final medical assessment, and that it was amenable to a third-doctor referral, subject to submission of the medical reports from Nabuab's own doctors.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Dissatisfied, Nabuab asked BSM to settle the matter through the grievance machinery under the CBA; but BSM refused. Nabuab thus filed a Notice to Arbitrate with the National Conciliation and Mediation Board (NCMB).<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The parties underwent mandatory conciliation, which was unsuccessful; hence, they were directed to submit position papers.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p> On February 12, 2018, the NCMB voluntary arbitrator (NCMB-VA) dismissed Nabuab's claim,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> ruling that: 1) there is no substantial evidence to support Nabuab's narrative, as the master of the <i>High Enterprise</i> attested that there was no reported accident on board the vessel involving Nabuab;<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> 2) there is no substantial evidence that Nabuab's shoulder pain is work-related, considering that prior to September 2015, he had been working as a seafarer for 25 years;<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> 3) the reports of Nabuab's own doctors do not attest to the work-relation of his illness;<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> and 4) the assessment of BSM's designated physicians must be given more weight, as Nabuab underwent continuous treatment and evaluation at BSM's designated clinic from May to September 2016.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p> Nabuab moved for reconsideration, but was denied via a Resolution dated August 14, 2018.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Nabuab elevated the matter to the CA via Rule 43.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The CA dismissed Nabuab's petition. It agreed with the NCMB-VA that Nabuab cannot claim benefits under the CBA because there was no report of the alleged accident, per the ship master's attestation.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Nabuab cannot claim disability benefits under the POEA Standard Employment Contract (POEA-SEC) either, despite proof of the work-relation of his bursitis,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> as he failed to comply with the mandatory third-doctor referral.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The CA pinned the failed referral on Nabuab, as BSM manifested its willingness to submit to the referral and even sent a follow-up letter; but Nabuab instead demanded that the dispute be submitted to the CBA grievance machinery, failing which, he immediately elevated the dispute to the NCMB.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The CA also agree that the assessment of BSM's designated physicians should prevail over those of Nabuab's. The fit-to-work assessment issued by BSM's physicians was made after continuous treatment and evaluation from May 30 to September 16, 2016, within the 120-day period mandated by the POEA-SEC; while the assessments of Nabuab's physicians are based on solitary medical reports.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> The CA denied Nabuab's motion for reconsideration; hence this petition, where Nabuab argues that he could not have validly initiated the third-doctor referral as he was not given a copy of the final medical assessment.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Verbal or informal notice of the final assessment is not enough, as case law and regulations require that the seafarer be furnished with a written copy thereof, failing which, Nabuab should be deemed totally and permanently disabled by operation of law.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Nabuab argues that he only sought arbitration because BSM refused to act on his third-doctor referral request;<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> and when such request was made, the duty of making the referral was shifted to BSM.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> At any rate, the final assessment is not categorical enough to bind Nabuab because it declared him fit to work only from an "orthopedic standpoint". Such declaration is unclear as to the true extent of his injury or capacity to do the physically demanding tasks assigned to an oil tanker motorman.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Thus, the assessments of his doctors should be given more weight, as they are based on independent assessment and diagnostic tests conducted after the mandatory treatment period.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Given the foregoing, Nabuab asks this Court to award him permanent and total disability benefits under his CBA, in the amount of USD 98,909.00.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> He further prays for moral damages, exemplary damages, and attorney's fees, as respondents unjustly withheld his disability benefits in bad faith.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Finally, he prays that Table be held solidarily liable with BSM and BSS, citing Rule II, Section 1(f) of the POEA Rules and Regulations Governing the Recruitment and Employment of Seafarers and Rule VII, Section 3 of the Omnibus Rules and Regulations Implementing the Migrant Workers and Overseas Filipinos Act.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Respondents riposte that verbal notice of the final assessment is enough to meet regulatory and due process requirements. At any rate, Nabuab should be bound by his admission of knowledge of the final fit-to-work assessment.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The company physicians' assessment should prevail because it was based on continuous treatment from May to September 2016, and categorically passed upon Nabuab's fitness to resume working, in contrast to the assessments of Nabuab's doctors, which were based on a single consultation, without determination of the extent or severity of Nabuab's disability.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The failure of the third-doctor referral is Nabuab's fault. Not only did he admit having been informed that he was declared fit to work, he also failed to disclose his doctors' assessments to respondents prior to the filing of the complaint before the NCMB.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Nabuab cannot claim permanent disability benefits under the CBA because his condition was not proven to be the result of an accident on board the <i>High Enterprise</i>.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Finally, Nabuab is not entitled to attorney's fees and damages, as his claim for permanent disability benefits has no merit.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> The petition is meritorious.</p><p> The threshold issue discussed in the pleadings before Us is whether Nabuab was sufficiently and timely apprised of the September 16, 2016 final assessment. Nabuab argues that he should have been given a written copy of the assessment. Respondents riposte that verbal notice is enough, and that Nabuab should be deemed to have been verbally notified of the assessment in the course of his treatment with the company physician. In any case, Nabuab already admitted being notified of the assessment. </p><p> The necessity of furnishing the seafarer with a copy of the company physician's final assessment has been settled in <i>Gere v. Anglo-Eastern Crew Management</i>:<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><blockquote> <p> In following the [<i>Elburg</i>] guidelines, it must be emphasized that the company-designated physician must not only "issue" a final medical assessment of the seafarer's medical condition. He must also â and the Court cannot emphasize this enough â "give" his assessment to the seafarer concerned. That is to say that the seafarer must be fully and properly informed of his medical condition. The results of his/her medical examinations, the treatments extended to him/her, the diagnosis and prognosis, if needed, and, of course, his/her disability grading must be fully explained to him/her by no less than the company-designated physician. </p> <p> <b><u>In this regard, the company-designated physician is mandated to issue a medical certificate, which should be personally received by the seafarer, or, if not practicable, sent to him/her by any other means sanctioned by present rules</u></b>. For indeed, proper notice is one of the cornerstones of due process, and the seafarer must be accorded the same especially so in cases where his/her well-being is at stake. </p> <p> A company-designated physician who fails to "give" an assessment as herein interpreted and defined fails to abide by due process, and consequently, fails to abide by the foregoing guidelines. </p> <p> This elaboration acquires greater significance in light of Section 20 (A) (3) of the [POEA-SEC], which commences [the mandatory disability claim adjudication process]. This section states that, in the event that a seafarer suffers a work-related/aggravated illness or an injury during the course of his/her employment, it is the company-designated physician's medical assessment that shall control the determination of the seafarer's disability grading. Should the seafarer's personal physician disagree, then the matter shall be referred to a neutral third party physician, who shall then issue a final and binding assessment . . .</p> <p> In <i>INC Shipmanagement, Inc. vs. Rosales</i>, the Court . . . categorically [stated] that the referral to a third doctor is <b><u>mandatory</u></b>, and [failure to do so is a] breach of the POEA-SEC, [which renders] the assessment of the company-designated physician . . . final and binding. . . </p> <p> In this light, only when the seafarer is duly and properly informed of the medical assessment by the company-designated physician could he determine whether or not he/she agrees with the same; and if not, only then could he/she commence the process of consulting his personal physician. If conflicting assessments arise, only then is there a need to refer the matter to a neutral third-party physician. </p> <p> [The mandatory disability claims adjudication procedure] could only begin from the moment of proper notice to the seafarer of his medical assessment by the company-designated physician. <i>To require the seafarer to seek the decision of a neutral third party physician without primarily being informed of the assessment of the company-designated physician is a clear violation of the tenets of due process, and shall not be countenanced by the Court</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p> <p> <b><i>[F]ailure by the [employer] to furnish the [seafarer] a copy of his medical certificate militates gravely against the [former's] cause.</i></b> </p> <p> To begin with, without this proper notice, the 120-day and 240-day rule would have stepped in by operation of law. Insofar as the [seafarer] is concerned, there was no issuance of a final medical assessment regarding his disability. For all intents and purposes, [<i>Elburg</i>] rules that the [seafarer]'s disability has already become permanent and total. </p> <p> . . . . </p> <p> Secondly, without the proper notice, the [seafarer] was not given the opportunity to evaluate his medical assessment. Again, insofar as he was concerned, the disability grading of his personal physician was the only disability grading available to him prior to the filing of the case before the Panel of Arbitrators. In this instance, the mandatory referral to a neutral third doctor could not have been applicable. Indeed, from the perspective of the petitioner, there was absolutely no assessment by the company-designated physician to contest. As such, there was no impetus to seek a neutral third doctor. </p> <p> Moreover, considering that the respondents failed to inform the [seafarer] of the assessment of the company-designated physician, it would be the height of injustice if the Court were to uphold the former's disability grading of the petitioner's injury. Such an action would firmly go against the [Elburg] guidelines. . . </p> <p> Therefore, for the [employer's] failure to inform the [seafarer] of his medical assessment within the prescribed period, the [seafarer]'s disability grading is, by operation of law, total and permanent.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p> </blockquote> <p> <i>Gere</i> is clear and categorical. The proper way of notifying the seafarer of the company physician's final assessment is by furnishing them a copy thereof. This ruling has since been reiterated in a plethora of cases.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Verbal notice does not suffice, as this is not enough for the seafarer to make an informed decision on the availment of the third-doctor referral.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Without a copy of the final assessment, the seafarer has "<i>nothing to contest</i>,"<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> as "<i>it is the issuance and the corresponding conveyance to the employee of the final medical assessment by the company-designated physician that triggers the application of [the third-doctor referral procedure under] Section 20(A)(3) of the 2010 POEA-SEC</i>."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> It is undisputed here that Nabuab was not given a copy of the final assessment. He was simply told that he has already been deemed fit to work.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Respondents want this Court to charge Nabuab with knowledge of his medical condition by virtue of his continuous treatment and consultations with the company physician throughout the mandatory treatment period:<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> an argument already rejected by case law: </p><blockquote> <p> Here, [the company physician] only issued a medical report addressed to [the employer]. As in <i>Gere</i>, this medical report cannot be regarded as anything more than an internal communication between the company-designated physician and [the employer]. Further, [the seafarer] was not even furnished a copy of said medical report. [The employer] did not deny this. <b><u>They simply posited that the assessment was explained to [the seafarer]</u></b>. </p> <p> In other words, no final and definitive assessment was issued regarding any of [the seafarer]'s illnesses. Again, without a valid final and definitive assessment from the company-designated physician, [the seafarer]'s temporary and total disability, by operation of law, became permanent and total.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Underlining and emphasis supplied)</p> </blockquote> <p> Following <i>Gere</i>, the non-communication of the final assessment to Nabuab renders the third-doctor referral procedure untenable and entitles him to total and permanent disability benefits by operation of law. However, Nabuab cannot claim benefits under his contract's CBA, as his condition was not caused by an accident while in employment with respondents.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> This Court is bound by the concurrent finding of the NCMB-VA and the CA that Nabuab was not involved in any accident on board the <i>High Enterprise</i>. The master of the <i>High Enterprise</i> even certified that Nabuab was not involved in any accident while on board.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> However, Nabuab is still eligible to receive disability benefits under the POEA-SEC, which applies to work-related illnesses or injuries that existed during the term of the seafarerâs employment contract, even if not caused by an onboard accident.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> </p><p> Under Section 32 of the POEA-SEC and its disability allowance schedule, the award for total and permanent disability (treated as impediment grade 1) is USD 60,000.00 (USD 50,000.00*120.00%).<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Aside from the disability benefit, Nabuab is also entitled to attorney's fees. In labor proceedings, withholding of wages or benefits need not be attended by malice or bad faith to merit an award of attorney's fees; all that is needed is that lawful wages or benefits be unjustifiably withheld, thereby compelling the employee to litigate.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> We also find no cogent reason to reverse the common ruling of the NCMB-VA and the CA on moral and exemplary damages, there being no recorded indication of any bad faith or malicious conduct on the part of respondents that would entitle Nabuab to such damages. The total judgment award shall earn interest at the legal rate, following case law.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> Finally, respondent Table should be held solidarily liable with BSM and BSS, as president of the former corporation, pursuant to Section 10 of Republic Act No. 10022,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> which is a statutory exception to the non-liability of directors and officers for corporate contracts.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </p><p> <b>ACCORDINGLY</b>, the Petition for Review is <b>PARTIALLY GRANTED</b>. The September 18, 2020 Decision and the October 19, 2021 Resolution of the Court of Appeals in CA-G.R. SP No. 157597 are <b>REVERSED</b> and <b>SET ASIDE</b>. Judgment is hereby rendered <b>ORDERING</b> respondents BSM Crew Service Centre Philippines, Inc., Bernhard Schulte Shipmanagement (Singapore) Pte. Limited, and Capt. Ruel A. Table to <b>SOLIDARILY PAY</b> Ephraim N. Nabuab a disability benefit of USD 60,000.00 or its Philippine Peso equivalent, and 10% of said amount as attorney's fees. The monetary awards shall earn interest at the rate of 6% per annum from the date of finality of this Decision until full payment.</p><p> <b>SO ORDERED.</b></p><p> <em>Caguioa (Chairperson), Inting</em>, and <em>Dimaampao, JJ.</em>, concur. <br> <em>Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</em>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to in the records as "Capt. Ruel A. Tuble." <p><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, vol. I, pp. 9-20. Penned by Associate Justice Tita Marilyn B. Payoyo-Villordon and concurred in by Associate Justices Fernanda Lampas-Peralta and Nina G. Antonio-Valenzuela of the Second Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 22-23. Penned by Associate Justice Tita Marilyn B. Payoyo-Villordon and concurred in by Associate Justices Fernanda Lampas-Peralta and Nina G. Antonio-Valenzuela of the Former Second Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 10 &amp; 35. CA Decision, Petition for Review.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 137. Contract of Employment. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 40. Petition for Review.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 144. January 5, 2016 Medical Examination Report.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 180. Seaman's Book Entry.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 181. May 30, 2016 Medical Report. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 148 &amp; 267. October 4, 2016 Medical Report; NCMB-VA Decision.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 191. August 31, 2016 Memorandum from Marine Medical Services to BSM.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 192 &amp; 267. September 16, 2016 Memorandum from Marine Medical Services to BSM.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 148-151. Medical Reports dated October 4 and 5, 2016.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 147. MRI Report.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 152.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 199. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 46. Petition for Review. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 266-290. Per Voluntary Arbitrator Mariano M. Umali of the NCMB, Manila. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 278-279. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 280. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 282-286. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 286-289. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 330-334. Per Voluntary Arbitrator Mariano M. Umali of the NCMB, Manila. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 9. CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 16. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 18-19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 49-53. Petition for Review. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 49-53, 54-64, 613-620. Petition for Review and Reply. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 65-66, 622-627. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 68. Petition for Review. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 70-75, 620-621. Petition for Review and Reply. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 621-622. Reply. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 75-77. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 77-78. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 78-80. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 591-594. Comment. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 594-598. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 599-602. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 602-606. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 606-607. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 830 Phil. 695 (2018) [Per J. A. Reyes, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 706-708. (Citations omitted; emphasis in the original) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 711-712. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Ampolitod v. Top Ever Marine Management Phils., G.R. No. 252347</b>, May 22, 2024 [Per J. Gaerlan, Third Division] at 12-13; 6 (Concurring and Dissenting Opinion of J. Caguioa) (This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website); <b>Magno v. Career Philippines Shipmanagement</b>, 942 Phil. 668, 673 (2023) [Per J. Kho Jr., Second Division]; <b>Grossman v. North Sea Marine Services</b>, 932 Phil. 637, 641 (2022) [Per J. Kho, Jr., Second Division]; <b>Wenceslao v. C.F. Sharp Crew Management</b>, 903 Phil. 442, 448-449 (2021) [Per J. Carandang, First Division]; <b>Caampued v. Next Wave Maritime Management</b>, 903 Phil. 336, 343 (2021) [Per J. Lazaro-Javier, Second Division]; <b>Abella v. Abosta Shipmanagement Corporation</b>, 901 Phil. 578, 588 (2021) [Per J. Caguioa, First Division]; <b>United Philippine Lines, Inc. v. Ramos</b>, 899 Phil. 183, 189-190 (2021) [Per J. Caguioa, First Division]; <b>Palo v. Senator Crewing (Manila), Inc.</b>, 899 Phil. 124, 134-135 (2021) [Per J. Carandang, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Abella v. Abosta Shipmanagement Corporation</b>, <i>id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Parce v. Magsaysay Maritime Corp.</b>, 914 Phil. 556, 571 (2021) [Per J. J.Y. Lopez, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Chan v. Magsaysay Maritime Corporation</b>, 872 Phil. 1061, 1082-1083 (2020) [Per J. Lazaro-Javier, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, vol. I, pp. 107-108, 199. Nabuab's Position Paper before the NCMB-VA; November 8, 2016 letter from Del Rosario and Del Rosario Law Offices to Bermejo Laurino-Bermejo Luna Law Offices. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 593. Comment before the Supreme Court. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Caampued v. Next Wave Maritime Management</b>, 903 Phil. 336, 356 (2021) [Per J. Lazaro-Javier, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i> (Vol. 1), p. 178. Article 28.1 of the CBA. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 194. Sworn Certification of Capt. Antonio B. Jao. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Grossman v. North Sea Marine Services</b>, 932 Phil. 637, 647-650 (2022) [Per J. Kho Jr., Second Division]; <b>Wenceslao v. CF Sharp Crew Management</b>, 903 Phil. 442, 450-451 (2021) [Per J. Carandang, First Division]; <b>Palo v. Senator Crewing (Manila)</b>, 899 Phil. 124, 136 (2021) [Per J. Carandang, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>See</i> also <b>Dalusong v. Eagle Clarc Shipping Phils.</b> 742 Phil. 377, 382-383 (2014) [Per Acting C.J. Carpio, Second Division]; <b>Magsaysay Maritime Corp. v Lobusta</b>, 680 Phil. 137, 152 (2012) [Per J. Villarama, First Division]; <b>Vergara v. Hammonia Maritime Services</b>, 588 Phil. 895, 907 (2008) [Per J. Brion, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Atienza v. TKC Heavy Industries Corp.</b>, 905 Phil. 225, 258-259 (2021) [Per J. Villarama], <i>quoting</i> <b>Alva v. High Capacity Security Force</b>, 820 Phil. 677, 688-689 (2017) [Per J. A.B. Reyes, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Reyes v. Magsaysay Mitsui OSK Marine</b>, 903 Phil. 458, 472 (2021) [Per J. J.Y. Lopez, Third Division], <i>citing</i> <b>Nacar v. Gallery Frames</b>, 716 Phil. 267 (2013) [Per J. Peralta, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>SRL Int'l. Manpower Agency v. Yarza</b>, 919 Phil. 213 (2022) [Per J. Hernando, Second Division]; <b>Grona v. Singa Ship Management Phils., Inc.</b>, 912 Phil. 887, 909 (2021) [Per J. Carandang, Third Division]; <b>Eagle Clarc Shipping Philippines, Inc. v. National Labor Relations Commission (Fourth Division)</b>, 847 Phil. 263, 278-279 (2020) [Per J. J.C. Reyes, Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Loadstart Int'l. Shipping, Inc. v. Cawaling</b>, 904 Phil. 635, 647-649 (2021) [Per J. Delos Santos, Third Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. Nos. 246783-84 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. HERMINIO CASAL REYES, MUNICIPAL MAYOR, MA. MARLEY C. DADAY, LEO BAUSING GOMEZ, ARTURO ELUMBA ESTIL,* JOEL DINGLE PLAZA, ROMEO O. MAGADAN (ALL) MEMBER, SANGGUNIANG BAYAN, VIRGILIO A. JULAO, MEMBER, SANGGUNIANG BAYAN/ACTING PRESIDING OFFICER, FILOMENO CASE&Ntilde;AS SALISE,** MUNICIPAL TREASURER, (ALL OF) LORETO, AGUSAN DEL SUR, ACCUSED;
+HERMINIO CASAL REYES, MA. MARLEY C. DADAY, LEO BAUSING GOMEZ, JOEL DINGLE PLAZA, ROMEO O. MAGADAN, AND VIRGILIO A. JULAO, ACCUSED-APPELLANTS. 
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70089' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. Nos. 246783-84, July 29, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. HERMINIO CASAL REYES, MUNICIPAL MAYOR, MA. MARLEY C. DADAY, LEO BAUSING GOMEZ, ARTURO ELUMBA ESTIL,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> JOEL DINGLE PLAZA, ROMEO O. MAGADAN (ALL) MEMBER, SANGGUNIANG BAYAN, VIRGILIO A. JULAO, MEMBER, SANGGUNIANG BAYAN/ACTING PRESIDING OFFICER, FILOMENO CASEÃAS SALISE,<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> MUNICIPAL TREASURER, (ALL OF) LORETO, AGUSAN DEL SUR, ACCUSED;<BR><BR>
+HERMINIO CASAL REYES, MA. MARLEY C. DADAY, LEO BAUSING GOMEZ, JOEL DINGLE PLAZA, ROMEO O. MAGADAN, AND VIRGILIO A. JULAO, ACCUSED-APPELLANTS. <BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Notwithstanding the stated purpose or intention for public funds to be applied for a public purpose, the statutory presumption of malversation remains unrebutted absent proof that said funds were indeed applied for said public purpose.</p><p> This is an appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> from the Sandiganbayan (SBN) Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> convicting Herminio Casal Reyes (Reyes) of violation of Section 3(e) of Republic Act No. 3019<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and malversation of public funds, and Ma. Marley C. Daday (Daday), Leo Bausing Gomez (Gomez), Joel Dingle Plaza (Plaza), Romeo O. Magadan (Magadan), Virgilio A. Julao (Julao), and their co-accused, Arturo Elumba Estil (Estil) (collectively, Reyes et al.), of violation of Section 3(e) of Republic Act No. 3019.</p><p align="center"> <i>I</i> </p><p> At the time material and relevant to these cases, Reyes was the municipal mayor of Loreto, Agusan del Sur (Municipality) while the others were members of the Sangguniang Bayan (SB) of said Municipality.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> In early 2003, in view of the urgent need for service vehicles for the municipal officials of Loreto, Gomez and SB Secretary Estanislao Irisari (Irisari) suggested to Reyes the idea of the municipal government granting a loan to its officials to purchase motorcycles to be used exclusively for official purposes. They also suggested sourcing funds from the budget that was originally set aside for the construction of the municipal building, but which remained idle due to the suspension of the construction.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> To vet the legality of the proposed realignment of the unexpended balance of the construction of the municipal building, the municipal officials, including Reyes et al., caused Irisari to consult with resident Commission on Audit (COA) Auditor Arsenio B. Lorete (Lorete), who verbally opined that their intention or act is legal as long as all the required documents are complied with and is supported by an SB resolution.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> Accordingly, in March 2003, a Memorandum of Agreement<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (MOA) was entered into between the Municipality and the SB members, municipal secretary, budget officer, accountant, and assistant treasurer concerning, among other things, the availment of the latter of loans in the total amount of PHP 1.5 million to be borrowed from the fund allocated for the construction of the municipal building of Loreto which was unexpended, payable in three years through payroll deductions. The pertinent portion thereof states: </p><blockquote> <p> WHEREAS, that the First Party is the Local Government Unit of Loreto[.]</p> <p> WHEREAS, that the First Party has sufficient funds coming from the Municipal Building set aside for the construction. However, the money will not be utilized in due time and it is only fitting and proper to lend to the Local Officials at a reasonable time. </p> <p> WHEREAS, the amount of [PHP 1.5 million] shall be taken from the money intended for the Municipal Building and it will be borrowed and subject to replenishment. </p> <p> WHEREAS, the SECOND PARTY is very much willing and eager to avail the loan to borrow the amount of [PHP 1.5 million] from the appropriation coming from the Municipal Building which is good for [15] Local Officials at the amount of [PHP] 100,000.00 each <i>purposely to purchase service vehicle for official use of the Local Officials</i>. </p> <p> WHEREAS, that the [PHP] 100,000.00 shall be payable for a period of [three] years through payroll deduction until the principal amount of [PHP] 100,000.00 is fully paid by the loaner. </p> <p>. . . . </p> <p> WHEREAS, that the herein mentioned <i>shall be exclusively used for the intended purpose to suit the needs of the Local Officials in performing their official duties and responsibilities</i>.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> (Emphasis supplied) </p> </blockquote> <p> The SB also enacted three resolutions, two of which bore the same number, and all of which were approved by Reyes, to wit: </p><ol start="" type="a"><li> Resolution No. 38-2003: "RESOLUTION TO BORROW THE AMOUNT OF [PHP 1.5 MILLION] TAKEN FROM THE MUNICIPAL BUILDING AND SUCH AMOUNT BE GRANTED TO MEMBERS OF THE SANGGUNIANG BAYAN, INCLUDING THE SECRETARY IN THE PURCHASE OF MOTOR VEHICLE AND SUCH AMOUNT IS CONSIDERED AS AN INDIVIDUAL LOAN WHICH IS PAYABLE FOR [THREE] YEARS THROUGH PAYROLL DEDUCTION."<sup style="COLOR: RGB(255, 0, 0);">[10]<br><br></sup></li><li> Resolution No. 38-2003: "RESOLUTION TO BORROW THE AMOUNT OF [PHP 1.5 MILLION] TAKEN FROM THE MUNICIPAL BUILDING AND SUCH AMOUNT TO BE GRANTED AS A LIVELIHOOD PROJECTS [sic] TO SOME GOVERNMENT EMPLOYEES/OFFICIALS IN A FORM OF LOAN AND PAYABLE FOR A PERIOD OF [THREE] YEARS THROUGH PAYROLL DEDUCTION."<sup style="COLOR: RGB(255, 0, 0);">[11]<br><br></sup></li><li> Resolution No. 126-2003: "RESOLUTION REQUESTING HON. HERMINIO C. REYES, MUNICIPAL MAYOR AND MR. FILOMENO C. SAUSE, MUNICIPAL TREASURER, TO RELEASE THE [PHP 1.6 MILLION] TO BE DEPOSITED WITH THE LAND BANK OF THE PHILIPPINES IN FAVOR OF LORETO TRANSPORT SERVICES ASSOCIATION, INC. LORETO, AGUSAN DEL SUR."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </li></ol> <p> Thereafter, Land Bank of the Philippines (Land Bank), San Francisco Branch, Agusan del Sur, received a July 1, 2003 Letter<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> signed by Municipal Treasurer Filomeno Salise (Salise) and approved by Reyes, requesting the transfer of PHP 1.6 million from the Municipality's account to Loreto Transport Services Association, Inc. (LOTSA)'s account. Pursuant thereto, said amount was debited from the Municipality's account and credited to LOTSA's account. Reyes et al., except Julao, were among those who obtained loans under the aforestated resolutions.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> After the passage of the aforesaid Resolutions, the Office of the Ombudsman for Mindanao (OMB-Mindanao) received an anonymous complaint,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> a letter-complaint from a.k.a. "Gary" and "Marcy,"<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and a referral<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> from the Philippine National Police at Butuan City, pertaining to the purported misappropriation of the amount of PH.P 1.6 million that was allocated for the construction of the municipal building. </p><p> OMB-Mindanao subsequently referred the matter to the COA for audit investigation.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Lorete recommended the termination of the complaints, finding no irregularity in the assailed transaction.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> However, the COA Regional Legal and Adjudication Office constituted a Special Audit Team to reaudit the transaction,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> and found that: </p><ol start="" type="a"><li> The Municipality of Loreto had disbursed [PHP] 1.6 million to [LOTSA], a private entity composed of officials and employees of the municipality, intended as loan to [15] municipal officials and employees for the purchase of motor vehicles for their personal use, in violation of [Section] 4 (2) of [Presidential Decree No.] 1445, Article 217 of the Revised Penal Code, [Section] 3(e) of the Anti-Graft and Corrupt Practices Act, and other existing laws and regulations.<sup style="COLOR: RGB(255, 0, 0);">[21]<br><br></sup></li><li> The PHP 1.6 million loan was released to LOTSA through transfer of fund/debit advice, and was not covered by disbursement vouchers and was not receipted by LOTSA[,] contrary to Section 4.6 of [Presidential Decree No.] 1445 and [Volume II, Section] 430 of the Government Accounting and Auditing Manual (GAAM)]. Moreover, the transfer of fund was recorded in the Municipal Books of Accounts only in CY 2004, despite the release of fund effected in July 2003.<sup style="COLOR: RGB(255, 0, 0);">[22]<br><br></sup></li><li> Of the [PHP] 1.6 million loaned to LOTSA, only [PHP] 735,811.10 was remitted or paid to the Municipality of Loreto as of March 2007, thereby leaving a balance of PHP 864,188.90, despite that the MOA supporting the release of the money provided that the loan is payable within [three] years.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></li></ol> <p> Consequently, the COA recommended the filing of charges against Reyes, Daday, Gomez, Estil, Plaza, Magadan, Julao, and Salise for violation of Section 3(e), Republic Act No. 3019, and for malversation of public funds against Reyes and Salise.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> OMB-Mindanao filed the corresponding Amended Informations, the accusatory portions of which read:</p><p align="center"> [Criminal Case No. SB-10-CRM-0127 <br>(violation of Section 3(e), Republic Act No. 3019)] </p><blockquote> <p> That on [March 10,] 2003, or sometime prior or subsequent thereto, in the Municipality of Loreto, Agusan del Sur, Philippines and within the jurisdiction of this Honorable Court, accused HERMINIO CASAL REYES, a high ranking public officer being the Municipal Mayor of Loreto, Agusan del Sur with Salary Grade 27, accused FILOMENO CASEÃAS SAUSE, a public officer being the Municipal Treasurer of the same municipality (Loreto), accused VIRGILIO A. JULAO, a public officer being a member of the said Sangguniang Bayan, together with MA. MARLEY C. DADAY, LEO BAUSING GOMEZ, ARTURO ELUMBA ESTIL, JOEL DINGLE PLAZA[,] and ROMEO O. MAGADAN, the remaining five accused are also public officials being members of the said Sangguniang Bayan of Loreto, Agusan del Sur, all accused while committing the offense in relation to their office, conspiring and confederating with one another did then and there willfully, unlawfully[,] and maliciously through evident bad faith and manifest partiality <u>cause</u> the transfer of <u>[PHP] 1.6 million</u> from the General Fund account of the municipality with the Land Bank of the Philippines, San Francisco, Agusan del Sur Branch to Current Account No. 0972-1043-96 of a private entity Loreto Transport Services Association, Inc. (LOTSA) of Loreto, Agusan del Sur, in the same <u>bank</u> branch <u>through</u> mere debit advice <u>in violation of Commission on Audit (COA) rules, and immediately</u>, LOTSA <u>released said funds</u> to accused HERMINIO CASAL REYES, LEO BAUSING GOMEZ, ARTURO ELUMBA ESTIL, JOEL DINGLE PLAZA, MA. MARLEY C. DADAY[,] and ROMEO MAGADAN, SR., among others, <u>thereby giving unwarranted benefits, advantage, or preference to LOTSA on which said accused have financial and pecuniary interests and</u> causing undue damage and injury to the government in the <u>aforestated amount</u>. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Underscoring in the original) </p> </blockquote> <p align="center"> [Criminal Case No. SB-10-CRM-0128<br> (malversation of public funds)] </p><blockquote> <p> That on or about [July 1,] 2003 or sometime prior or subsequent thereto, in the Municipality of Loreto, Agusan del Sur, Philippines and within the jurisdiction of this Honorable Court, accused HERMINIO CASAL REYES, a high-ranking public official being a Municipal Mayor of Loreto, Agusan del Sur with Salary Grade 27 and accused FILOMENO CASENAS SAUSE, also a public officer being the Municipal Treasurer of Loreto, Agusan del Sur, both accused by reason of their duties are accountable public officials, committing the offense in relation to office <u>and taking advantage thereof</u>, conspiring and confederating with one another, did then and there willfully, unlawfully and feloniously request and approve for the transfer by mere debit advise of [PHP] <u>1.6 million</u> from the General Fund account of the Municipality (Loreto) with the Land Bank of the Philippines, San Franciso, Agusan del Sur Branch to Current Account No. 0972-1043-96 of the Loreto Transport Services Association (LOTSA), Loreto, Agusan del Sur with the same branch and thereafter take or misappropriate, <u>consent to the appropriation or misappropriation</u>, or convert the said amount for their own personal and other use and benefit to the damage and prejudice of the government in the said amount. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Underscoring in the original) </p> </blockquote> <p> Upon arraignment, Reyes et al. pleaded not guilty to the charges.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Thereafter, trial ensued. On August 22, 2017, the SBN dismissed the cases against Salise on account of his death.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> the SBN found Reyes et al. guilty beyond reasonable doubt of the crimes charged. The dispositive portion reads: </p><blockquote> <p> WHEREFORE. . . the Court renders judgment: </p> <p> 1. In Criminal Case No. SB-10-CRM-0127, finding Herminio Casal Reyes, Ma. Marley C. Daday, Leo Bausing Gomez, Arturo Elumba Estil, Joel Dingle Plaza, Romeo O. Magadan, and Virgilio A. Julao GUILTY beyond reasonable doubt of [v]iolation of Section 3(e) of Republic Act No. 3019, and are sentenced to suffer the indeterminate penalty of [six] years and [one] month, as minimum, to [10] years and [one] day, as maximum, with perpetual disqualification from public office. </p> <p> 2. In [Criminal] Case No. SB-10-CRM-0128, finding Herminio Casal Reyes GUILTY beyond reasonable doubt of Malversation of Public Funds, and is sentenced to suffer the indeterminate penalty ranging from [six] years and [one] day of <i>prision mayor</i> in its minimum period, as minimum, to [10] years of <i>prision mayor</i> in its medium period, as maximum[,] to suffer perpetual special disqualification[,] and to pay a fine of [PHP 1.6 million]. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p> </blockquote> <p> Their Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> and Omnibus Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> were subsequently denied.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> Hence, this appeal. </p><p align="center"> <i>II</i> </p><p> The appeal is partly meritorious. </p><p> Section 3(e) of Republic Act No. 3019 provides: </p><blockquote> <p> SEC. 3. <i>Corrupt practices of public officers</i>. â In addition to acts or omissions of public officers already penalized by existing law, the following shall constitute corrupt practices of any public officer and are hereby declared to be unlawful: </p> <p> . . . .</p> <p> (e) Causing any undue injury to any party, including the Government, or giving any private party any unwarranted benefits, advantage, or preference in the discharge of [their] official, administrative or judicial functions through manifest partiality, evident bad faith, or gross inexcusable negligence. This provision shall apply to officers and employees of offices or government corporations charged with the grant of licenses or permits or other concessions. </p> </blockquote> <p> In <i>Cabrera v. Sandiganbayan</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the Court laid down the following essential elements of the crime: </p><ol><li> The accused must be a public officer discharging administrative, judicial, or official functions;<br><br></li><li>[They] must have acted with manifest partiality, evident bad faith, or gross inexcusable negligence; and <br><br></li><li>That [their] action caused any undue injury to any party, including the government, or giving any private party unwarranted benefits, advantage, or preference in the discharge of [their] functions.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </li></ol> <p> The presence of the first element is undisputed. As regards the second element, accused-appellants argue that the assailed Decision is not supported by proof beyond reasonable doubt that they acted with evident bad faith or manifest partiality.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> They claim that there was no patently fraudulent and dishonest purpose but merely a factual conclusion that the accused-appellants "should have known better than to rely on the verbal affirmation (albeit erroneous) of a COA auditor as to whether their action was proper," which is not tantamount to a "conscious doing of a wrong," and which falls short of the exacting standard of moral certainty. Hence, there is a fatal lack of factual or evidentiary basis to establish evident bad faith.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> They had reasonable basis to believe that the transaction was valid and legal because they relied on the provisions of the MOA and SB Resolution No. 38-2003, which show that the loan was intended for a public purpose or benefit, as well as on the apparent expertise of COA Auditor Lorete, who opined that the realignment of the budget and the grant of the loan would be valid when supported by an SB resolution. They also relied on the apparent expertise of SB Secretary Irisari, a law graduate, SB Finance Head Gomez, who presumably knew the legal requirements and procedures for public fund disbursements, and the municipal accountant, treasurer, and assessor who all affirmed the validity of the loan by becoming incorporators of LOTSA themselves. They aver that the municipality had no legal officer who could be consulted on the subject loan and that they are not legal experts.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> They argue that the decision is bereft of any finding of manifest partiality. At most, they were guilty of bad judgment, a transgression not punished under Republic Act No. 3019.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> In <i>Villanueva v. The Commission on Audit</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> good faith was alleged to negate criminal liability for alleged bidding irregularities because the petitioners there relied on the expertise of the COA representative. We ruled that such argument is a matter of defense in the criminal case, if any.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Nonetheless, the COA is not estopped from questioning, in the process of post-audit, the previous acts of its officials, considering the well-established principle that estoppel does not lie against the government; more so if the acts of its officials are erroneous, let alone irregular.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> Indeed, the interpellation of Lorete by the trial court reveals that accused-appellants may have been misled by the former's erroneous opinion, which ultimately resulted in the cases filed against them, viz.: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">A:</div></td> <td width="95%"><div align="justify">[B]efore I gave them advice, I told them that fiscal responsibility is interrogative in management. Ours is to determine whether or not fiscal responsibility that has been lodged to management mainly to. . . Ours is mainly post-audit basis for the evaluation of the transaction. It has [sic] after the transaction is consummated.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">[AJ Hernandez:]</div></td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">And you know, <i>because of that advice of yours, you might have [misled] the local government unit, isn't it</i>?</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">No, your Honor. May I â</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify">[B]ecause in the first place, you should not give that advice because your duty is post-audit. When you gave that advice, they were probably [misled] into following it even if it is just pre-audit and later on, look what had happened, they have a case here.</div></td> </tr> <tr valign="top"> <td><div align="justify">A:</div></td> <td><div align="justify">But my advice, your Honor, is limited to the referral that they're going to realign. And, I believe, in my humble opinion, that the realignment after, ah, the fund is not â in [sic] balance of the fund is free from the other obligations, it can be realigned and that is to be supported by a resolution from the Sangguniang Bayan, your Honor.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"> <div align="justify">[AJ Hernandez]</div></td> </tr> <tr valign="top"> <td><div align="justify">Q:</div></td> <td><div align="justify"><i>Probably you gave them a wrong advice because, otherwise, they will not be having a case here</i>.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p>In disregarding accused-appellants' claim of good faith, the SBN merely observed that "[t]he accused are public officers who should have known better than to rely on the verbal affirmation (albeit erroneous) of a COA auditor as to whether their action was proper."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> It further quoted the testimony of Lorete to show that he merely rendered an opinion, viz.: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td colspan="2"><div align="justify">DSP SOMIDO</div></td> </tr> <tr valign="top"> <td width="5%"><div align="justify"></div><br></td> <td width="95%"><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">Q</div></td> <td><div align="justify">Would it be correct. . . to say that the advice you rendered was not made in accord with your official position as an auditor?</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">It was in accordance with my <i>kuwan</i> because when I rendered my opinion. . . and because you know in the local government, sir, they are, from time to time. . . referral advice.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q</div></td> <td><div align="justify">Not in your capacity as auditor?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">That is in line with my function opinion as <i>kuwan</i> because as I've said earlier, sir, <i>perform such other functions like rendering opinions and advices [sic] to a client focal government officials</i> in furtherance of their function to deliver the basic services in order to cater the needs of the populace, sir.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> <p> For its part, the People, through the Office of the Special Prosecutor, contend that accused-appellants' seeking of Lorete's opinion on the legality of borrowing the unexpended amount before the passage of the municipal resolutions was a mere subterfuge to facilitate the transfer of the funds to a private entity, which funds subsequently ended up in their pockets. They further argue that, worse, the purported opinion was not even in writing. </p> <p> We disagree. If accused-appellants could not reasonably rely on the opinion of Lorete, who is presumed to possess expertise in auditing financial transactions of government entities, and considering that the Municipality had no legal officer at the time, on whose opinion could they rely? The fact that the opinion was not in writing and that it was done pre-audit is of no moment since Lorete affirmed that he indeed rendered an opinion and that it was one of his functions. Accused-appellants had every right to presume that he not only performed his functions regularly but also correctly. </p><p> The People's contention that accused-appellants' seeking of Lorete's opinion was a mere subterfuge, is speculative at best and is not supported by evidence. Even assuming that bad faith attended such act, the law requires not mere bad faith but <i>evident</i> bad faith. "Evident bad faith" connotes not only bad judgment but also palpably and patently fraudulent and dishonest purpose to do moral obliquity or conscious wrongdoing for some perverse motive or ill will. It contemplates a state of mind affirmatively operating with furtive design or some motive, self-interest, ill will, or ulterior purposes.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> As We explained in <i>Sistoza v. Desierto</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> "mere bad faith or partiality and negligence per se are not enough for one to be held liable under the law since the act of bad faith or partiality must in the first place be evident or manifest."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Indeed, the trial court's observation that accused public officers "should have known better" reveals ignorance rather than bad faith. This is different from a case where the accused knew better but consciously and deliberately chose not to follow their better judgment.</p><p> As regards the two other modalities by which a Section 3(e) violation may be committed, We agree with accused-appellants that there was no finding by the SBN that they acted with manifest partiality. Neither was there any allegation in the Information that they acted with gross inexcusable negligence. It bears reminding that manifest partiality, evident bad faith, or gross inexcusable negligence must be alleged with particularity in the Information to sufficiently inform the accused of the charge against them and to enable the court properly to render a decision.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Considering that the third element hinges on the presence of the second element which, as discussed, is lacking, We need no longer determine its presence. </p><p align="center"> <i>III</i> </p><p> With regard to the charge of malversation of public funds, the SBN found Reyes and Salise guilty, considering that, by law, the former is immediately and primarily responsible for all government funds and property pertaining to his agency, while it is the latter's duty to take custody and exercise proper management of the funds of the local government unit concerned.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> It ruled that the failed to account for the funds which they borrowed from the Municipality after being presented with the COA audit observation, and their concerted acts made it possible for the local officials to receive the amount in question in the form of a loan. Further, Reyes signed the Resolution which allowed LOTSA to borrow PHP 1.6 million from the Municipality. Salise, on the other hand, made a letter-request to Land Bank for the transfer of the amount in question from the general fund account of the Municipality to the current account of LOTSA.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p><p> Malversation of public funds is defined and penalized under Article 217 of the Revised Penal Code, as amended, to wit: </p><blockquote> <p> ART. 217. <i>Malversation of public funds or property.â Presumption of malversation</i>.- Any public officer who, by reason of the duties of his office, is accountable for public funds or property, shall appropriate the same, or shall take or misappropriate or shall consent, through abandonment or negligence, shall permit any other person to take such public funds or property, wholly or partially, or shall otherwise be guilty of the misappropriation or malversation of such funds or property shall suffer: </p> <p>. . . . </p> <p> 3. The penalty of <i>prision mayor</i> in its maximum period to <i>reclusion temporal</i> in its minimum period, if the amount involved is more than [PHP 1.2 million] but does not exceed [PHP 2.4 million]. </p> <p> . . . .</p> <p> In all cases, persons guilty of malversation shall, also suffer the penalty of perpetual special disqualification and a fine equal to the amount of the funds malversed or equal to the total value of the property embezzled. </p> <p> The failure of a public officer to have duly forthcoming any public funds or property with which he is chargeable, upon demand by any duly authorized officer, shall be <i>prima facie</i> evidence that he has put such missing funds or property to personal uses. </p> </blockquote> <p> The elements of malversation under said provision are: (1) that the offender is a public officer; (2) that they had custody or control of funds or property by reason of the duties of their office; (3) that those funds or property were funds or property for which they were accountable; and (4) that they appropriated, took, misappropriated or consented or, through abandonment or negligence, permitted another person to take them.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> In malversation of public funds, the offender misappropriates public funds for their own personal use or allows any other person to take such public funds for the latter's personal use.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> In <i>Wa-acon v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> We elucidated on the disputable presumption of malversation in the last paragraph of Article 217 of the Revised Penal Code, as follows: </p><blockquote> <p> Article 217 [of the Revised Penal Code], as amended by Republic Act [No.] 1060, no longer requires proof by the State that the accused actually appropriated, took, or misappropriated public funds or property. Instead, a presumption, though disputable and rebuttable, was installed that upon demand by any duly authorized officer, the failure of a public officer to have duly forthcoming any public funds or propertyâwith which said officer is accountableâshould be <i>prima facie</i> evidence that [they] had put such missing funds or properties to personal use. When these circumstances are present, a "presumption of law" arises that there was malversation of public funds or properties as decreed by Article 217. A "presumption of law" is sanctioned by a statute prescribing that "a certain inference must be made whenever facts appear which furnish the basis of the interference.". . . When there is a presumption of law, the <i>onus probandi</i> (burden of proof), generally imposed upon the State, is now shifted to the party against whom the interference is made to adduce satisfactory evidence to rebut the presumption and hence, to demolish the <i>prima facie </i>case.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p> </blockquote> <p> Even assuming that the purpose of the loans to the municipal officials, as stated in the MOA and the SB Resolutions, was for them to be applied to a public use, i.e., for the purchase of service vehicles to be used only for official purposes, the fact remains that Reyes, as the officer accountable for said funds, failed to account for the same. Glaringly, no proof was adduced to show that said loans were indeed applied for said public purpose. We cannot simply rely on the MOA and SB Resolutions and presume that the recipients of the loans purchased motorcycles to be used exclusively as official service vehicles. At any rate, We find it most irregular that a loan agreement was even entered between the Municipality and its officials for the latter to purchase service vehicles in the first place, instead of the Municipality directly procuring said vehicles. To the Court's mind, therefore, Reyes utterly failed to rebut the statutory presumption of malversation. </p><p> <b>ACCORDINGLY</b>, the appeal is <b>PARTLY GRANTED</b>. The September 28, 2018 Decision and March 28, 2019 Resolution of the Sandiganbayan are <b>AFFIRMED</b> as to Criminal Case No. SB-10-CRM-0128. Accused-appellant Herminio Casal Reyes is found <b>GUILTY</b> beyond reasonable doubt of malversation of public funds and is sentenced to suffer the indeterminate penalty of six years and one day of <i>prision mayor</i>, as minimum, to 10 years of <i>prision mayor</i>, as maximum, to suffer perpetual special disqualification, and to pay a fine of PHP 1.6 million. </p><p> However, said Decision and Resolution are <b>MODIFIED</b> as to Criminal Case No. SB-10-CRM-0127. Accused-appellants Herminio Casal Reyes, Ma. Marley C. Daday, Leo Bausing Gomez, Joel Dingle Plaza, Romeo O. Magadan, and Virgilio A. Julao are <b>ACQUITTED</b> of violation of Section 3(e), Republic Act No. 3019 on the ground of reasonable doubt. Let entry of judgment be issued immediately as to accused-appellants in Criminal Case No. SB-10-CRM-0127. </p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>Rollo</i>, p. 67, n.1, Appellants' Brief. Accused Arturo Elumba Estil did not appeal his conviction. The Appellants' Brief alleges that he died while the case was being heard. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> SBN <i>rollo</i>, vol. 2, pp. 387-388 The cases against accused Filomeno CaseÃ±as Salise in Criminal Case Nos. SB-10-CRM-0127 to 0128 were dismissed by the Sandiganbayan on account of his death. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 39-41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 11-38. The September 28, 2018 Decision in Criminal Case Nos. SB-10-CRM-0127 to 0128 was penned by Associate Justice Alex L. Quiroz and concurred in by Associate Justices Reynaldo P. Cruz and Bayani H. Jacinto of the Fourth Division, Sandiganbayan, Quezon City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 217-218. The March 28, 2019 Resolution in Criminal Case Nos. SB-10-CRM-0127 to 0128 was approved by Associate Justices Alex L. Quiroz, Reynaldo P. Cruz, and Bayani H. Jacinto of the Fourth Division, Sandiganbayan, Quezon City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Republic Act No. 3019 (1960), Anti-Graft and Corrupt Practices Act. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> SBN <i>rollo</i>, vol. 2, pp. 1-4, Amended Information. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 132. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 133. </p><p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Exhibit K, Folder of Prosecution's Exhibits, pp. 50-52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, pp. 134-135. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Exhibit X, Folder of Prosecution's Exhibits, p. 77. The first two Whereas clauses of Resolution No. 38-2003 state: </p><blockquote> <p> WHEREAS, vehicle is one of the primary [necessities] of the Local Officials which we can reach to our point of destination in case of urgent call of appointment without encountering a necessary delay on our way;</p> <p> WHEREAS, the [PHP 1.5 million] shall be pro-rated or be divided equally which is equivalent to [PHP 100,000.00] each and such amount is payable for a period of [three] years subject to a payroll deduction[.]</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Exhibit W, Folder of Prosecution's Exhibits, p. 76. The first two Whereas clauses of the later version of Resolution No. 38-2003 state: </p><blockquote> <p> WHEREAS, livelihood projects is one of the primary necessity of some Government Employees/Officials considering the meager and through a livelihood projects, it is one of the means to increase the income to [meet] the daily needs of the family especially at this moment of economic crises; </p> <p>WHEREAS, the amount of [PHP 1.5 million] will be pro-rated or be divided equally which is equivalent to [PHP 100,000.00] each employee/officials and such amount is payable for a period of [three] years subject to a payroll deduction[.]</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Exhibit L, Folder of Prosecution's Exhibits, p. 53. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Exhibit BB, <i>id.</i> at 89. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, pp. 18, 73. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Exhibit F, Folder of Prosecution's Exhibits, p. 39. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Exhibit G, <i>id.</i> at 40. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Exhibit H, <i>id.</i> at 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Exhibit N, <i>id.</i> at p. 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Exhibit LLL, <i>id.</i> at 156; Exhibit 13-A, Folder of Defense's Exhibits, unpaginated. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Exhibit U, <i>id.</i> at 64. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 67. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 70. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> SBN <i>rollo</i>, vol. 2, pp. 2-3. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 5-6. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 14. With respect to accused Estil, the SBN noted his non-appearance during his arraignment on May 9, 2011 despite proper notice, but the defense manifested that he was sick and bed-ridden, and presented a medical certificate attesting to said fact. SBN <i>rollo</i>, vol. 1, pp. 289-290. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i>, p. 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 11-38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 37-38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> SBN <i>rollo</i>, vol. 1, pp. 541-547. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 549-557. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Rollo</i>, p. 218. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 484 Phil. 350 (2004) [Per J. Callejo, Sr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 360) <i>citing</i> <b>Jacinto v. Sandiganbayan</b>, 258-A Phil. 20, 26 ( 1989) [Per J. Gancayco, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, p. 156. </p><p><sup style="COLOR: RGB(255, 0, 0);">37]</sup> <i>Id.</i> at 160-161. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 163-167. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 168-169. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 493 Phil. 887 (2005) [Per J. Chico-Nazario, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 902-903. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 903, <i>citing</i> <b>Development Bank of the Philippines v. Commission on Audit</b>, 301 Phil. 207, 212 [Per J. Bidin, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> TSN, Arsenio B. Lorete, May 13, 2014, pp. 15-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> TSN, Arsenio B. Lorete, May 13, 2014, pp. 34-35. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Luspo v. People</b>, 658 Phil. 79, 104 (2011) [Per J. Nachura, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 437 Phil. 117 (2002) [Per J. Bellosillo, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 130. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Dela Chica v. Hon. Sandiganbayan</b>, 462 Phil. 712, 722 (2003) [Per J. Azcuna, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 35. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Corpuz v. People</b>, 873 Phil. 601, 612 (2020) [Per J. Reyes, Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Parungao v. Sandiganbayan</b>, 274 Phil. 451, 460 (1991) [Per J. Gutierrez, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 539 Phil. 485 (2006) [Per J. Velasco, Jr., Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 493-494. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

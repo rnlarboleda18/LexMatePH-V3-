@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277260 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. NICOLA JAKOBSEN Y ARNE AND ALONA TURTOSA Y OUANO, ACCUSED-APPELLANTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70134' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277260, August 18, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. NICOLA JAKOBSEN<I> Y</I> ARNE AND ALONA TURTOSA<I> Y</I> OUANO, ACCUSED-APPELLANTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">All children, in view of their particular vulnerabilities, deserve particular attention and protection by our laws. Therefore, the law considers trafficking in persons to be qualified when the trafficked person is a child, and thereby imposes severe penalties on perpetrators.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>This Court resolves the Appeal filed by Nicola Jakobsen<i> y</i> Arne (Jakobsen) and Alona Turtosa<i> y</i> Ouano (Turtosa) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals affirming the Joint Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court, which found Jakobsen and Turtosa guilty beyond reasonable doubt of qualified trafficking in persons and Jakobsen of statutory rape.<br><br>Two Informations were filed before the Regional Trial Court against Jakobsen and Turtosa, with one Information charging Jakobsen with statutory rape and the other Information charging both Jakobsen and Turtosa with qualified trafficking in persons in violation of Section 4(a), in relation to Section 6(a) of Republic Act No. 9802, as amended by Republic Act No. 10364.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>The accusatory portions of the Informations read:<br><blockquote><center><i>Statutory Rape</i></center><br>That on January 19, 2015, at around 11:30 o'clock [sic] in the evening, in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the said accused [Jakobsen], with the use of force and intimidation upon the person of one AAA, a minor, 10 years old, with deliberate intent, did then and there willfully, unlawfully, and feloniously insert his penis into the genital organ of the latter.<br><br>CONTRARY TO LAW.<br><br><center><i>Qualified Trafficking in Persons</i></center><br>That on January 19, 2015, at around 11 o'clock in the evening, in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the said accused [Turtosa], conniving and confederating together and mutually helping each other, with deliberate intent, did then and there unlawfully and feloniously recruit, obtain, hire, offer, transfer, harbor in the apartment room of accused [Jakobsen] and offered to three (3) female minors, namely, BBB, 12 years old, CCC, 12 years old, and AAA, 10 years old, money and other personal items by means of deception, or other forms of coercion, fraud[,] and taking advantage of the economic vulnerability and minority of said victims for the purpose of sexual exploitation and prostitution, in violation of Section 4(a), in relation to Section 6(a), RA 9208 as amended by RA 10364 (Qualified Trafficking).<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </blockquote>Both Jakobsen and Turtosa pleaded not guilty to the charge of qualified trafficking in persons, while Jakobsen pleaded not guilty to the charge of statutory rape.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Trial on the merits then ensued.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>The prosecution presented the following witnesses: Police Senior Inspector Mercy Villaro (PSI Villaro) and private complainants AAA and BBB.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Their testimonies are summarized as follows:<br><br>PSI Villaro was the Chief of the Women and Children's Protection Desk in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Police Office from 2013 to 2015.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> On January 19, 2015, at around 7:00 p.m., PSI Villaro received a call from Police Station 1 regarding the alleged trafficking of minors.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> She went to Police Station 1 and met BBB, who recounted to her that she, along with two other friends, had been sexually exploited by a foreigner.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> BBB stated that her two friends were still at the foreigner's house.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Acting on BBB's information, PSI Villaro brought her and other police officers from Police Station 1 to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> to meet with other police officers from the Regional Anti-Human Trafficking Task Force (Task Force), headed by Police Senior Inspector Macatangay (PSI Macatangay).<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> PSI Villaro learned from BBB that she met Turtosa in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> December 2014 and that it was Turtosa who convinced BBB and CCC to go to Jakobsen's residence, where the minors were made to engage in sexual acts in exchange for money.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>As other members of the Task Force arrived, they were divided into three groups: (1) the photo documentation team; (2) the arresting team; and (3) the team who would attend to the victims.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> PSI Villaro and the Task Force then instructed BBB to ride a public jeepney going to Jakobsen's apartment while the Task Force followed in their own vehicle.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Upon their arrival, BBB knocked on the door then went inside.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The arresting team swiftly followed and introduced themselves as police officers.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> PSI Villaro and the other Task Force members followed the arresting team inside the apartment.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> PSI Villaro saw that Jakobsen had been placed under arrest and was sitting handcuffed in a chair in the living room, while Turtosa was seated on the floor nearby with her son, Dodong.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> AAA, BBB, and CCC, the child victims, were standing on the other side of the room.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The police officers recovered packets of Vulcaseal or Fedseal, as well as small plastic bags on a small table in the middle of the room, and mobile phones belonging to Jakobsen and the child victims.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>PSI Villaro identified the photos of the child victims taken inside Jakobsen's apartment.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> After documentation was completed, the police officers took the child victims to the Department of Social Welfare and Development (DSWD) Office while Jakobsen and Turtosa were taken to the Police Office.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>The following day, PSI Villaro returned to the DSWD Office to take the child victim's affidavits.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The day after, the Task Force secured a search warrant and returned to Jakobsen's house to confiscate other items relevant to the case.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>BBB testified that she first met Jakobsen and Turtosa in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> in December 2014.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> She and CCC were playing with other children when Jakobsen and Turtosa approached them and asked that they stand in a line.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Turtosa told them that Jakobsen wanted to choose some children to accompany him to his apartment and that nothing terrible would happen to them.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Jakobsen then selected her and CCC, and they boarded his motorcycle together with Turtosa, who was with her son, and proceeded to Jakobsen's apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Once they arrived, Turtosa took them to Jakobsen's room. Jakobsen then took off his clothes and undergarments, grabbed BBB, and ordered her to perform oral sex on him. Jakobsen forced BBB to open her mouth, placed his penis inside it, and made back and forth pumping motions with his hips.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>After that, Jakobsen took off CCC's clothes and had sexual intercourse with her. When he had finished, Jakobsen gave BBB a mobile phone so he could contact her anytime. Jakobsen gave BBB PHP 1,300.00 and gave PHP 1,500.00 to CCC. Before leaving the apartment, Turtosa demanded PHP 500.00 each from BBB and CCC. Jakobsen and Turtosa then brought BBB and CCC back to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>This occurred several times over the next few days, where Jakobsen would text BBB to come to his apartment, and Turtosa would meet her and CCC in and bring them to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>BBB stated that Turtosa would have them sniff Fedseal or Vulcaseal before sending them to Jakobsen's room, where he would force her to give him oral sex and then have sexual intercourse with CCC. Jakobsen would also insert his fingers in CCC's female organ, lick the same, and finally would get on top of her and insert his penis into her vagina.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Sometimes, AAA would go with them, and Jakobsen would also have sexual intercourse with her.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> He would kiss her face and then insert his penis into her vagina, at which point AAA would cry and ask for him to stop.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Jakobsen always gave them money, ranging from PHP 1,000.00 to over PHP 2,000.00, but he would give more money to CCC.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Turtosa would also demand PHP 500.00 from each of them before going home.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>On January 19, 2015, BBB saw AAA being coerced by Turtosa to go to Jakobsen's apartment.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Later that day, BBB went with CCC to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> because the latter wanted to see her sister, AAA.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> When they arrived in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, CCC went to Jakobsen's apartment while BBB proceeded to the police station to report that they were victims of sexual abuse.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> She then led the police officers to Jakobsen's apartment, pointing at the specific building for the police to enter.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> After following the police officers inside, BBB saw Jakobsen being handcuffed and she also saw CCC and AAA.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The police officers gave each of them towels to cover their faces.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>BBB saw Jakobsen and Turtosa boarding one vehicle, while she, AAA, and CCC boarded another car that took them to the DSWD Office.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> BBB was later interviewed about the events that occurred, particularly the details of her alleged sexual abuse.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>During the interview, she learned her surname, and said that her birthday was <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> She identified her Birth Certificate which confirmed her date of birth.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Likewise, she identified her Affidavit dated January 21, 2015, and identified Jakobsen and the living room of his apartment in the photos shown to her.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> She also identified Turtosa and a police officer she knew as Kuya Kiko.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> She identified the items on the small table in the middle of the room as Vulcaseal, small plastic sachets, and mobile phones. Finally, she identified Jakobsen and Turtosa in open court.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Meanwhile, AAA testified that she was 10 years old at the time the events happened. On January 29, 2015, she was rescued together with BBB and CCC by police officers from Jakobsen's apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. She was brought to the DSWD Office and interviewed about her experience. She identified her Affidavit dated January 21, 2015 and affirmed its contents as true and correct.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>AAA first met Jakobsen and Turtosa at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market in January 2015; BBB introduced her to Turtosa, who in turn introduced her to Jakobsen. Turtosa told her they were going to Jakobsen's apartment to get something to eat. They took a public jeepney going to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and then rode a motorcycle to Jakobsen's apartment.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>While inside, they saw Jakobsen sitting down in the living room; he then brought BBB and AAA upstairs and told them to undress. Turtosa told AAA that Jakobsen would use her for sex and in return they would buy her cake and ice cream for her birthday. Jakobsen then forced BBB and CCC to take turns in giving him oral sex; after he finished, BBB and CCC both cried and ran downstairs.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>Jakobsen then made AAA lie down on the bed, held her hands, and inserted his penis into her vagina. After finishing, Jakobsen gave her PHP 5,000.00 and a mobile phone. Turtosa took the money from her, and they left the apartment.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>The next day, AAA met Turtosa at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market and Turtosa brought her to a nearby mall.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Upon their arrival, Turtosa told AAA that they would return to Jakobsen's apartment and reassured her that they would just get something to eat and Jakobsen would not do anything to her. BBB saw them both leave the mall and remembered that her sister CCC was supposed to go to Jakobsenâs apartment in the evening.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>At Jakobsen's apartment, AAA watched shows on the television until CCC arrived. Police officers arrived soon after, arrested Jakobsen and Turtosa, and took photos of the apartment. AAA identified the pictures taken of Jakobsen, the apartment's interior, and the Vulcaseal which Turtosa forced the child victims to sniff every time they went to the apartment. AAA also identified both Jakobsen and Turtosa in open court.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Meanwhile, Jakobsen and Turtosa were witnesses for the defense.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Turtosa testified that on January 19, 2015 she was living in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> with her child, Dodong, whose father was a certain Arturo Sumalinog, Jr., alias "Dondon." She was unemployed then, relying on support given by her sibling who worked in Saudi Arabia. In exchange for her sibling's support, she acted as the guardian of the latter's child on weekdays. On weekends, she did errands for Jakobsen.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>She explained that she first met Jakobsen through mutual friends in October 2011, when Jakobsen was in the country to look for his former live-in partner with whom he had a daughter. He was staying in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and worked in a local call center. Jakobsen offered Turtosa a job running errands for him and acting as his translator since he did not speak nor understand Bisaya.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Turtosa accepted and she lived in a spare room in his apartment, helping the maid clean the house and prepare Jakobsen's meals.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Jakobsen paid her PHP 500.00 weekly, plus allowances.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> In November 2011, Jakobsen had a live-in partner named Gemmalyn, and in 2012 they relocated to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> In 2013, Turtosa got pregnant and only worked weekends for Jakobsen.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>Turtosa knew CCC and AAA because they were Dondon's cousins, and BBB was friends with the two girls. In early December 2014, she met CCC and AAA in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market. Answering CCC's question on what she did for work, Turtosa said that she acted as her nephew's guardian on school days and worked at a foreigner's house on weekends. She again met CCC and AAA in the same place in late December 2014, and she was with Jakobsen at the time as they were getting ready to go to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. Allegedly, CCC and AAA approached them and asked if they could come with them, to which Jakobsen agreed and AAA's mother consented. They then boarded a motorcycle bound for <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>At the apartment, Turtosa showed them around and Jakobsen gave them money for food and drinks. Jakobsen then went to his room and did not come out for the rest of the night. Turtosa slept beside her son Dodong, along with the girls, in the living room.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>The next day, Turtosa took the girls to Jakobsen's room and asked them to use the computer, which was connected to the internet. The girls listened and sang along to local songs for about 30 minutes, after which Turtosa took them outside to buy groceries for Jakobsen. After doing the laundry, Turtosa went home to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> with the girls in the afternoon. A few days later, she was chatting with Gemmalyn in Jakobsen's house when CCC and AAA arrived suddenly. Jakobsen sent the girls home because nobody invited them to come over that day.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>On January 18, 2025, Turtosa met the girls again, this time with BBB in tow, at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market. They asked Turtosa if they could go with her again to Jakobsen's apartment. They left for <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> at around 9:00 a.m. The children went to Turtosa's room to use the newly installed computer with internet connection.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Jakobsen checked in on them, asked how they were doing, and then went back to his room.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> He did not come out again for the rest of the day.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> After about 30 minutes, Turtosa went outside to do the laundry, and an hour after the children went downstairs to watch television in the living room while she prepared lunch. Turtosa did not notice anything unusual with the children, and like before she left the apartment in the afternoon along with the children.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>The next day, January 19, 2015, Turtosa was at Jakobsen's apartment doing the laundry while BBB was in the living room with Dodong. Jakobsen came down to get his lunch, returned to his room to eat, came down to return his utensils after eating, said a few words to BBB, then went back up his room and stayed there for the rest of the day. Turtosa also received a text message from CCC saying she was on her way to the apartment, and at around 7:00 p.m. she arrived, to Jakobsen's surprise. Turtosa assured him that she would take CCC home the next day.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>After dinner, CCC cleaned the kitchen while Turtosa put BBB and Dodong to sleep. As she was doing this, there came a knock on the door and when CCC opened it she saw several police officers who said they were looking for a foreigner. Some DSWD personnel followed them inside as well. Turtosa was told to stand in a corner with the children, who were given towels to cover their heads. She saw AAA pointing to her when asked to identify a person named "Alona;" AAA also pointed to Jakobsen when asked to identify a person named "Nicola."<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>Jakobsen testified that he was a Danish citizen who used to work as a carpenter and truck driver in Denmark. He arrived in the Philippines in May 2010 and had been staying here since then; he said he initially just visited the country but decided to settle here because the weather and living costs were agreeable to him. He worked for a Philippine-based Danish call center for three years to support himself, and he met Turtosa in 2011 through mutual friends.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>Jakobsen denied hiring Turtosa as a translator and said she merely talked to him in English whenever they were with friends.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> He allowed Turtosa to stay in his apartment as a courtesy to a friend, but he said that Turtosa was not hired to clean, cook, or do his laundry, although he sometimes gave her a small amount for necessary household expenses.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> He likewise denied meeting the children at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market and said he merely stopped there briefly to pick up Turtosa. He met CCC and BBB and permitted them to enter his apartment since they were Turtosa's cousins. He denied abusing them in any way, shape, or form and could not think of any reason why they would bear a grudge against him.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>Jakobsen alleged that the charges against him were false and were lies concocted by AAA, and that he had forbidden AAA from coming to his apartment as the grudge she bore against him was "a compelling motive for her to make false accusations against him."<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> BBB, meanwhile, was "clearly instructed by the police as to what to say in court to support AAA's story [as she] even stated that she did not prepare her affidavit or understand its contents when she signed it."<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> CCC refused to testify "because she knew what they wanted her to say was false."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> There were also no traces of semen, blood, or DNA found in the apartment, and no medical report on the children was presented during trial. Jakobsen stated that he had no prior contact or altercation with any police officer or DSWD personnel.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>In a Joint Decision dated July 24, 2020, the Regional Trial Court found Jakobsen and Turtosa guilty beyond reasonable doubt of qualified trafficking in persons and Jakobsen guilty beyond reasonable doubt of statutory rape.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> The dispositive portion of the Joint Decision reads:<br><blockquote>WHEREFORE, judgment is hereby rendered:<br><br><center>x x x</center><br>2. FINDING accused NICOLA JAKOBSEN<i> y</i> ARNE GUILTY beyond reasonable doubt of Statutory Rape (in CBU-107331) and hereby sentenced to suffer the penalty of<i> Reclusion Perpetua</i>;<br><br>3. Ordering the accused NICOLA JAKOBSEN<i> y</i> ARNE to pay the victim in CBU-107331 [PHP 75,000.00] as civil indemnity, [PHP 75,000.00] as moral damages[,] and [PHP] 30,000.00 as exemplary damages, plus legal interest on all damages at the rate of 6% from the date of finality of this Decision (in CBU-107331).<br><br>4. FINDING accused NICOLA JAKOBSEN<i> y</i> ARNE and ALONA TURTOSA<i> y</i> OUANO GUILTY beyond reasonable doubt of Qualified Trafficking in Persons under RA 10364 (in CBU-107332) and hereby sentenced to suffer the penalty of life imprisonment and a fine of [PHP] 2,000,000.00.<br><br>5. Ordering accused NICOLA JAKOBSEN<i> y</i> ARNE and ALONA TURTOSA<i> y</i> OUANO to pay each of the victims in CBU-107332, [PHP] 500,000.00 as moral damages and [PHP] 100,000.00 as exemplary damages.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> </blockquote>The Regional Trial Court held that the prosecution successfully proved Jakobsen's guilt beyond reasonable doubt for statutory rape.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> BBB's birth certificate "clearly showed that she was born on January 29, 2004, and was thus only ten years..., 11 months, and 19 days [old] when [Jakobsen] engaged in sexual intercourse with her."<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> The trial court likewise found BBB's testimony "sufficient and credible, and AAA's testimony corroborated it. Moreover, no ill motive was even imputed [to] her."<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><br>Jakobsen and Turtosa's guilt beyond reasonable doubt for qualified trafficking in persons was likewise successfully proven by the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> The trial court observed that it was proven that Jakobsen and Turtosa "transported the children from <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and kept them in an apartment for purposes of sexual exploitation."<sup style="COLOR: RGB(255, 0, 0);">[89]</sup><br><br>Aggrieved, Jakobsen and Turtosa filed an Appeal before the Court of Appeals. The Court of Appeals' June 21, 2024 Decision<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> affirmed Jakobsen and Turtosa's convictions with modification, as follows:<br><blockquote><b>WHEREFORE,</b> the appeal is<b> DENIED. </b><br><br>The Joint Decision dated July 24, 2020 rendered by Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span> of the Regional Trial Court of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> in Criminal Case No. CBU-107331 and Criminal Case No. CBU-107332 is<b> AFFIRMED,</b> and the relevant portions of its dispositive portion are hereby<b> MODIFIED</b> to read as follows:<br><blockquote>WHEREFORE, judgment is hereby rendered:<br><br><center>x x x x</center><br>2. FINDING accused NICOLA JAKOBSEN<i> y</i> ARNE GUILTY beyond reasonable doubt of Statutory Rape (in CBU-107331) and hereby sentenced to suffer the penalty of <i>Reclusion Perpetua</i>;<br><br>3. Ordering the accused NICOLA JAKOBSEN<i> y</i> ARNE to pay the victim in CBU-107331 [PHP] 75,000[.00] as civil indemnity, [PHP] 75,000[.00] as moral damages[,] and [PHP] 30,000.00 as exemplary damages, plus legal interest on all damages at the rate of 6% from the date of finality of this Decision (in CBU-107331).<br><br>4. FINDING accused NICOLA JAKOBSEN<i> y</i> ARNE and ALONA TURTOSA<i> y</i> OUANO GUILTY beyond reasonable doubt of Qualified Trafficking in Persons under RA 10364 (in CBU-107332) and hereby sentenced to suffer the penalty of life imprisonment and a fine of [PHP] 2,000,000.00.<br><br>5. Ordering accused NICOLA JAKOBSEN<i> y</i> Arne and ALONA TURTOSA<i> y</i> OUANO to pay each of the victims in CBU-107332, [PHP] 500,000.00 as moral damages and [PHP] 100,000.00 as exemplary damages,<b> <u>plus legal interest on all damages awarded at the rate of 6% from the date of finality of this Decision (in CBU-107332).</u></b><br><br>SO ORDERED. </blockquote>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> </blockquote>The Court of Appeals said that the Regional Trial Court was correct in convicting Jakobsen of statutory rape. In particular, the appellate court said that all the elements for the crime were successfully proven by the prosecution beyond reasonable doubt, namely that the offended party was under 12 years of age as evidenced by her birth certificate and that Jakobsen had carnal knowledge of BBB as proven by her accounting of the event which was "not only unwavering but...bolstered by [her] testimony...in open court [where she vividly demonstrated,] with the use of anatomical dolls, how [Jakobsen] had sexual intercourse with her [.]<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>The appellate court likewise stated that the trial court was correct in convicting Jakobsen and Turtosa of qualified trafficking in persons, as the "evidence on record shows that [Jakobsen and Turtosa] sexually exploited AAA in this case. Taking advantage of her economic vulnerability, [they] convinced her to go with them to...Jakobsen's apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, where he forced her, on several occasions, to give him oral sex."<sup style="COLOR: RGB(255, 0, 0);">[93]</sup><br><br>Thereafter, Jakobsen and Turtosa filed their Notice of Appeal.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> The Court of Appeals gave due course in its October 16, 2024 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> The case records were thus elevated to this Court.<br><br>The Office of the Solicitor General, on behalf of the People of the Philippines, filed a Manifestation stating that it would no longer file a supplemental brief.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> The accused-appellants, through the Public Attorney's Office, likewise filed a Manifestation stating that they would no longer file a supplemental brief.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup><br><br>The issues for this Court's resolution are: (1) whether accused-appellant Nicola Jakobsen<i> y</i> Arne is guilty beyond reasonable doubt of statutory rape and qualified trafficking in persons; and (2) whether accused-appellant Alona Turtosa<i> y</i> Ouano is guilty beyond reasonable doubt of qualified trafficking in persons.<br><br>We deny the Appeal.<br><br>Article 266-A, paragraph 1 of the Revised Penal Code, as amended by Republic Act No. 11648 or the Act Raising the Age of Sexual Consent, provides the elements for the crime of rape:<br><blockquote>ARTICLE 266-A.<i> Rape; When and How Committed</i>.âRape is committed:<ol><li>By a man who shall have carnal knowledge of a woman under any of the following circumstances:<br><br><ol type="a"><li>Through force, threat, or intimidation;<br></li><li>When the offended party is deprived of reason or otherwise unconscious;<br></li><li>By means of fraudulent machination or grave abuse of authority; and<br></li><li>When the offended party is under sixteen (16) years of age or is demented, even though none of the circumstances mentioned above be present:<i> Provided</i>, That there shall be no criminal liability on the part of a person having carnal knowledge of another person under sixteen (16) years of age when the age difference between the parties is not more than three (3) years, and the sexual act in question is proven to be consensual, non-abusive, and non-exploitative:<i> Provided, further</i>, That if the victim is under thirteen (13) years of age, this exception shall not apply.</li></ol></li></ol>"As used in this Act, non-abusive shall mean the absence of undue influence, intimidation, fraudulent machinations, coercion, threat, physical, sexual, psychological, or mental injury or maltreatment, either with intention or through neglect, during the conduct of sexual activities with the child victim. On the other hand, non-exploitative shall mean there is no actual or attempted act or acts of unfairly taking advantage of the child's position of vulnerability, differential power, or trust during the conduct of sexual activities."<ol start="2"><li>By any person who, under any of the circumstances mentioned in paragraph 1 hereof, shall commit an act of sexual assault by inserting his penis into another person's mouth or anal orifice, or any instrument or object, into the genital or anal orifice of another person. </li></ol></blockquote>Article 266-B of the Revised Penal Code, as amended, states that rape "under paragraph 1 of the next preceding article shall be punished by<i> reclusion perpetua</i>."<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><br>In<i> People v. Gutierrez</i>,<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> this Court discussed the elements of statutory rape:<br><blockquote>Statutory rape is committed when (1) the offended party is under 12 years of age and (2) the accused has carnal knowledge of her, regardless of whether there was force, threat or intimidation; whether the victim was deprived of reason or consciousness; or whether it was done through fraud or grave abuse of authority. It is enough that the age of the victim is proven and that there was sexual intercourse.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> </blockquote>In this case, the rape of BBB was committed on January 19, 2015, or before Republic Act No. 11648 amended Article 266-A(1)(d) of the Revised Penal Code. Hence, the provisions on statutory rape before the effectivity of Republic Act No. 11648 applies, as outlined in<i> Gutierrez</i>.<br><br>In turn, Republic Act No. 9208, as amended by Republic Act No. 10364, defines trafficking in persons as follows:<br><blockquote>Section 3.<i> Definition of Terms</i>. â As used in this Act:<br><br>(a) Trafficking in Persons â refers to the recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person |for the purpose of exploitation which includes at a minimum, the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs.<br><br>The recruitment, transportation, transfer, harboring, adoption or receipt of a child for the purpose of exploitation or when the adoption is induced by any form of consideration for exploitative purposes shall also be considered as 'trafficking in persons' even if it does not involve any of the means set forth in the preceding paragraph.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> </blockquote>In relation to this, specific acts of trafficking in persons and qualified trafficking in persons are defined under the same statutes as:<br><blockquote>Section 4.<i> Acts of Trafficking in Persons</i>. â It shall be unlawful for any person, natural or juridical, to commit any of the following acts:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">To recruit, obtain, hire, provide, offer, transport, transfer, maintain, harbor, or receive a person by any means, including those done under the pretext of domestic or overseas employment or training or apprenticeship, for the purpose of prostitution, pornography, or sexual exploitation[.] </div></td> </tr> </tbody></table><br><center>x x x</center><br>Section 6.<i> Qualified Trafficking in Persons</i>. â Violations of Section 4 of this Act shall be considered as qualified trafficking:<br><br>(a) When the trafficked person is a child[.]<sup style="COLOR: RGB(255, 0, 0);">[102]</sup></blockquote>The penalty for qualified trafficking in persons is found in Section 10(e) of Republic Act No. 9208, as amended, which states that "[a]ny person found guilty of qualified trafficking under Section 6 shall suffer the penalty of life imprisonment and a fine of not less than Two million pesos (P2,000,000.00) but not more than Five million pesos (P5,000,000.00)[.]"<sup style="COLOR: RGB(255, 0, 0);">[103]</sup><br><br>In<i> People v. Celis</i>,<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> this Court enumerated the following elements of trafficking in persons:<br><blockquote>(1) The act of "recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders[;"]<br><br>(2) The means used include "by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person[;"]<br><br>(3) The purpose of trafficking includes "the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs[."]<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> (Citation omitted) </blockquote>The Court of Appeals and the Regional Trial Court correctly found accused-appellants guilty of statutory rape and qualified trafficking in persons.<br><br>Regarding the statutory rape charge, as aptly explained by the appellate court, all the elements were successfully proven beyond reasonable doubt by the prosecution:<br><blockquote>Statutory Rape is committed when: (1) a man has carnal knowledge of a woman, and (2) the offended party is under 12 years of age.<br><br>[AAA]'s [b]irth [c]ertificate unquestionably proves the second element in this case. The document shows that she was born on January 29, 2004, which means she was only 11 years old when appellant Jakobsen had sexual intercourse with her.<br><br>Meanwhile, the first element is proven by [AAA]'s testimony. She narrated that she met the appellants in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market and that BBB was the one who introduced them. Appellant Turtosa took her to appellant Jakobsen's apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> to get something to eat" but was told when they got there that the latter was going to use her for sexual intercourse in exchange for ice cream and cake for her birthday. Appellant Jakobsen bid her undress and then laid her on the bed. He held her hands over her head to keep her from struggling and then penetrated her. She experienced pain on both the inside and outside of her vagina, and she cried when she saw blood therefrom. [AAA]'s account is not only unwavering but it is bolstered by [her testimony], wh[en she] vividly demonstrated in open court, with the use of anatomical dolls, how appellant Jakobsen had sexual intercourse with her[.]<br><br>There is no merit in the objection by the defense that [AAA]'s testimony failed to give a detailed narration of her alleged rape and that no medical certificate was even presented to support her story. It is settled that testimonies of child victims are given full weight and credit, for when a child of tender years says that she has been raped, she says, in effect, all that is necessary to show that rape was indeed committed. As for the absence of a medical certificate, it is established that a medical examination of the victim is not indispensable as the victim's testimony alone, if credible, is sufficient to convict.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> (Citations omitted) </blockquote>Likewise, it can be gleaned from AAA's testimony, as the Regional Trial Court found, that she was forced to have sex with accused-appellant Jakobsen:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">PROS. HUPP </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="95%" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">During the last time that you were here in court and you testified about this case, you said that there are some statements in your judicial [a]ffidavit that are not correct according to your recollection. Do you remember saying that, AAA? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">That is correct. I remember, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And one of those statements in your [j]udicial [a]ffidavit that you said is not correct is that entry there saying that it was at the CICC that you first met [Turtosa]. Do you remember saying that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, I do remember. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Because, in fact, you went [on] to explain, that it was actually in the public market in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, the one near <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, w[h]ere you first met [Turtosa]. Do you remember saying that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, I do remember. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Now, my question, AAA, is: How did you meet [Turtosa]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">We were introduced. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Who introduced you to her? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">BBB. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">After you were introduced, what, if any, did [Turtosa] tell you, AAA? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">She told me that we were going to a house and so we went to that house. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Whose house was it that you were supposed to go [to] according to her? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Jakobsen]'s house. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And did [Turtosa] tell you what you were supposed to do in the house? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">(Court Interpreter: The witness shook her head gently to signify a negative answer.) </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">AAA, what, if any, did [Turtosa] tell you that made you go with her to this house of [Jakobsen]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">According to [Turtosa], we were going to the house of [Jakobsen] just to eat. Little did I know that instead of eating[,] I was going to be used or abused there. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So, in going to the house of [Jakobsen], who went with you? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Turtosa], CCC[,] and BBB. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">You mentioned earlier that it was BBB who introduced you to [Turtosa]. Now, was CCC also present when the introduction was made[?] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">No, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So, it was only after a while, after the introduction was made that CCC came to join you, is that correct? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q:&nbsp; </div></td> <td valign="top"> <div align="JUSTIFY">Where is this located? </div></td> </tr> <tr> <td valign="top">A:</td> <td valign="top">At <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What mode of transportation did you take in going to this house of [Jakobsen] in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Jeepney, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And who paid for your fare, BBB's fare[,] and CCC's fare? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Turtosa]. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">When you arrived in this house, who, if any, was there? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Jakobsen], me, [Turtosa], CCC[,] and BBB. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">By the way, can you recall when this happened, the first time that you went to the house of [Jakobsen]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">No, ma'am. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Can you recall what year was this? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I cannot recall the year[,] but I do recall that it was in the month of January. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">How old were you at th[e] time[,] if you can remember? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I was ten years old, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And I understand you are 14 now, is that correct? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So, when you arrived there, you mentioned the people that were there and the additional person that you mentioned was the name [Jakobsen]. So, what was [Jakobsen] doing when you arrived in that place? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He was just sitting down. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And what happened when you arrived? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">We were made to go upstairs. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So, this house of [Jakobsen] is a two-storey house? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And what happened after you were made to go upstairs? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">We were made to undress. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And by we, who are you referring to? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">First was Ate CCC[,] then BBB[,] then I was the last. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">You refer to CCC as ['<i>ate.</i>'] May I know the reason why? Are you related to her? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">She is my older sister, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">When your [<i>Ate</i>] CCC and BBB were made to undress, did you see, did you hear [Jakobsen] command them to undress? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And did you, in fact, see them undress? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And what happened after BBB and CCC undressed? </div></td> </tr> <tr> <td rowspan="3" valign="top"> <div align="JUSTIFY">A: </div></td> <td rowspan="3" valign="top"> <div align="JUSTIFY">After [<i>Ate</i>] CCC and BBB undressed or were made to undress, they then took turns in giving a blow job to [Jakobsen]. They were made to give blow job[s] to [Jakobsen]. They took turns in doing so. </div></td> </tr> <tr></tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">That happened upstairs. How many rooms were there on the second floor. </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Three, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">I understand this was the bedroom of [Jakobsen], is that correct? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And while they were doing that, were you in the same room also? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I was in the corner of the same room and then [<i>Ate</i>] CCC cried. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">And after [Jakobsen] made CCC and BBB give him a blow job, what happened after that, AAA? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Nothing else, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So, what did CCC and BBB do afterwards? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">They both cried and went downstairs. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">How about you, when [<i>Ate</i>] CCC and BBB went downstairs, what did you do? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I just asked them what they did but they refused to tell me. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">And did you remain upstairs after [<i>Ate</i>] CCC and BBB went downstairs? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And what happened when you remained upstairs? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">They also made me undress. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">You said ['they.'] Who are you referring to, the persons who made you undress? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Jakobsen and Turtosa], ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Can you recall what exactly [Jakobsen] told you? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What did he tell you? </div></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">A: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">That he wants me to undress and then he made me lie down on the bed and then he inserted his penis into my vagina. </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">How about [Turtosa], what did she tell you when she made you get undressed? </div></td> </tr> <tr></tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">A: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">She told me to lie down on the bed and that I will be used by [Jakobsen]. </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">Did either [Jakobsen or Turtosa] give you any promise...should you allow [Jakobsen] to, according to you, use you, if any? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">They promised to buy me cake and ice cream. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Why? What was the cake and ice cream for, AAA? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">For my birthday. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">Why? At that time that you were there, was your birthday coming near? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">The [b]irth [c]ertificate that you identified last hearing indicated that your birthday is January 29, is this correct? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="4" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="4" valign="top"> <div align="JUSTIFY">So, after [Jakobsen] told you to undress and you said he made you lie down on the bed and you described earlier what he did to you, I am sorry but I need to be specific, AAA, how did he do the â What did he do first while you were lying down on the bed? </div></td> </tr> <tr></tr> <tr></tr> <tr></tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">A: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">At first he placed himself on top of me and then he inserted his penis into my vagina. </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">While he was inserting his penis into your vagina, did he do any movement? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He also held my hand. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Why did he have to hold your hand, if you know, AAA? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">So that I won't be able to move. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">Are you saying that when he mounted on top of you and inserted his penis[,] you were moving yourself? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">And was the movement â Did you resist what he was about to do to you, AAA? </div></td> </tr> <tr></tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">Q: </div></td> <td rowspan="2" valign="top"> <div align="JUSTIFY">And when he succeeded in inserting his penis into your vagina, what did you feel, if any? </div></td> </tr> <tr></tr> <tr> <td rowspan="4" valign="top"> <div align="JUSTIFY">A: </div></td> <td rowspan="4" valign="top"> <div align="JUSTIFY">I felt so much pain and I saw there was blood that came out of my vagina. </div></td> </tr> <tr></tr> <tr></tr> <tr></tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And [is it] correct to say that it was also in your vagina area that you felt pain? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And to be specific also, in the vagina, there is the outer part and there is also the inner part. Which part of your vagina did you feel pain on? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Both inside and outside, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What happened after [Jakobsen] did that to you, AAA? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Nothing, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What did you do afterwards? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I cried, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And were you able to get out of that house? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Was it on the same day that you were able to leave the house? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And when you left the house, did you, BBB[,] and CCC also leave together? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Who, if any, accompanied the three of you in leaving the house? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Turtosa], ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">But before you left the house, did you receive anything from either [Turtosa or Jakobsen], if any? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, I did receive something but it was taken by [Turtosa]. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What was it that you received but was [also taken away] by [Turtosa]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Money, ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Did you know how much it was? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 5,000.00. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Who handed you the [PHP] 5,000.00? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[Jakobsen], ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And how did [Turtosa] take the money [away] from you? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">She told me that she will be the one to hold [on to] the money[.] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And how much was the amount that [Turtosa] took from you? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[PHP] 5,000.00, ma'am. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So, aside from the money, AAA, was there anything, if any, that you received from either [Jakobsen or Turtosa] before you left the house? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am, a cellular phone. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">To whom was the cellular phone given? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Me. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And when you were able to leave the house, were you able to bring the cell phone with you? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup></div></td> </tr> </tbody></table></blockquote>As to the charge of qualified trafficking in persons, the appellate court, affirming the trial court, was likewise correct in saying that all the elements for this offense had been proven beyond reasonable doubt:<br><blockquote>First, the element of recruitment and transport was sufficiently proven by the testimonies of AAA and BBB. AAA was straightforward and categorical in narrating that she met the [Jakobsen and Turtosa] for the first time in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> public market, that [Jakobsen] chose her and CCC, and that [Jakobsen and Turtosa] then brought them to [Jakobsen's] apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> to be sexually abused by him. [Jakobsen] even gave her a cellular phone so that he could communicate with her if he wanted the children-victims to go to his apartment, after which [Turtosa] would meet them in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and bring them to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, where [Jakobsen] would use them to satisfy his prurient desires.<br><br>Her testimony was corroborated by BBB, who stated that she met the [Jakobsen and Turtosa] through AAA and CCC, who already had an arrangement with [Turtosa] to go to [Jakobsen's] apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. She confirmed AAA's description of [Jakobsen and Turtosa's] modus and how she was similarly ensnared and subjected to [Jakobsen's] debauchery. BBB gave a vivid example of how [Jakobsen and Turtosa] recruited and transported her: [Turtosa] coaxed her into going to a mall in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>[,] only to turn around and tell her that they were going to [ Jakobsen's] apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><center>. . . .</center><br>Second, the element of coercion or deception was also sufficiently proven by the testimonies of AAA and BBB. [BBB] maintained that the [Jakobsen and Turtosa] enticed her and CCC to go to [Jakobsen's] apartment by telling them they would "get something to eat." [AAA] was also initially told that she could go with them to [Jakobsen's] apartment to "get something to eat," and [Turtosa] cajoled her by telling her that [Jakobsen] would buy her "ice cream and cake" in exchange for sexual intercourse. On January 19, 2025, [Turtosa] lured [AAA] to the mall in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> by promising to buy her "ice cream and cake," only to turn around and bring her instead to [Jakobsen's] apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. It should be pointed out that [Turtosa] enjoyed a person of moral authority over CCC and [AAA], the cousins of her common-law spouse. This relationship between [Turtosa] and [AAA] â coupled with the offer of food and comfort â was well-directed and allowed them to efficiently take advantage of the vulnerability of neglected children from the desperately impoverished sector of society.<br><br>Third, as already discussed above, [Jakobsen and Turtosa's] procurement of the children-victims was for the satisfaction of [Jakobsen's] lechery.<br><br>Finally, the age of minority of AAA and BBB was duly proven by their respective [b]irth [c]ertificates[,] the authenticity of which was not even challenged by the [Jakobsen and Turtosa].<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> (Citation omitted) </blockquote>As the trial court aptly observed and found, the accused-appellants "did obtain, hire[,] and/or recruit BBB, CCC[,] and AAA, all of whom are still minors, for the purpose of exploiting them sexually, by offering them money in exchange for sexual pleasures that [Jakobsen] may obtain from them. They took advantage of their vulnerability to attain their evil desire."<sup style="COLOR: RGB(255, 0, 0);">[109]</sup><br><br>As testified to by AAA, she was lured by Turtosa in going to Jakobsen's house by "offering her food to eat and promising her money in exchange for sex with Nicola Jakobsen. And when AAA refused, [Jakobsen] forced himself upon her and had carnal knowledge [of] her against her will, and thereafter paid her money in consideration thereof."<sup style="COLOR: RGB(255, 0, 0);">[110]</sup><br><br>This also happened to BBB, then a 12-year-old minor, as she also fell prey to Jakobsen who "hired or secured her services[,] as well as the other minors. Both [Jakobsen and Turtosa] transported them and brought them to an apartment in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> [,] where they were kept and secured for purposes of sexual exploitation."<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> BBB eventually sought help from the police to have the Jakobsen and Turtosa arrested.<br><br>For all these, the accused-appellants' guilt for the crime of statutory rape and qualified trafficking in persons has been proven beyond reasonable doubt. The penalties of<i> reclusion perpetua</i> and life imprisonment were correctly imposed by the Regional Trial Court and were rightfully upheld by the Court of Appeals.<br><br><b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b>. The June 21, 2024 Decision of the Court of Appeals in CA-G.R. CEB CR HC No. 04286 is <b>AFFIRMED with MODIFICATION</b>.<br><br>Accused-appellant Nicola Jakobsen<i> y</i> Arne is found <b>GUILTY</b> beyond reasonable doubt of one count of statutory rape and one count of qualified trafficking in persons. He is sentenced to suffer the penalty of<i> reclusion perpetua</i> for statutory rape; life imprisonment for qualified trafficking in persons; and to <b>PAY</b> the victim, AAA, moral damages, civil indemnity, and exemplary damages worth PHP 75,000.00 each<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> for the single count of statutory rape and to pay a fine of PHP 2,000,000.00 for the single count of qualified trafficking in persons.<br><br>He is also<b> DIRECTED</b> to<b> PAY</b> the victims AAA, BBB, and CCC PHP 500,000.00 each as moral damages and PHP 100,000.00 each as exemplary damages for the single count of qualified trafficking in persons.<br><br>Accused-appellant Alona Turtosa<i> y</i> Ouano is found<b> GUILTY</b> beyond reasonable doubt of one count of qualified trafficking in persons. She is sentenced to suffer the penalty life imprisonment and to<b> PAY</b> a fine of PHP 2,000,000.00 for the single count of qualified trafficking in persons.<br><br>She is also<b> DIRECTED</b> to<b> PAY</b> the victims AAA, BBB, and CCC PHP 500,000.00 each as moral damages and PHP 100,000.00 each as exemplary damages.<br><br>All damages awarded shall be subject to interest at the rate of six 6% per annum from the finality of this Decision until their full satisfaction.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup><br><br><b>SO ORDERED. </b><br><br><i>Lazaro-Javier, J. Lopez, Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>People v. XXX, G.R. No. 273990</b>, January 22, 2025 [Per J. Hernando, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i>, pp. 14-35. The June 21, 2024 Decision in CA-G.R. CEB CR HC No. 04286 was penned by Associate Justice Ma. Consejo M. Gengos-Ignalaga and concurred in by Associate Justices Bautista G. Corpin, Jr. and Mercedita G. Dadole-Ygnacio of the Court of Appeals, Twentieth Division, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 38-74. The July 24, 2020 Joint Decision in Criminal Case Nos. CBU-107331, CBU-107332 and C-107333 was penned by Presiding Judge Jose Nathaniel S. Andal of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxx</span> Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 38-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. The Court of Appeal's Decision inadvertently mixed up AAA and BBB from the Regional Trial Court's Joint Decision, hence this has been rectified in this case moving forward.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 18-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 20-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 21-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 22-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id</i>. at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>. at 38-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id</i>. at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id</i>. at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id</i>. at 14-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id</i>. at 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id</i>. at 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> CA <i>rollo</i>, pp. 213-217.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id</i>. at 225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Rollo</i>, pp. 78-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id</i>. at 89-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> REV. PEN. CODE, art. 266-B, as amended by Republic Act No. 8353 (1997).<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> 731 Phil. 352 (2014) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id</i>. at 357.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> Republic Act No. 9208, sec. 3 (a), as amended (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> Republic Act No. 9208, secs. 4(a) and 6(a).<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> Republic Act No. 9208, sec. 10(e).<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> 945 Phil. 794 (2023) [Per J. J. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id</i>. at 810.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Rollo</i>, pp. 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id</i>. at 49-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <i>Id</i>. at 31-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id</i>. at 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <b>People v. Jugueta</b>, 783 Phil. 806 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <i>Id</i>.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

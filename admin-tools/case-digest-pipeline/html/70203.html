@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 253896 - ARTHUR V. PASCUA, PETITIONER, VS. REPUBLIC OF THE PHILIPPINES AND SHIRLEY BULLOS PASCUA, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70203' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 253896, August 04, 2025 ]</H2>
+			<H3>ARTHUR V. PASCUA, PETITIONER, VS. REPUBLIC OF THE PHILIPPINES AND SHIRLEY BULLOS PASCUA, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 9, 2020 of the Court of Appeals (CA) in CA-G.R. CV No. 114345. The CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 31, 2019, and the Order<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 21, 2019, of Branch 289, Regional Trial Court (RTC), Malabon City in Civil Case No. CV-2271-MAL that dismissed for lack of evidence the Petition for Declaration of Nullity of Marriage filed by petitioner Arthur v. Pascua (Arthur) against private respondent Shirley Bullos Pascua (Shirley).<br><br><center><i>The Antecedents</i></center><br>On February 8, 2005, Arthur and Shirley got married at the Life Christian Fellowship Center in Concepcion Street, MBS, Caloocan City.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The marriage was solemnized by Rev. Saturnina V. Palero.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> In their Certificate of Marriage,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> the solemnizing officer certified that he was shown the Marriage License No. 5013850 issued to Arthur and Shirley on January 6, 2005 in Taytay, Rizal.<br><br>Arthur and Shirley had two children and lived together as a married couple for nine years. Sometime in 2014, they separated because Shirley allegedly engaged in an illicit affair.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On March 30, 2017, Arthur filed a Petition for Declaration of Nullity of Marriage before the RTC. He averred that his marriage to Shirley was void <i>ab initio</i> for lack of a valid marriage license under Article 3<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> in relation to Article 4<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Arthur testified that his marriage to Shirley was done in haste as it was his brother-in-law, Alexander Bullos (Alexander), who brought them to the solemnizing officer on February 8, 2005, the day of Alexander's own marriage, before the same solemnizing officer.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Arthur suspected the issuance of Marriage License No. 5013850 by the Local Civil Registrar of Taytay, Rizal because neither him nor Shirley was residing thereat.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Thus, sometime in early 2017, he visited the Office of the Local Civil Registrar of Taytay, Rizal and discovered that it did not issue Marriage License No. 5013850 on January 6, 2005. He then obtained a Certification<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated March 8, 2017 (Certification) from the Municipal Treasurer of Taytay, Rizal which states as follows:<blockquote>To Whom It May Concern:<br><br>This is to certify that as per record of this office, Accountable Form No. 54 with Serial Number 5013850 dated January 6, 2005 â Marriage License â which was issued to Mr. Arthur V. Pascua and Ms. Shirley M. Bullos was not included in the series issued by this municipality.<br><br>This Certification is issued upon the request of Mr. Arthur V. Pascua for whatever legal intents or purpose it may serve.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="70%">&nbsp;</td><td width="30%"><div align="center">(signed)<br>&nbsp;MA. LORETO M. COLLADO<br>&nbsp;ICO - <i>Municipal Treasurer</i><sup style="COLOR: RGB(255, 0, 0);">[15]</sup></div></td></tr></tbody></table></blockquote>During the trial, the Certification was identified by Victorino E. Pangilinan, Jr. (Pangilinan, Jr.), the authorized representative of the Office of the Municipal Treasurer of Taytay, Rizal.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Pangilinan, Jr. also identified several pages of the Marriage License Record Book (Logbook)<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of Accountable Form No. 54 kept in the Municipal Treasurer's Office. He testified<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> that Accountable Form No. 54 refers to marriage license forms; and that on pages 36 to 37 of the Logbook, which cover the period of October 11, 2004 to August 22, 2006, there is no record of Accountable Form No, 54 with serial number 5013850 issued on January 6, 2005.<br><br>As to Shirley, she failed to file an answer and present her evidence despite service of summons and notices of hearings.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Hence, after Arthur's presentation of evidence, the case was submitted for decision.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>On July 31, 2019, the RTC issued a Decision that dismissed the Petition for Declaration of Nullity of Marriage, <i>viz.</i>:<blockquote>WHEREFORE, premises considered, judgment is hereby rendered, DISMISSING the petition for lack of evidence.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></blockquote>The RTC ruled that Arthur failed to present sufficient evidence to prove that he married Shirley without a valid marriage license. It stressed that the government officer responsible for the issuance of marriage licenses is the Local Civil Registrar, not the Municipal Treasurer.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> It thus concluded that the Municipal Treasurer had no authority to certify the issuance or non-issuance of marriage licenses, and the Certification cannot be relied upon as proof of the non-issuance of a valid marriage license to Arthur and Shirley.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Petitioner filed a Motion for Reconsideration, but the RTC denied it in the Order dated October 21, 2019.<br><br>Aggrieved, petitioner appealed the RTC Decision to the CA.<br><br><center><i>The Ruling of the CA</i></center><br>In the Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated October 9, 2020, the CA affirmed the RTC ruling <i>in toto</i>, to wit:<blockquote>WHEREFORE, the appealed Decision dated July 31, 2019 and Order dated October 21, 2019 of the trial court are AFFIRMED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>The CA agreed with the RTC that the Certification lacked probative value because the maintenance of records relative to the issuance of a marriage license is the responsibility of the Local Civil Registrar, not the Municipal Treasurer. It ruled that while the issuance of a marriage license requires the payment of fees to the Municipal Treasurer, the duty to issue one and keep a record thereof remains with the Local Civil Registrar.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Thus, the present Petition.<br><br><center><i>Petitioners Arguments</i></center><br>A1ihur insists that the Petition for Declaration of Nullity of Marriage was supported by sufficient evidence. He maintains that: <i>One</i>, the Certification has probative value because the Municipal Treasurer of Taytay, Rizal is vested by law to be the custodian of marriage license certificates or Accountable Form No. 54. And <i>two</i>, the Municipal Treasurer's custodial authority is based on Article II, Section 470 of Republic Act No. 7160 or the Local Government Code of 1991, in relation to Section 23(c) and Section 59(B)[l] of the Local Treasury Operations Manual (LTOM).<br><br>According to Arthur, the Municipal Treasurer is the actual custodian of the marriage licenses issued by the municipal gove1nment of Taytay, Rizal. Supposedly, when Arthur and his counsel inquired with the Office of the Local Civil Registrar of Taytay, Rizal as to the existence or non-existence of the marriage license in question, the Registrar repeatedly referred them to the Municipal Treasurer as the custodian of marriage licenses.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Arthur further contends 1hat the relevant pages of the Logbook that were identified by Pangilinan, Jr., are sufficient to prove that the municipal government of Taytay, Rizal did not issue the marriage license in question.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center><i>Respondents Arguments</i></center><br>Respondent Republic of the Philippines, through the Office of the Solicitor General (OSG), insists that it is the certification of the Local Civil Registrar, not the Municipal Treasurer, which shall be sufficient proof of lack or absence of a marriage license.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The OSG points out that under the LTOM, the Accountable Form No. 54 (Marriage License Certificate) that is allegedly in the custody of the Municipal Treasurer refers to blank forms, not to duly accomplished marriage licenses that have been issued to applicants.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Finally, the OSG asserts that the Certification should be disregarded because it failed to comply with Section 28, Rule 132 of the Rules of Court, which requires the authorized custodian to include in the ce1iification that diligent efforts had been exerted to locate the specified documents from its record.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br><center><i>Issue</i></center><br>The issue for the Court's resolution is whether the Certification of the Municipal Treasurer of Taytay, Rizal possesses probative value and may serve as proof that no val.id marriage license was issued to Arthur and Shirley before their marriage on February 8, 2005.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is denied for lack of merit.<br><br>The Court agrees with the RTC and the CA that the Petition for Declaration of Nullity of Marriage must be dismissed for lack of evidence.<br><br>Article 3 of the Family Code categorically states that a valid marriage license is a formal requisite of marriage, except in those instances wherein the requirement may be legally dispensed with. No evidence on record suggests that Arthur's marriage to Shirley is excepted from the marriage license requirement. Thus, for their marriage to be valid, a duly issued marriage license is indispensable; otherwise, the marriage is void <i>ab initio</i>.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Arthur argues that he has provided sufficient proof that his marriage to Shirley is void <i>ab initio</i> for lack of a valid marriage license. The Court, however, does not agree.<br><br>Under Article 9<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> of the Family Code, a marriage license is issued by the local civil registrar of the city or municipality where either contracting party habitually resides. The local civil registrar issues the marriage license upon payment of the authorized fee to the treasurer and compliance with the other requirements of law.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Accordingly, sworn applications for a marriage license are required to be submitted to the Local Civil Registrar.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> In turn, Article 25<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> of the Family Code mandates the Local Civil Registrar to enter in a registry book <i>all</i> applications for marriage licenses, the names of the applicants, the date on which the marriage license was issued, and such other data as may be necessary. The Local Civil Registrar is particularly tasked to enter such data in the Register of Applications for Marriage License,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> which must be kept, maintained, and preserved in his or her office. He or she must also retain a copy of the sworn applications for marriage licenses.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>A marriage license and the application for its issuance, as records that are required by law to be kept by a public officer, i.e., the Local Civil Registrar, and to be entered in the Register of Applications for Marriage License, are considered as <i>official and public documents</i>.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> In relation thereto, the Revised Rules on Evidence, Rule 132, Section 28 states that to prove the <i>absence or lack</i> of an official record, the officer having <i>custody</i> of the official document or their deputy must certify that despite diligent search, a particular document does not exist in their office or that a particular entry was not found in a register, <i>viz.</i>:<blockquote>SECTION 28. <i>Proof of lack of record</i>. â A written statement signed by an officer having the custody of an official record or by his or her deputy that, after diligent search, no record or entry of a specified tenor is found to exist in the records of his or her office, accompanied by a certificate as above provided, is admissible as evidence that the records of his or her office contain no such record or entry.</blockquote>Thus, to prove the absence or non-issuance of a valid marriage license, its <i>custodian</i> must issue the negative certification required by Rule 132, Section 28. Indisputably, the <i>Local Civil Registrar</i> is the <i>custodian</i> who must maintain the Register of Applications for Marriage License and to record in the said Register the necessary data relative to the issuance of a marriage license. As such, the Court has repeatedly ruled that a certification by the Local Civil Registrar on the absence or non-issuance of a marriage license has probative value.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Certainly, the absence of the proper entry in the Register of Applications for Marriage License necessarily implies the <i>absence</i> of a marriage license.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>In the case at bench, Arthur offered the Certification of the <i>Municipal Treasurer</i> of Taytay, Rizal to prove that no valid marriage license was issued before he married Shirley. Clearly, the Certification was <i>not</i> issued by the Local Civil Registrar of Taytay, Rizal, the appropriate <i>custodian</i> of such document under the Revised Rules on Evidence, Rule 132, Section 28.<br><br>To reiterate, a negative certification under Section 28 may prove the absence of a public record only <i>if</i>, in the first place, the certifying officer has "records in his or her office" relative to the document or entry that is alleged to be non-existent. Given that the Municipal Treasurer is <i>not</i> the custodian of the Register of Applications for Marriage License, the sworn applications for such marriage licenses, or other data relative to the issuance of marriage licenses, then the Certification cannot be considered as proof that no valid marriage license was issued by the municipal government of Taytay, Rizal to Arthur and Shirley before their marriage.<br><br>It must be stressed that the probative value accorded to public documents and entries in official records flows from the presumption that the public officer concerned regularly performed his or her duty as the <i>legal custodian</i> to prepare such public documents or make entries in public records.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> In several cases<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> where a certification as to a public record is issued by a government officer who is <i>not</i> its <i>legal custodian</i>, the Court <i>refused</i> to consider the document as proof of the facts therein stated. In such a case, it cannot be presumed that the certifying officer regularly performed his or her duty precisely because he or she is <i>not</i> required by law to prepare the relevant public document or make entries in the pertinent public record.<br><br>Verily, a negative certification issued by a public officer who is <i>not</i> the legal custodian of the relevant public document or record cannot be relied upon as adequate proof that "no record or entry of a specified tenor is found to exist in the records of his or her office[.]"<br><br>Arthur nonetheless insists that the Municipal Treasurer of Taytay, Rizal qualifies as a custodian of marriage licenses based on the catch-all provision in Article II Section 470 of Republic Act No. 7160, or the Local Government Code, on the powers of a local treasurer, to wit:<blockquote><center>ARTICLE II<br><i>The Treasurer</i></center><br>SECTION 470. Appointment, Qualifications, Powers, and Duties â<br><br>. . . .<br><br><i>(e) Exercise such other powers and perform such other duties and functions as may be prescribed by law or ordinance.</i> (Emphasis supplied).</blockquote>According to Arthur, one of the "other powers" of the municipal treasurer is to keep custody of marriage licenses, which is allegedly based on Book I, Chapter 4, Section 23(c) in relation to Book II, Chapter 2, Section 59(B) of the LTOM,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> to wit:<blockquote>Chapter 4 ROLE, DUTIES, AND RESPONSIBILITIES OF THE LOCAL TREASURER<br><br>Section 23. Duties and Responsibilities of Provincial, City, and Municipal Treasurer:<br><br><center>. . . .</center><br><i>c) Custody and Requisition of Accountable Forms. â The Treasurer shall be the custodian of all accountable forms requisitioned by the local government unit. He shall maintain a complete record of the receipt, issue, and transfer of accountable forms.</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>. . . .<br><br>Chapter 2 COLLECTION OF REVENUES AND OTHER RECEIPTS<br><br><center>. . . .</center><br>Section 59. Control and Accountability for Official Receipts and Other Accountable Forms. â&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">A)</div></td><td colspan="2"><div align="justify">Revenue Collection and the Use of Accountable Forms. â The Provincial, City, Municipal and Barangay Treasurers shall be responsible for the use of all accountable forms invoiced to them and receipted by them in person or entrusted by them to their designated collectors for care, custody, and use. A Local Treasurer's accountability:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="90%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">1)</div></td><td><div align="justify">By taking up in the accounts the amount shown to have been collected therefrom;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">2)</div></td><td> <div align="justify">By presenting the unissued and cancelled official receipts; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">3)</div></td><td><div align="justify">By producing satisfactory evidence that they are in the hands of authorized personnel.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">B) </div></td><td colspan="2"><div align="justify">Types of Accountable Forms. â</div></td></tr><tr valign="top"><td>&nbsp;</td><td colspan="2">&nbsp;</td></tr><tr valign="top"><td colspan="3">. . . . </td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">1)</div></td><td><div align="justify">The Accountable Forms with money value consist of the following:&nbsp;</div></td></tr></tbody></table></blockquote><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="50%"><div align="center">Type of Form </div></td><td width="50%"><div align="center">Utilization</div></td></tr><tr valign="top"><td><div align="center"><br>. . . .</div>&nbsp;<div align="center"><em>(4) Marriage License Certificate,<br>&nbsp; Accountable Form No. 54</em></div></td><td><div align="center"><br>. . . .&nbsp;&nbsp;<br><br>&nbsp; Issued to contract<br>&nbsp; marriage<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></div></td></tr></tbody></table></blockquote>Arthur's arguments fail to persuade.<br><br>The duties of the Municipal Treasury Office under Book I, Section 4(E) of the LTOM, Second Edition, refer to the conduct of <i>physical inventory</i> over <i>unused accountable forms</i>, the <i>issuance</i> of accountable forms to accountable officers, and the preparation of monthly reports on the accountable forms, to wit:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">E.</div></td><td colspan="4"><div align="justify">For the Municipal Treasury Office (MTO), the organizational structure is simpler with only two (2) functional divisions, i.e., Cash Division, and the Revenue Division, whose functions are similar to that of the [City Treasury Office's], together with Administrative Section to provide administrative support to the operations office.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="80%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">1.</div></td><td colspan="3"><div align="justify">Administrative Section</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td colspan="4"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify">h.</div></td><td colspan="2"><div align="justify">Conduct annual physical inventory of the following: unused accountable forms; . . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td colspan="3"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify">k.</div></td><td colspan="2"><div align="justify">Issue accountable forms to accountable officers;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify">1.</div></td><td colspan="2"><div align="justify">Prepare monthly report of accountable forms;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td colspan="3"><div align="justify">. . . .</div></td></tr></tbody></table></blockquote>Evidently, the accountable form for a marriage license mentioned in the possession of the Municipal Treasurer refers to <i>blank</i> or <i>unused</i> forms. This is further evidenced by Book II, Section 86 of the LTOM, Second Edition, which mentions that the accountable forms received by the Municipal Treasurer are requisitioned from recognized government printers, to wit:<blockquote>SECTION 86. CONTROL OF OFFICIAL RECEIPTS AND OTHER ACCOUNTABLE FORMS<br><br>The local treasurer shall be the custodian of all accountable forms requisitioned by the LGU. He/she shall maintain a complete record of the receipt, issue and <i>transfer</i> of accountable forms. (Sec. 24, COA Cir. 92-382, 3 July 1992).<br><br>. . . .<br><br>C. Inspection of Accountable Forms<br><br>1. Upon receipt of <i>accountable forms from the recognized government printers</i>, the Treasurer shall examine carefully each book or <i>pad</i>. He/She shall segregate any book or pad found to contain defects such as incorrect series of numbers, or missing leaves or sheets, etc. and submit it to Commission on Audit (COA) Auditor together with a statement of the defects or deficiencies noted. (Emphasis supplied)</blockquote>Notably, when Pangilinan, Jr. testified about the accountable forms for marriage licenses in the custody of the Municipal Treasurer, he mentioned that the marriage licenses refer to <i>booklets</i> that they buy from the Bureau of Internal Revenue:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q:</div></td><td width="95%"><div align="justify">That marriage license number is 5013850, are these series of license number assigned to you or these are booklets?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">They are booklets, ma'am.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Who give[s] the booklets of the marriage license to a particular municipality like yours?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">We buy them from the Bureau of Internal Revenue[.]<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></div></td></tr></tbody></table></blockquote>In addition, when Pangilinan, Jr. provided a sample of the accountable forms for marriage licenses that are in the office of the Municipal Treasurer, he merely produced a <i>blank</i> form for a marriage license, wherein the Local Civil Registrar was indicated as the authorized signatory.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Clearly, the supposed marriage licenses in the custody of the Municipal Treasurer pertain only to <i>blank</i> booklets of forms for marriage licenses, which have not yet been accomplished or signed by the Local Civil Registrar. It cannot therefore be said that the Municipal Treasurer keeps a record of marriage licenses that have actually been issued by the municipal government of Taytay, Rizal to the relevant applicants therefor.<br><br>It is also evident from the afore-cited Book I, Section 4(E) and Book II, Section 86 of the LTOM, Second Edition, that the treasurer <i>transfers</i> the blank accountable forms to other accountable public officers for the latter's use; however, the treasurer is expected to keep a <i>physical count</i> of the accountable forms pursuant to Section 64<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> of the Commission on Audit (COA) Circular No. 2020-004. Particularly, in the Report of Accountability for Accountable Forms accomplished by the local treasurer, it must report the beginning and ending balance or <i>quantity</i> of accountable forms in its custody from month to month.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Evidently, the local treasurer's duty as regards the accountable forms is only for <i>inventory</i> purposes, i.e., to record how many forms were delivered to the local government unit concerned, how many were issued, and how many are left unused at the end of the month. Although the treasurer is required to keep a <i>permanent record</i> of accountable forms that it received from government printers, the record is only for the purpose of identifying the whereabouts of the forms, the names of the government employees to whom the forms were given, and the <i>quantity</i> of the accountable forms in the inventory, as provided in Book II, Section 86(D) and (G) of the LTOM:<blockquote>D. Permanent record book for accountable forms<ol><li>Treasurers/collecting officers accountable for receipts/stamps and other accountable form in their possession or in the hands of deputies and other employees entrusted therewith, shall keep adequate permanent record books which should show, among other things, <i>the whereabouts of the accountable forms with which they are charged, the name and title of the officer or employee to whom such forms have been given</i>, and the evidence of the receipt and subsequent sale and issuance of the same. The record books shall contain the following column headings:<blockquote><ol type="a"><li>Booklet Number/Quantity (in case of official receipt without money value)<br><br></li><li>Serial Number/Total value (in case of official receipt with money value)<br><br></li><li>Name (in print) of accountable officer to whom issued<br><br></li><li>Signature of accountable officer<br><br></li><li>Date received by accountable officer<br><br></li><li>Date reported, totally used, sold, issued</li></ol></blockquote></li><li>These columns shall be utilized for recording consecutively all accountable forms in the order they are received in the office of the Treasurer.<br><br></li><li>The recording of each batch of accountable forms received shall be headed by data on the invoice number and date, the date the accountable forms were received, the quantity, inclusive serial numbers and/or total value of the accountable forms.</li></ol>. . . .<br><br>G. Report of the Accountable Officer<ol><li>The Report of Accountability for Accountable Forms (RAAF), shall be used to report the quantity of accountable forms received, issued or cancelled by the accountable officer at the end of the month.<br><br>Treasurers/collectors/tellers and other accountable officers shall render this report of accountability for accountable forms at the end of the month for consolidation by the local treasurer. Such report shall also be prepared in case of transfer of officer or accountability of the accountable officer.</li></ol></blockquote>The foregoing shows that the Municipal Treasurer has custody only of pads of <i>blank</i> and <i>unaccomplished</i> forms for marriage licenses identified as Accountable Form No. 54. Custody over these forms is thereafter transferred to the Local Civil Registrar for the latter's use considering that on its face, Accountable Form No. 54 identifies the Local Civil Registrar as the authorized signatory. In other words, the Municipal Treasurer's permanent record of Accountable Form No. 54 is only <i>for inventory purposes</i>. This is evident from the Logbook identified by Pangilinan, Jr., where only the serial numbers of Accountable Form No. 54 released per date are reflected, viz.:<blockquote><center>Accountable Form # 54<br>&nbsp;Date Received: April 13, 2004<br>Serial Nos.: 5192501-519400</center>&nbsp;<table width="100%" Â ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="25%">ret. 11-5-04</td><td width="25%"><div align="center">1</div></td><td width="25%">5192501-5192550</td><td width="25%">10-11-04</td></tr><tr><td>ret. 11-22-04</td><td><div align="center">2</div></td><td>2551-2600</td><td>10-22-04</td></tr><tr><td>ret. 12-05-04</td><td><div align="center">3</div> </td><td>2601-2650</td><td>11-5-04</td></tr><tr><td>ret. 12-16-04</td><td><div align="center">4</div></td><td>2651-2700 </td><td>11-22-04</td></tr><tr><td>ret. 12-29-04</td><td><div align="center">5</div></td><td>2701-2750 </td><td>12-6-04</td></tr><tr><td rowspan="2" valign="middle">ret. 1-20-05</td><td><div align="center">6</div></td><td>2751-2800</td><td>12-16-04</td></tr><tr><td><div align="center">7</div></td><td>2801-2850</td><td>12-29-04</td></tr><tr><td>ret. 1-28-05 </td><td><div align="center">8</div></td><td>2851-2900</td><td>1-13-05</td></tr><tr><td>ret. 2-4</td><td><div align="center">9</div></td><td>2901-2950 D 3-9-05 (sgd.)</td><td>1-20-05</td></tr><tr><td>ret. 2-2-05</td><td><div align="center">10</div></td><td>2951-3000 </td><td>1-20-05</td></tr><tr><td rowspan="2" valign="middle">ret. 2-21-05</td><td><div align="center">11</div></td><td>5193001-5193050</td><td>1-28-05</td></tr><tr><td><div align="center">12</div></td><td rowspan="3">3051-3100 ]<br>3101-3150 ] 5193107<br>3151-3200 ]</td><td>2-9-05</td></tr><tr><td>ret. 3-01-05</td><td><div align="center">13</div></td><td rowspan="2" valign="middle">2-21-05</td></tr><tr><td>ret. 3-11-05</td><td><div align="center">14</div></td></tr></tbody></table></blockquote>The Logbook maintained by the Municipal Treasurer of Taytay, Rizal does <i>not</i> show the names of the applicants to whom the marriage license has been issued and the date of its issuance. It does not even include an individual entry for each piece of Accountable Form No. 54, but merely records them in batches of 50 pieces per entry.<br><br>Apparently, the Logbook only reflects a batch of blank marriage license forms released to the proper accountable officer pursuant to the LTOM, Second Edition, Book II, Section 86(F), which states that "[a]ccountable forms shall be issued to bonded officers only in sufficient quantities <i>not to exceed three months use</i>." This dovetails with the testimony of Pangilinan, Jr., who mentioned that the documents in the custody of the Municipal Treasurer refers to <i>booklets</i> of forms for marriage licenses that they buy from the Bureau of Internal Revenue. Plainly, each entry in the Logbook refers to a series of 50 serial numbers because the record only pertains to <i>booklets</i> containing blank pieces of marriage license forms, which are then issued by the Municipal Treasurer to the proper accountable officer.<br><br>Besides, the dates stated in the Logbook merely show when the <i>Municipal Treasurer</i> released the booklets of Accountable Form No. 54 to the appropriate accountable officer in quantities not to exceed three months use. Such entries do not necessarily correspond to the <i>actual date</i> when the <i>Municipal Civil Registrar</i> issues an accomplished Accountable Form No. 54 as a <i>marriage license</i> to qualified applicants.<br><br>As pointed out by Associate Justice Caguioa in his Dissenting Opinion, the Municipal Treasurer, as record keeper and custodian of all Accountable Form No. 45 <i>bearing identified and specific serial numbers</i> received by the LGU concerned, is certainly competent to certify as regards the existence, receipt, and release of the accountable forms to the appropriate accountable officerâstrictly based on what is documented in their records. However, this fact alone does not make the Municipal Treasurer competent to certify as to the existence or inexistence of each <i>duly accomplished marriage license</i> issued by the Municipality of Taytay, Rizal. It would be a grave error to accord evidentiary weight to a certification issued by one lacking the requisite competence to attest to the facts stated therein.<br><br>Without the material details in the Logbook concerning the exact marriage license issued to a particular applicant on a specific date, the Municipal Treasurer unsurprisingly issued the Certification stating that its record does not include "Accountable Form No. 54 with Serial Number 5013850 dated January 6, 2005 â Marriage License â which was issued to Mr. Arthur V. Pascua and Ms. Shirley M. Bullos." As such, neither the Logbook nor the Certification of the Municipal Treasurer can be considered as reliable proof that no valid marriage license was issued by the Municipality of Taytay, Rizal for the marriage of Arthur and Shirley.<br><br>The Court stresses that in declaration of nullity of marriage cases, it is the certification issued by the Local Civil Registrar that enjoys probative value, as it is the Registrar's legal mandate to maintain records of duly accomplished sworn applications for marriage licenses. The fact that fees are required to be paid to the Municipal Treasurer before the marriage license is issued by the Local Civil Registrar does not mean that records related thereto are likewise kept by the former. To repeat, the permanent record kept by the Municipal Treasurer only relates to blank and unaccomplished fo1ms for marriage licenses.<br><br>The Court notes Arthur's statement that he and his counsel were referred by the Taytay, Rizal Local Civil Registrar to the Municipal Treasurer when they inquired about the whereabouts of Marriage License No. 5013850. While the situation is certainly lamentable, Arthur still had remedies available to him to compel the participation of the Local Civil Registrar in the case. He could have filed the necessary motion for the RTC to issue a subpoena <i>ad testificandum</i> and <i>duces tecum</i> to the Local Civil Registrar of Taytay, Rizal, not the Municipal Treasurer, to testify and produce records of Marriage License No. 5013850 in its custody, as allowed in the Judicial Affidavit Rule, Section 5<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and the Rules of Court, Rule 21.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Moreover, he could have corroborated the existence or non-existence of the Marriage License through the solemnizing officer, who is required to keep a file of the original marriage license under Article 23<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>All told, the RTC and the CA correctly dismissed the Petition for Declaration of Nullity of Marriage for lack of evidence. Indeed, the presumption is always in favor of the validity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Any doubt should be resolved in favor of the marriage's existence and continuation, and against its dissolution and nullity.<br><br>Still, Arthur is not barred by <i>res judicata</i> from filing another action for the declaration of nullity of his marriage to Shirley. The doctrine of <i>res judicata</i> does not apply when there is no conclusive adjudication in the proceedings, as when the case is dismissed for insufficiency of evidence.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> This is particularly true in the case at bar, for the petition was dismissed solely for the lack of probative value of the Municipal Treasurer's Certification as evidence to prove the alleged non-issuance of Marriage License No. 5013850.<br><br>"[A] judgment may be considered as one rendered on the merits when it determines the rights and liabilities of the parties based on the disclosed facts, irrespective of formal, technical or dilatory objections."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> As such, when the judgment does not contain a legal declaration on the parties' respective rights and liabilities and does not resolve the substantial issues, as in this case, the judgment would not constitute as <i>res judicata</i>.<br><br>Further, in the present proceedings, Arthur aims only to establish a status or a fact, i.e., that his marriage to Shirley is allegedly void for lack of a valid marriage license. Pertinently, a void marriage is inexistent from the very beginning and a judicial decree is not necessary to establish its nullity, except only for purposes of remarriage under Article 40 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Any judgment in favor of Arthur would only serve as a <i>judicial confirmation</i> of the supposed nullity of his marriage to Shirley.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Hence, the dismissal of a petition for judicial declaration of nullity of marriage on the ground of <i>lack of evidence</i>, similar to the present case, means nothing more than that â the failure of the petitioner to prove his or her cause with adequate evidence.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> The dismissal would not constitute <i>res judicata</i> and the petitioner could simply refile the case.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Certainly, if a marriage is void in fact and in law, the dismissal of a petition to confirm its nullity due to insufficiency of evidence cannot convert the marriage into a valid one; it cannot validate an act that is contrary to law.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated October 9, 2020 of the Court of Appeals in CA-G.R. CV No. 114345 is <b>AFFIRMED</b>. The Petition for Declaration of Nullity of Marriage is <b>DISMISSED</b> for lack of evidence, without prejudice to the refiling of the same action before the appropriate trial court.<br><br><b>SO ORDERED.</b><br><br><i>Gaerlan</i> and <i>Dimaampao, JJ.</i>, concur.<br><i>Caguioa (Chairperson), J.</i>, see dissent.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 44-58. Penned by Associate Justice Fernanda Lampas Peralta and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Tita Marilyn Payoyo-Villordon of the Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> CA <i>rollo</i>, pp. 56-64. Penned by Presiding Judge Rhoda Magdalene L. Mapile-Osinada of Branch 289, Regional Trial Court, Malabon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 65-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, p. 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> RTC Records (Folder of Exhibits), p. 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, p. 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> ARTICLE 3. The formal requisites of marriage are:<blockquote>(1) Authority of the solemnizing officer;<br>(2) A valid marriage license except in the cases provided for in Chapter 2 of this Title; and<br>(3) A marriage ceremony which takes place with the appearance of the contracting parties before the solemnizing officer and their personal declaration that they take each other as husband and wife in the presence of not less than two witnesses of legal age.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> ARTICLE 4. The absence of any of the essential or formal requisites shall render the marriage <i>void ab initio</i>, except as stated in Article 35 (2).<br><br>A defect in any of the essential requisites shall render the marriage voidable as provided in Article 45.<br><br>An irregularity in the formal requisites shall not affect the validity of the marriage but the party or parties responsible for the irregularity shall be civilly, criminally and administratively liable.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> RTC Records (Folder of Exhibits), p. 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, pp. 7-8<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> RTC Records (Folder of Exhibits), pp. 142-146.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Transcript of Stenographic Notes (7SN), Victorino E. Pangilinan, Jr., December 13, 2018, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, p. 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> CA <i>rollo</i>, p. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, pp. 44-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 20-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 77-78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 79-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>Abbas v. Abbas</b>, 702 Phil. 578 (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> FAMILY CODE, art. 9 states:<blockquote>ARTICLE 9. A marriage license shall be issued by the local civil registrar of the city or municipality where either contracting party habitually resides, except in marriages where no license is required in accordance with Chapter 2 of this Title.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Local Government Code, Article IX, Section 479 (vi). <i>See also</i> Family Code, Article 19 and Implementing Rules and Regulations of Act No. 3753, Rule 5(k).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> FAMILY CODE, art. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> FAMILY CODE, art. 25 states:<blockquote>ARTICLE 25. The local civil registrar concerned shall enter all applications for marriage licenses filed with him in a registry book strictly in the order in which the same are received. He shall record in said book the names of the applicants, the date on which the marriage license was issued, and such other data as may be necessary.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Implementing Rules and Regulations of Act No. 3753 or the Civil Registry Law (1992), Rule 7 (g).<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Implementing Rules and Regulations of Act No. 3753 or the Civil Registry Law (1992), Rule 49 states:<blockquote>RULE 49. <i>Number of Copies to be Accomplished for Distribution</i>. â It shall be the duty of the contracting parties to accomplish four (4) copies of the Application for Marriage License for registration. After the registration, the civil registrar shall distribute copies of the document bearing the civil registry number as follows: first copy to the registrant; second copy to the Office of the Civil Registrar-General; third copy shall be retained for his file; and fourth copy to the solemnizing officer.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> <b>Menciano v. San Jose</b>, 89 Phil. 63 (1951).<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Cariaga v. Republic</b>, 918-A Phil. 770 (2021); <b>Kho v. Republic of the Philippines</b>, 786 Phil. 43 (2016); <b>Abbas v. Abbas</b>, <i>supra</i> note 32; <b>CariÃ±o v. CariÃ±o</b>, 403 Phil. 861 (2001); <b>Republic v. Court of Appeals</b>, 306 Phil. 284 (1994).<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Cariaga v. Republic of the Philippines</b>, <i>id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Genio v. People</b>, 950 Phil. 311, 346 (2024). <i>See also</i> <b>Gaerlan-Ostonal v. Heirs of Delim</b>, 934 Phil. 705 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Rivera v. Woo Namsun</b>, 916 Phil. 296 (2021); <b>DCD Construction, Inc. v. Republic</b>, 672 Phil. 212 (2011); <b>Republic v. T.A.N. Properties, Inc.</b>, 578 Phil. 441 (2008).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Local Treasury Operations Manual (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, pp. 22-23. Emphasis supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 24-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> TSN, Pangilinan, Jr., December 13, 2018, pp. 6-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> SECTION 64. Verification of Collections and Accountable Forms. â The Treasurer/Cashier shall verify the Report of Collections and Deposits; check the statement of accountable forms as to initial balances on hand, receipts, issues and the ending balances on hand; <i>make a physical count of the accountable forms remaining in the custody of the collector/teller</i> and check the same against the new balances on hand column. He shall indicate his verification by affixing his signature at the back of the triplicate copy of the last official receipt issued. He shall count the money turned over to him and sign the certification and receipt portion of all copies of RCD.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> COA Circular No. 2020-004, Appendix 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Judicial Affidavit Rule, sec. 5 states:<blockquote>SECTION 5. <i>Subpoena</i>. â If the government employee or official, or the requested witness, who is neither the witness of the adverse party nor a hostile witness, unjustifiably declines to execute a judicial affidavit or refuses without just cause to make the relevant books, documents, or other things under his control available for copying, authentication, and eventual production in court, the requesting party may avail himself of the issuance of a subpoena <i>ad testificandum</i> or <i>duces tecum</i> under Rule 21 of the Rules of Court. The rules governing the issuance of a subpoena to the witness in this case shall be the same as when taking his deposition except that the taking of a judicial affidavit shall be understood to be <i>ex parte</i>.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>See</i> <b>Ng Meng Tam v. China Banking Corp.</b>, 765 Phil. 979 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> FAMILY CODE, art. 23 states:<blockquote>Art. 23. It shall be the duty of the person solemnizing the marriage to furnish either of the contracting parties the original of the marriage certificate referred to in Article 6 and to send the duplicate and triplicate copies of the certificate not later than fifteen days after the marriage, to the local civil registrar of the place where the marriage was solemnized. Proper receipts shall be issued by the local civil registrar to the solemnizing officer transmitting copies of the marriage certificate. <i>The solemnizing officer shall retain in his file</i> the quadruplicate copy of the marriage certificate, the copy of the marriage certificate, <i>the original of the marriage license</i> and, in proper cases, the affidavit of the contracting party regarding the solemnization. of the marriage in place other than those mentioned in Article 8. (Emphasis supplied)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>See also</i> Supreme Court Administrative Circular No. 125-07 or the Guidelines on the Solemnization of Marriage by the Members of the Judiciary, Section 7(b)(3), which states:<blockquote>SECTION 7. <i>Duties of Solemnizing Officer after Solemnization of the Marriage</i>. â After performing the marriage ceremony, the solemnizing officer shall:<br><br>. . . .<br><br>b. See to it that the marriage is properly documented in accordance with Article 23 of the Family Code, as follows:<br><br>. . . .<br><br>(3) <i>By retaining in the court's files[:]</i> (1) the quadruplicate copy of the marriage certificate, (2) <i>the original of the marriage license</i>, and, in proper cases, (3) the affidavit of the contracting parties regarding the solemnization of the marriage in a place other than the Justice's/judge's chambers or in open court. (Emphasis supplied)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Alcantara v. Alcantara</b>, 558 Phil. 192 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>Superiora Locale Dell' lnslilulo Delle Suore Di San Giuseppe Def Caburlotto, Inc. v. Republic</b>, 923 Phil. 472 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>David v. Calilung</b>, 894 Phil. 752 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Pulido v. People</b>, 908 Phil. 573 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Castillo v. De Leon Castillo</b>, 784 Phil. 667 (2016), <i>citing</i> <b>Domingo v. Court of Appeals</b>, 297 Phil. 642 (1993).<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See</i> <b>Vda. de Santos v. Diaz</b>, 120 Phil. 1477 (1964).<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> <b>Kondo v. Civil Registrar General</b>, 872 Phil. 251 (2020).<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>DISSENTING OPINION</b></center><br><b>CAGUIOA, <i>J.</i>:</b><br><br>I dissent. The Petition for Declaration of Nullity of Marriage filed by petitioner Arthur V. Pascua (Arthur) against private respondent Shirley Bullos Pascua (Shirley) should be granted on the ground that Arthur was able to prove that there was no valid marriage license issued prior to his marriage with Shirley.<br><br>In particular, I respectfully disagree with the <i>ponencia</i>'s ruling that the negative certification issued by the Municipal Treasurer (MT) of Taytay, Rizal does not have any probative value.<br><br>To recall, on February 8, 2005, Arthur and Shirley got married at the Life Christian Fellowship Center, which was solemnized by Rev. Saturnino V. Palero (Rev. Palero) in Caloocan City.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> In their Certificate of Marriage, Rev. Palero certified that he was shown Marriage License with Serial Number 5013850 dated January 6, 2005 issued from Taytay, Rizal in favor of Arthur and Shirley (subject marriage license).<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>In 2017, Arthur filed for the nullity of his marriage with Shirley alleging that his marriage was void <i>ab initio</i> for lack of a valid marriage license.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Arthur particularly questioned the issuance of the subject marriage license by the Local Civil Registrar (LCR) of Taytay, Rizal because neither he nor Shirley was a resident of Taytay. Arthur testified that the marriage was done in haste<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and when he and his lawyer inquired as to the whereabouts of the subject marriage license, the Taytay LCR referred them to the Taytay MT<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> who issued a Certification (MT Certification), which stated that the subject marriage license was not issued by the Municipality of Taytay, to wit:<blockquote>To Whom It May Concern:<br>&nbsp;<br>This is to certify that as per record of this office, Accountable Form No. 54 with Serial Number 5013850 dated January 6, 2005 â Marriage License â which was issued to Mr. Arthur V. Pascua and Ms. Shirley M. Bullos was not included in the series issued by this municipality.<br><br>This Certification is issued upon the request of Mr. Arthur V. Pascua for whatever legal intents or purpose it may serve.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="70%">&nbsp;</td><td width="30%"><div align="center">(signed)<br>&nbsp; MA. LORETO M. COLLADO<br>&nbsp;ICO â <i>Municipal Treasurer</i><sup style="COLOR: RGB(255, 0, 0);">[6]</sup></div></td></tr></tbody></table></blockquote>This MT Certification was identified by Victorino E. Pangilinan Jr. (Victorino), the authorized representative of the Office of the Taytay MT, who also identified several pages of the Marriage License Record Book (Logbook) of Accountable Form No. 54 or marriage license forms kept in the Office of the Taytay MT.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> According to Victorino, there was no record of the subject marriage license based on pages 36 to 37 of the Logbook, which covered the period of October 11, 2004 to August 22, 2006, i.e., the relevant time when the subject marriage license was allegedly issued.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>The <i>ponencia</i> rules that the MT Certification has no probative value because the person who issued it, i.e., the MT, is not the public officer tasked by law to keep records of marriage licenses.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> According to the <i>ponencia</i>, it is the LCR who is legally mandated to maintain records of duly accomplished sworn applications for marriage licenses.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Thus, as the legal custodian of duly accomplished sworn applications for marriage licenses, the LCR must be the one to issue a negative certification required under Rule 132, Section 28<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> of the Revised Rules on Evidence to prove the existence or non-existence of a marriage license.<br><br>While I agree that, under the law, the LCR is the legal custodian of marriage licenses issued by the corresponding city or municipality, it is my view that his or her certification should not be the only reliable source to prove the existence or non-existence of a marriage license purportedly issued by that city or municipality. The LCR's certification may not even be taken as gospel truth in certain exceptional circumstances.<br><br>I expound.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="50%"><div align="justify"><em>The treasurer of the city or municipality (C/MT) is recognized as custodian of all accountable forms (AF) requisitioned by such local government unit (LGU).</em></div></td><td width="50%">&nbsp;</td></tr></tbody></table><br>First and foremost, it must be understood that a marriage license form pertains to Accountable Form No. 54<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> which, together with all other AFs, is printed by recognized printers of the government, like the National Printing Office (NPO), with serial numbers and are distributed upon proper requisition by the C/MT concerned.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Chapter 4, Section 23(c) of the Local Treasury Operations Manual<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (LTOM) and Section 24 of the Commission on Audit (COA) Circular No. 92-382<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> explicitly state that the C/MT "shall be the custodian of all accountable forms requisitioned by the [LGU]."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Moreover, the C/MT shall maintain a complete record of the receipt, issue, and transfer of all AFs of the LGU.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>From these provisions alone, it is apparent that the C/MT is the legal custodian of all AFs not only requisitioned, but also issued and transferred to other offices by the concerned LGU. As the legal custodian of all AFs, the C/MT is definitely clothed with authority to issue a certification under Rule 132, Section 28 of the Revised Rules on Evidence<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> to prove the existence or non-existence of a marriage license form (which, again to stress, is an accountable form) issued by the concerned LGU. To the point, an AF like a marriage license form (Form No. 54) duly issued by the LGU must have been originally requisitioned by the C/MT.<br><br>The <i>ponencia</i> counters this by explaining that the AFs or marriage license forms mentioned in the possession and custody of the C/MT refer to blank or unused forms<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> and that the C/MT's duty as regards these is only for inventory purposes,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> particularly in recording how many forms were delivered to the LGU concerned, how many were issued, and how many are left unused at the end of the month.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br>&nbsp;<br>The <i>ponencia</i> continues by comparing the contents of the MT's Logbook, which only reflects serial numbers of AFs received by the municipality and released per date to the LCR,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>vis-Ã -vis</i> the contents of the record kept by the LCR, which shows the names of the applicants to whom the AFs have been issued and the dates of their issuance.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Following this comparison, the <i>ponencia</i> rules that the certification based on the MT's Logbook cannot be a reliable source to declare the issuance or non-issuance of a marriage license because unlike the record kept by the LCR, it does not contain details such as the names of the applicants of the marriage license and the date on which such marriage license was issued.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>I respectfully submit that this reasoning is flawed.<br><br>To be sure, Book I, Section 4(E) of the LTOM mentions the duty of the C/MT to conduct physical inventory over unused AFs, the issuance of AFs to accountable officers, and the preparation of monthly reports on AFs. In relation to such duty, Book II, Section 86 of the LTOM mentions that the C/MT shall be custodian of all AFs requisitioned by the LGU and shall maintain a complete record of the receipt, issue, and transfer of AFs.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Under Section 86(C)(l) of the same provision, it is stated that upon receipt of AFs from the recognized printers, the C/MT shall examine carefully each book or pad and shall segregate any book or pad found to contain defects such as <i>incorrect series of numbers</i>, or missing leaves or sheets, etc. and submit to the COA Auditor together with a statement of the defects or deficiencies noted.<br><br>Moreover, in <i>Geronimo v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the Court recognized that AFs bearing serial numbers from the NPO are distributed upon proper requisition by C/MTs concerned, thus:<blockquote>It is a known fact, and it is of judicial notice, that all printed accountable forms of the Government like the Marriage License (Municipal Form 95-A) [, now Accountable Form No. 54,] come from the National Printing Office and are printed with serial numbers. These forms are distributed upon proper requisition by the city/municipal treasurers concerned.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></blockquote>Based on the foregoing, AFs from recognized printers of the government, like the NPO, are received and are duly inventoried by the C/MT upon requisition of the concerned LGU. These AFs are not just mere blank forms, <b>but are forms bearing identified and specific serial numbers</b> which the C/MT keeps a record of. Logically, if these AFs bearing identified and specific serial numbers are inventoried and recorded by the C/MT, then it follows that only such AFs bearing the identified and specific serial numbers duly requisitioned, inventoried, and recorded by the C/MT can be the only ones used and issued by the concerned LGU.<br><br>From this, it is reasonable to conclude that the C/MT, as the record keeper and custodian of all AFs <b>bearing identified and specific serial numbers</b> received by the concerned LGU, is certainly competent to certify as regards the existence, receipt, and release of each AF used and issued by the said LGU.<br><br>Following the above-mentioned logic, the Taytay MT, as the record keeper and custodian of all AFs <b>bearing identified and specific serial numbers</b> received by the Municipality of Taytay, is competent to certify as regards the existence or inexistence, receipt, and release of each marriage license used and issued by the Municipality of Taytay.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="50%"><div align="justify"><em>AFs used in the LGU come from the C/MT Thus, as the source, the C/MT is aware whether a certain AF bearing a serial number is issued by the LGU.</em></div></td><td width="50%">&nbsp;</td></tr></tbody></table><br>The <i>ponencia</i> mentions the process when an AF is received, inventoried, transferred, and eventually used for an application of a marriage license. According to the <i>ponencia</i>, the C/MT, as the custodian of pads of blank and unaccomplished AFs for marriage licenses, records in its Logbook the series of AFs bearing specific serial numbers bought by the LGU from the Bureau of Internal Revenue (BIR).<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The C/MT then transfers the blank and unaccomplished AFs to the LCR for the latter's use.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> When an AF is used by the applicants and after payment of the fee to the C/MT and compliance with the other requirements of law,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> the LCR signs the AF.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Thereafter, the LCR, as the legal custodian of sworn applications for marriage licenses, enters in The Register of Applications for Marriage License all applications for marriage licenses, the names of the applicants, the date on which the marriage license was issued, and such other data as may be necessary.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Following this, it can be inferred that the C/MT is the source of the AF used by the LCR in a particular LGU. Regardless of the fact that the AF is blank and unaccomplished, the AF bears a specific serial number traceable to the record or Logbook duly kept by the C/MT pursuant to the C/MT's duties. To reiterate and emphasize, <b>only those AFs which originated from the C/MT</b>, being the custodian of all AFs in the LGU and transferred to accountable officers in that LGU, like the LCR who then uses the said AFs for applications for marriage licenses, <b>can be said to have been officially issued by such LGU</b>.<br>&nbsp;<br>Applying this process to the present case, it can be gleaned that when the Taytay MT's negative certification was issued, it was only after the Taytay MT verified the AFs with identified and specific serial numbers that were requisitioned and bought from the BIR, inventoried in their Logbook, and transferred to the LCR. Hence, the language of the Taytay MT's Certification that "Accountable Form No. 54 with Serial Number 5013850 . . . was not included in the series issued by [the] municipality."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> And if that form was never issued by the Taytay MT to the municipality, that is proof that is competent and highly reliable to prove the non-existence of the subject marriage license.<br><br>I hasten to add humbly these observations. In case of the presence of negative certifications of both the C/MT and the LCR, i.e., inexistence of AF No. 54 with specific serial number, the latter's certification is merely corroborative. Where the certifications by both are positive, regarding the existence of issued AF No. 54 is concerned, the C/MT certification is corroborative. In case of conflict between a negative certification by the C/MT and a positive one by the LCR, the former carries greater weight.<br><br>Based on the records, Arthur was unable to procure a certification from the LCR because when he and his counsel inquired about the whereabouts of the subject marriage license, they were referred by the Taytay LCR to the Taytay MT, which, in tum, made the negative Certification.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Arthur further presented the authorized representative from the Office of the Taytay MT to identify several pages of the Logbook of AFs kept in the Office of the Taytay MT as well as to testify that there is no record of the subject marriage license bearing the Serial Number 5013850 in the MT's Logbook.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>In view of the foregoing, Arthur was able to dispense his burden of proof clearly and convincingly that there was no valid marriage license that was issued prior to his marriage with Shirley. Thus, the present Petition should be <b>GRANTED</b> and Arthur's marriage with Shirley should be <b>NULLIFIED</b>.&nbsp;<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, p. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Article 11 in relation to Article 25 of the Family Code.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Ponencia</i>, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Section 28, Rule 132 of the Rules of Court, as amended by A.M. No. 19-08-15-SC states:<blockquote>Section 28. <i>Proof of lack of record</i>. â A written statement signed by an officer having the custody of an official record or by his or her deputy that, after diligent search, no record or entry of a specified tenor is found to exist in the records of his or her office, accompanied by a certificate as above provided, is admissible as evidence that the records of his or her office contain no such record or entry.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Ponencia</i>, p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <b>Geronimo v. Court of Appeals</b>, 296 Phil. 356, 363 (1993) [Per J. Davide, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The LTOM was issued pursuant to Item 4.6 of Joint Memorandum Circular No. 1, Series of 2007 of the Department of Interior and Local Government, National Economic and Development Authority, Department of Budget and Management and Department of Finance, and Article 456 of the Implementing Rules and Regulations of Republic Act No. 7160, otherwise known as the Local Government Code of 1991. A copy of the LTOM is <i>available at</i> <a href="https://blgf.gov.ph/wp-content/uploads/2022/10/LTOM-Book-1-E-Copy.pdf">https://blgf.gov.ph/wp-content/uploads/2022/10/LTOM-Book-1-E-Copy.pdf</a> (last accessed on August 1, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> This Circular on Accounting and Auditing Rules and Regulations designed to implement the provisions of Republic Act No. 7160, the Local Government Code of 1991, is issued pursuant to Section 2(2), Article IX-D, of the Constitution (1992).<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> RULES OF COURT, Rule 132, sec. 28, as amended by A.M. No. 19-08-15-SC, October 8, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Ponencia</i>, p. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Supra</i> note 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 163.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Ponencia</i>, pp. 11-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 3.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

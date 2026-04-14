@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262564 - ISABELLE FRANCESCA F. PAULINO, PETITIONER, VS. SUTHERLAND GLOBAL SERVICES, INC. &ndash; CLARK,* RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70181' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262564, August 06, 2025 ]</H2>
+			<H3>ISABELLE FRANCESCA F. PAULINO, PETITIONER, VS. SUTHERLAND GLOBAL SERVICES, INC. â CLARK,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 20, 2021, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 8, 2022, of the Court of Appeals (CA) in CA-G.R. SP No. 164681. The CA reversed the rulings<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the National Labor Relations Commission (NLRC) in NLRC LAC No. 09-003343-19 and reinstated the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated June 11, 2019, of the Labor Arbiter (LA) in NLRC Case No. RAB-III-09-28146-18 that dismissed, for lack of merit, the Complaint for constructive dismissal filed by petitioner Isabelle Francesca F. Paulino (Paulino) against respondent Sutherland Global Services Philippines, Inc. (Sutherland), its Human Resource Manager, Erly Sarmiento (Sarmiento), and its Training Manager, and Aliaa Moussa (Moussa) (collectively, respondent et al.).<br><br><center><i>The Antecedents</i></center><br>On September 12, 2016, Sutherland, a domestic corporation engaged in the business of process outsourcing, hired Paulino as a Senior Training Specialist and assigned her at Sutherland's Office in Shaw Boulevard (Shaw Office).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Initially, Paulino was doing well in her job. Sutherland recognized her as the Best Trainer for the Month of May 2017 as shown by a Certificate<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> dated June 4, 2017, and designated her as OIC-Training Manager.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> However, a year later, i.e., in September 2017, Paulino got pregnant with her second child. When Paulino informed the Training Manager, Jelanie Tupas (Tupas), that she was pregnant - one week later, Sutherland announced the transfer of all of its trainers to its Clark Site (Clark Office) effective October 2017.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Sutherland's Training Director, Anna Ileto (Ileto), convinced Paulino via phone conversation to accept the temporary assignment at the Clark Office where trainers were needed. Paulino, despite her pregnancy and the Clark Office being a considerable distance away from her residence in Bulacan, agreed to the new assignment as it was merely temporary. Moreover, Paulino expected, per company policy, that she would be given hotel accommodations near the Clark Office; that shuttle services would be provided; and that she would be given <i>per diem</i> allowance for daily expenses. However, a few hours after she consented to the transfer to the Clark Office, Sutherland informed Paulino that her assignment would be at Sutherland's Office in Tarlac (Tarlac Office).<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Because of her pregnancy, Paulino became hesitant to accept the assignment, but Tupas and Ileto assured Paulino that Sutherland would provide shuttle services for her.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>In her Position Paper,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Paulino alleged the following:<br><br>She complied with Sutherland's directives and conducted training sessions at the Tarlac Office despite her sensitive condition caused by her pregnancy. She spent three and a half hours of travel every day from the Hotel in Clark to the Tarlac Office and vice versa. She experienced motion sickness due to the strenuous work Sutherland required her to do. As she could no longer continue because of her sickness, Sutherland ended the training sessions in Tarlac. Consequently, Sutherland assigned her to the Clark Office.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Subsequently, Moussa, the Training Manager, had a one-on-one session with Paulino in the Clark Office. Moussa berated Paulino and blamed her for the dissolution of the training sessions at the Tarlac Office and described her performance as not "trainer-like."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Sutherland transferred Paulino to the Production Area of the Clark Office. There, she brought with her a blanket to the Production Area because it was cold and she only had limited clothing as she was merely on temporary assignment. While the trainees were entitled to a 15-minute break, she would choose to take the break inside the Production Area than to spend it at their designated sleeping quarters which were remotely located. Despite knowledge of her pregnancy, Moussa barred her from bringing a blanket in the Production Area. And for "aesthetic reasons," Moussa likewise prevented her from bringing a bag to or taking a break at the Production Area.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Worse, Sutherland decided to change Paulino's assignment at the Clark Office from temporary to permanent. Sometime in December 2017, Moussa asked her if she wanted to be assigned permanently at the Clark Office. While the assignment appeared optional, Moussa clarified that if she would not accept the permanent assignment, she would be placed on a floating status indefinitely with no pay. Thus, Paulino was constrained to accept the permanent assignment. Moussa then promised to give her a relocation allowance in the first week of January, but it never materialized.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> On January 30, 2018, Paulino requested Moussa to extend her stay at Red Planet Hotel for just one day as she has not yet found a place to rent near the Clark Office. Moussa refused to extend Paulino's hotel accommodation. Instead, she directed Paulino to take a forced leave.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Following the advice of her doctor,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Paulino, on February 24, 2018, filed an application for leave of absence for one week, as she was suffering from urinary tract infection. Moussa received the application; she also extended her concern of her predicament.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On March 5, 2018, Paulino went to Sutherland to submit the Medical Certificate prepared by her doctor and SSS Form, which stated that she would be needing a 40-day rest.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Despite having filed her medical leave of absence, Sutherland included her in their company's "Absconding List," and consequently, withheld her salary which was due on March 15, 2018.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>While on preterm labor, Paulino formally brought the issue of non-payment of her salary to Sutherland's Human Resources Team via email:<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><blockquote>Subject: Demand Letter-Isabelle Paulino-311603-March 15, 2018 pay.<br><br>. . . .<br><br>[L]ast night, March 23, 8 days after everyone got their pay, i got an update from her stating that according to HR and comp and ben, i need an activity in iroz to be able to process CA which is totally impossible since i[']m on LOA, Bed rest, Pre Term Labor and under medication.<br><br>[I] spoke with sir mike knowing that i was part of the absconding list that's why i did not get my pay.<br><br>Now, i need a clear answer to the following questions:<br><br>1. Was i part of the absconding list[?]<br><br>. . . .<br><br>4. I demand to get my march 15 pay covering feb 21 up to march cut off on march 30.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></blockquote>In response, Moussa stated that Paulino 's pay would be credited on March 30, 2018, according to the Human Resources Team:<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><blockquote>I notified you on March 29<sup>th</sup> that your dispute will be credited on the 30<sup>th</sup> per HR comp confirmation and you acknowledge. What other questions do you have? You can call me.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>After her repeated follow-ups and giving birth on April 23, 2018, Paulino still did not receive her March 15 pay which she needed to cover her hospital bills. Thus, she threatened to file a legal action against Sutherland:<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><blockquote>Hi team,<br><br>I am looking forward for an answer as i have waited for this since March.<br><br>I have undergone pre term labor and have given birth via Cesarian Section. This means that i have a lot of loans due for April 30th.<br><br>I am honestly tired of run arounds. I don't want to be rude but i am just being honest of my situation and frustrations.<br><br>I think i should stop making follow ups and do what is legally necessary.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></blockquote>On the last day of her maternity leave, i.e., June 28, 2018, Paulino, with the assent of Moussa, used three of her earned leaves of absence to look for a suitable babysitter. Unfortunately, after the lapse of three days, she was unable to find one. Paulino then asked Moussa for an extension of her leave of absence, but Moussa did not grant it.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>As she was unable to bring her newborn baby from her residence at Bulacan to the remote Clark Office, Paulino requested to be reassigned to the Shaw Office so she could take care of her baby. Moussa flatly rejected it and reasoned that her assignment to the Clark Office cannot be altered for one year because of the "relocation bond," a condition which was foreign to Paulino since Sutherland never mentioned it to her. Out of frustration, Paulino asked Moussa if she should just resign because no one will take care of her newborn baby. In response, Moussa stated that Sutherland's policy requires 30-day notice before an employee could resign, but in Paulina's case, Moussa stated that she would immediately approve her resignation in disregard of company policy.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>This prompted Paulino to tender her resignation from Sutherland in the letter<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated June 30, 2018 (resignation letter), viz.:<blockquote>Dear Ms. Aliaa Moussa:<br><br>I am writing this letter to inform you of my decision to resign immediately from my position as a Sr. Training Specialist at Sutherland - Clark.<br><br>I have been extremely stressed, disappointed and felt discriminated for the following reasons:<ol><li>I was pregnant when they transferred us to Pampanga site. We were advised to train in Clark but there was a sudden notice that it will happen in Tarlac. I was left with no choice because I need to work.<br><br></li><li>I was pregnant when I got high fever while training in Tarlac. I was in the clinic for half day and when I went back to work, [y]ou were disappointed because I did not send my EOD report. Considering that I was pregnant and went to work with fever, I felt that I was degraded when you said that not sending the report was not a "Trainer like".<br><br></li><li>I was pregnant and my hotel accommodation was to end. My accommodation was to expire on January 30. I was asked to hunt for a house on January 1. But hunting for a place became very difficult because we didn't have the relocation allowance on hand. I asked for 1 day exten[s]ion at least until January 31<sup>st</sup> once pay roll is out but it was declined. It became very challenging to beg for your consideration knowing that I was pregnant. You wanted me to pay for the hotel bills if I will extend for just I day. I was offered to travel back and forth to Bulacan while waiting for my pay and I didn't have a place to stay. I felt that it was very difficult to ask for a consideration knowing that it was never my fault that the relocation allowance hasn't arrived yet.<br><br></li><li>I became part of the Absconding (inactive) list resulting [in] my pay to be on hold. You always tell us to check the Absconding email list to make sure that none of the active employees will become inactive but I was surprised when HR said that my profile was deactivated. I felt that you did not mind me being on the list and deactivated.<br><br></li><li>You called me once to tell that my medical certificate was not validated. You asked me if I went to the clinic and had my certificate validated. I told you that I sent my medical certificate thru FB and it is impossible for [me] to bring that paper to the clinic. I was crying on the phone and you said "I am not a doctor to validate your document". That is why my leaves were not approved even if you know that my pay was on hold due to the absconding list. This is how you show you care.<br><br></li><li>I have been sending emails but there was this one email that you did not answer until I reached out to our Training Director. The question was from HR asking you to reply to the email. I felt that you really did not want to answer.<br><br></li><li>Finance promised that my pay will come out on April 30. I had dues to pay and I was compromised because my pay was still not released. I felt that they did not bother [to ask] how [I was] able to give birth.<br><br></li><li>HR knew that I was on [preterm] labor and was no longer allowed to travel. I asked then to check the forms first while I was still in the office yet, my SSS LOA notification was declined due to a signature that was left out. How many times do I have to check the form and reiterate to them that they have to check it because I cannot travel back and forth? This put more pressure on my pregnancy.<br><br></li><li>I sent an email with multiple follow ups for inquiry but only the Senior Director had the guts to ask for someone to answer my questions. This is how credible the HR team was.<br><br></li><li>I asked for Leave of Absence because my baby sitter surprisingly left. You said that you will check if my earned leaves can be applied on my behalf but latter it can[']t. So you asked me of my next plan. I requested for [LOA] while looking for a baby sitter but you said no LOA will be approved. Then I said if I can go back to my original site (Shaw). You said it won[']t be possible because of the Relocation bond of 1 year.<br><br></li><li>No one told me that [there] is a Relocation bond of 1 year. You asked me to decide urgent or else I will float without telling me that I will be required to stay in Pampanga for 1 year and no paper was signed. I felt that I was left with no option.<br><br></li><li>Now, since my LOA was declined, going back to my original site was no longer possible, you told me that you will no longer ask me to render. You will approve my immediate resignation.<br><br>This, I was left with no option but to leave. I told my Training Director that I am not yet ready to leave because I love Sutherland as a whole but Pampanga site is unique that now I am being forced to leave this good office. The sequence of events became just unbearable and inhumane. This is without prejudice to the appropriate legal remedies which I may resort to in accordance with law.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></li></ol></blockquote>Paulino thereafter filed a Complaint for constructive dismissal, separation pay in lieu of reinstatement, non-payment of 13<sup>th</sup> month pay, and moral and exemplary damages against respondent et al.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>For their part, respondent et al. argued that Paulino voluntarily resigned based on her resignation letter; she is thus not entitled to separation pay, backwages, moral and exemplary damages, or attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Respondent et al. countered that Sutherland is the one entitled to moral and exemplary damages, as well as attorney's fees because the complaint is baseless.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><center><i>The Ruling of the LA</i></center><br>In the Decision<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated June 11, 2019, the LA dismissed Paulino's Complaint for lack of merit, but he found Sutherland liable to pay Paulino her 13<sup>th</sup> month pay for the year 2018, viz.:<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><blockquote>WHEREFORE, judgment is hereby rendered DISMISSING the [C]omplaint for constructive dismissal for lack of merit.<br><br>However, respondent Sutherland Global Services Philippines, Inc. is ordered to pay complainant Isabelle Francesca F. Paulino the amount of [PHP] 15,900.00 representing her unpaid Proportionate 13<sup>th</sup> Month Pay for 2018.<br><br>The rest of the money claims including damages and attorney's fees is denied for lack of merit.<br><br>The respondents' counterclaims are denied for lack of jurisdiction.<br><br>The names of Erly Sarmiento and Alia Moussa are ordered removed as parties-respondent in this case.<br><br>The attached computation prepared by the Fiscal Examiner shall form an integral part of this Decision.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></blockquote>In so ruling, the LA declared that there is nothing in the records which showed that Moussa forced Paulino to resign. According to the LA, Paulino "[sought] too much privilege just because she was pregnant."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The LA also dropped the names of Sarmiento and Moussa as respondents to the case.<br><br>Aggrieved, Paulino appealed to the NLRC.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br><center><i>The Ruling of the NLRC</i></center><br>In the Decision<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> dated September 30, 2019, the NLRC reversed the LA Decision and partially granted Paulino's Appeal. The NLRC declared that Paulino was constructively dismissed from employment by Sutherland because Paulino's resignation was triggered by the harsh, hostile, and unfavorable conditions set by Sutherland during Paulino's period of pregnancy.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>The NLRC stated that while the decision to transfer an employee is a management prerogative, Paulino's transfers to the Clark Office and to the Tarlac Office, taken collectively, were motivated by discrimination on account of her pregnancy.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> In doing so, the NLRC found that Sutherland violated the provision on reasonable travel under its Employment Contract, i.e., Item 8.1,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> as well as the right of women to decent work<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> which is mandated by Republic Act No. 9710 or the "Magna Carta of Women." Consequently, the NLRC directed Sutherland to pay Paulino full backwages and separation pay equivalent to one month pay per year of service in the total amount of PHP 688,197.69.<br><br>According to the NLRC, reinstatement was no longer feasible due to the strained relations between the parties.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>The dispositive portion of the Decision reads:<blockquote>WHEREFORE, premises considered, the appeal is partially GRANTED. The assailed Decision is Modified in the sense that respondent Sutherland Global Services Philippines, Inc. is directed to pay complainant full backwages and separation pay.<br><br>Portion of the assailed Decision consistent herewith stands.<br><br>The attached computation forms part of this decision.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><center>COMPUTATION OF JUDGMENT AWARD:</center><br>1) Backwages (July 10, 2018 â September 30, 2019):<br>([PHP] 31,800+4,200)<br>&nbsp;<br>[PHP] 36,000 x 14.66&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=&nbsp; [PHP] 527,760.00<br><br>13<sup>th</sup> Month Pay:&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;=&nbsp; [PHP] 43,980.00<br>[PHP] 527,760/12<br>&nbsp;<br>SILP:<br>[PHP] 36,000/26 x 5/12 x 4.16=<br>[PHP] 8,457.69&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= [PHP] 580,197.69<br><br>2) Separation Pay: (Sept.12, 2016 â Sept. 30, 2019)<br><br>[PHP] 36,000 x 3 yrs&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;= [PHP] 108,000.00<br>&nbsp; <b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Total</b>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = <b>[PHP] 688,197.69</b><sup style="COLOR: RGB(255, 0, 0);">[47]</sup></blockquote>Sutherland moved for a reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> but the NLRC denied the motion for lack of merit in the Resolution<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> dated November 28, 2019.<br><br><center><i>The Ruling of the CA</i></center><br>In the assailed Decision,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> the CA granted Sutherland's Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and reversed the NLRC Decision. Thus:<blockquote>We find that the NLRC gravely abused its discretion when it declared that respondent was constructively dismissed and entitled to backwages and separation pay. Suffice it to stress that there being no illegal dismissal in this case, respondent's monetary claims and the solidary liability of individual petitioners must be denied for lack of legal basis.<br><br>WHEREFORE, premises considered, the Petition for Certiorari is Granted. The Decision dated September 30, 2019 and the Resolution dated November 28, 2019 of the National Labor Relations Commission, Third Division, in NLRC LAC No. 09-003343-19, are Reversed and Set Aside. The June 11, 2019 Decision of the Labor Arbiter in NLRC Case No. RAB-III-09-28146-18, is Reinstated. The monetary award granted shall earn legal interest at the rate of six percent (6%) per annum from the date of the finality of this Decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote>The CA held that since Paulino admittedly resigned, it was incumbent upon her to prove that her resignation was involuntary. Aside from bare allegations, the CA stated that there was no evidence which showed that Sutherland intentionally made Paulino's working conditions unbearable.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>On the contrary, the CA found that Paulino expressly and unconditionally stated her desire to resign from Sutherland; hence, there was no dismissal to speak of.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> The CA noted that Sutherland even provided Paulino a free 30-day hotel accommodation in Clark. Further, Paulino never initiated any action regarding the alleged occupational and health hazards that were detrimental to her pregnancy.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The CA added that, even if the option to resign originated from the employer, the resignation is still voluntary so long as the employee's intent to relinquish concurs with the overt act of relinquishment.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>In the assailed Resolution,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> dated August 8, 2022, the CA denied Paulino's Motion for Reconsideration in this wise:<blockquote>[A] review of the messages exchanged between [Paulino] and Aliaa Moussa clearly showed that her resignation was because of her need to care for her children â a personal reason which, to private respondent, could not be sacrificed in favor of the exigency of the service. Moreover, her resignation letter clearly indicated her intent to voluntarily relinquish her employment and that she was fully aware of the implications of her decision to resign. Jurisprudence is clear. An unconditional and categorical letter of resignation cannot be considered indicative of constructive dismissal if it is submitted by an employee fully aware of its effects and implications.<br><br>. . . .<br><br>WHEREFORE, premises considered, the Motion for Reconsideration is Denied.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></blockquote>Hence, the present Petition.<br><br><center><i>The Issue</i></center><br>The issue for the Court's resolution is whether petitioner was constructively dismissed from employment.<br><br><center><i>Petitioner's Arguments</i></center><br>Petitioner assails the CA Decision and alleges that while she admits having submitted a resignation letter to Sutherland, she did so because she had no other choice but to leave. Further, she submits that the CA failed to consider the following: (1) the entire text of the resignation letter in concluding that her resignation was voluntary; (2) Sutherland's unjustified act of including her in the absconding list; and (3) her assertion that corporate officers, Moussa and Sarmiento, should be held solidarily liable with Sutherland.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br><center><i>Respondent's Arguments</i></center><br>In its Comment/Opposition,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> respondent et al. alleges as follows: (1) that petitioner was transferred to the Clark Office due to the closure of the account/program to which she was initially assigned; (2) that petitioner agreed to be deputized in the Tarlac Office, and it paid for her hotel accommodation from October 2017 to January 2018 so she would not need to travel from Bulacan to Tarlac; (3) that based on company records, petitioner never filed her maternity leave, and this resulted in zero net pay; and (4) that on June 30, 2018, petitioner voluntarily resigned.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Respondent et al. added that petitioner should be held liable for Willful Disobedience because she failed to report on numerous instances, i.e., from February 23, 2018 to March 3, 2018.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br><center><i>The Ruling of the Court</i></center><br>The Petition is meritorious.<br><br>Prefatorily, as to Sarmiento and Moussa, it bears accentuating that the LA, in the Decision dated June 11, 2019, previously dropped their names as respondents to the case. Thus, the CA should have no longer included their names in the title of the case.<br><br>It is well to note that the issue raised by petitionerâ<i>whether she was constructively dismissed or whether her resignation was involuntary</i>âis evidently a factual matter that would necessarily require a re-evaluation of the evidence. As a rule, factual questions are inappropriate under a petition for review on <i>certiorari</i> as the Court's jurisdiction is limited to questions of law.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Nonetheless, this rule is not absolute, and it admits various exceptions.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> One exception is when the findings of facts of the labor tribunals and the CA are conflicting.<br><br>Moreover, "in a Rule 45 review in labor cases, the Court examines the CA's Decision from the prism of whether, [in a petition for <i>certiorari</i>,] the latter had correctly determined the presence or absence of grave abuse of discretion in the NLRC's Decision."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> There is grave abuse of discretion on the part of the NLRC when its findings and conclusions are not supported by substantial evidence, i.e., that amount of relevant evidence that a reasonable mind might accept as adequate to justify a conclusion.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>To recall, the NLRC, on the one hand, found that petitioner was constructively dismissed due to the harsh and unfair treatment she suffered at Sutherland's Clark and Tarlac offices on account of her pregnancy. The CA, on the other hand, declared that the NLRC gravely abused its discretion considering that petitioner, based on her unconditional resignation letter, voluntarily resigned.<br><br>Citing <i>Pascua v. Bankwise, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> the CA found petitioner's resignation letter categorical and unconditional. It held that because petitioner resigned, it was incumbent upon her to prove that her resignation was not voluntary. Moreover, the CA held that petitioner failed to show by substantial evidence that she was forced to resign due to unbearable working conditions.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>Due to these conflicting findings, the Court is constrained to resolve the factual question of whether petitioner voluntarily resigned or was constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>Resignation is defined as "the formal relinquishment of a position or office."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Based on prevailing jurisprudence, the rule is that it is the employer, <i>not the employee</i>, who bears the burden of proof to show that the resignation was voluntary. Moreover, the employer cannot simply rely on the weakness of the employee's evidence. Instead, the employer must show by clear, positive, and convincing evidence that the resignation was indeed voluntary.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> This is in line with the State's policy to afford greater protection to labor, a Constitutionally-protected social class.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>In <i>Pascua v. Bankwise, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> the Court enunciated:<blockquote>The employer has the burden of proving, in illegal dismissal cases, that the employee was dismissed for a just or authorized cause. <i>Even if the employer claims that the employee resigned, the employer still has the burden of proving that the resignation was voluntary.</i> It is constructive dismissal when resignation was made under compulsion or under circumstances approximating compulsion, such as when an employee's act of handing in his [or her] resignation was a reaction to circumstances leaving him [or her] no alternative but to resign. (Emphasis supplied; citation omitted)</blockquote>Curiously, the CA, despite citing the case of <i>Pascua</i>, held that the burden of proof falls on petitioner, the employee, instead of the employer respondent. The CA then declared that petitioner voluntarily and unconditionally resigned based solely on the first line of her resignation letter which reads:<blockquote>Dear Ms. Aliaa Moussa:<br><br><i>I am writing this letter to inform you of my decision to resign immediately from my position as a Sr. Training Specialist at Sutherland - Clark.</i><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> (Emphasis supplied)</blockquote>However, for a resignation to be considered valid, the following must concur: (1) intent to relinquish the position; and (2) the overt act of relinquishment.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> And because intent is a mental state, it can only be determined by observing the person's actions. The Court must therefore examine the resignation letter in its entirety and delve into the "totality of circumstances" of the case;<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> and it must take into consideration the actuation of the employee <i>before and after</i> the alleged resignation to determine if the employee truly intended to resign from their employment.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Applied to the case, while petitioner in the <i>first line</i> of her resignation letter expressed her desire to immediately resign, the tenor of the succeeding <i>12 or more lines</i> unmistakably show that she "was left with no option but to leave" due to pregnancy discrimination. Worse, contrary to the CA's declaration that the resignation was unconditional, the last line of petitioner's letter expressly stated that her resignation is "<i>without prejudice to the appropriate legal remedies which I may resort to in accordance with law</i>."<br><br>For emphasis, the complete text of the resignation letter is reproduced as follows:<blockquote>Dear Ms. Aliaa Moussa:<br><br>I am writing this letter to infom1 you of my decision to resign immediately from my position as a Sr. Training Specialist at Sutherland - Clark.<br><br><i>I have been extremely stressed, disappointed and felt discriminated for the following reasons</i>:<blockquote><ol><li><i>I was pregnant when they transferred us to Pampanga site. We were advised to train in Clark but there was a sudden notice that it will happen in Tarlac. I was left with no choice because I need to work.</i><br><br></li><li><i>I was pregnant when I got high fever while training in Tarlac. I was in the clinic for half day and when I went back to work, [y]ou were disappointed because I did not send my EOD report. Considering that I was pregnant and went to work with fever, I felt that I was degraded when you said that not sending the report was not a "Trainer like".</i><br><br></li><li><i>I was pregnant and my hotel accommodation was to end. My accommodation was to expire on January 30. I was asked to hunt for a house on January 1. But hunting for a place became very difficult because we didn't have the relocation allowance on hand. I asked for 1 day extension at least until January 31<sup>st</sup> once pay roll is out but it was declined. It became very challenging to beg for your consideration knowing that I was pregnant. You wanted me to pay for the hotel bills if I will extend for just 1 day. I was offered to travel back and forth to Bulacan while waiting for my pay and I didn't have a place to stay. I felt that it was very difficult to ask for a consideration knowing that it was never my fault that the relocation allowance hasn't arrived yet.</i><br><br></li><li><i>I became part of the Absconding (inactive) list resulting for my pay to be on hold. You always tell us to check the Absconding email list to make sure that none of the active employees will become inactive but I was surprised when HR said that my profile was deactivated. I felt that you did not mind me being on the list and deactivated.</i><br><br></li><li>You called me once to tell that my medical certificate was not validated. You asked me if I went to the clinic and had my certificate validated. I told you that I sent my medical certificate thru FB and it is impossible for [me] to bring that paper to the clinic. I was crying on the phone and you said "I am not a doctor to validate your document". That is why my leaves were not approved even if you know that my pay was on hold due to the absconding list. This is how you show you care.<br><br></li><li>I have been sending emails but there was this one email that you did not answer until I reached out to our Training Director. The question was from HR asking you to reply to the email. I felt that you really did not want to answer.<br><br></li><li><i>Finance promised that my pay will come out on April 30. I had dues to pay and I was compromised because my pay was still not released. I felt that they did not bother how was I able to give birth.</i><br><br></li><li><i>HR knew that I was on pre term labor and was no longer allowed to travel. I asked then to check the forms first while I was still in the office yet; my SSS LOA notification was declined due to a signature that was left out. How many times do I have to check the form and reiterate to them that they have to check it because I cannot travel back and forth? This put more pressure on my pregnancy.</i><br><br></li><li>I sent an email with multiple follow ups for inquiry but only the Senior Director had the guts to ask for someone to answer my questions. This is how credible the HR team was.&nbsp;<br><br></li><li>I asked for Leave of Absence because my baby sitter surprisingly left. You said that you will check if my earned leaves can be applied on my behalf but latter it cant. So you asked me of my next plan. I requested for [LOA] while looking for a baby sitter but you said no LOA will be approved. Then I said if I can go back to my original site (Shaw). You said it won[']t be possible because of the Relocation bond of 1 year.<br><br></li><li><i>No one told me that [there] is a Relocation bond of 1 year. You asked me to decide urgent or else I will float without telling me that I will be required to stay in Pampanga for 1 year and no paper was signed. I felt that I was left with no option.</i><br><br></li><li><i>Now, since my LOA was declined, going back to my original site was no longer possible, you told me that you will no longer ask me to render. You will approve my immediate resignation.</i><br><br><i>This, I was left with no option but to leave. I told my Training Director that I am not yet ready to leave because I love Sutherland as a whole but Pampanga site is unique that now I am being forced to leave this good office. The sequence of events became just unbearable and inhumane. This is without prejudice to the appropriate legal remedies which I may resort to in accordance with law.</i><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> (Emphasis supplied)</li></ol></blockquote></blockquote>Based on the full text of the resignation letter alone, it is clear that petitioner's resignation was not voluntary.<br><br>Respondent et al. argues that there can be no constructive dismissal for the following reasons: (1) petitioner accepted the transfers to the Clark Office and the Tarlac Office, and the transfers were an exercise of management prerogative; (2) as she retained her position, there was no demotion in rank or diminution in pay; and (3) it provided petitioner with hotel accommodations.<br><br>Respondent et al.'s arguments are absurd.<br><br><i>First</i>, it is well to stress that employers, such as respondent, bear the burden of proving that the transfer of an employee is for a valid and legitimate ground; otherwise, the transfer is deemed a constructive dismissal."<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br><i>Second</i>, constructive dismissal or constructive discharge exists "when continued employment is rendered impossible, unreasonable, or unlikely as the offer of employment involves a demotion in rank or diminution in pay."<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> It likewise exists where "an act of clear discrimination, insensibility, or disdain by an employer becomes so unbearable on the part of the employee that it could foreclose any choice by him [or her] except to forego his [or her] continued employment."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Stated otherwise, even without a demotion in rank or diminution in pay, there may still be constructive dismissal in cases where the employee was forced to resign because of discrimination.<br><br><i>Third</i>, the Supreme Court, as the prime duty bearer and as the last bulwark of justice and democracy, is constitutionally mandated to protect working women against all forms of discrimination and to ensure that they enjoy decent work environments, with due regard to their maternal functions.<br><br>Article XIII, Section 14 of the 1987 Constitution states:<blockquote>SECTION 14. The State shall protect working women by providing safe and healthful working conditions, <i>taking into account their maternal functions</i>, and such facilities and opportunities that will enhance their welfare and enable them to realize their full potential in the service of the nation. (Emphasis supplied)</blockquote>Additionally, Section 5(b) in relation to Section 22 of the Magna Carta of Women reads:<blockquote>SECTION 5. <i>The State as the Primary Duty-Bearer</i>. â The State, as the primary duty-bearer, shall:<br><br>. . . .<br><br>(b) <i>Protect women against discrimination and from violation of their rights by private corporations, entities, and individuals</i>; and<br><br>The State shall fulfill these duties through law, policy, regulatory instruments, administrative guidelines, and other appropriate measures, including temporary special measures[.]<br><br>SECTION 22. <i>Right to Decent Work</i>. â The State shall progressively realize and ensure decent work standards for women that involve the creation of jobs of acceptable quality in conditions of freedom, equity, security, and human dignity.<br><br>(a) Decent work involves opportunities for work that are productive and fairly remunerative as family living wage, security in the workplace, and social protection for families, better prospects for personal development and social integration, freedom for people to express their concerns, organize, participate in the decisions that affect their lives, and equality of opportunity and treatment for all women and men.<br><br>(b) The State shall further ensure:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1) </div></td><td width="95%"><div align="justify"><i>Support services and gears to protect them from occupational and health hazards taking into account women's maternal functions</i>;</div></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">Support services that will enable women to balance their family obligations and work responsibilities including, but not limited to, the establishment of day care centers and breast-feeding stations at the workplace, and providing maternity leave pursuant to the Labor Code and other pertinent laws[.] (Emphasis supplied)</div></td></tr></tbody></table></blockquote></blockquote>Guided by the foregoing labor principles, the Magna Carta of Women, and the 1987 Constitution, the Court finds that the CA erred in imputing grave abuse of discretion on the part of the NLRC.<br><br><i>For one</i>, it is undisputed that respondent, <i>one week after petitioner disclosed the fact of her pregnancy</i>, immediately transferred her from the Shaw Office to the Clark Office; otherwise, she would be placed on a floating status, indefinitely, and without pay. To justify the transfer, respondent alleged that the re-assignment was due to the closure of ISM Shaw, and as proof, it attached an image of a purported email communication dated September 30, 2017, which stated, among others, that petitioner would be absorbed in ISM Clark.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>Unfortunately, the purported email communications cannot be relied upon for being unauthenticated and unsigned.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> "While the rules of evidence prevailing in the courts of law or equity are not controlling in proceedings before [labor tribunals], the evidence presented before it must at least have a modicum of admissibility for it to be given some probative value."<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br><i>For another</i>, when petitioner, a resident of Bulacan, agreed to the "temporary assignment" to the Clark Office, respondent et al., without any explanation, changed petitioner's assignment to the Tarlac Office. In its Comment, respondent et al. stated that it paid for petitioner's hotel from October 2017 to January 2018, so she did not have to travel from her residence in Bulacan to her place of work in Tarlac. Similarly, the CA, in the assailed Decision, stated that respondent et al. addressed petitioner's pregnancy by giving her a 30-day hotel accommodation. However, it must be stressed that the hotel accommodation was at Red Planet Hotel located in Clark which meant that to report to work, petitioner, a pregnant woman, was required to travel more or less three and a half hours a day from Clark to Tarlac, and vice versa.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Consequently, she got sick and was unable to finish her training sessions in Tarlac. In all the pleadings it filed, respondent et al. provided no explanation as to the following: (I) why petitioner was assigned to the Tarlac Office after their earlier agreement to assign her to the Clark Office; and (2) why petitioner was not given a hotel accommodation near the Tarlac Office but was instead lodged in a hotel located in Clark.<br><br>Verily, the NLRC correctly ruled that respondent et al. violated Item 8.1 of its Employment Contract with petitioner, viz.:<blockquote>8. Business Travel.<br><br>8.1. Your duties may require you to engage in travel on behalf of the Company including travel outside the Philippines. As a consequence, you must work any additional hours as required. You expressly agree to accept such reasonable travel and hours of work without additional compensation subject to applicable law.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup></blockquote>In addition, in <i>Guinto v. Sto. NiÃ±o Long-Zeny Consignee</i>,<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> the rule is that "when the employer fails to specifically deny the ... employee's material averments as to the circumstances of his [or her] dismissal, <i>the employer is deemed to have admitted the fact of dismissal</i> and must then discharge [the] burden of proving that the dismissal of the employee was valid." In this case, respondent et al. never denied, and in effect admitted the following: (1) the harsh conditions petitioner allegedly suffered while in the Production Area of the Clark Office during her pregnancy; (2) her unjustifiable inclusion in the Absconding List and the fact that she was unable to receive her salary for the periods before and after she gave birth, despite respondent et al.'s representations that it would be credited to her account; (3) the fact that respondent et al. never informed petitioner about the "relocation bond," which prohibited her re-assignment to the Shaw Office for one year; and (4) that it was Moussa who suggested and triggered petitioner's resignation.<br><br>In <i>Bayview Management Consultants, Inc. v. Pre</i>,<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> "[a]cts of disdain and hostile behavior such as demotion, uttering insulting words, <i>asking for resignation</i>, and <i>apathetic conduct towards an employee constitute constructive illegal dismissal</i>."<br><br>To the Court's mind, the circumstances, taken collectively, demonstrate respondent et al.'s discrimination against petitioner on account of her pregnancy. Such discrimination constitutes not only constructive dismissal but also a violation of the Magna Carta of Women.<br><br>Considering that petitioner was constructively dismissed, she is entitled to full backwages pursuant to Article 294<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> of the Labor Code. Separation pay is likewise warranted when the cause for termination is not attributable to the employee's fault, such as those provided in Articles 298 to 299 of the Labor Code, as well as in cases of illegal dismissal where reinstatement is no longer feasible.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> Here, the NLRC determined that reinstatement is not feasible due to the strained relations between petitioner and Sutherland.<br><br>In addition, a dismissed employee is entitled to moral damages when the dismissal of an employee is attended by bad faith or fraud, constitutes an act oppressive to labor, or is done in a manner contrary to good morals, good customs, or public policy. Moreover, exemplary damages may be awarded if the dismissal is effected in a wanton, oppressive, or malevolent manner.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> As found by the NLRC, petitioner's dismissal is tainted with bad faith as they were done to punish her on account of her pregnancy. The Court, thus, finds it proper to award moral damages and exemplary damages in the amount of PHP 100,000.00 each to petitioner.<sup style="COLOR: RGB(255, 0, 0);">[92]<br></sup><br>Further, pursuant to Article 2221<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> of the Civil Code, the Court grants nominal damages to petitioner, not to indemnify her for her losses, but to recognize and vindicate her rights under the Magna Carta of Women, which respondent violated.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> The State enacted the Magna Carta of Women in light of its strong policy to eliminate discrimination against women in keeping with the Convention on the Elimination of All Forms of Discrimination Against Women and other international instruments that are consistent with Philippine law.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> Under the circumstances, the amount of PHP 50,000.00 as nominal damages is just and reasonable.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup><br><br>Also, because petitioner was forced to litigate and incur expenses to protect her rights and interests, she is likewise entitled to attorney's fees equivalent to 10% of the total monetary award.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup><br><br>Lastly, pursuant to recent jurisprudence, the Court imposes interest at the rate of 6% per annum on the total monetary awards granted in favor of petitioner from the date of the finality of this Decision until full satisfaction.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Decision dated October 20, 2021, and the Resolution dated August 8, 2022, of the Court of Appeals in CA-G.R. SP No. 164681 are <b>REVERSED</b> and <b>SET ASIDE</b>. Respondent Sutherland Global Services, Inc. â Clark is found to have constructively dismissed petitioner Isabelle Francesca F. Paulino. Accordingly, respondent Sutherland Global Services, Inc. â Clark is <b>ORDERED</b> to <b>PAY</b> petitioner Isabelle Francesca F. Paulino the following:<blockquote><ol><li>full backwages computed from the time petitioner Isabelle Francesca F. Paulino was illegally dismissed up to the finality of this Decision;<br><br></li><li>separation pay equivalent to one month pay every year of service, with a fraction of at least six months considered as one whole year, computed from petitioner Isabelle Francesca F. Paulino's first day of employment up to the finality of this Decision;<br><br></li><li>moral and exemplary damages m the amount of PHP 100,000.00 each;<br><br></li><li>nominal damages in the amount of PHP 50,000.00; and<br><br></li><li>attorney's fees equivalent to 10% of the total monetary award.</li></ol></blockquote>The total monetary award shall earn interest at the rate of 6% per annum from the date of the finality of this Decision until full satisfaction.<br><br>Further, the case is <b>REFERRED</b> to the Labor Arbiter for the computation and execution of the foregoing monetary awards due to petitioner Isabelle Francesca F. Paulino.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>Rollo</i>, p. 223. The names of Erly Sarmiento and Aliaa Moussa were dropped as party-respondents in this case per the Labor Arbiter's Decision dated June 11, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 43-55. Penned by Associate Justice Victoria Isabel A. Paredes and concurred in by Associate Justices Emily R. AliÃ±o-Geluz and Raymond Reynold R. Lauigan of the Fifteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 56-59. Penned by Associate Justice Victoria Isabel A. Paredes and concurred in by Associate Justices Emily R. AliÃ±o-Geluz and Raymond Reynold R. Lauigan of the Former Fifteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 268-292. The Decision dated September 30, 2019, penned by Presiding Commissioner Alex A. Lopez and concurred in by Commissioners Pablo C. Espiritu, Jr., and Cecilio Alejandro C. Villanueva. <i>Id.</i> at 324-325, the Resolution dated November 28, 2019, penned by Presiding Commissioner Alex A. Lopez, and concurred in by Commissioners Pablo C. Espiritu, Jr., and Cecilio Alejandro C. Villanueva.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 208-223. Penned by Labor Arbiter Roderick Q. Almeyda.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 44, 97-110. <i>See</i> Employment Contract dated September 8, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 112.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 209, 269.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 209.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 78-96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 80-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 115. <i>See</i> Medical Certificate dated February 24, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 83, 115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 117.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 117.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 119-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at l19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 85.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 183-185.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 172-174.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 176.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 208-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 222-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 2l6-219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 224-254. <i>See</i> Memorandum of Appeal dated August 5, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 268-292.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 87-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 290.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 102. Item 8.1 reads:<br><br>8. Business Travel.<br><br>8.1. You duties may require you to engage in travel on behalf of the Company including travel outside the Philippines. As a consequence, you must work any additional hours as required. You expressly agree to accept such reasonable travel and hours of work without additional compensation, subject to applicable law.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> REPUBLIC ACT No. 9710, sec. 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, p. 291.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 291-292.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 293.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 294-301. <i>See</i> Motion for Reconsideration dated October 28, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 324-325.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 43-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 326-347.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 52-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 51-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 52-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 56-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 24-25, 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 443-458.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 443-444.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 452.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> RULES OF Court, Rule 45, sec. 1; <b>Lopez v. Saludo, Jr.</b>, 910 Phil. 600, 606 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>See</i> <b>Enriquez v. Heirs of Enriquez</b>, 954 Phil. 787, 796-797 (2024).<br><br>The exceptions are as follows: (a) when the findings are grounded entirely on speculation, surmises or conjectures; (b) when the inference made is manifestly mistaken, absurd or impossible; (c) when there is grave abuse of discretion; (d) when the judgment is based on a misapprehension of facts; (e) when the findings of facts are conflicting; (f) when in making its findings the CA went beyond the issues of the case, or its findings are contrary to the admissions of both the appellant and the appellee; (g) when the findings are contrary to those of the trial court; (h) when the findings are conclusions without citation of specific evidence on which they are based; (i) when the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondent; (j) when the findings of fact are premised on the supposed absence of evidence and contradicted by the evidence on record; and (k) when the CA manifestly overlooked certain relevant facts not disputed by the parties, which, if properly considered, would justify a different conclusion. <i>See also</i> <b>Soliva v. Tanggol</b>, 869 Phil. 707, 719-720 (2020); <b>Angeles v. Pascual</b>, 673 Phil. 499, 506 (2011).<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Philippine Pizza, Inc. v. Tumpang</b>, 923 Phil. 677, 681 (2022); <b>Slord Development Corporation v. Noya</b>, 846 Phil. 380, 391 (2019); <b>Maricalum Mining Corp. v. Florentino</b>, 836 Phil. 655, 677 (2018); <b>Quebral v. Angbus Construction, Inc.</b>, 798 Phil. 179. 187 (2016); <b>Montoya v. Transmed Manila Corporation</b>, 613 Phil. 696, 707 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Philippine Pizza, Inc. v. Tumpang</b>, <i>id.</i>, <i>citing</i> <b>Ace Navigation Co. v. Garcia</b>, 760 Phil. 924, 932 (2015); <b>Mercado v. AMA Computer College-ParaÃ±aque City, Inc.</b>, 632 Phil. 228, 247 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 824 Phil. 846, 862 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, pp. 53-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>William G. Kwong Management, Inc. v. Diamond Homeowners &amp; Residents Association</b>, 853 Phil. 71, 92 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Bance v. University of St. Anthony</b>, 895 Phil. 412, 429 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Dela Fuente v. Gimenez</b>, 915 Phil. 517, 526-527 (2021); <b>Pascua v. Bankwise, Inc.</b>, <i>supra</i> note 67, at 858; <b>Jacob v. Villaseran Maintenance Service Corp.</b>, 894 Phil. 526, 546 (2021); <b>Gatmaitan v. Dr. Gonzales</b>, 525 Phil. 658, 671 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Dela Fuente v. Gimenez</b>, <i>id.</i> at 532; <b>Pascua v. Bankwise, Inc.</b>, <i>supra</i> note 67, <i>id.</i> at 861.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Pascua v. Bankwise, Inc.</b>, <i>id.</i> at 858-859.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Rollo</i>, p. 183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Bance v. University of St. Anthony</b>, <i>supra</i> note 70, at 429.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Jacob v. First Step Manpower Int'l. Services, Inc.</b>, 876 Phil. 771, 793 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Bance v. University of St. Anthony</b>, <i>supra</i> note 70, at 429.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 185.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Philippine Veterans Bank v. National Labor Relations Commission</b>, 631 Phil. 202, 210-211 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Siemens Philippines, Inc. v. Domingo</b>, 582 Phil. 86, 99-100 (2008); <b>New Ever Marketing, Inc. v. Court of Appeals</b>, 501 Phil. 575, 587 (2005); <b>R.P. Dinglasan Construction, Inc. v. Atienza</b>, 477 Phil. 305, 307-308 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Jacob v. First Step Manpower Int'l. Services, Inc.</b>, <i>supra</i> note 76, at 540.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Rollo</i>, p. 338.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Philippine Long Distance Telephone Co., Inc. v. Tiamson</b>, 511 Phil. 384, 401 (2005).<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <b>Uichico v. National Labor Relations Commission</b>, 339 Phil. 242, 250-251 (1997); <b>Jarcia Machine Shop and Auto Supply, Inc. v. National Labor Relations Commission</b>, 334 Phil. 84, 92 (1997).<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Rollo</i>, p. 298.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 29, 102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> 921 Phil. 1048, 1060-1061 (2022). (Emphasis in the original)<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 879 Phil. 176, 178 (2020). (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> ARTICLE 294. [279] <i>Security of Tenure</i>. â In cases of regular employment, the employer shall not terminate the services of an employee except for a just cause or when authorized by this Title. An employee who is unjustly dismissed from work shall be entitled to reinstatement without loss of seniority rights and other privileges and to his full backwages, inclusive of allowances, and to his other benefits or their monetary equivalent computed from the time his compensation was withheld from him up to the time of his actual reinstatement.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <b>Sumifru (Philippines) Corp. v. Baya</b>, 808 Phil. 635, 645 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Bartolome v. Toyota Quezon Avenue, Inc.</b>, 952 Phil. 539, 558 (2024), <i>citing</i> <b>Leus v. St. Scholastica's College Westgrove</b>, 752 Phil. 186, 218 (2015); <b>Quadra v. Court of Appeals</b>, 529 Phil. 218, 223-224 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>Bayview Management Consultants, Inc. v. Pre</b>, 879 Phil. 176, 185 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> ARTICLE 2221. Nominal damages are adjudicated in order that a right of the plaintiff, which has been violated or invaded by the defendant, may be vindicated or recognized, and not for the purpose of indemnifying the plaintiff for any loss suffered by him.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>Pryce Properties Corp. v. Spouses Octobre</b>, 802 Phil. 391, 398 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> REPUBLIC ACT No. 9710, titled, "The Magna Carta of Women", sec. 2 states:<br><br>SECTION 2. <i>Declaration of Policy</i>. â ...<br><br>The State condemns discrimination against women in all its forms and pursues by all appropriate means and without delay the policy of eliminating discrimination against women in keeping with the Convention on the Elimination of All Forms of Discrimination Against Women (CEDAW) and other international instruments consistent with Philippine law. The State shall accord women the rights, protection, and opportunities available to every member of society[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Cojuangco, Jr. v. Court of Appeals</b>, 369 Phil. 41, 60 (1999); CIVIL CODE, art. 2221.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Bartolome v. Toyota Quezon Avenue, Inc.</b>, <i>supra</i> note 91; <i>citing</i> <b>Leus v. St. Scholastica's College Westgrove</b>, <i>supra</i> note 91, at 218; <b>Lambert Pawnbrokers and Jewelry Corporation v. Binamira</b>, 639 Phil. 1, 16 (2010); <b>Quijano v. Mercury Drug Corporation and National Labor Relations Commission</b>, 354 Phil. 112, 127 (1998).<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754 (2022).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

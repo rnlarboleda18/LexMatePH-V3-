@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 265302 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. CICL XXX265302,*** ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70170' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 265302, April 02, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. CICL XXX265302,<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP> ACCUSED-APPELLANT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, M., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">The enactment of Republic Act No. 9346<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> in 2006 resulted in the statutory interdiction of the death penalty for crimes where the penalty prescribed by law for the offense is death and for purposes of graduating the penalty in case the law prescribes a penalty lower or higher by one or more degrees than another given penalty under Article 71 of the Revised Penal Code (RPC). As such, "death" as a penalty in Article 71 is no longer part of the equation for graduation of penalties.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>We reiterate this dictum in this Appeal,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> questioning the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup>dated June 8, 2020, of the Court of Appeals (CA) in CA-G.R. CR No. 40474 that affirmed the conviction of XXX265302 for the crime of rape in Criminal Case No. 25406-2015-C-(P).<br><br><center><b>ANTECEDENTS</b></center><br>XXX265302, a child in conflict with the law,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> was charged with rape in an Information that reads:<br><blockquote>The undersigned Prosecutor hereby accuses [XXX265302], a sixteen year old minor, who acted with discernment in the commission of the offense, of the crime of "R A P E", committed as follows:<br><br>That in or about December 2014, in the Municipality of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Province of Laguna and within the jurisdiction of this Honorable Court, the above-named minor accused, acting with discernment, with lewd design, through force, violence and intimidation, did, then and there, willfully, unlawfully and feloniously had carnal knowledge of five (5) [-] year old [AAA265302]<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> against her will and without her consent, to her damage and prejudice.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></blockquote>When arraigned, XXX265302 pleaded not guilty.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In the Social Case Study Report<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> submitted by the Provincial Social Welfare and Development Office, the social worker found that:<br><blockquote>Although [XXX265302] strongly denies the commission of the alleged crime[,] he is aware that it was an offense. Based on the Discernment tool conducted ... it was found out that minor has discernment in life but has acted without discernment on this case since he strongly denies his involvement in said alleged crime.<br><br>In this end, [XXX265302] is strongly recommended to undergo counseling and therapy session for him to better understand himself and have realizations. It would be best if he could undergo diversion program under the undersigned social worker since the alleged victim has to be handled by Municipal Social Welfare and Development Officer of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Laguna.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></blockquote>Thus, the trial court ordered the social welfare officer to implement an Intervention Program as recommended in the Social Case Study Report to determine XXX265302's civil liability for the alleged crime committed.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Trial ensued.<br><br>The prosecution proved that in December 2014, XXX265302 invited AAA265302 with seven other kids to his house.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> AAA265302 was the only girl among them. She was 5 years old and knew XXX265302 as her "playmate."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Inside the house, XXX265302 removed AAA265302's short pants and underwear and ordered her to lie down on the wooden bed.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> XXX265302 went on top of AAA265302, inserted his penis into her vagina,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and made a push-and-pull movement.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> At that instance, AAA265302 felt pain and cried.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> After ravishing her, XXX265302 warned AAA265302 not to tell anybody about what happened, or he would punch her.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> AAA265302 then went home with another kid, Vera.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Unknown to XXX265302, one of the kidsâKen, also a minor<sup style="COLOR: RGB(255, 0, 0);">[21]</sup>âsaw how XXX265302 had carnal knowledge of AAA265302.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>For the defense, XXX265302 interposed denial and alibi. He claimed he could not have committed the crime becausc he was not home then. From December 1 to 15, 2014, he was in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> High School, where he would play basketball after class. Then, from December 16 to 31, he stayed at his grandmother's house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Laguna.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The case was filed against him because he was the oldest among the suspects.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The defense also presented Jayson Agliones, who testified that he saw Ken and three others sexually molest AAA265302.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>On August 31, 2017, the trial court convicted XXX265302 of rape.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> It held that XXX265302's denial cannot prevail over AAA265302's straightforward and candid testimony. The trial court considered XXX265302's minority as a special mitigating circumstance, and, following Section 38<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> of Republic Act No. 9344,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> it suspended the sentence. Thus:<br><blockquote><b>WHEREFORE,</b> foregoing premises considered, JUDGMENT is hereby rendered finding the accused [XXX265302], a child in conflict of the law, <b>GUILTY</b> beyond reasonable doubt of STATUTORY RAPE falling under paragraph 1, subparagraph d, Article 266-A of the Revised Penal Code, as amended by RA 8353, and hereby imposes upon him the penalty of Eight (8) Years and One (1) Day of <i>prision mayor</i> in its medium period, as minimum, to Fourteen (14) Years, Eight (8) Months and One (1) Day of <i>reclusion temporal</i> in its medium period, as maximum.<br><br>However, in conformity with Section 38 of Republic Act No. 9344, the sentence of [sic] imposed by the Court is hereby <b>SUSPENDED.</b><br><br>Accused [XXX265302] is, likewise, <b>ORDERED TO PAY</b> private complainant [AAA265302] the amount of [PIIP] 50,000.00 as moral damages, [PHP] 50,000.00 as civil indemnity and [PUP] 30,000.00 as exemplary damages. The total monetary awards shall earn 6% interest <i>per annum</i> from the finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original)</blockquote>On October 2, 2017, the trial court ordered the issuance of a warrant of arrest to XXX265302 upon the motion of the private offended party that the accused had already attained the age of majority.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> XXX265302 appealed his conviction to the appellate court,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> questioning the credibility of AAA265302's testimony. XXX265302 claimed that there were inconsistencies in AAA265302's statements contrary to human instinct and experience. AAA265302 testified that her other playmates took turns in raping her, but she did not allege this in her sworn statement. She did not also file rape charges against them. XXX265302 added that AAA265302's mother was coaching AAA265302 after AAA265302 gave an inconsistent statement during her cross-examination about the alleged insertion and touching of the accused's penis on her vagina. Further, the Medico-Legal Report<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> dated March 18, 2015 stated that AAA265302's hymen remained intact, thus, creating serious doubt as to whether AAA265302 was telling the truth. Most importantly, the prosecution failed to prove carnal knowledge. XXX265302 pointed to AAA265302's testimony during cross and re-direct examinations that XXX265302's penis did not touch her vagina.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Moreover, XXX265302 insisted that the prosecution failed to establish discernment when committing the crime. The prosecution did not exert efforts to determine discernment and that he could fully appreciate the consequences of the alleged act.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In its Brief,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> the People countered that the alleged inconsistencies in AAA265302's statements during cross-examination on whether any part of her and XXX265302's bodies came into contact were clarified during reÂ­direct. AAA265302 stated that XXX265302 raped her by referring to the act as <i>"kinantot"</i> and demonstrated it by inserting her right index finger into the hole formed by her left index finger. The People averred that XXX265302's act of threatening AAA265302 is evidence of discernment in the commission of the crime.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><center><b><i>CA Ruling</i></b></center><br>The CA affirmed XXX265302's conviction in the assailed Decision. It held that AAA265302 was able to explain during her cross and re-direct examinations the alleged inconsistency in her statement on whether XXX265302 was able to insert his penis into her vagina or the penis merely touched her vagina.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> The CA ruled that the prosecution established XXX265302's discernment as shown by XXX265302's actions before, during, and after the rape.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> The CA modified the penalty imposed by the trial court considering the age of AAA265302 at the time of the incident and the privileged mitigating circumstance of minority. Thus:<br><blockquote><b>WHEREFORE,</b> premises considered, the <b>APPEAL</b> is hereby <b>DENIED.</b> Hence, the August 31. 2017 Decision of the Regional Trial Court is <b>AFFIRMED with MODIFICATION.</b> Appellant XXX is adjudged <b>GUILTY</b> beyond reasonable doubt of Statutory Rape under Article 266-A (I)(d) and penalized in Article 266 B of the Revised Penal Code, and is sentenced to suffer the penalty of <i>reclusion perpetua.</i><br><br>Accused-appellant if. further directed to pay the amounts of [PHP] 75,000.00 as civil indemnity, [PHP] 75.000.00 as moral damages, and [PHP] 75,000.00 as exemplary damages. All damages awarded shall be subject to interest at the rate of six percent (6%) per annum from the date of finality of this Decision until full satisfaction thereof.<br><br>Pursuant to the letter dated October 4, 2018 from the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Municipal Police Station, to the effect that the accused is now detained thereat, We direct the trial court to issue forthwith the Commitment Order of accused-appellant.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original)</blockquote>Hence, this appeal.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The parties manifested that they were dispensing with the filing of supplemental briefs and adopted their briefs filed with the CA.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br><center><b>RULING</b></center><br>The appeal lacks merit.<br><br><b><i>The prosecution proved all the elements of rape</i></b><br><br>Statutory rape under Article 266-A(I)(d)<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> of the RFC. as amended, requires two elements: (1) the offender had carnal knowledge of a woman, and (2) the woman is 12 years<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> of age.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> We have repeatedly held that the crime is committed regardless of force, threat, intimidation, or grave abuse of authority; it is enough that the age of the victim is proven and that there was sexual intercourse.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The absence of free consent is conclusively presumed when the victim is below the age of 12 since, at that age, the law presumes that the victim does not possess discernment and is incapable of giving intelligent consent to the sexual act.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> This act of rape shall be qualified under Article 266-B when, among others, the victim is a child below seven years old.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>Here, the prosecution proved AAA265302's age through her Certificate of Live Birth, showing that she was born on June 25,2009.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> AAA265302 was only 6 years old at the time of the rape in December 2014.<br><br>The prosecution also proved beyond reasonable doubt that XXX265302 had carnal knowledge of AAA265302 in his home. AAA265302 narrated in a clear, convincing, and straightforward manner how XXX265302 molested her:<br><blockquote><table Â ="" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td colspan="2" valign="top">PROS. MARPURI</td></tr><tr><td width="5%" valign="top">&nbsp;</td><td width="95%">&nbsp;</td></tr><tr><td valign="top">Q </td><td>Do you recall that you went to the police station?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">WITNESS</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>At the police station, you were asked by a policewoman?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>And the question of the policewoman to you was ano ang ginawa ni [XXX265302] sayo?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">A </td><td>Kinantot po.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Do you know the meaning of Kinantot? Can you please demonstrate what [XXX265302] do [sic] to you?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">INTERPRETER</td></tr><tr><td valign="top">&nbsp;</td><td>The child formed a circle using her fingers in her right hand and inserted the index finger of her left hand.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROS. MARPURI</td></tr><tr><td valign="top">&nbsp;</td><td>Q Where did it happen, this Kinantot?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">WITNESS</td></tr><tr><td valign="top">A </td><td>In his house, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q</td><td> What place was that, the house of [XXX265302]?</td></tr><tr><td valign="top">A </td><td>The house of [XXX265302] is located inside an alley, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Were you invited by [XXX265302] to go inside his house?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>And you were the only girl?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Upon arrival at the house of [XXX265302], what did you do?</td></tr><tr><td valign="top">A </td><td>Kinantot po ako ni [XXX265302].</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>How did he do it?</td></tr><tr><td valign="top">A </td><td>(No answer).</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>What particular place in his house?</td></tr><tr><td valign="top">A </td><td>Inside the room, sir.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>What is inside the room? A bed or a table?</td></tr><tr><td valign="top">A </td><td>Wooden bed, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q</td><td> Pinahiga sa papag?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>May damit ka?</td></tr><tr><td valign="top">A</td><td> Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>You have shorts?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Panty?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>When you said, kinantok [sic] ka, hinubaran ka ba?</td></tr><tr><td valign="top">A </td><td>He removed my shorts and panty, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Prior to the removal of your shorts and panty, what about [XXX265302], was he also naked?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Did you feel pain?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Did he do it for a long time?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>How does it feel?</td></tr><tr><td valign="top">A </td><td>It is painful, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>What did accused [XXX265302] told [sic] you?</td></tr><tr><td valign="top">A</td><td> That if I will tell this to anyone, he will punch me, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>So, he threatened you?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">. . . . </td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROS. MARPURI</td></tr><tr><td valign="top">Q </td><td>Did [XXX265302J let you lay [sic] down in the wooden bed?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">WITNESS</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>While you were lying on the wooden bed, was [XXX265302] standing?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>You were facing with cach other?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Just a sample. This is the wooden bed and you were lying down. He came closeto you and you have no panty on. Did you feel his penis?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>How does it feel? You cried?</td></tr><tr><td valign="top">A </td><td>Yes, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>You shouted?</td></tr><tr><td valign="top">A </td><td>No, ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Is he saying something while he was doing that?</td></tr><tr><td valign="top">A </td><td>He threatened me, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></td></tr></tbody></table></blockquote>XXX265302 questions the element of carnal knowledge since AAA265302 gave contradictory statements during her cross-examination on whether XXX265302 successfully inserted his penis into AAA265302's vagina.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Yet, AAA265302 corrected herself during her re-direct examination and repeated the harrowing ordeal she suffered at the hands of the accused:<br><blockquote><table Â ="" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td colspan="2" valign="top">PROSECUTOR MARPURI: (to the witness)</td></tr><tr><td width="5%" valign="top">&nbsp;</td><td width="95%">&nbsp;</td></tr><tr><td valign="top">Q </td><td>[AAA265302] during the last hearing, you stated two conflicting answers, now, may we be clarified which one is true and correct, the first answer was dumikil ang ari ni [XXX265302] sa pepe mo and the other answer was hindi dumikit?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A </td><td>Inilapit niya po yung tele niya sa pepe ko.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROSECUTOR MAGPURI:</td></tr><tr><td valign="top">Q </td><td><i>Was it inserted?</i></td></tr><tr><td valign="top">A </td><td>Opo.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q</td><td> What did you feel?</td></tr><tr><td valign="top">A </td><td>It is painful (masakit po).</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Were you naked, no undergarments?</td></tr><tr><td valign="top">A </td><td>He removed my undergarments ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>What about [XXX265302], was he wearing undergarments?</td></tr><tr><td valign="top">A</td><td> He was not wearing undergarments, he was naked.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q</td><td> When you say that the penis of [XXX265302] touches your vagina, may we know what was the action or movement of [XXX265302]?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">ATTY. RAGSAC:</td></tr><tr><td valign="top">&nbsp;</td><td>May we just manifest your Honor that prior to the child answering, the mother was doing like this (moving herself forward and backward) you Honor and the child imitated the movement of the mother your Honor.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">Q </td><td>Were you told by your mother to do that action or was it the real thing that happened?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A</td><td> Yun po.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">&nbsp;</td><td>May I also manifest that the movement demonstrated by the child was moving backward and forward you Honor.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">COURT:</td></tr><tr><td valign="top">&nbsp;</td><td>Noted</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">Q </td><td>Were you lying down?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">A </td><td>Yes ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>What about [XXX265302]?</td></tr><tr><td valign="top">A </td><td>Nakadapa po.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q</td><td> Nakadapa kanino?</td></tr><tr><td valign="top">A </td><td>On top of me ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q</td><td> What did you feel?</td></tr><tr><td valign="top">A </td><td>Masakit po.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Would you know how long does [sic] it take?</td></tr><tr><td valign="top">A</td><td> Matagal po.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Emphasis supplied)</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>And a while ago, you mentioned that [XXX265302] was lying on top of you, correct?</td></tr><tr><td valign="top">A</td><td> Yes ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>And where were you lying down at that time?</td></tr><tr><td valign="top">A </td><td>At the wooden bed of [XXX265302],</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td><i>While you were lying down, how was [XXX265302] able to insert his penis in your vagina ?</i></td></tr><tr><td valign="top">A </td><td>(<i>witness demonstrating a movement, push and pull motion</i>)</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>At that time was [XXX265302] [l]ying down or sitting up?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">&nbsp;</td><td>Already answered, on top of her.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">ATTY. RAGSAC:</td></tr><tr><td valign="top">&nbsp;</td><td>But what position, was he lying down on top of her or sitting on top of her.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">&nbsp;</td><td>The witness said, she was lying down and [XXX265302] was on top of her.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">ATTY. RAGSAC:</td></tr><tr><td valign="top">&nbsp;</td><td>Yes but what I am asking is while [XXX265302] is 011 top of her, is [XXX265302] lying down also or sitting on top of her?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A </td><td>He was lying on top of me ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">ATTY. RAGSAC:</td></tr><tr><td valign="top">Q </td><td>When he was lying on top of you, can you tell me up to what part of his body can you see?</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">A</td><td> His penis.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Do you see his face at that time?</td></tr><tr><td valign="top">A </td><td>Yes ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>And you said that it was painful?</td></tr><tr><td valign="top">A </td><td>Yes ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Did you shout?</td></tr><tr><td valign="top">A </td><td>No ma'am.</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td>Did you cry?</td></tr><tr><td valign="top">A </td><td>Yes ma'am."<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Emphasis supplied)</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">. . . .</td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">ATTY. RAGSAC:</td></tr><tr><td valign="top">Q</td><td><em> How many times [Ms.] witness that [XXX265302] inserted his penis into your vagina?</em></td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A </td><td><em>Two times.</em></td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">Q </td><td><em>And during those two times, vou are sure that it was his penis that was inside your vagina ?</em></td></tr><tr><td valign="top">&nbsp;</td><td>&nbsp;</td></tr><tr><td valign="top">A </td><td><em>Yes ma 'am</em>.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (Emphasis supplied)</td></tr></tbody></table></blockquote><br>That XXX265302 had carnal knowledge of AAA265302 was further testified by prosecution witness Ken, who stated, as follows:<br><blockquote><table Â ="" width="100%" cellspacing="0" cellpadding="0" border="0"><tbody><tr><td width="5%" valign="top">Q</td><td width="95%"> <div align="justify">In paragraph 14, Mr. witness, you were asked ano ba ang nangyari kay [AAA265302] your answer is <i>"dinali po siya"</i>. May we be clarified what do you mean by dinali?</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A </td><td><div align="justify">She was used <i>"ginamit siya".</i></div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">Q </td><td><div align="justify">Can you describe to this Honorable Court the appearance of [XXX265302] and the complainant [AAA265302], what was the position?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">[AAA265302] was lying on the wooden bed and [XXX265302] was standing.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify">Is [XXX265302] wearing garment?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">Yes ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify">Upper?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">Yes ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify">What about the lower?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">There was but he lowered it up to his knees.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">COURT (to the witness)</td></tr><tr><td valign="top">Q </td><td><div align="justify">So nakita mo ang puwit at penis niya';</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">A </td><td><div align="justify">Yes your Honor.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q</td><td> <div align="justify">Si [AAA265302] nakahubad ba siya?</div></td></tr><tr><td valign="top">A</td><td> <div align="justify">Short lang po.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify">Nakita mo ang pekpek niya?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">Yes your Honor.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI: </td></tr><tr><td valign="top">Q</td><td> <div align="justify">How near is [XXX265302] to [AAA265302]?</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A </td><td><div align="justify">They are very near to each other.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">Q </td><td><div align="justify">They are attached to each other?</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">A </td><td><div align="justify">Yes ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify"><i>What parts of the body are attached?</i></div></td></tr><tr><td valign="top">A </td><td><div align="justify"><i>Their private parts ma 'am.</i></div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify"><i>The private parts of the accused and that of [AAA265302]?</i></div></td></tr><tr><td valign="top">A </td><td><div align="justify">Yes ma 'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify">How far are you from them?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">Very near ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">COURT</td></tr><tr><td valign="top">Q</td><td> <div align="justify">Can you demonstrate the position of the two persons?</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A</td><td> <div align="justify">[XXX265302] is holding the hips of [AAA265302] your Honor.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify"><i>Did you see the penis inserted inside the vagina?</i></div></td></tr><tr><td valign="top">A </td><td><div align="justify"><i>Yes vour Honor.</i></div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">PROSECUTOR MARPURI:</td></tr><tr><td valign="top">Q </td><td><div align="justify">For how long does [sic] it take?</div></td></tr><tr><td valign="top">A </td><td><div align="justify">One minute ma'am.</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td valign="top">Q </td><td><div align="justify">Was there a body movement?</div></td></tr><tr><td valign="top">&nbsp;</td><td><div align="justify"></div><br></td></tr><tr><td colspan="2" valign="top">THE WITNESS:</td></tr><tr><td valign="top">A </td><td><div align="justify">Yes ma'am.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Emphasis supplied)</div></td></tr></tbody></table></blockquote>The supposed inconsistency in AAA265302's statement was fully clarified in her re-direct examination and through another prosecution witness's testimony. Besides, the Court recognizes that "the intimidating atmosphere of a courtroom causes anxiety in children, and undermines their capacity to offer accurate testimonial evidence."<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Accordingly, we affirm the trial and appellate courts' finding on the credibility of AAA265302's narration of her defilement. "It is settled that testimonies of child victims are given full weight and credit since when a woman or a girl-child says that she has been raped, she says, in effect, all that is necessary to show that rape was indeed committed."<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Youth and immaturity are generally badges of truth and sincerity.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Moreover, when the credibility of witnesses is put in issue, the Court will generally not disturb the trial court's factual findings, especially when affirmed by the appellate court, as in this case. We repeat that the trial court's assessment of the credibility of witnesses is entitled to great respect on appeal because it had the opportunity to observe the witness's demeanor and deportment while testifying. More so, it is unnatural and highly improbable that a young girl would come out with such a serious accusation, risking her honor and reputation and her family's as well.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Therefore, XXX265302's defense of denial and alibi must be rejected. We ruled in <i>People v. Castillo:</i><sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><blockquote>It is well-settled that denial is an "intrinsically weak defense which must be supported by strong evidence of non-culpability to merit credibility." Alibi, on the other hand, is the "weakest of all defenses, for it is easy to contrive and difficult to disprove and for which reason it is generally rejected.<br><br>For the alibi to prosper, it is imperative that the accused establishes two elements: (1) he was not at the <i>locus delicti</i> at the time the offense was committed; and (2) it was physically impossible for him to be at the scene of the crime at the time of its commission.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></blockquote>XXX265302 and AAA265302 were neighbors. AAA265302 considered XXX265302 as her playmate.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Other than XXX265302's assertions that he would play basketball after class and began to stay at his grandmother's house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Laguna, on December 16, 2014, he did not present independent evidence to prove that he was somewhere else when the crime was committed.<br><br>Also, the medical finding that AAA265302's hymen was still intact<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> does not negate rape. We reiterated this in <i>People v. Bay-od,</i><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> to wit:<br><br>Indeed We, in not a few cases already, have affirmed convictions for rape despite the absence of injury on the victim's hymen in view of the medical possibility for a hymen to remain intact despite history of sexual intercourse. In <i>People v. Opong,</i> We ran down some of these cases:<br><blockquote>In <i>People v. Gabayron,</i> we sustained the conviction of accused for rape even though the victim's hymen remained intact after the incidents because medical researches show that negative findings of lacerations are of no significance, as the hymen may not be torn despite repeated <i>coitus.</i> It was noted that many cases of pregnancy had been reported about women with unruptured hymens, and that there could still be a finding of rape even if, despite repeated intercourse over a period of years, the victim still retained an intact hymen without signs of injury.<br><br>In <i>People v. Capt. Llanto,</i> citing <i>People v. Aguinaldo,</i> we likewise affirmed the conviction of the accused for rape despite the absence of laceration on the victim's hymen since medical findings suggest that it is possible for the victim's hymen to remain intact despite repeated sexual intercourse. We elucidated that the strength and dilatability of the hymen varies from one woman to another, such that it may be so elastic as to stretch without laceration during intercourse; on the other hand, it may be so resistant that its surgical removal is necessary before intercourse can ensue.<br><br>In <i>People v. Palicte</i> and in <i>People v. Castro,</i> the rape victims involved were minors. The medical examination showed that their hymen remained intact even after the rape. Even then, we held that such fact is not proof that rape was not committed.</blockquote>Moreover, in <i>People v. Pamintuan,</i> We recognized that the absence of injuries in a rape victim's hymen could also be attributed to a variety of factors that do not at all discount the fact that rape has been committed. As <i>Pamintuan</i> observed:<br><blockquote>The presence or absence of injuries would depend on different factors, such as the forcefulness of the insertion, the size of the object inserted, the method by which the injury was caused, the changes occurring in a female child's body, and the length of healing time, if indeed injuries were caused. Thus, the fact that AAA did not sustain any injury in her sex organ does not <i>ipso facto</i> mean that she was not raped.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> (Citations omitted)</blockquote><b><i>The prosecution proved discernment</i></b><br><br>As to whether XXX265302 is exempt from criminal liability since he was only 15 years and six months old<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> at that time, we affirm the CA. Section 6 of Republic Act No. 9344 reads:<br><blockquote>SECTION 6. M<i>inimum Age of Criminal Responsibility.</i> â A child fifteen (15) years of age or under at the time of the commission of the offense shall be exempt from criminal liability. However, the child shall be subjected to an intervention program pursuant to Section 20 of this Act.<br><br>A child above fifteen (15) years but below eighteen (18) years of age shall likewise be exempt from criminal liability and be subjected to an intervention program, unless he/she has acted with discernment, in which case, such child shall be subjected to the appropriate proceedings in accordance with this Act.<br><br>The exemption from criminal liability herein established does not include exemption from civil liability, which shall be enforced in accordance with existing laws.</blockquote>Discernment is defined as the capacity of the child at the time of the commission of the offense to understand the difference between right and wrong and the consequences of the wrongful act."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> No presumption exists that a minor above 15, but below 18 years old acts with discernment. During the trial, the prosecution must specifically prove as a separate circumstance that the minor accused committed the crime with discernment.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> In <i>CICLXXX v. People,</i><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> the Court gave the following guidelines on determining discernment:<br><blockquote>1. Discernment is the capacity of the child at the time of the commission of the offense to understand the difference between right and wrong and the consequences of the wrongful act.<br><br>2. The task of ascertaining discernment is undertaken preliminarily by a social worker, and finally by the court. The determination of discernment shall take into account the ability of a child to understand the moral and psychological components of criminal responsibility and the consequences of the wrongful act; and whether a child can be held responsible for essentially antisocial behavior. The assessment of a social worker is merely evidentiary and is not binding upon the court. Ultimately, the court finally determines discernment, based on its own appreciation of all the facts and circumstances in each case.<br><br>3. In our jurisdiction, there is no presumption that a minor acts with discernment. The prosecution must specifically prove as a separate circumstance that the alleged crime was committed with discernment. For a minor at such an age to be criminally liable, the prosecution is burdened to prove beyond reasonable doubt, by direct or circumstantial evidence, that he acted with discernment.<br><br>4. In determining discernment, courts shall consider the totality of facts and circumstances in each case. Such circumstances include, but are not limited to: (i) the very appearance, the very attitude, the very comportment and behavior of said minor, not only before and during the commission of the act, but also after and even during trial, (ii) the gruesome nature of the crime, (iii) the minor's cunning and shrewdness, (iv) the utterances of the minor, (v) his overt acts before, during and after the commission of the crime, (vi) the nature of the weapon used, (vii) his attempt to silence a witness, and (via) his disposal of evidence or his hiding the <i>corpus delicti</i><sup style="COLOR: RGB(255, 0, 0);">[72]</sup></blockquote>The social worker assessed that XXX265302 acted without discernment.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> However, the court is not bound by the assessment and may still independently determine the existence of discernment after considering all the facts. We agree with the CA that the totality of the facts and circumstances will show that XXX265302 exhibited discernment in the commission of the rape, viz.:<br><br>In this particular case, the prosecution managed to prove the presence of the sense of responsibility as demonstrated by |XXX265302'sJ demeanor of closing all the windows and door when he sexually abused [AAA265302] in his house, and when [XXX265302] threatened to punch her if she told anybody about his dastardly acts. Consequently, We are of the considered view that [XXX265302] knew fully well that what he did was wrong and that he was aware of the consequences thereof. Withal, per his own testimony, [XXX265302] could distinguish between what is good or bad and that doing bad things could result to a punishment.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>Ultimately, XXX265302 is criminally liable for his act.<br><br><b><i>Penalty</i></b><br><br>To be precise, the crime committed against AAA265302 is Qualified Rape of a Minor<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> since she was below 7 years old<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> when the crime was committed in December 2014. In <i>People v. ABC260708,</i><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> the Court set the proper designation of the offense when the elements of both statutory rape and qualified rape are present:<br><blockquote>For clarity and uniformity, the Court now fixes the guidelines as to the proper designation of the offense when the elements of both statutory rape, <i>i.e., victim is below the statutory age or is suffering from mental retardation comparable to the intellectual capacity of a child below the statutory age, and qualified rape, i.e., twin circumstances of minority and relationship, or the age of the victim being below 7 years old, or the accused's knowledge of the mental disability of the victim at the time of the commission of rape,</i> are present, thus:<br><br>1. The crime shall be denominated as <i>QUALIFIED RAPE of a minor and not qualified statutory rape if any of the special qualifying aggravating circumstances is present, i.e., twin circumstances of minority and relationship, or the age of the victim being below 7 years old, or the accused's knowledge of the mental disability of the victim at the time of the commission of rape.</i> This rule shall apply whether the victim is below the statutory age or is suffering from mental retardation comparable to the intellectual capacity of a child below the statutory age.<br><br>2. The crime shall be denominated as <i>QUALIFIED RAPE of a minor and not qualified statutory rape if the crime is attended with two or more special qualifying aggravating circumstances, i.e., twin circumstances of minority and relationship, or the age of the victim being below 7 years old, or the accused's knowledge of the mental disability of the victim at the time of the commission of rape.</i> One of these aggravating circumstances is sufficient to qualify the crime. The unutilized special qualifying aggravating circumstances will be deemed as generic aggravating circumstances which may be appreciated if the facts warrant the imposition of a divisible penalty, <i>i.e., existence of privileged mitigating circumstances under Article 69 of the RPC, and penalties in cases of frustrated and attempted felonies, and for accomplices and accessories pursuant to Articles 50 to 57 of the RPC.</i> Otherwise, any unutilized aggravating circumstances shall not be considered in the application of penalties.<br><br>3. The term <i>"statutory age "</i> in these guidelines shall mean either <i>"below 12 years old"</i> or <i>"under 16 years old"</i> depending on whether the crime of rape was committed before or after the effectivity of Republic Act No. 11648, respectively.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup></blockquote>The prescribed penalty for rape committed against a victim below seven years old is death.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup>" On the other hand, XXX265302 was 15 years and six months old at the time of the rape;<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> hence, he is entitled to the privileged mitigating circumstance of minority, viz.:<br><blockquote>ARTICLE 68. <i>Penalty to Be Imposed Upon a Person Under Eighteen Years of Age.</i> â When the offender is a minor under eighteen years and his case is one coming under the provisions of the paragraph next to the last of article 80 of this Code, the following rules shall be observed:<br><br>. . . .<br><br>2. Upon a person over fifteen and under eighteen years of age the penalty next lower than that prescribed by law shall be imposed, but always in the proper period.</blockquote>In People v. bon,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> the Court, speaking through Justice Dante O. Tinga, explicated that the legislative intent of Republic Act No. 9346 was not only to limit the prohibition of the law to the physical imposition of the death penalty but, extends the effect to the graduated scale of penalties under Article 71 of the RPC. The Court said:<br><blockquote>The implementation of Rep. Act No. 9346 in a way that leaves extant the penalties for accomplices, accessories, frustrated and attempted felonies, clearly results in illogical, iniquitous and inconsistent effects. In contrast, no similar flaws ensue should we construe Rep. Act No. 9346 instead as not having barred the application of the death penalty even as a means of depreciating penalties other than death. In particular, the operative amendment that would assure the integrity of penalties for accomplices, accessories, frustrated and attempted felonies lies in Article 71, which ranks "death" at the top of the scale for graduated penalties.<br><br>Simply put, the negation of the word "death' as previously inscribed in Article 71 will have the effect of appropriately downgrading the proper penalties attaching to accomplices, accessories, frustrated and attempted felonies to the level consistent with the rest of our penal laws. Returning to our previous examples, Y, the convicted accomplice in kidnapping for ransom, would now bear the penalty of <i>reclusion temporal,</i> the penalty one degree lower than that the principal X would bear (<i>reclusion perpetua</i>). Such sentence would be consistent with Article 52 of the Revised Penal Code, as well as Article 71, as amended, to remove the reference to "death." Moreover, the prospect of the accomplice receiving the same sentence as the principal, an anomalous notion within our penal laws, would be eliminated. Thus, the same standard would prevail in sentencing principals and accomplices to the crime of kidnapping in ransom, as that prescribed to the crime of simple kidnapping.<br><br>The harmonization that would result if Rep. Act No. 9346 were construed as having eliminated the reference to "death" in Article 71 would run across the board in our penal laws. Consistent with Article 51 of the Revised Penal Code, those convicted of attempted qualified rape would receive the penalty two degrees lower than that prescribed by law, now Rep. Act No. 9346, for qualified rape.<br><br>There are principles in statutory construction that will sanction, even mandate, this "expansive" interpretation of Rep. Act No. 9346. The maxim <i>interpretare et concordare legibus est optimus interpretandi</i> embodies the principle that a statute should be so construed not only to be consistent with itself, but also to harmonize with other laws on the same subject matter, as to form a complete, coherent and intelligible system â a uniform system of jurisprudence. "Interpreting and harmonizing laws with laws is the best method of interpretation. . . . This manner of construction would provide a complete, consistent and intelligible system to secure the rights of all persons affected by different legislative and quasi-legislative acts." There can be no harmony between Rep. Act No. 9346 and the Revised Penal Code unless the later statute is construed as having downgraded those penalties attached to death by reason of the graduated scale under Article 71. Only in that manner will a clear and consistent rule emerge as to the application of penalties for frustrated and attempted felonies, and for accessories and accomplices.<br><br>It is also a well-known rule of legal hermeneutics that penal or criminal laws are strictly construed against the state and liberally in favor of the accused. If the language of the law were ambiguous, the court will lean more strongly in favor of the defendant than it would if the statute were remedial, as a means of effecting substantial justice. The law is tender in favor of the rights of an individual. It is this philosophy of caution before the State may deprive a person of life or liberty that animates one of the most fundamental principles in our Bill of Rights, that every person is presumed innocent until proven guilty.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup></blockquote>We reiterated that the highest remaining penalty in the scale of penalties under Article 71 is <i>reclusion perpetua,</i> as held in Bon, in <i>People v. Abellera,</i><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>People v. Brioso,</i><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> and <i>People v. Gambao.</i><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Thus, the correct imposable penalty is <b><i>reclusion temporal</i></b>âthe penalty next lower than <i>reclusion perpetua.</i> The "death" as a penalty in Article 71<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> of the RPC is not considered in the equation, so the highest penalty in the scale of penalties is <i>reclusion perpelua.</i><br><br>Moreover, applying Republic Act No. 9346 in the graduation of penalties is favorable to the accused. We have held in <i>People v. Simon</i>:<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><blockquote>Since, obviously, the favorable provisions of Republic Act No. 7659 could neither have then been involved nor invoked in the present case, a corollary question would be whether this court, at the present stage, can <i>sua sponte</i> apply the provisions of said Article 22 to reduce the penalty to be imposed on appellant. That issue has likewise been resolved in the cited case of <i>People vs. Moran, et al.,</i> ante., thus:<br><blockquote>"[. . .] The plain precept contained in article 22 of the Penal Code, declaring the retroactivity of penal laws [insofar] as they are favorable to persons accused of a felony, would be useless and nugatory if the courts of justice were not under obligation to fulfill such duty, irrespective of whether or not the accused has applied for it, just as would also all provisions relating to the prescription of the crime and the penalty."<sup style="COLOR: RGB(255, 0, 0);">[88]</sup></blockquote></blockquote>The crime in this case was committed before the enactment of Republic Act No. 9346 in 2006. The downgrading of the penalty will surely benefit XXX265302. Thus, we see no reason not to extend this favorable interpretation to him.<br><br>Applying now the Indeterminate Sentence Law, XXX265302 may be sentenced to an indeterminate penalty, the minimum of which shall be within the range of <i>prision mayor</i> (the penalty next lower in degree from <i>reclusion temporal</i>)&nbsp; or six years and one day to 12 years, and the maximum of which shall be within the range of <i>reclusion temporal</i> in its medium period, there being no other modifying circumstances attendant to the crime,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> or 14 years, eight months and one day to 17 years and four months. Thus, <b>we impose the indeterminate penalty of 12 years of <i>prision mayor,</i> as a minimum, to 14 years, eight months and one day of <i>reclusion temporal,</i> as a maximum, upon XXX265302.</b><br><br><b><i>Suspended sentence</i></b><br><br>Nonetheless, the plight of the accused does not end here. XXX265302 is entitled to suspension of his sentence,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> subject to the limit imposed by Section 40<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> of Republic Act No. 9344, being a minor at the time of the commission of the offense. We note, however, that on October 2, 2017, the trial court ordered the issuance of a warrant of arrest to XXX265302 upon the motion of the private offended party that XXX265302 is already 18 years old.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> On April 26, 2024, the Court was informed that XXX265302 was transferred from New Bilibid Prison to Davao Prison and Penal Farm. <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> To date, XXX265302 is 25 years old. Still, we extend to him the application of Republic Act No. 9344, specifically on him being confined in an agricultural camp or other training facilities under Section 51 of RA No. 9344, to give meaning to the legislative intent of the law.<br><br>In <i>People v. Jacinto,</i><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> we ruled:<br><blockquote>The legislative intent reflected in the Senate deliberations on Senate Bill No. 1402 (Juvenile Justice and Delinquency Prevention Act of 2005) further strengthened the new position of this Court to cover heinous crimes in the application of the provision on the automatic suspension of sentence of a child in conflict with the law. The pertinent portion of the deliberation reads:<br><blockquote>If a mature minor, maybe 16 years old to below 18 years old is charged, accused with, or may have committed a serious offense, and may have acted with discernment, then the child could be recommended by the Department of Social Welfare and Development (DSWD), by the Local Council for the Protection of Children (LCPC), or by [Senator Miriam Defensor-Santiago's] proposed Office of Juvenile Welfare and Restoration to go through a judicial proceeding; <i>but the welfare, best interests, and restoration of the child should still be a primordial or primary consideration. Even in heinous crimes, the intention should still be the child's restoration, rehabilitation and reintegration</i></blockquote>On 24 November 2009, the Court En Banc promulgated the <i>Revised Rule on Children in Conflict with the Law,</i> which reflected the same position.<br><br>These developments notwithstanding, we find that the benefits of a suspended sentence can no longer apply to appellant. The suspension of sentence lasts only until the child in conflict with the law reaches the maximum age of twenty-one (21) years. Section 40 of the law and Section 48 of the Rule are clear on the matter. Unfortunately, appellant is now twenty- five (25) years old.<br><br>Be that as it may, to give meaning to the legislative intent of the Act, the promotion of the welfare of a child in conflict with the law should extend even to one who has exceeded the age limit of twenty-one (21) years, so long as he/she committed the crime when he/she was still a child. The offender shall be entitled to the right to restoration, rehabilitation and reintegration in accordance with the Act in order that he/she is given the chance to live a normal life and become a productive member of the community. The age of the child in conflict with the law at the time of the promulgation of the judgment of conviction is not material. What matters is that the offender committed the offense when he/she was still of tender age.<br><br>Thus, appellant may be confined in an agricultural camp or any other training facility in accordance with Sec. 51 of Republic Act No. 9344.<br><blockquote>Sec. 51. <i>Confinement of Convicted Children in Agricultural Camps and Other Training Facilities.</i> â A child in conflict with the law may, after conviction and upon order of the court, be made to serve his/her sentence, in lieu of confinement in a regular penal institution, in an agricultural camp and other training facilities that may be established, maintained, supervised and controlled by the BUCOR, in coordination with the DSWD.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup></blockquote></blockquote>Thus, the case shall be remanded to the trial court to effect XXX265302's confinement in an agricultural camp or other training facility.<br><br><b><i>Damages</i></b><br><br>We modify the damages awarded by the CA. Despite the eradication of the death penalty in the scale of penalties, the principal consideration for the award of damages should still be "the penalty provided by law or imposable for the offense because of its heinousness, not the public penalty actually imposed on the offender."<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> The Court explained in <i>People v. Sarcia,</i><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> to wit:<br><blockquote>The principal consideration for the award of damages, under the ruling in <i>People v. Salome</i> and <i>People v. Quiachon</i> is the <b>penalty provided by law or imposable for the offense because of its heinousness, not</b> the public penalty <b>actually</b> imposed on the offender.<br><br>Regarding the civil indemnity and moral damages, <i>People v. Salome</i> explained the basis for increasing the amount of said civil damages as follows:<br><blockquote>The Court, likewise, affirms the civil indemnity awarded by the Court of Appeals to Sally in accordance with the ruling in <i>People v. Sambrano</i> which slates:<br><br>As to damages, we have held that <b>if the rape is perpetrated with any of the attending qualifying circumstances that require the imposition of the death penalty,</b> the civil indemnity for the victim shall [be] [PHP] 75,000.00. . . Also, in rape cases, moral damages are awarded without the need [sic] proof other than the fact of rape because it is assumed that the victim has suffered moral injuries entitling her to such an award. However, the trial court's award of [PHP] 50,000.00 as moral damages should also be increased to [PHP] 75,000 pursuant to current jurisprudence on qualified rape.<br><br>It should be noted that while the new law prohibits <i>the imposition</i> of the death <b>penalty, the penalty provided for by law for a heinous offense is still death and the offense is still heinous.</b> Consequently, the civil indemnity for the victim is still [PHP] 75,000.00.</blockquote><i>People v. Quiachon</i> also ratiocinates as follows:<br><blockquote>With respect to the award of damages, the appellate court, following prevailing jurisprudence, correctly awarded the following amounts; [PHP1 75,000.00 as civil indemnity <b>which is awarded if the crime is qualified by circumstances warranting the imposition of the death penalty;</b> [PHP] 75,000.00.00 as moral damages because the victim is assumed to have suffered moral injuries, hence, entitling her to an award of moral damages even without proof thereof[.]<br><br><b>Even if</b> the penalty of death is not to be imposed on the appellant because of the prohibition in R.A. No. 9346, <b>the civil indemnity of [PHP] 75,000.00 is still proper</b> because, following the ratiocination in <i>People v. Victor,</i> <b>the said award is not dependent on the actual imposition of the death penalty but on the fact that qualifying circumstances warranting the imposition of the death penalty attended the commission of the offense.</b> The Court declared that the award of [PUP] 75,000.00 shows <b>"not only a reaction to the apathetic societal perception of the penal law and the financial fluctuations over time but also the expression of the displeasure or the court of the incidence of heinous crimes against chastity."</b></blockquote>The litmus test therefore, in the determination of the civil indemnity is the heinous character of the crime committed, which would have warranted the imposition of the death penalty, regardless of whether the penalty actually imposed is reduced to <i>reclusion perpetua.</i><br><br>As to the award of exemplary damages, Article 2229 of the Civil Code provides that exemplary or corrective damages are imposed in addition to the moral, temperate, liquidated or compensatory damages. Exemplary damages are not recoverable as a matter of right. The requirements of an award of exemplary damages are: (1) they may be imposed by way of example in addition to compensatory damages, and only after the claimant's right to them has been established; (2) they cannot be recovered as a matter of right, <i>their determination depending upon the amount of compensatory damages that may be awarded to the claimant;</i> (3) the act must be accompanied by bad faith or done in a wanton, fraudulent, oppressive or malevolent manner. Since the compensatory damages, such as the civil indemnity and moral damages, are increased when qualified rape is committed, the exemplary damages should likewise be increased in accordance with prevailing jurisprudence. <sup style="COLOR: RGB(255, 0, 0);">[98]</sup>(Citations omitted, emphasis in the original)</blockquote>Therefore, notwithstanding the presence of the privileged mitigating circumstance of minority in this case, which lowered the public penalty by one degree, and considering further that death is no longer part of the equation in the scale of penalties under Article 71 of the RPC, the classification of qualified rape as "heinous" remains.<br><br>The amendatory effects of Republic Act No. 9346 extend only to the application of the death penalty but not to the definition or classification of crimes. True, the penalties for heinous crimes have been downgraded under the aegis of the new law. Still, what remains extant is (he recognition by law that such crimes, by their abhorrent nature, constitute a special category by themselves. Accordingly, Rep. Act No. 9346 does not serve as basis for the reduction of civil indemnity and other damages that adhere to heinous crimes.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup><br><br>In <i>People v. Jugueta,</i><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> the Court set the amount of civil indemnity, moral damages, and exemplary damages for qualified rape where the penalty imposed is death, but reduced to <i>reclusion perpetua</i> because of Republic Act No. 9346 to PHP 100,000.00 each. We clarified in <i>People v. ABC260708</i><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> that "the law and jurisprudence set the minimum amounts of civil indemnity and damages but do not provide for a ceiling. Thus, the minimum amounts can be validly increased when the circumstances warrant." In that case, we increased the amounts of damages to PHP 150,000.00 each in view of the depravity of the qualified rape committed against the minor victim.<br><br>Accordingly, XXX265302 is adjudged to pay the victim civil indemnity, moral damages, and exemplary damages of PHP 150,000.00 each, in line with recent jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> The damages awarded shall earn interest of 6% per annum from the finality of judgment until full payment.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup><br><br><b>ACCORDINGLY,</b> the appeal is <b>DENIED.</b> The Court of Appeals' Decision dated June 8, 2020 in CA-G.R. CR No. 40474 is <b>AFFIRMED with MODIFICATION.</b> Accused-appellant XXX265302 is <b>GUILTY</b> beyond reasonable doubt of <b>Qualified Rape of a Minor</b> under Article 266-B of the Revised Penal Code, as amended. He is sentenced to suffer the indeterminate penalty of 12 years of <i>prision mayor,</i> as minimum, to 14 years, eight months and one day of <i>reclusion temporal,</i> as maximum, and is <b>ORDERED</b> to pay the victim AAA265302 the amounts of PHP 150,000.00 as civil indemnity, PHP 150,000.00 as moral damages, and PHP 150,000.00 as exemplary damages, all with legal interest at the rate of 6% per annum from the finality of this Decision until full payment.<br><br>Further, the case is <b>REMANDED</b> to the Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Laguna, for appropriate disposition in accordance with Section 51 of Republic Act No. 9344.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, Lopez, J., Marquez,</i> and <i>Kho, Jr., JJ.,</i> concur.<br><i>Dimaampao, J.,</i> No part.<br><i>Singh, J.,</i> On leave.<br><br><br><hr width="60%" size="1" noshade="" align="LEFT"><sup style="COLOR: RGB(255, 0, 0);">*</sup> No part due to prior participation in the proceedings before the Court of Appeals.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> A Child in Conflict with the Law,' pursuant to sec. 4(e) of Republic Act No. 9344, as amended.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1] </sup>Titled "An Act Prohibiting The Imposition Of Death Penalty hi The Philippines," June 24,2006.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2] </sup><i>People v. Bon,</i> 536 Phil. 897, 940 (2006) [Per J. Tinga, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3] </sup><i>Rollo,</i> pp. 3-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4] </sup>CA <i>rollo,</i> pp. 116-139. The Decision was penned by Associate Juslice Eduardo B. Peralta, Jr. and concurred in by Associate Juslices Japar B. Dimaampao (now a Member of the Court) and Louis P. Acosta of the Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5] </sup><i>Id.</i> at 78. XXX265302 was 15 years old at the time of the incident, having been born on May 26, 1999. See RTC records, p. 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6] </sup>Supreme Court Amended Administrative Circular No. 83-2015 states that the geographical location where the crime was committed should refer only to the province where the crime occurred. References to the specific barangay or town should be blotted out from the body of the decision if its identification could lead to the disclosure of the women or children victims.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7] </sup>The identity of the victim or any information which could establish or compromise their identity, and those of their immediate family or household members, shall be withheld pursuant to Republic Act No. 7610 (1992); Republic Act No. 92b2 (2004), An Act Defining Violence Against Women and Their Children, Providing for Protective Measures for Victim, Prescribing Penalties Therefor, and for Other Purposes; and Section 40 of A.M. No. 04-10-11-SC (2004), Rule on Violence Against Women and Their Children.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8] </sup>RTC records, p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9] </sup><i>Id.</i> at 55-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10] </sup><i>Id.</i> at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11] </sup>Id. at 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12] </sup><i>Id.</i> at 69-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13] </sup>TSN, AAA265302, March 2, 2016, pp. 5- 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14] </sup><i>Id.</i> at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15] </sup><i>Id.</i> at 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16] </sup>TSN, AAA265302, March 30, 2016, p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17] </sup><i>Id.</i> at. 3-4, 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18] </sup><i>Id.</i> at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19] </sup>TSN. AAA265302, March 2. 2016 p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20] </sup><i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21] </sup>Ken Sinad Bautista was born on July 2, 2003. See RTC records, p 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22] </sup>TSN, Ken Sinad Bautista, August 3, 2016, pp 5-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23] </sup>TSN, XXX265302, March 22, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24] </sup><i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25] </sup>TSN, Jayson Agliones, June 7, 2017, pp. 12-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26] </sup>CA <i>rollo,</i> pp. 78-91. The August 31,2017 Decision in Criminal Case No. 25406-2015-C-(P) was penned by Presiding Judge Maria Florencia B. Formes-Baculo, Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, Laguna.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27] </sup>SECTION 38. <i>Automatic Suspension of Sentence.</i> - Once the child who is under eighteen (18) years of age at the time of the commission of the offense is found guilty or the offense charged, the court shall determine and ascertain any civil liability which may have resulted from the offense committed. However, instead of pronouncing the judgment of conviction, the court shall place the child in conflict with the law under suspended sentence, without need of application: <i>Provided, however,</i> That suspension of sentence shall Still be applied even it the juvenile is already eighteen years (18) of age or more at the time of the pronouncement of his/her guilt.<br><br>Upon suspension of sentence and after considering the various circumstances of the child, the court shall impose the appropriate disposition measures as provided in the Supreme Court Rule on Juveniles in Conflict with the Law.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28] </sup>Titled "An Act Establishing A Comprehensive Juvenile Justice And Welfare System, Creating The Juvenile Justice And Welfare Council Under The Department Of Justice, Appropriating Funds Therefor And For Other Purposes," April 28, 2006. <br><br><sup style="COLOR: RGB(255, 0, 0);">[29] </sup>CA <i>rollo.</i> p. 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30] </sup>RTC records, p. 257.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31] </sup>CA <i>rollo,</i> pp. 56-77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32] </sup>RTC records, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33] </sup>CA <i>rollo,</i> pp. 64, 66,69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34] </sup><i>Id.</i> at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35] </sup><i>Id.</i> at 108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36] </sup><i>Id.</i> at 103-106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37] </sup><i>Id.</i> at 124-129.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38] </sup><i>Id.</i> at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39] </sup><i>Id.</i> at 137-138.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40] </sup><i>Rollo,</i> pp. 3-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41] </sup><i>Id.</i> at 52-56, 57-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42] </sup>Article 266-A. Rape; When And how Committed. - Rape is Committed:<br><blockquote>1) By a man who shall have carnal knowledge of a woman under any of the following circumstances:<br>a) Through force, threat, or intimidation;<br>b) When the offended party deprived of a reason or otherwise unconscious;<br>c) By means of fraudulent machination or grave abuse of authority; and<br>d) When the offended party is under twelve (12) years of age or is demented, even though none of the circumstances mentioned above be present</blockquote><sup style="COLOR: RGB(255, 0, 0);">[43] </sup>Now, 16 years of age under Republic Act No. 11648 titled "An Act Providing For Stronger Protection Against Rape And Sexual Exploitation And Abuse, Increasing The Age For Determining The Commission Of Statutory Rape. Amending for the Purpose Act No. 3815, As Amended, Otherwise Known As "The Revised Penal Code" Republic Act No. 8353, Also Known As "The Anti-Rape Law of 1997," And Republic Act No. 7610 As Amended, Otherwise Known As The "Special Protection Of Children Against Abuse, Exploitation And Discrimination Act." March 4, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44] </sup><i>People v. Ronquillo,</i> 818 Phil. 641. 643 (2017) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45] </sup>Id.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46] </sup>People v. <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, 857 Phil. 202, 217 (2019) [Per J. Lazaro-Javier, Second Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[47] </sup>Article 266-B. Penalty. â Rape under paragraph 1 of the next preceding article shall be punished by <i>reclusion perpetua.</i><br><br>. . . .<br><br>The death penalty shall also be imposed if the crime of rape's committed with any of the following aggravating/qualifying circumstances<br><br>5) When the victim is a child below seven (7) years old[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[48] </sup>RTC records, P. 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49] </sup>TSN, AAA265302, March 2, 2016, pp. 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50] </sup><i>Id.</i> at 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51] </sup><i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52] </sup><i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53] </sup>TSN, AAA265302, March 16, 2016. pp. 14-17.<br><blockquote>On cross examination:<br><br>ATTY. RAGSAC<br><br>Q So when [XXX265302] <i>"kinantot" ka, the only thing he did was to remove your shorts and panty</i> ?<br><br>A <i>Yes ma 'am.</i><br><br>Q <i>He did not do anything else?</i><br><br>A Yes ma 'am.<br><br>Q At that time, [XXX265302] was wearing clothes?<br><br>A No ma'am he was naked.<br><br>. . . .<br><br>Q <i>Can you tell me if any part of the body of [XXX265302] touched your body</i>?<br><br>A None ma 'am.<br><br>On re-direct examination:<br><br>PROS. MARPURI<br><br>Q Earllier on you were confronted if telling a lie is bad and you answered yes. Are you telling a lie when you said that [XXX265302] had abused you?<br>A No ma'am.<br><br>. . . .<br><br>Q Okay, earlier on the counsel likewise asked you what do you understand about the word "kinantot" and you demonstrated with your fingers and at the same time she asked you when you were "kinantot" by [XXX265302], the only thing he did to you was to remove your shorts and panty and you said yes. Did [XXX265302] able to insert his penis to your vagina?<br><br>ATTY. RAGSAC<br><br>Objection Your Honor the witness testified that no part of [XXX265302J's body touched her skin Your Honor.<br><br>PROS. MARPURI<br>No because in my direct Your Honor, she answered yes. You review the TSN. When I asked her" "NAGDIKIT BA ANG ORGAN MO SA ORGAN NI [XXX265302]?" and she said yes. And now. on cross what part of the body...<br><br>ATTY. RAGSAC<br>Did any part of the body of [XXX265302] touch her body? PROS. MARPURI<br><br>And her answer was none. So my re-direct question is. when you said "kinantot" do you mean that [XXX265302] was able to insert his penis to your vagina?<br><br>A <i>No ma 'am.</i><br><br>Q But it touched your vagina?<br><br>ATTY. RAGSAC<br>Objection Your Honor, the witness already answered no Your Honor.<br><br>PROS. MARPURI<br><i>I have another question. Did his penis touch your vagina?</i><br><br>WITNESS<br><i>No ma 'am. (Emphasis supplied)</i></blockquote><sup style="COLOR: RGB(255, 0, 0);">[54] </sup>TSN. AAA265302, March 30, 2016, pp. 2-4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55] </sup><i>Id.</i> at 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56] </sup><i>Id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57] </sup>TSN, Ken Sinag Hautista, August 3, 20169, pp. 5-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58] </sup><i>People, v. Agao.</i> 930 Phil. 559, 602 (2022) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59] </sup><i>People v. Serado.</i> 435 Phil. 313, 321 (2002) [Per J. Ynaress-Santiago. First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60] </sup><i>People v. Lusa,</i> 351 Phil. 537, 545 (1998) [Per J. Romero, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61] </sup><i>People v. Bato,</i> 382 Phil. 558 (2000) [Per J. Pardo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62] </sup>871 Phil. 73 (2020) [Per J. Reyes, J. Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63] </sup><i>Id.</i> at 85.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64] </sup>TSN, AAA265302, March 2, 2016, p. 4; TSN. AAA265302, March 16, 2016, p. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65] </sup>RTC records, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66] </sup>845 Phil. 644 (2019) [Per J Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67] </sup><i>Id.</i> at 652-653.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68] </sup>XXX265302 was born on May 26,1999. <i>See</i> RTC records, p. 4 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69] </sup><i>CICL XXX v. People,</i> 938 Phil. 32,43 (2023) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70] </sup><i>CICL XXX v. People,</i> 859 Phil. 912, 922 (2019) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71] </sup>938 Phil. 32 (2023) [Per J. <i>Zalameda, En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72] </sup>Id. at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73] </sup>RTC records, pp. 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74] </sup>CA <i>rollo,</i> pp. 134-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75] </sup><i>People v. ABC260708,</i> 950 Phil. 199, (2024) [Per J. Lopez, M., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76] </sup>AAA265302 was born on June 25. 2009. <i>See</i> RTC records, p. 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77] </sup>950 Phil. 199. (2024) [Per J. Lopez, M., <i>En Banc.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[78] </sup>Id. at 236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79] </sup>REV. PEN. CODE. An. 266-B(5).<br><br><sup style="COLOR: RGB(255, 0, 0);">[80] </sup>XXX265302 was born on May 26. 1999. <i>See</i> RTC records, p. 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81] </sup>536 Phil. 897 (2006) [Per J. Tinga, <i>En Banc</i>]<br><br><sup style="COLOR: RGB(255, 0, 0);">[82] </sup><i>Id.</i> at 932-933.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83] </sup>553 Phil. 307 (2007) [Per J. Corona, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84] </sup>600 Phil. 530 (2009) [Per J. Nachura, Third Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[85] </sup>718 Phil. 507 (2013) [Per J. Perez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[86] </sup>Art. 71. <i>Graduated scales.</i> â In the cases in which the law prescribes a penalty lower or higher by one or more degrees than another given penalty, the rules prescribed in Article 61 shall be observed in graduating such penalty.<br><br>The lower or higher penalty shall be taken from the graduated scale in which is comprised the given penalty.<br><br>The courts, in applying such lower or higher penalty, shall observe the following graduated scales:<br><br>SCALE NO. 1<br><br>1. Death<br>2. <i>Reclusion perpetua</i><br>3. <i>Reclusion temporal</i><br>4. <i>Prision mayor</i><br>5. <i>Prision correctional</i><br>6. <i>Arresto mayor</i><br>7. <i>Destierro</i><br>8. <i>Arresto menor</i><br>9. Public censure f<br>10. Fine<br><br><sup style="COLOR: RGB(255, 0, 0);">[87] </sup>304 Phil. 725 (1994) [Per J. Regalado, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88] </sup><i>Id.</i> at 752.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89] </sup>REV. PEN. CODE, An. 64( 1).<br><br><sup style="COLOR: RGB(255, 0, 0);">[90] </sup>Republic Act No. 9344, sec. 38.<br><br>Sec. 38. <i>Automatic Suspension of Sentence.</i> â Once the child who is under eighteen (18) years of age at the time of the commission of the offense is found guilty of the offense charged, the court shall determine and ascertain any civil liability which may have resulted from the offense committed. However, instead of pronouncing the judgment of conviction, the court shall place the child in conflict with the law under suspended sentence, without need of application: Provided, however, That suspension of sentence shall still be applied even if the juvenile is already eighteen (18) of age or more at the time of the pronouncement of his/her guilt.<br><br>Upon suspension of sentence and after considering the various circumstances of the child, the court shall impose the appropriate disposition measures as provided in the Supreme Court Rule on Juvenile in Conflict with the Law.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91] </sup>Sec. 40. Return of the Child in Conflict with the Law to Court. â<br><br>. . . .<br><br>If said child in conflict with the 'aw has reached eighteen (18) years of age while under suspended sentence, the court shall determine whether to discharge the child in accordance with this Act, to order execution of sentence, or to extend the suspended sentence for a certain specified period or until the child reaches the maximum age of twenty-one (21) years.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92] </sup>RTC records, p. 257.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93] </sup>The April 26, 2024 Letter of the Bureau of Corrections is appended to the dorsal portion of the <i>rollo</i> cover.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94] </sup>661 Phil. 224 (2011) [Per J. Perez, First Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[95] </sup><i>Id.</i> at 255-257.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96] </sup><i>People v. Sarcia,</i> 615 Phil. 97, 124 (2009) [Per J. Leonardo-Dc Castro, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[97] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[98] </sup><i>Id.</i> at 124-125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99] </sup><i>People v. Bon,</i> 536 Phil. 897, 939-940 (2006) [Per J. Tinga, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[100] </sup>783 Phil. 806 (2016) [Per J. Peralta. <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[101] </sup>950 Phil. 199, (2024) [Per J. Lopez, M. <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[102] </sup><i>Id.</i> at 235. 238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[103] </sup><i>Nacar v. Gallery Frames and/or Border. Jr.,</i> 716 Phil. 267, 283 (2013) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

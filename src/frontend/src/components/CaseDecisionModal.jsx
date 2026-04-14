@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
 import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale } from 'lucide-react';
@@ -12,6 +13,7 @@ import DigestHtmlViewer from './DigestHtmlViewer';
 import { getSubjectMainDoctrinePanelClasses } from '../utils/colors';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 import { apiUrl } from '../utils/apiUrl';
+import { consumeFreeTierUsage, notifyUsageBlocked } from '../utils/freeTierUsage';
 import { CaseFullTextMarkdown, DigestMarkdownText, SmartLink } from './CaseDigestMarkdown';
 
 // --- HELPER COMPONENTS ---
@@ -274,7 +276,8 @@ const isMobileDigestPdfDisabled = () =>
     typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
 
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
-    const { requireAccess, canAccess, openUpgradeModal } = useSubscription();
+    const { getToken, isSignedIn } = useAuth();
+    const { canAccess, openUpgradeModal } = useSubscription();
     const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
@@ -412,17 +415,35 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         [onClose]
     );
 
-    const handleViewHtmlViewer = () => {
+    const handleViewHtmlViewer = async () => {
         if (!fullDecision) return;
         if (isMobileDigestPdfDisabled()) return;
-        if (!requireAccess('case_digest_download')) return;
+        const usage = await consumeFreeTierUsage({
+            feature: 'case_digest_download',
+            getToken,
+            isSignedIn,
+            canAccess,
+        });
+        if (!usage.allowed) {
+            notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
+            return;
+        }
         setShowHtmlViewer(true);
     };
 
-    const handleDownloadDigestPDF = () => {
+    const handleDownloadDigestPDF = async () => {
         if (!fullDecision) return;
         if (isMobileDigestPdfDisabled()) return;
-        if (!requireAccess('case_digest_download')) return;
+        const usage = await consumeFreeTierUsage({
+            feature: 'case_digest_download',
+            getToken,
+            isSignedIn,
+            canAccess,
+        });
+        if (!usage.allowed) {
+            notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
+            return;
+        }
 
         const doc = new jsPDF({ format: 'a4', unit: 'mm' });
         const pageWidth = doc.internal.pageSize.getWidth();

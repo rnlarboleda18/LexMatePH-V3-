@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 253981 - MARIE ANNE GRACE CHUA-MASCARI&Ntilde;AS,* PETITIONER, VS. MARTIN S. MASCARI&Ntilde;AS,* JR. AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70078' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 253981, July 07, 2025 ]</H2>
+			<H3>MARIE ANNE GRACE CHUA-MASCARIÃAS,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PETITIONER, VS. MARTIN S. MASCARIÃAS,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> JR. AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> challenges the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. CV No. 112231, which reversed the declaration of nullity of marriage between petitioner Marie Anne Grace Chua-MascariÃ±as (Marie) and respondent Martin S. MascariÃ±as, Jr. (Martin).</p><p> Marie and Martin were former schoolmates. During college, despite already being in a relationship, Martin attempted to reconnect with Marie. Their friendship eventually turned into a courtship, and they went on several dates. They once attended a birthday party, where they started to become intimate towards each other.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> Later, Martin proposed that they move in together, a suggestion their parents agreed to, provided that both of them complete their studies and that Marie does not get pregnant in the interim. While living together, Marie began to notice Martin's violent tendencies. His behavior became increasingly unbearable as he forced her to do all his schoolwork while he went out with his friends. He also constantly compared her to his ex-girlfriend, causing Marie significant emotional and physical distress.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Martin likewise admitted that he physically and emotionally abused said ex-girlfriend, and that Marie should still be thankful since he had already toned down compared to his previous relationship. Martin deleted all the contact information of Marie's friends from her mobile phone and prohibited her from getting in touch with any of them.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> There even came a time when Martin threw food on her face.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Worse, he regularly had carnal knowledge of Marie while intoxicated, leading to her unexpected pregnancy. Thus, they were compelled to get married.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> After they got married, Martin's physical and emotional abuse worsened. He even wished death upon their unborn child and claimed that her pregnancy was the only reason why he agreed to marry Marie. At one point, in a fit of rage, Martin shoved Marie to the floor, causing her to miscarry. He said nothing and showed no remorse for his actions.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Three years later, Marie graduated from college and was hired as a direct selling assistant at a lingerie company. Meanwhile, Martin joined the service crew at a fast-food chain. Feeling insecure about his wife's growing career, he sought to keep her under his control and insisted on managing their finances. Martin then quit his job, so Marie helped him secure a new position as a ride attendant at an amusement park.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> In 2010, Marie noticed that Martin had become distant and no longer wanted to sleep on the same bed. He was also constantly on his phone, texting. Soon after, during one of their heated arguments, Martin confessed that he was having an affair. Despite the pain this caused her, Marie set aside her feelings and chose to ignore her husband's admission.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> A few weeks later, to Marie's unpleasant surprise, Martin woke her up and told her that they should live separately. He lost control upon seeing her and exclaimed, "[<i>p</i>]<i>utang ina mo! Bahala ka sa buhay mo! Bastusan na, wala na ako[ng] pakialam sa 'yo, tumayo ka diyan!</i>"<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Terrified, Marie left the house but still made an effort to visit Martin twice a week. However, Martin treated her as if she were just one of his string of girlfriends. Marie further discovered that Martin was also involved with two other women, whom he would bring to their own bedroom to spend the night.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Consequently, on February 19, 2016, Marie decided to file a petition<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> to nullify her marriage under Article 36<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> of the Family Code, with Branch 109, Regional Trial Court (RTC), Pasay City. Marie asseverated that from the time she began living with Martin, through their marriage and until their physical separation, Martin manifested psychological incapacity to perform his marital obligations, and such was grave, incorrigible, and incurable.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> Despite receipt of summons, Martin did not file an answer. Trial then ensued wherein Marie testified, along with Felicito Rocky Vargas (Vargas), her close friend, and Regina V. Beltran (Beltran), a clinical psychologist as expert witness.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Beltran testified and affirmed the contents of her Psychological Evaluation Report.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The Report indicated that the sources of information for its preparation were the interviews from Marie and her best friend, Camille Joy B. BiÃ±aber (BiÃ±aber). There, Beltran concluded that based on the data she gathered from a battery of tests and interviews she conducted, Marie was suffering from a dependent personality disorder with passive aggressive traits. On the other hand, Martin was diagnosed with narcissistic personality disorder co-existing with anti-social and dependent personality disorder. These diagnoses rendered both of them psychologically incapacitated to assume and properly discharge their roles and obligations in the marriage.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Meanwhile, Vargas testified about Martin's disposition, describing him as arrogant, snob, and a quiet but hot-headed person. He made unreasonable demands to his wife, to the point that he threatened to kill her if she did not leave their conjugal dwelling.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> In due course, the RTC rendered its Decision.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The RTC declared the marriage between Marie and Martin null and void on the ground of psychological incapacity. The RTC found that the totality of the evidence, including the Psychological Report issued by Beltran, have established the characteristics of gravity, antecedence, and incurability of the psychological incapacities of the parties.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Through the Office of the Solicitor-General (OSG), the Republic of the Philippines filed a motion for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> which was brushed aside by the RTC.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Undaunted, the OSG elevated the case to the CA via a notice of appeal,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> principally arguing that the RTC erred in concluding that Marie's evidence sufficiently proved that Martin was psychologically incapacitated to comply with the essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Finding merit in the appeal, the CA reversed the RTC Decision, thereby dismissing the petition for declaration of nullity of marriage. The CA discerned that the totality of Marie's evidence was insufficient to establish that either or both Marie and Martin are psychologically incapacitated to perform their essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> In the main, the CA did not ascribe evidentiary value to Beltran's Psychological Report for failing to satisfy the "required depth and comprehensiveness of an examination required to evaluate a party"<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> supposedly suffering from a psychological disorder. Moreover, there was no evidence from independent sources who intimately knew Martin prior and after the celebration of the marriage to lend weight to the Psychological Report.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The CA subsequently denied Marie's motion for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> in the challenged Resolution. </p><p> Disgruntled, Marie now comes to this Court, praying to reinstate the RTC's declaration of their marriage null and void on the ground that the parties are both psychologically incapacitated to perform their respective marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The root causes of the psychological capacities were amply proven by Beltran's expert testimony.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p align="center"> <b>The Court's Ruling</b> </p><p> <b><i>The Petition is impressed with merit. </i></b></p><p> In the case of <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> the three characteristics of psychological incapacity have been restated: </p><p> <b>Incurability</b> must be viewed in the legal, not medical, sense. Veering away from the medical orientation, the third guideline from <i>Republic v. Molina</i><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> was amended. Psychological incapacity is not a medical illness which can be cured. It must be "so enduring and persistent with respect to a specific partner, and contemplates a situation where the couple's respective personality structures are so incompatible and antagonistic that the only result of the union would be the inevitable and irreparable breakdown of the marriage."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> To satisfy the requirement of incurability, there must be a showing of an undeniable pattern of such persisting failure to be a present, loving, faithful, respectful, and supportive spouse that must be established so as to demonstrate that there is indeed a psychological anomaly or incongruity in the spouse relative to the other.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p> <p> The retained requirement on the <b>gravity</b> of the psychological incapacity must be caused by a genuinely psychic cause. It must not be mere mild characterological peculiarities, mood changes, occasional emotional outbursts, nor mere refusal, neglect, difficulty, much less ill will.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> Lastly, the requisite of <b>juridical antecedence</b> means that the incapacity is determined to exist during the time of celebration of marriage. While it may be difficult, if not scientifically impossible, to determine the existence of psychological incapacity at the exact point in time that the couple exchanged their "I dos", it is sufficient that the petitioning spouse demonstrates, with clear and convincing evidence, that the incapacity, in all reasonable likelihood, already exists at the time of the celebration of marriage.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> As the Court held in <i>Tan-Andal</i>, in determining the reasonable likelihood of such an existence, "proof of juridically antecedent psychological incapacity may consist of testimonies describing the environment where the supposedly incapacitated spouse lived that may have led to a particular behavior."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Apropos thereto, the Court, in <i>Navarrosa v. Navarrosa</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> further illumined the concept of juridical antecedence, thus: </p><blockquote> <p> [T]he concept of juridical antecedence must be understood to include the ordinary experiences of the spouses <b>not only prior to the marriage itself, but more importantly, during their "lived conjugal life" together since, as the law itself states, a marriage can be declared null and void under Article 36 "<i>even if such incapacity becomes manifest only after its solemnization."</i></b> As the parties have yet to assume any of the essential marital obligations prior to being married, the Court discerns that the experience of marriage itself is the litmus test of self-realization, reflecting one's true psychological makeup as to whether or not he or she was indeed capable of assuming the essential marital obligations to his or her spouse at the time the marriage was entered into.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Emphasis supplied, citation omitted) </p> </blockquote> <p> Upon these premises, the Court finds that Marie had sufficiently overcome the burden of proving, by clear and convincing evidence, the nullity of her marriage with Martin on the ground of the latter's psychological incapacity. </p><p> It is important to note that Martin chose not to participate in the trial despite the summons served upon him. Tellingly, this exemplifies his indifference to the status of his marriage to Marie. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The psychological incapacity of Martin is grave, incurable, and juridically antecedent</i> </div></td> </tr> </tbody></table> <p>To recapitulate, the CA found that the following facts were established by the evidence presented:<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><ol start="" type="a"><li> Martin was unreasonably jealous of Marie's male friends; </li><li> As Martin frequently came home drunk, the spouses habitually argued; </li><li>When Marie was pregnant, she and Martin quarreled and the latter pushed the former to the ground, resulting in her miscarriage;</li><li> Martin's employment lasted only a few months due to his impatience and inability to work with others; </li><li>Martin admitted having extra-marital affairs; and </li><li> A violent confrontation erupted between Martin and Marie regarding one of Martin's mistresses, and Marie left their conjugal dwelling as a result. </li></ol> <p> Likewise, a perusal of the records reveals that: </p><ol start="" type="a"><li> Martin had the tendency for philandering even prior to their marriage, as shown by the fact that he still had a girlfriend when he started courting Marie;</li><li> He made Marie do all household chores as well as his schoolwork while he drank with his friends, even when both of them attended school;</li><li> Not only was he frequently inebriated, but he also had carnal knowledge of Marie while intoxicated, and at times, intentionally vomited in their bedroom for Marie to clean, further exposing his depravity;</li><li>He admitted that he also manhandled and verbally abused his ex-girlfriend; </li><li>He threw food to Marie's face over a petty fight; </li><li> He demanded that he be the one to handle their finances despite Marie being the earner in the family; and </li><li>Rather than being remorseful upon Marie's discovery of his affairs, he instead turned to anger and bedded women in their marital chambers despite Marie's hopes for reconciliation. </li></ol> <p> Based on the foregoing, there is no other conclusion but that Martin abused Marie, physically and mentally, before and after they exchanged their wedding vows. In fact, expressing regret over their unplanned marriage on account of Marie's pregnancy, he verbally wished for the death of their child.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> True enough, he disregarded Marie's condition when he pushed her to the floor, causing harm not only to Marie, but also to their unborn child. Thereafter, he expressed no guilt over the incident.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> From this very occurrence alone, palpable is his failure to fulfill his obligations as a father even prior to the birth of their child. </p><p> Contrary to the CA's conclusion that the foregoing acts were only signs of immaturity and lack of a sense of responsibility,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> these circumstances demonstrate an <i>undeniable pattern of persisting failure</i> on the part of Martin <i>to fulfill his duty</i> as a present, loving, faithful, respectful, and supportive spouse to Marie. This renders his psychological incapacity <b>incurable</b>. In her testimony, Beltran pithily narrated: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="7%"><div align="right">19.Q:</div></td> <td width="2%"><div align="justify"></div><br></td> <td width="91%"><div align="justify">How did this psychological disorder of [Martin] affect his ability to comply with his basic marital obligations of love, respect, fidelity, mutual help[,] and support?</div></td> </tr> <tr valign="top"> <td><div align="right">A:</div></td> <td><div align="justify"></div><br></td> <td><div align="justify">Because of [Martin]' s traits and behavioral patterns, [Martin] was not able to sustain a relationship with one person for a long time. More so with a life-long marital relationship founded on love, respect, fidelity, mutual help[,] and support. </div></td> </tr> <tr valign="top"> <td><div align="right">. . . . </div></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="right">21.Q:</div></td> <td><div align="justify"></div><br></td> <td><div align="justify">Given the proper medical or psychiatric attention, is there any possibility of curing this psychological disorder of [Martin]? </div></td> </tr> <tr valign="top"> <td><div align="right">A:</div></td> <td><div align="justify"></div><br></td> <td><div align="justify">No, Sir. Even with the proper medical attention, the psychological disorder of [Martin] is chronic and incurable. It cannot be cured because of the fact that a personality disorder is an enduring pattern of behaviors, traits, and attitudes that are maladaptive and inflexible.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Upon this point, the Court differs from the CA's dismissal of Martin's narcissistic and controlling actions over Marie as trivial matters and a superficial refusal to perform his marital obligation. Martin's noncompliance with his essential marital obligations cannot be considered as a mere product of some difficulty, neglect, refusal, or ill-will to escape the marital bond. Taken together, his actions reveal an innate insecurity and self-centeredness which are hallmarks of his narcissistic personality disorder with dependent and anti-social personality features. As pointed out in the Psychological Report, Martin's psychological incapacity was impermeable to recovery and is characterized by permanence as he does not see anything wrong with his behaviors, being aligned with his inner sense of selfâ </p> <blockquote> <p> [Martin] had done everything to exploit his wife and had even used his masculine strength to dominate her and make her submit to all his needs. Moreover, he had only betrayed her trust by continuous [sic] to be irresponsible[,] which eventually had brought extreme suffering and emotional trauma to his wife. </p> <p> Moreover, he failed to gain insight or sense of awareness about his wrongdoings but instead, he has an attitude of throwing all the blame towards other people, so that he would be able to escape accountability for his actions. Therefore, he had obviously lacked commitment towards his marriage and had extremely failed in assuming his share of responsibilities and obligations as a husband and a responsible family man. </p> <p> As such, he failed to exert an inch of effort to assume the responsibilities and obligations attached in marriage. Consequently, instead of being a good husband, he continued his maladaptive behaviors. Thus, he had fallen short of showing concern towards his wife. Hence, this eventually led to the inevitable collapse of his marriage to [Marie], for he did not have the will to uphold his marital covenant.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p> </blockquote> <p> The foregoing assessment of Martin's acts shows a serious and persistent failure to love and support Marie as her husband. As adumbrated in Beltran's Psychological Report, Martin's disorder commenced from his childhood and was further intensified by the responsibilities and obligations during his adulthood and their married life. Hence, it is deep-seated in his personality development, thereby causing the eventual breakdown of the marriage and hampering their normal adaptivity to the demands of married life.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> In sum, the Court finds that the requisite of <b>gravity</b> has been satisfied. </p><p> Finally, as to the requisite of juridical antecedence, the Court finds and so holds that Marie was able to clearly and convincingly show that, in all reasonable likelihood, Martin's psychological incapacity was already present during the celebration of their marriage. At the risk of being repetitive, it is doctrinal that the concept of juridical antecedence must be understood to include the ordinary experiences of the spouses not only prior to the marriage itself, but more importantly, during their "lived conjugal life" together. After all, a marriage can nevertheless be declared null and void under Article 36 even if the incapacity becomes manifest only after its solemnization. </p><p> In this case, during the early period of the parties' relationship, particularly while they lived under the same roof without the benefit of marriage, Martin already displayed the precursors of his incapacity to fulfill his marital obligations. Presumably, their living together stood as a trial run of their marriage in order to test the waters of conjugal life. Lamentably, as above-stated, Martin's violent and abusive nature presented itself during this time. As dissected by Beltran, such violent nature may be attributed to the psychological abnormality developed in the early stages of his life: </p><blockquote> <p> As a child, [Martin grew] up without proper guidance from an ideal role model[] since he had witnessed his father's weak-willed and careless disposition. He was an absentee father[] because of the nature of his job as a [s]eaman. He also had a rare chance [to discipline] his children because he was always away. But he [] recalled being punished by his father, by letting [him] kneel on mongo seeds with books on his hands. When on vacations, he squander[ed] his money on his friends and indulge[d] in drinking spree and gambling. [His] Mother has been perceived as overprotective of her children. </p> <p> Being exposed to inconsistent discipline, tolerance[,] and lack of proper guidance from [his] parents had affected his emotional development [sic]. [Martin] had harbored a lot of deep-seated hatred in his life. A such, he had lost respect towards authority figures and had also resented the lack of love and weaknesses that he had witnessed from his mother. Thus, as he progresses in adulthood, he had unconsciously imbibed some of the characteristics of his father who was "easy[-]go[-]lucky" and irresponsible. So that instead of striving to have a good value system, he had adapted the flawed attitudes of his father. This was fueled by [Martin]'s rebellious acts, considering that he was not accorded with the needed love and attention from his significant others.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p> </blockquote> <p> At present, it is undeniable that these natal issues persisted until during the parties' marriage and their stay in the house of Martin's mother. Notably, despite the awareness of Martin's mother of her son's abuse against Marie, she continued to tolerate his despicable actions,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> as she did during his youth.</p><p> Thus, based on her expert evaluation, Beltran observed that Martin suffered from narcissistic personality disorder co-existing with anti-social and dependent personality disorder, which manifests the following characteristics: </p><ul><li>He manifests grandiosity and sense of self-importance, as he believes he is superior and special[;] </li><li> He is demanding and shows arrogant behaviors[;] </li><li> He renders disposition as he pleases without consideration to the feelings of his wife[;] </li><li> He lacks empathy and is unwilling to recognize or identify with the feelings and needs of others[;] </li><li> He seeks another relationship as a source of care and support[;] </li><li> He needs help in assuming his responsibilities[;] </li><li> He basically lacks confidence and assertiveness[;] </li><li> He displays irritably and aggressive behavior towards others[;] </li><li>He commits actions, which are against societal norms and the legal system[;] </li><li> He manifests deceitful and manipulative behavior[;] </li><li> He prefers a self-gratifying lifestyle that gives him pleasure[;] </li><li> He felt no remorse for the offenses he had committed towards other people, including his wife[; and]</li><li> He manifests consistent irresponsibility.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></li></ul> <p> Analyzing these details collectively, Marie's harrowing experiences during her lived conjugal life with Martin (during the marriage), as well as their history living together, and Martin's intrinsic personality forged by his childhood experiences (before the marriage), all point to the conclusion that there is <b>juridical antecedence</b>, i.e., Martin's psychological incapacity, in all reasonable likelihood, was present at the time their marriage was celebrated. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The RTC correctly accorded due credence to Beltran's Psychological Report</i> </div></td> </tr> </tbody></table> <p>Despite the foregoing, the CA junked Beltran's Psychological Report for lack of independent evidence to support the findings therein. The interviews with Marie and BiÃ±aber were not considered independent evidence that would enable Beltran to arrive at an unbiased and unassumed evaluation of Martin's psychological condition. Additionally, the CA concluded that the elements of gravity, incurability, and juridical antecedence were not sufficiently established by the testimonies of Marie and Vargas and the Psychological Report. </p><p> <b><i>The CA fell into error. </i></b></p><p> Incipiently, it must be reiterated that psychological incapacity is "neither a mental incapacity nor a personality disorder that must be proven through expert opinion."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The Court has settled that it is not necessary to label a person as having a mental disorder just to obtain a decree of nullity. Upon this point, a psychological report or diagnosis is not indispensable to sustain a petition for nullity of marriage filed under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> This notwithstanding, Marie presented Beltran, who testified on the Psychological Report of Marie and Martin that she prepared based on the information gathered from Marie and BiÃ±aber. While it is true that Martin was not interviewed by Beltran, this alone should not denigrate the credence of the Psychological Report she prepared, especially since it was he who refused to participate thereto. The fact that the information comes from one side alone should not dilute the veracity of the evidence Marie presented during the trial, for to do so would punish every innocent spouse suffering in a marriage with a psychologically incapacitated spouse who comes to the court for succor. To be sure, the dilemma of bias is avoided when other persons support the <i>petitioning spouse's</i> testimony, <i>even if the supporting testimonies come from such petitioning spouse's friends or relatives</i>.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> This is but a realistic reception of psychological assessments considering that the friends or relatives of the suspected psychologically incapacitated spouse will not be inclined to give hostile testimonies against him or her.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> Verily, the merits of each Article 36 petition should be judiciously assessed on a case-to-case basis, including the psychological assessment, if any.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> At this juncture, the Court echoes with approbation the RTC's pronouncement in its February 22, 2018 Order: </p><blockquote> <p> Contrary to the appreciation of the [OSG], the facts as they are sufficiently supported by facts and evidence [sic]; and, proven during trial should not be disregarded. It should be noted that, apart from her interview with the psychologist, [Marie] testified in court on the facts upon which the psychiatric report was based. . . . At this point, it is well to stress that having the opportunity to personally examine the veracity of the testimony of [Marie] and the witnesses presented, the [c]ourt deems it is in better position [sic] to conclude that the parties are both psychologically incapacitated to comply with their essential marital obligations. Emphasizing the importance of presenting expert testimony to establish the precise cause of a party's psychological incapacity, the presentation of expert proof presupposes a thorough and in depth assessment of the parties by the psychologist or expert, for a conclusive diagnosis of a grave[,] severe[,] and incurable presence of psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p> </blockquote> <p> It is likewise worth emphasizing that the collateral information upon which the report was premised corroborated Marie's account of her marital history with Martin. These pieces of information were relayed to Beltran, who, in tum, testified based on her personal knowledge and expert opinion, on the existence of Martin's psychological incapacity, which remains undisputed by evidence. Apart from Marie's clinical interview and collateral information from Vargas, Beltran likewise administered a battery of psychological tests<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> conducted to identify personality traits, as well as to determine the presence of any underlying psychological disturbances, if any.</p><p> Unlike ordinary witnesses who must have personal knowledge of the matters they testify on, expert witnesses do not testify in court because they have personal knowledge of the facts of the case. Rather, their testimony is sought because of their special knowledge, skill, experience, or training that ordinary persons and judges do not have.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Notably, Beltran is qualified as an expert witness, having obtained both bachelor's and master's degrees in psychology. She has been trained in the field, having practiced since 1988.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> Applying the foregoing, the RTC correctly relied upon Beltran's expert opinion. It is pertinent that the Psychological Report was never controverted by contrary evidence. There is likewise no finding of collusion between the parties by the public prosecutor. As such, there is nothing on record that would negate its legitimacy. </p><p> Nevertheless, with Martin's established psychological incapacity to fulfill his marital obligations, the Court finds no necessity to delve into Marie's psychological incapacity as the nullification of a marriage may be based on the psychological incapacity of either spouse. </p><p> In prÃ©cis, Marie's petition for nullity of marriage under Article 36 must be granted. To uphold the marital bonds between Marie and Martin in the face of the latter's wanton disregard of his essential marital obligations stemming from his psychological incapacity is tantamount to unfairly hauling the former over the coals by languishing in a marriage with a spouse who had neglected and abused her, and failed to uphold the sanctity of their marriage. On account of Marie's evidence, Martin ultimately failed to perform his essential marital obligations of love, faithfulness, and support due from any decent partner in a marriage. Rightly so, the Court declares the marriage between Marie and Martin null and void under Article 36 of the Family Code. </p><p> <b>FOR THESE REASONS</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The December 6, 2019 Decision and the October 23, 2020 Resolution of the Court of Appeals in CA-G.R. CV No. 112231 are <b>REVERSED</b> and <b>SET ASIDE</b>. The August 17, 2017 Decision and the February 22, 2018 Resolution of Branch 109, Regional Trial Court, Pasay City in Civil Case No. R-PSY-16-21858-CV declaring the marriage between petitioner Marie Anne Grace Chua-MascariÃ±as and respondent Martin S. MascariÃ±as, Jr. null and void under Article 36 of the Family Code are <b>REINSTATED</b>.</p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa (Chairperson), Inting</i>, and <i>Gaerlan, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Also spelled as Mascarinas in some parts of the <i>rollo</i>. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-37.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 40-63. The December 6, 2019 Decision was penned by Associate Justice Rafael Antonio M. Santos, with the concurrence of Associate Justices Manuel M. Barrios and Tita Marilyn B. Payoyo-Villordon of the Special Seventeenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 65-72. Dated October 23, 2020.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 41-42. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 42. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 197, Petition for Declaration of Nullity of Marriage. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 198. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 42. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 42-43. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 43.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 201. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 194-207. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Art. 36. A marriage contracted by any party who, at the time of the celebration, was psychologically incapacitated to comply with the essential marital obligations of marriage, shall likewise be void even if such incapacity becomes manifest only after its solemnization.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i>, pp. 201-204. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 43-44.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> RTC records, pp. 157-176.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> CA <i>rollo</i>, pp. 206-207.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 208.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> RTC records, pp. 193-201. The August 17, 2017 Decision was penned by Presiding Judge Tingaraan U. Guiling of Branch 109, Regional Trial Court, Pasay City. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 198. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 203-211. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 239-242. Order dated February 22, 2018. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 243-245. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> CA <i>rollo</i>, p. 25. <i>See also</i> <i>id.</i> at 20-34, Brief for the Appellant. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 50. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 73-97. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 11. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> 902 Phil. 558 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 335 Phil. 664 (1997) [Per J. Panganiban, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 599-600 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See</i> <i>id.</i> at 600. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> <i>id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>See</i> J. Perlas-Bernabe, Concurring Opinion on <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 673 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 598 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 922 Phil. 565 (2022) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 572. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i>, p. 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 42. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> RTC records, p. 153, Judicial Affidavit of Beltran. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 175. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <i>id.</i> at 176. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 174. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <i>rollo</i>, pp. 199-200. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> RTC records, pp. 172-174. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Navarrosa v. Navarrosa</b>, 922 Phil. 565, 569 (2022) [Per J. Perlas-Bernabe, Second Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>See</i> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 597-598 (2021) [Per J. Leonen, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>See</i> <b>Georfo v. Republic</b>, 937 Phil. 518, 539 (2023) [Per J. Leonen, Second Division]. (Citation omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 539-540. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> <b>Navarrosa v. Navarrosa</b>, 922 Phil. 565, 583 (2022) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> RTC records, p. 241. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> I.e., Revised Beta Examination II, Bender Visual Motor Gestalt Test, Machover Draw a Person Test, Rorschach Psychodiagnostic Test, Manchester Personality Questionnaire, Curtis Completion Form, and Self-Analysis Test. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>See</i> <b>Navarrosa v. Navarrosa</b>, 922 Phil. 565, 583 (2022) [Per J. Perlas-Bernabe, Second Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> RTC records, p. 149. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

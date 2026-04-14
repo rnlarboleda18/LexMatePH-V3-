@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 252739 - XXX,[1] PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70151' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 252739, August 19, 2025 ]</H2>
+			<H3>XXX,<SUP STYLE="COLOR: RGB(255, 0, 0);">[1]</SUP> PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">The present Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> seeks to reverse Our April 16, 2024 Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> which affirmed the November 8, 2019 Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and the June 22, 2022 Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Court of Appeals (CA), which found XXX guilty of violating Section 5(i) of Republic Act No. 9262, otherwise known as the Anti-Violence Against Women and Their Children Act of 2004.<br><br><i>Antecedents</i><br><br>AAA<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> discovered that her spouse, herein petitioner XXX, has been keeping a mistress for four years, with whom he begot a child. Upon confrontation before the barangay, XXX admitted that he was truly the father of the child.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>AAA was so affected by the incident that she was unable to work for three to four months and could not sleep.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> AAA then filed a complaint for violation of Section 5(i) of Republic Act No. 9262 against XXX.<br><br>For his part, XXX admitted having a child with YYY. However, he denied maintaining any intimate relationship with YYY and asserted that the child was only the result of a one-night stand. He also averred that he did not live with YYY and their child, and that he only visited the child during the July 19, 2016 incident. Thus, he could not have caused AAA emotional and mental anguish.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> dated November 17, 2017, Branch 144, Regional Trial Court of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (RTC) found XXX guilty of the crime charged.<br><br>On appeal, the CA sustained XXX's conviction.<br><br>Petitioner filed a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> contending that the prosecution failed to establish beyond a reasonable doubt that the mental and emotional anguish suffered by AAA was caused by his unfaithfulness, and that he did not commit any of the acts mentioned in Section 5(i) of Republic Act No. 9262.<br><br>The assailed Decision dated April 16, 2024 denied the Petition and affirmed the challenged decision and resolution of the CA, which held XXX liable for violation of Section 5(i) of Republic Act No. 9262. In so ruling, the Court agreed with the RTC and the CA that the elements of the crime charged were successfully proven by the prosecution. It gave credence to the observation of the courts<i> a quo</i> that the mental and emotional anguish suffered by AAA were the result of XXX's philandering as evidenced by her emotional breakdown while narrating XXX's infidelity in open court. XXX's infidelity was the sole source of AAA's stress and grief. The Court rejected XXX's argument that AAA's suffering was caused by his refusal to repair their broken relationship for want of evidence. Finally, the Court gave its stamp of approval on the CA's ratiocination that an illicit sexual encounter committed by a male person, however casual or infrequent, constitutes marital infidelity that is tantamount to psychological violence punishable by the provisions of Republic Act No. 9262. The<i> fallo</i> of the Decision reads:<br><blockquote><b>ACCORDINGLY</b>, the Petition is<b> DENIED</b>. The November 8, 2019 Decision and the June 22, 2022 Resolution of the Court of Appeals in CA-G.R. CR No. 40938 are<b> AFFIRMED</b>. Petitioner XXX is found<b> GUILTY</b> of violating Section 5(i) of Republic Act No. 9262, otherwise known as the Anti-Violence Against Women and Their Children Act of 2004. Petitioner is<b> SENTENCED</b> to suffer an indeterminate penalty of<b> two (2) years, four (4) months and one (1) day</b> of<i> prision correccional</i>, as minimum, to<b> eight (8) years and one (1) day<i> </i></b>of <i>prision mayor</i>, as maximum, and is<b> ORDERED</b> to (a) pay a fine in the amount of<b> ONE HUNDRED THOUSAND PESOS</b> (PHP 100,000.00); and (b) undergo mandatory psychological counseling or psychiatric treatment and report compliance to the Court, as set forth in the last paragraph of Section 6 of Republic Act No. 9262.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> (Emphasis in the original) </blockquote>Unrelenting, XXX files the instant Motion for Reconsideration reiterating the same arguments in his Petition before this Court which were already judiciously passed upon in the Court's assailed Decision. He insists that marital infidelity is not expressly included in the enumeration of the modes of committing the crime of violence against women and their children. While it is true that under Section 3(a)(C) of Republic Act No. 9262, marital infidelity is constitutive of psychological violence, the same law, however, does not clearly define marital infidelity as one of the modes of committing the crime as defined and penalized under Section 5(i) of Republic Act No. 9262.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>XXX also points out that the assailed Decision of the Court failed to define marital infidelity within the ambit of Republic Act No. 9262. He contends that the ambiguity and vagueness of the definition of marital infidelity as a mode of committing acts of violence against women and children under Section 5(i) of Republic Act No. 9262 renders the said provision unconstitutional. He further argues that the presumption of deliberate intent in marital infidelity based on societal, cultural, and religious norms is inherently subjective.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br><center><i>Our Ruling</i></center><br>After a careful deliberation, We find the motion for reconsideration bereft of merit.<br><br>To reiterate, the law itself includes marital infidelity as one of the forms of psychological violence. Section 5(i) of Republic Act No. 9262 punishes<b> any form of harassment or violence</b>, i.e., physical, sexual,<b> psychological</b> and economic, that causes<b> mental or emotional anguish</b>, public ridicule or humiliation to the woman or her child, including, but not limited to, repeated verbal and emotional abuse, and denial of financial support or custody of minor children or access to the woman's child/children.<br><br>Corollary to this, Section 3(a)(C) of Republic Act No. 9262 defines <i>"Psychological violence</i>" as acts or omissions causing or likely to cause mental or emotional suffering of the victim such as but not limited to intimidation, harassment, stalking, damage to property, public ridicule or humiliation, repeated verbal abuse and<b> marital infidelity</b>.<br><br>To stress, marital infidelity was specifically mentioned in Section 3(a)(C) as constitutive of psychological violence, which evidently falls under the phrase any form of harassment or violence under Section 5(i) of Republic Act No. 9262. Besides, the use of the phrase "including, but not limited to" in the examples enumerated in Section 5(i) reveals that the said enumeration is not exclusive.<br><br>Moreover, a careful review of the enumerated acts of violence against women and children under Section 5 of Republic Act No. 9262 reveals that marital infidelity squarely falls under Section 5(i) of the same Act. It is thus unthinkable that the law specifically mentioned marital infidelity as a form of psychological violence under Section 3(a)(C) if it did not intend to punish it anyway under Section 5 thereof. To be sure, Section 5(i) must be read in conjunction with Section 3(a)(C) of Republic Act No. 9262 since a statute must be read or construed as a whole or in its entirety. All parts, provisions, or sections, must be read, considered or construed together, and each must be considered with respect to all others, and in harmony with the whole.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Anent XXX's contention that the ambiguity and vagueness of the definition of "marital infidelity" as a mode of committing acts of violence against women and children under Section 5(i) of Republic Act No. 9262 renders the said provision unconstitutional, it must be pointed out that such issue had not been pleaded below and even on appeal to this Court. It is only in the present Motion for Reconsideration that the same had been raised. Settled is the rule that issues that were not alleged or proved before the lower court cannot be decided for the first time on appeal. This rule ensures fairness in proceedings.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Thus, XXX is barred from invoking it as an issue before this Court.<br><br>Further, We reject XXX's assertion that presumption of deliberate intent in marital infidelity is without basis as the same is not expressly provided in the law.<br><br>We have painstakingly discussed in Our assailed Decision that the requirement of specific criminal intent to cause mental and emotional suffering is already satisfied the moment the perpetrator commits the act of marital infidelity. This is because marital infidelity is inherently immoral and depraved under prevailing societal, cultural, and religious norms. As articulated by the Court in<i> Regir v. Regir</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> "[i]t is morally reprehensible for a married man or woman to maintain intimate relations with a person other than [their] spouse."<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Ergo, when the cause of mental or emotional distress is marital infidelity which is inherently wrongful, specific intent is not necessary as the spouse's intent to cause mental or emotional anguish upon the spouse or their child is already presumed upon the spouse's mere commission of the act of marital infidelity.<br><br>This is supported by the language of Section 5(i) of Republic Act No. 9262. A careful reading of the said provision reveals that the law merely looks at the consequences or effects of marital infidelity upon the aggrieved spouse or child â that is, whether or not the conduct causes mental or emotional anguish to the aggrieved spouse or her child. In contrast, Sections 5(e), 5(f), and 5(h) of the same law specifically requires intent on the part of the violator in order to support a conviction. Verily, the absence of any such term requiring intent on the part of the defendant supports the conclusion that intent is not required in Section 5(i) of Republic Act No. 9262.<br><br>Finally, it has been made clear in Our assailed Decision that rendering the crime subjective is not, and should not be, the purpose and objective of the law. To echo Justice Amy C. Lazaro-Javier's view, the protection of women and childrenâand no otherâis the main objective of Republic Act No. 9262. If We thus seek to fully animate the intent and purpose of the law and truly take upon Ourselves to deliver genuine justice to these women and children, Our vantage point must lie from the eyes of those the law seeks to protect, never from the eyes of those We protect them from or against. For to do the latter would turn a blind eye to the undeniable existence of the injury which the law intends to prevent.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> It is apt to reiterate that the main thrust of Republic Act No. 9262 is the protection of women and their children. It looks at the effects of a certain act or omission against a woman or her child, rather than the motive of the offender.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><b>ACCORDINGLY</b>, the Motion for Reconsideration is<b> DENIED with FINALITY</b>.<br><br>No further pleadings shall be entertained. Let entry of judgment be issued in due course.<br><br><b>SO ORDERED. </b><br><br><i>Gesmundo, C.J., Lazaro-Javier, Inting, Zalameda, Gaerlan, J. Lopez, Marquez,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Leonen, SAJ.,</i> maintains his dissent. See separate opinion.<br><i>Caguioa, J.,</i> see dissent.<br><i>Rosario,</i><i></i><sup style="COLOR: RGB(255, 0, 0);">*</sup><i> J.,</i> no part.<br><i>Dimaampao, J.,</i> maintains his dissent.<br><i>Kho, Jr., J.,</i> maintains his dissent in the main.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> In line with the Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 9262, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">*</sup> No part.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i>, pp. 443-449.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 130-152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> CA <i>rollo</i>, pp. 137-151. The November 8, 2019 Decision in CA-G.R. CR No. 40938 was penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Ricardo R. Rosario (now a Member of the Court) and Zenaida T. Galapate-Laguilles of the Ninth Division, Court of Appeals, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 167-172. The June 22, 2022 Resolution in CA-G.R. CR No. 40938 was penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Ricardo R. Rosario (now a Member of the Court) and Zenaida T. Galapate-Laguilles of the Former Ninth Division, Court of Appeals, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> "The identity of the victim or any information which could establish or compromise her identity, as well as those of her immediate family or household members, shall be withheld pursuant to Republic Act No. 7610, An Act Providing for Stronger Deterrence and Special Protection against Child Abuse, Exploitation and Discrimination, Providing Penalties for its Violation, and for Other Purposes; Republic Act No. 9262, An Act Defining Violence Against Women and Their Children, Providing for Protective Measures for Victims, Prescribing Penalties Therefor, and for Other Purposes; and Section 40 of A.M. No. 04-10-11-SC, known as the Rule on Violence against Women and their Children, effective November 15, 2004." (<b>People v. Dumadag</b>, 667 Phil. 664, 669 [2011]).<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, pp. 132-133.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> RTC records, pp. 101-114 The November 17, 2017 Decision in R-MKT-17-00580-CR was penned by Presiding Judge Liza Marie R. Picardal-Tecson of Branch 144, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Geographical location is blotted out pursuant to Supreme Court Amended Administrative Circular No. 83-Â­2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, pp. 9-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 149-150.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 444.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 445.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <b>Atty. Valera v. Office of the Ombudsman</b>, 570 Phil. 368, 390 (2008) [Per C.J. Puno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Chinatrust (Phils.) Commercial Bank v. Turner,</b> 812 Phil. 1, 3 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 612 Phil. 771 (2009) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 778.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, p. 147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 148.</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>DISSENTING OPINION</b> </center><br><b>LEONEN, <i>S.A.J.</i>: </b><br><br>I maintain my dissent.<br><br>The majority holds that if a wife or child suffers mental or emotional anguish, then specific criminal intent to cause mental and emotional suffering exists. Respectfully, I believe it will be a mistake for the Court to read a conclusive presumption of intent to cause mental and emotional anguish in every instance of infidelity.<br><br>In<i> Acharon v. People</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> this Court has correctly ruled that there must be deliberate intent to commit an act of violence for the purpose of inflicting mental or emotional anguish to establish a violation of Section 5(i) of Republic Act No. 9262.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>The same doctrine must apply here. The Court should not distinguish where the law does not.<br><br>Without evidence that petitioner XXX252739 pursued an extramarital relationship specifically to inflict mental or emotional anguish on his wife, his infidelity is not psychological violence within the meaning of the law.<br><br>Republic Act No. 9262 rightfully punishes criminal abuse of power in intimate relationships. It does not punish marital infidelity, in and of itself, as a violation of Section 5(i) of Republic Act No. 9262 absent a showing of intent to cause mental or emotional anguish on the victim.<br><br>The majority in this case holds that "specific criminal intent to cause mental or emotional suffering is already satisfied the moment the perpetrator commits the act of infidelity."<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Deliberate intent to cause mental or emotional anguish is conclusively presumed upon the commission of the marital infidelity because, according to the majority, it is "inherently immoral and depraved under prevailing societal, cultural, and religious norms."<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>To criminalize all acts that cause mental and emotional anguish as "psychological violence" expands the law beyond its intention. Nothing in Republic Act No. 9262 warrants the conclusive presumption of specific intent to cause mental and emotional anguish from the fact of infidelity, especially since the modes specifically enumerated in Section 5(i) all require willfulness and deliberate intent.<br><br>If infidelity is "inherently immoral and depraved under prevailing societal, cultural, and religious norms,"<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> then the law ought not to allow condonation of adultery and concubinage. Yet, it does. In contrast, psychological violence, like all acts of violence against women and their children under Republic Act No. 9262, cannot be condoned. It may even be prosecuted upon the filing of a complaint by any citizen having personal knowledge of the circumstances involving the commission of the crime.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Reason thus dictates that the elements distinguishing psychological violence through infidelity from adultery and concubinage cannot be taken lightly. The element of specific criminal intent cannot be collapsed with the fact of infidelity. It should not be conclusively presumed to exist at the moment the perpetrator commits any act of infidelity.<br><br>Indeed, infidelity can be painful. Yet, not every instance of pain is tantamount to a crime. Not every instance of pain is abuse.<br><br>Cheating is wrong. Yet, not every mistake one commits in a relationship is abuse.<br><br>The law draws the line. The Court reads the line.<br><br>While the law is intended to protect women and their children from oppression and inequality, and the conclusive presumption created by the Court will certainly expedite convictions for violence against women and their children, I cannot accept the sweeping declaration that the commission of marital infidelity may be presumed to have been done with the deliberate intent to cause mental or emotional anguish. A greater number of convictions for an act that was not contemplated by the law will not foster fairness and equality. Rather than fixating on penalties, I believe courts have an untapped potential to instigate restorative justice.<br><br>When infidelity is committed to cause mental or emotional anguish, then there is psychological violence, and the abuser must be brought to justice. Here, however, the prosecution did not prove petitioner's deliberate intent to cause mental or emotional anguish.<br><br>There is no justification for the pain petitioner's wife suffered. Yet, wrongfully convicting petitioner will not undo that pain. Needlessly characterizing infidelity per se as abuse will only allow further injustice.<br><br><b>FOR THESE REASONS AND THOSE WHICH I DISCUSSED IN MY DISSENTING OPINION</b>, I vote to<b> GRANT</b> the Motion for Reconsideration and<b> SET ASIDE</b> the November 8, 2019 Decision and the June 22, 2022 Resolution of the Court of Appeals in CA-G.R. CR No. 40938. Petitioner XXX252739 must be<b> ACQUITTED</b> of violating Section 5(i) of Republic Act No. 9262.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> 913 Phil. 731 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 737-739.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Ponencia</i>, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>DISSENTING OPINION</b></center><br><b>CAGUIOA,<i> J.</i>:</b><br><br>I reiterate my dissent. I maintain my vote to acquit petitioner XXX252739 (petitioner) of the crime charged based on reasonable doubt.<br><br>In affirming petitioner's conviction for violation of Section 5(i) of Republic Act No. 9262,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> the majority are laying down the rule that when a husband commits "marital infidelity," it is conclusively presumed that he did so to cause mental or emotional anguish, public ridicule, or humiliation upon his wife or their child. To justify this, the majority asserts that marital infidelity is "inherently immoral [or] depraved."<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> This reference stems from the assailed Decision's<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> premise that marital infidelity is analogous to homicide:<br><blockquote>To further illustrate, it can be said that one who kills another person âan inherently vile actâwill generally be found guilty, barring all justifications, as long as specific intent to kill is proven. Intent to kill, in turn, is conclusively presumed from the fact of the victim's death, thereby completing the ingredients of the crime.<br><br>Applied to the present case, can it also be said that the specific intent to cause mental and emotional anguish upon the victim may be conclusively presumed from the fact of infidelity itself?<br><br>The Court firmly believes so.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </blockquote>Simply put, for violations of Republic Act No. 9262, the majority have adapted the rule in homicide as follows: "If a husband committed marital infidelity and the wife suffers mental or emotional anguish, intent to commit psychological violence upon the wife is conclusively presumed."<br><br><center><b>I. </b></center><br>At the outset, it should be noted that the majority is engaging in the fallacy of<i> faulty analogy</i>, which "occurs when analogies are used as arguments or explanations and the similarities between the two things compared are too remote to support the conclusion."<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> For example:<br><blockquote>If a child gets a new toy, he or she will want to play with it;<br>So, if a nation gets new weapons, it will want to use them. </blockquote>As explained in the<i> Stanford Encyclopedia of Philosophy</i>:<br><blockquote>In this example (due to Churchill 1986, 349) there is a great difference between using (playing with) toys and using (discharging) weapons. The former is done for amusement, the latter is done to inflict harm on others. Playing with toys is a benign activity that requires little justification; using weapons against other nations is something that is usually only done after extensive deliberation and as a last resort. Hence, there is too much of a difference between using toys and using weapons to conclude that a nation, if it acquires weapons, will want to use them as readily as children will want to play with their toys.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </blockquote>Homicide and psychological violence through marital infidelity are not analogous. One key distinction is that the latter involves three parties whereas the former only involves two. In other words, the object and the victim in marital infidelity are not the same. Thus, in cases of psychological violence through marital infidelity, the object of the "act of infidelity" is the mistress whereas the victim of the crime, i.e., the one who suffers the "mental or emotional anguish," is the wife. There is, therefore, a separation between the object of the act (infidelity) and its effect (mental or emotional anguish). In contrast, in cases of homicide, the victim and the object of the act (killing) and its effect (death) are one and the same person.<br><br>Hence, because of the union between the cause and the effect in the same person in homicides, the intent of the malefactor may be discerned or reasonably be presumed through its physical manifestations in the victim. As the Court<i> En Banc</i> held in<i> People</i> v.<i> Delim</i>,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> "evidence [of intent to kill] may consist<i> inter alia</i> in the use of weapons by the malefactors, the nature, location, and number of wounds sustained by the victim and the words uttered by the malefactors before, at the time, or immediately after the killing of the victim."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The same is not true, however, for marital infidelity. It is reasonable to conclusively presume that the person had the intent to engage in an affair with someone else, but it is not reasonable to presume an intent to cause harm to a third person. In other words, there is no question that a person who committed marital infidelity<i> intended</i> to engage in particular conductâsexual or otherwiseâbut it is a jump in logic to presume that the person<i> intended</i> to cause harm to another person not involved in that conduct.<br><br>Homicide is thus not analogous to marital infidelity. That said, the majority's error in logic is only compounded by the fact that their novel presumption has no legal basis as discussed below.<br><br><center><b>II. </b></center><br>The presumption established by the majority is neither found in the Rules of Court, nor under Republic Act No. 9282. This presumptionâone that truly is prejudicial to the accusedâis a pure judicial invention sanitized as statutory interpretation.<br><br>As earlier mentioned, the majority appeal to "prevailing societal, cultural, and religious norms" to justify the premise that "marital infidelity is inherently immoral and depraved."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> For the majority, since marital infidelity is inherently wrongful, mere commission of such inherently wrongful act constitutes psychological violence. As such, the majority dispenses with the proof of the husband's specific intent to cause mental or emotional anguish, public ridicule, or humiliation upon his wife in the prosecution for violation of Republic Act No. 9262.<br><br>This is an erroneous conclusion.<br><br><i>First</i>, the majority wrongfully associate "inherently wrongful acts" with crimes<i> mala prohibita</i>, which clearly do not require proof of criminal intent. However, it is settled in criminal law, that if the law punishes an act inherently immoral or wrongful by nature, it is a crime<i> mala in se;</i> and in prosecution for crimes<i> mala in se</i>, proof of criminal intent is indispensable.<br><br><i>Second</i>, the majority are engaging in another fallacyâthis time of<i> false equivalence</i> by equating adultery, marital infidelity, and psychological violence, thereby conflating their definitions and elements.<br><br><i>Third</i>, worth noting is the trend in most nations across the world in decriminalizing adultery.<br><br>In a 2019 Report by the Philippine Commission on Women,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> "the Philippines, Brunei, and Taiwan<i> remain to be the only countries in the Asia-Pacific Region that treat adultery as a crime</i>."<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> In Europe, adultery is no longer a crime.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Japan decriminalized adultery in 1947 and India in 2018.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Further, an October 18, 2012 Background Note by the United Nations Working Group on Discrimination<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> reads in relevant part:<br><blockquote>The UN Division for the Advancement of Women recommended in 2009 that drafters should repeal any criminal offenses related to adultery or extramarital sex between consenting adults, remarking that often, these laws discriminate against women whether on their face or in practice.<br><br>There are several examples of good practices, where countries have remedied the discrimination against women and violation of women's rights by decriminalizing adultery. Adultery was abolished in England in 1857, and the Republic of Ireland in 1976, which was one of the last European countries to decriminalize adultery. In 2005 in Haiti a Decree was promulgated which, in the context of regulating offences of sexual aggression and eliminating discrimination against women, decriminalized adultery. A 1996 decision of the Guatemalan Constitutional Court struck down the penal code's punishment of marital infidelity or adultery on the basis both of the constitution's equality guarantees and human rights treaties, including the Convention on the Elimination of All Forms of Discrimination against Women (CEDAW). Similarly, in 2007, the Ugandan Constitutional Court overturned the adultery law that penalised women for adultery while leaving their male partners unpunished.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Citations omitted) </blockquote>In contrast, the "prevailing societal, cultural, and religious norms" referenced by the majority refer to only a handful of jurisdictions.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> More importantly, the Court is not in the best position to be the arbiter of societal and culturalâmuch less religiousânorms. The Court is an arbiter of law, based on facts established by evidence, and societal and cultural norms were never debated in this case. That religious norms are even part of the discussion shows how erroneous the conclusion is. For what is the separation of church and State then, if religious norms bear a heavy influence on the State? It also begs the question: which religion are we talking about? Is this not a classic example of what the non-establishment clause seeks to prevent?<br><br>It thus appears that the majority are arbitrarily relying on "societal, cultural, and religious" norms to support their conclusion that infidelity is inherently immoral. Their arbitrariness is highlighted in how husbands, in their view, are the only persons punishable for infidelity. If an act is truly "inherently immoral and depraved," then the punishment for the act should fall on whoever commits the sameâwhether a man or a woman. Their argument should cut both ways.<br><br><center><b>III. </b></center><br>As discussed in Part I, there are ample reasons and common sense to distinguish homicide from marital infidelity in relation to presumptions of intent. Besides being distinguishable, it would be the height of injustice to designate the majority's presumption as conclusive. A "conclusive presumption" has been defined as a "presumption that cannot be overcome by any additional evidence or argument."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Consequently, by declaring that intent to cause mental or emotional anguish, public ridicule, or humiliation upon a woman is conclusively presumed by an act of infidelity, the majority is foreclosing any defense that the offender may offer to establish that he had no such intent to cause psychological violence upon his wife. For example, the offender may argue that he was intoxicated, of unsound mind (nymphomania or other psychological disorders), or simply overcome with lust.<br><br>Moreover, in criminal cases, presumptions should be taken with caution especially considering serious concerns that they might water down the requirement of proof beyond reasonable doubt. As special considerations must be given to the right of the accused to be presumed innocent, there should be limits on the use of presumptions against an accused.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Thus, if at all, the presumption that a husband who engages in marital infidelity intended to cause psychological violence upon his wife is, at best, only<i> disputable</i>. Thus, it may be contradicted and overcome by other evidence.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>To recall, the "disputable presumption" of intent to cause mental or emotional anguish, public ridicule or humiliation was sufficiently overturned by the following pieces of evidence noted in a Concurring Opinion from the assailed Decision: (a) petitioner admitted that he has a child with YYY252739 and signed the birth certificate; (b) that petitioner's child with YYY252739 was a product of a one-night stand, which he tried to keep a secret from his wife "for good reasons"; (c) that petitioner visits his child on several occasions, about 15 to 20 times, at various places;<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (c) that petitioner characterized his relationship with his son as a "[normal] father and son relationship."; (d) that prosecution witnesses heard that YYY252739's child called petitioner "Daddy."<br><br>The foregoing circumstances are actual evidenceâphysical manifestationsâof petitioner's shame and humiliation for the infidelity he committed against his wife, and his act of taking responsibility, as a father, for the child. In other words, these circumstances are actual facts that completely negate the presumption that petitioner intended to cause psychological violence upon his wife. The majority's presumption must yield and conform to these established facts.<br><br><b>ACCORDINGLY,</b> I vote to<b> GRANT</b> the Motion for Reconsideration and Petition and<b> ACQUIT</b> petitioner XXX252739 from the charge of violating Section 5(i) of Republic Act No. 9262.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015 dated September 5, 2017, titled "Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances," the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Anti-Violence Against Women and Their Children Act of 2004.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Ponencia</i>, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>XXX v. People</b>, 953 Phil. 462 (2024) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 610.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> STANFORD ENCYCLOPEDIA OF PHILOSOPHY, <i>available at</i> <a href="https://plato.stanford.edu/entries/fallacies">https://plato.stanford.edu/entries/fallacies</a> (last accessed on August 12, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> 444 Phil. 430 (2003) [Per J. Callejo, Sr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Ponencia</i>, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>See</i> <i>Repealing the Revised Penal Code Provisions on Adultery and Concubinage</i>, <i>available at</i> <a href="https://pcw.gov.ph/assets/files/2019/10/PCW-WPLA-PB-02-Repeal-of-RPC-provisions-on-Adultery-and-Concubinage-AEB.pdf">https://pcw.gov.ph/assets/files/2019/10/PCW-WPLA-PB-02-Repeal-of-RPC-provisions-on-Adultery-and-Concubinage-AEB.pdf</a><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>See</i> <i>Eliminating Discrimination Against Women in the Revised Penal Code (RPC): Decriminalizing Adultery and Concubinage</i>, <i>available at</i> <a href="https://pcw.gov.ph/assets/files/2019/07/PCW-WPLA-Policy-Brief-3-Adulter-Concubinage.pdf">https://pcw.gov.ph/assets/files/2019/07/PCW-WPLA-Policy-Brief-3-Adulter-Concubinage.pdf</a>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Prof. Frances Raday, <i>Background Information on the Statement Issued by the Working Group on Discrimination Against Women</i>, <i>available at</i> <a href="http://www.ohchr.org/Documents/Issues/Women/WG/BackgroundNoteAdultery2.doc">http://www.ohchr.org/Documents/Issues/Women/WG/BackgroundNoteAdultery2.doc</a>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>See</i> <i>United Nations Human Rights, The Criminalization of Adultery: A Violation of Women's Human Right</i>, <i>available at</i> <a href="https://www.ohchr.org/en/special-procedures/wg-women-and-girls/criminalization-adultery-violation-womens-human-rights">https://www.ohchr.org/en/special-procedures/wg-women-and-girls/criminalization-adultery-violation-womens-human-rights</a>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Black's Law Dictionary, 9<sup>th</sup> ed.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <b>Mabunga v. People</b>, 473 Phil. 555, 565 (2004) [Carpio Morales J., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>See</i> J. Lazaro-Javier, Concurring Opinion in <b>Manalang v. People, G.R. No. 252739</b>, April 16, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 15.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 263599 & 263643 - GMA NETWORK, INC., PETITIONER, VS. ABS-CBN BROADCASTING CORPORATION, ANGELO PALMONES, ALONA MAGTALAS,* JUNRIE HIDALGO,* JOBERT SUCALDITO, CRISTY FERMIN, LUCHI CRUZ-VALDES, BOYET AGUSTIN,* ATTY. MAXIMILIAN UY, KORINA SANCHEZ, LUIS ANDRADA, LANI GUTIERREZ,* ROMER GONZALES,* NANCY YABUT, AND IAN REYNO,* RESPONDENTS.[G.R. No. 263643]ABS-CBN BROADCASTING CORPORATION, ANGELO PALMONES, ALONA LINDSTROM, LEONCIO HIDALGO III, JOBERT SUCALDITO, CRISTY FERMIN, JOSELITO AGUSTIN, ATTY. MAXIMILLIAM UY III, LUCHI CRUZ-VALDEZ, LUIS ANDRADA, KORINA SANCHEZ, MALOU SANTOS, LEILANIE GUTIERREZ, ROMERDEO GONZALES, NANCY YABUT, AND MARIANO REYNO III, PETITIONERS, VS. GMA NETWORK, INC., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70230' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 263599 &amp; 263643, November 03, 2025 ]</H2>
+			<H3>GMA NETWORK, INC., PETITIONER, VS. ABS-CBN BROADCASTING CORPORATION, ANGELO PALMONES, ALONA MAGTALAS,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> JUNRIE HIDALGO,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> JOBERT SUCALDITO, CRISTY FERMIN, LUCHI CRUZ-VALDES, BOYET AGUSTIN,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ATTY. MAXIMILIAN UY, KORINA SANCHEZ, LUIS ANDRADA, LANI GUTIERREZ,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ROMER GONZALES,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> NANCY YABUT, AND IAN REYNO,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> RESPONDENTS.<BR><BR>[G.R. No. 263643]<BR><BR>ABS-CBN BROADCASTING CORPORATION, ANGELO PALMONES, ALONA LINDSTROM, LEONCIO HIDALGO III, JOBERT SUCALDITO, CRISTY FERMIN, JOSELITO AGUSTIN, ATTY. MAXIMILLIAM UY III, LUCHI CRUZ-VALDEZ, LUIS ANDRADA, KORINA SANCHEZ, MALOU SANTOS, LEILANIE GUTIERREZ, ROMERDEO GONZALES, NANCY YABUT, AND MARIANO REYNO III, PETITIONERS, VS. GMA NETWORK, INC., RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before this Court are two consolidated Petitions for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court impugning the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. CV No. 116134, which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) in Civil Case No. Q-08-61735. The RTC dismissed GMA Network, Inc. (GMA)'s complaint for damages against ABS-CBN Broadcasting Corporation (ABS-CBN), as well as the counterclaims which ABS-CBN filed against GMA.<br><br><b>G.R. No. 263599</b> is a Petition for Review on<i> Certiorari</i> in which GMA contends that the CA erred in dismissing its complaint for damages against ABS-CBN. On the other hand,<b> G.R. No. 263643</b> is a Petition for Review on <i>Certiorari</i> in which ABS-CBN asserts that it has sufficiently established its entitlement to damages, arguing that GMA's "baseless complaint" tarnished its reputation and led the public to doubt its integrity.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>The material operative facts are as follows:<br><br>At the time the events in question took place, ABS-CBN was a broadcasting corporation operating on Channel 2 in Very High Frequency and Channel 23 in Ultra High Frequency. As part of its business operations, it aired television programs over these frequencies. ABS-CBN heavily relied on Television Audience Measurement Data (TAM data), commonly referred to as TV ratings data, to determine the types of programs to broadcast, their scheduling, and the target audience.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In 2007, ABS-CBN entered into two Service Contracts with AGB Nielsen, a corporation engaged in the business of providing TAM data, for TV Audience Measurement in Mega Manila and national urban areas. Each contract covered a separate three-month period: the first from March 1 to June 30, 2007, and the second from September 1 to December 31, 2007. To maintain the integrity of the TAM data, it was essential that the sample households (referred to as Panel Homes) remained free from any tampering or interference by parties within the media industry. The TAM Service Contract specifically required that the locations of the Panel Homes be kept strictly confidential.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Subsequently, ABS-CBN received reports indicating that certain Panel Homes monitored through AGB Nielsen were approached by individuals allegedly employed by GMA. These individuals reportedly attempted to manipulate viewing data, persuading residents to watch GMA programs and creating the false impression of higher viewership for these shows. According to the reports, residents were offered PHP 500.00 in cash and groceries worth PHP 300.00 as monthly incentives.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Notably, Johnny Aliguin, who was an employee of GMA TV6 Iloilo from May 2006 to August 2007, testified that Station Manager Jonathan Cabillon directed him and six others to locate the AGB Nielsen Panel Homes, to persuade the residents to watch GMA TV6 Iloilo programs, and offer them PHP 500.00 in cash and PHP 300.00 worth of groceries each month.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Concerned about these reports and their impact on the integrity and reliability of the TAM data, ABS-CBN held a series of meetings with representatives from AGB Nielsen, including its General Manager, Maya Reforma (Reforma).<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On December 3, 2007, ABS-CBN received a letter from Reforma, in which she admitted that the Panel Homes had been compromised.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> The letter stated:<br><blockquote>"It has come to our attention that certain activities of GMA in Visayas have led some of our panel homes [to be] contacted by employees or representatives of GMA. As you can appreciate, the integrity of a television audience measurement panel is based on homes on the sample panel remaining known only to the TAM contractor."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </blockquote>ABS-CBN then conducted its own investigation, identifying witnesses whom GMA supposedly hired, and who were directly involved in the infiltration and tampering of the Panel Homes.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On December 14, 2007, ABS-CBN filed a complaint for specific performance and damages against AGB Nielsen with the RTC of Quezon City, docketed as Civil Case No. Q-07-61665. Following the hearing on ABS-CBN's application for a Temporary Restraining Order (TRO) against AGB Nielsen,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> DZMM reporters interviewed Reforma, who made the following statements:<br><blockquote>[U]pon receipt or upon information . . .ah. . . or upon receipt of the . . .ah. . . allegation, we immediately went into an investigation. And so, .ahm... that investigation really brought us to, you know, establishing there were some, or a few homes that were actually exposed as part of some promotional activities. In this case, the allegation pertains to GMA and so with that ... (the network?) ... the network, yes... and thru some activities that they have launched ..ah., some or a few of our panel homes were exposed. So, the issue for us is really whether these homes or these alleged homes which have been exposed, actually ..ahm.. has an impact or were able to really change the accuracy of our report. So for us, at this point, we have established and we have, you know, analyzed., there is no, hardly any effect on the data and so for ..ah.. our decision not to stop the data, that is brought about by ..ahm.. our findings, that the data continues to be accurate, credible and even if there were activities or there were activities that were launched that may have exposed the panel, that does not necessarily mean that the data has been compromised."<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </blockquote><dl><dt>Thereafter, ABS-CBN aired the following segments:<br><br></dt><dd>1) On December 19, 2007, in "<i>Walang Preno</i>,"<i> </i>ABS-CBN reporter Junrie Hidalgo stated:</dd></dl><blockquote>Junrie Hidalgo: "<i>Tahasang inamin na ngayon ng AGB Nielsen Media Research na ang GMA Network ang siyang nasa likod ng sinasabing pagmamanipula ng survey ng television ratings sa Bacolod. Sa isang panayam matapos ang pagdinig ng injunction case na isinampa ng ABS-CBN Broadcasting Corporation sa sala ni Judge Charito Gonzales ng QC RTC Branch 80, sinabi ni AGB Nielsen General Manager Maya Reform na may isinagawang promotional activities ang GMA Network upang mahimok ang mga televiewers sa Bacolod na tangkilikin lamang ang naturang istasyon</i>[.]"<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis supplied)</blockquote><dl><dd>2) On December 19, 2007, in "<i>Showbiz Mismo</i>," ABS-CBN hosts Jobert Sucaldito and Cristy Fermin stated:</dd></dl><blockquote>Jobert Sucaldito: "<i>May announcement na po tayo. Heto ha mga kaibigan. Inamin na ng AGB Nielsen Media Research ang anomalya sa survey ng television ratings</i>." (Emphasis supplied)<br><br>. . . .<br><br>Cristy Fermin:<i> "Ang linaw eh eto, sa isang panayam matapos ang pagdinig ng injunction case na isinampa ng ABS-CBN doon sa sala ni ano, tahasan pang itinuro ni AGB Nielsen General Manager Maya Reforma ang GMA Network na siyang nasa likod ng sinasabing pagmamanipula ng survey ng TV ratings</i>."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original)</blockquote><dl><dd>3) On December 20, 2007, in "<i>Bandila</i>," ABS-CBN host Korina Sanchez and her guest, Atty. Maximilian Uy stated:</dd></dl><blockquote>Atty. Maximilian Uy: "<i>Inaamin ng AGB na merong tinatawag na tampering ng panel homes. Ibig sabihin non . . . may mga aktibidades na sadyang ginagawa ng isang tao, ng isang broadcasting network na para maiba yung tamang ratings.</i>" (Emphasis in the original)<br><br>Korina Sanchez:<i> "Sa isinumite ring mga dokumento ng AGB sa korte, inamin nito na 79 sa 532 nilang panel homes an[g] na-expose sa mga gawain o efforts ng GMA-7 network. Batay sa statistical tests ng AGB lumalabas na [82] na panel homes kinakitaan ng malaking epekto at pumanig sa GMA-7. Para sa ABS-CBN, ito'y malinaw na manipulasyon ng data at malaki ang epekto nito sa ABS-CBN</i>."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> (Emphasis supplied)</blockquote><dl><dd>4) On December 22, 2007, in "<i>Entertainment Live</i>," the following statements were aired:</dd></dl><blockquote>Voice-over: "<i>Matatandaang nung nakaraang ling[g]o, nagsampa ng civil case para sa damages at injunction ang ABS-CBN laban sa AGB Nielsen Media Research Philippines kaugnay ng di-umano'y dayaan sa ratings. Noong Miyerkules, December 19, sa hearing na ginanap sa Quezon City Regional Trial Court, ibinulgar ng AGB Nielsen Media Research na ang GMA-7 ang TV Network na tinutukoy sa pagtunton sa mga household sa Bacolod na nilagyan ng metering panel na siyang ginagamit sa pagkuha ng TV ratings</i>."<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></blockquote><dl><dd>5) On December 23, 2007, in "<i>The Buzz</i>" the following statements were aired:</dd></dl><blockquote>SUPER: "<i>SA PAGLABAS NG BALITA NAGING PALAISIPAN SA MARAMI KUNG ANO NGA BA ANG TV NETWORK NA TINUTUKOY NA (sic) IMPORMANTE NG ABS-CBN NA DIUMANO'Y NANDADAYA NG TV RATINGS!</i>"<br><br>Voice-over: "<i>Ilang kabahayang kabilang sa kanilang panel ang nilapitan ng ilang tao mula sa isang istasyon para impluwensiyahan ang panonood ng mga ito at sa mismong pahayag ng AGB Nielsen General Research Manager na si Maya Reforma, tinukoy nito ang istasyong nagmamanipula diumano sa mga kabahayang kinabitan nila ng TV meter.</i>"<br><br>Maya Reforma: "<i>Investigation really brought us to, you know, establishing that there were some or a few homes that were actually exposed as part of some promotional activities. In this case, the allegations pertain to GMA.</i>"<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></blockquote>ABS-CBN's supposedly defamatory statements prompted GMA to file a complaint for damages<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> on January 3, 2008, docketed as Civil Case No. Q-08-61735, and a Motion for the Issuance of a TRO or Writ of Preliminary Injunction on January 10, 2008, before the RTC of Quezon City. GMA claimed that ABS-CBN deliberately twisted and distorted Reforma's statements by declaring that GMA had manipulated the ratings. Ensuingly, the RTC issued a TRO, restraining ABS-CBN from airing the said segments.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>For its part, ABS-CBN filed counterclaims against GMA, seeking moral damages in the amount of PHP 10,000,000.00, exemplary damages in the amount of PHP 5,000,000.00, attorney's fees in the amount of PHP 3,000,000.00, and litigation expenses in the amount of PHP 2,000,000.00.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In due course, the RTC rendered its Decision,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> disposing in this wise:<br><blockquote><b><i>WHEREFORE</i>,</b> premises considered, judgment is hereby rendered DISMISSING the instant case. The counterclaims of defendants are also DENIED.<br><br>No pronouncement as to costs.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis in the original)</blockquote>The RTC ratiocinated that the statements aired on ABS-CBN's programs fit into the category of qualified privileged communications and were "not intended to cast disparagement" upon GMA's integrity and reputation. Likewise, it found no malice on the part of ABS-CBN, as "the truth of the contents of the supposed libelous materials was undeniably established" through the Data Review on the Panel Intervention Issue NUTAM Data Analysis submitted by AGB Nielsen.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The RTC likewise dismissed ABS-CBN's counterclaims for lack of factual basis.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Both parties eventually appealed to the CA which, in the now repugned Decision,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> affirmed the ruling of the RTC, thuslyâ<br><blockquote><b>WHEREFORE,</b> premises considered, the instant appeal is <b>DENIED.</b> The Decision dated 6 February 2020 of the Regional Trial Court, National Capital Judicial Region, Branch 100, Quezon City in Civil Case No. Q-08-61735 is<b> AFFIRMED.</b><br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original) </blockquote>The CA held that ABS-CBN's remarks pertaining to GMA were "expressions of opinions based on established facts, i.e., that promotional efforts were made in certain panel homes." It treated the subject remarks as "privileged under the doctrine of fair commentaries of public interest, since these [were] reasonably inferred from the activities conducted by [GMA]." Anent ABS-CBN's counterclaims, the CA sustained the RTC's dismissal thereof for lack of factual basis.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Unflustered, both GMA and ABS-CBN lodged their respective Petitions for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> before this Court, ascribing reversible errors in the CA Decision. In G.R. No. 263599, GMA asserts that the CA misapplied the "fair comment" doctrine<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> and Article 361 of the Revised Penal Code,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> and erred in classifying the subject statements as qualified privileged communications. Meanwhile, in G.R. No. 263643, ABS-CBN argues that it has sufficiently proven its entitlement to damages, asserting that GMA's "baseless complaint" tarnished its reputation and caused the public to doubt its integrity.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><center><b>The Issues</b></center><br>A percipient analysis of the Petitions reveals the following issues for this Court's resolution:<br><br>In <b>G.R. No. 263599â</b><br><br>Was the CA correct in ruling that GMA is not entitled to damages?<br><br>Do the statements of ABS-CBN's hosts and guest speakers fall within the category of qualified privileged communications?<br><br>Did the CA correctly apply the fair comment doctrine and Article 361 of the Revised Penal Code?<br><br><b>In G.R. No. 263643â</b><br><br>Did ABS-CBN sufficiently prove its entitlement to damages, considering that GMA's "baseless complaint" tarnished its reputation and caused the public to question its integrity?<br><br><center><b>The Court's Ruling</b></center><br><b><i>Upon judicious rumination of the case, the Court discerns no palpable reason to disturb the findings of the CA</i>.</b><br><br>At the outset, it bears stressing that the factual findings of the trial court, especially when affirmed by the appellate court, are accorded the highest degree of respect and considered conclusive between the parties.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> While jurisprudence has provided several exceptions to this rule, none of them obtain in the present case.<br><br>All the same, the Court sustains the CA and the RTC's dismissal of GMA's complaint and ABS-CBN's counterclaims.<br><br>Defamation pertains to the offense of injuring a person's character, fame or reputation through false and malicious statements. It is "that which tends to injure reputation or to diminish esteem, respect, goodwill or confidence in the plaintiff or to excite derogatory feelings or opinions about the plaintiff."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>The general rule is that every defamatory imputation is presumed to be malicious, except when it involves privileged communication, which is of two kinds: absolute and qualified. Qualified privileged communications are those which, although containing defamatory imputations, would not be actionable unless made with malice or bad faith.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Undoubtedly, a review of the utterances aired on ABS-CBN refutes GMA's claim that these were deliberately and maliciously intended to "defame GMA and ridicule it before the public."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> As aptly adjudged by the courts<i> a quo</i>, the utterances made by ABS-CBN's hosts and guest speakers fall within the category of qualified privileged communications, and constitute a fair and true report based on their interpretation of Reforma's interview with DZMM, and the contents of the Data Review on the Panel Intervention Issue NUTAM Data Analysis submitted by AGB Nielsen.<br><br>The Data Analysis report providesâ<br><blockquote><i>Activities</i><br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY"><i>1. </i></div></td> <td colspan="3" valign="top"> <div align="JUSTIFY"><i>Panel members described the following activities which were conducted by GMA: </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="85%" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><i>a. </i></div></td> <td colspan="2" valign="top"> <div align="JUSTIFY"><i>Homes were visited including AGB Nielsen panel homes and were asked what they were watching and proof of this is required be (sic) the home. If tuned to GMA, they get a prize. They were however convinced to watch it every day so that they will get a prize on a monthly basis (grocery, umbrella, pens, medicines, P500). </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><i>b. </i></div></td> <td colspan="2" valign="top"> <div align="JUSTIFY"><i>Homes who declared themselves to be watching ABS-CBN were asked to become a "member" of the GMA Kapuso viewers in order to receive a monthly supply of groceries and P500. </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><i>c. </i></div></td> <td colspan="2" valign="top"> <div align="JUSTIFY"><i>Shows/events are launched and announced house-to-house to invite people to watch. In return, bags and other items are given. </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><i>d. </i></div></td> <td colspan="2" valign="top"> <div align="JUSTIFY"><i>In GMA mall shows, the audience are [sic] given a membership card which entitled them to grocery gifts for 7 items to be delivered directly to the homes. Addresses are therefore secured from the members. </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><i>â¢ </i></div></td> <td valign="top"> <div align="JUSTIFY"><i>A number of panel homes have confirmed having been visited by GMA several times to promote their programs bearing P500 cash and grocery items, umbrellas, pens and medicines. </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"><i>â¢ </i></div></td> <td valign="top"> <div align="JUSTIFY"><i>Efforts were found, to be concentrated in Iloilo and Bacolod, and most claimed contact between July to September. </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td colspan="3" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td colspan="3" valign="top"> <div align="JUSTIFY"><i>Summary of Findings </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"><div align="JUSTIFY"></div><div align="JUSTIFY"><i>â¢ </i></div></td> <td colspan="2" valign="top"> <div align="JUSTIFY"><i>125 or 6% of the 1933 installed homes audited were confirmed by panel homes to have been exposed to media promotional efforts. Of these, only 96 are reporting to the NUTAM panel. </i></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><div align="JUSTIFY"><i>â¢ </i></div></td> <td colspan="2" valign="top"> <div align="JUSTIFY"><i>82 homes were exposed to GMA promos while 16 homes were&nbsp; 39&nbsp; exposed to ABS-CBN promos.</i><sup style="COLOR: RGB(255, 0, 0);">[39]</sup><i> </i></div></td> </tr> </tbody></table></blockquote>As a broadcasting corporation committed to providing the public with timely information, ABS-CBN had the responsibility to report on the issue. There was clearly no malice in its airing of the statements in question, as these were supported by documentary evidence, thusâ<br><blockquote>Korina Sanchez:<i> "Sa isinumite ring mga dokumento ng AGB sa korte, inamin nito na 79 sa 532 nilang panel homes an[g] na-expose sa mga gawain o efforts ng GMA-7 network. Batay sa statistical tests ng AGB lumalabas na [82] na panel homes kinakitaan ng malaking epekto at pumanig sa GMA-7. Para sa ABS-CBN, ito'y malinaw na manipulasyon ng data at malaki ang epekto nito sa ABS-CBN.</i>"<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>. . . .<br><br>Voice-over:<i> "Ilang kabahayang kabilang sa kanilang panel ang nilapitan ng ilang tao mula sa isang istasyon para impluwensiyahan ang panonood ng mga ito at sa mismong pahayag ng AGB Nielsen General Research Manager na si Maya Reforma, tinukoy nito ang istasyong nagmamanipula diumano sa mga kabahayang kinabitan nila ng TV meter</i>."<br><br>Maya Reforma: "<i>Investigation really brought us to, you know; establishing that there were some or a few homes that were actually exposed as part of some promotional activities. In this case, the allegations pertain to GMA</i>."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </blockquote>Upon this point, the CA's disquisition deserves the Court's <i>imprimaturâ</i><br><blockquote>At the very least, the remarks pertaining to the promotional activities of GMA-7 are efforts to "manipulate" or "cheat," are expressions of opinions based on established facts, i.e., that promotional efforts were made in certain panel homes. These expressions are likewise privileged under the doctrine of fair commentaries of public interest, since these are reasonably inferred from the activities conducted by GMA-7.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </blockquote>Relevantly, the doctrine of fair comment entails that "if the comment is an expression of opinion, based on established facts, then it is immaterial that the opinion happens to be mistaken, as long as it might reasonably be inferred from the facts."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>In<i> ABS-CBN v. Ampatuan, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> the Court iterated that fair commentaries on matters of public interest are privileged:<br><blockquote>To reiterate, fair commentaries on matters of public interest are privileged and constitute a valid defense in an action for libel or slander. The doctrine of fair comment means that while in general every discreditable imputation publicly made is deemed false, because every man is presumed innocent until his guilt is judicially proved, and every false imputation is deemed malicious, nevertheless, when the discreditable imputation is directed against a public person in his public capacity, it is not necessarily actionable. In order that such discreditable imputation to a public official may be actionable, it must either be a false allegation of fact or a comment based on a false supposition. If the comment is an expression of opinion, based on established facts, then it is immaterial that the opinion happens to be mistaken, as long as it might reasonably be inferred from the facts.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </blockquote>Certainly, the subject statements are covered by the fair comment doctrine because GMA is a public figure and a mass media entity operating in an industry impressed with public interest.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>GMA also argues that under Article 361 of the Revised Penal Code, "proof of truth should not have been admitted and considered."<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> However, as the Court decreed in<i> Guingguing v. Court of Appeals,</i><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> truth is a valid defense particularly, where the remarks are directed against a public figure.<br><br>Apropos ABS-CBN's counterclaims, the RTC and CA unerringly decreed the dismissal thereof for lack of factual basis. While ABS-CBN anchors its counterclaims on the "baselessness" of GMA's complaint, the fact remains that GMA was able to establish a cause of action against it based on the notion that the statements aired on its programs were defamatory.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br><b>ACCORDINGLY</b>, the consolidated Petitions for Review on<i> Certiorari </i>are<b> DENIED.</b> The Decision dated June 16, 2022 and the Resolution dated September 27, 2022 of the Court of Appeals in CA-G.R. CV No. 116134 are <b>AFFIRMED.</b><br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan,</i> and <i>Rosario,</i><sup><font color="#ff0000">**</font></sup><i> JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">***</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In <b>G.R. No. 263643</b>, the names of the parties appear as follows: Alona Magtalas as Alona Lindstrom, Junrie Hidalgo as Leoncio Hidalgo III, Boyet Agustin as Joselito Agustin, Lani Gutierrez as Leilani Gutierrez, Romer Gonzales as Romerdeo Gonzales, and Ian Reyno as Mariano Reyno III.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Designated additional Member vice Inting, J, per Raffle dated June 4, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b>, pp. 48-92; <i>rollo</i> <b>(G.R. No. 263643)</b>, pp. 44-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b>, pp. 13-41. The June 16, 2022 Decision was penned by Associate Justice Raymond Reynold R. Lauigan, with the concurrence of Associate Justices Fernanda Lampas-Peralta and Pablito A. Perez of the Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 43-46. Dated September 27, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i> <b>(G.R. No. 263643)</b>, pp. 147-159. The February 6, 2020 Decision was penned by Presiding Judge Editha G. Mina-Aguba of Branch 100, Regional Trial Court, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 68-69, <i>see</i> Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b>, pp. 719, <i>see</i> Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 719-720.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 724.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 720.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 721.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 51-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 52-53, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 54, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 148-166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 53 &amp; 57-59, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i> <b>(G.R. No. 263643)</b>, p. 16, <i>see</i> CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 147-159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 159, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 154-159, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i> <b>(G. R. No. 263599)</b>, pp. 13-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 41, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i> <b>(G. R. No. 263643)</b>, pp. 34-35, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 44-72; <i>rollo</i> <b>(G.R. No. 263599)</b>, pp. 48-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b>, p. 62, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> ART. 361. <i>Proof of the truth</i>. â In every criminal prosecution for libel, the truth may be given in evidence to the court and if it appears that the matter charged as libelous is true, and, moreover, that it was published with good motives and for justifiable ends, the defendants shall be acquitted.<br><br>Proof of the truth of an imputation of an act or omission not constituting a crime shall not be admitted, unless the imputation shall have been made against Government employees with respect to facts related to the discharge of their official duties.<br><br>In such cases if the defendant proves the truth of the imputation made by him, he shall be acquitted.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i> <b>(G.R. No. 263643</b>), pp. 68-69, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>See</i> <b>City of Bacolod v. Sugarland Hotel Incorporated</b>, 917 Phil. 384, 396-397 (2021) [Per J. Zalameda, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See</i> <b>Yuchengco v. The Manila Chronicle Publishing Corp.</b>, 620 Phil. 697, 716 (2009) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> <b>Tulfo v. People</b>, 893 Phil. 6, 52-53 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b>, p. 53, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Rollo</i> <b>(G.R. No. 263643)</b> pp. 33-34, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b> p. 55, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i> <b>(G.R. No. 263643)</b>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>See</i> <b>Tulfo v. People</b>, 893 Phil. 6, 54 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 941 Phil. 182 (2023) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 276.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i> <b>(G.R. No. 263599)</b>, p. 731, Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 733.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 508 Phil. 193 (2005) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i> <b>(G.R. No. 263643)</b>, p. 35, CA Decision.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

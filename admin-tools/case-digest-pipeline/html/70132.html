@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 264456 - SPOUSES SERVILLANO SAMBRANO AND DELIA SAMBRANO, SPOUSES CONRADO PERALTA, SR. AND ELMA PERALTA, SPOUSES SIMEON MANOPOL AND LUISA MANOPOL, SPOUSES CARLITO ALICAYCAY AND REMY ALICAYCAY, SPOUSES ROGELIO VILLAFLOR AND ROMELITA VILLAFLOR, SPOUSES ROMEO MANAPOL AND OLYMPIA*  MANAPOL, SPOUSES ERIC BALANAY AND AILEEN BALANAY, SPOUSES JERIC PERALTA AND VICTORIA PERALTA, SPOUSES MELCHOR AGUSTIN AND ANGELITA AGUSTIN, SPOUSES MARVIN GERVACIO AND RICHELLE GERVACIO, MACARIO MANAPOL AND MARIBETH MANAPOL-GALO, PETITIONERS, VS. SPOUSES JOSEPHINE J. BERNABE AND FRANCISCO***  G. BERNABE, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70132' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 264456, August 13, 2025 ]</H2>
+			<H3>SPOUSES SERVILLANO SAMBRANO AND DELIA SAMBRANO, SPOUSES CONRADO PERALTA, SR. AND ELMA PERALTA, SPOUSES SIMEON MANOPOL AND LUISA MANOPOL, SPOUSES CARLITO ALICAYCAY AND REMY ALICAYCAY, SPOUSES ROGELIO VILLAFLOR AND ROMELITA VILLAFLOR, SPOUSES ROMEO MANAPOL AND OLYMPIA<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP>  MANAPOL, SPOUSES ERIC BALANAY AND AILEEN BALANAY, SPOUSES JERIC PERALTA AND VICTORIA PERALTA, SPOUSES MELCHOR AGUSTIN AND ANGELITA AGUSTIN, SPOUSES MARVIN GERVACIO AND RICHELLE GERVACIO, MACARIO MANAPOL AND MARIBETH MANAPOL-GALO, PETITIONERS, VS. SPOUSES JOSEPHINE J. BERNABE AND FRANCISCO<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP>  G. BERNABE, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Resolutions dated July 4, 2022<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and November 8, 2022<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. SP No. 173660. The CA dismissed the Petition for Review filed by petitioners spouses Servillano Sambrano and Delia Sambrano, spouses Conrado Peralta, Sr. and Elma Peralta, spouses Simeon Manopol and Luisa Manopol, spouses Carlito Alicaycay and Remy Alicaycay, spouses Rogelio Villaflor and Romelita Villaflor (Romelita), spouses Romeo Manapol and Olympia Manapol, spouses Eric Balanay and Aileen Balanay, spouses Jeric Peralta and Victoria Peralta, spouses Melchor Agustin and Angelita Agustin, spouses Marvin Gervacio and Richelle Gervacio, Macario Manapol and Maribeth Manapol-Galo (collectively, spouses Sambrano et al.) for being filed out of time. It affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated November 15, 2021 and Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated March 23, 2022 of Branch 40 of the Regional Trial Court (RTC), Palayan City, Nueva Ecija, which ordered spouses Sambrano et al. to vacate the property subject of the case.<br><br><center><b>The Antecedents</b></center><br>On January 10, 2020, respondents spouses Josephine (Josephine) and Francisco Bernabe (spouses Bernabe) filed before the Municipal Trial Court (MTC) of Bongabon, Nueva Ecija, a Complaint<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> for Unlawful Detainer against spouses Sambrano et al. They alleged that they are the registered owners of a 1,871 square meter parcel of land (property) located in Barangay Tugatog, Bongabon, Nueva Ecija covered by TCT No. 041-2019004589. Josephine's grandparents originally owned the property until it was transferred to her father, Rafael Jacinto (Rafael). Thereafter, Rafael donated the property to Josephine.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Out of generosity and mercy, Josephine's parents permitted spouses Sambrano et al. to temporarily use the property on the condition that once the former needs the same, the latter shall freely, voluntarily, and without contest return the lot. Upon the transfer of the property to Josephine, she again reminded spouses Sambrano et al. that their possession of the property is by mere tolerance and "<i>pakikisama</i>." Nevertheless, after several years, spouses Bernabe was surprised that spouses Sambrano et al. were already building houses of concrete materials. On the other hand, they already need the property to build their own house. They orally demanded spouses Sambrano et al. to vacate the property. For humanitarian reasons, they also made an offer to spouses Sambrano et al. to buy the property, to no avail.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Spouses Bernabe referred the matter to the barangay captain of Barangay Tugatog for mediation and conciliation, yet no amicable settlement was reached. Thus, a Certificate To File Action was issued. On October 28, 2019, spouses Bernabe sent final demand letters to spouses Sambrano et al., but the registered mails were returned with the annotation "RTS Refused to receive 11-7-19."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> They subsequently furnished spouses Sambrano et al. with copies of the demand letters through the help of the barangay chief of police. Spouses Sambrano et al. personally received the demand letters with the exception of spouses Romeo Manapol and Olimpia Manapol. Despite the lapse of 15 days from receipt of the demand letter, spouses Sambrano et al. refused to vacate the property. As a result, spouses Bernabe filed the present complaint. They asked the court to order spouses Sambrano et. al and all persons claiming rights under them to remove the structures of whatever kind in the subject property and to pay moral and exemplary damages in the sum of PHP 100,000.00 and attorney's fees of PHP 80,000.00.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Spouses Sambrano et al. countered that the complaint should be dismissed for failure to state a cause of action and for prematurity since there was no conciliation and mediation conducted before the barangay lupon tagapamayapa. Only three among spouses Sambrano et al. were given a chance to participate in the conciliation. Spouses Sambrano et al. alleged that their possession of the property and that of their predecessors-in-interest began and continued lawfully by virtue of the consent to occupy given by the registered owner of the property, Zosimo Alivia (Zosimo). Some of them were obligated by Zosimo to pay "<i>buwis</i>" while the others, out of kindness, were allowed to occupy the property for free. Spouses Sambrano et al. attached to their Answer some of the handwritten receipts of rents showing their payment to Zosimo. They maintained that spouses Bernabe's claim of tolerance has no basis.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> They further contended that spouses Bernabe's title over the property is fake and void because the Deed of Donation in favor of Josephine was executed after the death of her father. Consequently, aside from the dismissal of the complaint, they prayed for the payment of moral and exemplary damages in the amount of PHP 200,000.00 and PHP 100,000.00, respectively.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br><center><b>The Ruling of the MTC</b></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated February 26, 2021, the MTC ruled in favor of spouses Bernabe, to wit:<br><blockquote>WHEREFORE, premises considered, judgment is hereby rendered in favor of the plaintiffs [herein, Sps. Bernabe] and against the defendants [herein, Sps. Sambrano, et al.], as follows:<ol><li>Ordering the defendants to vacate the subject premises and peacefully surrender possession of the property located at Brgy. Tugatog, Bongabon, Nueva Ecija covered and embraced under Transfer Certificate of Title No. 041-2019004589;<br><br></li><li>Ordering the defendants to demolish/remove their houses at their expense;<br><br></li><li>Ordering each of the defendants to pay a reasonable monthly rental of One Thousand Pesos ([PHP] 1,000.00) to the plaintiffs computed from the date of demand to vacate up to the time the subject premises is completely vacated and surrendered to [the] plaintiff[s];<br><br></li><li>Ordering the defendants to jointly pay the plaintiff the sum of [PHP] 20,000 as attorney's fees.</li></ol>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </blockquote>The MTC found that the complaint sufficiently alleged a cause of action for unlawful detainer.<i> First</i>, the complaint stated that spouses Bernabe's grandfather Zosimo tolerated spouses Sambrano et al.'s possession of the property.<i> Second</i>, spouses Bernabe sent spouses Sambrano et al. demand letters to vacate the property and filed the case within one year from the final written demand to vacate.<i> Third</i>, despite demand, spouses Sambrano et al. refused to vacate the property. Thereby, unlawfully withholding and depriving spouses Bernabe of their rights over the property.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The MTC noted that spouses Sambrano et al. admitted that their possession of the property was due to Zosimo's consent. Attached to their position paper are a series of receipts paid to Zosimo, which the MTC considered as accrued rentals for their occupation of the property. Thus, it is clear that initially, spouses Sambrano et al.'s possession of the property was due to a verbal contract between them and Josephine's grandparent Zosimo. When the property was transferred to spouses Bernabe, they reminded spouses Sambrano et al. that their possession is by mere tolerance. The MTC held that the barangay tanod chief personally delivered the final written demand letter to vacate to spouses Sambrano et al., and from then on, the latter's possession became unlawful.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>As to the issue of prematurity, the MTC opined that the Certificate to File Action dated October 26, 2019, signed by the Lupon Chairman and Lupon Secretary, is the best proof that indeed the case underwent mediation and conciliation proceedings before the barangay.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Finally, the MTC adjudged that spouses Sambrano et al. cannot collaterally attack spouses Bernabe's title over the property. To settle the issue of possession, the MTC provisionally ruled that it is undisputed that spouses Bernabe are the registered owners of the property. As such, they are entitled to the possession thereof. Until spouses Bernabe's title is rendered void, the same is binding upon the whole world. The MTC ordered spouses Sambrano et al. to pay a reasonable rent of PHP 1,000.00 per month to spouses Bernabe for the former's use of the latter's property beginning October 28, 2019 or the date of the written demand to vacate, up to the time that spouses Sambrano et al. completely vacate the property.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><center><b>The Ruling of the RTC</b></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> dated November 15, 2021, the RTC dismissed petitioners' appeal for lack of merit and affirmed the MTC<i> in toto</i>, viz.:<br><blockquote><b>IN VIEW OF THE FOREGOING</b>, premises considered and finding no reversible error, the appeal is hereby dismissed for lack of merit and the Decision appealed from is hereby AFFIRMED<i> in toto</i>.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original) </blockquote>The RTC reiterated that spouses Bernabe, as the registered owners of the property, have the right of possession thereof, it being one of the attributes of ownership.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Spouses Sambrano et al. sought reconsideration, which the RTC denied in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated March 23, 2022. Aggrieved, they filed a petition for review before the CA.<br><br><center><b>The Ruling of the CA</b></center><br>In its Resolution<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated July 4, 2022, the CA denied the petition for review for being filed out of time. It explained that spouses Sambrano et al.'s former counsel, Atty. Johndy Roxas (Atty. Roxas) received a copy of the RTC's Resolution on April 30, 2022, hence spouses Sambrano et al. had until May 15, 2022 to file the appeal. However, Atty. Roxas formally withdrew his appearance as counsel on May 12, 2022. Spouses Sambrano et al., through their current counsel from the Public Attorney's Office, filed the petition for review on May 31, 2022 or 16 days after the reglementary period provided under Rule 42 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>The CA noted that the right to appeal is a mere statutory privilege, and one who seeks to avail of it must comply with the statute or rules. While in a number of cases, the court has relaxed the governing periods of appeal in order to serve substantial justice, no exceptional circumstance exists in the case. The failure of Atty. Roxas to notify spouses Sambrano et al. of the adverse Decision does not constitute gross negligence.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Spouses Sambrano et al. sought reconsideration, which the CA denied in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated November 8, 2022. The CA held that even if the liberal application of the rules is allowed in the case, the petition is without merit.<i> First</i>, spouses Sambrano et al. admitted in their Answer and Position Paper in the MTC that their possession of the property is due to the tolerance of spouses Bernabe's predecessor, Zosimo.<i> Second</i>, even if the lower court were to conclusively pass upon the validity of the Deed of Donation and declare it void, Josephine, as an heir of Ruperto Jacinto (Ruperto), would still be considered a co-owner of the property by succession. Hence, she may exercise all attributes of ownership over the same including possession, and may bring an action for ejectment under the Civil Code.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Undaunted, spouses Sambrano et al. filed this Rule 45 petition, insisting that the CA erred in dismissing their appeal. If not corrected, the assailed CA Resolutions would result in grave injustice and irreparable injury to spouses Sambrano et al., who risk eviction from the subject property.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Spouses Sambrano et al. averred that Atty. Roxas's gross negligence deprived them of their right to appeal the adverse Decision of the RTC. While the Notice of Withdrawal of Counsel bears the conformity of Romelita, spouses Sambrano et al.'s attorney-in-fact and co-petitioner, Atty. Roxas did not ensure that the name of the new lawyer was recorded in the case.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Atty. Roxas did not inform spouses Sambrano et al., ignorant as they are of the intricacies of Civil Procedure, to secure the services of another counsel before the lapse of the period to appeal, much less explain that the failure to file the petition within such period would result in the finality of the RTC Decision. Atty. Roxas did not bother to provide spouses Sambrano et al., with a copy of the RTC Decision.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Spouses Sambrano et al. subsequently asserted that their case is meritorious. Spouses Bernabe failed to establish their cause of action by a preponderance of evidence. They did not state the period from when spouses Sambrano et al.'s occupation by tolerance started. There is also no evidence, documentary or otherwise, which would substantiate the alleged acts of tolerance on the part of spouses Bernabe.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Spouses Sambrano et al. maintained that spouses Bernabe's alleged ownership of the property emanates from a fraudulent deed of donation. The Deed of Donation in favor of Josephine was executed on July 15, 2019, while the donor, Ruperto, was already dead as early as October 30, 1998. Thus, spouses Bernabe did not acquire any right or title over the property. Spouses Sambrano et al. prayed for the Court to declare the Deed of Donation null and void.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In their Comment, spouses Bernabe argued that the withdrawal of spouses Sambrano's previous counsel, three days before the deadline to file a petition for review in the CA, does not amount to gross negligence. They echoed the CA's finding that: (a) they have sufficiently established that spouses Sambrano et al.'s possession of the property was by mere tolerance; and (b) their title over the property cannot be attacked in an unlawful detainer suit.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><center><b>Issues</b></center><br>The issues before the Court are:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Whether the CA erred in dismissing the petition for review for being filed out of time; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">Whether spouses Bernabe established by a preponderance of evidence that spouses Sambrano et al.'s possession of the property is by mere tolerance. </div></td> </tr> </tbody></table><br><center><b>The Court's Ruling</b></center><br>The petition is meritorious.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><b><i>The manifest error of the courts a quo in granting the Complaint justifies the relaxation of the rules</i></b></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>At the outset, it is undisputed that spouses Sambrano et al.'s petition for review before the CA was filed 16 days late. In their Petition before the Court, spouses Sambrano et al. stated that their former counsel, Atty. Roxas, informed Romelita that he received a copy of the RTC's Resolution on April 30, 2022. Thus, they had until May 15, 2022, to file the CA petition. However, on May 12, 2022, Atty. Roxas withdrew his appearance as counsel from the case. Spouses Sambrano et al. claimed that they were deprived of sufficient time to engage the services of another lawyer.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> They asserted that the act of Atty. Roxas amounts to gross negligence. The Court is not persuaded.<br><br>Spouses Sambrano et al. admitted that the Notice of Withdrawal of Counsel filed by Atty. Roxas bears the written consent of Romelita. As a rule, the withdrawal of counsel from a case made with the written conformity of the client takes effect once the same is filed with the court.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Spouses Sambrano et al. are bound by the conformity given by their co-petitioner and attorney-in-fact. They should not have given their consent to Atty. Roxas's withdrawal from the case without first securing the services of another lawyer.<br><br>Be that as it may, the Court finds that the CA erred in dismissing the appeal on the ground of technicality. While an appeal, being a mere statutory privilege, must be exercised only in accordance with the requirements of the law, the rules on appeal are not iron-clad. In special instances, the Court balances the stringent application of technical rules with regard to strong policy considerations, equity, and justice. The Court may relax the period for perfecting an appeal on grounds of substantial justice or upon the presence of special and meritorious circumstances and issues.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In<i> Orata v. Intermediate Appellate Court</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the Court disregarded the nine-day delay in the filing of a petition for review before the CA after finding that the case had a good cause of action. It held that it is more appropriate to consider the petition on its merits rather than to dismiss it.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>In<i> Sarmiento v. Dizon</i><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the Court overlooked therein petitioner's 14-day delay from the expiration of her second motion for extension of time to file a petition for review in the CA. It noted that the grant of therein respondent's complaint for ejectment is manifestly erroneous since she failed to prove the basic element of tolerance. Thus, it resolved the case on the merits to serve the ends of substantive justice.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>The present case is analogous to<i> Sarmiento</i>. As will be discussed shortly, the MTC, the RTC, and the CA manifestly erred in ruling that spouses Bernabe established the vital element of tolerance in an ejectment suit. Hence, despite the 16-day delay in the filing of the petition for review in the CA, the Court shall consider the case on the merits. Time and again, the Court highlights that procedural rules should not be rigidly applied to frustrate the greater interest of substantial justice.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><b><i>Spouses Bernabe miserably failed to establish tolerance</i></b></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Preliminarily, the Court is not a trier of facts, and Our jurisdiction in a Rule 45 petition is limited to reviewing questions of law. The issue of whether spouses Bernabe proved by a preponderance of evidence that they merely tolerated spouses Sambrano et al.'s possession of the property is a question of fact. While this matter is generally beyond the ambit of the Court's limited jurisdiction, the rule admits of exceptions such as, in this case, when the judgment of the courts<i> a quo</i> is based on a misapprehension of facts.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Thus, the Court may re-examine the records to see if the CA made a reversible error that will warrant the exercise of the Court's discretionary appellate jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Unlawful detainer is a summary action for the recovery of possession of real property. This action may be filed by a lessor, vendor, vendee, or other person against whom the possession of any land or building is unlawfully withheld after the expiration or termination of the right to hold possession by virtue of any contract, express or implied.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> For a complaint for unlawful detainer to prosper, the following requisites must be established:<br><blockquote><ol><li>Initially, possession of property by the defendant was by contract with or by tolerance of the plaintiff;<br><br></li><li>eventually, such possession became illegal upon notice by the plaintiff to the defendant of the termination of the right of possession;<br><br></li><li>thereafter, the defendant remained in possession of the property and deprived the plaintiff of the enjoyment thereof; and<br><br></li><li>within one year from the last demand on the defendant to vacate the property, the plaintiff instituted the complaint for ejectment.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></li></ol> </blockquote>Notably, a person who occupies the land of another at the latter's permission or tolerance, without any contract between them, is necessarily bound by an implied promise that he or she will vacate upon demand, failing which, a summary action for unlawful detainer or ejectment may be filed against him or her. However, it is essential in ejectment cases of this kind that the plaintiffs supposed acts of tolerance must have been present right from the start of the possession which is later sought to be recovered.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>In<i> Dayandayan v. Spouses Rojas</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court reiterated the definition of "tolerance" as stated in the landmark case of<i> Sarona, et al. v. Villegas, et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> to wit:<br><blockquote>Professor Arturo M. Tolentino states that acts merely tolerated are "those which by reason of neighborliness or familiarity, the owner of property<i> allows</i> his neighbor or another person to do on the property; they are generally those particular services or benefits which one's property can give to another without material injury or prejudice to the owner, who<i> permits</i> them out of friendship or courtesy." He adds that: "[t]hey are acts of little disturbances which a person, in the interest of neighborliness or friendly relations,<i> permits</i> others to do on his property, such as passing over the land, tying a horse therein, or getting some water from a well." And, Tolentino continues, even though "this is<i> continued</i> for a long time, no right will be acquired by prescription." Further expounding on the concept, Tolentino writes:<b>" There is tacit consent of the possessor to the acts which are merely tolerated. Thus,<i> not every case of knowledge and silence</i> on the part of the possessor<i> can be considered mere tolerance</i>. By virtue of tolerance that is considered as an authorization, permission or license, acts of possession are realized or performed. The question reduces itself to the existence or non-existence of the permission.</b><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis supplied) </blockquote>In their Complaint, spouses Bernabe present the following allegations in support of their claim of tolerance:<br><blockquote>4) It was Josephine Bernabe's grandparents who originally cultivated and tilled the subject lot until it was transferred to plaintiff Josephine Bernabe's father Rafael V. Jacinto, containing more or less 1,871 square meters,<b> until respondents [herein Sps. Sambrano et al.] who were landless and homeless at that time ask the kindness of the plaintiff's parents to use temporarily the subject lot.</b><br><br>5) <b>Out of generosity and mercy, Josephine's parents permitted respondents to use temporarily the lot, subject to the condition that once the need to use the subject property arises, the defendants [herein Sps. Sambrano et al.] shall freely, voluntarily, and without contest return the subject lot to Josephine's parents. </b><br><br>6) The subject lot was ultimately donated to plaintiff Josephine Bernabe. Again the respondents were reminded that their possession at the subject lot is by mere tolerance and once the need of the plaintiff arise, the defendants shall freely, voluntarily, and without contest shall return the subject lot to the plaintiff. All the defendants agreed to such term of the plaintiffs. Plaintiffs allowed the defendants to stay in the subject lot out of humanitarian considerations and "pakikisama."<br><br>7) However, after several years, plaintiffs were surprised to find out that the defendants were building already houses made of concrete materials... Plaintiffs made an oral demand that they need already the subject lot and defendants were requested to vacate the subject lot and remove their personal belongings in accordance with the prior agreement that they will vacate the property freely, voluntarily, without contest upon demand. However, the defendants did not heed the plaintiffs demand.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis supplied) </blockquote>Simply put, spouses Bernabe maintains that it was her parents who initially allowed spouses Sambrano et al. to stay in the property. After the property was donated to Josephine, spouses Sambrano et al. were reminded that their possession is by mere tolerance. After several years, spouses Bernabe were surprised that spouses Sambrano et. al. already built houses of concrete materials on the property. Coincidentally, they already need the property so they asked spouses Sambrano et al. to vacate, but the latter refused.<br><br>The Court finds that the Complaint of spouses Bernabe does not make a case for unlawful detainer. The key jurisdictional fact of tolerance is missing. Aside from their bare allegations, spouses Bernabe failed to present evidence to substantiate their claim that Josephine's parents allowed spouses Sambrano et al. to occupy the property out of tolerance or due to generosity and mercy. They were silent on the details of how and when spouses Sambrano et al. entered the property and how and when the permission to occupy was purportedly given. They failed to aver the specific overt acts demonstrating their supposed acquiescence. In<i> Sarmiento</i>, the Court emphasized that in an action for unlawful detainer, there must be supporting evidence on record that would show when the defendants entered the property in dispute, who had granted them entry, and how entry was effected. Bare allegations with respect to these circumstances are insufficient.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Further in<i> Nabo v. Buenviaje</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> the Court held that the failure to, at least, show the plaintiffs or his or her predecessor's overt acts indicative of tolerance or the permission granted to occupy the property means that the defendant's possession is illegal from the beginning. Thus, the plaintiffs action for unlawful detainer necessarily fails.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In ruling in favor of spouses Bernabe, the MTC erroneously declared that: (1) spouses Bernabe's grandfather is Zosimo; (2) Zosimo tolerated the possession of spouses Sambrano et al.; and (3) spouses Sambrano et al. admitted that they were occupying the property by virtue of the consent of Zosimo, hence, tolerance was established.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> A cursory reading of the Complaint would show that spouses Bernabe did not state that Zosimo is Josephine's grandfather. In fact, in their Memorandum before the RTC, spouses Bernabe mentioned that the name of Josephine's grandfather is Ruperto.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Therefore, the admission of spouses Sambrano et al. that they were occupying the property by virtue of Zosimo's consent does not help the case of spouses Bernabe. For their part, spouses Bernabe neither alleged nor proved their connection/relation with Zosimo. The MTC's confusion as to who the predecessor of Josephine led the RTC and the CA to rule that spouses Bernabe were able to prove that spouses Sambrano et al.'s possession was by mere tolerance, when in fact this is not supported by evidence on record.<br><br>In fine, since spouses Bernabe claimed that they have the better right to possess the property; they have the burden of proving the jurisdictional facts required in the present unlawful detainer case.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> They, however, failed to discharge their burden. Their supposed act of tolerance is not present right from the start of spouses Sambrano et al.'s possession of the property. Accordingly, the Complaint for unlawful detainer is dismissible for lack of cause of action.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The MTC, the RTC, and the CA erred in granting the Complaint.<br><br><b><i>Ownership is immaterial in ejectment cases</i></b><br><br>Spouses Bernabe anchor their right to possess the property on their title over the same. However, ejectment cases are not automatically decided in favor of the party who presents proof of ownership.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> This is because only possession<i> de facto</i> and not possession<i> de jure</i> is involved in an unlawful detainer. In the oft-cited case of<i> Pajuyo v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> the Court elucidated on the nature of ejectment proceeding in this wise:<br><blockquote>Ownership or the right to possess arising from ownership is not at issue in an action for recovery of possession. The parties cannot present evidence to prove ownership or right to legal possession except to prove the nature of the possession when necessary to resolve the issue of physical possession. The same is true when the defendant asserts the absence of title over the property. The absence of title over the contested lot is not a ground for the courts to withhold relief from the parties in an ejectment case.<br><br>The only question that the courts must resolve in ejectment proceedings is â who is entitled to the physical possession of the premises, that is, to the possession<i> de facto</i> and not to the possession<i> de jure</i>. It does not even matter if a party's title to the property is questionable, or when both parties intruded into public land and their applications to own the land have yet to be approved by the proper government agency. Regardless of the actual condition of the title to the property, the party in peaceable quiet possession shall not be thrown out by a strong hand, violence or terror. Neither is the unlawful withholding of property allowed. Courts will always uphold respect for prior possession.<br><br>Thus, a party who can prove prior possession can recover such possession even against the owner himself. Whatever may be the character of his possession, if he has in his favor prior possession in time, he has the security that entitles him to remain on the property until a person with a better right lawfully ejects him. To repeat, the only issue that the court has to settle in an ejectment suit is the right to physical possession.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </blockquote>It is settled that even the registered owner of the real property cannot simply wrest possession from whoever is in its actual possession.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> The purpose of the law in giving recognition to ejectment suits is to protect the person who in fact has actual possession, and in case of a controverted proprietary right, the law requires the parties to preserve the<i> status quo</i> until one or the other sees fit to invoke the Decision of a court of competent jurisdiction upon the question of ownership.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>Here, it is dangerous for the Court to deprive spouses Sambrano et al. of their possession of the propertyâwhich some of them claim to have started since 1970<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> or 50 years before the ejectment suit was filed in 2020âby means of summary proceeding, simply because spouses Bernabe used the word "tolerance" without sufficient allegations or evidence to support it.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>Meanwhile, considering the dismissal of spouses Bernabe's complaint for lack of cause of action, there is no need to discuss the alleged nullity of the Deed of Donation in favor of Josephine.<br><br>On a final note, the Court clarifies that its ruling does not mean that it favors the occupants of the property over the persons claiming a right of ownership by virtue of a title. Rather, the ruling merely highlights the doctrine that even a legal owner of the property cannot simply oust a party who is in peaceable quiet possession thereof through a summary action for ejectment, without having established by a preponderance of evidence the essential requisites of the action.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> In any case, spouses Bernabe are not left without a remedy in law. They may avail of other more appropriate legal remedies to obtain possession of the subject property before the proper regional trial court.<br><br><b>ACCORDINGLY</b>, premises considered, the Petition for Review on <i>Certiorari</i> is<b> GRANTED</b>. The following rulings are hereby<b> REVERSED and SET ASIDE</b>:<ol><li>The Resolutions dated July 4, 2022 and November 8, 2022 of the Court of Appeals in CA-G.R. SP No. 173660;<br><br></li><li>The Decision dated November 15, 2021 and Resolution dated March 23, 2022 of Branch 40 of the Regional Trial Court of Palayan City, Nueva Ecija, in Civil Case No. 1105-P-21; and<br><br></li><li>The Decision dated February 26, 2021 of the Municipal Trial Court of Bongabon, Nueva Ecija in Civil Case No. 2020-30.</li></ol>The Complaint of respondents spouses Josephine and Francisco Bernabe is<b> DISMISSED</b> for lack of cause of action.<br><br>Respondents spouses Josephine and Francisco Bernabe are <b>DIRECTED</b> to respect petitioners spouses Servillano Sambrano and Delia Sambrano, spouses Conrado Peralta, Sr. and Elma Peralta, spouses Simeon Manopol and Luisa Manopol, spouses Carlito Alicaycay and Remy Alicaycay, spouses Rogelio Villaflor and Romelita Villaflor, spouses Romeo Manapol and Olympia Manapol, spouses Eric Balanay and Aileen Balanay, spouses Jeric Peralta and Victoria Peralta, spouses Melchor Agustin and Angelita Agustin, spouses Marvin Gervacio and Richelle Gervacio, Macario Manapol and Maribeth Manapol-Galo's peaceful possession of the property covered by TCT No. 041-2019004589 located at Barangay Tugatog, Bongabon, Nueva Ecija, and the improvements built thereon.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting, </i>and <i>Dimaampao,</i> <i>JJ.,</i> concur.</div><div align="JUSTIFY"><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup><i> J., </i>on leave.</div><div align="JUSTIFY"><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also spelled as "Olimpia" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> Also referred as "Jacinto and Jacinta" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 36-39. Penned by Associate Justice Jose Lorenzo R. Dela Rosa and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Emily R. AliÃ±o-Geluz of the Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 41-45. Penned by Associate Justice Jose Lorenzo R. Dela Rosa and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Raymond Reynold R. Lauigan of the Special Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 72-79. Penned by Presiding Judge Lody Q. Tancioco.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 80-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 97-99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 97, Complaint.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 98-99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 132-133, Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 83-90. Penned by Presiding Judge Cheryl S. Gamalinda-Encinares.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 89-90, MTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 88-89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 72-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 79, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup><i>Id</i>. at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 80-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 36-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 37, CA Resolution dated July 4, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 41-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 43-45, CA Resolution dated November 8, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 17, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 382-386, Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 20-21, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Mercado v. Commission on Higher Education</b>, 699 Phil. 419, 435 (2012) [Per J. Perez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Subic Bay Metropolitan Authority v. Subic Bay Marine Exploratorium, Inc.</b>, 914 Phil. 200, 209 (2021) [Per J. Gaerlan, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 263 Phil. 846 (1990) [Per J. Paras, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 852.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 895 Phil. 506 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 519.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 515-516.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 520.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Spouses Dagode v. Tapao</b>, 945 Phil. 183, 187 (2023) [Per J. Lopez, M., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Jose v. Alfuerto</b>, 699 Phil. 307, 316 (2012) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Fernandez v. Fernandez, G.R. No. 266145</b>, August 19, 2024, <i>citing</i> <b>Chansuyco v. Spouses Paltep</b>, 860 Phil. 13, 14 (2019) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Galacgac v. Bautista</b>, 889 Phil. 379, 386 (2020) [Per J. Lopez, M., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 877 Phil. 628 (2020) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 131 Phil. 365 (1968) [Per J. Sanchez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 372-373.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, pp. 97-98, Complaint.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Sarmiento v. Dizon</b>, 895 Phil. 506, 522 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 887 Phil. 678 (2020) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 693.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 86, MTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 345, Appellee's Memorandum.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i><i>See</i></i> <b>Sarmiento v. Dizon</b>, 895 Phil. 506, 525 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Galacgac v. Bautista</b>, 889 Phil. 379, 387 (2020) [Per J. Lopez, M., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Eversley Childs Sanitarium v. Spouses Barbarona</b>, 829 Phil. 111, 131 (2018) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 474 Phil. 557 (2004) [Per J. Carpio, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 578-579.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Galacgac v. Bautista</b>, 889 Phil. 379, 389 (2020) [Per J. Lopez, M., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>See</i> <i>rollo</i>, pp. 132-133, Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>See</i> <b>Jose v. Alfuerto</b>, 699 Phil. 307, 321 (2012) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Nabo v. Buenviaje</b>, 887 Phil. 678, 694-695 (2020) [Per J. Inting, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

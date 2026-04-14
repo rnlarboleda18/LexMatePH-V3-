@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272134 - ERNESTO DOMINGO, JR., THE HEIRS OF NORBERTO ROBLES, REPRESENTED BY NORLYN*** ROBLES, SPS. ROBERT*** DAQUIOAG AND MARITES DAQUIOAG, REPRESENTED BY FRANCIS DAQUIOAG AND DOMINADOR GUERRERO, PETITIONERS, VS. ERNESTO ORDONIO, JR., NELFRED CABALLERO, MARK VALDEZ AND JERRY VILLANUEVA, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70187' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272134, September 29, 2025 ]</H2>
+			<H3>ERNESTO DOMINGO, JR., THE HEIRS OF NORBERTO ROBLES, REPRESENTED BY NORLYN<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP> ROBLES, SPS. ROBERT<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP> DAQUIOAG AND MARITES DAQUIOAG, REPRESENTED BY FRANCIS DAQUIOAG AND DOMINADOR GUERRERO, PETITIONERS, VS. ERNESTO ORDONIO, JR., NELFRED CABALLERO, MARK VALDEZ AND JERRY VILLANUEVA, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on Certiorari<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><b> (Petition)</b> under Rule 45 of the Rules of Court assailing the Court of Appeals<b> (CA)</b> Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 27, 2023, and the CA Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated September 14, 2023, in CA-G.R. SP NO. 10742-MIN. The CA Decision reversed the Regional Trial Court<b> (RTC)</b> Judgment, dated February 19, 2021, in Civil Case No. 963 (19), and dismissed the Complaint for Forcible Entry filed by Ernesto Domingo, Jr. et al.<b> (Domingo, Jr. et al.)</b> for lack of jurisdiction. The CA Resolution denied the Motion for Reconsideration filed by Domingo, Jr. et al.<br><br><center><b><i>The Facts</i></b></center><br>In their Complaint for Forcible Entry, Domingo, Jr. et al. alleged that they are the owners of parcels of land situated in Tumiao, Lambayong, Sultan Kudarat covered by the following Transfer Certificates of Title<b> (TCTs):</b><sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><blockquote><table width="100%" border="1" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="33%" valign="top"> <div align="JUSTIFY">Ernesto Domingo, Jr. </div></td> <td width="33%" valign="top"> <div align="JUSTIFY">TCT No. T-68348 </div></td> <td width="34%" valign="top"> <div align="JUSTIFY">30,157 [sqm.] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Norberto Robles </div></td> <td valign="top"> <div align="JUSTIFY">TCT No. T-01912 </div></td> <td valign="top"> <div align="JUSTIFY">10,004 [sqm.] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Robert Daquioag </div></td> <td valign="top"> <div align="JUSTIFY">TCT No. T-01913 </div></td> <td valign="top"> <div align="JUSTIFY">10,006 [sqm.] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Dominador Guerrero </div></td> <td valign="top"> <div align="JUSTIFY">TCT No. T-01914 </div></td> <td valign="top"> <div align="JUSTIFY">30,914 [sqm.] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Total </div></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">81,081 [sqm.] </div></td> </tr> </tbody></table></blockquote>Domingo, Jr. et al. averred that they had been in possession of their respective parcels of land<b> (subject properties)</b>, which they devoted mainly to planting rice crops, until their dispossession thereof.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On February 4, 2017, at around 7:00 in the morning, respondents Ernesto Ordonio, Jr., Nelfred Caballero, Mark Valdez and Jerry Villanueva (collectively,<b> Ordonio, Jr. et al.</b>), together with two unidentified armed men, entered the subject properties by means of force and intimidation. After, they started to cultivate the subject properties. A criminal complaint for Grave Coercion was then filed against them before the Provincial Prosecutor.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On April 1, 2017, at around 7:00 in the morning, Ordonio, Jr. et al., together with several men armed with rifles, fired shots at the direction of Domingo, Jr., a certain Ricky Domingo and one Jobert Garcia.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> They were then cultivating their agricultural lands. A criminal complaint for Attempted Murder was subsequently filed against Ordonio, Jr. et al.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Domingo, Jr. et al. stated that since the occurrence of the said incidents, Ordonio, Jr. et al. have remained in the illegal possession of the subject properties, and cultivated and planted crops thereon.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In their Answer to the Complaint for Forcible Entry, Ordonio, Jr. et al. averred that the Municipal Circuit Trial Court<b> (MCTC)</b> has no jurisdiction over Domingo, Jr. et al.'s Complaint because of their failure to allege "physical prior possession" of the subject properties. In addition to this, Domingo, Jr. et al. lacked compliance with the requirements on conciliation proceedings as a prerequisite to filing the action.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Ordonio, Jr. et al. also denied Domingo, Jr. et al.'s claim of ownership over the subject properties.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> They countered that the Emancipation Patents issued in Domingo, Jr. et al.'s favor were already declared null and void by the Department of Agrarian Reform<b> (DAR)</b> in DAR Adjudication Board <b>(DARAB)</b> Case No. XII 623-SK-96. This had long become final and executory since October 10, 2004.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In addition to this, while the Emancipation Patent of Dominador Guerrero did not appear to have been declared null and void in the said DARAB case, it was clearly void for falling within the coverage of the constitutional limitations exempting homestead lands from the applicability of Presidential Decree No. 27.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Ordonio, Jr. et al. averred that they were the prevailing parties in the said DARAB case. They were adjudged to be the owners of the subject properties covered by the Emancipation Patents previously issued in the names of Domingo, Jr. et al., but were subsequently declared as null and void by the DARAB.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On July 18, 2019, the MCTC rendered a Decision granting Domingo, Jr. et al.'s Complaint.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The dispositive portion reads:<br><blockquote>WHEREFORE, premises above considered, judgment is hereby rendered directing [Ordonio, Jr. et al.] as follows:<br><br>1. to vacate the land subject of the case and relinquish possession thereof in favour of [Domingo, Jr. et al.];<br><br>2. to pay [Domingo, Jr. et al.] reasonable compensation for the use and occupation of the premises of each parcel of land valued at [PHP] 5,000.00 each for Norberto Robles and Robert Daquioag and [PHP] 15,000.00 each for Ernesto Domingo, Jr. and Dominador Guerrero per cropping beginning April 2017;<br><br>3. to reimburse [Domingo, Jr. et al.] the amount of [PHP] 20,000.00 as by way of attorney's [fees];<br><br>4. to reimburse [Domingo, Jr. et al.] the amount of [PHP] 15,566.00 as litigation related expenses; and<br><br>5. to pay the costs.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </blockquote>The MCTC ruled that contrary to Ordonio, Jr. et al.'s claim, Domingo, Jr. et al. substantially alleged in their Complaint that they had prior physical possession of the subject properties when they stated under paragraph 5 thereof that "[Domingo, Jr. et al.] had been in possession of their parcels of land which they then devoted to mainly planting rice crops, until their dispossession hereinafter alleged[.]"<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The MCTC stressed that the plaintiff in a forcible entry suit is not required to use the exact terminology employed by the rules in his allegations. It is enough that the facts set up in the complaint show that dispossession took place under the required conditions.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The MCTC also held that there was no need for the parties to comply with the mandatory barangay conciliation process before the action could be filed before the court. The case before the MCTC was coupled with a prayer for the issuance of Preliminary Mandatory Injunction, which is one of the recognized exceptions when parties may go directly to the court.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>The MCTC pointed out that the evidence of Domingo, Jr. et al. satisfactorily showed that they had been in prior possession of the subject properties as lawful occupants thereof, which they devoted mainly to planting rice crops until they were forcibly ousted therefrom by Ordonio, Jr. et al.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Ordonio, Jr. et al. no longer refuted Domingo, Jr. et al.'s assertion of prior physical possession. Instead, Domingo, Jr. et al. shifted their claim of right of possession on their alleged ownership of the subject properties by virtue of the DARAB Decision, which they alleged to be final and executory.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>The MCTC, however, noted that the issue of ownership remained under dispute before the DARAB under DARAB Case No. XII 623-SK-96 despite Ordonio, Jr. et al.'s claim to the contrary.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Other than their bare allegation of finality, Ordonio, Jr. et al. failed to show any resolution on Domingo, Jr. et al.'s Motion to Re-Open and Clarify Decision, as well as the Motion for Reconsideration pending before the DARAB. Moreover, it underscored that the claim of ownership is not an issue in forcible entry cases.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The MCTC further found Domingo, Jr. et al. to be entitled to reasonable compensation for Ordonio, Jr. et al.'s use and occupation of the subject properties, as well as attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>Aggrieved, Ordonio, Jr. et al. filed an appeal before the RTC. They argued, among others, that the case involved an agrarian dispute over which the DARAB has primary jurisdiction to the exclusion of the courts.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>On February 19, 2021, the RTC issued its assailed Judgment, affirming the MCTC Decision, dated July 18, 2019. The dispositive portion reads:<br><blockquote><b>WHEREFORE,</b> upon the foregoing considerations, the instant appeal is hereby<b> DENIED</b>. The judgment rendered by 2nd MCTC of Lutayan-Columbio-President Quirino-Lambayong[,] dated [July 18, 2019] is hereby<b> AFFIRMED</b> in<i> toto</i>.<br><br><b>IT IS SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis in the original) </blockquote><center><b><i>The Ruling of the CA</i></b></center><br>The CA agreed with Ordonio, Jr. et al.'s contention that it is the DARAB, not the MCTC, that has jurisdiction over the action for Forcible Entry.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>As held by the CA, this case met the two requirements for automatic referral, as set out in Republic Act No. 9700 and as summarized in the case of <i>Chailese Development Company Inc. v. Dizon</i>.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The first requirement is the presence of an allegation from any one or both of the parties that the case is agrarian in nature. Despite the filing of the Forcible Entry case, Ordonio, Jr. et al. and Domingo, Jr. et al. were consistent in alleging that the controversy is agrarian in nature. As stated in Republic Act No. 9700, mere allegation of the existence of an agrarian dispute is enough.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Hence, the first requirement was met.<br><br>As to the second requirement, the case of<i> Chailese</i> adds that proof must be adduced as to the person's status as farmer, farmworker, or tenant. In this case, it is undisputed that Domingo, Jr. et al. are farmers of the subject properties.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The DARAB recognized the status of Domingo, Jr. et al. as farmers. Further, their status as farmers was cemented by the issuance of the Emancipation Patents in their names. Thus, the second requirement was met.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>The CA held that the factual context of this case demonstrated that it is impossible to resolve the issue of possession without considering the agrarian nature of the dispute. To ensure a comprehensive resolution of the issues, the DAR's jurisdiction over these types of cases was reaffirmed by Republic Act No. 9700. The CA thus sustained the DAR's jurisdiction to the exclusion of the MCTC.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Considering the application of Republic Act No. 9700 to this case, the general rule is that the case should have been automatically referred to the DAR in accordance with procedure above-stated.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> However, notwithstanding the application of Republic Act No. 9700 to this case (which should have triggered the automatic referral procedure), records show that the case is clearly agrarian in nature based on the submissions of the parties. Hence, the case is outside the jurisdiction of the MCTC. The CA found that the need to automatically refer the case to the DAR may be dispensed with and the first level court may already proceed to dismiss the case for lack of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Thus, the dispositive portion of the CA Decision reads as follows:<br><blockquote><b>WHEREFORE,</b> the instant Petition is<b> GRANTED</b>. The Judgment[,] dated [February 19, 2021,] of the [Branch 20,] Regional Trial Court, 12th Judicial Region, [] Tacurong City, in Civil Case No. 963 (19), is hereby<b> REVERSED and SET ASIDE</b>. The Complaint for Forcible Entry filed by [Domingo, Jr. et al.] is<b> DISMISSED</b> for lack of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis in the original) </blockquote>Domingo, Jr. et al. filed a Motion for Reconsideration of the CA Decision, which was denied.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Aggrieved, Domingo, Jr. et al. filed the present Petition arguing that it is the MCTC that has jurisdiction over the subject matter of this case.<br><br><center><b><i>The Issue</i></b> </center><br>Did the CA err in reversing the RTC's ruling that the MCTC has jurisdiction over the subject matter of this case?<br><br><center><b><i>The Ruling of the Court</i></b> </center><br>The Court resolves to grant the Petition.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The Petition is not procedurally defective even if its verification and certification of non-forum shopping lacks proof of the affiants' identification</i></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table>Preliminarily, the Court has noted that the verification of this Petition and certification of non-forum shopping<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> lacks the affiants' current identification document issued by an official agency bearing the photographs and signatures of the affiants, in violation of the 2004 Rules of Notarial Practice.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Under Section 4,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Rule 45 of the Rules of Court, a Petition for Review on<i> Certiorari</i> must contain a<i> sworn</i> certification against forum shopping. Under Section 5<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> of the same Rule, the failure of the petitioner to comply with any of the foregoing requirements regarding the contents of and the documents which should accompany the petition shall be sufficient ground for the dismissal thereof.<br><br>An improperly notarized certification does not comply with the required<i> sworn</i> certification.<br><br>However, the Court has also noted that the affiants are personally known to the Notary Public who notarized the verification and certification of non-forum shopping.<br><br>In<i> Jandoquile v. Revilla, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the Court has held that "if the notary public knows the affiants personally, he need not require them to show their valid identification cards."<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> This rule is supported by the definition of a "jurat" under Rule II, Section 6 of the 2004 Rules of Notarial Practice, which provides:<br><blockquote>A "jurat" refers to an act in which an individual on a single occasion: (a) appears in person before the notary public and presents an instrument or document; (b)<i> is personally known to the notary public<b> or</b> identified by the notary public through competent evidence of identity;</i> (c) signs the instrument or document in the presence of the notary; and (d) takes an oath or affirmation before the notary public as to such instrument or document.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis supplied) </blockquote>Moreover, in<i> Coca-Cola Bottlers v. De la Cruz</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> where the verification was marred only by a gap in the evidence of the identity of the affiant, the Court was of the considered view that, in the interest of justice, the minor defect can be overlooked and should not defeat the petition.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Thus, the Court finds that this Petition filed by Domingo, Jr. et al. has complied with the rules on verification and certification of non-forum shopping.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The first requirement for automatic referral of the case to the DAR was not complied with</i></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table>It is settled that first level courts have jurisdiction over cases of forcible entry, while the DARAB has primary jurisdiction over agrarian disputes.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Regarding the determination of whether or not a particular case involves an agrarian dispute, Section 19 of Republic Act No. 9700,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> otherwise known as the "Comprehensive Agrarian Reform Law," provides:<br><blockquote>Section 19. Section 50 of Republic Act No. 6657, as amended, is hereby further amended by adding Section 50-A to read as follows:<br><blockquote>SEC. 50-A.<i> Exclusive Jurisdiction on Agrarian Dispute</i>. â No court or prosecutor's office shall take cognizance of cases pertaining to the implementation of the CARP except those provided under Section 57 of Republic Act No. 6657, as amended.<i> If there is an allegation from any of the parties that the case is agrarian in nature and one of the parties is a farmer, farmworker, or tenant, the case shall be automatically referred by the judge or the prosecutor to the DAR which shall determine and certify within </i><i>[15]</i><i> days from referral whether an agrarian dispute exists:</i> Provided, that from the determination of the DAR, an aggrieved party shall have judicial recourse. In cases referred by the municipal trial court and the prosecutor's office, the appeal shall be with the proper regional trial court, and in cases referred by the regional trial court, the appeal shall be to the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Emphasis supplied) </blockquote> </blockquote>Based on the foregoing provision, the judge or prosecutor is obligated to automatically refer the cases pending before it to the DAR when the following requisites are present:<ol type="a"><li>There is an allegation from any one or both of the parties that the case is agrarian in nature; and<br><br></li><li>One of the parties is a farmer, farmworker, or tenant.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></li></ol>The CA held that in order to establish the first requisite, a mere allegation from any of the parties that an agrarian dispute exists is already sufficient. The CA then proceeded to conclude that the first requisite was complied with in this case since Ordonio, Jr. et al. has consistently maintained their allegation that the case involves an agrarian dispute, from their Answer filed before the MCTC, up to their appeal before the RTC, and in their Petition for Review filed before the CA.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>The Court does not agree.<br><br>Merely stating in the pleadings that an agrarian dispute exists is not sufficient to comply with the first requirement for automatic referral of a case to the DAR. Otherwise, every time one of the parties simply states in their pleading that an agrarian dispute exists in a case involving farmers and agricultural lands, even if the pleading did not mention any basis therefor, the judge or prosecutor would be required to automatically refer the case to the DAR. Without any basis for the allegation that an agrarian dispute exists, the case would just then be remanded to the regular courts. This would cause unnecessary delays in the proceedings.<br><br>It is likewise worthy to note that the original text of Section 19 of Republic Act No. 9700 does not use the term "mere" before "allegation." Thus, in order to clarify the seemingly ambiguous phrase "an allegation from any one or both of the parties that the case is agrarian in nature" in Section 19 of Republic Act No. 9700, there is a need to consider the intent of the framers of the said Act.<br><br>The framers of Republic Act No. 9700 intended that in order to warrant an automatic referral of a case to the DAR, the pleadings must clearly show the existence of an agrarian dispute, which is evident from the deliberations of the Members of the House of Representatives on House Bill No. 4077, which later became Republic Act No. 9700, thus:<br><blockquote>REP. MENDOZA (V.). My second to the last point is the issue of jurisdiction of the courts. I noted that even â is my understanding correct, that even criminal cases now involving tenants and landowners will be subject to referral to the DAR?<br><br>REP. LAGMAN. Your Honor, the special agrarian courts under Section 57 would retain jurisdiction over criminal proceedings because these courts will have to adjudicate and possibly impose penalties, and the DAR is not competent or does not have the jurisdiction to impose penalties. You would notice, Your Honor, that under the present bill it says, "Subject to the provisions of Section 57 of the Comprehensive Agrarian Reform Law." But, <i>with respect to cases filed involving land disputes where there is a farmer involved,<b> or the pleadings themselves would clearly show an agrarian dispute</b>. . . then the prosecutor is mandated to desist from further prosecution and refer the same to the DAR</i>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis supplied) </blockquote>Based on the foregoing, the pleadings themselves must clearly show that an agrarian dispute exists. Thus, a mere allegation or statement that "an agrarian dispute exists" is insufficient for a case to be automatically referred to the DAR. Either or both of the parties must allege the existence of the elements of an agrarian dispute.<br><br>The term "allegation" as used in Section 19 of Republic Act No. 9700 should not be interpreted to mean a mere statement in the pleading that an agrarian dispute exists. This can be compared to an allegation of a criminal offense, wherein an Information does not merely allege or state that the accused committed a crime, but must also allege the elements of the crime charged.<br><br>In the present case, Ordonio, Jr. et al. merely alleged that the case is agrarian in nature, without mentioning any of the elements of an agrarian dispute.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Thus, the first requirement for the automatic referral of the case to the DAR was not complied with.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The present case does not involve an agrarian dispute</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Moreover, the Court finds that the present case does not involve an agrarian dispute.<br><br>Section 3(d) of Republic Act No. 6657<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> defines "agrarian dispute" as follows:<br><blockquote>Agrarian Dispute refers to any controversy relating to tenurial arrangements, whether leasehold, tenancy, stewardship or otherwise, over lands devoted to agriculture, including disputes concerning farmworkers' associations or representation of persons in negotiating, fixing, maintaining, changing, or seeking to arrange terms or conditions of such tenurial arrangements.<br><br>It includes any controversy relating to compensation of lands acquired under this Act and other terms and conditions of transfer of ownership from landowners to farmworkers, tenants and other agrarian reform beneficiaries, whether the disputants stand in the proximate relation of farm operator and beneficiary, landowner and tenant, or lessor and lessee.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </blockquote>An important element of an agrarian dispute is the existence of a tenancy relation between the parties. In<i> Bumagat v. Arribay</i>,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> the Court has held:<br><blockquote>A case involving agricultural land does not immediately qualify it as an agrarian dispute. The mere fact that the land is agricultural does<i> not ipso facto</i> make the possessor an agricultural lessee or tenant; there are conditions or requisites before he can qualify as an agricultural lessee or tenant, and the subject matter being agricultural land constitutes simply one condition.<i> In order to qualify as an agrarian dispute, there must likewise exist a tenancy relation between the parties</i>.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (Emphasis supplied) </blockquote>In<i> Bumagat</i>, the Court has enumerated the elements of an agrarian dispute as follows:<ol><li><i>that the parties are the landowner and the tenant or agricultural lessee; </i><br><br></li><li>that the subject matter of the relationship is an agricultural land;<br><br></li><li>that there is consent between the parties to the relationship;<br><br></li><li>that the purpose of the relationship is to bring about agricultural production;<br><br></li><li>that there is personal cultivation on the part of the tenant or agricultural lessee;<i> and</i><br><br></li><li>that the harvest is shared between the landowner and the tenant or agricultural lessee.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></li></ol>Still in<i> Bumagat</i>, the Court declared that there is no agrarian dispute because not all of the aforementioned elements are present. Particularly, there is no tenant, as both parties claim ownership over the property.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>In the present case, not all requisites were met, since none of the parties are tenants, as they both claim to be owners of the same parcels of land. Domingo, Jr. et al. claim ownership based on their Transfer Certificates of Title issued pursuant to emancipation patents granted in their favor.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> On the other hand, Ordonio, Jr. et al. claim ownership based on a previous DARAB decision cancelling Domingo, Jr. et al.'s emancipation patents.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Thus, this case does not involve an agrarian dispute. The regular courts have jurisdiction over the action for forcible entry filed by Domingo, Jr. et al. involving the subject parcels of land.<br><br>Finally, the Court cannot ignore the October 10, 2004 Decision of the DARAB in Case No. XII 623-SK-96, which Domingo et al. are trying to question long after its promulgation. Absent any proof that this final Decision has been set aside, the Court must give it respect and binding effect.<br><br><b>ACCORDINGLY,</b> the Petition is<b> GRANTED</b>. The Decision, dated January 27, 2023, and the Resolution, dated September 14, 2023, of the Court of Appeals, Cagayan de Oro City in CA-G.R. SP NO. 10742-MIN are <b>REVERSED</b>. The Judgment, dated February 19, 2021, of Branch 20, Regional Trial Court, Tacurong City in Civil Case No. 963 (19), and the Decision, dated July 18, 2019, of the Municipal Circuit Trial Court, Lutayan-Columbio in Special Civil Action No. 013-La, granting the Complaint for Forcible Entry filed by Ernesto Domingo, Jr. et al., are<b> REINSTATED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Inting</i><sup style="COLOR: RGB(255, 0, 0);">**</sup><i> </i> <i>(Acting Chairperson)</i><i>, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Caguioa</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>(Chairperson), J.,</i> on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business but left a vote.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Per Special Order No. 3227 dated September 23, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> Also referred as Jorlyn and Roberto in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 16-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 28-43. Penned by Associate Justice Evalyn M. Arellano-Morales and concurred in by Associate Justices Anisah B. Amanodin-Umpa and John Z. Lee of the Twenty-Second Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 44-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 826 Phil. 51 (2018) [Per J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 44-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> A.M. No. 02-8-13-SC, July 6, 2004.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Section 4. <i>Contents of petition</i>. â The petition shall be filed in [18] copies, with the original copy intended for the court being indicated as such by the petitioner, and shall. . . (e) contain a sworn certification against forum shopping[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Section 5. <i>Dismissal or denial of petition</i>. â The failure of the petitioner to comply with any of the foregoing requirements regarding the payment of the docket and other lawful fees, deposit for costs, proof of service of the petition, and the contents of and the documents which should accompany the petition shall be sufficient ground for the dismissal thereof.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 708 Phil. 337 (2013) [Per J. Villarama, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> A.M. No. 02-8-13-SC, 2004 RULES OF NOTARIAL PRACTICE, Rule II, sec. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 622 Phil. 886 (2009) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 900.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Dayrit v. Norquillas</b>, 918-A Phil. 302, 312 (2021) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> An Act Strengthening the Comprehensive Agrarian Reform Program (CARP), Extending the Acquisition and Distribution of all Agricultural Lands, Instituting Necessary Reforms, amending for the purpose certain provisions of Republic Act No. 6657, otherwise known as the Comprehensive Agrarian Reform Law Of 1988, as amended, and appropriating funds therefor.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Republic Act No. 9700 (2009), sec. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Cruz v. Cervantes</b>, 922 Phil. 454, 464 (2022) [Per J. Rosario, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Committee on Agrarian Reform, House of Representatives Committee Report on House Bill No. 4077 (May 28, 2009), 14<sup>th</sup> Congress, at 86-87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, p. 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Approved on June 10, 1988.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Republic Act No. 6657 (1988), sec. 3(e).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 735 Phil. 595 (2014) [Per J. Del Castillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 597.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 607.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i>, p. 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 30.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

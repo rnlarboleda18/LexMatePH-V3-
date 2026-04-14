@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 241309 - RUTHGAR T. PARCE, PETITIONER, VS. MAGSAYSAY MARITIME CORPORATION, PRINCESS CRUISES LTD.** AND/OR SORWIN JOY G. RIVERA, RESPONDENTS.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70236' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SPECIAL FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 241309, October 13, 2025 ]</H2>
+			<H3>RUTHGAR T. PARCE, PETITIONER, VS. MAGSAYSAY MARITIME CORPORATION, PRINCESS CRUISES LTD.<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> AND/OR SORWIN JOY G. RIVERA, RESPONDENTS.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Motion for Partial Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> filed by petitioner Ruthgar T. Parce (Parce), and respondents Magsaysay Maritime Corporation (Magsaysay), Princess Cruises Ltd. (Princess Cruises) and Sorwin Joy G. Rivera (Rivera) (collectively, Magsaysay et al.), respectively, of this Court's Decision.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>In its Decision, this Court reversed and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Court of Appeals (CA), ordering Magsaysay and Princess Cruises jointly and severally liable to pay Parce permanent disability benefits in the amount of US$60,000.00 at the prevailing rate of exchange at the time of payment, and attorney's fees amounting to 10% of the total award, subject to legal interest of 6% per annum reckoned from the date of finality of the Decision until fully paid.<br><br><center><b>The Facts</b></center><br>On September 8, 2014, Magsaysay engaged Parce as Senior Electrical Fitter for its foreign principal, Princess Cruises.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> In November 2014, Parce sustained a shoulder injury while doing his work routine onboard the vessel "Golden Princess."<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> He was medically repatriated to Manila, where the company-designated physician diagnosed Parce of rotator tendinitis and recommended for his physical therapy sessions.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> However, on April 13, 2015, Parce was verbally informed that he had already reached the maximum medical cure.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Accordingly, Magsaysay ordered the termination of his medical treatment and the discontinuance of his sickness allowance.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Without Parce's knowledge, Magsaysay's company-designated physician issued a final medical report on April 15, 2015, which Princess Cruises used as basis to consider Parce's status as fit without restrictions.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Due to persisting pain, Parce consulted an independent physician who found him unfit for sea duties.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Parce then sent a letter to Magsaysay on July 2, 2015 requesting for referral to a third doctor and to be furnished with all his medical records pertaining to his rehabilitation and treatment.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> However, Magsaysay refused to heed Parce's request and instead asked for a copy of the second opinion of Parce's physician so they can study the possibility of entering settlement negotiations.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On August 20, 2015, Parce filed a complaint before the labor arbiter, praying for payment of disability benefits, reimbursement for medical expenses, damages, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The labor arbiter rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> in favor of Parce. It found that the medical report of the company-designated physician cannot be considered as equivalent to a fitness to work declaration there being no express declaration. Thus, with the lapse of the 240 days from repatriation without a definite fitness to work assessment issued by the company-designated physician, the labor arbiter declared that Parce's disability is deemed total and permanent by operation of law. The labor arbiter decreed:<br><blockquote>WHEREFORE, premises considered, judgment is hereby rendered ordering respondents Magsaysay Maritime Corporation, and/or the foreign principal Princess Cruise Lines, Ltd., to pay Ruthgar T. Parce the Philippine peso equivalent at the time of actual payment of SIXTY THOUSAND US DOLLARS (US$60,000.00), representing total permanent disability benefits, plus ten percent (10%) thereof as and for attorney's fees.<br><br>All other claims are dismissed for lack of merit.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </blockquote>Magsaysay elevated the case to the National Labor Relations Commission (NLRC), which affirmed with modification the Labor Arbiter's disposition. In so ruling, the NLRC held Rivera solidarily liable with the corporate principals pursuant to Section 10 of Republic Act No. 8042, otherwise known as the "Migrant Workers and Overseas Filipinos Act of 1995."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>On appeal, the CA reversed the rulings of the labor tribunals.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Essentially, the CA found as crucial Parce's failure to protest his medical assessment immediately and found dubious the two-month gap from Parce's termination of medical treatment and the filing of his labor complaint. According to the CA, Parce's failure to disclose what happened in those two months militates against his cause. The decretal portion of the CA decision reads:<br><blockquote>WHEREFORE, the Decision dated June 30, 2016 of the National Labor Relations Commission (NLRC)-4th Division in NLRC LAC No. OFW-M-05-000392-16/NLRC-NCR-OFW Case No. (M) 08-10002-15 and Decision dated March 29, 2016 of the Labor Arbiter in NLRC NCR OFW Case No. (M) 08-10002-15 are hereby ANNULLED AND SET ASIDE.<br><br>The complaint of private respondent is hereby DISMISSED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </blockquote>In this Court's Decision,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> We held that: (1) the medical report issued by Magsaysay's company-designated physician fell short of the requirements for a complete and definite assessment, leaving Parce nothing to properly contest; (2) there is no need for Parce to initiate the referral to a third doctor for him to be entitled to permanent disability benefits since it was by operation of law that Parce became permanently disabled; and (3) Parce's claim of attorney's fees is in order as he was indeed compelled to litigate in pursuit of his claims for disability benefits. The Decision disposed thus:<br><blockquote><b>WHEREFORE</b>, the petition is<b> GRANTED</b>. The Decision dated February 27, 2018 and the Resolution dated August 8, 2018 of the Court of Appeals in CA-G.R. SP No. 148328 are hereby<b> REVERSED</b> and<b> SET ASIDE</b>. The Decision dated June 30, 2016 and the Resolution dated August 31, 2016 of the National Labor Relations Commission in NLRC LAC No. OFW-M-05-000392-16 are<b> REINSTATED</b> in that Magsaysay Maritime Corporation and Princess Cruises Ltd. are jointly and severally liable to pay Ruthgar T. Parce permanent disability benefits in the amount of US$60,000.00 at the prevailing rate of exchange at the time of payment, and attorney's fees amounting to ten percent (10%) of the total award. These awards shall earn legal interest of six percent (6%) per annum reckoned from the finality of this Decision until fully paid.<br><br>The deletion of the awards of moral and exemplary damages still stands.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis in the original) </blockquote>Dissatisfied, both parties filed their respective motions for reconsideration of the Court's November 11, 2021 Decision.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In essence, Magsaysay et al. argued that this Court committed patent and palpable error in: (1) disregarding the medical conclusions of the company-designated physician; (2) awarding permanent disability benefits on the basis of the private respondents' failure to furnish a copy of the final medical report to Parce; (3) failing to direct the parties to appoint a third doctor; (4) reinstating the award of permanent disability benefits on the basis of the lapse of 120/240 days; (5) reinstating the award of attorney's fees; and (6) awarding 6% legal interest.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><center><b>This Court's Ruling</b></center><br>At the outset, Magsaysay et al.'s first to fifth arguments have already been sufficiently passed upon and discussed by this Court in the assailed Decision. This Court finds no cogent reason to modify or reverse its Decision as to these issues.<br><br>Anent the award of legal interest, this Court also finds no valid justification to depart from it, albeit a discussion is in order.<br><br>Magsaysay et al. alleged that pursuant to a Writ of Execution issued by the labor arbiter on December 05, 2016, they were compelled to satisfy the judgment award.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In such case, then the legal interest at the rate of 6% per annum imposed by this Court shall no longer apply. However, Magsaysay et al. have not submitted any proof that it has paid the full judgment award to Parce. Hence, we do not have any basis to modify Our ruling at this juncture.<br><br>Meanwhile, Parce moves to consider only the part of the assailed Decision where this Court did not categorically declare respondent Rivera's solidary liability to the whole judgment award.<br><br>After taking a second look at the circumstances of the case, this Court finds Parce's motion for partial reconsideration meritorious.<br><br>We sustain the ruling of the NLRC that Rivera is jointly and severally liable with Magsaysay and Princess Cruises for the payment of the monetary award arising from Parce's total and permanent disability. Section 10 of Republic Act No. 8042, otherwise known as the "Migrant Workers and Overseas Filipinos Act of 1995,"<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> as amended by Republic Act No. 10022,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> reads:<br><blockquote>SECTION. 10.<i> Money Claims</i>. -<br>. . . .<br>The liability of the principal/employer and the recruitment/placement agency for any and all claims under this section shall be joint and several. This provision shall be incorporated in the contract for overseas employment and shall be a condition precedent for its approval. The performance bond to be filed by the recruitment/placement agency, as provided by law, shall be answerable for all money claims or damages that may be awarded to the workers.<i> If the recruitment/placement agency is a juridical being, the corporate officers and directors and partners as the case may be, shall themselves be jointly and solidarity liable with the corporation or partnership for the aforesaid claims and damages.</i> (Emphasis supplied) </blockquote>Clearly, the law expressly provides the joint and solidary liability of corporate directors and officers with the recruitment/placement agency for all money claims or damages that may be awarded to overseas Filipino workers. In<i> Oscares v. Magsaysay Maritime Corp.</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> this Court explained that although generally, corporate officers cannot be personally held liable for the contracts entered into by the corporation in deference to the latter's separate and distinct personality, personal liability may validly attach when he is made personally liable for his corporate action by a specific provision of law.<br><br>Section 10 of Republic Act No. 8042, as amended by Republic Act No. 10022, governs and not the Corporation Code. Thus, in the more recent case of<i> United Philippines Lines, Inc. v. Alkuino, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> this Court also sustained the joint and solidary liability of the manning agency and the manning agency's owner and president in accordance with Section 10 of Republic Act No. 8042, as amended. Indubitably, Rivera, as the corporate officer of Magsaysay, is solidarily liable with the latter for the petitioner's total and permanent disability benefits.<br><br>Here, Rivera was impleaded in the complaint before the Labor Arbiter in his capacity as "Owner/President/Manager" of Magsaysay. Attached to the said complaint is a copy of the Contract of Employment executed between Parce and Magsaysay, where Rivera was the signatory on behalf of Magsaysay, with the notation "For the Employer."<br><br>Further, it appears from the records that al no point during the proceedings before the labor arbiter, the NLRC, or the CA was it disputed that Rivera held the position of owner/president/manager of Magsaysay.<br><br>At any rate, Magsaysay's officers and directors are presumed to have submitted a verified undertaking that they will be jointly and severally liable with the company over claims arising from an employer-employee relationship, when it applied for a license to operate a seafarer's manning agency. Part II, Rule II, Section 1(f) of the 2003 Philippine Overseas Employment Administration (POEA) Rules and Regulations Governing the Recruitment and Employment of Seafarers (POEA Rules) reads:<br><blockquote>Section 1. Requirements for Licensing. Every applicant for license to operate a manning agency shall submit a written application together with the following requirements:<br><br>. . . .<br><br>f. In case of corporation or partnership,<i> verified undertaking by officers, directors and partners that they will be jointly and severally liable with the company</i> over claims arising from employer-employee relationship. (Emphasis supplied) </blockquote>Applicable laws form part of, and are read into, contracts without need for any express reference; more so, when it pertains to a labor contract that is imbued with public interest.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Each labor contract contains not only what was explicitly stipulated, but also the statutory provisions that have any bearing on the matter.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Thus, Section 10 of Republic Act No. 8042, as amended, and the pertinent POEA Rules are deemed incorporated in petitioner's employment contract with respondents. These provisions are in line with the State's policy of affording protection to labor and alleviating the workers' plight and are meant to assure overseas Filipino workers immediate and sufficient payment of what is due them.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>All told, this Court finds Rivera jointly and solidarily liable with Magsaysay and Princess Cruises for the payment of the monetary award arising from Parce's total and permanent disability, and, to such extent, grants Parce's motion for reconsideration. This Court's November 11, 2021 Decision is modified accordingly.<br><br><b>ACCORDINGLY</b>, this Court hereby<b> RESOLVES</b> to:<br><br>1. <b>GRANT</b> Ruthgar T. Parce's Motion for Partial Reconsideration and<b> DECLARE</b> Sorwin Joy G. Rivera jointly and severally liable with Magsaysay Maritime Corporation and Princess Cruises Ltd., to<b> PAY</b> Ruthgar T. Parce his permanent disability benefits in the amount of US$60,000.00 at the prevailing rate of exchange at the time of payment, and attorney's fees amounting to 10% of the total award; and<br><br>2. <b>DENY</b> the Motion for Reconsideration filed by Magsaysay Maritime Corporation, Princess Cruises Ltd., and Sorwin Joy G. Rivera, thereby sustaining the legal interest of 6% per annum imposed on the monetary award, reckoned from the date of finality of this Resolution until fully paid. However, should the full judgment award be proven to have been fully paid prior to the finality of this Resolution, the legal interest at the rate abovementioned shall no longer be imposed.<br><br>The rest of this Court's November 11, 2021 Decision<b> STANDS</b>.<br><br><b>SO ORDERED. </b><br><br><i>Gesmundo, C.J. (Chairperson), Caguioa, Lazaro-Javier,<sup><font color="#ff0000">*</font></sup> </i>and <i>Villanueva, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Pursuant to the third paragraph, Sec. 8, Rule 2 of the IRSC in lieu of Lopez, M., <i>J</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Also appears as "Princess Cruise Lines, Ltd. in some parts of the <i>rollo</i>. (pp. 32, 35, 121 &amp; 907)<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 878-885. Dated May 19, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 628-677. Dated May 25, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 614-627. The November 11, 2021 Decision was penned by Associate Justice Jhosep Y. Lopez and concurred in by Chief Justice Alexander G. Gesmundo and Associate Justices Alfredo Benjamin S. Caguioa, Amy C. Lazaro-Javier, and Mario V. Lopez (now retired) of the First Division of this Court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 76-89. The February 27, 2018 Decision in CA-G.R. SP No. 148328 was penned by Associate Justice Henri Jean Paul B. Inting (now a member of this Court) and concurred in by Associate Justices Mariflor P. Punzalan Castillo and Danton Q. Bueser, Ninth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 74-75. The August 8, 2018 Resolution in CA-G.R. SP No. 148328 was penned by Associate Justice Henri Jean Paul B. Inting (now a member of this Court) and concurred in by Associate Justices Mariflor P. Punzalan Castillo and Danton Q. Bueser, Ninth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 615.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 615-617.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 617.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 618.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 266-279. The March 29, 2016 Decision in NLRC NCR OFW Case No. (M) 08-10002-15 was penned by Labor Arbiter Veneranda C. Guerrero, NLRC, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 279.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 340-341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 8-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 614-627.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 626-627.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 628-677 and 878-885.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 628-677.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 669-670.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Entitled "An Act To Institute The Policies Of Overseas Employment And Establish A Higher Standard Of Protection And Promotion Of The Welfare Of Migrant Workers, Their Families And Overseas Filipinos In Distress, And For Other Purposes," approved on June 7, 1995.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Entitled "An Act Amending Republic Act No. 8042, Otherwise Known As The Migrant Workers And Overseas Filipinos Act Of 1995, As Amended, Further Improving The Standard Of Protection And Promotion Of The Welfare Of Migrant Workers, Their Families And Overseas Filipinos In Distress, And For Other Purposes," approved on March 8, 2010.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 891 Phil. 518 (2020) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 908 Phil. 305 (2021) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Halili v. Justice for Children International</b>, 769 Phil. 456 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Art. 1700 of the CIVIL CODE provides:<br><blockquote>"Art. 1700. The relations between capital and labor are not merely contractual. They are so impressed with public interest that labor contracts must yield to the common good. Therefore, such contracts are subject to the special laws on labor unions, collective bargaining, strikes and lockouts, closed shop, wages, working conditions, hours of labor and similar subjects."</blockquote><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Sameer Overseas Placement Agency, Inc. v. Cabiles</b>, 740 Phil. 403 (2014) [Per J. Perlas-Bernabe, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

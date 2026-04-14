@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 245269 - SAUDI ARABIAN AIRLINES, PETITIONER, VS. MARIA LOURDES D. CASTELLS AND SHALIMAR CENTI-MANDANAS, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70084' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 245269, July 28, 2025 ]</H2>
+			<H3>SAUDI ARABIAN AIRLINES, PETITIONER, VS. MARIA LOURDES D. CASTELLS AND SHALIMAR CENTI-MANDANAS, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>In this Petition for Review on <i>Certiorari</i>,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> petitioner Saudi Arabian Airlines (Saudia) impugns the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. SP No. 101971. The impugned Decision overturned the ruling<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the National Labor Relations Commission (NLRC) and reinstated the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Labor Arbiter holding Saudia and Abdulmalik Saddik (Saddik), its Manila-based In-flight Service Senior Manager, responsible for the unlawful dismissal of respondents Maria Lourdes D. Castells (Castells) and Shalimar Centi-Mandanas (Centi-Mandanas).</p><p> Maria Joy Teresa O. Bilbao (Bilbao), Castells, and Centi-Mandanas were hired by Saudia on May 13, 1986 as flight attendants.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Years after into their employment with Saudia, Saddik received an inter-office memorandum<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> dated August 18, 2004 from Saudia's head office directing the transfer of the three crew members from Manila to Jeddah due to operational requirements- </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="19%">To:</td> <td width="81%">Snr. Manager IFS Admin. &amp; Supp.</td> </tr> <tr valign="top"> <td>From:</td> <td>G.M. IFS Cabin Crew</td> </tr> <tr valign="top"> <td>Date:</td> <td>01/071425.H / 17/08/2004 G</td> </tr> <tr valign="top"> <td>Reference: </td> <td>760/130/1223/2004 </td> </tr> <tr valign="top"> <td>Subject:</td> <td><b><u>TRANSFER OF FLIGHT ATTENDANTS</u></b></td> </tr> </tbody></table> <p>For your information F/A will transfer from MNL centre to JED centre effective 01-SEP 2004. As this transfer is being made due to operational requirements. </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="4%">1-<br> 2- <br> 3-<br> 4- <br> 5- <br> 6- <br> 7- <br> 8- <br> 9- <br> 10-<br></td> <td width="28%">Dela [T]orre Rachel <br> Remedios Elisea <br> [Castells] <br> [Bilbao] <br> [Centi-Mandanas] <br> Molleno Eugene <br> Chamen Josefina <br> Kintana Jessica<br> Ebbah Christine <br> Relucio Monique<br></td> <td width="68%">PRN 3001101<br> PRN 3006075<br> PRN 3006077 <br> PRN 3006078 <br> PRN 3006079 <br> PRN 3006093 <br> PRN 3007992 <br> PRN 3008002 <br> PRN 3008444 <br> PRN 3008450</td> </tr> </tbody></table> <p>Please arrange necessary papers as soon as possible. </p> <p>Thank you. (Emphasis in the original) </p> </blockquote> <p> As it happened, Castells submitted her resignation letter on September 1, 2004.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Four days later, Saudia, through Saddik, accepted her resignation, effective September 30, 2004. Bilbao and Centi-Mandanas followed suit and tendered their resignations on September 7, 2004.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> They both executed their respective quitclaims on October 28, 2004, acknowledging that they had received the full and complete end-of-service award, along with the final settlement, and had no further claims against Saudia.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> In the case of Castells, Bilbao signed a quitclaim on her behalf.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> On July 20, 2005, Castells and Bilbao lodged a complaint<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> for illegal constructive dismissal against Saudia and Saddik, stating that they were forced to resign. On August 3, 2005, Centi-Mandanas also filed a complaint<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> of the same cause of action against Saudia and Saddik, claiming that she was forced to resign.</p><p> In her sworn statement, Castells recounted the following, among others: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1)</div></td> <td width="95%"><div align="justify">She had worked for nearly 19 years with Saudia, earning multiple citations and commendations for excellent service. </div></td> </tr> <tr valign="top"> <td><div align="justify">2)</div></td> <td><div align="justify">On August 25, 2004, she was informed by their acting group supervisor, Faiza Hussein (Hussein), that she was on the list of flight attendants to be transferred from Manila to Jeddah starting in the first week of September 2004. </div></td> </tr> <tr valign="top"> <td><div align="justify">3)</div></td> <td> <div align="justify">It was widely known among Saudia employees that when flight attendants of other nationalities were transferred to Jeddah due to "operational requirements," they were essentially compelled to resign.</div></td> </tr> <tr valign="top"> <td><div align="justify">4)</div></td> <td><div align="justify">She reluctantly wrote her resignation letter, expressing gratitude for her work experience, as she felt she had no alternative but to resign in order to avoid the public embarrassment and stigma of being terminated.</div></td> </tr> <tr valign="top"> <td><div align="justify">5)</div></td> <td><div align="justify">Her employment was being terminated due to her being 39 years old.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>For herself, Centi-Mandanas attestedâ</p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1)</div></td> <td width="95%"><div align="justify">She had dedicated almost 19 years to Saudia, during which time she received several citations and commendations in recognition of her outstanding service.</div></td> </tr> <tr valign="top"> <td><div align="justify">2)</div></td> <td><div align="justify">Hussein informed her on August 25, 2004 that along with several of her fellow flight attendants, she was being transferred from Manila to Jeddah starting the first week of September 2004 due to "operational requirements."</div></td> </tr> <tr valign="top"> <td><div align="justify">3)</div></td> <td><div align="justify">Upon arriving in Jeddah on September 2, 2004, she discovered that many of the Jeddah-based flight attendants aged 40 and above had already submitted their resignation letters.</div></td> </tr> <tr valign="top"> <td><div align="justify">4)</div></td> <td><div align="justify">She was instructed to report to the office of the base manager on September 6, 2004, where she was informed that her employment contract with Saudia would not be renewed. </div></td> </tr> <tr valign="top"> <td><div align="justify">5)</div></td> <td><div align="justify">She was asked to sign a document acknowledging that she had been informed that her employment contract would expire in 30 days. </div></td> </tr> <tr valign="top"> <td><div align="justify">6)</div></td> <td><div align="justify">She was pressured to sign a pro forma resignation letter drafted by Saudia to avoid the humiliation of her abrupt termination.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></div></td> </tr> </tbody></table> </blockquote> <p>Saudia declaimed against the allegations of Castells and Centi-Mandanas (respondents) and contended that their resignation letters and exit interview forms, along with that of Bilbao, stated expressions of gratitude for the opportunity to work as flight attendants.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p> <p> In ruling that respondents and Bilbao were illegally dismissed, the Labor Arbiter disposed, thusly: </p><blockquote> <p> <b>WHEREFORE</b>, premises all considered, judgment is hereby rendered declaring that complainants were illegally dismissed, and ordering Saudia to pay them full backwages from the time of their illegal dismissal until the finality of this Decision, separation pay at one (1) month for every year of service, less the amount they already received plus ten (10) percent attorney's fees on the amounts actually determined to be due them. </p> <p> The Research and Computation Unit, this Commission, is hereby directed to effect the necessary computation of the judgment award which shall form part of this decision. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original) </p> </blockquote> <p> Unruffled, respondents appealed before the NLRC, asserting that the Labor Arbiter erred in failing to award them moral and exemplary damages.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Bilbao filed a separate appeal, similarly seeking payment of moral and exemplary damages.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Saudia also lodged an appeal before the NLRC,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> asseverating that the resignation letters and exit interview forms clearly demonstrated that respondents and Bilbao voluntarily resigned from their positions. It argued that it was unreasonable to expect a notice of dismissal or termination when the facts clearly indicated that they chose to resign before the company had an opportunity to exercise any rights under the circumstances. Moreover, Saudia contended that the signed quitclaims showed that the three former employees had read and understood the terms, which legally prohibited them from reversing their decisions. Allowing them to repudiate their quitclaims would amount to unjust enrichment.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> The NLRC granted Saudia's appeal, ratiocinating that respondents and Bilbao failed to provide substantial evidence to prove that they were coerced into signing their resignation letters. The NLRC noted that Castells, in her resignation letter, explicitly stated, "It is time to move to another career." Additionally, the NLRC concluded that they had all received their separation benefits, as indicated by the quitclaims they had executed.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The NLRC disposed in this wiseâ </p><blockquote> <p> WHEREFORE, the foregoing premises considered, the respondents' appeal is hereby <b>GRANTED</b>. The decision appealed from is <b>REVERSED</b> and <b>SET ASIDE</b> and a new one is issued finding respondent not guilty of illegal dismissal. </p> <p> For lack of merit, [Bilbao]'s appeal is <b>DISMISSED</b>. </p> <p> Accordingly, the complaint is <b>DISMISSED</b>. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis in the original) </p> </blockquote> <p> Respondents moved for a reconsideration of the foregoing disposition, insisting that they had no viable option but to reluctantly resign from Saudia and as such, they were constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> However, their motion was denied for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> On February 5, 2008, respondents sought recourse before the CA via a Petition for <i>Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The case, docketed as CA-G.R. SP No. 101971, was raffled off to the Ninth Division. </p><p> In their petition, respondents argued that the resignation and quitclaim forms they signed were pre-drafted by Saudia, leaving them with no choice but to complete them in order to avoid having a termination record. They contended that the mere absence of physical coercion or intimidation did not equate to their voluntary or genuine consent to the terms of the quitclaim. They further revealed that Saudia's practice of transferring employees from Manila to Jeddah under the guise of "operational requirements" was a scheme to rid the company of "aging" employees. Lastly, they maintained that both the NLRC and the Labor Arbiter should have awarded them moral and exemplary damages, as Saudia's actions amounted to fraud and bad faith when their employment was terminated.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Bilbao separately filed a petition for <i>certiorari</i> before the CA, impugning the same NLRC issuances. The case was docketed as CA-G.R. SP No. 102319.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p align="center"> <b>CA-G.R. SP No. 102319</b> </p><p> On May 30, 2008, the CA upheld the NLRC's ruling, finding that there was no constructive dismissal. It determined that Saudia exercised a valid management prerogative in terminating its employees for just cause, as outlined in the employment contract signed by both parties. The CA also noted that Saudia gave Bilbao the option to resign or face termination, and like the other employees offered the same choice, Bilbao opted for resignation due to the generous separation pay offered. Moreover, a close examination of the resignation letters from Bilbao and the other complainants revealed expressions of gratitude and appreciation towards their employer, leaving no grounds to assert that they were coerced into resigning.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Bilbao filed a motion for reconsideration, which was subsequently denied by the CA in its July 22, 2008 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The case was then elevated to this Court via a petition for review on <i>certiorari</i>, docketed as G.R. No. 183915, and assigned to the First Division. </p><p> On December 14, 2011, this Court denied Bilbao's petition and affirmed both the May 30, 2008 Decision and the July 22, 2008 Resolution of the CA in CA-G.R. SP No. 102319. The Court decreed that Bilbao voluntarily resigned from her employment with Saudia. Her resignation letter, combined with her educational background and the circumstances surrounding the filing of the illegal dismissal complaint, provided substantial evidence of her voluntary resignation.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p align="center"> <b>CA-G.R. SP No. 101971</b><br> <b><i>(Assailed Decision)</i></b> </p><p> In the impugned Decision now before this Court, the CA reversed the ruling of the NLRC and reinstated the Labor Arbiter's Decision. In so ruling, the CA held that respondents were constructively dismissed by Saudia as revealed by the following circumstancesâ </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1)</div></td> <td width="95%"><div align="justify">Respondents, as well as Bilbao, were all nearly 40 years old when they ended their employment with Saudia.</div></td> </tr> <tr valign="top"> <td><div align="justify">2)</div></td> <td><div align="justify">They were all senior flight attendants with close to two decades of service when their employment with Saudia was terminated.</div></td> </tr> <tr valign="top"> <td><div align="justify">3)</div></td> <td><div align="justify">Saudia provided them with only one week to prepare for their transfer from Manila to Jeddah. </div></td> </tr> <tr valign="top"> <td><div align="justify">4)</div></td> <td><div align="justify">They were required to sign pre-drafted and pre-printed quitclaims by Saudia, which did not specify the amount of settlement being paid.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>The CA further explicated thatâ</p> <blockquote> <p> It is unnatural and contrary to ordinary human experience that a person of sound mind would suddenly and voluntarily abandon a decent-paying job held for almost two (2) decades without any compelling reason; especially if the separation pay is substantial. And given the fact that the flight attendants who resigned at that time were around forty (40) years of age, a clear pattern emerges that Saudia is indeed laying-off the subject flight attendants on the basis of their ages which is tantamount to discrimination.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p> </blockquote> <p> The CA likewise awarded moral and exemplary damages in respondents' favor, disposing in this wise: </p><blockquote> <p> <b>WHEREFORE</b>, in view of the foregoing reasons, the Court <b>SETS ASIDE</b> the National Labor Relations Commission's June 25, 2007 and October 26, 2007 Resolutions for being tainted with grave abuse of discretion amounting to excess of jurisdiction as they are inconsistent with established and prevailing jurisprudence. </p> <p> Accordingly, the Court <b>REINSTATES</b> the Labor Arbiter's August 31, 2006 Decision <b><i>with modifications</i></b>. Consequently, [Saudia] is <b>ORDERED</b> to pay both [respondents] a combined amount of [PHP] 100,000.00 <b><i>per</i> person</b> as moral and exemplary damages, consistent with established and prevailing jurisprudence. </p> <p> Costs against respondent [Saudia]. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> (Emphasis in the original) </p> </blockquote> <p> Saudia's motion for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> was denied by the CA in the challenged Resolution. </p><p> Firm in its position, Saudia stands before this Court through the present Petition, reiterating that respondents voluntary tendered their resignations. Furthermore, Saudia highlights that this issue has long been resolved by this Court in its December 14, 2011 Decision in G.R. No. 183915.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p align="center"> <b>The Court's Ruling</b> </p><p> <b><i>The Petition is impressed with merit.</i></b> </p><p> First off, <i>Tacis v. Shields Security Services, Inc</i>.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> iterates this Court's earlier pronouncement, viz.: </p><blockquote> <p> [I]t must be emphasized that this Court is <i>not</i> a trier of facts, and it is not its function to examine, review, or evaluate the evidence all over again. A petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court should cover only questions of law. In the case at bar, the <i>question of whether petitioners were constructively dismissed from employment is evidently factual because it necessitates an examination of the evidence on record</i>.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p> <p> The Court has enumerated <i>several exceptions</i> to this rule: (1) the conclusion is grounded on speculations, surmises or conjectures; (2) the inference is manifestly mistaken, absurd or impossible; (3) there is grave abuse of discretion; (4) the judgment is based on misapprehension of facts; (5) the findings of fact are conflicting; (6) there is no citation of specific evidence on which the factual findings are based; (7) the findings of absence of facts are contradicted by the presence of evidence on record; (8) the findings of the CA are contrary to those of the trial court; (9) the CA manifestly overlooked certain relevant and undisputed facts that, if properly considered, would justify a different conclusion; (10) the findings of the CA are beyond the issues of the case; and (11) such findings are contrary to the admissions of both parties.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis supplied; citations omitted) </p> </blockquote> <p> In the case at bench, the factual findings of the Labor Arbiter and the CA are at odds with those of the NLRC. Of greater significance, the CA itself rendered conflicting findings in two intertwined cases that essentially involve the same subject matter. In view of these inconsistencies in the factual findings and legal conclusions of the labor tribunals and the appellate court, the Court is compelled to entertain this Petition, albeit it entails questions of fact. </p><p> <b><i>Respondents' resignations were voluntary. Saudia is not guilty of constructive dismissal.</i></b> </p><p> The concept of constructive dismissal <i>vis-Ã -vis</i> voluntary resignation was edifyingly explicated in the case of <i>Panasonic Manufacturing Philippines Corporation v. Peckson</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> thusâ </p><blockquote> <p> Constructive dismissal is defined as quitting or cessation of work because continued employment is rendered impossible, unreasonable or unlikely; when there is a demotion in rank or a diminution of pay and other benefits. It exists if an act of clear discrimination, insensibility, or disdain by an employer becomes so unbearable on the part of the employee that it could foreclose any choice by him except to forego his continued employment. There is involuntary resignation due to the harsh, hostile, and unfavorable conditions set by the employer. The test of constructive dismissal is whether a reasonable person in the employee's position would have felt compelled to give up his employment/position under the circumstances. </p> <p> On the other hand, "[r]esignation is the voluntary act of an employee who is in a situation where one believes that personal reasons cannot be sacrificed in favor of the exigency of the service, and one has no other choice but to dissociate oneself from employment. It is a formal pronouncement or relinquishment of an office, with the intention of relinquishing the office accompanied by the act of relinquishment. As the intent to relinquish must concur with the overt act of relinquishment, the acts of the employee before and after the alleged resignation must be considered in determining whether he or she, in fact, intended to sever his or her employment."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Citation omitted) </p> </blockquote> <p> In light of the foregoing jurisprudential polestars, a careful scrutiny of the facts on record reveals-that contrary to the CA's conclusion, Saudia was able to establish respondents' voluntary resignation. </p><p> <i>First</i>, Saudia effectively demonstrated that respondents' resignation letters reflected the voluntary nature of their separation from the company, and were not prompted by any form of deceptive tactics or coercion on Saudia's part. In actual fact, the resignation letters not only revealed an absence of reluctance or tension on respondents' part but also conveyed genuine gratitude. There is no indication of hostility toward Saudia. The pronouncement of the Court in <i>Bilbao v. Saudi Arabian Airlines</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> which arose from the same set of facts as the present case, is directly applicable and highly relevant to the issue at handâ </p><blockquote> <p> After a review of the case, we uphold the findings of the CA that Bilbao voluntarily resigned from her employment with Saudia. Her resignation letter and undertaking that evidenced her receipt of separation pay, when taken together with her <b>educational attainment</b> and the circumstances surrounding the filing of the complaint for illegal dismissal, comprise substantial proof of Bilbao's voluntary resignation. </p> <p> . . . .</p> <p> In the instant case, Bilbao tendered her resignation letter a week after her transfer to the Jeddah office. In the said letter, Bilbao <b>expressed her gratitude for the support which Saudia had given her for her eighteen years of service</b>. Clearly, her use of words of appreciation and gratitude <b>negates the notion that she was forced and coerced to resign</b>. Besides, the resignation letter was hand-written by Bilbao on a Saudia form and was in English, a language she is conversant in.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis supplied) </p> </blockquote> <p> <i>Second</i>, respondents accepted the monetary benefits provided by Saudia and in return, they executed an undertaking,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> thereby settling and waiving any further claims or causes of action against Saudia. The Court has consistently held that a waiver or quitclaim is a valid and binding agreement between the parties, provided that it represents a fair and reasonable settlement, and that the person executing it does so voluntarily and with a full understanding of its implications.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> <i>Lastly</i>, respondents' contention that they were coerced into signing the resignation letter, quitclaims, and waivers remains unsubstantiated and, therefore, lacks merit. Once again, <i>Bilbao</i> elucidatesâ </p><blockquote> <p> Even assuming that Saudia prepared the form in which Bilbao wrote her resignation letter as claimed, this Court is not convinced that she was coerced and intimidated into signing it. Bilbao is <b>no ordinary employee who may not be able to completely comprehend and realize the consequences of her acts</b>. She is <b>an educated individual</b>. It is highly improbable that with her long years in the profession and her educational attainment, she could be tricked and forced into doing something she does not intend to do. Under these circumstances, it can hardly be said that Bilbao was coerced into resigning from Saudia.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Emphasis supplied) </p> </blockquote> <p> Moreover, even if respondents genuinely believed that it was widely known among Saudi employees that when flight attendants of other nationalities were transferred to Jeddah due to 'operational requirements,' they were effectively coerced into resigning, this belief alone amounts to mere speculation or conjecture, and is insufficient to support the claim of constructive dismissal. After all, <i>he who asserts, not he who denies, must prove</i>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> In the absence of concrete evidence, the Court must rely on the actual proof presentedâthe resignation letters, quitclaims, and waivers bearing the respondents' signatures, which unequivocally demonstrate their intent to voluntarily terminate their employment with Saudia, rather than the unsubstantiated claim of coercion. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <em>Certiorari</em> is <b>GRANTED</b>. The July 27, 2017 Decision and the February 15, 2019 Resolution of the Court of Appeals in CA-G.R. SP No. 101971 are <b>REVERSED and SET ASIDE</b>. The June 25, 2007 Resolution and the October 26, 2007 Resolution of the National Labor Relations Commission in NLRC-NCR CA No. 051530-07 are <b>REINSTATED AND AFFIRMED</b> with respect to respondents Maria Lourdes D. Castells and Shalimar Centi-Mandanas. </p><p> <b>SO ORDERED.</b> </p><p> <i>Inting<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup></i> and <i>Gaerlan, JJ</i>., concur. <i><br> Caguioa<sup style="COLOR: RGB(255, 0, 0);">*</sup> (Chairperson), J</i>., on official business. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Acting Chairperson. </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 10-43. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 50-64. The July 27, 2017 Decision was penned by Associate Justice Renato C. Francisco, with the concurrence of Associate Justices Sesinando E. Villon and Manuel M. Barrios of the Ninth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 66-68. The February 15, 2019 Resolution was issued by Associate Justice Sesinando E. Villon, with the concurrence of Associate Justices Manuel M. Barrios and Danton Q. Bueser of the Special Former Ninth Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 592-602. The June 25, 2007 Resolution in NLRC-NCR CA No. 051530-07 was issued by Commissioner Tito F. Genilo, with the concurrence of Presiding Commissioner Lourdes C. Javier and Commissioner Gregorio O. Bilog III of the Third Division, National Labor Relations Commission, Quezon City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 436-450. The August 31, 2006 Decision in NLRC-NCR Case No. 00-07-06315-05 00-08-06745-05 was penned by Labor Arbiter Ramon Valentin C. Reyes of the National Labor Relations Commission, National Capital Region, Quezon City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 113; 124; 135. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 145. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 146. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 151-152.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 153-154.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 155. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 70-71.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 72-73.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 171-173, Affidavit.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 229-231, Affidavit. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 85-94, Position Paper. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 54; 449-450. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 527-541, Memorandum of Appeal for Castells and Centi-Mandanas. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 453-454, Notice of Appeal. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 470-515, Respondent's Verified Memorandum of Appeal. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 597-601. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 601-602. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 604-623, Motion for Reconsideration. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 635-637. The October 26, 2007 Resolution in NLRC-NCR CA No. 051530-07 was issued by Commissioner Tito F. Genilo, with the concurrence of Presiding Commissioner Lourdes C. Javier and Commissioner Gregorio O. Bilog III of the Third Division, National Labor Relations Commission, Quezon City. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 653-690. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 57. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 761-777. The May 30, 2008 Decision in CA-G.R. SP No. 102319 was penned by Associate Justice Mariano C. Del Castillo (now a retired Member of this Court), with the concurrence of Associate Justices Arcangelita Romilla-Lontok and Ricardo R. Rosario (now a member of this Court) of the Thirteenth Division, Court of Appeals, Manila. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 768-775. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 776-777. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 639-652. The December 14, 2011 Decision was penned by Associate Justice Teresita J. Leonardo-De Castro, with the concurrence of Chief Justice Renato C. Corona (Chairperson) and Associate Justices Lucas P. Bersamin, Martin S. Villarama, and Bienvenido L. Reyes of the First Division. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 60-61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 63-64. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 741-759. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 678 Phil. 793 (2011) [Per J. Leonardo-De Castro, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 907 Phil. 456 (2021) [Per J. Hernando, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 463-464. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 464. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 850 Phil. 68 (2019) [Per J. A.B. Reyes, Jr., Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 79. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 678 Phil. 793 (2011) [Per J. Leonardo-De Castro, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 802. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, pp. 154-155. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> <b>Tacis v. Shields Security Services, Inc.</b>, 907 Phil. 456, 466 (2021) [Per J. Hernando, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Bilbao v. Saudi Arabian Lines</b>, 678 Phil. 793, 803 (2011) [Per J. Leonardo-De Castro, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>See</i> <b>Pascual v. Sitel Philippines Corporation</b>, 872 Phil. 525, 540 (2020) [Per J. Inting, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

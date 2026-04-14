@@ -11,7 +11,7 @@ Ingest scripts expect block boundaries like:
 
 ## CHAPTER 1 …
 
-### Article 1.
+### Section 1.
 
 Body paragraph one.
 
@@ -21,7 +21,7 @@ Body paragraph two.
 Rules:
 
 - `##` = Book / Title / Chapter (or preliminary blocks).
-- `### Article N.` = article heading; **blank line after** the heading line before body text.
+- `### Section N.` = section heading (RA 11232 uses SEC./SECTION in the statute); **blank line after** the heading line before body text.
 - **Blank line before** each `##` / `###` when it follows body or a title line, so the hierarchy is never run into the previous paragraph.
 
 Word exports often drop those blank lines or merge paragraphs onto one line.
@@ -36,7 +36,7 @@ python LexCode/pipelines/rcc/normalize_codal_md_layout.py LexCode/Codals/md/RCC_
 python LexCode/pipelines/rcc/3_ingest_codal_reference.py --md LexCode/Codals/md/RCC_structured.md --clear
 ```
 
-Each `SEC.` / `SECTION` becomes one ingest row (`### Article N.`). Titles and chapters from `TITLE` / `CHAPTER` lines are preserved.
+Each `SEC.` / `SECTION` becomes one ingest row (`### Section N.`). Titles and chapters from `TITLE` / `CHAPTER` lines are preserved.
 
 ## One-shot CLI (recommended)
 

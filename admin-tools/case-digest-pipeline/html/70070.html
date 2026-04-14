@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 238095 - ANGELITO O. HAO, PETITIONER, VS. JENNIFER LAGAHID, ALSO KHOWN AS "JENNIFER LAGAHID-HAO," RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70070' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 238095, August 20, 2025 ]</H2>
+			<H3>ANGELITO O. HAO, PETITIONER, VS. JENNIFER LAGAHID, ALSO KHOWN AS "JENNIFER LAGAHID-HAO," RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">An act or omission causing damage to another may give rise to two separate civil liabilities.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>This Court resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> under Rule 45 of the 1997 Rules of Civil Procedure, praying that the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 4, 2017 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated February 27, 2018 of the Court of Appeals be reversed and set aside.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The Court of Appeals reversed and set aside<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> the April 25, 2016 Decision<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> of the Regional Trial Court, which granted the Complaint for Damages filed by Angelito O. Hao (Angelito) against Jennifer Lagahid, also known as "Jennifer Lagahid-Hao" (Jennifer).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Samson Eng Guan Hao (Samson) was the registered owner of several properties.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> He was the brother of Angelito and the alleged spouse of Jennifer.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Samson died on August 24, 2007.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On September 18, 2007, Jennifer executed an Affidavit of SelfÂ­-Adjudication<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> for herself and her minor son, Ace Jefferson Lagahid Hao (Ace). She claimed that she was the lawful wife of Samson and that Ace was their son. She adjudicated to herself and her son the properties left by Samson.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On May 6, 2008 and May 27, 2008, Jennifer executed two Affidavits of Loss,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> alleging that she can no longer locate the owner's duplicate copies of Samson's 15 Transfer Certificates of Title.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> According to Jennifer, the copies were stored in the cabinet of their room but were either "misplaced or removed by [their] house helpers[.]"<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Jennifer and Ace filed an Omnibus Petition<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated June 11, 2008, praying for the replacement of the lost owner's duplicate copies.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The case was docketed as Miscellaneous Case No. 2008-086.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Their Petition was eventually granted by the trial court in its Order<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated January 22, 2009.<br><br>On October 5, 2009, Angelito filed a Petition for Relief from Judgment with Application for Issuance of Preliminary Injunction and/or Temporary Restraining Order<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> before the trial court. He alleged that the 15 owner's duplicate copies were not lost but were actually in his possession as Samson's brother and business partner. He discovered that new owner's duplicate copies were issued to Jennifer when he applied for certified true copies of the titles for extra-judicial partition purposes.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Angelito also claimed that Samson was never married nor did he have a child. To prove his claim, he attached to his petition the certifications from the National Statistics Office and the Civil Registrar of Cagayan de Oro City, both stating that they have no record of marriage between Samson and Jennifer. Angelito alleged that Jennifer was only able to get the new owner's duplicate copies through fraudulent misrepresentations.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> He prayed that the trial court's Order dated January 22, 2009 be declared void and that the original owner's duplicate copies in his possession be reinstated and declared valid.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>On October 9, 2009, the trial court issued an Order<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> granting Angelito's Petition.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> It declared the Order dated January 22, 2009 void and reinstated the original owner's duplicate copies.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Angelito then filed a criminal complaint against Jennifer for four counts of perjury. The prosecutor later filed four Informations for perjury against Jennifer before the Municipal Trial Court in Cities in Cagayan de Oro City. The criminal cases were docketed as Criminal Case Nos. M10-02-238 to M10-02-241.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>On October 28, 2009, Angelito also filed a civil complaint<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> for damages against Jennifer before the trial court based on her false and fraudulent claims.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> He prayed that he be awarded PHP 50,000.00 as actual damages, PHP 200,000.00 as moral damages, PHP 100,000.00 as exemplary damages, PHP 100,000.00 as attorney's fees plus PHP 2,000.00 as appearance fee, PHP 50,000.00 as litigation expenses, and costs of suit.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The case was docketed as Civil Case No. 2009-302.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Angelito later filed an Amended Complaint<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated August 16, 2011 to include claims for damages arising from Jennifer's filing of a Petition for the surrender of the 15 Certificates of Title in Angelito's possession and a Complaint for Accounting and Damages.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Trial then ensued.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>On April 25, 2016, the trial court rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> in favor of Angelito.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Based on the evidence presented, it found that Jennifer and Samson were not legally married and that Jennifer and Ace were not heirs of Samson. It also found that Jennifer did not possess the purported lost titles. The trial court thus held that she violated Article 21 of the Civil Code when she misrepresented herself as Samson's legal spouse and when she fraudulently filed a Petition for the issuance of new owner's duplicate copies of the 15 titles that were registered in Samson's name. The trial court found that Jennifer's acts caused annoyance, disturbance, and vexation on Angelito and his siblings, who were Samson's intestate heirs.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The dispositive portion of the trial court's Decision provided:<blockquote><b>WHEREFORE</b>, there being preponderance of evidence in favor [of Angelito], [Jennifer] is ordered:<ol><li>To pay [Angelito] actual damages in the amount of [PHP] 50,000.00;<br></li><li>To pay [Angelito] the sum of [PHP] 100,000.00 as attorney's fee, plus [PHP] 2,000.00 appearance fee, and another amount of [PHP] 50,000.00 as litigation expenses;<br></li><li>To pay [Angelito] the amount of [PHP] 200,000.00 for moral damages and [PHP] 100,000.00 for exemplary damages;<br></li><li>To pay the cost of suit.</li></ol></blockquote><blockquote>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></blockquote>Jennifer appealed<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> the case before the Court of Appeals. She alleged that Angelito had no cause of action against her because the criminal cases he filed, which were the bases for his civil case for damages, were still pending before the trial court. Since she was not yet found guilty, her alleged fraudulent acts could not have caused any damage, loss, or injury to Angelito.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Jennifer also contended that assuming Angelito has a cause of action against her, he still failed to prove by preponderance of evidence his allegations.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Moreover, she claimed that there was a misjoinder of indispensable parties when Angelito failed to implead his siblings, who were also Samson's heirs.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>On August 4, 2017, the Court of Appeals promulgated a Decision<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> granting Jennifer's appeal.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> It held that the trial court erred in giving due course to Angelito's Complaint:<blockquote>. . . [T]his [c]ourt finds that [Angelito's] Complaint dated 26 October 2009 was barred by either <i>res judicata</i> or <i>litis pendentia</i> with respect to the claims arising from the petition for issuance of new owner's duplicate certificates of title, depending on the status of the said petition at the time of the filing of the Complaint, and by <i>litis pendentia</i> with respect to the claims arising from the criminal complaints for perjury, as the latter cases appear to have been pending at the time.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Emphasis in the original)</blockquote>The Court of Appeals explained that under Rule 38, Section 6 of the Rules of Court, in case the trial court grants a petition for relief from judgment, the court "shall proceed to hear the case[.]"<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Hence, when Angelito's Petition for Relief from Judgment was granted, Angelito "should have instituted his claim for attorney's fees and expenses of litigation as a compulsory counterclaim in the petition for issuance of new owner's duplicate certificates of title."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Citing <i>Lafarge Cement Philippines, Inc. v. Continental Cement Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the Court of Appeals reiterated that a compulsory counterclaim for damages must be set up in the same action. Otherwise, the claim is barred forever.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> If the claim "is filed concurrently with the main action but in a different proceeding, it would be abated on the ground of <i>litis pendentia</i>[.]"<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> On the other hand, if the claim was filed subsequently, the claim will also be dismissed on the ground of <i>res judicata</i>.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>On Angelito's claims arising from the criminal cases, the Court of Appeals held that the civil liability was deemed instituted with the criminal action, unless he waived the civil action, reserved the right to institute it in a separate action, or instituted the civil action before he filed the criminal cases. Since he filed the criminal cases first" and there was no reservation made by Angelito either in his Complaint or in the criminal cases, his claim for damages was deemed instituted in the criminal action against Jennifer. He is now barred from instituting a separate civil action to recover civil liability.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The dispositive portion of the Court of Appeals Decision provided:<blockquote>Accordingly, the appeal is GRANTED. The assailed Decision dated 25 April 2016 rendered by Branch 21 of the Regional Trial Court of Misamis Oriental, 10<sup>th</sup> Judicial Region, Cagayan de Oro City in Civil Case No. 2009-302 is hereby REVERSED and SET ASIDE. The Complaint dated 26 October 2009 is hereby DISMISSED for being barred by <i>res judicata</i> and/or <i>litis pendentia</i>.&nbsp;<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Emphasis in the original)</blockquote>Angelito moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> which was denied by the Court of Appeals for lack of merit in its Resolution dated February 27, 2018.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>On April 6, 2018, Angelito filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> against Jennifer before this Court. Petitioner Angelito prays that the August 4, 2017 Decision and the February 27, 2018 Resolution of the Court of Appeals be reversed and set aside and that the April 25, 2016 Decision of the trial court be reinstated.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Petitioner ascribes grave abuse of discretion amounting to lack or excess of jurisdiction on the part of the Court of Appeals when it reversed and set aside the April 25, 2016 Decision of the trial court and ruled that his claim for damages is barred by <i>res judicata</i> and <i>litis pendentia</i>.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Petitioner argues that Miscellaneous Case No. 2008-086 is "summary in nature and partakes of a cadastral proceeding[.]"<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> He explains that the Omnibus Petition filed by respondent Jennifer only deals with the issuance of new owner's duplicate copies of transfer certificates of title; there was no respondent or defendant in that petition. Since he was not a party to the Omnibus Petition, he was not required to submit an answer where he could have setup his counterclaims. He reiterates that counterclaims are not allowed in administrative cases. Moreover, the trial court order granting respondent's Omnibus Petition was not directed against him. His main purpose for filing the Petition for Relief from Judgment is only to inform the trial court that he possessed the allegedly lost certificates of title. In addition, the trial court has limited jurisdiction since it was only acting as a cadastral court.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Petitioner also contends that Rule 38, Section 6 of the Rules of Court should not be strictly applied in his case because it is a miscellaneous case that is cadastral in nature.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> The trial court in the miscellaneous case also did not really "proceed to hear and determine the case as if a timely motion for a new trial or reconsideration had been granted by it."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> It merely declared its Decision dated January 22, 2009 void.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>According to petitioner, the trial court did not acquire jurisdiction over Miscellaneous Case No. 2008-086 since the certificates of title were not missing. Without jurisdiction over the case, the trial court could not pass upon any counterclaim that petitioner may have pursued.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>Petitioner avers that he could not set up a counterclaim because there was no claim against him in Miscellaneous Case No. 2008-086.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Also, his "claim for damages are not necessarily compulsory counterclaims[.]"<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> He argues that in his Amended Complaint: he included the following as his causes of action:<blockquote><ol type="i"><li>Petitioner's claims for civil liability <i>quasi-delicto</i> arising from the four (4) counts of perjury charges against [respondent] docketed as Crim. Case Nos. M10-02-238 to 241 with the MTCC-5, Cagayan de Oro City;<br><br></li><li>Claims for damages arising from the filing of a second baseless petition before the RTC-12, Oroquieta City, against herein petitioner for the surrender of the 15 certificates of title to respondent docketed as Miscellaneous Case No. 5005; and<br><br></li><li>Claims for damages arising from another unfounded complaint for accounting and damages with prayer for TRO, injunction and receivership, against herein petitioner filed before the RTC-14, Oroquieta City docketed therein as Civil Case No. 5007-140175[.]<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></li></ol></blockquote>During trial for his Petition for damages, petitioner included another cause of action. He added that his claim for damages was likewise based on the criminal complaint for qualified theft filed by respondent against him. This was subsequently dismissed by the City Prosecution Office.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>To prove that his claim for damages is not wholly in the nature of counterclaims, petitioner differentiates Miscellaneous Case No. 2008-086 and Civil Case No. 2009-302:<blockquote>The miscellaneous case deals with the issue of whether the certificates of title were lost and whether petitioner therein (herein respondent) has sufficient interest in the property covered by the certificates of title to entitle her to pursue the case. The complaint for damages on the other hand deals with the issue of whether or not respondent committed perjury in her various affidavits which she used in pursuing the miscellaneous case as well as the issue of whether respondent is liable for damages in the two unfounded miscellaneous cases and one civil case for accounting, and in her baseless complaint for Qualified Theft against petitioner.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></blockquote>Petitioner adds that respondent, despite active participation in the trial court, did not raise the issue of <i>res judicata</i> or <i>litis pendentia</i>. He points out that the issue was not raised even on appeal before the Court of Appeals. This defense is, therefore, waived.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Lastly, petitioner claims that the civil action was filed prior to the filing of the criminal information for perjury. Thus, there was no need to reserve his right to file a separate civil action to claim civil liability in criminal cases.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>In compliance with this Court's Resolution<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> dated July 4, 2018, respondent filed a Comment<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> dated August 23, 2018. Respondent asserts that the Court of Appeals did not commit reversible error.<br><br>First, petitioner should have raised his claim for damages when he filed the Petition for Relief from Judgment with Application for Issuance of Preliminary Injunction and/or Temporary Restraining Order. The cadastral court hearing the petition was still a court of "original jurisdiction." According to respondent, petitioner should have filed the claim for damages as a compulsory counterclaim because it was based on the "alleged 'false and fraudulent claims"' made by respondent in Miscellaneous Case No. 2008-086. For failing to do so, respondent argues that petitioner abandoned his claim. Thus, the matter is now barred by <i>res judicata</i> and <i>litis pendentia</i>.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>Second, respondent claims that petitioner did not reserve his right to file a separate civil action when the criminal cases for perjury were instituted.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>Third, she asserts that the Court of Appeals did not commit reversible error nor grave abuse of discretion when it ruled on the issues of <i>res judicata</i> and <i>litis pendentia</i>, which were not raised by respondent in its appeal.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Fourth, even assuming that petitioner's claim for damages is entertained, respondent asserts that it is unmeritorious. The finding of guilt against her is pending appeal, and until it is final, it cannot be determined whether petitioner suffered damages, loss, or injury as a consequence. Respondent adds that petitioner's claim for moral and exemplary damages was unsubstantiated by evidence. As for the attorney's fees, the grant of such had no basis in law.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>Fifth, respondent avers that petitioner's Complaint for Damages should have been dismissed for non-joinder of all of his siblings as indispensable parties.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br>In compliance with this Court's Resolution<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> dated November 19, 2018, petitioner filed a Reply<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> dated February 8, 2019.<br><br>Petitioner points out that respondent made conflicting assertions in conceding that proceedings for the reissuance of lost owner's duplicate titles are summary and non-adversarial in nature, yet insisting that a "regular adversarial" claim for damages should have been made there. He maintains that the cases respondent cited do not support the position that counterclaims should be litigated in a petition for relief from judgment. On the contrary, petitioner stresses that a cadastral court has no authority to award damages. Thus, the Complaint for Damages is not barred by <i>res judicata</i> or <i>litis pendentia</i>.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>On whether it was necessary to reserve the right to institute a separate civil action, petitioner asserts that an independent civil action for damages arising from fraud may be filed separately without any reservation in the criminal action. He adds that independent civil actions do not depend on a criminal finding of guilt.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>As to the misjoinder, petitioner argues that the interests of their other siblings will not be affected by any judgment rendered for or against petitioner.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br>Both parties were ordered to submit their respective memoranda in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> dated November 15, 2021. In compliance, petitioner filed a Memorandum<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> dated April 8, 2022. After delays, respondent filed a Memorandum<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> dated November 10, 2023.<br><br>The issue for this Court's resolution is whether petitioner Angelito O. Hao may pursue a separate civil action for damages.<br><br>The Petition is impressed with merit.<br><br>A single act or omission may trigger different kinds of civil liability: civil liability arising from the crime and independent civil liability.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> In <i>Cancio, Jr. v. Isip</i>:<sup style="COLOR: RGB(255, 0, 0);">[89]</sup><blockquote>An act or omission causing damage to another may give rise to two separate civil liabilities on the part of the offender, <i>i.e.</i>, (1) civil liability <i>ex delicto</i>, under Article 100 of the Revised Penal Code; and (2) independent civil liabilities, such as those (a) not arising from an act or omission complained of as felony [<i>e.g., culpa contractual</i> or obligations arising from law under Article 31 of the Civil Code, intentional torts under Articles 32 and 34, and <i>culpa aquiliana</i> under Article 2176 of the Civil Code]; or (b) where the injured party is granted a right to file an action independent and distinct from the criminal action [Article 33, Civil Code]. Either of these two possible liabilities may be enforced against the offender subject, however, to the caveat under Article 2177 of the Civil Code that the offended party "cannot recover damages twice for the same act or omission" or under both causes.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> (Citations omitted)</blockquote><center><b>I</b></center><br>Petitioner's claim for damages arising from the crime was instituted with the criminal action.<br><br>An action to recover civil liability of the first kind, or civil liability arising from crime, is deemed instituted with the criminal action. Rule 111, Section 1 of the Rules of Court provides:<blockquote><center><b>RULE 111<br>Prosecution of Civil Action</b></center><br>SECTION 1. <i>Institution of Criminal and Civil Actions</i>. â (a) When a criminal action is instituted, the civil action for the recovery of civil liability arising from the offense charged shall be deemed instituted with the criminal action unless the offended party waives the civil action, reserves the right to institute it separately or institutes the civil action prior to the criminal action.<br><br>. . . .</blockquote>The institution of criminal actions is governed by Rule 110, Section 1 of the Rules of Court:<blockquote><center><b>RULE 110<br>Prosecution of Offenses</b></center><br>SECTION 1. <i>Institution of Criminal Actions</i>. â Criminal actions shall be instituted as follows:<blockquote><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">For offenses where a preliminary investigation is required pursuant to section 1 of Rule 112, by <i>filing the complaint</i> with the proper officer for the purpose of conducting the requisite preliminary investigation.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">For all other offenses, by <i>filing the complaint or information</i> directly with the Municipal Trial Courts and Municipal Circuit Trial Courts, or the <i>complaint</i> with the office of the prosecutor. In Manila and other chartered cities, the <i>complaint</i> shall be filed with the office of the prosecutor unless otherwise provided in their charters. (Emphasis supplied)</div></td></tr></tbody></table></blockquote></blockquote>Applying Rule 110, Section 1, petitioner's criminal action was instituted when he filed a complaint for four counts of perjury before the Office of the City Prosecutor, and not when the prosecutor filed an Information against respondent. The filing of the criminal action preceded the filing of his complaint for damages, which he admitted in his Complaint for Damages:<blockquote>12. That, thereafter, Plaintiff filed a criminal complaint for perjury on four (4) counts against Defendant before the Office of the City Prosecutor under NPS No. X-06-INV-09J-02118;<sup style="COLOR: RGB(255, 0, 0);">[91]</sup></blockquote>Petitioner did not waive the civil action nor did he reserve his right to institute it separately. Since the criminal complaint was filed prior to the filing of the civil complaint, his civil action to recover damages was deemed instituted in the criminal action for perjury against respondent. Thus, his claim for damages arising from the crime cannot be the subject of a separate civil action.<br><br><center><b>II</b></center><br>Petitioner may claim damages arising from respondent's independent civil liability.<br><br>While petitioner cannot institute a separate civil action for damages arising from the crime, he is not precluded from filing a separate civil action for damages arising from respondent's independent civil liability. The Civil Code allows an injured party to bring a separate civil action for damages based on fraud:<blockquote>ARTICLE 33. In cases of defamation, fraud, and physical injuries, a civil action for damages, entirely separate and distinct from the criminal action, may be brought by the injured party. Such civil action shall proceed independently of the criminal prosecution, and shall require only a preponderance of evidence.</blockquote>Rule 111, Section 3 of the Rules of Court likewise provides:<blockquote><center><b>RULE 111<br>Prosecution of Civil Action<br><br></b></center>SECTION 3. <i>When Civil Action May Proceed Independently</i>. â In the cases provided for in Articles 32, 33, 34 and 2176 of the Civil Code of the Philippines, the independent civil action may be brought by the offended party. It shall proceed independently of the criminal action and shall require only a preponderance of evidence. In no case, however, may the offended party recover damages twice for the same act or omission charged in the criminal action.</blockquote>"Article 33 [of the Civil Code] contemplates a civil action for the recovery of damages that is entirely unrelated to the purely criminal aspect of the case."<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> While the quantum of proof in criminal cases is proof beyond reasonable doubt, preponderance of evidence is sufficient in independent civil actions under Article 33.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> This independent civil action may be filed separately and prosecuted independently.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> Failure to make a reservation in the criminal action does not constitute a waiver of the right to file an independent civil action.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup><br><br>"Fraud" in Article 33 is to be understood in the ordinary sense.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> The Revised Penal Code does not use "fraud" to define specific offenses.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> It has no technical legal meaning in our laws.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> Thus, "fraud" in Article 33 should be appreciated in its generic sense:<blockquote>In its general sense, fraud is deemed to comprise anything calculated to deceive, including all acts, omissions, and concealment involving a breach of legal or equitable duty, trust, or confidence justly reposed, resulting in damage to another, or by which an undue and unconscientious advantage is taken of another. It is a generic term embracing all multifarious means which human ingenuity can devise, and which are resorted to by one individual to secure an advantage over another by false suggestions or by suppression of truth and includes all surprise, trick, cunning, dissembling and any unfair way by which another is cheated.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup></blockquote>A perusal of petitioner's Complaint for Damages demonstrates that petitioner seeks damages for injury incurred due to respondent's fraudulent acts.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> Petitioner alleged that by filing the perjured complaint that contained false allegations and was supported by likewise perjured documents and testimony, respondent was able to obtain the Order dated January 22, 2009 in her favor.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> Through the said Order, the 15 owner's duplicate copies of titles in petitioner's possession were declared void and new copies were issued to respondent.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup><br><br>Petitioner amended his Complaint to include damages for respondent's filing of a Petition for the surrender of the 15 Certificates of Title in his possession and a Complaint for Accounting and Damages.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> During trial, petitioner added as a cause of action respondent's filing of a criminal complaint for qualified theft against petitioner, which was dismissed by the prosecutor.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> In addition to the "mental anguish, serious anxiety, wounded feelings, sleepless nights and moral shock" petitioner suffered from this as the administrator and possessor of the properties, as represented by the titles, petitioner was constrained to engage" the services of counsel to redress his rights.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> Respondent's scheme to gain control of the titles for her enrichment and to petitioner's detriment constitutes fraud that may be the subject of an action under Article 33 of the Civil Code.<br><br><center><b>III</b></center><br>Petitioner's claim for damages arising from the grant of the Petition for Relief from Judgment cannot be set up as a compulsory counterclaim.<br><br>Petitioner argues that the Court of Appeals erred in holding that he should have filed his claim for damages as a compulsory counterclaim in the Petition for issuance of new owner's duplicate certificates of title. He insists that he can file a separate civil action to claim damages based on the grant of the Petition for Relief from Judgment.<br><br>The Court of Appeals mistakenly considered petitioner's claim as a compulsory counterclaim. In <i>Spouses Ponciano v. Parentela, Jr.</i>:<sup style="COLOR: RGB(255, 0, 0);">[106]</sup><blockquote>A compulsory counterclaim is any claim for money or other relief which a defending party may have against an opposing party, which at the time of suit arises out of, or is necessarily connected with, the same transaction or occurrence that is the subject matter of plaintiff's complaint. It is compulsory in the sense that if it is within the jurisdiction of the court, and does not require for its adjudication the presence of third parties over whom the court cannot acquire jurisdiction, it must be set up therein, and will be barred in the future if not set up.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup> (Citation omitted)</blockquote>In <i>Financial Building Corp. v. Forbes Park Association, Inc.</i>:<sup style="COLOR: RGB(255, 0, 0);">[108]</sup><blockquote>A compulsory counterclaim is auxiliary to the proceeding in the original suit and derives its jurisdictional support therefrom. A counterclaim presupposes the existence of a claim against the party filing the counterclaim. Hence, where there is no claim against the counterclaimant, the counterclaim is improper and it must dismissed . . .<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> (Citations omitted)</blockquote>In respondent's Petition for issuance of new owner's duplicate certificates of title, there is no defendant since the objective of the Petition is "merely to determine two things â (1) that the owner's duplicate [copies] of the certificate[s] of title [were] actually lost; and (2) that the person who filed the petition has sufficient interest in the property covered by the title to acquire a copy of the same."<sup style="COLOR: RGB(255, 0, 0);">[110]</sup><br><br>Petitioner cannot be expected to set up his claim for damages as a compulsory counterclaim since he was not a party to respondent's Petition. He was not a respondent there nor was he even aware that the Petition exists.<br><br>Petitioner's claim is merely similar to a compulsory counterclaim in that in ordinary civil actions, a claim for damages incurred by reason of the unfounded suit must be set up as a compulsory counterclaim:<blockquote>A counterclaim purely for damages and attorney's fees by reason of the unfounded suit filed by the respondent, has long been settled as falling under the classification of compulsory counterclaim and it must be pleaded in the same action, otherwise, it is barred. In <i>Lafarge Cement Phil. Inc. v. Continental Cement Corp.</i> citing <i>Tiu Po, et al. v. Hon. Bautista, et al.</i>, this Court ruled that counterclaims seeking moral, actual and exemplary damages and attorney's fees against the respondent on account of their malicious and unfounded complaint was compulsory.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> (Citations omitted)</blockquote>The rule on bringing compulsory counterclaims cannot apply in a proceeding where the one who stands to be damaged by the allegations is not a party. The success of respondent's machinations hinged precisely on the exclusion of petitioner from the proceedings. By respondent's actions, petitioner could not have interposed an answer nor a compulsory counterclaim.<br><br>Even compulsory counterclaims may be brought in a separate action when the complaint is dismissed for lack of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> Here, the court rendering the decision to grant the issuance of new owner's duplicate titles lost jurisdiction when it found that the subject titles were neither lost nor destroyed.<br><br>In <i>Gaw Chin Ty v. Chua</i>,<sup style="COLOR: RGB(255, 0, 0);">[113]</sup> Chua claimed that he lost the original owner's duplicate title and instituted a proceeding for the issuance of a new owner's duplicate title.<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> It was later proven that the title was not actually lost or destroyed.<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> The Court ruled that if the title is not lost or destroyed in the first place, the court rendering the decision to grant the issuance of a new owner's duplicate title has no jurisdiction to order the issuance of a new owner's duplicate title:<blockquote>Presidential Decree (P.D.) No. 1529 provides the procedure in case of loss of an owner's duplicate certificate of title as follows:<blockquote>Section 109. <i>Notice and replacement of lost duplicate certificate</i>. â In case of loss or theft of an owner's duplicate certificate of title, due notice under oath shall be sent by the owner or by someone in his behalf to the Register of Deeds of the province or city where the land lies as soon as the loss or theft is discovered. If a duplicate certificate is lost or destroyed, or cannot be produced by a person applying for the entry of a new certificate to him or for the registration of any instrument, a sworn statement of the fact of such loss or destruction may be filed by the registered owner or other person in interest and registered.<br><br>Upon the petition of the registered owner or other person in interest, the court may, after notice and due hearing, direct the issuance of a new duplicate certificate, which shall contain a memorandum of the fact that it is issued in place of the lost duplicate certificate, but shall in all respects be entitled to like faith and credit as the original duplicate, and shall thereafter be regarded as such for all purposes of this decree.</blockquote>However, Section 109 applies only if the owner's duplicate certificate is indeed lost or destroyed. Consequently, the decision may be attacked any time.<br><br>In <i>Ibias, Sr. v. Macabeo</i>, We ruled that if the certificate of title is not in fact lost or destroyed, the court where the petition for the issuance of a new owner's duplicate certificate of title never acquired jurisdiction to order the issuance of a new certificate. The newly issued duplicate is itself null and void. In <i>New Durawood Co., Inc. v. CA</i>, We also stated that:<blockquote>In the instant case, the owner's duplicate certificates of title were in the possession of Dy Quim Pong, the petitioner's chairman of the board and whose family controls the petitioner-corporation. Since said certificates were not in fact "lost or destroyed," there was no necessity for the petition filed in the trial court for the "issuance of New Owner's Duplicate Certificates of Title: . . ." In fact, the said court never acquired jurisdiction to order the issuance of new certificates. Hence, the newly issued duplicates are themselves null and void.<sup style="COLOR: RGB(255, 0, 0);">[116]</sup> (Citations omitted)</blockquote></blockquote>Typically, a defendant will have the opportunity to assert counterclaims when a petition for relief is granted because the court proceeds to hear and determine the case as if a timely motion for a new trial or reconsideration had been granted by it.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> However, in a proceeding for the issuance of a new owner's duplicate title, the court loses jurisdiction upon the grant of a petition for relief on the ground that the title was not actually lost or destroyed, as in this case. There is no new trial or reconsideration where petitioner may set up his claims.<br><br>If petitioner's claims are to be treated like compulsory counterclaims, they may either be pursued in the same or a different proceeding.<sup style="COLOR: RGB(255, 0, 0);">[118]</sup><br><br>In <i>Espino v. Spouses Bulut</i>,<sup style="COLOR: RGB(255, 0, 0);">[119]</sup> the trial court granted Espino's petition for issuance of new owner's copies. However, the copies that were allegedly lost or destroyed were actually in the possession of spouses Bulut. Thus, spouses Bulut filed a petition for relief from judgment. The trial court granted the petition for relief from judgment and awarded moral and exemplary damages and attorney's fees. The Court upheld the decision but deleted the award for damages for lack of support in the records.<br><br>In contrast, petitioner in the present case opted to litigate his claims in a separation action. The trial court, in Civil Case No. 2009-302, ruled that respondent's false misrepresentations violated Article 21 of the Civil Code and caused annoyance, vexation, and disturbance to petitioner.<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> The trial court found justification to award actual, moral, and exemplary damages, attorney's fees, and litigation expenses.<sup style="COLOR: RGB(255, 0, 0);">[121]</sup><br><br><b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The Decision dated August 4, 2017 and the Resolution dated February 27, 2018 of the Court of Appeals in CA-G.R. CV No. 04333-MIN are <b>REVERSED</b> and <b>SET ASIDE</b>. The Decision dated April 25, 2016 of Branch 21, Regional Trial Court, Cagayan de Oro City, Misamis Oriental in Civil Case No. 2009-302 is <b>REINSTATED</b>. Respondent Jennifer Lagahid, also known as "Jennifer Lagahid-Hao," is ordered to pay petitioner Angelito O. Hao:<blockquote><ol><li>actual damages in the amount of PHP 50,000.00;<br></li><li>attorney's fees in the amount of PHP 100,000.00, appearance fee in the amount of PHP 2,000.00, and litigation expenses in the amount of PHP 50,000.00;<br></li><li>moral damages in the amount of PHP 200,000.00 and exemplary damages in the amount of PHP 100,000.00; and<br></li><li>costs of suit.</li></ol></blockquote>All monetary awards shall earn legal interest at the rate of 6% per annum from the finality of this Decision until fully paid.<sup style="COLOR: RGB(255, 0, 0);">[122]</sup><br><br><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Cancio, Jr. v. Isip</b>, 440 Phil. 29, 39 (2002) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i>, pp. 3-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 41-56. The Decision in CA-G.R. CV No. 04333-MIN was penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Romulo V. Borja (Acting Chairperson) and Ronaldo B. Martin of the Special Twenty-Second Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 83-86. The Resolution in CA-G.R. CV No. 04333-MIN was penned by Associate Justice Romulo V. Borja (Chairperson) and concurred in by Associate Justices Oscar V. Badelles and Tita Marilyn Payoyo-Villordon of the Twenty-First Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at. 57-69. The Decision in Civil Case No. 2009-302 was penned by Presiding Judge Gil G. Bollozos of Branch 21, Regional Trial Court, Cagayan de Oro City, Misamis Oriental.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 96-98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 93-95.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 87-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 96-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 103-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 104-105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 105-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 108-109.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 118-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 121-128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 124-126.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 126-127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 136-143.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 57-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 144-171.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 154.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 154-166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 166-169.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 41-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 55-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 486 Phil. 123 (2004) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 53-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 70-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 83-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 3-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 12-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at l9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 20-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 26-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 28-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 31-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 221.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 222-238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 226.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 227.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 228.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 229-232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 233-236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 244.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 245-261.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 246-249.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 250-252.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 254.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 291-292.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 293-335.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 409-426.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>Cancio, Jr. v. Isip</b>, 440 Phil. 29, 39 (2002) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 440 Phil. 29 (2002) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 34-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Rollo</i>, p. 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>Kane v. Roggenkamp</b>, 876 Phil. 159, 177 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>Cancio, Jr. v. Isip</b>, 440 Phil. 29, 37 (2002) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Kane v. Roggenkamp</b>, 876 Phil. 159, 178 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Carandang v. Santiago</b>, 97 Phil. 94, 96 (1955) [Per J. Labrador, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <b>Information Technology Foundation of the Philippines v. Commission on Elections</b>, 810 Phil. 400, 422 (2017) [Per J. Jardeleza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Rollo</i>, pp. 122-127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i> at 124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id.</i> at 140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id.</i> at 26-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id.</i> at 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> 387 Phil. 621 (2000) [Per J. Gonzaga-Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id.</i> at 627.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> 392 Phil. 895 (2000) [Per J. De Leon, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id.</i> at 904.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <b>Re: Complaint of Concerned Members of Chinese Grocers Association Against Justice Inting</b>, 663 Phil. 179, 187-188 (2011) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <b>Villanueva-Ong v. Enrile</b>, 821 Phil. 538, 549 (2017) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> 2019 RULES OF CIVIL PROCEDURE, Rule 17, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> 911 Phil. 317 (2021) [Per J. J.Y. Lopez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <i>Id.</i> at 318.<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Id.</i> at 320.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> <i>Id.</i> at 325-327.<br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> 2019 RULES OF CIVIL PROCEDURE, Rule 38, sec. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> 2019 RULES OF CIVIL PROCEDURE, Rule 17, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[119]</sup> 664 Phil. 702, 711 (2011) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[120]</sup> <i>Rollo</i>, p. 68-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754 (2022) [Per Acting C.J. Leonen, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

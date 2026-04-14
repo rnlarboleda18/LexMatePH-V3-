@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 225427 - CARMELITA M. MERCADO, PETITIONER, VS. HEIRS OF SERAFIN DE GUZMAN, REPRESENTED BY REYNALDO DE GUZMAN, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70251' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 225427, January 26, 2026 ]</H2>
+			<H3>CARMELITA M. MERCADO, PETITIONER, VS. HEIRS OF SERAFIN DE GUZMAN, REPRESENTED BY REYNALDO DE GUZMAN, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GESMUNDO, C.J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the August 5, 2015 Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and May 13, 2016 Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. SP No. 130896, which set aside the assailed September 13, 2012 Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Department of Agrarian Reform Adjudication Board (DARAB) in DARAB Case No. 14513-A (Reg. Case No. 6713'NNE'97) and reinstated the April 5, 2001 Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> issued by the Regional Agrarian Reform Adjudication Board (RARAD) of the DARAB, Region III, Office of the Provincial Agrarian Reform Adjudicator, Branch 1, Talavera, Nueva Ecija.</p><p align="center"> <i>Antecedents</i> </p><p> The present case stemmed from an action for Annulment of Transfer Certificate of Title Emancipation Patent No. 73307 (TCT EP 73307) instituted by petitioner Carmelita M. Mercado (Mercado) against respondents-heirs of Serafin De Guzman (Heirs of De Guzman) and the Register of Deeds for the province of Nueva Ecija over a parcel of land consisting of 8,212 square meters, which formed part of a real property with a total area of more or less 43,354 square meters and covered by TCT EP 73307 (DARAB Case No. 6713'NNE'97).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> Mercado alleged that the property, registered in the name of the Heirs of De Guzman, was the subject of an earlier DARAB Case No. 1118'NNE'94 for correction or cancellation of TCT EP 73307, involving the same parties.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Mercado alleged that she was in possession of the 8,212-square meter portion, which was erroneously included in TCT EP 73307.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> In that earlier case, a Decision was rendered by provincial agrarian reform adjudicator (PARAD) Romeo B. Bello on December 20, 1994, the dispositive portion of which reads: </p><blockquote> <p> WHEREFORE, in view of the foregoing, judgment is hereby rendered as follows: </p> <ol><li> Ordering the PARO of DAR, North Talavera, Nueva Ecija to generate an emancipation patent in favor of petitioner Carmelita Mercado; and<br><br> </li><li>Order the Register of Deeds for the province of Nueva Ecija to annotate at the back of TCT No. EP 73307 the technical segregation or deduction of 8,812 [square] meters from the mass of 43,354 [square] meters and to enter in the Registry Book the EP thus issued in favor of the herein petitioner. </li></ol> <p> Talavera, Nueva Ecija, December 20, 1994.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p> </blockquote> <p> Despite finality of the said Decision, the Heirs of De Guzman refused to surrender the owner's duplicate certificate of title to effect the necessary correction. Mercado, thus, filed the instant action for annulment. </p><p> The Heirs of De Guzman averred that Rogelio De Guzman (Rogelio), one of the sons of the late Serafin De Guzman, lent the subject 8,212-square meter portion of the property to Mercado to finance the hospitalization of Rogelio's daughter. They later executed a waiver of rights in favor of Mercado due to their inability to pay Rogelio's indebtedness, on the condition that Mercado will assume all obligations relative to the said real property.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The Heirs of De Guzman further alleged that they have fully paid the value of the property with the Land Bank of the Philippines (LBP). Due to Mercado's failure to pay the obligations on the property, the Heirs of De Guzman asserted that Mercado was no longer in a position to claim any rights over the contested area. They, thus, prayed for the dismissal of the Petition and that they be ordered to pay back the amount Rogelio borrowed from Mercado. They also prayed that the latter be disqualified as a tenant-beneficiary.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p align="center"> <i>Ruling of the RARAD</i> </p><p> On April 5, 2001, RARAD Fe Arche Manalang rendered a Decision, ruling: </p><blockquote> <p> WHEREFORE, premises considered, judgment is hereby rendered: </p> <ol><li> Dismissing the Complaint for lack of merit; <br><br></li><li> Directing the Respondents-Heirs of Serafin De Guzman, to pay to the Petitioner jointly and severally the existing mortgage loan constituted on the 8,212 [square meters] portion together with the legal interest due and accruing thereon or in the alternative transfer the same to the Petitioner conformably to DAR Administrative Order No. 8, series of 1995 and Memorandum Circular No. 6, series of 1996; <br><br></li><li> Maintaining the Petitioner in peaceful possession and cultivation over the disputed portion consisting of [8,212 square meters] until the option specified in the preceding paragraph is exercised by the Respondents-Heirs of Serafin De Guzman. </li></ol> <p> NO COSTS. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p> </blockquote> <p> The records established that the Heirs of De Guzman executed a notarized Waiver of Rights over the contested portion of 8,212 square meters, which the municipal agrarian reform officer (MARO) recommended for reallocation to Mercado, who signified her acceptance in a <i>Sinumpaang Salaysay sa Pagtanggap</i> dated July 25, 1994. She also bound herself to assume all obligations related to the possession and tilling of the subject property by executing an Actual Tiller's Deed of Undertaking.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> However, Mercado cannot be considered a rightful reallocatee because the initial transfer action undertaken at the local MARO level never passed the recommendatory stage. The Department of Agrarian Reform (DAR) did not issue any order of reallocation in favor of Mercado, as prescribed under the governing guidelines.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> Meanwhile, the parties'<i> status quo</i> at that time changed since the entire property covered by TCT EP 73307 had already been paid for with LBP. The Heirs of De Guzman paid the landholding amortization of the property, which included the portion possessed by Mercado, as well as irrigation fees and realty taxes.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The RARAD, thus, ruled that the Heirs of De Guzman were faced with two options: (1) to sell outright the occupied portion to Mercado with prior DAR clearance or approval pursuant to Administrative Order No. 8, series of 1995<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and Administrative Order No. 6, series of 1996;<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> or (2) redeem the said portion by settling the mortgage debt, the amount of which had not been disclosed.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Until then, Mercado's peaceful possession and cultivation of the subject property in the concept of mortgagee must be respected and maintained.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> The RARAD further held that Mercado's reliance on the December 20, 1994 Decision in DARAB Case No. 1118'NNE'94 was misplaced, considering that the said Decision was null and void for having been issued in violation of the constitutional right to substantive and procedural due process of the Heirs of De Guzman.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> On Motion for Reconsideration, an Order<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> was issued dated July 4, 2002 setting aside the April 5, 2001 Decision and ordering the issuance of a writ of execution for the implementation of the Decisions in DARAB Case No. 1118'NNE'94, and DARAB Case No. 987'NNE'94, which ordered the generation of an emancipation patent in favor of Mercado.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Aggrieved, the Heirs of De Guzman filed a Manifestation with the PARAD. On March 20, 2006, an Order<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> was issued vacating and setting aside the July 4, 2002 Order and reinstating the April 5, 2001 RARAD Decision. Parties were also ordered to submit their Compromise Agreement.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p align="center"> <i>Decision of the DARAB</i> </p><p> Mercado appealed the March 20, 2006 Order before the DARAB, submitting two separate appeal memorandum briefs, one for <i>DARAB Case No. 1118'NNE'94</i> and another for <i>DARAB Case No. 6713'NNE'97</i>. The DARAB was faced with the sole issue of jurisdictionâwhether it has jurisdiction to resolve the core issues of the consolidated cases.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> The DARAB was of the view that the primary concern of Mercado's appeal are the contrasting Decisions of the PARAD and RARAD dated December 20, 1994 (in DARAB Case No. 1118'NNE'94) and April 5, 2001 (in DARAB Case No. 6713'NNE'97), respectively, over the subject 8,212-square meter property covered by TCT EP 73307.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> The DARAB, however, focused its resolution of the case on the issue of jurisdiction, ruling that both Decisions encroached on the exclusive jurisdiction of the proper regional director/DAR secretary. It emphasized that the feasibility of reallocating the disputed 8,212-square meter portion to Mercado was, inarguably, an administrative issue that falls within the exclusive jurisdiction of the regional director/DAR secretary.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The DARAB relied on the 1994 DARAB Rules of Procedure, specifically Rule II, Section 1(g) which provides: </p><blockquote> <p> SECTION 1. Primary and Exclusive Original and Appellate Jurisdiction. â The Board shall have primary and exclusive jurisdiction, both original and appellate, to determine and adjudicate all agrarian disputes involving the implementation of the Comprehensive Agrarian Reform Program (CARP) under Republic Act No. 6657, Executive Order Nos. 228, 229, and 129-A, Republic Act No. 3844 as amended by Republic Act No. 6389, Presidential Decree No. 27 and other agrarian laws and their implementing rules and regulations. Specifically, such jurisdiction shall include but not be limited to cases involving the following: </p> <p> . . . .</p> <p> g) Those cases previously falling under the original and exclusive jurisdiction of the defunct Court of Agrarian Relations under Section 12 of Presidential Decree No. 946, except sub-paragraph (q) thereof and Presidential Decree No. 815. </p> <p> It is understood that the aforementioned cases, complaints or petitions were filed with the DARAB after August 29, 1987. </p> <p> <i>Matters involving strictly the administrative implementation of Republic Act No. 6657, otherwise known as the Comprehensive Agrarian Reform Law (CARL) of 1988 and other agrarian laws as enunciated by pertinent rules shall be the exclusive prerogative of and cognizable by the Secretary of the DAR. . . . </i></p> </blockquote> <p> The DARAB reiterated that it has no power and/or authority to adjudicate questions pertaining to the administrative implementation of the agrarian reform programâand reallocation falls within such administrative matters.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Thus, the December 20, 1994 Decision was void for having been issued by the PARAD despite not having jurisdiction over the issue of reallocation and all relative matters.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Furthermore, even if the December 20, 1994 Decision was not void, the DARAB held that Mercado's subsequent actions destroyed the immutable character of said Decision. Her failure to comply with the undertakings imposed upon her within the prescribed period of time, concomitant to having been "rendered qualified to be a beneficiary/reallocatee of the subject area, created a supervening event which defeated the immutability of the said final and executory judgment.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> The dispositive portion of the September 13, 2012 Decision of the DARAB reads: </p><blockquote> <p> <b>WHEREFORE</b>, judgment is hereby rendered by this Board, <b>ordering that the Decisions respectively promulgated on [December 20, 1994] and [April 5, 2001] be SET ASIDE AND VACATED, including all the Orders and/or Resolutions that were issued relative thereto, specifically herein appealed Order.</b> This Board hereby decrees a <b>NEW JUDGMENT</b>, thus: </p> <ol><li> Maintaining the validity and/or regularity of TCT No. EP â 73307, issued in favor of respondents-appellees, <b>without prejudice</b>, however, to an Order of Reallocation by the Regional Director concerned/DAR Secretary that may be issued in the future, with respect to the contested 8,212 square meter area;<br><br></li><li> Ordering respondents-appellees to pay petitioner-appellant the sum of money due her, representing the mortgage loan that was constituted on the subject 8,212 square meter portion; and <br><br></li><li>Ordering petitioner-appellant to peacefully surrender the possession of, and/or vacate the contested 8,212 square meter area IMMEDIATELY after the aforementioned payment has been made by respondents-appellees. </li></ol> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis in the original) </p> </blockquote> <p> Mercado, thus, filed a Petition for Review under Rule 43 of the 1997 Rules of Civil Procedure before the CA. She assailed, among others, the DARAB's declaration of the December 20, 1994 PARAD Decision as null and void despite its finality, and the jurisdiction of the DARAB. She also questioned the finding that the Heirs of De Guzman have a better right over the subject property.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p align="center"> <i>Ruling of the CA</i> </p><p> On August 5, 2015, the CA rendered a Decision, the dispositive portion of which reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the petition for review is hereby <b>PARTIALLY GRANTED</b>. The Decision of the DARAB dated September [13], 2013 is <b>SET ASIDE</b> and <b>VACATED</b>. The April 5, 2001 Decision issued by Regional Director Fe Arche Manalang in DARAB CASE No. 6713'NNE'97 is hereby <b>REINSTATED</b>. The case is <b>REMANDED</b> to DARAB, Region III, Office of the Provincial Reform Adjudicator, Branch 1 for the proper determination of the amount of the mortgage debt and the legal interest thereon. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis in the original) </p> </blockquote> <p> The CA held that the 1994 DARAB New Rules of Procedure, specifically Rule II, Section 1(f) establishes the DARAB's exclusive jurisdiction over cases involving the issuance, correction, and cancellation of emancipation patents which are registered with the Land Registration Authority or the Registry of Deeds.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Since the subject real property covered by TCT EP 73307 is already registered with the Registry of Deeds, the DARAB has jurisdiction over the same.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </p><p> Further, the CA reiterated the clear pronouncement of the RARAD in its April 5, 2001 Decision that the December 20, 1994 Decision in DARAB Case No. 1118'NNE'94 is void for having been issued in violation of the heirs' constitutional right to substantive and procedural due process of law.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The CA also ruled that the immutability of judgments is inapplicable in the present case since the Board and its regional and provincial adjudicators are not bound by technical rules of procedure as prescribed by the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> Finally, the CA emphasized the long-standing jurisprudence that factual findings of administrative bodies deserve utmost respect when supported by evidence. The appellate court cannot make its own findings of facts and substitute the same for the findings of facts of the DARAB where there is no abuse of discretion on the part of the agrarian quasi-judicial agencies.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> Both Mercado and the Heirs of De Guzman filed their respective Motions for Reconsideration. Mercado maintained the validity and immutability of the December 20, 1994 PARAD Decision, while the heirs of De Guzman questioned the imposition of legal interest on the mortgage debt. </p><p> As to the legal interest, the CA explained that said imposition, despite the absence of such an award in the April 5, 2001 Decision, is sanctioned by the law and by jurisprudence. It reiterated that legal interest represents the interest in case of delay in the payment of the judgment award.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> As regards Mercado's argument, the CA emphasized that the rule on immutability of judgment is inapplicable because the December 20, 1994 Decision was void for being violative of the substantive and procedural rights to due process of the Heirs of De Guzman. As such, the Decision can still be questioned anytime.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> The CA, thus, denied both Motions. Hence, the present Petition filed by Mercado. </p><p align="center"> <i>Issue</i> </p><p> The sole issue for resolution is whether the reinstatement of the April 5, 2001 Decision of the RARAD in DARAB Case No. 6713'NNE'97 was proper. </p><p> <i>Arguments of the parties</i></p><p> Petitioner asserts that the December 20, 1994 PARAD Decision was validly rendered as it was based on the documents presented and the rules of procedure were followed. It attained finality after the lapse of the reglementary period to appeal. A judgment that has become final and executory is immutable and unalterable, it may no longer be modified in any respect, even if the modification is meant to correct what is perceived to be an erroneous conclusion of fact or law, and regardless of whether the modification is attempted to be made by the court rendering it or by the highest Court of the land.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> Petitioner further argues that remand of the case to the Office of the Provincial Adjudicator is unnecessary because there is no mortgage debt to determine. She insists on being the legal owner of the subject 8,212-square meter property which respondents had abandoned. She claims that abandonment is one of the grounds for the cancellation of an emancipation patent. Respondents abandoned the property when they executed a waiver and relinquished possession in favor of petitioner.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> On the other hand, respondents maintain that the December 20, 1994 PARAD Decision can never attain finality because the same is void for having been issued in violation of their constitutional right to substantive and procedural due process and applicable laws.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p><p align="center"> <i>Ruling of the Court</i> </p><p> The Petition is denied. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>DARABâs jurisdiction over agrarian disputes vis-Ã -vis the jurisdiction of the secretary of DAR over agrarian reform matters</i> </div></td> </tr> </tbody></table> <p>Jurisdiction, which is the power of the court to hear and decide cases, is a matter of substantive law, and the statute in force at the time of the commencement of the action determines the jurisdiction of the court.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> When a court has no jurisdiction over the subject matter, the only power it has is to dismiss the action.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> If it proceeds to render judgment despite the lack of jurisdiction, the judgment is null and void and may be attacked anytime as it creates no rights and produces no effect.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> In agrarian reform cases, jurisdiction is primarily vested in the DAR as established by Republic Act No. 6657, otherwise known as the Comprehensive Agrarian Reform Law of 1988 (CARL), and the 1994 DARAB New Rules of Procedureâthe laws applicable at the time Mercado sought the cancellation of TCT EP 73307 and the issuance of an emancipation patent in her favor.</p><p> Chapter XII, Section 50 of the CARL provides: </p><blockquote> <p> SECTION 50. Quasi-Judicial Powers of the DAR. â The DAR is hereby vested with primary jurisdiction to <i>determine and adjudicate agrarian reform matters</i> and shall have exclusive original jurisdiction over <i>all matters involving the implementation of agrarian reform</i> except those falling under the exclusive jurisdiction of the Department of Agriculture (DA) and the Department of Environment and Natural Resources (DENR).</p> <p> It shall not be bound by technical rules of procedure and evidence but shall proceed to hear and decide all cases, disputes or controversies in a most expeditious manner, employing all reasonable means to ascertain the facts of every case in accordance with justice and equity and the merits of the case. Toward this end, it shall adopt a uniform rule of procedure to achieve a just, expeditious and inexpensive determination of every action or proceeding before it.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis supplied) </p> </blockquote> <p> Meanwhile, Rule II, Section 1 of the 1994 DARAB New Rules of Procedure states that: </p><blockquote> <p> SECTION 1. Primary and Exclusive Original and Appellate Jurisdiction. â The Board shall have primary and exclusive jurisdiction, both original and appellate, to <i>determine and adjudicate all agrarian disputes</i> involving the implementation of the Comprehensive Agrarian Reform Program (CARP) under Republic Act No. 6657, Executive Order Nos. 228, 229, and 129-A, Republic Act No. 3844 as amended by Republic Act No. 6389, Presidential Decree No. 27 and other agrarian laws and their implementing rules and regulations. Specifically, such jurisdiction shall include but not be limited to cases involving the following: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">a)</div></td> <td width="95%"><div align="justify">The rights and obligations of persons, whether natural or juridical, engaged in the management, cultivation and use of all agricultural lands covered by the CARP and other agrarian laws;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">b)</div></td> <td><div align="justify">The valuation of land, and the preliminary determination and payment of just compensation, fixing and collection of lease rentals, disturbance compensation, amortization payments, and similar disputes concerning the functions of the Land Bank of the Philippines (LBP); </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">c)</div></td> <td><div align="justify">The annulment or cancellation of lease contracts or deeds of sale or their amendments involving lands under the administration and disposition of the DAR or LBP;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">d)</div></td> <td><div align="justify">Those cases arising from or connected with membership or representation in compact farms, farmers' cooperative and other registered farmers' associations or organizations, related to lands covered by the CARP and other agrarian laws;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">e)</div></td> <td><div align="justify">Those involving the sale, alienation, mortgage, foreclosure, preemption and redemption of agricultural lands under the coverage of the CARP or other agrarian laws; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">f)</div></td> <td><div align="justify">) Those involving the issuance, correction and cancellation of Certificates of Land Ownership Award (CLOAs) and Emancipation Patents (EPs) which are registered with the Land Registration Authority;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">g)</div></td> <td><div align="justify">Those cases previously falling under the original and exclusive jurisdiction of the defunct Court of Agrarian Relations under Section 12 of Presidential Decree No. 946, except sub-paragraph (q) thereof and Presidential Decree No. 815.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">It is understood that the aforementioned cases, complaints or petitions were filed with the DARAB after August 29, 1987.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"><i>Matters involving strictly the administrative implementation of Republic Act No. 6657, otherwise known as the Comprehensive Agrarian Reform Law (CARL) of 1988 and other agrarian laws as enunciated by pertinent rules shall be the exclusive prerogative of and cognizable by the Secretary of the DAR</i>. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">h)</div></td> <td><div align="justify">And such other agrarian cases, disputes, matters or concerns referred to it by the Secretary of the DAR.</div></td> </tr> </tbody></table> </blockquote> <p>SECTION 2. Jurisdiction of the Regional and Provincial Adjudicators. â The RARAD and the PARAD shall have <i>concurrent original jurisdiction with the Board to hear, determine and adjudicate all agrarian cases and disputes</i>, and incidents in connection therewith, arising within their assigned territorial jurisdiction. (Emphasis supplied) </p> </blockquote> <p> The DAR's exclusive original jurisdiction is exercised through hierarchically arranged agencies, namely, the DARAB, RARAD and PARAD. The latter two exercise "delegated authority," while the first exercises appellate jurisdiction over resolutions, orders, decisions and other dispositions of the RARAD and the PARAD, and "functional supervision" over the RARAD and.the PARAD.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></p><p> In <i>Polo Plantation Agrarian Reform Multipurpose Cooperative v. Inson</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the Court acknowledged that prior to the CARL, Executive Order No. 129-A created the Adjudication Board and authorized it to assume the Department of Agrarian Reform's quasi-judicial functions: </p><blockquote> <p> SECTION 13. Agrarian Reform Adjudication Board. â There is hereby created an Agrarian Reform Adjudication Board under the Office of the Secretary. The Board shall be composed of the Secretary as Chairman, two (2) Undersecretaries as may be designated by the Secretary, the Assistant Secretary for Legal Affairs, and three (3) others to be appointed by the President upon the recommendation of the Secretary as members. A Secretariat shall be constituted to support the Board. <i>The Board shall assume the powers and functions with respect to the adjudication of agrarian reform cases under Executive Order No. 229 and this Executive Order</i>. These powers and functions may be delegated to the regional offices of the Department in accordance with rules and regulations to be promulgated by the Board.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis in the original) </p> </blockquote> <p> Evidently, the law and the rules categorize the fundamental duties of the DAR into <i>administrative functions</i> or the enforcement, administration, and execution of agrarian reform laws; and <i>quasi-judicial functions</i> or the determination of the parties' rights and obligations in agrarian reform matters,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> as well as recognize the power of the DAR secretary <i>vis-Ã -vis</i> that of the DARAB. </p><p> The CARL and the 1994 DARAB New Rules of Procedure, thus, present two concerns that are subject of different jurisdictions: (1) agrarian reform matters; and (2) agrarian disputes. Section 3 of the CARL defines <i>agrarian reform</i> and <i>agrarian dispute</i> as follows: </p><blockquote> <p> SECTION 3. Definitions. â For the purpose of this Act, unless the context indicates otherwise: </p> <p> (a) <i>Agrarian Reform</i> means redistribution of lands, regardless of crops or fruits produced to farmers and regular farmworkers who are landless, irrespective of tenurial arrangement, to include the totality of factors and support services designed to lift the economic status of the beneficiaries and all other arrangements alternative to the physical redistribution of lands, such as production or profit-sharing, labor administration, and the distribution of shares of stocks, which will allow beneficiaries to receive a just share of the fruits of the lands they work. </p> <p> . . . . </p> <p> (d) <i>Agrarian Dispute</i> refers to any controversy relating to tenurial arrangements, whether leasehold, tenancy, stewardship or otherwise, over lands devoted to agriculture, including disputes concerning farmworkers' associations or representation of persons in negotiating, fixing, maintaining, changing, or seeking to arrange terms or conditions of such tenurial arrangements. </p> <p> It includes any controversy relating to compensation of lands acquired under this Act and other terms and conditions of transfer of ownership from landowners to farmworkers, tenants and other agrarian reform beneficiaries, whether the disputants stand in the proximate relation of farm operator and beneficiary, landowner and tenant, or lessor and lessee.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p> </blockquote> <p> The present case involves a supposedly erroneous inclusion of a parcel of land in the emancipation patent issued in favor of another. Petitioner, thus, sought the cancellation of said patent, the reallocation of the subject parcel of land, and the issuance of a new emancipation patent in her favor before the PARAD/RARAD. When the case eventually reached the DARAB, it ruled that it had no power and/or authority to adjudicate questions pertaining to the administrative implementation of the agrarian reform program. </p><p> Conversely, the CA opined that the cancellation of an emancipation patent requires the DAR's exercise of its quasi-judicial power through its adjudicating arm, the DARAB. It ruled that the DARAB has exclusive jurisdiction over cases involving the cancellation of registered emancipation patents. Thus, the DARAB had jurisdiction over the cancellation of the already registered TCT EP 73307 in the name of respondents. </p><p> The Court disagrees. </p><p> As mentioned above, there are two agrarian concepts that are subject of different jurisdictionsâthose under the jurisdiction of the DAR secretary and those under the jurisdiction of the DARAB, including the RARAD and PARAD. In cases of agrarian disputes, the law is clear that the DARAB exercises primary and exclusive jurisdiction, both original and appellate, and the RARAD and PARAD exercise concurrent original jurisdiction over the same. On the other hand, the DAR secretary exercises primary jurisdiction over agrarian reform matters and exclusive original jurisdiction over all matters involving the implementation of agrarian reform. Matters involving strictly the administrative implementation of the CARL and other pertinent agrarian laws and rules shall be the exclusive prerogative of and cognizable by the secretary of the DAR. </p><p> In <i>Lim v. Cruz</i>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> the Court elucidated that a case involving agricultural land does not immediately qualify it as an agrarian dispute. The mere fact that the land is agricultural does not <i>ipso facto</i> make the possessor an agricultural lessee or tenant.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> The Court continued to explain that: </p><blockquote> <p> There are conditions or requisites before he can qualify as an agricultural lessee or tenant, and the subject matter being agricultural land simply constitutes one condition. To qualify as an agrarian dispute, there must likewise exist a tenancy relation between the parties. </p> <p> To prove tenancy or an agricultural leasehold agreement and determine whether a case falls within DARAB's jurisdiction, it is normally necessary to establish the following elements: (1) the parties are the landowner and the tenant or agricultural lessee; (2) the subject matter of the relationship is a piece of agricultural land; (3) there is consent between the parties to the relationship; (4) the purpose of the relationship is to bring about agricultural production; (5) there is personal cultivation on the part of the tenant or agricultural lessee; and (6) the harvest is shared between the landowner and the tenant or agricultural lessee.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p> </blockquote> <p> Thus, an agrarian dispute must be a controversy relating to a tenurial arrangement over lands devoted to agriculture. And as previously mentioned, such arrangement may be leasehold, tenancy, or stewardship. </p><p> In <i>Sutton v. Lim</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> the Court elucidated: </p><blockquote> <p> To be sure, the Court explained that the tenurial, leasehold, or agrarian relations referred to may be established with the concurrence of the following: 1) the parties are the landowner and the tenant or agricultural lessee; 2) the subject matter of the relationship is an agricultural land; 3) there is consent between the parties to the relationship; 4) the purpose of the agricultural relationship is to bring about agricultural production; 5) there is personal cultivation on the part of the tenant or agricultural lessee; and 6) the harvest is shared between the landowner and the tenant or agricultural lessee.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> </p> </blockquote> <p> All these requisites must concur in order to create a tenancy relationship between the parties.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> Based on the statutory definitions of a tenant or a lessee, petitioner and Rogelio were neither tenants or lessees of one another. They did not agree on any arrangement on cultivation of the subject agricultural land or sharing of profits/harvests between them. Rogelio simply lent or loaned the subject land to petitioner to finance the hospitalization of his daughter. Tenurial arrangements are agreements which set out the rights between a landowner and a tenant, lessee, farm worker or other agrarian reform beneficiary involving agricultural land. Traditionally, they are in the form of tenancy or leasehold arrangements. However, other forms such as a joint production agreement to effect the implementation of CARP have been recognized as a valid tenurial arrangement.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Consequently, there was no tenurial arrangement nor any other form of joint production agreement between herein parties, hence, no agrarian dispute was cognizable by the DARAB. </p><p> Likewise, the cancellation of the emancipation patent being sought by petitioner was not an agrarian dispute as it did not involve or arise from a tenurial arrangement between her and respondents. Petitioner sought the correction and cancellation of TCT EP 73307 in the name of respondents allegedly because of an erroneous inclusion of the subject 8,212-square meter portion in the said title. However, the December 20, 1994 PARAD Decision, which petitioner heavy relies on, even declared that no correction of title was necessary since there was no erroneous inclusion of the subject property in the same. </p><p> Prescinding from that, it is clear that the DARAB had no jurisdiction over the controversy subject of the annulment case filed by petitioner in DARAB Case No. 6713'NNE'97. While the DARAB may, under the 1994 DARAB New Rules of Procedure, entertain petitions for cancellation of certificates of land ownership awards, and emancipation patents, as in this case, its jurisdiction is, however, confined only to agrarian disputes. Echoing <i>Sutton</i>, it is not sufficient that the controversy involves the cancellation of an emancipation patent already registered with the Land Registration Authority. What is of primordial consideration is the existence of an agrarian dispute between the parties.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> Having resolved the issue of jurisdiction over cancellation of emancipation patent leaves us to the issue of reallocation of the subject property and eventual issuance of an emancipation patent in favor of petitioner. </p><p> As mentioned above, Rule II, Section 1 of the 1994 DARAB New Rules of Procedure explicitly vests in the DARAB jurisdiction over issuance of emancipation patents. However, the identification and selection of CARP beneficiaries are matters strictly involving the administrative implementation of the CARP, a matter exclusively cognizable by the secretary of the DAR, and beyond the jurisdiction of the DARAB.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> The reallocation of the subject property and the declaration of petitioner as a reallocatee are administrative matters which rightfully fall under the jurisdiction of the DAR secretary. The DARAB in this case properly emphasized that: </p><blockquote> <p> Applying the two afore-cited legal provisions to the facts at hand would mean that while the DARAB, under the 1994 DARAB Rules of Procedures, can very well order the issuance of an EP, <i>it is nevertheless vital that determination and/or resolution by the Regional Director concerned/DAR Secretary has been previously obtained, with respect to herein administrative issues, to wit, the purported erroneous inclusion of the contested portion in the respondents-appellees' EP, and petitioner-appellantâs supposed qualification as beneficiary/reallocate thereof</i>.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> (Emphasis supplied)</p> </blockquote> <p> The Court, also, could not agree more with the DARAB in ruling that the December 20, 1994 PARAD Decision and the April 5, 2001 RARAD Decision encroached on the exclusive jurisdiction of the proper regional director/DAR secretary as both Decisions resolved the feasibility of reallocating the disputed 8,212-square meter area to petitioner. The DARAB had no jurisdiction to determine petitioner's qualification as a reallocatee of the subject property and to subsequently order the issuance of an emancipation patent in her name without the imprimatur from the regional director/DAR secretary concerned through the issuance of an order of reallocation.</p><p> <i>Void judgments; exception <br> to the immutability doctrine</i> </p><p> Finality of judgment, also referred to as immutability of judgment, is a legal principle that bars any alteration, modification, or amendment in the decision, even if the same is to correct erroneous conclusions of law or of facts. It is based on principles of public policy and the need to end litigation. Once a judgment attains finality, there is nothing else left to do but to enforce it. </p><p> However, like any other rule, the doctrine of immutability is subject to certain recognized exceptions, one of which is a void judgment. In case a judgment is void for having been rendered without jurisdiction, the immutability of judgment principle will not apply because a void judgment does not produce any legal and binding effect. It can never attain finality, even after the lapse of the reglementary period within which to appeal, and therefore, it can be challenged at any time. </p><p> Here, petitioner insists on the enforcement of the December 20, 1994 PARAD Decision on the action for cancellation and correction of TCT EP 73307, claiming that the same attained finality. It is worth noting that it was also her who filed the subsequent action for annulment of TCT EP 73307 before the RARAD, the root of the present action, which unfortunately, did not result in her favor as established in the April 5, 2001 Decision of the RARAD. However, both the December 20, 1994 PARAD and April 5, 2001 RARAD Decisions are, as discussed above, void for having been rendered without jurisdiction to adjudicate on the primary issue of reallocation. Both Decisions, thereby, do not become binding and effective. They did not create any rights, nor divest parties of any rights. They cannot be immutable, but rather, can be attacked anytime. </p><p> The CA opined that immutability of judgments is inapplicable in this case since the Board and its regional and provincial adjudicators are not bound by technical rules of procedure. </p><p> While the Court agrees with the CA as regards the inapplicability of the immutability doctrine, it must be underscored that said doctrine is not a mere technicality, but a fundamental principle founded on public policy. We once explained in <i>Apo Fruits Corp. v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> that: </p><blockquote> <p> The doctrine of immutability and inalterability of a final judgment has a <i>two-fold</i> purpose: (1) to avoid delay in the administration of justice and thus, procedurally, to make orderly the discharge of judicial business and (2) to put an end to judicial controversies, <i>at the risk of occasional errors</i>, which is precisely why courts exist. Controversies cannot drag on indefinitely. The rights and obligations of every litigant must not hang in suspense for an indefinite period of time. <i>The doctrine is not a mere technicality to be easily brushed aside, but a matter of public policy as well as a time-honored principle of procedural law</i>.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> (Emphasis supplied) </p> </blockquote> <p> As long as the modification in a final judgment being sought does not involve (1) the correction of clerical errors; (2) the so-called <i>nunc pro tunc</i> entries that cause no prejudice to any party; (3) void judgments; and (4) whenever circumstances transpire after the finality of the decision rendering its execution unjust and inequitable,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> the principle of immutability of judgment remains applicable to ALLâcourts, tribunals, judicial and quasi-judicial agencies. </p><p> <b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. However, the August 5, 2015 Decision and May 13, 2016 Resolution of the Court of Appeals in CA- G.R. SP NO. 130896 are hereby <b>REVERSED</b> and <b>SET ASIDE</b>. The September 13, 2012 Decision of the Department of Agrarian Reform Adjudication Board in the consolidated cases docketed as DARAB Case Nos. 14513 and 14513-A is <b>REINSTATED</b>. </p><p> <b>SO ORDERED.</b></p><p> <i>Hernando (Working Chairperson), Zalameda, Rosario</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-16. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 20-33. The Decision was penned by Associate Justice Maria Elisa Sempio Diy and concurred in by Associate Justices Ramon M. Bato, Jr. and Manuel M. Barrios of the Twelfth Division of the Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 35-38. The Resolution was penned by Associate Justice Maria Elisa Sempio Diy and concurred in by Associate Justices Ramon M. Bato, Jr. and Manuel M. Barrios of the Twelfth Division of the Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> CA <i>rollo</i>, pp. 11-28.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 73-76. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 73.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 63.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 67.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 74. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> 75-76.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 74.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 75. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> DARAB records, pp. 151-152.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Rules and Procedures Governing the Transferability of Lands Awarded to Agrarian Reform Beneficiaries Pursuant to Presidential Decree No. 27, as amended by Executive Order No. 228 and Republic Act No. 6657.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> CA <i>rollo</i>, p. 75. Supplemental Guidelines to Administrative Order No. 8, Series of 1995 â Re: Rules and Procedures Governing the Transferability of Lands Awarded to Agrarian Reform Beneficiaries (ARBS) Pursuant to P.D. No. 27/E.O. No. 228 and R.A. No. 6657; the RARAD mistakenly refers to this as Memorandum Circular No. 6, series of 1996.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 77-83. The Order was penned by OIC Regional Adjudicator for CAR and Presiding Adjudicator Napoleon B. Baguilat. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 81. The dispositive portion of DARAB Case No. 987'NNE'94 reads:</p> <blockquote> <p> WHEREFORE, premises considered, the Provincial Agrarian Reform Office (PARO) of DAR North, Nueva Ecija, is hereby ordered to generate Emancipation Patent in favor of petitioner CARMELITA M. MERCADO. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 85-87. The Order was penned by Provincial Adjudicator Marvin V. Bernal. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 87. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 20. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 25-26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 28. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i>, p. 26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 28-30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 30. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 31. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 37-38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 12. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 13-14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Non v. Office of the Ombudsman</b>, 882 Phil. 962, 978 (2020) [Per J. Reyes, Jr., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Bilag v. Ay-ay</b>, 809 Phil. 236, 243 (2017) [Per J. Perlas-Bernabe, First Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Tan v. Cinco</b>, 787 Phil. 441, 450 (2016) [Per J. Perlas-Bernabe, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Republic Act No. 6657 (1988), sec. 50, as amended by Republic Act No. 9700 (2009). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Department of Agrarian Reform Adjudication Board v. Court of Appeals</b>, 334 Phil. 369, 383 (1997) [Per J. Davide, Jr., Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 846 Phil. 239 (2019) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 263. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Philcontrust Resources, Inc. v. Atty. Aquino</b>, 887 Phil. 616, 629 (2020) [Per J. Gaerlan, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Republic Act No. 6657 (1988), sec. 3, as amended. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 938 Phil. 392 (2023) [Per J. Zalameda, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 399. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 700 Phil. 67 (2012) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 76-77. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Isidro v. Court of Appeals</b>, 298-A Phil. 481, 491 (1993) [Per J. Padilla, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Sutton v. Lim</b>, 700 Phil. 67, 75-76 (2012). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 700 Phil. 67, 74 (2012) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Lercana v. Jalandoni</b>, 426 Phil. 319, 329-330 (2002) [Per J. Quisumbing, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> CA <i>rollo</i>, p. 22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 622 Phil. 215 (2009) [Per J. Bersamin, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 231. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

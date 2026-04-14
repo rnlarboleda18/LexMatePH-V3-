@@ -1,0 +1,619 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262644 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. JAMES WILLIAMS Y FRANCIS AND JOY MONTECILLO Y BUTASLAC, ACCUSED,
+
+JOY MONTECILLO Y BUTASLAC, ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70117' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262644, August 13, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. JAMES WILLIAMS <i>Y</i> FRANCIS AND JOY MONTECILLO <i>Y</i> BUTASLAC, ACCUSED,<BR><BR>
+
+JOY MONTECILLO <i>Y</i> BUTASLAC, ACCUSED-APPELLANT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is an appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA), which affirmed <i>in toto</i> the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC). The RTC found James Williams <i>y</i> Francis (Williams) and accused-appellant Joy Montecillo <i>y</i> Butaslac (Montecillo) guilty beyond reasonable doubt of violation of Section 5 (illegal sale of dangerous drugs) in relation to Section 26 of Republic Act No. 9165, otherwise known as the Comprehensive Dangerous Drugs Act of 2002.</p><p align="center"> <i>The Facts</i> </p><p> Williams and Montecillo were charged in an Information, the accusatory portion of which reads: </p><blockquote> <p> That on or about May 2, 2012, in the City of Manila, the said accused, conspiring and confederating together and mutually helping each other, not having been authorized by law to sell, trade, deliver, transport and distribute any dangerous drug, did then and there willfully, unlawfully, knowingly and jointly sell or offer to sell to a police officer/ poseur buyer one (1) stapled and heat-sealed transparent plastic sachet with marking "JFW" 05-02-12 containing THREE ZERO POINT ZERO FOUR SEVEN SIX (30.0476) grams of white crystalline substance commonly known as [<i>shabu</i>], containing Methamphetamine Hydrochloride, a dangerous drug. </p> <p> Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </p> </blockquote> <p> When arraigned, Williams and Montecillo pleaded not guilty to the offense charged. Pre-trial followed, in which the respective identities of Williams and Montecillo were admitted. Thereafter, trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> The prosecution presented the following eight witnesses, namely: (1) Intelligence Officer (IO) 1 Jestner Tacloy (IO1 Tacloy), the poseur buyer; (2) Philippine Drug Enforcement Agency (PDEA) Agent Marjorie D. Inojales (Agent Inojales), the forensic chemist; (3) Kagawad Jose Ruiz, Jr. (Kagawad Ruiz, Jr.), an elected public official; (4) IO1 Orlando Bagawe (IO1 Bagawe); (5) IO1 Jose Alfonso Morados (IO1 Morados), both perimeter back-up operatives; (6) IO1 Ma. Lourdes B. Acosta (IO1 Acosta), apprehending officers (7) IOIII Jigger Juniller (IOIII Juniller), team leader of the buy-bust operatives; and (8) Jayson B. Correa (Correa), a PDEA administrative staff. However, the testimonies of the last four witnesses were stipulated by the parties, and their presentations were dispensed with.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> On the other hand, the defense presented Williams, Montecillo, and Passana Poo-Roong.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> The respective versions of the prosecution<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and the defense, as narrated by the CA in its Decision, are as follows: </p><p> <i>Version of the Prosecution</i> </p><blockquote> <p> On May 1, 2012, a female confidential informant (CI) who regularly provides her services to the [PDEA] reported that a certain James Williams . . . whom she personally knew, was actively engaged in the selling of <i>Methamphetamine Hydrochloride</i>, commonly known as <i>shabu</i>, within Metro Manila. Thereafter, the CI contacted [Williams] and arranged a purchase of [PHP 100,000.00] worth of <i>shabu</i> which will take place any time from May 1, 2012 to May 2, 2012. </p> <p> Thus, PDEA Special Enforcement Team Leader Agent [IOIII Juniller] immediately prepared an <i>Authority to Operate </i>and a <i>Pre-Operation Report</i>, both with Control Numbers PDEA NOC 0512-00001 and dated May 1, 2012. </p> <p> At 11:00 [a.m.] of May 2, 2012, the CI confirmed the meeting with [Williams] which was to take place at 3:00 [p.m.] in front of <i>Kanumayan Hotel</i> along Leon Guinto Street in Manila. IOIII Juniller conducted a briefing which covered the designation of [IO1 Tacloy] as poseur buyer, the designation of [14] other co-agents to serve as support for the buy-bust operation, and the preparation of the buy-bust money consisting of two [PHP] 1,000.00 bills marked 'JST.' In total, the buy-bust team, using [four] cars, consisted of [15] agents plus [one] CI. Only [IO1 Tacloy] and the CI were to make initial contact with [Williams,] while the rest of the team were to be spread at other advantageous positions. </p> <p> Upon arrival of the team in front of <i>Kanumayan Hotel</i>, [Williams] called the CI to meet instead at <i>Ministop Convenience Store</i> (<i>Ministop</i>) near the same hotel. It was at 2:45 [p.m.] [t]hat the team arrived at <i>Ministop</i>. For more than [three] hours, the team was on standby as the CI continued to converse with [Williams] through text messaging. </p> <p> At 6:00 [p.m.], a . . . male individual and his Filipina companion arrived on board a taxi. The CI informed [IO1 Tacloy] that the black individual is [Williams]. The CI then introduced [IO1 Tacloy] to [Williams] as the buyer of the <i>shabu</i>. [Williams] asked [IO1 Tacloy] if he had the money and [IO1 Tacloy] showed a white window envelope containing <i>boodle</i> money made to appear as [PHP 100,000.00]. [Williams] then got hold of the bag of his lady companion and showed a medium-sized transparent plastic sachet containing white crystalline substance. Thereafter, [Williams] handed the plastic sachet to [IO1 Tacloy], who, in turn, handed the white envelope to [Williams]. Upon consummation of the sale, [IO1] Tacloy immediately executed the team's pre-arranged signal of removing his sunglasses from his head. </p> <p> Immediately, the other members of the team approached [Williams] and introduced themselves as PDEA agents. [IO1 Bagawe] then arrested [Williams] while [IO1 Acosta] arrested his lady companion, who was later identified as [Montecillo]. </p> <p> At 7:30 [p.m.], [IO1 Tacloy] marked the drug evidence as 'JFW 05-02-12' and signed the same at the place of seizure. Such marking was evidenced by photographs taken by [Agent Kristel Tan (Agent Tan)]<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> which depicted, in a single frame, [IO1 Tacloy, Williams, and Montecillo] with the drug evidence. Then, the PDEA ground commander instructed the team to proceed to their PDEA office in [Quezon City] since it was already dark and getting unsafe because of the growing crowd. </p> <p> Due to traffic along [Quezon Avenue] and [EDSA], it was only at 9:00 [p.m.] that the team, together with [Williams] and [Montecillo], arrived at the PDEA office in Quezon City. The seized items, consisting of both drug and non-drug evidence, were inventoried in the presence of [Kagawad Ruiz, Jr.] and Net 25 Media Representative Crystalyn Lagman [(Lagman)]. Such inventory was evidenced by photographs taken, again by Agent Tan, which [depict] the signing of the inventory by the aforementioned personalities in the presence of [Williams and Montecillo]. [IO1 Tacloy] then personally brought the seized drugs to the Forensic Laboratory Service located in the same PDEA building, with [the specimen] testing positive for <i>shabu</i> as per Chemistry Report No. PDEA-DD012-148. </p> <p> [Williams and Montecillo] were then brought to Camp Crame for physical examination. </p> <p> From the moment the <i>shabu</i> was seized in <i>Ministop</i> until submission for laboratory examination, it was in the actual possession of [IO1 Tacloy].<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p> </blockquote> <p> <i>Version of the Defense</i> </p><blockquote> <p> In her Brief,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> [Montecillo] vehemently [denied] the charge against her. She [narrated] that on May 2, 2012, at around [2:00 p.m.], she met her co-accused Williams at Leon Guinto Street, Manila. Williams was supposed to accompany her in Pasay City to purchase plane tickets for her travel to Benin, Africa. However, [two] men arrived and arrested her and Williams for allegedly selling illegal drugs. They were then brought to the PDEA [office] in Quezon City[,] and were, thereafter, charged for violation of [Republic Act] No. 9165. </p> <p> Williams likewise denied the charge against him. In his Brief,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> he [claimed] that on May 2, 2012, at around 10:30 to 11:00 a.m., he had just met with Montecillo at the LRT Quirino Station, which was a stone's throw away from [<i>Ministop</i>] where the alleged illegal drug transaction took place. Accordingly, the meet-up was purposely for Williams to accompany Montecillo to purchase plane tickets as per the request of the latter's husband. However, right there and then, he was immediately accosted and arrested by the PDEA elements. Thereafter, the PDEA elements allegedly brought him for a "joy-ride" around the Malate-Singalong-Luneta area then back to the [<i>Ministop</i>] store along Leon Guinto Street, Manila.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p> </blockquote> <p align="center"> <i>Ruling of the RTC</i> </p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated November 15, 2016, the RTC found Williams and Montecillo guilty beyond reasonable doubt of illegal sale of dangerous drugs under Section 5 in relation to Section 26 of Republic Act No. 9165. The dispositive portion of the RTC Decision reads: </p><blockquote> <p> WHEREFORE, in view of the foregoing, this Court finds the accused JAMES WILLIAMS <i>y</i> FRANCIS [and] JOY MONTECILLO <i>y</i> BUTASLAC GUILTY beyond reasonable doubt as principals for violation of Sections 5 and 26 of Republic Act No. 9165 otherwise known as the Comprehensive Dangerous Drugs Act of 2002 (for pushing [<i>shabu</i>]) as charged and sentences each of them to suffer the penalty of LIFE IMPRISONMENT and to pay a Fine in the amount of [PHP] 500,000.00 each. </p> <p> The plastic sachet of [<i>shabu</i>] and other items recovered from the accused [Williams and Montecillo] are ordered confiscated in favor of the government to be disposed of in accordance with law. </p> <p> <u>Issue mittimus orders committing (1) JOY MONTECILLO [<i>y</i>] BUTASLAC to the Correctional Institution for Women and (2) JAMES WILLIAMS [<i>y</i>] FRANCIS to the National Bilibid Prisons for service of sentence.</u> </p> <p> Send copies of this Decision to the Director General of the [PDEA], to the Director of the National Bureau of Investigation[,] and to the Philippine National Police Anti-Illegal Drugs Group (PNP-AIDG). </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original) </p> </blockquote> <p> The RTC ruled that: (1) the prosecution was able to establish all the elements of violation of Section 5 of Republic Act No. 9165 by Williams and Montecillo; (2) a buy-bust operation indeed took place; (3) the totality of evidence presented established an unbroken chain of custody of the <i>shabu</i> which was bought from Williams and Montecillo; (4) the defenses of denial by Williams and Montecillo failed in light of the positive identification and declarations of the prosecution witnesses; and (5) the testimonies of both Williams and Montecillo conflicted with each other in their material points.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> Williams and Montecillo filed their respective notices of appeal.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> These were given due course by the RTC in its Order<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated December 13, 2016. </p><p align="center"> <i>Ruling of the CA</i> </p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> dated July 30, 2021, the CA affirmed <i>in toto</i> Williams and Montecillo's conviction for violation of Section 5 in relation to Section 26 of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The dispositive portion of the CA Decision states: </p><blockquote> <p> <b>WHEREFORE,</b> the appealed <i>Decision </i>dated November 15, 2016, of the Regional Trial Court of Manila, Branch 13, in Criminal Case No. 12-291177, convicting the accused-appellants James Williams [<i>y</i>] Francis and Joy Montecillo [<i>y</i>] Butaslac of [v]iolation of Section 5 in relation to Section 26, Article II of Republic Act No. 9165, otherwise known as the Comprehensive Dangerous Drugs Act of 2002, is hereby <b>AFFIRMED in toto.</b> </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original, citation omitted) </p> </blockquote> <p> Hence, accused-appellant filed the present appeal before the Court.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Both accused-appellant and the People, the latter being represented by the Office of the Solicitor General, filed their respective manifestations in lieu of supplemental briefs.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Both accused-appellant and the People stated that they will no longer file their respective supplemental briefs, considering that they have sufficiently and exhaustively discussed their arguments in their respective briefs filed before the CA.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> Accused-appellant assails her conviction for illegal sale of dangerous drugs under Section 5 in relation to Section 26 of Republic Act No. 9165. She maintains that the arresting officers failed to comply with Section 21 of Republic Act No. 9165, and that the chain of custody of the allegedly seized drug was broken. Thus, the identity and integrity of the allegedly seized drug were not established. Accused-appellant further maintains that the CA erred in disregarding her defense of denial.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p align="center"> <i>The Court's Ruling</i> </p><p> The appeal is meritorious. </p><p> Section 5 of Republic Act No. 9165 provides in part: </p><blockquote> <p> Section 5. <i>Sale, Trading, Administration, Dispensation, Delivery, Distribution and Transportation of Dangerous Drugs and/or Controlled Precursors and Essential Chemicals</i>. â The penalty of life imprisonment to death and a fine ranging from [PHP 500,000.00] to [PHP 10 million] shall be imposed upon any person, who, unless authorized by law, shall sell, trade, administer, dispense, deliver, give away to another, distribute dispatch in transit[,] or transport any dangerous drug, including any and all species of opium poppy regardless of the quantity and purity involved, or shall act as a broker in any of such transactions. </p> </blockquote> <p> Section 26 of Republic Act No. 9165 provides in part: </p><blockquote> <p> Section 26. <i>Attempt or Conspiracy</i>. â Any attempt or conspiracy to commit the following unlawful acts shall be penalized by the same penalty prescribed for the commission of the same as provided under this Act: </p> <blockquote> <p> . . . .</p> <p> (b) Sale, trading, administration, dispensation, delivery, distribution and transportation of any dangerous drug and/or controlled precursor and essential chemical[.]</p> </blockquote> </blockquote> <p> To secure a conviction for illegal sale of dangerous drugs under Section 5 of Republic Act No. 9165, the prosecution must prove the following elements: (a) the identity of the buyer and the seller, the object, and the consideration; and (b) the delivery of the thing sold and the payment therefor.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> In cases involving dangerous drugs, the dangerous drug seized from the accused constitutes the <i>corpus delicti</i> of the offense and the fact of its existence is vital to sustain a judgment of conviction.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Thus, the prosecution must be able to account for each link in the chain of custody over the dangerous drug/paraphernalia from the moment of seizure up to its presentation in court as evidence of the <i>corpus delicti</i>.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The chain of custody requirement in drugs cases ensures that doubts concerning the identity of the seized drug are removed.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Chain of custody is defined as follows: </p><blockquote> <p> Chain of custody is defined under Section 1 (b) of the Dangerous Drugs Board Regulation No. 1, Series of 2002, as "the duly recorded authorized movements and custody of seized drugs or controlled chemicals or plant sources of dangerous drugs or laboratory equipment of each stage, from the time of seizure/confiscation to receipt in the forensic laboratory to safekeeping to presentation in court for destruction." Further, "[s]uch record of movements and custody of seized item shall include the identity and signature of the person who held temporary custody of the seized item, the date and time when such transfer of custody were made in the course of safekeeping and use in court as evidence, and the final disposition."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Citation omitted) </p> </blockquote> <p> The chain of custody is divided into four links: <i>first</i>, the seizure and marking, if practicable, of the illegal drug recovered from the accused by the apprehending officer; <i>second</i>, the turnover of the illegal drug seized by the apprehending officer to the investigating officer; <i>third</i>, the turnover by the investigating officer of the illegal drug to the forensic chemist for laboratory examination; and <i>fourth</i>, the turnover and submission of the marked illegal drug seized from the forensic chemist to the court.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> Furthermore, Section 21 of Republic Act No. 9165 provides for requirements relating to the seizure and custody of illegal drugs to ensure an unbroken chain of custody. Section 21 provides in part: </p><blockquote> <p> Section 21. <i>Custody and Disposition of Confiscated, Seized, and/or Surrendered Dangerous Drugs, Plant Sources of Dangerous Drugs, Controlled Precursors and Essential Chemicals, Instruments/Paraphernalia and/or Laboratory Equipment</i>. â The PDEA shall take charge and have custody of all dangerous drugs, plant sources of dangerous drugs, controlled precursors and essential chemicals, as well as instruments/paraphernalia and/or laboratory equipment so confiscated, seized and/or surrendered, for proper disposition in the following manner: </p> <p> (1) The apprehending team having initial custody and control of the drugs shall, immediately after seizure and confiscation, physically inventory and photograph the same in the presence of the accused or the person/s from whom such items were confiscated and/or seized, or his/her representative or counsel, a representative from the media and the Department of Justice (DOJ), and any elected public official who shall be required to sign the copies of the inventory and be given a copy thereof[.]</p> </blockquote> <p> Still, the Implementing Rules and Regulations (IRR) of Republic Act No. 9165 provides for a saving clause so that non-compliance with Section 21 of the same law will not automatically render void and invalid the seizure and custody over the seized items.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Section 21 of the IRR of Republic Act No. 9165 states: </p><blockquote> <p> SECTION 21. <i>Custody and Disposition of Confiscated, Seized and/or Surrendered Dangerous Drugs, Plant Sources of Dangerous Drugs, Controlled Precursors and Essential Chemicals, Instruments/Paraphernalia and/or Laboratory Equipment</i>. - The PDEA shall take charge and have custody of all dangerous drugs, plant sources of dangerous drugs, controlled precursors and essential chemicals, as well as instruments/paraphernalia and/or laboratory equipment so confiscated, seized and/or surrendered, for proper disposition in the following manner: </p> <p> (a) The apprehending officer/team having initial custody and control of the drugs shall, immediately after seizure and confiscation, physically inventory and photograph the same in the presence of the accused or the person/s from whom such items were confiscated and/or seized, or his/her representative or counsel, a representative from the media and the Department of Justice (DOJ), and any elected public official who shall be required to sign the copies of the inventory and be given a copy thereof: Provided, that the physical inventory and photograph shall be conducted at the place where the search warrant is served; or at the nearest police station or at the nearest office of the apprehending officer/team, whichever is practicable, in case of warrantless seizures; <i>Provided, further, that non-compliance with these requirements under justifiable grounds, as long as the integrity and the evidentiary value of the seized items are properly preserved by the apprehending officer/team, shall not render void and invalid such seizures of and custody over said items</i>. (Emphasis supplied) </p> </blockquote> <p> Notably, while Section 21 of Republic Act No. 9165 requires the presence of three witnesses, namely, (1) an elected public official; (2) a Department of Justice (DOJ) representative; and (3) a media representative during the inventory and photographing of the seized drugs, Section 21 of Republic Act No. 9165 has been amended by Republic Act No. 10640,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> which took effect on August 7, 2014.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> As amended, Section 21 requires the presence of two witnesses, i.e., "[(1)] an elected public official and [(2)] a representative of the National Prosecution Service <i>or</i> the media"<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> during the physical inventory and photographing of the seized drugs. The amendment to Section 21 also substantially included the saving clause in the IRR of Republic Act No. 9165, which provides that non-compliance with the law's requirements under justifiable grounds, as long as the integrity and the evidentiary value of the seized items are properly preserved by the apprehending officer/team, shall not render void and invalid the seizure and custody over confiscated items.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> However, considering that the incident occurred prior to August 7, 2014, the date of effectivity of Republic Act No. 10640, Section 21 of Republic Act No. 9165 prior to its amendment applies in the present case. </p><p> The Court focuses on the first link of the chain of custody. </p><p> In <i>Nisperos v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the Court adopted the following guidelines as to the marking, conduct of inventory, and taking of photographs of the seized dangerous drugs: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1.</div></td> <td colspan="3"><div align="justify">The marking of the seized dangerous drugs must be done: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">a.</div></td> <td colspan="2"><div align="justify">Immediately upon confiscation; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td colspan="2"><div align="justify">At the place of confiscation; and </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">c.</div></td> <td colspan="2"><div align="justify">In the presence of the offender (unless the offender eluded the arrest); </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">2.</div></td> <td colspan="3"><div align="justify">The conduct of inventory and taking of photographs of the seized dangerous drugs must be done:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">a.</div></td> <td colspan="2"><div align="justify">Immediately after seizure and confiscation;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td colspan="2"> <div align="justify">In the presence of the accused, or the person/s from whom such items were confiscated and/or seized, or [their] representative or counsel; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">c.</div></td> <td colspan="2"><div align="justify">Also in the presence of the insulating witnesses, as follows: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify">i.</div></td> <td><div align="justify">if the seizure occurred during the effectivity of [Republic Act] No. 9165, or from July 4, 2002 until August 6, 2014, the presence of [three] witnesses, namely, an elected public official; a [DOJ] representative; and a media representative;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">ii.</div></td> <td width="85%"> <div align="justify">if the seizure occurred after the effectivity of [Republic Act] No. 10640, or from August 7, 2014 onward, the presence of [two] witnesses, namely, an elected public official; and a National Prosecution Service representative or a media representative.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td colspan="3"><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">3.</div></td> <td colspan="3"><div align="justify">In case of any deviation from the foregoing, the prosecution must positively acknowledge the same and prove (1) justifiable ground/s for non-compliance and (2) the proper preservation of the integrity and evidentiary value of the seized item/s.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Citations omitted) </div></td> </tr> </tbody></table> </blockquote> <p>The following instances, when alleged and proved by the prosecution, are considered as justifiable reasons for not securing the witnesses during the physical inventory and photograph taking of the seized illegal drugs: </p> <blockquote> <p> (1) their attendance was impossible because the place of arrest was a remote area; (2) their safety during the inventory and photograph of the seized drugs was threatened by an immediate retaliatory action of the accused or any person/s acting for and in their behalf; (3) the elected official themselves were involved in the punishable acts sought to be apprehended; (4) earnest efforts to secure the presence of a DOJ or media representative and an elected public official within the period required under Article 125 of the Revised Penal Code prove futile through no fault of the arresting officers, who face the threat of being charged with arbitrary detention; or (5) time constraints and urgency of the anti-drug operations, which often rely on tips of confidential assets, prevented the law enforcers from obtaining the presence of the required witnesses even before the offenders could escape.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p> </blockquote> <p> In the present case, the Court finds deviations in the chain of custody procedure, which cast doubt on the integrity and identity of the seized drugs and which warrant the acquittal of accused-appellant. </p><p> Notably, the CA found that based on IO1 Tacloy's cross-examination, it was established that the inventory and photographing of the seized items were conducted at the PDEA office in Quezon City, and that while this is a deviation from the procedural guidelines laid down by Section 21 of Republic Act No. 9165, the apprehending officers were justified in so doing. In arriving at this conclusion, the CA relied on the following testimony of IO1 Tacloy: </p><blockquote> <p> ATTY. RONQUILLO:</p> <p> . . . .</p> <p> Q: So, immediately when you seized the items, you marked it? <br> A: Yes sir.</p><p>. . . .</p> <p> Q: And you did not do the inventory there because it is getting dark? <br> A: Yes sir. </p> <p>Q: Is darkness [sic] can be a ground to be an exception under the rules on chain of custody?&nbsp;</p><p><i>. . . .</i></p><p><b><i> A: Padami na po kasi ng padami yung tao sir kaya noong pagkatapos na na-marked ko yung drug evidence, ah, I was ordered by our ground commander that the inventory of the non-drug evidence be done at the Special Enforcement Service sir.</i></b> </p> <p>Q: What time was that? <br> A: Ah, <i>kasi paalis na kami rito noong manga</i> around 7:00 sir or 7:30 [p.m.]. </p> <p>. . . . </p> <p>ATTY. RONQUILLO:</p> <p> <i>Q: By the way, who declared that the place is not safe to conduct inventory? <br> A: Our ground commander sir, [Intelligence Agent 5] Alonzo sir.</i> </p> <p>. . . . </p> <p> Q: And he was with you during the operation? <br> A: Yes sir. </p> <p> Q: Do you have any proof or explanation given stating that the inventory was not conducted in the said place because it is not safe to conduct an inventory there? <br> A: I was just told by our team leader that ah, <i>iayos na yan</i> and then we will proceed to our office because the place is not already safe for the conduction of the, ah,<i> kasi pag doon pa kami mag-i-inventory sir, tatagal pa kami doon, and then, hindi pa dumating yung witness namin sir</i>."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> (Emphasis supplied) </p> </blockquote> <p> The CA explained that based on IO1 Tacloy's testimony, the drug-evidence was marked and photographed at the place of arrest and seizure, and that the inventory and photographing were continued in the PDEA office to ensure the security and safety of the team and the apprehended persons.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> However, the photographing of the seized items at the place of Williams and accused-appellant's arrest cannot be considered as compliant with Section 21 of Republic Act No. 9165. It is evident from IO1 Tacloy's testimony that the buy-bust team failed to exert earnest efforts to ensure the presence of an elected public official, a DOJ representative, and a media representative to witness the photographing of the seized items. IO1 Tacloy testified: </p><blockquote> <p> Q: And how many minutes or hours did you spend inside that Ministop? <br> A: More or less [four] sir. </p> <p>Q: [Four] hours? <br> A: Yes sir.</p> <p> Q: You stayed all along inside the Ministop for [four] hours? <br> A: Yes sir.</p> <p> Q: But your call time with the accused James Williams would be 3:00 [p.m.]. Is that correct? <br> A: Yes sir.</p> <p> Q: And he arrived only at 6:30 [p.m.]. Is that correct? <br> A: Yes sir. </p> <p>Q: So, from that period of time Mr. Witness, you just waited for the accused James Williams to arrive and appear. Is that correct? <br> A: Yes sir. </p> <p>Q: Without, ah, ... but will you agree with me that you already confirmed that James Williams will be coming? <br> A: Yes sir. </p> <p>Q: You did not coordinate again with the [barangay] officials within that span of time? <br> A: Yes sir. </p> <p>Q: You did not coordinate with the Department of Justice? <br> A: Yes sir. </p> <p>Q: You did not coordinate with the Manila City Prosecutor's Office?<br> A: Yes sir. </p> <p>Q: You did not call any mediaman? <br> A: Yes sir. </p> <p>Q: You did not call any [barangay] elected official? <br> A: Yes sir. <br></p><p>. . . .</p> <p> ATTY. AQUINO.</p>  <p> Q: In this drug evidence that you bought from the accused. Is that correct? <br> A: Yes sir. </p> <p>Q: Now, when you marked this particular evidence Mr. Witness, am I right to state that there is no presence of any elected official. ls that correct? <br> A: Yes sir. </p> <p>Q: There is also no media. Is that correct? <br> A: Yes sir. </p> <p>Q: There is also no representative from the Department of Justice. Is that correct? <br> A: Yes sir.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p> </blockquote> <p> Furthermore, the Court finds that the buy-bust team's failure to immediately conduct an inventory of the seized items upon confiscation at the place of arrest of Williams and accused-appellant is an unjustified deviation from the chain of custody requirement. This is considering that the prosecution failed to substantiate any threat to the safety of the buy-bust team posed by the purported commotion at the time of Williams and accused-appellant's arrest.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> In the present case, the prosecution's explanation that the number of people at the place where the items were seized were already increasing, or the fact that the place of arrest was a thickly populated area, does not constitute a justification which would excuse the failure of the buy-bust team to immediately conduct an inventory of the seized items at the said place and in the presence of the insulating witnesses. This is especially considering that, as testified by IO1 Tacloy, there were 15 agents and one "action agent" during the buy-bust operation and that all of them were armed with high powered guns and pistols.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Given their number, the members of the team could have ensured their safety during what should have been an immediate conduct of inventory at the place of arrest. </p><p> Equally important, even when the conduct of inventory of the seized items was done at the PDEA office in Quezon City, the buy-bust team again failed to secure the complete presence of the mandatory witnesses. To recall, the prosecution averred that the seized items, consisting of both drug and non-drug evidence, were inventoried in the presence of Kagawad Ruiz, Jr. and Net 25 media representative Lagman. However, the buy-bust team failed to secure the presence of a DOJ representative to witness the inventory. Notably, the prosecution failed to explain why they were not able to secure the presence of a DOJ representative during the inventory. IO1 Tacloy merely testified on re-cross examination that the buy-bust team no longer bothered to secure the presence of a DOJ representative because that was the instruction of their team leader. IO1 Tacloy testified as follows: </p><blockquote> <p> ATTY. AQUINO: </p> <p>Q: In this inventory of seized evidence, Your Honor. The non-drug evidence were already marked, is that correct? <br> A: Yes, sir. </p> <p>Q: And you confirmed that the drug evidence were already marked at the scene of the alleged crime, is that correct? <br> A: Yes, sir. </p> <p>Q: Would you happened [sic] to know what time did the [barangay kagawad] appear in your office on May 2, 2012, Mr. witness? <br> A: It was 9:45 p.m., sir. </p> <p>Q: What about the media or the reporter, what time? <br> A: I cannot remember, sir. </p> <p> Q: So would you agree with me that the barangay elected official and the media man did not arrive on the same time, is that correct? <br> A: It was just only a couple of minutes, sir.</p> <p> Q: And you would affirm and confirm, Mr. witness, that you did no longer bother to request the presence of the Department of Justice despite passing through the DOJ, Manila City Hall and the Quezon City Hall for the prosecutors, is that correct? <br> A: Yes, sir.</p> <p> Q: Because that was the instruction given to you by your chief, is that correct? <br> A: Our team leader, sir.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p> </blockquote> <p> Considering the unjustified deviations from the chain of custody rule, the Court finds that the integrity and evidentiary value of the seized items were compromised. This warrants the acquittal of accused-appellant.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Consequently, it is unnecessary for the Court to discuss the other links of the chain. </p><p> Lastly, the Court notes that Williams died on July 7, 2020, pending appeal of the case with the CA.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Thus, in view of his supervening death prior to his final conviction, the present criminal case against him must be dismissed. <br></p><p> <b>ACCORDINGLY</b>, the appeal is <b>GRANTED</b>. The July 30, 2021 Decision of the Court of Appeals in CA-G.R. CR HC No. 08903 is <b>REVERSED</b> and <b>SET ASIDE</b>. Accused-appellant Joy Montecillo <i>y</i> Butaslac is <b>ACQUITTED</b> of the charge of illegal sale of dangerous drugs as defined and penalized under Section 5 in relation to Section 26 of Republic Act No. 9165, for failure of the prosecution to prove her guilt beyond reasonable doubt. She is ordered <b>IMMEDIATELY RELEASED</b> from detention unless she is confined for other lawful causes. </p><p>The Court resolves to <b>DISMISS</b> Criminal Case No. 12-291177 only as against James Williams <i>y</i> Francis by reason of his supervening death prior to his final conviction.&nbsp; </p><p>Let a copy of this Decision be furnished to the Director General of the Bureau of Corrections for immediate implementation. The Director General is directed to report to this Court, within five days from receipt of this Decision, the action he has taken. Copies shall also be furnished to the Police General of the Philippine National Police and the Director General of the Philippine Drug Enforcement Agency for their information. </p><p> Let an entry of judgment be issued immediately. </p><p> <b>SO ORDERED.</b> </p><p> <i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-6, Notice of Appeal dated August 9, 2019. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 9-24. The July 30, 2021 Decision in CA-G.R. CR-HC No. 08903 was penned by Associate Justice Carlito B. Calpatura and concurred in by Associate Justices Fernanda Lampas Peralta and Maria Elisa Sempio Diy of the Second Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 26-34. The November 15, 2016 Decision in Criminal Case No. 12-291177 was penned by Presiding Judge Emilio Rodolfo Y. Legaspi III of Branch 13, Regional Trial Court, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 9-10. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 10. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The CA quoted the Office of the Solicitor General's narration in the Brief for the Appellee (CA <i>rollo</i>, pp. 105-128).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> TSN, IO1 Jestner S. Tacloy, March 12, 2013, p. 63.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 10-12. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> CA <i>rollo</i>, pp. 194-211.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 54-75. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 12. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 26-34. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 33-34.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 12-13, 32-33. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> CA <i>rollo</i>, pp. 23-24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 9-24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 3-6. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 37-46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> CA <i>rollo</i>, pp. 105-128, 194-211. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 196, 201-209. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>People v. Rivera</b>, 898 Phil. 492, 498 (2021) [Per J. Perlas-Bernabe, Second Division]; <strong>People v. Ismael</strong>, 806 Phil. 21, 29 (2017) [Per J. Del Castillo, First Division], <i>citing</i> <b>People v. Alberto</b>, 625 Phil. 545, 554 (2010) [Per J. Del Castillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>People v. Claudel</b>, 851 Phil. 64, 74 (2019) [Per J. Caguioa, Second Division], <i>citing</i> <b>People v. Sagana</b>, 815 Phil. 356, 367 (2017) [Per J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>People v. Villalon, Jr.</b>, 898 Phil. 452, 458 (2021) [Per J. Perlas-Bernabe, Second Division], <i>citing</i> <b>People v. Ching</b>, 819 Phil. 565, 576 (2017) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>People v. Wisco</b>, 860 Phil. 195, 207 (2019) [Per J. Inting, Third Division], <i>citing </i><b>Mallillin v. People</b>, 576 Phil. 576, 587 (2008) [Per J. Tinga, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>People v. Wisco</b>, 860 Phil. 195, 207 (2019) [Per J. Inting, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 209, <i>citing</i> <b>People v. Ubungen</b>, 836 Phil. 888, 897 (2018) [Per J. Martires, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>People v. Wisco</b>, 860 Phil. 195, 210-211 (2019) [Per J. Inting, Third Division].</p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Republic Act No. 10640 (2014), An Act to Further Strengthen the Anti-Drug Campaign of the Government, Amending for the Purpose Section 21 of Republic Act No. 9165, Otherwise Known as the "Comprehensive Dangerous Drugs Act of 2002." Section 21 of Republic Act No. 9165, as amended by Republic Act No. 10640 provides in part: </p><blockquote> <p> SEC. 21. <i>Custody and Disposition of Confiscated, Seized, and/or Surrendered Dangerous Drugs, Plant Sources of Dangerous Drugs, Controlled Precursors and Essential Chemicals, Instruments/Paraphernalia and/or Laboratory Equipment</i>. â The PDEA shall take charge and have custody of all dangerous drugs, plant sources of dangerous drugs, controlled precursors and essential chemicals, as well as instruments/paraphernalia and/or laboratory equipment so confiscated, seized and/or surrendered, for proper disposition in the following manner: </p> <p> (1) The apprehending team having initial custody and control of the dangerous drugs, controlled precursors and essential chemicals, instruments/paraphernalia and/or laboratory equipment shall, immediately after seizure and confiscation, conduct a physical inventory of the seized items and photograph the same in the presence of the accused or the person/s from whom such items were confiscated and/or seized, or his/her representative or counsel, with an elected public official and a representative of the National Prosecution Service or the media who shall be required to sign the copies of the inventory and be given a copy thereof: <i>Provided</i>, That the physical inventory and photograph shall be conducted at the place where the search warrant is served; or at the nearest police station or at the nearest office of the apprehending officer/team, whichever is practicable, in case of warrantless seizures: <i>Provided, finally</i>, That noncompliance of these requirements under justifiable grounds, as long as the integrity and the evidentiary value of the seized items are properly preserved by the apprehending officer/team, shall not render void and invalid such seizures and custody over said items. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Plan, Jr. v. People</b>, 879 Phil 453, 462-463 (2020) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Emphasis supplied. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Gutierrez v. People</b>, 844 Phil. 1043, 1056-1057 [Per J. Reyes, Jr., A., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 931 Phil. 945 (2022) [Per J. Rosario, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 956-957. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. Lim</b>, 839 Phil. 598, 621-622 (2018) [Per J. Peralta, <i>En Banc</i>], <i>citing</i> <b>People v. Sipin</b>, 833 Phil. 67, 93 (2018) [Per J. Peralta, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> TSN, IO1 Jestner S. Tacloy, March 12, 2013, pp. 51-57. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> TSN, IO1 Jestner S. Tacloy, August 30, 2013, pp. 39-40, 47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 20-22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> TSN, IO1 Jestner S. Tacloy, August 30, 2013, pp. 35-36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> TSN, IO1 Jestner S. Tacloy, November 14, 2013, pp. l 9-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>People v. De Motor</b>, 866 Phil. 908, 919 (2019) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> CA <i>rollo</i>, pp. 257, 264. Certificate of Death of James Francis Williams. <br></p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

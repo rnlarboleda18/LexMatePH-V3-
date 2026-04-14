@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 241893 - ELEAZAR R. ROBISO, PETITIONER, VS. HON. MARIE GRACE JAVIER IBAY, PRESIDING JUDGE OF THE REGIONAL TRIAL COURT (BRANCH 194) OF PARA&Ntilde;AQUE CITY, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70228' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 241893, November 03, 2025 ]</H2>
+			<H3>ELEAZAR R. ROBISO, PETITIONER, VS. HON. MARIE GRACE JAVIER IBAY, PRESIDING JUDGE OF THE REGIONAL TRIAL COURT (BRANCH 194) OF PARAÃAQUE CITY, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the two Resolutions of the Court of Appeals (CA) in CA-G.R. SP No. 154222. The first Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dismissed outright the Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> filed by petitioner Eleazar R. Robiso (Eleazar) for being the wrong remedy. Meanwhile, the second Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> denied his ensuing Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><b>Antecedents</b> </center><br>On April 17, 2017, Eleazar filed a Petition for Adoption<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the minor Ava Marie Relox (Ava Marie) under Republic Act No. 8552<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> before Branch 194, Regional Trial Court, ParaÃ±aque City (RTC), docketed as Spec. Proc. No. 2017-27.<br><br>In his petition, Eleazar averred that Ava Marie, born on April 24, 2016, is the child of Carmina Relox (Carmina), an unmarried woman. Carmina turned over the care of Ava Marie to him and his parents, Atty. and Mrs. Romeo Robiso, and that she freely and voluntarily relinquished her parental authority over the child.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> With respect to Ava Marie's natural father, Eleazar avowed that his consent could not be obtained as his whereabouts and personal circumstances at the time of the filing of the petition remained unknown.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>To justify the adoption, Eleazar asserted that Ava Marie was not disqualified by law to be adopted. He further claimed that he is financially capable of supporting and caring for her, and that he possesses all the qualifications and none of the disqualifications to adopt herâbeing of good moral character; not having been convicted of any crime involving moral turpitude in the Philippines or elsewhere; and emotionally and psychologically capable of caring for the minor who is more than 16 years younger than him. Moreover, Eleazar claimed that the adoption will serve to the best interest of Ava Marie.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Carmina executed an Affidavit of Consent to Adoption and Grant of Custody of Child<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> to support the petition. She affirmed that she is Ava Marie's natural mother. As she cannot financially support her child, she has entrusted her to the care of Atty. and Mrs. Romeo Robiso and their eldest son, Eleazar. Carmina declared that consenting to the adoption is for the best interest of the baby, and by stating so, she has relinquished her parental authority in favor of Eleazar.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br><center><b>Ruling of the RTC</b> </center><br>The RTC issued an Order<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dismissing Eleazar's petition, thuslyâ<br><blockquote>It appearing that the minor subject of the petition is a surrendered child and that the petition failed to attach a Certification from the Department of Social Welfare and Development [] declaring a child legally available for adoption[,] which is [a] pre-requisite to the adoption proceeding pursuant to Republic Act No. 9523, the present petition is DISMISSED for non-compliance with such requirement.<br><br>SO ORDERED. </blockquote>Eleazar moved for the reconsideration<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> of the foregoing order, arguing that a certification from the Department of Social Welfare and Development (DSWD) is not required because Ava Marie is not an abandoned, a neglected, or a voluntarily committed child. Steadfast on its position that Ava Marie is a voluntarily committed child or a surrendered child, the RTC denied Eleazar's motion, ratiocinatingâ<br><blockquote>There being no substantial argument raised which would warrant the reversal of the Court's order of dismissal, the<i> Motion for Reconsideration</i> is DENIED. Despite that the custody of the minor adoptee was turned over to [Eleazar] and not to the DSWD or to any accredited child-caring agency or institution, still, the adoptee is considered a voluntarily committed or surrendered child because the child's biological mother had knowingly and willingly relinquished parental authority over her minor child through the Affidavit of Consent to Adoption which she executed in favo[]r of [Eleazar], Since Section 4 of the DSWD Implementing Rules and Regulations of Republic Act No. 9523 enumerates the cases or adoption proceedings where the Certification Declaring a Child Legally Available for Adoption is no longer required, and considering that the circumstances surrounding this petition do not fall in any of the three (3) cases mentioned therein, the Motion for Reconsideration is DENIED.<br><br>....<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </blockquote><center><b>Ruling of the CA</b></center><br>With his Respectful Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> simply being noted by the RTC,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Eleazar sought recourse before the CA via a petition for <i>certiorari</i>. In his petition, he imputed gross error or grave abuse of discretion on the part of the RTC in:<i> one</i>, determining Ava Marie, the minor adoptee, as a "surrendered child" or a "voluntarily committed child," that required a DSWD certification declaring her as a child legally available for adoption; and<i> two</i>, allowing the DSWD Implementing Rules and Regulations<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> (IRR) of Republic Act No. 9523 prevail over, modify, or amend the said law by limiting or expanding the scope of its application.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>The first challenged Resolution dismissed the petition outright. The CA held that considering the RTC order had completely disposed of Eleazar's case, his remedy was to file a regular appeal and not a petition for<i> certiorari</i>, before the CA. There was nothing left to resolve with respect to the merits of the case.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The CA disposed in this wise:<br><blockquote><b>WHEREFORE,</b> the foregoing considered, the Petition for [<i>Certiorari</i>] is<b> DISMISSED</b> for being the wrong remedy. This case is, thus, deemed<b> CLOSED AND TERMINATED.</b><br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original) </blockquote>With the denial of his subsequent motion for reconsideration in the second impugned Resolution, Eleazar turns to this Court, insistent that he legally adopt Ava Marie.<br><br><center><b>Issues at Bench</b> </center><br>Stated simply, the issues raised in this Petition are:<ol><li>Whether adoption is an action<i> in rem</i>, such that the RTC acquires jurisdiction over the<i> res</i> only after the notice and publication of hearing;<br><br></li><li>Whether the RTC may dismiss the petition for adoption on the merits without notice and publication of hearing;<br><br></li><li>Whether Ava Marie must secure a DSWD certification of availability for adoption under Republic Act No. 9523; and<br><br></li><li>Whether, under the circumstances of the case, dismissal may be reviewed through<i> certiorari</i> instead of ordinary appeal.</li></ol>Eleazar argues that in an adoption proceeding, the court must fix a date and place of hearing which must be published in a newspaper of general circulation. Failing to do so, the court cannot acquire jurisdiction over the<i> res </i>and its act of summarily dismissing the petition becomes void.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> He insists that Ava Marie is neither an abandoned child, a neglected child, nor a voluntarily committed child so as to render a DSWD certificate declaring her legally available for adoption indispensable in the adoption proceeding.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> More importantly, Eleazar contends that the dismissal of the Petition is injurious to his and the child's interest as they are being required to obtain such certification although the law itself does require so.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> the Office of the Solicitor General (OSG) stressed that the impugned orders of the RTC had already become final and executory in view of Eleazar's filing of a second motion for reconsideration, which is a prohibited pleading.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Similarly, the remedy he used by elevating the case to the CA was improper and should be dismissed outright.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> In any case, Ava Marie is a surrendered child. Thus, before the petition for adoption may be considered by the RTC, she must first be declared as legally available for adoption by the DSWD.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>During the pendency of the case, Republic Act No. 11642<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> was enacted to introduce significant reforms to the Philippine adoption and alternative childcare system. Among the reforms introduced is the streamlining and expediting of the adoption procedure by making it an administrative process and no longer a judicial one. To give flesh to Republic Act No. 11642, the Court issued A.M. No. 02-6-02-SC,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> outlining the guidelines on the implications of the law. Guideline No. 5 under A.M. No. 02-6-02-SC specifically states that petitioners in adoption proceedings may withdraw their petitions to avail of the benefit of the new law.<br><br>Along this grain, the Court required the parties to manifest any pertinent subsequent developments of the case that would help in its immediate disposition or that would have rendered the case moot and academic.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The OSG, for its part, manifested that it had not received any information that would render the case moot and academic.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Meanwhile, the Court received no manifestation from Eleazar other than a change of counsel by reason of death.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>There being no manifestation that Eleazar availed of the administrative remedy under Republic Act No. 11642, the Court shall proceed to rule on the case. Further, the provisions of A.M. No. 02-6-02-SC on the 2002 Rules of Adoption, prior to the passage of Republic Act No. 11642, apply to the case.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><center><b>The Court's Ruling </b> </center><br><b><i>The Court finds no basis to grant the Petition</i></b><i>.</i><br><br>The nature of adoption had been exhaustively discussed by this Court in<i> Rep. of the Phils. v. Court of Appeals</i>.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> While this case primarily clarified the change of surname of an adopted person, the Court nevertheless made a detailed exposition on the nature and effects of adoption. In holding that adoption establishes a person's legal status, it explainedâ<br><blockquote>While it is true that the statutory fiat under Article 365 of the Civil Code is to the effect that an adopted child shall bear the surname of the adopter, it must nevertheless be borne in mind that<i> the change of the surname of the adopted child is more an incident rather than the object of adoption proceedings. The act of adoption fixes a status, viz., that of parent and child. More technically, it is an act by which relations of paternity and affiliation are recognized as legally existing between persons not so related by nature</i>. It has been defined as the taking into one's family of the child of another as son or daughter and heir and conferring on it a title to the rights and privileges of such. The purpose of an adoption proceeding is to effect this new status of relationship between the child and its adoptive parents, the change of name which frequently accompanies adoption being more an incident than the object of the proceeding. The welfare of the child is the primary consideration in the determination of an application for adoption. On this point, there is unanimous agreement.<br><br>It is the usual effect of a decree of adoption to transfer from the natural parents to the adoptive parents the custody of the child's person, the duty of obedience owing by the child, and all other legal consequences and incidents of the natural relation, in the same manner as if the child had been born of such adoptive parents in lawful wedlock, subject, however, to such limitations and restrictions as may be by statute imposed.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (Emphasis in the original, emphasis supplied, citations omitted) </blockquote>Given that adoption determines a person's legal status, the Court has consistently recognized adoption proceedings as action<i> in rem</i>, or those directed against the thing itself or the<i> res</i>.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Simply stated, an adoption proceeding is directed at the legal status of the adoptee, and its effects are binding upon the whole world.<br><br>In<i> Diclas v. Bugnay</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the Court clarified how jurisdiction over the<i> res </i>may be acquired in an action<i> in rem</i>â<br><blockquote>Being an action<i> in rem</i>, "jurisdiction over the person of the defendant is not a prerequisite to confer" on a tribunal the power and authority to decide the case, provided that it acquires jurisdiction over the<i> res</i> or the thing being litigated.<br><br>Jurisdiction over the<i> res</i> is acquired "by actually or constructively seizing or placing the thing under the [tribunal's] custody," which may be effected through the posting and publication of the application for certificate of ancestral land title.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </blockquote>However, Section 12 of the<i> 2002 Rule on Adoption</i><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> provides that "<i>if the petition and attachments are sufficient in form and substance</i>, the court shall issue an order which shall contain [...] the date and place of hearing [...] and shall direct a copy thereof to be published before the date of hearing at least once a week for three successive weeks in a newspaper of general circulation in the province or city where the court is situated." Thus, notice and publication come only<i> after</i> the court has determined the petition's sufficiency in form and substance.<br><br>Corollarily thereto, Section 11 of the same<i> 2002 Rule on Adoption </i>enumerates the required annexes to a petition for adoption as follows:<br><blockquote><dl><dt>SEC. 11.<i> Annexes to the Petition.-</i> The following documents shall be attached to the petition:<br><br></dt><dd>A. Birth, baptismal or foundling certificate, as the case may be, and school records showing the name and residence of the adoptee;<br><br>B. Affidavit of consent of the following:<br><br>1. The adoptee, if ten (10) years of age or over;<br><br>2. The biological parents of the child, if know, or the legal guardian, or the child-placement agency, child-caring agency, or the proper government instrumentality which has legal custody of the child;<br><br>3. The legitimate and adopted children of the adopter and of the adoptee if any, who are ten (10) years of age or over;<br><br>4. The illegitimate children of the adopter living with him who are ten (10) years of age or over; and<br><br>5. The spouse, if any, of the adopter or adoptee.<br><br>C. Child custody report on the adoptee and his biological parents;<br><br>D. If the petitioner is an alien, certification by his diplomatic or consular office or any appropriate government agency that he has legal capacity to adopt in his country and that his government allows the adoptee to enter his country as his own adopted child unless exempted under Section 4(2);<br><br>E. Home study report on the adopters. If the adopter is an alien residing abroad but qualified to adopt, the home study report by a foreign adoption agency duly accredited by the Inter-Country Adoption Board; and<br><br>F. Decree of annulment, nullity or legal separation of the adopter as well as that of the biological parents of the adoptee, if any,</dd></dl> </blockquote>From the foregoing, there was originally no requirement to attach a DSWD certificate declaring a child legally available for adoption. However, with the passage of Republic Act No. 9523,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> such certification was made a prerequisite in adoption proceedings. Section 4 of the IRR of Republic Act No. 9523 clarifies the coverage of the law, viz.:<br><blockquote>Section 4.<b> Coverage-</b> These rules shall apply to surrendered, abandoned, neglected and dependent children as mentioned in this Act who are subject for adoption.<br><br>Any of the following adoption proceedings in court does not require a Certification Declaring a Child Legally Available for Adoption[:]<ol type="i"><li>Adoption of an illegitimate child by any of his/her biological parent[;]<br></li><li>Adoption of a child by his/her step-parent[; and]<br></li><li>Adoption of a child by a relative within the fourth (4<sup>th</sup>) degree of consanguinity or affinity[.]</li></ol></blockquote>These exceptions reflect situations where there is an existing relationship between the adoptee and the adopter. Thus, as a general rule, a certification declaring a child legally available for adoption is required in cases involving adoption of surrendered, abandoned, neglected and dependent children. Absent such certification, the petition fails to meet the threshold of sufficiency in form and substance and may be dismissed.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In the case at bench, the RTC determined that Ava Marie is a voluntarily committed or surrendered child, based on the allegations of the petition. Consequently, it found that the petition should have been accompanied by the required DSWD certificate. Its absence rendered the petition defective and subject to dismissal<i> motu proprio</i>.<br><br>Unflinching, Eleazar argues that the RTC erred in requiring the DSWD certificate, since Ava Marie is not covered within the scope of Republic Act No. 9523. He contends that there was no need to secure or attach a DSWD certification declaring her legally available for adoption.<br><br><i>The argument does not hold water.</i><br><br>Republic Act No. 9523 declares as State policy that "alternative protection and assistance shall be afforded to every child who is abandoned, surrendered, or neglected."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> It defines an<i> abandoned child</i> as one who has no proper parental care or guardianship, or whose parents have deserted him or her for a period of at least three continuous months, which includes a founding.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> A<i> neglected child</i> refers to one whose basic needs have been deliberately unattended or inadequately attended for the same period.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>While the policy of the law extends to a surrendered child, the law itself does not define the term. Instead, it refers to a<i> voluntarily committed child â </i>one whose parents or legal guardian knowingly and willingly relinquished parental authority to the DSWD or any duly accredited child-placement or child-caring agency or institution.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The IRR of Republic Act No. 9523 defines a surrendered child<i> alongside</i> a voluntarily committed child.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>In clarifying who may be considered a surrendered, a voluntarily committed, or an involuntarily committed child, the law must be read as a whole. It is a rule in statutory construction that every part of the statute must be interpreted with reference to the context, i.e., that every part of the statute must be considered together with the other parts, and kept subservient to the general intent of the whole enactment.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> The particular words, clauses and phrases should not be studied as detached and isolated expression, but the whole and every part of the statute must be considered in fixing the meaning of any of its parts and in order to produce a harmonious whole.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>The Court agrees with the OSG that a voluntarily committed child includes a dependent, abandoned or neglected child who has been entrusted to the DSWD, a child placement agency, or even to an individual. Section 7 of Republic Act No. 9523 refers to Article 154 of Presidential Decree No. 603<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> when discussing the declaration of availability for adoption of a voluntary commitment of a child:<br><blockquote>SEC. 7.<i> Declaration of Availability for Adoption of Involuntarily Committed Child and Voluntarily Committed Child. â ....</i><br><br>In case of voluntary commitment a contemplated in Article 154 of Presidential Decree No. 603, the certification declaring the child legally available for adoption shall be issued by the Secretary within three (3) months following the filing of the Deed of Voluntary Commitment, as signed by the parent(s) with the DSWD. </blockquote>Relatedly, Article 154 of Presidential Decree No. 603 provides:<br><blockquote><b>ART. 154.</b><i><b> </b>Voluntary Commitment of a Child to an Institution</i>. â The parent or guardian of a dependent, abandoned or neglected child may voluntarily commit him to the Department of Social Welfare or any duly licensed child placement agency or<i> individual</i> subject to the provisions of the next succeeding articles. (Emphasis supplied) </blockquote>From the foregoing, it is clear that children surrendered to an individual are deemed to be voluntarily committed for purposes of requiring a certification declaring a child legally available for adoption. Stated otherwise, when a parentâoften a mother acting under difficult circumstances, as in this caseâentrusts her child to another's care, the child is legally considered voluntarily committed. For purposes of adoption, the prospective adopter must therefore first secure the necessary DSWD certification.<br><br>Whence, the RTC committed no reversible error in dismissing the petition on the ground of non-compliance with the provision of Republic Act No. 9523. Such dismissal completely disposes of the case. Consequently, the Court finds no reason to disturb the disposition of the CA in dismissing Eleazar's petition for<i> certiorari</i> filed before it for being the wrong remedy.<br><br><b><i>A final note</i>. </b>The Court commiserates with Eleazar's genuine desire to provide Ava Marie with a stable and loving home. Nevertheless, justice demands equal vigilance in protecting children, who are often the most vulnerable and may become susceptible to exploitation if legal safeguards are disregarded. Adoption laws were crafted precisely to uphold the welfare and best interest of the child, and compliance with their requirements cannot be dispensed with.<br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is<b> DENIED</b>, without prejudice to the filing of an appropriate petition. The March 5, 2018 and August 31, 2018 Resolutions of the Court of Appeals in CA-G.R. SP No. 154222 are<b> AFFIRMED</b>.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting,</i> and <i>Gaerlan, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 8-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 19-20. The March 5, 2018 Resolution was penned by Associate Justice Manuel M. Barrios, with the concurrence of Associate Justices Victoria Isabel A. Paredes and Jhosep Y. Lopez (now a Member of this Court) of the Special Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 49-57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 28-30. Dated August 31, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 21-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 31-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Republic Act No. 8552 (1998), The Domestic Adoption Act of 1998.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, p. 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 31-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 37-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 39. The May 9, 2017 Order was signed by Presiding Judge Marie Grace Javier Ibay.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 40-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 43. The July 11, 2017 Order was issued by Presiding Judge Marie Grace Javier Ibay.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 44-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 48. The November 16, 2017 Order was issued by Presiding Judge Marie Grace Javier Ibay.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Approved on June 1, 2009.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 51-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 11-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 12-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 77-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 79-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 81-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 84-88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Republic Act No. 11642 (2022), Domestic Administrative Adoption and Alternative Child Care Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> ADOPTION RULE, April 19, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, p. 126, March 29, 2023 Resolution of the Third Division.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 122, Manifestation and Compliance (To the Resolution dated 29 March 2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 136, Entry of Appearance with Manifestation.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Guideline No. 9 reads: "The Rule on Adoption which covers the domestic adoption of Filipino children is therefore rendered ineffective, except insofar as petitions for adoption which have not been withdrawn from the courts pursuant to Sec. 56 of R.A. No. 11642 are concerned. In such cases, the existing Rule on Adoption shall be applied."<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 284-A Phil. 643 (1992) [Per J. Regalado, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 658-659.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i><i>See</i></i> <b>JAPRL Dev't. Corp. v. Security Bank Corp.</b>, 665 Phil. 774, 809 (2011) [Per J. Nachura, Second Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 933 Phil. 499, 525 (2023) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 525-526.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> ADOPTION RULE, August 22, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Republic Act No. 9523 (2009), An Act Requiring Certification of the Department of Social Welfare and Development (DSWD) to Declare a "Child Legally Available for Adoption" as a Prerequisite for Adoption Proceedings, Amending for this Purpose Certain Provisions of Republic Act No. 8552, Otherwise Known as the Domestic Adoption Act of 1998, Republic Act No. 8043 Otherwise Known as the Child and Youth Welfare Code, and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> RULES OF COURT, Rule 17, sec 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Republic Act No. 9523 (2009), sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>., sec. 2(3).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>., sec. 2(4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>., sec. 2(6).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Department of Social Welfare and Development, Implementing Rules and Regulations DSWD IRR of Republic Act No. 9523 (2009), sec. 3(8).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>ACT Teachers Rep. Tinio v. President Duterte</b>, 934 Phil. 212, 265 (2023) [Per J. Dimaampao, <i>En Banc</i>]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Commissioner of Internal Revenue v. Pilipinas Shell Petroleum Corp.</b>, 744 Phil. 313, 326-327 (2014) [Per J. Villarama, Jr., Third Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Presidential Decree No. 603 (1974), The Child and Youth Welfare Code.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

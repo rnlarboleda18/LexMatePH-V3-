@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 240301 - ANGELO ANG PALA&Ntilde;A, PETITIONER, VS. FIELD INVESTIGATION OFFICE, OFFICE OF THE OMBUDSMAN, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70216' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 240301, August 12, 2025 ]</H2>
+			<H3>ANGELO ANG PALAÃA, PETITIONER, VS. FIELD INVESTIGATION OFFICE, OFFICE OF THE OMBUDSMAN, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This pertains to the Manifestation<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated December 5, 2019 and the Motion for Leave to File Second Motion for Reconsideration with Included Second Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 18, 2020, filed by petitioner Angelo Ang PalaÃ±a (PalaÃ±a), questioning anew the Court's Resolutions dated September 24, 2018<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and September 4, 2019.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p align="center"> <b>Antecedents</b> </p><p> <i>Version of the complainant</i></p><p> In a Verified Complaint<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated May 22, 2013, Rebene C. Carrera (Carrera) accused PalaÃ±a of using his position as Commissioner of the National Labor Relations Commission (NLRC) to extort bribe money from him. Specifically, Carrera alleged that he had a cordial relationship with PalaÃ±a and that the latter impressed upon him that he had a wide discretion, authority, and influence in the outcome of the cases of Carrera's clients which were pending before PalaÃ±a's division in the NLRC. Sometime in December 2011, Carrera received an urgent phone call from PalaÃ±a. The latter asked the former to extend a personal loan which could also be considered as "goodwill money."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Carrera refused to give the loan to PalaÃ±a, but the latter kept on calling his number. Eventually, Carrera agreed and deposited the amount of PHP 100,000.00 to PalaÃ±a's BDO Unibank Account No. 2770043524, as evidenced by a Cash Deposit Slip<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> dated December 21, 2011.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> Later on, Carrera requested PalaÃ±a to pay the loan, to no avail. PalaÃ±a refused to pay, allegedly because the subject amount is in the nature of "goodwill money." Worse, PalaÃ±a sent Carrera a handwritten note<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> enumerating the cases that PalaÃ±a allegedly resolved in favor of Carrera's clients.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> PalaÃ±a's continued refusal to pay the loan resulted in Carrera filing an administrative case against him. The Field Investigation Office of the Office of the Ombudsman (FIO-Ombudsman) found credence in Carrera's allegations, thus, filing a formal administrative Complaint<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated February 19, 2014 against PalaÃ±a. </p><p> The contents of Carrera's complaint were likewise replicated in the FIO-Ombudsman's Verified Position Paper<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> which it filed before the Office of the Ombudsman. </p><p> <i>PalaÃ±a's version</i></p><p> Countermanding the foregoing allegations, PalaÃ±a contended in his Position Paper<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> that he never maintained any cordial or friendly relationship with Carrera. Neither did he ever impress upon Carrera or to any other person that he wielded any authority to influence the outcome of cases pending before the NLRC. Since the NLRC is a collegiate body, he has never spoken on behalf of his division to any person.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> PalaÃ±a denied obtaining a loan from Carrera, and argued that the source and the veracity of the deposit slip was highly suspicious. According to PalaÃ±a, contrary to the FIO-Ombudsman's claim, the depositor was actually a janitress in Carrera's office, a certain Maria Johanna Andora (Andora), who made the deposit, and not Carrera's secretary. In the absence of any verified statement or affidavit from Andora, the said deposit slip must be considered as hearsay evidence and, accordingly, should not be considered by the Ombudsman in resolving the case.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Too, PalaÃ±a denied sending Carrera any handwritten note containing the list of cases that he purportedly influenced in his capacity as NLRC Commissioner.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> Finally, PalaÃ±a surmised that Carrera's complaint was motivated by a desire to exact revenge because PalaÃ±a's division had earlier denied a Motion for Attorney's Lien, filed by Carrera, for being out of time.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p align="center"> <b>The Ombudsman Ruling</b> </p><p> On October 30, 2014, the Ombudsman rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> finding PalaÃ±a guilty of grave misconduct and imposing against him the penalty of dismissal from the service and all its accessory penalties. </p><p> According to the Ombudsman, PalaÃ±a neither refuted nor denied that the amount of PHP 100,000.00 was deposited to his account. Also, he never denied that he owned the BDO account, the details of which were confidential and would not have been known to Carrera if PalaÃ±a did not give such information in the first place. Thus, there is evidence that he committed grave misconduct. </p><p> The dispositive portion of the Ombudsman's Decision reads: </p><blockquote> <p> <b>FOREGOING CONSIDERED</b>, pursuant to Section 43 (A-3), Rule 10 of the Revised Rules on Administrative Cases in the Civil Service (CSC Resolution No. 1101502) dated 18 November 2011, respondent <b>ANGELO ANG PALAÃA</b> is hereby found guilty of <b>GRAVE MISCONDUCT</b>, and is meted the corresponding penalty of <b>DISMISSAL FROM THE SERVICE</b> including all the accessory penalties of cancellation of eligibility, forfeiture of leave credits and retirement benefits, and disqualification for reemployment in the government service. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original) </p> </blockquote> <p> PalaÃ±a's Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> was denied by the said office through an Order<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated September 24, 2015. </p><p> Aggrieved, PalaÃ±a filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> with the Court of Appeals (CA), which was docketed as CA-G.R. SP No. 143572. He argued, among others, that Carrera failed to prove his claim of having a cordial relationship with PalaÃ±a. Neither did he prove that PalaÃ±a asked a loan from him. And, the origin of the cash deposit slip is dubious because the person who made such deposit did not execute any affidavit on the circumstances under which the same was made. In any event, the existence of such cash deposit slip does not even prove that PalaÃ±a demanded the amount of PHP 100,000.00 from Carrera. PalaÃ±a vehemently denied authorship of the handwritten list of cases and highlighted the fact that it was never proven that he wrote the same. PalaÃ±a maintained that Carrera's complaint was impelled by an ill motive because Carrera's services were terminated by a client while said client's case was pending before PalaÃ±a's division. Finally, PalaÃ±a asserted that the Ombudsman did not even take these matters into consideration, thus, violating his right to due process.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p align="center"> <b>The CA Ruling</b> </p><p> On February 22, 2018, the CA issued a Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dismissing PalaÃ±a's petition. </p><p> The CA ruled that there was substantial evidence to hold PalaÃ±a liable for grave misconduct. Specifically, the CA found that PalaÃ±a had actually asked Carrera for "goodwill money" and that the same was corroborated by the cash deposit slip that was produced by the latter. Too, PalaÃ±a never denied that the amount of PHP 100,000.00 was indeed deposited to his account.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> Thus, the CA decreed: </p><blockquote> <p> Absent error on the part of the Ombudsman in issuing the assailed Decision dated 30 October 2014, and the assailed Order dated 24 September 2015, we <b>DISMISS</b> the Petition for Review. </p> <p> <b>IT IS SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis in the original) </p> </blockquote> <p> PalaÃ±a filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> but the same was denied by the CA in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated June 1, 2018. </p><p> Undaunted, PalaÃ±a elevated his cause to this Court through a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> under Rule 45 of the Rules of Court, as amended. </p><p align="center"> <b>The Court's Earlier Resolutions</b> </p><p> The Court, in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated September 24, 2018, affirmed with modification the issuances of the CA because PalaÃ±a raised factual matters and failed to sufficiently show that the CA committed any reversible error. PalaÃ±a filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> which was, however, also denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> dated September 4, 2019 for failure on his part to raise any substantial argument as would warrant the reconsideration sought. </p><p> Hence, the present incidents. </p><p> In his Manifestation,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> PalaÃ±a attacks Carrera's credibility in light of the latter's September 3, 2019 disbarment, on grounds of gross immorality, in <em>Chan v. Carrera</em>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> PalaÃ±a's Motion for Leave to File Second Motion for Reconsideration with Included Second Motion for Reconsideration likewise zeroes in on Carrera's disbarment. PalaÃ±a asserts that Carrera's mental instability and predilection to fabricate scenarios necessitate another close inspection of the latter's allegations against the former. </p><p align="center"><strong> Issue</strong> </p><p> The Court is tasked to determine whether to give due course to PalaÃ±a's Second Motion for Reconsideration and, thereafter, rule on the merits of said Motion. </p><p align="center"><strong> The Ruling of the Court</strong> </p><p align="center"> I. </p><p> The Court resolves to allow PalaÃ±a's Second Motion for Reconsideration and give due course to his Petition. </p><p> As a general rule, second and subsequent motions for reconsideration are prohibited.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Rule 52, Section 2 of the Rules of Court so states: </p><blockquote> <p> Section 2. <em>Second motion for reconsideration</em>. â No second motion for reconsideration of a judgment or final resolution by the same party shall be entertained. </p> </blockquote> <p> Nevertheless, Rule 15, Section 3 of the Internal Rules of the Supreme Court provides an exception: </p><blockquote> <p> Sec. 3. <i>Second motion for reconsideration</i>. â The Court shall not entertain a second motion for reconsideration, and any exception to this rule can only be granted in the higher interest of justice by the Court <em>en banc</em> upon a vote of at least two-thirds of its actual membership. There is reconsideration "in the highest interest of justice" when the assailed decision is not only legally erroneous, but is likewise patently unjust and potentially capable of causing unwarranted and irremediable injury or damage to the parties. A second motion for reconsideration can only be entertained before the ruling sought to be reconsidered becomes final by operation of law or by the Court's declaration.</p> <p> In the Division, a vote of three Members shall be required to elevate a second motion for reconsideration to the Court <i>En Banc</i>. </p> </blockquote> <p> Prescinding from the foregoing, it is clear that in order for a second motion for reconsideration to prosper, the movant must show that a reconsideration of the Court's ruling is necessary in the higher interest of justice, which standard is satisfied upon proving that the assailed ruling is both (1) legally erroneous and (2) patently unjust and potentially capable of causing unwarranted and irremediable injury or damage to the moving party.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> Illuminating at this point is the Court's comprehensive treatise in <i>McBurnie v. Ganzon</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> viz.: </p><blockquote> <p> In a line of cases, the Court has then entertained and granted second motions for reconsideration "in the higher interest of substantial justice," as allowed under the Internal Rules when the assailed decision is "legally erroneous," "patently unjust" and "potentially capable of causing unwarranted and irremediable injury or damage to the parties." In <i>Tirazona v. Philippine EDS Techno-Service, Inc. (PET, Inc.)</i>, we also explained that a second motion for reconsideration may be allowed in instances of "extraordinarily persuasive reasons and only after an express leave shall have been obtained." In <i>Apo Fruits Corporation v. Land Bank of the Philippines</i>, we allowed a second motion for reconsideration as the issue involved therein was a matter of public interest, as it pertained to the proper application of a basic constitutionally-guaranteed right in the government's implementation of its agrarian reform program. In <i>San Miguel Corporation v. NLRC</i>, the Court set aside the decisions of the LA and the NLRC that favored claimants-security guards upon the Court's review of San Miguel Corporation's second motion for reconsideration. In <i>Vir-Jen Shipping and Marine Services, Inc. v. NLRC, et al</i>., the Court <i>en banc</i> reversed on a third motion for reconsideration the ruling of the Court's Division on therein private respondents' claim for wages and monetary benefits. </p> <p> It is also recognized that in some instances, the prudent action towards a just resolution of a case is for the Court to suspend rules of procedure, for ''the power of this Court to suspend its own rules or to except a particular case from its operations whenever the purposes of justice require it, cannot be questioned." In <i>De Guzman v. Sandiganbayan</i>, the Court, thus, explained: </p> <blockquote> <p> [T]he rules of procedure should be viewed as mere tools designed to facilitate the attainment of justice. Their strict and rigid application, which would result in technicalities that tend to frustrate rather than promote substantial justice, must always be avoided. Even the Rules of Court envision this liberality. This power to suspend or even disregard the rules can be so pervasive and encompassing so as to alter even that which this Court itself has already declared to be final, as we are now compelled to do in this case. </p> <p>. . . . </p> <p> The Rules of Court was conceived and promulgated to set forth guidelines in the dispensation of justice but not to bind and chain the hand that dispenses it, for otherwise, courts will be mere slaves to or robots of technical rules, shorn of judicial discretion. That is precisely why courts in rendering real justice have always been, as they in fact ought to be, conscientiously guided by the norm that when on the balance, technicalities take a backseat against substantive rights, and not the other way around. Truly then, technicalities, in the appropriate language of Justice Makalintal, "<i>should give way to the realities of the situation</i>." </p> </blockquote> <p> Consistent with the foregoing precepts, the Court has then reconsidered even decisions that have attained finality, finding it more appropriate to lift entries of judgments already made in these cases. In <i>Navarro v. Executive Secretary</i>, we reiterated the pronouncement in <i>De Guzman</i> that the power to suspend or even disregard rules of procedure can be so pervasive and compelling as to alter even that which this Court itself has already declared final. The Court then recalled in <i>Navarro</i> an entry of judgment after it had determined the validity and constitutionality of Republic Act No. 9355, explaining that: </p> <blockquote> <p> Verily, the Court had, on several occasions, sanctioned the recall of entries of judgment in light of attendant extraordinary circumstances. The power to suspend or even disregard rules of procedure can be so pervasive and compelling as to alter even that which this Court itself had already declared final. In this case, the compelling concern is not only to afford the movants-intervenors the right to be heard since they would be adversely affected by the judgment in this case despite not being original parties thereto, but also to arrive at the correct interpretation of the provisions of the [Local Government Code (LGC)] with respect to the creation of local government units. </p> </blockquote> <p> In <i>MuÃ±oz v. CA</i>, the Court resolved to recall an entry of judgment to prevent a miscarriage of justice. This justification was likewise applied in <i>Tan Tiac Chiong v. Hon. Cosico</i>, wherein the Court held that: </p> <blockquote> <p> The recall of entries of judgments, albeit rare, is not a novelty. In <i>MuÃ±oz v. CA</i>, where the case was elevated to this Court and a first and <i>second</i> motion for reconsideration had been denied with <i>finality</i>, the Court, in the interest of substantial justice, recalled the Entry of Judgment as well as the letter of transmittal of the records to the Court of Appeals. </p> </blockquote> <p> In <i>Barnes v. Judge Padilla</i>, we ruled: </p> <blockquote> <p> [A] final and executory judgment can no longer be attacked by any of the parties or be modified, directly or indirectly, even by the highest court of the land. </p> <p>However, this Court has relaxed this rule in order to serve substantial justice considering (a) matters of life, liberty, honor or property, (b) the existence of special or compelling circumstances, (c) the merits of the case, (d) a cause not entirely attributable to the fault or negligence of the party favored by the suspension of the rules, (e) a lack of any showing that the review sought is merely frivolous and dilatory, and (f) the other party will not be unjustly prejudiced thereby.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Emphasis in the original) </p> </blockquote> </blockquote> <p> As the Court will demonstrate, the instant case falls under the exception. The higher interest of justice necessitates the Court to give another hard look at the circumstances extant in this case. Indeed, there is a higher interest of justice "when the assailed decision is not only legally erroneous, but is likewise patently unjust and potentially capable of causing unwarranted and irremediable injury or damage to the parties."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Although no person can have a proprietary right to public office, public officers are still entitled to the basic constitutional rights to due process of law and security of tenure.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> In <i>Bince, Jr. v. Commission on Elections</i>:<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><blockquote> <p> Petitioner cannot be deprived of his office without due process of law. Although public office is not property under Section 1 of the Bill of Rights of the Constitution, and one cannot acquire a vested right to public office, it is, nevertheless, a protected right.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p> </blockquote> <p> Due process, as described in <i>Ermita-Malate Hotel and Motel Operators Association, Inc. v. The Honorable City Mayor of Manila</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> is: </p><blockquote> <p> [R]esponsiveness to the supremacy of reason, obedience to the dictates of justice. Negatively put, arbitrariness is ruled out and unfairness avoided. To satisfy the due process requirement, official action, to paraphrase Cardozo, must not outrun the bounds of reason and result in sheer oppression. Due process is thus hostile to any official action marred by lack of reasonableness. Correctly has it been identified as freedom from arbitrariness. It is the embodiment of the sporting idea of fair play. It exacts fealty "to those strivings for justice" and judges the act of officialdom of whatever branch "in the light of reason drawn from considerations of fairness that reflect [democratic] traditions of legal and political thought." It is not a narrow or "technical conception with fixed content unrelated to time, place and circumstances," decisions based on such a clause requiring a "close and perceptive inquiry into fundamental principles of our society."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p> </blockquote> <p> While PalaÃ±a has no vested or proprietary right to the office of a Commissioner of the NLRC, he is nevertheless, entitled to due process of law. The Court finds that the finding of grave misconduct against him was tainted with arbitrariness to such a degree that he was inevitably denied due process. Thus, his dismissal from the service must be set aside. </p><p align="center"> II. </p><p> The parameters on the acts that constitute misconduct were defined by the Court in <i>Besmonte v. National Police Commission-National Capital Region</i>,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> viz.: </p><blockquote> <p> Misconduct is a transgression of some established and definite rule of action, more particularly, unlawful behavior or gross negligence by the public officer. It is the intentional wrongdoing or deliberate violation of a rule of law or standard of behavior. </p> <p> In administrative cases, misconduct can be classified as either simple or grave. Simple misconduct has been defined as an unacceptable behavior which transgresses the established rules of conduct for public officers, work-related or not. On the other hand, in grave misconduct, the elements of corruption, clear intent to violate the law, or flagrant disregard of an established rule must be manifest. </p> <p> Corruption as an element of grave misconduct consists in the act of an official or fiduciary person who unlawfully and wrongfully uses his or her station or character to procure some benefit for himself/herself or for another person, contrary to duty and the rights of others. Clear intent to violate the law or flagrant disregard of an established rule presupposes that there is an order or regulation defied by the public official. In <i>Imperial, Jr. v. Government Service Insurance System</i>: </p> <blockquote> <p> Flagrant disregard of rules is a ground that jurisprudence has already touched upon. It has been demonstrated, among others, in the instances when there had been open defiance of a customary rule; in the repeated voluntary disregard of established rules in the procurement of supplies; in the practice of illegally collecting fees more than what is prescribed for delayed registration of marriages; when several violations or disregard of regulations governing the collection of government funds were committed; and when the employee arrogated unto herself responsibilities that were clearly beyond her given duties. The common denominator in these cases was the employee's propensity to ignore the rules as clearly manifested by his or her actions. </p> </blockquote> <p> Without any of these elements, the transgression of an established rule is properly characterized as simple misconduct only.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Citations omitted) </p> </blockquote> <p> The quantum of proof in administrative cases is substantial evidence, which is more than a mere scintilla of evidence,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> and means "such relevant evidence as a reasonable mind might accept as adequate to support a conclusion, even if other minds equally reasonable might conceivably opine otherwise."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> This standard is satisfied when there is reasonable ground to believe, based on the evidence submitted, that the respondent is responsible for the misconduct complained of.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> This holds true even if such evidence might not be overwhelming or even preponderant.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> In finding PalaÃ±a guilty of grave misconduct, the Ombudsman relied on the cash deposit that was made to his account, as well as the fact that the details of such account were known to a third party who, for all intents and purposes, should not have knowledge of the same. The CA upheld this finding <i>in toto</i>. </p><p> The Court, however, finds these circumstances to be patently insufficient to hold PalaÃ±a administratively liable for misconduct, whether grave or simple. Indeed, "[w]hile substantial evidence suffices to hold one administratively liable, it does not authorize any conclusion to be made just as long as there is any evidence to support it; it does not excuse administrative agencies from taking into account countervailing evidence which fairly detracts from the evidence supporting a finding."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p><p> Here, the FIO-Ombudsman failed to prove that the deposit of PHP 100,000.00 into PalaÃ±a's bank account was made by Carrera at the behest of PalaÃ±a, or that such deposit was made to perpetuate corruption. </p><p> The Court takes judicial notice of its resolution in <i>People v. PalaÃ±a</i><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> which involves the same set of facts as in the instant case. In said case, PalaÃ±a revealed that the subject amount of PHP 100,000.00 was deposited to BDO Unibank Account No. 2770043524 by retired NLRC Commissioner Nieves De Castro (Commissioner De Castro) as part of her payment for jewelry which were purchased from PalaÃ±a's wife, Shirley S. PalaÃ±a (Shirley). Commissioner De Castro took the witness stand and testified that Shirley was engaged in the jewelry business and the said bank account is jointly owned by PalaÃ±a and Shirley. Thus, the amount of PHP 100,000.00 was deposited by Commissioner De Castro to BDO Unibank Account No. 2770043524. </p><p> True enough, as evidenced by a Certificate of Bank Deposit and/or Placement<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> dated August 17, 2015, the subject BDO Unibank Account No. 2770043524 is in the name of "Angelo A. PalaÃ±a OR Shirley S. PalaÃ±a." Clearly, it is a joint account which PalaÃ±a shares with his wife. </p><p> Verily, it has been held that bank deposit entries are mere <i>prima facie</i> proof of what are stated therein, i.e., the dates of the transactions, the amounts deposited or withdrawn, and the outstanding balances.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> The subject cash deposit slip merely serves as <i>prima facie</i> proof of the information that are stated on its face: that on December 21, 2011, the amount of PHP 100,000.00 was deposited to BDO Unibank Account No. 2770043524. Here, the legitimate purpose of the deposit was sufficiently explained by Commissioner De Castro. </p><p> The records show that the person whom Carrera claims to have allegedly made the deposit, i.e., his secretary, Joanna D. Vianzon (Vianzon), had no personal knowledge of the circumstances involving the same. Rather, as revealed by Vianzon, it was Andora who allegedly deposited the amount of PHP 100,000.00 to PalaÃ±a's bank account. </p><p> Worth reviewing are the following statements in Vianzon's Affidavit<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> dated December 12, 2013: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">3.</div></td> <td width="95%"><div align="justify">Sometime on December 21, 2011, Atty. Carrera instructed me by cellphone to deposit to the account of Mr. Angelo P. [sic] PalaÃ±a at Banco De Oro, Cagayan De Oro Branch the sum of One Hundred Thousand Pesos ([PHP] 100,000.00) and he dictated to me the account name and account number of Mr. PalaÃ±a as he got said information from Commissioner PalaÃ±a himself. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">4.</div></td> <td><div align="justify">I inquired to Atty. Carrera why he is depositing the sum of ([PHP] 100,000.00) to the account of Mr. Angelo PalaÃ±a at BDO, Cagayan De Oro Branch and Atty. Carrera informed me that Mr. PalaÃ±a urgently requested it, as that time he needs at [sic] very badly as he was at Cagayan de Oro that time. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">5.</div></td> <td><div align="justify">As I have [sic] many things to do in the office at that time, I instructed our janitress, Maria Johanna Andora, to deposit said sum of money in accordance with the instruction of Atty. Carrera.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">6.</div></td> <td><div align="justify">After about an hour our janitress arrived and she handed to me the original deposit slip which is now in my possession. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">7.</div></td> <td><div align="justify">I learned later that this sum of money is [sic] supposed to be just loan to Mr. PalaÃ±a, however Mr. PalaÃ±a did not pay it anymore and he considers the same as a goodwill money as Mr. PalaÃ±a are [sic] holding some cases [sic] of Atty. Carrera and this is apparently considered as advance goodwill money and he rendered decision [sic] already in favor of the cases of Atty. Carrera.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></div></td> </tr> </tbody></table> </blockquote> <p>A cursory reading of the foregoing statements readily reveals that while the amount of PHP 100,000.00 was allegedly deposited by Andora to PalaÃ±a's bank account, there is no evidence to show that, indeed, PalaÃ±a was aware that the said amount was deposited to his account and was intended as "goodwill money" for future cases that Carrera would be handling before the NLRC. Neither Vianzon nor Andora, who did not execute any affidavit, had personal knowledge of the alleged arrangement between Carrera and PalaÃ±a. Nothing on record shows that Carrera was actually informed by Vianzon that such deposit was made. Thus, in the absence of any evidence that PalaÃ±a was aware of, and consented to, the deposit, it cannot be concluded that he committed a corrupt act as would render him administratively liable for grave misconduct. </p> <p> In addition, there is no civil service rule or regulation which punishes the mere deposit of money into the bank account of a public officer. Since there is more than one account holder, it cannot be concluded that the information on the subject account was obtained through PalaÃ±a alone, to the exclusion of Shirley, and that the subject deposit was indeed made at the behest of PalaÃ±a. Rather, the Court is inclined to adopt the findings in <i>People v. PalaÃ±a</i> that the subject PHP 100,000.00 was actually deposited by Commissioner De Castro and not by Carrera or any of his subordinates. </p><p> On this score, there being a dearth of evidence to prove corruption, it was error for the Ombudsman and the CA to rule PalaÃ±a liable for grave misconduct. While a person's bank account number is, ideally, confidential information, there is no positive duty for a bank account holder to ensure that the same is known to no other person, and that such person's failure to do so is punishable by law. Moreso in this case, where it is clear that the subject bank account is in the name of two persons, it becomes unreasonable to expect such a high degree of confidentiality in securing the supposed secrecy of account information. </p><p> All told, the conclusion that PalaÃ±a's account details would not have been known to other persons had he not personally supplied the same is based entirely on speculations and conjectures and, as such, are not sufficient substantial evidence to sustain a finding of administrative liability.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> He must, perforce, be cleared of the charge against him. </p><p align="center"> III. </p><p> Indeed, while the general rule is that the findings of facts of quasi-judicial and quasi-administrative bodies are conclusive and not subject to review by the Court, this rule does not apply if such findings are tainted with mistake or are not supported by substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Such is obtaining in this case. </p><p> Since the Court can take judicial notice of its own official acts, as provided for in Rule 129, Section 1<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> of the Rules of Court, a reading of <i>People v. PalaÃ±a</i><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> shows that a clear error was committed by the Ombudsman and the CA in finding administrative liability against PalaÃ±a. The uncorroborated claim that Andora, a janitress who never executed any sworn affidavit, deposited the amount of PHP 100,000.00 to PalaÃ±a's bank account as part of the latter's corrupt deed, cannot prevail over the testimonial evidence of Commissioner De Castro who testified before the Sandiganbayan that she was the one who actually deposited the said amount as part of the purchase price of jewelry that she purchased from PalaÃ±a's wife.</p><p> While PalaÃ±a can no longer be reinstated to his former position as Commissioner of the NLRC because he has already reached the compulsory retirement age of 65, he is nevertheless entitled to backwages from the time he was dismissed until the date of his compulsory retirement. He is also entitled to all the benefits accruing to him as a retired NLRC Commissioner. The total amounts shall earn legal interest.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></p><p> <b>ACCORDINGLY</b>, the Second Motion for Reconsideration is <b>GRANTED</b>. The Resolutions dated September 24, 2018 and September 4, 2019 are <b>REVERSED</b> and <b>SET ASIDE</b>.</p><p> The Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Decision dated February 22, 2018 and the Resolution dated June 1, 2018 of the Court of Appeals in CA-G.R. SP No. 143572 are <b>REVERSED</b> and <b>SET ASIDE</b>. Consequently, the complaint against petitioner Angelo Ang PalaÃ±a, filed before the Office of the Ombudsman, is <b>DISMISSED</b>.</p><p> The National Labor Relations Commission is <strong>ORDERED to PAY</strong> petitioner Angelo Ang PalaÃ±a his backwages from the date of his separation from the service until the date of his compulsory retirement, with legal interest at the rate of 6% per annum until the same are fully paid. He shall also be paid all the retirement benefits accruing to a retired NLRC Commissioner. </p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Rosario, J. Lopez, Dimaampao, Marquez, Kho, Jr.</i>, and <i>Villanueva, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 311-314.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 320-329. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 298-300.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 309.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 41-46.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 42.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 47.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 41-42.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 48.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 43.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 53-61. The Complaint was prepared by Corinne Joie M. Garillo, Associate Graft Investigation Officer III, who thereafter verified the same under oath before Christopher S. Soguilon, Graft Investigation and Prosecution Officer II. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 70-81. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 82-91. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 84-85. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 86-87. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 87-88. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 89. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 92-101. Signed by Graft Investigation and Prosecution Officer II Joseph L. Licudan, reviewed by Director Mothalib C. Onos and, ultimately, approved by Ombudsman Conchita Carpio Morales. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 100-101. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 102-136. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 174-177. Signed by Graft Investigation and Prosecution Officer II Joseph L. Licudan, recommended for approval by Acting Director Anna Isabel G. Aurellano and, ultimately, approved by Ombudsman Conchita Carpio Morales. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 178-240. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 194-230. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 28-37. Penned by Associate Justice Nina G. Antonio-Valenzuela and concurred in by Associate Justices Priscilla J. Baltazar-Padilla (a former Member of this Court) and Germano Francisco D. Legaspi of the Special Sixteenth Division, Court of Appeals, Manila. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 34-36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 241-270. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 39-40. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 9-26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 298-300. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 301-307. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 309. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 311-314. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 861 Phil. 110 (2019) [<i>Per Curiam, En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>McBurnie v. Ganzon</b>, 719 Phil. 680, 700 (2013) [Per J. Reyes, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Heirs of Spouses Ferrer v. Court of Appeals</b>, 637 Phil. 618, 629 (2010) [Per J. Brion, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 719 Phil. 680 (2013) [Per J. Reyes, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 701-704. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Flight Attendants and Stewards Association of the Philippines v. Philippine Airlines, Inc.</b>, 827 Phil. 680, 711 (2018) [Per J. Bersamin, <em>En Banc</em>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Rosete v. Court of Appeals</b>, 332 Phil. 169, 186 (1996) [Per J. Kapunan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 291-A Phil. 829 (1993) [Per J. Davide, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 841-842. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 127 Phil. 306 (1967) [Per J. Fernando, <em>En Banc</em>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 319. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 952 Phil. 561 (2024) [Per J. Gaerlan, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 569-570. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Montemayor v. Bundalian</b>, 453 Phil. 158, 167 (2003) [Per J. Puno, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Abogado v. Department of Environment and Natural Resources</b>, 861 Phil. 703, 729-730 (2019) [Per J. Leonen, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Office of the Ombudsman v. Manalastas</b>, 791 Phil. 557, 567 (2016) [Per J. Carpio, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Office of the Ombudsman-Visayas v. Castro</b>, 759 Phil. 68, 77 (2015) [Per J. Brion, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Mahinay v. Court of Appeals</b>, 899 Phil. 195, 204-205 (2021) [Per J. Carandang, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>G.R. Nos. 243547-48</b>, June 12, 2021 [Notice, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 137. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Land Bank of the Philippines v. OÃ±ate</b>, 724 Phil. 564, 592 (2014) [Per J. Del Castillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i>, p. 51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Office of the Ombudsman v. De Villa</b>, 760 Phil. 937, 953 (2015) [Per J. Mendoza, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Office of the Ombudsman v. Angeles</b>, 482 Phil. 472, 484 (2004) [Per J. Callejo, Sr., Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> SECTION 1. <i>Judicial notice, when mandatory</i>. â A court shall take judicial notice, without the introduction of evidence, of the existence and territorial extent of states, their political history, forms of government and symbols of nationality, the law of nations, the admiralty and maritime courts of the world and their seals, the political constitution and history of the Philippines, the official acts of legislative, executive and judicial departments of the Philippines, the laws of nature, the measure of time, and the geographical divisions. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>G.R. Nos. 243547-48</b>, June 16, 2021 [Unsigned Resolution, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Villa-Ignacio v. Barreras-Sulit</b>, 930 Phil. 84, 145 (2022) [Per J. Lazaro-Javier, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

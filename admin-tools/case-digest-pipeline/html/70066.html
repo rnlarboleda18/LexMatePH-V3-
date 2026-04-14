@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 270897 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX270897,* ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70066' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 270897, January 14, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX270897,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, M., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is an appeal from the Court of Appeals' (CA) Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated September 18, 2023 finding accused-appellant XXX270897 guilty of three counts of qualified trafficking under Republic Act (RA) No. 9208, as amended by RA No. 10364.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br><center><b>ANTECEDENTS</b></center><br>XXX270897 was charged with, and convicted of three counts of Qualified Trafficking under the following Informations:<br><blockquote><center><b>In Criminal Case No. R-DVO-16-01691-CR</b></center><br>That sometime in September 2014 in the City of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused willfully, unlawfully, and knowingly received private complainant <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, fifteen years old, whose age is known to him, through another minor, whom he directed to provide him with the services of the private complainant for the purpose of engaging the latter's services, that is, to have sexual intercourse with him for a fee.<br><br>CONTRARY TO LAW.<br><br><center><b>In Criminal Case No. R-DVO-16-01693-CR</b></center><br>That sometime in April 2014 in the City of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, willfully, unlawfully, and knowingly received and hired private complainant <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, fifteen years old, whose age is known to him and engaged her services to have sexual intercourse with him for a fee in the amount of One Thousand Five Hundred Pesos ([PHP] 1,500.00) through another minor, whom he directed to provide him with the services of the private complainant for the said sexual purpose.<br><br>CONTRARY TO LAW.<br><br><center><b>In Criminal Case No. R-DVO16-01694-CR</b></center><br>That on or about in September 19, 2014 in the City of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, willfully, unlawfully, and knowingly received and hired private complainant <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, fourteen years whose age is known to him and engaged her services to have sexual intercourse with him for a fee in the amount of Two Thousand Five Hundred Pesos ([PHP] 2,500.00) through another minor whom he directed to provide him with the services of the private complainant for the said sexual purpose.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> </blockquote>XXX270897 was originally charged with seven counts of qualified trafficking in persons. However, four of these cases were dismissed due to lack of evidence when the victims did not testify.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>During trial, the prosecution presented the testimonies of the three minor victims, AAA270897, BBB270897, and CCC270897.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>AAA270897 was born on April 9, 2000, and was just 14 years old when she was introduced to XXX270897. She testified that sometime in September 2014, her friend, another minor named DDD270897,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> persuaded her to meet and have sex with a certain "<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxx</span>" (XXX270897's coined name). After AAA270897 agreed, she and DDD270897 rode a taxi to meet XXX270897 at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Motel. Upon arrival, DDD270897 introduced AAA270897 to XXX270897 and left her alone with him in his motel room.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> XXX270897 then started touching AAA270897's breasts, but she asked him to stop out of fear.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> AAA270897 was paid PHP 500.00.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> On their way home, DDD270897 told AAA270897 that XXX270897 was displeased with what had happened. Due to this, he instructed DDD270897 to bring a different girl who would be willing to have sex with him.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>CCC270897 was born on September 11, 1999<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> and was only 15 years old when she was abused by XXX270897. She first learned of XXX270897 when she received a text message from her friend, a certain Rizza, who informed her that XXX270897 was willing to pay to have sex with a young woman. CCC270897, a runaway from home with no means of earning an income,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> was enticed with the offer. She then went with Rizza and a certain Nica to&nbsp;<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span> to meet with XXX270897. When they arrived, the trio went to XXX270897's room where Rizza introduced CCC270897 to XXX270897. XXX270897 then handed Rizza and Nica money; Nica gave CCC270897 PHP 1,500.00. Afterward, Rizza and Nica left CCC270897 alone with XXX270897 to have sex. After having sex, XXX270897 informed CCC270897 that he would pay her higher if she brought him other virgin minors. Tempted by this proposal, CCC270897 claimed that she brought a total of six other minor girls to XXX270897.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>BBB270897 was the final victim to testify. She was born on October 20, 2000<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> and was just 13 years old when she met XXX270897 on September 19, 2014. Similar to AAA270897, DDD270897 brought BBB270897 to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Motel where she had sex with XXX270897. Afterward, XXX270897 paid BBB270897 PHP 2,500.00; he also asked her to look for other minor virgins for a reward.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> BBB270897 brought another victim, who eventually became a complainant in a separate case. However, that case was dismissed because the victim chose not to testify.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>The records of this case show that XXX270897 was apprehended through an entrapment operation carried out by the Philippine National Police's Women and Children Protection Desk.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> On November 5, 2014, the entrapment team, together with a minor who posed as a victim, travelled to&nbsp;<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>  Motel to meet with XXX270897. When they arrived, the minor and two police operatives went to Room 115 where XXX270897 was eventually arrested.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>After the prosecution rested its case, the defense moved for the submission of a written memorandum in lieu of presenting its witnesses. In his Memorandum, XXX270897 argued, through counsel, that the prosecution failed to prove that he was engaged in qualified trafficking because the minor victims were not recruited, threatened, coerced, or forced as all their actions were done with consent. XXX270897 also claimed that he did not know that the victims were minors, which was allegedly important to qualify the act as qualified trafficking in persons.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> the Regional Trial Court (RTC), convicted XXX270897 with three counts of qualified trafficking in persons. The trial court found that the Informations filed against XXX270897 sufficiently alleged the receipt of the minor victims for sexual exploitation by taking advantage of the victims' vulnerability and poverty.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Further, XXX270897's act of directing minor victims to recruit other minors to engage in prostitution makes him punishable under Section 4 paragraphs (a), (e), and (l) of the Anti-Trafficking in Persons Act.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>As regards the alleged voluntariness of the victims' act, the trial court held that trafficking can exist even with the victim's consent and knowledge. This is because consent is rendered meaningless by virtue of the coercive, abusive, or deceptive means employed by the perpetrators of human trafficking.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Ultimately, the RTC found that the prosecution properly established all the elements of qualified trafficking.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The dispositive portion of the Decision reads:<br><blockquote>WHEREFORE, premises considered, this court finds the accused [XXX270897] <b>GUILTY BEYOND REASONABLE DOUBT</b> for the crimes of Qualified Trafficking in Persons as defined and penalized under Section 4(a) in relation to Section 6(a) and a(2) of RA 9208 as amended and hereby imposes against him, <b>in each case</b>, a penalty of life imprisonment and to pay a fine of Two Million Pesos ([PHP] 2,000,000.00). This court further directs the accused to pay each of the private complainants AAA, BBB, and CCC Five Hundred Thousand Pesos ([PHP] 500,000.00) as moral damages and One hundred thousand pesos ([PHP] 100,000.00) as exemplary damages and to pay the cost of suit.<br><br>All monetary awards shall earn interest at the legal rate of six percent (6%) per annum to be computed from the date of the finality of this Decision until fully paid.<br><br>The period of preventive imprisonment of the accused shall be credited in the service of his penalty pursuant to Article 29 of the Revised Penal Code.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </blockquote>Afterward, XXX270897 filed a petition for review under Rule 42 with the CA. In his Brief,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> XXX270897 accused the trial court judge of being partial and biased, citing various portions of the Transcripts of Stenographic Notes (TSNs) where his counsel's objections were overruled.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> As to substance, he objected to the sufficiency of the Informations filed against him as they failed to indicate the elements of qualified trafficking. XXX270897 also alleged that the trial court erred since the evidence of the prosecution was inadequate to prove XXX270897's guilt beyond a reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Lastly, he reiterated that he was not aware of the minority of the victims.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In its September 18, 2023 Amended Decision,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> the CA affirmed XXX270897's conviction. It held that XXX270897's petition should be dismissed for being the wrong remedy and for the various fatal procedural lapses in his Appellant's Brief.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Even if the technicalities were set aside, the CA found no cogent reason to reverse the ruling of the trial court.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> It ruled that the prosecution establisheds all the elements of the crime of qualified trafficking in persons. <i>First,</i> XXX270897 recruited and received the minor victims for sexual exploitation, and also directed these young victims to look for other young women.<i> Second</i>, the lack of threat or force is immaterial since the victims were minors.<i> Third</i>, the recruitment of the victims were for sexual exploitation and/or prostitution.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The CA also explained that in the case of AAA270897, trafficking in persons can be consummated even without sexual intercourse.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The dispositive portion of the Amended Decision reads:<br><blockquote>WHEREFORE, the instant Appeal is hereby DISMISSED. The Decision of the Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span> of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City dated November 25, 2020 in Criminal Cases Nos. R-DVO-16-01691, R-DVO-16-01693, and R-DVO-16-01694 is AFFIRMED.<br><br>SO ORDERED<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></blockquote>Hence, this appeal.<br><br>In his Supplemental Brief,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> XXX270897 again argued that the Informations filed against him inadequately state all the elements of qualified trafficking. Specifically, the second element is missingâmeans use to perpetuate trafficking in persons, which includes threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or the giving or receiving of payments or benefits to achieve the consent of a person having control over another.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> XXX270897 stated that none of these were indicated in the Informations. While there was a mention of monetary consideration, the payments were given to the minor victims and not to the persons having control over them.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br><center><b>RULING</b></center><br>The appeal is bereft of merit.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The Informations sufficiently alleged all the elements of qualified trafficking</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>An accused enjoys the constitutional right to be informed of the nature and cause of the accusation against him or her.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> In this regard, Sections 6, 8, and 9 of Rule 110 of the 2000 Rules on Criminal Procedure<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> require that the Information should state the acts or omissions complained of as constituting the offense, among others:<br><blockquote>Section 6.<i> Sufficiency of complaint or information.</i> âA complaint or <b>information is sufficient</b> if it states the name of the accused; the designation of the offense given by the statute; <b>the acts or omissions complained of as constituting the offense;</b> the name of the offended party; the approximate date of the commission of the offense; and the place where the offense was committed. When an offense is committed by more than one person, all of them shall be included in the complaint or information.<br><br>. . . .<br><br>Section 8.<i> Designation of the offense.</i> â The complaint or information shall state the designation of the offense given by the statute, <b>aver the acts or omissions constituting the offense,</b> and specify its qualifying and aggravating circumstances. If there is no designation of the offense, reference shall be made to the section or subsection of the statute punishing it.<br><br>Section 9.<i> Cause of the accusation.</i> â The <b>acts or omissions complained of as constituting the offense</b> and the qualifying and aggravating circumstances must be stated in ordinary and concise language and not necessarily in the language used in the statute but in terms sufficient to enable a person of common understanding to know what offense is being charged as well as its qualifying and aggravating circumstances and for the court to pronounce judgment. (Emphasis supplied) </blockquote>Verily, the Information does not need to use the exact language of the statute; what is required is that the acts or omissions complained of as constituting the offense must be stated in ordinary and concise language sufficient to enable a person of common understanding to know the offense charged.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Thus, an Information is deemed sufficient if it completely, clearly, and accurately alleges the elements of the crime charged:<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><blockquote>Jurisprudence has already set the standard on how the requirement is to be satisfied. Case law dictates that the allegations in the Information must be in such form as is sufficient to enable a person of common understanding to know what offense is intended to be charged and enable the court to know the proper judgment. <b>The Information must allege clearly and accurately the elements of the crime charged.</b> The facts and circumstances necessary to be included therein are determined by reference to the definition and elements of the specific crimes.<br><br>The main purpose of requiring the elements of a crime to be set out in the Information is to enable the accused to suitably prepare his defense because he is presumed to have no independent knowledge of the facts that constitute the offense. The allegations of facts constituting the offense charged are substantial matters and the right of an accused to question his conviction based on facts not alleged in the information cannot be waived.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis supplied) </blockquote>The elements of the crime of trafficking under RA No. 9208, as amended by RA No. 10364, were enumerated in<i> People v. Casio</i><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> as follows:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The <i> <b>act</b></i> of "recruitment, transportation, transfer or harbouring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders"; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(2) </div> <div align="JUSTIFY"></div></td> <td valign="top"> <div align="JUSTIFY">The <i> <b>means</b></i> used include "threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, <b>taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits </b> to achieve the consent of a person having control over another"; and </div> </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">The <b><i> purpose</i></b> of trafficking is exploitation which includes "exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs."<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>The crime of trafficking becomes qualified when the victim is a "child," defined as any "person below eighteen (18) years of age or one who is over eighteen (18) but is unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>For an Information charging a person of the crime of trafficking, to be considered sufficient, it must contain three essential elements, namely: (1) the offender performed an act of recruitment, transfer, harboring, or receipt of a person, among others; (2) through the means of threat, force, intimidation, taking advantage of the vulnerability of the victim, giving or receiving of payment, etc., and (3) the offender's purpose in doing so was to exploit the victim. When trafficking is qualified, the age of the victim must also be included in the Information.<br><br>In this case, a perusal of the three Informations (Criminal Case No. R-DVO-16-01691-CR, Criminal Case No. R-DVO-16-01693-CR, and Criminal Case No. R-DVO-16-01694-CR) reveals that the prosecution sufficiently alleged all the elements of qualified trafficking:<br><blockquote><center><b>In Criminal Case No. R-DVO-16-01691-CR</b></center><br>[T]he above-named accused willfully, unlawfully, and knowingly received private complainant <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span> fifteen years old, whose age is known to him, through another minor, whom he directed to provide him with the services of the private complainant for the purpose of engaging the latter's services, that is, to have sexual intercourse with him for a fee.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br><center><b>In Criminal Case No. R-DVO-16-01693-CR</b></center><br>[T]he above-named accused, willfully, unlawfully, and knowingly received and hired private complainant <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>, fifteen years old, whose age is known to him and engaged her services to have sexual intercourse with him for a fee in the amount of One Thousand Five Hundred Pesos ([PHP] 1,500.00) through another minor, whom he directed to provide him with the services of the private complainant for the said sexual purpose.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br><center><b>In Criminal Case No. R-DVO-16-01694-CR</b></center><br>[T]he above-named accused, willfully, unlawfully, and knowingly received hired private complainant <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>, fourteen years old, whose age is known to him and engaged her services to have sexual intercourse with him for a fee in the amount of Two Thousand Five Hundred Pesos ([PHP] 2,500.00) through another minor whom he directed to provide him with the services of the private complainant for the said sexual purpose.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </blockquote>Each Information averred that accused-appellant performed an act of "receiving," "hir[ing]" or harboring the complainant-victims by means of paying a pimp and the complainant-victim, for purposes of prostitution or "sexual intercourse . . . for a fee."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> The age of each minor victim was also indicated.<br><br>Clearly, the Informations are sufficient because they alleged all the elements of the crime of qualified trafficking.<br><br>In any case, jurisprudence has clarified that if the victim is a minor, the crime will always be qualified trafficking<i> regardless of the means used</i>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> This is because a minor's consent to the sexual intercourse is immaterial, a minor not being able to legally give a consent under the Civil Code.<br><br>Thus, in<i> People v. Celis</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> the Court recognized that the prosecution need not establish "the criminal element of means to commit trafficking," but must prove the age of the victim:<br><blockquote><b>The law carved out an exception as to the means adopted to prove trafficking,</b> for the protection of minors. Section 3 (a) of R.A. No. 9208, as amended, reads as follows:<br><br>. . . .<br><br><b>Therefore, where the victim is a child, the criminal element of means to commit trafficking need not he established in evidence. It is sufficient that the fact of minority is established on record. </b><br><br>Under Section 3 (b) of the law, a child is a person below 18 years of age or one who is over 18 but is unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Emphasis supplied) </blockquote>Similarly, in<i> People v. Hernandez</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court categorically held that the prosecution has no burden of proving the element of 'means employed by the offender' if the trafficked victim is a minor:<br><blockquote><b>Notwithstanding this finding of the use of deceit and taking advantage of the vulnerability of the victim, the prosecution docs not even carry the burden of proving the means employed in the commission of the crime of trafficking when the victim is a minor, as in this case.</b><br><br>The State, as parens patriae and in recognition of the inherent vulnerability of minors, has carved out an exception as to the means adopted to prove trafficking in persons. Appositely, Section 3 (a) of Republic Act No. 9208 provides that "[t]he recruitment, transportation, transfer, harboring[,] or receipt of a child for the purpose of exploitation shall also be considered as 'trafficking in persons' even if it does not involve any of the means set forth in the preceding paragraph."<br><br>For this purpose, a child refers to a person below 18 years of age or older but is unable to fully take care of or protect himself or herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition. <b>Thus, the criminal element of means to commit trafficking need not be established in evidence where the fact of the minority of the victim is proven on record. To reiterate, the crime of trafficking was committed by means of taking advantage of AAA's vulnerability as a minor</b>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Emphasis supplied) </blockquote><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The prosecution proved XXX270897's guilt beyond a reasonable doubt</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>As to the substance, we adopt the factual findings of the RTC, as affirmed by the CA, and uphold the ruling of the courts<i> a quo</i> that accused-appellant's guilt for the offense of qualified trafficking against AAA270897, CCC270897, and BBB270897 was proven beyond reasonable doubt.<br><br><i>First.</i> the minor victims' ages were proved through their birth certificate.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><i>Second.</i> The prosecution, through the categorical testimonies of the minor victims, duly established the act of trafficking and the exploitative purpose, that accused-appellant received them for a fee for the purpose of prostitution and sexual exploitation. They bravely detailed accused-appellant's nefarious scheme of asking other minors to find him a minor victim who are willing to have sexual intercourse with him, taking advantage of their minority and financial needs.<br><br>AAA270897 categorically testified how she was recruited by her friend, DDD270897, to have sex with accused-appellant for a fee:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">[Pros. Razon]: </div> </td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Why do you know [XXX270897]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He was introduced to me by a friend. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And who was this friend? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[DDD270897] sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY"></div><div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">When you arrived in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> [Motel], what happened, if any? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Allegedly, we would have sex. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Who told you that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[DDD270897] sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">What else, if any, did [DDD270897] tell you? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">if I would have sex with [XXX270897], I would be given money.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></div></td> </tr> </tbody></table></blockquote>We emphasize that while accused-appellant did not succeed in having sexual intercourse with AAA270897, the crime of trafficking in persons is already consummated. It is settled that actual sexual intercourse with the victim is not indispensable to sustain a finding of trafficking.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Similarly, CCC270897 also testified how she was invited by Rizza through text message, offering a similar offer regarding accused-appellant:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">[Pros. Razon] </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">When was the first time that you met [XXX270897]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Between April to July 2014. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Where did you meet him for the first time? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">At <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span> Motel Sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">How did you meet in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I was texted by my friend Rizza informing me that somebody is looking for a girl. I needed money at that time and so I agreed. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q- </div></td> <td valign="top"> <div align="JUSTIFY">What was your reply to Rizza, if any? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I said yes. I agree. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">How did you go to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I was fetched by Rizza and Nica at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and we rode a taxi in going to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td colspan="2" valign="top">. . . . </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Upon entering the room, what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I was introduced by Nica to Jun, sir[.] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">After that, what happened when you entered? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">First, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span> talked to Nica, and then he gave her money. After that, Nica gave me [PHP] 1,500.00 and they left. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And then after what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span> made me take a shower. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">After that what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">When I went out from the CR he made me sat beside him and told me to take off the towel. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">After that what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He started kissing me on my neck and down to the lower part of my body. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">When you say lower part of your body, what do you mean by this? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">My breasts and my vagina. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Then after that what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He inserted his penis in my vagina.<sup><font color="#ff0000">[59]</font></sup></div></td> </tr> </tbody></table></blockquote>While accused-appellant did not seek out CCC270897 directly, he took advantage of CCC270897's need for money:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">[Court] </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Why did you allow yourself to have sex with <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Since I was a stowaway at that time, I feel it is not right for me to ask for money from my parents, and I have no other way in order to earn, so I clung to this situation. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">You allowed yourself to have sex with <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> because you were paid? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Your Honor.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></div></td> </tr> </tbody></table></blockquote>Also, CCC270897 admitting that she referred other girls to be exploited by XXX270897 only highlights her minority and vulnerability, as she was unaware that her actions were wrong and unlawful:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Did somebody influence you to file this case against <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">When we were rescued, it was then that I learned that what I doing was prohibited. So the police officer asked me if I wanted to file a case because what we were doing was bad.</div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">[Court]</div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Why did you allow yourself to have sex with <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Since I was a stowaway at that time, I feel it is not right for me to ask for money from my parents, and I have no other way in order to earn, so I clung to this situation. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">You allowed yourself to have sex with <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span> because you were paid? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Your Honor.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></div></td> </tr> </tbody></table></blockquote>XXX270897 employed the same scheme when he had sex with BBB270897, who testified in detail how she was recruited by DDD270897 under the same pretext:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">[Pros Razon] </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Miss Witness, how did you meet [XXX270897]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Through [DDD270897] sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And who is this Paolo that you mentioned? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Our neighbor, [DDD270897] sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">When was the first time that you met [XXX270897] ? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">September 19, 2014. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And where did you meet him? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">At <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Motel sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">When you reached <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Motel, what happened? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[DDD270897] went upstairs to ask for taxi fare, sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">When you say upstairs, where did you go? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">To the room sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And who as inside the room when you got there? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span> sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">After arriving [in] the room, what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[DDD270897] introduced me to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span> sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And after that, what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">After taking a bath <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span> told me to dry my hair. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And then after that, what happened? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He made me lie on the bed sir, </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And what were you wearing, if any, at that time? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I was covering myself with something because I was naked underneath. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And then after that, what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He made me lie on the bed and he spread my legs. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td colspan="2" valign="top">. . . . </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">After that, what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">He again inserted his penis sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And after that, what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Jun gave me [PHP] 2,500.00 sir.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></div></td> </tr> </tbody></table></blockquote>BBB270897's testimony also shows that she only agreed to do it because she needed the money:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">[Court] </div> </td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">You were not forced, but is it true that you were given money? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Your Honor. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Who gave you the money? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">XXX270897, Your Honor. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Because you need the money? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, your Honor.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></div></td> </tr> </tbody></table></blockquote>At this juncture, we stress that the factual findings of the trial court are accorded great weight and respect and will not be disturbed on appeal.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> This is because having seen and heard the witnesses themselves and observed their behavior and manner of testifying, the trial court stood in a much better position to decide the question of credibility.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> The trial court can only be disturbed when some facts or circumstances of weight and substance have been overlooked, misapprehended or misinterpreted.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Here, the trial court found the minor victims' testimonies to be "direct, candid, and spontaneous despite being subjected to intense cross-examination,"<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> which was affirmed by the appellate court.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> We find no cogent reason to depart from this rule. Clearly, the prosecution was able to prove that accused-appellant received the minor victims for purposes of sexual exploitation.<br><br>Accused-appellant cannot raise the fact that the minor victims willingly agreed to have sex with him. In cases of trafficking, a minor's consent to the sexual transaction is irrelevant because they cannot validly give their consent.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>Finally, accused-appellant's imputation of bias on the trial court judge is utterly baseless. After a careful review of the entire records of the case, we find that the trial court acted properly and impartially during the trial. Divergence of opinion between a judge and a party's counsel regarding the application of laws or evidence does not automatically indicate bias or partiality:<br><blockquote>Divergence of opinion as to applicable laws and jurisprudence between counsel and the judge is not a proper ground for disqualification. Opinions framed in the course of judicial proceedings, although erroneous, as long as they are based on the evidence presented and conduct observed by the judge, do not prove bias or prejudice. Repeated rulings against a litigant no matter how erroneous are not bases for disqualification.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> </blockquote>For the penalty and damages, the Court affirms the imposition of the penalty of life imprisonment and fine in the amount of PHP 2,000,000.00 as provided under Section 10(e) of RA No. 9208, as amended by RA No. 10364<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> for each count.<br><br>We also affirm the award of PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages, with legal interest of 6% per annum from finality of Decision until full payment, consistent with our pronouncement in<i> People v. Estonilo, Sr.</i><sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br><b>ACCORDINGLY</b>, the appeal is<b> DISMISSED.</b> The Amended Decision dated September 18, 2023 of the Court of Appeals in CA-G.R. CR-HC No. 02767-MIN convicting accused-appellant XXX270897 of three counts of qualified trafficking in persons under Section 4(a), in relation to Section 6 of Republic Act No. 9208, as amended by Republic Act No. 10364 is<b> AFFIRMED.</b> Accused-appellant is sentenced to life imprisonment and <b>ORDERED</b> to<b> PAY</b> a fine of PHP 2,000,000.00 for each count. He is further ORDERED to pay each of the victims PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages and to pay the cost of suit.<br><br>All monetary amounts shall earn legal interest at the rate of 6% per annum from the finality of this Decision until full payment.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier, J. Lopez,</i> and <i>Kho, Jr., JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 7610, Special Protection of Children Against Abuse, Exploitation and Discrimination Act, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 9-20. The September 18, 2023 Decision in CA-G.R. CR-HC No. 02767-MIN was penned by Associate Justice Oscar V. Badelles and concurred in by Associate Justices Anisah B. Amanodin-Umpa and Jill Rose S. Jaugan-Lo of the Special Twenty-First Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Republic Act No. 9208 (2003), Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 (2013), Expanded Anti-Trafficking in Persons Act of 2012.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. In fine with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 7610, Special Protection of Children Against Abuse, Exploitation and Discrimination Act, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> February 14, 2019, p. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, p. 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, February 14, 2019, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, p. 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, May 7, 2019, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> May 7, 2019, p. 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> RTC records, p. 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 23-44. The November 25, 2020 Decision in R-DVO-16-01691-CR, R-DVO-16-01693-CR, and R-DVO-16-01694-CR was penned by Presiding Judge Lope L. Calio of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. <i>See </i>Republic Act No. 9208 (2003), sec. 4, par. a, e, l, Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 (2013), Expanded Anti-Trafficking in Persons Act of 2012.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> CA <i>rollo</i>, pp. 46-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 9-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 18-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 57-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. Caballes</b>, 929 Phil. 367, 382 (2022) [Per J. Hernando, First Division] <i>citing</i> <b>People v. DasmariÃ±as</b>, 819 Phil. 357, 376 (2017) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> RULES OF COURT, Rule 110, secs. 6, 8, 9, as amended by A.M. No. 00-5-03-SC, December 1, 2000.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>People v. Cadampog</b>, 472 Phil. 358, 372 (2004) [Per J. Callejo, Sr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Quimvel v. People</b>, 808 Phil. 889 (2017) [Per J. Velasco, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 912-913.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 749 Phil. 458 (2014) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 472-473.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Republic Act No. 9208 (2003), sec. 3(b), Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 (2013), Expanded Anti-Trafficking in Persons Act of 2012.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, p. 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Rodriguez</b>, 948 Phil. 67, 79-80 (2023) [Per J. M. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 945 Phil. 794 (2023) [Per J. J. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>G.R. No. 265754</b>, February 5, 2024. [Per J. J. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> RTC records, pp. 6-7, 15, 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Rollo</i>, pp. 32-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>People v. Dela Cruz</b>, 904 Phil. 566, 588 (2021) [Per J. J. Lopez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i>, pp. 36-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, May 7, 2019, p. 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, May 7, 2019, p. 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> TSN, BBB270897, May 7, 2019, p. 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, May 7, 2019, p. 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> TSN, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, April 25, 2019, p. 22-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>People v. Buclao</b>, 736 Phil. 325, 337 (2014) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>People v. Tuazon</b>, 558 Phil. 759, 769 (2007) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, p. 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>People v. Rodriguez, G.R. No. 263603</b>, October 9, 2023 [Per J. M. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>People v. Kho</b>, 409 Phil 326 (2001) [Per J. Kapunan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Republic Act No. 9208 (2003), sec. 10(e), Anti-Trafficking in Persons Act of 2003, as amended by Republic Act No. 10364 (2013), Expanded Anti-Trafficking in Persons Act of 2012:<blockquote>SEC. 10. <i>Penalties and Sanctions</i>. â The following penalties and sanctions are hereby established for the offenses enumerated in this Act:<br><br>. . . .<br>(e) Any person found guilty of qualified trafficking under Section 6 shall suffer the penalty of life imprisonment and a fine of not less than Two million pesos ([PHP] 2,000,000.00) but not more than Five million pesos ([PHP] 5,000,000.00);<br></blockquote><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 745 Phil. 331 (2014) [Per J. Leonardo-De Castro, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277608 - EDGAR R. ERICE, PETITIONER, VS. COMMISSION ON ELECTIONS AND RAYMOND D.C. SALIPOT, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70102' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277608, July 08, 2025 ]</H2>
+			<H3>EDGAR R. ERICE, PETITIONER, VS. COMMISSION ON ELECTIONS AND RAYMOND D.C. SALIPOT, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for <i>Certiorari</i> (with Application for the Issuance of a Temporary Restraining Order and/or Writ of Preliminary Injunction)<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by petitioner Edgar R. Erice (Erice) assailing the Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 27, 2024, of the Commission on Elections (COMELEC) <i>En Banc</i> in SPA Case No. 24-210 (DC). The COMELEC <i>En Banc</i> affirmed the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated November 26, 2024, of the COMELEC Second Division which disqualified Erice as a candidate for the position of Member of the House of Representatives for the Second District of Caloocan City in the May 12, 2025 National and Local Elections (2025 NLE).<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center><i>The Antecedents</i></center><br>On August 15, 2024, respondent Raymond D.C. Salipot (Salipot) and Benjamin B. Balatbat (Balatbat) filed a Joint Complaint-Affidavit<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> against Erice for violation of Section 261(z)(11) of Batas Pambansa Blg. 881 or the Omnibus Election Code. The complaint is based on the statements made by Erice in various interviews that the contract of the COMELEC with Miru Systems (Miru) is highly anomalous and that the bidding process which preceded it was rigged. For example, in his interview with DWPM Radyo 630 on April 15, 2024, Erice said: "<i>May propaganda kase ang</i> COMELEC <i>eh, na mi-mislead yung mga taong bayan na maganda yung [S]istema. Pero po yung itong [s]istema na ito masasabi ko ng tapat na ito ay isang P18B, one time big time scam</i>." In addition, Erice asserted that the automated counting machines (ACM) to be provided by Miru have never been used in any previous election in other countries; thus, the Philippines will serve as its guinea pig in the 2025 NLE. Salipot and Balatbat argued that Brice's statements lacked verification and supporting evidence.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On October 7, 2024, Erice filed his Certificate of Candidacy<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (COC) for the position of Member of the House of Representatives for the Second District of Caloocan City for the 2025 NLE.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On October 28, 2024, Salipot filed a Petition for Disqualification<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> against Erice for violation of Section 261(z)(11) of the Omnibus Election Code in relation to Section 1(c)(3)(viii) of COMELEC Resolution No. 11046.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The COMELEC Second Division issued summons ordering Erice to file his Answer <i>cum</i> Memorandum within a nonextendible period of five days from receipt of the summons. Erice did not file the required pleading.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br><center><i>The COMELEC Second Division Ruling</i></center><br>The COMELEC Second Division granted the Petition in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated November 26, 2024, the <i>fallo</i> of which provides:<blockquote>WHEREFORE, premises considered, the Petition is GRANTED. Respondent EDGAR R. ERICE is DISQUALIFIED as a candidate for the position of Member, House of Representatives in the Second (2nd) District of Caloocan City for the 12 May 2025 National and Local Elections ["2025 NLE"].<br><br>Let the records of the case be forwarded to the Law Department of this Commission relative to the election offense aspect of this case.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></blockquote>The COMELEC Second Division found that the evidence submitted by Salipot substantially proved that Erice violated Section 261(z)(11) of the Omnibus Election Code. Erice repeatedly made the following statements: <i>first</i>, the Philippines will serve as a guinea pig in the 2025 NLE. The ACMs and systems procured from Miru have never been utilized in any election worldwide; <i>second</i>, the PHP 18 billion contract with Miru was highly anomalous, the bidding process was rigged, and the custom-made specifications were used to justify price inflation; and <i>finally</i>, he received evidence of offshore accounts of COMELEC officials, particularly COMELEC Chairperson George Erwin M. Garcia (Chairperson Garcia), suggesting suspicious transactions with Miru.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>The COMELEC Second Division ruled that the statements, which relate to the general conduct of elections, are unverified and unsupported by evidence and, therefore, false. It held that Erice's act of propagating false information across multiple platforms shows his deliberate intent to disrupt elections rather than offer legitimate criticism. It also found that his statements may cause public alarm and voter confusion as well as damage the integrity of the electoral system of the Philippines. In accordance with COMELEC Resolution No. 11046, the COMELEC Second Division disqualified Erice.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>On November 27, 2024, Chairperson Garcia inhibited himself from handling or participating in any case involving Erice to "<i>preserve the principles of fairness and impartiality, ensuring the integrity of the proceedings under my jurisdiction and avoiding any potential perception of bias or conflict of interest</i>."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On December 2, 2024, Erice filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> wherein he alleged that Salipot did not send a copy of the petition to him but only its annexes. He also asserted that he was not guilty of violation of Section 261(z)(11) of the Omnibus Election Code.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><center><i>The COMELEC En Banc Ruling</i></center><br>In its Resolution<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> dated December 27, 2024, the COMELEC <i>En Banc</i> affirmed the ruling of the COMELEC Second Division, thus:<blockquote><b>WHEREFORE</b>, premises considered, the Commission (<i>En Banc</i>) <b>AFFIRMS</b> the Commission (<i>Second Division</i>)'s <i>Resolution</i> dated 26 November 2024 insofar as it declared Respondent <b>EDGAR R. ERICE</b> as <b>DISQUALIFIED</b> as a candidate for the position of Member, House of Representatives in the 2<sup>nd</sup> District of Caloocan City for the 12 May 2025 National and Local Elections.<br><br>Let the records of the case be forwarded to the Law Department of this Commission relative to the election offense aspect of this case.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original)</blockquote><br>The COMELEC <i>En Banc</i> held that Erice was served a copy of the petition via the email address that he provided in his COC. This is supported by the Affidavit of Electronic Service<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> executed by Paquito Eleazar Joaquin (Joaquin). The COMELEC Second Division also served him summons together with a copy of the petition. Hence, the COMELEC <i>En Banc</i> ruled that Erice was given the opportunity to be heard but did not file an answer. In any event, Erice presented his arguments through his motion for reconsideration which failed to invoke the required grounds of insufficient evidence or contrariness to law.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>The COMELEC <i>En Banc</i> clarified that Erice is mistaken in asserting that for Section 261(z)(11) of the Omnibus Election Code to apply, the statements must be made around voting centers based on <i>ABS-CBN v. COMELEC</i>,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> as said case did not discuss the elements of Section 261(z)(11). The COMELEC <i>En Banc</i> also ruled that contrary to Erice's contention, Section 261(z)(11) does not require the conduct of an actual election.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>The COMELEC <i>En Banc</i> upheld the ruling of the COMELEC Second Division that Erice violated Section 261(z)(11) of the Omnibus Election Code. The COMELEC <i>En Banc</i> held that Erice's statements refer to the general conduct of the elections because they involve the very machines to be used for the elections. The COMELEC <i>En Banc</i> found Erice's statements to be beyond the bounds of propriety and protected free speech; and his accusations of corruption were baseless, unsubstantiated, and coupled with calls to revert to the usage of unserviceable machines. According to the COMELEC <i>En Banc</i>, these statements were intended to cause confusion among the voters, disrupt the orderly conduct of elections, and undermine the framework for the protection of our electoral processes. Hence, the COMELEC En Banc found that Erice's disqualification is called for under COMELEC Resolution No. 11046.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>On January 14, 2025, the Court issued a temporary restraining order (TRO) prohibiting the COMELEC from implementing its resolutions disqualifying Erice as candidate for representative of the 2nd District of Caloocan in the 2025 NLE.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br><center><i>The Issue</i></center><br>The issue for the resolution of the Court is whether the COMELEC <i>En Banc</i> erred in affirming that Erice should be disqualified for violation of Section 261(z)(11) of the Omnibus Election Code.<br><br><center><i>Petitioner's Arguments</i></center><br><i>First</i>, respondent COMELEC should have dismissed respondent Salipot's petition for disqualification for failure to comply with jurisdictional requirements, specifically, to furnish petitioner Erice with a copy of said petition and its annexes. Respondent Salipot only sent a copy of the annexes through email but not the petition itself, in violation of petitioner Erice's right to due process. Respondent Salipot is not even a registered voter of Caloocan but of Rizal and has a deactivated status.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><i>Second</i>, respondent Salipot failed to prove that petitioner Erice violated Section 261(z)(11) of the Omnibus Election Code. Petitioner Erice stresses that the disruptive behavior penalized under that provision must have been done around the voting centers. However, petitioner Erice made his statements in restaurants and media stations. In addition, the statements should have been made during the conduct of an election, which is not the case here. More, petitioner Erice's statements do not pertain to the printing of official ballots, postponement of election, transfer of polling place, or general conduct of election but to respondent COMELEC's violation of Republic Act No. 9369, which is currently the subject of his pending Petition before the Court docketed as G.R. No. 272887, and Republic Act No. 3019, or the Anti-Graft and Corrupt Practices Act, which is the subject of his complaintÂ­ affidavit pending before the Office of the Ombudsman. The statements were consistent with petitioner Erice's right to free speech and in line with his duty as a citizen of this country.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><i>Third</i>, petitioner Erice's statements are covered by his right to freedom of expression. The statements do not present a clear and present danger to warrant the suppression of his right and cause his disqualification.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br><center><i>Respondent COMELEC's Arguments</i></center><br><i>First</i>, respondent Salipot was able to prove that he sent a copy of his petition to petitioner Erice through the Affidavit of Electronic Service of Joaquin. In any event, respondent COMELEC has the discretion to summarily dismiss the petition under Section 4, paragraph 7 of COMELEC Resolution No. 11046 for failure to submit proof of service of the petition and its annexes to respondent. Notably, petitioner Erice did not deny receiving the notice of summons, summons, and a copy of the petition sent to his email by the COMELEC Second Division. As for respondent Salipot's standing, COMELEC Resolution No. 11046 only requires that the one filing the complaint is a registered voter. It is silent as to the voter's status.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br><i>Second</i>, Section 261(z)(11) of the Omnibus Election Code does not require that the act must be committed at voting centers and during the actual conduct of elections.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br><i>Third</i>, all the elements for violation of Section 261(z)(11) of the Omnibus Election Code were established in the case. Petitioner Erice repetitively proclaimed on different social media platforms and radio stations that the Philippines would become Miru's guinea pig for the technology to be used in the 2025 NLE. This claim refers to the integrity of the ACM; thus, the subject matter is the general conduct of the election. Petitioner Erice's intent to disrupt the election process was shown through his overt act of consistently making unfounded and libelous statements which caused confusion and disruption of the election process. His statements go beyond what is protected under the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><i>Fourth</i>, there is no basis to grant the prayer for a writ of preliminary injunction. For one, petitioner Erice has no clear and unmistakable right to seek election to a public elective office. For another, he did not suffer any irreparable injury.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><center><i>Salipot's Arguments</i></center><br><i>First</i>, petitioner Erice was given the opportunity to be heard before the respondent COMELEC. He was served a copy of the petition through his official email address in his COC.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><i>Second</i>, petitioner Erice failed to show that the respondent COMELEC acted with grave abuse of discretion in disqualifying him. The findings of respondent COMELEC have factual and legal basis.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><i>Third</i>, the TRO should be lifted because petitioner Erice is not entitled to it. He did not establish that he has a clear and unmistakable right to injunctive relief.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><center><i>The Ruling of the Court</i></center><br>The Petition is meritorious.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="50%"><div align="justify"><em>Petitioner Erice's right to due process was not violated.</em></div></td><td width="50%"><br></td></tr></tbody></table><br>Petitioner Erice avers that respondent COMELEC should have dismissed respondent Salipot's petition outright due to the latter's failure to give him a copy of the Petition. Respondent COMELEC correctly pointed out that the language of Section 4, paragraph 7(vii)<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of COMELEC Resolution No. 11046 gives it the discretion to summarily dismiss a petition for failure to submit proof of service of the petition with complete annexes to the respondent or failure to execute an affidavit of service. The dismissal is not mandatory. Here, respondent COMELEC cannot be faulted for not dismissing the petition considering that respondent Salipot submitted the Affidavit of Electronic Service of Joaquin to attest that he served a copy of the petition and its annexes to petitioner Erice.<br><br>Further, the Court is not convinced that petitioner Erice did not receive a copy of the petition. Petitioner Erice submitted the printed copy<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> of the email sent by the counsel of respondent Salipot to prove that he did not receive a copy of the petition. The printed copy of the email states that it contains 11 attachments but only the title of 10 attachments is shown, which incidentally does not include the petition. Thus, the printed copy of the email alone is insufficient proof that the Petition was not attached to the email sent to petitioner Erice. Moreover, respondent Salipot submitted a copy of the same email showing that the petition was attached thereto.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> In any event, respondent COMELEC duly considered the merits of Erice's arguments, including his allegation of lack of due process, when he filed his motion for reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup>&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="50%"><div align="justify"><em>The COMELEC gravely abused its discretion in disqualifying petitioner Erice for violation of Section 261(z)(11) of the Omnibus Election Code.</em></div></td><td width="50%">&nbsp;</td></tr></tbody></table><br>Section 1(c) of COMELEC Resolution No. 11046 provides in full:<blockquote>SECTION 1. <i>Grounds</i>.<br><br>. . . .&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">c.</div></td><td width="95%"><div align="justify"><i>Disqualification of Candidates</i>. â A registered voter or a duly registered political party, organization or coalition of political parties may file a verified Petition for Disqualification against any candidate for any of the following grounds:&nbsp;</div></td></tr></tbody></table>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1.</div></td><td colspan="2"><div align="justify">For lack of qualifications or possessing any of the grounds for disqualification provided by law or the Constitution;</div></td></tr><tr valign="top"><td><div align="justify">2.</div></td><td colspan="2"><div align="justify"> For failure to file Statement of Contributions and Expenditures (SOCE) for two elections pursuant to Section 14 of Republic Act No. 7166; and</div></td></tr><tr valign="top"><td><div align="justify">3.</div></td><td colspan="2"><div align="justify"> In an action or protest in which he or she is a party, for having been declared by final decision of a competent court, guilty of, or found by the Commission of, having:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="90%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">i.</div></td><td><div align="justify">Given money or material consideration to influence, induce to corrupt voters or public officials performing electoral functions;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">ii.</div></td><td><div align="justify">Committed acts of terrorism to enhance his or her candidacy;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">iii.</div></td><td><div align="justify">Spent in his or her election campaign an amount in excess of that allowed by law;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">iv.</div></td><td><div align="justify"> Solicited, received, or made any contribution prohibited under Sections 89, 95, 96, 97, and 104 of the Omnibus Election Code;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">v.</div></td><td><div align="justify">Violated any of Sections 80, 83, 85, 86, and 261, paragraphs d, e, k, v, and cc sub-paragraph 6 of the Omnibus Election Code;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">vi.</div></td><td><div align="justify">Acquired permanent residency or immigrant status in a foreign country, unless waiver of status as permanent resident or immigrant of a foreign country is made in accordance with the residence requirement provided for in election laws;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">vii.</div></td><td><div align="justify">Violated any of Section 40 (a), (b), and (c) of the Local Government Code (LGC) of 1991; or</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">viii.</div></td><td><div align="justify">Violated all other grounds under the LGC and the OEC.</div></td></tr></tbody></table></blockquote>The disqualification of petitioner Erice is based on Section 1(c)(3)(viii) of COMELEC Resolution No. 11046, or that he has "[v]iolated all other grounds under the [Local Government Code] and the [Omnibus Election Code]." He allegedly violated Section 261(z)(11) of the Omnibus Election Code which provides:<blockquote>SECTION 261. <i>Prohibited Acts</i>. â The following shall be guilty of an election offense:<br><br>. . . .<br><br>(z) <i>On voting</i>:<br><br>. . . .<br><br>(11) Any person who, for the purpose of disrupting or obstructing the election process or causing confusion among the voters, propagates false and alarming reports or information or transmits or circulates false orders, directives or messages regarding any matter relating to the printing of official ballots, the postponement of the election, the transfer of polling place or the general conduct of the election[.]</blockquote>Under Section 1(c)(3) of COMELEC Resolution No. 11046, the disqualification for violation of all other grounds under the Local Government Code and the Omnibus Election Code requires that the person subject of the disqualification was declared guilty of said violation by final decision of a competent court in an action or protest in which they are a party. Simply put, it is the final decision finding the party guilty of a violation of the Local Government Code or the Omnibus Election Code that shall serve as the basis for their disqualification. This means that the finding of guilt was done in a prior proceeding separate from the disqualification case itself. This is consistent with Section 265<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> of the Omnibus Election Code, as amended by Republic Act No. 9369,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> which vests respondent COMELEC with the duty to conduct the preliminary investigation for election offenses; and Section 268,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> of the Omnibus Election Code which grants the Regional Trial Court the exclusive original jurisdiction to try and decide on whether an election offense was committed. Incidentally, Section 264<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> of the Omnibus Election Code imposes disqualification as a penalty for the commission of an election offense.<br><br>Instead of following the foregoing procedure, it appears that respondent COMELEC decided to directly rule on whether petitioner Erice is guilty of violation of Section 261(z)(11), an election offense, and after having done so, imposed the penalty of disqualification. This cannot be permitted. The COMELEC cannot skip the processes laid down in our laws, no matter how noble the cause of protecting the integrity of the elections may be.<br><br>More importantly, Section 261(z)(11) is not listed as a ground for disqualification under the Omnibus Election Code, specifically Section 68 thereof:<blockquote>SECTION 68. <i>Disqualifications</i>. â Any candidate who, in an action or protest in which he is a party is declared by final decision of a competent court guilty of, or found by the Commission of having (a) given money or other material consideration to influence, induce or corrupt the voters or public officials performing electoral functions; (b) committed acts of terrorism to enhance his candidacy; (c) spent in his election campaign an amount in excess of that allowed by this Code; (d) solicited, received or made any contribution prohibited under Sections 89, 95, 96, 97 and 104; or (e) violated any of Sections 80, 83, 85, 86 and 261, paragraphs d, e, k, v, and cc, sub-paragraph 6, shall be disqualified from continuing as a candidate, or if he has been elected, from holding the office. Any person who is a permanent resident of or an immigrant to a foreign country shall not be qualified to run for any elective office under this Code, unless said person has waived his status as permanent resident or immigrant of a foreign country in accordance with the residence requirement provided for in the election laws[.]</blockquote>Aside from Section 68, the other grounds for disqualification can be found in Section 12<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> of the Omnibus Election Code, Sections 39<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> and 40<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> of the Local Government Code in relation to Section 65<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> of the Omnibus Election Code, and Section 4<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> of Republic Act No. 8295.<sup style="COLOR: RGB(255, 0, 0);">[50]<br></sup><br>In <i>Codilla, Sr. v. De Venecia</i>,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> the Court held that "the jurisdiction of the COMELEC to disqualify candidates is limited to those enumerated in Section 68 of the Omnibus Election Code. All other election offenses are beyond the ambit of COMELEC jurisdiction. They are criminal and not administrative in nature."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The Court reiterated this ruling in <i>Atty. Francisco v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Gov. Javier v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> and <i>Aratea v. Commission on Elections</i>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>Hence, respondent COMELEC cannot expand the grounds for disqualification under our laws using COMELEC Resolution No. 11046 as its basis. The powers of respondent COMELEC under the 1987 Constitution do not include the power to amend laws passed by the legislature.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Therefore, respondent COMELEC went beyond its jurisdiction in disqualifying petitioner Erice for violation of Section 261(z)(11) of the Omnibus Election Code.<br><br>Considering that respondent COMELEC had no power in the first place to disqualify a candidate on the ground of violation of Section 261(z)(11) of the Omnibus Election Code, the Court shall refrain from determining whether petitioner Erice violated this provision. To reiterate, the determination of petitioner Erice's guilt for this election offense should be made in the proper forum through an appropriate action. Notably, respondent COMELEC already ordered that the records of the case be forwarded to its Law Department to study its election offense aspect.<br><br>Nonetheless, the Court deems it proper to clarify the elements of Section 261(z)(11) for the guidance of the bench and the bar. These are:<br><br><i>First</i>, a person propagates false and alarming reports or information; or transmits or circulates false orders, directives or messages.<br><br><i>Second</i>, the foregoing must be regarding any matter relating to the printing of official ballots, the postponement of the election, the transfer of polling place, or the general conduct of the election.<br><br><i>Finally</i>, it must be done for the purpose of disrupting or obstructing the election process or causing confusion among the voters.<br><br>Contrary to petitioner Erice's understanding, Section 261(z)(11) does not require that the act be done near the polling place. There is nothing in the text of Section 261(z)(11) that would suggest this. As to whether the violation must take place during the conduct of the election, Section 261(z) refers to acts "On voting." This would imply that the punishable acts all relate to voting, which of course would only take place during the conduct of an election. Even so, there being no clear statement in Section 261(z)(11) itself that it must take place during an election, the Court cannot agree with petitioner Erice that this is required.<br><br>In prosecuting violations of Section 261(z)(11), due consideration must be given to the right to freedom of speech under Article III, Section 4 of the 1987 Constitution. As eloquently put in <i>United States v. Bustos</i>:<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><blockquote>[O]f course, criticism does not authorize defamation. Nevertheless, as the individual is less than the State, so must expected criticism be born for the common good. Rising superior to any official, or set of officials, to the Chief Executive, to the Legislature, to the Judiciaryâto any or all the agencies of Governmentâpublic opinion should be the constant source of liberty and democracy[.]<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></blockquote>All told, while the vigilance of respondent COMELEC in safeguarding the elections is laudable, it cannot excuse noncompliance with our laws.<br><br><b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> is <b>GRANTED</b>. The Resolution dated December 27, 2024, of the Commission on Elections <i>En Banc</i> in SPA Case No. 24-210 (DC) is <b>REVERSED</b> and <b>SET ASIDE</b>. The Petition for Disqualification filed by respondent Raymond D.C. Salipot against petitioner Edgar R. Erice is <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Caguioa, Hernando, Lazaro-Javier, Zalameda, Gaerlan, J. Lopez, Dimaampao, Marquez, Kho, Jr.</i>, and Villanueva, <i>JJ.</i>, concur.<br><i>Leonen, SAJ.</i>, I concur. See separate opinion.<br><i>Rosario</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on wellness leave.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On wellness leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 37-66. Approved by Chairman George Erwin M. Garcia (but took no part), Commissioners Socorro B. Inting, Marlon S. Casquejo, Aimee P. Ferolino, Rey E. Bulay, Ernesto Ferdinand P. Maceda, Jr., and Nelson J. Celis.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 24-34. Approved by Presiding Commissioner Marlon S. Casquejo and Commissioners Rey E. Bulay and Nelson J. Celis.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 93-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 25-26, 38-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 90-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 71-88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Titled, "RULES OF PROCEDURE ON THE FILING OF: (1) PETITION TO DENY DUE COURSE TO OR CANCEL CERTIFICATE OF CANDIDACY; (2) PETITION TO DECLARE A NUISANCE CANDIDATE; AND (3) PETITION FOR DISQUALIFICATION IN CONNECTION WITH THE 2025 NATIONAL AND LOCAL ELECTIONS INCLUDING THE BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO PARLIAMENTARY ELECTIONS." Approved on August 28, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 24-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 33-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 32-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 160-173.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 40-41, 163-164.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 37-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 46-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> 380 Phil. 780 (2000) [Per J. Panganiban, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, pp. 50-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 57-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 277-278, 279-280.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 8-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 10-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 348-353.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 356.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 356-362.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 362-366.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 291-302.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 303-312.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 312-317.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> SECTION 4. <i>Procedures to be Observed</i>. â Both parties shall observe the following procedures:<br><br>. . . .<br><br>7. The Commission may summarily dismiss the Petition on any of the following grounds:<br><br>. . . .&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">vii.</div></td><td width="95%"><div align="justify">The petitioner failed to submit proof of service of the Petition with complete annexes to the respondent or failed to execute an affidavit of service[.]</div></td></tr></tbody></table><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, p. 157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 206-207.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> <b>Prescott v. Bureau of Immigration</b>, 949 Phil. 919 (2023) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> SECTION 265. <i>Prosecution</i>. â The Commission shall, through its duly authorized legal officers, have the power, concurrent with the other prosecuting arms of the government, to conduct preliminary investigation of all election offenses punishable under this Code, and to prosecute the same.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Amendment to Republic Act No. 8436 (Election Modernization Act), Approved on January 23, 2007.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> SECTION 268. <i>Jurisdiction of courts</i>. â The regional trial court shall have the exclusive original jurisdiction to try and decide any criminal action or proceedings for violation of this Code, except those relating to the offense of failure to register or failure to vote which shall be under the jurisdiction of the metropolitan or municipal trial courts. From the decision of the courts, appeal will lie as in other criminal cases[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> SECTION 264. <i>Penalties</i>. â Any person found guilty of any election offense under this Code shall be punished with imprisonment of not less than one year but not more than six years and shall not be subject to probation. In addition, the guilty party shall be sentenced to suffer disqualification to hold public office and deprivation of the right of suffrage. If he is a foreigner, he shall be sentenced to deportation which shall be enforced after the prison term has been served. Any political party found guilty shall be sentenced to pay a fine of not less than ten thousand pesos, which shall be imposed upon such party after criminal action has been instituted in which their corresponding officials have been found guilty[.]<br><br>In case of prisoner or prisoners illegally released from any penitentiary or jail during the prohibited period as provided in Section 261, paragraph (n) of this Code, the director of prisons, provincial warden, keeper of the jail or prison, or persons who are required by law to keep said prisoner in their custody shall, if convicted by a competent court, be sentenced to suffer the penalty of <i>prisiÃ³n mayor</i> in its maximum period if the prisoner or prisoners so illegally released commit any act of intimidation, terrorism of interference in the election[.]<br><br>Any person found guilty of the offense of failure to register or failure to vote shall, upon conviction, be fined one hundred pesos. In addition, he shall suffer disqualification to run for public office in the next succeeding election following his conviction or be appointed to a public office for a period of one year following his conviction[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> SECTION 12. <i>Disqualifications</i>. â Any person who has been declared by competent authority insane or incompetent, or has been sentenced by final judgment for subversion, insurrection, rebellion or for any offense for which he has been sentenced to a penalty of more than eighteen months or for a crime involving moral turpitude, shall be disqualified to be a candidate and to hold any office, unless he has been given plenary pardon or granted amnesty.<br><br>This disqualifications to be a candidate herein provided shall be deemed removed upon the declaration by competent authority that said insanity or incompetence had been removed or after the expiration of a period of five years from his service of sentence, unless within the same period he again becomes disqualified.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> SECTION 39. <i>Qualifications</i>. â&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">An elective local official must be a citizen of the Philippines; a registered voter in the barangay, municipality, city, or province or, in the case of a member of the sangguniang panlalawigan, sangguniang panlungsod, or sangguniang bayan, the district where he intends to be elected; a resident therein for at least one (1) year immediately preceding the day of the election; and able to read and write Filipino or any other local language or dialect.</div></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">Candidates for the position of governor, vice-governor, or member of the sangguniang panlalawigan, or mayor, vice-mayor or member of the sangguniang panlungsod of highly urbanized cities must be at least twenty-three (23) years of age on election day.</div></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">Candidates for the position of mayor or vice-mayor of independent component cities, component cities, or municipalities must be at least twenty-one (21) years of age on election day.</div></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">Candidates for the position of member of the sangguniang panlungsod or sangguniang bayan must be at least eighteen (18) years of age on election day.</div></td></tr><tr valign="top"><td><div align="justify">(e)</div></td><td><div align="justify">Candidates for the position of punong barangay or member of the sangguniang barangay must be at least eighteen (18) years of age on election day.</div></td></tr><tr valign="top"><td><div align="justify">(f)</div></td><td><div align="justify">Candidates for the sangguniang kabataan must be at least fifteen (15) years of age but not more than twenty-one (21) years of age on election day.</div></td></tr></tbody></table><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> SECTION 40. <i>Disqualifications</i>. â The following persons are disqualified from running for any elective local position:&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">Those sentenced by final judgment for an offense involving moral turpitude or for an offense punishable by one (1) year or more of imprisonment, with in two (2) years after serving sentence;</div></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">Those removed from office as a result of an administrative case;</div></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">Those convicted by final judgment for violating the oath of allegiance to the Republic;</div></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">Those with dual citizenship;</div></td></tr><tr valign="top"><td><div align="justify">(e)</div></td><td><div align="justify">Fugitives from justice in criminal or non-political cases here or abroad;</div></td></tr><tr valign="top"><td><div align="justify">(f)</div></td><td><div align="justify">Permanent residents in a foreign country or those who have acquired the right to reside abroad and continue to avail of the same right after the effectivity of this Code; and</div></td></tr><tr valign="top"><td><div align="justify">(g)</div></td><td><div align="justify">The insane or feeble-minded.</div></td></tr></tbody></table><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> SECTION 65. <i>Qualifications of elective local officials</i>. â The qualifications for elective provincial, city, municipal and barangay officials shall be those provided for in the Local Government Code.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> SECTION 4. <i>Disqualification</i>. â In addition to the disqualifications mentioned in Sections 12 and 68 of the Omnibus Election Code and Section 40 of Republic Act No. 7160, otherwise known as the Local Government Code, whenever the evidence of guilt is strong, the following persons are disqualified to run in a special election called to fill the vacancy in an elective office, to wit:&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">a)</div></td><td width="95%"><div align="justify">Any elective official who has resigned from his office by accepting an appointive office or for whatever reason which he previously occupied but has caused to become vacant due to his resignation; and</div></td></tr><tr valign="top"><td><div align="justify">b) </div></td><td><div align="justify">Any person who, directly or indirectly, coerces, bribes, threatens, harasses, intimidates or actually causes, inflicts or produces any violence, injury, punishment, torture, damage, loss or disadvantage to any person or persons aspiring to become a candidate or that of the immediate member of his family, his honor or property that is meant to eliminate all other potential candidate.</div></td></tr></tbody></table><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> "AN ACT PROVIDING FOR THE PROCLAMATION OF A LONE CANDIDATE FOR ANY ELECTIVE OFFICE IN A SPECIAL ELECTION, AND FOR OTHER PURPOSES." Approved on June 6, 1997.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 442 Phil. 139 (2002) [Per J. Puno, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, pp. 177-178.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 831 Phil. 106, 125 (2018) [Per J. Velasco, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 777 Phil. 700, 728-729 (2016) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 696 Phil. 700, 724-725 (2012) [Per J. Carpio, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> ARTICLE IX. Constitutional Commission.<br>. . . .<br><br>C. The Commission on Elections<br>. . . .<br><br>SECTION 2. The Commission on Elections shall exercise the following powers and functions:&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">Enforce and administer all laws and regulations relative to the conduct of an election, plebiscite, initiative, referendum, and recall.</div></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">Exercise exclusive original jurisdiction over all contests relating to the elections, returns, and qualifications of all elective regional, provincial, and city officials, and appellate jurisdiction over all contests involving elective municipal officials decided by trial courts of general jurisdiction, or involving elective barangay officials decided by trial courts of limited jurisdiction.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Decisions, final orders. or rulings of the Commission on Elections contests involving elective municipal and barangay offices shall be final, executory, and not appealable.</div></td></tr><tr valign="top"><td><div align="justify">(3)</div></td><td><div align="justify">Decide, except those involving the right to vote, all questions affecting elections, including determination of the number and location of polling places, appointment of election officials and inspectors, and registration of voters.</div></td></tr><tr valign="top"><td><div align="justify">(4)</div></td><td><div align="justify">Deputize, with the concurrence of the President, law enforcement agencies and instrumentalities of the Government, including the Armed Forces of the Philippines, for the exclusive purpose of ensuring free, orderly, honest, peaceful, and credible elections.</div></td></tr><tr valign="top"><td><div align="justify">(5)</div></td><td><div align="justify">Register, after sufficient publication, political parties, organizations, or coalitions which, in addition to other requirements, must present their platform or program of government; and accredit citizens' arms of the Commission on Elections. Religious denominations and sects shall not be registered. Those which seek to achieve their goals through violence or unlawful means, or refuse to uphold and adhere to this Constitution, or which are supported by any foreign government shall likewise be refused registration.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Financial contributions from foreign governments and their agencies to political parties, organizations, coalitions, or candidates related to elections constitute interference in national affairs, and, when accepted, shall be an additional ground for the cancellation of their registration with the Commission, in addition to other penalties that may be prescribed by law.</div></td></tr><tr valign="top"><td><div align="justify">(6)</div></td><td><div align="justify">File, upon a verified complaint, or on its own initiative, petitions in court for inclusion or exclusion of voters; investigate and, where appropriate, prosecute cases of violations of election laws, including acts or omissions constituting election frauds, offenses, and malpractices.</div></td></tr><tr valign="top"><td><div align="justify">(7)</div></td><td><div align="justify">Recommend to the Congress effective measures to minimize election spending, including limitation of places where propaganda materials shall be posted, and to prevent and penalize all forms of election frauds, offenses, malpractices, and nuisance candidacies.</div></td></tr><tr valign="top"><td><div align="justify">(8)</div></td><td><div align="justify">Recommend to the President the removal of any officer or employee it has deputized, or the imposition of any other disciplinary action, for violation or disregard of, or disobedience to its directive, order, or decision.</div></td></tr><tr valign="top"><td><div align="justify">(9)</div></td><td><div align="justify">Submit to the President and the Congress a comprehensive report on the conduct of each election, plebiscite, initiative, referendum, or recall.</div></td></tr></tbody></table><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 37 Phil. 731 (1918) [Per J. Malcolm].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 741.<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>SEPARATE CONCURRING OPINION</b></center><br><b>LEONEN, <i>SAJ.</i>:</b><br><br>I concur that the Petition for Disqualification under Section 68 of the Omnibus Election Code filed by respondent Raymond D.C. Salipot against petitioner Edgar R. Erice must be dismissed because the Commission on Elections (COMELEC) has no power to disqualify a candidate on the ground of an election offense under Section 261(z)(11) of the Omnibus Election Code.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>However, I wish to take this opportunity to draw the parameters of freedom of expression for future cases involving laws that penalize or curtail certain forms of speech. This is because without clear legal boundaries, attempts to regulate speech may risk being overly broad or vague, leading to censorship or the suppression of legitimate speech. Having carefully defined parameters ensures that any harmful or malicious speech or any malicious publication of any false information can be addressed without compromising the democratic space for open, honest, and even critical expression. In this way, drawing the line becomes not about limiting speech for its own sake, but about protecting both public order and the integrity of free expression itself. Thus, it becomes a striking of a balance between protecting individual rights and promoting public good, public order, and public interest.<br><br><center><b>I</b></center><br>Freedom of speech is an essential pillar of a democratic society.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Article III, Section 4 of the Constitution reflects not only the high value that a democratic society places on the free exchange of ideas, but also serves as a safeguard against censorship and governmental overreach, ensuring that individuals can speak truth to power without fear of punishment.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>Enshrined in our constitutional framework, freedom of speech allows individuals to express opinions, criticize government actions, and engage in open discussion on matters of public concern. In the context of elections, such freedom enables transparency, accountability, and citizen participation.<sup style="COLOR: RGB(255, 0, 0);">[4]<br></sup><br>In <i>Philippine Blooming Mills Employees Organization v. Philippine Blooming Mills Co., Inc.</i>:<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><blockquote>The rights of free expression. . . [is] not only [a] civil right[] but also [a] political right[] essential to man's enjoyment of his life, to his happiness and to his full and complete fulfillment. Thru [this freedom] the citizens can participate not merely in the periodic establishment of the government through their suffrage[,] but also in the administration of public affairs as well as in the discipline of abusive public officers. The citizen is accorded [this right] so that he can appeal to the appropriate governmental officers or agencies for redress and protection as well as for the imposition of the lawful sanctions on erring public officers and employees.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>In <i>ABS-CBN Corp. v. Ampatuan, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> this Court elaborated how freedom of speech can be a powerful weapon of accountability:<blockquote>Freedom of expression is the "means of assuring individual selfÂ­-fulfillment, of attaining the truth, of securing participation by the people in social and political decision-making, and of maintaining the balance between stability and change." The exercise of one's self by an individual alone or in association with those of similar interests is the least limitable right. It guarantees the inherent sovereignty of a person to be human and the "dignity of individual thought."<br><br>The external expression of a thought or idea by way of words, or some other action, is bound to clash with competing ideas and interests.<br><br>Freedoms of speech and of the press are the most contentious liberties. These freedoms are guaranteed to keep the power surrendered to government in check, and these freedoms are powerful weapons of accountability. Thus, freedoms of speech and press are "[liberties] to discuss publicly and truthfully any matter of public interest without censorship or punishment" to keep public debates "uninhibited, robust, and wide-open."<br><br>. . . .<br><br>We have given the "broadest scope" and "widest latitude" to these freedoms:<br><br><i>. . . At the very least, free speech. . . may be identified with the liberty to discuss publicly and truthfully any matter of public interest without censorship or punishment.</i> There is to be then no previous restraint on the communication of views or subsequent liability whether in libel suits, prosecution for sedition, or action for damages, or contempt proceedings unless there be a clear and present danger of substantive evil that Congress has a right to prevent.<br><br>The vital need in a constitutional democracy for freedom of expression is undeniable whether as a means of assuring individual selfÂ­-fulfillment, of attaining the truth, of securing participation by the people in social including political decision-making, and of maintaining the balance between stability and change. The trend as reflected in Philippine and American decisions is to recognize the broadest scope and assure the widest latitude to this constitutional guaranty. It represents a profound commitment to the principle that debate of public issue should be uninhibited, robust, and wide-open. It is not going too far, according to another American decision, to view the function of free speech as inviting dispute. "<i>It may indeed best serve its high purpose when it induces a condition of unrest, creates dissatisfaction with conditions as they are, or even stirs people to anger.</i>"<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (Emphasis supplied, citations omitted)</blockquote>Nonetheless, even as "a full discussion of public affairs is indispensable,"<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> the freedom of speech is not absolute and must be balanced against the need to preserve the integrity of public discourse:<blockquote>[the freedom of speech and its cognate rights] "may be regulated to some extent to serve important public interests, with some forms of speech not being protected." Even as these freedoms are integral to a free society, they must be limited when they go beyond mere expression of views and become acts that threaten society. This distinction is basic to understanding the democratic process.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></blockquote>To draw the parameters of freedom of speech in relation to laws that curtail it, this Court must perform a balancing act between the constitutional right to free speech and legitimate state interests, as will be explained below.<br><br><center><b>II</b></center><br>In resolving cases involving the curtailment of speech, this Court must, in considering the merits, "tread carefully with understanding, compassion, and reason."<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Constitutional text derives its most effective meaning when "read within the context of the entire Constitution, along with contemporary circumstances, advised but not straightjacketed by judicial doctrines sufficient during their times and always with a view to achieving the ideals of social justice."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In evaluating a law curtailing speech, this Court must guard against overbreadth and vagueness; evaluate such law through the lens of clear and present danger test, and ensure that restrictions are proportional, the least restrictive, and necessary to protect democratic processes.<br><br>Otherwise stated, to pass constitutional muster, a law that allegedly infringes upon the freedom of speech must pass the following tests: (a) it must not suppress free speech too broadly or otherwise be void under the overbreadth doctrine; (b) it must be a content-neutral regulation and accordingly not a prior restraint upon free speech; (c) it must pass the strict scrutiny test and therefore must be narrowly tailored and proportionate; and (d) it must pass either the clear and present danger test or the dangerous tendency rule.<br><br>In my Concurring and Dissenting Opinion in <i>Calleja v. Executive Secretary</i>:<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><blockquote>One of the analytical tools to test whether a statute that regulates free speech can be invalidated is the overbreadth doctrine. Under the overbreadth doctrine, a law is void when it unnecessarily sweeps broadly and invades on the area of protected freedoms to further a governmental purpose. The law casts too wide a net in its looseness and imprecision such that it is susceptible to many interpretations, including sanctions on the legitimate exercise of one's fundamental rights.<br><br>The overbreadth doctrine posits that any "possible harm to society in permitting some unprotected speech to go unpunished is outweighed by the possibility that the protected speech of others may be deterred and perceived grievances left to fester because of possible inhibitory effects of overly broad statutes." In <i>Estrada</i>:<br><br>A facial challenge is allowed to be made to a vague statute and to one which is overbroad because of possible "chilling effect" upon protected speech. The theory is that "[w]hen statutes regulate or prescribe speech and no readily apparent construction suggests itself as a vehicle for rehabilitating the statutes in a single prosecution, the transcendent value to all society of constitutionally protected expression is deemed to justify allowing attacks on overly broad statutes with no requirement that the person making the attack demonstrate that his own conduct could not be regulated by a stature drawn with narrow specificity."<br><br>It is easy to see why overbroad laws should be struck down: They give off a "chilling effect" on free speech and expression. These fundamental rights sit at the core of our democracy, so delicate and protected, that the "threat of sanctions may deter their exercise almost as potently as the actual application of sanctions."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Citations omitted)</blockquote>Another test involves distinguishing whether the relevant criminal law provision is content-neutral or content-basedâa law that constitutes prior restraint on speech:<blockquote>Content-neutral regulation is 'merely concerned with the incidents of the speech, or one that merely controls the time, place or manner, and under well-defined standards,' regardless of the content of the speech.<br><br>Meanwhile, a regulation is content-based if it restricts the speech or expression's subject matter. It constitutes prior restraint, which curtails speech or expression in advance of its actual utterance, dissemination, or publication. A content-based regulation bears a heavy presumption of unconstitutionality, and to be valid, any form of prior restraint must be narrowly tailored and least restrictive to achieve a compelling State interest.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Citations omitted)</blockquote>To determine whether the relevant criminal law constitutes a prior restraint on speech, this Court may apply either the clear and present danger rule or the dangerous tendency rule:<blockquote>Prior restraint on protected speech will only be valid if they pass the governing jurisprudential test. Two tests in determining the validity of restrictions in the exercise of free speech have been recognized:<blockquote>These are the 'clear and present danger' rule and the 'dangerous tendency' rule. The first, as interpreted in a number of cases, means that the evil consequence of the comment or utterance must be 'extremely serious and the degree of imminence extremely high' before the utterance can be punished. The danger to be guarded against is the 'substantive evil' sought to be prevented . . .<br><br>. . . .<br><br>The 'dangerous tendency' rule, on the other hand, . . . may be epitomized as follows: If the words uttered create a dangerous tendency which the state has a right to prevent, then such words are punishable. It is not necessary that some definite or immediate acts of force, violence, or unlawfulness be advocated. It is sufficient that such acts be advocated in general terms. Nor is it necessary that the language used be reasonably calculated to incite persons to acts of force, violence, or unlawfulness. It is sufficient if the natural tendency and probable effect of the utterance be to bring about the substantive evil which the legislative body seeks to prevent.</blockquote>This Court had previously applied either test to resolve free speech challenges. Recently, however, we have generally adhered to the clear and present danger test, under which speech may be restrained when there is "substantial danger that the speech will likely lead to an evil the government has a right to prevent."<br><br>In the early case of <i>Cabansag v. Fernandez</i>, this Court described the clear and present danger test:<blockquote>The question in every case, according to Justice Holmes, is whether the words used are used in such circumstances and are of such a nature as to create a clear and present danger that they will bring about the substantive evils that congress has a right to prevent. It is a question of proximity and degree.</blockquote>As the test itself words it, the danger must not only be clear but also present. By clear, there must be "a causal connection with the danger of the substantive evil arising from utterance questioned." Meanwhile, "present" indicates the time element â imminent, immediate, not just possible "but very likely inevitable."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Citations omitted)</blockquote><center><b>III</b></center><br>The constitutional guarantee under Article III, Section 4 is not intended to give immunity to every possible form of speech. There are certain wellÂ­-defined classes of speech, "the prevention and punishment of which has never been thought to raise any Constitutional problems"<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> In <i>Soriano v. Laguardia</i>:<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><blockquote>[a] speech would fall under the unprotected type[,] if the utterances involved are 'no essential part of any exposition of ideas, and are of such slight social value as a step of truth that any benefit that may be derived from them is clearly outweighed by the social interest in order and morality'. Being of little or no value, there is, in dealing with or regulating them, no imperative call for the application of the clear and present danger rule or the balancingÂ­-of-interest test, they being essentially modes of weighing competing values, or, with like effect, determining which of the clashing interests should be advanced.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Citations omitted)</blockquote>In our jurisdiction, unprotected speech or low-value expression includes "libelous statements, obscenity or pornography, false or misleading advertisement, insulting or 'fighting words,' i.e., those which by their very utterance inflict injury or tend to incite an immediate breach of peace and expression endangering national security."<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Despite the broad protections afforded to free speech, this Court has recognized the need to curtail speech that causes undue harm, such as when speech: (a) is seditious<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> or tends to incite sedition,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (b) involves comments that constitutes contempt of court,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (c) is libelous,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (d) involves the malicious publication of disinformation or false news which may endanger the public order or cause damage to the interest or credit of the State,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> or (e) involves communication of false information which is expected to have deleterious consequences on public security and order.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>It bears noting, however, that a law that regulates or proscribes unprotected speech or speech falling beyond the ambit of constitutional protection cannot be subject to facial invalidation because there is 'no transcendent value to all society' that would justify such attack.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Nonetheless, such a law may still be vulnerable to constitutional attack by a litigant who stands charged under a law that regulates unprotected speech insofar as it is applied to him or her.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> In that case, a court may examine the provisions of law allegedly violated in light of the conduct for which a litigant has been charged; and if said litigant prevails, a court may carve away the unconstitutional aspects of the relevant legal provision by invalidating its improper application on a case-to-case basis.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><center><b><br>IV</b></center><br>While the State has a legitimate interest in combating disinformation, especially during elections, any restriction on speech must be narrowly-Â­tailored, clearly defined, and constitutionally soundâcarefully balanced to protect both public order and the fundamental right to free expression. Indeed, the State may penalize the malicious publication or spread of disinformation, but in doing so, it must not compromise a citizen's constitutional right to free expression, which remains essential to an open and accountable democracy.<br><br>In our present political climate, an electoral campaign's ability to effectively utilize media and to dominate media spaces undoubtedly has become instrumental in shaping national opinion.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> In fact, coordinated disinformation campaigns has significant impact on electoral integrity as they have been designed not only "to manipulate public opinion and distort democratic discourse,"<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> but also to influence political conversations and voting decisions.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Misinformation threatens to sow further division in Philippine society and politics.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> It can cause serious harm as it can mislead voters, erode trust in institutions, incite panic, and even endanger lives. It can also "drown out conversations about human rights and silence criticism against the ruling government"<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> and fuel intense polarization, oversimplify social dynamics, and create "stark dichotomies between perceived enemies and allies."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Some misinformation is particularly aimed at confusing voters or suppressing voter turnout, such as fake news about voting locations and election procedures which potentially discouraged voters from participating and casting votes.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>This has prompted Congress to enact laws that combat misinformation, while institutionalizing mechanisms for stronger regulatory oversight and accountability. At present, multiple bills are pending before Congress that target the creation and spread of false content, as well as the organized networks behind themâincluding House Bill No. 11506, or the Anti-Fake News and Disinformation Act.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>This legislative effort is not unprecedented. The Congress has long deemed it fit to penalize certain categories of false or harmful speech, such as Article 154 of the Revised Penal Code, Section 261(z)(11) of the Omnibus Election Code, Presidential Decree No. 1727, among others.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> These laws reflect a continued concern over the proliferation of speech that may endanger public order or damage the credit of the State.<br><br>Still, the regulation of false information, particularly in the context of elections and public discourse, presents a complex legal and ethical challenge. The dangers posed by fake news are undeniably real, but any attempt to curtail speech must be approached with great caution.<br><br>Unlike well-defined categories of unprotected speech or low-value expression previously mentioned, which have long been recognized in our legal system, false information remains a dynamic and context-dependent phenomenon; it cannot be considered a monolith that uniformly falls beyond the ambit of constitutional protection. Its regulation must account for several factors which may include the intent, context, and likely harm. In my considered opinion, it is imperative that laws targeting false information be framed with clarity, proportionality, and respect for constitutional freedoms, to ensure that the regulatory mechanism does not become more damaging than the harm it seeks to prevent.<br><br>As earlier intimated, drawing clear and constitutionally-sound parameters is essential, not only to protect citizens from deliberate disinformation, but also guard against the misuse of laws as a weapon to suppress critical thought, political dissent, satire, honest error, or journalistic inquiry.<br><br>In the exercise of its judicial power, this Court plays a critical role in maintaining the delicate balance between freedom of expression and the State's legitimate interest in curbing the spread of false information. The task of regulating false information, particularly in the sensitive context of elections and public discourse, must be undertaken with both precision and prudence. Thus, a judicial effort to protect the integrity of public discourse, while preserving space for robust, even uncomfortable, and democratic debate is an act of constitutional calibration.<br><br>While the spread of disinformation poses genuine threats to public order, institutional trust, and democratic participation, efforts to counter it must not trample upon the very freedoms that give democracy its vibrance. This Court has consistently held that freedom of expression, though not absolute, enjoys a preferred status in our constitutional order.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Accordingly, any law that seeks to restrict speech must be crafted narrowly, subject to strict scrutiny, and mindful of the chilling effects of vague or overbroad regulation.<br><br>By applying the tests enumerated above, this Court can ensure that the fight against false information does not come at the expense of the very freedoms this Court seeks to protect. Ultimately, our goal must not be merely to silence harmful or low-value expressions, but to foster a public sphere that is both free and responsibleâwhere truth can thrive, accountability is upheld, and democracy is allowed to flourish.<br><br><b>ACCORDINGLY</b>, I vote to <b>GRANT</b> the Petition. The petition for disqualification filed against Edgar R. Erice should be <b>DISMISSED</b>.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, pp. 8-13. <i>See also</i> Omnibus Election Code, sec. 261, which provides: <i>Prohibited Acts</i>. â The following shall be guilty of an election offense: . . . .(z) On voting: . . . .(11) Any person who, for the purpose of disrupting or obstructing the election process or causing confusion among the voters, propagates false and alarming reports or information or transmits or circulates false orders, directives or messages regarding any matter relating to the printing of official ballots, the postponement of the election, the transfer of polling place or the general conduct of the election.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>See</i> J. Leonen, Concurring and Dissenting Opinion in <b>Atty. Calleja v. Executive Secretary Medialdea</b>, 918-B Phil. 1, 770 (2021) [Per J. Carandang, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>See</i> CONST., art. III, sec. 4, provides: No law shall be passed abridging the freedom of speech, of expression, or of the press, or the right of the people peaceably to assemble and petition the government for redress of grievances.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>See</i> <b>ABS-CBN Corp. v. Ampatuan, Jr.</b>, 941 Phil. 182, 102-103 (2023) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> 151-A Phil. 656 (1973) [Per J. Makasiar, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 675.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <b>ABS-CBN Corp. v. Ampatuan, Jr.</b>, 941 Phil. 182 (2023) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 201-203.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <b>ABS-CBN Corp. v. Ampatuan, Jr.</b>, Phil. 941, 201 (2023) [Per J. Leonen, <i>En Banc</i>]. <i>See also</i> CONST., art. 11, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>See</i> J. Leonen, Concurring and Dissenting Opinion in <b>Calleja v. Executive Secretary</b>, 918-B Phil. 1, 790 (2021) [Per J. Carandang, <i>En Banc</i>].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>See</i> J. Leonen, Concurring and Dissenting Opinion in <b>Calleja v. Executive Secretary</b>, 918-8 Phil. 1, 754 (2021) [Per J. Carandang, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> <i>See also</i> <b>Nicolas-Lewis v. Commission on Elections</b>, 859 Phil. 560 (2019) [Per J. Reyes, Jr., <i>En Banc</i>]; <b>ABS-CBN Broadcasting Corporation v. Commission on Elections</b>, 380 Phil. 780 (2000) [Per J. Panganiban, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> 918-B Phil. 1, 752-833.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 773-774.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 790-791.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 791-794.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Madrilejos v. Gatdula</b>, 863 Phil. 754 [Per J. Jardaleza, <i>En Banc</i>]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 605 Phil. 43 (2009) [Per J. Velasco Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 96-97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 97. <i>See also</i> OMNIBUS ELECTION CODE, art. 261(z)(1), COMELEC Resolution No. 10425, sec. 14, Presidential Decree No. 1727 (1980), otherwise known as "Declaring as Unlawful the Malicious Dissemination of False Information of the Willful Making of any Threat Concerning Bombs, Explosives or any Similar Device or Means of Destruction and Imposing Penalties Therefor."<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>See</i> <b>People v. Perez</b>, 45 Phil. 599 (1923) [Per J. Malcolm, Second Division]; <b>People v. Feleo</b>, 57 Phil. 451 (1932) [Per J. Street, <i>En Banc</i>]; <b>People v. Evangelista</b>, 57 Phil. 354 (1932) [Per J. Ostrand, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>See</i> <b>Espuelas v. People</b>, 90 Phil. 524 (1951) [Per J. Bengzon, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <b>Krivenko v. Register of Deeds</b>, 79 Phil. 461 (1947) [Per C. J. Moran, Second Division]; <b>In Re Parazo</b>, 82 Phil. 230 (1948) [Per J. Montemayor, <i>En Banc</i>]; <b>In Re Sotto</b>, 82 Phil. 595 (1949) [Per J. Feria, <i>En Banc</i>]; <b>In Re Contempt Proceedings Against Alfonso Ponce Enrile, G.R. No. L-22979</b>, June 26, 1967 [Per J. Sanchez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>See</i> <b>Borjal v. Court of Appeals</b>, 361 Phil. 1 (1999) [Per J. Bellosillo, Second Division]; <b>Policarpio v. Manila Times Publishing Co., G.R. No. L-16027</b>, May 30, 1962 [Per J. Concepcion, <i>En Banc</i>]; <b>Imperial v. Ziga, G.R. No. L-19726</b>, April 13, 1967 [Per C. J. Concepcion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> REV. PEN. CODE, art. 154(1) provides:<br><br>Article 154. Unlawful use of means of publication. â The penalty of <i>arresto mayor</i> or a fine ranging from 200 to 1,000 pesos shall be imposed upon:<br><br>1. Any person who by means of printing, lithography, or any other means of publication, shall maliciously publish as news any false news which may endanger the public order or cause damage to the interest or credit of the State[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>Soriano v. Laguardia</b>, 605 Phil. 43 (2009) [Per J. Velasco Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Madrilejos v. Gatdula</b>, 863 PHIL 754, 796(2019) [Per J. Jardeleza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>See</i> J. Leonen, Dissenting Opinion in <b>Madrilejos v. Gatdula</b>, 863 Phil. 754, 866 [Per J. Jardeleza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Madrilejos v. Gatdula</b>, 863 PHIL 754, 802 [Per J. Jardeleza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> JAPHET QUITZON, <i>Social Media Misinformation and the 2022 Philippine Elections</i>, Center for Strategic and International Studies, November 22, 2021, available at <a href="https://www.csis.org/blogs/newÂ­perspectives-asia/social-media-misinformation-and-2022-philippine-elections">https://www.csis.org/blogs/newÂ­perspectives-asia/social-media-misinformation-and-2022-philippine-elections</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Asian Journal Press, <i>Fake Accounts, Real Impact: Lawmakers, Experts Warn of Disinformation Threat Ahead of Elections</i>, April 24, 2025, available at <a href="https://asianjournal.com/philippines/fake-accounts-realÂ­impact-lawmakers-experts-warn-of-disinformation-threat-ahead-of-elections/">https://asianjournal.com/philippines/fake-accounts-realÂ­impact-lawmakers-experts-warn-of-disinformation-threat-ahead-of-elections/</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> ASEAN Parliamentarians for Human Rights, <i>Fact-Finding Mission: Impact of Online Disinformation in Elections and Democracy in the Philippines</i>, August 28-31, 2022, p. 1, available at <a href="https://wp.aseanmp.org/wp-content/uploads/2024/03/24.03.28-FFM-the-Philippines.pdf">https://wp.aseanmp.org/wp-content/uploads/2024/03/24.03.28-FFM-the-Philippines.pdf</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> JAPHET QUITZON, <i>Social Media Misinformation and the 2022 Philippine Elections</i>, Center for Strategic and International Studies, November 22, 2021, available at <a href="https://www.csis.org/blogs/newÂ­perspectives-asia/social-media-misinformation-and-2022-philippine-elections">https://www.csis.org/blogs/newÂ­perspectives-asia/social-media-misinformation-and-2022-philippine-elections</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> ASEAN Parliamentarians for Human Rights, <i>Fact-Finding Mission: Impact of Online Disinformation in Elections and Democracy in the Philippines</i>, August 28-31, 2022, p. 6, available at <a href="https://wp.aseanmp.org/wp-content/uploads/2024/03/24.03.28-FFM-the-Philippines.pdf">https://wp.aseanmp.org/wp-content/uploads/2024/03/24.03.28-FFM-the-Philippines.pdf</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> ASEAN Parliamentarians for Human Rights, <i>Fact-Finding Mission: Impact of Online Disinformation in Elections and Democracy in the Philippines</i>, August 28-31, 2022, p. 5, available at <a href="https://wp.aseanmp.org/wp-content/uploads/2024/03/24.03.28-FFM-the-Philippines.pdf">https://wp.aseanmp.org/wp-content/uploads/2024/03/24.03.28-FFM-the-Philippines.pdf</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> DOMINIQUE NICOLE FLORES, <i>Anti-fake news bill seeks up to 12-year jail time, P2M fine for disinfo peddlers</i>, Philstar.com, available at <a href="https://www.philstar.com/headlines/2025/06/02/2447659/anti-fakeÂ­news-bill-seeks-12-year-jail-time-p2m-fine-disinfo-peddlers">https://www.philstar.com/headlines/2025/06/02/2447659/anti-fake-Â­news-bill-seeks-12-year-jail-time-p2m-fine-disinfo-peddlers</a> (last accessed on July 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Presidential Decree No. 1727 (1980), sec. 1 provides: [a]ny person who, by word of mouth or through the use of the mail, telephone, telegraph, printed materials and other instrument or means of communication, willfully makes any threat or maliciously conveys, communicates, transmits, imparts, passes on, or otherwise disseminates false information, knowing the same to be false, concerning an attempt or alleged attempt being made to kill, injure, or intimidate any individual or unlawfully to damage or destroy any building, vehicle, or other real or personal property, by means of explosives, incendiary devices, and other destructive forces of similar nature or characteristics, shall upon conviction be punished with imprisonment of not more than five (5) years, or a fine or not more than forty thousand pesos (P40,000.00) or both at the discretion of the court having jurisdiction over the offense herein defined and penalized.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> <b>Reyes v. Bagatsing</b>, 210 Phil. 457, 475 (1983) [Per C.J. Fernando, <i>En Banc</i>]; <b>Philippine Blooming Mills Employees Organization v. Philippine Blooming Mills Co., Inc.</b>, 151-A Phil. 656, 676 (1973) [Per J. Makasiar, <i>En Banc</i>]. <i>See also</i> <b>The Diocese of Bacolod v. Commission on Elections</b>, 751 Phil. 301-450 [Per J. Leonen, En <i>Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

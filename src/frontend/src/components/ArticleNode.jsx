@@ -4,7 +4,14 @@ import remarkGfm from 'remark-gfm';
 import { Info, Gavel, FileSignature, X, Headphones } from 'lucide-react';
 import { useLexPlayApi } from '../features/lexplay/useLexPlay';
 import { toTitleCase } from '../utils/textUtils';
-import { extractRccLeadingShortTitle, fixStrayQuotationArtifacts, repairRccListMidItemLineBreaks } from '../utils/codalMarkdown';
+import {
+    collapseBlankLinesInPipeTables,
+    extractRccLeadingShortTitle,
+    fixStrayQuotationArtifacts,
+    repairRccBrokenIncorporatorPipeHeaders,
+    repairRccListMidItemLineBreaks,
+    shieldGfmTables,
+} from '../utils/codalMarkdown';
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
 
 const ArticleNode = React.memo(({ article, highlight, showElements = true, showHistory = false, hiddenPhrases = [], centerLayout = false, onToggleJurisprudence, onToggleAmendment, codeId }) => {
@@ -14,23 +21,26 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     // --- HOOKS MUST BE CALLED TOP-LEVEL ---
     const { playNow } = useLexPlayApi();
     const docCode = (codeId || article?.code_id || "").toLowerCase();
-    
+    const isRcc = docCode === 'rcc' || (article?.code_id || '').toLowerCase() === 'rcc';
+    const rccSectionLabel = 'Section';
+
     const hasContent = !!(article.content_md || 
                   (article.elements && article.elements !== '[]') || 
                   (article.amendments && article.amendments !== '[]') ||
                   (article.amendment_links && article.amendment_links.length > 0));
 
-    const skipKeywords = ['roc', 'const'].includes(docCode) ? ['SECTION', 'RULE'] : [];
+    const skipKeywords = ['roc', 'const', 'rcc'].includes(docCode) ? ['SECTION', 'RULE'] : [];
 
     const handleAddToPlaylist = (e) => {
         e.stopPropagation();
 
         const numStr = String(article.article_num || '');
+        const provLabel = docCode === 'rcc' ? 'Section' : 'Article';
         let displayTitle = /^(article|preamble|section|rule)/i.test(numStr)
             ? toTitleCase(numStr, skipKeywords)
-            : `Article ${numStr}`;
+            : `${provLabel} ${numStr}`;
             
-        if (numStr === '0') displayTitle = 'Preliminary Article';
+        if (numStr === '0') displayTitle = docCode === 'rcc' ? 'Preliminary Section' : 'Preliminary Article';
 
         const codexNames = {
             'rpc': 'Revised Penal Code',
@@ -100,7 +110,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
     const articleNumKey = String(article.article_num ?? article.article_number ?? '').trim();
     const normArticleKey = (s) => {
-        const m = String(s || '').match(/article\s+([\d]+(?:-[a-z]+)?)/i);
+        const m = String(s || '').match(/(?:article|section)\s+([\d]+(?:-[a-z]+)?)/i);
         return m ? m[1].toLowerCase() : String(s || '').toLowerCase().replace(/\s+/g, '');
     };
 
@@ -147,17 +157,27 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     //  and also causes false positives like "provided with one." being treated as an ordinal marker.)
     const _isConstForPreProc = (codeId || article?.code_id || '').toLowerCase() === 'const';
     if (!_isConstForPreProc) {
-        contentToDisplay = contentToDisplay
-            // 1. Break before embedded bracketed markers like `[(b)` wedged mid-sentence
-            .replace(/([a-zA-Z0-9.,;:!?])\s+(\[\s*\([a-zA-Z0-9]{1,3}\)\s*)/g, "$1\n\n$2")
-            // 2. Break before unbracketed markers like `(a)` that are only separated by a single newline
-            .replace(/([a-zA-Z0-9.,;:!?])\s*\n\s*(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
-            // 3. Break before unbracketed markers like `(b)` wedged directly on the same line after a sentence ender
-            .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, "$1\n\n$2")
-            // 4. Break before digit-dot markers like `2.` wedged directly on the same line after a sentence ender
-            .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, "$1\n\n$2")
-            // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline
-            .replace(/([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi, "$1\n\n$2");
+        let preShield = contentToDisplay;
+        if (isRcc) {
+            preShield = repairRccBrokenIncorporatorPipeHeaders(preShield);
+        }
+        const { protectedText, restore } = shieldGfmTables(preShield);
+        contentToDisplay = restore(
+            protectedText
+                // 1. Break before embedded bracketed markers like `[(b)` wedged mid-sentence
+                .replace(/([a-zA-Z0-9.,;:!?])\s+(\[\s*\([a-zA-Z0-9]{1,3}\)\s*)/g, '$1\n\n$2')
+                // 2. Break before unbracketed markers like `(a)` that are only separated by a single newline
+                .replace(/([a-zA-Z0-9.,;:!?])\s*\n\s*(\([a-zA-Z0-9]{1,3}\)\s+)/g, '$1\n\n$2')
+                // 3. Break before unbracketed markers like `(b)` wedged directly on the same line after a sentence ender
+                .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, '$1\n\n$2')
+                // 4. Break before digit-dot markers like `2.` wedged directly on the same line after a sentence ender
+                .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, '$1\n\n$2')
+                // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline
+                .replace(
+                    /([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi,
+                    '$1\n\n$2',
+                ),
+        );
     }
 
     // --- SMART HEADER EXTRACTION ---
@@ -185,7 +205,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             }
 
             const embeddedKey = normArticleKey(boldPart);
-            const rowKey = normArticleKey(`Article ${articleNumKey}`);
+            const rowKey = normArticleKey(isRcc ? `${rccSectionLabel} ${articleNumKey}` : `Article ${articleNumKey}`);
             const isConstArticle = codeId === 'const' || (article?.code_id && article.code_id.toLowerCase() === 'const');
             const redundantEmbedded =
                 embeddedKey &&
@@ -266,7 +286,6 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     // We will convert `[1]` -> `[1](#footnote-1)`
     contentToDisplay = contentToDisplay.replace(/\[(\d+)\]/g, '[$1](#footnote-$1)');
 
-    const isRcc = (codeId || '').toLowerCase() === 'rcc' || (article?.code_id || '').toLowerCase() === 'rcc';
     let rccInlineLeadTitle = null;
     if (
         isRcc &&
@@ -370,7 +389,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         {customHeaderNode ? customHeaderNode : (
                             String(article_num) === '0' ? (
                                 <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
-                                    Preliminary Article
+                                    {isRcc ? 'Preliminary Section' : 'Preliminary Article'}
                                 </h3>
                             ) : (
                                 <h3
@@ -380,7 +399,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                             : `text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
                                     }
                                 >
-                                    {/* Smart Prefix: Don't add "Article" if article_num already has it or is Preamble */}
+                                    {/* Smart prefix: RCC uses "Section"; omit if article_num already includes a structural label */}
                                     {(!article_num || String(article_num).includes('Header') || String(article_num).includes('Subheader')) ? null :
                                         (codeId === 'const' || (article.code_id && article.code_id.toLowerCase() === 'const')) ? null :
                                         /^(article|preamble|section|rule)/i.test(String(article_num))
@@ -400,14 +419,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 if (rccInlineLeadTitle) {
                                                     return (
                                                         <>
-                                                            <span className="font-bold">Article {article_num}.</span>
+                                                            <span className="font-bold">
+                                                                {isRcc ? rccSectionLabel : 'Article'} {article_num}.
+                                                            </span>
                                                             <span className="font-bold text-gray-900 dark:text-gray-100">
                                                                 {rccInlineLeadTitle}
                                                             </span>
                                                         </>
                                                     );
                                                 }
-                                                const prefix = `Article ${article_num}`;
+                                                const prefix = `${isRcc ? rccSectionLabel : 'Article'} ${article_num}`;
                                                 if (article_title && String(article_title).trim().toUpperCase().startsWith(prefix.toUpperCase())) {
                                                     return toTitleCase(article_title, skipKeywords);
                                                 }
@@ -492,20 +513,29 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                     
                     let segments = [];
                     if (isRocOrRpc) {
-                        const rawLines = contentToDisplay.split('\n');
-                        let currentSegment = "";
-                        for (let rLine of rawLines) {
+                        const rawLines = collapseBlankLinesInPipeTables(contentToDisplay).split('\n');
+                        let currentSegment = '';
+                        const isTableLine = (line) => line.trim().startsWith('|');
+                        for (let li = 0; li < rawLines.length; li++) {
+                            const rLine = rawLines[li];
                             if (rLine.trim() === '') {
+                                if (currentSegment.trim().startsWith('|')) {
+                                    let j = li + 1;
+                                    while (j < rawLines.length && rawLines[j].trim() === '') j++;
+                                    if (j < rawLines.length && isTableLine(rawLines[j])) {
+                                        continue;
+                                    }
+                                }
                                 if (currentSegment) segments.push(currentSegment);
-                                segments.push("");
-                                currentSegment = "";
+                                segments.push('');
+                                currentSegment = '';
                                 continue;
                             }
                             const stripped = rLine.replace(/^[\u200C\u00A0\s]*/, '');
                             const isMarkerLine = /^(\(?[a-z0-9ivx]{1,3}[\.\)]|(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth)\.)/i.test(stripped);
                             const isHeaderLine = rLine.trim().startsWith('#');
-                            const isTableLine = rLine.trim().startsWith('|');
-                            
+                            const rowIsTable = isTableLine(rLine);
+
                             if (isMarkerLine || isHeaderLine) {
                                 // Special handling for ROC: Don't break if it's just a (n) marker alone,
                                 // as it likely belongs to the previous paragraph as a suffix.
@@ -515,7 +545,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                     if (currentSegment) segments.push(currentSegment);
                                     currentSegment = rLine;
                                 }
-                            } else if (isTableLine) {
+                            } else if (rowIsTable) {
                                 // For tables, preserve newlines and don't merge into text paragraphs
                                 if (currentSegment && !currentSegment.trim().startsWith('|')) {
                                     segments.push(currentSegment);
@@ -647,9 +677,22 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                         let hasBands = activeSources.length > 0;
 
+                        // Whole-segment GFM pipe tables: skip line-anchored transforms — they break `| --- |`
+                        // separator rows (`^(\d+)\.` matches `| - |` middle cells in some widths) and confuse remark-gfm.
+                        const segmentIsGfmPipeTableBlock =
+                            typeof segment === 'string' &&
+                            (() => {
+                                const nonempty = segment.split('\n').filter((ln) => ln.trim());
+                                if (nonempty.length < 2) return false;
+                                return nonempty.every((ln) => {
+                                    const t = ln.trim();
+                                    return t.startsWith('|') && (t.match(/\|/g) || []).length >= 2;
+                                });
+                            })();
+
                         // Detect Sub-Headers (e.g. "Principles", "A. Common Provisions")
                         let renderSegment = segment;
-                        if (typeof segment === 'string') {
+                        if (typeof segment === 'string' && !segmentIsGfmPipeTableBlock) {
                             // Strip redundant "CHAPTER II - CHAPTER TWO:" or "TITLE I - TITLE ONE:"
                             renderSegment = segment.replace(/^(TITLE|CHAPTER|BOOK)\s+[IVXLCDM]+\s*-\s+(TITLE|CHAPTER|BOOK)\s+[A-Z]+:\s*/i, '').trim();
                             // Inhibit ReactMarkdown from converting "1." or "1)" into list node blocks (which strips the number)
@@ -802,7 +845,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                             table: ({ node, children, ...props }) => (
                                                 <div className="not-prose my-4 max-w-full overflow-x-auto overscroll-x-contain rounded-lg border border-gray-200/90 bg-white/70 shadow-sm [-webkit-overflow-scrolling:touch] dark:border-gray-600/80 dark:bg-slate-900/55">
                                                     <table
-                                                        className="w-max min-w-full border-collapse text-left text-sm leading-snug text-gray-800 dark:text-gray-200"
+                                                        className="w-full max-w-full border-collapse text-left text-sm leading-snug text-gray-800 dark:text-gray-200"
                                                         {...props}
                                                     >
                                                         {children}
@@ -822,7 +865,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                             ),
                                             td: ({ node, ...props }) => (
                                                 <td
-                                                    className="break-normal border border-gray-200 px-3 py-2 align-top text-[15px] [overflow-wrap:normal] [word-break:normal] dark:border-gray-600"
+                                                    className="break-words border border-gray-200 px-3 py-2 align-top text-[15px] dark:border-gray-600"
                                                     {...props}
                                                 />
                                             ),

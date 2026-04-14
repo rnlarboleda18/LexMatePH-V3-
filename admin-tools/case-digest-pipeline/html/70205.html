@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 258264 - SECURITIES AND EXCHANGE COMMISSION, PETITIONER, VS. HDI ADMIX, INC., HDI ADVENTURES, INC., AND HDI STOPOVERS, INC.,** RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70205' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 258264, August 20, 2025 ]</H2>
+			<H3>SECURITIES AND EXCHANGE COMMISSION, PETITIONER, VS. HDI ADMIX, INC., HDI ADVENTURES, INC., AND HDI STOPOVERS, INC.,<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed via direct resort on pure questions of law relative to the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 7, 2021 and the Order<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 2, 2021 of Branch 222 of the Regional Trial Court (RTC) of Quezon City in Special Civil Case No. R-QZN-19-10668-CV. Said rulings of the trial court granted respondent HDI ADMIX, INC., HDI ADVENTURES, INC., and HDI STOPOVERS, INC.'s (HDI ADMIX etc.) Petition<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> for Declaratory Relief, which prayed for the judicial declaration that HDI ADMIX etc. are not mass media entities within the context of Article XVI, Section 11(1), paragraph 1 of the 1987 Constitution. Said constitutional provision mandates that "[t]he ownership and management of mass media shall be limited to citizens of the Philippines, or to corporations, cooperatives or associations, wholly owned and managed by such citizens."&nbsp;<br><br><center><b>Factual Antecedents</b></center><br>In their Petition for Declaratory Relief below, HDI ADMIX etc. averred that they are corporations duly organized and existing under Philippine laws, and that since their respective dates of incorporation, they have been engaged in the business of leasing and subleasing spaces for advertisements, such as waiting sheds, billboard structures, electronic light-emitting diode (LED) displays, and other similar fixed or movable structures where such advertisements may be displayed. They further averred that they are wholly owned and managed by Filipino citizens, but had "recently received an offer of purchase of their stocks and assets by a foreign investor,"<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and that "[h]ence, there is a compelling need to confirm the[ir] rights . . . based on the proper interpretation of the Constitution,"<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> particularly for "confirmation that they are not mass media entities covered by nationality restrictions set out under the 1987 Constitution and List A(l) of Executive Order No. 184, Series of 2015."<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>In addition to their arguments for the propriety of declaratory relief to their situation, HDI ADMIX etc. put forward the following points for the declaration of their status as non-mass media entities:<blockquote><ol><li>The term "mass media" as used in Article XVI, Section 11(1), paragraph 1 of the 1987 Constitution is used in its generic and traditional sense, which is meant to include books, newspapers, magazines, recordings, radio broadcasts, films, television, and the Internet. Differently said, the term was never meant to include any and all mass media meant to transmit information to large numbers of people.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br></li><li>The stationary nature of the structures and signage employed and utilized by HDI ADMIX etc. do not have the same reach or pervasiveness as the aforementioned media, and said structures and signage do not have the ability, at least in HDI ADMIX etc.'s estimation, to convey information having significant impact on people's ideals.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br></li><li>HDI ADMIX etc. are not involved in the gathering, transmission, and distribution of news and information, but are merely in the business of leasing available advertising space to interested advertisers, with no discretion or participation as to content.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br></li><li>HDI ADMIX etc. are thus no different from owners of broadcasting equipment or printers that lease or offer their services to broadcasting companies and newspapers, or even from simple printing service shops that mass-produce pamphlets, tarpaulins, posters, or other propaganda material where they have no input as to the content.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br></li><li>In HDI ADMIX etc.'s opinion, there is "no pressing governmental concern or interest that requires protection so as to warrant the inclusion of [their] business of leasing or subleasing billboards and the like in the class of mass media subject to foreign restrictions,"<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> and that "to lump billboards and signages [sic] together with what are properly classified as mass media espouses a problem concerning the regulation of other media of the same nature and reach as billboards and other signages [sic]."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br></li><li>And in the same vein, the classification of HDI ADMIX etc.'s business as mass media would supposedly constitute an unreasonable exercise of police power properly reviewable by the courts.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></li></ol></blockquote>Petitioner Securities and Exchange Commission (SEC) filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> to HDI ADMIX etc.'s Petition for Declaratory Relief, wherein it argued the following:<blockquote><ol><li>Presidential Decree No. 1018 defined in Section 1<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> thereof the broader scope of mass media, which includes billboards and other similar signage. Since Presidential Decree No. 1018 has neither been amended nor repealed, and since its provisions are clear and not warranting any further judicial construction, HDI ADMIX etc.'s business is clearly covered by the term "mass media" and thus subject to constitutional equity restrictions.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br></li><li>HDI ADMIX etc. fail to satisfy the requisites for declaratory relief, since the provisions of Presidential Decree No. 1018 are clear and do not require further judicial construction in the form of a declaration of HDI ADMIX etc.'s rights, and thus there is neither an issue ripe for adjudication nor an actual case or controversy to begin with.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></li></ol></blockquote>After some further proceedings, such as the consideration of HDI ADMIX etc.'s Memorandum of Authorities,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> the trial court considered the case submitted for decision via its Order<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated September 30, 2020.<br><br><center><b>Ruling of the Trial Court</b></center><br>In its Decision dated January 7, 2021, RTC-Quezon City granted the Petition for Declaratory Relief, viz.:<blockquote><b>WHEREFORE</b>, premises considered, the instant Petition is hereby <b>GRANTED</b>. Accordingly, the Court hereby declares that petitioners HDI Admix, Inc., HDI Adventures, Inc., and HDI Stopovers, Inc. are NOT MASS MEDIA ENTITIES, pursuant to Section 11(1), Article XVI of the 1987 Constitution.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original)</blockquote>The trial court first basically ruled that the issue presented by <b>HDI ADMIX</b> etc. was one ripe for adjudication, viz.:<blockquote>It is worthwhile to note that PD No. 1018 (a 1976 statute, a Martial Law decree) was enacted pursuant to the 1973 Constitution (not the 1987 Constitution), specifically Section 7 (1) of Article XV of the 1973 Constitution which is substantially the same as Section 11 (1), Article XVI of the 1987 Constitution. The Court also notes that the definition of mass media under the 1973 Constitution is overly broad to even include "all advertising therein." This could be reflective of the then government's thrust to regulate mass media to the widest extent possible during the martial law years. But when the 1987 Constitution was enacted, "advertising" appeared to have been segregated from "mass media."<br><br>. . . .<br><br>It must be noted that in the 1973 Constitution, there is no separate provision for advertising. Hence, it can be said that the definition of "mass media" is impliedly modified by the 1987 Constitution which furnishes ample basis for the filing of the present petition.<br><br>Third. There appears to be no breach of Section 11 (1), Article XVI of the 1987 Constitution. Even Respondent SEC, in its Comment, concedes that there is no apparent breach of the foreign equity restriction by the petitioners corporations [sic].<br><br>Fourth and Fifth. A justiciable controversy refers to an existing case or controversy that is appropriate or ripe for judicial determination, not one that is conjectural or merely anticipatory. Corollary thereto, by "ripening seeds" it is meant, not that sufficient accrued facts may be dispensed with, but that a dispute may be tried at its inception before it has accumulated the asperity, distemper, animosity, passion, and violence of a full-blown battle that looms ahead. The concept describes a state of facts indicating imminent and inevitable litigation provided that the issue is not settled and stabilized by tranquilizing declaration (<i>Republic of the Philippines vs. Harry Roque, G.R. No. 204603, September 24, 2013</i>).<br><br>In this case, and as correctly pointed out by petitioners' corporations [sic], there is a judicial controversy inasmuch as they are already contemplating to sell their shares to foreign investors. Given that respondent SEC made known its opinion that petitioners corporations [sic] are mass media entities, then in all likelihood, they will object to or take remedial actions against petitioners['] planned sale of the shares which would cause dan1age to petitioners corporations [sic]. Thus apparently, the purpose of the instant petition is geared towards avoiding that situation by litigating the dispute at its inception.<br><br>For the same reasons given, the issue is ripe for judicial determination.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></blockquote>On the issue of whether or not HDI ADMIX etc. were mass media entities, RTC-Quezon City ruled in their favor as follows:<blockquote>The Court notes that petitioners corporations' [sic] position that the plain or generic meaning of "mass media" pertains to books, newspapers, magazines, radios, cinema, television and the [I]nternet. Hence, the lease or sublease of advertising spaces, such as waiting sheds, billboard structures, electronic LED displays and other fixed or movable structures, etc. do not come to mind at all when talking about "mass media."<br><br>Given that petitioners corporations' [sic] business caters more to adve1tising, this Court is of the considered view that they are not mass media entities.<br><br>. . . .<br><br>As earlier discussed, it is important to take note of the fact that PD 1018 was enacted pursuant to the 1973 Constitution, which did not distinguish between mass media and adve1tising. Hence, the broad definition of "mass media" under PD 1018 which likewise did not distinguish between mass media and advertising. However, the 1987 Constitution specifically distinguished between mass media and advertising, signifying the legislative intent to deviate from the previous understanding of "mass media," . . .<br><br>. . . .<br><br>The logical conclusion that can be derived from the foregoing is that absent any new legislation defining what mass media is, the "mass media" referred to in Section 11 (1), Article XVI of the 1987 Constitution should be understood in its plain meaning and generic sense, which does not include the lease and sublease of advertising spaces, such as waiting sheds, billboard structures, electronic LED displays and other fixed or movable structures, etc.<br><br>Perforce, petitioners corporations [sic] are not mass media entities given that the 1987 Constitution is the basic and paramount law to which all other laws must confo1m, (<i>Louis Biraogo vs. The Philippine Truth Commission of 2010, G.R. No. 192935, December 7, 2010</i>) the definition of "mass media" under Sec. 1 of PD 1018 should be deemed to have been modified and have adopted the said change introduced by the 1987 Constitution.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></blockquote>The SEC duly filed its Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> relative to the aforementioned Decision, but the same was denied via the trial court's Order dated August 2, 2021, viz.:<blockquote>This resolves the "MOTION FOR RECONSIDERATION" filed by respondent Securities and Exchange Commission, through the Office of the Solicitor General, on March 16, 2021 which is ripe for resolution, relative to the Court's Decision dated January 7, 2021 which was rendered in favor of the petitioners, essentially alleging among others, that the term "Mass Media" includes billboards, neon signs and the likes [sic] pursuant to the Mass Media Law, that petitioners' business which is subject to the foreign restriction under the law, and that petitioners failed to satisfy the requisites for the grant of a petition for declaratory relief, and it appearing from the records of the case that these issues were amply discussed in the said decision, and considering further that there is no valid and/or compelling reason which would warrant the reversal and/or modification of the assailed Decision, the same is hereby DENIED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>Hence, the instant Petition for Review on <i>Certiorari</i>.<br><br><i>Arguments of the Parties</i><br><br>The SEC basically puts forth the following substantive arguments for the Court's due consideration:<blockquote>WITH DUE RESPECT, THE HONORABLE COURT <i>A QUO</i> â IN DECLARING THAT RESPONDENTS ARE NOT MASS MEDIA ENTITIES â DECIDED A QUESTION OF SUBSTANCE THAT IS CONTRARY TO LAW AND SETTLED JURISPRUDENCE CONSIDERING THAT:<br><br>I. The term "Mass Media" includes outdoor mass media in the form of billboards, neon signs and the likes [sic] pursuant to the plain and ordinary meaning of the words and to [sic] Presidential Decree No. 1018, otherwise known as the Mass Media Law;<br><br>II. Respondents' businesses are mass media businesses which are subject to the foreign equity restriction pursuant to Section 11(1), Article XVI of the 1987 Constitution; Republic Act No. 7042, as amended; and, Executive Order No. 65 ([s.] 2018);<br><br>III. Respondents' businesses must comply with the land ownership restriction pursuant to Sections 2, 3 and 7, Article XII of the 1987 Constitution;<br><br>IV. Petitioner is empowered, under the R[evised Corporation Code] and [the] S[ecurities Regulation Code], with jurisdiction and supervision over all corporations, as well as the authority to clarify the application of laws, rules and regulations in the exercise of this function; and,<br><br>V. Respondents failed to satisfy the requisites for the grant of a Petition for Declaratory Relief.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></blockquote>In their Comment,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> HDI ADMIX etc. through counsel offer the following counter-arguments for the dismissal of the instant Petition:<blockquote><center>I.</center><br>THE PETITION SHOULD NOT BE GIVEN DUE COURSE FOR BEING REPLETE WITH QUESTIONS OF FACT, WHICH ARE INAPPROPRIATE UNDER RULE 45 OF THE RULES OF COURT.<br><br><center>II.</center><br>THE PETITION SHOULD BE DISMISSED OUTRIGHT FOR VIOLATING THE DOCTRINE OF HIERARCHY OF COURTS.<br><br><center>III.</center><br>ASSUMING WITHOUT CONCEDING THAT THE PETITION MAY BE GIVEN DUE COURSE, IT SHOULD BE DISMISSED FOR LACK OF MERIT. THE RTC CORRECTLY HELD THAT RESPONDENTS ARE NOT MASS MEDIA ENTITIES.<br><br><center>IV.</center><br>THE RTC CORRECTLY FOUND THAT THE REQUISITES OF DECLARATORY RELIEF WERE MET BY RESPONDENTS.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></blockquote><center><b>Issues before the Court</b></center><br>For the Court's consideration are the following three (3) issues: 1) whether or not the Petition for Declaratory Relief filed below was properly cognizable by an RTC branch that is not duly designated as a Special Commercial Court (SCC); 2) whether or not the instant case should be remanded to the trial court of origin for re-docketing and re-raffling to a branch thereof that is designated as an SCC; and 3) whether or not declaratory relief was actually proper here.<br><br><center><b>Ruling of the Court</b></center><br>The instant Petition for Review on <i>Certiorari</i> is hereby granted, and accordingly, the trial court's rulings are reversed and set aside.<br><br>As a preliminary procedural matter, the Court notes that this is indeed a direct appeal from RTC-Quezon City via Rule 45 of the Rules of Court, as amended. In the recent case of <i>City Government of Antipolo v. Transmix Builders &amp; Construction, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> the Court reiterated that "[c]learly, a direct appeal from the RTC to this Court is warranted only when (1) the RTC exercised its original jurisdiction, and (2) only questions of law are being raised."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Additionally, the Court noted in the same case that "a question of law exists when there is doubt or controversy as to what the law is on a certain state of facts."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>It is clear that RTC-Quezon City ostensibly exercised original jurisdiction here, the case being one for declaratory relief and solely cognizable by the RTCs. Additionally, the arguments presented by the SEC all require a simple interpretation (at least in theory) by the Court of the applicable constitutional and statutory provisions relative to the appropriate classification of HDI ADMIX etc. as business entities in the context of the prohibitions on levels of foreign ownership and management. Additionally, no further questions of fact linger; the existence and extent of HDI ADMIX etc.'s business activities are actually not in doubt, but only their legal nature and that of HDI ADMIX etc. themselves are put in question. As the Court also stated in <i>City Government of Antipolo</i>, "there is a question of fact when the doubt or contrast arises as to the truth or falsehood of facts, or when the contention necessarily invites calibration of the whole evidence considering mainly the credibility of witnesses, existence and relevancy of specific surrounding circumstances, their relation to each other and to the whole, and probabilities of the situation."<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Again, no such questions of fact remain here, and the Court is suppositionally primed and ready to rule on the extant questions of law presentâwhich are the only questions left for the Court's consideration. Thus, contrary to the assertion of HDI ADMIX etc., there is no violation of the doctrine hierarchy of courts here.<br><br>Moving on to the substantive albeit still essentially procedural aspects of the case, the Court must note early on that Republic Act No. 8799, specifically Section 5.2 thereof, provides as follows:<blockquote>5.2. The [Securities and Exchange] Commission's <b>jurisdiction over all cases enumerated under section 5 of Presidential Decree No. 902-A is hereby transferred to the Courts of general jurisdiction or the appropriate Regional Trial Court: <i>Provided</i>, That the Supreme Court in the exercise of its authority may designate the Regional Trial Court branches that shall exercise jurisdiction over the cases</b>. The Commission shall retain jurisdiction over pending cases involving intra-corporate disputes submitted for final resolution which should be resolved within one (1) year from the enactment of this Code. The Commission shall retain jurisdiction over pending suspension of payment/rehabilitation cases filed as of 30 June 2000 until finally disposed. (Emphasis supplied)</blockquote>Section 5 of Presidential Decree No. 902-A<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> reads as follows:<blockquote><i>Sec. 5.</i> In addition to the regulatory and adjudicative functions of the Securities and Exchange Commission over corporations, partnerships and other forms of associations registered with it as expressly granted under existing laws and decrees, it shall have original and exclusive jurisdiction to hear and decide cases involving[:]<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">a)</div></td><td width="95%"><div align="justify">Devises or schemes employed by or any acts, or the board of directors, business associates, its officers or partners, amounting to fraud and misrepresentation which may be detrimental to the interest of the public and/or of the stockholder, partners, members of associations or organizations registered with the Commission.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">b)</div></td><td><div align="justify">Controversies arising out of intra-corporate or partnership relations, between and among stockholders, members or associates; between any or all of them and the corporation, partnership or association of which they are stockholders, members or associates, respectively; <b>and between such corporation, partnership or association and the [S]tate insofar as it concerns their individual franchise or right to exist as such entity</b>;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">c)</div></td><td><div align="justify">Controversies in the election or appointments of directors, trustees, officers or managers of such corporations. partnerships or associations. (Emphasis supplied)</div></td></tr></tbody></table></blockquote>Section 5(b) is actually constitutive of the so-called "relationship test," which is used to determine whether or not a dispute involves an intra-corporate controversy.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Verily, while indeed petitions for declaratory relief are not explicitly listed among the cases cognizable before the RTCs duly designated as SCCs by the Court, <b><i>the Petition for Declaratory Relief below evinces issues specifically impacting</i></b> HDI ADMIX <b><i>etc.'s relationship with the State in terms of the validity of possible changes to the nationalities of their respective equity structures</i></b>. A plain reading of Section 5 of Presidential Decree No. 902-A in relation to Section 5.2 of Republic Act No. 8799 would readily show that the Petition for Declaratory Relief below is indeed a corporate controversy that is properly cognizable before a court of general jurisdiction, i.e., the appropriate RTC, duly designated as an SCC.<br><br>Thus, even if petitions for declaratory relief are properly defined and operationalized under Rule 63 of the Rules of Court, as amended, meaning that they are cognizable before the "appropriate Regional Trial Court" as specified in Section 1 thereof, harmonization with Republic Act No. 8799 is necessary when a declaratory relief petition deals with controversies that fell under the former exclusive and original jurisdiction of the SEC. <b><i>In other words, the RTC's jurisdiction over declaratory relief petitions dealing with such matters must be exercised by duly designated SCCs in compliance with Republic Act No. 8799, which are the appropriate RTCs that Rule 63, Section 1 of the Rules of Court, as amended, also contemplates.</i></b><br><br>Thus, while the caption of the case below was indeed "For: Declaratory Relief,"<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> the Court held in <i>Republic, et al. v. Nolasco</i><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> that "the principle consistently adhered to in this jurisdiction is that it is not the caption but the allegations in the complaint or other initiatory pleading which give meaning to the pleading and on the basis of which such pleading may be legally characterized."<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b><i>The case was thus not any ordinary declaratory relief petition cognizable by the regular branches of RTC-Quezon City; it was a declaratory relief petition solely cognizable by a branch of RTC-Quezon City duly designated as an SCC.</i></b>&nbsp;<br><br>And more to the point, the obvious relevance and applicability of Republic Act No. 7042, otherwise known as the Foreign Investments Act of 1991 and as amended by Republic Act No. 11647, triggers in turn the applicability of A.M. No. 03-03-03-SC (dated November 9, 2021 and entitled "Further Expansion of the Coverage of Cases Cognizable by Special Commercial Courts to Include Anti-Money Laundering Cases and Civil and Criminal Forfeiture Cases under the Anti-Money Laundering Act of 2001, as well as Other Commercial Cases under Various Special Laws"). Specifically, said issuance recently included "[c]ases involving foreign investments, including violations of the Foreign Investments Act of 1991 (RA 7042)"<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> as now within the proper ambit and exercise of the jurisdiction of SCCs.<br><br>However, the Court notes that the case below was raffled off to Branch 222 of RTC-Quezon Cityâa branch that is <b><i>NOT</i></b> and has <b><i>NEVER</i></b> been designated as an SCC. Was its handling of the case a proper exercise of jurisdiction?<br><br>The Court here rules that it was not.<br><br>In <i>Calleja v. Panday</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the Court dealt for the first time with the issue of lack of authority to exercise jurisdiction over an intra-corporate controversy by an RTC not designated as an SCC, viz.:<blockquote>Evidently, the RTC-Br. 58 in San Jose, Camarines Sur is bereft of jurisdiction over respondents' petition for <i>quo warranto</i>. <b>Based on the allegations in the petition, the case was clearly one involving an intra-corporate dispute. The trial court should have been aware that under R.A. No. 8799 and the aforementioned administrative issuances of this Court, RTC-Br. 58 was never designated as a Special Commercial Court; hence, it was never vested with jurisdiction over cases previously cognizable by the SEC.</b><br><br>Such being the case, RTC-Br. 58 did not have the requisite authority or power to order the transfer of the case to another branch of the Regional Trial Court. The only action that RTC-Br. 58 could take on the matter was to dismiss the petition for lack of jurisdiction. In <i>HLC Construction and Development Corp. v. Emily Homes Subdivision Homeowners' Association</i>, the Court held that the trial court, having no jurisdiction over the subject matter of the complaint, should dismiss the san1e so the issues therein could be expeditiously heard and resolved by the tribunal which was clothed with jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> (Emphasis supplied)</blockquote>Subsequently, in <i>Medical Plaza Makati Condominium Corp. v. Cullen</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the Court clarified that while the RTC therein had jurisdiction over the intra-corporate controversy, the handling branch was not "vested with jurisdiction" to act upon the case, viz.:<blockquote>To be sure, this action partakes of the nature of an intra-corporate controversy, the jurisdiction over which pertains to the SEC. Pursuant to Section 5.2 of Republic Act No. 8799, otherwise known as the Securities Regulation Code, the jurisdiction of the SEC over all cases enumerated under Section 5 of Presidential Decree No. 902-A has been transferred to RTCs designated by this Court as Special Commercial Courts. <b>While the CA may be correct that the RTC has jurisdiction, the case should have been filed not with the regular court but with the branch of the RTC designated as a special commercial court. Considering that the RTC of Makati City, Branch 58 was not designated as a special commercial court, it was not vested with jurisdiction over cases previously cognizable by the SEC.</b> The CA, therefore, gravely erred in remanding the case to the RTC for further proceedings.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> (Emphasis supplied)</blockquote>The Court in <i>Medical Plaza</i>, however, along with its order of dismissal of the complaint below, also remanded the case to the Executive Judge of the trial court below for re-raffling purposes among the branches duly designated as secs.<br><br>And in <i>Gonzales v. GJH Land, Inc., et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the Court provided the following guidelines for scenarios concerning the erroneous raffling off of intra-corporate controversies to regular RTC branches not designated as SCCs:<blockquote>Going back to the case at bar, the Court nonetheless deems that the erroneous raffling to a regular branch instead of to a Special Commercial Court is only a matter of procedureâthat is, an incident related to the exercise of jurisdictionâand, thus, should not negate the jurisdiction which the RTC of Muntinlupa City had already acquired. In such a scenario, the proper course of action was not for the commercial case to be dismissed; instead, Branch 276 should have first referred the case to the Executive Judge for re-docketing as a commercial case; thereafter, the Executive Judge should then assign said case to the only designated Special Commercial Court in the station, <i>i.e.</i>, Branch 256.<br><br>Note that the procedure would be different where the RTC acquiring jurisdiction over the case has multiple special commercial court branches; in such a scenario, the Executive Judge, after re-docketing the same as a commercial case, should proceed to order its re-raffling among the said special branches.<br><br>Meanwhile, if the RTC acquiring jurisdiction has no branch designated as a Special Commercial Court, then it should refer the case to the nearest RTC with a designated Special Commercial Court branch within the judicial region. Upon referral, the RTC to which the case was referred to should re-docket the case as a commercial case, and then: (a) if the said RTC has only one branch designated as a Special Commercial Court, assign the case to the sole special branch; or (b) if the said RTC has multiple branches designated as Special Commercial Courts, raffle off the case among these special branches.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></blockquote>The Court spelled out the aforementioned guidelines in more direct language and with additional details in the dispositive portion as follows:<blockquote>Furthermore, the Court hereby RESOLVES that henceforth, the following guidelines shall be observed:<br><br>1. If a commercial case filed before the proper RTC is wrongly raffled to its regular branch, the proper courses of action are as follows:<blockquote>1.1. If the RTC has only one branch designated as a Special Commercial Court, then the case shall be referred to the Executive Judge for re-docketing as a commercial case, and thereafter, assigned to the sole special branch;<br><br>1.2. If the RTC has multiple branches designated as Special Commercial Courts, then the case shall be referred to the Executive Judge for re-docketing as a commercial case, and thereafter, raffled off among those special branches; and<br><br>1.3. If the RTC has no internal branch designated as a Special Commercial Court, then the case shall be referred to the nearest RTC with a designated Special Commercial Court branch within the judicial region. Upon referral, the RTC to which the case was referred to should re-docket the case as a commercial case, and then: (a) if the said RTC has only one branch designated as a Special Commercial Court, assign the case to the sole special branch; or (b) if the said RTC has multiple branches designated as Special Commercial Courts, raffle off the case an1ong those special branches.</blockquote>2. If an ordinary civil case filed before the proper RTC is wrongly raffled off to its branch designated as a Special Commercial Court, then the case shall be referred to the Executive Judge for re-docketing as an ordinary civil case. Thereafter, it shall be raffled off to all courts of the san1e RTC (including its designated special branches which, by statute, are equally capable of exercising general jurisdiction, same as regular branches), as provided for under existing rules.<br><br>3. All transfer/raffle of cases is subject to the payment of the appropriate docket fees in case of any difference. On the other hand, all docket fees already paid shall be duly credited, and any excess refunded.<br><br>4. Finally, to avert any future confusion, the Court requires that all initiatory pleadings state the action's nature both in its caption and body. Otherwise, the initiatory pleading may, upon motion or by order of the cow1 <i>motu proprio</i>, be dismissed without prejudice to its re-filing after due rectification. This last procedural rule is prospective in application.<br><br>5. All existing rules inconsistent with the foregoing are deemed superseded.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></blockquote>The Court in <i>Gonzales</i> also clarified its ruling in <i>Calleja</i> in order to affirm the distinction between subject-matter jurisdiction as granted by law from the authorized exercise thereof:<blockquote>Besides, the Court observes that the fine line that distinguishes subject matter jurisdiction and exercise of jurisdiction had been clearly blurred in <i>Calleja</i>. Harkening back to the statute that had conferred subject matter jurisdiction, two things are apparently clear: (a) that the SEC's subject matter jurisdiction over intra-corporate cases under Section 5 of Presidential Decree No. 902-A was transferred to the [c]ourts of general jurisdiction, <i>i.e.</i>, the appropriate Regional Trial Courts; and (b) the designated branches of the Regional Trial Court, as per the rules promulgated by the Supreme Court, shall exercise jurisdiction over such cases. . .<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></blockquote>Here now, the Court faces a crossroads decision: should it, as it has done in the past and as discussed above, and in order to afford both parties the opportunity to present their positions before a duly designated SCC of RTC-Quezon City that is fully equipped and specialized for cases precisely like this one, remand the instant Petition in order to afford the prospective SCC below all necessary leeway and latitude to decide on the Petition for Declaratory Relief as Republic Act No. 8799 intended?<br><br>The Court sees no need for such a move here that would result in needless and circuitous litigation inevitably prolonging the resolution of such an important constitutional question. The seminal and oft-cited case of <i>Heirs of Crisanta Y. Gabriel-Almoradie v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> comes to the Court's mind, where it held thus:<blockquote>It is a rule of procedure for the Supreme Court to strive to settle the entire controversy in a single proceeding leaving no root or branch to bear the seeds of future litigation. No useful purpose will be served if the case or the determination of an issue in a case is remanded to the trial court only to have its decision raised again to the Court of Appeals and from there to the Supreme Court.<br><br>We have laid down the rule that the remand of the case or of an issue to the lower court for further reception of evidence is not necessary where the Court is in a position to resolve the dispute based on the records before it and particularly where the ends of justice would not be subserved by the remand thereof. Moreover, the Supreme Court is clothed with ample authority to review matters, even those not raised on appeal if it finds that their consideration is necessary in arriving at a just disposition of the case.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></blockquote>And as stated previously, with no lingering factual issues left, the Court sees fit to proceed to the remaining issue of the propriety of declaratory belief below.<br><br>Declaratory relief, as defined under Rule 63, Section 1, paragraph 1 of the Rules of Court, as amended, is operationalized as follows:<blockquote>Section 1. <i>Who may file petition</i>. â Any person interested under a deed, will, contract or other written instrument, whose rights are affected by a statute, executive order or regulation, ordinance, or any other governmental regulation may, before breach or violation thereof, bring an action in the appropriate Regional Trial Court to determine any question of construction or validity arising, and for a declaration of his rights or duties, thereunder.</blockquote>The Court has had numerous occasions to define declaratory relief proceedings and enumerate its requisites, but the best still is that of retired Associate Justice Antonio Eduardo B. Nachura in <i>Almeda v. Bathala Marketing Industries, lnc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> viz.:<blockquote>Declaratory relief is defined as an action by any person interested in a deed, will, contract or other written instrument, executive order or resolution, to determine any question of construction or validity arising from the instrument, executive order or resolution, or statute, and for a declaration of his rights and duties thereunder. The only issue that may be raised in such a petition is the question of construction or validity of provisions in an instrument or statute. Corollary is the general rule that such an action must be justified, as no other adequate relief or remedy under the circumstances.<br><br>Decisional law enumerates the requisites of an action for declaratory relief, as follows: 1) the subject matter of the controversy must be a deed, will, contract or other written instrument, statute, executive order or regulation; or ordinance; 2) the terms of said documents and the validity thereof are doubtful and require judicial construction; 3) there must have been no breach of the documents in question; 4) there must be an actual justiciable controversy or the "ripening seeds" of one between persons whose interests are adverse; 5) the issue must be ripe for judicial determination; and 6) adequate relief is not available through other means or other forms of action or proceeding.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></blockquote>Going down the aforementioned checklist, one notes that indeed, the present controversy involves the issue of applicability of Presidential Decree No. 1018 (approved on September 22, 1978 and entitled "Limiting the Ownership and Management of Mass Media to Citizens of the Philippines and for Other Purposes") and the so-called Foreign Investment Negative List as enunciated in Executive Order No. 184 (s. 2015) (entitled "Promulgating the Tenth Regular Foreign Investment Negative List"), which was recently amended by Executive Order No. 175 (s. 2022) (entitled "Promulgating the Twelfth Regular Foreign Investment Negative List"). And indeed, the issue of the present controversy hinges on the supposed doubt concerning said applicability, which ostensibly does require judicial construction. Additionally, one can easily surmise that indeed, there has been no breach yet of the aforementioned executive issuances and/or regulations, since the Petition for Declaratory Relief below was filed indeed to specifically seek judicial clearance for HDI ADMIX etc.'s potential sale of some of their ownership equity to foreign investors.<br><br>However, as to the fourth, fifth, and even the sixth requisites, HDI ADMIX etc.'s Petition for Declaratory Relief actually falls short.<br><br>The requisites of an actual case or controversy and of ripeness can be discussed here jointly. In the case of <i>Atty. Calleja v. Executive Secretary Medialdea</i>,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> the Court pronounced a comprehensive explanation of the two, viz.:<blockquote>An actual case or controversy exists when there is a conflict of legal rights, an assertion of opposite legal claims, susceptible of judicial resolution as distinguished from a hypothetical or abstract difference or dispute. The issues presented must be definite and concrete, touching on the legal relations of parties having adverse interests. There must be a contrariety of legal rights that can be interpreted and enforced on the basis of existing law and jurisprudence. Corollary thereto, the case must not be moot or academic, or based on extra-legal or other similar considerations not cognizable by a court of justice. All these are in line with the well-settled rule that this Court does not issue advisory opinions, nor does it resolve mere academic questions, abstract quandaries, hypothetical or feigned problems, or mental exercises, no matter how challenging or interesting they may be. Instead, case law requires that there is ample showing of <i>prima facie</i> grave abuse of discretion in the assailed governmental act in the context of actual, not merely theoretical, facts.<br><br>Closely linked to this requirement is that the question must be ripe for adjudication. A question is ripe for adjudication when the act being challenged has had a direct adverse effect on the individual challenging it. For a case to be considered ripe for adjudication, it is a prerequisite that something has been accomplished or performed by either branch before a court may come into the picture, and the petitioner must allege the existence of an immediate or threatened injury to himself as a result of the challenged action. He must show that he has sustained or is immediately in danger of sustaining some direct injury as a result of the act complained of.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote>In <i>Republic v. Pryce Corp., Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> the Court further elucidated on how facts could be deemed as "sufficient" enough for declaratory relief petitions to proceed, viz.:<blockquote>A petition for declaratory relief is not exempt from the actual case or controversy requirement. Jurisprudence reveals a common ground in applying the actual case or controversy requirementâthere must be sufficient facts to enable the Court to intelligently adjudicate the issues, such that the questions raised may be resolved without relying on speculations or hypothetical scenarios.<br><br>The determination of sufficient facts is more nuanced in petitions for declaratory relief. Applying the third and forth requisites for a declaratory relief action, We must locate the fine point where there exists an actual case or controversy, yet there is no breach of the documents in question. On this note, former Chief Justice Moran opined that accomplished physical wrong need not be alleged in a petition for declaratory relief.<br><br>This is best explained in the case of <i>Republic v. Roque</i>, where a petition for declaratory relief was filed by private respondents to assail the constitutionality of RA 9372. or the Human Security Act of 2007. We explained that a justiciable controversy refers to an existing case or controversy that is appropriate or ripe for judicial dete1mination, not one that is conjectural or merely anticipatory. The term 'ripening seeds' means "not that sufficient accrued facts may be dispensed with, but that a dispute may be tried at its inception before it has accumulated the asperity, distemper, animosity, passion, and violence of a full-blown battle that looms ahead." The concept describes "a state of facts indicating imminent and inevitable litigation provided that the issue is not settled and stabilized by tranquilizing declaration."<br><br>Following the disquisition in <i>Roque</i>, in a petition for declaratory relief, there are "sufficient facts" when there is a showing of an imminent and inevitable litigation if the issue is not judicially settled. The same rule was declared in <i>CJH Development v. BIR</i>, where We ruled that ripeness in declaratory relief cases means that litigation is inevitable or there is no adequate relief available in any other fom1 or proceeding. To require more than this standard will already negate the requirement that declaratory relief cases should be filed before any breach.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></blockquote>The critical question must thus be posited: were there enough "ripening seeds" of imminent litigation due to a contrariety of legal rights here, or is the controversy contemplated by the Petition for Declaratory Relief below actually a speculative request for an advisory opinion concerning a hypothetical problem?<br><br>The Court here rules that the facts of the declaratory relief proceedings below did <b><i>not</i></b> constitute a contrariety of legal rights representing the "ripening seeds" of imminent litigation, and that upon extensive examination, the Petition for Declaratory Relief itself basically presented a request for an advisory opm10n that courts in the Philippines are constitutionally prohibited from 1ssmng.<br><br>Paragraph 7<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> of the Petition below is very telling. There is only a hint of a received offer of purchase of HDI ADMIX etc.'s shares of stock by a potential foreign investor, without any foreign investors explicitly named, nor any definite terms for said offer of purchase laid out for easy examination; no attachments of any relevant documents are even mentioned. And true enough, the trial court's Decision also fails to mention any such foreign investor's identity or terms surrounding the planned purchase. Additionally, Paragraph 20 of the Petition below actually indicates that HDI ADMIX etc. does note that the SEC would actually have had primary jurisdiction over the present controversy, viz.:<blockquote>20. On the basis of its power to classify corporations and ensure their compliance with regulations. including the subject provision of the Constitution, respondent SEC may deny, oppose and/or disapprove the acquisition of foreigners of petitioners' shareholdings, and thus render the whole transaction invalid, futile, and wasteful. It bears emphasis that respondent SEC possesses the power to approve, reject, suspend, revoke or require amendments to registration statements, and registration and licensing applications; regulate, investigate or supervise the activities of persons to ensure compliance; and impose sanctions for the violation of laws and the rules, regulations and orders issued pursuant thereto. Hence, litigation on the matter is highly likely and may he averted by the Honorable Court's timely issuance of a declaratory judgment.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></blockquote>The picture painted above of likely litigation between the parties had the Petition for Declaratory Relief not been filed is, to the Court's mind, an attempt at sophistry. Verily, HDI ADMIX etc. was somehow faulting the SEC for executing its statutory functions in regulating the presence of, and prohibitions on, foreign capital in the country, and was already making two conclusions: that the SEC was going to reject its application for capital restructuring anyway, and that the SEC's actions would have inevitably resulted in litigation. Clearly, these speculations do not merit the Court's approbation.<br><br>Again, to revisit the facts as alleged by the Petition for Declaratory Relief itself, there is only a hint of a received offer of purchase of HDI ADMIX etc.'s stocks and assets from a foreign investor, and from the contents of the trial court's Decision, no proof was introduced regarding the same. Even if the SEC ultimately opposed HDI ADMlX etc.'s Petition below and presented its legal reasons as to why HDI ADMIX etc. should not be declared as "non-mass media entities," the SEC was basically forced to show its hand in said proceedings. But the basic premise cannot escape the Court's attention: that, to begin with, there were not enough facts for the Petition for Declaratory Relief below to proceed. The question posited by HDI ADMIX etc. was actually hypothetical in nature without any specific factual grounding, and its conjecture of the SEC's likely adversarial action towards the planned foreign buy-in (or buy-out, depending on what the offered terms were), are too theoretical to constitute an actual case or controversy with appropriate ripeness.<br><br>Compared with the situation in <i>Pryce</i>, which involved the proper application of the 20% discount on funeral and burial services, the situation here lacks the imminence that should be characterized as like two speeding ships mere meters away from collision at sea where it is a foregone conclusion that there will definitely be impact. Said the Court in <i>Pryce</i>:<blockquote>It bears stressing that this case does not involve a theoretical issue. which calls for an advisory opinion. Indeed, one cannot file an action for declaratory relief based on theoretical or hypothetical questions because our courts are not advisory courts. In this case, respondent has shown that there is an actual controversy. Respondent is seeking the correct interpretation of the law and the IRR to determine its rights. To repeat, respondent is in the business of selling memorial lots and providing interment services. Thus, while it insists it is not required to grant a 20% discount on interment services of senior citizens as provided under the law, it is inevitable that its clients or customers would demand the said discount. Unlike <i>Delumen</i> [<i>v. Republic</i>], the inevitability of the conflict of rights in this case is real and not uncertain or hypothetical.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></blockquote>To the eyes of the Court, there loomed no inevitable clash of legal positions on the horizon at the time of the filing of the Petition for Declaratory Relief below, and even at present. While it is true that the SEC has been forced to stake out its position regarding the theoretical plan of HDI ADMIX etc. to bring in a foreign investor, said plan to this day remains in the realm of suppositional realityâ<i>in other words, without any specifics as to how the said foreign investor is to participate in equity ownership, or even as to the corporate identity of said foreign investor himself/herself/itself, the premise of HDI ADMIX etc.'s Petition for Declaratory Relief remains purely abstract and tentative</i>. Reduced to its bones, the said Petition basically asks the following: should HDI ADMIX etc. wish, can they sell to said unknown investor equity ownership, the percentage of which is yet to be specified?<br><br>The Court is thus reminded of its seminal ruling in <i>Falcis III v. Civil Registrar General</i>,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> where reiterated that advisory opinions are not the province of the Philippine judiciary:<blockquote>This Court's constitutional mandate does not include the duty to answer all of life's questions. No question, no matter how interesting or compelling, can be answered by this Court if it cannot be shown that there is an "actual and an antagonistic assertion of rights by one party against the other in a controversy wherein judicial intervention is unavoidable."<br><br>This Court does not issue advisory opinions. We do not act to satisfy academic questions or dabble in thought experiments. We do not decide hypothetical, feigned, or abstract disputes, or those collusively arranged by parties without real adverse interests. If this Court were to do otherwise and jump headlong into ruling on every matter brought before us, we may close off avenues for opportune, future litigation. We may forestall proper adjudication for when there are actual, concrete, adversarial positions, rather than mere conjectural posturing[.]<br><br>. . . .<br><br>As this Court makes "final and binding construction[s] of law[,]" our opinions cannot be mere counsel for unreal conflicts conjured by enterprising minds. Judicial decisions, as part of the legal system, bind actual persons, places, and things. Rulings based on hypothetical situations weaken the immense power of judicial review.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup></blockquote>The Court also had to emphasize in <i>Provincial Bus Operators Assoc. of the Phils. v. Dep't. of Labor &amp; Employment</i><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> that the expanded <i>certiorari</i> jurisdiction under the 1987 Constitution does not line up with even the very concept of advisory opinions, viz.:<blockquote>Even the expanded jurisdiction of this Court under Article VIII, Section 1 does not provide license to provide advisory opinions. An advisory opinion is one where the factual setting is conjectural or hypothetical. In such cases, the conflict will not have sufficient concreteness or adversariness [sic] so as to constrain the discretion of this Court. After all, legal arguments from concretely lived facts are chosen narrowly by the parties. Those who bring theoretical cases will have no such limits. They can argue up to the level of absurdity. They will bind the future parties who may have more motives to choose specific legal arguments. In other words, for there to be a real conflict between the parties, there must exist actual facts from which courts can properly determine whether there has been a breach of constitutional text.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></blockquote>Thus, with the purely speculative character of the factual actuations presented in the Petition for Declaratory Relief filed below, the Court rules here and now that the trial court should have dismissed the same for being improper due to the lack of an actual case or controversy, and for being unripe for judicial action. Indeed, it was sheer error for said trial court to have promulgated its Decision dated January 7, 2021, which was effectively and for all intents and purposes an advisory opinion on a supposed plan to bring in foreign capital investment.<br><br>The Court here notes, moreover, that the language of the Petition for Declaratory Relief below evinces a furtive effort on the part of HDI ADMIX etc. to seek a more favorable ruling from a likely more agreeable trial court not specialized for such complicated commercial questions. This is likely why, as they have admitted, they purposely avoided going to the SEC in the first place. This now brings to the forefront the sixth and final requisite for declaratory relief petitions to proceed: that of there being no adequate remedy or other action available to HDI ADMIX etc.<br><br>Republic Act No. 7042, as amended by Republic Act No. 11647, provides for the State's regulation of foreign capital in the economy of the Philippines. Section 5 thereof, as amended by Section 6 of Republic Act No. 11647, states the a non-Philippine national "may, upon registration with the Securities and Exchange Commission (SEC), or the DTI in the case of single proprietorships, do business as defined in Section 3(d) of this Act or invest in a domestic enterprise up to one hundred percent (100%) of its capital, unless participation of non-Philippine nationals in the enterprise is <u>prohibited</u> or limited to a smaller percentage by existing law and/or under the provisions of this Act."<br><br>The Implementing Rules and Regulations (IRR) of Republic Act No. 11647 (dated July 11, 2022) provides in Section 19 thereof the process for application and registration of such investments by non-Philippine nationals, and Paragraph (d) thereof reads as follows:<blockquote>d. <i>Approval</i>. â The SEC or DTI, as applicable, shall decide on the application within seven (7) working days from official acceptance of an application by domestic corporations, partnerships, and sole proprietors. In the case of foreign corporations, the SEC shall decide on the same within twenty (20) working days. Otherwise, the application shall be considered as automatically approved if it is not acted upon within said period for a cause not attributable to the applicant.</blockquote>The Court is thus perplexed as to why HDI ADMX etc. failed to undertake and comply with the aforementioned process, which is stipulated in both statute and implementing regulation as the administrative proceeding for the proper entry of foreign capital as allowed by the 1987 Constitution and relevant laws. Clearly, the filing of the Petition for Declaratory Relief below was premature and even outright unwarranted, since the aforementioned application process is precisely the adequate administrative remedy or other action available to HDI ADMIX etc. for their particular concerns. The SEC would have been in the best position, as the State's duly designated and empowered entity to enforce Philippine corporate and commercial laws, to make a well-founded ruling with regard to the supposed plan to accept the offer of stock purchase by a foreign investor. The Court thus frowns upon this rash resort to judicial action without exhausting and existing and available administrative remedy, and adds this to the tally of reasons why declarato1y relief below was improper.<br><br>Thus, with three requisites for the propriety of declaratory relief proceedings utterly lacking, the Court finds the reversal of the trial court's Decision in order, and accordingly orders the dismissal of the Petition for Declaratory Relief below. Much as the Court compellingly desires to decide on the case's merits, which would inevitably result in a landmark ruling on the question of whether or not HDI ADMIX etc. and their activities fall within what the 1987 Constitution contemplates as "mass media," this cannot be done when there is no ripe and actual case or controversy at the outset.<br><br>To do so would be to go against the Court's own admonitions against the utilization of judicial power to rule upon a disputation yet to exist. As the Court stated in <i>De Borja v. Pinalakas na Ugnayan ng Maliliit na Mangingisda ng Luzon, Mindanao at Visayas ("PUMALU-MV")</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> "[a] petition for declaratory relief, like any other court action, cannot prosper absent an actual controversy that is ripe for judicial determination."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> And even if one were to invoke that oft-exploited doctrine of transcendental importance in order to summon the Court's attention and powers for the definitive pronouncement as to the nature and character of HDI ADMIX etc.'s business, the Court in the same case noted that the doctrine of transcendental importance "cannot and does not override the requirements of actual and justiciable controversy and ripeness for adjudication, which are conditions sine qua non for the exercise of judicial power."<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> And recently in <i>Baquirin v. Director-General Dela Rosa</i>,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> the Court pronounced the following:<blockquote>In this regard, the Court has ruled that the general invocation of transcendental importance is not a talisman which automatically excuses compliance with technical rules of procedure. Among the factors in the determination of an issue's transcendental importance to warrant the relaxation of procedural rules are: (a) clear and imminent threat to fundamental rights; (b) the presence of a clear case of disregard of a constitutional or statutory prohibition by the public respondent agency or instrumentality of the government; and (c) the lack of any other party with a more direct and specific interest in raising the questions being raised. Facts must be undisputed, only legal issues must be present, and proper and sufficient justifications why the Court should not simply stay its hand must be clear. This is because the alleged transcendental importance of the issues raised will be better served when there are actual cases with the proper parties suffering an actual or imminent injury. <b>Thus, the Court must exercise restrain in cases that fail to properly present justiciable controversies brought by parties who fail to demonstrate their standing and observe the hierarchy of courts.</b> Otherwise, it may be rendered ineffective to dispense justice as cases clog its docket.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> (Emphasis supplied)</blockquote>The highlighted portion of the quoted paragraph applies <i>mutatis mutandis</i> here. Verily, the requirement of an actual case or controversy that is ripe for adjudication cannot be set aside at convenience here and now for the Court's exercise of judicial power over a problem that is yet to be faced by HDI ADMIX etc. Judicial restraint is very much applicable here, lest the Court hypocritically promulgates an advisory opinion for the benefit of parties only still in vague and ambiguous contemplation of welcoming in a foreign direct investment. Moreover, with an administrative remedy available still with the SEC, HDI ADMIX etc. still have an opportunity to forge an actual case and controversy that would be ripe for judicial determination at the proper time. But that moment is yet to come, and the Court for now stays its hand and stills its voice from further articulating on the nature and character of the LED display-leasing business.<br><br>It would thus do HDI ADMIX etc. well to be mindful of the things the Court has settled here and now, and to be prudent and sensible about their future legal steps, especially if they are to be properly before the SEC. <i>Memores acti, prudentes futuri.</i><br><br><b>ACCORDINGLY</b>, the instant Petition for Review on <i>Certiorari</i> is hereby <b>GRANTED</b>. The Decision dated January 7, 2021, and the Order dated August 2, 2021 of Branch 222 of the Regional Trial Court of Quezon City in Special Civil Case No. R-QZN-19-10668-CV, are accordingly <b>REVERSED</b> and <b>SET ASIDE</b>, and the Petition for Declaratory Relief in the said case is hereby <b>DISMISSED</b> due to lack of an actual case or controversy that is ripe for judicial determination, and due to the availability of adequate relief elsewhere prior to resorting to judicial action.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting</i>, and <i>Dimaampao, JJ.</i>, concur.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Also referred to as "HDI Stoppers, Inc." in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 28-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 234-241; penned by Judge Edgar D. Santos.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 242.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 172-200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 177.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 186.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 192.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 194-198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 376-386.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Section 1. The term "mass media" refers to the print medium of communication, which includes all newspapers, periodicals, magazines. journals, and publications and all advertising therein, <b>and billboards, neon signs and the like</b>, and the broadcast medium of communication, which includes radio and television broadcasting in all their aspects and all other cinematographic or radio promotions and advertising. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, pp. 377-381.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 381-383.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 387-414.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 207.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 241.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 237-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 240-241.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 208-220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 242.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 33-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 246-280.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 254.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 945 Phil. 611 (2023) [Per C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 621.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> REORGANIZATION OF THE SECURITIES AND EXCHANGE COMMISSION WITH ADDITIONAL POWERS AND PLACING THE SAID AGENCY UNDER THE ADMINISTRATIVE SUPERVISION OF THE OFFICE OF THE PRESIDENT. Approved on March 11, 1976.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> <b>Guerrero Estate Dev't. Corp. v. Leviste &amp; Guerrero Realty Corp.</b>, 920 Phil. 24, 34-35 (2022) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 172.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 496 Phil. 853 (2005) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 867; <i>see also</i> <b>Gonzales v. GJH Land, Inc., et al.</b>, 772 Phil. 483, 512 (2015) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>A.M. No. 03-03-03-SC</b>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 518 Phil. 801 (2006) [Per J. Austria-Martinez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 813.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 720 Phil. 732 (2013) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 745.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 772 Phil. 483 (2015) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 512-513; <i>see also</i> <b>Guerrero Estate Dev't. Corp. v. Leviste &amp; Guerrero Realty Corp.</b>, 920 Phil. 24, 38 (2022) [Per J. Inting, Second Division].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 518-519.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 514.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 299 Phil. 14 (1994) [Per J. Nocon, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 30-31. <b>Bigcas v. Court of Appeals, G.R. No. 265579</b>, November 26, 2024 [Per J. Lazaro-Javier, Second Division] at 9. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website; <b>MascariÃ±as v. BPI Family Savings Bank, Inc.</b>, 880 Phil. 76, 85 (2020) [Per J. Lazaro-Javier, First Division]; <b>Ching v. Court of Appeals</b>, 387 Phil. 28, 42 (2000) [Per J. Buena, Second Division]; and <b>Golangco v. Court of Appeals</b>, 347 Phil. 771, 778 (1997) [Per J. Romero, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 566 Phil. 458 (2008) [Per J. Nachura, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 466-467. <b>City of Caloocan v. City of Malabon, G.R. No. 269159</b>, November 4, 2024 [Per J. Kho, Jr., Second Division] at 16. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website; <b>Republic v. Pryce Corp.</b>, 937 Phil. 639, 642 (2023) [Per J. Zalameda, <i>En Banc</i>]; and <b>Republic v. Roque</b>, 718 Phil. 294, 304 (2013) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 918-B Phil. 1 (2021) [Per J. Carandang, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 55-57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 937 Phil. 639 (2023) [Per J. Zalameda, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 644-645.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i>, p. 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 649, <i>citing</i> <b>Delumen v. Republic</b>, 94 Phil. 287 (1954) [Per C.J. Paras, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 861 Phil. 388 (2019) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 438-439.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 836 Phil. 205 (2018) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 245-255.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 809 Phil. 65 (2017) [Per J. Jardeleza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 91. <i>See</i> <b>Kilusang Magbubukid ng Pilipinas v. Aurora Pacific Economic Zone &amp; Freeport Authority</b>, 890 Phii. 944, 999 (2020) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> 944 Phil. 279 (2023) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 284-285.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

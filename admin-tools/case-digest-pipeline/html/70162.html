@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 222086 - HERMOGENES P. POBRE, RUDEGELIO D. TACORDA, UNITED FILIPINO SEAFARERS, INC., REPRESENTED BY ITS PRESIDENT, NELSON G. RAMIREZ, AND BIENVENIDO S. LORQUE, PETITIONERS, VS. MARITIME INDUSTRY AUTHORITY (MARINA), REPRESENTED BY ITS ADMINISTRATOR, HON. MAXIMO Q. MEJIA, JR. AND DEPARTMENT OF TRANSPORTATION AND COMMUNICATION (DOTC), REPRESENTED BY ITS SECRETARY, HON. JOSEPH EMILIO A. ABAYA, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70162' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 222086, May 20, 2025 ]</H2>
+			<H3>HERMOGENES P. POBRE, RUDEGELIO D. TACORDA, UNITED FILIPINO SEAFARERS, INC., REPRESENTED BY ITS PRESIDENT, NELSON G. RAMIREZ, AND BIENVENIDO S. LORQUE, PETITIONERS, VS. MARITIME INDUSTRY AUTHORITY (MARINA), REPRESENTED BY ITS ADMINISTRATOR, HON. MAXIMO Q. MEJIA, JR. AND DEPARTMENT OF TRANSPORTATION AND COMMUNICATION (DOTC), REPRESENTED BY ITS SECRETARY, HON. JOSEPH EMILIO A. ABAYA, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, M., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>The compliance of the statute with the constitutional "<i>one subject-one title</i>" rule is the sole issue in this Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, assailing the Regional Trial Court's (RTC) Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 14, 2015 in Special Civil Action No. R-QZN-14-11759-CV.</p><p align="center"> <b>ANTECEDENTS</b> </p><p> On March 28, 2014, Republic Act No. 10635<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> took effect. The law vested the Maritime Industry Authority (MARINA) all powers relating to the enforcement of the country's treaty obligations under the 1978 International Convention on Standards of Training, Certification and Watchkeeping for Seafarers (STCW Convention). Specifically, Sections 4(c)(1) and 8 of Republic Act No. 10635 transferred to MARINA all powers, duties, and functions of the Professional Regulation Commission (PRC) over licensure examination and certification of marine deck and engine officers: </p><blockquote> <p> Section 4. <i>Powers and Functions of the MARINA</i>. â In addition to the mandate of the MARINA under Presidential Decree No. 474, as amended, and in order to carry out the provisions of this Act, the MARINA shall exercise the following powers and functions: </p> <p> . . . . </p> <p> (c) Assume all powers and functions of the Professional Regulation Commission (PRC), the Commission on Higher Education (CHED), the Technical Education and Skills Development Authority (TESDA), the Department of Health (DOH) and the National Telecommunications Commission (NTC) relative to the issuance, validation, verification, correction, revocation or cancellation of certificates of competency, endorsement, proficiency and documentary evidence required of all seafarers and all such other matters pertaining to the implementation of the STCW Convention, subject to the following: </p> <blockquote> <p> (1) <i>The MARINA shall ensure that the examination, licensing and certification system for marine deck and engine officers are in accordance with the requirements prescribed under the STCW Convention. All powers, duties and functions of the PRC on examination, licensing and certification system for marine deck and engine officers as provided in Republic Act No. 8544, otherwise known as "The Philippine Merchant Marine Officers Act of 1998," shall henceforth he exercised by the MARINA.</i> The compensation and allowances of the Board of Marine Deck Officers and Marine Engine Officers under Article IV, Section 8 of Republic Act No. 8544 shall, however, be comparable to the compensation and allowances being received by the chairpersons and members of other existing regulatory boards under the PRC and as provided in the General Appropriations Act.</p> <p> . . . .</p> </blockquote> <p> Section 8. <i>Transitory Provisions</i>. â All certificates of competency, endorsement, proficiency and documentary evidence issued prior to the effectivity of this Act shall be deemed valid without necessity of revalidation or reissuance until the date of expiration as stated in such certificates or other documents. Thereafter, new certificates or other documents shall be revalidated or reissued only in accordance with the implementing rules and regulations issued pursuant to this Act, in conformity with the STCW requirements. (Emphasis supplied)</p> </blockquote> <p> On November 27, 2014, Hermogenes P. Pobre, Rudegelio D. Tacorda, Bienvenido S. Lorque, and United Filipino Seafarers, Inc. represented by Nelson G. Ramirez (petitioners) filed a Special Civil Action for prohibition, mandamus, and declaratory relief against MARINA and the Department of Transportation and Communication (respondents) before the RTC. Petitioners sought to declare as unconstitutional Sections 4(c)(1) and 8 of Republic Act No. 10635 for violating Article VI, Section 26(1) of the Constitution which mandates that "<i>[e]very bill passed by the Congress shall embrace only one subject which shall be expressed in the title thereof</i>." Petitioners allege that the assailed provisions are "<i>riders</i>" not reflected in the title of the law.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> On December 14, 2015, the RTC dismissed the Special Civil Action for lack of merit. The RTC explained that the "<i>one subject-one title</i>" rule has not been violated and that Sections 4(c)(1) and 8 of Republic Act No. 10635 are germane to the purpose of the law and in harmony with the policies and provisions of the STCW Convention: </p><blockquote> <p> WHEREFORE, foregoing premises considered, Sections [4(c)(1)] and 8 of RA [No.] 10635 and each counterpart provisions in its Implementing Rules and Regulation[s] are hereby declared valid and constitutional.</p> <p> The petition is hereby dismissed for lack of merit.</p> <p> IT IS SO CONSIDERED.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p> </blockquote> <p> Aggrieved, petitioners appealed directly to the Court on pure question of law and reiterated that Sections (4)(c)(1) and 8 are "<i>rider provisions</i>." The petitioners claim that the transfer of regulatory powers is unnecessary and would result in outright deprivation of the professional status of thousands of marine deck and engine officers.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> In contrast, the respondents, in their Comment,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> maintained that the title of Republic Act No. 10635 shows that Congress, in establishing MARINA as the single maritime administration agency for the implementation of maritime international agreements, necessarily transferred to it all the powers and functions that used to be with other government agencies. The respondents added that the transfer of PRC's powers, duties, and functions to MARINA relative to the examination, licensing, and certification system of marine deck and engine officers is germane to the subject matter of Republic Act No. 10635, i.e., the establishment of MARINA as the single maritime administration charged with the responsibility of ensuring compliance with the STCW Convention. Lastly, the respondents averred that any question about the necessity of power transfer is not justiciable because it essentially refers into the wisdom of Congress.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p align="center"> <b>RULING</b> </p><p> The Petition is unmeritorious. </p><p> The "<i>one subject-one title</i>" rule is aimed against the evils of "<i>omnibus bills</i>" and "<i>log-rolling legislation</i>," as well as surreptitious and/or unconsidered encroaches.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Case law instructs that the "constitutional requirement that the subject of an act shall be expressed in its title should be reasonably construed so as not to interfere unduly with the enactment of necessary legislation. It should be given a practical rather than technical construction":<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><blockquote> <p> Moreover, a <i>liberal construction of the</i> "<i>one title-one subject</i>" rule has been invariably adopted by this court <i>so as not to cripple or impede legislation</i>. Thus, in <i>Sumulong v. Comelec</i>, we ruled that the constitutional requirement as now expressed in Article VI, Section 26(1) "should be given a practical rather than a technical construction. <i>It should be sufficient compliance with such requirement if the title expresses the general subject and all the provisions are germane to that general subject</i>."<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Emphasis supplied, citation omitted) </p> </blockquote> <p> In <i>Tatad v. The Secretary of the Department of Energy</i>,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> this Court ruled that "a law having a single general subject indicated in the title may contain any number of provisions, . . . so long as they are not inconsistent with or foreign to the general subject, and may be considered in furtherance of such subject by providing for the method and means of carrying out the general subject."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> In <i>Remman Enterprises, Inc. v. Professional Regulatory Board of Real Estate Service</i><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> and in <i>Spouses Imbong v. Ochoa, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> this Court also upheld the liberal construction of the "<i>one subject-one title</i>" rule: </p><blockquote> <p> It is well-settled that the "one title-one subject" rule does not require the Congress to employ in the title of the enactment language of such precision as to mirror, fully index or catalogue all the contents and the minute details therein. The rule is sufficiently complied with if the title is comprehensive enough as to include the general object which the statute seeks to effect. Indeed, this Court has invariably adopted a liberal rather than technical construction of the rule so as not to cripple or impede legislation."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p> </blockquote> <p> Here, Sections 4(c)(1) and 8 of Republic Act No. 10635 do not violate the "<i>one subject-one title</i>" rule. The title of the law is comprehensive enough to encapsulate the more detailed provisions as to how exactly MARINA should be able to implement the STCW Convention as the <b><i>single</i></b> maritime administration agency responsible for such obligation. The title of Republic Act No. 10635 likewise encompasses the declared policies of the State: </p><blockquote> <p> Section 1. <i>Declaration of Policy</i>. â The following are hereby declared to be the policies of the State: </p> <p>(a) The State shall ensure compliance with the 1978 International Convention on Standards of Training, Certification and Watchkeeping for Seafarers (STCW Convention), as amended; all international agreements implementing or applying the STCW Convention; and other international maritime safety conventions or agreements that the STCW Convention seeks to promote compliance with; </p> <p> (b) The State recognizes the vital contribution of the seafarers to the national economy. Toward this end, <i>the State shall establish systems and mechanisms for the promotion and protection of the well-being of the seafarers to ensure their professionalism and competitiveness, both in local and international trade, consistent with existing local labor laws and applicable international laws</i>;</p> <p> (c) <i>The State shall create a single maritime administrative system and structure that shall provide an enabling environment for the business of Philippine seafaring; establish appropriate institutional arrangements with other agencies of government; and create an effective regulatory framework conducive to the efficiency, transparency and competitiveness of the Philippine seafaring industry consistent with the STCW Convention</i>; and</p> <p> (d) The State shall harmonize all legal and administrative measures which are taken and provided for by government regulatory agencies and ensure that such measures are appropriate and consistent with the STCW Convention. (Emphasis supplied)</p> </blockquote> <p> Verily, the objective of Republic Act No. 10635 is to introduce structural changes that will significantly minimize inefficiency and gaps in the implementation of the STCW Convention. The law seeks to attain this purpose by giving MARINA a firm control over all administrative processes relating to maritime industry and by eliminating layers of bureaucracy that complicates the efforts of the State to achieve an optimal level of efficiency, transparency, and competitiveness in the seafaring industry consistent with the STCW Convention. On this score, it bears emphasis that the title of the law need not be a full index or catalogue of all the contents and the minute details of the policies. In this case, it is sufficient that Sections 4(c)(1) and 8 of Republic Act No. 10635 are not inconsistent with or foreign to the general subject of statute. Indeed, the contested provisions sensibly outlined the manner by which MARINA shall assume a single point of responsibility to comply with the STCW Convention and to ensure, among others, that Filipino seafarers are "seaworthy" to assume the rigors and duties of seafaring. Hence, the mere fact that the title of the law made no particular mention of MARINA's regulatory powers over licensure examination and certification of marine deck and engine officers does not automatically mean that such power is arbitrarily "<i>log-rolled</i>" into the law. To be sure, the administration of licensure examinations is subsumed under MARIN A's consolidated power to enforce the country's general obligations under the STCW Convention: </p><blockquote> <p> Article I. <i>General Obligations Under the Convention</i></p> <p> . . . .</p> <p> (2) The Parties undertake to promulgate all laws, decrees, orders and regulations and to take all other steps which may be necessary to give the Convention full and complete effect, so as to ensure that, from the point of view of safety of life and property at sea and the protection of the marine environment, seafarers on board ships are qualified and fit for their duties.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p> </blockquote> <p> Pursuant to the STCW Convention, each state-party agreed to issue "<i>Certificates</i>" for masters and officers who meet the minimum mandatory requirements for "<i>service, age, medical fitness, training, qualification and examinations</i>" to ensure competence and qualification of seafarers.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The STCW Convention defines "<i>Certificate</i>" as a "<i>valid document, by whatever name it may be known</i>" that is issued by the government of the state-party.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Obviously, the certification requirement covers the regulation of licensure examinations of marine deck and engine officers to guarantee that they are qualified and fit for sea duty. This is the very means by which the main objective of marine safety under the STCW Convention is realized. Inarguably, the assailed provisions which transferred the authority over licensure examination and certifications of marine deck and engine officers from PRC to MARINA are undoubtedly embraced in the title of the law which seeks to uphold the country's obligations under the STCW Convention.</p><p> Undaunted, the petitioners cited the repealing clause under Section 10 of Republic Act No. 10635 and posited that the term "<i>amended</i>" connotes that the law does not really divest PRC of its power under Presidential Decree No. 223<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> and Republic Act No. 8544<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> to regulate the licensure examinations of marine engine and deck officers through the Board of Marine Deck Officers and the Board of Marine Engineer Officers. The Court is not convinced. For reference, we quote Section 10 of Republic Act No. 10635: </p><blockquote> <p> Section 10. <i>Repealing Clause</i>. â The provisions of Presidential Decree No. 474 on the composition of the Maritime Industry Board and all the provisions under Republic Act No. 8544 relating to the examination, licensing and certification system for marine deck and engine officers are hereby <i>amended</i>. All existing laws, orders, decrees, rules and regulations or parts thereof inconsistent with the provisions of this Act are hereby repealed or modified accordingly. (Emphasis supplied)</p> </blockquote> <p> There is nothing in the repealing clause that would prohibit the transfer of regulatory power from PRC to MARINA with respect to the licensure examinations of marine engine and deck officers. The term "amended" simply means that as far as licensure examinations of marine deck and engine officers are concerned, the general regulatory power<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> of the PRC must yield to the specific regulatory power<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> of MARINA. It is a canon of statutory construction that a special law prevails over a general law and the specific provision is to be considered as an exception to the general provisions.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Moreover, "in case of irreconcilable conflict between two laws, the later enactment must prevail being the more recent expression of legislative will. Indeed, statutes must be so construed and harmonized with other statutes as to form a uniform system of jurisprudence[.]" "[I]f several laws cannot be harmonized, the earlier statute must yield to the later enactment."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In this case, apart from the express intention of the legislature to transfer power from PRC to MARINA, the specific and more recent provisions of Sections 4(c)(1) and 8 of Republic Act No. 10635 must prevail over the general and earlier provisions of Presidential Decree No. 223 and Republic Act No. 8544.</p><p> Contrary to petitioners' theory, the transfer of regulatory powers would not result in outright deprivation of the professional status of thousands of marine deck and engine officers. The transitory provision under Section 8 of Republic Act No. 10635 commands that: "<i>All certificates of competency, endorsement, proficiency and documentary evidence issued prior to the effectivity of this Act shall be deemed valid without necessity of revalidation or reissuance until the date of expiration as stated in such certificates or other documents. Thereafter, new certificates or other documents shall be revalidated or reissued only in accordance with the implementing rules and regulations issued pursuant to this Act, in conformity with the STCW requirements</i>." As such, the professional licenses already issued by PRC will continue to be valid and effective until those licenses expire, subject to revalidation or reissuance to be processed this time by MARINA pursuant to Republic Act No. 10635.</p><p> Lastly, petitioners argue that the transfer of authority over licensure examination of marine officers is "<i>unnecessary</i>" given that the previous licensure examinations handled by PRC is already compliant with the STCW Convention. As the respondents aptly pointed out, this is a political question which must be decided by the people in their sovereign capacity, or in regard to which full discretionary authority has been delegated to the Legislative or Executive branch of the government.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The "<i>necessity</i>" of enacting laws that transfer the powers of one administrative agency to another is clearly within the exclusive prerogative of the Legislative department, which created those administrative agencies in the first place, and which expresses the sovereign will of the people through the laws it enact. A political question may only be overturned by a showing of grave abuse of discretion amounting to lack or excess of jurisdiction on the part of any branch or instrumentality of the government.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> None is either alleged or proven in this case. Hence, the wisdom of transferring authority over licensure examinations of marine officers to MARINA cannot be decided by the Court.</p><p> In sum, it is a settled doctrine that laws are presumptively constitutional until proven otherwise.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Petitioners miserably failed to demonstrate how Sections 4(c)(l) and 8 of Republic Act No. 10635 violated the "<i>one subject-one title</i>" rule under Article VI, Section 26(1) of the Constitution.</p><p> <b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Court upholds the constitutionality of Sections 4(c)(1) and 8 of Republic Act No. 10635 which transferred to Maritime Industry Authority all powers, duties, and functions of the Professional Regulation Commission over licensure examination and certification of marine deck and engine officers.</p><p> <b>SO ORDERED.</b> </p><p><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Lazaro-Javier, Zalameda, Dimaampao</i>, and <i>Kho, Jr., JJ</i>., concur. <i><br> Hernando<sup style="COLOR: RGB(255, 0, 0);">*</sup> </i>and <i>Inting,<sup style="COLOR: RGB(255, 0, 0);">*</sup> JJ</i>., concurring and on official business. <i> <br> Gaerlan,<sup style="COLOR: RGB(255, 0, 0);">**</sup> J</i>., on official leave. <i></i><i><br> Rosario</i><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Marquez,<sup style="COLOR: RGB(255, 0, 0);">***</sup></i><em> JJ</em>., concurring and on official leave. <i> </i><i><br> J. Lopez,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on official business. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., concurring and on leave. <br><br><i></i><i> </i> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Concurring and on official business. <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Concurring and on official leave. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Concurring and on leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 10-61.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 67-88. The Decision was penned by Presiding Judge Eleuterio L. Bathan of Branch 92, Regional Trial Court, Quezon City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> An Act Establishing the Maritime Industry Authority (MARINA) as the Single Maritime Administration Responsible for the Implementation and Enforcement of the 1978 International Convention on Standards of Training, Certification and Watchkeeping for Seafarers, as Amended, and International Agreements or Covenants Related Thereto (2014).</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, p. 11. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 87. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 48-57.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 352-396.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 383-391.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <b>Commission on Elections v. Cruz</b>, 620 Phil. 175, 202 (2009) [Per J. Brion, <i>En Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <b>Sumulong v. Commission on Elections</b>, 73 Phil. 288, 291 (1941) [Per J. Abad Santos, <i>En Banc</i>]. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <b>Tobias v. Abalos</b>, 309 Phil. 100, 104-105 (1994) [Per J. Bidin, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> 346 Phil. 321 (1997) [Per J. Puno, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 359. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> 726 Phil. 104 (2014) [Per J. Villarama, Jr., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> 732 Phil. 1 (2014) [Per J. Mendoza, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 131-132; <b>Remman Enterprises, Inc. v. Professional Regulatory Board of Real Estate Service</b>, 726 Phil. 104, 116 (2014) [Per J. Villarama, Jr., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> International Convention on Standards of Training, Certification and Watchkeeping for Seafarers (1978), art. 1(2). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at art. VI(1). </p><blockquote> <p> Article VI. Certificates<br> 1. Certificates for masters, officers or ratings shall be issued to those candidates who, to the satisfaction of the Administration, meet the requirements for service, age, medical fitness, training, qualification and examinations in accordance with the appropriate provisions of the Annex to the Convention.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at art. II(c). </p><blockquote> <p> Article II. Definitions<br> . . . .<br> c. "Certificate" means a valid document, by whatever name it may be known, issued by or under the authority of the Administration or recognized by the Administration authorizing the holder to serve as stated in this document or as authorized by national regulations[.]</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Creating the Professional Regulation Commission and Prescribing its Powers and Functions (1973). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> An Act Regulating the Practice of the Merchant Marine Profession in the Philippines (1998). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Presidential Decree No. 223 (1973), sec. 5(a). </p><blockquote> <p> Section 5. <i>Powers of the Commission</i>. The powers of the Commission are as follows: <br> a) To administer, implement and enforce the regulatory policies of the National Government with respect to the regulation and licensing of the various professions and occupations under its jurisdiction including the maintenance of professional and occupational standards and ethics and the enforcement of the rules and regulations relative thereto. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Republic Act No. 10635, sec. 4(c)(1); <i>rollo</i>, p. 87. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>Lopez v. Civil Service Commission</b>, 273 Phil. 147, 152 (1991) [Per J. Sarmiento, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>People v. Quinto</b>, 871 Phil. 679, 688 (2020) [Per J. Reyes, J. Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>TaÃ±ada v. Cuenco</b>, 103 Phil. 1051, 1066 (1975) [Per J. Concepcion, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Ocampo v. Enriquez</b>, 798 Phil. 227, 289 (2016) [Per J. Peralta, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Monreal v. Commission on Elections</b>, 623 Phil. 613, 617-618 (2009) [Per J. Abad,<i> En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

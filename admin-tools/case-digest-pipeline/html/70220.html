@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262480 - INOCENCIO TAGANILE, ANA TAGANILE, NESTOR ARNALDO, MELANIE ARNALDO, DELIA QUILANG, WENDEL* ALLAGA, HERMINIA AZARCON, NEMESIO BALICASMAYA, ROGELIO FERNANDO, AND EMMA FERNANDO, PETITIONERS, VS. FILOMENA DELOS SANTOS DOLAR, ROMANO DELA CRUZ, ARNALDO DELA CRUZ, NARCISO DELOS SANTOS, SEVERINO DELOS SANTOS, LAUREANA INOCENCIO VILLANUEVA, FLAVIANA I. VILLANUEVA, NENITA I. VILLANUEVA-PICAR, EDUARDO I. VILLANUEVA, JULIANA C. INOCENCIO VDA. DE DIO, DOLORES C. INOCENCIO-NISOLA, JOSE C. INOCENCIO, PEDRO C. INOCENCIO, ANTONIO C. INOCENCIO, PURITA C. INOCENCIO, BIENVENIDO C. INOCENCIO, PORFIRO C. INOCENCIO, MARCELO BALUYOT, LAMBERTO BALUYOT, SOLIDAD  BALUYOT, ELENA BALUYOT, GUILLERMO I. BALUYOT, ROSALINDA I. BALUYOT-NARAG, ALFREDO I. BALUYOT, JR., TEOFILO I. BALUYOT, FLORENCIO I. BALUYOT, ESTRELITO I. BALUYOT, CONSOLACION I. CRUZ-DE GUZMAN, DOMINICA INOCENCIO-DIMASAKA VDA. DE CRUZ, RITA D. CRUZ, MACARIA D. CRUZ-EMBIEN, FRANCISCA D. CRUZ-ESGUERRA, LUIS D. CRUZ, SINANDO D. CRUZ, VICTORIA D. CRUZ, VIRGINIA D. CRUZ, SEVERINO D. CRUZ, PEDRO ADIA, MARCELINA ADIA-SUBALDO, MARIO A. ALFONSO, AND MAXIMA A. ALFONSO VDA. DE VELASCO, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70220' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262480, October 29, 2025 ]</H2>
+			<H3>INOCENCIO TAGANILE, ANA TAGANILE, NESTOR ARNALDO, MELANIE ARNALDO, DELIA QUILANG, WENDEL<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ALLAGA, HERMINIA AZARCON, NEMESIO BALICASMAYA, ROGELIO FERNANDO, AND EMMA FERNANDO, PETITIONERS, VS. FILOMENA DELOS SANTOS DOLAR, ROMANO DELA CRUZ, ARNALDO DELA CRUZ, NARCISO DELOS SANTOS, SEVERINO DELOS SANTOS, LAUREANA INOCENCIO VILLANUEVA, FLAVIANA I. VILLANUEVA, NENITA I. VILLANUEVA-PICAR, EDUARDO I. VILLANUEVA, JULIANA C. INOCENCIO VDA. DE DIO, DOLORES C. INOCENCIO-NISOLA, JOSE C. INOCENCIO, PEDRO C. INOCENCIO, ANTONIO C. INOCENCIO, PURITA C. INOCENCIO, BIENVENIDO C. INOCENCIO, PORFIRO C. INOCENCIO, MARCELO BALUYOT, LAMBERTO BALUYOT, SOLIDAD  BALUYOT, ELENA BALUYOT, GUILLERMO I. BALUYOT, ROSALINDA I. BALUYOT-NARAG, ALFREDO I. BALUYOT, JR., TEOFILO I. BALUYOT, FLORENCIO I. BALUYOT, ESTRELITO I. BALUYOT, CONSOLACION I. CRUZ-DE GUZMAN, DOMINICA INOCENCIO-DIMASAKA VDA. DE CRUZ, RITA D. CRUZ, MACARIA D. CRUZ-EMBIEN, FRANCISCA D. CRUZ-ESGUERRA, LUIS D. CRUZ, SINANDO D. CRUZ, VICTORIA D. CRUZ, VIRGINIA D. CRUZ, SEVERINO D. CRUZ, PEDRO ADIA, MARCELINA ADIA-SUBALDO, MARIO A. ALFONSO, AND MAXIMA A. ALFONSO VDA. DE VELASCO, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 16, 2021, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 5, 2022, of the Court of Appeals<b> (CA)</b> in CA-G.R. CV No. 115571. The CA affirmed the Orders, dated October 17, 2019<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and February 19, 2020,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of Branch 161, Regional Trial Court<b> (RTC)</b> of Pasig City, which dismissed the Petition for Quieting of Title,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated April 2, 2019, filed by Inocencio Taganile, Ana Taganile, Nestor Arnaldo, Melanie Arnaldo, Delia Quilang, Wendel Allaga, Herminia Azarcon, Nemesio Balicasmaya, Rogelio Fernando, and Emma Fernando (collectively,<b> Taganile et al.)</b> against Filomena Delos Santos Dolar, Romano Dela Cruz, Arnaldo Dela Cruz, Narciso Delos Santos, Severino Delos Santos, Laureana Inocencio Villanueva, Flaviana I. Villanueva, Nenita I. Villanueva-Picar, Eduardo I. Villanueva, Juliana C. Inocencio Vda. De Dio, Dolores C. Inocencio-Nisola, Jose C. Inocencio, Pedro C. Inocencio, Antonio C. Inocencio, Purita C. Inocencio, Bienvenido C. Inocencio, Porfiro C. Inocencio, Marcelo Baluyot, Lamberto Baluyot, Solidad Baluyot, Elena Baluyot, Guillermo I. Baluyot, Rosalinda I. Baluyot-Narag, Alfredo I. Baluyot, Jr., Teofilo I. Baluyot, Florencio I. Baluyot, Estrelito I. Baluyot, Consolacion I. Cruz-De Guzman, Dominica Inocencio-Dimasaka Vda. De Cruz, Rita D. Cruz, Macaria D. Cruz-Embien, Francisca D. Cruz-Esguerra, Luis D. Cruz, Sinando D. Cruz, Victoria D. Cruz, Virginia D. Cruz, Severino D. Cruz, Pedro Adia, Marcelina Adia-Subaldo, Mario A. Alfonso, And Maxima A. Alfonso Vda. De Velasco (collectively,<b> Dolar et al.)</b>.<br><br><center><b><i>The Facts</i></b></center><br>On April 2, 2019, Taganile et al. filed a Petition for Quieting of Title against Dolar et al. They alleged that they are the occupants of a portion of No. 147 (Interior), Dr. Sixto Antonio Avenue, Rosario, Pasig City (the <b>subject property)</b>, more particularly described as follows:<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><blockquote><center><u>OCT No. 011-2010000009:</u></center><br>A parcel of land (Lot 5 plan Psu-154072, LR Case No. N-11504; LRA Record No. N-76065, with improvements there-on, situated in the Barrio of Rosario, City of Pasig (Metro Manila), Island of Luzon. Bounded on the E., along line 1-2 by Lot 2, (Mamerto Inocencio); along line 2-3 by Lot 1 (Juana &amp; Laureano Inocencio) both of plan Psu-154072; on the S., along line 3-4 by property of Hrs. of Maximo Cruz; on the SW., along line 4-5 by Marikina River (100 m. wide); on the N., along line 5-6 by Callejon, 2.00 m. wide beyond by property of Maria Mariano et al; and on the E., along line 6-7 by Lot 4, (Patricio &amp; Jacinta Adia); along line 7-1 by Lot 3 (Dominica Dimasaka) both of plan Psu-154072. Beginning at a point marked "1" on plan, being S. 54 deg. 06W., 363.68 m. from BLBM No. 3 Bo. Rosario, Mun. of Pasig., thence:<br><blockquote>S. 3 deg. 20'E., 10.50 m. to point 2;<br>S. 3 deg. 20'E., 10.91 m. to point 3;<br>S. 87 deg. 12'W., 6.50 m. to point 4;<br>N. 9 deg. 30 W., 44.03 m. to point 5;<br>S. 87 deg. 28'E., 10.95 m. to point 6;<br>S. 3 deg. 20'E., 10.78 m. to point 7;<br>S. 3 deg. 20'E., 10.55 m. to the point of</blockquote>Beginning; containing an area of [375] SQUARE METERS, more or less. All points referred to are indicated on the plan and are marked on the ground by PLS cyl. conc. mons. 15x60 cm.; Bearings: True and date of survey: April 13-16, 1956. NOTE: On the Western portion of Lot along line 4-5, a strip of 3.00 m. wide is provided for Public Legal Easement.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </blockquote>Taganile et al. claimed that they have been in open, actual, continuous, adverse, and peaceful possession and occupation of a portion of the subject property as early as 1970:<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><blockquote><table width="100%" border="1" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="50%" valign="top"> <div align="CENTER"><b>Petitioner</b> </div></td> <td width="50%" valign="top"> <div align="CENTER"><b>Approximate Start of Occupation</b> </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Inocencio and Ana Taganile </div></td> <td valign="top"> <div align="CENTER">1970 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Nestor and Melanie Arnaldo </div></td> <td valign="top"> <div align="CENTER">1972 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Delia Quilang </div></td> <td valign="top"> <div align="CENTER">1972 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Weldel Allaga </div></td> <td valign="top"> <div align="CENTER">1979 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Rolando and Herminia Azarcon </div></td> <td valign="top"> <div align="CENTER">1975 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Nemesio Balicasmaya </div></td> <td valign="top"> <div align="CENTER">1980 </div></td> </tr> <tr> <td valign="top"> <div align="CENTER">Rogelio and Emma Fernando </div></td> <td valign="top"> <div align="CENTER">1982<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></div></td> </tr> </tbody></table></blockquote>As the supposed owners of a portion of the subject property, Taganile et al. introduced improvements, such as houses of strong materials, trees, and other kinds of ornamental plants on said property.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> For the entirety of their possession and occupation, they claimed to have never paid any rent to Dolar et al., or entered into any lease agreement with them.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>As such, they were surprised to learn that the subject property was registered under the names of Dolar et al. on September 1, 2009 and that the latter were issued Original Certificate of Title<b> (OCT)</b> No. 011-2010000009 <b>(subject OCT)</b> pursuant to a Decision, dated August 22, 2008, of Branch 71, RTC of Pasig City, in Land Registration Case<b> (LRC)</b> Case No. N-11504.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Taganile et al. contend that the subject OCT cast a cloud on their title, which they acquired through acquisitive prescription.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Although the subject OCT appears legally effective, Taganile et al. allege that it is in fact invalid and inoperative as it was fraudulently obtained and in violation of Section 15 of Presidential Decree No. 1529, or the Property Registration Decree:<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><blockquote>Section 15.<i> Form and contents</i>. The application for land registration shall be in writing, signed by the application or the person duly authorized in his behalf, and sworn to before any officer authorized to administer oaths for the province or city where the application was actually signed. If there is more than one applicant, the application shall be signed and sworn to by and in behalf of each. The application shall contain a description of the land and shall state the citizenship and civil status of the applicant, whether single or married, and, if married, the name of the wife or husband, and, if the marriage has been legally dissolved, when and how the marriage relation terminated.<i> It shall also state the full names and addresses of all occupants of the land and those of the adjoining owners, if known, and, if not known, it shall state the extent of the search made to find them</i>.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis supplied) </blockquote>Taganile et al. assert that the subject OCT is null and void and claim to be the sole and rightful owners of the subject property,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> arguing that they were not notified of the proceedings in LRC Case No. N-11504, despite being the actual occupants of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Upon receipt of the Petition for Quieting of Title, Dolar et al. filed a Motion to Dismiss, dated July 3, 2019, raising the following grounds:<i> firstly</i>, that Taganile et al.'s cause of action has been barred by prior judgment and prescription;<i> secondly</i>, that the Petition for Quieting of Title stated no cause of action; and<i> lastly</i>, that the claim set forth in the Petition for Quieting of Title has been waived or extinguished.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Dolar et al. averred that sometime in the 1970s, they entered into a verbal contract of lease with Taganile et al. for the latter to occupy a portion of the subject property, that was renewable on a monthly basis. Taganile et al. regularly paid their rent until they reneged on their obligation sometime in 2000. Subsequently, Dolar et al. filed an application for land registration and complied with the procedure for titling of real properties by posting the notice of initial hearing in conspicuous places, as well as causing the publication of the said notice in the Official Gazette. Thereafter, Branch 71, RTC of Pasig City, issued the Decision, dated August 22, 2008, a Certificate of Finality, and the Order for the issuance of a decree supporting the titling of the subject property in favor of Dolar et al. On September 29, 2010, the subject OCT was issued in the names of Dolar et al. and was entered in the registration book of the Land Registration Authority. Taganile et al. did not file a petition for the reopening and review of the said decree of registration within one year from September 29, 2010, or until September 28, 2011.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Further, Dolar et al. posited that the requisites for an action for quieting of title were not established in the Petition for Quieting of Title.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Taganile et al. did not attach any proof of their legal or equitable title over the subject property and instead attached copies of the subject OCT and the corresponding tax declarations in the name of Dolar et al. By doing this, Taganile et al. had supposedly admitted Dolar et al.'s legal right to own and possess the subject property. In the absence of a legal or equitable title, Taganile et al. purportedly failed to establish where the alleged cloud would be cast as they were mere lessees of a portion of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>Through an Order,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated October 17, 2019, Branch 161, RTC of Pasig City granted the Motion to Dismiss after finding that the Petition for Quieting of Title stated no cause of action considering that Taganile et al. supposedly failed to allege the actual date of their possession and provide proof of their alleged title over the contested portion of the subject property:<br><blockquote>A careful perusal of the allegations of petitioners shows that petitioners fail to alleged [sic] the actual date of their alleged possession and occupation of the subject property, to support their alleged title over the subject property by acquisitive prescription and as to the date when and how they gained knowledge of the registration of the subject property in the name of respondents, as well as alleged fraudulent act of respondents in obtaining the assailed title over the property. These are vital in establishing the cause of action of herein petitioners. Mere sweeping allegations such as these without laying the basis and in the absence of any supporting evidence do not suffice to establish their claim considering that the relief prayed for is for the declaration of nullity of the subject title and for declaration of petitioners as absolute and exclusive owners and possessors of the same.<br><br><b>WHEREFORE,</b> finding the instant Motion to be meritorious, the same is hereby<b> GRANTED. ACCORDINGLY,</b> the instant petition is hereby<b> DISMISSED.</b><br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (Emphasis in the original) </blockquote>Taganile et al. moved for reconsideration, but the same was denied by the RTC through an Order,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated February 19, 2020.<br><br>Aggrieved, Taganile et al. appealed before the CA alleging that the RTC erred in dismissing the Petition for Quieting of Title. They contended that they should not be deemed to have failed to provide the actual dates of their possession of the subject property or to present evidence supporting their claim, as pre-trial and trial had yet to proceed.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>The CA, in its Decision,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> dated December 16, 2021, denied the appeal and affirmed the RTC's Orders, dated October 17, 2019, and February 19, 2020:<br><blockquote>The elementary test for failure to state a cause of action is whether the complaint alleges facts which if true would justify the relief demanded. The inquiry is into the sufficiency, not the veracity of the material allegations. If the allegations in the complaint furnish sufficient basis on which it can be maintained, it should not be dismissed regardless of the defense that may be presented by the defendants. To sustain a motion to dismiss for lack of cause of action, the complaint must show that the claim for relief does not exist, and not only that a claim was defectively stated, or is ambiguous, indefinite or uncertain. In this wise, considering that neither of the two requisites for an action to quiet title could be drawn from the allegations in the complaint of the petitioners, We are constrained to affirm that the petition for quieting of title was properly dismissed by the RTC for failure to state a cause of action.<br><br><b>FOR THESE REASONS</b>, the appeal is<b> DENIED</b>.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis in the original; citations omitted) </blockquote>In affirming the Orders of the RTC, the CA explained that the Petition for Quieting of Title failed to sufficiently establish Taganile et al.'s cause of action considering that the requisites for an action for quieting of title were not properly substantiated. Following Articles 476 and 477 of the Civil Code,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> the two indispensable requisites in an action for quieting of title are: <i>firstly</i>, that the plaintiff has a legal or equitable title to or interest in the real property subject of the action; and<i> secondly</i>, the deed, claim, encumbrance, or proceeding claimed to be casting a cloud on the title must be shown to be in fact invalid or inoperative despite its<i> prima facie</i> appearance of validity or efficacy.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>The CA determined that Taganile et al.'s allegations were not enough to establish their title to the subject property considering that the Petition for Quieting of Title only claimed that they have been occupying the subject property since 1970 and had improvements thereon.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The CA took notice of the Decision, dated August 22, 2008, in LRC Case No. N-11504, which granted the application for registration of title by Dolar et al.<br><br>Dolar et al. were able to establish that the subject property was inherited from their grandparents, Josefina, Mamena, Mamerto and Aurelio Inocencio, who occupied and cultivated the same since 1942.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> To prove this, Dolar et al. presented documentary evidence such as the tracing cloth plan, Suveryor's Certificate, real property tax declarations and receipts from 2002 to 2006. On the other hand, Taganile et al. did not present any documentary evidence of their claim. The only evidence they presented were the subject OCT and tax declarations, all in the name of Dolar et al.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Further, the CA concluded that Taganile et al. failed to establish the invalidity of the subject OCT. Following<i> Heirs of Datu Dalandag Kuli v. Pia et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the CA emphasized that the subject OCT enjoyed the presumption of regularity of issuance, and that it would require more than bare allegations to dispute such presumption. The allegation that the subject OCT is invalid on account of Taganile et al.'s non-inclusion in LRC Case No. N-11504 was rejected by the CA. None of the allegations in the Petition for Quieting of Title established that Taganile et al. were indispensable parties in LRC Case No. N-11504 considering that they were not able to prove their open, continuous, exclusive and notorious possession of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>The CA went on to explain that a Torrens title, once registered, serves as a notice to the whole world where all persons must take notice and no one can plead ignorance of its registration.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Absent clear and convincing evidence of fraud, a Torrens title is generally conclusive evidence of ownership and it is presumed that the same was regularly issued and valid.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Hence, on account of Taganile et al.'s failure to establish their title over the subject property, and that the subject OCT is invalid, the CA found no reason to reverse the findings of the RTC.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Taganile et al. moved for reconsideration of the CA Decision,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> dated December 16, 2021, but the same was denied by the CA through a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> dated July 5, 2022.<br><br>Hence, the present Petition for Review on<i> Certiorari</i> under Rule 45 of the Rules of Court.<br><br>Taganile et al. assert that their allegations in the Petition for Quieting of Title were sufficient to constitute a cause of action. They claim that the actual dates of their possession and occupation, as well as when and how they gained knowledge of Dolar et al.'s adverse registration of the subject property were all properly alleged. They also alleged the fraudulent registration of the subject property by Dolar et al.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Notwithstanding, Taganile et al. claim that they were not mandated to submit all their evidence together with the Petition for Quieting of Title to prove their claim.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br><center><b><i>The Issue</i></b></center><br>Did Taganile et al. sufficiently state their cause of action in the Petition for Quieting of Title?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Petition has merit. The RTC and the CA erred in dismissing the Petition for Quieting of Title on the ground that Taganile et al. failed to state a cause of action. Thus, the case is remanded to the RTC for the prompt continuation of proceedings.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Failure to state a cause of action vis-Ã -vis absence of a cause of action</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>A cause of action is the act or omission by which a party violates a right of another.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The three essential elements of a cause of action, are: (a) a right in favor of the plaintiff by whatever means and under whatever law it arises or is created; (b) an obligation on the part of the named defendant to respect or not to violate such right; and (c) an act or omission on the part of the named defendant violative of the right of the plaintiff or constituting a breach of the obligation of defendant to the plaintiff for which the latter may maintain an action for recovery of damages.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>The Rules of Court require that every ordinary civil action must be based on a cause of action,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> otherwise, the civil action is prone to dismissal. The way in which said dismissal would be effected depends on whether the plaintiff does not have a cause of action, or if the complaint or petition merely failed to state a cause of action.<br><br>Before the 2019 Amendments to the Rules of Civil Procedure, dismissal for failure to state a cause of action may be raised at the earliest stages of the proceedings through a motion to dismiss or as an affirmative defense.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Under the present rules, however, a motion to dismiss is prohibited unless it is based on lack of subject matter jurisdiction,<i> res judicata</i>, or<i> litis pendentia</i>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Nonetheless, the plaintiffs failure to state a cause of action may still be raised as an affirmative defense through an answer under Section 12(4), Rule 8 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>On the other hand, dismissal for lack of cause of action may be raised any time after questions of fact have been resolved on the basis of stipulations, admissions or evidence presented by the plaintiff.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> This is based on Rule 33, Section 1 of the Rules of Court which allows the defendant to move for dismissal on the ground that, upon the facts and the law, the plaintiff has shown no right to relief:<br><blockquote>SECTION 1.<i> Demurrer to Evidence</i>. â After the plaintiff has completed the presentation of his or her evidence, the defendant may move for dismissal on the ground that upon the facts and the law the plaintiff has shown no right to relief. If his or her motion is denied, he or she shall have the right to present evidence. If the motion is granted but on appeal the order of dismissal is reversed, he or she shall be deemed to have waived the right to present evidence. </blockquote>The test to determine whether a plaintiff lacks a cause of action necessitates a review of the evidence to ascertain if the three elements of a cause of action are present. In contrast, the test to determine whether a petition or complaint states a cause of action against the defendants is this: admitting hypothetically the truth of the allegations of fact made in the complaint, may a judge validly grant the relief demanded in the complaint?<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>In dismissing the Petition for Quieting of Title, the RTC and CA determined that Taganile et al. failed to state their cause of action. This was based on the lower courts' finding that Taganile et al. failed to substantiate their legal or equitable title over portions of the subject property. Both courts evaluated the claims of Taganile et al. and weighed them against the allegations and evidence presented by Dolar et al. In doing so, the RTC and CA made a comprehensive evaluation of the evidence to ultimately dismiss the Petition for Quieting of Title.<br><br>This is where the Court takes exception with the decisions made by the lower courts.<br><br>As explained, a court can only dismiss a petition or complaint for failure to state a cause of action if the judge cannot validly grant the relief demanded in the complaint even if he or she hypothetically admitted the truth of the factual allegations made in said petition or complaint.<br><br>The test of failure to state cause of action is expounded in<i> Aquino v. Quiazon</i>:<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><blockquote><i>The familiar test for determining whether a complaint did or did not state a cause of action against the defendants is whether or not, admitting hypothetically the truth of the allegations of fact made in the complaint, a judge may validly grant the relief demanded in the complaint</i>. In<i> Rava Development Corporation v. Court of Appeals</i>, the Court elaborated on this established standard in the following manner:<br><blockquote>"The rule is that a defendant moving to dismiss a complaint on the ground of lack of cause of action is regarded as having hypothetically admitted all the averments thereof. The test of the sufficiency of the facts found in a petition as constituting a cause of action is whether or not, admitting the facts alleged, the court can render a valid judgment upon the same in accordance with the prayer thereof (<i>Consolidated Bank and Trust Corp. v. Court of Appeals</i>, 197 SCRA 663 [1991]).<br><br>In determining the existence of a cause of action, only the statements in the complaint may properly be considered. It is error for the court to take cognizance of external facts or hold preliminary hearings to determine their existence. If the allegation in a complaint furnish sufficient basis by which the complaint may be maintained, the same should not be dismissed regardless of the defenses that may be assessed by the defendants (<i>supra</i>).</blockquote>Thus,<i> in determining the existence of a cause of action, only the allegations in the complaint may properly be considered. For the court to do otherwise would be a procedural error and a denial of the plaintiff's right to due process</i>.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Emphasis supplied, citations omitted) </blockquote>Based on the record, Taganile et al. were able to establish a<i> prima facie </i>case for quieting of title.<br><br>For an action to quiet title to prosper, two indispensable requisites must concur, namely: (a) the plaintiff or complainant has a legal or an equitable title to or interest in the real property subject of the action; and (b) the deed, claim, encumbrance, or proceeding claimed to be casting cloud on his or her title must be shown to be in fact invalid or inoperative despite its<i> prima facie </i>appearance of validity or legal efficacy.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Contrary to the findings of the RTC, the approximate starting points of Taganile et al.'s possession and occupation over portions of the Subject Property were listed in the Petition for Quieting of Title, the earliest going back to the 1970s.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> This was corroborated by the allegation that Taganile et al. never occupied the subject property as mere lessees of Dolar et al.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Moreover, Taganile et al. claim to have constructed houses of strong materials and to have continuously introduced improvements on the Subject Property, such as trees and ornamental plants.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> As Associate Justice Alfredo Benjamin S. Caguioa pointed out during the deliberations of this case, the Court in <i>Calicdan v. CendaÃ±a</i><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> held that building a house and cultivating the land support a claim of actual possession as an owner.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Taganile et al. also al leged the invalidity or inoperability of the subject OCT. As Justice Caguioa highlighted, the Petition for Quieting of Title asserted that Taganile et al. had acquired legal title to portions of the subject property through acquisitive prescription; hence, the subject OCT in favor of Dolar et al. could not have been validly issued.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>These assert that Taganile et al. have been occupying portions of the subject property in the concept of an owner until said occupation was supposedly disturbed by the registration of the subject OCT.<br><br>Although Taganile et al. were unable to append documentary evidence to the Petition for Quieting of Title to support their claim of legal or equitable title over a portion of the subject property, this did not imply that they failed to state a cause of action. As explained, the trial court does not require an evaluation of the evidence presented to determine whether a complaint is dismissible for failure to state a cause of action.<br><br>Likewise, the fact that Dolar et al. were able to controvert the allegations in the Petition for Quieting of Title through the Motion to Dismiss does not indicate that Taganile et al. failed to state a cause of action. Conflicting allegations present justiciable issues which are ripe for the lower courts' adjudication. By granting the Motion to Dismiss, the RTC essentially ruled based on the evidence presented by Dolar et al. This is not proper considering that the RTC dismissed the case for supposedly failing to state a cause of action, not for having no cause of action. A portion of the RTC's Order, dated October 17, 2019, is quoted below:<br><blockquote>A motion to dismiss hypothetically admits the truth of the facts alleged in the complaint. Such admission, however, is limited only to all material and relevant facts which are well pleaded in the complaint.<i> When the ground for dismissal is that the complaint states no cause of action, such fact can be determined only from the facts alleged in the complaint</i>.<br><br>Courts should exercise utmost care and circumspection in passing upon motions to dismiss based on this ground. The test is whether, assuming the allegations of fact in the complaint, a valid judgment could be rendered in accordance with the prayer in the complaint.<br><br><i>A careful perusal of the allegations of petitioners shows that petitioners fail to alleged [sic] the actual date of their alleged possession and occupation of the subject property, to support their alleged title over the subject property by acquisitive prescription and as to the date when and how they gained knowledge of the registration of the subject property in the name of respondents, as well as alleged fraudulent act of respondents in obtaining the assailed title over the property. These are vital in establishing the cause of action of herein petitioners. Mere sweeping allegations such as these without laying the basis and in the absence of any supporting evidence do not suffice to establish their claim considering that the relief prayed for is for the declaration of nullity of the subject title and for declaration of petitioners as absolute and exclusive owners and possessors of the same. </i><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> (Emphasis supplied, citations omitted) </blockquote>Regrettably, the RTC misappreciated the allegations in the Petition for Quieting of Title considering that the approximate dates of Taganile et al.'s alleged possession over portions of the Subject Property have been properly alleged.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Further, both the RTC and CA interchanged procedural concepts when they dismissed the Petition for Quieting of Title for failing to state a cause of action because Taganile et al. supposedly failed to present evidence substantiating their title over portions of the Subject Property.<br><br>To recall, the RTC ruled that the Petition for Quieting of Title stated no cause of action yet it proceeded to dismiss said petition for relying on "[m]ere sweeping allegations [. . .] without laying the basis and in the absence of any supporting evidence."<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> The CA upheld the RTC's ruling after assessing the requisites for an action to quiet title, concluding that Taganile et al. failed to establish its indispensable requisites. In fact, the CA referenced jurisprudence on the dismissal of cases for lack of cause of action, not for failing to state a cause of action:<br><blockquote>The elementary test for failure to state a cause of action is whether the complaint alleges facts which if true would justify the relief demanded. The inquiry is into the sufficiency, not the veracity of the material allegations. If the allegations in the complaint furnish sufficient basis on which it can be maintained, it should not be dismissed regardless of the defense that may be presented by the defendants.<i> To sustain a motion to dismiss for lack of cause of action, the complaint must show that the claim for relief does not exist, and not only that a claim was defectively stated, or is ambiguous, indefinite or uncertain</i>.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><i> In this wise, considering that neither of the two requisites for an action to quiet title could be drawn from the allegations in the complaint of the petitioners, We are constrained to affirm that the petition for quieting of title was properly dismissed by the RTC for failure to state a cause of action</i>.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> (Emphasis supplied) </blockquote>Evidently, both the RTC and CA erred in citing Taganile et al.'s supposed failure to state a cause of action to dismiss the Petition for Quieting of Title if both courts meant that the same had no cause of action. It was premature for the RTC and CA to make said determination considering that Taganile et al. have not yet presented their evidence, much less started trial.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Remand of the case for the expeditious continuation of proceedings</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>A long line of jurisprudence supports the Court's present dispensation.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> The Court has repeatedly reversed decisions of lower courts for erroneously dismissing a complaint after conflating the concepts of lack of cause of action and failure to state the cause of action.<br><br>In<i> Asia Brewery, Inc. v. Equitable PCI Bank</i>,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> the Court, citing precedent, reversed an order of the trial court dismissing a complaint for lack of cause of action when the action has not even reached the pre-trial stage:<br><blockquote>In<i> PNB v. Spouses Rivera</i>, this Court upheld the CA ruling that the trial court therein erred in dismissing the Complaint on the ground of lack of cause of action. We said that "<i>dismissal due to lack of cause of action may be raised any time after the questions of fact have been resolved on the basis of stipulations, admissions, or evidence presented by the plaintiff." In the case at bar, the action has not even reached the pre-trial stage</i>.<br><br>In<i> Pamaran v. Bank of Commerce</i>, petitioners came directly to this Court and raised the issue of whether the trial court had erred in dismissing its Complaint only upon a motion to dismiss by way of affirmative defenses raised in the Answer of the defendant therein. The Court ruled then:<br><blockquote>Not only did the RTC Olongapo disregard the allegations in the Complaint, it also failed to consider that the Bankcom's arguments necessitate the examination of the evidence that can be done through a full-blown trial. The determination of whether Rosa has a right over the subject house and of whether Bankcom violated this right cannot be addressed in a mere motion to dismiss. Such determination requires the contravention of the allegations in the Complaint and the full adjudication of the merits of the case based on all the evidence adduced by the parties. </blockquote>In the same manner, the arguments raised by both of the parties to this case require an examination of evidence. Even a determination of whether there was "delivery" in the legal sense necessitates a presentation of evidence. It was erroneous for the RTC to have concluded that there was no delivery, just because the checks did not reach the payee. It failed to consider Section 16 of the Negotiable Instruments Law, which envisions instances when instruments may have been delivered to a person other than the payee. The provision states:<br><blockquote>Sec. 16. Delivery; when effectual; when presumed. â Every contract on a negotiable instrument is incomplete and revocable until delivery of the instrument for the purpose of giving effect thereto. As between immediate parties and as regards a remote party other than a holder in due course, the delivery, in order to be effectual, must be made either by or under the authority of the party making, drawing, accepting, or indorsing, as the case may be; and, in such case, the delivery may be shown to have been conditional, or for a special purpose only, and not for the purpose of transferring the property in the instrument. But where the instrument is in the hands of a holder in due course, a valid delivery thereof by all parties prior to him [or her] so as to make them liable to him [or her] is conclusively presumed. And where the instrument is no longer in the possession of a party whose signature appears thereon, a valid and intentional delivery by him [or her] is presumed until the contrary is proved. </blockquote>Hence,<i> in order to resolve whether the Complaint lacked a cause of action, respondent must have presented evidence to dispute the presumption that the signatories validly and intentionally delivered the instrument</i>.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> (Emphasis supplied, citations omitted) </blockquote>A comparable conclusion was reached by the Court in<i> Roa v. Sps Sy</i>.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> In that case, the Court determined that the CA erred in reversing the ruling of the RTC and dismissing a complaint on the ground of lack of cause of action, when the respondents had moved for dismissal based on failure to state a cause of action. The Court went on to discuss when it would be appropriate to dismiss an action for lack of cause of action, as follows:<br><blockquote>To emphasize, lack of cause of action may only be raised after the questions of fact have been resolved on the basis of stipulations or admissions or evidence presented by the plaintiff. Before then, it cannot be raised as a ground for dismissal; much less, can the court dismiss the case on that ground.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> </blockquote>Considering that the plaintiff in<i> Roa</i> has not yet presented its evidence, the Court determined that it was erroneous for the CA to dismiss the case for lack of cause of action.<br><br>In both<i> Asia Brewery</i> and<i> Roa</i>, the Court found it proper to remand the cases to their courts of origin for further proceedings. Remand was necessary in order to receive further evidence on the claims set forth by the plaintiffs. Following these, the Court deems it proper to follow jurisprudence and remand the case to the RTC for pre-trial and eventual trial on the merits.<br><br><i>Examining past jurisprudence</i><br><br>All things considered, the Court takes this opportunity to revisit and clarify past jurisprudence on failure to state a cause of action. The misapplication of procedural concepts in this case may, in part, stem from the Court's own pronouncements in<i> Aquino</i> and other cases.<br><br>Aside from explaining the test for determining whether a complaint states a cause of action, the Court in<i> Aquino</i> also listed the exceptions to the general rule that allegations are hypothetically admitted as true and that the inquiry is confined to the face of the complaint or petition:<br><blockquote>The Court does not discount, however, that there are exceptions to the general rule that allegations are hypothetically admitted as true and inquiry is confined to the face of the complaint. First,<i> there is no hypothetical admission of<b> (a) the veracity of allegations if their falsity is subject to judicial notice; (b) allegations that are legally impossible; (c) facts inadmissible in evidence; and (d) facts which appear, by record or document included in the pleadings, to be unfounded</b></i>. Second,<i> inquiry is not confined to the complaint if culled (a) from annexes and other pleadings submitted by the parties; (b) from documentary evidence admitted by stipulation which disclose facts sufficient to defeat the claim; or (c) from evidence admitted in the course of hearings related to the case</i>.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> (Emphasis supplied, citations omitted) </blockquote>Following<i> Aquino</i>, the trial court is not expected to hypothetically admit all the claims made in the complaint or the petition. Exceptions to the general rule arise when claims are legally impossible, inadmissible, or unfounded based on the pleadings and their attachments.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> In determining whether a claim is legally impossible, inadmissible, or unfounded, the trial court may undertake a comprehensive evaluation of the initiatory pleading and its attachments. The court is supposedly not confined to the complaint or petition and its annexes; it may also consider other submissions and admissions presented during the hearings on the case.<br><br>It appears that the Court in<i> Aquino</i> cited<i> Dabuco v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> as basis for the listed exceptions.<br><br>A review of<i> Dabuco</i> shows that said exceptions were first applied and discussed in<i> Mathay v. Consolidated Bank and Trust Company</i> (1974)<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> and <i>Tan v. Director of Forestry</i> (1986).<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>The plaintiffs in<i> Mathay</i> filed a class suit to prevent the respondents from depriving petitioners of their supposed right to subscribe to Consolidated Mines, Inc.'s<b> (CMI)</b> capital stock. Both the RTC and CA dismissed the suit holding that it failed to state a cause of action. The Court affirmed the lower courts' findings and premised its discussion with the following discussion:<br><blockquote><blockquote>"As a rule the sufficiency of the complaint, when Challenged [sic] in a motion to dismiss, must be determined exclusively on the basis of the facts alleged therein." </blockquote>It has been likewise held that a motion to dismiss based on lack of cause of action hypothetically admits the truth of the allegations of fact made in the complaint.<i> It is to be noted that only the facts well pleaded in the complaint, and likewise, any inferences fairly deducible therefrom, are deemed admitted by a motion to dismiss.<b> Neither allegations of conclusions nor allegations of facts the falsity of which the court may take judicial notice are deemed admitted</b></i>. The question, therefore, submitted to the Court in a motion to dismiss based on lack of cause of action is not whether the facts alleged in the complaint are true, for these are hypothetically admitted, but whether the facts alleged are sufficient to constitute a cause of action such that the court may render a valid judgment upon the facts alleged therein.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> (Emphasis supplied, citations omitted) </blockquote>In finding merit in respondents' contentions, the Court ruled that the complaint failed to allege petitioners' qualifications to subscribe to CMI's capital stock. Even assuming they were qualified, the Court determined that "[petitioners] did not even aver that the stocks waived to the subscription of which they claimed the right to subscribe, were comprised in 'the extent and amount' of their respective [shareholdings] in the CMI." The Court dismissed petitioners' arguments as mere legal conclusions, unsupported by ultimate facts to substantiate their causes of action.<br><br>On the other hand,<i> Tan</i> involved a suit challenging the cancellation of a timber license. Through a motion to dismiss, therein respondents argued that the petition does not state a cause of action. A hearing was conducted on a prayer for preliminary injunction where evidence was submitted. The trial court granted the motion to dismiss for failure to state a cause of action. The trial court held that, on the basis of the evidence presented in the hearings, the timber license relied upon was null and void. Such license being void, plaintiffs allegation that his right had been violated was false.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>When the case reached the Court, therein plaintiff argued that the lower courts erred in ruling in favor of respondents. Plaintiffs position was summarized as follows:<br><blockquote>He argues that the sole issue in the present case is, whether or not the facts in the petition constitute a sufficient cause of action (p. 31, rec.). Petitioner-appellant, in his brief, presented a lengthy discussion on the definition of the term cause of action wherein he contended that the three essential elements thereof â namely, the legal right of the plaintiff, the correlative obligation of the defendants and the act or omission of the defendant in violation of that right â are satisfied in the averments of this petition (pp. 31-32, rec.). He invoked the rule that when the ground for dismissal is that the complaint states no cause of action, such fact can be determined only from the facts alleged in the complaint and from no other, and the court cannot consider other matters aliunde. He further invoked the rule that in a motion to dismiss based on insufficiency of cause of action, the facts alleged in the complaint are deemed hypothetically admitted for the purpose of the motion (pp. 32-33, rec.).<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </blockquote>To address this, the Court explained:<br><blockquote>A perusal of the records of the case shows that petitioner-appellant's contentions are untenable. As already observed, this case was presented to the trial court upon a motion to dismiss for failure of the petition to state a claim upon which relief could be granted (Rule 16 [g]. Revised Rules of Court), on the ground that the timber license relied upon by the petitioner-appellant in his petition was issued by the Director of Forestry without authority and is therefore void ab initio. This motion supplanted the general demurrer in an action at law and, as a rule admits, for the purpose of the motion, all facts which are well pleaded.<b><i> However, while the court must accept as true all well pleaded facts, the motion does not admit allegations of which the court will take judicial notice are not true, nor does the rule apply to legally impossible facts, nor to facts inadmissible in evidence, nor to facts which appear by record or document included in the pleadings to be unfounded</i></b> (Vol. 1, Moran's Comments on the Rules of Court, 1970 ed., p. 505, citing cases).<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> (Emphasis supplied) </blockquote><i>Mathay</i> involved a complaint which failed to allege any of the ultimate facts which would establish their claims. The case dealt with an initiatory pleading that the court properly dismissed for failing to state a cause of action. <i>Tan</i>, on the other hand, involved a dismissal on the ground that the plaintiff did not have a cause of action in light of the counter-allegations stated in therein respondents' motion to dismiss.<br><br>Dissimilar here, Taganile et al. was able to allege the basis for their claim to support their Petition for Quieting of Title. The validity of their claim was only questioned once Dolar et al. filed their Motion to Dismiss. However, it must be emphasized that the trial court must only look into the sufficiency, not the veracity, of the averments in a complaint or petition to determine if it states a cause of action.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><i> Dabuco</i> explained:<br><blockquote>In dismissal for failure to state a cause, the inquiry is into the sufficiency, not the veracity, of the material allegations. The test is whether the material allegations, assuming these to be true, state ultimate facts which constitute plaintiffs cause of action, such that plaintiff is entitled to a favorable judgment as a matter of law. The general rule is that inquiry is confined to the four corners of the complaint, and no other.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Citations omitted) </blockquote>To do otherwise, or to receive and evaluate evidence, would delve into the existence of a cause of action, and not just whether the plaintiff was able to state one in their complaint or petition.<br><br>In weighing the applicability of the exceptions listed in<i> Aquino</i>,<i> </i>concerns arise on when each ground may be applied by the trial court to dismiss a complaint. As Associate Justice Japar B. Dimaampao pointed out, these exceptions could blur the distinction between a failure to state a cause of actionâwhere no hypothetical admission can be made because the facts, as shown by the record or documents attached to the pleadings, appear unfoundedâand a lack of cause of action.<br><br>To reconcile, the Court now settles, once and for all, that a complaint or petition may only be dismissed for failure to state a cause of action after an examination of the complaint or information itself, together with its annexesâstrictly excluding the pleadings or submissions of other parties.<br><br>In so ruling, the Court returns to the established test: assuming the truth of the factual allegations in the complaint, may the judge validly grant the relief sought?<br><br>This test does not call for input from the other parties or extraneous evidence. To allow such would effectively permit the trial court to determine the very existence of a cause of action, rather than limit itself to the narrower question of whether the petitioner or plaintiff has failed to state one.<br><br>To be clear, this ruling will effectively revisit and clarify the underscored portion of this discussion in<i> Aquino:</i><br><blockquote>The Court does not discount, however, that there are exceptions to the general rule that allegations are hypothetically admitted as true and inquiry is confined to the face of the complaint. First,<i> there is no hypothetical admission of (a) the veracity of allegations if their falsity is subject to judicial notice; (b) allegations that are legally impossible; (c) facts inadmissible in evidence; and (d) facts which appear, by record or document included in the pleadings, to be unfounded</i>.<b> Second,<i> inquiry is not confined to the complaint if culled (a) from annexes and other pleadings submitted by the parties; (b) from documentary evidence admitted by stipulation which disclose facts sufficient to defeat the claim; or (c) from evidence admitted in the course of hearings related to the case</i></b>.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> (Emphasis supplied, citations omitted) </blockquote>As mentioned, the underscored portion calls for an evidentiary evaluation and an appreciation of the parties' submissions outside the complaint or petition. Once the trial court considers other pleadings submitted by the parties or evidence admitted during the proceedings, it is no longer determining a failure to state a cause of action, but rather the very existence of one. In doing so, the ground for dismissing the complaint or petition ceases to be "failure to state a cause of action" and becomes "lack of cause of action."<br><br>As basis, the Court in<i> Aquino</i> referred to the following cases for the underscored portion â<i> Tan</i>, <i>Dabuco</i>, and<i> Phil. Army, 5<sup>th</sup> Infantry Division v. Sps. Pamittan</i><sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>As discussed,<i> Tan</i> involved a dismissal for lack of cause of action not for failure to state a cause of action. Its precedential value is therefore limited to cases involving the former more than the latter.<br><br><i>Dabuco</i>, on the other hand, involved a complaint over agricultural lands which was dismissed by the trial court holding that the plaintiffs lacked a cause of action for failing to present evidence. The CA later overturned the trial court's ruling. In upholding the CA Decision, the Court explained that it was premature for the trial court to rule that plaintiffs had no cause of action.<br><br>As regards the complaint's supposed failure to state a cause of action, the Court echoed the CA's finding that the complaint sufficiently alleged its cause. The CA correctly limited its evaluation to the allegations in the complaint:<br><blockquote>In dismissal for failure to state a cause, the inquiry is into the sufficiency, not the veracity, of the material allegations. The test is whether the material allegations, assuming these to be true, state ultimate facts which constitute plaintiffs cause of action, such that plaintiff is entitled to a favorable judgment as a matter of law. The general rule is that inquiry is confined to the four corners of the complaint, and no other.<br><br>This general rule was applied by the [CA]. Said court stated:<br><blockquote>It is a well-settled rule that in determining the sufficiency of the cause of action, ONLY the facts alleged in the complaint and no others, should be considered. In determining the existence of a cause of action, only the statements in the complaint may properly be considered. If the complaint furnish sufficient basis by which the complaint may be maintained, the same should not be dismissed regardless of the defenses that may be assessed [sic] by defendants-appellees. </blockquote>The appellate court, relying on the general rule, made the following conclusion:<br><blockquote>A reading of the above-quoted complaint would readily show that plaintiff-appellant has sufficient cause of action as against defendants-appellees.<br><br>In the complaint, it is alleged that plaintiff-appellant is the owner of the subject properties, thus, entitled to be respected in its possession and ownership. This is the first element.<br><br>Defendants-appellees are mere squatters of the subject properties who should vacate the premises upon demand by plaintiff-appellant. This is the second element.<br><br>Defendants-appellees unjustly refused to vacate the subject premises, thus, depriving plaintiff-appellant possession of the same. This is the third element.<br><br>In this case therefore, plaintiff-appellant has sufficient cause of action.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> (Citations omitted) </blockquote></blockquote>The petitioners in<i> Dabuco</i> invoked<i> Tan</i> and the earlier underscored exceptions to justify the dismissal by the trial court. However, the Court, in <i>Dabuco</i>, determined that<i> Tan</i> was inapplicable:<br><blockquote>A hearing was conducted on Tan's prayer for preliminary injunction, wherein evidence was submitted by the parties and extensive discussion held. The trial court then resolved the Motion to Dismiss and dismissed Tan's petition for failure to state a cause of action. The trial court held that, on the basis of the evidence presented in the hearings, the timber license relied upon by Tan was null and void. Such license being void, Tan's allegation that his right had been violated was false. On appeal, this Court ruled that the trial court was correct in considering the evidence already presented and in not confining itself to the allegations in Tan's petition.<br><br>The theory behind<i> Tan</i> is that the trial court must not rigidly apply the device of hypothetical admission of allegations when, on the basis of evidence already presented, such allegations are found to be false. Thus, findings of fact are not postponed until after trial, but are made at the preliminary stage because there is sufficient evidence available.<br><br>We find, however, that<i> Tan</i> is not applicable in this case. Unlike in <i>Tan</i> where the parties were given ample opportunity in the preliminary hearing to present evidence on their contentions, [respondents] did not have sufficient chance to prove its allegation of ownership. Thus, the conclusion that [respondent]'s allegation of ownership is false and that its complaint stated no cause of action, appears to be without basis.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> </blockquote>As earlier explained,<i> Tan</i> involved a preliminary hearing on the application for a writ of preliminary injunction, which also served as an opportunity for the reception of evidence on the claims stated in the suit and the motion to dismiss. After evaluating the evidence presented by the parties, the trial court found that the plaintiff had no cause of action. In contrast, in <i>Dabuco</i>, the parties had yet to present evidence on their respective claims, and the allegations in the initiatory pleading were not insufficient. Hence, it was premature for the trial court to rule on the existence of a cause of action prior to trial, and the Court accordingly declined to apply<i> Tan</i>.<br><br>Meanwhile,<i> Spouses Pamittan</i> involved a complaint for damages with a prayer for injunction against several officers of the Armed Forces of the Philippines<b> (AFP)</b> for directing the demolition of complainants' houses in Isabela. The Office of the Solicitor General<b> (OSG)</b> moved to dismiss the complaint, arguing, among others, that it failed to state a cause of action, which the trial court granted. The CA however reversed the trial court's ruling and explained that the determination of ownership over the disputed proper could best be resolved in a full blown hearing on the merits. In reversing the CA and reinstating the trial court's order, the Court, in<i> Spouses Pamittan</i>, relied on<i> Santiago v. Pioneer Savings &amp; Loan Bank</i><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> to explain that the trial court correctly relied on the survey report issued by the Department of Environment and Natural Resources to rule that the disputed property was within the AFP's military reservation. Notably, the trial court "dismissed the complaint for lack of cause of action considering that the State as the owner has the right to use the subject property."<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Although the ground invoked by the OSG in moving to dismiss the case was the complaint's supposed failure to state a cause of action, the trial court, in light of the evidence presented, dismissed the complaint for lack of cause of action, which was affirmed by the Court.<br><br><i>Santiago</i>, similar to<i> Tan</i> and referencing said case, considered evidence extraneous to the complaint that was gathered during the hearing on the petition for preliminary injunction when it ordered the dismissal of the case for lack of cause of action.<br><br>The Court's rulings in<i> Tan</i>, <i>Spouses Pamittan</i>, and even in<i> Santiago </i>may be better appreciated in the context of the procedural rules then in force. As mentioned, prior to the 2019 amendments to the Rules of Civil Procedure, a plaintiffs failure to state a cause of action could be raised at the very outset of the proceedings, whether through a motion to dismiss or as an affirmative defense. Consequently, the trial court was constrained to make an early determination of whether the initiatory pleading adequately alleged the elements of a cause of action. Inevitably, this inquiry also touched upon the actual existence of that cause of action. Through its present disposition, the Court acknowledges that one's failure to state a cause of action may still be raised as an affirmative defense, but the inquiry must be limited to the complaint or petition and its annexes. Any evaluation of evidence beyond these necessarily involves determining whether the complainant or petitioner has a cause of action, not merely whether it was stated.<br><br>Trial courts must be mindful that such a determination effectively resolves the case on its merits, and a dismissal on this ground may bar the refiling of the same cause of action. In comparison, a dismissal of a petition on the ground of failure to state a cause of action is without prejudice to the refiling of another petition raising the same remedies so long as it conforms with the requirements found in the Rules of Court.<br><br>Rule 15, Section 13 of the Rules of Court enumerates the grounds for dismissal that preclude the refiling of another petition based on the same claim:<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><blockquote>SECTION 13.<i> Dismissal with Prejudice</i>. â Subject to the right of appeal,<i> an order granting a motion to dismiss or an affirmative defense that the cause of action is barred by a prior judgment or by the statute of limitations; that the claim or demand set forth in the plaintiffs pleading has been paid, waived, abandoned or otherwise extinguished; or that the claim on which the action is founded is unenforceable under the provisions of the statute of frauds</i>, shall bar the refiling of the same action or claim. (Emphasis supplied) </blockquote>Dismissals for failure to state a cause of action are not included in the list because they do not resolve the case on the merits. An adjudication on the merits means that the court has ruled on the substantive legal and factual issues of the claim. Once a claim has been adjudicated on the merits, such as when the court determines that the plaintiff has no cause of action, the plaintiff can no longer refile it, pursuant to the doctrine of<i> res judicata</i>.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> This further underscores the distinction between the two.<br><br>Notably, Rule 41, Section 1(h)<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> of the Rules of Court mandates that no appeal may be taken from an order dismissing an action without prejudice. The same section provides that in such an instant where the final order is not appealable, the aggrieved party may file an appropriate special civil action under Rule 65 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> On the other hand, when an action is dismissed on its merits, it operates as a judgment that bars the refiling of the same cause of action, as mentioned. Such dismissal may then be appealed in accordance with the relevant provisions of the Rules of Court.<br><br>By appealing the RTC's Orders before the CA and subsequently filing the present Petition, it may appear that Taganile et al. availed of the wrong remedy, as both the RTC and CA held that they failed to state a cause of action. However, as discussed, the RTC and CA went beyond the Petition for Quieting of Title and admitted evidence extraneous to it, thereby effectively determining, albeit prematurely, that Taganile et al. had no cause of action. In this light, the Court does not fault Taganile et al. for resorting to the remedies they did, given the RTC and CA's disposition.<br><br>In resolving whether a party failed to state a cause of action, courts must be careful not to conflate this inquiry with a determination of whether the party actually has a cause of action. The former is a procedural question confined to the pleading, while the latter is a substantive issue that necessarily entails the reception and evaluation of evidence. When a court admits and relies on matters outside the pleading, it effectively shifts from assessing the sufficiency of the allegations to ruling on the merits of the claim itself.<br><br>Fair play requires that the sufficiency of an initiatory pleading be determined solely from the plaintiffs own allegations and statements in their complaint or petition. The determination should not hinge on the submissions of other parties, as this would unjustly bind one party to matters clearly beyond their control. In the end, the truth of conflicting allegations is best resolved through trial, not by a cursory invocation of the exceptions that the Court now reexamines.<br><br><b>ACCORDINGLY,</b> the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The Decision, dated December 16, 2021, and the Resolution, dated July 5, 2022, of the Court of Appeals in CA-G.R. CV No. 115571, which affirmed with modification the Orders, dated October 17, 2019 and February 19, 2020, of Branch 161, Regional Trial Court, Pasig City in Civil Case No. R-PSG-19-00805, are<b> REVERSED</b>. The case is<b> REMANDED</b> to the trial court for the expeditious continuation of proceedings.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as Weldel in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 9-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 27-40. Penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Victoria Isabel A. Paredes and Bonifacio S. Pascua of the Fourteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 42-46. Penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Victoria Isabel A. Paredes and Bonifacio S. Pascua of the Former Fourteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 66-69. Penned by Presiding Judge Nicanor A. Manalo, Jr.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 71-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 48-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 49-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> PRESIDENTIAL DECREE NO. 1529, sec. 15. <i>See also</i> <i>rollo</i>, p. 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, p. 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 31; 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 31-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 66-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 71-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 27-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> CIVIL CODE, arts. 476, 477:<br><blockquote>ARTICLE 476. Whenever there is a cloud on title to real property or any interest therein, by reason of any instrument, record, claim, encumbrance or proceeding which is apparently valid or effective but is in truth and in fact invalid, ineffective, voidable, or unenforceable, and may be prejudicial to said title, an action may be brought to remove such cloud or to quiet the title.<br><br>An action may also be brought to prevent a cloud from being cast upon title to real property or any interest therein.<br><br>ARTICLE 477. The plaintiff must have legal or equitable title to, or interest in the real property which is the subject-matter of the action. He need not be in possession of said property.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 34-35, <i>citing</i> <b>Quintos et al. v. Nicolas et al.</b>, 736 Phil. 438, 450 (2014) [Per J. Velasco, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, p. 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 36-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 760 Phil. 883 (2015) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>., <i>citing</i> <b>Spouses Pico v. Spouses Salcedo</b>, 617 Phil. 221, 229 (2009) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo</i>, p. 38, <i>citing</i> <b>Yu v. Topacio</b>, 863 Phil. 397, 407 (2019) [Per J. J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, pp. 38-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 27-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 42-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 15-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 19-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> RULES OF COURT, Rule 2, sec. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Roa v. Spouses Sy et al.</b>, 910 Phil. 219 (2021) [Per J. Lazaro-Javier, First Division], <i>citing</i> <b>Spouses Chu, Sr. v. Benelda Estate Development Corp.</b>, 405 Phil. 936 (2001) [Per J. De Leon, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> RULES OF COURT, rule 2, section 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>See</i> <b>Roa v. Sps. Sy</b>, 910 Phil. 219, 226-227 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> RULES OF COURT, Rule 15, sec. 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>., Rule 6, sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Roa v. Sps. Sy</b>, 910 Phil. 219, 226-227 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Asia Brewery v. Equitable PCI Bank</b>, 809 Phil. 289, 299 (2017) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 755 Phil. 793 (2015) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 810.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Mananquil v. Moico</b>, 699 Phil. 120, 127 (2012) [Per J. Del Castillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 466 Phil. 894 (2004) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 68-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Rollo</i>, pp. 68-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Virra Mall Tenants Association, Inc. v. Virra Mall Greenhills Association</b>, 674 Phil. 517 (2011) [Per J. Sereno, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, p. 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>See</i> <b>PNB v. Sps. Rivera</b>, 785 Phil. 450 (2016) [Per J. Jardeleza, Third Division]. <i>See also</i> <b>Heirs of Rosa Pamaran v. Bank of Commerce</b>, 789 Phil. 42 (2016) [Per J. Del Castillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 809 Phil. 289 (2017) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>. at 297-299.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 910 Phil. 219 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 228.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Aquino v. Quiazon</b>, 755 Phil. 793, 813-814 (2015) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>See</i> OXFORD ENGLISH DICTIONARY, "unfounded", <i>available at</i> <a href="https://www.oed.com/search/dictionary/?scope=Entries&amp;q=unfounded">https://www.oed.com/search/dictionary/?scope=Entries&amp;q=unfounded</a> (last accessed on August 21, 2024). A claim is considered unfounded if it has no basis in fact.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 379 Phil. 939 (2000) [Per J. Kapunan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 157 Phil. 551 (1974) [Per J. Zaldivar, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> 210 Phil. 244 (1983) [Per J. Makasiar, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> 157 Phil. 551 (1974) [Per J. Zaldivar, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>See</i> <b>Dabuco v. Court of Appeals</b>, 379 Phil. 939 (2000) [Per J. Kapunan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Tan v. Director of Forestry</b>, 210 Phil. 244, 254-255 (1983) [Per J. Makasiar, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id</i>. at 255.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Dabuco v. Court of Appeals</b>, 379 Phil. 939 (2000) [Per J. Kapunan, First Division], <i>citing</i><b> Ventura v. Bernabe</b>, 148 Phil. 610 (1971) [Per J. Barredo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Dabuco v. Court of Appeals</b>, <i>id</i>. at 949.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Aquino v. Quiazon</b>, 755 Phil. 793, 813-814 (2015) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> 667 Phil. 440 (2011) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Dabuco v. Court of Appeals</b>, 379 Phil. 939, 949-950 (2000) [Per J. Kapunan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id</i>. at 951-952.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> 241 Phil. 113 (1988) [Per J. Melencio-Herrera, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> These grounds were lifted from the Court's ruling in<b> DBP v. Judge Carpio</b>, 805 Phil. 99 (2017) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> CORNELL LAW SCHOOL, LEGAL INFORMATION INSTITUTE, "with prejudice"<i> <i>available at</i> </i><a href="https://www.law.cornell.edu/wex/with_prejudice">https://www.law.cornell.edu/wex/with_prejudice</a> (last accessed on August 28, 2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> SECTION 1. Subject of appeal. â An appeal may be taken from a judgment or final order that completely disposes of the case, or of a particular matter therein when declared by these Rules to be appealable.<br><br><i>No appeal may be taken from:</i><br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">An order denying a motion for new trial or reconsideration; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">An order denying a petition for relief or any similar motion seeking relief from judgment; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">An interlocutory order; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td valign="top"> <div align="JUSTIFY">An order disallowing or dismissing an appeal; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(e) </div></td> <td valign="top"> <div align="JUSTIFY">An order denying a motion to set aside a judgment by consent, confession or compromise on the ground of fraud, mistake or duress, or any other ground vitiating consent; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(f)</div></td> <td valign="top"> <div align="JUSTIFY">An order of execution; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(g) </div></td> <td valign="top"> <div align="JUSTIFY">A judgment or final order for or against one or more of several parties or in separate claims, counterclaims, cross-claims and third-party complaints, while the main case is pending, unless the court allows an appeal therefrom; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(h)</div></td> <td valign="top"> <div align="JUSTIFY"><i>An order dismissing an action without prejudice</i>. </div></td> </tr> </tbody></table></blockquote><i>In all the above instances where the judgment or final order is not appealable, the aggrieved party may file an appropriate special civil action under Rule 65</i>. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 805 Phil. 99 (2017) [Per J. Mendoza, Second Division], <i>citing</i> <b>Atty. Fernandez v. CA</b>, 497 Phil. 748 (2005) [Per J. Chico-Nazario, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 240385 - XXX,[1] PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT. D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70160' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 240385, October 08, 2025 ]</H2>
+			<H3>XXX,<SUP STYLE="COLOR: RGB(255, 0, 0);">[1]</SUP> PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR> D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before this Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> filed by XXX questioning the April 19, 2018 Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and the July 2, 2018 Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Court of Appeals (CA) in CA-G.R. CR. No. 38012. The assailed Decision and Resolution affirmed with modification the conviction of XXX for Simple Seduction in relation to Section 5(b) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> <i>The Factual Antecedents</i></p><p> An Information<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated May 31, 2000 charged XXX as follows: </p><blockquote> <p> That on or about the month of August 1998, or subsequent thereto, in the Municipality of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> and within the jurisdiction of this Honorable Court, the above-named accused, by means of deceit and false promise of marriage, did, then and there, willfully, unlawfully, and feloniously seduce and have sexual intercourse several times with the complainant, [AAA],<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> a virgin over 12 but under 18 years of age.</p> <p> <b>CONTRARY TO LAW.</b><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> (Emphasis in the original) </p> </blockquote> <p> Upon his arraignment on November 14, 2000, XXX entered a plea of "not guilty."<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> After pre-trial was terminated on April 22, 2002, the trial of the case ensued.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> <i>Version of the Prosecution</i> </p><p> In August 1998, AAA, then a first-year student at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>, and XXX met through common friends. XXX impressed upon AAA that he is single.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> On November 15, 1998, XXX informed AAA's parents that he was courting their daughter. Eventually, the two became lovers.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> On May 8, 1999, AAA, accompanied by her mother and aunt, went to XXX's house and informed him of her pregnancy. That same day, AAA learned that XXX was married.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The following day, XXX, together with his father and a friend, went to speak to AAA's parents concerning the status of their relationship and AAA's pregnancy.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> In May 1999, XXX and his father reassured AAA and her parents that they would work out the annulment of XXX's previous marriage. XXX likewise filled up an application for marriage license.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> On October 16, 1999, AAA requested her friends to inform XXX that she had given birth. XXX did not visit her and the baby, nor did he extend financial assistance. Due to the pregnancy, AAA was forced to drop out of her classes. She also lost the opportunity to earn as a showbiz talent, and instead depended on her parents for the child's support.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> <i>Version of the Defense</i></p><p> For his part, XXX contended that in May 1999, after the pregnancy was confirmed, AAA's parents went to XXX's house to confront him and to force him to marry their daughter. Additionally, XXX asserted that AAA and her family knew about his previous marriage which had not yet been nullified. Persistent in marrying off their daughter, AAA's parents made XXX sign an application for a marriage license.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> As time passed, the relationship between AAA and XXX soured. AAA then filed a criminal case for seduction in relation to Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> <i>Ruling of the Regional Trial Court</i></p><p> In a Decision dated May 17, 2007,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> XXX was found guilty of Simple Seduction in relation to Republic Act No. 7610, to wit: </p><blockquote> <p> WHEREFORE, in view of the foregoing premises, judgment is hereby rendered finding accused [XXX] <b>guilty</b> of the crime of SIMPLE SEDUCTION in relation to [Republic Act No.] 7610 and this Court hereby sentences him to suffer imprisonment of FOUR (4) YEARS, EIGHT (8) MONTHS AND ONE (1) DAY of <i>Prision Correccional</i>, as minimum, to SIX (6) YEARS AND ONE (1) DAY of <i>Prision Mayor</i>, as maximum. </p> <p> He is further ordered to pay the private complainant the following amounts, to wit: </p> <p> a) [PHP] 20,000.00 as Actual Damages; <br> b) [PHP] 100,000.00 as Moral Damages; and, <br> c) [PHP] 50,000.00 as Exemplary Damages. </p> <p>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original) </p> </blockquote> <p> The trial court found all elements of Seduction under Article 338 to be present in this case, to wit: </p><ol><li> The private complainant is over twelve (12) and under eighteen (18) years of age;</li><li>She is single and of good reputation;</li><li> The offender had sexual intercourse with her; and</li><li> It was committed by deceit.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </li></ol> <p> The trial court observed that XXX introduced himself to AAA and her parents as single and made a false promise of marriage, resulting to successfully persuading AAA to engage in sexual congress with him.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> The trial court ruled that AAA's testimony was credible, straightforward, and firm despite rigorous cross-examination.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> <i>Ruling of the Court of Appeals</i></p><p> On May 21, 2015, XXX filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> alleging that as of such date, he had not received any communication pertaining to his appeal. He asserted that upon verification, he learned that the records of his case had not been forwarded to the CA for disposition. XXX likewise alleged that he had just learned that his counsel of record died some time in 2009.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> On June 15, 2015, Acting Presiding Judge Gloria Butay Aglugub (Acting Presiding Judge Aglugub) issued an Order<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> directing the Branch Clerk of Court to locate the records of the case and to verify if there was indeed a notice of appeal filed before the trial court within the reglementary period. On August 14, 2015, Clerk of Court V Alpha L. Andrada submitted a Report<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> stating that no notice of appeal was attached nor was a copy of the same found in the folder where pleadings for criminal cases are kept. Only upon verification with the Office of the Clerk of Court of RTC <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxx</span> was she able to obtain a copy of the notice of appeal. It was discovered that the Criminal Clerk-in-Charge in 2007 must have overlooked to file the notice of appeal, hence the non-transmittal of the records of the case to the appellate court.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Thus, on September 14, 2015, Acting Presiding Judge Aglugub issued an order directing the Branch Clerk of Court to immediately forward the entire records of the case to the CA.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> In a Decision dated April 19, 2018,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the appellate court affirmed the conviction, to wit: </p><blockquote> <p> <b>WHEREFORE</b>, the appeal is <b>DISMISSED.</b> The May 17, 2007 <i>Decision</i> of the Regional Trial Court, Branch 22, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span> docketed as Crim. Case No. 8269-00 is <b>AFFIRMED with the following MODIFICATIONS:</b> </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">Accused-appellant [XXX] is found guilty beyond reasonable doubt of [the crime] of Simple Seduction in relation to Section 5(b), Article III of Republic Act [No.] 7610 and, accordingly, sentenced to suffer the indeterminate prison term of fourteen (14) years and eight (8) months of <i>reclusion temporal</i>, as minimum, to twenty (20) years of <i>reclusion temporal</i>, as maximum;</div></td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td><div align="justify">Accused-appellant [XXX] is ordered to pay private complainant [AAA] the amounts of [PHP] 50,000.00 as civil indemnity, [PHP] 50,000.00 as moral damages, [PHP] 15,000.00 as exemplary damages, and [PHP] 15,000.00 as fine; and </div></td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td><div align="justify">Accused-appellant [XXX] is ordered to pay the private complainant [AAA] interest on all monetary awards at the legal rate of six percent (6%) <i>per annum</i> from the date of finality of this Decision until full payment.</div></td> </tr> </tbody></table> </blockquote> <p><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Emphasis in the original) </p> </blockquote> <p> The appellate court ruled that the prosecution sufficiently proved the elements of both Simple Seduction under the Revised Penal Code and Section 5(b), Article III of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The CA, like the trial court, found the straightforward testimony of AAA to be credible.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> The appellate court noted that under Article 338 of the Revised Penal Code, to constitute seduction, there must be some deceitful promise or inducement which should have made the victim yield.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> In the instant case, it was found that XXX's acts of misrepresenting himself as single, coupled with a false promise of marriage, induced AAA who was over 12 and under 18 years old and of good moral reputation to have sexual intercourse with him.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> The penalty imposed and the damages awarded by the trial court were modified. The CA sentenced XXX to suffer the indeterminate prison term of 14 years and eight months of <i>reclusion temporal</i>, as minimum, to 20 years of <i>reclusion temporal</i>, as maximum.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> XXX was ordered to pay AAA the amount of PHP50,000.00 as civil indemnity <i>ex delicto</i> as awarded in cases of Violation of Section 5(b), Article III of Republic Act No. 7610. XXX was additionally ordered to pay the amounts of PHP50,000.00 as moral damages, PHP15,000.00 as exemplary damages, and PHP15,000.00 as fine, which shall all earn interest at the rate of six percent (6%) <i>per annum</i> from the date of finality of judgment.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> Finally, the appellate court tackled XXX's contention that his right to speedy trial and disposition were violated. It held that the constitutional guarantees of speedy trial and speedy disposition are flexible concepts. It is consistent with delays and depends upon circumstances.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> In determining whether these rights were violated, four factors must be considered: (a) the length of delay; (b) the reason for the delay; (c) the defendant's assertion of his right; and (d) prejudice to the defendant. Of the four, the most serious is the last because the inability of a defendant to adequately prepare his case skews the fairness of the entire system.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> However, the appellate court noted that while the Constitution guarantees the rights to a speedy trial and speedy disposition, the best interest of children, special protection to children from all forms of neglect, abuse, cruelty, exploitation, and other conditions prejudicial to their development,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> are of paramount consideration.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> The CA observed that XXX is not faultless because he should have taken steps to know the status of his appeal and called the attention of the trial court to any delay in the transmittal of the records of the case.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> In addition, prevailing jurisprudence on the matter usually deals with a delay in the trial of the case. In the case at bar, XXX was convicted of the crime charged and was out on bail the entire time his notice of appeal was pending with the trial court. It took eight years before XXX asserted his right, contrary to his alleged persistence in inquiring about the status of his case.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> Upon motion for reconsideration, the CA affirmed the conviction.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></p><p align="center"> <i>Issues</i> </p><p> In this petition,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> petitioner raises the following questions: </p><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">I.</div></td> <td width="95%"><div align="justify">Whether the CA gravely erred in modifying the offense charged in the Information to a graver offense for which the petitioner was not arraigned; </div></td> </tr> <tr valign="top"> <td><div align="justify">II.</div></td> <td><div align="justify">Corollarily, whether the CA gravely erred in modifying and imposing a heavier penalty against the petitioner; </div></td> </tr> <tr valign="top"> <td><div align="justify">III.</div></td> <td><div align="justify">Whether provisions in the Bill of Rights prevail over other general declarations in the Constitution; </div></td> </tr> <tr valign="top"> <td><div align="justify">IV.</div></td> <td><div align="justify">Whether the inexplicable delay of eight years in acting upon the notice of appeal of petitioner violates his constitutional right to speedy disposition of his case; </div></td> </tr> <tr valign="top"> <td><div align="justify">V.</div></td> <td><div align="justify">Whether a promise to marry "after", made after the sexual intercourse, assuming <i>arguendo</i> that the complainant got pregnant, constitutes simple seduction; and</div></td> </tr> <tr valign="top"> <td><div align="justify">VI.</div></td> <td><div align="justify">Whether damages are appropriate to be awarded in the instant case.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </div></td> </tr> </tbody></table> <p>Relative to Issues I and II, petitioner asserts that he was charged with Simple Seduction in relation to Republic Act No. 7610, but was convicted of Simple Seduction in relation to Article III, Section 5(b) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Petitioner contends that the appellate court did not pass upon, nor was there any evidence presented to prove a violation of Article III, Section 5(b) of Republic Act No. 7610, thus the modification of the crime committed and the imposition of a higher penalty violated the constitutional protection of due process.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The CA not only reviewed the case but modified the crime committed without affording him the opportunity to defend himself for the additional charge.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> Regarding Issue III, petitioner asserts that the CA gave more importance to the rights of a child under the Constitution, against the right of every person to a speedy disposition of cases, also embodied in the Constitution under the Bill of Rights.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Petitioner argues that the Decision failed to consider that the constitutional provision he invoked is a specific provision embodied in the Bill of Rights, which is independent and can be invoked anytime, compared to the right of a child provided in Article XV, Section 3, which is a mere general declaration of policy.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Petitioner likewise contends that he was not aware of AAA's age at the time they were in a relationship. He maintains that he was led to believe that AAA was of legal age, considering that there was no hesitation, prohibition, or warning from the parents that AAA was still a minor and that she should not be dating petitioner who was already of legal age at the time.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> As the crime charged is one <i>malum in se</i>, it requires intent on the part of the actor to commit the crime against the child.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><p> On Issue IV, petitioner reiterates that it took the trial court more than eight years to realize that it had not acted upon the appeal, for no justifiable reason other than the gross negligence of its employees.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Had it not been for petitioner's persistence, the trial court would not have realized its gross negligence resulting to the violation of the petitioner's right to speedy disposition of his case.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Petitioner alleges that he was prejudiced by the delay, having been deprived of the right to have his case reviewed as early as possible and made to believe that his case was already being reviewed by the CA while being engulfed with anxiety over the possible outcome of his appeal and further costs of litigation.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> </p><p> On Issue V, petitioner contends that the time element of when the alleged marriage proposal was made is significant as it will determine whether there was deceit employed by petitioner for him to have sexual intercourse with AAA.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Petitioner maintains that the marriage proposal did not precede their sexual intercourse.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> In addition, the application for marriage license cannot be taken as evidence of deceit as petitioner signed the same after he was confronted by AAA's parents regarding their daughter's pregnancy.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Petitioner's representation that he is single is not equivalent to a promise of marriage.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Petitioner cites <i>U.S. v. Sarmiento</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> where the Court held that a promise of marriage must be the inducement and the woman must yield her virtue because of the promise or other inducement. If she consents merely from carnal lust and the intercourse is from mutual desire, there is no seduction.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> </p><p> Lastly, regarding Issue VI, petitioner maintains that considering the lack of basis for the conviction, the award of damages is not warranted.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></p><p align="center"> <i>Our Ruling</i> </p><p> The Petition is meritorious.</p><p> Preliminarily, in criminal cases, an appeal throws the entire case wide open for review and the reviewing tribunal can correct errors, although unassigned in the appealed judgment, or even reverse the trial court's decision based on grounds other than those raised as errors. It confers the appellate court full jurisdiction over the case and renders such court competent to examine records, revise the judgment appealed from, increase the penalty, and cite the proper provision of the penal law.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Guided by such consideration, the Court examines the correctness of the conviction and the findings of the lower courts on the incidents in this case. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>There is no crime of "Simple Seduction in relation to Section 5(b), Article III of Republic Act No. 7610"</i> </div></td> </tr> </tbody></table> <p>To recall, the Information filed against petitioner was for "<b>Simple Seduction in relation to Republic Act No. 7610</b>." The trial court convicted petitioner,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> while the appellate court affirmed but modified the nomenclature of the crime, to "<b>Simple Seduction in relation to Section 5(b), Article III of Republic Act [No.] 7610.</b>"<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> </p><p> The Court holds that there can be no crime of Simple Seduction in relation to Section 5(b) of Republic Act No. 7610. <i>People v. Tulagan</i><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> is enlightening: </p><blockquote> <p> If the victim who is 12 years old or less than 18 and is deemed to be a child "exploited in prostitution and other sexual abuse" because she agreed to indulge in sexual intercourse "for money, profit or any other consideration or due to coercion or influence of any adult, syndicate or group," then the crime could not be rape under the RPC, because this no longer falls under the concept of statutory rape, and there was consent. That is why the offender will now be penalized under Section 5(b), [Republic Act] No. 7610, and not under Article 335 of the RPC [now Article 266-A]. But if the said victim does not give her consent to sexual intercourse in the sense that the sexual intercourse was committed through force, threat or intimidation the crime is rape under paragraph 1, Article 266-A of the RPC. However, <i>if the same victim gave her consent to the sexual intercourse, and no money, profit, consideration, coercion or influence is involved, then there is no crime committed, except in those cases where "force, threat or intimidation" as an element of rape is substituted by "moral ascendancy or moral authority," like in the cases of incestuous rape, and unless it is punished under the RPC as qualified seduction under Article 337 or simple seduction under Article 338</i>.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> (Citations omitted, emphasis supplied) </p> </blockquote> <p> Below is a table of comparison between the elements of violation of Section 5(b) of Republic Act No. 7610 and those of Simple Seduction. </p><table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="50%"><div align="center"><strong>Section 5(b), Republic Act No. <br> 7610</strong></div></td> <td width="50%"><div align="center"><strong>Simple Seduction Under Article <br> 338, Revised Penal Code</strong><sup style="COLOR: RGB(255, 0, 0);">[70]</sup></div></td> </tr> <tr valign="top"> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">1.</td> <td width="95%"><div align="justify">The accused commits the act of sexual intercourse or lascivious conduct;</div></td> </tr> </tbody></table> </div></td> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%">1.</td> <td width="95%"><div align="justify">The minor is over 12 but under 18 years of age;</div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">2.</td> <td width="95%"><div align="justify">The said act is <strong>performed with a child exploited in prostitution or subjected to other sexual abuse (EPSOSA);</strong> </div></td> </tr> </tbody></table> </div></td> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%">2.</td> <td width="95%"><div align="justify">She is of good reputation, single or widow;</div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">3.</td> <td width="95%"><div align="justify">The child, whether male of female, is below 18 years of age.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup></div></td> </tr> </tbody></table> </div></td> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%">3.</td> <td width="95%"><div align="justify">The offender has sexual intercourse with her;</div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%">4.</td> <td width="95%"> <div align="justify">It is committed by means of <strong>deceit</strong>.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup></div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%">5.</td> <td width="95%"><div align="justify">The offender has sexual intercourse with her;</div></td> </tr> </tbody></table> </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"> <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%">6.</td> <td width="95%"> <div align="justify">It is committed by means of <strong>deceit</strong>.</div></td> </tr> </tbody></table> </div></td> </tr> </tbody></table> <p> For a charge under Republic Act No. 7610 to prosper, the minor victim must be a child EPSOSA.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> The Court had occasion to discuss this requisite in <i>Tulagan</i>: </p><blockquote> <p> To avoid further confusion, We dissect the phrase "children exploited in prostitution" as an element of violation of Section 5(b) of [Republic Act] No. 7610. As can be gathered from the text of Section 5 of [Republic Act] No. 7610 and having in mind that the term "lascivious conduct" has a clear definition which does not include "sexual intercourse," the phrase "children exploited in prostitution" contemplates four scenarios: (a) a child, whether male or female, who for money, profit or any other consideration, indulges in lascivious conduct; (b) a female child, who for money, profit or any other consideration, indulges in sexual intercourse; (c) a child, whether male or female, who due to the coercion or influence of any adult, syndicate or group, indulges in lascivious conduct; and (d) a female, due to the coercion or influence of any adult, syndicate or group, indulge in sexual intercourse. </p> <p> The term "other sexual abuse," on the other hand, is construed in relation to the definitions of "child abuse" under Section 3, Article I of [Republic Act] No. 7610 and "sexual abuse" under Section 2(g) of the <i>Rules and Regulations on the Reporting and Investigation of Child Abuse Cases</i>. In the former provision, "child abuse" refers to the maltreatment, whether habitual or not, of the child which includes sexual abuse, among other matters. In the latter provision, "sexual abuse" includes the employment, use, persuasion, inducement, enticement or coercion of a child to engage in, or assist another person to engage in, sexual intercourse or lascivious conduct or the molestation, prostitution, or incest with children. </p> <p> In <i>Quimvel</i>, it was held that the term "coercion or influence" is broad enough to cover or even synonymous with the term "force or intimidation." Nonetheless, it should be emphasized that "coercion or influence" is used in Section 5 of [Republic Act] No. 7610 to qualify or refer to the means through which "any adult, syndicate or group" compels a child to indulge in sexual intercourse. On the other hand, the use of "money, profit or any other consideration" is the other mode by which a child indulges in sexual intercourse, without the participation of "any adult, syndicate or group." In other words, "coercion or influence" of a child to indulge in sexual intercourse is clearly exerted NOT by the offender whose liability is based on Section 5(b) of [Republic Act] No. 7610 for committing sexual act with a child exploited in prostitution or other sexual abuse. Rather, the "coercion or influence" is exerted upon the child by "any adult, syndicate, or group" whose liability is found under Section 5(a) for engaging in, promoting, facilitating or inducing child prostitution, whereby the sexual intercourse is the necessary consequence of the prostitution.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> (Citations omitted) </p> </blockquote> <p> <i>Tulagan</i> categorically ruled that there could be no instance that an Information may charge the same accused with the crime of rape where "force, threat or intimidation" is the element of the crime under the Revised Penal Code, and at the same time a violation of Section 5(b) of Republic Act No. 7610, where the victim indulged in sexual intercourse because she/he is exploited in prostitution either for money, profit, or any other consideration, or due to coercion or influence of any adult, syndicate or group.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> The Court now opines that in the same manner, where an accused is charged with Simple Seduction where <b><u>deceit</u></b> is a fundamental element, such accused cannot be charged with a violation of Section 5(b) because this presupposes either (a) money, profit, or any other consideration or (b) coercion or influence of any adult, syndicate, or group, as the driving cause of consent of the child to engage in sexual intercourse. Deceit, in the specific sense of being an element of Simple Seduction, cannot and does not fall under (a) or (b). </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The elements of Simple Seduction were not proven beyond a reasonable doubt</i> </div></td> </tr> </tbody></table> <p>Article 338 of the Revised Penal Code provides that simple seduction is committed upon the seduction of a woman who is single or a widow of good reputation, over 12 but under 18, by means of deceit.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> The deceit contemplated by law is persuasion to engage in sexual intercourse upon a promise of marriage.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </p><p> The appellate court affirmed the trial court's finding of the presence of deceit in this case, reproducing pertinent portions of AAA's testimony: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td width="95%"><div align="justify">Did the accused propose marriage to you, Madam [W]itness? </div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">Yes, sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q</div></td> <td><div align="justify">What happened to that proposal?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td> <div align="justify">[O]n May 12, 1999[,] I consulted a doctor regarding my situation and when we have [confirmed my] situation after May 12[,] they went back to our house so that we could [discuss our] relationship and [my situation.]</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">Q</div></td> <td><div align="justify">Did you tell the accused that you were pregnant at that time?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">Yes, sir. We went to their house [o]n May 8, 1999 so that we could tell him and his family about my situation, sir.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup></div></td> </tr> </tbody></table> </blockquote> <p>The cited testimony fails to clearly state when the marriage proposal took place. Thus, it is necessary to refer to other testimonial evidence. BBB, mother of AAA, testified in this wise: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td width="95%"><div align="justify">Did the accused [propose] to you to marry your daughter? </div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">When I found out that my daughter was pregnant[,] I also found out that he was married from his parents[,] so they told us to wait so that he can have his marriage [annulled] first.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">When was the time you [knew] from his parents that the accused was married?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">Maybe it was May 1999 when I learned from my relatives that my daughter was pregnant[,] then we tried to contact him by calling him but we cannot reach him[,] so we decided to go to their place.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="center">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">Madam Witness, when â on the several occasions the accused visited your residence â he proposed to marry your daughter, in what particular time[?] During the first, second or third visit? </div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">The last time he went to our house[,] confirming that he [was] the one who got my daughter pregnant.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">What made you believe that the accused really meant to marry your daughter during the time?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">He filled up an application for marriage.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup></div></td> </tr> </tbody></table> </blockquote> <p>CCC, AAA's father, likewise testified on the matter, thus:</p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td width="95%"><div align="justify">When did you learn that your daughter was pregnant?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">That was before May of 1999. When I came to know [of] it[,] I [had] her [take a] pregnancy test. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">Why, did not [AAA,] your daughter, tell you that she was pregnant?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">No[,] sir. [M]y relatives told me that she is afraid of me. It was my relatives who told me about it.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">After the pregnancy test was taken, did you not ask her, "now you are pregnant, would you tell me [who the] father of the child [is]?"</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">Yes, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">What did she tell you?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">That the father of her child is [XXX]. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">That is the reason why you called for [XXX,] to confront him?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">Yes, sir.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">During the confrontation, what did [XXX] tell you?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">When we found out she was pregnant[,] we tried to call [XXX,] but we were not able to contact him[,] so we decided to go to his house. [W]e were not able to talk to him because he was not there[.] [W]e were able to talk to his mother.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">Then after that, what happened?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">The mother told us that he cannot marry my daughter because he is already married[,] but we were able to have an agreement that night[.] [T]he following day[,] they will go to our house so that we could settle the problem. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">When you said, "your house", they were going to your house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td><div align="justify">Yes, sir. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">And what happened[?] Did he go to your house the next day?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td> <div align="justify">The following day[,] it was [XXX], his father[,] and a friend who came to our house.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">And you reached an agreement. Is that correct? </div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td> <div align="justify">During the talk[,] we had not come to an agreement because he cannot marry my daughter[,] because he is married. [W]e also were not able to settle [what] will happen to my daughter and the daughter of my daughter. The second time they came to us[,] that was when we had an agreement that they will cause the annulment of the first marriage[,] then after that[,] he will marry my daughter. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td><div align="justify">When was that?</div></td> </tr> <tr valign="top"> <td><div align="justify">A</div></td> <td> <div align="justify">I think that was on May or June 1999.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup></div></td> </tr> </tbody></table> </blockquote> <p>A perusal of the testimonies offered in evidence reveals that the marriage proposal came after the confirmation of the pregnancy. There was no tinge of proof to support the claim that petitioner made a false promise of marriage to obtain AAA's consent to engage in sexual intercourse. While AAA stated in her Affidavit-Complaint that she gave herself to petitioner after he promised that he will marry,<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> no evidence was offered to prove this allegation. It must be noted that the burden of proving beyond a reasonable doubt each element of the crime is upon the prosecution, as its case will rise or fall on the strength of its own evidence. Any doubt shall be resolved in favor of the accused.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup></p> <p> It bears repeating that the element of deceit in cases of Simple Seduction must be in the form of a <b>false promise of marriage that served as the means by which consent of the minor to engage in sexual intercourse was obtained. A promise of marriage made <i>after</i> sexual intercourse has taken place, or <i>after</i> the woman has yielded her body to the man cannot be held to have induced the woman to surrender her virtue</b>.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> The old case of <i>People v. Iman</i><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> must be considered: </p><blockquote> <p> Wherefore, the court finds Crispin Iman guilty of seduction by means of the false promise of marriage under article 338 of the Revised Penal Code, committed against Corazon Arcadia, seventeen years of age, of chaste life and good reputation. As held in the case of State vs. Smith (145 S.E., 287): </p> <p> "'The statute making seduction a crime is not to punish illicit intercourse, but to punish the seducer who by means of a promise of marriage, destroys the chastity of an unmarried female of previous chaste character, and who thus draws her aside from the path of virtue and rectitude, and then fails and refuses to fulfill his promise,' a character despicable in the eyes of every decent, honorable man."<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> </p> </blockquote> <table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Petitioner's constitutional right to speedy trial and disposition was not violated</i> </div></td> </tr> </tbody></table> <p>In <i>Martin v. Ver</i>,<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> the Court adopted the balancing test laid down by the U.S. case of <i>Barker v. Wingo</i><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> to determine whether a defendant's right to a speedy trial has been violated. The test necessitates courts to decide speedy trial cases where the conduct of both the prosecution and the defense are weighed against four factors, to wit: (1) length of the delay; (2) reason for the delay; (3) defendant's assertion or non-assertion of the right; and (4) prejudice to the defendant resulting from the delay.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> It must be noted, however, that none of these elements is either a necessary or sufficient condition. They are related and must be considered together with the circumstances.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> </p><p> In the present case, the trial court transmitted the records to the appellate courts eight years after the notice of appeal was filed due to the fault of a court staff. In all those years, not once did petitioner assert his right to speedy trial and disposition and follow up his case. In examining the circumstances, petitioner cannot also be considered to have been prejudiced by the delay, as his witnesses were all available during presentation of evidence at the trial court level. Additionally, petitioner was out on bail during the pendency of the appeal. </p><p> The Court commiserates with litigants whose cases are delayed by human error but reiterates that claims of rights to speedy trial and disposition must be assessed in consideration of the realities and circumstances of each case. After all, there also exists the People's right to justice. We remind the public that there are remedies available to seek the discipline of erring Judiciary employees. </p><p> <b>FOR THESE REASONS,</b> the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The April 19, 2018 Decision and the July 2, 2018 Resolution of the Court of Appeals in CA-G.R. CR No. 38012 are <b>REVERSED</b> and <b>SET ASIDE</b>. Petitioner XXX is <b>ACQUITTED</b> for the prosecution's failure to prove his guilt beyond a reasonable doubt for the crime of Simple Seduction. </p><p> <b>SO ORDERED."</b></p><p> <i>Zalameda, Rosario</i>, and <i>Marquez, JJ</i>., concur.<br> <i>Gesmundo,<sup style="COLOR: RGB(255, 0, 0);">*</sup> C.J. (Chairperson)</i>, on official leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> In line with the Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 7610, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i>, pp. 8-31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 45-71. The April 19, 2018 Decision in CA-G.R. CR No. 38012 was penned by Associate Justice Carmelita Salandanan Manahan concurred in by Presiding Justice Romeo F. Barza and Associate Justice Stephen C. Cruz of the First Division, Court of Appeals, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 45-71. The April 19, 2018 Decision in CA-G.R. CR No. 38012 was penned by Associate Justice Carmelita Salandanan Manahan concurred in by Presiding Justice Romeo F. Barza and Associate Justice Stephen C. Cruz of the First Division, Court of Appeals, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 70.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> RTC Records, pp. 1-2. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Geographical location is blotted out pursuant to Supreme Court Amended Administrative Circular No. 83-2015.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> "The identity of the victim or any information which could establish or compromise her identity, as well as those of her immediate family or household members, shall be withheld pursuant to Republic Act No. 7610, An Act Providing for Stronger Deterrence and Special Protection against Child Abuse, Exploitation and Discrimination, Providing Penalties for its Violation, and for Other Purposes; Republic Act No. 9262, An Act Defining Violence Against Women and Their Children, Providing for Protective Measures for Victims, Prescribing Penalties Therefor, and for Other Purposes; and Section 40 of A.M. No. 04-10-11-SC, known as the Rule on Violence against Women and their Children, effective November 15, 2004." (<b>People v. Dumadag</b>, 667 Phil. 664, 669 [2011]). </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 1. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 52.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 120.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, p. 47. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 47-48.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 48. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 48-49. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 35-39. The May 17, 2007 Decision in Criminal Case No. 8269-00 was penned by Judge Cesar A. Mangrobang of Branch 22, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxx</span>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 39. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> RTC records, pp. 369-370. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> RTC records, p. 369; <i>rollo</i>, p. 51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> RTC records, p. 371. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 372. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 375. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, pp. 45-71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 69-70. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 55-56. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 56-60. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 60. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 62. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 65. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 65-66. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 67. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 73-75. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 8-33. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 13-14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 25. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 27 Phil. 121, 123 (1914) [Per J. Carson, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, p. 28. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <strong>People v. Bernardo</strong>, 890 Phil. 97, 110 (2020) [Per J. Perlas-Bernabe, Second Division], <i>citing</i> <b>Arambulo v. People</b>, 857 Phil. 828, 836 (2019) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo</i>, p. 39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 70. </p><p><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 849 Phil. 197 (2019) [Per J. Peralta, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 238-239. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> The amendatory law, Republic Act No. 11648 or An Act Providing for Stronger Protection Against Rape and Sexual Exploitation and Abuse, Increasing the Age for Determining the Commission of Statutory Rape, Amending for the Purpose Act No. 3815 as Amended, Otherwise Known As "The Revised Penal Code," Republic Act No. 8353, Also Known as "The Anti-Rape Law of 1997," and Republic Act No. 7610, as Amended, Otherwise Known As the "Special Protection of Children Against Abuse, Exploitation and Discrimination Act" was approved on March 4, 2022 and has been effective since March 22, 2022. Due to the principle of non-retroactivity of criminal law and the more favorable treatment of the old law to the accused, the old law must be applied. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>People v. XXX</b>, 882 Phil. 875, 887 (2020) [Per J. Reyes, J., Jr., First Division], <i>citing</i> <b>People v. Jaime</b>, 836 Phil. 871, 879 (2018) [Per J. Martires, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> REVISED PENAL CODE, art. 338. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>People v. XXX</b>, 882 Phil. 875, 887 (2020) [Per J. Reyes, J., Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> 849 Phil. 197, 242-244 (2019) [Per J. Peralta, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 245. </p><p><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> REVISED PENAL CODE, art. 338. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>People v. Teodosio</b>, 275 Phil. 136, 144 (1991) [Per J. Gancayco, First Division], <i>citing</i> <b>People v. Iman</b>, 62 Phil. 92, 100 (1935) [Per J. Recto, <i>En Banc</i>] and <b>U.S. v. Sarmiento</b>, 27 Phil. 121, 123-124 (1914) [Per J. Carson, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Rollo</i>, p. 59. </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> TSN, BBB, August 6, 2002, pp. 9-10. </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 12-13. </p><p><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> TSN, CCC, August 6, 2002, pp. 28-31. </p><p><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> RTC records, p. 6. </p><p><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Dela Cruz v. People</b>, 792 Phil. 214, 236 (2016) [Per J. Reyes, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <b>U.S. v. Sarmiento</b>, 27 Phil. 121, 124 (1914) [Per J. Carson, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> 62 Phil. 92 (1935) [Per J. Recto, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 102. </p><p><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> 208 Phil. 658, 664 (1983) [Per J. Plana, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 407 U.S. 514, 92 S.Ct. 2182 (1972). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 208 Phil. 658, 664 (1983) [Per J. Plana, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <b>Remulla v. Sandiganbayan</b>, 808 Phil. 739, 748 (2017) [Per J. Mendoza, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

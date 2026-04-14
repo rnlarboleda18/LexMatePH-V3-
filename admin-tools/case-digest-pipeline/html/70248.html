@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276927 - JANITO M. SEDENIO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES,* RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70248' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276927, January 19, 2026 ]</H2>
+			<H3>JANITO M. SEDENIO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by petitioner Janito M. Sedenio (Sedenio) assailing the Court of Appeals (CA) Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> where the CA affirmed the Regional Trial Court (RTC) Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and found Sedenio guilty beyond reasonable doubt of violating Section 5(h)(5) of Republic Act No. 9262 or the Anti-Violence Against Women and Their Children Act of 2004. </p><p align="center"> <i>The Antecedents</i> </p><p> Sedenio was charged with a violation of Section 5(h)(5) of Republic Act No. 9262 in an Information, the accusatory portion of which reads: </p><blockquote> <p> That sometime during the period from February to August all of 2012, at Barangay Bio-os, Amlan, Negros Oriental, Philippines, and within the jurisdiction of the Honorable Court, accused did, then and there, willfully[,] unlawfully[,] and feloniously engage in purposeful, knowing[,] and reckless conduct, [through personally] threatening and derogative text messages, that alarmed and caused substantial emotional or psychological distress to [AAA], with whom accused has a dating relationship, to the damage and prejudice of said [AAA]. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p> </blockquote> <p> Upon arraignment, Sedenio pleaded not guilty. Thereafter, trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> According to the evidence for the prosecution, Sedenio and AAA met in August 2009, when AAA was inspecting her residential unit in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxx</span>, in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxx</span>, Negros Negros Occidental, where Sedenio was a Project Engineer. Sedenio asked for AAA's phone number, and after a series of text messages, they became close friends. They would often make their way to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxx</span> together, where Sedenio was working on a project and where AAA worked for a lending institution. Eventually, they agreed to be in a relationship. Sedenio told AAA that he had already separated from his wife. Meanwhile, AAA was in a relationship with another man that she had met in Manila.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> In January 2010, AAA moved to her unit in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxx</span>, where Sedenio frequently visited her. They agreed that Sedenio would be the one to pay for the amortization of the unit. Soon after, in March 2010, Sedenio began planting sugarcane on a parcel of land with an area of approximately 4.5 hectares. AAA managed the sugarcane plantation and contributed money thereto using money entrusted to her by the lending institution. However, problems later arose when her employer noticed that she had failed to turn over a significant amount of money.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> In January or February 2011, the sugarcane was harvested. However, AAA realized that she received no part of the proceeds thereof. AAA later learned that Sedenio did not want her to participate in the harvest due to his wife's participation therein. It was at this point that their relationship began to turn sour.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> In April 2011, AAA told Sedenio about her relationship with another man named YYY. She showed Sedenio pictures of her and YYY and claimed that they had gotten married in a Muslim ceremony. While Sedenio eventually managed to come to terms with the relationship, he grew jealous upon seeing that YYY was staying in AAA's home. Sedenio then sent AAA a threatening text message, stating: "<i>Dauban na nako ang tanan gamit ni [YYY] ug dili na nimo haw-ason sa imong balay ug dili ka pakita nako</i>," which translates to, "I will burn all of [YYY]'s belongings if you do not remove them from your house and if you refuse to see me in person." AAA caused the incident to be recorded at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxx</span> Police Station.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> On July 18, 2012, AAA went to the police station to report another text message sent to her by Sedenio, where he threatened to humiliate AAA before her creditors, called her "ligated," and told her that her husband left her and had custody of their children because she was irresponsible and of ill-repute.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> A mere two days later, on July 20, 2012, Sedenio sent AAA another threatening text message, stating: "<i>Kung ayaw mo akung kausapin mgbayad ka lang sa 20K na imo ghulam pra hospital ni [KKK] k kng edeadma mu yan cge mag antay ka kung anung gawin ko kasama na mama mung consentidor</i>," which translates to, "If you do not want to talk to me, just pay the [PHP 20,000.00] that you borrowed for the hospitalization of [KKK]. If you will ignore me, just wait for what I will do. I will include your consenting mother."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> On July 23, 2012, Sedenio sent AAA another text message, stating "<i>Dako ka nadispalko sa lending tungod sa imong lalaki k gapato o ka mayaman</i>," which translates to, "You embezzled a large amount of money in the lending company because of your guy who made you believe that he is rich."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> On August 2, 2012, AAA received another text message from Sedenio, stating: "<i>Unsa storya [YYY] nmu 13 iya anak kaya nia tostosan yan na ginhawa ang buhay may pa ug dili cia mangawat sa barko di na pla ra gud iya sahod bantog rah cge ra ingon pagpakatatag ka hon wlay datong aw babaye man pod muy bahala k maya man gd gatog an cia patoga2 may man ko k duha rah ako anak ge owat rpud ka otin ra pohonan k solve and libog nmu</i>" which translates to, "What did [YYY] tell you? That he has [13] children and he can support all of them and give them a comfortable life? If he did not steal from the ship he could not do so because he makes a meager income. That is why he keeps telling you to be strong. Even if he has no money[,] the girl will take charge of everything. Good for me, I only have two children. He deceived you. His only contribution is his penis and you are already satisfied."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> On August 13, 2012, Sedenio forcibly entered AAA's house using a kitchen knife, staying there until the police arrived. Despite catching Sedenio in AAA's home, the police officers did not do anything-even letting Sedenio leave before they did. Nonetheless, AAA knew that Sedenio used a knife to enter because she saw the knife on her couch. AAA later brought the knife to the police station.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> After the incident, Sedenio sent AAA several mocking text messages.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> <em>First</em>, Sedenio said,"<i>Naposasan ko haha ikaw ra gapaka ulaw sa imong pkatawo hahaha pgkalooy</i>," which translates to, "Was I handcuffed? Haha. You just humiliated yourself."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> <i>Second</i>, he messaged, "<i>Daghan u rocket mga lake sa nabalan noon ka sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> Police Stn hahaha ako napod pa blotter sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> [kda] txt nag patyon k ni [YYY] mabulgar nah jud nah sa taan u rocket hahaha</i>," which translates to, "<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> Police Station knows about you. It is my turn to cause a police blotter in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> because I have a text message saying [YYY] will kill me. Everyone will know about your racket."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> <i>Third</i>, Sedenio stated, "<i>Ayaw palabe salig nga inila mu sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> k basin maulawan ka nya mao u plano posasan k hahaha gpicturan nako tanan u album n [YYY]. Epadala ko ni [GGG] sa Aboitiz tan awon nako kto u blotter sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> tubagon nko 2 k d a ko daghan picture Ninyo ni [YYY] butol ka ako imo isulod ug bulsa nasayop ka k bright pako nimu usa pa maulaw ko lalake hahahaha</i>," which translates to, "Do not be too complacent that you are known in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>. Maybe you will be embarrassed. Was that your plan to have me handcuffed? Hahaha. I took a picture of all your albums with [YYY]. I will [send] them to [GGG] in Aboitiz. I will look at your blotter in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>. I will answer it. You are dumb. You tried to make a fool out of me. You made a mistake because I am smarter than you. Hahahaha."<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> <i>Fourth</i>, he texted, "<i>Ugma adon nako [RRR] sa coop mao nman ni u toyo tanan tan awon nto knsa sikat hahaha</i>," which translates to, "Tomorrow, I will go to [RRR] in the cooperative. That is what you want. Let us see who will become famous. Hahaha."<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> <i>Fifth</i>, Sedenio said, "<i>Aron jud mulame pa blotter npd tka n [VVV] na a ka panty dri ug picture nako gahukas ka gadulog ta pakita na sa barangay <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> tanan aron naa ebedencia [VVV]</i>," which translates to, "To make it better, I will also tell [VVV] to enter in the police blotter that you have your underwear here and show a picture of you and me in bed wearing no clothes. Show it to everyone in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> so that [VVV] will have evidence."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> <i>Finally</i>, he messaged, "<i>Krn happy nha sa imong gebuhat pero wala ka molampas k wala man ko maposas gapakaulaw rka pag ingon nmo nya wala ka makapahimulos nako tan awa ra unsa k ka butol ga sis patong usang pulis nko pag una ra og gawas sir k wala me labot ana u problema laktod pagka storya ni angal and usang lalake k napud laen lake gpakaulaw rka sa inyong pamilya labe na ni [DDD] kapita [ra] sa an u brgy cge lang. Kuhaan nko statement and pulis na ko kaila ato nga mubayad ka aghan cla nkadungog nmu ayaw na pagmalinis k basa nka tanan maypa muapas ka n [YYY] sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> [ad2] mu mgpuyo did2 wlay nkaila nmu pro sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> ay nlang basa nka ikaw ra gabobo ug tubig sa imong ulo,</i>"which translates to, "Are you happy with what you did? You did not succeed because I was not handcuffed. You were just humiliating yourself when you told them and you were not able to take advantage of me. Look how dumb you are. The police even told me to go ahead because they do not have any involvement in this problem. To be honest, one of the men objected because there was another guy. You are just embarrassing your family, especially [DDD], who is the barangay captain in your barangay. Do not worry, I will take the statement of the police officer who heard you say that you ar going to pay. Many of them heard you. Do not act clean. It would be better if you would go after [YYY] in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> and live there because nobody knows you there. In <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>, everyone already knows about you. You poured water on your own head."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p>As a result of Sedenio's text messages, AAA experienced mental anguish, sleepless nights for around six months, and a besmirched reputation. She could also no longer look her neighbors in the eyes because she was worried that they were laughing at her.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> On the part of the defense, Sedenio claimed that he met AAA in a subdivision in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>, where he was a contractor and she acquired a residential unit. Sedenio admitted that for around two years, he used to fetch AAA on his way to work in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> and drop her off at home. During this time, they entered into a secret relationship despite being married to other people.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> During their two-year relationship, when AAA could not afford to pay the estimated PHP 7,000.00 monthly amortization on her residential unit in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>, Sedenio would pay it for her. During the times that AAA was able to raise around PHP 3,000.00, Sedenio paid the remaining amount.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> In their first year together, Sedenio and AAA were in a loving relationship. However, when Sedenio moved to Iloilo for work for three months, he was told by his men in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> that AAA was seeing YYY, another married man. This angered Sedenio and made him depressed, causing him to send "bad" text messages to AAA three times. According to Sedenio, he was the one paying for the amortization of the house, but another man was sleeping in it. Further, he was drunk when he sent AAA the text messages.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p align="center"> <i>The Ruling of the RTC</i> </p><p> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> the RTC found Sedenio guilty beyond reasonable doubt of violating Section 5(h)(5) of Republic Act No. 9262. The dispositive portion of the Decision reads: </p><blockquote> <p> WHEREFORE, accused [SEDENIO] is found GUILTY beyond reasonable doubt of violating Section 5(h)(5) of [Republic Act] No. 9262, otherwise known as the "Anti-Violence against Women and Their Children Act of 2004." Accused Sedenio is hereby sentenced to an indeterminate prison term of [six] months and [one] day of <i>prision correccional</i>, as minimum, to [eight] years and [one] day of <i>prision mayor</i>, as maximum, and to pay a FINE in the amount of [PHP 100,000.00]. Also, he [is] directed to undergo mandatory psychological counseling or psychiatric treatment and shall report compliance to this Court.</p> <p> As to the civil aspect of this case, accused Sedenio is directed to pay private complainant [AAA] the amount of [PHP 3,000.00] by way of moral damages.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p> </blockquote> <p> Aggrieved, Sedenio appealed before the CA, arguing in his Brief<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> that: (1) the prosecution failed to prove that the text messages he sent caused mental anguish to AAA, there being no psychological or medical report submitted to prove such condition. The claim of mental anguish should not be given credence in the absence of evidence to support the same; (2) the acts of violence purportedly committed by Sedenio are based on the text messages sent by him to AAA. While excerpts of such messages were handwritten and marked as exhibits for the prosecution, the actual contents of the text messages from the cellular phone involved have not been presented in court or identified by witnesses. Although on cross-examination, Sedenio admitted to sending text messages to AAA while he was drunk, he made no mention of the contents thereof. Thus, there is no basis for his conviction; and (3) the fact that Sedenio admitted to having sent text messages to AAA without verbalizing the contents of such messages is not an admission that he sent the messages claimed by AAA.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> In their Brief,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the People, through the Office of the Solicitor General (OSG), countered that: (1) all elements of a violation of Section 5(h)(5) of Republic Act No. 9262 are present in the instant case. The first two elements of the crime were admitted by Sedenio during trial. From his own testimony, it was established that the victim had a sexual or dating relationship with AAA. The same only ended when AAA found another man and left Sedenio. Out of hurt and disappointment, he willfully and intentionally sent text messages to AAA, which caused the latter emotional and psychological distress; (2) Sedenio's testimony constitutes a judicial admission, which may be, contradicted only through a showing that it was made through palpable mistake or that no such admission was made. Here, neither situation applies; (3) Sedenio's argument that the acts constituting violence or harassment were not proven because the alleged text messages he sent were not properly authenticated is not meritorious, he having judicially admitted to sending humiliating and threatening text messages to AAA. Hence, the text messages need not be presented as proof that he harassed AAA. After all, it is the act of sending text messages purposely meant to humiliate, harass, and demean the victim that is being punished by law; and (4) AAA identified the hurtful and harassing text messages sent to her by Sedenio. Upon clarification from the court, she also testified as to which text messages caused her emotional and psychological distress. The fact that she suffered emotional and psychological distress was shown through her clear, candid, and unequivocal testimony that she experienced mental and emotional anguish, humiliation, and sleepless nights for six months. She could not even look at her neighbors because in her mind, they were all laughing at her. Hence, the trial court's ruling was based on solid evidence.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p align="center"> <i>The Ruling of the CA</i> </p><p> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> the CA denied the appeal and affirmed the ruling of the trial court. The dispositive portion of the Decision reads: </p><blockquote> <p> WHEREFORE, premises considered, the appeal is DENIED. The Decision dated February 11, 2022 of the Regional Trial Court, Branch 43 of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxx</span>, Negros Oriental in Criminal Case No. 1873 is AFFIRMED.</p> <p> Accused-appellant is DIRECTED to report his compliance [with] the mandatory psychological counseling or psychiatric treatment to the court of origin within [15] days after the completion [of the same].</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p> </blockquote> <p> Hence, the present Petition for Review on <i>Certiorari</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> where petitioner argues that: (1) under Rule 11, Section 2 of the Rules on Electronic Evidence, all ephemeral electronic evidence, such as text messages, need to be presented to the court to be identified and authenticated by the person to testify on the accuracy thereof; (2) pursuant to jurisprudence, text messages need to be proved by the testimony of a person who was a party to the conversation or has personal knowledge of the same; (3) the prosecution failed to prove that the alleged text messages were sent with the intent to harass AAA; (4) the lack of context on the part of the prosecution, specifically the responses that were most probably Made by AAA, negates the allegation that the text messages of petitioner were made with the intent to harass. AAA may have provoked petitioner to send the said text messages; (5) the absence in the Information<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> of the fact that petitioner and AAA were no longer in a relationship at the time the Information was filed was violative of petitioner's right as an accused to be informed of the nature and cause of his accusation; (6) a paramour's tears during trial cannot be considered as substantial emotional or psychological distress; and (7) that the testimony of the complainant is the only requirement to establish mental or emotional anguish is contrary to justice, fairness, and equity to the accused in cases within the ambit of Republic Act No. 9262. Further evidence should be required, such as testimonies of witnesses who may have personally witnessed the effect of harassment towards the complainant or a verification of mental or emotional anguish by a psychological expert.</p><p align="center"> <i>The Issue</i> </p><p> The issue before the Court is whether the CA erred in finding petitioner guilty beyond reasonable doubt of violating Section 5(h)(5) of Republic Act No. 9262. </p><p align="center"> <i>The Court's Ruling</i> </p><p> The Petition is denied. </p><p> At the onset, We note that the Petition fails to comply with several requirements under the Rules of Court. </p><p> <i>First</i>, proof of service to the court of origin was not attached to the Petition. The Rules of Court require that a petition for review be accompanied by proof of service on the adverse party as well as the lower court concerned.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Failure to comply with this requirement is a sufficient ground for the dismissal of the Petition.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Here, while petitioner attached the proof of service on the adverse party through the OSG, he failed to attach the proof of service on the CA.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> <i>Second</i>, the Petition contains an incomplete statement of material dates. The Rules of Court provide that a petition for review must indicate the material dates showing when the notice of the judgment, final order, or resolution subject of the petition was received; when a motion for new trial or reconsideration was filed; and when notice of the denial thereof was received.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Noncompliance with the foregoing requirement is sufficient ground for the dismissal of the Petition.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> In the instant case, while We note that the assailed CA Decision<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> and the Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> filed before the CA were attached to the Petition, petitioner nonetheless failed to indicate the dates when the notice of the assailed judgment was received and when the motion for reconsideration was filed.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p><p> In any case, upon a judicious review of the records, We find no reversible error which would warrant the Court's exercise of its discretionary appellate jurisdiction. </p><p> <i>The subject text messages were sufficiently proven</i></p><p> Under the Rules on Electronic Evidence, text messages shall be proven by the testimony of a person who was a party to the same or has personal knowledge thereof.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> In the instant case, AAA, who was a party to the subject text messages and has personal knowledge of the sameâshe being the intended recipientâsufficiently proved such text messages through her testimony. AAA clearly relayed how, after things turned sour in her relationship with petitioner, he began texting her such threatening and derogative messages.</p><p> In fact, on cross-examination, petitioner himself admitted that the mobile number used to send AAA the subject text messages was his own number, and that he sent such "humiliating [and] threatening words"<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> to AAA because he felt hurt and was often drunk when texting her.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> As admitted by petitioner before the trial court: </p><blockquote> <p>Q: And during the span of [one] year, your relationship with the private complainant was a very romantic relationship, is that correct?</p> <p> A: Yes, Attorney. </p> <p>Q: And the romantic relationship ended when this certain [YYY] entered in the scene. </p> <p>A: Yes, Attorney. </p> <p>Q: And because of that situation Mr. Witness, and in fact you admitted a while ago that you were mad when this certain [YYY] entered in the life of the private complainant. </p> <p>A: Yes, Attorney. </p> <p>Q: <i>And since you were mad, is it correct to say Mr. Witness that you resulted to texting the private complainant, humiliating [and} threatening words that really affected the psychological and emotional condition of the private complainant?</i> </p> <p>A: <i>At that time Attorney, I am drunk, yes Attorney.</i> </p> <p>Q: Now there are several instances when these text messages were sent by you to the private complainant. Are you trying to say Mr. Witness that in all of these instances, you were drunk?</p> <p> Atty. Amante: The witness testified already that[.] </p> <p>Court: Let him clarify. There were several text messages[,] Mr. Witness. The question is, in all those text messages, you were drunk when you sent them? </p> <p>A: Not all the time Attorney, but <i>I feel hurt Attorney that's why I can do that kind of text Attorney</i>. </p> <p>Q: <i>So, Mr. Witness, are you admitting before this Honorable Court that this phone number <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> is your phone number?</i> </p> <p>A: <i>Yes, before Attorney that is my number</i>.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Emphasis supplied)</p> </blockquote> <p> Clearly, the subject text messages were sufficiently proven. Petitioner cannot now go back on his judicial admission, there being no showing that such admission was made through palpable mistake or that the imputed admission was not, in fact, made.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></p><p> <i>The information need not state that petitioner<br> and AAA were no longer in a relationship <br> at the time of filing of the same</i> </p><p> Pursuant to Section 5(h)(5) of Republic Act No. 9262, the elements of violence against women through harassment are: (1) the offender <i>has or had a sexual or dating relationship</i> with the offended woman; (2) the offender, by themselves or through another, commits an act or series of acts of harassment against the woman; and (3) the harassment causes her alarm or substantial emotional or psychological distress.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> In other words, one element of violence against women through harassment is <i>either a present or past</i> sexual or dating relationship with the offended woman. Thus, as long as at the time the alleged crime was committed, the offender and the offended woman <i>either were or used to be</i> in a sexual or dating relationship, the foregoing element is present. </p><p> Here, the Information<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> clearly stated that at the time of the commission of the crime, petitioner and AAA were in a dating relationship, and that petitioner personally sent threatening and derogative text messages to the latter, causing her alarm and substantial emotional or psychological distress. Hence, contrary to petitioner's claims, he was sufficiently informed of the nature and cause of the accusation against him. Whether he and AAA were still in a dating relationship at the time the Information was filed is immaterial.</p><p> <i>Petitioner is guilty of violating Section 5(h)(5) <br> of Republic Act No. 9262</i> </p><p> Section 5(h)(5) of Republic Act No. 9262 provides one of the ways by which violence against women may be committed, to wit: </p><blockquote> <p> Section 5. Acts of Violence Against Women and Their Children. â The crime of violence against women and their children is committed through any of the following acts:</p> </blockquote> <p align="center"> . . . . </p><blockquote> <blockquote> <p> (h) Engaging in purposeful, knowing, or reckless conduct, personally or through another, that alarms or causes substantial emotional or psychological distress to the woman or her child. This shall include, but not be limited to, the following acts:</p> </blockquote> </blockquote> <p align="center"> . . . . </p><blockquote> <blockquote> <blockquote> <p> (5) <i>Engaging in any form of harassment or violence</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p> </blockquote> </blockquote> </blockquote> <p> Thus, as discussed, the elements of violence against women through harassment are: (1) the offender has or had a sexual or dating relationship with the offended woman; (2) the offender, by themselves or through another, commits an act or series of acts of harassment against the woman; and (3) the harassment causes her alarm or substantial emotional or psychological distress.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></p><p> As applied to the present case, <i>first</i>, it is undisputed that petitioner and AAA were in a sexual or dating relationship. As noted by the CA, both petitioner and AAA testified that they were in a clandestine romantic relationship for about two years despite being married to other people.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Second</i>, as previously discussed, the prosecution sufficiently established through AAA's testimonyâas well as petitioner's judicial admissionâthat petitioner sent AAA multiple text messages constituting harassment from around July to August 2012. As stated by petitioner before the trial court, he sent AAA such "humiliating [and] threatening words"<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> because he felt hurt by the fact that she was living with another man and he was often drunk when texting her.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> As aptly added by the CA: </p><blockquote> <p> It should be stressed that what is penalized under the law is the act of engaging in purposeful, knowing, or reckless conduct that alarms or causes substantial emotional or psychological distress to a woman or her child. In other words, what constitutes the crime is the commission of acts that cause psychological harm to a woman or her child. Here, accused-appellant admitted to sending text messages designed to produce mental anguish to private complainant. . . . What is material is that accused-appellant, by his admission of authorship, knowingly and purposefully sent text messages that harassed private complainant, causing her psychological or emotional distress.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p> </blockquote> <p> Finally, as to the <i>third</i> element, We agree with the finding that the harassment inflicted upon AAA by petitioner caused her alarm or substantial emotional or psychological distress. </p><p> Under Republic Act No. 9262, psychological violence refers to acts or omissions that cause or are likely to cause the victim's mental or emotional suffering.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> One such form of psychological violence is harassment.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> In <i>Araza v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> the Court categorically held that in cases of psychological violence, proof that the victim became psychologically ill as a result of the psychological violence sustained by her is not required. Thus, to prove emotional anguish or mental suffering, for instance, jurisprudence only requires that the testimony of the victim be presented in court, as their experiences are personal to them.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p><p> Similarly, whether a victim experienced alarm or substantial emotional or psychological distress as a result of the harassment inflicted upon her is an experience that is particular to her. Hence, her testimonyâif found credible by the courtâis sufficient to establish the element of alarm or substantial emotional or psychological distress. </p><p> In the instant case, the prosecution established that petitioner, through a series of text messages over multiple months, threatened to humiliate AAA before her creditors; threatened to potentially harm her and her mother; accused her of embezzling money; stated that the "only contribution" of her new lover is "his penis;"<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> said that she humiliated herself by calling the police; threatened to file a police blotter against her; called her dumb; and threatened to show everyone in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> a photograph of her and petitioner in bed with no clothes, among others.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> AAA testified that as a result of such text messages, she experienced mental anguish, sleepless nights for around six months, and besmirched reputation. She could no longer look her neighbors in the eyes out of fear that they were laughing at her.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p> Based on the foregoing, We agree with the finding that AAA experienced alarm or substantial emotional or psychological distress at the hands of petitioner. Thus, all the elements of a violation of Section 5(h)(5) of Republic Act No. 9262 are present in the instant case.</p><p> As to the penalty, Republic Act No. 9262 provides that acts falling under Section 5(h) of the said law shall be punished by <i>prision mayor</i>,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> which ranges from six years and one day to 12 years.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Applying the Indeterminate Sentence Law, the minimum term of the indeterminate penalty shall be taken from the penalty next lower in degree, <i>prision correccional</i>, in any of its periods, which is from six months and one day to six years. Meanwhile, the maximum term shall be that which could be properly imposed under the law, which is <i>prision mayor</i> in its medium period, or eight years and one day to 10 years, there being no aggravating or mitigating circumstance shown.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></p><p> Pursuant to Republic Act No. 9262, the fine, moral damages, and mandatory psychological counseling or psychiatric treatment are likewise affirmed.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></p><p> In accordance with prevailing jurisprudence,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> however, legal interest of 6% per annum shall be imposed upon the award of moral damages, which shall be computed from the finality of this Decision until full payment. </p><p> <b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The May 17, 2023 Decision and July 15, 2024 Resolution of the Court of Appeals in CA-G.R. CR No. 04105 are <b>AFFIRMED with MODIFICATION</b>. Petitioner Janito M. Sedenio is found <b>GUILTY</b> beyond reasonable doubt of a violation of Section 5(h)(5) of Republic Act No. 9262 and is <b>SENTENCED</b> to suffer the indeterminate penalty of six months and one day of <i>prision correccional</i>, as minimum, to eight years and one day of <i>prision mayor</i>, as maximum. He is <b>ORDERED</b> to pay a fine in the amount of PHP 100,000.00 and moral damages in the amount of PHP 3,000.00, the latter of which shall be subject to 6% legal interest per annum from the finality of this Decision until full payment. He is likewise <b>DIRECTED</b> to undergo mandatory psychological counseling or psychiatric treatment, and to report compliance to the court of origin within 15 days from completion of the same. </p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 9262, the name of the private offended party, along with all other personal circumstances that may tend to establish their identity, are made confidential to protect their privacy and dignity. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-16.</p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 49-64. The May 17, 2023 Decision in CA-G.R. CR No. 04105 was penned by Associate Justice Marilyn B. Lagura-Yap and concurred in by Associate Justices Jacinto G. Fajardo, Jr. and Rogelio G. Largo of the Nineteenth Division, Court of Appeals, Cebu City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 19-24. The July 15, 2024 Resolution in CA-G.R. CR No. 04105 was penned by Associate Justice Marilyn B. Lagura-Yap and concurred in by Associate Justices Jacinto G. Fajardo, Jr. and Rogelio G. Largo of the Nineteenth Division, Court of Appeals, Cebu City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 42-46. The February 11, 2022 Decision in Criminal Case No. 1873 was penned by Presiding Judge Christine M. Tabasuares-Aba of Branch 43, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxx</span>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 49-50. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 50.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 51.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 51, 55.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 51. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 51-52.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 52.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 52-53.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 53.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 53-54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 54-55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 42-46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 45-46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Petitioner did not attach a copy of the same to the Petition. It is likewise not attached to the <i>rollo</i>. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 57-58. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Petitioner did not attach a copy of the same to the Petition. It is likewise not attached to the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i>, pp. 58-59. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 49-64. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 63. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 4-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See</i> <i>Id.</i> at 49-50. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> RULES OF COURT, Rule 45, sec. 3. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> RULES OF COURT, Rule 45, sec. 5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Rollo</i>, pp. 16, 66. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> RULES OF COURT, Rule 45, sec. 4. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> RULES OF COURT, Rule 45, sec. 5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i>, pp. 49-64. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 26-41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> RULES ON ELECTRONIC EVIDENCE, Rule 11, sec. 2 in relation to Rule 2, sec. 1(k). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, p. 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 44-45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> See RULES OF COURT, Rule 129, sec. 4. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Ang v. Court of Appeals</b>, 632 Phil. 609, 619 (2010) [Per J. Abad, Second Division]. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i>, pp. 49-50. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Republic Act No. 9262 (2004), sec. 5(h)(5). (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Ang v. Court of Appeals</b>, 632 Phil. 609, 619 (2010) [Per J. Abad, Second Division]. (Emphasis supplied) </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 61-62. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Republic Act No. 9262 (2004), sec. 3(a)(C). </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 882 Phil. 905 (2020) [Per C.J. Peralta, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 919. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Rollo</i>, p. 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 51-54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 54. </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Republic Act No. 9262 (2004), sec. 6. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> REVISED PENAL CODE, art. 27. </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Araza v. People</b>, 882 Phil. 905, 929-930 (2020) [Per C.J. Peralta, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Republic Act No. 9262 (2004), secs. 6, 36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754, 781 (2022) [Per J. Leonen, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

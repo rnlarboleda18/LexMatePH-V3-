@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 271635 - ADELFA ALCANTARA ASICO AND ANNIEROSE ALCANTARA ASICO, PETITIONERS, VS. HEIRS OF ERNESTO SEE NAMELY: EDNA SEE-PORNEL, MARY ANNE SEE-HILARIO, MARY GRACE C. SEE, AND MARY JANE SEE-TAN&bull; AND THE REGISTER OF DEEDS OF NEGROS OCCIDENTAL, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70213' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 271635, August 27, 2025 ]</H2>
+			<H3>ADELFA ALCANTARA ASICO AND ANNIEROSE ALCANTARA ASICO, PETITIONERS, VS. HEIRS OF ERNESTO SEE NAMELY: EDNA SEE-PORNEL, MARY ANNE SEE-HILARIO, MARY GRACE C. SEE, AND MARY JANE SEE-TAN<SUP STYLE="COLOR: RGB(255, 0, 0);">â¢</SUP> AND THE REGISTER OF DEEDS OF NEGROS OCCIDENTAL, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) under Rule 45 of the Rules of Court filed by petitioners Adelfa Alcantara Asico (Adelfa) and Annierose Alcantara Asico (Annierose) (collectively, petitioners) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 16, 2022 and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 18, 2023 of the Court of Appeals (CA) in CA-G.R. CV No. 07720. The CA Decision denied the Rule 41 appeal filed by petitioners, while the CA Resolution denied their motion for reconsideration.</p><p align="center"> <b><i>The Facts and Antecedent Proceedings</i></b> </p><p> The CA Decision narrates the factual antecedents as follows: </p><blockquote> <p>The case stemmed from a complaint for <i>Declaration of Nullity of Title</i> filed [on September 13, 2017<sup style="COLOR: RGB(255, 0, 0);">[4]</sup>] by [petitioners] against the Heirs of Ernesto See, namely: Edna See-Pornel, Mary Anne See-Hilario, Mary Grace C. See and Mary Jane See-Tan [(respondents See)]; and the Register of Deeds of Negros Occidental. </p> <p> In the complaint, [petitioners] alleged that Adelfa . . . and Roberto Asico [(Roberto)] were the registered owners of a parcel of land known as Lot 856-B located at the Municipality of Himamaylan, Negros Occidental [(subject property)]. This was evidenced by a Transfer Certificate of Title [(TCT)] No. T-139808. </p> <p> Allegedly, on May 22, 1987, Ernesto See [(Ernesto)] managed to transfer the subject property in his name, employing unlawful, fraudulent, and corrupt machinations without [petitioners'] knowledge. [Petitioners] related that Ernesto effected the transfer of the property under his name by presenting a Deed of Sale before the Provincial Register of Deeds of Negros Occidental [(RD)], purportedly signed by Adelfa as the vendor. As a consequence, TCT No. T-139808 was canceled, and TCT No. T-139809 was issued in favor of Ernesto. </p> <p> However, [petitioners] recalled that Adelfa never signed any deed of sale and never appeared before any Notary Public. More so, [petitioners] recounted that Adelfa could not sign a deed of sale under her married name since she married her husband only on March 28, 1987, while the alleged deed of sale was [dated] March 9, 1987. </p> <p> To further bolster [their] claim, [petitioners] highlighted the fact that the annotation which Ernesto caused to be made on TCT No. T-139808, as Entry No. 317077[,] was never signed and approved by the [RD]. </p> <p> Meanwhile in their <i>Answer</i>, [respondents See] countered that Adelfa sold and transferred the [subject] property to Ernesto, as evidenced by a Deed of Sale dated March 9, 1987. As a public document, the notarized deed of sale enjoys the presumption of regularity and is treated as prima facie evidence of the truth of the facts [stated] therein. </p> <p> Likewise, as opposed to [petitioners'] allegation, [respondents See] asseverated that Adelfa signed the Deed of Sale using her maiden name, "Adelfa Alcantara", and not under her married name, as claimed by [petitioners]. </p> <p> Aside from the above, [respondents See] asserted that the complaint was dismissible for failure to state a cause of action, and assuming arguendo, that there existed a cause of action, the same had already prescribed. </p> <p> During trial, [petitioners] presented Adelfa as [their] sole witness. [Respondents See], on the other hand, filed a Demurrer to Evidence. </p> <p> In the Demurrer to Evidence, [respondents See] vehemently argued that [petitioners] failed to prove that Ernesto . . . committed fraud and other illegal means to procure registration of the subject property in his name. </p> </blockquote> <p align="center"> <u>RTC Ruling</u> </p><blockquote> <p> In an Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated October 12, 2019 [(RTC Order)], the [RTC<sup style="COLOR: RGB(255, 0, 0);">[6]</sup>] granted [respondents See's] Demurrer to Evidence and dismissed [petitioners'] complaint. </p> <p> In dismissing the complaint, the [RTC] held that aside from [petitioners'] bare allegations, their sole witness, Adelfa, failed to present any clear and convincing evidence that there was anomaly or irregularity in the proceedings that led to the registration of the subject [property] in favor of [respondents See]. The [RTC] further explained that Adelfa's testimony [did] not suffice to overcome the presumption of validity of [respondents See's TCT], the presumption of regularity in the performance of official duties, and the presumption that all the requisites for the issuance of a valid title had been complied with. </p> <p> The [RTC] also concluded that Adelfa's testimony was riddled with inaccuracies and inconsistencies, not to mention that she failed to recall specific material dates regarding the subject property. While this may be attributable to the frailty of her memory, it did not augur well for the success of [petitioners'] case. The [RTC] reminded [petitioners] that it was still incumbent upon them to prove their cause of action with clear and convincing evidence. </p> <p> The dispositive portion of the [RTC] Order reads: </p> <blockquote> <p> "WHEREFORE, premises considered, the <i>Demurrer to Evidence</i> [filed] by the defendant[s (respondents See)] is hereby GRANTED. Accordingly, this case is hereby ordered DISMISSED for insufficiency of evidence."<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p> </blockquote> </blockquote> <p align="center"> <b><i>The CA Ruling</i></b> </p><p> Petitioners appealed the RTC Order to the CA. In the assailed Decision, the CA denied the appeal based on two grounds: prescription and lack of merit. </p><p> Regarding prescription, the CA took the position that, pursuant to Article 1456<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> of the Civil Code, a person acquiring property through fraud becomes, by operation of law, a trustee of an implied trust for the benefit of the real owner of the property, and, just as an implied or constructive trust is an offspring of the law, so is the corresponding obligation to reconvey the property and the title thereto in favor of the owner.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The CA pointed out that the prescriptive period of 10 years applies to an action upon an obligation created by law as provided in Article 1144(2)<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> of the same Code.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> Correlating paragraph 3, Section 53 of Presidential Decree No. 1529<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> or the Property Registration Decree, which provides: "[i]n all cases of registration procured by fraud, the owner may pursue all his legal and equitable remedies against the parties to such fraud without prejudice, however, to the rights of any innocent holder for value of a certificate of title. After the entry of the decree of registration on the original petition or application, any subsequent registration procured by the presentation of a forged duplicate certificate of title, or a forged deed or other instrument, shall be null and void" and Article 1456 and Article 1144(2) of the Civil Code, the CA concluded that an action for reconveyance based on an implied trust or constructive trust prescribes in 10 years, and the reference point of the prescriptive period is the date of registration of the deed or the issuance of the title.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> However, the CA recognized that the only exception to the above rule is when the plaintiff is in actual possession of the subject land, in which case the action for reconveyance does not prescribe.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> The CA noted that, in this case, TCT No. T-139809 was issued in the name of Ernesto in 1987 and petitioners filed the complaint for nullification of the title in 2017. With the admission by Adelfa during the trial that a certain Mr. Perido, Mr. Artesuno, and other unnamed persons were occupying the subject property, the CA found that the instant action, having been filed in 2017 or after the lapse of 30 years, was filed beyond the 10-year prescriptive period and is already barred by prescription.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> As to the other ground, lack of cause of action, the CA posited that, assuming for argument's sake that the instant action has yet to prescribe, it must fail for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> The CA essentially relied on the following factual bases in support of such finding: </p><p> (1) Contrary to petitioners' claim that the deed of sale was inexistent, the CA stated that a perusal of the records of the case would reveal that the Deed of Sale<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated March 9, 1987 exists, as in fact, the same was attached to the <i>Answer</i><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> filed by respondents See; and petitioners should have presented evidence to refute the authenticity and genuineness of the deed of sale. Unfortunately, they failed to discharge such burden.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> (2) As to petitioners' argument that the subject property was a conjugal property of spouses Adelfa and Roberto, and thus, the deed of sale should have been signed by Roberto, the CA was not persuaded with the testimony of Adelfa even after noting that Adelfa claimed under cross-examination that they bought the subject property from Mr. Sola after their marriage. The CA considered that petitioners presented no evidence to such effect.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> (3) As to petitioners' argument that the registration of the Deed of Sale and its annotation (Entry No. 317077) on TCT No. T-139808 was fraudulent because it was not approved by the RD, the CA countered that although Entry No. 317077 was not signed by the RD, the same does not establish fraud. According to the CA, fraud is never presumed and it must be established by clear and convincing evidence. The testimony alone of Adelfa was not enough to overcome the presumption of validity of the TCT in the name of respondents See as well as the earlier title in the name of their predecessor-in-interest, Ernesto.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> The dispositive portion of the CA Decision states: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant appeal is hereby <b>DENIED</b>. The Order dated October 12, 2019 of the RTC, Branch 55 of Himamaylan City, Negros Occidental is <b>AFFIRMED</b>. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p> </blockquote> <p> Petitioners sought the reconsideration of the CA Decision, but the CA denied their motion for reconsideration in its Resolution dated August 18, 2023. </p><p> Thereafter, they filed before the Court a Motion for Extension of Time to File Petition for Review on Certiorari under Rule 45 of the Rules of Court<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> which was granted in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated April 8, 2024. Petitioners filed their Petition dated February 4, 2024. In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated August 5, 2024, respondents See were required to file a Comment to the Petition. A Comment<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated July 25, 2025 was filed by respondents See. </p><p align="center"> <b><i>The Issue</i></b> </p><p> Whether the CA committed reversible error m denying petitioners' appeal. </p><p align="center"> <b><i>The Court's Ruling</i></b> </p><p> The Petition is meritorious. </p><p> At the core of the resolution of the issue is the application of Rule 33 of the 2019 Proposed Amendments to the 1997 Rules of Civil Procedure,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> which provides: </p><p align="center"> <b>RULE 33 <br> DEMURRER TO EVIDENCE</b> </p><blockquote> <p> Section 1. <i>Demurrer to evidence</i>. â After the plaintiff has completed the presentation of his or her evidence, the defendant may move for dismissal on the ground that upon the facts and the law the plaintiff has shown no right to relief. If his or her motion is denied, he or she shall have the right to present evidence. If the motion is granted but on appeal the order of dismissal is reversed, he or she shall be deemed to have waived the right to present evidence. (1a) </p> <p> Section 2. <i>Action on demurrer to evidence</i>. â A demurrer to evidence shall be subject to the provisions of Rule 15. </p> <p> The order denying the demurrer to evidence shall not be subject of an appeal or petition for <i>certiorari</i>, prohibition or mandamus before judgment. (n) </p> </blockquote> <p> The RTC Order appealed to the CA granted respondents See's <i>Demurrer to Evidence</i><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> and was affirmed by the CA. As Section 1 of Rule 33 provides, the dismissal of the complaint by way of demurrer to evidence is warranted if "upon the facts and the law the plaintiff has shown no right to relief." </p><p> Petitioners seek the review of the correctness of the CA's affirmance of the RTC Order, dismissing the case for insufficiency of evidence by way of demurrer to evidence. </p><p> Petitioners anchor their Rule 45 Petition on their submission that the CA has decided questions of substance in a way that is not in accord with law or applicable jurisprudence and manifestly overlooked certain relevant and undisputed facts that, if properly considered, would justify a different conclusion.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> This is an allowed exception to the rule that in a Rule 45 petition, factual review is proscribed. Therefore, the Court will undertake both factual and legal review. </p><p> <i>The deed of sale</i></p><p> Petitioners claim that the deed of sale between Adelfa and Ernesto is inexistent and that Adelfa and her husband, Roberto, never executed any deed of sale in favor of Ernesto. In the Judicial Affidavit of Adelfa dated May 31, 2019, she stated that she and her husband never sold to Ernesto the subject property nor authorized Ernesto to transfer the title thereof to his name.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> But, was a deed of sale adduced and admitted into evidence to counter petitioners' claim? </p><p> The RTC clearly stated in its assailed Order that "Plaintiffs did not even bother to present or exert effort to produce in evidence the alleged notarized '<i>Deed of Sale</i>,' which was supposed to be the basis for the transfer of the title of the property in the name of Ernesto See."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Indeed, the RTC Order (<i>Formal Offer of Exhibits</i>)<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> admitted only the following documentary exhibits: (1) Exhibit "A" â TCT No. T-139808 in the name of Adelfa; (2) Exhibit "B" â Marriage Contract of Adelfa and Roberto; (3) Exhibit "C" â TCT No. T-139809 in the name of Ernesto; (4) Exhibit "D" â TCT No. 091-2016008139 in the name of respondents See; (5) Exhibit "E" â Declaration of Heirship executed by respondents See; (6) Exhibit "F" â Real Property Tax Account Register, showing payment of real property taxes and location of the subject property; (7) Exhibit "G" â Philippine Registry Form for Persons with Disability, showing that Annierose suffers from Down syndrome; and (8) Exhibit "H" â Certificate of Death of Roberto.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> As far as the RTC is concerned, there was no deed of sale. </p><p> As mentioned earlier, the CA acknowledged the existence of a Deed of Sale dated March 9, 1987 because it was attached to the <i>Answer</i> filed by respondents See, accorded to it the presumption of regularity being a notarized document, and gave evidentiary weight as to its due execution.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p><p> The CA committed egregious error in considering such Deed of Sale as the same was never formally offered and admitted in evidence. Under Section 34, Rule 132 of the 2019 Proposed Amendments to the Revised Rules on Evidence,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> "[t]he court shall consider no evidence which has not been formally offered. The purpose for which the evidence is offered must be specified." </p><p> In <i>Mato v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> the Court explained: </p><blockquote> <p> From foregoing provision, it is clear that for evidence to be considered, the same must be formally offered. Corollarily, the mere fact that a particular document is identified and marked as an exhibit does not mean that it has already been offered as part of the evidence of a party. In <i>Interpacific Transit, Inc. v. Aviles</i>, we had the occasion to make a distinction between identification of documentary evidence and its formal offer as an exhibit. We said that the first is done in the course of the trial and is accompanied by the marking of the evidence as an exhibit while the second is done only when the party rests its case and not before. A party, therefore, may opt to formally offer his evidence if he believes that it will advance his cause or not to do so at all. In the event he chooses to do the latter, the trial court is not authorized by the Rules to consider the same. </p> <p> However, in <i>People v. Napat-a</i> citing <i>People v. Mate</i>, we relaxed the foregoing rule and allowed evidence not formally offered to be admitted and considered by the trial court provided the following requirements are present, <i>viz</i>: first, the same must have been duly identified by testimony duly recorded and, second, the same must have been incorporated in the records of the case.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Citations omitted) </p> </blockquote> <p> Since the Deed of Sale attached to respondents See's <i>Answer</i> had not been formally offered, it should not be considered as evidence. To be sure, the purported Deed of Sale was not even properly identified by testimony nor marked in evidence. </p><p> Petitioners' claim of inexistence of a deed of sale over the subject property has factual basis based on Adelfa's testimony and judicial affidavit. In fact, as mentioned above, the RTC even stated in its assailed Order, granting the <i>Demurrer to Evidence</i>, that "Plaintiffs did not even bother to present or exert effort to produce in evidence the alleged notarized "<i>Deed of Sale</i>," which was supposed to be the basis for the transfer of the title of the property in the name of Ernesto See."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Adelfa never testified on the Deed of Sale, and the same was not among the documentary exhibits which were offered before and admitted by the trial court.</p><p> It was not Adelfa's burden to prove the existence of the Deed of Sale because she was, in fact, denying its existence. Rather, it is respondents See's burden since their defense rested mainly on such Deed of Sale. </p><p> However, respondents See simply attached the Deed of Sale to their <i>Answer</i>. No one testified to identify it. It was not marked or even offered as evidence. Instead, they opted to file a <i>Demurrer to Evidence</i>. </p><p> With respect to a demurrer to evidence, pursuant to Section 1, Rule 33, it is only "If [the defendants'] motion is denied, [that] he or she shall have the right to present evidence." Since respondents See's <i>Demurrer to Evidence</i> was granted, they did not present any evidence. </p><p> It must be stressed anew that respondents See did not present any witness to testify on the existence of the Deed of Sale, to identify and authenticate it, and to offer it as part of their evidence in accordance with the Rules on Evidence. That being the case, the Deed of Sale even if it was attached to their <i>Answer</i> cannot be considered by the Court and given any probative value nor evidentiary weight. The Deed of Sale is no better than a scrap of paper. </p><p> Consequently, without any controverting evidence, both lower courts should have given credence to petitioners' claim of the inexistence of a deed of sale over the subject property in favor of Ernesto, respondents See's predecessor-in-interest. </p><p> The Court is mindful of Section 8, Rule 8 of the 2019 Proposed Amendments to the 1997 Rules of Civil Procedure, which provides: </p><blockquote> <p> Section 8. <i>How to contest such documents</i>. â When an action or defense is founded upon a written instrument, or attached to the corresponding pleading as provided in the preceding section, the genuineness and due execution of the instrument shall be deemed admitted unless the adverse party, under oath specifically denies them, and sets forth what he or she claims to be the facts; but the requirement of an oath does not apply when the adverse party does not appear to be a party to the instrument or when compliance with an order for an inspection of the original instrument is refused. (8a) </p> </blockquote> <p> While it appears that there was no Reply under oath filed by petitioners to respondents See's <i>Answer</i> where the Deed of Sale was attached, wherein they specifically denied under oath the genuineness and due execution thereof, petitioners' cause is not thereby negated. </p><p> The Court's elucidation in <i>Spouses Sy v. Westmont Bank</i><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> on how an actionable document should be contested is instructive: </p><blockquote> <p> Whenever an action or defense is based upon a written instrument or document, the substance of such instrument or document shall be set forth in the pleading, and the original or a copy thereof shall be attached to the pleading as an exhibit, which shall be deemed to be a part of the pleading, or said copy may with like effect be set forth in the pleading. The said instrument or document is called an actionable document and Section 8 of Rule 8 provides the proper method for the adverse party to deny its genuineness and due execution[.]</p> <p> . . . . </p> <p> Accordingly, to deny the genuineness and due execution of an actionable document: (1) there must be a specific denial in the responsive pleading of the adverse party; (2) the said pleading must be under oath; and (3) the adverse party must set forth what he claims to be the facts. Failure to comply with the prescribed procedure results in the admission of the genuineness and due execution of the actionable document. </p> <p> In <i>Toribio v. Bidin</i>, the Court expounded that the purpose of specifically denying an actionable document "appears to have been to relieve a party of the trouble and expense of proving in the first instance an alleged fact, the existence or non-existence of which is necessarily within the knowledge of the adverse party, and of the necessity (to his opponent's case) of establishing which such adverse party is notified by his opponent's pleading." In other words, the reason for the rule is to enable the adverse party to know beforehand whether he will have to meet the issue of genuineness or due execution of the document during trial. </p> <p> In that said case, the petitioners therein failed to file a responsive pleading to specifically deny a deed of sale, the actionable document, attached in the answer of the respondents therein. <b>Despite such failure, the Court held that Section 8, Rule 8, was sufficiently complied with because they had already stated under oath in their complaint that they never sold, transferred, or disposed of their shares in the inheritance to others.</b> Thus, respondents therein were placed on adequate notice that they would be called upon during trial to prove the genuineness or due execution of the disputed deeds of sale. Notably, the Court exercised liberality in applying the rules of procedure so that substantial justice may be served. </p> <p> Similarly, in <i>Titan Construction Corporation v. David, Sr</i>., the Court relaxed the rules of procedure regarding Section 8 of Rule 8. In that case, the respondent failed to file a responsive pleading under oath to specifically deny the special power of attorney, the actionable document therein, which was attached to the answer of the petitioner therein. Notwithstanding such deficiency, the Court ruled that there was substantial compliance <b>because the respondent therein consistently denied the genuineness and due execution of the actionable document in his complaint and during trial</b>. </p> <p> In fine, although Section 8 of Rule 8 provides for a precise method in denying the genuineness and due execution of an actionable document and the dire consequences of its non-compliance, it must not be applied with absolute rigidity. What should guide judicial action is the principle that a party-litigant is to be given the fullest opportunity to establish the merits of his complaint or defense rather than for him to lose life, liberty, honor, or property on technicalities.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> (Citations omitted; emphasis supplied) </p> </blockquote> <p> Applying jurisprudence in the present case, there is substantial compliance of Section 8, Rule 8 when petitioners in their <i>Complaint</i><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> and in Adelfa's judicial affidavit alleged under oath the inexistence of the Deed of Sale and during trial, Adelfa testified on the inexistence of the purported sale. </p><p> In the <i>Complaint</i>, petitioners clearly alleged: </p><blockquote> <p> 7.a. There is NO such Deed of Sale signed by a certain Adelfa Alcantara Asico as Vendor in favor of a certain Ernesto See as Vendee. </p> <p> 7.b. Plaintiff Adelfa has never appeared before any Notary Public in order to subscribe to any Deed of Sale over the property covered by TCT No. T-139808 in favor of anybody or even in favor of a certain Ernesto See[.]<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></p> </blockquote> <p> As well, in the judicial affidavit of Adelfa, she denied the purported sale to Ernesto: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="7%"><div align="justify">"24.</div></td> <td width="5%"><div align="justify">Q.</div></td> <td width="88%"><div align="justify">Did you or your husband authorize Mr. Ernesto See to transfer the title of your subject property to his name? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A.</div></td> <td><div align="justify">No, Sir.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">25.</div></td> <td><div align="justify">Q.</div></td> <td><div align="justify">Did you and your husband sell to Mr. Ernesto See the subject property known as Lot 865-B covered by TCT No. T-139808, marked as Exhibit "A"?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A.</div></td> <td><div align="justify">My husband and I never sold to Mr. Ernesto See that property."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Besides, petitioners are not even mandatorily required to file a reply pursuant to Section 10, Rule 6 of the 2019 Proposed Amendments to the 1997 Rules of Civil Procedure, to wit: </p> <blockquote> <p> Section 10. <i>Reply</i>. â All new matters alleged in the answer are deemed controverted. If the plaintiff wishes to interpose any claims arising out of the new matters so alleged, such claims shall be set forth in an amended or supplemental complaint. <u>However, the plaintiff <b>may</b> file a reply only if the defending party attaches an actionable document to his or her answer.</u> </p> <p> A reply is a pleading, the office or function of which is to deny, or allege facts in denial or avoidance of new matters alleged in, or relating to, said actionable document. </p> <p> In the event of an actionable document attached to the reply, the defendant may file a rejoinder if the same is based solely on an actionable document. (Emphasis supplied) </p> </blockquote> <table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>TCT No. T-139808 and TCT No. T-139809</i> </div></td> </tr> </tbody></table> <p>Petitioners offered TCT No. T-139808, with "ADELFA A. ASICO, of legal age, filipino, married to Roberto Asico" as registered owner, specifically Entry No. 317077,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> as part of their evidence, to wit: </p><blockquote> <p> Entry No. 317077. â Deed of Sale. â Ernesto See. â Sale of the property described in this title executed by Adelfa Alcantara Asico in favor of Ernesto See for the sum of [PHP] 75,000.00. Ratified before Notary Public Vicente Garaygay as Doc. [No.] 117, Page 69, Book IV, S. of 1987. </p> <blockquote> <p> This title is TOTALLY CANCELLED, TCT, T-139809 issued in lieu thereof. <br> Date of instrument. â March 9, 1987. <br> Date of inscription. â May 22, 1987 at 10:45 a.m. </p> </blockquote> <p align="right"> Register of Deeds<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p> </blockquote> <p> to prove that TCT No. T-139809, which was issued to Ernesto when TCT No. T-139808 was cancelled, purportedly, by virtue of Entry No. 317077, was obtained fraudulently because such Entry was not approved by the RD.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> The RTC found that the testimony of Adelfa alone did not suffice to overcome the presumption of regularity of the performance of official duties of the accountable public officers of the office of the RD, the presumption that all the requisites for the issuance of a valid title had been complied with, and the presumption of validity of the TCT in the name of respondents See as well as the earlier title in the name of their predecessor-in-interest.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> The CA agreed with the RTC, which observed that the testimony of Adelfa alone was not enough to overcome the above presumptions established by law.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> As to Entry No. 317077 not being approved by the RD, the CA stated that the fact that it was not signed by the RD does not establish the sale transaction fraudulent because fraud is never presumed, but must be established by clear and convincing evidence.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The CA concluded that due to the failure of petitioners to dispute the regularity in the issuance of TCT No. T-139809 in favor of Ernesto, it was perfectly justified that TCT No. 091-2016008139 was issued in favor of respondents See.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> Presidential Decree No. 1529 provides the following procedure in the registration of dealings less than ownership and voluntary conveyances, to wit: </p><blockquote> <p> SEC. 54. <i>Dealings less than ownership, how registered</i>. â No new certificate shall be entered or issued pursuant to any instrument which does not divest the ownership or title from the owner or from the transferee of the registered owners. <b>All interests in registered land less than ownership shall be registered by filing with the Register of Deeds the instrument which creates or transfers or claims such interests and by a brief memorandum thereof made by the Register of Deeds upon the certificate of title, and <u>signed by him</u>.</b> A similar memorandum shall also be made on the owner's duplicate. The cancellation or extinguishment of such interests shall be registered in the same manner. </p> <p> . . . . </p> <p> SEC. 57. <i>Procedure in registration of conveyances</i>. â An owner desiring to convey his registered land in fee simple shall execute and register a deed of conveyance in a form sufficient in law. The Register of Deeds shall thereafter make out in the registration book a new certificate of title to the grantee and shall prepare and deliver to him an owner's duplicate certificate. <b>The Register of Deeds shall note upon the original and duplicate certificate the date of transfer, the volume and page of the registration book in which the new certificate is registered and a reference by number to the last preceding certificate.</b> The original and the owner's duplicate of the grantor's certificate shall be stamped "cancelled". The deed of conveyance shall be filed and indorsed with the number and the place of registration of the certificate of title of the land conveyed. (Emphasis supplied) </p> </blockquote> <p> While Section 54 expressly requires that a brief memorandum of the instrument which creates or transfers or claims interests less than ownership be made by the Register of Deeds upon the certificate of title and <u>signed by him or her</u>, Section 57 does not mention the need for a brief memorandum of the instrument which conveys the land in fee simple on the certificate of title and the signature of the Register of Deeds. </p><p> The Court takes the position that the registration procedure insofar as the requirements of the making of a brief memorandum upon the certificate of title of the instrument by the Register of Deeds and the affixing of the signature of the Register of Deeds are concerned should apply to both, and these requirements are mandatory. With respect to a voluntary dealing conveying the registered land in fee simple, such memorandum of the voluntary instrument on the certificate of title to be cancelled is necessary to evidence the origin of the transfer of title to the new registered owner. </p><p> In <i>Heirs of Pastora Lozano v. The Register of Deeds of Lingayen, Pangasinan</i><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (<i>Heirs of Lozano</i>), the Court explained the effect of an owner's duplicate certificate of title, which was not signed by the Register of Deeds, <i>viz</i>.: </p><blockquote> <p> We give utmost consideration to the fact that the owner's duplicate copy presented by appellee was not duly signed by the Register of Deeds. This defect was neither clarified nor justified by appellee both before the lower court and before Us on appeal. Appellee merely explained that what was presented before the court was a duplicate original, and thus, need not be authenticated. Such explanation, however, does not change the fact that the owner's duplicate does not contain the Register of Deeds' signature, <b>making the title <u>inherently flawed</u></b>. </p> <p> . . . . </p> <p> <b>Without the signature of the Register of Deeds, the owner's duplicate copy presented by appellee as basis for the reconstitution could <u>definitely be categorized as spurious and of dubious origin</u>. It would be <u>very difficult to support and uphold the validity of a public document which does not bear the signature of the official in charge of the office which issued such document</u>.</b> In all candidness, the trial court should have been more circumspect in appraising the value of the document presented before it. Although no person came forward to contest the reconstitution of the subject title even after the requirements of posting and publication have been complied with, the duplicate copy presented by appellee, on its face, is apparently flawed. In addition, the manner the title number was written should have also alarmed the trial court as it was obviously different from the other entries in the title. </p> <p> . . . . </p> <p> <b>While public documents, <i>e.g</i>., owner's duplicate copy of certificate of title, are admissible in evidence without further proof of their due execution or genuineness</b> (<i>Antillon vs. Barcelon</i>, 37 Phil. 148 [1917]), <b>the rule does not apply where, on its face, such documents are not authenticated by the official signature and seal which they are supposed to bear</b>. Thus, while petitioner may argue that the subject property is covered by a certificate of title which was lost/destroyed, she is also duty-bound to present a competent source for its reconstitution. This, petitioner failed to do. Thus, no error may be attributed to the Court of Appeals when it reversed and set aside the RTC Decision dated January 26, 2000. </p> <p> . . . . </p> <p> Petitioners were burdened to prove the execution or existence of the original copy of TCT No. 17100 which is the copy on file in the Office of the Register of Deeds, and the contents thereof. </p> <p> Clearly, petitioners failed to discharge their burden. Inexplicably, they even also failed to prove the due execution of the original copy of TCT No. 17100, and failed to present any person before whom its execution was authorized, and who was present when it was executed; or the person who, after its execution saw it and recognized the signature of the Register of Deeds; or by a person to whom the Register of Deeds authorized to oversee such execution. </p> <p> . . . . </p> <p> <b>Any title issued by the Register of Deeds, including the original copy on file in the Office of the Register of Deeds or the owner's duplicate of said title, must bear the signature of the Register of Deeds. Hence, the owner's duplicate copy of title relied upon by the petitioner must be authentic and not spurious.</b> In this case, the owner's duplicate of TCT No. 17100 which petitioners adduced in evidence is not signed by the Register of Deeds, and does not even contain the number of the title certificate. After the words "<i>Certifico de Transferencio De Titulo No</i>." is a blank space where the number of the title is supposed to be typewritten. The petitioners failed to explain why the owner's duplicate of TCT No. 17100 does not contain such signature. <b>Thus, the ruling of the CA that the owner's duplicate presented by the petitioners is <u>spurious</u> is correct.</b><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> While in <i>Heirs of Lozano</i> it was the owner's duplicate which was unsigned by the Register of Deeds and in the instant case it is the memorandum regarding the purported sale in favor of Ernesto which was not signed by the RD, the Court finds no compelling reason to depart from its ruling in <i>Heirs of Lozano</i> that an owner's duplicate certificate of title which is not signed by the Register of Deeds is spurious, and, by parity of reasoning, a memorandum on a certificate of title which is unsigned by the Register of Deeds is likewise spurious. </p><p> The memorandum in question, Entry No. 317077, pursuant to <i>Heirs of Lozano</i>, is not authentic because it does not bear the signature of the RD. Being on its face not regular, given the absence of the RD's signature, the disputable presumption: "That official duty has been regularly performed"<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> cannot be invoked. </p><p> Thus, both lower courts erred in according Entry No. 317077, without the RD's signatureâa fact that even the CA recognized, the presumption of regularity in the performance of official duty and the presumption of validity or authenticity simply do not arise. Given that Entry No. 317077 is spurious, the issuance of TCT No. T-139809 in favor of Ernesto is fraudulent, as correctly claimed by petitioners. </p><p> Based on the evidence adduced by petitioners, the validity of TCT No. T-139809 in Ernesto's name cannot be sustained. There is no deed of sale evidencing the transfer from Adelfa to him. The memorandum in Adelfa's certificate of title regarding such purported sale is spurious because it was not signed by the RD. </p><p> The issuance of Ernesto's TCT, having been procured fraudulently, is void pursuant to Section 53 of Presidential Decree No. 1529, to wit: </p><blockquote> <p> SEC. 53. . . . </p> <p> . . . .</p> <p> In all cases of registration procured by fraud, the owner may pursue all his legal and equitable remedies against the parties to such fraud without prejudice, however, to the rights of any innocent holder for value of a certificate of title. After the entry of the decree of registration on the original petition or application, any subsequent registration procured by the presentation of a forged duplicate certificate of title, or a forged deed or other instrument, shall be null and void. </p> </blockquote> <p> Given that the source of respondents See's title is void for being fraudulently issued, TCT No. 091-2016008139 in their name is likewise void. </p><p> <i>Prescription</i></p><p> While the RTC Order expressed that "it also baffles this court why it took . . . Adelfa . . . 30 years more or less before she finally decided to assert her rights, if any, and to file an action to nullify the title of Ernesto ... and the derivative title of [respondents See],"<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> nowhere therein did the RTC discuss the issue of prescription. The RTC Order centered on the failure of petitioners' testimonial and documentary evidence to establish their cause of action as alleged in their <i>Complaint</i>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> The CA, in resolving the issue of whether the subject property may be properly reconveyed to petitioners,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> discussed prescription. As discussed above, the CA ruled that petitioners' cause of action of reconveyance has prescribed. </p><p> Petitioners argue that since the purported sale to Ernesto is inexistent, an action to declare its inexistence or nullity does not prescribe.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> As to the CA's application of constructive trust, they argue that the CA failed to consider that the occupancy of the persons mentioned by the CAâ"a certain Mr. Perido, Mr. Artesuno, and other unnamed persons"<sup style="COLOR: RGB(255, 0, 0);">[58]</sup>âwas by Adelfa's permission and that they were allowed by her to stay in the subject property to report to her on matters affecting the same.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> The arguments of petitioners are meritorious. Indeed, based on Adelfa's Judicial Affidavit as quoted in the Petition, she came to know that respondents See were bothering the occupants of the subject property because they reported the matter to her and told them that she continued to own it since she and her husband had not sold the same to anybody,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> to wit: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="7%"><div align="justify">"26.</div></td> <td width="5%"><div align="justify">Q.</div></td> <td width="88%"><div align="justify">When did you learn that your Exhibit <b>"A"</b> was cancelled and that Exhibit <b>"C"</b> was issued in lieu thereof? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A.</div></td> <td><div align="justify">Only lately, before I filed this case.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">27.</div></td> <td width="5%"><div align="justify">Q.</div></td> <td><div align="justify">How did you discover it?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A.</div></td> <td><div align="justify">Because people came to me and were informing me that the heirs of Ernesto See were already bothering them.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">28.</div></td> <td width="5%"><div align="justify">Q.</div></td> <td><div align="justify">What did you do? </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">A.</div></td> <td> <div align="justify">I told them that I own the property and my husband and I have not sold it to any body.["]<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Indeed, the occupants of the subject property knew that Adelfa and her husband owned it and that is why they reported to her that respondents See were bothering them. </p> <p> Adopting the exception mentioned in the CA Decision wherein an action for reconveyance based on implied or constructive trust is imprescriptible, the present action has not prescribed in view of the fact that petitioners are in possession of the subject property through certain individuals who occupy the same with the former's consent and permission. </p><p> More than this, however, the action to declare the purported sale of the subject property between Adelfa and Ernesto inexistent does not prescribe pursuant to Article 1410 of the Civil Code, which provides that: "The action or defense for the declaration of the inexistence of a contract does not prescribe." </p><p> Consequently, the CA committed reversible error on the issue of prescription. </p><p> <i>The demurrer to evidence</i></p><p> With petitioners proving the inexistence of the deed of sale in favor of Ernesto, the fraud committed in the issuance of TCT No. T-139809, and the nullity of the TCTs in Ernesto and respondents See's names, both lower courts erred in granting respondents See's <i>Demurrer to Evidence</i>. Upon the facts and the law, as explained above, petitioners, as plaintiffs, have shown their right to the reliefs alleged in the <i>Complaint</i>âdeclaration as null and void of TCT No. T-139809 and TCT No. 091-2016008139 and restoration of TCT No. T-139808 in the name of Adelfa, married to Roberto. </p><p> As provided in Section 1 of Rule 33, if the motion for demurrer to evidence is "granted but on appeal the order of dismissal is reversed, [the defendant] shall be deemed to have waived the right to present evidence." With respondents See being deemed to have waived the right to present evidence, the testimonial and documentary evidence of petitioners stand uncontested and preponderate over respondents See's zilch evidence. Perforce, the dismissal of their <i>Complaint</i> is overturned, and the reliefs sought therein are hereby granted. </p><p> <i>A final note</i></p><p> As observed by the Court in <i>Heirs of Lozano</i>, given that the memorandum which is crucial to prove the validity of Ernesto's TCT is unsigned by the RD, respondents See, not petitioners, were burdened to prove the due execution of the memorandum appearing on Adelfa's TCT by presenting any person in the office of the RD who could competently and satisfactorily explain why such memorandum was not signed by the RD. </p><p> As to the purported deed of sale attached to respondents See's <i>Answer</i>, a witness is required to testify upon it before it can be offered and admitted as evidence. That it is part of the records of the case is inconsequential. Without such process, no court can consider the same as evidence. Such witness has to explain why it was executed by Adelfa in her unmarried name despite the fact that the subject property is registered in the name of Adelfa, married to Roberto. The Court also wonders why a certified true copy of said deed of sale was not obtained from the RD, if indeed it was so registered by the latter. </p><p> Additionally, both persons, the RD's representative and witness on the deed of sale, will have to reconcile the memorandum in question, Entry No. 317077, which referred to a sale by a certain Adelfa Alcantara Asico in favor of Ernesto pursuant to a notarized document (entered as Doc. No. 117, Page No. 69, Book IV, S. of 1987 in the notarial registry of Notary Public Vicente Garaygay, Jr.) and the purported Deed of Sale attached to respondents See's <i>Answer</i>, which is described as "a Deed of Sale dated March 9, 1987 . . . notarized by Atty. Vicente Garaygay, Jr., and entered into the Notarial Book as Document [No.] 117, Page No. 69[,] Book IV, Series of 1987,"<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> and executed by a certain Adelfa T. Alcantara, single, in favor of Ernesto. As well, a credible explanation is needed why the said Deed of Sale referred to "the VENDOR [as] the owner of TWO FOURTH (2/4) shares, in Lot No. 865, Himamaylan Cadastre, by virtue of a Deed of Absolute Sale executed in her favor by the prior owner, Jose Sola, and which document was ratified before Notary Public Artemio L. Balinas, and entered in his Notarial Register as Doc. No. 78, Page No. 17, Book No. XIII, Series of 1986, and more particularly described and bounded as follows: <u>TRANSFER CERTIFICATE OF TITLE NO. T-24933</u>"<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> and the memorandum on the purported sale was annotated on TCT No. T-139808 (pertaining to Lot No. 865-B), which "is a transfer from Transfer Certificate of Title No. T-24933."<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p>Lastly, respondents See saw fit to file a <i>Demurrer to Evidence</i> and not present any evidence in their favorâa calculated legal gambit they risked. Having failed therein, they have to bear its repercussions when it unfortunately backfired on them. </p><p> <b>ACCORDINGLY,</b> the Petition for Review on <i>Certiorari</i> is hereby <b>GRANTED</b>. The Decision dated December 16, 2022 and Resolution dated August 18, 2023 of the Court of Appeals in CA-G.R. CV No. 07720 are <b>REVERSED</b> and <b>SET ASIDE</b>. The <i>Complaint</i> filed by petitioners Adelfa Alcantara Asico and Annierose Alcantara Asico against respondents Heirs of Ernesto See, namely: Edna See-Pornel, Mary Anne See-Hilario, Mary Grace C. See, and Mary Jane See-Tan in Civil Case No. 17-1356 before Branch 55, Regional Trial Court, 6<sup>th</sup> Judicial Region, Himamaylan City, Negros Occidental is hereby <b>REINSTATED</b> and <b>GRANTED</b>. </p><p> Transfer Certificate of Title No. T-139809, with Ernesto See as registered owner, and Transfer Certificate of Title No. 091-2016008139, with Edna See Pornel, Mary Ann See Hilario, Mary Grace See, and Mary Jane See Tan as registered owners, both issued by the Register of Deeds for the Province of Negros Occidental are <b>DECLARED</b> null and void. Transfer Certificate of Title No. T-139808, with Adelfa A. Asico, married to Roberto Asico as registered owner is <b>REINSTATED</b>. </p><p> The Register of Deeds for the Province of Negros Occidental is <b>DIRECTED</b> to cause the cancellation of Transfer Certificate of Title No. T-139809 and Transfer Certificate of Title No. 091-2016008139, to reinstate Transfer Certificate of Title No. T-139808, with Adelfa A. Asico, married to Roberto Asico as registered owner, and to cancel Entry No. 317077 annotated thereon. </p><p> <b>SO ORDERED.</b> </p><p> <i>Inting, Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">â¢</sup> The names of the heirs of Ernesto appear as "Edna See Pornel," "Mary Ann See Hilario," "Mary Grace See," and "Mary Jane See Tan" in Transfer Certificate of Title No. 091-2016008139, <i>rollo</i>, pp. 80-81. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-32, excluding Annexes.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 35-46. Penned by Associate Justice Ronald Suva Tolentino and concurred in by Associate Justices Pamela Ann Abella Maxino and Nancy C. Rivas-Palmones of the Eighteenth Division, CA, Cebu City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 59-60.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 67, Complaint.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 120-130. Penned by Presiding Judge Walter G. Zorilla. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Branch 55, Himamaylan City, Negros Occidental.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, pp. 36-38, CA Decision.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> ART. 1456. If property is acquired through mistake or fraud, the person obtaining it is, by force of law, considered a trustee of an implied trust for the benefit of the person from whom the property comes. (n)</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, p. 41, CA Decision.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> ART. 1144. The following actions must be brought within ten years from the time the right of action accrues: </p> <blockquote> <p> (1) Upon a written contract;<br> (2) Upon an obligation created by law;<br> (3) Upon a judgment. (n)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, p. 41, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Amending and Codifying the Laws Relative to Registration of Property and for Other Purposes, June 11, 1978. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 41, CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 42. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 99-100. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 85-98. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 3-8. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 9-A to 9-B. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 132-133. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 167-172. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> A.M. No. 19-10-20-SC which took effect on May 1, 2020. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i>, pp. 105-112. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 19, Petition. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 20-21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 122, RTC Order dated October 12, 2019. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 101-104, RTC Order dated June 10, 2019. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 43, CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> A.M. No. 19-08-15-SC, which took effect on May 1, 2020. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 320 Phil. 344 (1995) [Per J. Kapunan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 349-350. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 122, RTC Order dated October 12, 2019. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 797 Phil. 694 (2016) [Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 703-705. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, pp. 67-73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 68, Complaint. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 21, Petition. While a copy of Adelfa's judicial affidavit was not attached to the Petition, this quoted portion appears therein, and respondents See could have disputed the same in their Comment, but they did not. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Marked, offered, and admitted as Exhibit "A-2" pursuant to the RTC Order dated June 10, 2019, <i>rollo</i>, p. 101. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, p. 75. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 101, RTC Order dated June 10, 2019. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 122, RTC Order dated October 12, 2019. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 44, CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 44-45. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 530 Phil. 255 (2006) [Per J. Callejo, Sr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 261-269. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 2019 Proposed Amendments to the Revised Rules on Evidence, Rule 131, sec. 3(m). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 122, RTC Order dated October 12, 2019. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 121. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 39, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 20-21, Petition. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 42, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 22, Petition. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> While a copy of Adelfa's judicial affidavit was not attached to the Petition, this quoted portion appears therein, and respondents See could have disputed the same in their Comment, but they did not. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 86, Answer. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 99, Annex "1" of Answer. </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 74, Annex "A" of Complaint. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

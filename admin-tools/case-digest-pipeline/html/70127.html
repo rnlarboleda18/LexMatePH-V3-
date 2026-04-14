@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 275924 - PEDRO PAGARIGAN Y MARAVE, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70127' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 275924, August 18, 2025 ]</H2>
+			<H3>PEDRO PAGARIGAN <i>Y</i> MARAVE, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Court resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) which ruled that Pedro Pagarigan <em>y</em> Marave (Pagarigan) is guilty beyond reasonable doubt of violating Section 77 (previously Section 68) of Presidential Decree (P.D.) No. 705, as amended, or the Forestry Reform Code of the Philippines.</p><p align="center"> <b>Antecedents</b> </p><p> An Information was filed against Pagarigan charging him with violation of P.D. No. 705.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Its accusatory portion reads: </p><blockquote> <p> That on or about the 6<sup>th</sup> day of August 2019, at about 2:45 AM, in Barangay Lucapon South, Municipality of Sta. Cruz, Province of Zambales, Philippines, and within the jurisdiction of this Honorable Court, the said accused, did then and there willfully, unlawfully and feloniously; having in his possession and/or control while transporting fifty (50) pieces of illegally sawn lumber/forest products, to wit:</p> <table width="100%" border="1" cellspacing="0" cellpadding="4"> <tbody><tr> <td width="22%"><div align="center">Quantity/Unit</div></td> <td width="29%"><div align="center">Description</div></td> <td width="20%"><div align="center">Volume</div></td> <td width="29%"><div align="center">Estimated <br> Value</div></td> </tr> <tr valign="top"> <td><div align="center">10 pcs </div></td> <td><div align="center">2x5x15 <br> (Apitong)</div></td> <td><div align="center"> 125 bd. ft. </div></td> <td><div align="center">Php6,000.00</div></td> </tr> <tr valign="top"> <td><div align="center">2 pcs </div></td> <td><div align="center">2x5x12 <br> (Apitong) </div></td> <td><div align="center">20 bd. ft.</div></td> <td><div align="center">960.00 </div></td> </tr> <tr valign="top"> <td><div align="center">2 pcs </div></td> <td><div align="center">2x6x20<br> (Palosapis)</div></td> <td><div align="center">40 bd. ft. </div></td> <td><div align="center">1,920.00</div></td> </tr> <tr valign="top"> <td><div align="center">36 pcs </div></td> <td><div align="center">2x3x14<br> (Palosapis) </div></td> <td><div align="center">252 bd. ft.</div></td> <td><div align="center">12,096.00 </div></td> </tr> </tbody></table> <p>with a total volume of 437 board feet having an estimated market value of TWENTY THOUSAND NINE HUNDRED SEVENTY-SIX PESOS ([PHP] 20,976.00) Philippine currency, which were boarded on a Mitsubishi Canter (Drop Side) bearing plate number UHF 362, without authority and without obtaining from the proper government authorities the necessary permit/license and other legal documents as required under existing forest laws and regulations.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p> </blockquote> <p> During his arraignment, Pagarigan pleaded not guilty to the charge.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> After pre-trial,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> trial ensued.</p><p> The prosecution presented the following witnesses: (1) Police Staff Sergeant Ricky D. Tagulao (PSSg Tagulao); (2) Police Corporal Reynante Sison (PCpl Sison); and (3) Ardian R. Domincil (Domincil).</p><p> On August 6, 2019, at around 2:15 a.m., PSSg Tagulao received a tip from a confidential informant that an Elf truck transporting illegally sawn lumber will pass through Barangay Lucapon South, Sta. Cruz, Zambales.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> PSSg Tagulao and PCpl Sison were then directed by their superior to verify the information.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> At around 2:45 a.m. on the same day, PSSg Tagulao, PCpl Sison, and other police officers went to the place mentioned by the informant and spotted a Mitsubushi Canter with plate number UHF 362 with timber protruding from its rear.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> PSSg Tagulao and PCpl Sison flagged down the vehicle and asked its driver, Pagarigan, if he had a permit to possess and transport the timber loaded on the vehicle he was driving.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Pagarigan was unable to present any permit or license and was arrested by PCpl Sison.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Pagarigan and the pieces of lumber that he transported were then brought to the police station.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> Personnel from the City Environment and Natural Resources Office (CENRO) arrived at the police station to assist in the investigation. Domincil, a forest ranger assigned to the CENRO, prepared the apprehension report and tally sheet, which stated the quantity, description, and estimated value of the confiscated timber.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Domincil claimed that the valuation of the seized timber was based on the highest price of the same type of wood sold in Sta. Cruz, Zambales.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> For its part, the defense presented the following witnesses: (1) Police Master Sergeant Froilan M. Corpuz (PMSg Corpuz); (2) Dominador Pagarigan (Dominador); (3) Pagarigan; and (4) PSSg Tagulao.</p><p> Pagarigan admitted that he was driving the truck loaded with the confiscated timber but claimed that he did not know that they were illegally sourced.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> He averred that a certain Peter Merced (Merced) rented the truck from his brother, Dominador. Pagarigan also clarified that he was arrested by the police officers in Barangay Bayto, Sta. Cruz, Zambales and not in Barangay Lucapon South.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> Dominador testified that the truck carrying the seized lumber was owned by his wife.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> He narrated that on August 6, 2019, at around 11:00 a.m., Merced went to his house in Infanta, Pangasinan and rented his wife's truck.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Dominador asserted that Merced told him that he will use the truck to transport second-hand building materials.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> He then instructed Pagarigan to drive the truck from Lucapon, Sta. Cruz, Zambales to Bayto, Sta. Cruz, Zambales.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Dominador likewise claimed that PSSg Tagulao previously rented the same truck from him.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> PMSg Corpuz testified that he was the investigator assigned to Pagarigan's case and that he was the one who prepared all the documents necessary for the filing of the Information against him.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> He narrated that during the course of his investigation, he learned that the owner of the seized timber was a certain "Prudencio Merced" and that a separate case was filed against him.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup></p><p> PSSg Tagulao confirmed that he knew Pagarigan prior to the latter's arrest but denied that he previously rented Dominador's truck.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> On March 12, 2020, the RTC rendered its Decision,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the dispositive portion of which states: </p><blockquote> <p> WHEREFORE, accused Pedro Pagarigan <i>y</i> Marave is found GUILTY beyond reasonable doubt of the crime of Violation of Section 78 of P.D. [No.] 705, as amended, and he is hereby sentenced to suffer the indeterminate penalty of four (4) months and one (1) day of <i>arresto mayor</i>, as minimum, to three (3) years, six (6) months[,] and twenty-one (21) days of <i>prision correccional</i>, as maximum.</p> <p> The fifty (50) pieces of lumber with combined volume of 437 board feet is hereby ordered confiscated in favor of the government.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></p> </blockquote> <p> The RTC ruled that the prosecution was able to prove all the elements of the crime charged against Pagarigan and gave no credence to his defense of non-ownership of the seized timber since the law punishes mere possession of timber and forest goods without a permit.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The RTC likewise held that the prosecution was able to prove the identity and preserve the evidentiary integrity of the timber seized from Pagarigan.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Pagarigan appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the CA denied Pagarigan's appeal: </p><blockquote> <p> WHEREFORE, the appeal is hereby DENIED. The Decision dated March 12, 2020 of the Regional Trial Court (RTC), Iba, Zambales, Branch 69 in Criminal Case No. RTC-12783-2019-I is hereby AFFIRMED in full. Accused-appellant is hereby found GUILTY beyond reasonable doubt of violation of SECTION [77] of P[.]D[.] [No.] 705, as amended.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p> </blockquote> <p> The CA ruled that the RTC did not err when it convicted Pagarigan of illegal possession of timber and forest products under Section 77 of P.D. No. 705, as amended.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> It held that contrary to Pagarigan's claim, ownership is not an element of the crime charged against him and the law punishes mere possession of timber and forest products without the necessary permits and licenses.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p><p> Pagarigan moved for reconsideration of the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> but was denied by the CA in the assailed Resolution.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> Hence, Pagarigan filed the present Petition.</p><p> Pagarigan argues that the CA erred when it denied his appeal and raised the following arguments: (1) there are discrepancies in the testimony of the prosecution's witnesses regarding the time and place where he was arrested;<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (2) he is not the owner of the timber that he was transporting;<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (3) there was no proof that the timber that he was transporting was prohibited;<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (4) the prosecution failed to present proof that the owner of the timber had no permit to transport the timber;<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> (5) he was not apprised of his constitutional rights when he was arrested;<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> and (6) the pieces of lumber confiscated from him was not admissible as evidence considering that it was not scaled, measured, and inventoried in his presence.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></p><p> On February 12, 2025, this Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> directing the Office of the Solicitor General (OSG) to file its comment to the Petition.</p><p> On May 16, 2025, the OSG filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> which prayed for the denial of the Petition.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The OSG argues that the Petition should be denied outright since it raises factual issues which are outside the ambit of an appeal by <i>certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> It likewise asserts that the CA did not err when it denied Pagarigan's appeal since his guilt was proven beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The OSG pointed out that the law punishes mere possession of timber and forest products without the required permits.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Thus, it was irrelevant that Pagarigan was not the owner as it was proven that the seized timber was in his possession without a permit when he was arrested.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The OSG likewise asserts that the seized timber was relevant and competent and therefore admissible as evidence.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></p><p align="center"> <b>Issue</b> </p><p> Whether petitioner Pedro Pagarigan<i> y</i> Marave is guilty beyond reasonable doubt of violation of Section 77 of P.D. No. 705.</p><p align="center"> <b>This Court's Ruling</b> </p><p> The Petition is denied. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The Petition is fatally defective and should be denied outright</i> </div></td> </tr> </tbody></table> <p>Rule 45, Sections 1 and 4 enumerate some of the basic procedural requirements for the filing of an appeal by <i>certiorari</i>: </p><blockquote> <p> <b>Section 1.</b> <i>Filing of petition with Supreme Court</i>. â A party desiring to appeal by <i>certiorari</i> from a judgment or final order or resolution of the Court of Appeals, the Sandiganbayan, the Regional Trial Court or other courts whenever authorized by law, may file with the Supreme Court a verified petition for review on <i>certiorari</i>. The petition shall raise only questions of law which must be distinctly set forth.</p> <p> . . . .</p> <p> <b>Section 4.</b> <i>Contents of petition.</i> â The petition shall be filed in eighteen (18) copies, with the original copy intended for the court being indicated as such by the petitioner and shall (a) state the full name of the appealing party as the petitioner and the adverse party as respondent, without impleading the lower courts or judges thereof either as petitioners or respondents; (b) indicate the material dates showing when notice of the judgment or final order or resolution subject thereof was received, when a motion for new trial or reconsideration, if any, was filed and when notice of the denial thereof was received; (c) set forth concisely a statement of the matters involved, and the reasons or arguments relied on for the allowance of the petition; (d) be accompanied by a clearly legible duplicate original, or a certified true copy of the judgment or final order or resolution certified by the clerk of court of the court <i>a quo</i> and the requisite number of plain copies thereof, and such material portions of the record as would support the petition; and (e) contain a sworn certification against forum shopping as provided in the last paragraph of section 2, Rule 42</p> </blockquote> <p> Notably, Rule 45, Section 5 provides that failure to comply with the foregoing requirements can result in the outright denial of a Rule 45 petition: </p><blockquote> <p> <b>Section 5. </b><i>Dismissal or denial of petition</i>. â The failure of the petitioner to comply with any of the foregoing requirements regarding the payment of the docket and other lawful fees, deposit for costs, proof of service of the petition, and the contents of and the documents which should accompany the petition shall be sufficient ground for the dismissal thereof.</p> <p> The Supreme Court may on its own initiative deny the petition on the ground that the appeal is without merit, or is prosecuted manifestly for delay, or that the questions raised therein are too unsubstantial to require consideration.</p> </blockquote> <p> In addition, Rule 46, Section 5 of the Rules of Court provides additional grounds for dismissal of Rule 45 petitions: </p><blockquote> <p> <b>Section 5.</b> <i>Grounds for dismissal of appeal</i>. â The appeal may be dismissed <i>motu proprio</i> or on motion of the respondent on the following grounds:</p> <blockquote> <p> (a) Failure to take the appeal within the reglementary period; </p> <p>(b) Lack of merit in the petition;</p> <p>(c) Failure to pay the requisite docket fee and other lawful fees or to make a deposit for costs; </p> <p>(d) Failure to comply with the requirements regarding proof of service and contents of and the documents which should accompany the petition;</p> <p> (e) Failure to comply with any circular, directive or order of the Supreme Court without justifiable cause;</p> <p> (f) Error in the choice or mode of appeal; and</p> <p> (g) The fact that the case is not appealable to the Supreme Court.</p> </blockquote> </blockquote> <p> Here, a perusal of the Petition shows that it failed to comply with the aforesaid requirements.</p><p> <i>First</i>, the Petition was filed outside of the reglementary period. Rule 45, Section 2 of the Rules of Court provides that a Rule 45 petition must be filed within 15 days from receipt of the assailed judgment. For justifiable reasons, this Court may extend the period for filing of the petition for an additional 30 days.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Here, petitioner claims that he received a copy of the assailed Resolution on September 19, 2024.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Thus, he had 15 days or until October 4, 2024 to file his Petition for Review on <i>Certiorari</i>.</p><p> On October 2, 2024, petitioner filed a Motion for Extension of Time<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> requesting for an additional 30 days or until November 3, 2024 to file his Petition for Review on <i>Certiorari</i>. On October 30, 2024, this Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> which granted petitioner's motion with a warning that no further extension of time will be given to him. Despite the leniency exhibited by this Court to petitioner, he only filed the Petition on November 14, 2024 or 11 days after it was due.</p><p> <i>Second</i>, petitioner failed to attach an original or certified true copy of the assailed Resolution to his Petition or even belatedly submit a copy of it to this Court.</p><p> <i>Third</i>, a Rule 45 petition may be denied outright if material portions of the record are not attached to it.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> In <i>Air Philippines Corporation v. Zamora</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> this Court laid down the principles governing this rule: </p><blockquote> <p> First, not all pleadings and parts of case records are required to be attached to the petition. Only those which are relevant and pertinent must accompany it. The test of relevancy is whether the document in question will support the material allegations in the petition, whether said document will make out a <i>prima facie</i> case of grave abuse of discretion [or error] as to convince the court to give due course to the petition.</p> <p> Second, even if a document is relevant and pertinent to the petition, it need not be appended if it is shown that the contents thereof can also found in another document already attached to the petition. Thus, if the material allegations in a position paper are summarized in a questioned judgment, it will suffice that only a certified true copy of the judgment is attached.</p> <p> Third, a petition lacking an essential pleading or part of the case record may still be given due course or reinstated (if earlier dismissed) upon showing that petitioner later submitted the documents required, or that it will serve the higher interest of justice that the case be decided on the merits.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Citations omitted)</p> </blockquote> <p> Here, petitioner made repeated reference to the testimonies of the prosecution's witnesses and the RTC Decision and proffered arguments to debunk both.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> However, petitioner failed to attach a copy of the RTC Decision, the transcript of stenographic notes of the hearing, or the affidavits of the prosecution's witnesses to the Petition. While the assailed judgment summarized the testimonies of the prosecution's witnesses,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> as well as the RTC's ruling,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> it is silent on the matters raised by petitioner. Thus, We have no basis to determine whether petitioner is correctly quoting or misquoting the testimonies of the witnesses during trial, as well as the RTC Decision and whether the conclusions reached by the RTC is supported by evidence.</p><p> <i>Fourth</i>, petitioner failed to include in the Petition a recital of material dates. Specifically, the Petition lacked any detail as to when petitioner: (1) received a copy of the assailed Decision; and (2) moved for its reconsideration. Without these pieces of information, this Court is unable to determine if petitioner was able to timely move for reconsideration of the assailed Decision or if he was unable to do so, which meant that CA ruling had already attained finality.</p><p> <i>Fifth</i>, the affidavit of service,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> verification, and certification of non-forum shopping<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> appended to the Petition were not properly notarized. A cursory review of these documents shows that their <i>jurats</i> do not state that the affiant exhibited before the notary public at least one of their current identification documents issued by an official agency bearing the photographs and signature of the affiant as required under Rule II, Sections 6 and 12 of A.M. No. 02-8-13-SC, or the 2004 Rules on Notarial Practice, as amended.</p><p> Considering that the Petition is riddled with procedural errors, its outright dismissal is in order. In any event, even if the Petition is evaluated on its merits, it must still be denied. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>No error was committed by the CA when it denied petitionerâs appeal</i> </div></td> </tr> </tbody></table> <p>Petitioner was charged with violation of Section 68 (now Section 77) of P.D. No. 705, as amended, which states: </p><blockquote> <p> Section 68. <i>Cutting, Gathering and/or collecting Timber or Other Forest Products Without License</i>. â Any person who shall cut, gather, collect, remove timber or other forest products from any forest land, or timber from alienable or disposable public land, or from private land, without any authority, or possess timber or other forest products without the legal documents as required under existing forest laws and regulations, shall be punished with the penalties imposed under Articles 309 and 310 of the Revised Penal Code: Provided, That in the case of partnerships, associations, or corporations, the officers who ordered the cutting, gathering, collection or possession shall be liable, and if such officers are aliens, they shall, in addition to the penalty, be deported without further proceedings on the part of the Commission on Immigration and Deportation.</p> <p> The Court shall further order the confiscation in favor of the government of the timber or any forest products cut, gathered, collected, removed, or possessed, as well as the machinery, equipment, implements and tools illegally used in the area where the timber or forest products are found.</p> </blockquote> <p> In <i>Idanan v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> We ruled that the foregoing provision punishes three distinct acts: (1) the cutting, gathering, collecting, or removing of timber or other forest products from any forest land without any authority; (2) the cutting, gathering, collecting, or removing of timber from alienable or disposable public land, or from private land without any authority; and (3) the possession of timber or other forest products without the legal documents as required under existing forest laws and regulations.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p> Here, petitioner is charged under the third category, i.e., the possession of timber or other forest products without the legal documents, since he was found in possession of 50 pieces of <i>Apitong</i> and <i>Palosapis</i> lumber without the required permits under existing forest laws and regulations.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p><p> In <i>Villarin v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> We clarified the kind of "possession" punished under Section 77 of P.D. No. 705, as amended. </p><blockquote> <p> As a special law, the nature of the offense is malum prohibitum and as such, criminal intent is not an essential element. "However, the prosecution must prove that petitioners had the intent to possess (<i>animus possidendi</i>)" the timber. "Possession, under the law, includes not only actual possession, but also constructive possession. Actual possession exists when the [object of the crime] is in the immediate physical control of the accused. On the other hand, constructive possession exists when the [object of the crime] is under the dominion and control of the accused or when he has the right to exercise dominion and control over the place where it is found."</p> <p> There is no dispute that petitioners were in constructive possession of the timber without the requisite legal documents. Villarin and Latayada were personally involved in its procurement, delivery and storage without any license or permit issued by any competent authority. Given these and considering that the offense is malum prohibitum, petitioners' contention that the possession of the illegally cut timber was not for personal gain but for the repair of said bridge is, therefore, inconsequential.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> ( Citations omitted)</p> </blockquote> <p> Illegal possession of timber is a crime covered by special law and is <i>malum prohibitum</i>.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Hence, intent is not an essential element of the crime.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> However, the prosecution still has the burden to prove that the accused intended to perpetrate the prohibited act under the special law. In <i>Valenzona v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> We differentiated between "intent to commit the crime" and "intent to perpetrate the act" thusly: </p><blockquote> <p> That said, dispensing with proof of criminal intent for crimes <i>mala prohibita</i> does not, in any way, discharge the prosecution of its burden to show that the prohibited act was done intentionally by the accused. On this note, it is important to distinguish between <i>intent to commit the crime and intent to perpetrate the act</i> - while a person may not have consciously intended to commit a crime regarded as <i>malum prohibitum</i>, he or she may still be held liable if he or she did intend to commit an act that is, by the very nature of things, the crime itself. Thus, for acts that are <i>mala prohibita</i>, the intent to perpetrate the prohibited act under the special law must nevertheless be shown.</p> <p> In contrast to crimes <i>mala in se</i>, which presuppose that the person who did the felonious act had criminal intent in doing so, crimes <i>mala prohibita</i> do not require such knowledge or criminal intent; rather, what is crucial is <i>volition</i> or the intent to commit the act. While volition or voluntariness refers to knowledge of the act being done (as opposed to knowledge of the nature of the act), criminal intent is the state of mind that goes beyond voluntariness, and it is this intent which is punished by crimes<i> mala in se</i>. To hold an offender liable for an offense that is <i>malum prohibitum</i>, it is sufficient that there is a conscious intent to perpetrate the act prohibited by the special law, for the essence of <i>mala prohibita</i> is voluntariness in the commission of the act constitutive of the crime.</p> <p> Succinctly put, for crimes <i>mala in se</i>, there must be proof of criminal intent, while for crimes <i>mala prohibita</i>, it is sufficient that the prohibited act is done freely and consciously. As applied here, even if a violation of P.D. 957 is <i>malum prohibitum</i>, it must still be established that the accused had the volition or intent to commit the prohibited act, which is the non-registration of the subject contracts.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> (Citations omitted)</p> </blockquote> <p> A review of the records of the case shows that the prosecution was able to prove that petitioner had possession and intended to possess the lumber subject of the case. During trial, PSSg Tagulao and PCpl Sison testified that petitioner was the driver of the vehicle carrying the pieces of timber subject of the case.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> More, petitioner himself admitted that he was transporting lumber when he was arrested.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> </p><p> Petitioner, however, argues that his acquittal is warranted considering that: (1) there are discrepancies in the testimony of the prosecution's witnesses regarding the time and place where he was arrested;<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> (2) he is not the owner of the timber that he was transporting;<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> (3) there was no proof that the timber that he was transporting was prohibited;<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> (4) the prosecution failed to present proof that the owner of the timber had no permit to transport the timber;<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> (5) he was not apprised of his constitutional rights when he was arrested;<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> and (6) the pieces of lumber confiscated from him is not admissible as evidence considering that it was not scaled, measured and inventoried in his presence.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> </p><p> We disagree. </p><p><i>One</i>, the alleged discrepancies in the prosecution witnesses' testimony,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> assuming to be true, pertain to minor details that do not affect their credibility. To emphasize, PSSg Tagulao and PCpl Sison's assertion that they arrested petitioner transporting forest products without a license remain undisputed.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Petitioner himself admitted to this fact.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> More, petitioner likewise admitted in the Petition that "the time and place of apprehension are immaterial in the determination of [his] guilt[.]"<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> </p><p> <i>Two</i>, ownership is not an element of the crime of illegal possession of timber. In <i>Nieto v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> We ruled that "possession of timber or other forest products without the proper legal documents, even absent malice or criminal intent, is illegal" and that "[t]he fact that the person in possession thereof is not the owner is irrelevant."<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Notably, We convicted the accused in <i>Idanan</i> even though they are not the owners of the seized forest goods but only transported it.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Likewise in <i>Nieto</i>, We convicted truck drivers who transported timber without any license.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Verily, ownership is immaterial as mere possession of timber or other forest products is sufficient to consummate the crime.</p><p> <i>Three</i>, Section 77 of P.D. No. 705 prohibits the possession of "timber or other forest products without the legal documents as required under existing forest laws and regulations." Thus, mere possession of timber and forest products sans any of the required permit or license is punished under the provision.</p><p> <i>Four</i>, it is of no moment that the confiscated timber was owned by another person. To emphasize, the mere possession of timber or other forest products without the proper legal documents is illegal.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> What is not disputed is that when petitioner was asked by the arresting officers whether he had a permit to possess or transport the forest products loaded on the vehicle that he was driving, he was unable to present any.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup></p><p> <i>Five</i>, it is presumed that an official duty has been regularly performed.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> While such presumption is disputable, clear and convincing evidence of irregularity or failure to perform a duty must be presented to overcome it.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> Here, petitioner failed to adduce any evidence that his arrest was attended by any irregularity or that PSSg Tagulao and PCpl Sison were impelled by malice or bad faith in the performance of their duties. More, PCpl Sison testified that petitioner was informed of his constitutional rights when he was arrested.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> </p><p><i>Six</i>, evidence is admissible if it is relevant and competent, i.e., not excluded by law.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> Here, the seized timber is undeniably relevant to the crime charged against petitioner. More, there is no law requiring that an accused should be present during the inventory of the timber or forest goods seized under Section 77 of P.D. No. 705 for it to be admissible as evidence against them. The RTC likewise found that the arresting officers immediately brought the timber that it seized from petitioner to the police station and was able to preserve its evidentiary integrity.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> Thus, there is no basis to exclude the seized timber as evidence in this case. </p><p> Verily, petitioner's contentions have no merit. The CA did not err when it denied petitioner's appeal considering that the prosecution was able to establish all the elements of the crime charged to the point of moral certainty.</p><p> <i>The imposable penalty</i></p><p> Violation of Section 77 of P.D. No. 705, as amended, is punishable as qualified theft under Article 310, in relation to Articles 308 and 309 of the Revised Penal Code (RPC), as amended, to wit: </p><blockquote> <p> Article 308. <i>Who are liable for theft</i>. â Theft is committed by any person who, with intent to gain but without violence against or intimidation of persons nor force upon things, shall take personal property of another without the latter's consent.</p> <p> Theft is likewise committed by:</p> <p> 1. Any person who, having found lost property, shall fail to deliver the same to the local authorities or to its owner; </p> <p> 2. Any person who, after having maliciously damaged the property of another, shall remove or make use of the fruits or object of the damage caused by him; and</p> <p> 3. Any person who shall enter an inclosed estate or a field where trespass is forbidden or which belongs to another and without the consent of its owner, shall hunt or fish upon the same or shall gather fruits, cereals, or other forest or farm products.</p> <p> Art. 309. <i>Penalties</i>. â Any person guilty of theft shall be punished by:</p> <p> 1. The penalty of <i>prisiÃ³n mayor</i> in its minimum and medium periods, if the value of the thing stolen is more than One million two hundred thousand pesos ([PHP] 1,200,000) but does not exceed Two million two hundred thousand pesos ([PHP] 2,200,000); but if the value of the thing stolen exceeds the latter amount, the penalty shall be the maximum period of the one prescribed in this paragraph, and one (1) year for each additional One million pesos ([PHP] 1,000,000), but the total of the penalty which may be imposed shall not exceed twenty (20) years. In such cases, and in connection with the accessory penalties which may be imposed and for the purpose of the other provisions of this Code, the penalty shall be termed <i>prisiÃ³n mayor</i> or <i>reclusion temporal</i>, as the case may be.</p> <p> 2. The penalty of <i>prisiÃ³n correccional</i> in its medium and maximum periods, if the value of the thing stolen is more than Six hundred thousand pesos ([PHP] 600,000) but does not exceed One million two hundred thousand pesos ([PHP] 1,200,000).</p> <p> 3. The penalty of <i>prisiÃ³n correccional</i> in its minimum and medium periods, if the value of the property stolen is more than Twenty thousand pesos ([PHP] 20,000) but does not exceed Six hundred thousand pesos ([PHP] 600,000).</p> <p> 4. <i>Arresto mayor</i> in its medium period to <i>prisiÃ³n correccional</i> in its minimum period, if the value of the properly stolen is over Five thousand pesos ([PHP] 5,000) but does not exceed Twenty thousand pesos ([PHP] 20,000).</p> <p> 5. <i>Arresto mayor</i> to its full extent, if such value is over Five hundred pesos ([PHP] 500) but does not exceed Five thousand pesos ([PHP] 5,000).</p> <p> 6. <i>Arresto mayor</i> in its minimum and medium periods, if such value does not exceed Five hundred pesos ([PHP] 500).</p> <p> 7. <i>Arresto menor</i> or a fine not exceeding Twenty thousand pesos ([PHP] 20,000), if the theft is committed under the circumstances enumerated in paragraph 3 of the next preceding article and the value of the thing stolen does not exceed Five hundred pesos ([PHP] 500). If such value exceeds said amount, the provisions of any of the five preceding subdivisions shall be made applicable.</p> <p> 8. <i>Arresto menor</i> in its minimum period or a fine of not exceeding Five thousand pesos ([PHP] 5,000), when the value of the thing stolen is not over Five hundred pesos ([PHP] 500), and the offender shall have acted under the impulse of hunger, poverty, or the difficulty of earning a livelihood for the support of himself or his family.</p> <p> Article 310. <i>Qualified theft</i>. â The crime of theft shall be punished by the penalties next higher in degree than those respectively specified in the next preceding article, if committed by a domestic servant, or with grave abuse of confidence, or if the property stolen is large cattle or consists of coconuts, or fish taken from a fishpond or fishery.</p> </blockquote> <p> Thus, the value of the timber taken from petitioner is essential to determine the penalty to be imposed against him. In the Information, the prosecution pegged the value of the timber taken from petitioner at PHP 20,976.00.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> During trial, however, the prosecution failed to present sufficient evidence to prove its valuation. In <i>Crescencio v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> this Court imposed the penalty two degrees higher than that provided in Article 309(6) of the RPC, as amended, or <em>prision correccional</em> in its medium and maximum periods, considering that the accused in the case is likewise guilty of qualified theft and the prosecution was unable to sufficiently establish the value of the goods taken.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> </p><p> In cases where the penalties prescribed by law contain three periods and there are no mitigating or aggravating circumstance proven, courts shall impose the penalty prescribed by law in its medium period.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> Applying the indeterminate sentence law, the maximum term of imprisonments shall thus be taken from the medium period of <i>prision correccional</i> medium to maximum, which has a range of three years, six months, and 21 days to four years, nine months, and 10 days. The minimum term shall be taken one degree lower, within the range of<em> arresto mayor</em> maximum to <i>prison correccional</i> minimum, which has a range of four months and one day to two years and four months.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> Hence, the CA did not err when it imposed an indeterminate sentence of four months and one day or<i> arresto mayor</i>, as minimum, to three years, six months, and 21 days of <i>prision correccional</i>, as maximum, considering that no aggravating or mitigating circumstance was alleged in the Information and/or proven during trial.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> </p><p> Finally, considering the circumstances surrounding petitioner's commission of the crime and the penalty imposed on him, We recommend that he be granted executive clemency pursuant to Article 5 of the RPC.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup></p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The August 7, 2024 Decision of the Court of Appeals in CA-G.R. CR No. 45353 is <b>AFFIRMED</b>. Petitioner Pedro Pagarigan <i>y</i> Marave is <b>GUILTY</b> beyond reasonable doubt of violation of Section 77 of Presidential Decree No. 705, as amended. He is <b>SENTENCED</b> to suffer the penalty of four months and one day or <i>arresto mayor</i>, as minimum, to three years, six months, and 21 days of <i>prision correccional</i>, as maximum.</p><p> Pursuant to Article 5 of the Revised Penal Code, this Court shall<big> TRANSMIT</big> the case to the Chief Executive, through the Department of Justice, and <b>RECOMMENDS</b> the grant of executive clemency to petitioner Pedro Pagarigan <i>y</i> Marave.</p><p> <b>SO ORDERED."</b></p><p> <i>Leonen, SAJ., Lazaro-Javier, Kho, Jr.</i>, and <i>Villanueva, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 8-27. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 64-74. The August 7, 2024 Decision in CA-G.R. CR No. 45353 was penned by Associate Justice Alfonso C. Ruiz II and concurred in by Associate Justices Germano Francisco D. Legaspi and Rex Bernardo L. Pascual of the Special Seventeenth Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 3. Not attached to the <i>rollo</i>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 65.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 66.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 67. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 68. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 64. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 64-74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 68-69. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 70-72. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 3. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 18-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 14-15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 16-17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 23-24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 78. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 89-108. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 94-99. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 94. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 100-101. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 101-103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> RULES OF COURT, Rule 45, sec. 2. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, p. 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 3-5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 6. Resolution (Notice) dated October 30, 2024. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Cabug-os v. Espina</b>, 927 Phil. 314, 320 (2022) [Per S.A.J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 529 Phil. 718 (2006) [Per J. Austria-Martiraez, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 728. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 16-21, 23-24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 66-68. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 68. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 27. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 25-26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 783 Phil. 429 (2016) [Per J. Perez, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 437. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Rollo</i>, p. 32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 672 Phil. 155 (2011) [Per J. Del Castillo, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 174. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Idanan v. People</b>, 783 Phil. 429, 437 (2016) [Per J. Perez, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>People v. Ramoy</b>, 920 Phil. 656, 673 (2022) [Per J. Gaerlan, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> 946 Phil. 629 (2023) [Per J. Caguioa, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 640-641. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Rollo</i>, p. 66. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 67. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 18-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 14-15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 16-17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 23-24. </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 18-21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 66. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 67. </p><p><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> 913 Phil. 484 (2021) [Per J. Zalameda, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 493. </p><p><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> 783 Phil. 429, 438 (2016) [Per J. Perez, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> 913 Phil. 484, 493-494 (2021) [Per J. Zalameda, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>Nieto v. People,</b> 913 Phil. 484, 493 (2021) [Per J. Zalameda, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Rollo</i>, p. 66. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[90]</sup> RULES OF COURT, Rule 131, sec. 3(m). </p><p><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Survivors of Agrichemicals in Gensan, Inc. v. Standard Fruit Company</b>, 940 Phil. 18, 41 (2023) [Per J. Leonen, Second Division]. (Citation omitted) <br></p><p><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Rollo</i>, p. 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <b>Gumabon v. Philippine National Bank</b>, 791 Phil. 101 (2016) [Per J. Brion, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Rollo</i>, p. 68. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i> at 65. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[96]</sup> 747 Phil. 577 (2014) [Per J. Reyes, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id.</i> at 589. </p><p><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> REVISED PENAL CODE, art. 64. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[99]</sup> Acts No. 4103 (1933), sec. 1, as amended. </p><p><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> REVISED PENAL CODE, art. 5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> ART. 5. <i>Duty of the court in connection with acts which should be repressed but which are not covered by the law, and in cases of excessive penalties</i>. â . . . In the same way the court shall submit to the Chief Executive, through the Department of Justice, such statement as may be deemed proper, without suspending the execution of the sentence, when a strict enforcement of the provisions of this Code would result in the imposition of a clearly excessive penalty, taking into consideration the degree of malice and the injury caused by the offense. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

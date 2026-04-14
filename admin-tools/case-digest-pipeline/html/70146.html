@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 223961 - SSGT. ERWIN Z. APLACADOR, PETITIONER, VS.  THE HONORABLE COURT OF APPEALS,    MARIETTA A. QUILANG, AND PEOPLE OF THE PHILIPPINES RESPONDENTS. - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70146' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 223961, October 06, 2025 ]</H2>
+			<H3>SSGT. ERWIN Z. APLACADOR, PETITIONER, VS.  THE HONORABLE COURT OF APPEALS,    MARIETTA A. QUILANG, AND PEOPLE OF THE PHILIPPINES RESPONDENTS.</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Petition for Certiorari<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the August 27, 2015 Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the February 5, 2016 Resolution<sup><font color="#ff0000">[3]</font></sup> of the Court of Appeals (CA) in CA-G.R. CR No. 36436, which affirmed with modification the February 20, 2014 Judgment<sup><font color="#ff0000">[4]</font></sup> of Branch 03 of the Regional Trial Court (RTC), Second Judicial Region, Tuguegarao City in Criminal Case No. 14101. The RTC found petitioner SSgt. Erwin Z. Aplacador (Aplacador) guilty beyond reasonable doubt of the complex crime of qualified direct assault with homicide, defined and penalized under Articles 148 and 249, in relation to Article 48 of the Revised Penal Code, as amended.<br><br><center><b>The Antecedent Facts</b></center><br>Aplacador was indicted for the crime of direct assault with murder in an Information,<sup><font color="#ff0000">[5]</font></sup> the accusatory portion of which reads:<blockquote>That on April 29, 2011, in the City of Tuguegarao, Province of Cagayan and within the jurisdiction of this Honorable Court, the accused SSGT. ERWIN APLACADOR y ZALUN, who is a member of the Military Intelligence Group 02, ISAFP, Caggay, this city, armed with a calibre .45 handgun, with intent to kill, qualified with treachery, and evident premeditation, did then and there wilfully, unlawfully and feloniously, attack, assault, and shoot several times his superior who is the victim MSGT. JIMMY P. QUILANG, husband of the private complainant MARIETTA L. QUILANG, that the victim was unanned during the incident; that the accused knew that the victim is an agent of a person in authority as the latter is his superior in the military service; that accused harbored ill-feelings against the victim when the latter called his attention for not rendering his official duties during nighttime; that the accused perpetrated the shooting while the victim was in the actual performance of his official duties; that accused was able to inflict fatal gunshot wounds upon the said victim which was the direct cause of his untimely death.<br><br>That the crime was qualified by the fact that the assault was committed with a weapon and that the accused is a public officer.<br><br>That immediately after the incident, the accused was placed under the custody of the law. CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>Upon arraignment, Aplacador pleaded "not guilty" to the crime charged, claiming self-defense.<sup><font color="#ff0000">[7]</font></sup><blockquote>During pre-trial, the parties stipulated, among others, that:</blockquote><ol><li>[Aplacador and MSgt. Jimmy P. Quilang (Quilang)] are both members of the Military Intelligence Group 02. 2.&nbsp;&nbsp;&nbsp;<br>&nbsp;</li><li>[Quilang] was the immediate superior of [Aplacador].<br><br></li><li>[Quilang,] being the immediate superior of [Aplacador,] was a person in authority.<br><br></li><li>[Aplacador] is also a person in authority.<br><br></li><li>[The] fact and cause of death [of Quilang].<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></li></ol>Trial on the merits thereafter ensued. <br><br>Aplacador alleged that on April 28, 2011, he went home to visit his family, but not without first obtaining permission from his superior, Quilang. He reported late to work the following day and went to the Operations Room of the Military Intelligence Group, Region 2 (MIG 2) to look for Quilang, but learned from Maria Charissa Sofia Cefre (Cefre), a civilian employee, that Quilang was yet to report for work during that time.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Aplacador further alleged that while he was working on his monthly reports, he heard Quilang shout: "Apia, come here." Aplacador obliged and proceeded to the kiosk where he was allegedly confronted by Quilang for not rendering duty the night before. Aplacador responded by stating that he was off duty during the previous night, and was even given permission to go home to his family. Thereafter, he went back to his desk at the Logistics Office.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Upon proceeding to the Operations Room to print his reports, Aplacador saw Quilang alone at the latter's table, and took the chance to ask Quilang why he was angry despite giving Aplacador permission to go home. At this point, Quilang allegedly stood up and suddenly punched Aplacador below his right eyelid, causing the latter to feel dizzy and weak. Aplacador tried to run away, but Quilang kept on punching his chest, the left and right part of his body, and his back. Aplacador then drew his service firearm from his waist, and fired at Quilang several times, then, out of dizziness, fell down to the floor. Thereafter, upon hearing the voice of Lt. Col. Sibayan (Sibayan) near the door, he stood up, approached Sibayan, and uttered the words: <i>"Nadisgrasya ko ata si MSGT Quilang."</i> Aplacador then surrendered his firearm to Sibayan.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>For its part, the prosecution averred that on the day of the incident, Quilang arrived and called Aplacador who was at the Logistics Office of MIG 2, and scolded Aplacador for failing to render duty during the previous night. A heated conversation between the two ensued. During those moments, Cefre overheard Quilang stating that he had recommended to Sibayan a month-long restriction of Aplacador.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>When Quilang made his way back to the Operations Room, Aplacador allegedly followed him and stood in front of Quilang's desk and began shouting at his superior, uttering the words: "Ano bang problema mo sa akin? Gusto mo magbunutan tayo?" At this point, Aplacador's right hand was positioned on his waist. Cefre tried to pacify the two, then ran out of the Operations Room to ask for help. Upon seeing Sibayan at the kiosk, she told him: "Sir, magbabarilan na po sila."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Thereafter, three gunshots were heard by Sibayan, prompting the latter to rush to the Operations Room. While outside, he shouted: "Tama na." When Aplacador failed to heed his request, he again shouted: "Lumabas ka na at tapusin na natin ito." Aplacador then went outside and voluntarily surrendered his .45 caliber firearm to Sibayan. Upon entering the Operations Room, Sibayan saw Quilang lying on the floor. Aplacador was brought to the Police Regional Command, while Quilang was rushed to the Cagayan Valley Medical Center.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br><div align="center"><b>Ruling of the RTC</b><br></div><br>The RTC rendered Judgment<sup><font color="#ff0000">[15]</font></sup> dated February 20, 2014, convicting Aplacador of the complex crime of qualified direct assault with homicide, the dispositive portion of which reads:<blockquote>WHEREFORE, in light of the foregoing, this Court finds the accused ERWIN APLACADOR <i>y</i> ZALUN [guilty] beyond reasonable doubt of the complex crime of Qualified Direct Assault with Homicide, defined and penalized under Article[s] 148 and 248, in relation to Article 48, of the Revised Penal Code, and hereby sentences him:<ol><li>To suffer an indeterminate prison sentence ranging from twelve (12) years of <i>prision mayor</i> maximum as minimum to twenty (20) years of <i>reclusion temporal </i>maximum as maximum; and,<br><br></li><li>To pay the heirs of Timmy Quilang the amounts of:<br><br>a.&nbsp;&nbsp;&nbsp; [PHP] 50.000.00 as death indemnity;<br>b.&nbsp;&nbsp;&nbsp; [PHP] 50,000.00 as moral damages;<br>c.&nbsp;&nbsp;&nbsp; [PHP] 4,446.702.67 as compensatory damages for lost earnings; and<br>d.&nbsp;&nbsp;&nbsp; [PHP] 78,000.00 as actual damages; and,<br><br></li><li>&nbsp; To pay the costs.</li></ol><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis in the original)<br></blockquote>The RTC rejected Aplacador's claim of self-defense, finding that he failed to prove unlawful aggression on the part of the victim. The trial court noted that Quilang, the deceased victim, was a first sergeant and chief operation Non-Commissioned Officer of the MIG 2 and, as stipulated, was a person in authority pursuant to Article 152 of the Revised Penal Code, as amended. The RTC, however, ruled that since treachery was not sufficiently proven, Aplacador was liable for the complex crime of qualified direct assault with homicide.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Aplacador appealed his conviction to the CA.<br><br><center><b>Ruling of the CA</b></center><br>The CA denied Aplacador's appeal and affirmed with modification the decision of the RTC in its own Decision<sup><font color="#ff0000">[18]</font></sup> dated August 27, 2015, the dispositive portion of which reads:<blockquote><b>WHEREFORE,</b> the Appeal is hereby <b>DENIED</b>. The Judgment of the Regional Trial Couti, Second Judicial Region, Tuguegarao City, Branch 03, in Criminal Case No. 14101, is<b> AFFIRMED</b> with <b>MODIFICATION</b>. Accused-appellant Erwin Aplacador <i>y</i> Zalun is sentenced to suffer the penalty of imprisonment of reclusion perpetua and is not eligible for parole. In addition to the damages adjudged by the court a quo, accused-appellant is <b>ORDERED</b> to pay the heirs of Msgt. Jimmy Quilang the amount of [PHP] 75,000.00 as civil indemnity, and [PHP] 30,000.00 as exemplary damages, all with interest at the rate of six percent (6%) per annum from date of finality of this judgment until fully paid.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original)</blockquote>The CA found Aplacador guilty beyond reasonable doubt of the complex crime of direct assault with murder. The appellate court ruled that the killing of Quilang was attended with treachery as shown by Aplacador's act of deliberately shooting the victim at the back of his head while the latter was alone and entirely helpless to defend himself. The CA held that the manner of Aplacador's attack, the number of wounds sustained by the victim, and the location of the fatal wounds were enough to show that Aplacador deliberately and consciously aimed at a vital spot of Quilang's body, illustrating the manner in which treachery was employed.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Consequently, the CA ruled that Aplacador was guilty of direct assault with murder, instead of direct assault with homicide.<br><br>The CA denied Aplacador's Motion for Reconsideration in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated February 5, 2016, received by Aplacador on February 29, 2016.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On April 28, 2016, Aplacador filed the instant Petition for Certiorari before the Court, praying that the Court set aside the assailed decision and resolution of the CA, and acquit him of the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>On June 27, 2016, the Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> deferring the Court's action on the petition until Aplacador was able to obtain the services of counsel, and the latter files the required formal entry of appearance. Atty. Bonifacio Albino B. Pattaguan, Jr. (Atty. Pattaguan) formally entered his appearance as counsel for Aplacador.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Private respondent Marietta L. Quilang (Marietta), wife of Quilang, filed a Manifestation and Motion<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated November 10, 2016, praying for the dismissal of the instant Petition for Certiorari, for failure of Aplacador to furnish Marietta a copy of the petition.<br><br>On April 3, 2017, the Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> noting the entry of appearance of Atty. Pattaguan on behalf of Aplacador, and granting Atty. Pattaguan's request that he be furnished copies of pleadings, notices, and other court processes at his office. The Court likewise noted Marietta's Manifestation and Motion dated November 10, 2016. However, the Court, without necessarily giving due course to the petition, required Marietta to comment on the instant petition, and not file a motion to dismiss.<br><br>On January 15, 2018, the Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> requiring Atty. Jesus John B. Garma (Atty. Garma), counsel for Marietta, to show cause why he should not be disciplinarily dealt with for failing to file a comment on the petition, as enjoined by the Court. The Court also reiterated its order in the April 3, 2017 Resolution to file a comment on the petition.<br><br>Atty. Garma filed a Compliance to the Show Cause Order<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated April 2, 2018, explaining that neither he nor Marietta had received a copy of Aplacador's Petition for Certiorari. Consequently, the Court issued another Resolution<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated June 18, 2018, noting Atty. Garma's explanation, and directing Aplacador to serve anew a copy of his petition to Marietta.<br><br>On July 30, 2019, the Court issued a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> this time requiring Atty. Pattaguan to show cause why he should not be disciplinarily dealt with for failing to serve a copy of the petition to Marietta, in defiance of the Court's command. The Court also reiterated its order in the June 18, 2018 Resolution to serve a copy of the petition to Marietta.<br><br>In his Compliance/Explanation (With the Most Humble Apologies)<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> dated November 19, 2019, Atty. Pattaguan explained that he only came to know of the Court's June 18, 2019 Resolution after he had received the Court's July 30, 2019 Resolution. He disclosed that upon receipt of the Court's July 30, 2019 Resolution, he instructed his office secretary to look into their records and eventually found that his secretary inadvertently failed to refer the June 18, 2019 Resolution to him. Atty. Pattaguan profusely apologized for his office's oversight.<br><br>The Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated December 9, 2020 noting Atty. Pattaguan's Compliance/Explanation (With the Most Humble Apologies). The Court also reiterated its April 3, 2017 Resolution requiring Marietta to submit her comment, and not file a motion to dismiss.<br><br>Marietta filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> dated March 19, 2021 stating that as of the said date, she still did not receive a copy of the petition. Thus, Marietta explained that she remained unable to comply with the Court's directive to file her comment.<br><br>Atty. Pattaguan filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> on behalf of Aplacador, dated March 29, 2021, disputing Marietta's claim that she was yet to receive a copy of the petition. In response, Marietta filed a Manifestation (With Most Humble Apologies) and Motion for Leave of Court to Admit Comment<sup><font color="#ff0000">[36]</font></sup> dated April 20, 2021, explaining that she had indeed overlooked and misplaced the petition and its annexes, and located them only on April 6, 2021, the day she received Atty. Pattaguan's March 29, 2021 Manifestation. Thereafter, Marietta finally submitted her Comment<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> dated April 20, 2021.<br><br>Subsequently, the Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[38]</sup>ordering that the People of the Philippines, through the Office of the Solicitor General (OSG), be impleaded. Likewise, the OSG was ordered to submit its Comment on the petition.<br><br>Aplacador submitted his Amended Petition<sup><font color="#ff0000">[39]</font></sup> dated July 30, 2024, stating that the People of the Philippines, through the OSG, has been impleaded. Thereafter, the OSG filed a Motion for Extension of Time to File Comment<sup><font color="#ff0000">[40]</font></sup> on May 29, 2025. On June 27, 2025, the OSG filed its Comment<sup><font color="#ff0000">[41]</font></sup> to Aplacador's petition.<br><br><center><b>Issue</b></center><br>The issue for the Court's resolution is whether or not the CA erred in finding Aplacador guilty beyond reasonable doubt of the complex crime of direct assault with murder.<br><br><center><b>Ruling</b></center><br>The Petition is partially granted.<br><br><i>On Aplacador 's proper remedy to the Court</i><br><br>Preliminarily, the Court discusses the manner by which Aplacador elevated this matter before the Court.<br><br>Aplacador was found guilty by the CA of the complex crime of direct assault with murder, and was meted, among others, with the penalty of reclusion perpetua. Aplacador received the CA resolution denying his motion for reconsideration on February 29, 2016. On April 28, 2016, Aplacador sought to assail the CA decision and resolution via the instant Petition for Certiorari under Rule 65 of the Rules of Court, stating therein that the CA <i>"gravely abused its discretion in disregarding the findings of fact of the RTC-[Branch] 03 and declar[ing] the presence of treachery."</i><sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>Aplacador availed of the wrong remedy.<br><br>In the appeal of criminal cases, the general rule is that it shall be brought to the Court by filing an appeal by certiorari under Rule 45 of the Rules of Court, except when the CA imposes the penalty of <i>"reclusion perpetua,</i> life imprisonment or a lesser penalty," in which case the appeal shall be made by mere notice of appeal filed before the CA.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Since the CA imposed the penalty of <i>reclusion perpetua,</i> Aplacador's correct remedy would have been to file a notice of appeal before the CA.<br><br>Time and again, the Court has ruled that <i>certiorari</i> cannot be used as a substitute for lost appeal. <i>Certiorari</i> lies only when there is no appeal nor any plain, speedy, and adequate remedy in the ordinary course of law. Why the question being raised by petitioner, i.e., whether the appellate court committed grave abuse of discretion, could not have been raised on appeal, no reason therefor has been advanced.<sup><font color="#ff0000">[44]</font></sup> In fact, other than a blanket allegation of grave abuse of discretion, a perusal of the petition shows that Aplacador failed to advance any explanation whatsoever to establish the presence of grave abuse of discretion. On this ground alone, the instant petition could be dismissed.<br><br>Nevertheless, it bears noting that there are certain exceptions to the rule that certiorari is not a substitute to an appeal. The Court has, in exceptional circumstances, and in the spirit of justice and liberality, recognized the following exceptions, to wit: (a) when public welfare and the advancement of public policy dictates; (b) when the broader interest of justice so requires; (c) when the writs issued are null and void; or (d) when the questioned order amounts to an oppressive exercise of judicial authority.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>The Court finds that exception (b) could apply in this case. Consequently, there is reason to treat the instant Petition for Certiorari as an appeal.<br><br>The provisions of the Rules of Court, which are technical rules, may be relaxed in certain exceptional situations.<sup><font color="#ff0000">[46] </font></sup>Procedural rules may be relaxed where there are strong considerations of substantive justice which are manifest in the petition.<sup><font color="#ff0000">[47]</font></sup> Cases should be decided on the merits after full opportunity to all parties for ventilation of their causes and defenses, rather than on technicality or some procedural imperfections so that the ends of justice would be served better.<sup><font color="#ff0000">[48]</font></sup> The Court has emphasized that dismissal of appeals purely on technical grounds is frowned upon and the rules of procedure ought not to be applied in a very rigid, technical sense, for they are adopted to help secure, not override substantial justice.<sup><font color="#ff0000">[49]</font></sup> The Court has relaxed the observance of procedural rules to advance substantial justice.<sup><font color="#ff0000">[50]</font></sup><br><br>Additionally, Rule 135, Section 5 of the Revised Rules of Court provides for the inherent power of courts "to amend and control its process and orders so as to make them conformable to law and justice."<br><br>In the instant case, as will be herein discussed, the Court finds that there is a need to reinstate the decision of the RTC insofar as the designation of the crime committed by Aplacador. Accordingly, the Court finds sufficient justification to exercise its prerogative to relax its procedural rules to make the disposition of the case more conformable to law, thereby serving the broader interest of justice.<br><br><i>On Aplacador 's claim of self-defense</i><br><br>Foremost, the Court scrutinizes Aplacador's insistence that he acted in self-defense when he killed Quilang. In his version of events, Aplacador claims that he merely acted in self-defense after Quilang had punched him with several strong blows below his eye, his chest, his sides, and his back, which allegedly caused him to feel dizzy and fall down to the floor.<br><br>The RTC and the CA both correctly rejected Aplacador's claim of self-defense.<br><br>Jurisprudence provides that self-defense is inherently a weak defense because, as experience has demonstrated, it is easy to fabricate and difficult to prove. Thus, for this defense to prosper, the accused must prove with clear and convincing evidence the elements of self-defense. He must rely on the strength of his own evidence and not on the weakness of that of the prosecution. Even if the evidence of the prosecution is weak, it cannot be disbelieved if the accused admitted responsibility for the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>The essential requisites of self-defense are as follows: (1) unlawful aggression on the part of the victim; (2) reasonable necessity of the means employed to prevent or repel such aggression; and (3) lack of sufficient provocation on the part of the person resorting to self-defense.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>The trial court, echoed by the CA, aptly found that Aplacador failed to prove the essential requisites of self-defense. The RTC, in resolving the matter, discussed:<blockquote>The theory of the [petitioner] is that the victim punched him with strong blows several times hitting below his eye, his chest and sides and further, at his back that caused him to feel dizzy. This is not supported by physical evidence because of the testimony of Dr. Minerva Battung who examined him on the day of the incident that [petitioner] sustained only a bruise in the lower eyelid area, a bruise on the right lower chest and a bruise on the left upper back, all of which are non-mortal.<br><br>. . . .<br><br>According to the [petitioner], he wanted to run but the victim continued to hit him [petitioner] from behind causing him to stoop down and at that juncture, [petitioner] instinctively pulled his 45 cal. service pistol from his waist and his right hand holding the firearm across his chest and below his left armpit, fired several shots to stop the victim ... Thus, the version of the [petitioner] is simply unbelievable and inconsistent with a claim of self-defense. The location of the three (3) fatal wounds inflicted by the [petitioner] on the victim sufficiently show a determined effort on the part of said (petitioner] to kill the victim and not merely to defend himself or to disable the victim.<br><br>Significantly, the [petitioner] did not claim self-defense to Col. Sibayan but rather told the latter: <i>"Nadigrasya ko ata si MSGT. Quilang".</i> Persons who have truly acted in self-defense invariably sun-ender themselves to the authorities and describe full and in all candor all that has happened, with a view to justify their acts.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br></blockquote>Other than Aplacador's bare testimony, no other evidence convincingly shows that Quilang suddenly launched an attack on Aplacador immediately after the latter approached Quilang. Accordingly, the RTC reasonably found that based on the evidence, Aplacador failed to prove unlawful aggression on the part of Quilang. At most, evidence suggests that a scuffle broke out between the two after tensions had begun to build up on the morning of that fateful day.<br><br>Moreover, assuming <i>arguendo</i> that there was unlawful aggression on the part of Quilang, it cannot be said that Aplacador's act of inflicting three fatal wounds on the victim was reasonably necessary to repel the alleged attack from Quilang. Notably, Aplacador admitted on cross-examination to shooting Quilang on the right side of the head and on the right side of the neck when the latter was down on the floor.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>In determining the reasonable necessity of the means employed, the courts may look at and consider the number of wounds inflicted. A large number of wounds inflicted on the victim can indicate a determined effort on the part of the accused to kill the victim and may belie the reasonableness of the means adopted to prevent or repel an unlawful act of an aggressor.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>Still, even if the first two elements of self-defense were somehow appreciated in favour of Aplacador, it cannot be conclusively stated that there was a lack of sufficient provocation on his part.<br><br>On direct examination, Cefre recounted the series of events that transpired immediately prior to the mortal encounter:<br><br><table width="95%" Â ="" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">Q</div></td> <td width="95%"> <div align="justify">What happened when you and MSGT. Quilang were standing infront of his computer? </div></td> </tr> <tr valign="top"> <td><div align="justify">A&nbsp;&nbsp;&nbsp;</div></td> <td><div align="justify">SSgt. Aplacador went inside the Operations branch and stood infront of us.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">Q&nbsp; </div></td> <td> <div align="justify">What did SSgt. Erwin Aplacador say, if any while standing infront of you?&nbsp;</div></td> </tr> <tr valign="top"> <td><div align="justify">A&nbsp;</div></td> <td> <div align="justify">SSgt. Aplacador shouted at Msgt. Jimmy Quilang and said what is your problem with me. what do you want, let's just have a draw (<em>ano ba problema mo sa akin. gusto mo magbunutan tayo</em>).&nbsp;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">Q&nbsp;&nbsp; <br></div></td><td><div align="justify">While SSgt. Aplacador was saying that, what happened? <br> </div></td> </tr> <tr valign="top"> <td><div align="justify">A&nbsp;&nbsp;</div></td> <td><div align="justify">SSgt. Aplacador["s] right hand was positioned on his waist.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">Q&nbsp; </div></td> <td><div align="justify">When SSgt. Aplacador positioned his right hand on his right waist, what do you mean by that?</div></td> </tr> <tr valign="top"> <td><div align="justify">A&nbsp;&nbsp;&nbsp; </div></td> <td><div align="justify">What I observed it seems he is going to draw his gun, Sir.<sup><font color="#ff0000">[56]</font></sup></div></td> </tr> </tbody></table><br>In his version of events, Aplacador narrated that he approached Quilang to simply ask the latter why he was angry despite giving Aplacador permission to go home the night before. This, however, is belied by Cefre's testimony which shows that Aplacador approached Quilang while still in a state of anger as a consequence of being scolded upon earlier that day. He was even heard by Cefre to have challenged Quilang to a gun duel when he uttered the words "ano ba problema mo sa akin, gusto mo magbunutan tayo?"<sup><font color="#ff0000">[57]</font></sup> Clearly, there was some provocation on the part of Aplacador that led to the escalation of events, eventually leading to his shooting of Quilang.<br><br>All pieces of evidence considered, the Court finds no reason to disturb the findings of the courts a quo when they denied Aplacador's claim of self-defense.<br><br><i>On the proper designation of the crime <br>committed by Aplacador</i><br><br>Having found the claim of self-defense to be untenable, it now becomes necessary to determine the crime committed.<br><br>The RTC found Aplacador guilty beyond reasonable doubt of the complex crime of direct assault with homicide. On the other hand, the CA found Aplacador guilty of direct assault with murder.<br><br>Article 148 of the Revised Penal Code defines and penalizes direct assault:<blockquote><b>Article 148. </b><i>Direct assaults.</i> -Any person or persons who, without a public uprising, shall employ force or intimidation for the attainment of any of the purposes enumerated in defining the crimes of rebellion and sedition, or shall attack, employ force or seriously intimidate or resist any person in authority or any of his agents, while engaged in the performance of official duties, or on occasion of such performance, shall suffer the penalty of prision correccional in its medium and maximum periods and a fine not exceeding 1,000 pesos, when the assault is committed with a weapon or when the offender is a public officer or employee, or when the offender lays hands upon a person in authority. If none of these circumstances be present, the penalty of <i>prision correccional</i> in its minimum period and a fine not exceeding 500 pesos shall be imposed.</blockquote>Direct assault may be committed in two ways:<br><br>First, by any person or persons who, without a public uprising, shall employ force or intimidation for the attainment of any of the purposes enumerated in defining the crimes of rebellion and sedition; and second, by any person or persons who, without a public uprising, shall attack, employ force, or seriously intimidate or resist any person in authority or any of his agents, while engaged in the performance of official duties, or on occasion of such performance.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>In this case, Aplacador is charged with the second mode of assault. Its elements are the following:<ol><li>That the offender (a) makes an attack, (b) employs force, (c) makes a serious intimidation, or (d) makes a serious resistance.<br><br></li><li>That the person assaulted is a person in authority or his/her agent.<br><br></li><li>That at the time of the assault the person in authority or his/her agent (a) is engaged in the actual performance of official duties, or (b) that he/she is assaulted by reason of the past performance of official duties.<br><br></li><li>That the offender knows that the one he/she is assaulting is a person in authority or his/her agent in the exercise of his/her duties.<br><br></li><li>That there is no public uprising.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup></li></ol>Aplacador made an attack and employed force which eventually led to the death of Quilang. Moreover, the parties stipulated during pre-trial that both Aplacador and Quilang were persons in authority. Furthermore, the courts <i>a quo</i> found that Quilang was in the actual perfonnance of his functions and duties at the station when he was killed by Aplacador.<br><br>The Court notes that during pre-trial, it was stipulated that Quilang was a person in authority. The determination of whether Quilang is indeed a person in authority, however, is a question of law,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> since the definition of such persons is provided for under the Revised Penal Code.<br><br>Article 152 of the Revised Penal Code, as amended, reads:<blockquote><b>Article 152. </b><i>Persons in authority and agents of persons in authority; Who shall be deemed as such.</i> -Â· In applying the provisions of the preceding and other articles of this Code, any person directly vested with jurisdiction, whether as an individual or as a member of some court or governmental corporation, board, or commission, shall be deemed a person in authority. A barrio captain and a barangay chairman shall also be deemed a person in authority.<br><br>A person who, by direct provision of law or by election or by appointment by competent authority, is <b>charged with the maintenance of public order and the protection and security of life and property,</b> such as a barrio councilman, barrio policeman and barangay leader and any person who comes to the aid of persons in authority, shall be deemed an agent of a person in authority.<br><br>In applying the provisions of Articles 148 and 151 of this Code, teachers, professors and persons charged with the supervision of public or duly recognized private schools, colleges and universities, and lawyers in the actual performance of their professional duties or on the occasion of such performance, shall be deemed persons in authority. (Emphasis supplied)<br></blockquote>Based on the above-cited provision, it appears that the appropriate designation of Aplacador and Quilang, being members of the MIG 2, would have been as <i>agents of a person in authority.</i> An agent of a person in authority is one who is "charged with the maintenance of public order and the protection and security of life and property."<br><br>Primarily, one of the functions of the Armed Forces of the Philippines (AFP), as provided for under Executive Order No. 292, otherwise known as the Revised Administrative Code of 1987, is to defend the territory of the Republic of the Philippines against both foreign and domestic enemies. Additionally, the AFP may perform other functions provided by law, or assigned by higher authorities.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>In furtherance of its functions, Republic Act No. 7898, otherwise known as the AFP Modernization Act, as amended, was enacted. Republic Act No. 7898 sought to achieve the following objectives:<blockquote><b>Sec. 3. </b><i>Objectives of the AFP Modernization Program.</i> -The AFP modernization program shall be implemented in accordance with the following objectives:<br><br><table width="95%" Â ="" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)&nbsp;</div></td> <td width="95%"> <div align="justify">To develop its capability to uphold the sovereignty and territorial integrity of the Republic and to secure the national territory from all forms of intrusion and encroachment;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">. . .&nbsp; . </div></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">(c)&nbsp;</div></td> <td> <div align="justify">To enhance its capability to fulfill its mandate to protect the Filipino people not only from armed threats but from the ill effects of life-threatening and destructive consequences of natural and man-made disasters and calamities, including typhoons, earthquakes, volcanic eruptions, major accidents in far-flung or inaccessible terrain or at sea and from all forms of ecological damage;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">(d)&nbsp;</div></td> <td> <div align="justify">To improve its capability to assist other agencies in the enforcement of domestic and foreign policies as well as international covenants against piracy, white slavery, smuggling, drug trafficking, hijacking of aircraft and seacraft and the transport of toxic and other ecologically-harmful substances taking place in or through Philippine territory;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">(e)&nbsp;&nbsp;</div></td> <td> <div align="justify">To enhance its capability to assist the Philippine National Police in law enforcement and internal security operations[.]</div></td> </tr> </tbody></table></blockquote>From the foregoing, it can be gleaned that in the performance of their functions provided by law, members of the AFP perform tasks which may necessarily include the maintenance of public order, and the protection and security of life and property. Thus, Aplacador and Quilang shouid have been properly classified as agents of a person in authority.<br><br>Be that as it may, Article l48 of the Revised Penal Code penalizes the crime of direct assault, whether it is committed against a person in authority or his agent. Thus, the RTC and the CA were still correct in finding Aplacador guilty thereof.<br><br>Likewise, the RTC was correct in pointing out that since Aplacador used a firearm to perpetrate the killing, the direct assault becomes qualified pursuant to the provisions of Article 148, which provides for a higher penalty when the assault is committed with a weapon.<br><br>In <i>People v. Pitulan</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> the Court held that when the assault leads to the death of an agent or a person in authority, the resulting offense is the complex crime of direct assault with homicide or murder.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>In this case, the Court agrees with the RTC that Aplacador is guilty of the complex crime of direct assault with homicide, there being no treachery to qualify the killing of Quilang.<br><br>The appellate court held that the killing of Quilang was attended by treachery, as evidenced by Aplacador's deliberate act of shooting the victim at the back of the head while the latter was alone and completely defenseless.<br><br>In order for treachery to be properly appreciated, two elements must be present: (1) at the time of the attack, the victim was not in a position to defend himself or herself; and (2) the accused consciously and deliberately adopted the particular means, methods, or forms of attack employed by him/her. The essence of treachery is that the attack is deliberate and without warning, done in a swift and unexpected way, affording the hapless, unarmed and unsuspecting victim no chance to resist or escape.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>Treachery must be proved with the same quantum of evidence as the crime itself, that is, beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Hence, for Aplacador to be convicted of murder, the prosecution must not only establish that he killed Quilang; it must also prove, beyond reasonable doubt, that the killing of Quilang was attended by treachery.<br><br>The RTC pointed out that by the time Aplacador and Quilang were past the point of shouting at each other, Cefre had already gone out of the Operations Room to seek help. Cefre was already outside when she heard the gunshots, and went back to the scene of the crime after the killing had finished.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>Thus, the trial court, citing <i>People v. Plazo,</i><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> correctly ruled that where no particulars are known regarding the manner in which the aggression was made or how the act which resulted in the death of the victim began and developed, it cannot be established from mere supposition that an accused perpetrated the killing with treachery.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Absent any particulars as to the manner in which the aggression commenced, treachery cannot be appreciated. Since the prosecution witness failed to see how the attack had been initiated on the victim, the qualifying circumstance of treachery cannot be applied.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>The appellate court found Aplacador guilty of murder largely because he admitted to shooting Quilang at the back of his head while the latter was down, helpless, and unable to defend himself. However, this fact alone is not sufficient to establish the presence of treachery beyond reasonable doubt.<br><br>For treachery to be appreciated, it must be shown to have existed at the inception of the attack, and if absent and the attack continues, even if present at the subsequent stage, treachery is not a qualifying or generic aggravating circumstance. <i>The prosecution must adduce conclusive proof as to the manner in which the altercation started and resulted in the death of the victim.</i> If the prosecution fails to discharge its burden, the crime committed is homicide and not murder.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>Furthermore, the manner in which the altercation between Aplacador and Quilang started belies the presence of treachery. As narrated by Cefre, Aplacador sought out Quilang who, at that time, was within vision and hearing range of Cefre. The Court fails to see how Aplacador's approach can be characterized as being swift and unexpected enough to qualify the killing to murder. To the contrary, when Aplacador approached Quilang, he even challenged the latter to a gun draw.<br><br>Likewise, there is no sufficient evidence to conclude that there was evident premeditation on the part of Aplacador when he killed Quilang.<br><br>As it happens, the Court agrees with the RTC that the totality of the evidence suggests that the shooting was done on the spur of the moment, brought about by a confrontation between Aplacador and Quilang, after tensions had been brewing since the morning of that eventful day.<br><br>Considering all the foregoing, the Court finds that Aplacador should be found guilty beyond reasonable doubt of the complex crime of direct assault with homicide, and not direct assault with murder.<br><br><i>On Aplacador 's voluntary surrender</i><br><br>In his petition, Aplacador insists that the mitigating circumstance of voluntary surrender should have been appreciated in his favor. Both the RTC and the CA rejected Aplacador's claim.<br><br>After reviewing the records of the instant case, the Court finds that Aplacador voluntarily surrendered to the authorities.<br><br>For voluntary surrender to apply, the following requisites must concur: (a) the offender had not been actually arrested; (b) the offender surrendered himself or herself to a person in authority or the latter's agent; and (c) the surrender was voluntary.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> The Court finds that the requisites for voluntary surrender are present in the case at bar.<br><br>A few minutes after the shooting, Aplacador voluntarily surrendered himself and his .45 caliber firearm to Sibayan before he was even arrested. Notably, he immediately and spontaneously remarked <i>"Nadisgrasya ko ata si MSGT Quilang"</i> upon exiting the Operations Room. Clearly, at the exact moment he surrendered, he acknowledged his guilt of killing Quilang. This suffices to accord him the mitigating circumstance of voluntary surrender.<br><br>The voluntariness of Aplacador's surrender is further bolstered by Sibayan' s testimony when he narrated that:<br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; <table width="95%" Â ="" border="0" align="center" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q&nbsp;&nbsp;</div></td><td width="95%"> <div align="justify">After you said "tama na," what happened?</div></td></tr><tr valign="top"><td><div align="justify">A&nbsp; </div></td><td><div align="justify">SSgt. Erwin Aplacador went out from the office, sir.<br><br></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><br></td></tr><tr valign="top"><td><div align="justify">Q&nbsp;&nbsp; </div></td><td><div align="justify">And what did SSgt. Aplacador do? </div></td></tr><tr valign="top"><td><div align="justify">A&nbsp; <b></b></div></td><td><div align="justify"><b>I asked SSGT Aplacador if he could still remember me, and he said, yes and he voluntarily surrendered his gun to me and unlocked it, sir.<br><br></b></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q&nbsp;&nbsp;&nbsp;&nbsp;</div></td><td> <div align="justify">What was the calibre he surrendered to you? </div></td></tr><tr valign="top"><td><div align="justify">A&nbsp;&nbsp;&nbsp; </div></td><td><div align="justify">Caliber .45, sir.<br><br></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div></td><td><div align="justify">What did you do when Sgt. Aplacador turned over to you his issued firearm? </div></td></tr><tr valign="top"><td><div align="justify">A&nbsp;&nbsp;&nbsp;</div></td><td> <div align="justify">When Sgt. Aplacador&nbsp; turned&nbsp; over his firearm, I rushed&nbsp; to I.he Operation Office and I saw brother Quilang lying on the floor, sir.</div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td>Q&nbsp;</td><td> After that, what did you do next, Mr. witness? </td></tr><tr valign="top"><td>A</td><td><b>When I saw the fatal wound of brother Quilang, I let Sgt. Aplacador rode into my car and brought him to Recom, sir.</b><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> (Emphasis supplied)</td></tr></tbody></table><br>It is important to note that when Aplacador surrendered himself and his firearm to an agent of authority, he spontaneously admitted to committing the act that led to Quilang's death. This spontaneous admission emhodies the essence of voluntary surrender as a mitigating circumstance, reflecting the positivist theory of criminal law that the accused, while not entirely free from criminal fobility, acted with diminished criminal intent, freedom, or intelligence at the time of the commission of the crime.<br><br><i>On the proper penalty to be imposed</i><br><br>As regards the penalty to be imposed, Article 48 of the Revised Penal Code provides that for complex crimes, the penalty for the most serious crime shall be imposed, the same to be applied in its maximum period.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> For the complex crime of direct assault with homicide, the graver offense is homicide, punished by reclusion temporal under Article 249 of the Revised Penal Code. Thus, pursuant to Article 48 of the Revised Penal Code, the proper penalty is reclusion temporal in its maximum period.<br><br>Applying the provisions of the Indeterminate Sentence Law, reclusion temporal maximum shall comprise the maximum of the indete1minate sentence. While the Court finds that voluntary surrender should be properly appreciated in favor of Aplacador, in the case of complex crimes, the penalty for the most serious crime shall be imposed, the same to be applied in its maximum period <i>irrespective of the presence of modifying circumstances.</i><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> In effect, despite the presence of the mitigating circumstance of voluntary surrender, reclusion temporal maximum would still comprise the maximum of the indeterminate sentence.<br><br>On the other hand, the minimum shall be within range of the penalty next lower than that prescribed for homicide, which is <i>prision mayor.</i><br><br>Thus, even if voluntary surrender is considered in favor of Aplacador, the penalty imposed by the RTC of imprisonment ranging from 12 years of <i>prision mayor</i> maximum, as minimum, to 20 years of <i>reclusion temporal</i> maximum, as maximum, remains in accordance and within the bounds set by the Indeterminate Sentence Law.<br><br>Finally, the Court also finds that the amounts imposed by the trial court as damages are consistent with prevailing jurisprudence.<br><br>It is settled that when death occurs due to a crime, the following may be recovered: (1) civil indemnity ex delicto for the death of the victim; (2) actual or compensatory damages; (3) moral damages; (4) exemplary damages; (5) attorney's fees and expenses of litigation; and (6) interest, in proper cases.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>In <i>People v. Jugueta,</i><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> the Court held that for crimes like homicide where the victim dies as a result, and the penalty consists of divisible penalties, civil indemnity of [PHP] 50,000.00 and moral damages of [PHP] 50,000.00 may be awarded. Moreover, the amount of [PHP] 78,000.00 as actual damages and [PHP] 4,446,702.67 as compensatory damages for lost earnings were substantiated during trial and supported by competent evidence. Thus, the Court finds the award of damages by the RTC proper.<br><br>Article 2230 of the New Civil Code allows for the imposition of exemplary damages when a crime is committed with one or more aggravating circumstances. However, considering that the prosecution failed to prove the presence of treachery, the award of exemplary damages by the CA must be deleted in view of the Court's finding convicting Aplacador of direct assault with homicide, instead of direct assault with murder.<br><br>finally, in conformity with recent case law, interest is imposed on all damages awarded at the rate of 6% per annum from the date of finality of this Decision until full payment.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br><b>ACCORDINGLY, </b>premises considered, the Petition for Certiorari is <b>PARTIALLY GRANTED</b>. The Decision dated August 27, 2015 and the Resolution dated February 5, 2016 of the Court of Appeals in CA-G.R. CR No. 36436, are hereby <b>SET ASIDE</b>. The Judgment of Branch 03 of the Regional Trial Court, Second Judicial Region, Tuguegarao City dated February 20, 2014 in Criminal Case No. 14101 is hereby <b>REINSTATED.</b><br><br><b>SO ORDERED.</b></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><i>Inting<sup style="COLOR: RGB(255, 0, 0);">**</sup> </i>and <i>Villanueva,<sup style="COLOR: RGB(255, 0, 0);">****</sup> JJ., </i>concur.<br><i>Caguioa<sup style="COLOR: RGB(255, 0, 0);">*</sup></i> and<i> Singh,<sup style="COLOR: RGB(255, 0, 0);">***</sup> JJ.,</i> on leave.<br><br><br><hr align="LEFT" width="60%" size="1" noshade=""><font color="#ff0000">*</font> On leave. <br><br><font color="#ff0000">**</font> Acting Chairperson per Special Order No. 3227 dated September 23, 2025. <br><br><font color="#ff0000">***</font> On leave. <br><font color="#ff0000"><br>****</font> Designated additional Member in lieu of Lopez. M., J., (Ret.) per Special Order No. 3187 dated June I0, 2025. <br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo,</i> pp. 3-18. <br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Id. at 229-240. Penned by Associate Justice Japar B. Dimaampao (now a Member of the Court) and concurred in by Associate fostices Franchito N. Diamante and Carmelita Salandanan-Manahan. <br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 249-250. <br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 199-209. Penned by Judge Marivic A. Cacatian-Beltran.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup><i> Id.</i> at 203. <br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup><i> Id.</i> at 200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id. </i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup>&nbsp;<i>Id. </i> at 200-201.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Id. at 201-202. <br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup>&nbsp;<i>Id. </i> at 202. <br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup>&nbsp;<i>Id. </i> <br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup>&nbsp;<i>Id. </i> at 199-209.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 208-209. <br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 203-206. <br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 229-240. <br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 237-239. <br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 249-250. <br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 7. <br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 3. <br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 251. <br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 252-253. <br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 255-258.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 261-262.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 263. <br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 265-268. <br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 279-280. <br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 284. <br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 285-287. <br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 295-296. <br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 300-304.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 307-309. <br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i>&nbsp; at 3l7-321. <br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 325-351. <br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 359-360. <br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 381-396. <br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 632--635. <br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 638-652.</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Id. at 7-8. <br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Ramos v. People,</i> 803 Phil. 775, 782(.2017) [Per J. Perlas-Bernabe, First Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Celina, Sr. v. Court of Appeals,</i> 553 Phil. 178, 183 (2007) [Per J. Carpio-Morales, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup><i> See Punongbayan-Visitacion v. People, </i>823 Phil. 212,221 (2018) [Per J. Martires, Third Division].</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>People v. Villaber,</i> 904 Phil. 719, 730 (2021) [Per J. lnting, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id., citing Spouses Godinez v. Spouse Norman,</i> 871 Phil. 752, 764 (2020) (Per J. Leonen, Third Division], <br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id., citing Garcia v. PAL, Inc.. </i>498 Phil. 808. 821 (2005) [Per J. Callejo, Sr., Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i>, citing <i>Cusi-Hernandez v. Sps. Diaz.</i> 390 Phil. 1245, 1252 (2000) [Per J. Panganiban, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id. citing Dr. Malixi v. Dr. Baltazar, </i>821 Phil. 423, 438 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Mahawan v. People,</i> 595 Phil. 397, 417-418 (2008) [Per J. Chico-Nazario. Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>People v. Panerio,</i> 823 Phil. 738. 746(2018) [Per J. Marites. Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo,</i> pp. 203-204.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup>&nbsp;<i>Id.</i> at 234-235. <br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>People v. Olarbe.</i> 836 Phil. 1015, 1030 (2018) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> TSN, Maria Charissa Sofia Cefre, April 15, 2013, pp. 8-9. <br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Mallari v. People,</i> 870 Phil. 687 (2020) [Per J. Leonen, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 697. <br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See People v. Rodil,</i> 196 Phil. 20, 79 ( 1981) [Per J. Makasiar, En Banc]; <i>People v. Balbar,</i> 129 Phil. 358 (1967) [Per J. Makalintal, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Section 33.</b> Functions. - The Armed Forces of the Philippines (AFP) shall: <br><blockquote>(1) Uphold the sovereignty, support the Constitution, and defend the territory of the Republic of the Philippines against all enemies, foreign and domestic; <br>(2)&nbsp;&nbsp;&nbsp; Promote and advance the national aims. goals, interests and policies; <br>(3)&nbsp;&nbsp;&nbsp; Plan, organize, maintain, develop and deploy its regular and citizen reserve forces for national security; and <br>(4)&nbsp;&nbsp;&nbsp; Perform such other functions as may be provided by law or assigned by higher authorities. (Book IV, Title VIII, Subtitle II, Chapter 6).<br></blockquote><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 869 Phil. 177 (2020) [Per J. Leonen, Third Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>People v. Lagman,</i> 685 Phil. 733, 745(2012) [Per J. Velasco, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> See <i>People v. Gayon,</i> 851 Phil. I 028, i 036 (2019) [Per J. Caguioa, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo,</i> p. 206. <br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 403 Phil. 347 (200!) [Per J. Quisumbing, Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup><i> Id.</i> at 359. <br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>See People v. Ayupan,</i> 427 Phil.&nbsp; 200, 220 (2002) [Per J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>People v. Canillo,</i> 901 Phil. 45,., 465-466 (2021) [Per J. Leonen. Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Almojuela v. People, </i>734 Phil. 636. 650(2014) [Per J. Brion Second Division]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> TSN. Lt. Col. Richard Sibayan, March 20, 2013, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Article 48.</b> <i>Penalty for complex crime</i> -- When a single act constitutes two or more grave or less grave felonies, or when an offense is a necessary means for committing the other, the penalty for the most serious crime shall be imposed, the same to be applied in its maximum period. <br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>See People v. Comadre,</i> 475 Phil. 29, (2004) [<i>Per Curiam, En Banc</i>]; <i>Malana v. People.</i> 573 Phil. 39 (2008) (Per J. Tinga, Second Division] <br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>People: v. Moreno,</i> 872 Phil. 17, 2l (2020) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 783 Phil. 806, 847-853 (20I6) [Per J. Peralta, <i>En Banc</i>]. <br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Nacar v. Gallen; Frames,</i> 716 Phil. 267. 268 (2013) [Per J. Peralta, En Banc].<br></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

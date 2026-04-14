@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 279010 - SPOUSES RAMIL B. GUTIERREZ AND MARIBEL N. GUTIERREZ, PETITIONERS, VS.  JOSEPH RAYMUND M. CUARESMA, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70176' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 279010, October 29, 2025 ]</H2>
+			<H3>SPOUSES RAMIL B. GUTIERREZ AND MARIBEL N. GUTIERREZ, PETITIONERS, VS.  JOSEPH RAYMUND M. CUARESMA, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Spouses Ramil B. Gutierrez and Maribel N. Gutierrez (Spouses Gutierrez) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 26, 2024, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 8, 2025, of the Court of Appeals (CA) in CA-G.R. CV No. 119153. The CA affirmed the Decision dated February 7,2022, of Branch 39, Regional Trial Court (RTC), Lingayen, Pangasinan that granted the Complaint filed by Joseph Raymund M. Cuaresma (Raymund).<br><br><center><i>The Antecedents</i></center><br>The case stems from a Complaint for Annulment of Title, Quieting of Title, and Damages filed by Raymund. He sought to nullify Transfer Certificates of Title (TCT) Nos. 026-2011001496 and 026-2011001497, registered in the names of Spouses Gutierrez, and to recover possession of the land covered by these titles.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>Raymund alleged that he is the absolute owner of a 480-square- meter parcel of land in Barangay Gayaman, Binmaley, Pangasinan (subject land), covered by TCT No. 326754. In December 2013, he discovered ongoing construction on a portion of the subject land. His mother, Nympha Cuaresma, confronted the workers and learned that the construction was for Marigold Bookstore. Upon inquiry, she was referred to Spouses Gutierrez. Spouses Gutierrez claimed ownership over the 240-square-meter portion where the construction was taking place (contested lot), asserting that they possessed their own titles, specifically TCT Nos. 026-2011001496 and 026-2011001497.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>Raymund presented a Deed of Absolute Sale dated September 16, 2009, showing that he purchased the subject land from the Roman Catholic Bishop of Lingayen for PHP 480,000.00. Before the purchase, he commissioned a relocation survey to ascertain the property's boundaries. Following the sale, Original Certificate of Title (OCT) No. 1018 registered in the name of Roman Catholic Bishop of Lingayen was cancelled, and on October 21, 2009, TCT No. 326754 was issued in his name.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In their Answer, Spouses Gutierrez countered that they are the registered owners of the contested lot. They acquired the property from Lourdes Cayabyab (Cayabyab) through a Deed of Absolute Sale dated January 7,2011. Subsequently, Cayabyab's titles, TCT Nos. 324915 and 324916, were cancelled and TCT Nos. 026-2011001496 and 026-2011001497 were issued in their names.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Spouses Gutierrez traced their title to OCT No. 13158, an emancipation patent granted to their predecessor-in-interest, Benedicto Cerezo (Cerezo), under Presidential Decree No. 27, which vested absolute ownership in Cerezo and purportedly superseded the previous title of the Roman Catholic Bishop of Lingayen under OCT No. 1018. They maintained that an annotation on OCT No. 1018 regarding the grant to Cerezo served as a sufficient notice to Raymund, thereby limiting the right of the Roman Catholic Bishop of Lingayen to dispose of the property. Thus, they claim to be buyers in good faith.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Notably, Spouses Gutierrez provided inconsistent statements regarding due diligence; Ramil Gutierrez stated that they hired a surveyor before the purchase, while Maribel Gutierrez averred that no such survey was conducted.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In the Decision dated February 7, 2022, the RTC granted Raymund's Complaint. The dispositive portion of the Decision reads:<br><blockquote>WHEREFORE, premises considered, judgment is hereby rendered-<br><br>a. DECLARING null and void Transfer Certificate of Title No. 026- 2011001496 and Transfer Certificate of Title No. 026-2011001497 in the name of spouses Ramil and Maribel Gutierrez; [and]<br><br>b. ORDERING the defendants to remove the improvements that they have introduced inside the property of the plaintiff;<br><br>No costs.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></blockquote>The RTC found that Raymund possessed a valid title over the subject land, including the 240-square-meter contested lot. The trial court emphasized that OCT No. 1018, issued in the name of Raymund's predecessor-in-interest, the Roman Catholic Bishop of Lingayen, predates OCT No. 13158, from which the Spouses Gutierrez trace their title, by 39 years. Applying the principle that an earlier-issued title prevails over a later one, the RTC nullified OCT No. 13158 and all its derivative titles, including TCT Nos. 026-2011001496 and 026-2011001497.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Furthermore, the RTC held that the subject land, having been registered under the Torrens System as early as 1951, was not subjected to land transfer under Presidential Decree No. 27. Consequently, the emancipation patent issued to Cerezo was ineffective. The RTC concluded that the titles held by the Spouses Gutierrez were invalid and constituted a cloud on Raymund's title.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Spouses Gutierrez filed a Motion for Reconsideration, which the RTC denied in the Order dated April 8, 2022, for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In the Decision<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated January 26, 2024, the CA affirmed the RTC's ruling that Raymund has a better title, but on a different ground.<br><br>The CA ruled that the RTC's reliance on the rules of double sale under Article 1544 of the New Civil Code was misplaced, as this provision contemplates a case where the same thing is sold to different vendees by a single vendor. The appellate court explained that considering that the parties acquired their respective lots from different vendors, the rule on double sale does not apply. Instead, the case is one for quieting of title and recovery of possession initiated by Raymund, a previous registrant, against Spouses Gutierrez who purchased a portion of the subject land and had it registered in the Torrens System under their names as well.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Spouses Gutierrez assailed the validity of the sale between Raymund and the Roman Catholic Bishop of Lingayen on the basis of an absence of an express authority to sell granted to Bishop Renato Mayugba.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> On this issue, the CA found that Raymund's acquisition of the subject land from the Roman Catholic Bishop of Lingayen is evidenced by a Deed of Absolute Sale dated September 16, 2009. As a notarized public document, this Deed enjoys a presumption of regularity and is a <i>prima facie</i> evidence of the facts stated therein. Spouses Gutierrez failed to present clear and convincing evidence to overcome this presumption.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>In contrast, the CA determined that the title of the Spouses Gutierrez is void because their predecessors-in-interest had no valid registrable title over the contested lot. Their claim traces back to Cerezo, whose title was purportedly based on an emancipation patent. However, an annotation on OCT No. 13158 explicitly states that no certificate of land transfer (CLT) was ever issued to Cerezo. The issuance of a CLT is a mandatory first stage under Presidential Decree No. 27, serving as the government's recognition of a farmer-beneficiary's inchoate right. Without a CLT, Cerezo acquired no registrable right over the subject land that could be perfected into an emancipation patent. Consequently, OCT No. 13158, issued in Cerezo's name, is null and void. As a spring cannot rise higher than its source, Cerezo could not transmit any valid title to his successors-in-interest, including Spouses Gutierrez. The CA further noted that none of the TCTs issued in the name of the transferees between Spouses Gutierrez and Cerezo, including Cayabyab, reflect that it was derived from OCT No. 13158. These irregularities in the certificate of registration in the TCTs further fortify the nullity of OCT No. 13158.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The CA also dismissed the defenses of laches and prescription. It held that Raymund's cause of action accrued only in 2013 when his ownership was disturbed by the construction. Neither had prescription set in because Spouses Gutierrez's TCTs were issued on March 15, 2011. Considering that an action for quieting of title involving property not in the actual possession of the plaintiff prescribes in 30 years after the cause of action accrues, Raymund filed the Complaint well within the prescriptive period in 2014.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Finally, Spouses Gutierrez's claim of being purchasers in good faith is unavailing, as their predecessors-in-interest never had a valid title to convey. The CA affirmed the denial of moral damages for lack of sufficient proof.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Spouses Gutierrez filed a Motion for Reconsideration, which the CA denied in the Resolution<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated January 8, 2025.<br><br>Hence, the present Petition.<br><br><center><i>The Arguments of the Spouses Gutierrez</i></center><br>Spouses Gutierrez assert that the lower courts erred in applying the doctrine of superiority of a prior title. They contend that the Mirror Doctrine and the Chain of Title Doctrine should have been applied, as they are innocent purchasers for value and in good faith.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Spouses Gutierrez trace their ownership back to Cerezo, who was awarded the land under Presidential Decree No. 27. They argue that this award divested the Roman Catholic Bishop of Lingayen of ownership, rendering the subsequent sale to Raymund void for lack of object. They maintain an unbroken chain of title from Cerezo to themselves, evidenced by various TCTs. They argue that they relied on the clean titles of their immediate seller, Cayabyab, which bore no liens or encumbrances. They exercised due diligence by verifying the titles and conducting a survey without any opposition. These actions, they assert, establish their status as innocent purchasers for value.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Spouses Gutierrez posit that the rule on the superiority of an earlier title is not absolute and admits of exceptions, particularly when the earlier title was procured through fraud or is otherwise flawed, or when the holder of the earlier title is guilty of laches.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> They argue that Raymund and his predecessor-in-interest were negligent for failing to possess the property or assert their claim for a significant period, which should bar their recovery. They emphasize that they and their predecessors have always been in possession of the contested lot, a fact Raymund did not dispute.<br><br><center><i>The Issue</i></center><br>The sole issue for the Court's resolution is who between the parties has a better right over the contested lot.<br><br><center><i>The Ruling of the Court</i></center><br>At the outset, the question of whether Spouses Gutierrez are innocent purchasers for value is a question of fact that is beyond the scope of a petition for review on <i>certiorari </i>under Rule 45 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>In <i>Land Bank of the Philippines v. Belle Corporation,</i><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the Court held that in ascertaining good faith or lack thereof, courts must necessarily look at the evidence of a party's conduct and actions.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The Court is not a trier of facts<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> and it is not our function to weigh all over again the evidence presented before the trial court. Although this rule is subject to several exceptions,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> none obtain in the present case.<br><br>Still, the Petition fails on the merits.<br><br>Even assuming <i>arguendo</i> that Spouses Gutierrez are innocent purchasers for value, this does not give them an advantage over Raymund, who was likewise an innocent purchaser for value. Records show that before he purchased the subject land on September 16, 2009, he exercised due diligence by commissioning a relocation survey to ascertain its boundaries. He subsequently registered the sale, and TCT No. 326754 was issued in his name on October 21, 2009, originating from a valid title, OCT No. 1018 registered in the name of the Roman Catholic Bishop of Lingayen, his immediate predecessor-in-interest, as early as 1951. Spouses Gutierrez did not allege, much less prove, that the issuance of OCT No. 1018, in the name of the Roman Catholic Bishop of Lingayen was irregular. Raymund's good faith is coupled with the fact that he has a <i>valid pre-existing title</i> over the subject land. Thus, even if Spouses Gutierrez may have acted in good faith when they purchased the contested lot in 2011, their good faith is immaterial given the circumstances.<br><br>To be clear, a careful perusal of the assailed CA issuances shows that the appellate court did not apply the rule on the superiority of an earlier title or the maxim <i>prior est in tempore, potior est in jure</i> (first in time, priority in right). It was the RTC that applied this rule. In contrast, the CA denied the Spouses Gutierrez's Appeal on a different groundâ specifically, its finding that OCT No. 13158, issued in the name of Cerezo, was void. The Court finds that the CA was correct in not applying this rule because it does not operate where one of the conflicting titles is void.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Nonetheless, the RTC's reliance on this rule is of no moment considering that the scope of the Court's review in the present case is limited to the assailed issuances of the CA, not those of the RTC.<br><br>The C A correctly adopted the approach of determining who among the parties has a better right over the contested lot by tracing the original certificates from which their TCTs were derived. In <i>Degollacion v. Register of Deeds of Cavite,</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the Court ruled that when two titles include the same land, whether wholly or partially, the better approach is to trace the OCT from which these titles were derived.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Here, the CA aptly found that the issuance of OCT No. 13158 was attended by irregularities, rendering it void. An annotation on page 4 of OCT No. 13158 explicitly provides that Cerezo never obtained a CLT over the subject land prior to the issuance of EPNo. 152526.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> This proved that OCT No. 13158 was not issued in accordance with Presidential Decree No. 27. The framework in Presidential Decree No. 27 outlines a two-stage process for the transfer of land to tenant-farmers. The initial step is the issuance of a CLT, which formally recognizes the farmer's inchoate right to the land. This is followed by the granting of an EP upon the fulfillment of all legal requirements, most notably the full payment of the amortization for the land.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In <i>Davao New Town Dev't. Corp. v. Sps. Saliga,</i><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> the Court held that no vested rights under Presidential Decree No. 27 accrued to the respondents therein considering that no CLTs were issued to them:<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><blockquote>In <i>Del Castillo v. Orciga,</i> the Court explained that land transfer under P.D. No. 27 is effected in two (2) stages: first, the issuance of a certificate of land transfer (CLT); and second, the issuance of an emancipation patent (EP). The first stage - issuance of the CLT - serves as the government's recognition of the tenant farmers' inchoate right as "deemed owners" of the land that they till. The second stage - issuance of the EP - perfects the title of the tenant farmers and vests in them absolute ownership upon full compliance with the prescribed requirements. As a preliminary step, therefore, the CLT immediately serves as the tangible evidence of the government's recognition of the tenant farmers' inchoate right and of the subjection of the particular landholding to the government's OLT program.<br><br>In this case, the record does not show that the respondents had been issued CLTs. The CLT could have been their best evidence of the government's recognition of their inchoate right as "deemed owners" of the property. Similarly, the record does not show that the government had placed the property under its OLT program or that the government, through the MARO, recognized the respondents as the actual tenants of the property on the relevant date, thereby sufficiently vesting in them such inchoate right. Consequently, this Court can safely conclude that no CLTs had ever been issued to the respondents and that the government never recognized any inchoate right on the part of the respondents as "deemed owners" of the property. In effect, therefore, no vested rights under PD. No. 27, in relation to R.A. No. 6657, accrued to the respondents such that when the property was reclassified prior to June 15, 1988, it did not fall, by clear legal recognition within the coverage of R.A. No. 6657.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Citation omitted)</blockquote>In the same vein, departure from the procedure outlined in Presidential Decree No. 27 is a material irregularity which rendered Cerezo's OCT No. 13158 void. Consequently, Spouses Gutierrez cannot acquire a better right than Cerezo because of the legal truism that the spring cannot rise higher than its source.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Verily, Spouses Gutierrez's void title cannot be upheld against Raymund's unblemished title.<br><br>Even assuming that Cerezo's OCT No. 13158 was valid, Raymund still has a better right over the contested lot than Spouses Gutierrez. The registration of the land in the name of Raymund's predecessor-in-interest under the Torrens System, through a cadastral proceeding, is a proceeding <i>in rem.</i> The decision rendered therein is binding against the whole world, including the Government. The Government, therefore, had no right to subsequently convey the same land to another party through an emancipation patent.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Moreover, under the rule on the superiority of an earlier title, OCT No. 1018 would prevail over OCT No. 13158.<br><br><i>Finally,</i> Raymund is not barred by laches from filing the present action. As correctly noted by the CA, he filed the action in 2014, only after the Spouses Gutierrez began construction on the property in 2013. Spouses Gutierrez's contention that the contested lot was in the possession of their predecessors-in-interest is a bare assertion unsupported by evidence. It is settled that he who alleges a fact has the burden of proving it and a mere allegation is not evidence.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Spouses Gutierrez failed to allege, much less prove, the manner by which such possession was exercised by their predecessors-in-interest.<br><br>In fine, the Petition should be denied for failure of Spouses Gutierrez to show that the CA committed reversible error in rendering its assailed issuances as to warrant the exercise of the Court's discretionary appellate jurisdiction.<br><br><b>ACCORDINGLY,</b> the Petition for Review on Certiorari is hereby <b>DENIED.</b> The Decision dated January 26, 2024, and the Resolution dated January 8, 2025, of the Court of Appeals in CA-G.R. CV No. 119153 are <b>AFFIRMED.</b><br><br><b>SO ORDERED.</b><br><br><i>Caguioa, (Chairperson), Gaerlan, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><br><hr width="60%" size="1" noshade="" align="LEFT"><sup style="COLOR: RGB(255, 0, 0);">[1] </sup><i>Rollo,</i> pp. 16â41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2] </sup><i>Id.</i> at 42-59. Penned by Associate Justice Marie Christine Azcarraga-Jacob and concurred in by Associate Justices Bonifacio S. Pascua and Raymond Joseph G. Javier of the Sixteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3] </sup><i>Id.</i> at 60-63. Penned by Associate Justice Marie Christine Azcarraga-Jacob and concurred in by Associate Justices Bonifacio S. Pascua and Raymond Joseph G. Javier of the Former Sixteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4] </sup><i>Id.</i> at 43, see CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6] </sup><i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8] </sup><i>Id.</i> at 44-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10] </sup><i>Id.</i> at 47, see CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13] </sup><i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14] </sup><i>Id.</i> at 42-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15] </sup><i>Id.</i> at 50-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16] </sup><i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17] </sup><i>Id.</i> at 52-53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18] </sup><i>Id.</i> at 54-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19] </sup><i>Id.</i> at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20] </sup><i>Id.</i> at 57-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21] </sup><i>Id.</i> at 60-63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22] </sup><i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23] </sup><i>Id.</i> at 22-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24] </sup><i>Id.</i> at 25-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25] </sup>Rules of Court, Rule 45, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26] </sup>768 Phil. 368(2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[27] </sup><i>Id.</i> at 385.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28] </sup><i>See Microsoft Corporation v. Farajallah,</i> 742 Phil. 775, 785 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[29] </sup><i>See Medina v. Mayor Asistio, Jr.,</i> 269 Phil. 225, 232 (1990).<br><br>(1) When the conclusion is a finding grounded entirely on speculation, surmises or conjectures;<br>(2) When the inference made is manifestly mistaken, absurd or impossible; (3) Where there is a grave abuse of discretion; (4) When the judgment is based on a misapprehension of facts; (5) When the findings of fact are conflicting; (6) When the Court of Appeals, in making its findings, went beyond the issues of the case and the same is contrary to the admissions of both appellant and appellee; (7) [When the] findings of the Court of Appeals are contrary to those of the trial court; (8) When the findings of fact are conclusions without citation of specific evidence on which they are based; (9) When the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondents; and (10) [When the] finding of fact of the Court of Appeals is premised on the supposed absence of evidence and is contradicted by the evidence on record. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[30] </sup><i>See Pryce Corporation v. Engr. Ponce,</i> 938 Phil. 473,489-90 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[31] </sup>531 Phil. 501 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[32] </sup><i>Id.</i> at 508, <i>citing Spouses Mathay v. Court of Appeals,</i> 356 Phil 870, 894 (1998).<br><br><sup style="COLOR: RGB(255, 0, 0);">[33] </sup><i>Rollo,</i> p. 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34] </sup><i>See Del Castillo v. Orciga,</i> 532 Phil. 204, 214 (2006). <i>See also</i> H. DE LEON, TEXTBOOK ON AGRARIAN REFORM AND TAXATION (1990), p. 98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35] </sup>723 Phil. 353 (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[36] </sup><i>Id.</i> at 374.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37] </sup><i>Id.</i> at 372-373.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38] </sup><i>See Hrs. of Arao v. Hrs. of Eclipse,</i> 843 Phil. 391, 404 (2018); <i>Calalang v. Register of Deeds of Quezon City,</i> 301 Phil. 91, 108 (1994).<br><br><sup style="COLOR: RGB(255, 0, 0);">[39] </sup><i>See Nieto v. Quines and Pio,</i> 110 Phil. 823, 833 (1961).<br><br><sup style="COLOR: RGB(255, 0, 0);">[40] </sup><i>Dantis v. Maghinang, Jr.,</i> 708 Phil. 575, 587 (2013).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

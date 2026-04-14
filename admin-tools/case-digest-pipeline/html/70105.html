@@ -1,0 +1,631 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256964 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ARISTON PATERNO, JR. Y SALES,* ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70105' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256964, August 13, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. ARISTON PATERNO, JR. Y SALES,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>While the imposable penalty for illegal possession of five grams or more but less than 10 grams of <i>shabu</i> is 20 years and one day to life imprisonment under Section 11, Republic Act No. 9615, the maximum penalty of life imprisonment may only be imposed when the possession was committed in the presence of two or more persons or in a social gathering.</p><p> This is an ordinary appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Court of Appeals (CA) Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which affirmed the Regional Trial Court (RTC) Joint Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> convicting Ariston Paterno, Jr. <i>y</i> Sales (Paterno) of violation of Sections 5 and 11, Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> Paterno was charged with violation of Sections 5 and 11, Republic Act No. 9165 under two informations, the accusatory portions of which read:</p><p align="center"> [Criminal Case No. 14279] </p><blockquote> <p> That on or about [February 1,] 2015, in the City of Legazpi, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, not being authorized by law, and for consideration of the amount of [PHP 12,000.00], did then and there willfully, unlawfully, and criminally sell [one] piece medium size heat-sealed transparent plastic sachet containing 4.608 grams of white crystalline substance which upon examination yielded a positive result to the test for the presence of METHAMPHETAMINE HYDR[O]CHLORIDE known as [<i>SHABU</i>], a dangerous drug. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (Emphasis in the original)</p> </blockquote> <p align="center"> [Criminal Case No. 14280] </p><blockquote> <p> That on or about [February 2,] 2015, in the City of Legazpi, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, did then and there willfully, unlawfully and criminally have in his possession, control and custody the following with their markings and respective weights: </p> <p> [One] heat sealed transparent plastic sachet with markings NBG-2 02-01-15 containing 0.470 gram of white crystalline substance</p> <p> [One] heat sealed transparent plastic sachet with marking NBG-3 02-01-15 containing 4.732 grams of white crystalline substance </p> <p>having a gross weight of 5.202 grams, which gave a positive result for the presence of METHAMPHETAMINE HYDROCHLORIDE ([<i>SHABU</i>]), a dangerous drug, without authority of law. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (Emphasis in the original) </p> </blockquote> <p> Upon arraignment, Paterno pleaded not guilty to the charges. Thereafter, trial ensued. </p><p> The CA summarizes the facts as follows: </p><blockquote> <p> [O]n [February 1, 2015,] at around 6 [p.m.], [Police Officer II (PO2) Noel B. Grutas] (PO2 Grutas), while at his office in Camp Simeon Ola in Legazpi City, received a call from his confidential informant (CI) who reported that some known drug users and pushers were seen going to the house of [Paterno]. The CI further informed PO2 Grutas that they could buy [PHP] 1,000.00 worth of <i>shabu</i>, or more, from [Paterno]. . . </p> <p> . . . PO2 Grutas asked the CI to arrange a drug deal with [Paterno] in order to buy dangerous drugs worth [PHP] 12,000.00, to which the CI agreed to and arranged the same. Thereafter, a briefing was conducted where PO2 Grutas was assigned to be the poseur-buyer, and that the prearranged signal would be when PO2 Grutas would remove his cap signifying that the sale had been consummated. [Police Senior Inspector Augusto Ocfemia, Jr.] then handed PO2 Grutas [two] pieces of [PHP 500.00] bill, which he marked. . . and [11] pieces of [PHP 1,000.00] bill of boodle money for the buy-bust. </p> <p> . . . . </p> <p> At around 10:30 [p.m.], [Paterno] went out of his house. .. The CI then introduced PO2 Grutas to [Paterno]. The latter then uttered, '<i>Isang bulto ba talaga bibilhin mo?</i>', PO2 Grutas then replied, 'Oo', then handed over the buy-bust money to [Paterno]. [Paterno] then in turn took from his shoulder bag [one] piece medium sized heat-sealed transparent plastic sachet containing white crystalline substance and handed it over to PO2 Grutas. [When (t)he latter then removed his cap, executing the pre-arranged signal, the rest of the team then rushed over to PO2 Grutas's position and effected the arrest of [Paterno]. While being apprised of his rights, [Paterno] then became unruly and started shouting, calling the attention of the neighbors. Said action of [Paterno] prompted the police officers to immediately bring him, together with the medium sized heat-sealed transparent plastic sachet and [Paterno]'s bag, to the police station. </p> <p> Upon arrival at the police station, PO2 Eugene Edward Godino. . . called the representatives of the barangay. . . as well as a representative from the media. . . In the presence of the representatives, PO2 Grutas inspected the bag of [Paterno] where the buy-bust money was recovered. . . Further search revealed an additional [two] pieces of heat-sealed transparent plastic sachet containing white crystalline substance. </p> <p> Markings and documentation [were] done on the items seized from [Paterno] as shown by the Certificate of Inventory of Seized Articles and Receipt of Property Seized signed and witnessed by the representatives and PO2 Grutas. </p> <p> PO2 Grutas then personally brought the seized plastic sachets for laboratory examinations. [Paterno] likewise underwent drug testing. After a qualitative examination of the plastic sachets, the same yielded a positive result for the presence of methamphetamine hydrochloride. </p> <p> . . . .</p> <p> [Paterno] counters that on [February 1, 2015] at around 9:30 [p.m.] while he was with his boyfriend and live-in partner, Danilo Bryan A. Ombao I (Ombao) was preparing to leave their house, a former boarder, John Ardee Diamsen (Diamsen) sent him a text message saying that the latter. . . would come over to their house in order to look at the room that they would be renting as previously agreed upon. . . [Paterno] and Ombao decided to wait for Diamsen to arrive. </p> <p> At around 10:30 [p.m.], Diamsen and his companion arrived. Diamsen introduced his companion as his cousin. [Paterno] together with Ombao asked to Diamsen and his cousin to go inside in order to see the room. . . However, as [Paterno] was about to close the gate of the boarding house, Diamsen's cousin suddenly handed out a bundle of money uttering 'here take this money as our rentals.' [Paterno] retorted and said 'you have to see first the room for us to finalize your rentals.' While Diamsen's cousin had his arm stretched with the bundle of money, [Paterno] heard a tricycle stop in front of their gate and [four] men in civilian clothes alighted and forcibly opened the gate and entered their house. </p> <p> [Paterno] averred that the [four] men surrounded him, grabbed him, held his hands, and punched him several times. </p> <p> Despite being shocked, [Paterno] asked the men why they are apprehending and mauling him. He managed to get away from the men and went out of their gate, thinking that the incident would be caught on the closed-circuit television. . . Because of the commotion, [Paterno]'s sister Richeer Paterno [(Richeer)] came and started shouting at the men, asking them for their identity. The [four] men then shouted back at Richeer that they were police officers and that they are placing [Paterno] under arrest. . .</p> <p> After a while, [Paterno] was then pulled up by one of the policemen, whom he later knew to be PO2 Grutas, the latter frisked him and did a body search, but failed to find any unlawful item. The [Philippine National Police (PNP)] mobile then came and [Paterno] was then taken aboard the mobile and was brought to the Police Station. . . While there, [Paterno] claimed that they waited for almost [four] hours for the alleged witnesses to arrive. . . He was frisked again [two] times and on the third time, PO2 Grutas claimed that [Paterno] was in possession of illegal drugs[.]<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p> </blockquote> <p> In its Joint Decision, the RTC convicted Paterno of the crimes charged. The dispositive portion reads: </p><blockquote> <p> WHEREFORE, judgment is rendered as follows: </p> <p> 1. In Criminal Case [No.] 14279, the court finds accused Ariston Paterno, Jr. y Sales GUILTY beyond reasonable doubt of violation of [Section] 5, [Republic Act No.] 9165 and he is sentenced to suffer the penalty of life imprisonment and a fine of [PHP] 500,000.00</p> <p> 2. In Criminal Case [No.] 14280, the court finds accused Ariston Paterno, Jr. y Sales GUILTY beyond reasonable doubt of violation of par. 2, [Section] 11, [Republic Act No.] 9165 and he is sentenced to suffer the penalty of imprisonment of [20] years and one day to life imprisonment and a fine of [PHP] 400,000.00. </p> <p> . . . .</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p> </blockquote> <p> Undeterred, Paterno appealed before the CA and filed his Brief<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> where he argued that the RTC gravely erred in convicting him despite the absence of a valid buy-bust operation and despite non-compliance with the procedure for the custody and control of the seized prohibited drugs, i.e.,: (1) PO2 Grutas failed to immediately mark the seized items at the place of arrest; (2) the investigator failed to indicate the weight of the items seized and to make an inventory in the presence of a DOJ representative; and (3) the forensic chemist failed to show how the test was done and how the specimens were handled from the time of receipt until presentation in court, and to state if he received the specimens as properly marked, weighed, sealed, and intact. </p><p> On the other hand, the People, through the Office of the Solicitor General, filed their Brief,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> positing that the existence of the buy-bust operation is evident from the testimony of PO2 Grutas, and that the alleged failure to establish the chain of custody of the seized items has been belied by the latter's direct and categorical testimony, the stipulations between the parties, as well as the documentary evidence presented. </p><p> The CA eventually denied the appeal and affirmed the Joint Decision of the RTC <i>in toto</i>.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Hence, this appeal. </p><p> In their respective Manifestations,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> the parties adopted their respective Briefs filed before the CA. </p><p> The appeal is partly meritorious. </p><p> At the outset, there was no need to conduct an inventory in the presence of a Department of Justice (DOJ) representative because the crime occurred during the effectivity of Republic Act No. 10640<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> which requires only "the accused or the person/s from whom such items were confiscated and/or seized, or his/her representative or counsel, with an elected public official and a representative of the National Prosecution Service <i>or</i> the media" to witness the inventory.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Considering that the inventory was witnessed by barangay officials and a media representative, the witness requirement under Section 21 of Republic Act No. 9165, as amended, was complied with. </p><p> Anent the failure to immediately mark the seized items subject of Criminal Case No. 14729 at the place of arrest, the prosecution endeavored to justify the same, arguing that accused-appellant became unruly at the time that he was being placed under arrest. His sister and other friends were also causing a commotion at the place of the arrest, forcing the police officers to bring accused-appellant to the police station for security reasons. In ruling that the failure to immediately mark did not automatically impair the integrity of the seized items, the CA held that pursuant to jurisprudence, testimony that included the marking of the seized items at the police station and in the presence of the accused was sufficient to show compliance with the rules on chain of custody. Marking upon immediate confiscation contemplates even marking at the nearest police station or office of the apprehending team. </p><p> In <i>People v. Casa</i>,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the Court <i>En Banc</i> cited a catena of cases where We did not buy the justification of the buy-bust team, to wit: </p><blockquote> <p> In <i>People v. Dumanjug</i>, the Court rejected the buy-bust team's argument that it failed to conduct the marking, inventory, and photography of the seized drug immediately at the place of arrest because a crowd of 200 people had gathered, thus, creating a dangerous environment. </p> <p> Likewise, in <i>Lim</i>, the Court reiterated the general rule that the inventory and taking of photographs in case of warrantless seizures must be conducted at the place of seizure <b><i>unless</i></b> there is a threat of immediate or extreme danger; in which case, the inventory and taking of photographs can be conducted at the nearest police station, to wit: </p> <blockquote> <p> We have held that the immediate physical inventory and photograph of the confiscated items at the place of arrest may be excused in instances when the safety and security of the apprehending officers and the witnesses required by law or of the items seized are <b><i>threatened by immediate or extreme danger</i></b> such as retaliatory action of those who have the resources and capability to mount a counter-assault. </p> <p> The pronouncement in <i>Lim</i> was likewise applied in <i>People v. Salenga (Salenga)</i>, where the police officers simply gave a flimsy excuse that the crowd was getting bigger at the place of seizure; hence, it was treated by the Court as an invalid reason for them to conduct the inventory at the nearest police station.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis in the original, citations omitted) </p> </blockquote> </blockquote> <p> The buy-bust team's excuses that accused-appellant became unruly and that his sister and friends caused a commotion at the place of arrest were not justifiable grounds to conduct the marking and inventory at the police station. For failure to prove a justifiable ground for their deviation from the chain of custody rule, the seizure and custody over the seized items subject of Criminal Case No. 14729 are rendered void and their integrity and evidentiary value compromised, thus, warranting accused-appellant's acquittal for illegal sale. </p><p> However, as regards his conviction for illegal possession of dangerous drugs in Criminal Case No. 14780, We find the same to be in accord with the law and the evidence on record. The two additional sachets of <i>shabu</i> were recovered from him at the police station and were immediately marked and inventoried thereat in the presence of the mandatory witnesses. The prosecution also successfully established the movement and custody of said seized items from seizure thereof until their turnover to the trial court.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Hence, the integrity and evidentiary value of said items remained intact. </p><p> Nonetheless, the CA erred in affirming the penalty of 20 years and one day to life imprisonment. While the imposable penalty for illegal possession of five grams or more but less than 10 grams of <i>shabu</i> is indeed 20 years and one day to life imprisonment under Section 11 of Republic Act No. 9165,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the maximum term of life imprisonment should only be imposed when the circumstances in Section 13<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> are present, i.e., when the accused was found "possessing any dangerous drug during a party, or at a social gathering or meeting, or in the proximate company of at least [two] persons."<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Otherwise, a maximum term below life imprisonment should be imposed for the accused to avail of the benefits of the Indeterminate Sentence Law, as elucidated by then Associate Justice (later Chief Justice) Diosdado Peralta in his Concurring Opinion in <i>People v. Obias</i>,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> to wit: </p><blockquote> <p> The imposable penalty for the offense under Section 11(2), [Republic Act] No. 9165. . . is [20] years and [one] day to life imprisonment, a penalty not provided for in the [Revised Penal Code] because [Republic Act] No. 9165 is a <i>malum prohibitum</i>. Hence, the principles of graduation of penalties under. . . the [Revised Penal Code]. . . may not be applicable.</p> <p> Nevertheless, the provisions of the Indeterminate Sentence Law should still apply if the penalty consists of a range[.]</p> <p> . . . .</p> <p> [I]f the imposable penalty consists of a range of [20] years and [one] day to life imprisonment, like in this case, the Court should impose a minimum term not less than the minimum of the penalty, which is [20] years and [one] day, and a maximum term not higher than life imprisonment. Thus, imposing an indeterminate sentence of 20 years and [one] day, as minimum, to life imprisonment, as maximum, would appear to be compliant with [Section 1 of Act No. 4103, as amended].</p> <p> However, by imposing such an indeterminate sentence, the accused, after serving the minimum term of 20 years and [one] day, will not be entitled to be released on parole because he will still serve the maximum term of life imprisonment. Besides, if the penalty of life imprisonment is imposed, the Indeterminate Sentence Law is no longer applicable because Section 2 of Act No. 4103, as amended, expressly provides that it shall not apply to persons convicted of offenses punished with life imprisonment[.]</p> <p> . . . . </p> <p> Imposing a maximum term of life imprisonment upon the accused will not be consistent with the objectives of the Indeterminate Sentence Law which is "to uplift and redeem valuable human material, and prevent unnecessary and excessive deprivation of personal liberty and economic usefulness" of the accused since he/she may be exempted from serving the entire sentence, depending upon his/her behavior and his/her physical, mental, and moral record. </p> <p> It will not be good for the person who may have already been reformed and rehabilitated while serving sentence in a correctional institution and deprived of the benefits of the Indeterminate Sentence Law. That is why in <i>Argoncillo v. Court of Appeals</i>, where the penalty for violation of [Presidential Decree No.] 7049 is 20 years to life imprisonment, the Court imposed a penalty of 20 years to 25 years because any period in excess of 20 years is within the range of the penalty. . .</p> <p> This will give effect to the very purpose of the Indeterminate Sentence Law because when the penalty of life imprisonment is no longer imposed as a maximum term, then the accused, after serving 20 years or even less, taking into account his[/her] good conduct time allowance, may be already released on parole, subject to Section 6 of said law[.]</p> <p> . . . .</p> <p> <i>It is only when the illegal possession under Section 11, [Republic Act] No. 9165 is committed in the presence of two or more persons or in a social gathering that the maximum penalty of life imprisonment may be imposed pursuant to Section 13, [Republic Act] No. 9165. It is only then that the Indeterminate Sentence Law is no longer applicable</i>.</p> <p> <i>Accordingly, for illegal possession of dangerous drugs with a weight of 6.69 grams, the indeterminate sentence of [20] years and [one] day, as minimum, to [30] years, as maximum, was properly sustained by the ponencia</i>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis supplied) </p> </blockquote> <p> Thus, in <i>People v. Pis-an</i>,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> We ruled that when the illegal possession of dangerous drugs was not committed in the presence of two or more persons or in a social gathering, the maximum imposable penalty should be below life imprisonment which is pegged at 40 years and one day.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> There being neither allegation nor proof that accused-appellant possessed the drugs during a party, or at a social gathering or meeting, or in the proximate company of at least two persons, We modify his sentence to an indeterminate penalty of imprisonment of 20 years and one day, as minimum, to 30 years, as maximum. </p><p> <b>ACCORDINGLY</b>, the appeal is <b>PARTIALLY GRANTED</b>. The November 19, 2020 Decision of the Court of Appeals in CA-G.R. CR-HC No. 12805 is <b>AFFIRMED</b> with <b>MODIFICATION</b>. </p><p> In Criminal Case No. 14279, accused-appellant Ariston Paterno, Jr. <i>y</i> Sales is <b>ACQUITTED</b> of illegal sale of dangerous drugs on the ground of reasonable doubt. Let entry of judgment in said case be issued immediately. </p><p> In Criminal Case No. 14280, accused-appellant Ariston Paterno, Jr. <em>y</em> Sales is found <strong>GUILTY</strong> beyond reasonable doubt of illegal possession of dangerous drugs and is sentenced to suffer the indeterminate penalty of imprisonment of 20 years and one day, as minimum, to 30 years, as maximum, and to pay a fine of PHP 400,000.00. </p><p> Copies of this Decision shall be furnished to the Chief of the Philippine National Police and the Director General of the Philippine Drug Enforcement Agency for their information. </p><p> The Regional Trial Court is <b>DIRECTED</b> to turn over the sachets of <i>shabu</i> to the Dangerous Drugs Board for destruction in accordance with law. </p><p> <b>SO ORDERED.</b> </p><p> <i>Gesmundo, C.J., Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> The aliases of accused-appellant were removed from the case title pursuant to SC Administrative Matter No. 21-11-25-SC, which prohibits the use of gender-linked words that carry disrespectful or pejorative connotations. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-27. The November 19, 2020 Decision in CA-G.R. CR-HC No. 12805 was penned by Associate Justice Danton Q. Bueser and concurred in by Associate Justices Geraldine C. Fiel-Macaraig and Tita Marilyn B. Payoyo-Villordon of the Thirteenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 29-41. The February 28, 2019 Joint Decision in Criminal Cases Nos. 14279 and 14280 was penned by Acting Presiding Judge Annielyn B. Medes-Cabelis of Branch 5, Regional Trial Court, Legazpi City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Republic Act No. 9165 (2002), Comprehensive Dangerous Drugs Act of 2002. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, p. 13. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 14. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 8-12. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 41.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> CA <i>rollo</i>, pp. 35-54.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 79-107. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 26-27. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 46-48, 53-54.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Republic Act No. 10640 (2014), An Act to Further Strengthen the Anti-Drug Campaign of the Government, Amending for the Purpose Section 21 of Republic Act No. 9165, Otherwise Known as the "Comprehensive Dangerous Drugs Act of 2002." </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>See</i> <b>Nisperos v. People</b>, 931 Phil. 945, 957 (2022) [Per J. Rosario, <i>En Banc</i>]. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> 928 Phil. 356 (2022) [Per C.J. Gesmundo, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 374. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, pp. 21-22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Republic Act No. 9165, sec. 11 states: Sec. 11. <i>Possession of Dangerous Drugs</i>. - . . .
+    <br></p><blockquote>
+    <p> . . . .</p>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tbody><tr valign="top">
+        <td width="5%"><div align="justify">(2)</div></td>
+        <td width="95%"><div align="justify"><i>Imprisonment of [20] years and [one] day to life imprisonment</i>
+ and a fine ranging from [PHP 400,000.00] to [PHP 500,000.00], if the 
+quantities of dangerous drugs are [five] grams or more but less than 
+[10] grams of opium, morphine, heroin, cocaine or cocaine hydrochloride,
+ marijuana resin or marijuana resin oil, methamphetamine hydrochloride 
+or "shabu", or other dangerous drugs such as, but not limited to, MDMA 
+or "ecstasy", PMA, TMA, LSD, GHB, and those similarly designed or newly 
+introduced drugs and their derivatives, without having any therapeutic 
+value or if the quantity possessed is far beyond therapeutic 
+requirements; or [300] grams or more but less than [500] grams of 
+marijuana[.] (Emphasis supplied)</div></td></tr></tbody></table></blockquote><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Republic Act No. 9165, sec. 13 states: Sec. 13. <i>Possession of Dangerous Drugs During Parties, Social Gatherings or Meetings</i>. - Any person found possessing any dangerous drug during a party, or at a social gathering or meeting, or in the proximate company of at least [two] persons, shall suffer the maximum penalties provided for in Section 11 of this Act, regardless of the quantity and purity of such dangerous drugs. <br></p><blockquote> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>People v. Pis-an</b>, 877 Phil. 235, 248 (2020) [Per J. Reyes, Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> 850 Phil. 420 (2019) [Per J. Del Castillo, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 438-443. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> 877 Phil. 235 (2020) [Per J. Reyes, Jr., First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 248. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

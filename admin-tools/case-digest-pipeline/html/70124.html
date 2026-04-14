@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 273100 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. APRIL JANE "LALING" BANGUIS ALBET, ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70124' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 273100, March 03, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. APRIL JANE "LALING" BANGUIS ALBET, ACCUSED-APPELLANT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LAZARO-JAVIER, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 14, 2023 of the Court of Appeals in CA-G.R. CR No. 02346-MIN, affirming with modification the conviction of accused-appellant April Jane "Laling" Banguis Albet (Albet) for qualified trafficking in persons under Section 3(a) in relation to Sections 4(a) and 6(a) of Republic Act No. 9208, as amended by Republic Act No. 10364, and violation of Article III, Section 5(a) of Republic Act No. 7610.<br><br><center><b>Antecedents</b></center><br>By two separate Informations<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 15, 2016, Albet was charged with qualified trafficking in persons and violation of Article III, Section 5(a) of Republic Act No. 7610, respectively, viz.:<br><blockquote><center><b>Criminal Case No. CR-ORD-2016-962</b></center><br>That on July 10, 2016 or date prior thereto, at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, Philippines, and within the jurisdiction of this Honourable [sic] Court, the above-named accused, taking advantage of the vulnerability of the victim 16-year[-]old AAA<sup><font color="#ff0000">*</font></sup> (Date of Birth: <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxx</span>, 1999), well-knowing that the latter is a minor, did then and there, wi[l]lfully, criminally and feloniously recruit, transport, bring and transfer the said minor victim to JOHN DOE a.k.a JASON CARAM OR JASON CARAMBA at [Sogo Hotel], this City, where the minor victim was prostituted or sexually exploited in exchange of money, and in turn accused received the amount of [PHP]2,000.00 as commission by reason of her referral and bringing the minor victim to JOHN DOE a.k.a JASON CARAMBA who engaged in sexual intercourse and/or lascivious conduct with the victim, to her damage and prejudice.<br><br>Contrary to law, sec. 3(a) in relation to sec. 4(a) and sec. 6(a), of R.A. No. 9208, as amended by R.A. No. 10364, the "Expanded Anti-Trafficking in Persons Act 2012."<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center><b>Criminal Case No. CR-ORD-2016-963</b></center><br>That on July 11, 2016 or date prior thereto, at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, Philippines, and within the jurisdiction of this Honourable [sic] Court, the above-named accused well-knowing that the victim AAA (Date of Birth: <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, 1999) is a 16-year[-]old minor, did then and there, wil[l]fully, criminally and feloniously engage, promote, facilitate or induce said minor into prostitution by offering her sexual services to JOHN DOE a.k.a JASON CARAM OR JASON CARAMBA at [Sogo Hotel], this City, for a fee in the amount of [PHP] 2,000.00, to her damage and prejudice.<br><br>Contrary to law, sec. 5(a) of R.A. No. 7610, the "Special Protection of Children Against Abuse, Exploitation and Discrimination Act."<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </blockquote>On arraignment, Albet pleaded not guilty to both charges.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>The prosecution presented the testimonies of BBB, mother of the victim, AAA, AAA's aunt, CCC, and Senior Police Officer III Francis Michael Fortunato (SPO3 Fortunato). The defense, on the other hand, presented Albet as its lone witness.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br><b><i>Version of the Prosecution</i> </b><br><br>Sometime in August 2015, AAA left their home in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City as she feared for her safety due to the two complaints for rape she filed against their barangay chairperson. She had to live with CCC in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City. She left behind BBB in their home.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On July 6, 2016, Albet visited AAA at CCC's house. AAA told CCC that Albet was her friend. On July 10, 2016, BBB went to CCC's house to give AAA money for her school expenses. BBB and AAA agreed that they would meet the next day, July 11, 2016, so that BBB could accompany AAA to the City High School for enrollment.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On July 11, 2016, BBB called AAA's phone several times but the latter could not be reached. BBB then called CCC and inquired as to AAA's whereabouts. After being told that AAA had left their house, BBB rushed to look for her daughter. When AAA could not also be found in the house of a certain EEE, who was her suitor, CCC told BBB that it was Albet who kept on calling and talking with AAA before her disappearance. Consequently, BBB went to Albet's house.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>When she saw Albet, BBB asked her if she knew AAA's whereabouts. Albet replied that she and AAA met at Sogo Hotel but she left AAA at the said place and she did not know where AAA went after they met. BBB, however, did not believe Albet. BBB warned Albet that she would report her (Albet) to the police authorities if she (Albet) would continuously refuse to disclose the true whereabouts of AAA. Albet was thus constrained to tell BBB that AAA "applied for a work with a big salary." Then, both of them boarded a taxi and proceeded to Sogo Hotel in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City. While on their way to the hotel, BBB kept on asking why Albet brought AAA to such place. Albet told BBB that she would tell her everything once they reached the said hotel.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>When they got to the hotel, Albet told BBB to wait outside and to let her talk to the hotel manager first. After several minutes, Albet came back and informed BBB that it was not possible for them to disturb the room occupants. After much prodding from BBB, Albet went back inside the hotel. However, Albet returned and informed BBB that the hotel manager told her that the occupants of Room 314 had already left and returned the key card to the front desk.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Albet then confessed to BBB that AAA was with a certain Jason Caramba (Jason). Albet also disclosed to BBB that Jason sent her (Albet) money a week before arriving in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, as he was "asking for a girl." Hence, Albet brought AAA to Jason, as demanded.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>BBB immediately went inside the hotel and begged the front desk attendant to help her find her daughter AAA, who was still a minor. However, the front desk attendant informed her that the occupants of Room 314 already left the hotel. She was advised to wait as they might return. While waiting at the hotel, BBB received a call from CCC, who told her that she received information that AAA was seen in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. Thus, BBB and Albet immediately returned to CCC's house in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>There, BBB told CCC that it was Albet who brought AAA to Sogo Hotel. CCC confronted Albet, but the latter remained silent and suggested that they should go back to the hotel in case AAA and Jason would return. Before they could go back to the hotel, Albet left CCC's house and no longer returned, even refusing to answer BBB's phone calls.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>BBB and CCC then went back to the hotel and were informed by its employees that the occupants of Room 314 had not yet returned. BBB and CCC went to Divisoria to look for AAA, but was not able to find her. They decided to go home around 3:00 a.m. the next day.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>In the meantime, SPO3 Fortunato, who was on duty at the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> Police Station, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, received a call from a room attendant of Sogo Hotel informing him that the body of a female person, who was later identified as AAA, was found lifeless inside Room 314. SPO3 Fortunato and a team from Scene of the Crime Operations (SOCO) immediately went to the hotel to inspect the crime scene.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Once there, the SOCO personnel took several photographs while SPO3 Fortunato recovered AAA's personal belongings. SPO3 Fortunato then viewed the hotel's closed-circuit television where he found out that it was Albet who accompanied AAA to the hotel. SPO3 Fortunato also received information that Albet was a known pimp.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>On July 12, 2016, around 6:00 a.m., SPO3 Fortunato called BBB and requested her to go to the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> Police Station. There, SPO3 Fortunato showed her AAA's personal belongings and informed them that AAA was found lifeless inside Room 314 of Sogo Hotel. BBB immediately informed the police that it was Albet who accompanied AAA to the said hotel. SPO3 Fortunato called Albet and asked her to go to the police station. Hesitant at first, Albet eventually went to the police station and admitted to SPO3 Fortunato that she was the one who accompanied AAA to the hotel. Albet also disclosed that she received from Jason a PHP 2,000.00 commission for bringing AAA to him.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br><b><i>Version of the Defense</i></b><br><br>Albet interposed denial. She testified that sometime in July of 2016, she was with AAA at National Bookstore. She only found out that AAA was missing when the latter's parents informed her. Thereafter, she went home, not knowing AAA's whereabouts. On July 21, 2016, she was invited to go to the police station. When she arrived, she was shocked when she was suddenly detained without informing her of the reason therefor. Thereafter, she was asked on her whereabouts when AAA was found dead inside the Sogo Hotel.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><center><b>Ruling of the Regional Trial Court</b></center><br>By Consolidated Judgment<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated September 19, 2022, the trial court found Albet guilty of qualified trafficking in persons under Section 3(a) in relation to Sections 4(a) and 6(a) of Republic Act No. 9208, as emended by Republic Act No. 10364; and child abuse penalized under Republic Act No. 7610, viz.:<br><blockquote>Wherefore, all the foregoing premises considered, judgment is hereby rendered:<br><br>a) In Criminal Case No. CR-ORD-2016-962, the Court finds the accused April Jane "Laling" Banguis Albet, GUILTY beyond reasonable doubt of the crime of qualified trafficking in persons, defined and penalized in Sec. 3(a) in relation to Sec. 4(a) and Sec. 6(a), of R.A. No. 9208, as amended by R.A. No. 10364, the "Expanded Anti-Trafficking in Persons Act [of] 2012[."] Accordingly, she is sentenced to suffer the penalty of imprisonment of twenty (20) years and a fine of not less than One million pesos ([PHP] 1,000,000.00).<br><br>Accused is further ordered to pay the heirs of the victim the sum of [PHP] 75,000.00 as moral damages and another [PHP] 75,000.00 as exemplary damages, both with legal interest of six percent (6%) per annum from the finality of this judgment until full payment; and<br><br>b) In Criminal Case No. CR-ORD-2016-963, the Court finds the accused April Jane "Laling" Banguis Albet, GUILTY beyond reasonable doubt of the crime of child abuse, for promoting and inducing child prostitution, defined and penalized in Section 5(a) of Republic Act 7610; and sentences her the penalty of reclusion temporal in its medium period to reclusion perpetua.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </blockquote>The trial court found that the elements of the crimes charged in the Informations were duly established. Albet's defense of denial cannot outweigh the positive testimony of the witnesses who testified that she brought AAA to Sogo Hotel, coupled with her admission to SPO3 Fortunato that she received a PHP 2,000.00 commission from Jason for bringing AAA to him.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br><center><b>Ruling of the Court of Appeals</b></center><br>By Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated December 14, 2023, the Court of Appeals affirmed with modification. In Criminal Case No. CR-ORD-2016-962, in accordance with Section 10(e) of Republic Act No. 9208 and prevailing jurisprudence, the penalty was modified to life imprisonment, a fine of PHP 2,000,000.00, PHP 500,000.00 in moral damages, and PHP 100,000.00 in exemplary damages. In Criminal Case No. CR-ORD-2016-963, the penalty was modified to an indeterminate penalty of 14 years and eight months of<i> reclusion temporal</i>, as minimum, to 20 years of<i> reclusion temporal</i>, as maximum. Likewise, the heirs of AAA were awarded civil indemnity, moral damages, and exemplary damages in the amount of PHP 50,000.00 each.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Thus:<br><blockquote>WHEREFORE, for lack of merit, the Appeal is DENIED. Accordingly, the Consolidated Judgment dated September 19, 2022 of the Regional Trial Court, 10th Judicial Region, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, in Criminal [Case] Nos. CR-ORD-2016-962 and CR-ORD-2016-963, is hereby AFFIRMED with MODIFICATION, to wit:<br><blockquote><ol><li>In Criminal Case No. CR-ORD-2016-962, accused-appellant April Jane "Laling" Banguis Albet is found GUILTY beyond reasonable doubt of the crime of Qualified Trafficking in Persons, as penalized under Section 3 (a) in relation to Sections 4 (a) and 6 (a) of Republic Act (R.A.) No. 9208, as amended by R.A. No. 10364. She is sentenced to suffer the penalty of Life Imprisonment and to pay a Fine in the amount of [PHP] 2,000,000.00. She is also ordered to pay the heirs of the victim moral damages in the amount of [PHP] 500,000.00 and exemplary damages in the amount of [PHP] 100,000.00; and<br><br></li><li>In Criminal Case No. CR-ORD-2016-963, accused-appellant April Jane "Laling" Banguis Albet is found GUILTY of violation of Section 5 (a), Article III of R. A. No. 7610. She is sentenced to suffer an indeterminate penalty of fourteen (14) years and eight (8) months of Reclusion Temporal, as minimum, to twenty (20) years of Reclusion Temporal, as maximum. She is further ordered to pay the heirs of the victim civil indemnity in the amount of [PHP] 50,000.00, moral damages in the amount of [PHP] 50,000.00, and exemplary damages in the amount of [PHP] 50,000.00.</li></ol></blockquote>All damages awarded shall earn interest at the rate of six percent (6%) per annum computed from the date of finality of this Decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </blockquote><center><b>The Present Appeal</b></center><br>Albet now seeks affirmative relief from the Court and pleads anew for her acquittal. She reiterates that the prosecution was not able to prove beyond reasonable doubt that she engaged in the act of recruitment and that she exploited AAA for prostitution. She also reiterates that the prosecution never proved her intent to debase, demean, and degrade AAA's intrinsic worth as a child.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The People, on the other hand, manifested that, in lieu of supplemental briefs, it is adopting its Brief filed before the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center><b>Our Ruling</b></center><br>We affirm.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><b><i>The prosecution sufficiently established all the elements of qualified trafficking in persons</i></b></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Section 3(a) of Republic Act No. 9208 defines the offense of trafficking in persons, thus:<br><blockquote>(a) Trafficking in Persons - refers to the recruitment, transportation, transfer or harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders by means of threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the persons, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person for the purpose of exploitation which includes at a minimum, the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs. </blockquote>Republic Act No. 9208 was amended by Republic Act No. 10364. The Court in<i> People v. Valencia</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> enumerated the elements of the offense as follows:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The act of "recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders"; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">The means used include "by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, <i> taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person</i>;" </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">The purpose of trafficking includes "the exploitation or <i> the prostitution of others or other forms of sexual exploitation</i>, forced labor or services, slavery, servitude or the removal or sale of organs."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>Here, the Information for Criminal Case No. CR-ORD-2016-962 charged Albet with the crime of qualified trafficking in persons, under Section 3(a) in relation to Sections 4(a) and 6(a) of Republic Act No. 9208, as amended, viz.:<br><blockquote>SEC. 4. Acts of Trafficking in Persons. â It shall be unlawful for any person, natural or juridical, to commit any of the following acts:<br><blockquote> (a) To recruit, obtain, hire, provide, offer, transport, transfer, maintain, harbor, or receive a person by any means, including those done under the pretext of domestic or overseas employment or training or apprenticeship,<i> for the purpose of prostitution, pornography, or sexual exploitation</i>;<br><br>. . . .</blockquote>SEC. 6. Qualified Trafficking in Persons. â Violations of Section 4 of this Act shall be considered as qualified trafficking:<br><blockquote> (a)<i> When the trafficked person is a child</i>; </blockquote>. . . .</blockquote>Trafficking is qualified when "the trafficked person is a child."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Here, AAA's minority was clearly alleged in the Information and sufficiently established during trial through her birth certificate showing she was only 16 years old when the incident took place.<br><br>Albet nonetheless claims she should be acquitted of the crimes charged in the Informations. She argues that the testimonies of the prosecution witnesses are only hearsay, hence, do not deserve weight or credence.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>We do not agree.<br><br>AAA was found dead inside a room in Sogo Hotel after she was brought there by Albet for prostitution and sexual exploitation. Direct evidence is not the only matrix where a trial court may draw its conclusion and finding of guilt.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The Court has consistently held that circumstantial evidence is sufficient to support a conviction, and that direct evidence is not always necessary.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The Court of Appeals correctly held that the corroborating testimonies of the prosecution witnesses were sufficient to convict Albet of the crime of qualified trafficking in persons. The evidence presented by the prosecution had established beyond any shadow of doubt that Albet exploited AAA and enticed her to go to Sogo Hotel to meet Jason.<br><br>More, the testimonies of BBB, CCC, and SPO3 Fortunato show how Albet took advantage of AAA's minority to recruit and subject her to prostitution and sexual exploitation. BBB testified that it was only when she threatened to report Albet to the police authorities that the latter confided that AAA was in Sogo Hotel, viz.:<br><blockquote>Q: What happened next?<br>A: I even scolded her by saying, "Where is my daughter? Where is my daughter? Where did you bring her? If you will not tell the truth I will have you arrested by the police.["]<br><br>Q: What happened next?<br>A: She ran to her mother and asked permission [;] that she will accompany me in looking for my daughter.<br><br>. . . .<br><br>Q: What happened next?<br>A: While we were in the taxi I kept on asking her where is my daughter. And then she told me "<i>sige lang Te moabot ra ta karon kon asa sya</i>" (Don't worry I will bring you to Sogo Hotel)<br><br>. . . .<br><br>Q: So what transportation did you take in going to Sogo Hotel with the accused?<br>A: Taxi.<br><br>Q: While on your way to Sogo Hotel, what transpired next while riding the taxi together with the accused?<br>A: I kept on asking her why was my daughter brought to Sogo.<br><br>Q: And what was the reply of the accused?<br>A: She said that I will just tell you everything when we reached there in Sogo. This Jason Caramba keeps on calling me asking for a girl and then I brought your daughter, [AAA].<br><br>. . . .<br><br>Q: When the accused told you to just stay outside because she will be the one to enter Sogo, what happened next?<br>A: Then [Albet] went inside Sogo hotel and then later, she came back and told me that the Manager told her not to disturb the guests inside the room.<br><br>Q: What did you do after hearing that statement?<br>A: I told her I will be the one to get inside instead.<br><br>Q: And then what happened next?<br>A: I was not able to get inside because [Albet] pointed to me the person in charge of the hotel and told me that she is the one but she will be relieved later on for another shift.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </blockquote>Too, SPO3 Fortunato testified that Albet, unblemished by any coercion or intimidation, admitted to him that she brought AAA to Jason at Sogo Hotel for a commission of PHP 2,000.00. CCC's testimony also corroborated how Albet committed qualified trafficking in persons. She testified that Albet personally came to see AAA in CCC's house on July 11, 2016, after Albet had made several calls to AAA.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>The act of sexual intercourse need not be consummated for illegal recruitment to take place. It is sufficient that the accused has lured, enticed or engaged its victims or transported them for the established purpose of exploitation, which includes prostitution, sexual exploitation, forced labor, slavery, and the removal or sale of organs.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Here, the prosecution has satisfactorily established Albet's recruitment and transportation of AAA for purposes of prostitution and sexual exploitation, taking advantage of AAA's minority and vulnerability. Indeed, the combination of these acts, means, and purpose consummate the crime of qualified trafficking in persons.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><b><i>Albet is guilty of violation of Article III, Section 5(a) of Republic Act No. 7610 for acting as a procurer of a child prostitute</i></b></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Article III, Section 5(a) of Republic Act No. 7610 punishes acts pertaining to or connected with child prostitution wherein the child is abused primarily for profit. The elements of Section 5(a) are:<br><blockquote><ol><li><i>the accused engages in, promotes, facilitates or induces child prostitution</i>;<br><br></li><li>the act is done through, but not limited to, the following means:<br><blockquote><ol type="a"><li><i>acting as a procurer of a child prostitute</i>;<br><br></li><li>inducing a person to be a client of a child prostitute by means of written or oral advertisements or other similar means;<br><br></li><li>taking advantage of influence or relationship to procure a child as a prostitute;<br><br></li><li>threatening or using violence towards a child to engage him as a prostitute; or<br><br></li><li>giving monetary consideration, goods or other pecuniary benefit to a child with intent to engage such child in prostitution;</li></ol></blockquote></li><li><i>the child is exploited or intended to be exploited in prostitution</i>; and<br><br></li><li><i>the child, whether male or female, is below 18 years of age</i>.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Emphasis supplied) </li></ol></blockquote>These elements are all present here: (1) AAA was induced to engage in prostitution by Albet who facilitated the former's prostitution on July 11, 2016; (2) Albet acted as procurer of a child prostitute for Jason, and consequently received a "commission" from the latter in the amount of PHP 2,000.00; (3) AAA was exploited in prostitution; and (4) AAA was only 16 years old when the incident happened, as proven by the testimonies of prosecution witnesses and AAA's birth certificate.<br><br>The positive identification of Albet, who was also a known pimp, as the one who induced AAA to engage in prostitution inside the Sogo Hotel, immediately before the latter was found dead inside the said establishment, deserves weight and utmost credence.<br><br>To be sure, denial is inherently weak, self-serving, and undeserving of weight.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Hence, the positive testimonies of the prosecution witnesses must prevail over the self-serving and unsubstantiated testimony of Albet. The Court therefore finds no reason to deviate from the factual findings of the trial court, as affirmed by the Court of Appeals. There is no indication that it overlooked, misunderstood or misapplied the surrounding facts and circumstances of the case. Surely, the trial court was in the best position to assess and determine the credibility of the witnesses presented by both parties, hence, due deference should be accorded to the same.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>As for Albet's claim that her constitutional right to double jeopardy was violated, the Court reiterates the principle that the same act may give rise to two or more separate and distinct offenses. No double jeopardy attaches as long as there is a variance between the elements of the two offenses charged. What is forbidden is another prosecution for the same offense.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The same principle was used in the recent case of<i> Brozoto v. People</i><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> where the Court affirmed the conviction of the accused for qualified trafficking in persons under Sections 3(a) and 4(a), in relation to Section 6(a) of Republic Act No. 9208, and violation of Article III, Section 5(a) of Republic Act No. 7610, in engaging a minor for the purpose of prostitution.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>In sum, Albet's conviction for qualified trafficking in persons, being in accordance with Section 3(a) in relation to Sections 4(a) and 6(a) of Republic Act No. 9208; and violation of Article III, Section 5(a) of Republic Act No. 7610 must be upheld.<br><br><b><i>Penalties</i></b><br><br>As for Criminal Case No. CR-ORD-2016-962, Section 10(e) of Republic Act No. 9208, as amended, provides:<br><blockquote>SEC. 10. Penalties and Sanctions. â The following penalties and sanctions are hereby established for the offenses enumerated in this Act:<br><br>. . . .<br><br>(e) Any person found guilty of qualified trafficking under Section 6 shall suffer the penalty of life imprisonment and a fine of not less than Two million pesos ([PHP] 2,000,000.00) but not more than Five million pesos ([PHP] 5,000,000.00);<br><br>. . . .</blockquote>Too, prevailing jurisprudence on qualified trafficking in persons awards to the victim moral damages in the amount of PHP 500,000.00 and exemplary damages in the amount of PHP 100,000.00.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Thus, the Court of Appeals correctly modified the penalty to life imprisonment, a fine of PHP 2,000,000.00, moral damages in the amount of PHP 500,000.00, and exemplary damages in the amount of PHP 100,000.00.<br><br>As for Criminal Case No. CR-ORD-2016-963,<i> Tan v. People</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> ordained that in the absence of modifying circumstances, the imposable penalty for child prostitution is<i> reclusion temporal</i> in its maximum period of 17 years, four months and one day to 20 years.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Applying the Indeterminate Sentence Law, the minimum period of the imposable penalty shall be taken within the range of the penalty next lower to that prescribed by the law, i.e.,<i> prision mayor</i> in its medium period to<i> reclusion temporal</i> in its minimum period â ranging from eight years and one day to 14 years and eight months. Thus, the Court of Appeals properly imposed the indeterminate penalty of 14 years and eight months of<i> reclusion temporal</i>, as minimum, to 20 years of<i> reclusion temporal</i>, as maximum. Further, in accordance with<i> People v. Jugueta</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the award of civil indemnity, moral damages, and exemplary damages in the amount of PHP 50,000.00 each was proper.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br><b>ACCORDINGLY</b>, the Appeal is<b> DISMISSED</b>. The Decision dated December 14, 2023 of the Court of Appeals in CA-G.R. CR No. 02346-MIN is<b> AFFIRMED</b>.<br><br>In Criminal Case No. CR-ORD-2016-962, April Jane Banguis Albet, a.k.a. "Laling," is found<b> GUILTY</b> beyond reasonable doubt of qualified trafficking in persons under Section 3(a) in relation to Sections 4(a) and 6(a) of Republic Act No. 9208, as amended by Republic Act No. 10364. She is sentenced to life imprisonment and is ordered to<b> PAY</b> a fine of PHP 2,000,000.00. She is also ordered to<b> PAY</b> the heirs of AAA moral damages in the amount of PHP 500,000.00 and exemplary damages in the amount of PHP 100,000.00.<br><br>In Criminal Case No. CR-ORD-2016-963, April Jane Banguis Albet, a.k.a. "Laling," is found<b> GUILTY</b> beyond reasonable doubt of violation of Article III, Section 5(a) of Republic Act No. 7610. She is sentenced to an indeterminate penalty of 14 years and eight months of<i> reclusion temporal</i>, as minimum, to 20 years of<i> reclusion temporal</i>, as maximum. She is further ordered to<b> PAY</b> the heirs of AAA civil indemnity in the amount of PHP 50,000.00, moral damages in the amount of PHP 50,000.00, and exemplary damages in the amount of PHP 50,000.00.<br><br>The monetary awards earn 6% interest per annum from finality of this Decision until fully paid.<br><br><b>SO ORDERED. </b><br><br><i>Leonen, SAJ. (Chairperson), M. Lopez, J. Lopez,</i> and <i>Kho, Jr., JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 11-30. Penned by Associate Justice Evalyn M. Arellano-Morales and concurred in by Associate Justices Anisah B. Amanodin-Umpa and John Z. Lee of the Twenty-Second Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 12-13.<br><br><sup><font color="#ff0000">*</font></sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Section 29 of Republic Act No. 7610, Section 44 of Republic Act No. 9262, and Section 40 of A.C. No, 83-2015, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, p. 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, p. 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 32-54. Penned by Judge Ana Candida N. CasiÃ±o, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 11-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 18-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 72-78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 63-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 904 Phil. 518 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 531.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 532.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i>, p. 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>People v. Lignes</b>, 874 Phil. 530, 540 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Acuril v. People, G.R. No. 264219</b>, June 14, 2023 [Notice, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, pp. 21-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Ferrer v. People</b>, 925 Phil. 97, 121 (2022) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Brozoto v. People</b>, 901 Phil. 265, 280 (2021) [Per J. Lopez, J., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. XXX</b>, 939 Phil. 459, 473 (2023) [Per J. Hernando, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Peralta v. People</b>, 817 Phil. 552, 563 (2017) [Per J. Perlas-Bernabe, Second Division], <i>citing</i> <b>People v. Matibag</b>, 757 Phil. 286, 293 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Suero v. People</b>, 490 Phil. 760, 763 (2005) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 901 Phil. 265 (2021) [Per J. Lopez, J., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 284.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>People v. Celis</b>, 945 Phil. 794, 819 (2023) [Per J. Lopez, J., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>G.R. No. 260154</b>, June 14, 2023 [Notice, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 783 Phil. 806 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 855-856.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

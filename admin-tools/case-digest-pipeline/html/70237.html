@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277980 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX277980,* ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70237' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277980, October 22, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX277980,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by accused-appellant XXX277980 assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA). The CA affirmed with modification the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC), which convicted XXX277980 of the crime of murder, penalized under Article 248 of the Revised Penal Code, as amended.<br><br>In an Information, XXX277980 was charged with murder, in relation to Sections 5(a) and 6(a) of Republic Act No. 9262,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> for the death of AAA277980. The accusatory portion of the Information reads:<br><blockquote>That on or about the 12<sup>th</sup> day of March 2021, in Brgy. <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> City, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Philippines, and within the jurisdiction of the Honorable Court, the above-named accused, being the live-in partner of the mother of the victim [BBB277980], with deliberate intent to kill and take the life of minor [AAA277980], who is only eight years of age, with qualifying aggravating circumstances of treachery, with evident premeditation and use of superior strength, did, then and there, willfully, unlawfully, knowingly and feloniously attack and use personal violence against [AAA277980] with the use of a knife, by thrusting or stabbing said knife into the head, shoulders, back and other parts of the body of the victim, thereby inflicting upon the victim fatal, serious, and mortal injuries that caused the direct and immediate death of minor [AAA277980].<br><br>Accused consciously adopted the means and method of execution, done suddenly and an unexpected attack upon the victim, to ensure that the victim would not be able to defend himself thus, accused committed the crime with attending circumstances of evident premeditation, treachery, and use of superior strength.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </blockquote>On May 3, 2021, XXX277980 was arraigned and entered a plea of not guilty.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> At the pre-trial conference, the prosecution and the defense stipulated on the following: (1) XXX277980's identity as the same person charged and arraigned; and (2) XXX277980 and BBB277980, AAA277980's mother, have one child.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Trial on the merits then commenced.<br><br>The prosecution presented the following witnesses: (1) BBB277980, (2) Dr. Hernand Timoteo B. Tulud (Dr. Tulud), and (3) Police Corporal John Reynald L. Cabrera (PCpl Cabrera).<br><br>BBB277980 testified that she and XXX277980 were common-law partners for two years. XXX277980 is also the father of BBB277980's then 8-month-old daughter. AAA277980, who was 8 years old at that time, was BBB277980's child from a previous relationship. According to BBB277980, XXX277980 treated AAA277980 like a stranger because he neither cared for nor attended to him. At around 12:00 p.m. on March 12, 2021, she and XXX277980 had a heated argument inside their apartment unit. BBB277980 told XXX277980 that she was uncomfortable with XXX277980 chatting with other women, to which XXX277980 insisted that she was merely making it an issue. XXX277980 then ordered BBB277980 and AAA277980, who was playing with the baby, to leave. BBB277980 told XXX277980 not to involve AAA277980. However, XXX277980 exclaimed that BBB277980's son is useless. He even pointed his finger (<i>dinuro</i>) at AAA277980 who was already crying. BBB277980 slapped XXX277980, but XXX277980 pushed her and grabbed a kitchen knife. XXX277980 pressed (<i>diniin</i>) BBB277980's face and chest and said, "<i>Lubayan mo ako, lumubay ka na</i>." He then pressed the knife against the other side of BBB277980's chest. BBB277980 was able to break free from the clutches of XXX277980 and ran to the door. However, XXX277980 pulled BBB277980's left hand and stabbed her on her right side. Despite getting dizzy, BBB277980 tried to escape from XXX277980, but the latter pulled her back. BBB277980 fell on the floor with XXX277980 on top of her, pressing the knife down her neck. AAA277980 screamed and ran towards the door, but XXX277980 ran after him and locked the door. XXX277980 lifted AAA277980 and threw him towards BBB277980. Despite BBB277980's pleas not to involve AAA277980, "<i>Huwag si [AAA277980]. Huwag si [AAA277980]</i>," XXX277980 said, "<i>Tatakas ka pa, tatakbo ka pa, magsama kayong mag-ina</i>." He then repeatedly stabbed AAA277980, who helplessly screamed and struggled. BBB277980 begged and tried to protect AAA277980, but XXX277980 repeatedly stabbed her in the back.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>BBB277980 lost consciousness, and when she regained it, she ran to the door. However, XXX277980 ran after her and pulled her to the floor. AAA277980 was also lying down on the floor sobbing. Both BBB277980 and AAA277980 were covered in blood. XXX277980 kicked BBB277980 at the back, pointed the knife at her and told her, "<i>Tumahimik ka na, pumahinga ka na</i>." BBB277980 tried to escape again when XXX277980 went to the sink to wash their baby and his hands, but she suddenly dropped to her knees. XXX277980 kicked BBB277980 to the floor, placed a pillow against her face, and ordered her to keep quiet as she struggled to free herself. For the second time, BBB277980 lost consciousness, and when she regained it, she discovered that XXX277980 and their baby were gone. BBB277980 peeped outside and saw them leaving the gate. XXX277980 returned when he saw her asking for help from their neighbor. Shocked, their neighbors did not know what to do. Their neighbor, Kuya <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span> brought BBB277980 to the hospital. BBB277980 was initially told that AAA277980 was taken to another hospital. The next day, after BBB277980 was discharged from the operating room, her father informed her that AAA277980 already died. AAA277980's death caused BBB277980 immense pain, which cannot be quantified by any amount of money.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On cross-examination, BBB277980 recalled that during the altercation that resulted in AAA277980's death, the only persons inside their apartment unit were her, XXX277980, their baby daughter, and AAA277980. BBB277980 admitted that she hit XXX277980 after the latter pointed his finger (<i>dinuro</i>) at AAA277980's face and said, "<i>Wala namang pakinabang yan[,] anong silbi niyan, damay damay na to.</i>"<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The next witness was Dr. Tulud. The prosecution and the defense stipulated on his expertise and qualification: that Dr. Tulud is a medical doctor in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Pampanga; he testified as a medical officer in several cases similar to the present case; he conducted an autopsy on AAA277980's body; and he prepared a Medico-Legal Certificate<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> surrounding the death of AAA277980.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Dr. Tulud testified that AAA277980's Certificate of Death<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> states:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="25%" valign="top"> <div align="JUSTIFY">Immediate cause </div></td> <td width="2%" valign="top"> <div align="JUSTIFY">: </div></td> <td width="73%" valign="top"> <div align="JUSTIFY">a. Cardio-Respiratory Arrest; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Antecedent cause </div></td> <td valign="top"> <div align="JUSTIFY">: </div></td> <td valign="top"> <div align="JUSTIFY">b. Sec. to Severe Chest Injuries (Lung Injuries) (Right); </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Underlying cause </div></td> <td valign="top"> <div align="JUSTIFY"></div>:</td> <td valign="top"> <div align="JUSTIFY">c. Sec. to Alleged Stabbing Incident. </div></td> </tr> </tbody></table></blockquote>Dr. Tulud took pictures of AAA277980 when he performed the autopsy and was bothered by what happened to AAA277980, who was just a small and slim boy. Dr. Tulud found AAA277980 to have suffered 10 incised wounds at his back, neck, and shoulders, which penetrated and perforated his right lung. He also opined that a bladed or sharp-edged instrument such as a knife could have been used by the assailant to inflict the kind of wounds sustained by AAA277980. He added that AAA277980 could not have defended himself against XXX277980 given AAA277980's small body frame and the fact that the stab wounds inflicted on him were concentrated at his back, indicating that he was in a prone position when assaulted. More, the assailant had the intent to kill AAA277980, given the number of wounds inflicted on him.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On cross-examination, Dr. Tulud opined that based on the number and location of the stab wounds sustained by AAA277980, it is highly improbable that these were self-inflicted.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>PCpl Cabrera testified that on March 12, 2021, after responding to a report of an alleged stabbing incident, he, together with Barangay Ex-O Danilo D. Andan (Andan) and Barangay Bantay Bayan Alfredo D. Santos (Santos), arrested XXX277980. PCpl Cabrera presented and identified in court, the knife that he confiscated from XXX277980 and on which he placed his marking, "JLC-ECF 03-12-2021" with signature, as shown in the confiscation receipt.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> While the knife in the picture<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> presented by the prosecution bears a different marking, "JLC-BCF 03-12-2021" with signature, he confirmed that it is the same knife that he confiscated from XXX277980.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>On cross-examination, PCpl Cabrera testified that when he responded to the report, the stabbing incident had already happened. PCpl Cabrera found the knife with bloodstains on top of a small cabinet, held on it, and turned it over, still unmarked, to the investigators when they arrived. It was during the investigation at the police station that he marked the knife. PCpl Cabrera explained that XXX277980 initially gave his name as "BCF." When he learned of XXX277980's real name, he changed the marking on the knife as "ECF."<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On re-direct examination, PCpl Cabrera clarified that he took a picture of the knife after he marked it with "BCF." However, he no longer took a picture of the knife after he changed its marking upon learning of XXX277980's real name.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The prosecution and the defense stipulated on the testimonies of PCpl Cabrera's co-arresting officers, Andan and Santos, which are merely corroborative of PCpl Cabrera's testimony.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>The defense presented XXX277980 as its sole witness. According to XXX277980, on March 12, 2021, he and his common-law partner BBB277980 had a fight inside their apartment unit. BBB277980 told XXX277980 that she did not like him chatting with other girls and checked his messages. XXX277980 did not fight back even when BBB277980 repeatedly shouted at him and hit him on the head. During their argument, AAA277980 was initially silent but eventually cried. XXX277980 ordered AAA277980 to go outside for help, but BBB277980 prevented AAA277980 from doing so. Their fight lasted for about two to three hours. Since XXX277980 received several blows on the head, he blacked out. He was unaware of the events that transpired after. When XXX277980 regained consciousness, he saw a pool of blood on the floor. Shocked, he left their baby with his agent and asked his agent and landlord to call the police/barangay officials and an ambulance. Upon the apartment caretaker's instruction, XXX277980 locked himself inside their apartment unit and waited there. When the police/barangay officials and the ambulance arrived, XXX277980 was arrested.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On cross-examination, XXX277980 admitted that no other persons were inside their apartment unit at the time of the incident except for him, BBB277980, their baby daughter, and AAA277980. XXX277980 maintained that he did not know how BBB277980 and AAA277980 sustained several stab wounds because he lost consciousness due to BBB277980's beating. XXX277980 only learned about it after he was arrested by the police.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>After trial, the RTC rendered a Decision,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> which found XXX277980 guilty beyond reasonable doubt of murder. The dispositive portion of the Decision reads:<br><blockquote>WHEREFORE, in view of the above discussion, the Court finds the accused [XXX277980] guilty beyond reasonable doubt of the offense of murder and hereby sentences him to suffer the penalty of<i> reclusion perpetua</i> without eligibility for parole.<br><br>The accused is likewise ordered to pay the heirs of the victim the following:<ol><li>[c]ivil indemnity for the death of [AAA277980] in the amount of [PHP] 100,000.00;<br></li><li>[m]oral damages in the amount of [PHP] 100,000.00;<br></li><li>[a]ctual damages in the amount of [PHP] 342,760.00;<br></li><li>[e]xemplary damages in the amount of [PHP] 100,000.00;<br></li><li>[i]nterest at the rate of 6% per annum from the date of the finality of the judgment until fully paid.</li></ol>Serve copies of this Decision to the [p]ublic [p]rosecutor, private complainant, accused and [d]efense [c]ounsel.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </blockquote>The RTC ruled that the prosecution established all the elements of murder: (1) AAA277980 was killed; (2) XXX277980 killed AAA277980; (3) the killing was attended by the qualifying circumstance of treachery; and (4) the killing is neither parricide nor infanticide.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The RTC gave weight to BBB277980's straightforward and credible testimony when she positively identified XXX277980 as the person who stabbed AAA277980 several times.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>According to the RTC, the qualifying circumstances of treachery and abuse of superior strength were attendant in this case. However, the aggravating circumstance of abuse of superior strength is absorbed in the qualifying circumstance of treachery. Treachery attended the commission of the crime because: (1) XXX277980 used a knife to stab AAA277980 several times, which assured the success of his attack without compromising his safety; (2) AAA277980 is set upon by XXX277980 without warning, as when XXX277980 attacked AAA277980 from behind and without the slightest provocation on AAA277980's part; and (3) XXX277980, an adult, attacked and caused the death of 8-year-old AAA277980, a child of tender years, such that the tender age results in the absence of any danger to XXX277980. As to the alleged aggravating circumstance of evident premeditation, the RTC ruled that the prosecution's evidence is devoid of any proof that XXX277980 consciously planned the attack on AAA277980, as what was established is that the attack was sudden and without provocation on AAA277980's part.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The RTC found that between the positive assertions of the prosecution witnesses and the negative averments of the accused, the former deserves more credence and are entitled to greater evidentiary weight, as in this case.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Aggrieved, XXX277980 appealed to the CA.<br><br>In his Appellant's Brief,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> XXX277980 argued that the RTC erred in convicting him of murder despite the prosecution's failure to prove his guilt beyond reasonable doubt, the prosecution's, failure to establish the marking and the chain of custody of the knife, and when the RTC ruled that treachery attended AAA277980's killing.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>In its Appellee's Brief,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the Office of the Solicitor General (OSG) claimed that the RTC correctly found XXX277980 guilty of murder and rejected his bare denial of his recollection of the events that occurred when he repeatedly stabbed AAA277980 to death. According to the OSG, BBB277980 offered a credible narration as to XXX277980's commission of the crime of murder, which was supported by Dr. Tulud, who testified that AAA277980 suffered several penetrating and perforating wounds that injured his vital organs and resulted in his death. As to the knife, the OSG averred that it is not the<i> corpus delicti</i> or the element of the crime. The identity of the knife is merely incidental to the prosecution's case, which was proven beyond reasonable doubt with or without proving the identity of the murder weapon. The OSG also averred that the RTC correctly found the presence of the qualifying circumstances of treachery and abuse of superior strength in the crime.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the CA denied XXX277980's appeal and affirmed with modification his conviction. The dispositive portion of the Decision reads:<br><blockquote>WHEREFORE, premises considered, the appeal is DENIED. The Decision dated December 28, 2021 of the Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>, in Criminal Case No. R-ANG-21-00876-CR, is AFFIRMED with MODIFICATIONS.<br><br>Accused-appellant [XXX277980] is found GUILTY of Violation of Section 5(a) in relation to Section 6(a) of Republic Act No. 9262, constituting Murder under Article 248 of the Revised Penal Code, and is SENTENCED to suffer the penalty of<i> reclusion perpetua</i>. Accused-appellant is further ORDERED to pay a fine of PHP 100,000.00 and to undergo psychological counseling and to report to the Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxx</span>, his compliance therewith. Finally, the amounts of civil indemnity, moral damages, and exemplary damages are DECREASED from PHP 100,000.00 to PHP 75,000.00 each.<br><br>The rest of the assailed Decision, not otherwise modified, STAND.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </blockquote>The CA modified the nomenclature of the crime to "Violation of Section 5(a), in relation to Section 6(a), of Republic Act No. 9262, constituting murder under Article 248 of the Revised Penal Code." In convicting XXX277980, the CA gave weight to the prosecution witnesses' testimony and evidence. It also noted that since XXX277980 was charged with the crime of murder in relation to Sections 5(a) and 6(a) of Republic Act No. 9262, he is found to have committed acts of violence against women and their children when he stabbed to death AAA277980, his common-law partner's child. Section 5(a), in relation to Section 6(a), of Republic Act No. 9262 provides that when the acts of violence committed by causing physical harm to a child constitute murder, the same shall be punished in accordance with the provisions of the Revised Penal Code, with the additional penalty of fine and mandatory psychological counseling. For this reason, the CA imposed a fine of PHP 100,000.00 against XXX277980, in accordance with the subject provisions of Republic Act No. 9262 and required him to undergo psychological counseling.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>The CA also modified the penalty to<i> reclusion perpetua</i> against XXX277980. Since it is jurisprudentially settled that when the circumstance of abuse of superior strength concurs with treachery, the former is absorbed in the latter. This circumstance of superior strength thus could not serve to qualify or aggravate the felony at issue and should not have been considered in the imposition of the penalty. Pursuant to Article 63(2) of the Revised Penal Code, there being no aggravating or mitigating circumstance in the case, the penalty imposed by the CA is<i> reclusion perpetua</i>, it being the lesser penalty between the two indivisible penalties for the crime of murder (<i>reclusion perpetua</i> to death).<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Hence, XXX277980 filed the instant Appeal.<br><br>In a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> this Court required the plaintiff-appellee and the accused-appellant to file their respective supplemental briefs. Both the accused-appellant and plaintiff-appellee, through the OSG, filed their respective Manifestations<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> stating that they would no longer file supplemental briefs and, instead, adopt their Briefs filed before the CA.<br><br>The sole issue for this Court's resolution is whether the CA correctly affirmed accused-appellant XXX277980's conviction for violation of Section 5(a), in relation to Section 6(a), of Republic Act No. 9262, constituting murder under Article 248 of the Revised Penal Code.<br><br><center><b>This Court's Ruling </b> </center><br>The appeal is denied. We affirm with modification the ruling of the CA as to the damages to be awarded.<br><br>Section 3(a)<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> of Republic Act No. 9262 defines "violence against women and their children" as "any act or a series of acts committed by any person against a woman who is . . . a woman with whom the person has or had a sexual or dating relationship, or with whom he has a common child, or against her child whether legitimate or illegitimate, within or without the family abode, which result in or is likely to result in physical . . . harm or suffering, . . . including threats of such acts, battery, assault, coercion, harassment or arbitrary deprivation of liberty."<br><br>While Section 5(a),<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> in relation to Section 6(a),<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> of Republic Act No. 9262 provides that when the acts of violence committed by causing physical harm to the woman or her child constitute murder, this shall be punished in accordance with the provisions of the Revised Penal Code, in addition to the penalty of fine and mandatory psychological counseling.<br><br>Here, the evidence sufficiently established that accused-appellant committed acts of violence against AAA277980 and these acts constitute murder. Considering that accused-appellant and BBB277980 were common-law partners and AAA277980 is BBB277980's child, the CA correctly found accused-appellant liable under Republic Act No. 9262. Accused-appellant must be held guilty of violation of Section 5(a), in relation to Section 6(a), of Republic Act No. 9262, and must be imposed the penalty for murder under Article 248 of the Revised Penal Code.<br><br>Murder is defined and penalized under Article 248 of the Revised Penal Code. The elements of the crime are: (1) that a person was killed; (2) that the accused killed him or her; (3) that the killing was attended by any of the qualifying circumstances mentioned in Article 248 of the Revised Penal Code; and (4) that the killing is not parricide or infanticide.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Here, the first and fourth elements are not disputed. Based on AAA277980's Certificate of Death, AAA277980 died of cardio-respiratory arrest secondary to severe chest injuries (right lung) due to the stabbing incident. AAA277980's killing is neither parricide<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> nor infanticide.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> AAA277980 was BBB277980's child from a previous relationship, and was only 8 years old at the time of the killing, as evidenced by AAA277980's Certificate of Live Birth.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> AAA277980 was neither accused-appellant's parent, child, ascendant, descendant, or spouse nor was he a child who is less than 3 days of age.<br><br>As to the second element, BBB277980 positively identified accused-appellant as AAA277980's killer. BBB277980 testified:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"><div align="JUSTIFY">Pros. Sison: </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Madam Witness, the person you have identified awhile ago is wearing facemask, and you said that that person is the same as [XXX277980]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">How are you sure that he is [XXX277980]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Because, I personally know him, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Why do you know him? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">We are live-in partner[s], [S]ir, and he is the father of my second child/daughter. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">You said that he was your live-in partner, for how long were you living together? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">[Two years], [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And how are you related to [AAA277980]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He is my eldest child, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">How old is [AAA277980]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">8 years old, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">Pros. Sison: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">In your Affidavit, Madam Witness, you mentioned that on March 12, 2021 at around 12:00 [p.m.] you had [an] altercation with the accused, do you confirm that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What is that all about, Madam Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I told him that I was not comfortable that [he] is chatting with another woman or another lady, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was angry, [S]ir. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td colspan="2" valign="top">. . . . </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And when he got angry[,] what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">We had [a] heated [argument] and he was accusing me of doing something which he is doing? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Accusing you of what? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">That I [was fond] of making trouble, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Up to the time that he already involved the child [AAA277980], [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">How did he involved the child? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was sending us out [of] the house, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Where was [AAA277980] that time? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was playing with the little baby, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Was [AAA277980] meddling with you and your live-in partner that time? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">No, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Let us just be clarified, when you were having an argument[,] [AAA277980] was only there playing with your little baby? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next, Madam Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was sending us out from the house and I told him [not to involve] the child, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I asked him why he was involving the child[,] and I told him he did not do anything, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Then he told me&nbsp; "<i>DAMAY DAMAY NA DAW PO TALAGA TO LAGI [NA LANG] DAW PO YUNG BATA WALA NAMAN DAW PONG KWENTA</i>." </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">Pros. Sison: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">When he said&nbsp; "<i>DAMAY DAMAY NA LAHAT[,] WALA NAMANG KWENTA</i>", who is <i> WALANG KWENTA</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">My son [AAA277980], [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was pointing his finger to my son [AAA277980], [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Then I was trying to stop him, [S]ir. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">When the accused was doing that[,] what was [AAA277980] doing again? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He [was] crying but he [was] still playing with the baby, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Because of what he [was] doing to my child[,] I slapped him, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">At that time he was already pushing me up to the time that he was already holding a knife, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">Pros. Sison: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q</div></td> <td valign="top"> <div align="JUSTIFY">When the accused was already holding the knife[,] what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A</div></td> <td valign="top"> <div align="JUSTIFY">First, he was pointing the knife on my face, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">While doing that[,] was he uttering anything? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir, "<i>LUBAYAN MO AKO, LUMUBAY KA NA</i>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then he pointed it on my chest after pointing the knife on my face[,] and he said "<i>LUMUBAY KA NA</i>", [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">[A]nd did you feel that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir, "<i>DINIDIIN DIIN PO NIYA</i>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then afterwards he pointed it on the other side of my chest, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Did you also feel that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Were you injured by that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir, "<i>MAY TUSUK [NA PO]</i>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">"<i>HINAWI KO PO</i>." I removed the knife on my chest and then I ran, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Where did you go? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I turn around and proceeded to the door, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then he pulled me, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">He pulled you where? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He pulled my left hand [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then he stabbed me on my right side, [S]ir. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">"<i>NAHIHILO [NA PO] AKO</i>", I was trying to escape from him but he pulled me again, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I was already lying on the floor and he was on top of me, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He pointed again the knife on my neck, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Did you feel that? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Yes, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">"<i>IDINIIN NIYA PO [NG] DALAWANG KAMAY NIYA YUNG KUTSILYO SA LALAMUNAN KO</i>." </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">That is when my son [AAA277980] shouted, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What did [AAA277980] shout? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He [was] just screaming, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then [AAA277980] was about to run to the door, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He ran after him, he closed the door, he locked the door, "<i>BINUHAT NIYA PO SI</i> [AAA277980] <i> AT IBINALIBAG NIYA PO PABALIK SA AKIN</i>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then I beg[ged] him "<i>HUWAG SI</i> [AAA277980], <i> HUWAG SI </i> AAA277980" and then he said "<i>TATAKAS KA PA, TATAKBO KA PA, MAGSAMA KAYONG MAG-INA</i>" after that <i> "PINAGSASAKSAK NA NIYA PO SI</i> [AAA277980]". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">After stabbing [AAA277980][,] I tried to come closer to him and beg him "<i>HUWAG SI</i> [AAA277980], <i> HUWAG SI</i> [AAA277980]" and I tried to cover AAA277980, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He repeatedly stabbed me too, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">While covering [AAA277980][,] the accused was stabbing you[?] where? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">At my back, [S]ir. While I was holding my son [AAA277980]. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Then the baby was [going to] us, "<i>GUMAGAPANG PO SIYA PAPUNTA, SA AMIN</i>". </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td colspan="2" valign="top">. . . . </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He carried the baby, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He [was] continuously stabbing me, [S]ir. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">For [a while] lost consciousness and then when I regained it[,] I saw the baby was crying, while he was still holding the baby "<i>PINAGHELE HELE PO NIYA</i>", [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">After that[,] I tried going to the door, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then he ran after me, he pulled me[,] and then laid me on the floor again, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">When you tried to go to the door, where is [AAA277980] that time? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was lying down, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q</div></td> <td valign="top"> <div align="JUSTIFY">What was his condition? </div></td> </tr> <tr> <td valign="top">A</td> <td valign="top">"<i>HUMIHIKBI HIKBI PO</i>" and we were both blood[i]ed then, [S]ir. </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">When he pulled me[,] he kicked me again, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Where? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">At my back, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was again point[ing] [the knife to me], [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then he told me "<i>TUMAHIMIK KA NA, PUMAHINGA KA NA</i>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I can no longer [move] during that time I was lying on the ground, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was carrying the baby and washing her in the [sink], [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then after that they transferred to the comfort room, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">After that what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I tried to go to the door again, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I can no longer bear it, so I knelt down, [S]ir. "<i>HINDI KO NA PO KAYA NAPALUHOD NA LANG PO ULIT AKO</i>". </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I just came close to [AAA277980] because "<i>NAKADUKDOK PO KASI SIYA</i>" and I can no longer [move] because of the reflection of the blood, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Reflection of the blood, of who? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">The baby, "<i>SINASAYAW PO NIYA</i>", [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And then he kicked me again and I laid on the floor again, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And after that what happened? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">"<i>TINABUNAN NIYA PO AKO NANG UNAN</i>", [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">Where did he put the pillow? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">On my face, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I struggled and removed the pillow, but I was still lying down on the floor, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">And he told me "<i>TAMA NA HINDI MO NA KAYA, TUMAHIMIK KA NA, PUMAHINGA KA NA</i>. It's done. <i> SI <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, HUWAG MONG INTINDIHIN SI <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, SA AKIN SI</i> <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I can no longer [move] again. I just laid down on the floor. "<i>HINEHELE PO NIYA SI</i> BABY <i> TAS ILALAGAY SA DUYAN, TAS IIYAK PO, BUHAT NIYA PO ULIT. TAS TINGIN TINGIN PO SIYA SA LABAS INOPEN NIYA PO NANG KONTI AND PINTO</i>". </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">What happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">He was always looking at me if I am moving and the knife was still pointing at me, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">Then I lost consciousness again and when I regained my consciousness they [were] already gone, he and the baby, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And then what happened next? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I tried to stand up, went to the door and peeped, [S]ir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q </div></td> <td valign="top"> <div align="JUSTIFY">And what happened? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A </div></td> <td valign="top"> <div align="JUSTIFY">I saw them going out [of] the gate, they are already downstairs, [S]ir.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></div></td> </tr> </tbody></table></blockquote>Accused-appellant's contention that none of their neighbors corroborated BBB277980's account of the incident is inconsequential. Settled is the rule that "witnesses are to be weighed not numbered, such that the testimony of a sole witness, if found convincing and credible by the trial court, is sufficient to convict an accused."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Here, the RTC found BBB277980's testimony credible, straightforward, and devoid of any ill motive against accused-appellant, which the CA affirmed. This Court finds no reason to disturb the RTC's finding on BBB277980's credibility. It is settled that "when the credibility of a witness is of primordial consideration, as in this case, the findings of the trial court, its calibration of the testimonies of the witnesses and its assessment of the probative weight thereof, as well as its conclusions anchored on said findings are accorded respect if not conclusive effect."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> This is because the trial court had the full opportunity to observe directly the witnesses' deportment and manner of testifying.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> When the trial court's findings have been affirmed by the appellate court, they are generally binding upon this Court.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>As regards the third element, the qualifying circumstance of treachery was sufficiently alleged in the Information and proven by the prosecution.<br><br>One of the circumstances that would qualify the killing of the victim to murder is treachery. "There is treachery when the offender commits any of the crimes against persons, employing means and methods or forms in the execution thereof which tend to directly and especially ensure its execution, without risk to himself or herself arising from the defense which the offended party might make."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>From the foregoing definition, there are two conditions which must concur for treachery to be appreciated as a qualifying circumstance:<i> first</i>, the offender employed means, methods, or forms in the execution of the criminal act which afforded the person attacked no opportunity to defend himself or herself or to retaliate; and<i> second</i>, said means, methods, or forms of execution were deliberately or consciously adopted by the offender.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In<i> People v. Lalap</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> this Court explained that the essence of treachery is the suddenness of the attack which the offender deliberately adopted to deprive the victim of any opportunity to mount a defense, thus:<br><blockquote>The essence of treachery is the suddenness of the attack by an aggressor on the unsuspecting victim, depriving the latter of any chance to defend himself or herself and thereby ensuring the commission of the offense without risk to the offender arising from the defense which the offended party might make. Treachery is defined as the "swift and unexpected attack on the unarmed victim without the slightest provocation on his or her part." The attack must be deliberate and without warning which must be done in a swift and unexpected way, affording the hapless, unarmed, and unsuspecting victim no chance to resist or escape.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Citations omitted) </blockquote>More, jurisprudence dictates that the mere allegation of the victim's minority is sufficient to qualify the crime to murder.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The killing of a child is characterized by treachery regardless of whether the manner of the assault is shown in the Information.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The killing of a child of tender years is deemed<i> ipso facto</i> qualified by treachery due to his or her inherent defenselessness.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> In this case, AAA277980 was only 8 years old when accused-appellant repeatedly stabbed him. AAA277980 could not have been expected to put up a defense when accused-appellant brutally stabbed him several times. Accused-appellant took advantage of the inequality of forces between him and AAA277980. He used his superior strength over AAA277980 in committing the crime of murder. However, since treachery qualified the crime to murder, the generic aggravating circumstance of abuse of superior strength is absorbed and included in the former.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Meanwhile, accused-appellant interposed the defense of denial. Accused-appellant admitted that he was at the scene of the crime but insisted that he did not know how BBB277980 and AAA277980 suffered multiple stab wounds because he lost his consciousness after BBB277980 beat him up. As the RTC pointed out, if accused-appellant was beaten on the head for two to three hours, there should have been physical and medical proof of any injury he suffered. However, accused-appellant did not present any evidence to prove this. Between BBB277980's positive assertions identifying accused-appellant as the perpetrator and accused-appellant's bare denial, the former deserves more credence and evidentiary weight.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Accused-appellant further argued that the prosecution failed to establish the marking and chain of custody of the knife. We find his argument without merit. The non-identification or non-presentation of the murder weapon is not indispensable and fatal to the prosecution's cause when the accused was positively identified,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> as in this case. The weapon used in the killing is not an element of the crime of murder, and this may not have been recovered at all from the perpetrator.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>At any rate, this Court is convinced that the knife offered in evidence is the same knife seized from accused-appellant. PCpl Cabrera marked the handle of the knife with "JLC-ECF 03-12-2021" with signature, as shown in the confiscation receipt. PCpl Cabrera explained that the reason for the difference in marking in the knife as having "JLC-BCF 03-12-2021" with signature, is because he had to change the initial marking to reflect accused-appellant's real name which is "[XXX277980]" and not "<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>." According to PCpl Cabrera, accused-appellant gave his name only as "<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxx</span>" and when he found out that his real name is "<span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxx</span>," PCpl Cabrera changed the marking of the subject knife. When PCpl Cabrera testified before the RTC, he positively identified the knife as the same knife he recovered from accused-appellant's possession at the time of his arrest.<br><br>As for the penalty, pursuant to Section 6(a) of Republic Act No. 9262, the acts of violence committed by accused-appellant against AAA277980 constitute the crime of murder defined and penalized under Article 248<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> of the Revised Penal Code. The law imposes the penalty of <i>reclusion perpetua</i> to death. Since the circumstance of abuse of superior strength concurs with treachery, the former is absorbed in the latter.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> The circumstance of abuse of superior strength cannot serve to qualify or aggravate the felony at issue.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Pursuant to Article 63(2)<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> of the Revised Penal Code, there being no aggravating or mitigating circumstance in this case, the proper penalty is<i> reclusion perpetua</i>, being the lesser penalty between the two indivisible penalties for the crime of murder.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> In addition to imprisonment, Section 6 of Republic Act No. No. 9262 also provides for the penalty of fine of not less than PHP 100,000.00 but not more than PHP 300,000.00 and mandatory psychological counseling. Thus, the CA correctly ordered accused-appellant to pay a fine of PHP 100,000.00 and to undergo psychological counseling.<br><br>As to the award of civil indemnity and damages, the prevailing rule is that when the circumstances surrounding the commission of the felony call for the imposition of<i> reclusion perpetua</i> only, as in this case, the proper amounts should be PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, and PHP 75,000.00 as exemplary damages.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>As regards actual damages, settled is the rule that these "cannot be presumed but must be proved with reasonable degree of certainty."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> It must be emphasized that when actual damages proven by receipts during the trial amount to less than the sum allowed by the Court as temperate damages,<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> the award of temperate damages is justified in lieu of actual damages which is of a lesser amount.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Here, We do not find the grant of PHP 342,760.00 for actual damages to be properly substantiated by evidence. The RTC based its award mainly on BBB277980's testimony and on the submitted list of expenses allegedly incurred in connection with the death, wake, and burial of the victim. The award of actual damages may not be made on the basis alone of a handwritten enumeration of the supposed expenses incurred.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Neither can the actual damages in this case include the hospitalization expenses and other expenses incurred in relation to the injuries sustained by BBB277980, as the case litigated was only with respect to the murder of the victim, AAA277980. Based on evidence presented before the RTC, the actual damages incurred was proved to be in the amount of PHP 35,000.00, representing AAA277980's funeral expenses.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Since prevailing jurisprudence now fixes the amount of PHP 50,000.00 as temperate damages in murder cases, this Court finds it proper to award temperate damages to AAA277980's heirs, in lieu of actual damages.<br><br>Further, all the amounts of damages awarded should earn interest at the rate of 6% per annum from the finality of this Decision until fully paid.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> Hence, the damages awarded by the CA are in consonance with the foregoing pronouncement.<br><br><b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b>. The July 30, 2024 Decision of the Court of Appeals in CA-G.R. CR-HC No. 17974 is <b>AFFIRMED with MODIFICATION</b>. Accused-appellant XXX277980 is <b>GUILTY</b> beyond reasonable doubt of violation of Section 5(a), in relation to Section 6(a), of Republic Act No. 9262. He is sentenced to suffer the penalty of<i> reclusion perpetua</i> and is <b>ORDERED to PAY</b> a fine of PHP 100,000.00, to undergo psychological counseling, and to report to the Regional Trial Court, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxx</span>, his compliance. Accused-appellant is likewise <b>ORDERED to PAY </b> the heirs of AAA277980 the amounts of PHP 75,000.00 as civil indemnity <i>ex delicto</i>, PHP 75,000.00 as moral damages, PHP 75,000.00 as exemplary damages, and PHP 50,000.00 as temperate damages. All monetary awards shall earn interest at the rate of 6% per annum from the finality of this Decision until fully paid.<br><br><b>SO ORDERED. </b><br><br><i>Leonen, SAJ. (Chairperson), Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Lazaro-Javier,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.,</i> on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by the Revised Penal Code, Article 266-A, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity. On official business.</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business.</div><div align="JUSTIFY"><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 10-21. The July 30, 2024 Decision in CA-G.R. CR-HC No. 17974 was penned by Associate Justice Florencio M. Mamauag, Jr. and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Eleuterio L. Bathan of the Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 24-32. The December 28, 2021 Decision in Criminal case No. R-ANG-21-00876-CR was penned by Judge Irin Zenaida S. Buan of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Anti-Violence Against Women and Their Children Act of 2004.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> RTC records, p. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> TSN, BBB277980, July 26, 2021, pp. 9-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 27-32, 39-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> TSN, BBB277980, August 5, 2021, p. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Exhibit D, RTC records, p 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> TSN, Dr. Hernand Timoteo B. Tulud, August 16, 2021, pp. 3-4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Exhibit M, RTC records, p. 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> TSN, Dr. Hernand Timoteo B. Tulud, August 16, 2021, pp. 5-7; 10-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> TSN, Dr. Hernand Timoteo B. Tulud, October 4, 2021, pp. 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> TSN, PCpl John Reynald L. Cabrera, October 4, 2021, pp. 10-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Exhibit G-3, RTC records, p. 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> TSN, PCpl John Reynald L. Cabrera, October 4, 2021, pp. 7-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> TSN, PCpl John Reynald L. Cabrera, October 4, 2021, pp. 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> TSN, XXX277980, November 18, 2021, pp. 3-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 11-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, pp. 24-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 27-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 28-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> CA <i>rollo</i>, pp. 54-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 62-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 101-115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 105-112.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i>, pp. 10-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 33-34. Dated April 21, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 35-39, 40-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Anti-Violence Against Women and their Children Act of 2004.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> SECTION 5. <i>Acts of Violence Against Women and Their Children</i>. â The crime of violence against women and their children is committed through any of the following acts:<br><blockquote>(a) Causing physical harm to the woman or her child[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> SECTION 6. <i>Penalties</i>.- The crime of violence against women and their children, under Section 5 hereof shall be punished according to the following rules:<br><blockquote>(a) Acts falling under Section 5(a) constituting attempted, frustrated or consummated parricide or murder or homicide shall be punished in accordance with the provisions of the Revised Penal Code[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Casilac v. People</b>, 870 Phil. 888, 898-900 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> REV. PEN. CODE, art. 246.<br><blockquote>ARTICLE 246. <i>Parricide</i>. â Any person who shall kill his father, mother, or child, whether legitimate or illegitimate, or any of his[/her] ascendants, or descendants, or his[/her] spouse, shall be guilty of parricide and shall be punished by the penalty of <i>reclusion perpetua</i> to death.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> REV. PEN. CODE, art. 255.<br><br>ARTICLE 255. <i>Infanticide</i>. â The penalty provided for parricide in [A]rticle 246 and for murder in [A]rticle 248 shall be imposed upon any person who shall kill any child less than three days of age.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Exhibit L, RTC records, p. 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> TSN, BBB277980, July 26, 2021, pp. 9-10, 13-16, 23-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Labosta v. People</b>, 875 Phil. 506, 513 (2020) [Per J. J. C. Reyes, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>People v. Dela Cruz</b>, 735 Phil. 180, 188-189 (2014) [Per J. Leonardo-De Castro, First Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>People v. Lalap</b>, 904 Phil. 812, 822 (2021) [Per J. Inting, Third Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 904 Phil. 812 (2021) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 822-823.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>People v. Pilen</b>, 935 Phil. 957, 978 (2023) [Per J. Hernando, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>People v. Natindim</b>, 889 Phil. 18, 44-45 (2020) [Per J. Hernando, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>People v. De Guzman</b>, 644 Phil. 229, 248 (2010) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>People v. Pitulan</b>, 869 Phil. 177, 188 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> ARTICLE 248. <i>Murder</i>.-Any person who, not falling within the provisions of [a]rticle 246 shall kill another, shall be guilty of murder and shall be punished by <i>reclusion temporal</i> in its maximum period to death, if committed with any of the following attendant circumstances:<br><blockquote>1. With treachery, taking advantage of superior strength, with the aid of armed men, or employing means to weaken the defense or of means or persons to insure or afford impunity[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>People v. Natindim</b>, 889 Phil. 18, 44-45 (2020) [Per J. Hernando, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> ARTICLE 63. <b>Rules for the Application of Indivisible Penalties</b>.-In all cases in which the law prescribes a single indivisible penalty, it shall be applied by the courts regardless of any mitigating or aggravating circumstances that may have attended the commission of the deed.&nbsp;</div><div align="JUSTIFY"><br></div><div align="JUSTIFY">In all cases in which the law prescribes a penalty composed of two indivisible penalties, the following rules shall be observed in the application thereof:<br><blockquote>. . . .<br><br>2. When there are neither mitigating nor aggravating circumstances in the commission of the deed, the lesser penalty shall be applied[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Republic Act No. 9262 (2004), sec. 6.<br><br>SECTION 6. <i>Penalties</i>.- The crime of violence against women 1-20 and their children, under Section 5 hereof shall be punished according to the following rules:<br><blockquote>(a) Acts falling under Section 5(a) constituting attempted, frustrated or consummated parricide or murder or homicide shall be punished in accordance with the provisions of the Revised Penal Code.<br><br>. . . .</blockquote>In addition to imprisonment, the perpetrator shall (a) pay a fine in the amount of not less than One hundred thousand pesos ([PHP] 100,000.00) but not more than three hundred thousand pesos ([PHP] 300,000.00); (b) undergo mandatory psychological counseling or psychiatric treatment and shall report compliance to the court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>People v. Racal</b>, 817 Phil. 665, 685 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Heirs of Asis, Jr. v. G.G. Sportswear Manufacturing Corp.</b>, 850 Phil. 897, 907 (2019) [Per J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>People v. Racal</b>, 817 Phil. 665, 685 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>People v. Villanueva</b>, 456 Phil. 14, 28 (2003) [Per J. Corona, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Exhibit O-24, RTC records, p. 147-S.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>People v. Jugueta</b>, 783 Phil. 806, 848 (2016) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

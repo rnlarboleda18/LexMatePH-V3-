@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 254972 - ERNESTO GALICIA Y VILLARASA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70115' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 254972, August 28, 2025 ]</H2>
+			<H3>ERNESTO GALICIA <i>Y</i> VILLARASA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GESMUNDO, C.J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the June 23, 2020 Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the November 26, 2020 Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. SP No. 157824. The CA granted the Petition for <i>Certiorari</i> filed by the Office of the Solicitor General (OSG) and set aside the following issuances of Branch 27, Regional Trial Court of Naga City (RTC) in Criminal Case No. 2017-0743: (1) Orders dated June 18, 2018,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> July 24, 2018,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and August 9, 2018,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> allowing Ernesto Galicia <i>y</i> Villarasa<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (Galicia), indicted for illegal sale of <i>shabu</i> under Section 5 of Republic Act No. 9165,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> to plead guilty to the lesser offense of illegal possession of equipment, instrument, apparatus, and other paraphernalia for dangerous drugs under Section 12 of Republic Act No. 9165; and (2) Judgment<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated August 13, 2018, finding Galicia guilty of violation of Section 12 of Republic Act No. 9165.</p><p align="center"> <b>The Antecedents</b> </p><p> Galicia was charged with violation of Section 5 of Republic Act No. 9165 or illegal sale of dangerous drugs in an Information, the accusatory portion of which reads: </p><blockquote> <p> That on or about August 30, 2017, in the City of Naga, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, without authority of law, did, then and there, willfully, unlawfully and criminally sell, dispense and deliver one (1) piece heat-sealed transparent plastic sachet which marked [sic] as RES 8/30/17 SDN 8/30/17 with signature containing 0.054 gram of white crystalline substance, to a poseur buyer ROBERT ERIC SISON y Abrenica, a member of the Naga City Dangerous Drugs Board, in exchange of [sic] Four Hundred Peso bill with Serial Numbers NX562493, FS061546, FE886283 and CG830680 (buy-bust money), which yielded positive for the presence of Methamphetamine Hydrochloride popularly known as 'shabu', a dangerous drug, in violation of the above-cited law. </p> <p> ACTS CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p> </blockquote> <p> During arraignment, Galicia pleaded not guilty to the crime charged. After pre-trial was terminated, trial on the merits ensued wherein the prosecution presented and later, formally offered its evidence.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> On May 16, 2018, invoking A.M. No. 18-03-16-SC,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Galicia, through the Public Attorney's Office (PAO), filed a Motion for Plea Bargaining<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> intimating his intention to plead guilty to the lesser offense of violation of Section 12 of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> By way of Opposition to Proposal to Plea Bargain<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated May 30, 2018, Senior Assistant City Prosecutor Virgilio S. Balane, Jr., interposed his objection anchored on the ground that the "prosecutors of the Department of Justice [(DOJ)] handling drug cases are not allowed to enter into a plea bargain for violations of Section 5 of [Republic Act No.] 9165," pursuant to the Guidelines on Plea Bargaining Agreement for Republic Act No. 9165 set forth under Circular No. 61 of the DOJ dated November 21, 2017.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> In its June 18, 2018 Order, the RTC granted Galicia's Motion to plead guilty to a lesser offense because the same is allowed under A.M. No. 18-03-16-SC since the quantity of methamphetamine hydrochloride or <em>shabu</em> involved is 0.054 gram â not more than 0.99 gram. Also, it ruled that DOJ Circular No. 61, which prohibits plea bargaining when the accused is charged under Section 5 of Republic Act No. 9165, is "contrary to the Rules of Court, and encroaches on the Rule-Making Power of the Supreme Court enshrined under the 1987 Constitution."<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> On July 24, 2018, Galicia moved to withdraw his former plea of not guilty and manifested that he be allowed to plead guilty to violation of Section 12 of Republic Act No. 9165. The prosecution objected to Galicia's motion by invoking DOJ Circular No. 27 dated June 26, 2018, which "does not allow prosecutors to accept a plea bargain offer to Section 12 of [Republic Act No.] 9165 but only to Section 11 of [Republic Act No.] 9165 for violation of Section 5 of [Republic Act No.] 9165 where the weight of <i>shabu</i> is less than five grams."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> However, despite the absence of the consent of the prosecutor, the RTC vacated Galicia's previous plea of not guilty and the latter was re-arraigned and allowed to plead guilty to violation of Section 12 of Republic Act No. 9165. The RTC also set the promulgation of Judgment on August 13, 2018.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> On August 7, 2018, the prosecution filed its Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> seeking: (1) to set aside the July 24, 2018 Order; (2) to nullify and revoke, for being improper and irregular, the plea of guilt of Galicia without the consent of the prosecutor; and (3) to set the case for the reception of defense evidence.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The prosecution anchored its Motion on the grounds that: (a) consent of the offended party and the prosecutor is a condition precedent to a valid plea of guilt of the accused to a lesser offense as required under Rule 116, Section 2 of the Revised Rules of Criminal Procedure;<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> and (b) there is no showing in the July 24, 2018 Order that the court made a prior determination or finding that the weight of evidence presented by the prosecution is not strong before it accepted the plea bargain offer of Galicia,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> invoking the ruling in the case of <i>People v. Villarama, Jr</i>.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> In its August 9, 2018 Order, the RTC denied the prosecution's Motion for Reconsideration. It ruled that DOJ Circular No. 27 (which revised DOJ Circular No. 61) is still in conflict with A.M. No. 18-03-16-SC and also encroached upon the rule making power of the Supreme Court enshrined in the Constitution. The RTC further ruled that the prosecution's invocation of <i>Villarama</i> is misplaced and opined that it would be "a pre-judgment" and tantamount to a declaration "that the accused is guilty beyond reasonable doubt" if the court is required to make a prior determination of the strength of the prosecution's evidence before the plea bargain offer of the accused is accepted.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The RTC found Galicia guilty beyond reasonable doubt of the crime of illegal possession of paraphernalia for dangerous drugs. The dispositive portion of the August 13, 2018 Judgment reads: </p><blockquote> <p> WHEREFORE, judgment is hereby rendered finding the accused ERNESTO GALICIA y VILLARA[S]A, GUILTY beyond reasonable doubt of the offense under Section 12, Art. II of [Republic Act No.] 9165. </p> <p> Applying the Indeterminate Sentence Law, the accused is hereby sentenced to suffer imprisonment of six months and one day as minimum to four years as maximum, and to pay a fine of Fifty Thousand Pesos ([PHP] 50,000.00). He is further directed to submit himself to a drug dependency test. If accused admits drug use, or denies it [ ] but is found positive after the drug dependency test, he shall undergo treatment and rehabilitation for a period of not less than six months. </p> <p> In the service of the sentence, the accused shall be credited with the period of his preventive detention pursuant to Article 29 of the Revised Penal Code, as amended. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p> </blockquote> <p> The OSG then filed a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> before the CA raising the following issues: (a) whether a plea bargain offer may be granted without the consent of the prosecution; and (b) whether the state was deprived of its right to due process.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p align="center"> <b>The CA Ruling</b> </p><p> The dispositive portion of the assailed June 23, 2020 CA Decision reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the petition is <b>GRANTED</b> and a writ of certiorari is hereby issued <b>NULLIFYING</b> and <b>SETTING ASIDE</b> the assailed Orders dated June 18, 2018, July 24, 2018, and August 9, 2018 and the Judgment dated August 13, 2018, rendered by respondent Judge in Criminal Case No. 2017-0743. The Regional Trial Court of Naga, Branch 27 is <b>DIRECTED</b> to proceed with dispatch with the reception of defense evidence and to render judgment based on the evidence presented by the parties. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original) </p> </blockquote> <p> The CA held that the prosecution was not deprived of its right to due process because it was given the opportunity to be heard. The CA explained that the prosecution formally offered all its evidence and rested its case, filed its opposition to Galicia's offer to plead to a lesser offense, and thereafter, filed a motion for reconsideration from the Order of the court allowing the accused to plead guilty to a lesser offense. Thus, there was no denial of procedural due process.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> However, the CA held that the RTC committed grave abuse of discretion amounting to lack or excess of jurisdiction when it allowed Galicia to plead guilty to a lower offense without the consent of the prosecution. The CA opined that despite the general guidelines under A.M. No. 18-03-16-SC â which should rightfully prevail over DOJ Circular No. 61, as amended by DOJ Circular No. 27, it being issued in the exercise of the plenary rule-making power of the Supreme Court enshrined under Article VIII, Section 5(5) of the 1987 Constitution â the trial court should still secure the consent of the prosecutor in order to comply with the rules and pertinent jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> The CA further held that the RTC committed grave abuse of discretion amounting to lack or excess of jurisdiction when it issued the assailed Orders and Judgment without first evaluating the evidence presented by the prosecution to determine whether the evidence of guilt is strong for the offense charged.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Thus, the CA directed the RTC to proceed with dispatch with the reception of defense evidence and to render judgment based on the evidence presented by the parties. </p><p> Galicia filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> but the same was denied by the CA via its November 26, 2020 Resolution. Hence, Galicia filed this Petition for Review on <i>Certiorari</i> before the Court. </p><p align="center"> <b>Issue</b> </p><blockquote> <p> WHETHER THE CA GRAVELY ERRED IN HOLDING THAT THE CONSENT OF THE PROSECUTION IS A CONDITION <i>SINE QUA NON</i> FOR THE VALIDITY OF PLEA BARGAINING AGREEMENT IN DRUG CASES.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p> </blockquote> <p> Petitioner claims that the consent of the prosecution is not indispensable in plea bargaining agreement in drugs cases. He insists that to require the consent of the prosecution in these cases would defeat the purpose of A.M. No. 18-03-16-SC.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> the OSG insists that a plea bargain offer may not be granted without the consent of the prosecution. It ascribes grave abuse of discretion on the part of the RTC when it allowed petitioner to be re-arraigned and to plead guilty to the lesser offense of violation of Section 12 of Republic Act No. 9165 despite the prosecution's opposition.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Moreover, it contends that the RTC should have made a determination on the weight of evidence presented by the prosecution before granting petitioner's motion to plead guilty to a lesser offense because said motion was made after the prosecution had already rested its case.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> In his Reply,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> petitioner maintains that there was no grave abuse of discretion on the part of the RTC when he was allowed to avail the benefits of plea bargaining. DOJ Circular No. 18 dated May 10, 2022 mandated that the acceptable plea bargain for violation of Section 5 of Republic Act No. 9165 is now Section 12 of the same law.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> As held in the case of <i>People v. Montierro</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> "[w]ith the amendments introduced in DOJ Circular No. 18, the prosecution's objection to Montierro and Baldadera's plea bargaining proposals, which was based solely on DOJ Circular No. 27, can now be considered as effectively withdrawn. As such, the issues of whether the RTC erred in declaring DOJ Circular Nos. 61 and 27 invalid and overruling the prosecution's continuing objection to Montierro and Baldadera's plea bargaining proposals are now rendered moot and academic."<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Thus, the previous objection of the prosecution to the plea bargaining proposal of petitioner, which was based solely on DOJ Circular No. 61, should likewise be considered withdrawn. The RTC's grant of petitioner's motion to plea bargain to a lesser offense and his subsequent conviction for violation of Section 12 of Republic Act No. 9165 are in accordance with A.M. No. 18-03-16-SC, as amended, as well as with DOJ Circular No. 18.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p><p> Petitioner emphasizes that the approval or denial of the Motion to Plea Bargain rests upon the discretion of the RTC. Thus, it may validly overrule the objections made by the prosecution. Otherwise, the grant or denial of a motion to plea bargain is always at the mercy of the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> He also claims that his right against double jeopardy will be violated if Criminal Case No. 2017-0743 will be remanded to the RTC.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p align="center"> <b>The Court's Ruling</b> </p><p> The Petition is meritorious. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Application of the revised guidelines in plea bargaining in cases involving dangerous drugs</i> </div></td> </tr> </tbody></table> <p>The resolution of this case hinges on the application of the Court's pronouncement in the recent case of <i>Aquino v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> which expanded the <i>Montierro </i>guidelines to be observed for plea bargaining in cases involving dangerous drugs, thus: </p><ol><li> Offers for plea bargaining must be initiated in writing by way of a formal written motion filed by the accused in court.<br><br></li><li>The lesser offense which the accused proposes to plead guilty to must necessarily be included in the offense charged.<br><br></li><li> Upon receipt of the proposal for plea bargaining that is compliant with the provisions of the Plea Bargaining Framework in Drugs Cases, the judge shall order that a drug dependency assessment be administered. If the accused admits drug use, or denies it but is found positive after a drug dependency test, then they shall undergo treatment and rehabilitation for a period of not less than six months. Said period shall be credited to their penalty and the period of their after-care and follow-up program if the penalty is still unserved. If the accused is found negative for drug use/dependency, then they will be released on time served, otherwise, they will serve his/her sentence in jail minus the counselling period at rehabilitation center.<br><br></li><li>As a rule, plea bargaining requires the mutual agreement of the parties and remains subject to the approval of the court. Regardless of the mutual agreement of the parties, the acceptance of the offer to plead guilty to a lesser offense is not demandable by the accused as a matter of right, but is a matter addressed entirely to the sound discretion of the court. Although the prosecution and the defense may agree to enter into a plea bargain, it does not follow that the courts will automatically approve the proposal. Judges must still exercise sound discretion in granting or denying plea bargaining, taking into account <i>the objections raised by the prosecution and</i> other relevant circumstances, including the character of the accused. <br><br></li><li><i>In cases where the prosecution, in its comment or opposition to the accused's motion to plea bargain, raised only a few but not all possible grounds for opposing the motion, it must be understood that the prosecution has waived such grounds not raised, similar to the principle behind the Omnibus Motion Rule.<br><br></i></li><li>The court shall not allow plea bargaining if the objection to the plea bargaining is valid and supported by evidence to the effect that: <br> <br> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">a.</div></td> <td width="95%"><div align="justify">the offender is a recidivist, habitual offender, known in the community as a drug addict and a troublemaker, has undergone rehabilitation but had a relapse, or has been charged many times; or</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">b.</div></td> <td><div align="justify">when the evidence of guilt is strong. </div></td> </tr> </tbody></table> <br> </li><li> Plea bargaining in drugs cases shall not be allowed when the proposed plea bargain does not conform to the Court-issued Plea Bargaining Framework in Drugs Cases. <br><br></li><li> Judges may overrule the objection of the prosecution if it is based solely on the ground that the accused's plea bargaining proposal is inconsistent with the acceptable plea bargain under any internal rules or guidelines of the DOJ, although in accordance with the Plea Bargaining Framework issued by the Court, if any.<br><br></li><li> If the prosecution objects to the accused's plea bargaining proposal due to the circumstances enumerated in <i>item no. 6</i>, the trial court is mandated to hear the prosecution's objection and rule on the merits thereof. If the trial court finds the objection meritorious, it shall order the continuation of the criminal proceedings. <i>The trial court shall hear and receive evidence on any and all grounds raised by the prosecution for opposing the motion to plea bargain and must rule on each ground accordingly.<br><br></i></li><li> If an accused applies for probation in offenses punishable under Republic Act No. 9165, other than for illegal drug trafficking or pushing under Section 5 in relation to Section 24 thereof, then the law on probation shall apply. <br><br></li><li><i>Where the prosecution has raised multiple grounds in its opposition, but the trial court only ruled in one but was silent with regard to the rest, either the appellate court or this Court shall direct the trial court to rule on such pending issues in accordance with the principles in Montierro and this case</i>.<br><br></li><li><i>Where the records before either the appellate court or this Court are incomplete to determine if it falls in any of the preceding scenarios, the trial court shall be directed to rule again on the matter following the principles laid down in Montierro and this case</i>. <br><br></li><li><i>As a result of the foregoing rule, if the trial court or the appellate court has ruled correctly on the issue, the correct judgment shall be reinstated or affirmed, as the case may be</i>. <br><br></li><li><i>In cases where both the trial court and the appellate court ruled incorrectly on the issue (i.e., not in accordance with Montierro), a new judgment shall be entered by the Court directing the trial court to allow plea bargaining in the accused's case, and to render a guilty verdict accordingly</i>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis in the original) </li></ol> <p> As a background, the accused in <i>Aquino</i> was charged with illegal possession and illegal sale of dangerous drugs. After initially pleading not guilty to both charges, the accused filed a motion for plea bargaining, imploring the trial court to allow him to plead guilty to the lesser offense of illegal possession of drug paraphernalia. The prosecution objected to the plea bargaining proposal with respect to the offense of illegal sale of dangerous drugs on the ground that it contravenes DOJ Circular No. 27. The trial court granted the motion and allowed the accused to plead guilty to the lesser offense of illegal possession of drug paraphernalia for both criminal charges. On appeal, the CA reversed the ruling of the trial court on the ground that the prosecution did not consent to plea bargain. </p><p> In upholding the ruling of the trial court, the Court held that the prosecution's objection lost weight when DOJ Circular No. 18 revoked DOJ Circular No. 27, now allowing a guilty plea to the lesser offense of illegal possession of drug paraphernalia when an accused is indicted for illegal sale of dangerous drugs. </p><p> Following the <i>Montierro</i> guidelines, the case in <i>Aquino</i> would have been remanded to the trial court to determine if (a) the accused is a recidivist, habitual offender, known in the community as a drug addict and a troublemaker, has undergone rehabilitation but had a relapse, or has been charged many times, or (b) the evidence of guilt is strong. </p><p> However, the Court found this antithetical to the driving force behind the rules on plea bargaining, which is to provide a simplified and inexpensive procedure for the speedy disposition of cases. In <i>Estipona v. Judge Lobrigo</i>,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> the Court highlighted the importance of plea bargaining as a rule of procedure: </p><blockquote> <p> By the same token, it is towards the provision of a simplified and inexpensive procedure for the speedy disposition of cases in all courts that the rules on plea bargaining was introduced. As a way of disposing criminal charges by agreement of the parties, plea bargaining is considered to be an "important," "essential," "highly desirable," and "legitimate" component of the administration of justice.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Citations omitted) </p> </blockquote> <p> More importantly, the Court in <i>Aquino</i> held that remanding the case would make the trial court exercise critical determinations which are executive in nature, thus: </p><blockquote> <p> Forcing a trial court to make a determination as to the existence and propriety of grounds for objecting to a plea bargaining proposal where the prosecution itself did not even bother to propound such grounds in the first place is akin to arrogating upon such court the power to determine whether to interpose an objection, what ground to use for such objection, both of which are highly critical determinations reserved solely for the Executive. After all, the power to prosecute is purely an Executive function, and the prosecutor has a wide discretion of whether, what, and whom to charge due to the range of variables present when pursuing a criminal case.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Citations omitted) </p> </blockquote> <p> Instead, <i>Aquino</i> provided for conditions before a case could be remanded to the trial court for further determination of the propriety of the plea bargain. </p><p> Similar to the Omnibus Motion Rule, item number 5 of the revised guidelines require that the prosecution's objections to an accused's offer to plea bargain must specify all available grounds. Simply stated, any ground not raised by the prosecution shall be deemed waived and may no longer be raised on appeal. The records of the present petition reveal that the prosecution herein only raised one ground against petitioner's offer to plea bargain, i.e., that the guilty plea runs counter to DOJ Circular No. 27. As previously discussed, any objection based on this ground is deemed withdrawn or no longer valid as the said Circular had already been revoked by DOJ Circular No. 18. Consequently, the prosecution can no longer question petitioner's plea bargain on other grounds. </p><p> Item number 9 of the revised guidelines further directs the trial courts to hear and receive evidence on each objection raised by the prosecution against the accused's offer to plea and to rule on each objection. As a result, item number 11 of the revised guidelines provides that a remand of the case shall be made when the trial court failed to address a ground timely raised by the prosecution. </p><p> In view of these additional guidelines, there is now no basis to remand the present case to the trial court for further determination of the propriety of the plea bargain because: <i>first</i>, the sole ground raised by the prosecution has no leg to stand on in view of the revocation of DOJ Circular No. 27; and<i> second</i>, the prosecution is already deemed to have waived its right to raise additional grounds against the offer to plea bargain when it did not include these in its Opposition to Proposal to Plea Bargain. </p><p> As to the question of whether the consent of the prosecution is indispensable to a plea bargaining agreement in drugs cases, suffice it to say that in <i>Montierro</i>, the Court has already recognized and upheld the sound discretion of the trial court in determining the propriety of a plea bargain. </p><p> In <i>Estipona</i>, the Court held that the trial court ultimately has the discretion to allow the accused to plead guilty to a lesser offense which is necessarily included in the offense charged.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> However, it added that the consent of the offended party and the prosecutor is a condition precedent to a valid plea of guilty to a lesser offense.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p><p> Aware of the principle that the prosecutor has full control of the prosecution of criminal actions, the Court in <i>Montierro</i> clarified its pronouncements in <i>Estipona</i>. The Court does not undermine the prerogative of the government's prosecutorial arm in filing criminal actions, but it merely recognizes and emphasizes the discretion of the courts on how to dispose of a criminal action brought to its jurisdiction. Thus, the Court in <i>Montierro</i> explained: </p><blockquote> <p> Synthesizing the foregoing jurisprudential pronouncements, and cognizant of the ends of the plea bargaining process in drugs cases, the Court herein clarifies that the consent of the parties is necessary <b>but the approval of the accused's plea of guilty to a lesser offense is <u>ultimately</u> subject to the sound discretion of the court</b>. In the exercise of this discretion, the trial court's duty is to evaluate the qualifications of the accused and the circumstances or evidence of the case.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Emphasis and underscoring in the original) </p> </blockquote> <p> In the present case, while the prosecution did not consent to the guilty plea of petitioner, the lone ground for its objection was correctly rejected by the RTC. Resultantly, there is now no obstacle to Galicia's plea of guilt to the lesser offense of illegal possession of drug paraphernalia. </p><p> <i>Double jeopardy</i></p><p> The right against double jeopardy in our jurisdiction finds its genesis in <i>Kepner v. United States</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> where the Supreme Court of the United States (SCOTUS) upheld the ruling of the court of first instance acquitting the accused therein of estafa. In reversing the ruling of conviction of the Supreme Court of the Philippines, the SCOTUS explained: </p><blockquote> <p> When Congress came to pass the act of July 1, 1902, it enacted, almost in the language of the President's instructions, the Bill of Rights of our Constitution. In view of the expressed declaration of the President, followed by the action of Congress, both adopting, with little alteration, the provisions of the Bill of Rights, there would seem to be no room for argument that, in this form, it was intended to carry to the Philippine Islands those principles of our Government which the President declared to be established as rules of law for the maintenance of individual freedom, at the same time expressing regret that the inhabitants of the islands had not theretofore enjoyed their benefit.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p> </blockquote> <p> Consequently, the prohibition against double jeopardy became part of every Filipino's constitutional rights. Article III, Section 21 of the 1987 Constitution reads: </p><blockquote> <p> Section 21. No person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act. </p> </blockquote> <p> As one of the pillars of our criminal justice system, the rule dictates that when a criminal charge against a person is terminated, either by acquittal, conviction, or any other manner without the consent of the accused, the said accused cannot again be charged with the same or an identical offense. The rule has the following avowed purposes: (1) to prevent the State from using its criminal processes to harass and wear out the accused by a multitude of cases with accumulated trials; (2) to preclude the State, following an acquittal, from successively retrying the defendant in the hope of securing a conviction; and (3) to prevent the State, following conviction, from retrying the defendant again in the hope of securing a greater penalty.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> It is to put to rest the effects of the first prosecution and assure the accused of freedom from the danger and anxiety of having to face another prosecution for the same offense.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Without such protection, the accused would be subjected to unending malicious prosecution. </p><p> The Court, as early as 90 years back, discussed the relevance of the principle of jeopardy in <i>Julia v. Sotto</i>:<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><blockquote> <p> Without the safeguard this article establishes in favor of the accused, his fortune, safety, and peace of mind would be entirely at the mercy of the complaining witness, who might repeat his accusation as often as dismissed by the court and whenever he might see fit, subject to no other limitation or restriction than his own will and pleasure. The accused would never be free from the cruel and constant menace of a never-ending charge, which the malice of the complaining witness might hold indefinitely suspended over his head[.]<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p> </blockquote> <p> Rule 117, Section 7 of the Rules of Court, which implements this rule, thus provides: </p><blockquote> <p> Section 7. <i>Former conviction or acquittal; double jeopardy</i>. â When an accused has been convicted or acquitted, or the case against him dismissed or otherwise terminated without his express consent by a court of competent jurisdiction, upon a valid complaint or information or other formal charge sufficient in form and substance to sustain a conviction and after the accused had pleaded to the charge, <i>the conviction or acquittal of the accused or the dismissal of the case shall be a bar to another prosecution</i> for the offense charged, or for any attempt to commit the same or frustration thereof, or for any offense which necessarily includes or is necessarily included in the offense charged in the former complaint or information. </p> <p> However, the conviction of the accused shall not be a bar to another prosecution for an offense which necessarily includes the offense charged in the former complaint or information under any of the following instances: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">the graver offense developed due to supervening facts arising from the same act or omission constituting the former charge;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(b)</div></td> <td><div align="justify">the facts constituting the graver charge became known or were discovered only after a plea was entered in the former complaint or information; or</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(c)</div></td> <td><div align="justify">the plea of guilty to the lesser offense was made without the consent of the prosecutor and of the offended party except as provided in Section 1(f) of Rule 116. </div></td> </tr> </tbody></table> </blockquote> <p>In any of the foregoing cases, where the accused satisfies or serves in whole or in part the judgment, he shall be credited with the same in the event of conviction for the graver offense. (Emphasis supplied) </p> </blockquote> <p> Under this provision, a conviction or acquittal of the accused or dismissal of the case without the accused's consent bars the filing of a criminal charge for the same or similar offense. This is the accused's right against double jeopardy. </p><p> There are two accepted categories of double jeopardy. These were differentiated by the Court in <i>People v. Judge Relova</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> thus: </p><blockquote> <p> The first sentence of clause 20, section 1, Article III of the Constitution, ordains that "no person shall be twice put in jeopardy of punishment for the same offense." The second sentence of said clause provides that "if an act is punishable by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act." Thus, the first sentence prohibits double jeopardy of punishment for the same offense, whereas the second contemplates double jeopardy of punishment for the same act. Under the first sentence, one may be twice put in jeopardy of punishment of the same act, provided that he is charged with different offenses, or the offense charged in one case is not included in, or does not include, the crime charged in the other case. The second sentence applies, even if the offenses charged are not the same, owing to the fact that one constitutes a violation of an ordinance and the other a violation of a statute. If the two charges are based on one and the same act, conviction or acquittal under either the law or the ordinance shall bar a prosecution under the other.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p> </blockquote> <p> The present case involves the second category of double jeopardy where the same act for which petitioner was found guilty of by the RTC may be subjected to a more stringent punishment if the case is remanded to and retried by the same court. </p><p> <i>Requisites of Double Jeopardy</i></p><p> Jurisprudence elucidates that for the right against double jeopardy to attach, the following requisites must concur: (1) a first jeopardy must have attached prior to the second; (2) the first jeopardy must have been validly terminated; and (3) the second jeopardy must be for the same offense as that in the first or the second offense includes or is necessarily included in the offense charged in the first information, or is an attempt to commit the same or is a frustration thereof.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></p><p> As to the first requisite, a first jeopardy attaches when the following are present: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(1)</div></td> <td width="95%"><div align="justify">the accused is charged under a complaint or information sufficient in form and substance to sustain their conviction; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(2)</div></td> <td> <div align="justify">the court has jurisdiction;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(3)</div></td> <td> <div align="justify">the accused has been arraigned and has pleaded; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">(4)</div></td> <td> <div align="justify">the accused is convicted or acquitted, or the case is dismissed without his/her consent.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></div></td> </tr> </tbody></table> </blockquote> <p>In the instant case, all these requisites for the first jeopardy to attach are present. <i>First</i>, Galicia was charged under an Information for illegal sale of dangerous drugs, sufficient in form and substance to sustain a conviction. <i>Second</i>, the RTC has jurisdiction over the offense. <i>Third</i>, Galicia was arraigned and had validly entered a plea of not guilty prior to moving for plea bargaining. <i>Fourth</i>, the RTC validly granted Galicia's Motion for Plea Bargaining after rejecting the prosecution's objection. </p> <p> There having been a valid judgment of conviction, the first jeopardy was validly terminated. To remand the case to the RTC and necessarily reopen the case for further proceedings is tantamount to a second jeopardy for the same offense in the first jeopardy. </p><p> <b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The June 23, 2020 Decision and the November 26, 2020 Resolution of the Court of Appeals in CA-G.R. SP No. 157824 are <b>REVERSED</b> and <b>SET ASIDE</b>. </p><p> The issuances of Branch 27, Regional Trial Court of Naga City in Criminal Case No. 2017-0743, namely: the June 18, 2018, July 24, 2018, and August 9, 2018 Orders allowing Ernesto Galicia <i>y</i> Villarasa, indicted for illegal sale of <i>shabu</i> under Section 5 of Republic Act No. 9165, to plead guilty to the lesser offense of illegal possession of equipment, instrument, apparatus, and other paraphernalia for dangerous drugs under Section 12 of Republic Act No. 9165; and the August 13, 2018 Judgment, finding Galicia <b>GUILTY</b> of violation of Section 12 of Republic Act No. 9165, are <b>REINSTATED</b>. </p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez, Kho, Jr.</i>, and <i>Villanueva, JJ</i>., concur. <i><br> Leonen,<sup style="COLOR: RGB(255, 0, 0);">*</sup> SAJ</i>., on official business. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 35-50. The June 23, 2020 Decision in CA-G.R. SP No. 157824 was penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Zenaida T. Galapate-Laguilles and Florencio M. Mamauag, Jr. of the Sixth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 52-53. The November 26, 2020 Resolution in CA-G.R. SP No. 157824 was penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Zenaida T. Galapate-Laguilles and Florencio M. Mamauag, Jr. of the Former Sixth Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 73-78. The Order was issued by Judge Leo L. Intia of Branch 27, Regional Trial Court, Naga City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 106-107. The Order was issued by Judge Leo L. Intia of Branch 27, Regional Trial Court, Naga City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 79-82. The Order was issued by Judge Leo L. Intia of Branch 27, Regional Trial Court, Naga City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Also referred to as Ernesto Galicia <i>y</i> Villaraza in some parts of the <i>rollo</i>. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Comprehensive Dangerous Drugs Act of 2002 (June 7, 2002). </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, p. 83. The Judgment was rendered by Judge Leo L. Intia of Branch 27, Regional Trial Court, Naga City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 89.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Adoption of the Plea Bargaining Framework in Drug Cases (April 10, 2018). </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 90. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 91-92. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 77-78. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 84-88. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 88. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 84-86. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 86-87. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 285 Phil. 723 (1992) [Per J. Medialdea, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, pp. 80-81. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 83. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 54-72. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 49. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 42-43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 45-47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 47-48. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 127-136. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 23-26. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 149-164. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 153-156. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 157-159. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 166-181. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 167. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 926 Phil. 430 (2022) [Per J. Caguioa, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 443. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 170-171. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 172. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 176-177. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Aquino v. People, G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>] at 10-12. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 816 Phil. 789 (2017) [Per J. Peralta, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 812. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Aquino v. People, G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>] at 9-10. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Estipona v. Judge Lobrigo</b>, 816 Phil. 789, 815 (2017) [Per J. Peralta, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 814-815. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Montierro</b>, 926 Phil. 430, 462 (2022) [Per J. Caguioa, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 195 U.S. 100 (1904). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 124. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>People v. Dela Torre</b>, 430 Phil. 420, 430 (2002) [Per J. Panganiban, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>People v. Judge Vergara</b>, 293 Phil. 610, 617 (1993) [Per J. Bellosillo, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 2 Phil. 247 (1903) [Per J. Mapa, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 252-253. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 232 Phil. 269 (1987) [Per J. Feliciano, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 280. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>People v. Nitafan</b>, 362 Phil. 58, 73 (1999) [Per J. Martinez, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Austria v. AAA</b>, 924 Phil. 41, 82 (2022) [Per J. Lopez, M., <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

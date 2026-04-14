@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272837 - PROVINCIAL GOVERNMENT OF LAGUNA AS REPRESENTED BY HON. RAMIL L. HERNANDEZ, PETITIONER, VS. RAMLOID GAMING CORPORATION AND FLORA L. OBINA, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70147' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272837, October 22, 2025 ]</H2>
+			<H3>PROVINCIAL GOVERNMENT OF LAGUNA AS REPRESENTED BY HON. RAMIL L. HERNANDEZ, PETITIONER, VS. RAMLOID GAMING CORPORATION AND FLORA L. OBINA, RESPONDENT.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="justify"><p>The operation of a small-town lottery, although authorized by law, is a form of gambling. Hence, the grantee must abide by the limits set by its franchise and strictly adhere to its terms and conditions. Failure to comply with the requirements of small-town lottery such as regular remittance and submission of the names of sales agents is presumptive evidence that the small-town lottery license is used for other purposes such as to cover for illegal <i>jueteng</i> operations. Pursuant to its police power under the general welfare clause, the local government unit can inquire upon the grantee's compliance with the conditions of its authority.</p><p> This resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals. The Court of Appeals denied the Provincial Government of Laguna's (the Province) appeal and affirmed the Decision of the Regional Trial Court, which in turn dismissed<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> the Province's Complaint for Injunction with prayer for issuance of Temporary Restraining Order and Damages for lack of merit. The Regional Trial Court held that the Province is not entitled to an injunction for having failed to establish a violation of its right to the share of Ramloid Gaming Corporation (Ramloid) and Flora L. Obina's (Obina) net sale proceeds from small-town lottery.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The Court of Appeals also denied<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> the Province's subsequent motion for reconsideration. </p><p> The Province filed a complaint<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> for injunction and damages against Ramloid and Obina, in her capacity as the officer-in-charge branch manager of the Philippine Charity Sweepstakes Office (PCSO) â Laguna Branch.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> The Province alleged that sometime in March 2006, Ramloid was given the authority to conduct an actual test run of small-town lottery in the province of Laguna.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Subsequently, the Sangguniang Panlalawigan of Laguna issued Resolution No. 230, Series of 2008,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> entitled "A Resolution Interposing No Objection to Continue the Operation of Small Town Lottery (STL) by Ramloid Gaming Corporation in the Province of Laguna Subject to Faithful Remittance of the 5% Share of the Net Receipts to the Province of Laguna Including the Back Remittance from April 2006 to October 2007."</p><p> The Province claimed that Ramloid inconsistently remitted the Province's due share in Ramloid's sales proceeds of the small-town lottery and that Ramloid failed to submit a list of its employees and provide identification cards and uniforms to its personnel while on duty.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> These omissions allegedly violated PCSO Resolution No. 308, Series of 2012<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> and Section 16<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> of the October 2010 Revised Implementing Rules and Regulations for the Small Town Lottery Operations (October 2010 STL Rules),<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> which violations have been reported to the PCSO, through letters dated November 13, 2014<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> and November 20, 2014,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> but were unheeded.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> According to the Province, Ramloid also did not heed its letters dated October 1<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> and 18,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> 2014 directing the submission of proofs of Ramloid's collections from the start of STL operations<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> for proper determination of their liabilities. Moreover, Obina failed to conduct the internal audit relating to Ramloid's operations<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> despite the Province's November 12, 2014 letter<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> informing her of Ramloid's non-compliance.</p><p> In their defense, Ramloid and Obina alleged that Ramloid had been diligently remitting its share, that the decline in remittance was due to the change in percentage allocation in the October 2010 STL Rules, and that the Commission on Audit did not flag any irregularities on Ramloid's remittances.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p> The Regional Trial Court dismissed<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> the complaint. It held that the Province is not entitled to an injunction because it failed to establish a violation of its right to the share in Ramloid's net sales. The trial court relied on the provincial treasurer's acknowledgment during the Sangguniang Panlalawigan hearing that Ramloid faithfully and directly remitted the Province's share and the fact of the state auditors not flagging any irregularities in Ramloid's operations.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> It also accepted the explanation that the decline in remittances was due to the decrease in rate of remittance under the October 2010 STL Rules.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> The Province filed a motion for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> alleging that the Regional Trial Court failed to consider Ramloid's non-submission of the list of its sales force<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> and that the decrease in Ramloid's remittances (particularly from 2012 to 2013 and 2013 to 2014) is not due to the decrease in the percentage share of the Province, but on the unexplained decline in gross sales.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> It further asserted that in addition to the foregoing irregularities, the unexplained additional remittance of PHP 563,542.75 made by Ramloid on November 5, 2014 for its April and May 2014 arrears, which according to Obina's testimony, their office did not verify, justifies the need to conduct an audit of Ramloidâs operations.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> However, the Regional Trial Court denied the motion for reconsideration, ruling that the arguments raised in the motion "have been amply considered and resolved" and "there is no cogent reason . . . to modify [or] reverse" its decision.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> On appeal, the Court of Appeals affirmed the Regional Trial Court in ruling that the elements of injunction are absent and denied the Province's appeal for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> It also denied the Province's motion for reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></p><p> Hence, the Province filed a Petition before this Court.</p><p> Petitioner contends that the Court of Appeals failed to consider that respondent Ramloid's non-submission of the list of its sales force to petitioner and the Philippine National Police (PNP) offices in Laguna in violation of the October 2010 STL Rules is a valid ground for the stoppage of its operations.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Petitioner posits that the list of sales force is important because it will help determine the approximate sales of respondent Ramloid, assist petitioner and PNP officials in preventing "bookies" operation, and prevent the "commission or percentage basis" of payment to salespersons.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Petitioner also points out that despite Ramloid president's declaration during trial regarding their submission of the master list of sales force, and the trial court's directive to furnish the Court and petitioner with a copy of the same, respondent Ramloid failed to do so.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></p><p> Petitioner further argues that the Court of Appeals erred in ruling that the list of sales force "is immaterial because it is PCSO, not petitioner, who is the proper party to enforce the provisions of the October 2010 STL Rules. Petitioner asserts that under Section 16 of the Local Government Code, it has the power to regulate activities and businesses within its territorial jurisdiction to promote the general welfare of its constituents.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Pursuant to this, it is within its police power to check whether respondent Ramloid is operating within the bounds of law or the rules, such as the October 2010 STL Rules.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Hence, it is a real party in interest to file the injunction case against respondent Ramloid on account of the latter's anomalies and the PCSO's inactions on its letters.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> Finally, petitioner contends that the inconsistencies of the remittances and data provided by respondent Ramloid, and its violation of the October 2010 STL Rules provide more reason to require the conduct of an audit of its operation.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> Respondent Obina counters that petitioner reiterates arguments and errors that were previously raised with, considered, and passed upon by the Court of Appeals. Moreover, the questions raised are factual in nature which are not proper in a Rule 45 petition.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> She adds that the Court of Appeals aptly explained that the decrease of petitioner's share from small town lottery operations is attributable to the reduction of the percentage share allocated to petitioner rather than the alleged decline of respondent Ramloid's gross sales.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> She maintains that there was no need to conduct an audit because records pertaining to respondent Ramloid's sales since 2006 were already provided; respondent Ramloid's remittances of petitioner's share since the start of its operation in 2006 were supported by documentary exhibits; and there was no finding from the Commission on Audit (COA) of any irregularity in the remittances of Ramloid.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> All these considering, respondent Obina maintains that petitioner clearly failed to prove its entitlement to an injunction.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p><p> For its part, respondent Ramloid asserts that the petition is merely a repetition of the factual issues and arguments previously raised, which have already been fully resolved by the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> At any rate, respondent Ramloid contends that the Court of Appeals did not err in affirming the Regional Trial Court's ruling that petitioner is not entitled to a mandatory injunction.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></p><p> The sole issue to be resolved is whether petitioner Provincial Government of Laguna is entitled to a mandatory injunction ordering respondents Ramloid Gaming Corporation to submit its proof of collections since 2006 and Flora L. Obina, to conduct an audit of Ramloid Gaming Corporation's operations.</p><p> The Petition is partly meritorious.</p><p align="center"> <b>I</b> </p><p> The Complaint filed by petitioner seeks a mandatory injunction to direct: (i) respondent Ramloid to submit proof of its collections from the start of its small town lottery operations and pay the Province's proper share in the net sales; and (ii) respondent Obina, as the officer-in-charge branch manager of PCSO in Laguna, to conduct an audit of respondent Ramloid's operations in view of its non-compliance with the October 2010 STL Rules.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Particularly, respondent Ramloid allegedly failed to properly remit the petitioner's share in the net sales of the small town lottery operations, to submit a list of its sales force and provide its personnel on duty with identification cards and uniforms.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></p><p> Rule 58, Section 9 of the Rules of Court states when a final injunction may be issued: </p><blockquote> <p> SECTION 9. When Final Injunction Granted. â If after the trial of the action it appears that the applicant is entitled to have the act or acts complained of permanently enjoined, the court shall grant a final injunction perpetually restraining the party or person enjoined from the commission or continuance of the act or acts or confirming the preliminary mandatory injunction. (10a)</p> </blockquote> <p> For a main action for injunction to succeed, the plaintiff must show: "(i) that there is a right <i>in esse</i> that must be protected; and (ii) the act against which the injunction is directed to constitutes a violation of such right."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></p><p> Here, petitioner's right to share in respondent Ramloid's net sales from the operation of the small-town lottery is established and undisputed. Sangguniang Panlalawigan Resolution No. 230, Series of 2008 allows the operation of the small-town lottery "subject to faithful remittance of the 5% share of the net receipts to the province of Laguna including the back remittance from April 2006 to October 2007."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> In addition, PCSO Resolution No. 308, Series of 2012 allows the proper remittance of small-town-lottery shares to local government units and the PNP.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> The small-town lottery share is supposed to provide funding for "charitable undertakings, economic development and social amelioration activities"<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> of petitioner in time with the declared policies and programs of the national government.</p><p> Under Republic Act No. 7160 or the Local Government Code, local government units may exercise such powers and discharge such functions and responsibilities that are necessary, appropriate, or incidental to the efficient and effective provision of basic services and facilities, including health and social welfare services, to its constituents.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The Local Government Code further provides that the funding of these basic services and facilities are derived from "the share of local government units in the proceeds of national taxes and other local revenues. and funding support from the National Government, its instrumentalities and government-owned or -controlled corporations which are tasked by law to establish and maintain such services or facilities."<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></p><p> Consequently, the provincial governor, as chief executive, must ensure that these other revenues are collected and applied properly to their intended uses for the general welfare of the province and its inhabitants.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> In other words, concomitant to petitioner's share in the small-town proceeds is the right and duty to ensure that it receives the proper remittance.</p><p> According to respondent Obina, respondent Ramloid directly remits to petitioner the latterâs share in the small-town lottery proceeds.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> It is therefore within petitioner's authority, through the provincial treasurer, to gather sufficient informationâ such as by requiring respondent Ramloid to submit proofs of its collectionsâ to determine the correct amount of small-town-lottery share due to it. This finds basis, by analogy, in the Local Government Code, which authorizes the local treasurer to examine the taxpayer's books of accounts and pertinent records to ascertain, assess, and collect the correct amount of taxes.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p><p> However, respondent Ramloid disregarded petitioner's October 1, 2014 letter<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> and follow up October 18, 2014 letter,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> directing the submission of proofs of respondent Ramloid's collections from the start of small-town-lottery operations<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> for proper determination of its liabilities. Petitioner reported the matter to respondent Obina with a request for the latter to conduct an audit of respondent Ramloid's operation. Respondent Obina did not comply with the request,<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> thus prompting petitioner to file the complaint for injunction.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></p><p> During trial, respondent Obina presented and submitted respondent Ramloid's small-town-lottery earnings and remittance records as reported and certified by the branch accountant.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Respondent Ramloid also submitted its own record of its monthly sales/revenue allocations since 2006.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> These documents and records were examined by the lower courts and formed part of the records of this case. </p><p> Since both respondents Ramloid and Obina submitted their own records of the monthly sales/revenue allocations, which were provided to petitioner through its participation in the trial and the formal offers of evidence of respondents, there is no more need to grant the mandatory injunction sought by petitioner pertaining to the production of proof of respondent Ramloid's collections.</p><p align="center"> <b>II</b> </p><p> However, the Court finds sufficient grounds to compel respondent Obina to audit the operations of respondent Ramloid.</p><p> The small-town lottery was implemented primarily to raise additional charity funds and to eliminate illegal gambling like <i>jueteng</i>. Section 5 of the October 2010 STL Rules enumerates the following objectives: </p><ol start="" type="a"><li> To raise additional funds for PCSO's health programs, medical assistance and services, and charitable undertakings; </li><li> To provide funds for various local government units for charitable undertakings, economic development, and social amelioration activities of national character.</li><li> To provide an alternative to other illegal numbers games/operations and so aid in their eradication; and, </li><li> To provide additional opportunities for employment.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></li></ol> <p> Accordingly, in the selection of areas where the small-town lottery will be run, the previous existence and/or operation of illegal numbers games in the locality was a factor that is taken into consideration along with the projected viability of the small-town lottery operation in the area.</p><p> Through Resolution No. 123, Series of 2006, the Sangguniang Panlalawigan of Laguna allowed the PCSO, through respondent Ramloid, to conduct small-town lottery operations in Laguna in view of its potential benefits to petitioner's constituents. Initially, respondent Ramloid was authorized to conduct an actual test run pursuant to the "Authority to Conduct Actual Test Run for Small Town Lottery Project" with the PCSO dated March 29, 2006.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Under the deed of Authority, respondent Ramloid was required to submit to the PCSO chairman or general manager test run reports on volume sales and other financial matters and a complete list of personnel and their number per area of operation in order to determine the viability of the lottery "in terms of its potential as a source of charity fund and its strength to eliminate permanently the illegal numbers game[.]"<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></p><p> Later, respondent Ramloid was allowed to continue with its operations subject to the terms and conditions set forth in the rules and regulations governing small-town lottery approved by the PCSO Board. Pertinent to the period involved in this case, the October 2010 STL Rules require strict compliance by respondent Ramloid with its obligations and duties under Section 16, including the submission of the list of personnel and provision of identification cards to all its employees. Section 16 enumerates these duties and responsibilities as follows: </p><blockquote> <p> Section 16. The Agent shall, in the conduct of its operation have, among others, the following duties and responsibilities: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">a.</div></td> <td width="95%"><div align="justify">Sell STL Tickets for the STL games and other PCSO lottery products, as may be mandated or authorized, only to individuals eighteen (18) years and above. No bet must be accepted from minors whether in their own behalf or that of another.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"><em>b.</em></div></td> <td><div align="justify"><i>Provide its sales force and other employees with PCSO-prescribed uniforms and Identification cards which must be strictly worn and prominently displayed when they are on duty.</i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"><em>c.</em></div></td> <td><div align="justify"><i>Furnish the PCSO, Department of Interior and Local Government, Philippine National Police, the concerned local government unit and other offices as may be mandated, a list of its sales force and employees, indicating andâ¦ corresponding identification numbers and specimen signatures. Any addition and/or subtraction from said list must be submitted to said parties within twenty-four (24) hours from the effectivity of the same.</i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">d.</div></td> <td><div align="justify">Use HHTs for the recording of bets, printing of Tickets and on-line transmission of recorded bets. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Should no HHT be available or operable, due to the lack of technical facilities, the Agent shall use the pre-printed Tickets, as designed by the PCSO, in such manner as prescribed. The supervisor shall send the list of bets, in the prescribed form, no later than twenty (20) minutes before each draw, through fax/email to the PCSO-designated hotlines/email address.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">e.</div></td> <td><div align="justify">Remit to the PCSO the amounts equivalent to the Printing Cost, Charity Fund and Operating Fund, corresponding to the Retail Receipts, within the . . . hour of the banking day immediately following the collection thereof. Any delay shall merit a penalty of one-tenth (1/10) of one percent (1%) on the amount due, computed from due date to the date of actual remittance. Three (3) instances or delay will be a ground for the cancellation of the Agency Agreement, revocation of its authority and forfeiture of the Performance Bond.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">Any deficiency in the remittance based on the actual Retail Receipts remitted in a month and the expected from the Presumptive Retail Receipts, as stated in the Agency Agreement, shall be remitted immediately by the Agent, upon written notice from PCSO. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"><em>f.</em></div></td> <td><div align="justify"><i>Pay within the first five (5) days of every month or as may be required by law, all taxes, fees and other charges due to the government relative to its existence or operation as an Agent and submit to PCSO proof of said payment immediately thereafter. </i> </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">g.</div></td> <td><div align="justify">Maintain a separate account for the Prize Fund, which shall be subject to audit by PCSO at anytime within office hours. For this purpose the Agent shall issue a continuing authority to PCSO or its duly authorized representative/s to inquire into said account with any and all banks.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">h.</div></td> <td><div align="justify">Regularly submit to PCSO reports on required information, in the form and frequency as may be prescribed by PCSO.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">i.</div></td> <td><div align="justify">Keep proper books of accounts of its operation in accordance with generally accepted accounting principles and as may be required by PCSO and/or Commission on Audit. Said books and other records and documents in support thereof must be kept at its principal office, and must be made readily available for inspection by PCSO or its authorized representatives and the Commission on Audit at anytime.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> </blockquote> <p>The importance of strict compliance with the above duties and responsibilities cannot be overemphasized. Small-town lottery is a form of gambling, not a mere economic activity. In <i>Lim v. Pacquing</i>,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> it is argued that "[g]ambling is essentially antagonistic to the objectives of national productivity and self-reliance. It breeds indolence and erodes the value of good, honest and hard work. It is . . . a vice and a social ill which government must minimize (if not eradicate) in pursuit of social and economic development."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></p> <p> Gambling is generally prohibited. Participation in any form of illegal numbers game such as <i>jueteng</i> is punished under Article 3 of Republic Act No. 9287. Local government officials who, having knowledge of the existence of the operation of any illegal numbers game in their jurisdiction, fail to abate or to act, or tolerate the same are also punished under Section 5 of the same law. In addition, law enforcers who fail to apprehend perpetrators of any illegal numbers game may be suspended or dismissed from service.</p><p> Thus, any statute and implementing rules authorizing the operation of small-town lotteries must be strictly construed<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> and its operators are necessarily required to abide by stringent measures. The conduct of small-town lottery operations is always subject to the exercise of police power for public morals and welfare. The Court's ruling in <i>Jaworski v. Philippine Amusement Gaming Corp</i>.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> relating to sports betting stations and internet gaming operations is in point: </p><blockquote> <p> The grant of franchise is a special privilege that constitutes a right and a duty to be performed by the grantee. <i>The grantee must not perform its activities arbitrarily and whimsically but must abide by the limits set by its franchise and strictly adhere to its terms and conditionalities.</i> A corporation as a creature of the State is presumed to exist for the common good. Hence, the special privileges and franchises it receives are subject to the laws of the State and the limitations of its <b><i>charter.</i></b> <i>There is therefore a reserved right of the State to inquire how these privileges had been employed, and whether they have been abused</i>.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> (Citation omitted, emphasis supplied)</p> </blockquote> <p> Here, petitioner had reported respondent Ramloid's violations to the PCSO<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> and respondent Obina, precipitated by a complaint, made by a certain Mr. Ricardo Lasunuran from Calamba City, that respondent Ramloid conducts illegal bookies operation and does not remit the correct share to petitioner. Petitioner specifically requested respondent Obina to conduct an audit of respondent Ramloid per betting station, in the presence of COA and petitioner's auditor. However, PCSO and respondent Obina failed to act on petitioner's report. The provincial administrator, who was also presented as petitioner's witness, issued a Certification dated November 20, 2014, attesting that there is no list of respondent Ramloid's employees in the records of the Province.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> During trial, respondent Ramloid's representative denied any violation and declared that they have submitted the required list to the Province and to the PNP. However, despite the directive of the Regional Trial Court for respondent Ramloid to submit the list and furnish petitioners with a copy, nothing was submitted.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Even before this Court, respondent Ramloid has remained silent about its compliance with this particular requirement.</p><p> Parenthetically, the list of personnel is important to prevent the proliferation of illegal "<i>jueteng</i>" done by unauthorized or illegal collectors and "bookies." If there is a list of the sales force, the LGU and PNP could trap and catch these illegal collectors and bookies.</p><p> However, the Court of Appeals refused to rule on this matter holding that the PCSO is the real party-in-interest since its Board is the body entitled to act on any violation under its October 2010 STL Rules:<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </p><blockquote> <p> Since this case was filed on December 03, 2014, the governing PCSO IRR is the October 2010 IRR. Section 16 thereof mandates that PCSO agents must provide its list of sales force as well as direct its personnel to wear identification cards and uniforms while on duty, among others. According to Section 15 and 31, however, PCSO is the real party in interest who is entitled to invoke Section 16 for any violation or administrative liability pertaining thereto, <em>viz</em>:</p> <blockquote> <p> Section 15. The Agent shall strictly comply with the following duties and obligations contained in this article, among its other duties and obligations in these rules and regulations. Failure to comply with any of its duties and obligations shall be ground for the cancellation of the Agency. Agreement, revocation of its authority to operate, and forfeiture of the performance bond.</p> <p> Section 31. The PCSO Board may cancel, revoke or terminate the Agency Agreement of any STL Agent on any of the following grounds:</p> <p align="center"> . . . .</p> <p> h. Violation of any provision of these Rules and Regulations, and of pertinent and relevant PCSO issuances, directives, memoranda or circulars, and existing applicable laws;</p> </blockquote> </blockquote> <p align="center"> . . . . </p><blockquote> <p> This administrative requirement cannot be a basis for granting PGL's application for the mandatory injunctive writ because it is neither within PGL's right to exercise nor its cause of action to enforce.</p> </blockquote> <p> This is erroneous.</p> <p> Indeed, the PCSO, as the principal government agency for raising funds for health and charity programs, is expressly authorized under its charter to hold and conduct sweepstakes and lotteries.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> To implement the small-town lotteries project, the PCSO executes contracts with private corporations, with the understanding that a contract can be revoked if a corporation violated any of the provisions in its approved contract. Consequently, PCSO can revoke or terminate the authority of respondent Ramloid to conduct small-town lottery operations for violation of its agreement and the STL rules and regulations.</p><p> However, this does not preclude petitioner from pursuing a case against respondent Ramloid for its anomalies.</p><p> Petitioner has material and substantial interest to seek injunction to compel PCSO to conduct an audit of respondent Ramloid's operations. Respondent Ramloid was engaged in business, as an agent of PCSO, in the conduct of small-town lottery in Laguna. The continuous operation of respondent Ramloid was authorized by the Sangguniang Panlalawigan of Laguna is subject to its compliance with the STL rules and regulations and payment of its arrears. Petitioner had authority to regulate all persons engaging in business in Laguna, including a franchisee of a government-owned and controlled corporation, under its police power embodied in the general welfare clause. Section 16 of the Local Government Code provides: </p><blockquote> <p> SEC. 16. <i>General Welfare</i>.â Every local government unit shall exercise the powers expressly granted, those necessarily implied therefrom, as well as powers necessary, appropriate, or incidental for its efficient and effective governance, and those which are essential to the promotion of the general welfare. Within their respective territorial jurisdictions, local government units shall ensure and support, among other things, the preservation and enrichment of culture, promote health and safety, enhance the right of the people to a balanced ecology, encourage and support the development of appropriate and self-reliant scientific and technological capabilities, improve public morals, enhance economic prosperity and social justice, promote full employment among their residents, maintain peace and order, and preserve the comfort and convenience of their inhabitants.</p> </blockquote> <p> Like any municipal corporation, petitioner "[is an agency] of the State for the promotion and maintenance of local self-government and as such [is] endowed with police powers to effectively accomplish and carry out the declared objects of its creation."<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> </p><p> In <i>Roble Arrastre, Inc. v. Villaflor</i>:<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> </p><blockquote> <p>The general welfare clause is the delegation in statutory form of the police power of the State to LGUs. Through this, LGUs may prescribe regulations to protect the lives, health, and property of their constituents and maintain peace and order within their respective territorial jurisdictions. Accordingly, we have upheld enactments providing, for instance, the regulation of gambling, the occupation of rig drivers, the installation and operation of pinball machines, the maintenance and operation of cockpits, the exhumation and transfer of corpses from public burial grounds, and the operation of hotels, motels, and lodging houses as valid exercises by local legislatures of the police power under the general welfare clause.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Citation omitted) </p> </blockquote> <p> The small-town lottery operations, being a form of gambling albeit authorized by law, is subject to petitionerâs exercise of police power. It cannot be denied that the control and regulation of gambling promote public morals and the general welfare. Petitioner has the right to check whether respondent Ramloid is operating within the bounds of law or the STL rules and regulations.</p><p> At this point, the facts show that the PCSO and/or its Branch Office have been lenient in the supervision and monitoring of respondent Ramloid's operations. First, respondent Obina and the PCSO have not acted on the reports of the petitioner regarding respondent Ramloid's non-compliance with the October 2010 STL Rules. Second, regarding the additional remittance made by respondent Ramloid on November 5, 2014 of the amount of PHP 563,452.75 for its April and May 2014 arrears, there was no explanation whatsoever as to where this amount came from, and how it came about. From respondent Obina's own admission during the trial, she did not ask respondent Ramloid about this additional payment, nor did she conduct an investigation to verify the reason for the additional remittance.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> These are manifest violations that should have at least prompted respondent Obina to inquire upon. </p><p> Failure to comply with the requirements of small-town lottery such as regular remittance and submission of the names of sales agents is presumptive evidence that the small-town lottery license is used for other purposes such as to cover for illegal <i>jueteng</i> operations.</p><p> Hence, petitioner can investigate, or cause respondent Ramloid to be investigated, through the PCSO Branch Office,<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> for failure to comply with such terms and conditions in the grant of its franchise.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup></p><p> <b>ACCORDINGLY</b>, the Petition is <strong>PARTLY</strong> <b>GRANTED</b>. The May 26, 2023 Decision and the February 16, 2024 Resolution of the Court of Appeals in CA-G.R. CV No. 116400 are <b>REVERSED</b> and <b>SET ASIDE</b>. Respondent Flora L. Obina, the officer-in-charge branch manager of the Philippine Charity Sweepstakes Office â Laguna Branch, is hereby ordered to conduct an audit of the operations of respondent Ramloid Gaming Corporation in the presence of a duly authorized representative of the Province of Laguna. </p><p> <b>SO ORDERED.</b></p><p> <i>J. Lopez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur.<br> <i>Lazaro-Javier,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on official business. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-25. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 121-138. The May 26, 2023 Decision in CA-G.R. CV No. 116400 was penned by Associate Justice Eduardo S. Ramos, Jr. and concurred in by Associate Justice Edwin D. Sorongon and Associate Justice Ruben Reynaldo G. Roxas of the Eighth Division of the Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 155-156. The February 16, 2024 Resolution in CA-G.R. CV No. 116400 was penned by Associate Justice Eduardo S. Ramos, Jr. and concurred in by Associate Justice Edwin D. Sorongon and Associate Justice Ruben Reynaldo G. Roxas of the Former Eighth Division of the Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 97-105. The May 31, 2019 Decision in CIVIL CASE NO. 4854-2014-C penned by Presiding Judge Glenda R. Mendoza-Ramos of Branch 36 of the Regional Trial Court, City of Calamba.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 105.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 155- 156.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 26-34.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 122.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 122.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 41-42.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 97-98, 122. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 43-45; Secretary's Certificate of Eduardo G. Araullo, PCSO Board Secretary citing in full Resolution No. 308, Series of 2012, which was passed by the PCSO Board during its meeting on September 11, 2012.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at. 47-58. Section 16 of the October 2010 Revised Rules provides: </p> <blockquote> <p> Section 16. The Agent shall, in the conduct of its operation have, among others, the following duties and responsibilities:</p> <p> a. Sell STL Tickets for the STL games and other PCSO lottery products, as may be mandated or authorized, only to individuals eighteen (18) years and above. No bet must be accepted from minors whether in their own behalf or that of another. <br> b. Provide its sales force and other employees with PCSO-prescribed uniforms and Identification cards which must be strictly worn and prominently displayed when they are on duty. <br> c. Furnish the PCSO, Department of Interior and Local Government, Philippine National Police, the concerned local government unit and other offices as may be mandated, a list of its sales force and employees, indicating and . . . corresponding identification numbers and specimen signatures. Any addition and/or subtraction from said list must be submitted to said parties within twenty-four (24) hours from the effectivity of the same. <br> d. Use HHTs for the recording of bets, printing of Tickets and on-line transmission of recorded bets. Should no HHT be available or operable, due to the lack of technical facilities, the Agent shall use the pre-printed Tickets, as designed by the PCSO, in such manner as prescribed. The supervisor shall send the list of bets, in the prescribed form, no later than twenty (20) minutes before each draw, through fax/email to the PCSO-designated hotlines/email address. <br> e. Remit to the PCSO the amounts equivalent to the Printing Cost, Charity Fund and Operating Fund, corresponding to the Retail Receipts, within the . . . hour of the banking day immediately following the collection thereof. Any delay shall merit a penalty of one-tenth (1/10) of one percent (1%) on the amount due, computed from due date to the date of actual remittance. Three (3) instances of delay will be a ground for the cancellation of the Agency Agreement, revocation of its authority and forfeiture of the Performance Bond. <br>Any deficiency in the remittance based on the actual Retail Receipts remitted in a month and the expected from the Presumptive Retail Receipts, as stated in the Agency Agreement, shall be remitted immediately by the Agent, upon written notice from PCSO.<br> f. Pay within the first five (5) days of every month or as may be required by law, all taxes, fees and other charges due to the government relative to its existence or operation as an Agent and submit to PCSO proof of said payment immediately thereafter.<br> g. Maintain a separate account for the Prize Fund, which shall be subject to audit by PCSO at anytime within office hours. For this purpose the Agent shall issue a continuing authority to PCSO or its duly authorized representative/s to inquire into said account with any and all banks.<br> h. Regularly submit to PCSO reports on required information, in the form and frequency as may be prescribed by PCSO.<br> i. Keep proper books of accounts of its operation in accordance with generally accepted accounting principles and as may be required by PCSO and/or Commission on Audit. Said books and other records and documents in support thereof must be kept at its principal office, and must be made readily available for inspection by PCSO or its authorized representatives and the Commission on Audit at anytime. </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 6-7, 98, 122-123.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 94-96. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 69-70.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 29-31. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 62.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 63.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 98-99.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 7.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 64.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 103-104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 97-105. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 106-118. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 106. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 108-110. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 112-115, 127-128. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 119; October 28, 2019 Order of Presiding Judge Glenda R. Mendoza-Ramos of the Regional Trial Court, Branch 36, Calamba City, Laguna. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 128-129, 137. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 10. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 11-12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 13-14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 19-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 185. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 182. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 183. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 184. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 198-199. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 205. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 6-7. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 7. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <strong>Dela Cruz v. Parumog</strong>, 874 Phil. 343, 350 (2020) [Per J. Gaerlan, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, pp. 27-28, 41-42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 43-45. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 47. Section 5, October 2010 STL Rules. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>See</i> LOCAL GOV'T CODE, sec. 17(b)(3). </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> LOCAL GOV'T CODE, sec. 17(g). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>See</i> LOCAL GOV'T CODE, sec. 465(b)(3)(iii). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i>, p. 101. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> LOCAL GOV'T CODE, sec. 171 provides: </p><blockquote> <p> SECTION 171. <i>Examination of Books of Accounts and Pertinent Records of Businessmen by Local Treasurer</i>. â The provincial, city, municipal or barangay treasurer may, by himself or through any of his deputies duly authorized in writing, examine the books, accounts, and other pertinent records of any person, partnership, corporation, or association subject to local taxes, fees and charges in order to ascertain, assess, and collect the correct amount of the tax, fee, or charge. Such examination shall be made during regular business hours, only once for every tax period, and shall be certified to by the examining official. Such certificate shall be made of record in the books of accounts of the taxpayer examined.</p> <p> In case the examination herein authorized is made by a duly authorized deputy of the local treasurer, the written authority of the deputy concerned shall specifically state the name, address, and business of the taxpayer whose books, accounts, and pertinent records are to be examined, the date and place of such examination and the procedure to be followed in conducting the same.</p> <p> For this purpose, the records of the revenue district office of the Bureau of Internal Revenue shall be made available to the local treasurer, his deputy or duly authorized representative. </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 62. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 63. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 98-99. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 123. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 26-33. </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 130-131. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 136. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> October 2010 STL Rules, sec. 5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo</i>, pp. 36-38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 36; Authority to Conduct Actual Test Run for Small Town Lottery Project, sec. 2 Scope of Test Run. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, pp. 53-54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> 310 Phil. 722 (1995) [Per J. Padilla, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 764. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> In <strong>Manila Jockey Club, Inc. v. Court of Appeals</strong>, 360 Phil. 367, 384 (1998) [Per J. Quisumbing, First Division], the Court emphasized that "a statute which authorizes a gambling activity or business should be strictly construed, and every reasonable doubt be resolved so as to limit rather than expand the powers and rights claimed by franchise holders under its authority." </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 464 Phil. 375 (2004) [Per J. Ynares-Santiago, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 386. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Rollo</i>, pp. 94-96 (November 13, 2014 Letter of Provincial Attorney Rodel T. Paderayon) and 69-70 (November 20, 2014 Letter). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 12. </p><p><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 13-14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 137. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Republic Act No. 1169 (1954), sec. 1. as amended by Batas Pambansa Blg. 42 (1979). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Tatel v. Municipality of Virac</b>, 283 Phil. 983, 987 (1992) [Per J. Nocon, Second Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 531 Phil. 30 (2006) [Per J. Chico-Nazario, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 113-114, 146-147.&nbsp;</p><p><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> The 2020 Small Town Lottery Revised Implementing Rules and Regulations (January 9, 2020) enumerates the duties and functions of a Branch Office. </p><p> SECTION 8. <em>Functions of Branch Operations Sector (BOS)</em>. - The NCR Department and/or the concerned Branch Offices shall have the following duties and functions: </p><blockquote> <p> a. Supervise STL operations of AACs, pursuant to the following: <br> i. Sales Report and Remittance. The NCR Department and/or the concerned Branch Office shall:<br> 1. Monitor the daily and monthly sales reports and remittances of AACs; <br> 2. In case of any discrepancy between the sales report and remittance of the AAC, the Branch Office shall reconcile with the AAC concerning the difference. The Branch Office shall then confirm the Payment made by the AAC with the PCSO Accounting and Budget Department. Reconciliation of accounts shall not exceed ten (10) working days to determine whether an AAC has made full and timely remittance.<br> 3. In the event that an AAC fails to make full and timely remittance of its GMMRR, promptly submit a recommendation for the termination of the Agency Agreement with said AAC, through the concerned BOS-Department and OAGM-BOS to the GM. <br> The GM shall issue, without delay, the appropriate documents to implement the recommendation of the Branch Operations Sector (BOS).<br> ii. Conduct of STL draw. All STL draws must be conducted by the PCSO, in compliance with Article VII of this RIRR;<br> iii. Monitoring of STL draw results broadcast and publication; and<br> iv. Submission of regular reports and other documents as may be required; <br> b. Monitor compliance of AACs with this RIRR, Agency Agreement and all other pertinent PCSO issuances and regulations. Non-compliance should be reported within five (5) calendar days to the OAGM-BOS by the concerned Branch Office, copy furnished the OGM, for appropriate action;<br> c. Inspect the principal office of AAC based on the submitted proof of ownership or lease contract of the principal office; <br> d. Inspect and evaluate the proposed STL draw court, STL stations and STL booths and submit recommendation through the concerned BOS-Department and OAGM-BOS for approval of the GM; <br> e. Provide AACs with ID template, as prescribed by the PCSO, for STL sales supervisors and representatives, which shall be provided with control numbers and duly entered into the records of the office; <br> f. Submit the following monthly reports to the respective Department Manager for consolidation; <br> i. Sales and Remittances of AACs;<br> ii. Problems encountered in the operation of STL including matters pertaining to illegal number games; and<br> iii. Such other reports as may be required. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>See</i> LOCAL GOV'T CODE, sec. 481(b)(3)(5). </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259968 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. ROBINSONS CONVENIENCE STORES, INC., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70180' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259968, August 27, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. ROBINSONS CONVENIENCE STORES, INC., RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for <i>Certiorari</i> (under Rule 65)<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Rules of Court filed by the Commissioner of Internal Revenue (CIR), assailing the Resolutions promulgated on March 22, 2021<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and November 12, 2021,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> respectively, of the Court of Tax Appeals (CTA) Third Division (CTA Division), in CTA Case No. 9178.<br>&nbsp;<br>In the assailed Resolutions, the CTA Division enjoined the CIR from collecting the assessed deficiency taxes against respondent Robinsons Convenience Stores, Inc. (Robinsons) and <i>dispensed with the bond requirement under Section 11 of Republic Act No. 1125, as amended</i>.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> The CTA Division premised its order on its earlier Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated June 30, 2020 (Main Decision), which cancelled the deficiency income tax, value-added tax (VAT), expanded withholding tax (EWT), and withholding tax on compensation (WTC) assessments against Robinsons for taxable year 2010 on account of prescription and the revenue officers' lack of authority to conduct an audit examination.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br><center><i>The Antecedents</i></center><br>The Bureau of Internal Revenue (BIR) audited Robinsons' books of account for taxable year 2010. During the audit investigation, the parties executed a Waiver of the Defense of Prescription under the Statute of Limitations (Waiver), which extended the period to assess until March 31, 2014.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Subsequently, the Large Taxpayers Division of the BIR issued a Formal Letter of Demand (FLD), assessing to Robinsons for alleged deficiency income tax, VAT, EWT, and WTC for taxable year 2010, in the aggregate amount of PHP 3,324,939,818.35, inclusive of surcharges and interest.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The FLD was sent out on April 14, 2014.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Thereafter, Robinsons protested the FLD on June 6, 2014. The CIR, however, denied the protest and issued a Final Decision on Disputed Assessment (FDDA) dated March 2, 2015, reiterating his finding that Robinsons is liable to pay alleged deficiency income tax, VAT, EWT, and WTC in the total amount of PHP 3,583,693,014.79,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> computed as follows:<blockquote><table width="100%" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="20%"><div align="center">Tax Type</div></td><td width="20%"><div align="center">Basic<br>(in PHP)</div></td><td width="20%"><div align="center">Surcharge<br>(in PHP)</div></td><td width="20%"><div align="center">Interest<br>(in PHP)</div></td><td width="20%"><div align="center">Total<br>(in PHP)</div></td></tr><tr><td>Income Tax</td><td><div align="right">1,033,082,622.55</div></td><td><div align="right">516,541,311.27</div></td><td><div align="right">818,541,080.66</div></td><td><div align="right">2,368,165,014.48</div></td></tr><tr><td>VAT </td><td><div align="right">514,160,043.44</div></td><td><div align="right">257,080,021.72</div></td><td><div align="right">429,922,315.77</div></td><td><div align="right">1,201,162,380.93</div></td></tr><tr><td>EWT </td><td><div align="right">2,914,763.97</div></td><td><div align="right">1,457,381.99</div></td><td><div align="right">2,461,178.78</div></td><td><div align="right">6,833,324.74</div></td></tr><tr><td>WTC</td><td><div align="right">3,212,910.53</div></td><td><div align="right">1,606,455.27</div></td><td><div align="right">2,712,928.84</div></td><td><div align="right">7,532,294.64</div></td></tr><tr><td>Total </td><td><div align="right">1,553,370,340.49</div></td><td><div align="right">776,685,170.25</div></td><td><div align="right">1,253,637,504.05</div></td><td><div align="right">3,583,693,014.79</div></td></tr></tbody></table></blockquote>&nbsp;Robinsons appealed the assessments to the CTA.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> After trial on the merits, the case was submitted for decision on May 2, 2019.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On June 30, 2020, the CTA Division issued its Main Decision<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> cancelling the CIR's deficiency assessments for taxable year 2010. The tax court found that except for the deficiency income tax assessment, the assessments for deficiency VAT, WTC and EWT were void as they were issued beyond the three-year prescriptive period.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> It further ruled that all the tax assessments for taxable year 2010 against Robinsons, including the deficiency income tax assessment, were void because the revenue officers who conducted the audit lacked the proper authority under a valid Letter of Authority.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>However, on October 6, 2020, the CIR issued a Warrant of Distraint and/or Levy (WDL), a copy of which was received by Robinsons on the same day.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> This prompted Robinsons to file an Extremely Urgent Motion to Quash Warrant of Distraint and/or Levy and Suspend Collection of Taxes and/or Issuance of Temporary Restraining Order<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Motion to Quash and Suspend Collection) before the CTA Division on December 4, 2020.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The CIR neither filed a comment on the Motion to Quash and Suspend Collection nor presented evidence to rebut the testimony of Robinsons' witness during the hearing.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br>&nbsp;<br><center><i>The Ruling of the CTA Division</i></center><br>In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated March 22, 2021, the CTA Division granted Robinsons' Motion to Quash and Suspend Collection. The tax court quashed the WDL, ordered the CIR to desist from further collection, and dispensed with the bond requirement. The dispositive portion reads:<blockquote>WHEREFORE, in light of the foregoing considerations, petitioner's Extremely Urgent Motion to Quash Warrant of Distraint and/or Levy and Suspend Collection of Taxes and/or Issuance of Temporary Restraining Order is hereby GRANTED.<br><br>Accordingly, the Warrant of Distraint and/or Levy dated October 6, 2020 is hereby QUASHED and LIFTED.<br><br>Respondent is hereby ORDERED to CEASE AND DESIST from collecting the subject deficiency IT, VAT, EWT, and WTC for the taxable year 2010 in the aggregate amount of [PHP] 3,583,693,014.79, inclusive of surcharge and interest, pending the final disposition of this case.<br><br>Further, the required cash deposit or bond provided under Section 11 of Republic Act No. 1125, is DISPENSED with.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></blockquote>In dispensing with the bond requirement, the CTA Division relied on the Court's ruling in <i>Sps. Pacquiao v. Court of Tax Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> which upheld the CTA's authority to reduce or dispense with the bond requirement when there is a <i>preliminary finding</i> that the assessment and the subsequent collection efforts are contrary to law and applicable tax regulations.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The CTA Division pointed out that not only was there a preliminary determination; there had already been a <i>full-blown trial on the merits</i>, which led to the Main Decision voiding the CIR's deficiency assessments on account of prescription and the revenue officers' lack of authority to conduct an audit examination. On this basis, the tax court concluded that the CIR's summary collection measures were without basis justifying the dispensation of the bond requirement.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>The CIR moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> arguing that the CTA Division erred in dispensing with the bond requirement, as there was no patent violation of the law and no basis to exempt Robinsons from posting the required bond or paying the cash deposit.<br><br>The CTA Division denied the Motion in the Resolution<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated November 12, 2021.<br><br>Hence, the CIR filed the present <i>certiorari</i> Petition.<br><br><center><i>The Arguments of Petitioner CIR</i></center><br>The CIR imputes grave abuse of discretion amounting to lack or excess of jurisdiction upon the CTA Division for dispensing with the bond requirement and argues as follows:<br><br><i>First</i>, the posting of a bond is mandatory when tax collection is suspended. While the CIR concedes that this requirement may be dispensed with in exceptional situations where summary collection is patently in violation of the law, as held in <i>Sps. Pacquiao</i>, Robinsons, in its Motion to Quash and Suspend Collection, failed to meet this standardâits motion was grounded solely on the contention that the subject assessments were void, not on any patent illegality of the collection process itself.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><i>Second</i>, while the CTA Division nullified the assessments, its ruling was not yet final, as the case was appealed to the CTA En Banc. Until the Main Decision attains finality, the assessments shall be presumed correct and issued in good faith.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><i>Third</i>, resort to summary administrative tax collection remedies was both proper and in accordance with the law. The CIR insists that Robinsons' account was already delinquent, citing Section 249(c)(3)<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> of the National Internal Revenue Code of 1997, as amended (Tax Code), which provides that delinquency interest shall accrue upon failure of the taxpayer to pay a deficiency tax, or any surcharge or interest on the due date appearing in the notice and demand. Accordingly, pursuant to Revenue Memorandum Order No. 35-2019, a WDL shall immediately issue upon verification of the necessary field in the Form 40-Collectible. Thus, the CIR concluded that Robinsons failed to demonstrate any legal impediment to the CIR's resort to summary administrative tax collection remedies.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br><center><i>The Arguments of Respondent Robinsons</i></center><br>For its part, Robinsons contends that the CTA Division acted in accordance with law and jurisprudence in dispensing with the bond requirement. Citing <i>Tridharma Marketing Corp. v. Court of Tax Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> it argues that the bond requirement under Section 11 of Republic Act No. 1125, as amended, only applies when the CIR's collection measures are carried out in accordance with the lawâwhen the collection measures are in plain violation of the law, the tax collection must be suspended to protect the taxpayer's interests.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Further, in <i>Sps. Pacquiao</i>, it was settled that the CTA's authority to suspend the collection of taxes and to dispense with the required bond is not confined to cases where prescription has set in; tax collection may be suspended even without a bond whenever the CTA makes a preliminary determination that the CIR's tax collection measures are not sanctioned by law.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Finally, Robinsons emphasizes that the CTA Division did not just make a preliminary finding; it had already conducted a full trial and ruled on the merits of the case. In the Main Decision, the tax court nullified the assessments on two definitive grounds: prescription and the revenue officers' lack of authority, rendering the assessments void; thus, the CIR could no longer collect the alleged tax deficiencies.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><center><i>The Issues</i></center><br>The Petition presents the following issues for the Court's resolution:<blockquote><ol><li>Is <i>certiorari</i>/prohibition the proper remedy to challenge the assailed Resolutions of the CTA Division?<br><br></li><li>If resort to <i>certiorari</i> is proper, did the CTA Division commit grave abuse of discretion when it dispensed with the bond requirement upon its order of suspension of collection of taxes?</li></ol></blockquote><center><i>The Ruling of the Court</i></center><br>The Court resolves to dismiss the Petition. The Court finds no grave abuse of discretion on the part of the CTA Division in issuing the assailed Resolutions.<br><br>It is settled that Section 11 of Republic Act No. 1125, as amended, vests the CTA with ample authority to <i><b>suspend</b> the collection of taxes</i> and <i>to even <b>dispense</b> with the bond requirement</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> as an exception to the "no injunction" rule against tax collection<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> in disputed assessments, viz.:<blockquote>SECTION 11. <i>Who May Appeal; Mode of Appeal; Effect of Appeal</i>. â Any party adversely affected by a decision, ruling or inaction of the Commissioner of Internal Revenue, the Commissioner of Customs, the Secretary of Finance, the Secretary of Trade and Industry or the Secretary of Agriculture or the Central Board of Assessment Appeals or the Regional Trial Courts may file an appeal with the CTA within thirty (30) days after the receipt of such decision or ruling or after the expiration of the period fixed by law for action as referred to in Section 7(a)(2) herein.<br><br>. . . .<br><br>No appeal taken to the CTA from the decision of the Commissioner of Internal Revenue or the Commissioner of Customs or the Regional Trial Court, provincial, city or municipal treasurer or the Secretary of Finance, the Secretary of Trade and Industry or the Secretary of Agriculture, as the case may be, shall suspend the payment, levy, distraint, and/or sale of any property of the taxpayer for the satisfaction of his tax liability as provided by existing law: Provided, however, <i>That when <b>in the opinion of the Court</b> the collection by the aforementioned government agencies may jeopardize the interest of the Government and/or the taxpayer the Court any stage of the proceeding may suspend the said collection and require the taxpayer either to deposit the amount claimed or to file a surety bond for not more than double the amount with the Court</i>. (Emphasis supplied)</blockquote>The phrase "when in the <i>opinion</i> of the [CTA]" connotes adequate <i>judicial discretion</i>; empowering the tax court to grant this relief at any point during the proceedings, provided it determines that the CIR's collection method demonstrably jeopardizes the interests of a taxpayer for being patently in violation of the law.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Here, the CIR challenges the CTA Division's exercise of its authority to dispense with the bond requirement via the instant Rule 65 action.<br><br><i>Certiorari/prohibition is proper</i><br><br>As a rule, a petition for <i>certiorari</i> under Rule 65 is an extraordinary remedy, available only when no other plain, speedy, and adequate remedy exists in the ordinary course of law. Accordingly, when a ruling is <i>appealable</i>, challenging it via <i>certiorari</i> and/or prohibition is generally proscribed.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Section 1, Rule 41 of the Rules of Court identifies <i>unappealable</i> circumstances which, may be challenged, instead, via Rule 65, e.g., when an order is <i>not a complete adjudication the case on the merits</i><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> or when the order deals with is a <i>specific matter</i> not declared by the rules as appealable, viz.:<blockquote><center>RULE 41<br><br>Appeal From The Regional Trial Courts</center><br>Section 1. <i>Subject of appeal</i>. â An appeal may be taken from a judgment or final order that completely disposes of the case, or of a particular matter therein when declared by these Rules to be appealable.<br><br>No appeal may be taken from:&nbsp;&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">An order denying a motion for new trial or reconsideration;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">An order denying a petition for relief or any similar motion seeking relief from judgment;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify"><i>An interlocutory order</i>,</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">An order disallowing or dismissing an appeal;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(e)</div></td><td><div align="justify">An order denying a motion to set aside a judgment by consent, confession or compromise on the ground of fraud, mistake or duress, or any other ground vitiating consent;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(f)</div></td><td><div align="justify">An order of execution;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(g)</div></td><td><div align="justify">A judgment or final order for or against one or more of several parties or in separate claims, counterclaims, cross-claims and third-party complaints, while the main case is pending, unless the court allows an appeal therefrom; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(h)</div></td><td><div align="justify">An order dismissing an action without prejudice.</div></td></tr></tbody></table></blockquote>In all the above instances where the judgment or final order is not appealable, the aggrieved party may file an appropriate special civil action under Rule 65. (n) (Emphasis supplied)</blockquote>The suspension of collection of tax is viewed as a <i>provisional remedy</i> and <i>ancillary</i> to the assessment case itself.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> It is a temporary measure availed of <i>pendente lite</i>, a mere incident in and is dependent on the outcome of the main case.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> In <i>GMA Network, Inc. v. National Telecommunications Commission</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> it was held that when a court resolves an ancillary matter, its ruling is typically limited to the specific issues concerning the provisional remedy sought and does not go into the merits of the main case, viz.:<blockquote>Provisional reliefs or remedies are writs and processes that are available during the pendency of the action. A litigant may avail of provisional remedies to preserve and protect certain rights and interests pending the issuance of the final judgment in the case. These remedies are provisional because they are <b>temporary measures</b> availed of during the pendency of the action; they are <b>ancillary</b> because they are mere incidents in and are dependent on the result of the main action.<br><br>The ancillary nature of provisional remedies means that they are adjunct to the main suit. Consequently, it is not uncommon that the issues in the main action are closely intertwined, if not identical, to the allegations and counter-allegations of the opposing parties in support of their contrary positions concerning the propriety or impropriety of the provisional relief.<br><br>The distinguishing factor between the resolution of the provisional remedy and the main case lies in the temporary character of the ruling on the provisional relief, thus, the term "provisional." <b>The resolution of the provisional remedy, however, should be confined to the necessary issues attendant to its resolution <i>without</i> delving into the merits of the main case,</b><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis in the original; citations omitted)</blockquote>In view of this, a <b><i>suspension order issued independently</i></b> of a final decision on the assessment does not constitute a judgment or final order for purposes of appeal. Hence, pursuant to Section 1,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Rule 41 of the Rules of Court, such suspension order is <i>unappealable</i> and may be challenged, instead, via a petition for <i>certiorari</i> under Rule 65.<br><br>However, aside from granting relief in a separate order, the CTA may also suspend tax collection and waive the bond requirement <i>as part of its <b>main decision</b> on the merits, as a necessary consequence of cancelling an assessment</i>. The order of suspension forms part of the CTA's complete adjudication of the disputed assessment, not merely an interlocutory matter therein. As such, it constitutes an <i>appealable</i> final judgment or order under the Rules of Court, rendering a petition for <i>certiorari</i>/prohibition procedurally inappropriate for the aggrieved party.<br><br>Precisely, this was the Court's ruling in <i>Commissioner of Internal Revenue v. Court of Tax Appeals Second Division</i>.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>The assailed resolutions in <i>QLDI</i> dealt with the taxpayer's motion for early resolution. The CTA Division cancelled the assessment on account of prescription and ordered for the suspension of tax collection; <i>the suspension order was part and parcel of the same resolution that cancelled the assessment</i>.<br><br>The CIR filed a Rule 65 petition before the Court to set aside the CTA Division's resolutions. While, ultimately, the Court found no grave abuse of discretion on the part of the CTA Division, it was held that the assailed twin resolutions therein had been a final judgment on the disputed assessment, not merely interlocutory orders. Thus, the appropriate remedy was to file a petition for review with the CTA <i>En Banc</i>. As an appeal remained accessible to the CIR, the extraordinary writs of <i>certiorari</i> and prohibition were unavailable.<br><br>Distinguished from <i>QLDI</i>, the CTA Division in the present case resolved the assessment in its Main Decision<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>on the merits</i>, thereby canceling the assessments against Robinsons, and subsequently, ordered the suspension of collection measures against Robinsons. Upon Robinsons' filing of a Motion to Quash and Suspend Collection, the CTA Division dealt with the <i>ancillary matters</i> of suspension of tax collection and bond requirement <i>independently</i> in the assailed Resolutions.<br><br>To be sure, the assailed Resolutions did not dispose of the case completely; they lacked the character or finality and were therefore <i>unappealable</i>. Consequently, the CIR's recourse to <i>certiorari</i>/prohibition is proper under the circumstances.<br><br>In the recent case of <i>Commissioner of Internal Revenue v. Nippon Express Philippines Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court held that petition for certiorari assailing a CTA Division's interlocutory order is cognizable by this Court.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The CTA Division did not commit grave abuse of discretion in dispensing with the bond requirement</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Having established the propriety of the remedy, the Court now examines the substantive issue. To be clear, the CIR does not dispute the propriety of the suspension order itself but solely assails the CTA Division's order dispensing the bond requirement in connection therewith. Accordingly, the Court's inquiry is limited to the issue of the CTA's waiver of the bond requirement.<br><br>To successfully challenge an act via <i>certiorari</i> and prohibition under Rule 65, the petitioner must demonstrate that the abuse of discretion is "patent and gross as to amount to an evasion of a positive duty or a virtual refusal to perform a duty enjoined by law, or to act at all in contemplation of law, as where the power is exercised in an arbitrary and despotic manner by reason of passion and hostility."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> The lower court's errors of judgment and/or misappreciation of evidence do not, by themselves, amount to grave abuse of discretion and consequently, not correctible by <i>certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>In <i>Tellez v. Spouses Joson</i>,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> the Court clarified the standard for what constitutes grave abuse of discretion:<blockquote>[G]rave abuse of discretion attends when the trial court manifestly disregarded the basic rules and procedures, or acted with obstinate disregard of basic and established rule of law or procedure.<br><br>Thus, there is grave abuse of discretion when an act is: (1) done contrary to the Constitution, the law or jurisprudence; or (2) executed whimsically, capriciously or arbitrarily, out of malice, ill will or personal bias. It may also refer to cases in which, for various reasons, there has been a gross misapprehension of facts.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Citations omitted)</blockquote>In the present case, the CIR imputes grave abuse of discretion upon the CTA Division as follows:<blockquote>In the Resolution issued by the public respondent, Revenue Regulations No. 4-2019 was cited to state that an account will not be delinquent if a taxpayer files an appeal before the Honorable Court of Tax Appeals ...<br><br>Petitioner most respectfully disagrees. The definition of terms provided in Revenue Regulations No. 4-2019 is the Implementing Rules and Regulations of Republic Act No. [1]1213, or the "Tax Amnesty Act", which provides the guidelines of processing of tax amnesty application on tax delinquencies. As specifically stated in Section 2 of the said Revenue Regulations, the Definition of Terms enumerated therein is only for the purposes of the said Regulations, and cannot be applied outside its coverage.<br><br>. . . .<br><br>The Unpaid Tax Assessments mentioned in the abovequoted provision talks about those tax assessments arising from investigation which have become final and executory in accordance with existing policies.<br><br>It must be stressed that petitioner's right to collect from respondent arose from the moment the assessed tax became delinquent. Section 249(C) of the NIRC of 1997, as amended, provides a concise point when delinquency arises and delinquency interest accrues:<br><br>. . . .<br><br>Clearly, private respondent's account is delinquent and the proper subject of collection proceedings.<br><br>As such, petitioner submits that since private respondent railed to show that there is a legal impediment to petitioner's collection of the assessed deficiency taxes, nor the necessity and extraordinary circumstances showing the need for dispensation of the cash bond requirement, private respondent should be made to pay the required cash bond under the law, contrary to the Resolution promulgated by the public respondent.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote>A bare statement that a court committed grave abuse of discretion, without specifying the particular acts or omissions that constitute such abuse, is not enough. Certainly, the CTA Division's interpretation of Revenue Regulations No. 4-2019 and the term "delinquent," even if it is <i>different</i> from the CIR's, does not constitute grave abuse of discretion. A Rule 65 petition is deficient if it merely alleges a legal error committed by the lower court, <i>absent specific averments</i> that the error is tainted with arbitrariness, despotism, or capriciousness amounting to lack or excess of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>At any rate, the Court still finds no grave abuse in the CTA Division's exercise of its discretion. That the assailed resolutions were arrived at after a <i>full-blown trial</i> and in accordance with <i>settled jurisprudence</i> negate any claim of arbitrariness or caprice on the part of the tax court.<br><br><i>First</i>, the waiver of the bond requirement was duly made in accordance with applicable law and prevailing jurisprudence.<br><br>It is not disputed that the CTA is empowered to dispense with the bond requirement under Section 11 of Republic Act No. 1125, as amended. Verily, in general, the CTA's order suspension of collection of tax is conditional upon the posting/filing of a bond; primarily, this is to protect the government's interest, to guarantee the payment of the disputed tax in the event the assessment is upheld.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>However, under certain circumstances, the imposition of a bond may already be unwarranted; thus, upon its discretion, the tax court may waive this requirement. This exception is illustrated in <i>Collector of Internal Revenue v. Reyes and Court of Tax Appeals</i>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>In <i>Reyes</i>, the CIR attempted to collect deficiency taxes through the summary method of distraint and levy. The respondent-taxpayer sought injunctive relief from the CTA, arguing, among others, that the CIR's right to collect by summary proceedings had already prescribed and a distraint and levy on his properties would work injustice or irreparable injury to him and would tend to render any judgment of the Court in the main case meaningless and ineffectual. The CTA ruled in favor of the respondent-taxpayer and ordered the CIR to desist from collecting by administrative method the alleged deficiency taxes pending the final decision on the merits.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Upon review, the Court found that the CIR's right to collect had already lapsed. Regarding the bond requirement, the Court clarified that it applies only if the collection processes are done in accordance with law:<blockquote>[P]etitioner asserts that even assuming that under Section 11 of Republic Act No. 1125[,] respondent Court is empowered to order him to desist from the collection of said taxes by extra-judicial methods, yet the Court erred in issuing the injunction without requiring the taxpayer either to deposit the amount claimed or file a surety bond for an amount not more than double the tax sought to be collected. We disagree with this contention. At first blush it might be as contended by the Solicitor General, but a careful analysis of the second paragraph of said Section 11 will lead us to the conclusion that the requirement of the bond as a condition precedent to the issuance of the writ of injunction applies only in cases where the processes by which the collection sought to be made by means thereof are carried out in consonance with the law for such cases provided and <i>not when said processes are obviously in violation of the law to the extreme that they have to be SUSPENDED for jeopardizing the interests of the taxpayer</i>.<br><br>Section 11 of Republic Act No. 1125 is therefore premised on the assumption that the collection by summary proceedings is by itself in accordance with existing law; and then what is suspended is the act of collecting, whereas, in the case at bar[,] what the respondent Court suspended was the use of the method employed to verify the collection which was evidently illegal after the lapse of the three-year limitation period. The respondent Court issued the injunction in question on the basis of its findings that the means intended to be used by petitioner in the collection of the alleged deficiency taxes were in violation of law. <i>It certainly would be an absurdity on the part of the Court of Tax Appeals to declare that the collection by the summary methods of distraint and levy was violative of the law, and then, on the same breath, require the petitioner to deposit or file a bond as a prerequisite for the issuance of a writ of injunction</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Emphasis supplied)</blockquote><i>Reyes</i> thus established the core principle: the bond is a condition precedent for enjoining a lawful collection process, not an illegal one. This doctrine was affirmed by the Court in the more recent case of <i>Sps. Pacquiao</i>,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> viz.:<blockquote>Thus, despite the amendments to the law, the Court still holds that the CTA has ample authority to issue injunctive writs to restrain the collection of tax <i>and to even dispense with the deposit of the amount claimed or the filing of the required bond, whenever the method</i> employed by the CIR in the collection of tax jeopardizes the interests of a taxpayer for being <i>patently in violation of the law</i>[.]<br><br>. . . .<br><br>From all the foregoing, it is clear that the authority of the courts to issue injunctive writs to restrain the collection of tax and to dispense with the deposit of the amount claimed or the filing of the required bond is not simply confined to cases where prescription has set in. <i>As explained by the Court in those cases, whenever it is determined by the courts that the method employed by the Collector of Internal Revenue in the collection of tax is not sanctioned by law, the bond requirement under Section 11 of R.A. No. 1125 should be dispensed with. The purpose of the rule is not only to prevent jeopardizing the interest of the taxpayer, but more importantly, to prevent the absurd situation wherein the court would declare "that the collection by the summary methods of distraint and levy was violative of law, and then, in the same breath require the petitioner to deposit or file a bond as a prerequisite for the issuance of a writ of injunction.</i>"<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (Emphasis supplied)</blockquote>In <i>Sps. Pacquiao</i>, the Court also emphasized that in resolving the matter of suspension and concomitant bond requirement, the CTA is mandated to conduct a preliminary hearing to determine whether the CIR complied with the law and the pertinent issuances in its assessment and efforts of collecting the same. This precedent underscores that the CTA must scrutinize not only the lawfulness of the collection process but also the validity of the assessment before requiring the taxpayer to post a bond.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Further, in <i>Tridharma</i>, the CTA required a surety bond of over PHP 4.4 billion to suspend collection of a disputed assessment, an amount that was nearly five times the net worth of the petitioner therein. The Court held that imposing such high bond without first determining whether the assessment is legal or valid and whether it would jeopardize the interest of the taxpayer constitutes grave abuse of discretion on the part of the CTA:<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><blockquote>The surety bond amounting to [PHP] 4,467,391,881.76 imposed by the CTA was within the parameters delineated in Section 11 of R.A. 1125, as amended. The Court holds, however, that the CTA in Division gravely abused its discretion under Section 11 because it fixed the amount of the bond at nearly five times the net worth of the petitioner without conducting a preliminary hearing to ascertain whether there were grounds to suspend the collection of the deficiency assessment on the ground that such collection would jeopardize the interests of the taxpayer. Although the amount of [PHP] 4,467,391,881.76 was itself the amount of the assessment, it behooved the CTA in Division to consider other factors recognized by the law itself towards suspending the collection of the assessment, like whether or not the assessment would jeopardize the interest of the taxpayer, or whether the means adopted by the CIR in determining the liability of the taxpayer was legal and valid. Simply prescribing such high amount of the bond like the initial 150% of the deficiency assessment of [PHP] 4,467,391,881.76 (or [PHP] 6,701,087,822.64), or later on even reducing the amount of the bond to equal the deficiency assessment would practically deny to the petitioner the meaningful opportunity to contest the validity of the assessments, and would likely even impoverish it as to force it out of business.<br><br>At this juncture, it becomes imperative to reiterate the principle that the power to tax is not the power to destroy[.]<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></blockquote>Like <i>Sps. Pacquiao</i>, the case was remanded for a preliminary hearing on the twin issues of jeopardy to the taxpayer and the patent illegality of the assessment.<br><br>These cases, taken together, establish a definitive legal test: the bond requirement under Section 11 of Republic Act No. 1125 may be dispensed with in two instances: (1) when the assessment or the method of collection is "patently illegal" or "not sanctioned by law;" and (2) when the amount of bond itself would deny to the taxpayer the meaningful opportunity to contest the validity of the assessments.<br><br>In the CTA Division's Main Decision, it already found that: (<i>a</i>) the CIR's right to assess Robinsons for deficiency VAT, WTC and EWT had already <i>prescribed</i>; and (<i>b</i>) the revenue officers who conducted the audit were <i>unauthorized</i> to do so. These established facts render the assessment patently illegal. Guided by the discussion in <i>Sps. Pacquiao</i>, these findings adequately justified the dispensation of the bond requirement. To hold otherwise would create an absurdity: if the CTA Division would impose a bond requirement, it would implicitly treat the void assessment as a valid tax liability that still requires security.<br><br><i>Second</i>, the waiver of the bond requirement was based on the CTA Division's findings after a full-blown trial.<br><br>Here, the CTA Division's determination of the necessity of a bond <i>was not merely preliminary</i>: it already ruled <i>on the merits</i> of the disputed assessment. The CTA Division cancelled the assessments after finding that that the CIR's right to assess the taxpayer had prescribed and that the revenue officers were not authorized to conduct an audit examination. Thus, the assailed Resolutions ordering the suspension of tax collection and dispensing the bond requirement were rendered after consideration of <i>all</i> the evidence in the case.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The CIR's right to collect by way of a WDL had already prescribed</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Lastly, even if We assume that the subject tax assessments were valid and issued within the period allowed, the CIR's right to collect via summary administrative remedies had already prescribed, rendering the issuance of a WDL void.<br><br>The Court observes that the parties executed a Waiver extending the <i>assessment period</i>. When the CIR issues the assessment within such extended period, Section 222(d),<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> in relation to Section 222(b),<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> of the Tax Code, gives the tax authorities five years to collect the deficiency taxes by distraint or levy.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> The five-year prescriptive period to collect shall be reckoned from "the date the assessment notice had been released, mailed or sent by the BIR to the taxpayer."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>It was found that the BIR sent out the FLD on April 14, 2014. Hence, the CIR had only until April 14, 2019, to enforce collection through summary administrative collection remedies (e.g., distraint, levy) against Robinsons for its 20 deficiency taxes. However, as borne by the records, the subject WDL was issued only on October 6, 2020âmore than a year after the government's right to collect had lapsed. The WDL was therefore issued without legal authority and is void.<br><br><b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> is <b>DISMISSED</b> for lack of merit.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson)</i> and <i>Gaerlan JJ.</i>, concur.<br><i>Dimaampao, J.</i>, see concurring opinion.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 30-36. Signed by Associate Justices Erlinda P. Uy, Ma. Belen M. Ringpis-Liban and Maria Rowena Modesto-San Pedro of the Third Division, Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 37-44. Signed by Associate Justices Erlinda P. Uy, Ma. Belen M. Ringpis-Liban and Maria Rowena Modesto-San Pedro of the Third Division, Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> As amended by Republic Act No. 9282, approved on March 30, 2004. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, pp. 45-72. Penned by CTA Associate Justice Erlinda P. Uy and concurred in by Associate Justices Ma. Belen M. Ringpis-Liban and Maria Rowena Modesto-San Pedro of the Third Division, Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 47-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 45-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 58-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 67-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 73-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 30-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 784 Phil. 220 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 247-248.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, p. 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 119-123. <i>See</i> Motion for Reconsideration dated June 10, 2021.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 37-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 13-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> SECTION 249. <i>Interest</i>. â<br><br>. . . .<br><br>(c) <i>Delinquency Interest</i>. â In case of failure to pay:<br><br>. . . .<br><br>(3) A deficiency tax, or any surcharge or interest thereon on the due date appearing in the notice and demand of the Commissioner, there shall be assessed and collected on the unpaid amount, interest at the rate prescribed in Subsection (A) hereof until the amount is fully paid, which interest shall form part of the tax.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 787 Phil. 638, 648 (2016). <i>See also</i> <b>Collector of Internal Revenue v. Reyes and Court of Tax Appeals</b>, 100 Phil. 822, 828 (1957).<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i>, pp. 129-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 130-131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Sps. Pacquiao v. Court of Tax Appeals</b>, <i>supra</i> note 22, at 246-247. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See</i> TAX CODE, sec. 218 which states:<br><br>SECTION 218. <i>Injunction not Available to Restrain Collection of Tax</i>. â No court shall have the authority to grant an injunction to restrain the collection of any national internal revenue tax, fee or charge imposed by this Code.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Sps. Pacquiao v. Court of Tax Appeals</b>, <i>supra</i> note 22, at 246. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Commissioner of Internal Revenue v. Court of Tax Appeals Second Division</b>, 921 Phil. 1090, 1096 (2022). (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> <b>Integrated Credit and Corporate Services Co. v. Labrador</b>, 943 Phil. 581 (2023). (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Commissioner of Internal Revenue v. Court of Tax Appeals (First Division)</b>, 898 Phil. 131 (2021). (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>GMA Network, Inc. v. National Telecommunications Commission</b>, 780 Phil. 244, 252 (2016). (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> SECTION 1. <i>Subject of appeal</i>. â An appeal may be taken from a judgment or final order that completely disposes of the case, or of a particular matter therein when declared by these Rules to be appealable.<br><br>No appeal may be taken from:<br><br>. . .<br><br>(c) <i>An interlocutory order</i>;<br><br>. . . .<br><br>In all the above instances where the judgment or final order is not appealable, the aggrieved party may file an appropriate special civil action under Rule 65. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Supra</i> note 38. The private respondent in said case was QL Development, Inc. (QLDI).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, pp. 45-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>G.R. No. 271701</b>, promulgated on May 6, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>People v. Court of Tax Appeals-Third Division</b>, 929 Phil. 454, 473 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>See</i> <b>People v. Court of Appeals</b>, 691 Phil. 783, 787 (2012); <b>Triplex Enterprises, Inc. v. PNB-Republic Bank</b>, 527 Phil. 685, 690 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> 960 Phil. 515 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 523.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, pp. 18-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>See</i> <b>Villanueva v. Mayor Ople</b>, 512 Phil. 187, 199 (2005). (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>See</i> <b>Privatization and Management Office v. CTA</b>, 849 Phil. 652, 659 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Supra</i> note 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 825.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 828-829.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Supra</i> note 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 246-247.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 247-248.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Tridharma Marketing Corp. v. Court of Tax Appeals</b>, <i>supra</i> note 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 646-647.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> SECTION 222. <i>Exceptions as to Period of Limitation of Assessment and Collection of Taxes</i>.<br><br>. . .<br><br>(b) If before the expiration of the time prescribed in Section 203 for the assessment of the tax, both the Commissioner and the taxpayer have agreed in writing to its assessment after such time, the tax may be assessed within the period agreed upon. The period so agreed upon may be extended by subsequent written agreement made before the expiration of the period previously agreed upon.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> (d) Any internal revenue tax, which has been assessed within the period agreed upon as provided in paragraph (b) hereinabove, may be collected by distraint or levy or by a proceeding in court within the period agreed upon in writing before the expiration of the five (5)-year period. The period so agreed upon may be extended by subsequent written agreements made before the expiration of the period previously agreed upon.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> By analogy, this is consistent with <b>Commissioner of Internal Revenue v. Court of Tax Appeals Second Division</b>, <i>supra</i> note 38, where the Court held that the five-year period to collect (not three) shall apply in case an assessment is issued pursuant to Section 222(c), in relation to Section 222(a).<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Commissioner of Internal Revenue v. Bank of the Philippine Islands</b>, 885 Phil. 288, 302 (2020), <i>citing</i> <b>Bank of the Philippine Islands v. Commissioner of Internal Revenue</b>, 738 Phil. 577, 586 (2014).<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>CONCURRING OPINION</b></center><br><b>DIMAAMPAO, <i>J.</i>:</b><br><br>I concur with the well-reasoned discussion in the <i>ponencia</i> as to why the present Petition must be dismissed.<br><br>Nonetheless, I write to offer a few observations as to the discretionary power granted unto the Court of Tax Appeals (CTA) and the extent of the power of collection of the Commissioner of Internal Revenue (CIR) and its duly authorized representatives.<br><br>As aptly pointed out by the <i>ponencia</i>, sufficient discretion is given to the CTA with respect to both the actual suspension of taxes and the requirement of a bond.<br><br>At first blush, the wording of Section 11 of Republic Act No. 1125, as amended by Republic Act No. 9282, does not appear to afford the CTA with the option to dispense with either a deposit of the assessed amount or the filing of a bond:<blockquote>SEC. 11. Who May Appeal; Mode of Appeal; Effect of Appeal.â ...<br><br>. . . .<br><br>No appeal taken to the CTA from the decision of the Commissioner of Internal Revenue or the Commissioner of Customs or the Regional Trial Court, provincial, city or municipal treasurer or the Secretary of Finance, the Secretary of Trade and Industry or the Secretary of Agriculture, as the case may be, shall suspend the payment, levy, distraint, and/or sale of any property of the taxpayer for the satisfaction of his tax liability as provided by existing law: Provided, however, That <b>when in the opinion of the Court the collection by the aforementioned government agencies may jeopardize the interest of the Government and/or the taxpayer the Court at any stage of the proceeding may suspend the said collection and require the taxpayer either to deposit the amount claimed or to file a surety bond for not more than double the amount with the Court</b>. (Emphasis supplied)</blockquote>Notably, the above-quoted proviso remained largely unchanged from its original wording prior to the amendment introduced by Republic Act No. 9282.<br><br>As to how the foregoing proviso should be applied, it is arguable that its wording <b>could</b> mean that the discretion of the CTA is limited to determining whether the collection may jeopardize the interest of either the Government and/or taxpayer and, if so, the CTA may order the suspension of the collection of taxes but always conditioned on the depositing of the amount claimed or the filing of a surety bond. This is in line with the purpose of these condition precedents to "guarantee the payment of the deficiency taxes assessed against the taxpayer, if and when the case is finally decided against the said taxpayer."<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>Still, in the oft-mentioned case of <i>Spouses Pacquiao v. Court of Tax Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which, in turn, cited the case of <i>Collector of Internal Revenue v. Avelino</i>,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> the Court recognized that the CTA has the authority to restrain the collection of taxes <b>and even dispense with the deposit of the amount claimed or the filing of the required bond</b> "whenever the method employed by the [Commissioner of Internal Revenue (CIR)] in the collection of tax jeopardizes the interests of a taxpayer for being patently in violation of the law."<br><br>The reason for the foregoing interpretation is rooted in logical necessity and fairness. As the Court explicated in <i>Avelino</i>:<blockquote>It is true that the court did not require the taxpayer to deposit the amount claimed or to file a bond as required by law before granting the relief, but such action is justified considering that the court found the action of the Collector to be contrary to law. <b>To require a bond under such a situation would indeed be illogical and improper.</b><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (Emphasis supplied)</blockquote>Indeed, I wholeheartedly agree that this interpretation is more in keeping with justice and fairness and is likewise consistent with the intent of the law to vest the CTA "exclusive jurisdiction to resolve all tax problem."<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> It likewise balances the need to safeguard the collection of taxes with the need to protect taxpayers from baseless assessments and collection suits.<br><br>It cannot be denied that a baseless suit assessing an exorbitant amount coupled with a strict adherence to the literal wording of the proviso in Section 11 could veritably deprive a taxpayer from seeking relief from the CTA solely on the basis of financial constraints. In fact, this was the Court's observation in <i>Tridharma Marketing Corp. v. Court of Tax Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> wherein the Court invalidated the bond required by the CTA when it was set at five times the corporation's net worth:<blockquote>The surety bond amounting to [PHP]4,467,391,881.76 imposed by the CTA was within the parameters delineated in Section 11 of R.A. 1125, as amended. The Court holds, however, that the CTA in Division gravely abused its discretion under Section 11 because it fixed the amount of the bond at nearly five times the net worth of the petitioner without conducting a preliminary hearing to ascertain whether there were grounds to suspend the collection of the deficiency assessment on the ground that such collection would jeopardize the interests of the taxpayer. Although the amount of [PHP]4,467,391,881.76 was itself the amount of the assessment, it behoved the CTA in Division to consider other factors recognized by the law itself towards suspending the collection of the assessment, like whether or not the assessment would jeopardize the interest of the taxpayer, or whether the means adopted by the CIR in determining the liability of the taxpayer was legal and valid. <b>Simply prescribing such high amount of the bond like the initial 150% of the deficiency assessment of [PHP]4,467,391,881.76 (or [PHP]6,701,087,822.64), or later on even reducing the amount of the bond to equal the deficiency assessment would practically deny to the petitioner the meaningful opportunity to contest the validity of the assessments, and would likely even impoverish it as to force it out of business.</b> (Emphasis supplied)</blockquote>As to the extent of the CIR's power to collect, particularly with respect to its issuance of a warrant of distraint and/or levy (WDL) <b>after</b> the CTA issued a decision cancelling its assessment, I find myself legitimately concerned as to the CIR's seeming disregard of both the authority and pronouncement of a court of law.<br><br>To my mind, this haphazard attitude, as reinforced by the CIR's failure to file a comment to the motion to quash and suspend the collection of taxes or to even participate during the hearings, displays a dangerous propensity to circumvent legal processes and to pressure the taxpayer seeking judicial relief.<br><br>I believe the Court ought to remind the CIR to be more circumspect in its dealings with taxpayers and not to be moved by overzealousness at the expense of the public.<br><br>"[W]hile taxes are the lifeblood of the government, the power of taxation should be 'exercised with caution to minimize the proprietary rights of a taxpayer.' It must be exercised fairly, equally and uniformly, lest the tax collector kill the 'hen that lays the golden egg.'"<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Accordingly, I vote to <b>DISMISS</b> the Petition.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Privatization and Management Office v. Court of Tax Appeals</b>, 849 Phil. 652-664 (2019) [Per J. J.C. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> 784 Phil. 220-257 (2016) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> 100 Phil. 327-337 (1956) [Per J. Bautista Angelo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <b>Banco De Oro v. Republic, G.R. No. 198756</b> (Resolution), August 16, 2016 [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <b>G.R. No. 215950</b>, June 20, 2016 [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <b>Kepco Philippines Corp. v. Commissioner of Internal Revenue, G.R. Nos. 225750-51</b> (Resolution), July 28, 2020 [Per J. Lopez, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

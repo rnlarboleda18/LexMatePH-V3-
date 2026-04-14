@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277020 - AUREL ANN CHUA-CHIBA, PETITIONER, VS. JIN CHIBA AND MICHAEL LLONA, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70163' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277020, May 19, 2025 ]</H2>
+			<H3>AUREL ANN CHUA-CHIBA, PETITIONER, VS. JIN CHIBA AND MICHAEL LLONA, RESPONDENTS.<BR><BR>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Assailed in this Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court are the Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated October 21, 2024 and the Order<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated November 13, 2024 of Branch 112, Regional Trial Court (RTC) of Pasay City in Criminal Case No. R-PSY-24-01245-SC, which reversed and set aside the Orders dated March 12, 2024<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and April 25, 2024<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Branch 167, Metropolitan Trial Court (MeTC) of Pasay City (MeTC Pasay City-Branch 167), and ordered<i> inter alia</i> the reinstatement of Criminal Case No. M-PSY-23-00670-CR (for adultery) for a resolution on the merits.</p><p align="center"> <b>The Facts</b> </p><p> On December 21, 2022, respondent Jin Chiba (Jin), through his authorized representative, Marvin O. Ayende (Marvin), filed a complaint affidavit charging petitioner Aurel Ann Chua-Chiba (Aurel) and respondent Michael Llona (Michael) of the crimes of adultery and grave threats before the Office of the City Prosecutor, Pasay City (OCP-Pasay City). Following a preliminary investigation, the OCP-Pasay City found probable cause to indict Aurel and Michael of adultery and grave threats in a Resolution dated February 21, 2023. As a result, on March 6, 2023, two separate Informations for grave threats and adultery were filed before the MeTC Pasay City-Branch 167.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Afterwards, the MeTC Pasay City-Branch 167 found probable cause to hold Aurel and Michael for trial and issued the corresponding warrant of arrest with recommended PHP 36,000.00 bail against them. Subsequently, Aurel and Michael posted cash bonds for their provisional liberty.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> On February 12, 2024, Aurel filed a Motion to dismiss <i>ex abudanti ad cautelam</i> before the MeTC Pasay City-Branch 167, seeking the dismissal of the adultery case on the ground of lack of jurisdiction as the case cannot be prosecuted by a complete stranger even if armed by a special power of attorney, and the grave threats case in view of the alleged deprivation of the due process.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The prosecution then opposed the motion, averring that the grounds averred by Aurel were fabricated and that the motion to dismiss was a mere ploy to delay the proceedings.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p align="center"> <b>The MeTC Pasay City-Branch 167 Ruling</b> </p><p> In an Order dated March 12, 2024, the MeTC Pasay City-Branch 167 partially granted the motion, and accordingly ordered the dismissal of Criminal Case No. M-PSY-23-00670-CR for adultery against Aurel and Michael. In so ruling, the MeTC Pasay City-Branch 167 held that the complaint-affidavit filed by Marvin, who was merely authorized by Jin to file the complaint on his behalf, cannot be considered sufficient compliance with the legal requirements for filing an adultery case, particularly, that it should be filed by the offended spouse.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Aggrieved, Jin through his counsel, moved for reconsideration, which was denied by the MeTC Pasay City-Branch 167 in a Resolution dated April 25, 2024. Thus, Jin filed a Petition for <i>Certiorari</i> under Rule 65 of the Rules of Court (Rule 65 Petition) with application for temporary restraining order, which was docketed before the Regional Trial Court of Pasay City, Branch 112 (RTC).</p><p> Meanwhile, Criminal Case No. M-PSY-23-00669-CR for grave threats case was eventually transferred to the MeTC of Pasay City, Branch 165 (MeTC Pasay City-Branch 165).<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p align="center"> <b>The RTC Ruling</b> </p><p> In a Decision<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated October 21, 2024, the RTC ruled in Jin's favor, and accordingly, directed the MeTC Pasay City-Branch 167 to reinstate Criminal Case No. M-PSY-23-00670-CR for adultery filed by Jin against Aurel and Michael. </p><p> In so ruling, it found that the MeTC Pasay City-Branch 167 gravely abused its discretion in dismissing the case due to Jin's failure to comply with the filing requirements for an adultery case. It held that the complaint-affidavit filed by Jin, <b><i>which was attached to the complaint-affidavit by Marvin</i></b>, sufficiently complied with the legal requirements for the filing of an adultery case. It observed that the complaint-affidavit executed by Jin: (a) narrated the facts and circumstances constituting the crime and explicitly and categorically charged Aurel and Michael of adultery; (b) contained all the elements of a valid complaint under Article 344 of the RPC and Rule 110, Section 5 of the Rules of Court; and (c) was attached to the Information as an integral part thereof, and duly filed to the court. Further, it found that Marvin's complaint-affidavit merely echoed Jin's averments in his complaint-affidavit, and clearly stated that he was only Jin's authorized representative.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> Dissatisfied, Aurel moved for reconsideration, which was denied in an Order<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated November 13, 2024. Aurel then directly filed a Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court with prayer for the issuance of a temporary restraining order and/or writ of preliminary injunction before this Court.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p align="center"> <b>The Issue Before the Court</b> </p><p> The issue before this Court is whether the RTC erred in finding that Jin's complaint affidavit, which was attached to the complaint-affidavit filed by Marvin and the Information filed by the OCP-Pasay City before the MeTC Pasay City-Branch 167, can be considered as sufficient compliance with the requirements for filing an adultery case under Rule 110, Section 5 of the Rules of Court and Article 344 of the RPC. </p><p align="center"> <b>The Court's Ruling</b> </p><p> The appeal is meritorious. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>Aurel properly filed the Rule 45 Petition before this Court</i></b> </div></td> </tr> </tbody></table> <p>At the outset, the Court notes that Aurel availed of the proper mode of appeal in directly filing the Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court before this Court. </p><p> Under the Rules of Court, there are three modes of appeal from RTC decisions, particularly: (a) through an ordinary appeal before the CA under Rule 41 where the decision assailed was rendered in the exercise of the RTC's original jurisdiction. In ordinary appeals, questions of fact or mixed questions of fact and law may be raised; (b) through a petition for review before the CA under Rule 42 where the decision assailed was rendered by the RTC in the exercise of its appellate jurisdiction. In petitions for review, questions of fact, law, or mixed questions of fact and law may be raised; and (c) through an appeal by <i>certiorari</i> before this Court under Rule 45 where only questions of law shall be raised.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> Consequently, a question of law arises when there is doubt as to what the law is on a certain state of facts, while there is a question of fact when the doubt arises as to the truth or falsity of the alleged facts. For a question to be one of law, its resolution must not involve an examination of the probative value of the evidence presented by the litigants, but must rely solely on what the law provides on the given set of facts. If the facts are disputed or if the issues require an examination of the evidence, the question posed is one of fact. <b><i>The test, therefore, is not the appellation given to the question by the party raising it, but whether the appellate court can resolve the issue without examining or evaluating the evidence, in which case, it is a question of law; otherwise, it is a question of fact</i></b>.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> In this case, the issue raised by Aurel, i.e., whether the RTC erred in interpretating that Jin's complaint-affidavit attached to the complaint-affidavit executed by Marvin can be considered as a sufficient compliance with the requirements for filing an adultery case, involved pure question of law. Thus, Aurel properly filed the instant case before this Court. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><b><i>The Complaint-Affidavit filed by Marvin does not comply with the jurisdictional requirements for the filing of an adultery case</i></b> </div></td> </tr> </tbody></table> <p>Rule 110, Section 5 of the Revised Rules of Criminal Procedure provides: </p><blockquote> <p> Section 5. <i>Who must prosecute criminal actions</i>. -</p> <p> The crimes of adultery and concubinage shall not be prosecuted <b><i>except upon a complaint filed by the offended spouse</i></b>. The offended party cannot institute criminal prosecution without including the guilty parties, if both alive, nor, in any case, if the offended party has consented to the offense or pardoned the offenders.</p> </blockquote> <p> Consequently, Article 344 of the RPC states: </p><blockquote> <p> Article 344. Prosecution of the crimes of adultery, concubinage, seduction, abduction, rape and acts of lasciviousness. â <b><i>The crimes of adultery and concubinage shall not be prosecuted except upon a complaint filed by the offended spouse</i></b>.</p> <p> The offended party cannot institute criminal prosecution without including both the guilty parties, if they are both alive, nor, in any case, if he shall have consented or pardoned the offenders.</p> </blockquote> <p> Adultery, being a private offense, cannot be prosecuted except upon a complaint filed by the offended spouse who cannot institute the criminal prosecution without including both the guilty parties, if they are both alive, nor in any case, if he shall have consented or pardoned the offenders.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> Consequently, it has been held that "[w]hen it is said that the requirement in Article 344 (that there shall be a complaint of the offended party) is jurisdictional, what is meant is that it is the complaint that starts the prosecutory proceeding. It is not the complaint which confers jurisdiction on the court to try the case. The court's jurisdiction is vested in it by the Judiciary Law."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p> Further, the Court has invariably maintained strict adherence to the jurisdictional requirement that a complaint for adultery must be filed by the offended spouse. This legal requirement was imposed "out of consideration for the aggrieved party who might prefer to suffer the outrage in silence rather than go through the scandal of a public trial." The law leaves it to the option of the aggrieved spouse to seek judicial redress for the affront committed by the erring spouse.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p><p> In this case, the complaint for adultery against Aurel and Michael was not initiated by Jin, the offended spouse. Records revealed that the prosecution for the crime of adultery commenced with a complaint-affidavit filed by Marvin, Jin's authorized representative. Although Jin submitted his own complaint-affidavit accusing Aurel and Michael of adultery, it was only included as an annex to the complaint-affidavit filed by Marvin. Clearly, the jurisdictional requirement for filing an adultery case under Rule 110, Section 5 of the Revised Rules of Criminal Procedure and Article 344 of the RPC was not met. Therefore, since no valid complaint for adultery was filed against Aurel and Michael, the MeTC Pasay City-Branch 167 was correct in granting the Motion to dismiss and subsequently ordering the dismissal of Criminal Case No. R-PSY-23-00670-CR.</p><p> <b>FOR THESE REASONS</b>, the instant Petition is <b>GRANTED</b>. The Decision dated October 21, 2024 and the Order dated November 13, 2024 of Branch 112, Regional Trial Court of Pasay City are <b>REVERSED and SET ASIDE.</b> The Orders dated March 12, 2024 and April 25, 2024 of Branch 167, Metropolitan Trial Court of Pasay City are <b>AFFIRMED.</b> Accordingly, Criminal Case No. M-PSY-23-00670-CR for the crime of adultery against petitioner Aurel Ann Chua-Chiba and respondent Michael Llona is <b>DISMISSED.</b></p><p> <b>SO ORDERED.</b></p><p> <i>Lazaro-Javier </i>and <i>M. Lopez, JJ</i>., concur. <i><br> Leonen, SAJ. (Chairperson)</i>, see separate opinion. <i><br> J. Lopez,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on official business. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 89-99. Penned by Acting Judge Ronald August L. Tan.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 100-103.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 220-226. Penned by Presiding Judge Sheila Marie V. Sison-Javier.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 251-256.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 342.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 39. <i>See also</i> <i>id.</i> at 27.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 221-222. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 222-223. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 220-225.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 91. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 89-99.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 94-99.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 100-103.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 15-88.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <b>Sugar Regulatory Administration v. Central Azucarera De Bais, Inc.</b>, 937 Phil. 541, 546 (2023) [Per J. M. Lopez, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <b>Far Eastern Surety and Insurance Co., Inc. v. People</b>, 721 Phil. 760, 767 (2013) [Per J. Brion, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Donio-Teves v. Vamenta, Jr.</b>, 218 Phil. 578 (1984) [Per J. Cuevas, Second Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <b>People v. Dela Cruz</b>, 433 Phil. 739, 752 (2002) [Per J. Davide, Jr., First Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup><em> Id.<br><br></em></p> <hr align="center" width="60%" size="1" noshade="noshade"> <div align="center"><b><br></b></div><div align="center"><b>CONCURRING OPINION</b></div> <p> <b>LEONEN, <i>S.A.J</i>.:</b> </p><p> I concur with the <i>ponencia</i>. I write to also emphasize that the prosecution of private crimes must be read strictly. </p><p> For the crime of adultery, the Revised Penal Code provides that "[it] shall not be prosecuted except upon a complaint filed by the offended spouse."<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Accordingly, the language of the law is clear that adultery may only be prosecuted upon a complaint filed by the offended spouse. The provision also highlights the private nature of the crime of adultery. </p><p> In <i>Isturis-Rebuelta v. Rebuelta</i>,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> the Court further underscored the nature of adultery as a private crime and the rule on its prosecution: </p><blockquote> <p> In private crimes, the right to commence an action or refrain therefrom is at the sole power and option of the offended party, who must decide whether to expose in public, the vices, faults, and disgraceful acts within the family. Adultery, as a private crime, may only be prosecuted upon a complaint filed by the husband against the guilty parties. It is the husband who would exercise the option of commencing the action to seek judicial redress for the wrong committed by his wife. Worthy of emphasis here is that in all crimes, whether private or public, the term "offended party" refers to the private complainant to whom the offender will be civilly liable in view of Article 100 of the RPC.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> (Citations omitted) </p> </blockquote> <p> Moreover, I have explained the private nature of marital infidelity in my dissenting opinion in <i>Valencia v. People of the Philippines</i>:<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </p><blockquote> <p> It is a basic principle that the State is the offended party in criminal actions. This is so because the commission of crimes is considered "a breach of the security and peace of the people at large, an outrage against the very sovereignty of the State." Thus, "[c]rimes are punished as retribution so that society would understand that the act punished was wrong[.]"</p> <p> . . . .</p> <p> Considering the underlying reason for the existence of criminal actions, it is difficult to reconcile how acts that constitute adultery and concubinage fall within their scope. <i>Issues of marital infidelity are, at its core, private matters between two married individuals. When one engages in marital infidelity, it is only the family unit that is directly affected. In fact, such transgressions are rarely made known to the public, much less to the State</i>.</p> <p> The private nature of marital infidelity is emphasized in the Revised Penal Code, as "crimes of adultery and concubinage shall not be prosecuted except upon a complaint filed by the offended spouse." <i>The State, on its own, cannot initiate a criminal complaint for these crimes as it is not an offended party.</i> </p> <p> The reason is simple: Marital infidelity is not "a breach of the security and peace of the people at large, an outrage against the very sovereignty of the State." </p> <p> Adultery and concubinage are not "crimes" in the true sense of the word. </p> <p> <i>The relationship between two married individuals, including deviations from the marriage contract, is a private matter that does not require any government interference. There is no public interest to protect or act that requires penal sanctions. Thus, to allow private citizens to utilize the strong arm of the law to punish those who commit marital infidelity is a disproportionate remedy for the nature of the action</i>.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> Here, it appears on record that respondent Jin Chiba, the offended spouse, was not the one who initiated the complaint for adultery. It was merely his authorized representative, Marvin O. Ayende, who filed the complaint-affidavit charging Aurel Ann Chua-Chiba (Chua-Chiba) and Michael Llona (Llona) of the crime of adultery.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Thus, it is evident that the rule on the prosecution of the crime of adultery was not complied with. Without a valid complaint, there is no case to begin with. Consequently, the complaint for the crime of adultery against Chua-Chiba and Llona must be dismissed.</p><p> <b>ACCORDINGLY</b>, I vote to <b>GRANT</b> the Petition.<br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> REV. PEN. CODE, art. 344. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> 949 Phil. 1116 (2023) [Per C.J. Gesmundo, First Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 1123.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> 951 Phil. 163 (2024) [Per J. Lazaro-Javier, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> J. Leonen, Dissenting Opinion in <b>Valencia v. People</b>, 951 Phil. 163, 186-187 (2024) [Per J. Lazaro-Javier, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Ponencia</i>, p. 6.</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

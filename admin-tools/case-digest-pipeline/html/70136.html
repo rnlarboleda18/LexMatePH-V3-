@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 258730 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. REYNALDO SUELA Y ILLUSTRE ALIAS "IPOT," ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70136' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 258730, August 18, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. REYNALDO SUELA <I>Y</I> ILLUSTRE ALIAS "IPOT," ACCUSED-APPELLANT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Assailed in this Appeal is the Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of the Court of Appeals (CA) in CA-G.R. CR-HC No. 09782 which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Regional Trial Court (RTC), convicting accused-appellant Reynaldo Suela <i>y</i> Illustre alias "Ipot" (Suela) of murder penalized under Article 248<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Revised Penal Code albeit modifying the award for damages.<br><br>An Information<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> was filed before Branch 60 of the RTC, Makati City, indicting Suela for the crime of murder, the inculpatory averments of which readâ<br><blockquote>On the 3<sup>rd</sup> day of February 2014, in the city of Makati, [] Philippines, accused, conspiring and confederating with Juan Castro [<i>y</i>] Depoc @ Wawan, Romeo Sales[,] Jr. [<i>y</i>] Aguinaldo @ Boyet and unidentified male individual whose whereabouts were unknown, armed with firearm .38 cal. revolver, with treachery, evident premeditation and abuse of superior strength, did then and there willfully, unlawfully and feloniously and with intent to kill, shot one Bermindo Jose [<i>y</i>] de Gracia, thereby inflicting upon the latter, mortal wound which directly caused his death. <br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </blockquote>Upon arraignment, Suela pled not guilty to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> After the pre-trial conference, trial on the merits ensued.<br><br>The prosecution presented the following narrative to prove the culpability of Suela:<br><br>At around 8:20 p.m of February 3, 2014, Jose De Guzman (De Guzman) was at his market stall along P. Victor Street, Barangay Guadalupe Nuevo, Makati City, when he observed two men acting suspiciously. One of them, who was subsequently identified as Suela, wore a black sweatshirt and black bull cap.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> As it happened, the questionable behavior of these men also caught the eye of another vendor, Alberto Oserin (Oserin). Consequently, De Guzman, told Oserin, "<i>Abet, tingnan-tingnan mo nga ang dalawang iyon ha, iba ang kilos</i>."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>After several minutes, Suela and his unidentified companion approached Romeo Sales alias Boyet (Sales) and Juan Castro alias Wawan (Castro). After they spoke, Castro entered the UNIMEC Supermarket, while the rest of them walked along the side of the supermarket going towards the jeepney terminal exit. Incidentally, Bermindo Jose (Jose), the president of Highway 54 Pateros Drivers Association (HIPADA), was having a drink with Rene Robosa (Robosa) in the same area. Using his lips, Sales pointed Jose to the two men and immediately left the area. Afterwards, when Jose was about to board Robosa's motorcycle, Suela shot him in the back of his head.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Meanwhile, Oserin who did not anymore continue to observe Suela and his companion after seeing them converse with Sales, was surprised to hear the gunshot. Oserin then turned around and saw Jose slowly falling down from the motorcycle while Suela, who was armed with a gun, and his companion, were briskly walking towards the market.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Posthaste, Mark, one of Oserin's friends,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> shouted, "<i>Ayun! Ayun ang bumaril</i>!"<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Thus, Oserin joined the other people in chasing Suela. However, Suela fled after he pointed his gun at them.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>In the meantime, Robosa brought Jose to the Ospital ng Makati, where the latter was declared dead on arrival.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The cause of his death was a gunshot wound to the posterior neck.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Thereafter, De Guzman and Oserin gave their respective statements before the police officers at the Makati Police Station where they were shown a closed-circuit television (CCTV) footage of Suela being chased by some men.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>At around 10:00 a.m. of February 18, 2014, Senior Police Officer I Jason David (SPO1 David) learned that Suela, who bore a striking resemblance to the man wearing the black sweatshirt and bull cap in the CCTV footage, was arrested by police officers from the Malabon City Police Station.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Thus, on even date, he went to the Malabon City Police Station together with De Guzman<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> and Oserin as well as Alvin Alvarez and Michael Batiancila who also ran after Suela.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> When Suela was presented to them, they positively identified him as the same person involved in the shooting incident which resulted in the death of Jose.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Asserting that he is innocent, Suela vehemently denied the charge against him.<br><br>He averred that he lived in Purok 6, Hernandez, Catmon, Malabon.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> At around 6:00 p.m. of February 3, 2014, he and his wife were at the house of his wife's friend, Maricar O. Domingo (Domingo) in Malabon City. They had a drinking spree and stayed at Domingo's house until around 11:00 p.m.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>At around 5:30 p.m. of February 17, 2014, he noticed three men following him while he was walking towards his house. Suddenly, the men pointed their guns at him and one of them hit him with a gun, causing him to fall on the ground. The men, who turned out to be police officers, handcuffed him and brought him to the precinct.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> When he asked the police officers why he was arrested, they replied, "<i>Pasensya ka na [p]are, may umaarbor sa ulo mo.</i>"<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> When he was brought to the fiscal's office for inquest, he asserted that there was no truth to the accusation that he murdered someone.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Domingo and Paolo V. Sigua (Sigua), Suela's brother-in-law, corroborated Suela's testimony.<br><br>Domingo declared that on February 3, 2014, she, Suela and his wife, as well as some of their friends, had an impromptu get together for her daughter's upcoming birthday. Thus, from 6:00 p.m. to 11:00 p.m. of said date, Suela and their friends, were at her house having a drinking spree.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>For his part, Sigua avowed that when he learned that the basis of the arrest of his brother-in-law was a CCTV footage, he immediately searched the subject video in YouTube particularly that of 24 Oras, a news program of Channel 7, and downloaded it on his computer.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> In addition, he downloaded the mug shots of Suela from the Facebook account of Mr. Eduardo Trillana, the arresting officer of Malabon Police.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> He pointed out that the person in the video and the one showed in the photographs were two different personsâ <i>one</i>, the man in the video had no colloids or tattoo on his chest while the one in the picture has colloids as well as tattoo on his left arm and chest, and<i> two, </i>the man in the video has a well-built body and is '<i>tisoy</i>' (a mestizo) while the one in the photo is not.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In due course, the RTC rendered the August 1, 2017 Decision, finding Suela guilty beyond reasonable doubt of murder, thuslyâ<br><blockquote><b>WHEREFORE</b>, premises considered, this Court finds the accused REYNALDO SUELA [<i>y</i>] ILLUSTRE alias "IPOT " <b>GUILTY </b>beyond reasonable doubt of the crime of Murder defined and penalized under Article 248 of the Revised Penal Code and in line with the mandate of<b> Republic Act No. 9346</b>, without aggravating and mitigating circumstances, hereby imposes the penalty of [<i>Reclusion Perpetua</i>].<br><br>Also, this Court hereby orders the said accused to<b> PAY</b> the surviving heirs of the victim the following:<br><blockquote>1.) The sum of [PHP] 75,000.00 as civil indemnity ex-delicto;<br>2.) The sum of [PHP] 245,903.86 as actual damages;<br>3.) The sum of [PHP] 50,000.00 as moral damages, and<br>4.) The costs of this suit.</blockquote>The said accused is hereby credited of his total duration of preventive imprisonment in the service of his imposed imprisonment.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis in the original) </blockquote>Aggrieved, Suela filed an appeal before the CA. Still and all, finding no error on the part of the RTC in declaring Suela guilty of murder, the CA affirmed the foregoing Decision with modification anent the penalty in the February 21, 2020 Decision, viz.:<br><blockquote><b>FOR THESE REASONS</b>, the instant appeal is DISMISSED. The Decision dated 01 August 2017 rendered by the Regional Trial Court of Makati City, Branch 60 in Criminal Case No. 14-184 is<b> AFFIRMED with MODIFICATIONS</b>. Accused-Appellant Reynaldo Suela<i> y</i> Illustre<i> alias </i>"Ipot" is found<b> GUILTY</b> beyond reasonable doubt of the crime of murder and shall suffer the penalty of<i> reclusion perpetua</i> and shall pay the heirs of Bermindo Jose<i> y</i> De Gracia Seventy-Five Thousand Pesos ([PHP] 75,000.00) as civil indemnity, Seventy-Five Thousand Pesos ([PHP] 75,000.00) as moral damages, Two Hundred Forty-Five Thousand Nine Hundred Three Pesos and Eighty-Six Centavos ([PHP] 245,903.86) as actual damages, and the costs of suit. The damages awarded in this case shall be subject to interest at six percent (6%)<i> per annum</i> from the finality of this Decision until fully paid.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis in the original) </blockquote>Maintaining that the CA erred in affirming the RTC Decision, Suela comes to this Court via the present recourse intransigently asseverating that the prosecution failed to positively identify him as the malefactor of the crime, in view of the conflicting and incredible testimonies of the prosecution witnesses.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><b><i>The Appeal carries weight and conviction. The Court finds that the acquittal of Suela is in order. </i></b><br><br>First off, it bears stressing that the Court accords respect to the factual findings of the trial court as it is in a better position to evaluate the testimonial evidence. The rule finds an even more stringent application where the said findings are sustained by the CA.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> This rule, however, is not absolute. Indeed, even on appeals from criminal convictions, the Court is not precluded from overturning the factual findings of the trial court when it has been established that the trial court overlooked, misunderstood, or misapplied some fact or circumstance of weight and substance,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> as in this case.<br><br>It is settled that in assessing whether the accused-appellant's judgment of conviction should be upheld, the following must be considered:<b><i> first</i>, the identification of the accused</b> as perpetrator of the crime and<b><i> second</i></b>, all the elements constituting the crime were duly proven by the prosecution to be present.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Simply put, conviction requires no less than evidence sufficient to arrive at a moral certainty of guilt, not only with respect to the existence of a crime, but more importantly, of the identity of the accused as the author of the crime.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> As elucidated by the Courtâ<br><blockquote>Proving the identity of the accused as the malefactor is the prosecution's primary responsibility. Thus, in every criminal prosecution, the identity of the offender, like the crime itself, must be established by proof beyond reasonable doubt. Indeed, the first duty of the prosecution is not to prove the crime but to prove the identity of the criminal, for even if the commission of the crime can be established, there can be no conviction without proof of the identity of the criminal beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </blockquote>Undeniably, in this case, the crime of murder was committed. Lamentably, however, the prosecution failed to establish with moral certainty the identity of Suela as the author of the offense.<br><br>The Court elucidates.<br><br>To establish that Suela was the perpetrator of the crime, the prosecution relied heavily on the testimonies of De Guzman and Oserin. As it happened, they were brought by SPO1 David to the Malabon Police Station to identify Suela if indeed he was the one who killed Jose.<br><br><i>Was the foregoing out-of-court identification then of Suela by De Guzman and Oserin reliable? </i><br><br>On this score, the Court, in<i> Pagtakhan v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> once again pronounced the factors to be considered in the totality of circumstances test which is relevant in out-of-court identification, thusâ<br><blockquote>In<i> Teehankee, Jr.</i>, the Court laid down the "totality-of-circumstances" test when it comes to determining the admissibility and weight of such identifications, to wit:<br><blockquote>Out-of-court identification is conducted by the police in various ways.<b> It is done thr[ough] show-ups where the suspect alone is brought face[-]to[-]face with the witness for identification</b>. It is done th[rough] mug shots where photographs are shown to the witness to identify the suspect. It is also done thr[ough] line-ups where a witness identifies the suspect from a group of persons lined up for the purpose. <b>Since corruption of out-of-court identification contaminates the integrity of in-court identification during the trial of the case, courts have fashioned out rules to assure its fairness and its compliance with the requirements of constitutional due process</b>. In resolving the admissibility of and relying on<i> [sic]</i> out-of-court identification of suspects, courts have adopted the<b> totality of circumstances test</b> where they consider the following factors,<i> viz.</i>:<b> (1) the witness' opportunity to view the criminal at the time of the crime; (2) the witness' degree of attention at that time; (3) the accuracy of any prior description given by the witness; (4) the level of certainty demonstrated by the witness at the identification; (5) the length of time between the crime and the identification; and (6) the suggestiveness of the identification procedure</b>.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original) </blockquote></blockquote>Using the totality of circumstances test, the Court rules and so holds that the prosecution witnesses failed to identify Suela as the culprit with moral certainty.<br><br><b><i>First.</i></b> The factor of prior description is lacking.<br><br>Patently, De Guzman did not give at all any prior description of Suela when he gave his statement before the police aside from the fact that he confirmed that the killer was wearing "black t-shirt [and] bull cap."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> In his affidavit, De Guzman merely stated that the man in the CCTV footage was the one who killed Jose. This being so, De Guzman's testimony that he saw the face of the perpetrator and could never forget the same,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> is dubious particularly in view of his assertion that he merely noticed the contour of the face, thusâ<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Do you have any distinctive mark that you noticed in the face of the gun man? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Wala po akong nakita, mukha lang po talaga, yung bilog po ng mukha.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></div></td> </tr> </tbody></table></blockquote>Upon the other hand, Oserin himself declared that he did not see the "gunman shot [Jose]."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> While he averred that he knew that the man they were running after was the one who killed Jose, he admitted that he did not see his facial features, viz:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">[M]r. Witness, you mentioned in your Judicial Affidavit, you described the person who you run after as having a big built, correct Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Opo. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">But how about the facial features of the person, Mr. Witness. Why did you not describe it in your Affidavit? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Nakasumbrero po kasi. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So you cannot ascertain with certainty the facial features of the gunman because he was wearing a bull cap, correct Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Opo.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></div></td> </tr> </tbody></table></blockquote>Quite palpably, Oserin certainly could not give any prior description. Upon this point, SPO1 David himself avowed:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Will I be correct to say that when you examined witness Alberto Oserin, did you not ask him [sic] about the physical attributes of the alleged shooter? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Ma'am, they claim that they saw the physical attributes and when show to him the CCTV [sic], the CCTV ...(interrupted unfinished) </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Would I be correct to say, Mr. Witness, that when I say physical attributes, you did not gather the particular height, the particular built or the particular weight of the alleged shooter? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">No, Ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So what you are saying right now, Mr. Witness, is that the footage which was shown to the witnesses was the CCTV in Guada[lupe] Mall, correct? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And what was seen or shown to the witnesses was a male person wearing black shirt with black bull cap being chased, is that correct? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Ma'am. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And would I be correct that the perspective from which the camera was taken on the alleged person being chased was from the top, correct, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Ma'am. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So would I be correct that you still failed to get the particular height, weight or the particular physical attributes of this person being chased? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Ma'am. </div></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">So I would be correct to say, Mr. Witness, that when SPO2 Rene Baluyan told you that the person appearing on the CCTV in Guada Mall looks like the person on GMA news TV, you had no particular physical attributes to compare him to, correct, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, Ma'am.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></div></td> </tr> </tbody></table></blockquote>As there is an absence of the factor of prior description much less "accuracy of prior description," De Guzman and Oserin patently failed to convey any idea how the perpetrator looked like. Truly, said witnesses' validation that the person seen in the CCTV footage was the same person who killed Jose does not prove at all that Suela was the malefactor. In view of the absence of a previous description, a question is formed in the mind as to whether De Guzman and Oserin merely based such through the CCTV footage. In any case, given that the prosecution did not present the CCTV footage as evidence, it cannot properly rely on it to establish Suela's identity as the malefactor.<br><br>To stress, what guards against unjust conviction and imprisonment is the requirement that some form of identifying features and attributes of a crime's perpetrator must be given by a witness or complainant at the earliest opportunity to form a solid basis for subsequent identifications (both out-of-court and in-court) that may in turn lead to proper conviction and imprisonment.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><b><i>Second.</i></b> The record evinces suggestiveness in the identification procedure.<br><br>To recall, SPO1 David and the abovenamed witnesses went to Malabon Police Station for the purpose of identifying the suspect who was arrested, i.e., Suela, who has a similarity with the man shown in the CCTV footage. According to De Guzman, there were two men who were presented.<br><br>Still and all, De Guzman's avouchals tellingly indicate how such presentation was impermissibly suggestiveâ<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">In your Salaysay, Mr. Witness, you identified my client when you were [invited] at the Police Station, correct, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A:</div></td> <td valign="top"> <div align="JUSTIFY">Opo. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Where exactly in that Police Station did you chance upon my client, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Doon mismo sa istasyon ng pulis. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And I refer you now to the Question No. 5 and if I may quote, your [Honor], it says :'05. Tanong: May ipapakita akong tao sa iyo, ano ang masasabi mo dito?' Who is talking, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Si Jason David. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And <b> he has with him, beside him the Accused</b>, correct, Mr. Witness?</div></td> </tr> <tr> <td valign="top"><div align="JUSTIFY">A:</div></td> <td valign="top"><div align="JUSTIFY"><b>Opo, hawak nila. Yung pulis taga Malabon at siya</b>.</div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">And you identified him as the gunman, correct, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Opo. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">My question now is, how many of them were lined up in your presence, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Hindi ko na po masyadong matandaan pero dalawa lang silang pagpipilian. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Who is that other one, Mr. Witness? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Hindi ko kilala. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">But <b> you told awhile ago that Inspector David was holding my client?</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><b>Pati mga pulis dun sa Malabon</b>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis supplied). </div></td> </tr> </tbody></table></blockquote>Indisputably, <b>what occurred was, in effect, a show-up</b> perceivably suggestive in nature.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> As the Court edifyingly decreedâ<br><blockquote>In<i> People v. Baconguis</i>, the Court declared as invalid the out-of-court identification of therein accused-appellant, which was a show-up tainted with highly improper suggestion on the part of the arresting officers. Said the Court:<br><br>A show[-]up, such as what was undertaken by the police in the identification of appellant by Lydia, has been held to be an underhanded mode of identification for "being pointedly suggestive, generating confidence where there was none, activating visual imagination, and, all told, subverting their reliability as an eyewitness."<b> Lydia knew that she was going to identify a suspect, whose name had priorly [<i>sic</i>] been furnished by her brother-policeman, when she went to the police station</b>. And the police pointed appellant to her, and told her that he was the suspect, while he was behind bars, alone.<br><br>The unusual, coarse and highly singular method of identification, which revolts against accepted principles of scientific crime detection, alienates the esteem of every just man, and commands neither respect nor acceptance[.]<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis in the original) </blockquote>The question then comes down the pike â Did the prosecution witnesses truly recognize Suela as the one who killed Jose, or they merely identified said accused as "suggested" by the police officers since he looked like the one in the CCTV footage?<br><br><b>As there is dubiety on the identity of Suela, he must be exonerated </b>as there is<b> probability</b> that someone else participated in the crime. This nagging and inescapable possibility that a different individual, other than the person charged, is the author of the crime escapes the moral certainty required to convict Suela of the crime of murder.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br><i>A final note.</i> In criminal cases, the overriding consideration is not whether the court doubts the innocence of the accused, but whether it entertains a reasonable doubt as to his or her guilt. If there exists even one iota of doubt, the Court is under a longstanding legal injunction to resolve the doubt in favor of the accused.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br><b>ACCORDINGLY</b>, the Appeal is<b> GRANTED</b>. The February 21, 2020 Decision of the Court of Appeals in CA-G.R. CR-HC No. 09782 is <b>REVERSED and SET ASIDE</b>. Reynaldo Suela<i> y</i> Illustre alias "Ipot" is <b>ACQUITTED</b> for failure of the prosecution to prove his guilt beyond reasonable doubt. He is<b> ORDERED IMMEDIATELY RELEASED</b> from detention unless he is confined for any other lawful cause.<br><br>Let a copy of this Decision be furnished to the Director General of the Bureau of Corrections, Muntinlupa City, for immediate implementation. Furthermore, the Director General is<b> DIRECTED</b> to<b> REPORT</b> to this Court, within five days from receipt of this Decision, the action taken in compliance with this order.<br><br>Let entry of judgment be<b> ISSUED IMMEDIATELY</b>.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting,</i> and <i>Gaerlan, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> CA <i>rollo</i>, pp, 108-120. The Decision dated February 21, 2020 was penned by Associate Justice Elihu A. YbaÃ±ez with the concurrence of Associate Justices Rafael Antonio M. Santos and Tita Marilyn B. Payoyo-Villordon of the Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> RTC records, pp. 469-490. The Decision dated August 1, 2017 was penned by Presiding Judge Cesar L. Aganon of Branch 60, Regional Trial Court of Makati City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Article 248. <i>Murder. â Any person who, not falling within the provisions of Article 246, shall kill another, shall be guilty of murder and shall be punished by reclusion perpetua</i>, to death if committed with any of the following attendant circumstances:<br><blockquote><ol><li>With treachery, taking advantage of superior strength, with the aid of armed men, or employing means to weaken the defense or of means or persons to insure or afford impunity;<br></li><li>In consideration of a price, reward, or promise;<br></li><li>By means of inundation, fire, poison, explosion, shipwreck, stranding of a vessel, derailment or assault upon a railroad, fall of an airship, by means of motor vehicles, or with the use of any other means involving great waste and ruin;<br></li><li>On the occasion of any of the calamities enumerated in the preceding paragraph, or of an earthquake, eruption of a volcano, destructive cyclone, epidemic, or any other public calamity;<br></li><li>With evident premeditation;<br></li><li>With cruelty, by deliberately and inhumanly augmenting the suffering of the victim, or outraging or scoffing at his person or corpse.</li></ol></blockquote><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> RTC records, p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 63. Order dated March 18, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> TSN, Jose De Guzman, May 22, 2014, pp. 4-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records, p. 21. Affidavit of Alberto Oserin dated February 6, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 15-16. Affidavit of Jose De Guzman dated February 4, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 22. Affidavit of Alberto Oserin dated February 6, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> TSN, Alberto Oserin, July 8, 2014, pp. 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> RTC records, p. 22. Affidavit of Alberto Oserin dated February 6, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 27. Affidavit of Rene Robosa dated February 13, 2014. <i>See</i> TSN, Rene Robosa, August 14, 2014, p. 2, where the prosecution and the defense stipulated on the contents of Robosa's Affidavit and agreed to dispense with his testimony.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 367. Medico-Legal Report No. A14-122.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> TSN, Jose De Guzman, May 22, 2014, pp. 11-12; TSN, Alberto Oserin, July 8, 2014, p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> RTC records, p. 30. Joint Affidavit of Arrest.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 18. Affidavit of Jose De Guzman dated February 22, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> TSN, SPO1 Jason David, January 27, 2015, p. 10. Alvin Alvarez and Michael Batiancila did not testify in court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> RTC records, p. 30. Joint Affidavit of Arrest.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> TSN, Reynaldo Suela, November 8, 2016, p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> TSN, Reynaldo Suela, November 22, 2016, pp. 4-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 7-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> TSN, Maricar O. Domingo, August 27, 2015, pp. 6-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> TSN, Paolo Sigua, September 22, 2015 but erroneously dated August 27, 2015, pp. 3-4; <i>see also</i> TSN, Paolo Sigua, February 18, 2016, p. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> TSN, Paolo Sigua, May 5, 2016, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> TSN, Paolo Sigua, February 18, 2016, pp. 8-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> RTC records, pp. 489-490.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> CA <i>rollo</i>, pp. 119-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 42. Brief for the Accused-Appellant. <i>See also</i> <i>rollo</i>, pp. 55-57. Manifestation filed by the accused-appellant stating that he would no longer file Supplemental Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>People of the Philippines v. Domingo</b>, 905 Phil. 378, 386-387 (2021) [Per J. Delos Santos, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> <b>People of the Philippines v. Torres</b>, 908 Phil. 178, 184 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. (Emphasis in the original)<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Pagtakhan v. People</b>, 951 Phil. 115, 137 (2024) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 137-138.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 951 Phil. 115 (2024) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 127-128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> RTC records, p. 16. Affidavit of Jose De Guzman dated February 4, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> TSN, Jose De Guzman, May 22, 2014, p. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> TSN, Alberto Oserin, July 8, 2014, p. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> TSN, SPOI Jason David, January 27, 2015, pp. 7- 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>See</i> <b>Pagtakhan v. People</b>, 951 Phil. 115, 1387 (2024) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> TSN, Jose De Guzman, May 29, 2014, pp. 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>People of the Philippines v. Jimenez</b>, 948 Phil. 510, 521 (2023) [Per J. Zalameda, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>See</i> <b>Pagtakhan v. People, G.R. No. 257702</b> (February 7, 2024) [Per J. Gaerlan, Third Division] at 13Â­14. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>People of the Philippines v. Maglinas</b>, 928 Phil. 62, 84 (2022) [Per C. J. Gesmundo, First Division]. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 84.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

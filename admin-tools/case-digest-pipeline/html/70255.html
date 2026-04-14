@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 271518 - ANDRO T. BACANI, RONALD F. CABRERA, CAMESORO T. CABATUAN, JR., JAYSON D. DELARA, RAULE R. ARGUEL, RE-ANN D. RIVERO, CRIZALDY N. WAJE, ARIEL Y. SUA, AND CHARLIE R. SEBOLINO, PETITIONERS, VS. FIBER TEXTILE MANUFACTURING CORP., SHERLY QUE (OWNER/PRESIDENT), JUDY QUE (HR MANAGER), AND JASON QUE (PLANT MANAGER), RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : 'bb9578c4381ee4f0e5296fbdb8c65d99' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : 'bb9578c4381ee4f0e5296fbdb8c65d99' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70255' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 271518, September 30, 2025 ]</H2>
+			<H3>ANDRO T. BACANI, RONALD F. CABRERA, CAMESORO T. CABATUAN, JR., JAYSON D. DELARA, RAULE R. ARGUEL, RE-ANN D. RIVERO, CRIZALDY N. WAJE, ARIEL Y. SUA, AND CHARLIE R. SEBOLINO, PETITIONERS, VS. FIBER TEXTILE MANUFACTURING CORP., SHERLY QUE (OWNER/PRESIDENT), JUDY QUE (HR MANAGER), AND JASON QUE (PLANT MANAGER), RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LAZARO-JAVIER, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 assails the following dispositions of the Court of Appeals in CA-G.R. SP No. 165065, viz.:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated April 28, 2023, affirming the National Relations Labor Commission's (NLRC) dismissal of the complaint for constructive dismissal, shortened workweek and nonremittance of Social Security System (SSS), Philippine Health Insurance (PhilHealth), and Pag-IBIG contributions filed by petitioners Andro T. Bacani (Bacani), Ronald F. Cabrera (Cabrera), Camesoro T. Cabatuan, Jr. (Cabatuan), Jayson D. Delara (Delara), Raule R. Arguel (Arguel), Re-ann D. Rivero (Rivero), Crizaldy N. Waje (Waje), Ariel Y. Sua (Sua), and Charlie R. Sebolino (Sebolino) (collectively, petitioners) against respondents Fiber Textile Manufacturing Corp., (FMC), Sherly Que (Sherly), Judy Que (Judy), and Jason Que (Jason); and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">2) </div></td> <td valign="top"> <div align="JUSTIFY">Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 17, 2024, denying petitioners' motion for reconsideration, respectively. </div></td> </tr> </tbody></table><br><center><b>Antecedents</b></center><br>FMC, a corporation duly organized and existing under Philippine laws, is engaged in textile manufacturing. Its factory is located at Meycauayan, Bulacan while its administrative office and warehouse used to be located at Valenzuela City. Sherly is the president while Judy and Jason are the human resource manager and plant manager, respectively, of FMC.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>On June 16, 2017, petitioners were employed by FMC as folding operator, chemical mixer, color man, receiver, dyeing operator, and folding operator with a salary of PHP 380.00 per day. They initially had a six-day workweek. This was, however, subsequently reduced to two to three days per week, prompting them to seek the assistance of the Department of Labor and Employment (DOLE), Malolos. FMC, Sherly, Judy, and Jason, however, failed to appear during the Single-Entry Approach (SEnA) on July 20, 2018.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On July 27, 2018, petitioners went to FMC's premises but Judy angrily told Bacani, Delara, Arguel, and Rivero to look for another job, while she told the others to resign ("<i>Huwag na babalik. Layas layas</i>"). During a mediation conference, a certain Sammy Chua (Chua) admitted that he advised petitioners to look for another job.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Petitioners thus filed a complaint for constructive illegal dismissal, reduction of workweek, and nonremittance of SSS, PhilHealth, and Pag-IBIG contributions against FMC, Sherly, Judy, and Jason before the DOLE Regional Arbitration Branch III. The parties did not arrive at an amicable settlement despite conciliation. In their position paper, petitioners averred that they were dismissed from employment due to the complaint they filed before DOLE.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On the other hand, FMC and its officers riposted that on July 9, 2018, the management and employees of FMC were unexpectedly prevented from entering its compound in Valenzuela City, which became the subject of a pending ejectment case. FMC was prevented from removing its properties, including its inventory in the warehouse, as well as important office documents such as payrolls.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>FMC reasoned out that since the raw materials were stored in the warehouse in Valenzuela City and access thereto was denied, the production in the factory in Bulacan was gravely affected. As a remedy, FMC made an unscheduled purchase of fabrics from suppliers but there was delay in the delivery. Due to the lack of materials, the number of production workers allegedly exceeded the available work in the factory. Consequently, FMC decided to temporarily implement a work rotation schedule of production personnel in the factory until the raw materials they ordered were delivered. Management called for a meeting to inform the production supervisors and personnel of the predicament and the need to implement a work rotation schedule.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Thus, on July 16, 2018, FMC issued Company Memo - 81,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> informing all personnel of the immediate implementation of the work rotation schedule. This was allegedly posted in a conspicuous place in the factory for everyone to read. The schedules prepared by the supervisor allotted each worker at least two working days in a week.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Sometime in July 2018, Arguel allegedly filed for leave from July 23, 2018 to August 11, 2018 to take care of his child while his wife was in the province taking care of her mother. His leave application was approved. After his leave though, he no longer reported for work.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Meanwhile, Delara was suspended for 12 days or from July 25, 2018 to August 7, 2018 for sleeping during work hours. On July 24, 2018, he received the Violations Memo, informing him of his suspension. However, he also no longer returned to work after serving his suspension.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>During the first week of August 2018, Bacani, Cabrera, Sua and Sebolino did not report for work on their scheduled work days. Since they were absent without leave, management called other employees to cover for them. FMC denied that Chua admitted telling petitioners to look for another job or that Judy told them to resign, get out, and never return. It maintained that there was no illegal dismissal that occurred, actual or constructive. FMC's management was thus surprised to receive the summons with a copy of the complaint for illegal dismissal filed by petitioners on the second week of August 2018.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>In their reply, petitioners claimed that Company Memo - 81 should not be given consideration because FMC did not report the rotation plan to the DOLE and its claim that there was a lack of raw materials was not supported by substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br><center><b>Ruling of the Labor Arbiter</b></center><br>By Decision<sup style="COLOR: RGB(255, 0, 0);">[*]</sup> dated June 10, 2019, Labor Arbiter Jennifer R. Santos found that Bacani, Cabrera, Delara, Arguel, Waje, Sua, and Sebolino (Bacani, et al.) were constructively dismissed, while the complaints of Cabatuan, Jr. and Rivero were dismissed for failure to file their respective position papers. The labor arbiter awarded separation pay, backwages, service incentive leave pay (SILP), and pro rata 13<sup>th</sup> month pay for the year 2018, plus attorney's fees equivalent to 10% of the total monetary award to Bacani, et al.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>The labor arbiter cited DOLE Department Advisory No. 2, Series of 2009, which requires the employer to notify the Regional Office of the DOLE of the adoption of a flexible work arrangement. The absence of such notice resulted in the constructive dismissal of Bacani, et al. given, too, that there was no substantial evidence to prove the lack of raw materials that allegedly forced FMC to reduce the six-day workweek of the production personnel to only two to three days per week.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br><center><b>Ruling of the National Labor Relations Commission</b></center><br>Under Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated September 27, 2019, the National Labor Relations Commission (NLRC) reversed, viz.:<br><blockquote><b>WHEREFORE,</b> premises considered, the Decision of the Labor Arbiter is<b> SET ASIDE</b>. A new Decision is rendered:<br><blockquote><ol><li>Dismissing the Complaint for constructive dismissal;<br></li><li>Ordering Respondent Fiber[ ][T]extile Marketing Inc. to pay Complainants Andro T. Bacani, Ronaldo F. Cabrera, Jayson Delara, Raul R. Arguel, Crizaldy N. Waje, Ariel Y. Sua and Charlie Sebolino their SILP and 1<sup>3th</sup> month pay for 2018; and<br></li><li>Ordering Respondent Fiber[ ][T]extile Marking Inc. to pay ten (10%) percent of the amounts awarded for and as attorney's fees.</li></ol></blockquote><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original) </blockquote>Contrary to the labor arbiter's finding, the NLRC held that the absence of notice to the DOLE Regional Office of the adoption of a flexible workweek is a mere procedural infirmity that did not affect the valid exercise of management prerogative by FMC.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Under Resolution<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated December 19, 2019, the NLRC denied reconsideration.<br><br>Aggrieved, petitioners thus filed a petition for<i> certiorari</i> under Rule 65 before the Court of Appeals, ascribing grave abuse of discretion on the part of the NLRC.<br><br><center><b>Ruling of the Court of Appeals</b></center><br>By Decision<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated April 28, 2023, the Court of Appeals dismissed the petition. It did not agree with FMC's contention that petitioners belatedly raised the issue of constructive dismissal arising from the unilateral implementation of the reduced workday given that the same is necessarily part of petitioners' averment that there was lack of notice to the DOLE on the adoption of the flexible work arrangement.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Nonetheless, the Court of Appeals did not find any grave abuse of discretion by the NLRC in dismissing petitioners' complaint, ordaining that the notice requirement under DOLE Department Advisory No. 2, Series of 2009, is intended only to assist and guide employers in implementing flexible work arrangements. More important, it lent credence to FMC's allegation of lack of raw materials, taking in as reference the attached verified complaint, answer, and complaint-affidavit filed in the ejectment and grave coercion cases involving FMC's office and warehouse in Valenzuela City, and thus found the implementation of reduced workdays justified. In any case, such decision was found to have been made in good faith, with the consent of production supervisors and personnel, and more important, falls within the management prerogative of FMC. Finally, it affirmed the award of 13<sup>th</sup> month pay, SILP, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Under Resolution<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated January 17, 2024, the Court of Appeals denied petitioners' motion for reconsideration.<br><br><center><b>The Present Petition</b></center><br>Petitioners now seek affirmative relief from the Court and pray that the assailed disposition of the Court of Appeals be reversed and a new one rendered, granting their complaint for constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> They argue that the labor arbiter correctly declared that they were constructively dismissed, especially considering that FMC admitted hiring other employees in their place, belying its claim that the reduction of working days were undertaken to forestall business losses.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> FMC counters that the Petition did not raise any genuinely novel question or any special and important reasons to warrant the Court's exercise of its power of review. At any rate, the NLRC correctly found and recognized the economic difficulties FMC experienced which necessitated the flexible work arrangement, which was a direct exercise of its management prerogative. To be sure, the reduction of working days or rotation of work schedule was attended with notice and prior consultation with the production supervisors and personnel. Prior to the issuance of Company Memo - 81, a meeting was arranged and called to inform the production supervisors and personnel pertaining to the lack of raw materials. During the said meeting, a unanimous consensus was reached regarding the implementation of the work rotation schedule.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br><center><b>Issues</b></center><br><i>First</i>, did the NLRC gravely abuse its discretion when it ruled on the issue of constructive dismissal albeit it was allegedly raised for the first time on appeal?<br><br><i>Second</i>, were petitioners constructively dismissed as a result of FMC's unilateral implementation of reduced workdays sans notice to the DOLE as required under DOLE Department Advisory No. 2, Series of 2009?<br><br><i>Third</i>, are petitioners entitled to monetary awards and attorney's fees?<br><br><center><b>Our Ruling</b></center><br>We grant the Petition.<br><br>In dealing with Rule 45 petitions arising from the Court of Appeals' review of NLRC decisions, the Court appraises the correctness of the appellate court's ruling through a distinct lens, i.e., in the same context that the petition for<i> certiorari</i> was presented to the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Thus, if the Court finds that the NLRC committed grave abuse of discretion in its assailed disposition, the petition for review on<i> certiorari</i> must be granted.<br><br>Grave abuse of discretion is defined as a "capricious or whimsical exercise of judgment that is patent and gross as to amount to an evasion of positive duty or a virtual refusal to perform a duty enjoined by law."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> It refers not merely to palpable errors of jurisdiction or to violations of the Constitution, the law, and jurisprudence. It refers also to cases in which, for various reasons, there has been a gross misapprehension of facts,<i> as here</i>.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>The NLRC correctly ruled on the issue of constructive dismissal arising from illegal reduction of workdays</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Going first to the procedural issue, we agree that the NLRC did not commit grave abuse of discretion in determining whether petitioners were constructively dismissed. FMC's contention that this issue was raised for the first time before the NLRC is incorrect.<br><br>The records clearly bear petitioners' allegations, as set forth in their reply before the labor arbiter, which directly attack the validity of FMC's implementation of reduced workdays under Company Memo - 81 for lack of notice to the DOLE.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> In fact, petitioners even identified their complaint as one for "constructive dismissal" and "<i>reduction of workweek</i> [sic]," among others. Verily, the NLRC was fully empowered to treat the allegations of unlawful reduction of workdays as an additional ground for constructive dismissal, the latter being a necessary consequence of the former once established.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In any case, settled is the rule that in labor cases, strict adherence to the technical rules of procedure is not required. We have consistently supported the rule that labor officials should use all reasonable means to ascertain the facts in each case speedily and objectively, without regard to technicalities of law or procedure, in the interest of due process.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>FMC is guilty of illegal reduction of workdays and rotation of work</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>&nbsp; <table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="1%" valign="top">&nbsp;</td><td width="5%" valign="top"><div align="JUSTIFY"><b>I.</b> </div></td> <td width="90%" valign="top"><div align="JUSTIFY"><i><b>Kinds of Flexible Work Arrangements</b></i></div>&nbsp; <div align="JUSTIFY"></div></td> </tr> </tbody></table><br>At the outset, delineation must be made between the flexible work arrangements cognizable by issuances like the DOLE Department Advisory No. 2, Series of 2009 and other flexible work arrangements. The advent of the COVID-19 pandemic, for instance, installed changes which were carried over into the "new normal." One of these is the increasing trend of implementing flexible work arrangements such as the work-from-home (WFH) set-up and hybrid set-up in the workplace due to their benefits both to the employees and the employers.<br><br>As astutely posited by Senior Associate Justice Marvic M.V.F. Leonen (SAJ Leonen) during our deliberations, flexible work arrangements similar to the nature of WFH set-up and remote work offer several advantagesâfor employees, they get to enjoy greater work-life balance, reduced commute time, and improved productivity, among others; and for employers, they benefit from cost savings, access to wider talent pool, and increased employee satisfaction and retention.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>These innovative flexible work arrangements, however, are not the flexible work arrangements governed by DOLE Department Advisory No. 2, Series of 2009. Taking cue from the suggestion of the esteemed Chief Justice Alexander G. Gesmundo (Chief Justice Gesmundo), it is imperative that delineation be made between:<br><br><table width="100%" Â ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%">&nbsp;</td> <td width="5%"><div align="JUSTIFY">(1) </div></td> <td width="95%"><div align="JUSTIFY">flexible work arrangements that are entered into voluntarily by employers and employees as a matter of ordinary business practice, without resulting in a reduction of employee pay or benefits; and</div></td> </tr> <tr valign="TOP"> <td>&nbsp;</td> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> </tr> <tr valign="TOP"> <td>&nbsp;</td> <td><div align="JUSTIFY">(2)</div></td> <td><div align="JUSTIFY">flexible work arrangements that result in a reduction in employee pay or benefits.</div></td> </tr> </tbody></table><br>For purposes of our discussion, here, we deal only with the latter kind of flexible work arrangements, as regulated by DOLE Department Advisory No. 2, Series of 2009. We do not endeavor to adjudicate here and now the wisdom, merits, or legality of flexible work arrangements that do not unduly encroach on the rights of the workers.<br><br>&nbsp; <table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="1%" valign="top">&nbsp;</td><td width="5%" valign="top"><div align="JUSTIFY"><b>II.</b> </div></td> <td width="90%" valign="top"><div align="JUSTIFY"><b><i> Coverage of DOLE Department Advisory No. 2, Series of 2009</i></b></div>&nbsp; <div align="JUSTIFY"></div></td> </tr> </tbody></table><br>The scope of DOLE Department Advisory No. 2, Series of 2009 covers only the following flexible work arrangements and other similar alternative schemes that mitigate the loss of income of the employees:<br><blockquote><blockquote><b>III. Flexible Work Arrangements</b></blockquote>The following are the flexible work arrangements which may be considered, among others:<br><br>1. <i>Compressed Workweek</i> refers to one where the normal workweek is reduced to less than six (6) days but the total number of work-hours of 48 hours per week shall remain. The normal workday is increased to more than eight hours but not to exceed twelve hours, without corresponding overtime premium. The concept can be adjusted accordingly depending on the normal workweek of the company pursuant to the provisions of Department Advisory No. 02, series of 2004, dated 2 December 2004.<br><br>2. <i>Reduction of Workdays</i> refers to one where the normal workdays per week are reduced but should not last for more than six months.<br><br>3. <i>Rotation of Workers</i> refers to one where the employees are rotated or alternately provided work within the workweek.<br><br>4. <i>Forced Leave</i> refers to one where the employees are required to go on leave for several days or weeks utilizing their leave credits if there are any.<br><br>5. <i>Broken-time schedule</i> refers to one where the work schedule is not continuous but the work-hours within the day or week remain.<br><br>6. <i>Flexi-holidays schedule</i> refers to one where the employees agree to avail the holidays at some other days provided there is no diminution of existing benefits as a result of such arrangement.<br><br>Under these flexible work arrangements, the employers and the employees are encouraged to explore alternative schemes under any agreement and company policy or practice in order to cushion and mitigate the effect of the loss of income of the employees. </blockquote>It is readily discernible that the list provided by DOLE Department Advisory No. 2, Series of 2009 is not exclusive, and that based on the last paragraph thereof this issuance regulates only those flexible work arrangements that tend to "cushion and mitigate the effect of the loss of income of the employees" or those employed to address the economic difficulties suffered by the employer pursuant to the principle of<i> ejusdem generis</i>.<br><br>The purpose of the rule on<i> ejusdem generis</i> is to give effect to both the particular and general words, by treating the particular words as indicating the class and the general words as including all that is embraced in said class, although not specifically named by the particular words. This is justified on the ground that if the lawmaking body intended the general terms to be used in their unrestricted sense, it would have not made an enumeration of particular subjects but would have used only general terms.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Perceptibly, DOLE Department Advisory No. 2, Series of 2009 is a regulatory issuance that governs flexible work arrangements that are prejudicial to the employees but, nonetheless, are upheld as valid due to the unique circumstances suffered by the employer, i.e., national emergency and economic difficulties.<br><br>Other flexible work arrangements which have gained traction since the COVID-19 pandemic, such as the WFH or hybrid set-up, do not fall within the ambit of flexible work arrangements regulated by the DOLE under Department Advisory No. 2, Series of 2009 because they are not remedial measures against financial difficulties that may be experienced by the employer and do not affect the economic status of the employer or result in the diminution of the pay or benefits of the employees.<br><br>&nbsp; <table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="1%" valign="top">&nbsp;</td><td width="5%" valign="top"><div align="JUSTIFY"><b><i>III.</i></b> </div></td> <td width="90%" valign="top"><div align="JUSTIFY"><b><i> Requisites for the Valid Implementation of Flexible Work Arrangements under DOLE Department Advisory No. 2, Series of 2009 and similar issuances</i></b></div>&nbsp; <div align="JUSTIFY"></div></td> </tr> </tbody></table><br>Per Part III of DOLE Department Advisory No. 2, Series of 2009, the normal work hours per day is eight hours, which is consistent with Book Three, Title I, Chapter I, Article 83 of the Labor Code.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> On the other hand, the normal number of workdays per week shall be six days, or a total of 48 hours based on the normal workday of eight hours, without prejudice to firms whose normal workweek is five days or a total of 40 hours based on the normal workday of eight hours.<br><br>This does not mean, however, that employers are absolutely prohibited from reducing the normal eight-hour work day and six-day workweek. Management, after all, is free to regulate, according to its own discretion and judgment, all aspects of employment, including hiring, work assignments, working methods, time, place, and manner of work, processes to be followed, supervision of workers, working regulations, transfer of employees, work supervision, lay-off of workers, and discipline, dismissal and recall of workers. But the exercise of management prerogative is<i> not absolute</i> as it must be exercised in good faith and<i> with due regard to the rights of labor</i>.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>This prerogative of employers was recognized even prior to the issuance of DOLE Department Advisory No. 2, Series of 2009. In the Explanatory Bulletin on the Effect of Reduction of Workdays on Wages/Living Allowances dated July 23, 1985,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> the DOLE ratiocinated:<br><blockquote><i>In situations where the reduction in the number of regular working days is resorted to by the employer to prevent serious losses due to causes beyond his [or her] control</i>, such as when there is a substantial slump in the demand for his [or her] goods or services or<i> when there is lack of raw materials, it is the view of this Bureau that such reduction is valid. Such management action appears to be more humane and in keeping with sound business operations than the outright termination of the services of the employees or the total closure of the enterprise</i>. In this jurisdiction, it is generally recognized that an employer has the prerogative to devise and adopt necessary remedial measures to save his [or her] business from serious losses that may eventually result in its total collapse. This prerogative of an employer flows from the right of ownership of property which includes the right of an employer to manage, control and protect his [or her] property in a manner that is not contrary to law, morals and public policy. If the law recognizes the right of an employer to terminate the services of his [or her] employees and even to close his [or her] enterprise if it is suffering from serious losses for reasons beyond his [or her] control, the right to reduce the number of workdays of his [or her] employees may be conceded to him [or her], which management action is less severe in terms of its effects on the earnings of the employees than their outright layÂ­off or terminate [sic], or the closure of the enterprise.<br><br><i>Reduction of Wage/Allowances<br><br>In situations described above, this Bureau is also of the view that the employer may deduct the wages and living allowances corresponding to the days taken off from the workweek</i>, in the absence of an agreement specifically providing that a reduction in the number of workdays will not adversely affect the remuneration of the employees. This bulletin does not cover cases where there are existing agreements or employer policy or practice providing for more liberal benefits than those that would result with the application of the opinions or guidelines set forth herein in case of reduction of workdays.<i> It also does not contemplate of situations where the employer has unilaterally reduced the number of working days, although the business is not suffering from losses or there is available work to be done by the employees, and which reduction will alter the agreement or understanding of the parties as to the number of working days that the employees will work in a week or within a payroll period. Furthermore, the explanations herein assume that the reduction of workdays and the corresponding wage/allowance deductions are done in good faith</i>, justified by circumstance affecting the business of the employer, and are not resorted to for the purpose of defeating or circumventing the provisions of existing laws, applicable individual or collective agreement or any existing practice or policy obtaining in the establishment. (Emphasis supplied) </blockquote>Echoing the same sentiment, DOLE Department Advisory No. 2, Series of 2009 affirms as valid the adoption by employers of flexible work arrangements as one of the coping mechanisms and remedial measures in times of economic difficulties and national emergencies, as it is considered a better alternative than the outright termination of the services of employees or the total closure of the establishment.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Flexible work arrangements in the context of DOLE Department Advisory No. 2, Series of 2009 are those alternative arrangements or schedules other than the traditional or standard work hours, workdays and workweek,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> and includes compressed workweek,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> reduction of workdays, rotation of workers, forced leave,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> broken-time schedule,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> and flexi-holidays schedule.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Here, FMC admits reducing its personnel's six-day workweek to only two to three workdays a week and rotating the schedule of jobs among them. There is thus no question that it adopted a flexible work arrangement, as defined under DOLE Department Advisory No. 2, Series of 2009, specifically the<i> reduction of workdays</i>, i.e., an arrangement where the normal workdays per week are reduced but should not last for more than six months,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> and <i>rotation of workers</i>, i.e., an arrangement where the employees are rotated or alternately provided work within the workweek.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Rather, the question is whether FMC did so in compliance with the requirements under the rules.<br><br>In<i> Alejandro, et al. v. Philippine Pizza, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the Court quoted from NLRC Commissioner Nieves E. Vivar De-Castro's dissent, referencing, among others, DOLE Department Advisory No. 2, Series of 2009, a summary of the three conditions required before a company may adopt a flexible work arrangement.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Though the Court ultimately held in<i> Alejandro</i> that the said department advisory is inapplicable since the issue involved part-time workers who necessarily work less than eight hours a day, the Court finds that this enumeration of conditions correctly encapsulated the clear tenor of DOLE Department Advisory No. 2, Series of 2009. We, however, add another condition, i.e., it was sufficiently proven that the company was suffering from economic difficulties or national emergencies and its adoption of flexible work arrangement was done in good faith to cope with such circumstances.<br><br>Indeed, in<i> Linton Commercial Co, Inc. v. Hellera, et al.</i><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and<i> Intec Cebu, Inc. v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> the Court held the employers therein guilty of illegal reduction of work hours and, consequently, of constructive dismissal for failure to prove, based on their financial reports, that they were truly suffering from financial losses which would justify the implementation of reduced workdays and rotation of work.<i> Linton</i>, however, notably took place before DOLE Department Advisory No. 2, Series of 2009 was issued. Under the said Advisory, flexible work arrangements may be adopted "in times of economic difficulties and national emergencies," which does not necessarily, mean that the business is already suffering financial losses.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Chief Justice Gesmundo further opined during the deliberations that the grounds for the adoption of flexible work arrangements under DOLE Department Advisory No. 2, Series of 2009 should not be limited to<i> actual </i>economic difficulties or national emergencies. It is enough that, as in the authorized cause of retrenchment, the employer shows that the measure implemented is "reasonably necessary and likely to prevent business losses which, if already incurred, are not merely<i> de minimis</i>, but substantial, serious, actual, and real, or if only expected, are reasonably imminent as perceived objectively and in good faith by the employer."<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>Thus, under DOLE Department Advisory No. 2, Series of 2009, a company seeking to adopt a flexible work arrangement must meet the following requisites:<i> first</i>, the adoption of a different work schedule or scheme is expressly and voluntarily supported by a majority of the workers affected, i.e., there should have been a consultation with the employees before a part time work arrangement is adopted and implemented;<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><i> second</i>, the implementation of a non-traditional work arrangement should be temporary.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> For reduction of workdays, specifically, the same should not exceed six months;<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><i> third</i>, the DOLE Regional Office should be notified before any flexible work arrangements may be implemented;<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><i> and finally</i>, the employer is suffering from actual or reasonably imminent economic difficulties or national emergencies and its adoption of flexible work arrangement was done in good faith to cope with such circumstances.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>&nbsp; <table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="1%" valign="top">&nbsp;</td><td width="5%" valign="top"><div align="JUSTIFY"><b>IV.</b> </div></td> <td width="90%" valign="top"><div align="JUSTIFY"><b><i> Effect of failure to provide notice to the DOLE prior to the implementation of flexible work arrangements under DOLE Department Advisory No. 2, Series of 2009</i></b></div>&nbsp; <div align="JUSTIFY"></div></td> </tr> </tbody></table><br>Before ascertaining FMC's compliance with the foregoing requisites, the Court first reckons with this novel question: What is the effect of noncompliance with the third requisite or the reportorial requirement in DOLE Department Advisory No. 2, Series of 2009 vis-Ã -vis the employer's implementation of flexible work arrangements?<br><br>FMC submits, on one hand, that this is a mere procedural infirmity which does not invalidate its reduction of the personnel's workdays while petitioners asseverate, on the other, that the same amounted to their constructive dismissal, especially since the offered justification for the said reduction is unproven by substantial evidence.<br><br>We agree with FMC.<br><br>DOLE Department Advisory No. 2, Series of 2009, indeed visibly utilizes the word "shall" in imposing the notice requirement upon employers:<br><blockquote><b>V. Notice Requirement<br><br>Prior to its implementation, the employer <u>shall</u> notify the Department through the Regional Office</b> which has jurisdiction over the workplace, of the adoption of any of the above flexible work arrangements. <b>The notice <u>shall</u> be in the Report Form attached to this Advisory</b>.<br><br>The Regional Office shall conduct an ocular visit to validate whether the adoption of the flexible work arrangements is in accordance with this issuance. (Emphasis supplied) </blockquote>The connotation of the word "shall" is settled in jurisprudence, that is, its ordinary signification is that it is imperative, obligatory, or mandatory. Particularly,<i> Diokno v. Rehabilitation Finance Corporation</i><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> explains that the term "shall" is a word of command, and one which has always or which must be given compulsory meaning; as denoting obligation. It has the invariable significance of operating to impose a duty which may be enforced, particularly<i> if public policy is in favor of this meaning</i> or when addressed to public officials, or where a public interest is involved, or where the public or persons have rights which ought to be exercised or enforced, unless a contrary intent appears.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Though this general interpretation admits of exceptions, we find that the same are not applicable here.<br><br>Time and again, the Court emphasized the State's interest on the protection of laborâa public policy enshrined not only in the highest law of the land, the Constitution,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> but in various other legislation like the Civil Code<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> and the Labor Code.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Thus, all doubts in the implementation and interpretation of labor laws, rules, and regulations shall be resolved in favor of labor.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>Here, as petitioners correctly argue, it is more in accord with the dictates of social justice and policy on protection of labor to construe the word "shall" as mandatory. Perceptibly, the notice requirement under DOLE Department Advisory No. 2, Series of 2009, is not intended merely to inform, but is a preventive and regulatory measure to curb possible abuses by sly employers who might utilize flexible working arrangements to deprive laborers of work and their just compensation. Hence, why the notice is required<i> prior</i> to the implementation of the flexible work arrangement and why a subsequent ocular visit to check the employer's compliance with DOLE Department Advisory No. 2, Series of 2009 ensues.<br><br>As perceptibly raised by the erudite Associate Justice Alfredo Benjamin S. Caguioa (Justice Caguioa) during deliberations, DOLE Department Advisory No. 2, Series of 2009 provides a sound mechanism for monitoring and regulation of the adoption of flexible work arrangements through its notice requirement: the<i> first paragraph</i> prescribes the timing and form of the notice, while the<i> second paragraph</i> provides the consequence of filing it, i.e., the conduct of an ocular visit to validate whether the adoption of the flexible work arrangement is in accordance with the regulations.<br><br>On this score, it must be emphasized that flexible work arrangements which result in the diminution of the benefits and pay of workers do not enjoy any presumption of validity in their favor. By their nature, these arrangements contravene the standards on work hours prescribed by law. To reiterate, the Labor Code prescribes a normal six-day workweek comprised of a total of 48 work hours per week, without prejudice to firms whose normal workweek is five days or a total of 40 hours. This labor standard serves two important purposes for the protection of labor:<br><br><i>First</i>, it standardizes the amount of remuneration to be expected by workers who worked for an entire regular workweek. For example, a worker who, per employment contract, is paid PHP 1,500.00 a day for an eight-hour workday may reasonably expect PHP 9,000.00 a week or PHP 36,000.00 a month. Consequently, reducing the number of workdays from that prescribed under the law or contract would lead to reduced remuneration based on the principle of "no work, no pay,"<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> thereby depriving the worker of a substantial amount that he or she could have earned.<br><br><i>Second</i>, the prescribed number for work hours shields workers from unpaid overtime work. By setting the maximum number of work hours in a day, the Labor Code ensures that any work beyond such eight-hour maximum shall be compensated with overtime pay.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>Flexible work arrangements similar to those enumerated under DOLE Department Advisory No. 2, Series of 2009 disregard the foregoing protective measures. As such, by fault, flexible work arrangements of such nature are presumed illegal until proven otherwise. This is a view completely aligned with the intention of the Labor Code to provide adequate protection in favor of labor.<br><br>But, these flexible work arrangements are nonetheless upheld as valid only because of the exceptional circumstances involved: for the employer, to mitigate its difficulties in business;<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> and for the employees, because it is a more humane solution instead of retrenchment and reduction of personnel.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> In sum, they are band-aid solutions to an ailing business meant to alleviate the impact of ongoing economic difficulties or national emergencies until the business has regained sustainable and stable operations. This is precisely why flexible work arrangements of such nature are temporary in nature<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> and why prompt notice to the DOLE is imperative before the implementation of flexible work arrangements.<br><br>Since this kind of flexible work arrangements naturally violates labor standards, they must be met with scrutiny through effective monitoring and regulation by the DOLE. Again, the only means for the DOLE to fulfill this duty is when it receives notice of the employer's intention to implement such arrangements.<br><br>Ensuring that this mechanism enshrined in DOLE Department Advisory No. 2, Series of 2009 is operational is thus paramount and legally sanctioned in light of the State's constitutional policy to protect labor. We must thus ensure that the necessary consequence of noncompliance with the notice requirement under DOLE Department Advisory No. 2, Series of 2009 shall serve as an effective deterrent against abuse by cunning employers who circumvent our labor standards.<br><br>As convincingly and uniformly raised by Chief Justice Gesmundo, SAJ Leonen, and Justice Caguioa in their respective separate opinions, however, while DOLE Department Advisory No. 2, Series of 2009 utilize the word "shall," it does not provide the penalty for the violation of the employers' obligation to notify the DOLE of the intended implementation of flexible work arrangements nor does it explicitly dictate that such noncompliance renders the adoption of the flexible work arrangement unlawful.<br><br>Notably, the language of DOLE Department Advisory No. 2, Series of 2009, Part V is reminiscent of Article 292(b) of the Labor Code on the notice requirement for termination of employees due to just and authorized causes which also uses the word "shall,:"<br><blockquote>ARTICLE 292. [277]<i> Miscellaneous Provisions.</i> - ...<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">...</div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">Subject to the constitutional right of workers to security of tenure and their right to be protected against dismissal except for a just and authorized cause and without prejudice to the requirement of notice under Article 283 of this Code, &lt;I&gt; the employer &lt;B&gt; shall&lt;/B&gt; furnish the worker whose employment is sought to be terminated a written notice containing a statement of the causes for termination and shall afford the latter ample opportunity to be heard and to defend himself with the assistance of his representative if he so desires in accordance with company rules and regulations promulgated pursuant to guidelines set by the Department of Labor and Employment&lt;/I&gt;. .... (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>DOLE Department Order No. 147, Series of 2015<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> further expounded this provision and set forth the twin-notice requirement for terminations due to just causes and the one-notice requirement for terminations due to authorized causes.<br><br>Of these two, we find that the due process requirement corresponding to authorized causes for termination is more akin to the notice requirement under DOLE Department Advisory No. 2, Series of 2009 insofar as: (i) both involve similar grounds (retrenchment under Article 298 of the Labor Code is similar to, although more severe than, adoption of flexible work arrangements to prevent losses); (ii) in both instances, the employees are innocent of any offense against the employer; (iii) this notwithstanding, the employees still stand to be adversely affected by the business decision either through loss of employment or diminution of benefits; and (iv) both require prior notice to the DOLE as part of due process.<br><br>Section 5.3 of DOLE Department Order No. 147, Series of 2015 dictates thus:<br><blockquote><b>Section 5. Due Process of Termination of Employment.</b> In all cases of termination of employment, the standards of due process laid down in Article 299(b) of the Labor Code, as amended, and settled jurisprudence on the matter, must be observed as follows:<br><br>...<br><b>5.3. Termination of Employment Based on Authorized Causes.</b> As defined in Articles 298 and 299 of the Labor Code, as amended,<i> the requirements of due process<b> shall</b> be deemed complied with upon service of a written notice to the employee and the appropriate Regional Office of the Department of Labor and Employment (DOLE) at least thirty days (30) before the effectivity of the termination, specifying the ground or grounds for termination</i>. (Emphasis supplied) </blockquote>The mandatory tenor of the above notice requirements notwithstanding, the Court ruled in<i> Agabon v. NLRC</i><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> that noncompliance therewith does not serve to invalidate the dismissal but only allows the aggrieved employee, whose rights to due process was violated, to claim nominal damages. We extensively elucidated in<i> Agabon</i> the far-reaching consequences of severely punishing the violation of such procedural requirement with the invalidation of an otherwise valid management action:<br><blockquote><i>The unfairness of declaring illegal or ineffectual dismissals for valid and authorized causes but not complying with statutory due process may have far-reaching consequences.</i><br><br>This would encourage frivolous suits, where even the most notorious violators of company policy are rewarded by invoking due process.<i> This also creates absurd situations where there is a just or authorized cause for dismissal but a procedural infirmity invalidates the termination. Let us take for example a case</i> where the employee is caught stealing or threatens the lives of his co-employees or has become a criminal, who has fled and cannot be found, or<i> where serious business losses demand that operations be ceased in less than a month. Invalidating the dismissal would not serve public interest</i>. It could also discourage investments that can generate employment in the local economy.<br><br>The constitutional policy to provide full protection to labor is not meant to be a sword to oppress employers.<i> The commitment of this Court to the cause of labor does not prevent us from sustaining the employer when it is in the right, as in this case</i>. Certainly, an employer should not be compelled to pay employees for work not actually performed and in fact abandoned.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> (Emphasis supplied) </blockquote>As such, we have ruled that "where the dismissal is for a just cause.. .the lack of statutory due process should not nullify the dismissal, or render it illegal, or ineffectual."<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> We find it sound to apply the same rule here as it is entirely possible that, although the employer failed to give prior notice to the DOLE, the employer had a<i> bona fide</i> cause to adopt a flexible work arrangement.<br><br>In such a case, the employer's failure to notify the DOLE prior to the implementation of the flexible work arrangements does not remove the tremendous effect of the national emergency or economic difficulties on the finances and operations of the employer. Thus, the consequences relevant to the situation which, in the first place, necessitated the employment of drastic measures, like reducing the work hours of employees, remain pressing and valid. Consequently, we find no reason why the employer's adoption of any of the flexible work arrangements under DOLE Department Advisory No. 2, Series of 2009, should not be upheld as lawful so long as the other requisites for its validity are present and proved.<br><br>The employer, however, shall not escape unpunished for its utter disregard of the employee's right to due process. The employer shall still be held liable, not by invalidating its adoption of a flexible work arrangement, but by being liable to indemnify the employee for the wrong caused through the payment of nominal damages.<br><br>In the 2005 case of<i> Jaka Food Processing Corporation v. Pacot, et al.</i><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> the Court applied the doctrine in<i> Agabon</i> to valid dismissals for authorized causes where the employer breached the dictates of statutory due process. But while nominal damages for dismissal due to just causes was pegged at PHP 30,000.00, that for authorized causes was set at the higher amount of PHP 50,000.00 because the termination was initiated by the employer's exercise of its management prerogative. We ratiocinated:<br><blockquote>At this point, we note that there are divergent implications of a dismissal for just cause under Article 282, on one hand, and a dismissal for authorized cause under Article 283, on the other.<br><br>A dismissal for<i> just cause</i> under Article 282 implies that the employee concerned has committed, or is guilty of, some violation against the employer,<i> i.e.</i>, the employee has committed some serious misconduct, is guilty of some fraud against the employer, or, as in<i> Agabon</i>, he has neglected his duties. Thus, it can be said that the employee himself initiated the dismissal process.<br><br>On another breath, a dismissal for an<i> authorized cause</i> under Article 283 does not necessarily imply delinquency or culpability on the part of the employee.<i> Instead, the dismissal process is initiated by the employer's exercise of his management prerogative, i.e.,</i> when the employer opts to install labor saving devices, when he decides to cease business operations or when, as in this case, he undertakes to implement a retrenchment program.<br><br>...<br>For these reasons, there ought to be a difference in treatment when the ground for dismissal is one of the just causes under Article 282, and when based on one of the authorized causes under Article 283.<br><br><i>Accordingly, it is wise to hold that:</i> (1) if the dismissal is based on a just cause under Article 282 but the employer failed to comply with the notice requirement, the sanction to be imposed upon him should be tempered because the dismissal process was, in effect, initiated by an act imputable to the employee; and<i> (2) if the dismissal is based on an authorized cause under Article 283 but the employer failed to comply with the notice requirement, the sanction should be stiffer because the dismissal, process was initiated by the employer's exercise of his management prerogative</i>.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> (Emphasis supplied) </blockquote>The same can be said for the adoption of flexible work arrangements under DOLE Department Advisory No. 2, Series of 2009âit is made pursuant to the exercise of management prerogative and no fault can be imputed upon the employee. Consequently, we find that the amount of nominal damages that the employer must pay whenever it fails to comply with the notice requirement under DOLE Department Advisory No. 2, Series of 2009 shall be as equally steep as the amount imposed in cases of dismissal due to authorized causes.<br><br><i>Jaka Food Processing Corporation</i> was promulgated in 2005 or 20 years ago. As raised by SAJ Leonen,<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> in setting the amount of nominal damages here, we must take into account the change in the purchasing power of the peso over the last two decades. The purchasing power of the peso has depreciated by 116.22% from 2005 to 2025,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> meaning, what cost PHP 50,000.00 in 2005 amounts to around PHP 108,000.00 in 2025.<br><br>Thus, to guide the bench, the bar, and the public, we hold that:<br><br><ol><li>In cases where flexible work arrangements under DOLE Department Advisory No. 2, Series of 2009 and similar issuances were validly implemented, but the employer failed to give prior notice to the DOLE, the adoption and implementation of the flexible work arrangements shall remain valid but the employer shall be liable for nominal damages in the amount of PHP 100,000.00 for each employee.<br><br>We find that PHP 100,000.00 is an amount high enough to serve (i) as an effective deterrent against employers from failing to comply with the notice requirement under DOLE Department Advisory No. 2, Series of 2009 and (ii) as sufficient compensation and indemnity to employees who were prejudiced by such nonÂ­compliance.<br><br></li><li>Where, however, noncompliance with the notice requirement under DOLE Department Advisory No. 2, Series of 2009 is attended also by noncompliance with the other requisites for the valid adoption of flexible work arrangement, the adoption and implementation of such flexible work arrangement shall be declared invalid and the affected employees shall receive the proper reliefs corresponding to constructive or illegal dismissal.</li></ol><br><br>&nbsp; <table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="1%" valign="top">&nbsp;</td><td width="9%" valign="top"><div align="JUSTIFY"><b>V.</b> </div></td> <td width="90%" valign="top"><div align="JUSTIFY"><b><i>FMC failed to comply with the first, third, and fourth requisites for the valid implementation of flexible work arrangements under DOLE Department Advisory No. 2, Series of 2009, rendering its adoption of rotation of workers and reduction of work days illegal</i></b></div>&nbsp; <div align="JUSTIFY"></div></td> </tr> </tbody></table><br>We now determine whether FMC's adoption of rotation of workers' schedule and reduction of work days under DOLE Department Advisory No. 2, Series of 2009 is valid.<br><br>FMC averred that by January 2019, or six months after Company Memo - 81 was issued in July 2018, FMC reinstated the original work schedule of petitioners immediately after the replacement raw materials arrived. Petitioners, notably, did not dispute this claim. There is thus no dispute that the<i> second requisite</i>, i.e., the implementation of the flexible work arrangement is temporary, was complied with.<br><br>We cannot say the same, however, for the first, third, and fourth requisites.<br><br><i>First</i>, the adoption of the flexible work arrangement must be expressly and voluntarily supported by a majority of the workers affected, such that there was a prior consultation with the employees. The burden to prove compliance with this requirement lies with FMC, the employer. This, FMC failed to discharge.<br><br>Here, the facts merely indicated that FMC management called for a meeting to inform the production supervisors and personnel of the predicament involving FMC's raw materials and the need to implement a work rotation schedule. Thereafter, Company Memo - 81 was issued, informing the workers of the adoption of flexible work arrangement.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br>As SAJ Leonen and Justice Caguioa pointed out, other than this bare allegation of FMC, no proof was presented to show that the affected workers were consulted on the matter of rotation of workers' schedule or reduction of work days during the said meeting, much less, that majority of them gave their consent to the adoption of such flexible work arrangements. Informing the workers is one thing, securing their consent is another thing.<br><br>Part I of the DOLE Department Advisory No. 2, Series of 2009 requires that the flexible work arrangement be "anchored on [a] voluntary basis and conditions mutually acceptable to both the employer and employees." More, in Part IV of the said Advisory, employers are required to keep and maintain, as part of their records, the documentary requirements proving that the flexible work arrangement was voluntarily accepted to facilitate the resolution of grievances. No such document, however, can be found in the records to substantiate FMC's allegations.<br><br>Sans any evidence to prove that a majority of the affected workers in FMC truly assented to the rotation of workers and reduction of work days, we cannot make a finding that the<i> first requisite</i> has been complied with. Mere allegations, after all, are not evidence and are not equivalent to proof.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br><i>Next</i>, the<i> third requisite</i> or the notice requirement. Albeit the labor tribunals and appellate court differed on the legal consequence of nonÂ­compliance therewith, all are uniform in their finding that FMC failed to adduce any evidence that it sent notice to the DOLE Regional Office regarding its reduction of workdays and rotation of workers. Neither did FMC, in any of its pleadings, proffer any explanation for its noncompliance. What was consistently reiterated was that the same did not render its implementation of the flexible work arrangements illegal.<br><br>Verily, FMC's failure to notify the relevant DOLE Regional Office of its intention to reduce its worker's workdays and to rotate their work prior to implementation is also beyond contention.<br><br><i>Finally</i>, FMC also failed to establish the<b> fourth requisite</b>, i.e., that it was suffering from actual or reasonably imminent economic difficulties or national emergencies and its adoption of flexible work arrangement was done in good faith to cope with such circumstances.<br><br>Whether actual or imminent, FMC did not submit as evidence any relevant reports or documents to substantiate its claim. What it merely adduced were several pleadingsâverified complaint, answer, and complaint-affidavitâfrom the ejectment case and grave coercion case involving its Valenzuela City compound, which was allegedly locked out, causing the lack of raw materials. But these are not proofs. These pleadings do not contain incontestable facts upon which the reduction of workdays can be justified, but mere allegations that still need to be proved during trial.<br><br>More, the lack of raw materials does not necessarily mean that FMC was suffering from economic difficulties of such gravity which rendered it incapable of sustaining its normal operations especially since, as the circumstances later on proved, it was able to shortly resolve its dilemma through negotiation and settlement and other remedies were available, such as ordering new supplies of materials, albeit the same were delivered late. Indeed, in<i> Linton Commercial Co. v. Hellera, et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> the Court noted that though the employer's financial reports for 1997 to 1998 did show that it suffered from losses for that year, there remained enough earnings to sufficiently sustain its operations, rendering its reduction of workdays unjustified. The Court's following remarks in<i> Linton</i> are<i> apropos</i>:<br><blockquote>A close examination of petitioner's financial reports for 1997-1998 shows that, while the company suffered a loss of [PHP] 3,645,422.00 in 1997, it retained a considerable amount of earnings and operating income. Clearly then, while Linton suffered from losses for that year, there remained enough earnings to sufficiently sustain its operations. In business, sustained operations in the black is the ideal but being in the red is a cruel reality. <i>However, a year of financial losses would not warrant the immolation of the welfare of the employees, which in this case was done through a reduced workweek that resulted in an unsettling diminution of the periodic pay for a protracted period. Permitting reduction of work and pay at the slightest indication of losses would be contrary to the State's policy to afford protection to labor and provide full employment</i>.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> (Emphasis supplied, citations omitted) </blockquote>Thus, while the Court commiserates with FMC, we do not agree that its misfortune sufficiently justified the drastic measure it employed to cope, especially as it was notably quick to put the brunt of the blow upon its workers.<br><br>All told, we find that apart from its noncompliance with the notice requirement under DOLE Department Order No. 2, Series of 2009, FMC also failed to observe the other requisites for the valid adoption of flexible work arrangements, rendering FMC's implementation of rotation of workers' schedule and reduction of work days unlawful. Thus, consistent with our guidelines above, we ordain that FMC committed illegal reduction of workdays, which consequently reduced petitioners' salaries, amounting to constructive dismissal.<br><br>Constructive dismissal occurs when there is cessation of work because continued employment is rendered impossible, unreasonable, or unlikely; when there is a demotion in rank or<i> diminution in pay</i> or both; or when a clear discrimination, insensibility, or disdain by an employer becomes unbearable to the employee.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Here, petitioners suffered a decrease in their pay due to the unlawful adoption by FMC of rotation of workers and reduction of work days, rendering the continued employment of petitioners unreasonable or unlikely. As a matter of fact, petitioners were quick to seek assistance from DOLE regarding FMC's reduction of their six-day work week to two to three days per week.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br>More, the facts show that petitioners were shunned from work on July 27, 2018 after, and suggestively, because, they sought assistance from the DOLE regarding the implementation of such flexible work arrangements.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> This was also part of the arguments of petitioners in the complaint they filed before the DOLE. It was incumbent upon FMC to rebut these charges and prove that the termination of petitioners was for a valid or authorized cause,<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> but it did not nor did it even attempt to do so. Instead, FMC merely asseverated that petitioners abandoned their posts themselves.<br><br>We do not subscribe to FMC's allegations of abandonment against petitioners, contending that they were the ones who refused to return to work. Apart from bare allegations, FMC did not submit evidence to show petitioners' intent to completely sever their employments. Besides, it is settled that an employee who takes steps to protest his or her dismissal cannot logically be said to have abandoned their work. The filing of such complaint is proof enough of his or her desire to return to work, thus, negating any suggestion of abandonment.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><br>Verily, we find that petitioners were constructively dismissed by FMC.<br><br><b><i>Monetary awards</i></b><br><br>In case of constructive dismissal, much like in dismissal without just or authorized cause<i> and</i> due process was not observed,<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> the employee is entitled to reinstatement without loss of seniority rights and other privileges, full backwages inclusive of allowances, and other benefits or their monetary equivalent computed from the time their compensation was withheld until their actual reinstatement.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup><br><br>Thus, in<i> Borromeo v. Lazada E-Services Philippines, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> the Court ordered petitioners therein to be reinstated and to be paid their full backwages from the time of their illegal dismissal up to the time of their actual reinstatement after finding that the respondent dismissed them without just cause and did not give them the requisite notices and opportunity to be heard.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup><br><br>Here, we affirm the labor arbiter's dismissal of the complaint with respect to Cabatuan, Jr. and Rivero for their failure to file their respective position papers. Consequently, only petitioners Bacani, et al. are entitled to the abovementioned reliefs. However, while reinstatement is a normal consequence of illegal dismissal, where it is no longer viable as an option, such as where the parties already suffer from strained relations, separation pay equivalent to one month for every year of service should be awarded as an alternative. The payment of separation pay is in addition to the payment of backwages.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>Here, the labor arbiter found that there was already strained relations between the parties.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> As such, separation pay shall be awarded in lieu of reinstatement, which shall be reckoned from the time Bacani, et al. got constructively dismissed up to the finality of this Decision.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup><br><br>We further reinstate the ruling of the labor arbiter insofar as the award to Bacani, et al. of proportionate 13<sup>th</sup> month pay and SILP.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> Too, we affirm the award of attorney's fees equivalent to 10% of the total monetary award per statutory<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> and case law.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> Finally, all monetary awards shall be subject to 6% legal interest per annum from the finality of this Decision until fully paid.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><br><b>ACCORDINGLY</b>, the Petition is<b> GRANTED</b>. The Decision dated April 28, 2023 and Resolution dated January 17, 2024 of the Court of Appeals in CA-G.R. SP No. 165065 are<b> REVERSED</b>. Respondent Fibertextile Manufacturing Corp. is liable for the constructive dismissal of petitioners Andro T. Bacani, Ronald F. Cabrera, Jayson D. Delara, Raule R. Arguel, Crizaldy N. Waje, Ariel Y. Sua, and Charlie R. Sebolino.<br><br>Respondent Fibertextile Manufacturing Corp. is ordered to<b> PAY </b>petitioners Andro T. Bacani, Ronald F. Cabrera, Jayson D. Delara, Raule R. Arguel, Crizaldy N. Waje, Ariel Y. Sua, and Charlie R. Sebolino:<br><br><ol><li>full backwages, inclusive of allowances, and all other benefits accruing to them from the time of their dismissal up to the finality of this Decision;<br><br></li><li>Separation pay equivalent to one month pay for every year of service, with a fraction of at least six months considered as one whole year, computed from the date they were constructively dismissed up to the finality of this Decision; and<br><br></li><li>Attorney's fees equivalent to 10% of the total monetary awards.</li></ol><br><br>The total monetary awards shall earn 6% legal interest per annum from the finality of this Decision until fully paid.<br><br><b>SO ORDERED. </b><br><br><i>Hernando, Inting, Zalameda, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez, Kho, Jr., Singh,</i> and <i>Villanueva, JJ.,</i> concur.<br><i>Gesmundo,<sup style="COLOR: RGB(255, 0, 0);">*</sup>&nbsp; C.J.,</i> on official leave.<br><i>Leonen, Acting C.J.,</i> see separate concurring opinion.<br><i>Caguioa, J.,</i> with separate opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Acting C.J. per special order.<br><br><sup style="COLOR: RGB(255, 0, 0);">***</sup> On official business but with separate opinion<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 14-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 38-56. Penned by Associate Justice Angelene Mary W. Quimpo-Sale and concurred in by Associate Justices Maria Elisa Sempio Diy and Selma P. Alaras, Sixteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 58-60. Penned by Associate Justice Angelene Mary W. Quimpo-Sale and concurred in by Associate Justices Maria Elisa Sempio Diy and Selma P. Alaras, Former Sixteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[*]</sup> Copy of the decision ne t sttached in fhe <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i>, p. 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 306-318. Penned by Commissioner Cecilio Alejandro C. Villanueva and concurred in by Commissioner Pablo C. Espiritu, Jr. and Presiding Commissioner Alex A. Lopez, Third Division, National Labor Relations Commission.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 317-318.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 313-318.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 330-333. Penned by Commissioner Cecilio Alejandro C. Villanueva and concurred in by Commissioner Pablo C. Espiritu, Jr. and Presiding Commissioner Alex A. Lopez, Third Division, National Labor Relations Commission.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 38-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 48-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 45-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 58-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 86-124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 89-90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>See</i> <b>UST v. Samahang Manggagawa ng UST</b>, 809 Phil. 212, 220 (2017) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Cruz v. People</b>, 812 Phil. 166, 173 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup><b> Lee v. Sandiganbayan First Division</b>, 893 Phil. 416, 431 (2021) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Rollo</i>, pp. 225-227.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> <b>Intec Cebu, Inc. v. Court of Appeals</b>, 788 Phil. 31, 41 (2016) [Per J. Perez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Reyes v. Rural Bank of San Rafael, Inc., et al.</b>, 921 Phil. 670, 680 (2022) [Per J. Hernando, Second Division], <i>citing</i> <b>Loon v. Power Master, Inc.</b>, 723 Phil. 515, 528 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Fried, Jason &amp; Hansson, David Heinemer, Remote: Office Not Required (2013), SAJ Concurring and Dissenting Opinion, p. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> <b>Spouses Buot v. National Transmission Corporation</b>, 915 Phil. 675, 687 (2021) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> LABOR CODE, Book Three, Title I, Chapter I. Hours of Work. Art. 83. Normal hours of work. The normal hours of work of any employee shall not exceed eight hours a day. . .<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Royal Plant Workers Union v. Coca-Cola Bottlers Philippines, Inc.</b>, 709 Phil. 350, 364 (2013) [Per J Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Issued by DOLE Director August G. Sanchez.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> DOLE Department Advisory No. 2, Series of 2009, I. Purpose.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> DOLE Department Advisory No. 2, Series of 2009, II. Concept.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Compressed Workweek</i> refers to one where the normal workweek is reduced to less than six (6) days but the total number of work-hours of 48 hours per week shall remain. The normal workday is increased to more than eight hours but not to exceed twelve hours, without corresponding overtime premium. The concept can be adjusted accordingly depending on the normal workweek of the company pursuant to the provisions of Department Advisory No. 02, series of 2004. dated 2 December 2004 (DOLE Department Advisory No. 2, Series of 2009, III[1]).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Forced Leave</i> refers to one where the employees are required to go on leave for several days or weeks utilized their leave credits if there are any (DOLE Department Advisory No. 2, Series of 2009, III[4]).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Broken-time schedule</i> refers to one where the work schedule is not continuous but the work-hours within the day or week remain (DOLE Department Advisory No. 2, Series of 2009, III[5]).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Flexi-holidays schedule</i> refers to one where the employees agree to avail the holidays at some other days provided there is no diminution of existing benefits as a result of such arrangement (DOLE Department Advisory No. 2, Series of 2009, III[6]).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> DOLE Department Advisory No. 2, Series of 2009, III(2).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> DOLE Department Advisory No. 2, Series of 2009, III(3).<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>G.R. No. 226371</b>, August 8, 2022 [Notice, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 561 Phil. 536, 550 (2007) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 788 Phil. 31, 41 (2016) [Per J. Perez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Team Pacific Corporation v. Parente</b>, 877 Phil. 479, 496-497 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> DOLE, Department Advisory No. 2, Series of 2009, 1. Purpose. This Advisory is being issued to assist and guide employers and employees in the implementation of various flexible work arrangements as one of the coping mechanisms and remedial measures in times of economic difficulties and national emergencies. Adoption of flexible work arrangements is considered as a better alternative than the outright termination of the services of the employees or the total closure of the establishment. <i>Anchored on voluntary basis and conditions mutually acceptable to both the employers and the employees</i>, it is recognized as beneficial in terms of reduction of business costs and helps in saving jobs while maintaining competitiveness and productivity in industries. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> DOLE, Department Advisory No. 2, Series of 2009, II. Concept. . . The effectivity and implementation of any of the flexible work arrangements provided herein shall be <i>temporary in nature</i>. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> DOLE Department Advisory No. 2, Series of 2009, III(2).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> DOLE Department Advisory No. 2, Series of 2009, V. Notice Requirement. Prior to its implementation, the employer shall notify the Department through the Regional Office which has jurisdiction over the workplace, of the adoption of any of the above flexible work arrangements. The notice shall be in the Report Form attached to this Advisory.<br><br>The Regional Office shall conduct an ocular visit to validate whether the adoption of the flexible work arrangements is in accordance with this issuance.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> DOLE, Department Advisory No. 2, Series of 2009, I. Purpose. This Advisory is being issued to assist and guide employers and employees in the implementation of various flexible work arrangements as one of the <i>coping mechanisms and remedial measures in times of economic difficulties and national emergencies</i>. Adoption of flexible work arrangements is considered as a better alternative than the outright termination of the services of the employees or the total closure of the establishment. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 91 Phil. 608 (1952) [Per J. Labrador, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 610, <i>citing</i> <i>People v. O'Rourke</i>, 13 P. 2d. 989, 992, 124 Cal. App 752 (1932).<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> CONST. (1987), art. XIII, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> CIVIL CODE, art. 1700. The relations between capital and labor are not merely contractual. They are so impressed with public interest that labor contracts must yield to the common good. Therefore, such contracts are subject to the special laws on labor unions, collective bargaining, strikes and lockouts, closed shop, wages, working conditions, hours of labor and similar subjects.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> LABOR CODE, art. 3. Declaration of basic policy. The State shall afford full protection to labor, promote full employment, ensure equal work opportunities regardless of sex, race, or creed and regulate the relations between workers and employers. The State shall assure the rights of workers to self-organization, collective bargaining, security of tenure, and just and humane conditions of work.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>See</i> LABOR CODE, art. 4; <i>see also</i> CIVIL CODE, art. 1702.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>See</i> <b>Coca-Cola Bottlers v. Iloilo Coca-Cola</b>, 844 Phil. 696, 720 (2018) [Per J. A. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>See</i> LABOR CODE, art. 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>See</i><b> Alejandro v. Philippine Pizza, Inc., G.R. No. 226371</b>, August 8, 2022 [Notice, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>See</i> <b>Philippine Graphic Arts, Inc. v. NLRC</b>, 248 Phil. 353, 356 (1988) [Per J. Gutierrez, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> DOLE, Department Advisory No. 2, Series of 2009, II.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Amending the Implementing Rules and Regulations of Book VI of the Labor Code of the Philippines as Amended.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 485 Phil. 248 (2004) [Per J. Ynares-Santiago, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at 485-486.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id</i>. at 287.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> 494 Phil. 114 (2005) [Per J. Garcia, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 120-121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Concurring and Dissenting Opinion of SAJ Leonen, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <a href="https://filgit.com/philippine-inflation-calculator">https://filgit.com/philippine-inflation-calculator</a> (last accessed August 15, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Rollo</i>, p. 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Menez v. Status Maritime Corporation</b>, 839 Phil. 360, 369 (2018) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 561 Phil. 536 (2007) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>. at 551-552.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Panasonic Manufacturing Philippines Corporation v. Peckson</b>, 850 Phil. 68, 79 (2019) [Per J. A. Reyes, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Rollo</i>, pp. 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> LABOR CODE, art. 292 [277] (b).<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <b>Atienza v. Saluta</b>, 853 Phil. 661 (2019) [Per J. J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>Noblado, et al. v. Alfonso</b>, 773 Phil. 271, 286 (2015) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> LABOR CODE, art. 294 [279].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 952 Phil. 607 (2024) [Per J. J. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id</i>. at 631-632.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>Barlolome v. Toyota Quezon Avenue, Inc.</b>, 952 Phil. 539, 557 (2024) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Rollo</i>, p. 311.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>Barlolome v. Toyota Quezon Avenue, Inc.</b>, 952 Phil. 539, 557 (2024) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id</i>. at 543.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> LABOR CODE, art. 111 and CIVIL CODE, art. 2208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Agapito v. Aeroplus Multi-Services, Inc.</b>, 922 Phil. 619, 634 (2022) [Per J. Lazaro-Javier, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <b>Nacar v. Gallery Frames</b>, 716 Phil. 267, 283 (2013) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

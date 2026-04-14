@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276920 - SPOUSES QUIRINO RONI T. BATERNA AND MARITES M. BATERNA, PETITIONERS, VS. NATIONAL TRANSMISSION CORPORATION, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70249' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276920, January 21, 2026 ]</H2>
+			<H3>SPOUSES QUIRINO RONI T. BATERNA AND MARITES M. BATERNA, PETITIONERS, VS. NATIONAL TRANSMISSION CORPORATION, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, seeking to reverse and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA). The CA reversed and set aside the Order<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) and remanded the Complaint<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> for expropriation filed by respondent, National Transmission Corporation (TRANSCO), to the RTC for further proceedings, including the determination of just compensation for the subject properties.<br><br><i>The Factual Antecedents</i><br><br>The case stemmed from the Complaint for expropriation filed by TRANSCO against petitioners-spouses Quirino Roni T. Baterna and Marites M. Baterna (spouses Baterna).<br><br>Under Republic Act No. 9136,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> TRANSCO took over the electrical transmission functions previously held by the National Power Corporation (NPC), along with the powers and responsibilities granted by law. Accordingly, TRANSCO assumed the authority and duty of NPC to plan, construct, and centrally operate and maintain high-voltage transmission facilities, including grid interconnections and ancillary services.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Under the same law, TRANSCO may likewise exercise the power of eminent domain, subject to the requirements of the Constitution and existing statutes.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Spouses Baterna are the registered owners of two parcels of land, designated as Lots 2192-A and 2192-C, situated in Bo. Buntatala, Jaro, Iloilo City (subject properties). These properties are covered by Transfer Certificates of Title (TCT) Nos. 129920 and T-133560, respectively, and collectively encompass an area of 5,185 square meters.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>TRANSCO alleged in its Complaint that, in 1979 and 1995, NPC constructed steel towers and transmission lines for the Sta. Barbara-Baldoza and Sta. Barbara-Ingore 69kV Transmission Lines. These lines traverse various properties, including the subject properties owned by spouses Baterna, affecting an area of approximately 5,185 square meters.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Consequently, to ensure the continued operation, maintenance, and potential future upgrades of said transmission lines, TRANSCO sought to acquire the subject properties, leading to the filing of the instant Complaint on December 12, 2014.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Meanwhile, spouses Baterna and TRANSCO filed their respective Answer and Counterclaims. The case underwent both mediation and judicial dispute resolution, but efforts to reach a settlement proved unsuccessful.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On July 29, 2016, spouses Baterna filed a Motion to Order Plaintiff to Deposit Before the Honorable Court the Amount Equivalent to 100% Zonal Valuation of Subject Properties (Pursuant to Republic Act No. 10752).<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> The RTC granted this Motion, and pursuant to an Order,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> TRANSCO deposited PHP 6,688,650.00 with the Land Bank of the Philippines (LBP) on February 21, 2017. This amount represented the Bureau of Internal Revenue (BIR) zonal valuation of the subject properties at that time.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Subsequently, the RTC issued another Order<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> directing LBP to release the deposited funds to spouses Baterna. LBP complied with this Order on July 28, 2018, by issuing a manager's check to spouses Baterna.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>On October 25, 2017, the RTC ordered<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the formation of a three-member Board of Commissioners<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> to assess and determine the fair market value of the subject properties.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> On January 10, 2018, the Board of Commissioners submitted their Report,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> estimating the fair market value at PHP 4,000.00 per square meter, which valued the subject properties at PHP 20,740,000.00.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The relevant excerpt from the Report states:<blockquote>5. <b>CONCLUSION OF VALUE.</b> Based on the investigation conducted and considering all factors directly and indirectly affecting value, it is our opinion that the Fair Market Value of the property is here under estimated as follows:<br><br><b>Land Value: 5,185 [square meters] x [PHP] 4,000 [per square meters] = [PHP] 20,740,000.00</b><br><br><b>TOTAL FAIR MARKET VALUE OF THE LAND = [PHP] 20,740,000.00</b><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis in the original)</blockquote>On January 22, 2018, the RTC issued an Order<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> that: (1) admitted the January 10, 2018 Report of the Board of Commissioners; (2) approved the fair market value of the subject properties at PHP 20,740,000.00; and (3) set the Commissioners' Fee at PHP 240,000.00, allocating PHP 80,000.00 to each commissioner.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Dissatisfied with this Order, TRANSCO filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> seeking to revoke the Commissioners' Fee on the grounds that it was unconscionable and lacked substantiation.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> TRANSCO also filed its Comment/Objection<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> to the Report, arguing that just compensation should be determined based on the prevailing fair market value of the subject properties at the time of taking, specifically in 1979 and 1995.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Meanwhile, spouses Baterna filed a Supplemental Motion to Conduct a Joint Survey,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> raising the issue of "dangling areas." These areas referred to portions of the subject properties that had become practically unusable and significantly diminished in value due to their separation from the main lots following the construction of the transmission lines. They asserted that compensation was required for these affected areas rendered unusable by the presence of TRANSCO's transmission lines.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>During a pre-trial conference held on October 18, 2018, spouses Baterna and TRANSCO stipulated that the only remaining factual issues to be resolved were: (1) whether just compensation should be based on the fair market value of the subject properties at the time of taking or at the time of the actual filing of the Complaint; and (2) which law should govern the payment of just compensation, including the determination of compensation for the "dangling areas." The parties subsequently submitted their respective Memoranda.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Subsequently, on March 12, 2019, the RTC issued an Order<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> granting TRANSCO a Writ of Possession, thereby authorizing it to take possession, control, and acquire the subject properties pursuant to Republic Act No. 10752.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> This enabled TRANSCO to commence necessary maintenance on the transmission lines' right-of-way and to facilitate future upgrades. The RTC further held that just compensation payable to spouses Baterna should be based on the fair market value of the subject properties at the time the expropriation proceedings were instituted. The Order further directed the Board of Commissioners to assess whether the "dangling areas" remain suitable for use by spouses Baterna. In the event the Board of Commissioners concludes that said areas are no longer viable for such use, it shall proceed to determine the appropriate amount of just compensation or consequential damages. It shall then submit its findings and recommendations to the RTC, which shall render a final determination on the matter of just compensation or consequential damages pertaining to the "dangling areas."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Pursuant to the aforementioned Order of the RTC, the Board of Commissioners reconvened to determine just compensation for the "dangling areas."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Subsequently, on December 12, 2019, the Board of Commissioners submitted its Report,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> valuing the "dangling areas" at PHP 4,000.00 per square meter, which resulted in a total fair market value of PHP 21,584,000.00, as detailed below:<blockquote>5. Considering that the "dangling" property is contiguous to and exhibited the same characteristics as that of the property previously appraised by the undersigned commissioners, we are of the opinion that the market value per square meter of the "dangling" property is estimated at [PHP] 4,000.00 [per] square meter.<br><br><i>COMPUTATION:</i><br><br><i>Value of the "Dangling" Area to be included in the Expropriation:<br>5,396 [square meter] x [PHP] 4,000.00 [per square meter] = [PHP] 21,584,000.00</i><br><br><i>TOTAL FAIR MARKET VALUE OF THE DANGLING PROPERTY =<br>[PHP] 21, 584,000.00.</i><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Emphasis in the original)</blockquote>TRANSCO, however, subsequently filed its Objection/Comment<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> to this Report.<br><br><i>Ruling of the Regional Trial Court</i><br><br>On May 29, 2020, the RTC issued an Order,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> the dispositive portion of which states:<blockquote>Wherefore, Judgement is hereby rendered:<ol><li>Approving and adopting the Commissioner's Report dated January 10, 2018 and December 12, 2019;<br><br></li><li>Payment to [spouses Baterna] of the fair market value of [PHP 20,740,000.00] for the property sought to be expropriated, less [PHP 6,688,650.00,] which [TRANSCO] made as deposit on January 24, 2017, as 100% BIR [z]onal value for the 5,185 square meters area directly affected by the transmission lines, or [PHP 14,051,350.00], with legal interest thereon at 12% per annum computed from the filing of this case on December 12, 2014 until due amount shall have been fully paid; ...<br><br></li><li>Ordering [TRANSCO] to pay [spouses Baterna] the amount [of PHP 21,584,000.00] as just compensation or consequential damages for the "dangling area" consisting of 5,396 [square meters], with interest at 12% per annum from December 12, 2014, until fully paid[; and]<br><br></li><li>To pay compensation to the Board of Commissioners in the amount of [PHP 240,000.00] or [PHP 80,000.00] each plus [PHP 9,000.00] or [PHP 3,000.00] each as additional Commissioners' Fee on top of the [PHP 80,000.00].</li></ol>. . . .<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Citations omitted)</blockquote>The RTC approved the Board of Commissioners' Reports dated January 10, 2018 and December 12, 2019, and ordered TRANSCO to pay spouses Baterna PHP 20,740,000.00 as the fair market value of the subject properties, which was based on the value at the time the Complaint was filedâDecember 12, 2014âand reduced by the deposit of PHP 6,688,650.00 made by TRANSCO on January 24, 2017. The RTC also awarded PHP 21,584,000.00 as just compensation or consequential damages for the 5,396-square-meter "dangling areas," with interest at 12% per annum from December 12, 2014, until full payment. Additionally, TRANSCO was ordered to pay the Board of Commissioners PHP 240,000.00 as compensation and additional fees for their services.<br><br>TRANSCO subsequently moved for reconsideration of the Order of the RTC dated May 29, 2020, but its Motion was denied.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Consequently, TRANSCO filed an appeal with the CA.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br><i>Ruling of the Court of Appeals</i><br><br>On September 29, 2023, the CA rendered the assailed Decision, the dispositive portion of which reads as follows:<blockquote><i>WHEREFORE</i>, the appeals is <i>GRANTED</i>. The <i>Order</i> dated May 29, 2020 of the Regional Trial Court ... is <i>REVERSED</i> and <i>SET ASIDE</i>. This case is <i>REMANDED</i> to the Regional Trial Court ... which is hereby directed:<ol><li>Ascertain the exact date of the taking of the subject properties[;]<br><br></li><li>Re-convene the commissioners or appoint new commissioners to determine, in accordance with this <i>Decision</i>, the just compensation of the subject properties based on the fair market value of the properties or the zonal value, whichever is higher at the time of the taking of [spouses Baterna's] properties;<br><br></li><li>Determine the consequential damages[,] which should be limited only to 50% of the BIR zonal valuation of the affected properties segregated by the electric transmission lines;<br><br></li><li>Impose legal interest on the amount arrived at as just compensation and the consequential damages, less the amount [PHP] 6,688,650.00 representing the prior deposit made by [TRANSCO], at the rate of [12%] per annum from the time of taking up to June 30, 2013 and, thereafter, 6% per annum from July 1, 2013 until finality of this decision;<br><br></li><li>Ascertain the number of days that were devoted by the Board of Commissioners in the preparation of their reports and consequently determine their fees in accordance with Section 16, Rule 141 of the Rules of Court; and<br><br></li><li>Award exemplary damages in the amount of [PHP] 200,000.00 and attorney's fees equivalent to 1% of the total amount due.</li></ol><i>SO ORDERED.</i><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis in the original)</blockquote>The CA reversed the RTC's Order of May 29, 2020, and remanded the case to: (1) determine the exact date of taking; (2) recompute just compensation based on the fair market or zonal value at the time of taking; (3) limit consequential damages to 50% of the affected properties' BIR zonal valuation; (4) apply legal interest to the just compensation and consequential damages (less TRANSCO's prior deposit), with a rate of 12% per <i>annum</i> until June 30, 2013, and 6% per <i>annum</i> thereafter until the decision attains finality; (5) recalculate the commissioners' fees; and (6) award exemplary damages and attorney's fees.<br><br>The CA held that a valid taking of the subject properties for purposes of eminent domain occurred prior to the filing of the Complaint. Therefore, just compensation should be based on the fair market value at the time of taking, which occurred sometime in 1979 and 1995. The CA also found the RTC's award of consequential damages for the "dangling areas" to be unreasonably high and lacked sufficient basis to support the valuation recommended by the Board of Commissioners. Instead, the CA held that consequential damages should be computed at 50% of the BIR zonal valuation of the affected 5,396-square meter area at the time of taking. Moreover, the CA deemed the Commissioners' Fee excessive and unjustified, ruling that, pursuant to Rule 141, Section 16 of the Rules of Court,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> the fee should be pegged at PHP 300.00 per day for 48 days of service, totaling PHP 43,200.00. Nonetheless, the CA awarded spouses Baterna exemplary damages and attorneys' fees, citing TRANSCO's prolonged possession of the subject properties without properly initiating expropriation proceedings.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Following the denial<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> of TRANSCO's Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> it filed the present Petition before this Court.<br><br><center><i>Issues</i></center><br>The issues for resolution by this Court are as follows: (1) whether a valid taking of the subject properties occurred in 1979 and 1995, and consequently, whether just compensation should be computed based on (a) the date of taking in 1979 and 1995, or (b) the date of filing of the Complaint on December 12, 2014; (2) whether consequential damages should be limited to 50% of the BIR zonal valuation of the "dangling areas" or affected properties traversed by the electric transmission lines; and (3) whether the CA correctly ordered the reconvening or reconstitution of the Board of Commissioners.<br><br>Petitioners argue that respondent failed to present written documentation proving that prior notice was given before entering the subject properties in 1979 and 1995. They assert that respondent did not provide evidence showing that its entry complied with legal requirements. Consequently, respondent's entry onto the properties lacked legal warrant or authority, thus failing to meet the second element of a valid taking. Additionally, petitioners claim that respondent had no intent to acquire or expropriate the properties until they issued a Demand to Vacate, after which respondent filed the instant Complaint.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Petitioners also argue that the fifth element of taking is absent, as respondent's use of the property for public purposes did not dispossess petitioners or deprive them of beneficial enjoyment. They highlight that they continued to pay real estate taxes on the properties, indicating that respondent's possession was not equivalent to ownership and that petitioners retained absolute control over the properties.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Moreover, petitioners assert that based on Republic Act No. 10752, the law in effect when the Complaint was filed, just compensation should be based on the current fair market value at the time the expropriation proceedings were commenced.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br>&nbsp;<br>Furthermore, petitioners assert that reconvening or reconstituting the Board of Commissioners is unwarranted. The Board has already discharged its mandated functions, and the parties have been afforded sufficient opportunity to present all relevant documentary evidence for proper valuation.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Lastly, the award of consequential damages should not be limited to 50% of the BIR zonal valuation of the "dangling areas." Consequential damages should be based on the full market value of the affected areas, as provided for by Republic Act No. 10752 and consistent with prevailing jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> respondent argues that the CA correctly remanded the case to the RTC to ascertain the exact date of taking of the subject properties and to determine just compensation based on their value at the time of taking, in accordance with the appellate court's directives. Respondent likewise maintains that the CA properly limited the award of consequential damages to 50% of the BIR zonal valuation of the affected portions segregated by the transmission lines.<br><br><center><i>Our Ruling</i></center><br>The Court partially grants the Petition.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Preliminary matter: the fair market value for purposes of determining just compensation</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>As a preliminary matter, the Court deems it necessary to clarify that the determination of the fair market value of the subject propertiesâan essential component in fixing just compensationâis governed by Republic Act No. 10752, as amended by Republic Act No. 12289.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> These statutes apply to expropriation proceedings involving national government infrastructure projects, including the installation of transmission lines in the present case.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Expropriation under the power of eminent domain is not limited to the acquisition of title and possession. It also includes the imposition of easements, such as rights-of-way, over private property. Jurisprudence has consistently recognized that the establishment of a right-of-way easement constitutes a taking when it materially diminishes the property's value or interferes with its ordinary use for an indefinite period. The interference must be direct and substantial, effectively depriving the owner of full enjoyment and utility of the property.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Thus, the imposition of a right-of-way easementâparticularly one that restricts property rights due to the installation of transmission linesâis properly considered within the scope of expropriation.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Expropriation proceedings for national infrastructure projects are governed by Rule 67 of the Rules of Court, Republic Act No. 8974,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> and its successor, Republic Act No. 10752, as amended by Republic Act No. 12289. Republic Act No. 8974, enacted on November 7, 2000 and effective as of November 26, 2000,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> was later repealed by Republic Act No. 10752, which took effect on March 7, 2016.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> On September 12, 2025, Republic Act No. 12289 was signed into law.<br><br>While Republic Act No. 10752 focused on national government infrastructure projects, its amendatory law, Republic Act No. 12289, expressly extends coverage to private entities that provide public services and have been granted the power of eminent domain under their franchise or other laws. Among the listed services is "transmission of electricity,"<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> thereby subjecting respondent's transmission projectsâand the acquisition of rights-of-way for its linesâto the provisions on acquisition, deposits, possession, and valuation under Republic Act No. 12289.<br><br>On this score, Section 19 of Republic Act No. 12289 provides a transitory clause which states:<blockquote>Section 19. <i>Transitory Clause</i>. â The provisions of this Act shall apply to all right-of-way transactions, except those which, as of the effectivity of this Act, the implementing agency or the private entity and the property owner have reached a written agreement on the agreed amount of compensation.</blockquote>In the present case, the Complaint was filed on December 12, 2014, prior to the effectivity of Republic Act No. 10752 and Republic Act. No. 12289. However, no written agreement on the purchase price had been executed between the parties at that time. It was only in 2017 that respondent deposited 100% of the value of the subject properties, based on the prevailing zonal valuation of the BIR, and the Board of Commissioners was constituted to determine just compensation.<br>&nbsp;<br>Moreover, the deposit of the provisional value occurred in July 2016, after the effectivity of Republic Act No. 10752. This actâbeing a prerequisite for the government to take possessionâwas performed under the regime of Republic Act No. 10752. Therefore, the transaction is deemed "ongoing" and not "concluded satisfactorily" within the meaning of the transitory clause, thereby rendering Republic Act No. 10752, as amended by Republic Act No. 12289 applicable.<br><br>In view of the foregoing, Republic Act No. 10752, as amended by Republic Act No. 12289, thus provides the governing standard for determining the fair market value of the subject properties as the statutory basis for fixing just compensation in this case.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Reckoning point for the determination of just compensation</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Petitioners argue that under Republic Act No. 10752âthe law in force at the time the Complaint was filedâjust compensation must be based on the current fair market value at the commencement of expropriation proceedings. This interpretation, however, is misplaced.<br><br>This position overlooks the fact that Republic Act No. 10752, as amended by Republic Act No. 12289, operates with respect to the provisional deposit and the valuation necessary for the expropriating agency to obtain possession.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> This deposit is required for the issuance of a writ of possession, allowing the expropriating agency to take the property and begin the project. It is only provisional and does not constitute the final determination of just compensation.<br><br>Accordingly, a clear distinction must be drawn between statutory valuation and the judicial determination of just compensation. Republic Act No. 10752, as amended by Republic Act No. 12289, governs the computation of the provisional deposit and the fair market value required for the expropriating agency to obtain possession.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Rule 67 of the Rules of Court, on the other hand, governs the judicial determination of just compensation. Under Rule 67, Section 4, just compensation must be reckoned "as of the date of the taking of the property or the filing of the complaint, whichever came first." Neither Republic Act No. 10752 nor Republic Act No. 12289 contains any provision that modifies or supersedes this rule.<br><br>Thus clarified, the contention that Republic Act No. 10752, as amended by Republic Act No. 12289, mandates the use of the current fair market value at the commencement of expropriation proceedings is misplaced. Rule 67, Section 4 remains controlling: just compensation is determined "as of the date of the taking of the property or of the filing of the complaint, whichever came first."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>In this regard, petitioners seek to anchor the reckoning point on the filing of the Complaint, contending that no valid taking occurred in the context of the State's power of eminent domain. This argument is untenable.<br><br>The Court's landmark ruling in <i>Republic v. Vda. de Castellvi</i><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> defines the requisites of taking:<blockquote><i>First</i>, the expropriator must enter a private properly...<br><br><i>Second</i>, the entrance into private property must be for more than a momentary period...<br><br><i>Third</i>, the entry into the property should be under warrant or color of legal authority...<br><br><i>Fourth</i>, the property must be devoted to a public use or otherwise informally appropriated or injuriously affected...[and]<br><br><i>Fifth</i>, the utilization of the property for public use must be in such a way as to oust the owner and deprive him of all beneficial enjoyment of the property.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> (Emphasis in the original)</blockquote>Undisputedly, respondent installed its transmission lines on the subject properties in 1979 and 1995. Petitioners' own demand letter<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> dated October 16, 2014 demonstrates their knowledge and long-standing tolerance of these lines. There has been no categorical denial that these transmission lines were constructed on the subject properties during these years.<br>&nbsp;<br>Notwithstanding these facts, petitioners assert that no actual valid taking occurred. They argue that respondent's presence lacked legal warrant or authority, and that its use of the property for public purposes did not dispossess them or deprive them of beneficial enjoyment. They point to their continued payment of real estate taxes as evidence that respondent's possession was not in the concept of ownership, and that they retained absolute dominion over the properties.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>These contentions do not persuade. The requ1s1te of taking is clearly present, as the construction of permanent transmission lines necessarily entails an indefinite occupation of the subject properties. In addition, respondent's exercise of eminent domain is firmly anchored on its statutory authority under Republic Act No. 9136, in relation to Republic Act No. 10752, as amended by Republic Act No. 12289. Finally, it must be emphasized that petitioners have, in fact, been deprived of the beneficial enjoyment of their properties. Our pronouncement in <i>National Transmission Corp. v. Oroville Development Corporation</i><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> is instructive on this point:<blockquote>Finally, Oroville has been deprived of the beneficial enjoyment of its property. In several rulings, notably <i>National Power Corporation v. Spouses Zabala, Republic v. Spouses Libunao, and National Power Corporation v. Tuazon</i>[,] this Court has already declared that "since the high-tension electric current passing through the transmission lines will perpetually deprive the property owners of the normal use of their land, it is only just and proper to require Napocor to recompense them for the full market value of their property."<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> (Citations omitted)</blockquote>Thus, despite petitioners' supposed continued tax payments, the perpetual and restrictive presence of high-tension transmission lines significantly impairs the normal use and enjoyment of the subject properties, constituting a compensable deprivation of beneficial enjoyment.<br><br>Since there was a valid taking of the subject properties, it is therefore clear that the reckoning point for determining just compensation must be the date of taking, which in this case occurred upon the installation of the transmission lines in 1979 and 1995, pursuant to Rule 67, Section 4 of the Rules of Court.<br><br>Consistent with the doctrine articulated in <i>Secretary of the Department of Public Works and Highways v. Spouses Tecson</i>,<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> the Court has firmly established that when the taking occurs prior to the filing of the complaint, the valuation of the property must be anchored to the date of taking. This principle is supported by jurisprudence, as seen in <i>Forfom Development Corporation v. Philippine National Railways</i>,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Eusebio v. Luis</i>,<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Manila International Airport Authority v. Rodriguez</i>,<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> and <i>Republic v. Sarabia</i>,<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> wherein the Court upheld that just compensation is determined by the property's value at the time of taking, particularly when the government appropriated the properties before the initiation of expropriation proceedings.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> Notably, in <i>Heirs of Dimao v. National Grid Corporation of the Philippines</i><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> and <i>Heirs of Cipriano v. National Transmission Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> the Court ruled that the proper reckoning point for determining just compensation is the date of taking by TRANSCOâspecifically when it constructed the transmission lines on the propertyâand not the date when the expropriation proceedings were instituted.<br><br>The Court, in <i>Oroville</i>, further explained the rationale for fixing just compensation as of the date of taking:<br><blockquote>Indeed, the State is only obliged to make good the loss sustained by the landowner, with due consideration of the circumstances availing at the time the property was taken. The concept of just compensation does not imply fairness to the property owner alone. Compensation must also be just to the public, which ultimately bears the cost of expropriation.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Citation omitted)</blockquote>The Court recognizes that, by way of exception, certain cases have fixed just compensation at the filing of the complaint. In <i>National Power Corporation v. Heirs of Sangkay</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> the NPC clandestinely constructed underground tunnels beneath a private land without prior expropriation or notice. Deprived of compensation for decades, the owners filed an inverse condemnation complaint, and the Court, as an equitable measure, fixed just compensation as of the time of filing of the complaint. Similarly, in <i>National Power Corporation v. Saludares</i>,<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> the NPC strung high-tension transmission lines over private land in the 1970s without expropriation or payment. When the landowners later filed an inverse condemnation case, the Court again fixed the valuation as of the filing of the complaint, noting NPC's continued refusal to acknowledge or settle the owners' claim, which demonstrated its lack of intention to pay.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>These rulings, however, are exceptions grounded in equity rather than the strict application of Rule 67. The special circumstances of the aforementioned cases called for the valuation of just compensation at the time the landowners initiated inverse condemnation proceedings notwithstanding that taking of the properties occurred first.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> As the Court held in <i>Oroville</i>:<blockquote>These rulings, however, are exceptions to the general rule that just compensation must be reckoned from the time of taking or filing of the complaint, whichever came first. The special circumstances of the aforementioned cases called for the valuation of just compensation at the time the landowners initiated inverse condemnation proceedings notwithstanding that taking of the properties occurred first. In <i>Macabangkit Sangkay</i>, NAPOCOR did not even inform the property owners of the construction of the underground tunnels. Hence, it could be said that NAPOCOR employed stealth instead of complying with the legal process of expropriation. Further, considering that the tunnels were constructed underground, the property owners came to know thereof only when the purchaser of the property refused to proceed with the sale upon discovery of the underground tunnels. In this case, however, the transmission lines are visible, such that Oroville could not deny knowledge of its construction in 1983. In Saludares, NAPOCOR refused to acknowledge the respondents' claim and insisted that it already paid just compensation because the respondents' property was the same one involved in the Pereyra case. Thus, NAPOCOR had no intention to pay just compensation. This circumstance does not exist in the case at bench.<br><br>The rulings in <i>Macabangkit Sangkay</i> and <i>Saludares</i> are more in consonance with the rules of equity than with the Rules of Court, specifically Rule 67 on expropriation. Indeed, the practice of construct first, expropriate later is reprehensible and must not be countenanced. The Court, however, must not lose sight of Section 4, Rule 67 which mandates that just compensation must be determined "as of the date of the taking of the property or the filing of the complaint, whichever came first." This provision is, first and foremost, part of the Rules which the Court itself promulgated for purposes of uniformity, among others.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> (Emphasis supplied, citations omitted)</blockquote>Simply stated, these cases involved extraordinary circumstancesâsuch as stealth construction or misleading conductâthat prevented landowners from timely asserting their rights. In <i>Sangkay</i>, the owners were unaware of the subterranean tunnels until decades later. In <i>Saludares</i>, the NPC misled the owners into believing that compensation had already been paid. The Court thus adopted equitable measures to prevent manifest injustice.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>However, no exceptional circumstances exist in this case. The installation of the transmission lines was executed openly, with the knowledge and tolerance of the petitioners over the years. Unlike in <i>Sangkay</i> and <i>Saludares</i>, there exists no impediment that prevented petitioners from timely asserting their rights.<br><br>Accordingly, the reckoning point for just compensation remains the date of taking. Respondent's exercise of eminent domain presents no circumstance warranting deviation from the rule under Section 4, Rule 67 of the Rules of Court.<br><br><i>The "Present Value Formula"</i><br><br>The Court is not blind to the plight of property owners, such as herein petitioners, who find themselves thrust into a predicament not of their own making. Time and again, the Court has borne witness to practices whereby the NPC or its successor-in-interest, herein respondent, would unceremoniously traverse private lands, erect massive transmission lines, and occupy substantial portions of propertyâall without first observing the fundamental requirement of initiating proper expropriation proceedings.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> In several instances, these incursions persisted for years, the structures standing as sentinels to a continuing violation, while the affected landowners were left to shoulder the burden of instituting inverse condemnation suits merely to obtain what the Constitution already guarantees them: just compensation.<br><br>While jurisprudence consistently holds that just compensation must be reckoned from the date of taking, the procedural mandate is clear: before entering private property, the expropriating agency must file an action for eminent domain and deposit with an authorized government depository an amount equivalent to the assessed value of the property.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> To Our mind, this mandate is neither perfunctory nor ornamental; it is designed to shield private citizens from arbitrary deprivation of property.<br><br>Thus, while the Court reiterates its adherence to Rule 67, Section 4 of the Rules of Court, such reiteration must not be mistaken as toleration of the government's encroachment without due process. The Constitution does not bend to convenience, and this Court will not allow established procedure to be reduced to a mere afterthought.<br><br>Thus, to temper the inequity that inevitably arises when respondent delays payment despite long-standing occupation, the Court deems it proper to apply the "present value formula" to the subject properties' value at the time of taking. Through this method, petitioners are made wholeânot only for the value of the properties occupied but also for the opportunity lost resulting from delayed payment. In so ruling, the Court ensures that while just compensation remains pegged to the date of taking pursuant to Section 4, Rule 67, it nonetheless reflects the full measure of fairness the Constitution demands.<br>&nbsp;<br>In <i>Heirs of Jose Mariano v. City of Naga</i>,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> the Court <i>En Banc</i> applied the "present value formula" first enunciated in <i>Republic v. Spouses Nocom</i>:<sup style="COLOR: RGB(255, 0, 0);">[90]</sup><blockquote>In <i>Secretary of the Department of Public Works and Highways v. Spouses Tecson</i>, this Court laid down the remedies for an aggrieved private party when property is taken by the government for public use. It also enumerated cases illustrating an aggrieved party's remedy when deprived of their property without the benefit of just compensation.<br><br>[. . . .]<br><br>With this, the controlling doctrine is that when there is actual taking by the government without expropriation proceedings, the owner of the property is entitled to just compensation which is pegged at the value of the property at the time of taking.<br><br>[. . . .]<br><br>However, there are instances where this Court held that just compensation should not be reckoned from the time of taking of the properties, but from the time the property owners initiated inverse condemnation proceedings as a matter of justice and equity.<br><br>[. . . .]<br><br><i>Accordingly, it would result in great in injustice if this Court grants the prayer of petitioner that the just compensation be pegged at the value of the subject properties in 1983, or the alleged time of taking of the government. To do so would reward petitioner for its disregard of procedural due process in its exercise of the power of eminent domain.</i><br><br>Notably, if petitioner promptly recompensed respondents for the use of their property, the latter would have the opportunity to gain profit from the amount received. The non-payment of compensation deprived respondents of the principal amount as well as its prospective fruits.<br><br>To address this dilemma, an Opinion in <i>Secretary of the Department of Public Works</i> is illuminating. There, the economic concept of present value was explained thus:<blockquote>If the parties in an expropriation case would have perfect foresight, they would have known the amount of "fair market value at the time of taking." If this amount of money was deposited in a bank pending expropriation proceedings, by the time proceedings are over, the property owner would be able to withdraw the principal (fair market value at the time of taking) and the interest earnings it has accumulated over the time of the proceedings. Economists have devised a simple method to compute for the value of money in consideration of this future interest earnings.<br>&nbsp;<br>For purposes of explaining this method, consider property owner AA who owns a piece of land. The government took his property at Year 0. Let us assume that his property bad a fair market value of P100 at the time of taking. In our ideal situation, the government should have paid him P100 at Year 0. By then, AA could have put the money in the bank so it could earn interest. Let us peg the interest rate at 5% per annum (or in decimal form, 0.05).<br><br>If the expropriation proceedings took just one year (again, another ideal situation), AA could only be paid after that year. The value of the P100 would have appreciated already. We have to take into consideration the fact that in Year 1, AA could have earned an additional P5 in interest if he had been paid in Year 0.<br><br>In order to compute the present value of P100, we have to consider this formula:<br><br>Present Value in Year 1 = Value at the Time of Taking + (Interest Earned of the Value at the Time of Taking)<br><br>In formula terms, it will look like this:<blockquote>PV<sub>1</sub> = V + (V * r)<br>PV<sub>1</sub> = V * (1 + r)<br>PV<sub>1</sub> = present value in Year 1<br>V = value at the time of taking<br>r = interest rate</blockquote>So in the event that AA gets paid in Year 1, then:<blockquote>PV<sub>1</sub> = V * (1 +r)<br>PV<sub>1</sub> = P100 (1 + 0.05)<br>PV<sub>1</sub> = P105</blockquote>So if AA were to be paid in Year 1 instead of in Year 0, it is only just that he be paid P105 to take into account the interest earnings he has foregone due to the expropriation proceedings. If he were to be paid in Year 2, we should take into consideration not only the interest earned of the principal, but the fact that the interest earned in Year 1 will also be subject to interest earnings in Year 2. This concept is referred to as <i>compounding</i> interest rates. So our formula becomes:<br><br>Present Value in Year 2 = [Present Value in Year 1] + [Interest Earned of Present Value in Year 1].</blockquote>In advocating the use of present value and compounding interest, this Court meets the middle ground between established doctrine and substantial justice. Moreover, the result would be more in keeping with the concept of just compensation. By using the present value method, this Court recognizes that the value of money is not static. The amount of P552.00 in 1983 does not carry the same monetary or buying power in 1995 or in 2021. Thus, the method takes into consideration the present economic value of the property taken by the government if just compensation at the time of taking was paid promptly. It compensates for the opportunity loss due to the non-payment of a sum of money that is due and demandable.<br><br><i>In using this method, the powers that be [sic] would have a stronger incentive to comply with duly constituted procedures regarding the power of eminent domain instead of continuing its practice of taking property without filing the proper expropriation proceedings. At the same time, it remains consistent with the doctrine that just compensation must be reckoned from the time of actual taking. It merely directs the courts, which have the judicial function to determine the amount of just compensation, to make use of the formula to ensure that the profit loss suffered by private owners are computed for as well.</i><br><br>The interest prescribed above must be distinguished from legal interest which penalizes the payor for its delay in payment. Thus, it is without question that petitioner's occupation of the Subject Lots, for more than two decades without the proper expropriation proceedings also entitles respondents with the payment of legal interest at the rate of [6%] on the value of the land at the time of taking until full payment is made.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> (Emphasis supplied, citations omitted)</blockquote>In essence, the formula "grosses up" the fair market value at the time of taking (<i>V</i>) by compounding an appropriate rate (<i>r</i>) over the period until payment. This adjustment represents the earnings the property owner could have realized had just compensation been paid when the property was taken. In this way, the formula accounts for the opportunity loss tied to the date-of-taking value. Once the trial court finally determines just compensation, legal interest at 6% per <i>annum</i> then accrues from the finality of the decision until full payment.<br><br>To simplify, in applying the present value formula, the trial court first determines the fair market value of the property as of the date of taking. Next, an appropriate rate and compounding period are selected, guided by jurisprudence and reflective of reasonable earnings or the time value of money. The present value is then computed by compounding the rate over the relevant period using the formula: PV = V x (1 + r)<sup>n</sup>, where <i>V</i> represents the value at the time of taking, <i>r</i> the rate, and <i>n</i> the number of compounding periods. Finally, legal interest of 6% per <i>annum</i> is imposed from the finality of the decision fixing just compensation until full payment.<br><br>The present value formula corrects the inequity caused by prolonged non-payment, which deprives the property owner of the opportunity to earn from the amount due. While Rule 67, Section 4 of the Rules of Court fixes valuation at the date of taking, the formula adjusts that value to account for the time value of money until actual payment, ensuring full and fair compensation without departing from the reckoning point under Rule 67. As affirmed in <i>Spouses Nocom</i>, this approach yields a more equitable computation of just compensation. It recognizes that the harm suffered by the landowner extends beyond the mere loss of propertyâit includes the loss of the income that could have been earned had the expropriating agency observed the procedure mandated by law.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>Notably, Our pronouncement in <i>Heirs of Cipriano</i> is instructive on this point:<blockquote>Considering that just compensation should be reckoned from the date of actual taking, which in this case was in 1977 (for the Daraga-Putiao 69kV Transmission Lines) and in 1994 (for the Daraga-Bacman 230kV Transmission Lines), the CA correctly ordered the remand of the case to the RTC. This is because Commissioner Alzaga's recommended valuation, which was adopted with modification by the RTC, relied on the 2009 BIR zonal valuation and 2012-2015 sales data, and thus, not reflective of the fair market value at the time of taking. However, the just compensation shall be computed in accordance with the present value formula as provided in <i>Spouses Nocom</i> and <i>Heirs of Mariano</i>. Moreover, the total just compensation shall earn legal interest of 6% per annum from the finality of the decision fixing the just compensation until full payment in accordance with prevailing jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> (Emphasis in the original, citation omitted)</blockquote>Accordingly, the proper reckoning point for just compensation remains the date of takingâspecifically, 1979 and 1995 for the subject properties. However, given that respondent instituted expropriation proceedings only in 2014, decades after the actual taking, the Court finds it necessary to apply the present value formula to the fair market value as of the date of taking pursuant to <i>Spouses Nocom</i> and Heirs of Cipriano. Consequently, the legal interest rate "of [12%] per <i>annum</i> from the time of taking up to June 30, 2013 and, thereafter, 6% per <i>annum</i> from July 1, 2013 until finality of this decision"<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> as imposed by the CA, must be set aside. In accordance with prevailing jurisprudence, the total amount of just compensation, as computed using the present value formula, shall earn legal interest of 6% per <i>annum</i> only from the finality of the decision fixing just compensation until full payment.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup><br><br>In fine, Republic Act No. 10752, as amended by Republic Act No. 12289, sets forth the substantive standards for ascertaining the market value of properties subject to expropriation, including the basis for the provisional deposit and the initial valuation applicable to the transmission lines installed by respondent on the subject properties. Rule 67 of the Rules of Court, however, governs the judicial determination of just compensation and establishes the controlling reckoning point of valuationâwhich, in this case, is the date of taking. After the date-of-taking valueâascertained in accordance with the valuation parameters under Republic Act No. 10752 and Republic Act No. 12289âhas been fixed, the present value formula should be applied to adjust such amount so as to reflect the time value of money and the opportunity loss occasioned by delayed payment. This adjustment "grosses up" the date-of-taking value without altering the legally mandated reckoning point, thereby ensuring that petitioners receive the full measure of compensation required by the Constitution. Thus, Republic Act No. 10752, as amended by Republic Act No. 12289, provides the valuation standards; Rule 67 prescribes when those standards must be applied; and the present value formula bridges the gap created by delayed payment, ensuring consistency between the valuation standards under the law, the procedural rules, and the constitutional mandate of just compensation.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Award of consequential damages, exemplary damages, and attorney's fees</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>"Dangling" areas, as defined under National Power Board Resolution No. 94-313, refer to portions of land not traversed by the transmission line project but rendered useless due to the presence of transmission lines.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> In this regard, both petitioners and respondent do not dispute the extent of these dangling areas nor the award of consequential damages by the CA arising from the impairment or diminution in value caused by the construction of respondent's transmission lines on the subject properties.<br><br>Petitioners, however, challenge the CA's finding that consequential damages should be computed at 50% of the BIR zonal valuation, insisting instead on the full market value of the dangling areas.<br><br>The Court disagrees. Petitioners failed to present reliable and actual evidence to support the valuation adopted by the Board of Commissioners, which pegged damages at full market valueâan amount that is not only unsupported but even exceeds the recommended just compensation for the property actually expropriated. Moreover, jurisprudence has consistently maintained that consequential damages in analogous cases are set at 50% of the BIR zonal valuation for properties affected by electric transmission lines.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> Thus, in <i>National Power Corporation v. Marasigan</i>,<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> the Court granted consequential damages to the property owners due to impairment or reduction in value of their remaining properties following expropriation. Consequently, the Court awarded damages equivalent to 50% of the BlR zonal valuation of the property impacted by the transmission lines.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup><br><br>Accordingly, the Court affirms the CA's award of consequential damages equivalent to 50% of the BIR zonal valuation of the "dangling areas."<br><br>Likewise, the Court upholds the CA's award of exemplary damages and attorney's fees. The Court has previously granted exemplary damages and attorney's fees in cases where property owners were deprived of beneficial ownership of their properties without appropriate expropriation proceedings.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> Since petitioners have not challenged this award, We affirm the amount of PHP 200,000.00 in exemplary damages, along with attorney's fees set at 1% of the total amount due to the petitioners.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Reconvening or reconstitution of the Board of Commissioners</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The Court finds no error in the CA's directive to reconvene or reconstitute the Board of Commissioners. Rule 67, Section 8 of the Rules of Court<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> expressly authorizes the trial court to "recommit" matters to commissioners or "appoint new commissioners" when necessary to ensure that just compensation is determined in accordance with law.<br><br>Because Rule 67 vests the trial court with the power to recommit or appoint new commissioners, the CA, including this Court, may likewise direct the RTC to reconvene or reconstitute the Board of Commissioners, or even appoint a new one, when circumstances so require.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> In this case, such necessity is evident. First, the determination of just compensation cannot proceed without ascertaining the precise date of taking of the subject propertiesâwhether in 1979 or 1995âas this directly affects the computation of just compensation. Second, the amount of just compensation must be computed in accordance with the present value formula laid down in <i>Spouses Nocom, Heirs of Mariano</i>, and <i>Heirs of Cipriano</i>. Third, there is a need to determine consequential damages, which should be limited to 50% of the BIR zonal valuation of the "dangling areas" or affected properties segregated by respondent's transmission lines. Finally, the number of days devoted by the Board of Commissioners in preparing their reports must be ascertained to fix their fees pursuant to Rule 141, Section 16 of the Rules of Court.<br><br>These considerations make it imperative to remand the case to the RTC for the reconstitution or reconvening of the Board of Commissioners. This step is essential to address key factual and legal issuesâthe exact date of taking, the computation of just compensation under the present value formula, the determination of consequential damages, and the assessment of commissioners' feesâin accordance with the Rules of Court and prevailing jurisprudence.<br><br><b>FOR THESE REASONS</b>, the Petition is <b>PARTIALLY GRANTED</b>. The September 29, 2023 Decision and the August 14, 2024 Resolution of the Court of Appeals in CA-G.R. CV No. 07972 are <b>AFFRIMED</b> with <b>MODIFICATION</b>. The case is <b>REMANDED</b> to the Regional Trial Court, Branch 28, Iloilo City, which is <b>DIRECTED</b> to reconstitute or reconvene the Board of Commissioners, or appoint a new board if necessary, for the purpose of:<blockquote><ol><li>Determining the precise date of taking of the subject properties;<br></li><li>Computing the amount of just compensation in accordance with the present value formula laid down in <i>Spouses Nocom v. National Transmission Corporation, Heirs of Mariano v. National Transmission Corporation</i>, and <i>Heirs of Cipriano v. National Transmission Corporation</i>;<br></li><li>Determining consequential damages, which shall be limited to 50% of the BIR zonal valuation of the affected properties segregated by the electrical transmission lines; and<br></li><li>Ascertaining the number of days devoted by the Board of Commissioners in preparing their reports for purposes of fixing their fees pursuant to Rule 141, Section 16 of the Rules of Court.</li></ol></blockquote>In addition, respondent National Transmission Corporation is <b>ORDERED</b> to pay petitioner Spouses Quirino Roni T. Baterna and Marites M. Baterna exemplary damages in the amount of PHP 200,000.00 and attorney's fees equivalent to 1% of the total amount due to petitioners.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J. (Chairperson), Zalameda, Rosario</i>, and <i>Marquez, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 46-68. The September 29, 2023 Decision in CA-G.R. CV No. 07972 was penned by Associate Justice Rogelio G. Largo and concurred in by Associate Justices Marilyn B. Lagura-Yap and Jacinto G. Fajardo, Jr. of the Nineteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 77-80. The August 14, 2024 Resolution in CA-G.R. CV No. 07972 was penned by Associate Justice Rogelio G. Largo and concurred in by Associate Justices Marilyn B. Lagura-Yap and Jacinto G. Fajardo, Jr. of the Nineteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 107-111.The May 29, 2020 Order in Civil Case No. 14-32518 was penned by Acting Presiding Judge Jose Mauricio E. Gomez of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 138-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Republic Act No. 9136 (2001), Electric Power Industry Reform Act of 2001.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Republic Act No. 9136 (2001), sec. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Republic Act No. 9136 (2001), sec. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, pp. 48, 86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 48-49, 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 49, 88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, p. 15; RTC records p. 428.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> RTC records, pp. 135-140.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 147-148. The August 12, 2016 Order in Civil Case No. 14-32518 was penned by Presiding Judge Loida J. Diestro-Maputol of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, p. 87<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> RTC records, pp. 200-201. The June 30, 2017 Order in Civil Case No. 14-32518 was penned by Presiding Judge Loida J. Diestro-Maputol of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 207; <i>rollo</i>, p. 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 218. The September 14, 2017 Order in Civil Case No. 14-32518 was penned by Presiding Judge Loida J. Diestro-Maputol of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 221-228. The RTC appointed the following individuals as commissioners: (1) Atty. Therese C. del Campo PeÃ±aranda, City Assessor of Iloilo (nominated by TRANSCO); (2) the Branch Clerk of Court, who serves as the Court's representative and Chairman of the Panel; and (3) Mr. Catalino Hinolan Madayag, Jr. (nominated by spouses Baterna).<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, pp. 49, 88, 118.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> RTC records, pp. 256-266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i>, p. 88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> RTC records, p. 266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 275. The January 22, 2018 Order in Civil Case No. 14-32518 was penned by Presiding Judge Loida J. Diestro-Maputol of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, p. 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> RTC records, pp. 292-296.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> RTC records, pp. 302-311.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> RTC records, pp. 288-290.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, p. 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> RTC records, p. 432.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 426-435. The March 12, 2019 Order in Civil Case No. 14-32518 was penned by Acting Presiding Judge Jose Mauricio E. Gomez of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Republic Act No. 10752 (2016), The Right-of-Way Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> RTC records, pp. 434-435.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, p. 91. Mr. Catalino Hinolan Madayag, Jr. was replaced by Mr. Prudencio D. Relano, Jr. due to the former's untimely death.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> RTC records, pp. 655-657.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 656.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 661-675.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, p. 107-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 110.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 112. The October 23, 2020 Order in Civil Case No. 14-32518 was penned by Acting Presiding Judge Jose Mauricio E. Gomez of Branch 28, Regional Trial Court, Iloilo City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> RTC records, pp. 761-762.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, pp. 66-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> RULES OF COURT, Rule 141, sec. 16 states:<blockquote>Sec. 16. <i>Fees of commissioners in eminent domain proceedings</i>. â The commissioners appointed to appraise land sought to be condemned for public uses in accordance with these rules shall each receive a compensation to be fixed by the court of NOT LESS THAN [PHP 300.00] per day for the time actually and necessarily employed in the performance of their duties and in making their report to the court, which fees shall be taxed as a part of the costs of the proceedings.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, pp. 58-63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 77-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 69-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 20-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 32-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Comment, pp. 1-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Republic Act No. 12289 (2025), Accelerated and Reformed Right-of-Way (ARROW) Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> <b>National Transmission Corporation v. Spouses Manalo</b>, 950 Phil. 165, 171-172 (2024) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>National Transmission Corporation v. Untiveros</b>, 954 Phil. 220, 231-233 (2024) [Per J. Lopez, J.Y., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>See id. See also</i> <b>National Transmission Corporation v. Spouses Manalo</b>, 950 Phil. 165, 171-172 (2024) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Republic Act No. 8974 (2000), An Act to Facilitate the Acquisition of Right-Of-Way, Site or Location for National Government Infrastructure Projects and for Other Purposes; <b>Republic v. Estate of Juan Maria Posadas III</b>, 871 Phil. 612, 636 (2000) [Per J. Reyes, A, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>National Transmission Corporation v. Spouses Manalo</b>, 950 Phil. 165, 171 (2024) [Per J. Kho, Jr., Second Division]; <b>Republic of the Philippines v. Estate of Juan Maria Posadas III</b>, 871 Phil. 612, 636-637 (2000) [Per J. Reyes, A, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>National Transmission Corporation v. Spouses Manalo</b>, 950 Phil. 165, 171 (2024) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Republic Act No. 12289 (2025), sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Republic Act No. 12289 (2025), sec. 7 states:<blockquote>Section 7. Guidelines for Expropriation Proceedings. â . . . .<br><br>(a) Upon the filing of the complaint or at least time thereafter, and alter due notice to the property owner, the implementing agency or the private entity shall immediately deposit to the court in favor of the property owner the amount equivalent to the sum of:<blockquote>(1) Fifteen percent (15%) of the market value of the land;<br>(2) One hundred percent (100%) of the replacement cost, taking into consideration depreciation of the improvements, including machinery considered as immovable under Article 415 of the New Civil Code, and structures; and<br>(3) Fifteen percent (15%) of the market value of crops and trees located within the property.</blockquote>. . . .<br><br>Upon compliance with the above-mentioned guidelines, the court shall immediately issue to the implementing agency or the private entity an order to take possession of the property.<br><br>The court shall issue the writ of possession <i>ex parte</i>; no hearing shall be required.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>National Transmission Corporation v. Spouses Manalo</b>, 950 Phil. 165, 171 (2024) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>See</i> <b>Heirs of Cipriano v. National Transmission Corporation, G.R. No. 255113</b>, August 6, 2025 [Per J. Rosario, First Division] at 8. This pinpoint citation refers to the copy of the Decision uploaded in the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 157 Phil. 329 (1974) [Per J. Zaldivar, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 345-346.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> RTC records, p. 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Rollo</i>, p. 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> 815 Phil. 91 (2017) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 713 Phil. 55, 74(2013) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 594 Phil. 10, 33 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> 618 Phil. 586, 598 (2009) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> 518 Phil. 750, 757 (2006) [Per J. Tinga, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 505 Phil. 253, 263 (2005) [Per J. Garcia, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>National Transmission Corporation. v. Religious of the Virgin Mary</b>, 927 Phil. 84, 95-97 (2022) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 937 Phil. 398,407 (2023) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>G.R. No. 255113</b>, August 6, 2025 [Per .I. Rosario, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>National Transmission Corp. v. Oroville Development Corporation</b>, 815 Phil. 91, 107-108 (2017) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 671 Phil. 569, 591 (2011) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> 686 Phil. 967, 979 (2012) [Per .I. Sereno, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>National Transmission Corp. v. Oroville Development Corporation</b>, 815 Phil. 91, 108-111 (2017) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 110-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <b>National Transmission Corporation v. Religious of the Virgin Mary</b>, 927 Phil. 84, 97-101 (2022) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <b>National Transmission Corp. v. Oroville Development Corporation</b>, 815 Phil. 91, 114-115 (2017) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 931 Phil. 369, 379-380 (2022) [Per J. Dimaampao, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 914 Phil. 686, 712-713 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Heirs of Jose Mariano v. City of Naga</b>, 931 Phil. 369, 378-380 (2022) [Per J. Dimaampao, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id. See also</i> <b>Heirs of Cipriano v. National Transmission Corporation, G.R. No. 255113</b>, August 6, 2025 [Per J. Rosario, First Division] at 11-14. This pinpoint citation refers to the copy of the Decision uploaded in the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <b>Heirs of Cipriano v. National Transmission Corporation, G.R. No. 255113</b>, August 6, 2025 [Per J. Rosario, First Division] at 13-14. This pinpoint citation refers to the copy of the Decision uploaded in the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Rollo</i>, p. 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>Heirs of Cipriano v. National Transmission Corporation, G.R. No. 255113</b>, August 6, 2025 [Per J. Rosario, First Division] at 13-14. This pinpoint citation refers to the copy of the Decision uploaded in the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Schulze, Sr. v. National Power Corporation</b>, 873 Phil. 1029, 1042 [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Schulze, Sr. v. National Power Corporation</b>, 873 Phil. 1029, 1042 (Per J. Perlas-Bernabe, Second Division]; <b>National Transmission Corporation v. Lacson-De Leon</b>, 835 Phil. 686, 697 (2018) [Per J. Carpio, Second Division]; <b>National Power Corporation v. Marasigan</b>, 820 Phil. 1107, 1119 (2017) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> 820 Phil. 1107 (2017) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i> at 1129-1130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <b>Heirs of Cipriano v. National Transmission Corporation, G.R. No. 255113</b>, August 6, 2025 [Per J. Rosario, First Division] at 15-16. This pinpoint citation refers to the copy of the Decision uploaded in the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> RULES OF COURT, Rule 67, sec. 8 states:<blockquote>Section 8. <i>Action upon commissioners' report</i>. â Upon the expiration of the period of ten (10) days referred to in the preceding section, or even before the expiration of such period but after all the interested parties have filed their objections to the report or their statement of agreement therewith, the court may, after hearing, accept the report and render judgment in accordance therewith, or, for cause shown, it may recommit the same to the commissioners for further report of facts, or it may set aside the report and appoint new commissioners; or it may accept the report in part and reject it in part and it may make such order or render such judgment as shall secure to the plaintiff the property essential to the exercise of his right of expropriation, and to the defendant just compensation for the property so taken.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>See</i> <b>Republic v. Ropa Development Corporation</b>, 893 Phil. 189, 203 (2021) [Per J. Leonen, Third Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

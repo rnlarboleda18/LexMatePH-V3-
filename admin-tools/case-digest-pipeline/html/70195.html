@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259037 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. MARICRIS BAZAR Y BELLO, ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70195' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259037, September 29, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. MARICRIS BAZAR<I> Y</I> BELLO, ACCUSED-APPELLANT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">In criminal prosecutions that rest entirely on circumstantial evidence, the prosecution is all the more obligated to rely on the strength of its own case and not on the weakness of the defense.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Courts must ensure that the totality of the evidence adduced constitutes an unbroken chain leading beyond reasonable doubt to the guilt of the accused, to the exclusion of all others.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> When the inculpatory facts and circumstances are capable of two or more explanations, one of which is consistent with the innocence of the accused and the other consistent with their guilt, the evidence does not fulfill the test of moral certainty and is not sufficient to support a conviction.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br><center><i>I</i></center><br>In this ordinary appeal,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> accused-appellant Maricris Bazar<i> y</i> Bello (Maricris) assails the Court of Appeals (CA) Decision,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> which affirmed with modification the Regional Trial Court (RTC) Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> convicting her of robbery with multiple homicide.<br><br>Maricris and her co-accused, Abegail Jaingue (Abegail), were charged with robbery with multiple homicide, defined and penalized under Article 294 in relation to Article 249 of the Revised Penal Code, as amended by Republic Act No. 7659,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> under an Information which reads:<br><blockquote>That on or about [July 26,] 2015 at around 8:00 [a.m.] at Barangay Balintawak, Lipa City, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, together with [two] John Does, whose identities and whereabouts are still unknown, while armed with a piece of coco lumber, with intent to gain and without the knowledge and consent of the owner thereof, by means of violence against and/or intimidation of person, conspiring and confederating together, acting in common accord and mutually aiding one another, did then and there willfully, unlawfully and feloniously take, rob and carry away cash money amounting to [PHP 40,000.00] and pieces of jewelry valued at [PHP 55,000.00] belonging to Septy Jane Oliveros <i>y</i> Comilang all with the total amount of [PHP 95,000.00], to the damage and prejudice of the said owner in the aforesaid amount of [PHP 95,000.00].<br><br>That on the occasion or by reason of said robbery, the above-named accused, conspiring and confederating together, acting in common accord and mutually aiding one another with the use of force against and by means of threats and intimidation of person and abuse of superior strength, did then and there willfully, unlawfully[,] and feloniously hit with the said piece of coco lumber, Princess Shane Oliveros<i> y</i> Culla, 9 years old, Prince Andrei Oliveros <i>y</i> Culla, 6 years old, and Joyce Ann Oliveros <i>y</i> Rubianes, 6 years old, thereby inflicting upon the victims traumatic head injuries, skull fracture with brain laceration and hemorrhage which directly caused their death.<br><br>Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </blockquote>Upon arraignment, they pleaded not guilty to the charge. Thereafter, trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>The CA summarized the version of the prosecution as follows:<br><blockquote>The incident took place in the house of [(spouses)] Alexander J. Oliveros and Septy Jane C. Oliveros [(Septy Jane)] located at San Nicolas Street, Barangay Balintawak, Lipa City, Batangas on July 26, 2015.<br><br>The [spouses] sell vegetables in the market which is only about 20 to 30 meters away from their house. . . between 1:00 to 2:00 [a.m.] each day. They usually leave in the house their [three] grandchildren, namely: Princess Shane-9 years old, Prince Andrei-6 years old and Joyce Ann-6 years old, who have been living with them since they were toddlers.<br><br>In the early morning of July 26, 2015, the [spouses] left the house and proceeded to the market. Princess Shane was the one who closed the door for them and then she would return to sleep with Prince Andrei and Joyce Ann. Later that morning, Septy Jane wondered why the children have not followed her in the market. But since it was a Sunday, she just thought that they were still sleeping. Septy Jane sent their nephew, Arthur Cunanan, to the house to bring breakfast to the children. Arthur lives with the [spouses] but sleeps in their market stall. According to Arthur, when he reached the house, the door was open and the jalousie window broken with blood stains. Arthur saw his cousin, Princess Shane, lying on the bed covered with blood. Arthur immediately ran to the market, still trembling from what he saw, and informed the [spouses] about it. . . . Upon reaching the house, Septy Jane also found the door open, the jalousie windows broken, blood were scattered all over the walls and ceiling, there were broken bottles, their slippers scattered on the floor[,] and the electric fan was destroyed. When she went upstairs, she saw her grandchildren lying dead on the bed. Princess Shane had a big cut on the forehead while Prince Andrei and Joyce Ann had black eyes and injuries on their faces. Septy Jane also discovered that her wallet containing [PHP] 40,000.00 and a bracelet worth [PHP] 55,000.00. . . were gone. Thereafter, policemen and [Scene of the Crime Operatives (SOCO)] arrived in the house to investigate on the incident and took the bodies of the children for autopsy[.]<br><br>The Police conducted an investigation on the brutal killing of the children. [P]rior to the incident, Balbina Pelagio [(Balbina)] found that the occupants of the house she rented out to [Maricris] and [Abegail], were gone including their companions. . . Balbina says that these people did not inform her that they were moving out of the house. When the police inspected said house, they saw traces of blood on the wall, many clothes were inside the comfort room, [one] small and [one] big towel with blood stains, [one] t-shirt with blood stains, a round bamboo (coconut lumber) with handprints of blood and the curtain was also with blood stains. Photographs were taken of these items in the presence of a barangay representative, other policemen, Balbina's nephew and son-in-law, a neighbor and the SOCO team. After which, the items were taken by SOCO for forensic examination.<br><br>The respective Certificate of Death of the children indicated the cause of death as "traumatic head injury, comminuted skull fracture with brain laceration and hemorr[h]age."<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </blockquote>Additionally, according to the RTC, forensic serologist Police Chief Inspector Mylene Adag testified that she received several marked object evidence, including a peach towel labeled "<i>I'm sorry kung ano man ang nagawa ko, sorry</i>." She received a request for DNA examination of said pieces of evidence and of the green curtain with stain believed to be blood. She likewise prepared the Request for DNA Examination and Comparison requesting the crime laboratory of Camp Crame, Quezon City for examination of the curtain. The parties later stipulated on the testimony of Senior Police Officer IV Jesus Agustin (SPO4 Agustin) to the effect that: (1) he would have testified that certain object evidence was brought to Camp Crame; and (2) he could identify the documents relative to the results of the examination conducted on certain object evidence by the Batangas Crime Laboratory Office as well as the DNA Laboratory Report relative to the results of the examination conducted by the Crime Laboratory of Camp Crame.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On the other hand, the CA recapitulated the version of the defense as follows:<br><blockquote>Abegail is a 27-year old bar waitress at the time of the incident. She claims that on the night of July 25, 2015, she was at work in the bar and went home at around 4:00 [a.m.] the following day. She slept with her [two] children, a [5-year-old] and a [9-month-old] baby. When she woke up at about 8:00 [a.m.], she heard people screaming outside of the house about children who were killed. Despite the commotion outside, she and her children remained in the house, with Maricris and her friends. She also claims that she met Maricris in the bar sometime in 2015 and she moved in with her children to the house two weeks ago. The [girlfriend] of Maricris, Josie, and friend Melvie also live in said house. She did not leave the house in the early morning of July 26, 2015 and stayed there for [three] more days after the incident. Only Maricris, Josie and Melvie left the house at around 10:00 [a.m.] of July 26, 2015 without paying the rent and informing Balbina, leaving their personal belongings behind. She did not know Balbina and where she lives such that she could not inform her that she was also moving out of the house.<br><br>Maricris is a [22-year-old] bar waitress. She claims that she and her friends. . . had a drinking spree in the evening of July 25, 2016. Abegail was then at work. They slept at about 10:00 [p.m.], with the children of Abegail. The following day, they heard screams outside the house that children were killed. All of them went out of the house to see what was happening outside. They saw the dead children. At about 9:00 [a.m.], she and her friends left the house and went to the church in Granja, Lipa City. Abegail also left with her children to go somewhere. From the church, she and her friends returned to the house but left shortly, leaving behind her personal belongings. She proceeded to Transville, Banay-Banay to attend a birthday party while her friends went to their respective homes. She did not return anymore to the house because Abegail texted her that policemen were in the house and that a reward of [PHP] 300,000.00 would be given to anyone who could lead to her apprehension. She also claims that [she] just heeded the advice of the barangay captain thereat not to return to the house until she and her friends were cleared of any involvement in the incident. For which reason, she stayed in Banay-Banay for [two] weeks after which she proceeded to the house of her sister in Nasugbu, Batangas and stayed there until her arrest on March 9, 2016.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </blockquote>After trial, the RTC found it improbable that Abegail participated in the crime since she was at work. It gave credence to the children's Certificates of Death stating that they died at around 2:30 a.m. on July 26, 2015 as well as to Abegail's declaration that she only returned home at 4:00 a.m. that day, which was corroborated by Maricris.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> As regards Maricris, however, the RTC was convinced of her guilt based on the following circumstantial evidence:<br><blockquote><ol><li>On the night of July 25, 2015, [Maricris] together with her unidentified [partner] and [two] girl friends were at the house adjacent to the apartment of herein victims;<br><br></li><li>In the early morning of July 26, 2015, the day when the subject incident happened, witness Balbina Pelagio, who is the owner of the house being rented by [Maricris] and [Abegail], discovered that the occupants were all gone and everything inside the house were in disarray and destroyed. There were diapers around, the door was broken, and the room was full of dirt. Even the [two] accused were united in relating that [Maricris] together with her friends left the house in the morning of July 26, 2015;<br><br></li><li>[Maricris] left her rented house hurriedly and surreptitiously as indicated by the fact that she did not notify the owner of the house about it and that she did not take her clothes or things with her;<br><br></li><li>She never went back to her rented house to retrieve her clothes and belongings;<br><br></li><li>She obviously went into hiding: first, at Banay-Banay, Lipa City, Batangas where she stayed for a few weeks, then in her sister's house in Nasugbu, Batangas until her arrest on March 9, [2016]; and<br><br></li><li>Police Officers Silva and Gonzales were able to recover from the house abandoned by [Maricris] and her friends incriminating evidence such as towels, several clothes and a piece of wood all with blood stains.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Citations omitted)</li></ol> </blockquote>Thus, in its Decision,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the RTC convicted Maricris of the crime charged but acquitted Abegail. The decretal portion states:<br><blockquote>WHEREFORE. . . the Court finds herein accused Abegail Jaingue<i> y </i>Rull Not Guilty of the crime charged.<br><br>The Court, however, finds the accused Maricris Bazar <i>y</i> Bello Guilty beyond reasonable doubt, as principal, for the crime of Robbery with Multiple Homicide. . . and hereby sentences her to suffer the penalty of Reclusion Perpetua without the possibility of parole.<br><br>She is likewise ordered to pay Septy Jane Oliveros the amount of [PHP 95,000.00] representing the amount of the stolen property; and to pay the heirs of the [three] minor children [PHP 100,000.00] as civil indemnity, [PHP 100,000.00] as moral damages, [PHP 100,000.00] as exemplary damages and [PHP 50,000.00] by way of temperate damages plus interest of [6%] per annum from the date of the finality of the Decision until fully paid.<br><br>. . . .<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </blockquote>Maricris appealed before the CA and filed her Brief,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> arguing that the RTC gravely erred in convicting her based on circumstantial evidence despite the failure of the prosecution to prove her identity as the perpetrator, and based on her alleged act of flight. She asserted that: (1) she was not the only occupant of the rented house and even if she was the lessee, it does not follow that she is the perpetrator of the crime; (2) when Abegail returned to said house from work, it was impossible that she did not notice the traces of blood on the wall and clothes stained with blood inside the comfort room and continued to stay there for three more days; (3) there was no proof that the house was untouched and uncompromised from the time the occupants therein left the house since it was only inspected by the police after the burial of the children; (4) the testimony of Septy Jane about the condition of the house is hearsay because she had no personal knowledge; and (5) flight per se is not synonymous to guilt and must not always be attributed to one's consciousness of guilt but could be fear of being wrongly apprehended as the guilty person.<br><br>The Office of the Solicitor General, representing the People, averred in its Brief<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> that the prosecution had proven the guilt of Maricris beyond reasonable doubt, and that while there was no direct evidence pointing to her guilt due to absence of eyewitnesses, there exists a surfeit of circumstantial evidence, as found by the RTC, pointing to Maricris as the culprit or at least one of the culprits. Assuming that Abegail stayed in the rented house for three days after the incident yet did not see any bloodied clothes and blood stains on the walls, these are irrelevant and do not even touch on the elements of the crime for which she was convicted. What is clear is that money and jewelry were stolen, children were killed, and Maricris went into hiding despite there being no immediate reason for her to flee. All the circumstantial evidence coupled with her unexplained flight paints a picture of her guilt and must prevail over her self-serving defense of denial.<br><br>In its assailed Decision,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> the CA affirmed the RTC Decision but modified the nomenclature of the crime. The decretal portion reads:<br><blockquote>WHEREFORE, premises considered, the Appeal is DENIED. The Decision. . . convicting accused-appellant of Robbery with Homicide (<i>proper nomenclature of the crime</i>) is AFFIRMED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original) </blockquote>Hence, this appeal.<br><br>The parties having dispensed with the filing of supplemental briefs<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> and having adopted their respective appellate briefs, We now resolve.<br><br><center><i>II</i></center><br>Even in the absence of direct evidence, it is settled that conviction may be had even upon circumstantial evidence. In<i> People v. Modesto</i>,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> We discussed when circumstantial evidence would be sufficient to convict, viz.:<br><blockquote>A rule of ancient respectability now molded into tradition is that <i>circumstantial evidence suffices to convict only if the following requisites concur: (a) there is more than one circumstance; (b) the facts from which the inferences are derived are proven; and (c) the combination of all the circumstances is such as to produce a conviction beyond reasonable doubt</i>.<br><br>The standard. . . in the appreciation of circumstantial evidence is well set out in the following passage from<i> People [v.] Ludday</i>: "No general rule can be laid down as to the quantity of circumstantial evidence which in any case will suffice.<i> All the circumstances proved must be consistent with each other, consistent with the hypothesis that the accused is guilty, and at the same time inconsistent with the hypothesis that [they are] innocent, and with every other rational hypothesis except that of guilt</i>."<br><br>It has been said, and we believe correctly, that<i> the circumstances proved should constitute an unbroken chain which leads to one fair and reasonable conclusion which points to the accused, to the exclusion of all others, as the guilty person</i>. From all the circumstances, there should be a combination of evidence which in the ordinary and natural course of things, leaves no room for reasonable doubt as to his guilt. Stated in another way, <i>where the inculpatory facts and circumstances are capable of two or more explanations, one of which is consistent with innocence and the other with guilt, the evidence does not fulfill the lest of moral certainty and is not sufficient to convict the accused</i>.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis supplied) </blockquote>In assaying the probative value of circumstantial evidence, Our ruling in<i> People v. Monje</i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> established four basic guidelines to be observed:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">It should be acted upon with caution; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">All essential facts must be consistent with the hypothesis of guilt; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">The facts must exclude every other theory but that of guilt of the accused; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td valign="top"> <div align="JUSTIFY">The facts must establish with certainty the guilt of the accused as to convince beyond reasonable doubt that they were the perpetrator of the offense.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></div></td> </tr> </tbody></table><br>The peculiarity of circumstantial evidence is that the series of events pointing to the commission of a felony is appreciated not singly but collectively. The guilt of the accused cannot be deduced from scrutinizing just one particular piece of evidence. It is more like a puzzle which, when put together, reveals a convincing picture pointing to the conclusion that the accused is the author of the crime.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Thus, the only question We must ask is whether the pieces of circumstantial evidence in this case fulfill the test of moral certainty sufficient to convict accused-appellant. In other words, have the People discharged the heavy burden of proof beyond reasonable doubt? To answer this, We must scrutinize every piece of circumstantial evidence considered by the lower courts in arriving at a judgment of conviction.<br><br><i>First alleged circumstantial evidence</i><br><blockquote><ol><li>On the night of July 25, 2015, [accused-appellant] together with her unidentified [partner] and [two] girl friends were at the house adjacent to the apartment of herein victims.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></li></ol> </blockquote>While it is undisputed that both accused were at the house adjacent to the apartment of the victims, We must also consider the fact that there were at least 10 other people in the house, as testified by the owner herself:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Aside from the [two] female persons that you pointed to, you mentioned that there were several persons who lived in that house? How many were they, more or less, aside from the [two]?</div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">[A]round [10], Sir.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></div></td> </tr> </tbody></table></blockquote><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Second, third, and fourth alleged circumstantial evidence</i></div></td><td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><blockquote><ol start="2"><li>In the early morning of July 26, 2015. . . witness Balbina Pelagio, who is the owner of the house being rented by [accused-appellant] and [Abegail], discovered that the occupants were all gone and everything inside the house were in disarray and destroyed. There were diapers around, the door was broken, and the room was full of dirt. Even the [two] accused were united in relating that [accused-appellant] together with her friends left the house in the morning of July 26, 2015;<br><br></li><li>[Accused-appellant] left her rented house hurriedly and surreptitiously as indicated by the fact that she did not notify the owner of the house about it and that she did not take her clothes or things with her;<br><br></li><li>She never went back to her rented house to retrieve her clothes and belongings.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></li></ol> </blockquote>While it is true that accused-appellant eventually left the house, Septy Jane averred in her<i> Karagdagan[g] Salaysay</i>, which was made part of her testimony, that it was not only accused-appellant and her co-accused who left but also three other unidentified men, to wit:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">T: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY"><i>Ano naman ang kaugnayan ng RC [C]ola at [c]oco lumber na may dugo?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">S: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Dahil may pahinlulot po ang may-ari ng apartment <b> matapos umalis sina Abegail at Maricris at tatlong lalaking hindi naming kilala</b>,&nbsp; ay malaya kaming nakapaghalungkat sa nasabing apartment at bukod sa mga damit na may dugo ay meron din doon na RC Cola na walang laman at may coco lumber din na katulad ng coco lumber na may dugo</i>.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis supplied, paragraph numbering omitted) </div></td> </tr> </tbody></table></blockquote>Abegail's testimony also reveals that accused-appellant first left nearly eight hours after the incident, and even returned later that day. She likewise testified that accused-appellant's clothes were not scattered in the room:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> Q: </td> <td width="95%" valign="top"> <i>So, you said that Maricris and her friends left at [10:00] in the morning of that same day. Correct?</i> </td> </tr> <tr> <td colspan="2" valign="top">. . . .&nbsp; </td> </tr> <tr> <td valign="top"> A: </td> <td valign="top"> <i>Yes, sir</i>. </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td colspan="2" valign="top">. . . .&nbsp; </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td valign="top"> Q: </td> <td valign="top"> [W]hen your friend Maricris and her friends also left the house on that same day, they never returned on that same house? </td> </tr> <tr> <td valign="top"> A: </td> <td valign="top"> <i>They returned in the afternoon, sir</i>. </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td valign="top"> Q:&nbsp; </td> <td valign="top">But they did not return after that?&nbsp; </td> </tr> <tr> <td valign="top">A: </td> <td valign="top">Yes, sir. </td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> Q: </td> <td valign="top"> And they left all their things there? </td> </tr> <tr> <td valign="top"> A: </td> <td valign="top"> Yes, sir. </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td valign="top"> Q: </td> <td valign="top"> All their clothes? </td> </tr> <tr> <td valign="top"> A: </td> <td valign="top"> Yes, sir. </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td valign="top"> Q: </td> <td valign="top"> <i>Scattered in their room?</i> </td> </tr> <tr> <td valign="top"> A: </td> <td valign="top"> <i>No, sir</i>. </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td colspan="2" valign="top">. . . .&nbsp;&nbsp; </td> </tr> <tr> <td valign="top">&nbsp; </td> <td valign="top">&nbsp; </td> </tr> <tr> <td valign="top"> Court </td> <td valign="top">&nbsp; </td> </tr> <tr> <td valign="top"> Q: </td> <td valign="top"> <i>So, you were there when they returned in the afternoon?</i> </td> </tr> <tr> <td colspan="2" valign="top">. . . .&nbsp;&nbsp; </td> </tr> <tr> <td valign="top"> A: </td> <td valign="top"> <i>Yes, Your Honor</i>.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis supplied) </td> </tr> </tbody></table></blockquote>Abegail's testimony jibes with accused-appellant's testimony that the latter left the house at around 9:00 a.m. to go to church then returned shortly thereafter to attend a birthday party. It deserves more credence than Balbina's testimony that they ran away immediately after the incident since Balbina had no personal knowledge with regard to the time that accused-appellant left, she herself having left the house early that morning to go to the market.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Surely, the RTC acquitted Abegail because it found her testimony credible.<br><br><i>Fifth alleged circumstantial evidence</i><br><blockquote><ol start="5"><li>She obviously went into hiding: first, at Banay-Banay, Lipa City, Batangas where she stayed for a few weeks, then in her sister's house in Nasugbu, Batangas until her arrest on March 9, 2016.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></li></ol> </blockquote>In<i> United States v. Alegado</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> We defined flight in criminal law as the evading of the course of justice by voluntarily withdrawing oneself in order to avoid arrest or detention or the institution or continuance of criminal proceedings. The unexplained flight of an accused may generally be taken into consideration as evidence having a tendency to establish their guilt.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Senator Vicente Francisco, in his treatise on criminal evidence, expounded on the circumstance of flight in criminal prosecutions, to wit:<br><blockquote>The flight. . . of [the] accused raises no presumption of law that [they are] guilty; but it is admissible in evidence as a fact which may be considered by the court, and from which they may draw an inference,<i> in connection with other circumstances and in the absence of an explanation of the reasons or motives which prompted it, that [they are] guilty; and this is true whether the other evidence of guilt is direct or circumstantial</i>. For the same purpose the events and circumstances connected with the flight of accused are equally admissible. The law makes no nice or refined distinction as to the manner or method of a flight; it may be open, or it may be a hurried or concealed departure[.]<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (Emphasis supplied) </blockquote>Thus, We stress that flight per se does not establish guilt but only tends to do so. On its own, flight is insufficient to overcome the constitutional presumption of innocence of the accused, and must be coupled with other evidence, whether direct or circumstantial. Absent other circumstances, flight is not a reliable indicator of guilt because it is inherently ambiguous and lends itself just as easily to an innocent explanation as it does to a nefarious one.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Even in high crime areas, there are many innocent reasons for flight, including fear of retribution for speaking to officers, unwillingness to appear as witnesses, and fear of being wrongfully apprehended as a guilty party.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>In this case, accused-appellant testified that she did not return after leaving in the afternoon because Abegail texted her that policemen were in the house and that a reward of PHP 300,000.00 would be given to anyone who could lead to her apprehension, and that she merely heeded the advice of the barangay captain not to return until she and her friends were cleared of any involvement in the incident, to wit:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">So why were you afraid to go back when in fact, you said that you did nothing wrong? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Because we were told that we will be apprehended but we did not do anything wrong, Sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">If you did not do anything wrong, why will you be afraid to go back and if arrested, you can even easily defend yourself? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Because we were told that the people were given [PHP] 300,000.00 so that we will be apprehended, Sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Just to inform you Madam Witness, the [PHP] 300,000.00 was to be given to the people who will tell them who killed those [three] children. So, why will you be afraid to be arrested when in fact, you were not the one as you said who killed these [three] children? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Because Barangay Captain Lito told me that I stay first to the house of my sister, Sir.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></div></td> </tr> </tbody></table></blockquote>In<i> People v. Bulawin</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> where the accused left his<i> barrio</i> after the incident and went to live with his family in another province, We determined that such was not evidence of a guilty conscience but dictated by his instinct of self-preservation, there being evidence to show that he was warned by his neighbors that there were people hired by the brothers of the deceased to liquidate him, and that if he really intended to hide from the authorities, it was not shown why he did not do so at the first opportunity.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Similarly, if accused-appellant really intended to hide out of guilt, logic and human experience dictate that she would have fled at the first opportunity. Instead, she stayed at the rented house, right across the scene of the crime, another seven to eight hours after the incident. She even returned in the afternoon. Thus, it appears that she only decided to flee later that afternoon when she received news of a reward for her capture. Since accused-appellant only fled after she got wind of the pursuit against her, the adage "<i>the wicked man flees though no man pursueth, but the righteous are as bold as a lion</i>,"<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><i> </i>as mentioned by the trial court, hardly finds application.<br><br><i>Sixth alleged circumstantial evidence</i><br><blockquote><ol start="6"><li>Police Officers Silva and Gonzales were able to recover from the house abandoned by [Maricris] and her friends incriminating evidence such as towels, several clothes[,] and a piece of wood all with blood stains.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></li></ol> </blockquote>When asked why she filed a case against accused-appellant and her co-accused, Septy Jane had this to say in her<i> Karagdagan[g] Salaysay</i>:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">T: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY"><i>Sa nauna mong salaysay ay hindi mo sinabi na sila ang pumatay at nagnakaw sa inyo, bakit naman sa ngayon ay sila ang sinasabi mo?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">S: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Dahil wala pa po akong matibay na ebidensya laban sa kanila noon</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">T: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Meron ka na bang ebidensiya sa ngayon na magsasabing sila ang pumatay sa iyong tatlong apo at nagnakaw ng alahas at pera mo?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">S: </div></td> <td valign="top"> <div align="JUSTIFY"><b><i>Opo, unang una po ay bigla silang nag-alisan sa apartment na inuupahan nila sa likod lang ng apartment naming; ikalawa ay sa kapahintulutan ng may-ari ng apartment matapos na sila ay umalis ay may nakita kaming mga damit at kurtina na may bahid ng dugo at ikatlo ay ang mga nakuhang ebidensiya ng imbestigador at [SOCO] tulad ng BOTE NG RC COLA NA WALANG LAMAN at isang pirasong COCO LUMBER NA MAY DUGO</i>.</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">T: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Ano naman ang kaugnayan ng RC [C]ola at [c]oco lumber na may dugo?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">S: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Dahil may pahintulot po ang may-ari ng apartment matapos umalis sina Abegail at Maricris at tatlong lalaking hindi naming kilala, ay malaya kaming nakapaghalungkat sa nasabing apartment at bukod sa mga damit na may dugo ay meron din doon na RC Cola na walang laman at may coco lumber din na katulad ng coco lumber na may dugo</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">T: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Nasaan naman ngayon ang mga damit at coco lumber na may dugo?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">S: </div></td> <td valign="top"> <div align="JUSTIFY"><b><i>Dinala na po sa [SOCO] upang masuri kung dugo ng aking mga apo ang nakitang dugo sa damit at coco lumber, wala pa lamang po resulta.</i></b><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis supplied, paragraph numbering omitted) </div></td> </tr> </tbody></table></blockquote>For this reason, the Information specifically alleges that accused-appellant hit the victims with a piece of coco lumber, causing their deaths. Interestingly, despite Requests for DNA Examination<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> of the coco lumber, towels, and shirts, all with suspected human blood stains, the prosecution only formally offered the Request<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> and not the results of said examination, if any. The RTC did not even admit it for being merely provisionally marked.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Thus, this Court cannot presume that the suspected blood came from the victims.<br><br>Unfortunately, as much as this Court would have wanted to consider the contents of the DNA Laboratory Report results to shed light on the case, the exceptions to the formal offer rule<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> are not applicable here for the reason that while said documents are incorporated in the case records and the parties stipulated that SPO4 Agustin could identify them, there was no recital of their contents, particularly the forensic findings, in the stipulated testimony.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Since the prosecution of the accused hinged entirely on circumstantial evidence, the RTC could have taken a more proactive role by ordering<i> motu proprio</i> the conduct of DNA testing pursuant to Section 4 of the Rule on DNA Evidence. The fact that the biological samples from the various object evidence in this case already underwent DNA testing during investigation at the behest of police authorities does not preclude the court from ordering the conduct of another test to confirm the results for good reason,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> especially since the information produced is relevant to the proper resolution of the case<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and would have dispelled doubts as to the origin of the suspected blood stains.<br><br>Whatever may be the prosecution's reason for not formally offering the results, the fact remains that there is no iota of evidence showing that the suspected blood and hair on the alleged weapon and other object evidence recovered from accused-appellant's room were traced to the victims. Neither was there any evidence adduced, other than the fact that the alleged weapon was found in her room, to prove that it was she who wielded it. Otherwise stated, the circumstantial evidence did not discount the possibility that the coco lumber was used by another person or that it was used against another person, especially since there were at least 10 other people, aside from accused-appellant and her co-accused, who were staying in the rented house.<br><br>Likewise telling is the fact that Abegail's testimony is bereft of any indication that she noticed traces of blood on the wall and blood-stained clothes inside the comfort room of the rented house even if she continued to stay there for three more days after the incident. To this, the People riposte that such is irrelevant since it does not touch on the elements of the crime.<i> Au contraire</i>, it is relevant because if Abegail did not notice them despite having stayed there for three more days, it remains a possibility that said items were placed there after and not before accused-appellant left the house for good. Further, if the latter were indeed the author of the crime, it strains credulity that she would bring the alleged weapon and other items covered with blood to her room instead of leaving them at the crime scene or disposing of them.<br><br>In<i> United States v. Lim Sip</i>,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> while the prosecution proved that robbery occurred, the only evidence incriminating therein defendants was a crowbar found in the house where they lived together with other persons, and there was no showing that either accused owned it. In acquitting them, We declared:<br><blockquote>Notwithstanding the fact that the crime has been clearly proven, the case, however, offers no sufficient proof of the guilt of the accused. . . the charges of the prosecution, such as the finding of a crowbar at the house of the latter. . . are not sufficient to demonstrate the guilt of the said accused, inasmuch as, in order to established the liability of the criminal, and to convict him by circumstantial evidence, it is necessary that the evidence be derived from interrelated facts and properly proven in such manner that they definitely lead to the logical and rational conclusion, beyond all reasonable doubt, that the accused is the author of the crime, because<i> where his guilt has not been satisfactory established, there always arises the presumption of his innocence; and until the contrary is proven he is unquestionable entitled to an acquittal</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Emphasis supplied) </blockquote>In<i> United States v. Villos</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> We considered the following circumstantial evidence in determining whether the accused was guilty of the crime charged: (1) the deceased was stabbed in the back with a sharp-pointed instrument; (2) there was enmity between him and the accused for three years prior to the crime; (3) a blood-stained dagger was found three days after the incident near the place where the body was found, and witnesses identified this dagger with one known to have been in the possession of the accused a few months prior to the incident; (4) the accused was seen one mile from the scene of the crime on the night it took place and was wearing in his belt a dagger that resembled the one found near the body of the deceased; and (5) the people in the community did not usually carry daggers, a prohibitory ordinance having been enacted by the authorities.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> In exonerating the accused, We held:<br><blockquote>We think, however, that the evidence of record as to the identity of the dagger found near the scene of the crime with the dagger said to have been seen in the possession of the accused some months prior thereto is unsatisfactory and that the evidence is wholly insufficient to sustain a finding beyond a reasonable doubt that the accused was seen on the night of the crime wearing such a dagger.<br><br><i>When independent facts and circumstances are relied upon to identify the accused as the person who committed the crime charged, each material independent fact or circumstances necessary to complete the chain or series of independent facts tending to establish a presumption of guilt should be established to the same degree of certainly as the main fact. </i><br><br>. . . .<br><br><i>Before a conviction can be had upon circumstantial evidence, the circumstances proven should constitute an unbroken chain which leads to but one fair and reasonable conclusion, which points to the defendant to the exclusion of all others as the guilty person. The failure to find the dagger for some days after the crime, although it appears that a number of people visited the place where the body was found on the following day, suggest the possibility that it might have been placed there by some enemy of the accused or by the real murderer to divert suspicion from herself</i>; and<i> this hypothesis, which is consistent with the innocence of the accused, is not inconsistent with any of the remaining facts found by the trial court and adduced in evidence, nor is it inherently improbable or contrary to common experience in such cases</i>.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (Emphasis supplied, citations omitted) </blockquote>When evidence is purely circumstantial, the prosecution is all the more obligated to rely on the strength of its own case and not on the weakness of the defense, and conviction must rest on nothing less than moral certainty.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Thus, when the inculpatory facts and circumstances are capable of multiple explanations, one of which is consistent with the innocence of the accused and another consistent with their guilt, the evidence does not fulfill the test of moral certainty and is not enough to convict.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Since circumstantial evidence is only as strong as the weakest link, if the same does not fulfill the test of moral certainty sufficiently strong to offset the presumption of innocence, the accused has the right to be acquitted even if their innocence is doubtful.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>From the foregoing circumstantial evidence, We are unable to agree with the trial and appellate courts that the prosecution discharged its burden of proof beyond reasonable doubt. Taken together, they are not sufficient to justify the conclusion that accused-appellant killed the victims and stole the cash and jewelry.<br><br>We unequivocally condemn the brutality of the crime committed upon the three innocent children who were too soon deprived of their lives. At the same time, regardless of how We long to punish the perpetrator/s and accord justice to the victims and their family, justice must be dispensed with an even hand. The accused is never called upon to disprove what the prosecution has not proved.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> It is better to liberate a guilty person than to unjustly imprison one whose guilt has not been proved by the required quantum of evidence.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br><b>ACCORDINGLY</b>, the appeal is<b> GRANTED</b>. The March 11, 2021 Decision of the Court of Appeals in CA-G.R. CR-HC No. 14046 is <b>REVERSED</b> and<b> SET ASIDE</b>. Accused-appellant Maricris Bazar<i> y</i> Bello is <b>ACQUITTED</b> of robbery with homicide on the ground of reasonable doubt and is<b> ORDERED IMMEDIATELY RELEASED</b> from detention unless confined for some other lawful cause.<br><br>Let a copy of this Decision be furnished to the Superintendent, Correctional Institution for Women, Mandaluyong City for immediate implementation. The Superintendent of the Correctional Institution for Women is directed to report to this Court the action taken within five days from receipt of this Decision.<br><br>Let entry of judgment be issued immediately.<br><br><b>SO ORDERED. </b><br><br><i>Hernando</i><sup style="COLOR: RGB(255, 0, 0);">**</sup><i> (Acting Chairperson)</i><i>, Zalameda,</i> and <i>Marquez, JJ.,</i> concur.<br><i>Gesmundo,</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>C.J. (Chairperson)</i>, on official leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Per Special Order No. 3224 dated September 15, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>People v. Caparas, Jr.</b>, 352 Phil. 686, 699 (1998) [Per J. Melo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <b>People v. Ragon</b>, 346 Phil. 772, 779 (1997) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>People v. Taruc</b>, 241 Phil. 177, 186 (1988) [Per J. Gutierrez, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 3-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 9-22. The March 11, 2021 Decision in CA-G.R. CR-HC No. 14046 was penned by Associate Justice Marlene B. Gonzales-Sison and concurred in by Associate Justices Pablito A. Perez and Raymond Reynold R. Lauigan of the Eighth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 25-36. The November 4, 2019 Decision in Criminal Case No. 02-0152-2016 was penned by Acting Presiding Judge Noel M. Lindog of Branch 13, Regional Trial Court, Lipa City, Batangas.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Republic Act No. 7659 (1993), An Act to Impose the Death Penalty on Certain Heinous Crimes, Amending for that Purpose the Revised Penal Laws, as Amended, Other Special Penal Laws, and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records, pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, p. 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 12-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> CA <i>rollo</i>, pp. 71-72. <i>See</i> Brief for the Appellee dated November 6, 2020.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, pp. 25-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> CA <i>rollo</i>, pp. 25-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 60-78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 9-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 40-41, 49-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 134 Phil. 38 (1968) [Per J. Sanchez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 438 Phil. 716 (2002) [Per J. Bellosillo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 732-733.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 733.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> TSN, Balbina Pelagio, October 11, 2017, p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> RTC records, p. 7, <i>Karagdagan[g] Salaysay</i> dated October 5, 2015 of Septy Jane Oliveros.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> TSN, Abegail Jaingue, February 12, 2019, pp. 21-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> TSN, Balbina Pelagio, October 11, 2017, pp. 9-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Rollo</i>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 25 Phil. 510 (1913) [Per J. Carson, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 511.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 1 VICENTE J. FRANCISCO, CRIMINAL EVIDENCE 215 (1946 ed.), <i>citing</i> 16 C.J.S. 551.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Valdez v. People</b>, 563 Phil. 934, 948 (2007) [Per J. Tinga, Second Division], <i>citing</i> <i>People v. Shabaz</i>, 424 Mich. 42, 378 N.W.2d 451 (1985).<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>People v. Villareal</b>, 706 Phil. 511, 521 (2013) [Per J. Perlas-Bernabe, Second Division], <i>citing</i> <i>State v. Nicholson</i>, 188 S.W.3d 649 (Tenn. 2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> TSN, Maricris Bazar, March 20, 2019, p. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 140 Phil. 258 (1969) [Per J. Sanchez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 269.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>People v. Donio</b>, 806 Phil. 578, 596 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, p. 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> RTC records, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 100-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 210.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 213, RTC Order dated November 13, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Sabay v. People</b>, 744 Phil. 760, 771 (2014) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Tabuena v. Court of Appeals</b>, 274 Phil. 51 (1991) [Per J. Cruz, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> DNA EVID. RULE, sec. 4(b).<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> DNA EVID. RULE, sec. 4(d).<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 10 Phil. 627 (1908) [Per J. Torres, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 629.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 6 Phil. 510 (1906) [Per J. Carson, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 510-511.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 511-512.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>People v. Caparas, Jr.</b>, 352 Phil. 686, 699 (1998) [Per J. Melo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>People v. Taruc</b>, 241 Phil. 177, 186 (1988) [Per J. Gutierrez, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>People v. Lasac</b>, 232 Phil. 581 (1987) [Per J. Fernan, Second Division], <i>citing</i> <b>U.S. v. Gutierrez</b>, 4 Phil. 493 (1905) [Per J. Torres, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>People v. Monje</b>, 438 Phil. 716, 736 (2002) [Per J. Bellosillo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>People v. Esmaquilan</b>, 325 Phil. 576, 583 (1996) [Per J. Romero, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

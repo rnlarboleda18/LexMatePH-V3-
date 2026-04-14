@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 254800 - BRYAN TA-ALA Y CONSTANTINO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70123' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 254800, January 14, 2025 ]</H2>
+			<H3>BRYAN TA-ALA <I>Y</I> CONSTANTINO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>LAZARO-JAVIER, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">By Resolution<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated April 15, 2024, the Court denied (with finality) the Omnibus Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 5, 2022 filed by the Office of the Solicitor General (OSG) against the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated June 20, 2022; and ordered Assistant Solicitor General Bernard G. Hernandez (ASG Hernandez), Senior State Solicitor Josephine D. Arias (Senior State Solicitor Arias), and State Solicitor Donna Diana R. Dumpit-Lipit (State Solicitor Dumpit-Lipit) to show cause why they should not be held in contempt for using disrespectful, offensive, and degrading language against the Court in their omnibus motion for reconsideration, thus:<br><blockquote><b>FOR THESE REASONS</b>, the Omnibus Motion for Reconsideration dated October 5, 2022 is <b>DENIED with FINALITY</b>.<br><br>Assistant Solicitor General Bernard G. Hernandez, Senior State Solicitor Josephine D. Arias, and State Solicitor Donna Diana R. Dumpit-Lipit are <b>ORDERED </b> to <b>SHOW CAUSE </b> within a non-extendible period of ten days from notice <b><i>first</i>,</b> why they should not be held in contempt for using in their Omnibus Motion for Reconsideration disrespectful, offensive, abusive, and degrading language against the Court, thus, casting dishonor and sowing distrust on the integrity of the Court and its members; and <b><i>second</i>,</b> why they should not be held liable and sanctioned as members of the bar for violations of Sections 1, 2, 4, 5, and 6, Canon II on Propriety, Section 2, Canon III on Fidelity, and Canon VI on Accountability of the Code of Professional Responsibility and Accountability.<br><br>Let a copy of this Resolution be personally furnished the Honorable Solicitor General Menardo I. Guevarra.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (Emphasis supplied) </blockquote>To recall, ASG Hernandez, Senior State Solicitor Arias, and State Solicitor Dumpit-Lipit used the following language in their Omnibus Motion for Reconsideration, i.e.,<i> Second Division . . . made a selective factual evaluation of the records of this case and unfairly and hastily concluded, . . . that the petitioner's arrest is ". . . a case of frame up and planting of evidence" hurdled against the police officers;</i><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>the Honorable Court committed another capricious error of ignoring the hornbook doctrine that "conclusions and findings of fact by the trial [court], especially if affirmed by the appellate court, are entitled to great weight and should not be disturbed on appeal;</i><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>the Honorable Court arbitrarily ignored the fact that, in compliance with Section 26, Rule 114 of the Revised Rules of Criminal Procedure, the trial court already resolved the issues regarding petitioner's arrest and preliminary investigations;</i><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Honorable Court simply relied on petitioner's whimper that the trial court "ignored his motions and instead entered plea of not guilty for him";</i><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>[c]uriously, the Honorable Court singled out the "Affidavit of Arrest" executed by the police officers and disregarded all the other evidence on record upon which the lower courts based their rulings denying petitioner's motion to quash the Informations;</i><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Second Division . . . may have committed serious errors, dangerous precedent and injudicious ruling;</i><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>and the findings and declarations of the Honorable Second Division are based on the gross misapplication of the facts, laws and jurisprudence, which misapplication is so glaringly erroneous and extremely prejudicial to the People.</i><sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>In their Compliance<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated August 7, 2024, ASG Hernandez, Senior State Solicitor Arias, and State Solicitor Dumpit-Lipit explained:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">1) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">A closer scrutiny of the motion would show that the arguments were made with due respect to the Court. The language was used and the tenor imitated were premised, not to disrespect the Court, but borne out of the awareness that the Court is the court of last resort and the resulting alarm over the dismissal of the case against the accused with prejudice. It was in the honest and humble view that there was a seeming injustice of having acquitted petitioner, which seriously prejudiced the People, as the latter already offered strong evidence in the proceedings below addressing the same factual issues; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="90%" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">2) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">They sincerely and profusely apologize for any unintended offense or disrespect that may have been committed against the Court; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">3) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">Senior State Solicitor Arias took full responsibility as the assigned solicitor of the case, and humbly begs that ASG Hernandez and State Solicitor Dumpit-Lipit be spared: </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">a. </div></td> <td valign="top"> <div align="JUSTIFY">She explained that they received the request of the Department of Justice (DOJ) to file a motion for reconsideration only on the 15<sup>th</sup> day of the period to seek reconsideration. She quickly drafted the Omnibus Motion for Reconsideration but ASG Hernandez failed to review the draft. His e-signature was only affixed to the motion. ASG Hernandez has served the People and the Republic of the Philippines well and will be retiring from government service in a few months. She humbly and respectfully prayed that he be allowed to retire in peace; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">b. </div></td> <td valign="top"> <div align="JUSTIFY">At the time the motion was to be filed, Senior State Solicitor Arias was on official travel to Naga City and Puerto Princesa City from October 3-7, 2022 to attend to equally important cases for the Republic of the Philippines. To facilitate the immediate filing of the motion, State Solicitor Dumpit-Lipit merely co-signed the motion in wet ink and executed the required verified declaration. She had no hand in the preparation, drafting, and filing of the motion; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">c. </div></td> <td valign="top"> <div align="JUSTIFY">Senior State Solicitor Arias likewise ripostes that she meant no offense and offers her sincerest and highest respect to the Court, Associate Justice Amy C. Lazaro-Javier, and the rest of the Associate Justices of the Second Division of the Court. The arguments in the motion were raised in good faith, without ill intent; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">d. </div></td> <td valign="top"> <div align="JUSTIFY">It is the OSG's mandate and responsibility to assist zealously in prosecuting cases involving illegal possession and importation of firearms for the People. These are cases imbued with public interest because of the violence it brings, one which even our Justices, Judges, and even the OSG have not been spared from, including her mentor, ASG Nestor J. Ballacillo and his son, Benedict Ballacillo who were gunned down in 2006. The words she uttered were made in a burst of passion. It was made in good faith with utmost respect to the Court; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">e. </div></td> <td valign="top"> <div align="JUSTIFY">Senior State Solicitor Arias passionately served the People for almost 23 years with utmost respect for the Court. The motion was filed based purely on available facts, the law and jurisprudence and on the mandate to zealously defend the People's interest within the bounds of our rules and law. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">4) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">With due respect, the OSG did not exhibit any act that would disrespect, degrade, or offend the Court. The request to refer the decision to the Court <i> En Banc</i> was made under the premise that it was of transcendental importance, involves novel questions of law, and that the Court's full disquisition may serve as a guide to Bench and Bar on the rules on arrest and the conduct of preliminary investigation; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">5) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">The use of the word "selective" was nothing more than an honest belief that the Court missed to consider the Counter-Affidavit executed by accused-turned State witness Wilford Palma who narrated his participation in the crime and his knowledge about the activities of petitioner Bryan Ta-Ala <i>y</i> Constantino. More, the Court scrutinized the Affidavit of Arrest as to the issue of planted evidence, which in our honest and humble view should have been threshed out during a full blown trial; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">6) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">In the passion of advocating for the People's cause and out of the fever pitch preparation and review of the flurry of documents that came with the filing of the motion, we failed to reflect the utmost respect we unceasingly accord the entire Court, especially to the Court's Second Division; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td colspan="2" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">7) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">We sought the Court's generosity of spirit and forgiveness, with sincere undertaking, especially from Senior State Solicitor Arias, to be more careful in her submissions and to be more conscientious as officers of the court and not just for the People. We did not intend&nbsp; for the motion to be a cause for criticism to the Court. We hold the Court in the highest regard and respect and profusely apologize for any unintended offense or disrespect. </div></td> </tr> </tbody></table><br>While the Court notes the courage by which Senior State Solicitor Arias accepts full responsibility for using disrespectful, offensive, abusive, and degrading language against the Court in their omnibus motion for reconsideration, the fact that ASG Hernandez and State Solicitor Dumpit-Lipit, too, affixed their signatures to the motion brings them within the prism of Section 3, Rule 7 of the 2019 Rules of Court, alongside Senior Associate Solicitor Arias, thus:<br><blockquote>Section 3.<i> Signature and address. â</i> (a) Every pleading and other written submissions to the court must be signed by the party or counsel representing him or her.<dl><dt>(b) <i>The signature of counsel constitutes a certificate by him or her that he or she has read the pleading and document; that to the best of his or her knowledge, information, and belief, formed after an inquiry reasonable under the circumstances: </i><br><br></dt><dd>(1) It is not being presented for any improper purpose, such as to harass, cause unnecessary delay, or needlessly increase the cost of litigation;<br><br>(2) The claims, defenses, and other legal contentions are warranted by existing law or jurisprudence, or by a non-frivolous argument for extending, modifying, or reversing existing jurisprudence;<br><br>(3) The factual contentions have evidentiary support or, if specifically so identified, will likely have evidentiary support after availment of the modes of discovery under these Rules; and<br><br>(4) The denials of factual contentions are warranted on the evidence or, if specifically so identified, are reasonably based on belief or a lack of information.</dd></dl>(c) If the court determines, on motion or<i> motu proprio</i> and after notice and hearing, that this Rule has been violated, it may impose an appropriate sanction or refer such violation to the proper office for disciplinary action, on any attorney, law firm, or party that violated the rule, or is responsible for the violation. Absent exceptional circumstances, a law firm shall be held jointly and severally liable for a violation committed by its partner, associate, or employee. The sanction may include, but shall not be limited to, non-monetary directive or sanction; an order to pay a penalty in court; or, if imposed on motion and warranted for effective deterrence, an order directing payment to the movant of part or all of the reasonable attorney's fees and other expenses directly resulting from the violation, including attorney's fees for the filing of the motion for sanction. The lawyer or law firm cannot pass on the monetary penalty to the client. (Emphasis supplied) </blockquote>In<i> Spouses Mariano v. Atty. Abrajano</i>,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> the Court emphasized the significant impact of the signature of counsel on each and every pleading filed before the Court, as well as the consequences of their failure to abide by this rule. The lawyer's act of signing a pleading is essentially a certification that he or she has read the pleading and that it is meritorious and not intended for the purpose of delay. More, a lawyer's signature supplies the pleading with legal effect and elevated its status from a mere scrap of paper to that of a court document. As admitted by Senior State Solicitor Arias, ASG Hernandez affixed his electronic signature to the omnibus motion for reconsideration without reviewing it and she also prevailed upon State Solicitor Dumpit-Lipit to simply affix her wet signature to facilitate its filing, without reading it either. Thus, by their own admission, they violated Section 3, Rule 7 of the 2019 Rules of Court. This violation is an act of falsehood before the Court, which in itself is a ground for disciplinary action. In other words, ASG Hernandez, Senior State Solicitor Arias, and State Solicitor Dumpit-Lipit may be held administratively liable here, not only for the act of signing the omnibus motion for reconsideration but even for the use of disrespectful, offensive, abusive, and degrading language against the Court.<br><br>Sections 1 and 2, Canon II of the Code of Professional Responsibility and Accountability (CPRA) mandate that a lawyer shall, at all times, act with propriety and give due respect to the Court, maintain courtesy, civility and fairness. Nor shall the lawyer engage in conduct that adversely discredits the legal profession:<br><blockquote><center><b>CANON II<br>PROPRIETY</b></center><br>A lawyer shall, at all times, act with propriety and maintain the appearance of propriety in personal and professional dealings, observe honesty, respect and courtesy, and uphold the dignity of the legal profession consistent with the highest standards of ethical behavior.<br><br>Section 1. <i> Proper conduct.</i>â A lawyer shall not engage in unlawful, dishonest, immoral, or deceitful conduct.<br><br>Section 2.<i> Dignified conduct</i>. â A lawyer shall respect the law, the courts, tribunals, and other government agencies, their officials, employees, and processes, and act with courtesy, civility, fairness, and candor towards fellow members of the bar.<br><br>A lawyer shall not engage in conduct that adversely reflects on one's fitness to practice law, nor behave in a scandalous manner, whether in public or private life, to the discredit of the legal profession. (Emphasis supplied) </blockquote>Too, as a responsible and accountable lawyer in the practice of law, under Section 2, Canon III of the CPRA, a lawyer owes fidelity to the Constitution, the Court, promote respect for laws and legal processes, at all times advance the honor and integrity of the legal profession, uphold the rule of law and conscientiously assist in the speedy and efficient administration of justice, and represent the client with fidelity and zeal within the bounds of the law and the CPRA, viz.:<br><blockquote><center><b>CANON III<br>FIDELITY</b></center><br><i>Fidelity pertains to a lawyer's duty to uphold the Constitution and the laws of the land, to assist in the administration of justice as an officer of the court, and to advance or defend a client's cause, with full devotion, genuine interest, and zeal in the pursuit of truth and justice.</i><br><br>Section 1.<i> Practice of law.</i> â The practice of law is the rendition of legal service or performance of acts or the application of law, legal principles, and judgment, in or out of court, with regard to the circumstances or objectives of a person or a cause, and pursuant to a lawyer-client relationship or other engagement governed by the Code of Professional Responsibility and Accountability for lawyers. It includes employment in the public service or private sector and requires membership in the Philippine bar as qualification.<br><br>Section 2.<i> The responsible and accountable lawyer. â A lawyer shall uphold the constitution, obey the laws of the land, promote respect for laws and legal processes, safeguard human rights, and at all times advance the honor and integrity of the legal profession.<br><br>As an officer of the court, a lawyer shall uphold the rule of law and conscientiously assist in the speedy and efficient administration of justice.<br><br>As an advocate, a lawyer shall represent the client with fidelity and zeal within the bounds of the law and the CPRA.</i> (Emphasis supplied) </blockquote>Further, under Sections 4 and 6, Canon II on Propriety, and Canon VI on Accountability of the CPRA, a lawyer shall use dignified and sensitive language, observe fairness and obedience, prohibited from harassing the Court, observe the highest degree of morality, adhere to rigid standards of mental fitness, and faithfully comply with the rules of the legal profession, viz.:<br><blockquote><center><b>CANON II<br>PROPRIETY</b></center><br>SECTION 4.<i> Use of dignified, gender-fair, and child- and culturally sensitive language. â A lawyer shall use only dignified, gender-fair, child- and culturally-sensitive language in all personal and professional dealings.<br><br>To this end, a lawyer shall not use language which is abusive, intemperate, offensive or otherwise improper</i>, oral or written, and whether made through traditional or electronic means, including all forms or types of mass or social media. (Emphasis supplied)<br><br><center><b>CANON VI<br>ACCOUNTABILITY</b></center><br>By taking the Lawyer's Oath, a lawyer becomes a guardian of the law and an administrator of justice. As such,<i> the lawyer shall . . . faithfully comply with the rules of the legal profession.</i><br><br><i>Failure to honor this covenant makes the lawyer unfit to continue in the practice of law and is accountable to society, the courts, the legal profession, and the client.</i> </blockquote>Here, ASG Hernandez, Senior State Solicitor Arias, and State Solicitor Dumpit-Lipit, in their haste to file the omnibus motion for reconsideration, failed to honor the covenants they ought to strictly observe under the CPRA. By using disrespectful, offensive, abusive, and degrading language against the Court, intentional or otherwise, they sow the seed of distrust of the public against members of the Judiciary, most especially against the members of the highest court of the land, the last bulwark of justice.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Nevertheless, taking into account the attendant circumstances, their sincere apology and admission of mistake, and considering that they have not had any previous administrative infractions as members of the Bar, we are convinced that ASG Hernandez, Senior State Solicitor Arias, and State Solicitor Dumpit-Lipit did not truly intend to cast any aspersion on the Court. Indeed, they overzealously advocated for the People, a trait which every client especially the People would want its counsel to possess. While this in itself is commendable, the manner by which the concerned lawyers went about it was undesirable, to say the least.<br><br>Thus, the Court reminds ASG Hernandez, Senior State Solicitor Arias and State Solicitor Dumpit-Lipit that although the lawyers of the OSG as counsel for the People are dutybound to present their case with vigor and courage, such enthusiasm does not justify the use of disrespectful, offensive, abusive, or degrading words. Language abounds with countless possibilities for one to be emphatic but respectful, convincing but not derogatory, illuminating but not offensive.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The Court likewise issues a stern warning that a similar behavior or action in the future shall be dealt with more severely and they may be held liable and sanctioned as members of the bar for violations of the CPRA.<br><br><b>FOR THESE REASONS</b>, the Court <b>ACCEPTS</b> the apology of Assistant Solicitor General Bernard G. Hernandez, Senior State Solicitor Josephine D. Arias, and State Solicitor Donna Diana R. Dumpit-Lipit, with <b>STERN WARNING</b> that use of disrespectful, offensive, abusive, and degrading language in any pleadings or submissions shall be dealt with more severely.<br><br><b>SO ORDERED. </b><br><br><i>Leonen, SAJ. (Chairperson), M. Lopez, J. Lopez,</i> and <i>Kho, Jr., JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 993-1012.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 701-712.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 601-632.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 1011-1012.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 703.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 703-704.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 704.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 705.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 706.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 1013-1079.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> 900 Phil. 1 (2021) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> In re: <i>Atty. Lorenzo G. Gadon's Viral Video</i> against Raissa Robles, <i>citing</i> <b>Tallado v. Racoma, A.M. No. RTJ-22-022</b>, August 23, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

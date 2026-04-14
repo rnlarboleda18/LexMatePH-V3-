@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 265152 - MARILAO MEDICAL AND DIAGNOSTIC, INC., PETITIONER, VS. DR. JOVITH ROYALES, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70219' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 265152, October 29, 2025 ]</H2>
+			<H3>MARILAO MEDICAL AND DIAGNOSTIC, INC., PETITIONER, VS. DR. JOVITH ROYALES, RESPONDENT.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before this Court is a Rule 45 Petition for Review on<i> Certiorari</i>,<i> </i>assailing the Order, dated October 6, 2022,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and the Order, dated January 13, 2023,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of Branch 284, Regional Trial Court, Valenzuela City<b> (RTC)</b> in Civil Case No. 106-V-22. The RTC affirmed the Resolution, dated May 26, 2022,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and the Resolution, dated July 8, 2022,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Branch 81, Metropolitan Trial Court, Valenzuela City<b> (MeTC)</b> in Criminal Case No. 97633-97741, granting the Demurrer to Evidence of Dr. Jovith Royales<b> (Dr. Royales)</b> and acquitting him of the criminal charges filed against him by Marilao Medical and Diagnostic, Inc.<b> (Marilao Medical)</b>.<br><br><center><b><i>The Facts</i></b></center><br>This case originated from a criminal complaint filed by Marilao Medical against Dr. Royales for Falsification of Private Documents before the MeTC.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Dr. Royales is the owner of Best Care, a clinic not authorized to issue Reverse Transcription Polymerase Chain Reaction<b> (RT-PCR)</b> tests. Hence, Dr. Royales falsely used Marilao Medical's name to process and issue its own RT-PCR tests.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> After the prosecution presented its evidence, Dr. Royales filed a Demurrer to Evidence.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On May 26, 2022, the MeTC granted the Demurrer and acquitted Dr. Royales of all charges. The MeTC found that none of the alleged falsified documents were identified by the signatories therein. It was Dr. Alma Radovan-Onia<b> (Dr. Onia)</b>, incorporator of Marilao Medical, who identified these documents. However, she admitted that the documents were printouts given to her after the alleged falsification was reported to her. Thus, Dr. Onia had no personal knowledge regarding the commission of the falsification. As to the two witnesses who were employees of Best Care, neither one testified to any order from Dr. Royales to falsify documents nor did they identify the documents claimed to be false. The MeTC ruled that while a falsification scheme may have existed, the evidence failed to establish a connection between the scheme and Dr. Royales and the documents presented.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Marilao Medical filed a Motion for Reconsideration, which was denied by the MeTC. Marilao Medical then filed a Rule 65 Petition for<i> Certiorari </i>before the RTC, questioning the MeTC Resolutions.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Marilao Medical contended that Presiding Judge Teresita Asuncion M. Lacandula-Rodriguez acted with grave abuse of discretion in dismissing the criminal case. It asserted that the only element in dispute was whether Dr. Royales committed acts of falsification. It raised that there is a presumption of authorship against a person in possession of a falsified document who has made use of it and is profiting thereby. Marilao Medical reasoned that it was never denied that Best Care operated and provided COVID-19 test results and profited from the processing fees for RT-PCR tests; hence the presumption of authorship should apply against Dr. Royales. Likewise, Marilao Medical repeatedly alleged that it never processed RT-PCR tests from Best Care. Marilao Medical thus concluded that it was able to establish a<i> prima facie</i> case of falsification.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Further, Marilao Medical contested the appreciation of the MeTC that Dr. Onia did not have personal knowledge of the falsification. Given that Dr. Onia is the owner of Marilao Medical, she knew that her clinic did not process test results from Best Care. Hence, she had personal knowledge that Marilao Medical was falsely represented as the processor of Best Care's RT-PCR tests.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> However, she also admitted that Marilao Medical had a prior agreement to process test results for Best Care, which ended in 2020.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>As to the MeTC's ruling that the alleged falsified documents were never identified by the signatories, Marilao Medical argued that the prosecution did not allege that the signatures were falsified but rather that these were never processed by its clinic.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> As a final point, Marilao Medical argued that the MeTC erroneously held that Dr. Royales' participation was not established. Marilao Medical admitted that there was no direct evidence showing that Dr. Royales ordered the falsification. However, it contended that the criminal act could still be inferred from the circumstantial evidence submitted. Marilao Medical concluded that Best Care was clearly engaged in some sort of anomaly and, therefore, Dr. Royales must present evidence to prove that he had no knowledge of the suspicious circumstances.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Marilao Medical admitted that it inquired with the Office of the Solicitor General<b> (OSG)</b> as to the filing of the Petition for<i> Certiorari</i>. The OSG informed Marilao Medical that it would not undertake the filing of the appeal, but that the same could be carried out by the Office of the City Prosecutor<b> (OCP)</b>. Hence, Marilao Medical acquired the conformity of the OCP and proceeded to file its Petition.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>In its assailed Order, dated October 6, 2022, the RTC ruled that the issues raised in the Rule 65 Petition require a review of the criminal aspect of the case, which is within the jurisdiction of the Republic of the Philippines through a public prosecutor. Thus, the RTC ruled that Marilao Medical lacked the requisite authority and standing to bring a special civil action for<i> certiorari </i>before the RTC:<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><blockquote>WHEREFORE, the<i> Petition for Certiorari</i> is DENIED Due Course and is DISMISSED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original) </blockquote>Marilao Medical filed a Motion for Reconsideration highlighting the conformity of the OCP to its Petition and citing instances when a private complainant may raise the criminal aspect of a case via a special civil action.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The RTC denied the Motion for Reconsideration finding that the later cases of<i> Yokohama v. Reyes</i><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> and<i> JCLV Realty v. Mangali</i><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> explicitly limit the private offended party's interest to the civil aspect. In any case, the conformity of the OCP does not amount to a prosecution of the criminal aspect which must be instituted by the OCP on behalf of the State as a real party in interest.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Following the denial of its Motion for Reconsideration, Marilao Medical filed the present Petition before this Court. Marilao Medical raises the sole issue of whether its Petition for<i> Certiorari</i> bearing the conformity of the OCP may be given due course.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Marilao Medical argues that in previous cases, the Supreme Court has allowed private complainants to question judgments and orders in criminal proceedings without the OSG's intervention. Further, it asserts that prior to the decision in<i> Austria v. AAA</i>,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> in February 2023, there was no definitive ruling on how cases decided by the MeTC should be elevated by way of a Rule 65 Petition. In fact, the OSG advised Marilao Medical that it does not participate in cases where a Rule 65 Petition was filed with the RTC. Marilao Medical stresses that the OSG is only required to represent the government in cases before the Supreme Court or Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><center><b><i>The Issue</i></b></center><br>Did the RTC err in denying due course to the Petition for<i> Certiorari</i>?<br><br><center><b><i>The Ruling of the Court</i></b></center><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Private complainant's right to initiate a Rule 65 Petition</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Preliminarily, it is not in dispute that as a general rule a private complainant, on their own, may only question the acquittal of an accused with respect to the civil aspect.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In this case, however, Marilao Medical did not raise any issue on the civil liability of Dr. Royales. The arguments raised in its Rule 65 Petition before the RTC pertained to the elements of the crime of Falsification of Private Documents and the sufficiency of the prosecution's evidence. Clearly, Marilao Medical questioned the criminal aspect of the case in its Petition for<i> Certiorari</i> before the RTC. Nevertheless, Marilao Medical acquired the express conformity of the OCP as evinced in the signature page of the Rule 65 Petition.<br><br>It should be noted that the Court affirms the present resort to the Supreme Court via an appeal by<i> Certiorari</i> under a Rule 45 petition. Under Rule 41, Section 2(c) of the Rules of Court, the appeal from a judgment of the RTC, which raises only questions of law must be lodged with the Supreme Court via a Rule 45 petition.<br><br>A question of law arises when there is doubt as to what the law is on a certain state of facts, but does not question the truth or falsity of the alleged facts. The resolution thus, relies solely on what the law provides on the given set of facts. The test, therefore, is whether the appellate court can resolve the issue without examining or evaluating the evidence, in which case, it is a question of law.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Here, Marilao Medical does not question the factual findings of the RTC, neither does it ask this Court to review the evidence before the lower courts. The main issue now is whether the express conformity of the OCP, and not the OSG, satisfies the rule that only the State may question the criminal aspect of a case. The resolution of this issue lies in a review of the established rules and jurisprudence on appeals from acquittals and the role of the OCP. There is no need to review evidence in this case.<br><br>The RTC ruled that the conformity is insufficient since the prosecution of the criminal aspect must be instituted on behalf of the State as a real party in interest. On this point, the Court finds the following ruling in<i> Isturis-Rebuelta v. Rebuelta</i><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> instructive:<br><blockquote>Notably,<i> Austria</i> only made reference to the authority of the OSG to represent the State where the appeal or [P]etition for<i> [C]ertiorari</i> involving a criminal case is filed by the private complaint before the CA or this Court. It did not provide for an occasion where the same remedies are filed by the private complainant before the RTC, as in this case. It is pertinent to point this out in view of the delineation of functions between the OSG and the provincial or city prosecutors in acting as counsels for the State. As explained in<i> Fenequito v. Vergara, Jr.</i>,<i> when the case is filed or pending in the RTC, it is the provincial or city prosecutor who should represent the State, but if it is with the CA or this Court, the OSG shall act as counsel for the People</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis supplied) </blockquote>While the above discussion, and the original guidelines in<i> Austria v. AAA</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> were promulgated after the RTC rulings, the Court notes that these rulings synthesize earlier jurisprudence. There is no question that the OSG represents the State before the CA and this Court. However, at the RTC level, it is the public prosecutor who represents the State.<br><br>Further, jurisprudence has previously recognized petitions instituted by a private complainant questioning the criminal aspect even though the conformity of the public prosecutor came after the filing of the petition. In <i>People v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> as cited in<i> JCLV Realty &amp; Development Corp. v. Mangali</i>,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the Court expressly ruled that the Comment of the OSG fulfilled the requirement that all criminal actions shall be prosecuted under the direction and control of the public prosecutor. Thus, there is no need for the petition to be initiated by the public prosecutor on behalf of the State. What is required is that they manifest their concurrence with the action of the private complainant.<br><br>In this case, the OCP's express conformity is indicated in the Petition itself. Given the clear conformity of the OCP, the RTC erred in outrightly denying due course to the Rule 65 Petition.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>No grave abuse of discretion</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Nevertheless, in the interest of judicial economy, instead of remanding the case to the RTC, considering the delay the case has suffered, the Court finds it necessary to resolve the question presented in the Rule 65 Petition on grave abuse of discretion. After a careful review of the arguments, the Court finds no error in the assailed Resolutions of the MeTC.<br><br>The Court emphasizes that a judgement of acquittal is not subject to appeal. The rule is that a judgment acquitting the accused is final, unappealable, and immediately executory upon its promulgation. Once an accused has been acquitted of an offense, the right against double jeopardy sets in and guarantees that the State shall not be permitted to make repeated attempts to convict him. The underlying idea is that the State, with all its resources and power, should not be allowed to make repeated attempts to convict an individual for an alleged offense. This would unduly subject the accused to embarrassment, expense, as well as further anxiety and insecurity.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The only exception is when the judgment is assailed through a petition for<i> certiorari</i> under Rule 65. However, in such case, the petitioner must establish that the respondent court or tribunal acted in a capricious, whimsical, or arbitrary manner in the exercise of its jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The abuse of discretion must be so patent and gross as to amount to an "evasion of a positive duty or to a virtual refusal to perform a duty enjoined by law, or to act at all in contemplation of law, as where the power is exercised in an arbitrary and despotic manner by reason of passion and hostility."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Further, a special civil action of<i> certiorari</i> under Rule 65 can only strike an act down if the petitioner could manifestly show that the abuse of discretion was in fact patent and gross.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> In criminal cases, it must be shown that the prosecution was denied the opportunity to present its case or that the trial was a sham. It is the burden of the petitioner to clearly demonstrate that the lower court blatantly abused its authority.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Here, the Court finds that Marilao Medical failed to prove such gross and patent abuse. The MeTC rulings granting the Demurrer to Evidence do not appear capricious, whimsical, or arbitrary. This Court has laid down the guidelines in resolving a demurrer to evidence:<br><blockquote>A demurrer to evidence may be granted when, upon the facts and the law, the plaintiff has shown no right to relief. Where the plaintiffs evidence together with such inferences and conclusions as may reasonably be drawn therefrom does not warrant recovery against the defendant, a demurrer to evidence should be sustained. A demurrer to evidence is likewise sustainable when, admitting every proven fact favorable to the plaintiff and indulging in his favor all conclusions fairly and reasonably inferable therefrom, the plaintiff has failed to make out one or more of the material elements of his case, or when there is no evidence to support an allegation necessary to his claim. It should be sustained where the plaintiff's evidence is<i> prima facie</i> insufficient for a recovery.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </blockquote>The MeTC's Resolution granting the Demurrer to Evidence explained the basis for its conclusion that the prosecution failed to establish Dr. Royales' liability and did not establish a<i> prima facie</i> case:<br><blockquote>The prosecution witnesses were unable to provide any proof, aside from their testimonies, that there was an order or command from [Dr. Royales]. Likewise, there was no price, offering[,] or promise clearly shown to make them do the actions they testified on. More importantly and to reiterate, even assuming the court can accept these testimonies as<i> prima facie</i> evidence of the orders of [Dr. Royales] to falsify the results, there is no proof that the said orders resulted to the specific falsified documents being alleged in the informations.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </blockquote>Marilao Medical asserts that the MeTC should have entertained the presumption of authorship since Dr. Royales, being the owner of Best Care, necessarily possessed and benefited from the documents. However, this Court has ruled that possession â and in turn authorship cannot be presumed simply because one is an officer of the company which produced the documents. There must be evidence of actual possession. In the same vein, the Court cannot assume that one benefited from the falsification since any benefit received from the company's use of the documents would only have been incidental.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> As held by the MeTC, there is not enough evidence to support the conclusion that Dr. Royales was involved in the alleged falsification scheme.<br><br>It must be stressed that for a Rule 65 Petition to prosper, more than mere "abuse of direction" is required. Grave abuse must be shown to have tainted the questioned act or proceeding. Here, no proof of such grave abuse exists on record. After considering the evidence presented, the MeTC found that the prosecution's claims do not warrant recovery against Dr. Royales, which is ground for a demurrer. If at all, the mistake committed by the MeTC would only be an error of judgment and not of jurisdiction and, therefore, not tantamount to a grave abuse of discretion. Here, the Court finds neither error nor grave abuse of discretion on the part of the MeTC in granting the Demurrer to Evidence.<br><br><b>ACCORDINGLY,</b> the Petition for Review on<i> Certiorari</i> is <b>PARTIALLY GRANTED.</b> The Order, dated October 6, 2022, and the Order, dated January 13, 2023, of Branch 284, Regional Trial Court, Valenzuela City are<b> SET ASIDE</b> in so far as the outright dismissal by the Regional Trial Court of the Rule 65 Petition for<i> Certiorari</i> filed by Marilao Medical and Diagnostic, Inc. in Civil Case No. 106-V-22. In the interest of judicial economy and to prevent further delay, the Court considers the Petition for<i> Certiorari</i> as reinstated and given due course, but resolves to<b> DENY</b> the Petition insofar as the substantive issues and to<b> AFFIRM</b> the Resolution, dated May 26, 2022, and the Resolution, dated July 8, 2022 of Branch 81, Metropolitan Trial Court in Criminal Case No. 97633-97741.<br><br><b>SO ORDERED. </b><br><br><i>Inting, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Caguioa (Chairperson), J.,</i> see separate concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 269-270. Penned by Presiding Judge Arthur B. Melicor.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 279-280. Penned by Presiding Judge Arthur B. Melicor.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 110-132. Penned by Presiding Judge Teresita Asuncion M. Lacandula-Rodriguez.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 170-178. Penned by Presiding Judge Teresita Asuncion M. Lacandula-Rodriguez.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 120-132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 16-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 23-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 6-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 269-270.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 270.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 269-270.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> 870 Phil. 292 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> 880 Phil. 267 (2020) [Per J. Lopez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i>, pp. 279-280.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> 924 Phil. 41 (2022) [Per J. M. Lopez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 8-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>See</i> <b>Spouses NuÃ±ez v. Daz</b>, 950 Phil. 434, 440 (2024) [Per J. Singh, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>See</i> <b>Valderama v. Arguelles</b>, 829 Phil. 29, 41 (2018) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 949 Phil. 1116 (2023) [Per C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 1128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 924 Phil. 41 (2022) [Per J. M. Lopez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> 755 Phil. 80, 99 (2015) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 880 Phil. 267, 279 (2020) [Per J. Lopez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>People v. Sandiganbayan</b>, 524 Phil. 496, 519 (2006) [Per J. Callejo, Sr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>Yokohama Tire Philippines, Inc. v. Reyes</b>, 870 Phil. 292, 306 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> <b>Poro Exim Corp. v. Office of the Ombudsman</b>, 943 Phil. 196, 199 (2023) [Per J. Kho, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>People v. Arcega</b>, 880 Phil. 291, 306 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Republic v. Spouses Gimenez</b>, 776 Phil. 233, 263-264 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, p. 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> <b>Dizon v. People</b>, 524 Phil. 126, 145 (2006) [Per J. Chico-Nazario, First Division].</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>SEPARATE CONCURRING OPINION</b></center><br><b>CAGUIOA, <i>J.</i>: </b><br><br>I concur in affirming the Resolutions dated May 26, 2022 and July 8, 2022 of Branch 81, Metropolitan Trial Court of Valenzuela City (MeTC) in Criminal Case No. 97633-97741, which granted the Demurrer to Evidence of respondent Dr. Jovith Royales (respondent) and acquitted him of the criminal charges filed by petitioner Marilao Medical and Diagnostic, Inc. (petitioner). A petition seeking to reverse and set aside the MeTC Resolutions contravenes respondent's constitutionally protected right against double jeopardy.<br><br><b><i>Brief review of the facts</i></b><br><br>Respondent was charged with Falsification of Private Documents for falsely using petitioner's name in the processing and issuance of RT-PCR tests.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> After the prosecution presented its case, respondent filed a Demurrer to Evidence, which the MeTC granted.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> The MeTC found that while the falsification scheme may have existed, the prosecution's evidence failed to establish a connection between the scheme, respondent, and the documents presented.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>Petitioner moved for reconsideration but was denied by the MeTC.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Petitioner then filed a petition for<i> certiorari</i> with Branch 284, Regional Trial Court of Valenzuela City (RTC), but the latter denied due course to the petition for<i> certiorari</i> on the ground that petitioner lacked the authority and standing to assail the criminal aspect of the case.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Petitioner's motion for reconsideration was also denied by the RTC.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Petitioner filed the present Petition for Review on<i> Certiorari</i> before the Court asserting that its petition for<i> certiorari</i> filed with the RTC has the conformity of the Office of the City Prosecutor and citing supporting jurisprudence when the Court allowed a private complainant to assail the criminal aspect of the case via<i> certiorari</i> petition.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>The<i> ponencia</i> partially granted the Petition for Review on<i> Certiorari </i>insofar as the RTC erred in outrightly dismissing the petition for<i> certiorari </i>filed before it.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The<i> ponencia</i> ruled that the conformity of the public prosecutor indicated in the petition for<i> certiorari</i> filed with the RTC sufficiently grants petitioner the authority to assail the criminal aspect of the case.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The<i> ponencia</i> then proceeds to discuss the merits of the case, ruling that the MeTC did not commit grave abuse of discretion in the issuance of the assailed Resolutions granting the Demurrer to Evidence. The assailed Resolutions thoroughly explained the bases for the dismissal. And if at all, mistakes committed by the MeTC would only be errors of judgment and not of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Preliminarily, it must be pointed out that the filing of the present Petition for Review on<i> Certiorari</i> directly with the Court runs afoul with the doctrine of hierarchy of courts. Under the principle of hierarchy of courts, direct resort from the lower courts to the Court will not be entertained unless the appropriate remedy cannot be obtained in the lower tribunals. The Court is a court of last resort, and must so remain if it is to satisfactorily perform the functions assigned to it by the Constitution and immemorial traditional.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Thus, it was improper for petitioner to file the present Petition for Review on <i>Certiorari</i> with the Court without seeking recourse first with the Court of Appeals.<br><br>Nonetheless, setting aside this procedural mistake, as stated at the outset, I agree with upholding the MeTC Resolutions dismissing the case for insufficiency of evidence. I write this Separate Concurring Opinion to highlight that the grant of demurrer to evidence amounts to an acquittal. As such, it is final and unappealable, subject to very limited exceptions, which is not present in this case. Thus, the present Petition for Review on<i> Certiorari </i>which seeks to reverse said acquittal and the<i> ponencia</i>'s review of the MeTC order granting a demurrer to evidence, places respondent in double jeopardy.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Double jeopardy has set in with the MeTC Resolutions dismissing the case for insufficiency of evidence. A review of the MeTC Resolutions places respondent in double jeopardy</i>.</b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Section 21, Article III of the 1987 Constitution provides that "[n]o person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act."<br><br>To implement this constitutional right, Section 7, Rule 117 of the Revised Rules of Criminal Procedure provides:<br><blockquote>SECTION 7.<i> Former Conviction or Acquittal; Double Jeopardy.â </i>When an accused has been convicted or acquitted, or the case against him [or her] dismissed or otherwise terminated without his [or her] express consent by a court of competent jurisdiction, upon a valid complaint or information or other formal charge sufficient in form and substance to sustain a conviction and after the accused had pleaded to the charge, the conviction or acquittal of the accused or the dismissal of the case shall be a bar to another prosecution for the offense charged, or for any attempt to commit the same or frustration thereof, or for any offense which necessarily includes or is necessarily included in the offense charged in the former complaint or information. </blockquote>Dissecting the foregoing rule, for the right against double jeopardy to attach, the following requisites must concur: (1) a first jeopardy must have attached prior to the second; (2) the first jeopardy must have been validly terminated; and (3) the second jeopardy must be for the same offense as that in the first.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> In turn, the first jeopardy attaches only (1) upon a valid indictment, (2) before a competent court, (3) after arraignment, (4) when a valid plea has been entered, and (5) when the defendant was convicted or acquitted, or the case was dismissed or otherwise terminated without the express consent of the accused.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>All the foregoing requisites of double jeopardy are present in this case.<br><br>It is undisputed that the Information filed against respondent for Falsification of Private Document is valid and was filed with the MeTC, which has jurisdiction over the case. While the<i> ponencia</i> did not expressly indicate, it can reasonably be implied that respondent was arraigned and pleaded not guilty to the charge as the case proceeded to trial. Then, the prosecution presented its evidence and rested its case. Respondent filed a Demurrer to Evidence, and on May 26, 2022, the MeTC granted the same, dismissing the case against respondent.<br><br>In general, the dismissal of a criminal case resulting in acquittal made with the express consent of the accused or upon his or her own motion will not place the accused in double jeopardy. However, this rule admits of two exceptions, namely: insufficiency of evidence and denial of the right to a speedy trial.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Indeed, it has been consistently emphasized that a grant of demurrer to evidence is a resolution on the merits and is equivalent to an acquittal,<i> viz</i>.:<br><blockquote>The demurrer to evidence in criminal cases, such as the one at bar, is "<i>filed after the prosecution had rested its case</i>," and when the same is granted, it calls "for an appreciation of the evidence adduced by the prosecution and its sufficiency to warrant conviction beyond reasonable doubt, resulting in a<i> dismissal of the case on the merits, tantamount to an acquittal of the accused.</i>" Such dismissal of a criminal case by the grant of demurrer to evidence may not be appealed, for to do so would be to place the accused in double jeopardy.<b> The verdict being one of acquittal, the case ends there.</b><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis supplied) </blockquote>Clearly, there was a valid termination of the first jeopardy in this case. The dismissal of the case against respondent for insufficiency of evidence was final, unappealable, and immediately executory upon its promulgation and any further prosecution of respondent would violate the constitutional proscription on double jeopardy. This is commonly referred to as the doctrine of the finality-of-acquittal.<br><br>As any other rule, the finality-of-acquittal doctrine is not without exception. In some cases,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> the Court has clarified that the finality-of-acquittal doctrine does not apply when the prosecutionâthe sovereign people, as represented by the Stateâwas denied due process such as when it is denied the opportunity to present evidence or where trial is a sham or when there is mistrial. The reason for this is when the prosecution is deprived of due process, it could thus be said that the judgment of acquittal is void, which thereby means that the first jeopardy had not been validly terminated. As the second element for the right to attach is not yet present, then there could be no violation of the right against double jeopardy when an appellate court reviews and eventually reverses a judgment of acquittal which resulted from a denial of the prosecution's right to due process. These cases explain that only through this<b><i> <u>narrow and limited exception</u></i></b> would the remedy of <i>certiorari</i> be allowed without offending the constitutional right against double jeopardy. In other words, a Rule 65 petition assailing a judgment of acquittal violates the proscription against double jeopardy; except only when it is alleged and proved that the prosecution was denied due process.<br><br>Moreover, as the <i>ponencia</i> held, not every error in the trial or evaluation of the evidence by the court in question that led to the acquittal of the accused would be reviewable by<i> certiorari</i>. The writ of<i> certiorari</i>, being a remedy narrow in scope and inflexible in character, cannot be issued to correct every error committed by a lower court,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> especially in cases where the accused is acquitted.<br><br>In this case, there is no showing that the prosecution was denied its day in court. The Petition for Review on<i> Certiorari</i> in fact failed to allege this ground. Stated otherwise, the limited exception to the finality-of-acquittal rule does not apply here. It is immaterial whether the MeTC committed error in its appreciation of the prosecution's evidence in granting the Demurrer to Evidence. This is, at most, merely an error of judgment, which is not correctible by<i> certiorari</i>. More importantly, the fact remains that respondent's right against double jeopardy already attached when the MeTC, after the prosecution had rested its case, found the evidence against respondent insufficient to convict him of the charges. What is necessary for the Court to determine now is whether the prosecution was denied due process. Absent any allegation and proof that the State was denied its day in court, which is clearly not obtaining in this case, the finality-of-acquittal rule must strictly be adhered to. The present Petition for Review on<i> Certiorari</i> should be dismissed on this ground. The Court need not review the merits of the MeTC Resolution because to do so would place the respondent in double jeopardy.<br><br>Accordingly, I vote to affirm the Resolutions of the MeTC acquitting respondent of the charge.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 3-4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 4-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 6-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <b>Vidal-Plucena v. Balgos, Jr.</b>, 943 Phil. 700, 704 (2023) [Per J. Singh, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <b>People v. Declaro</b>, 252 Phil. 139, 143 (1989) [Per J. Gancayco, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <b>People v. Nitafan</b>, 362 Phil. 58, 74 (1999) [Per J. Martinez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <b>People v. Bans</b>, 309 Phil. 45, 50 (1994) [Per J. Bidin, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <b>People v. Sandiganbayan</b>, 488 Phil. 293, 309-310 (2004) [Per J. Sandoval-Gutierrez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>See</i> <b>Cogasi v. People</b>, 909 Phil. 660, 668-669 (2021) [Per J. Carandang, Third Division]; <b>People v. Sandiganbayan (Fourth Division)</b>, 903 Phil. 631, 645 (2021) [Per J. Caguioa, First Division]; <b>Raya v. People</b>, 902 Phil. 141, 160 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Delos Santos v. Metropolitan Bank and Trust Company</b>, 698 Phil. 1, 14 (2012) [Per J. Bersamin, First, Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

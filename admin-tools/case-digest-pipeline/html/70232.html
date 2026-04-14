@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. E-01837 - ANICETA R. CO,* NESTOR B. CO, AND EMMA L. ACEBEDO, PETITIONERS, VS. PEOPLE OF THE PHILIPPINES AND REGIONAL TRIAL COURT, BRANCH 54, MANILA, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70232' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. E-01837, November 03, 2025 ]</H2>
+			<H3>ANICETA R. CO,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> NESTOR B. CO, AND EMMA L. ACEBEDO, PETITIONERS, VS. PEOPLE OF THE PHILIPPINES AND REGIONAL TRIAL COURT, BRANCH 54, MANILA, RESPONDENTS.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 65 dated August 4, 2025 filed by petitioners Aniceta R. Co (Aniceta), Nestor B. Co (Nestor), and Emma L. Acebedo (Emma) alleging that the Court of Appeals (CA) committed grave abuse of discretion tantamount to lack of jurisdiction<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> in issuing its Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 20, 2024 and Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated May 29, 2025 in CA-G.R. CR No. 48751. The CA affirmed the Decision dated September 7, 2022<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of Branch 54 of the Regional Trial Court (RTC), Manila, which found petitioners guilty of violating Section 3(e) of Republic Act No. 3019<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> and sentenced them to suffer the penalty of imprisonment from six years and one month as minimum to 10 years as maximum and the perpetual disqualification from holding public office.<br><br><center><b>Facts</b> </center><br>This case stemmed from an Information<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> filed before the RTC, charging petitioners as follows:<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><blockquote>In 25 November 2014 or sometime prior or subsequent thereto, in Manila, Philippines, and within the jurisdiction of this Honorable Court, accused low-ranking officials of Barangay 526, Zone 52, District 4, Manila: Barangay Chairman Aniceta E. Co, Barangay Kagawad and Bids and Awards Committee (BAC) Chairman Nestor B. Co, and Barangay Treasurer Emma L. Acebedo, committing the offense in the discharge of their official functions and in grave abuse thereof, acting with evident bad faith, manifest partiality and/or gross inexcusable negligence, and conspiring with one another, did then and there, willfully, unlawfully and criminally cause undue injury to the government and/or give unwarranted benefits, advantage and preference to Derexon Trading and General Merchandise (Derexon Trading) by: (i) making it appear that the barangay awarded the contract for the purchase of one motor vehicle to the lowest bidder Derexon Trading, which tendered a bid price of [PHP] 83,830.00, when in truth and in fact, the motor vehicle was actually purchased at [PHP] 120,283.00 as shown in the notarized Deed of Absolute Sale dated [November 24. 2014] executed between accused Aniceta Co and Derexon Trading; and (ii) allowing Derexon Trading, after the contract has been perfected and awarded to it. to modify the terms of the bid contract by increasing the purchase price of the motor vehicle, in violation of Republic Act 9184 or the Government Procurement Reform Act, to the damage and prejudice of the government.<br><br>CONTRARY TO LAW. </blockquote>Petitioners pleaded not guilty and thereafter, trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><i>Version of the prosecution</i><br><br>On November 10, 2014, Emma L. Acebedo (Emma), in her capacity as Barangay Treasurer, sent out an Invitation to Bid for the procurement of among others, one unit of motor vehicle. Several suppliers submitted their bids, which included Derexon Trading in the amount of PHP 83,830.00 for the motor vehicle unit.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Aniceta R. Co (Aniceta), as Barangay Chairperson, then approved the recommendation of Barangay Kagawad and Bids and Awards Committee (BAC) Chairperson petitioner Nestor B. Co (Nestor) to award the bid for the motor vehicle to Derexon Trading as the participant with the lowest bid. Thus, a Notice of Award signed by Aniceta was issued in the name of Carlos CastaÃ±eda of Derexon Trading.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>After the corresponding Purchase Order was issued by Aniceta and Emma, the former entered into a Deed of Absolute Sale with Derexon Trading. The Deed, however, indicated that the price of the motor vehicle (subject vehicle) was PHP 120,283.00 instead of PHP 83,830.00.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>It was found out during the investigation conducted by the Ombudsman, that the subject vehicle was formerly owned by Dominador Co, Nestor's brother, and Aniceta's brother-in-law. It was also revealed that said vehicle was mortgaged to Variety Alternative Sources to secure a loan in the sum of PHP 51,000.00 and remained registered in Dominador Co's name from 1995 up to the expiration on October 25, 2017, of its latest registration. The motor vehicle was purchased by Carlos CastaÃ±eda only on November 3, 2014, until it was sold to Barangay 526.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><i>Version of the defense</i><br><br>Petitioners denied knowledge of the prior ownership of the subject vehicle and claimed that the procurement and purchase thereof was regularly done pursuant to the proper procedure.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br><center><b>Ruling of the RTC</b></center><br>The RTC in its Decision dated September 7, 2022, found petitioners guilty of violating Section 3 (e) of Republic Act No. 3019 and sentencing them to suffer the penalty of imprisonment from six years and one month as minimum to 10 years as maximum. The dispositive portion of the RTC Decision reads:<br><blockquote>WHEREFORE, all premises considered, accused Aniceta [R.] Co, Nestor B. Co and Emma E. Acebedo are hereby found guilty of violation of Section 3(e) of Republic Act 3019 and are hereby sentenced to suffer the penalty of imprisonment from six (6) years and one (1) month as minimum to ten (10) years as maximum and the perpetual disqualification from holding public office.<br><br>Furnish the parties copies of this order.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original) </blockquote>According to the RTC, petitioners were guilty of gross inexcusable negligence for their failure to examine the subject vehicle's registration despite the fact that the subject vehicle had previously been used by the barangay prior to its purchase.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Hence, petitioners appealed the RTC Decision with the CA.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br><center><b>Ruling of the CA</b></center><br>The CA affirmed the RTC's Decision, similarly finding that petitioners are guilty of the crime charged. The dispositive portion of the CA Decision reads:<br><blockquote>WHEREFORE, premises considered, the instant appeal is DENIED. The assailed Decision dated [September 7, 2022] of the Regional Trial Court, National Capital Judicial Region, Branch 54, Manila is hereby AFFIRMED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </blockquote>According to the CA, the prosecution was able to prove beyond reasonable doubt, all the elements to sustain a conviction under Section 3(e) of Republic Act No. 3019.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The CA held that petitioners' failure to inquire into the subject vehicle's ownership and registration prior to the consummation of its purchase constitutes gross inexcusable negligence. The omission to inspect the subject vehicle's registration documents in violation of their legal duty was willful and tantamount to gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Thereafter, petitioners filed a Motion for Reconsideration challenging the above CA Decision, which was denied by the CA in its Resolution dated May 29, 2025.<br><br>Thus, petitioners filed the present petition for<i> certiorari</i> under Rule 65, ascribing grave abuse of discretion on the part of the CA in affirming the RTC conviction of petitioners.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><center><b>Ruling of the Court</b></center><br>After a judicious review of the records, the Court resolves to dismiss the instant petition outright due to several procedural infirmities.<b> Nevertheless, the CA's Decision and Resolution are hereby VACATED for want of jurisdiction</b>.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The present Petition suffers from several procedural infirmities warranting its outright dismissal</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br><b><i>First</i></b>, the proper remedy to assail the CA's Decision affirming the conviction of petitioners is via a petition for review on<i> certiorari</i> under Rule 45 and not a petition for<i> certiorari</i> under Rule 65.<br><br>At the outset, the Court notes that the present Petition was conflictingly captioned as a "Petition for Review on<i> Certiorari</i> under Rule 65." However, the allegations in the Petition state that the CA "committed grave abuse of discretion tantamount to lack of jurisdiction," when it affirmed the RTC's Decision. Notably, the allegation of grave abuse of discretion pertained to the merits of the CA's affirmation of petitioners' conviction. As will be made relevant in the subsequent discussion, petitioners never questioned the jurisdiction of the CA's appellate jurisdiction over the RTC's Decision.<br><br>In determining the nature of an action, it is not the caption, but the averments in the Petition and the character of the relief sought, that are controlling.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Thus, the Court is compelled to consider the instant Petition as one under Rule 65 of the Rules of Court, which is the wrong remedy to assail the CA Decision.<br><br>The proper remedy of a party aggrieved by a decision of the CA is a petition for review under Rule 45, which is not similar to a petition for <i>certiorari</i> under Rule 65 of the Rules of Court. As provided in Rule 45 of the Rules of Court,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> decisions, final orders, or resolutions of the CA in any case, i.e., regardless of the nature of the action or proceedings involved, may be appealed to Us by filing a petition for review, which would be but a continuation of the appellate process over the original case.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>On the other hand, a special civil action under Rule 65 is a limited form of review and is a remedy of last recourse. It is an independent action that lies only where there is no appeal nor plain, speedy and adequate remedy in the ordinary course of law.<i> Certiorari</i> will issue only to correct errors of jurisdiction, not errors of procedure or mistakes in the findings or conclusions of the lower court. As long as the court<i> a quo</i> acts within its jurisdiction, any alleged errors committed in the exercise of its discretion will amount to nothing more than mere errors of judgment, correctible by an appeal or a petition for review under Rule 45 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>In the present case, the CA resolved the appeal before it on the merits. Therefore, the extraordinary remedy of<i> certiorari</i> under Rule 65 will not prosper because of the availability of an appeal under Rule 45 of the Rules of Court.<br><br>The Court has consistently held that these recourses are not alternative or successive and are, in fact, mutually exclusive remedies.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Hence, a party cannot substitute the special civil action of<i> certiorari</i> under Rule 65 of the Rules of Court for the remedy of appeal under Rule 45 where the latter is available but was lost through fault or negligence.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Where the rules prescribe a particular remedy for the vindication of rights, such remedy should be availed of. By filing a special civil action for<i> certiorari</i> under Rule 65, petitioners availed themselves of the wrong remedy.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><b><i>Second</i></b>, the Petition is not accompanied by a certified true copy of the assailed Decision dated December 20, 2024, and all relevant pleadings and documents in violation of Rule 65, Section 1 of the Rules of Court.<br><br>A party seeking the extraordinary remedy of<i> certiorari</i> must strictly observe the requirements for its issuance.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Rule 46, Section 3, and Rule 65, Section 1<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> of the Rules of Court provide the documents required to be attached in a petition for<i> certiorari</i>. Notably, two sets of documents should be appended to the petition, namely: (1) a duplicate original or certified true copy of the judgment, order, or resolution subject thereof; and (2) copies of all pleadings and documents relevant and pertinent thereto.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> A petition for<i> certiorari</i> lacking these documents may be dismissed outright under Rule 46, Section 3 of the Rules.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In the present case, the Petition was only accompanied by the CA's Resolution dated May 29, 2025, which denied petitioners' motion for reconsideration, and a Compliance filed before the CA. Other than the foregoing two annexes, no other relevant pleadings and submissions were attached to the present Petition, leaving the Court without any definitive basis in its determination of whether the CA committed grave abuse of discretion.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><b><i>Third</i></b>, petitioners submitted a defective verification for failure to allege that the pleading is not filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation, pursuant to Rule 7, Section 4 of the Rules of Court, as amended.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><b><i>Fourth</i></b>, after a repeated and circumspect review of the petition, it does not allege the ultimate facts, issues involved and grounds relied upon for the remedy prayed for.<br><br>The five-page<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Petition submitted before the Court is a mere narration of the submissions and proceedings before the RTC and the CA. The Petition is utterly bare of any relevant fact, and neither did petitioners raise a single argument in support of their challenge to the CA's Decision. Petitioners merely rely on an empty recital that the CA supposedly "committed grave abuse of discretion tantamount to lack of jurisdiction." The Court cannot be expected to seriously entertain the submission of petitioners, absent any factual or legal moorings.<br><br><b>Given the foregoing circumstances, the Court is left with no other recourse but to dismiss the instant Petition outright</b>. Procedural rules have their own wholesome rationale in the orderly administration of justice. Justice must be administered according to the Rules of Court to eliminate arbitrariness, caprice, or whimsicality.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Strict compliance with the Rules prevents needless delays and ensures the orderly and expeditious dispatch of judicial business.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The CA does not have appellate jurisdiction over the RTC's Decision</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Although the present petition is dismissed due to several fatal procedural defects, the CA's Decision and Resolution are nevertheless vacated for want of jurisdiction.<br><br>Section 4 of Presidential Decree No. 1606, as amended by Republic Act No. 10660<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> provides:<br><blockquote><i>Jurisdiction</i>. â The<i> Sandiganbayan</i> shall exercise exclusive original jurisdiction in all cases involving:<br><br>a. Violations of Republic Act No. 3019, as amended, otherwise known as the Anti-Graft and Corrupt Practices Act, Republic Act No. 1379, and Chapter II, Section 2, Title VII, Book II of the Revised Penal Code, where one or more of the accused are officials occupying the following positions in the government, whether in a permanent, acting or interim capacity, at the time of the commission of the offense:<br><br>. . . .<br><br><i>Provided</i>,<br><br>. . . .<br><br>In cases where none of the accused are occupying positions corresponding to Salary Grade "27" or higher, as prescribe in the said Republic Act No. 6758, or military and PNP officers mentioned above, exclusive original jurisdiction thereof shall be vested in the proper regional trial court, metropolitan trial court, municipal trial court, and municipal circuit trial court, as the case may be, pursuant to their respective jurisdictions as provided in Batas Pambansa Blg. 129, as amended.<br><br>The<i> Sandiganbayan</i> shall<b> exercise exclusive appellate jurisdiction over final judgments, resolutions or orders of regional trial courts</b> whether in the exercise of their own original jurisdiction or of their appellate jurisdiction as herein provided. (Emphasis supplied) </blockquote>From the clear and unequivocal wording of the above provision, it is the Sandiganbayan that has exclusive appellate jurisdiction over the RTC's Decision. Therefore, the CA had no jurisdiction to resolve the appeal brought before it.<br><br>The Court now proceeds to determine whether the improper appeal to the CA should prejudice petitioners' right to due process.<br><br>In cases decided by the regional trial court in the exercise of its original jurisdiction, an appeal is taken by "filing a notice of appeal with the court which rendered the judgment or final order appealed from."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>After the filing of the notice of appeal, it is the clerk of court who must transmit to the clerk of court of the appellate court the complete record of the case. Rule 122, Section 8 of the Rules of Court states:<br><blockquote>Section 8.<i> Transmission of papers to appellate court upon appeal. </i>â Within five (5) days from the filing of the notice of appeal, the clerk of the court with whom the notice of appeal was filed must transmit to the clerk of court of the appellate court the complete record of the case, together with said notice. The original and three copies of the transcript of stenographic notes, together with the records, shall also be transmitted to the clerk of the appellate court without undue delay. The other copy of the transcript shall remain in the lower court. (Emphasis added) </blockquote>Thus, after the filing of the notice of appeal, it is now incumbent upon the clerk of court to transmit the records of the case to the proper appellate court.<br><br>In<i> MuÃ±ez v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> petitioners therein were public officers and employees of the Department of Environment and Natural Resources - Cagayan de Oro with Salary Grades below 27. They were charged with violating Section 3 (b) of Republic Act No. 3019 and were eventually convicted by the regional trial court. Aggrieved, petitioners appealed their conviction. The case, however, was erroneously transmitted to the CA instead of the Sandiganbayan. Despite the improper transmittal, the CA proceeded to rule on petitioners' appeal on the merits and affirmed the regional trial court's decision convicting them of the crime charged.<br><br>Petitioners again appealed their case to the Court questioning the verdict of conviction on the merits. The Court vacated the Court of Appeal's decision and held that it had no jurisdiction to review the regional trial court's conviction, since the appellate jurisdiction is properly lodged with the Sandiganbayan. The Court held:<br><blockquote>The Court of Appeals does not have appellate jurisdiction over appeals from final judgments, resolutions or orders of regional trial courts pertaining to violations of [Republic Act No.] 3019. The assailed rulings should, therefore, be vacated and the case, remanded to the court of origin for referral to the proper forum â the Sandiganbayan.<br><br>. . . .<br><br>Aggrieved, petitioners sought relief from the verdict of conviction. Under Section 4 of [Presidential Decree No.] 1606, it is the<i> Sandiganbayan</i> which has<b> exclusive</b> appellate jurisdiction over the appeal. The case, however, was erroneously transmitted to the Court of Appeals. The subsequent Decision dated July 12,2018 and Resolution dated May 15, 2019 of the Court of Appeals were therefore rendered without jurisdiction, hence, void.<br><br>Petitioners are not responsible for the error in transmitting the case. For such duty rests on the shoulders of the clerk of court. Rule 122, Section 8 of the Rules of Court commands:<br><br>. . . .<br><br>Thus, petitioners should not be prejudiced by the clerk of court's mistake.<br><br>Similarly, in<i> Dizon v. People</i>, the Court ruled that petitioner's appeal from his conviction for the crime of Malversation of Public Funds through Falsification of Public Documents in the trial court fell within the exclusive appellate jurisdiction of the<i> Sandiganbayan</i>, but the appeal was erroneously taken to the Court of Appeals. Thus, the Court set the Court of Appeals' dispositions aside and remanded the case to the RTC for transmission of the case records to the<i> Sandiganbayan</i>.<br><br>Indeed,<b> the accused here should not be prejudiced "by the shortcoming or fault caused by the clerk of court concerned. For what is at stake is no less than the life and liberty of the accused. Hence, on the strength of<i> Dizon</i> and in the higher interest of substantial justice, the Court is constrained to order the dispositions of the Court of Appeals vacated and the case remanded to the trial court for transmission of the records to<i> the Sandiganbayan</i></b>. (Emphasis supplied) </blockquote>In<i> Hunnob v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the case similarly involved public officers with salary grades below 27 and were convicted by the regional trial court. On appeal the trial court transmitted the records of their case to the CA instead of the Sandiganbayan. The CA instead of dismissing the appeal, proceeded to resolve the case on the merits and affirmed petitioners' conviction. Upon appeal, the Court vacated the decision of the CA and remanded the records to the trial court for proper transmittal to the Sandiganbayan.<br><br>The foregoing rulings were again reiterated by the Court in<i> SideÃ±o v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> that petitioners should not be prejudiced by the transmittal of the records to the improper court. The Court citing<i> Dizon v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> held:<br><blockquote>Likewise,<i> SideÃ±o</i> should not be prejudiced by the error in transmitting the records of Criminal Case Nos. 13-299981, 13-299982 and 13-299983 to the CA. In<i> Dizon v. People</i>, citing the case of<i> Ulep v. People</i>, the Court wrote:<br><blockquote>The trial court, on the other hand, was duty-bound to forward the records of the case to the proper forum, the Sandiganbayan. It is unfortunate that the RTC judge concerned ordered the pertinent records to be forwarded to the wrong court, to the great prejudice of petitioner. Cases involving government employees with a salary grade lower than 27 are fairly common, albeit regrettably so. The judge was expected to know and should have known the law and the <u>rules</u> of procedure. He should have known when appeals' are to be taken to the CA and when they should be forwarded to the Sandiganbayan. He should have conscientiously and carefully observed this responsibility specially in cases such as this where a person's liberty was at stake. </blockquote>Indeed,<i> SideÃ±o</i> should not be prejudiced by the shortcoming or fault of the RTC judge. Guided by the pronouncement in<i> <u>Dizon</u></i>, since cases involving government employees and officials with a salary grade lower than 27 are fairly common, the RTC judge herein is expected to know that SideÃ±o's case should have been appealed to the SB. Apparently, she did not.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </blockquote>Prescinding from the foregoing jurisprudence, the Court finds that petitioners should not be prejudiced by the incorrect transmittal of the records of the case. After filing their notice of appeal, it was already incumbent upon the clerk of court to determine the proper appellate court having jurisdiction over the case before it transmitted the records.<br><br><b>ACCORDINGLY</b>, the Petition for<i> Certiorari</i> under Rule 65 dated August 4, 2025 filed by petitioners Aniceta R. Co, Nestor B. Co, and Emma L. Acebedo is<b> DENIED</b>. Nevertheless, the Decision dated December 20, 2024 and the Resolution dated May 29, 2025 of the Court of Appeals in CA-G.R. CR No. 48751 are<b> VACATED</b>. The Court of Appeals is<b> DIRECTED to immediately REMAND</b> the case records to Branch 54 of the Regional Trial Court of Manila, which shall transmit the same to the<i> Sandiganbayan</i>, with utmost dispatch.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Singh,</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.,</i> on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Aniceta E. Co" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-9. Captioned as "Petition for Review on <i>Certiorari</i> Under Rule 65."<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Not attached to the <i>rollo</i> but a copy is available at the Case Status Inquiry System of the CA. Penned by Associated Justice Tita Marilyn B. Payoyo-Villordon and concurred in by Associate Justices Ramon A. Cruz and Emily L. San Gaspar-Gito of the Fifth Division, Court of Appeals.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 14-17. Penned by Associated Justice Tita Marilyn B. Payoyo-Villordon and concurred in by Associate Justices Ramon A. Cruz and Emily L. San Gaspar-Gito.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> CA Decision, <i>supra</i> note 3, at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The Anti-Graft and Corrupt Practices Act. Approved on August 17, 1960.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> CA Decision, <i>supra</i> note 3, at 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 3-4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>Francisco, Jr. v. Desierto</b>, 617 Phil. 251, 314 (2009) [Per J. Leonardo-De Castro, <i>En Banc</i>]; <b>Flores v. Office of the Ombudsman</b>, 437 Phil. 684, 690 (2002) [Per J. Quisumbing, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Rule 45, Section 1 of the Rules of Court, as amended, states:<br><blockquote>Section 1. <i>Filing of petition with Supreme Court</i>. â A party desiring to appeal by certiorari from a judgment, final order or resolution of the Court of Appeals, . . ., whenever authorized by law, may file with the Supreme Court a verified petition for review on <i>certiorari</i>..."</blockquote><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>Albor v. Court of Appeals</b>, 823 Phil. 901, 909 (2018) [Per J. Martires, Third Division];<b> Mercado v. Valley Mountain Mines Exploration, Inc.</b>, 677 Phil. 13, 51 (2011) [Per J. Villarama, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>Albor v. Court of Appeals</b>, <i>id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>Inter-Island Information Systems, Inc. v. Court of Appeals</b>, 905 Phil. 29, 38 (2021) [Per J. Hernando, Third Division]; <b>Nava v. Palattao</b>, 531 Phil. 345, 358 (2006) [Per J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Sps. Dycoco v. Court of Appeals</b>, 715 Phil. 550, 562 (2013) [Per J. Leonard-De Castro, First Division]; <b>Nava v. Palattao</b>, <i>id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Albor v. Court of Appeals</b>, 823 Phil. 901, 909 (2018) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Air Philippines Corp. v. Zamora</b>, 529 Phil. 718, 726 (2006) [Per J. Austria-Martinez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Section 1. Petition for <i>Certiorari</i>. â . . .<br>. . . .<br>The petition shall be accompanied by a certified true copy of the judgment, order or resolution subject thereof, copies of all pleadings and documents relevant and pertinent thereto, and a sworn certification of non-forum shopping as provided in the third paragraph of Section 3, Rule 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Coogee International, Inc. v. Maningo, G.R. No. 264881</b>, July 16, 2025 [Per J. Gaerlan, Third Division] at 9. This pinpoint citation refers to copy of the Decision uploaded to the Supreme Court website; <b>Duremdes v. Jorilla</b>, 871 Phil. 810, 821 (2020) [Per J. Inting, Second Division]; <b>Air Philippines Corp. v. Zamora</b>, 529 Phil. 718, 726 (2006) [Per J. Austria-Martinez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup><b> Coogee International, Inc. v. Maningo</b>, <i>id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Pinakamasarap Corp. v. National Labor Relations Commission</b>, 534 Phil. 222, 230 (2006); <b>Durban Apartments Corporation v. Catacutan</b>, 514 Phil. 187, 194 (2005) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Section 4. <i>Verification</i>. â Except when otherwise specifically required by law or rule, pleadings need not be under oath or verified. A pleading is verified by an affidavit of an affiant duly authorized to sign said verification. The authorization of the affiant to act on behalf of a party, whether in the form of a secretary's certificate or a special power of attorney, should be attached to the pleading, and shall allege the following attestations:<br><blockquote>. . . .<br>(b) The pleading is not filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation; . . .</blockquote><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Excluding the page for the Verification and Certificate of Non-Forum Shopping.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Tible &amp; Tible Co., Inc., et al. v. Royal Savings and Loan Ass'n., et al.</b>, 574 Phil. 20, 38 (2008) [Per J. Reyes, R.T., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Rural Bank of San Mateo Isabela, Inc. v. Sps. Ramales, G.R. Nos. 256021 &amp; 268716</b>, April 2, 2025 [Per J. Gaerlan, Third Division] at 10. This pinpoint citation refers to copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> An Act Strengthening Further the Functional and Structural Organization of the Sandiganbayan, Further Amending Presidential Decree No. 1606, As Amended, and Appropriating Funds Therefor, approved on April 16, 2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> RULES OF COURT, Rule 122, sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 860 Phil. 1123 (2019) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 865 Phil. 111, 121 (2019) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 881 Phil. 405, 418 (2020) [Per J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 824 Phil. 599 (2018) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 609.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

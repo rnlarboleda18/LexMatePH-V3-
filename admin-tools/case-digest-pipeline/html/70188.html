@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 254973 - JESSIE FRANCISCO Y OBLINO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70188' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 254973, September 29, 2025 ]</H2>
+			<H3>JESSIE FRANCISCO <I>Y</I> OBLINO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<BR><BR>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This resolves the Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated May 26, 2022, filed by petitioner Jessie Francisco y Oblino<b> (Francisco)</b>. The Court, in its Resolution,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 10, 2021, denied the Petition for Review on <i>Certiorari</i>,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated February 5, 2021, filed by Francisco, which sought to reverse the June 23, 2020 Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and the December 1, 2020 Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Court of Appeals<b> (CA)</b> in CA-G.R. SP No. 158274. The CA Decision nullified and set aside the Orders dated June 25, 2018,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> July 18, 2018<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> and August 13, 2018,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and the Judgment,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated August 23, 2018, of Branch 24, Regional Trial Court of Naga City<b> (RTC)</b> in Criminal Case No. 2015-0110, and found that the RTC acted with grave abuse of discretion when it accepted Francisco's proposal for plea bargaining.<br><br><center><b><i>The Facts</i></b></center><br>Francisco was charged for violation of Article II, Sections 5 and 11 of Republic Act No. 9165, or the Comprehensive Dangerous Drugs Act of 2002, in two separate Informations. Relevant to the present case is the charge for violation of Article II, Section 5 of Republic Act No. 9165 docketed as Criminal Case No. 2015-0110, the accusatory portion of the Information reads:<br><blockquote>The undersigned Assistant City Prosecutor of Naga City, Camarines Sur, accuses<b> JESSIE FRANCISCO y Oblino</b> of Sitio Salanguigui, Zone 4 Cararayan, Naga City for the crime of<b> SALE OF DANGEROUS DRUGS (SHABU)</b> defined and penalized under [Article II, Section 5 of Republic Act No.] 9165, committed as follows:<br><br>That on or about<b> February 15, 2015</b>, in the City of Naga, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, without authority of law, did, then and there, willfully, unlawfully[,] and criminally sell, dispense[,] and deliver<b> one [ ] piece of small-sized, heat-sealed transparent plastic sachet containing white crystalline substance, weighing more or less 0.0214 gram[s] with marking CSN-22/15/15</b>, to a poseur buyer PO[2] CARLITO SALIVA NAVARROZA, which yield positive for the presence of Methamphetamine Hydrochloride popularly known as 'shabu', as dangerous drug, in violation of the above-cited law.<br><br>ACTS CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (Emphasis in the original) </blockquote>Upon arraignment, Francisco pleaded not guilty. Then, trial ensued.<br><br>After the prosecution presented and formally offered its evidence, Francisco, assisted by the Public Attorney's Office<b> (PAO)</b>, submitted a Proposal for Plea Bargaining,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated June 14, 2018, to request that he be allowed to plead guilty instead to a lesser offense of mere possession of equipment, instrument, apparatus, and other paraphernalia for dangerous drugs under Article II, Section 12 of Republic Act No. 9165, considering that the quantity of shabu is only 0.0214 grams, in accordance with Administrative Matter No. 18-03-16-SC, dated April 10, 2018, or the Adoption of the Plea Bargaining Framework in Drug Cases.<br><br>Senior Assistant City Prosecutor Julieta C. Namoro-BaÃ±es<b> (SACP Namoro-BaÃ±es)</b> opposed the proposal to plea bargain in view of Regional Order No. 027-E-18, dated May 17, 2018, issued by Regional Prosecutor Mary May B. De Leoz and in accordance with the guidelines under Department of Justice<b> (DOJ)</b> Circular No. 061 which prohibits prosecutors of the DOJ handling drug cases from entering into a plea bargain for violations of Article II, Section 5 of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br><center><b><i>The Ruling of the RTC</i></b> </center><br>In an Order, dated July 18, 2018, the RTC granted Francisco's motion to plead guilty to a lesser offense since it may be granted even after the prosecution has finished presenting its evidence and rested its case. He further opined that<i> Estipona Jr. v. People of the Philippines</i>, which declared as unconstitutional Section 23 of Republic Act No. 9165 prohibiting plea bargaining in drug cases, should be given retroactive effect because it is favorable to the accused.<br><br>Accordingly, the RTC vacated Francisco's former plea of not guilty and, upon re-arraignment, allowed Francisco to plead guilty to the offense of violation of Section 12, Article II of R.A. No. 9165, despite the objection of SACP Namoro-BaÃ±es invoking this time DOJ Circular No. 27, which allows the accused to plead guilty only to violation of Article II, Section 11 of Republic Act No. 9165 if charged under Article II, Section 5 of Republic Act No. 9165. The RTC overruled the objection of the prosecution considering that DOJ Circular No. 27 is likewise in conflict with Administrative Matter No. 18-03-16-SC.<br><br>On August 3, 2018, the prosecution filed a Motion for Reconsideration on the ground that the consent of the offended party and the prosecutor is an indispensable requirement under Rule 116, Section 2 of the Revised Rules of Criminal Procedure, but it was denied by the RTC. The dispositive portion of the Order, dated August 13, 2018, reads:<br><blockquote>WHEREFORE, the Motion for Reconsideration is DENIED. It is hereby declared that DOJ Circular No. 27 is contrary to the Rules of Court, and an encroachment on the Rule Making Power of the Supreme Court of the Philippines, to the extent that it contradicts the provisions of A[dministrative] M[atter] No. 18-13-19-SC, specifically that portion which disallows plea bargaining under [Article II, Section 5] of [Republic Act No.] 9165 if the offer to plead guilty to lesser offense by the accused is not to the offense under [Article II, Section 3, paragraph 3 of Republic Act No.] 9165.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> (Emphasis in the original) </blockquote>Eventually, the RTC rendered a Judgment, dated August 23, 2018, finding Francisco guilty beyond reasonable doubt for the offense of violation of Article II, Section 12 of Republic Act No. 9165 in Criminal Case No. 2015Â­-0110, the dispositive portion of which reads:<br><blockquote>WHEREFORE, judgment is hereby rendered finding the accused, JESSIE FRANCISCO y OBLINO, GUILTY beyond reasonable doubt of the offense under [Article II, Section 12 of Republic Act No.] 9165.<br><br>Applying the Indeterminate Sentence Law, the accused is hereby sentenced to suffer imprisonment of six months and one day as minimum to four years as maximum. He is further ordered to pay a fine of [PHP 50,000.00]. He is further directed to submit himself to a drug dependency test. If accused admits drug use, or denies it but is found positive after the drug dependency test, he shall undergo treatment and rehabilitation for a period of not less than six months.<br><br>In the service of his sentence, the accused shall be credited with the period of his preventive detention pursuant to Article 29 of the Revised Penal Code, as amended.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Emphasis in the original) </blockquote>Then, the Office of the Solicitor General<b> (OSG)</b> filed a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> before the CA.<br><br>The OSG averred that the RTC committed grave abuse of discretion amounting to lack or excess of jurisdiction when it allowed Francisco's plea to a lesser offense without the prosecution's consent, without considering the weight of the prosecution's evidence, and despite the absence of the required drug dependency test as a prerequisite for plea bargaining.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Francisco filed a Comment (on the Petition for Certiorari), dated May 9, 2019, while the OSG filed a Manifestation (In Lieu of Reply), dated June 3, 2019. Moreover, Francisco also filed a Manifestation (in Lieu of Memorandum) and the OSG filed its Memorandum, dated October 30, 2019.<br><br><center><b><i>The Ruling of the CA</i></b> </center><br>The CA, on June 23, 2020, rendered its Decision granting the Petition for<i> Certiorari</i>, the dispositive portion of which reads:<br><blockquote><b>ACCORDINGLY</b>, the petition is<b> GRANTED</b> and a writ of certiorari is hereby issued<b> NULLIFYING</b> and<b> SETTING ASIDE</b> the assailed Orders dated[,] June 25, 2018, July 18, 2018, and August 13, 2018 and the Judgment[,] dated August 23, 2018, rendered by respondent Judge in Criminal Case No. 2015-0110. [Branch 23,] Regional Trial Court, Branch 24 of Naga City is<b> DIRECTED</b> to proceed with dispatch with the reception of defense evidence and to render judgment based on the evidence presented by the parties.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original) </blockquote>The CA ruled that the RTC committed grave abuse of discretion amounting to excess of jurisdiction since plea bargaining requires the consent of the offended party and the prosecutor, a drug dependency test should be made before judgment, and that the RTC should evaluate the evidence presented by the prosecution to determine whether the evidence of guilt is strong.<br><br>Francisco filed a Motion for Reconsideration, but it was denied by the CA in its Resolution, dated December 1, 2020.<br><br>Undeterred, Francisco filed a Petition for Review on<i> Certiorari</i> before the Court asserting that the CA erred in ruling that the consent of the prosecution is a condition<i> sine qua non</i> for the validity of a plea bargaining agreement in drug cases and that a drug dependency test should be made before judgment. Francisco also averred that the OSG only belatedly raised the issue that the prosecution had sufficient evidence to convict Francisco before the CA, when it could have done so in its comment on the proposal for plea bargaining before the trial court.<br><br>In the assailed Resolution, dated May 10, 2021, the Court denied the Petition for Review on<i> Certiorari</i> for failure to sufficiently show that the appellate court committed any reversible error in the challenged decision and resolution and that there exists any substantial, special, or important reason to warrant the exercise by the Court of its discretionary appellate jurisdiction.<br><br>Aggrieved, Francisco filed the present Motion for Reconsideration. The OSG filed a Comment, dated January 8, 2024, on the Motion for Reconsideration.<br><br><center><b><i>The Issue</i></b> </center><br>The Court resolves the lone issue of whether the CA erred in setting aside the RTC's grant of Francisco's plea bargain despite the prosecution's objections.<br><br><center><b><i>The Ruling of the Court</i></b> </center><br>The Court grants the Motion for Reconsideration. In light of the Court's pronouncements in<i> People v. Montierro<b> (Montierro)</b></i><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> and<i> Aquino v. People <b>(Aquino</b></i><b>)</b>,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> the Court's Resolution, dated May 10, 2021, must be revisited.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The prosecutor's consent is not indispensable in plea bargaining agreements</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>In this case, the prosecution initially objected to the plea bargain citing DOJ Circular No. 061 which disallows prosecutors to enter into plea bargaining agreements with respect to violations of Article II, Section 5 of Republic Act No. 9165. Thereafter, the prosecution anchored their objection on the new DOJ Circular No. 027 which allows the accused to plead guilty only to violation of Article II, Section 11 of Republic Act No. 9165 if charged under Article II, Section 5 of Republic Act No. 9165. On its Motion for Reconsideration before the RTC, the prosecution also contended that in plea bargaining, the consent of the prosecutor is an indispensable requirement.<br><br>The foregoing issues presented in this case have been resolved by the Court in<i> Montierro</i>. In<i> Montierro</i>, the Court invoked its exclusive rule-making power in plea bargaining cases and that while the consent of the parties is necessary, the approval of the accused's plea of guilty to a lesser offense is ultimately subject to the sound discretion of the court:<br><blockquote>In this regard, courts are not bound by any resolution or administrative issuance that the Secretary of Justice may promulgate. It is within the sole ambit of the Court's discretion to impose rules governing the proceedings â including the Plea Bargaining Framework in Drugs Cases.<i> Thus, courts may overrule the objection of the prosecution when the objection has no valid basis, or is not supported by evidence, or if the objection solely tends to undermine the Court's plea bargaining framework, or that the objection is solely to the effect that it will weaken the drugs campaign of the government</i>. To narrowly construe the trial court's discretion under Rule 116, Section 2 of the Rules of Court is to undermine the value of plea bargaining itself and render it an ineffective tool of rehabilitation and restorative justice.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis supplied) </blockquote>Similarly, in this case, the RTC, in overruling the prosecution's objections and granting Francisco's plea bargain proposal, only upheld the Court's rule-making powers in Administrative Matter No. 18-03-16-SC over the inconsistent DOJ Circular No. 061 and DOJ Circular No. 027:<br><blockquote>WHEREFORE, the Motion for Reconsideration is DENIED. It is hereby declared that<i> DOJ Circular No. 27 is contrary to the Rules of Court, and an encroachment on the Rule Making Power of the Supreme Court of the Philippines, to the extent that it contradicts the provisions of [Administrative Matter]. No. 18-13-19-SC</i>, specifically that portion which disallows plea bargaining under [Article II, Section 5 of Republic Act No.] 9165 if the offer to plead guilty to lesser offense by the accused is not to the offense under [Article II, Section 11, paragraph 3 of Republic Act No.] 9165.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis supplied) </blockquote>Regardless, as likewise held in<i> Montierro</i>, the prosecution's objection is considered withdrawn following the release of DOJ Circular No. 18 in 2022, which now aligns with the Court's Plea Bargaining Framework.<br><br>With respect to the ruling of the CA that a drug dependency test should be made before a plea bargaining proposal may be accepted, the Court has already clarified that "a drug dependency test is not a precondition for the approval of a plea bargaining proposal. The test is to be conducted only after the trial court approves the plea bargaining proposal of the accused to determine whether he/she needs to be subjected to treatment and rehabilitation or undergo a counselling program at a rehabilitation center."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Indeed, Administrative Matter No. 18-03-16-SC does not specify that a drug dependency test is a prerequisite for plea bargaining.<br><br>Thus, given the foregoing discussions, the Court finds that the CA committed reversible error when it held that there was grave abuse of discretion in the RTC's grant of Francisco's plea bargaining proposal.<br><br>The Court has already explained that grave abuse of discretion means such capricious and whimsical exercise of judgment as is equivalent to lack of jurisdiction. The abuse of discretion must be grave as where the power is exercised in an arbitrary or despotic manner by reason of passion or personal hostility and must be so patent and gross as to amount to an evasion of positive duty or to a virtual refusal to perform the duty enjoined by or to act at all in contemplation of law.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Such circumstances do not obtain in this case. Clearly, the RTC only advocated for the Court's exclusive rule-making powers, in accordance with the prevailing law and applicable rules.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The prosecution already waived its right to oppose the plea bargaining proposal on the ground of sufficiency of evidence </i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Relative to the OSG's argument before the CA that the RTC granted the plea bargaining proposal without considering the weight of the prosecution's evidence, the Court finds that the prosecution has already waived its right to oppose the plea bargaining proposal on such ground when it failed to raise the same before the RTC.<br><br>In the recent case of<i> Aquino</i>, the Court refined the guidelines set forth in<i> Montierro</i> to do away with the remand to the court of origin to avoid undue delays in the resolution of plea bargaining cases:<br><blockquote>5. In cases where the prosecution, in its comment or opposition to the accused's motion to plea bargain, raised only a few but not all possible grounds for opposing the motion,<i> it must be understood that the prosecution has waived such grounds not raised, similar to the principle behind the Omnibus Motion Rule</i>.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (Emphasis supplied) </blockquote>In this case, on its Comment on the Proposal for Plea Bargain and on its Motion for Reconsideration before the RTC, the objections of the prosecution before the RTC merely centered on the inconsistency between the DOJ Circulars and the Court's Plea Bargaining Framework. The prosecution had ample opportunity to raise the issue of the sufficiency of evidence before the RTC considering it had already rested its case yet it failed to do so, and the OSG only mentioned the matter on its Petition for<i> Certiorari</i> before the CA.<br><br>Following<i> Aquino</i>, the Court holds that the prosecution has waived its right to oppose the plea bargain proposal on the ground of sufficiency of evidence, making it unnecessary to remand the case to the court of origin.<br><br><b>ACCORDINGLY</b>, the Motion for Reconsideration is<b> GRANTED</b>. The June 23, 2020 Decision and the December 1, 2020 Resolution of the Court of Appeals in CA-G.R. SP No. 158274 are<b> REVERSED</b>. The Orders dated June 25, 2018, July 18, 2018, and August 13, 2018, and the Judgment, dated August 23, 2018, of Branch 24, Regional Trial Court of Naga City in Criminal Case No. 2015-0110 are<b> REINSTATED</b>.<br><br>Furthermore, considering the maximum penalty imposed and taking into account the period of his preventive detention in the service of his sentence, Petitioner Jessie Francisco y Oblino is<b> ORDERED</b> immediately <b>RELEASED</b> on account of full service of his sentence, unless he is confined for any other lawful cause.<br><br>Let a copy of this Resolution be furnished to the Director General, Bureau of Corrections, Muntinlupa City for immediate implementation. Furthermore, the Director General of the Bureau of Corrections is <b>DIRECTED</b> to<b> REPORT</b> to this Court the action he has taken within five days from receipt of this Resolution.<br><br>Let entry of judgment be<b> ISSUED</b> immediately.<br><br><b>SO ORDERED.</b><br><br><i>Inting</i><sup style="COLOR: RGB(255, 0, 0);">**</sup> (<i>Acting Chairperson)</i><i>, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><i>Caguioa</i><sup style="COLOR: RGB(255, 0, 0);">*</sup> (<i>Chairperson), J.,</i> on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Per Special Order No. 3227 dated September 23, 2025.</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 186-203.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 184-185.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 11-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 35-49. Penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Zenaida T. Galapate-Laguilles and Florencio M. Mamauag, Jr. of the Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 51-52. Penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Zenaida T. Galapate-Laguilles and Florencio M. Mamauag, Jr. of the Former Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 75-76. Penned by Acting Presiding Judge Leo L. Intia.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 77-78. Penned by Acting Presiding Judge Leo L. Intia.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 79-82. Penned by Acting Presiding Judge Leo L. Intia.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 83-84. Penned by Acting Presiding Judge Leo L. Intia.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 90-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 92-93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 83-84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 53-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 62-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 926 Phil. 430 (2022) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <b>G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>People v. Montierro</b>, 926 Phil. 430, 462-463 (2022) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i>, p. 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>See</i> <b>Bason v. People</b>, 947 Phil. 610, 622 (2023) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <b>UCPB v. Looyuko</b>, 560 Phil. 581, 591-592 (2007) [Per J. Austria-Martinez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>People v. Aquino, G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

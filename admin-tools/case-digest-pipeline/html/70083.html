@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 249916 - NATIONAL BUREAU OF INVESTIGATION, REGION VII, PETITIONER, VS. AVELINO J. GUNGOB, SR., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70083' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 249916, August 13, 2025 ]</H2>
+			<H3>NATIONAL BUREAU OF INVESTIGATION, REGION VII, PETITIONER, VS. AVELINO J. GUNGOB, SR., RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated March 13, 2019 and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated October 2, 2019 of the Court of Appeals (CA).<br><br>The antecedents, as found by the CA, are as follows:<br><blockquote>In the morning of [November 26,] 2009, agents from the National Bureau of Investigation (NBI), Central Visayas Regional Office, Atty. Roy Salubre of the Provincial Treasurer's Office, officers from the Cebu Provincial Police Office (CPPO), and soldiers from the Philippine Army 78th Infantry Battalion, conducted monitoring operations and checkpoint in Barangays Danglag, Garing[,] and Dagongdong, all in Consolacion, Cebu. Their purpose was to monitor and possibly apprehend those suspected of illegal extraction and hauling of mineral products.<br><br>The checkpoint caused the apprehension of [three] ten-wheeler dump trucks loaded with limestone or diorite used as filling materials. The team also seized [one] backhoe and [one] bulldozer at the quarry site where the minerals were sourced from. All these vehicles were owned by the Municipal Government of Consolacion, Cebu. The Municipal Mayor at that time was [respondent] Avelino Gungob, Sr. [(Gungob).]<br><br>On [December 3,] 2009, [petitioner] NBI Regional Office VII [(NBI-Region 7)] filed a Complaint with the [Office of the Ombudsman (OMB)] accusing Gungob, in his capacity as Mayor of Consolacion, Cebu, and Job Order Employees namely: Glecerio Galo, Leonardo C. Capao, Joebeboy C. Dayon, Juanito T. Gerundio, Jr., Beda I. Comeso, Nicarter J. Yray, and Dionito C. Mangilaya (Job Order Employees, collectively) of Theft of Minerals punished under Section 103 of [Republic Act No. 7942 or] the Mining Act of 1995. These Job Order Employees were the drivers and operators of the seized [dump trucks] and heavy [equipment]. The [OMB] found enough basis to proceed with both the criminal and administrative investigations. [The criminal aspect of the complaint was docketed as OMB-V-C-09-0425-I, while the administrative aspect was docketed as OMB-V-A-09-0416-I].<br><br>In his Counter-Affidavit, Gungob alleged that he did not commit the offense charged. The alleged illegal quarrying in the mountains of Consolacion was for the construction of farm-to-market roads known as the "Mountain Highway Project." As mandated by the Environmental Compliance Certificate for the project, the excavated earth materials/debris were to be expeditiously removed. Coincidentally, several projects of the municipality required dumping of filling materials such as the construction of a transportation terminal within the new public market and the "Government Center Project," which was to reclaim and develop [21] hectares to be used as a Government Center.<br><br>In a 4<sup>th</sup> Endorsement dated [April 29,] 2008, the Provincial Government of Cebu granted the Municipality of Consolacion a Gratuitous Permit to extract and haul limestone. This permit, however, expired after the completion of the public transport terminal. The municipality then applied for another Gratuitous Permit to haul limestone from the "Mountain Highway Project" to the "Government Center Project" but the provincial government did not act upon their application despite of several follow-ups. So as not to delay [both] projects, the hauling of limestone continued until the municipality's vehicles were apprehended at the checkpoint.<br><br>The Job Order Employees also filed a Joint Counter-Affidavit. Their defense was that they merely followed the instructions of their supervisor who, in turn, only followed the directive of Gungob.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (Citations omitted) </blockquote>On February 9, 2015, the OMB issued a Joint Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> in<i> OMB-V-C-09-0425-I</i> and<i> OMB-V-A-09-0416-I</i>, ruling as follows:<ol><li>As for the criminal aspect, the OMB found probable cause to indict Gungob and the Job Order Employees for theft of materials under Section 103 in relation to Section 49 of Republic Act No. 7942. The OMB thus ordered that a corresponding information to be filed against Gungob and the Job Order Employees in the appropriate court.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br></li><li>As for the administrative aspect, on the other hand, the OMB found Gungob guilty of<i> simple misconduct</i> and meted him the penalty of suspension without pay for three months together with the concomitant accessory penalties. The OMB also directed that, in the event that the penalty of suspension can no longer be enforced due to Gungob's separation from the service, such penalty shall be converted into a fine in the amount equivalent to Gungob's salary for three months which may be deducted from the latter's retirement benefits, accrued leave credits or any receivables from his office.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></li></ol>Gungob filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> but was denied by the OMB via a Joint Order<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated April 23, 2015. Undeterred, Gungob filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> before the CA.<br><br>On March 13, 2019, the CA rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> partially granting Gungob's Petition for Review. Prefatorily, the CA held that it had no jurisdiction over questions regarding the criminal aspect of the OMB's ruling for lack of jurisdiction. Hence, it confined itself only to the resolution of Gungob's appeal against the administrative aspect of the OMB's ruling.<br><br>On that matter, the CA found Gungob<i> not</i> liable for simple misconduct. The appellate court noted that, while Gungob may have committed a blunder in causing the extraction of earth minerals or limestones without the necessary permits, the latter only did so out of utmost good faith and with the intent to implement bona fide projects of his municipality.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> The CA also held that the lack of gratuitous permits could not be attributed to the negligence or misconduct of Gungob, as evidence revealed that the latter had sent no less than five letters to the provincial governor, from January to October 2009, requesting for the renewal of the municipality's gratuitous permits, but had been ignored.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>The NBI-Region 7, through the Office of the Solicitor General (OSG), filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> but the CA denied the same for being filed out of time.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Hence, this Petition by the NBI-Region 7.<br><br><center><i>Our Ruling</i></center><br>We grant the Petition.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The CA erred in denying the Motion for Reconsideration of the petitioner for being filed out of time</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Prefatorily, We hold that the CA erroneously regarded the Motion for Reconsideration of the petitioner as being filed out of time. In deeming such motion too late, the appellate court reckoned the reglementary period for filing a motion for reconsideration from the time the petitioner received a copy of the assailed CA Decision, viz.:<br><blockquote><i>This Court NOTES that [the petitioner] received a copy of the [March 13,] 2019 Decision on [March 29,] 2019. The Office of the Solicitor General, representing [the petitioner], filed the herein Motion for Reconsideration only on [April 16,] 2019. </i><br><br>Based on the date of receipt, the [15-day] period to file a Motion for Reconsideration expired on [April 13,] 2019. Since the latter date fell on a Saturday, the [petitioner] had until [April 15,] 2019, Monday, to file the said Motion. Since the motion was filed only on [April 16,] 2019, said Motion is [one] day late.<br><br>The [15-day] reglementary period for filing a motion for reconsideration is non-extendible.<br><br>. . . .<br><br>WHEREFORE, the Motion for Reconsideration is DENIED for being filed out of time.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis supplied, citations omitted) </blockquote>The Rules of Court is clear that whenever a party to a case is represented by counsel,<i> service of pleadings, judgments, and other papers to such party ought to be done through his or her counsel</i> unless otherwise directed by the court. Thus, under Rule 13, Section 2 of the 1997 Rules on Civil Procedure:<br><blockquote>SEC. 2.<i> Filing and service, defined</i>. â Filing is the act of presenting the pleading or other paper to the clerk of court.<br><br>Service is the act of providing a party with a copy of the pleading or paper concerned.<i> If any party has appeared by counsel, service upon him shall be made upon his counsel or one of them, unless service upon the party himself is ordered by the court</i>. Where one counsel appears for several parties, he shall only be entitled to one copy of any paper served upon him by the opposite side. (Emphasis supplied) </blockquote>The above provision was substantially carried over under the 2019 Rules of Civil Procedure:<br><blockquote>SEC. 2.<i> Filing and service, defined. â</i> Filing is the act of submitting the pleading or other paper to the court.<br><br>Service is the act of providing a party with a copy of the pleading or any other court submission.<i> If a party has appeared by counsel, service upon such party shall be made upon his or her counsel, unless service upon the party and the party's counsel is ordered by the court</i>. Where one counsel appears for several parties, such counsel shall only be entitled to one copy of any paper served by the opposite side.<br><br>Where several counsels appear for one party, such party shall be entitled to only one copy of any pleading or paper to be served upon the lead counsel if one is designated, or upon any one of them if there is no designation of a lead counsel. (Emphasis supplied) </blockquote>Consequently, service of court orders or papers to a party who appears by counsel is<i> not</i>, as a rule, considered as notice in law.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> In<i> Soriano v. Soriano</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> it was taught:<br><blockquote>As mentioned above, the general rule is, where a party appears by attorney in an action or proceeding in a court of record, all notices required to be given therein must be given to the attorney of record; and<i> service of the court's order upon any person other than the counsel of record is not legally effective and binding upon the party, nor may it start the corresponding reglementary period for the subsequent procedural steps that may be taken by the attorney</i>. Notice should be made upon the counsel of record at his exact given address, to which notice of all kinds emanating from the court should be sent in the absence of a proper and adequate notice to the court of a change of address.<br><br><i>Said differently, when a party is represented by counsel of record, service of orders and notices must be made upon said attorney; and notice to the client and to any other lawyer, not the counsel of record, is not notice in law</i>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis supplied, citations omitted) </blockquote><i>Villalongha v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> on the other hand, expounded on the rationale of the foregoing rule, to wit:<br><blockquote>Section 2, Rule 13 of the Rules of Court provides that "if any party has appeared by counsel, service upon him shall be made upon his counsel or one of them, unless service upon the party himself is ordered by the court." Thus, even if a party represented by counsel has been actually notified, said notice is not considered notice in law. "<i>The reason is simple â the parties, generally, have no formal education or knowledge of the rules of procedure, specifically, the mechanics of an appeal or availment of legal remedies; thus, they may also be unaware of the rights and duties of a litigant relative to the receipt of a decision. More importantly, it is best for the courts to deal only with one person in the interest of orderly procedure â either the lawyer retained by the party or the party him/herself if [he/she] does not intend to hire a lawyer</i>."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis supplied, citations omitted) </blockquote>With the above precepts, the error of the CA becomes manifest.<br><br>Here, it is undisputed that the petitioner was and continues to be represented by the OSG. In fact, it was the OSG, as counsel of record of the petitioner, which prepared and filed with the CA the subject Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Consequently, to be considered effective and binding upon the petitioner, the service of the CA Decision must be made to its counselâ i.e., the OSG. As ordained under the Rules and as construed by jurisprudence, the petitioner's receipt of the CA Decision, on its own, cannot be considered as notice of such decision in law. Accordingly, We find that the CA erred in reckoning the reglementary period for filing a motion for reconsideration from the petitioner's receipt of the assailed CA Decision. The said period should have been counted from the OSG's receipt of the same decision.<br><br>In this case, the records attest that the OSG only received a copy of the CA Decision on April 4, 2019.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Thus, strictly speaking, the petitioner had until<i> April 19, 2019</i> to file its Motion for Reconsideration. Given that the subject Motion for Reconsideration was already filed on April 16, 2019,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> We hold that the CA's denial thereof, on the ground of being filed out of time, is baseless.<br><br><table width="485" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="283" valign="top"><div align="JUSTIFY"><i>The respondent is guilty of simple misconduct</i></div></td> <td width="200" valign="top"><div align="JUSTIFY"></div><br></td> </tr> </tbody></table><br>Anent the crux of the appeal, We find in favor of the petitioner.<br><br>The OMB was correct. The respondent may still be found guilty of simple misconduct. In<i> Civil Service Commission v. Ledesma</i>,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> We defined the concept of "<i>misconduct</i>" and its different permutations as such:<br><blockquote>Misconduct is "<i>a transgression of some established and definite rule of action, more particularly, unlawful behavior or gross negligence by a public officer</i>." The misconduct is<i> grave</i> if it involves any of the additional elements of corruption, willful intent to violate the law or to disregard established rules, which must be established by substantial evidence. Otherwise, the misconduct is only<i> simple</i>. A person charged with grave misconduct may be held liable for simple misconduct if the misconduct does not involve any of the additional elements to qualify the misconduct as grave.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis supplied, citations omitted) </blockquote>Verily, the plain unlawful behavior of a public officerâeven if not motivated by bad faith, malice or a corrupt considerationâalready gives rise to the administrative offense of simple misconduct.<br><br>In this case, it is undisputed that the respondent, in his capacity as the mayor of the municipality of Consolacion, directed the extraction and transport of earth minerals and limestones<i> sans</i> the necessary government permits.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Such act by the respondent, however, is in itself a<i> prima facie </i>violation of Section 103 of Republic Act No. 7942, viz.:<br><blockquote>SEC. 103.<i> Theft of Minerals. â Any person extracting minerals and disposing the same without a mining agreement, lease, permit, license, or steals minerals or ores or the products thereof from mines or mills or processing plants shall, upon conviction, be imprisoned from</i> [six]<i> months to</i> [six]<i> years or pay a fine from</i> [PHP 10,000.00]<i> to</i> [PHP 20,000.00],<i> or both, at the discretion of the appropriate court</i>. In addition, be shall be liable to pay damages and compensation for the minerals removed, extracted, and disposed of. In the case of associations, partnerships, or corporations, the president and each of the directors thereof shall be responsible for the acts committed by such association, corporation, or partnership. (Emphasis supplied) </blockquote>The CA's position that the respondent may be totally absolved on account of his good faithâi.e., that the respondent only authorized the extraction and transport of the minerals in order to implement bona fide projects of his municipality, and that there were already requests for the renewal of the municipality's gratuitous permitsâis not right. Good faith is not anathema to a finding of liability for simple misconduct. Thus, in <i>Faeldonea v. CSC</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> We held that while a postmaster's good faith and honest intentions when committing a protocol violation did not render him liable for the offense of grave misconduct,<i> the same did not excuse him from being found guilty of simple misconduct</i>:<br><blockquote>There is no doubt that petitioner's conduct was improper because he deviated from the normal procedure of delivering the letter to the addressee unopened. The question is whether his conduct amounted to "grave misconduct," which has been defined as "a flagrantly or shamefully wrong or improper conduct."<br><br>. . . .<br><br>In the instant case, the Court finds that petitioner's lack of ill or selfish motives in depositing the check for Efren's death benefits in the account of the Philippine Postal Corporation does not amount to grave misconduct.<br><br>. . . .<br><br><i>However, the Court finds that petitioner cannot be completely exonerated for the acts complained of. As Postmaster, petitioner is charged with the duty of preserving the privacy of communication and correspondence, particularly the integrity of the postal system. He is, likewise, expected to set a good example to his subordinates in the office. This he failed to do when he took matters into his own hands and deposited the check in the account of the Philippine Postal Corporation to settle Efren's obligations, instead of giving the check to Merced, the intended recipient thereof, and urging her to pay her late husband's debts. Petitioner is thus held liable for the less grave offense of simple misconduct</i>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis supplied, citations omitted) </blockquote>Hence, like the postmaster in<i> Faeldonea</i>, the respondent ought to remain administratively accountable for his transgression of the law despite his good faith. Verily, We must reinstate the ruling of the OMB anent the administrative liability of the respondent.<br><br><b>ACCORDINGLY</b>, the instant Petition is<b> GRANTED</b>. The Decision dated March 13, 2019 and the Resolution dated October 2, 2019 of the Court of Appeals in CA-G.R. SP No. 09439 are<b> REVERSED</b> and<b> SET ASIDE</b>.<br><br>Respondent Avelino Gungob, Sr. is found<b> GUILTY</b> of<b> SIMPLE MISCONDUCT</b> and is hereby meted the penalty of<b> SUSPENSION WITHOUT PAY</b> for three months together with the concomitant accessory penalties.<br><br>In the event that the penalty of suspension can no longer be enforced due to respondent Avelino J. Gungob, Sr.'s separation from the service, such penalty shall be converted into a<b> FINE</b> in the amount equivalent to the respondent's salary for three months which may be deducted from his retirement benefits, accrued leave credits, or any receivables from his office.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda,</i> and <i>Marquez, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 33-41. The March 13, 2019 Decision in CA-G.R. SP No. 09439 was penned by Associate Justice Dorothy P. Montejo-Gonzaga and concurred in by Associate Justices Gabriel T. Ingles and Edward B. Contreras of the Nineteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 132-134. The October 2, 2019 Resolution in CA-G.R. SP No. 09439 was penned by Associate Justice Dorothy P. Montejo-Gonzaga and concurred in by Associate Justices Gabriel T. Ingles and Carlito B. Calpatura of the Special Former Nineteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 34-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 59-67. The February 9, 2015 Joint Resolution in OMB-V-C-09-0425-I and OMB-V-A-09-0416-I was signed by Graft Investigation and Prosecution Officer I Blesilda T. Ouano and approved by Ombudsman Conchita Carpio-Morales.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>See</i> <i>id</i>. at 61-64, 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>See</i> <i>id</i>. at 64-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 68-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 74-77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 43-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 33-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 135-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 132-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>See</i> <b>Soriano v. Soriano</b>, 558 Phil. 627, 642 (2007) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 558 Phil. 627 (2007) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 642.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> 860 Phil. 351 (2019) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 359.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>See</i> <i>id</i>. at 142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <i>id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>See</i> <i>id</i>. at 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 508 Phil. 569 (2005) [Per J. Carpio, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 579-580.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>See</i> <i>rollo</i>, p. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 435 Phil. 410 (2002) [Per J. Kapunan, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 414, 416-417.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

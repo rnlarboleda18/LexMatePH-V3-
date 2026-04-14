@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 268461 - REPUBLIC PHILIPPINES, OF THE PETITIONER, VS. ST. AUGUSTINE REALTY AND DEVELOPMENT CORPORATION, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '3ae4bf5aa69f24e8f0189cf953349cbf' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70173' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 268461, April 07, 2025 ]</H2>
+			<H3>REPUBLIC PHILIPPINES, OF THE PETITIONER, VS. ST. AUGUSTINE REALTY AND DEVELOPMENT CORPORATION, RESPONDENT.<BR><BR>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated July 28, 2023, of the Court of Appeals <b>(CA)</b> in CA-G.R. CV No. 115979. The CA denied the appeal of petitioner, through the Office of the Solicitor General <b>(OSG)</b>, and affirmed the Decision,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 9, 2020, of Branch 82, Regional Trial Court <b>(RTC)</b>, Malolos, Bulacan, in LRC No. P-46-2018, which granted the Petition for Cancellation of Encumbrance Inscribed on Transfer Certificates of Title <b>(TCT)</b> Nos. 039-2015005913, 039-2015005914, 039-2015005915, 039-2015005916, 039-2015005917, 039-2015005918, 039-2015005919, 039-2015005920, 039-2015005921, and 039-2016014452.<br><br><center><b><i>The Facts</i></b></center><br>St. Augustine Realty and Development Corporation <b>(SARDC)</b> is a corporation established under the laws of the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> It is the legal, absolute, and registered owner of several parcels of land totaling approximately 1,641 square meters, situated in Barangay Malamig, Bustos, Bulacan.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> These properties are covered by TCT Nos, 039-2015005913, 039- 2015005914, 039-2015005915, 039-2015005916, 039-2015005917, 039- 2015005918, 039-2015005919, 039-2015005920, 039-2015005921, and 039- 2016014452 (<b>subject titles</b>).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>The subject titles were derived from TCT No. RT-73496 (T-34599), which underwent administrative reconstitution at the Registry of Deeds of the Province of Bulacan, with approval granted on July 20, 2004.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> No claims or interest were made regarding TCT No. RT-73496 (T-34599).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>As a result, on June 1, 2018, SARDC initiated a Petition for Cancellation of Encumbrance before the RTC, seeking the removal of the encumbrance annotated on the aforementioned TCTs, in accordance with Sections 7 and 9 of Republic Act No. 26 or An Act Providing a Special Procedure for the Reconstitution of Torrens Certificate of Title Lost or Destroyed.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>The Regional Trial Court, on March 9, 2020, granted the Petition. The disposition reads:<br><blockquote>WHEREFORE, the Register of Deeds of the Province of Bulacan, Guiguinto Branch, is hereby ordered to cancel, upon payment of the required legal fees, the encumbrance annotated on the third page of the <b>TRANSFER CERTIFICATE OF TITLE NOS. 039-2015005913, 039- 2015005914, 039-2015005915, 039-2015005916, 039-2015005917, 039- 2015005918, 039-2015005919, 039-2015005920, 039-2015005921, and 039-2016014452</b> registered under the name of <b>ST. AUGUSTINE REALTY AND DEVELOPMENT CORPORATION</b> pursuant to the provisions of [Section] 7 of [Republic Act] No. 26, otherwise known as <i>"[A]n Act Providing [a] Special Procedure for the Reconstitution of Torrens Certificate of Title Lost or Destroyed".</i><br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (Emphasis in the original)</blockquote>The RTC determined that the encumbrance uniformly annotated on the subject titles originated from TCT No. RT-73496 (T-34599), which was administratively reconstituted on July 30, 2004, as confirmed by a Certification issued by the Registry of Deeds for the Province of Bulacan, Guiguinto, Bulacan, dated July 31, 2018.[2] The RTC found the Petition to be properly supported by the evidence presented, particularly the fact that the two-year period specified under Section 7 of Republic Act No. 26 had already lapsed on July 30, 2006, with no claims or interests made by any party during that time.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>The OSG disagreed with the findings of the RTC and subsequently filed an appeal with the CA.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>The OSG argued that the RTC lacked jurisdiction over the case due to non-compliance with Section 9 of Republic Act No. 26.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Specifically, the RTC failed to ensure the publication of the Petition twice in consecutive issues of the Official Gazette and its posting in designated locations on specific dates.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The OSG contended that since the cancellation of an encumbrance is an in rem proceeding, proper publication and posting are essential to confer jurisdiction on the court.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>The CA denied the appeal, the dispositive portion of which reads:<br><blockquote><b>WHEREFORE,</b> the present appeal is DENIED. The March 9, 2020 Decision of [Branch 82, Regional Trial Court, Malolos, Bulacan,] is AFFIRMED.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original)</blockquote>The CA ruled that, upon reviewing the entire Section 9 of Republic Act No. 26, it is clear that, as a general rule, a registered owner who seeks to remove an encumbrance from a reconstituted title must file a Petition with the RTC.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> This process requires compliance with the mandatory requirements outlined in the first part of Section 9 of Republic Act No. 26.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> However, if the registered owner files the Petition more than two years after the reconstitution of the title, and no claims or interests have been made by any party during that time, the mandatory requirements are dispensed with.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The OSG, before this Court, filed a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> under Rule 45 of the Rules of Court, arguing that the CA erred in holding that the RTC was vested with jurisdiction, despite the failure to comply with the strict requirements of Section 9 of Republic Act No. 26.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><b><i>The Issue</i></b></center><br>In order to remove the encumbrance annotated through an administrative reconstitution of title pursuant to Section 7 of Republic Act No. 26, can the mandatory jurisdictional requirements of publication and posting under Section 9 be dispensed with if the registered owner files the petition more than two years after the title's administrative reconstitution and no claims or interests have been raised by any party during that period?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Petition is without merit.<br><br>Section 1 10<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> of Presidential Decree No. 1529,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> as amended by Republic Act No. 6732,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> provides for two ways to reconstitute a certificate of title: <i>first,</i> administrative reconstitution, which is available only in cases of substantial loss or destruction of the original certificate of title due to <i>force majeure</i> as determined by the Administrator of the Land Registration Authority and requires that the number of lost or damaged certificates of title must be at least 10%, and in no case less than 500 certificates of title, of the total certificates of title held by the Office of the Register of Deeds;<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> and second, judicial reconstitution following the procedures outlined in Republic Act No. 26, which may be availed of when the original certificate of title is lost or destroyed in the office of the Register of Deeds, regardless of the cause, and does not require the conditions set for in administrative reconstitution of a certificate of title.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>For certificates of title reconstituted administratively, any existing rights or interest in the property are protected by annotating an encumbrance on the reconstituted title, as outlined in Section 7 and Section 8 of Republic Act No. 26,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> which state:<br><blockquote>Section 7. Reconstituted certificates of title shall have the same validity and legal effect as the originals thereof: <i>Provided, however,</i> That <i>certificates of title reconstituted extrajudicially,</i> in the manner stated in sections five and six hereof, shall be without prejudice to any party whose right or interest in the property was duly noted in the original, at the time it was lost or destroyed, but entry or notation of which has not been made on the reconstituted certificate of title. <i>This reservation shall be noted as an encumbrance on the reconstituted certificate of title.</i><br><br>Section 8. <i>Any person whose right or interest was duly noted in the original of a certificate of title, at the time it was lost or destroyed, but does not appear so noted on the reconstituted certificate of title, which is subject to the reservation provided in the preceding section,</i> may, while such reservation subsists, file a petition with the proper Court of First Instance for the annotation of such right or interest on said reconstituted certificate of title, and the court, after notice and hearing, shall determine the merits of the petition and render such judgment as justice and equity may require. The petition shall state the number of the reconstituted certificate of title and the nature, as well as a description, of the right or interest claimed. (Emphasis supplied)</blockquote>To remove the encumbrance annotated in an administratively reconstituted certificate of title pursuant to Section 7 of Republic Act No. 26, Section 9 provides:<br><blockquote>Section 9. A registered owner desiring to have his reconstituted certificate of title freed from the encumbrance mentioned in section seven of this Act, may file a petition to that end with the proper Court of First Instance, giving his reason or reasons thereof. A similar petition may, likewise, be filed by a mortgagee, lessees, or other lien holder whose interest is annotated in the reconstituted certificate of title. Thereupon, the court shall cause a notice of the petition to be published, at the expense of the petitioner, twice in successive issues of the <i>Official Gazette,</i> and to be posted on the main entrance of the provincial building and of the municipal building of the municipality or city in which the land lies, at least thirty days prior to the date of hearing, and after hearing, shall determine the petition and render such judgment as justice and equity may require. The notice shall specify, among other things, the number of the certificate of title, the name of the registered owner, the names of the interested parties appearing in the reconstituted certificate of title, the location of the property, and the date on which all persons having an interest in the property must appear and file such claim as they may have. The petitioner shall, at the hearing, submit proof of the publication and posting of the notice: <i>Provided, however, That after the expiration of two years from the date of the reconstitution of a certificate of title, if no petition has been filed within that period under the preceding section, the court shall, on motion ex parte by the registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the incumbrance mentioned in section seven hereof</i>. (Emphasis supplied)</blockquote>The OSG is correct in saying that a petition for cancellation of an encumbrance in a certificate of title is a proceeding <i>in rem.</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> In a proceeding <i>in rem,</i> jurisdiction over the res or the subject matter is required.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Jurisdiction over the res is acquired either (1) by the seizure of the property under legal process, whereby it is brought into actual custody of the law;<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> or (2) <i>as a result of the institution of legal proceedings, in which the power of the court is recognized and made effective</i><sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In order for a court to acquire jurisdiction over the <i>res</i> in a petition for cancellation of an encumbrance made on a certificate of title pursuant to Section 7 of Republic Act No. 26, Section 9 mandates the publication of the notice of the petition twice in successive issues of the Official Gazette and the posting of the notice of the petition at the main entrance of the provincial building and of the municipal building of the municipality or city where the property is located at least 30 days prior to the date of the hearing. However, the RTC and the CA are correct in pointing out that the proviso in Section 9 admits an exception.<br><br>A thorough reading of Section 9 shows that, as a general rule, a registered owner who seeks to remove the encumbrance made on their administratively reconstituted title pursuant to Section 7 of Republic Act No. 26 must submit a petition to the RTC. To initiate this, the registered owner must comply with the mandatory jurisdictional requirements outlined in the first part of Section 9 of Republic Act No. 26. However, if the petition is filed more than two years after the administrative reconstitution of the title, and no claim or interests have been made by other parties, the mandatory jurisdictional requirements of posting and publication provided for in Section 9 are no longer necessary. In fact, the law provides that "the court shall, on motion <i>ex parte</i> by the registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the encumbrance mentioned in section seven hereof." Therefore, after the lapse of the two-year period, only an <i>ex parte</i> motion is necessary to cancel an encumbrance under Section 9. Publication and posting are no longer required. The reason for this distinction is clear: the law already gave sufficient time and opportunity for anyone with a claim to raise the same during the two-year period. There must be finality and stability in our titles at some point. That is the whole essence of the Torrens System.<br><br>A fundamental principle in statutory construction is that when the law is clear and unambiguous, there is no need for construction or interpretation - only application.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Here, as the provisions are clear, plain, and free from ambiguity, they must be applied according to their plain meaning, without the need for further interpretation.<br><br>In this case, the certificates of title were administratively reconstituted on July 30, 2004. The said two-year period is deemed to have lapsed on July 20, 2006. Clearly, the petition to cancel the encumbrance was filed after the two-year period lapsed. Hence, no publication or posting was necessary.<br><br><b>ACCORDINGLY,</b> the Petition for Review on <i>Certiorari</i> is <b>DENIED.</b> The Decision, dated July 28, 2023, of the Court of Appeals in CA-G.R. CV No. 115979, is <b>AFFIRMED.</b><br><br><b>SO ORDERED.</b><br><br><i>Gaerlan, and Dimaampao, JJ.,</i> concur.<br><i>Caguioa, J., (Chairperson),</i> See Concurring.<br><i>Inting, J.,</i> On official business.<br><br><br><hr width="60%" size="1" noshade="" align="LEFT"><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1] </sup><i>Rollo,</i> pp. 10-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2] </sup><i>Id.</i> at 30-38. Penned by Associate Justice Alfonso C. Ruiz II and concurred in by Associate Justices Ronaldo Roberto B. Martin and Bonifacio S. Pascua of the Special Fourth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3] </sup>Id. at 39-42. Penned by Presiding Judge Maria Maruja P. Narvaiza-Mendoza.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4] </sup><i>Id.</i> at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10] </sup><i>Id.</i> at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11] </sup><i>Id.</i> at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13] </sup><i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17] </sup><i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18] </sup><b>Id.</b> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21] </sup><i>Id.</i> at 10-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22] </sup><i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23] </sup>Presidential Decree No. 1529, sec. 110 states:<br><br>Section 110. <i>Reconstitution of Lost or Destroyed Original of Torrens Title.</i> - Original copies of certificates of titles lost or destroyed in the office of the Register of Deeds as well as liens and encumbrances affecting the lands covered by such titles shall be reconstituted judicially in accordance with the procedure prescribed in Republic Act No. 26 insofar as not inconsistent with this Decree. The procedure relative to administrative reconstitution of lost or destroyed certificate prescribed in said Act may be availed of only in case of substantial loss or destruction of land titles due to fire, flood[,] or other <i>force majeure</i> as determined by the Administrator of the Land Registration Authority: <i>Provided,</i> That the number of certificates of titles lost or damaged should be at least [10%] of the total number in the possession of the Office of the Register of Deeds: <i>Provided, further,</i> That in no case shall the number of certificates of titles lost or damaged be less than [500].<br><br>Notice of all hearings of the petition for judicial reconstitution shall be furnished the Register of Deeds of the place where the land is situated and to the Administrator of the Land Registration Authority. No order or judgment ordering the reconstitution of a certificate of title shall become final until the lapse of <sup style="COLOR: RGB(255, 0, 0);">[15] </sup>days from receipt by the Register of Deeds and by the Administrator of the Land Registration Authority of a notice of such order or judgment without any appeal having been filed by any such officials.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24] </sup>Presidential Decree No. 1529 (1978), Amending and Codifying the Law Relative to Registration of Property and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25] </sup>Republic Act No. 6732 (1989), An Act Allowing Administrative Reconstitution of Original Copies of Certificates of Titles Lost or Destroyed Due to Fire, Flood, and Other <i>Force Majeure,</i> Amending for the Purpose Section One Hundred Ten of Presidential Decree Numbered Fifteen Twenty-Nine and Section Five of Republic Act Numbered Twenty-Six.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26] </sup>Republic Act No. 6732 (1989), sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28] </sup>Republic Act No. 26 (1946), An Act Providing a Special Procedure for the Reconstitution of Torrens Certificates of Title Lost or Destroyed.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29] </sup><i>Rollo,</i> pp. 24-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30] </sup><i>San Pedro v. Ong et al,</i> 590 Phil. 781, 793-795 (2008) [Per J. Chico-Nazario, Third Division], <i>citing Alba v. Court of Appeals,</i> 503 Phil. 451, 505-506 (2005) [Per J. Ynares-Santiago, First Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[31] </sup><i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32] </sup><i>Id.</i> (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[33] </sup>See <i>Dubongco v. Commission on Audit,</i> 848 Phil. 367, 378 (2019) [Per J. Reyes, Jr., <i>En Banc</i>].<br><br><br><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>CONCURRING OPINION</b></center><br><br><b>CAGUIOA, <i>J</i>.:</b><br><br>The <i>ponencia</i> in the above-captioned case denies the petition and holds that when a title is reconstituted administratively, the general reservation that is required to be annotated on the reconstituted title pursuant to Section 7<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of Republic Act No. 26,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> may be removed without the need of publication and posting, if the petition for such removal is filed more than two years after the date of the reconstitution and no petition has in the meantime been filed by any interested party to annotate such omitted right or interest.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>I concur with the <i>ponencia</i> and find it opportune to expound on the relevant provisions of Republic Act No. 26 and its diminished relevance given the current electronic titling system adopted in the country.<br><br><b><i>The purpose of the mandatory<br>encumbrance under Section 7 of<br>Republic Act No. 26 and how it may be<br>removed</i></b><br><br>Section 7 of Republic Act No. 26 provides that the extrajudicial (or administrative) reconstitution of a title shall not prejudice "any party whose right or interest in the property was duly noted in the original, at the time it was lost or destroyed, but entry or notation of which has not been made on the reconstituted certificate of title. This reservation shall be noted as an encumbrance on the reconstituted certificate of title."<br><br>Evidently, this reservation is a mandatory encumbrance that acts as a safeguard to protect rights or interests in the property that were recorded in the original title at the time of loss but do not appear in the reconstituted title for one reason or another. The reservation apprises the world that there may be extant rights and interests over the property that are not reflected in the reconstituted title.<br><br>Under Section 8<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Republic Act No. 26, any person whose right or interest was annotated in the original but was omitted in the reconstituted title may, during the subsistence of the reservation in Section 7, petition the court to annotate such right on the reconstituted title. This, of course, is without prejudice to the operation of prescription under the Civil Code. Indeed, Section 8 does not extend the prescriptive period for actions founded on rights or interests that are omitted in the reconstituted title; rather, it merely urges lienholders to assert their rights and protect their own interest by allowing the subsequent annotation of their omitted right or interest.<br><br>Section 9<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of Republic Act No. 26 provides the procedure on how the registered owner or a lienholder may cause the removal of the reservation from the reconstituted title. The general rule is that there must be compliance with the publication and posting requirements stated in Section 9. In particular, upon the filing of the petition, the court shall issue a notice of hearing which shall direct all persons who have any interest in the property to appear and file such claim or interest at the said hearing. The notice shall be published twice in successive issues of the Official Gazette, and shall be posted at the provincial and municipal buildings of the municipality or city where the land is located for at least 30 days prior to the date of the hearing.<br><br>As an exception, Section 9 provides that if two years have already lapsed since the date of the reconstitution of the title and no petition under Section 8 has been filed, the court shall, upon an <i>ex parte</i> motion, order the register of deeds to cancel the reservation. As correctly observed in the <i>ponencia,</i> since the manner of removal is merely through an <i>ex parte</i> motion, then there is no more need for publication and posting. This is because the law had already afforded sufficient time and opportunity to interested persons to assert their omitted interest.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Notably, the Republic Act No. 26 encumbrance functions similarly to the two-year lien under Section 4, Rule 74 of the Rules of Civil Procedure which protects heirs, creditors, or other claimants who were unduly deprived of their lawful participation in extrajudicially or summarily settled estates:<br><blockquote>SEC. 4. <i>Liability of distributees and estate.</i> â If it shall appear at any time within two (2) years after the settlement and distribution of an estate in accordance with the provisions of either of the first two sections of this rule, that an heir or other person has been unduly deprived of his lawful participation in the estate, such heir or such other person may compel the settlement of the estate in the courts in the manner hereinafter provided for the purpose of satisfying such lawful participation. And if within the same time of two (2) years, it shall appear that there are debts outstanding against the estate which have not been paid, or that an heir or other person has been unduly deprived of his lawful participation payable in money, the court having jurisdiction of the estate may, by order for that purpose, after hearing, settle the amount of such debts or lawful participation and order how much and in what manner each distributee shall contribute in the payment thereof, and may issue execution, if circumstances require, against the bond provided in the preceding section or against the real estate belonging to the deceased, or both. <b>Such bond and such real estate shall remain charged with a liability to creditors, heirs, or other persons for the full period of two (2) years after such distribution,</b> notwithstanding any transfers of real estate that may have been made. (Emphasis supplied)</blockquote>The above safeguard, however, is likewise limitedâomitted or impaired rights must be asserted within two years. After such period, the protective mantle afforded by Section 4, Rule 74 is lifted, leaving subsequent transferees clear of dormant claims. The procedure for the cancellation of a Rule 74 lien is provided in Section 86 of Presidential Decree No. 1529:<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><blockquote>SEC. 86. <i>Extrajudicial settlement of estate.</i> â When a deed of extrajudicial settlement has been duly registered, the Register of Deeds shall annotate on the proper title the two-year lien mentioned in Section 4 of Rule 74 of the Rules of Court. <b>Upon the expiration of the two-year period and presentation of a verified petition by the registered heirs, devisees or legatees or any other party in interest that no claim or claims of any creditor, heir or other person exist, the Register of Deeds shall cancel the two-year lien noted on the title without the necessity of a court order.</b> The verified petition shall be entered in the Primary Entry Book and a memorandum thereof made on the title. (Emphasis supplied)</blockquote>Whereas Republic Act No. 26 requires a motion and judicial action, the cancellation of an annotation under Rule 74 may proceed by verified petition alone. In both instances, nonetheless, the lapse of the two-year period signals that the mandatory annotation in a certificate of title may already be cancelled upon motion or petition.<br><br>The two-year reservation periods under Republic Act No. 26 and Rule 74 underscore a common policy objective: both provisions impose a clear, time-bound mechanism for asserting omitted rights. By providing a limitation to the protection afforded by the mandatory liens, both legal frameworks strike a deliberate balance between recognizing excluded claims and promoting finality in registered land transactions.<br><br>In the present case, Transfer Certificate of Title (TCT) No. RT-73496 (T-34599) was administratively reconstituted on July 30, 20048 and the required reservation was annotated thereon pursuant to Section 7. When respondent St. Augustine Realty and Development Corporation filed its Petition for Cancellation of Encumbrance with the Regional Trial Court (RTC) on June 1, 2018, the two-year period under Section 9 had already lapsed without any claim or interest being asserted by any person pursuant to Section 8. Applying the exception in Section 9, there is no need for the RTC to comply with the publication and posting requirements before cancelling the said reservation.<br><br><b><i>Modernization through electronic titling<br>is gradually diminishing the need for<br>reconstitution under Republic Act No.<br>26</i></b><br><br>I observe, however, that the relevance of the foregoing provisions of Republic Act No. 26 has been diminished by the ongoing modernization efforts of the Land Registration Authority (LRA).<br><br>As I discussed in my Concurring Opinion in <i>Republic v. Bella,</i><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> the original scope of Republic Act No. 26âi.e., the reconstitution of lost or destroyed certificates of titleâhas been narrowed by Section 110<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> of Presidential Decree No. 1529, as amended by Republic Act No. 6732<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> and by the LRA's shift to a fully digital land records system under the <i>Land Titling Computerization Project</i> (LTCP). Under the <i>Title Upgrade Program embodied in LRA Circular Nos. 001-16</i><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> and <i>02-2017,</i><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> the LRA seeks to accelerate the phase-out of manually-issued or physical original certificates of titles by requiring their conversion into eTitles as a condition for processing certain transactions.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Under this framework, titles subject of annotation-type transactions, i.e., voluntary transactions for interests less than ownership, shall first be subject to conversion to eTitles before annotations are processed:<br><blockquote>SECTION 1.3 Voluntary transactions on manually-issued titles that are not yet converted into eTitles after such period shall no longer be accepted for processing in LRA and its Registries of Deeds, and must undergo conversion into eTitles prior to transaction processing.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></blockquote>By requiring the prior conversion of manually-issued or physical copies of titles into eTitles before any annotation-type transaction may be processed, the LRA accelerated the transition to a fully electronic registry. This directive ensures that even non-transfer transactions serve as a trigger point for eTitling, thereby reinforcing the system-wide shift toward digital land records.<br><br>The LRA's digital transformation efforts are further complemented by new operational tools and updated workflows, including: (i) an automated self-service system for requesting certified true copies;<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (ii) allowing registers of deed to <i>motu proprio</i> initiate the digitization and cataloging of manually-issued titles in preparation for eventual eTitle conversion;<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> and (iii) the issuance of joint administrative guidelines with the Department of Agrarian Reform governing the issuance of individual eTitles and the computerized and electronic annotation of agrarian reform conditions under collective certificates of land ownership awards.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Taken altogether, these reforms underscore the LRA's broader goal: establishing a digital infrastructure that ensures all original registry copies of titlesâand the annotations they bearâcan no longer be lost, altered, or omitted due to physical risks. All certified true copies of titles will also be generated from a centralized electronic source record, and therefore, will consistently reflect all valid encumbrances annotated on a title.<br><br>As recognized in <i>Spouses Manalese v. The Estate of Spouses Ferreras,</i><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> the advent of computerized and electronic titles means that there may no longer be physical original certificates of title and transfer certificates of title in the registry as previously understood under Presidential Decree No. 1529:<br><blockquote>With computerized and electronic titles, the Court understands that there may no longer be a physical original certificate of titleâthe one referred to in Sections 39 and 40 of PD 1529, regarding the Original Certificate of Title and Section 43, regarding the Transfer Certificate of Title, or the "government copy" as it is referred to at present in a Memorandum issued by LRAâwhich is to be kept by the Register of Deeds. The said original certificate of title is now in digital form stored in the LRA Computerized System being maintained by the Land Registration Systems, Inc. (LARES). Pursuant to the said LRA Memorandum, a copy of the digitized original certificate of title may be obtained from the Register of Deeds and this copy generated from the LRA Computerized System, which is called as an electronic title or "eTitle," is now being referred to as computerized title or "eTitle." Only the owner's duplicate certificate of title is issued by the Register of Deeds in physical form.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></blockquote>With this changing landscape in the land registration, the scope of reconstitution under Republic Act No. 26, as amended by Presidential Decree No. 1529,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> continues to narrow steadily, now applying only in cases where the original registry copy has yet to be converted to an eTitle. However, the <i>judicial</i> replacement of lost owner's duplicate certificates, which is still issued by the register of deeds in physical form, remains governed by a separate process under Section 109 of Presidential Decree No. 1529.<br><br>All told, the move towards a purely digitalized registration of land titles and related transactions is gradually displacing the operational premise of Republic Act No. 26. It is hoped that reconstitution of titles in the registryâwhether judicial or administrativeâwill no longer be necessary once all certificates of title exist in digital form within the LRA's secure and backed-up system. Indeed, if this digital shift is successful, titles would be insulated from the vulnerabilities that warrant reconstitution.<br><br>In sum, I concur that the Section 7 reservation may be removed without complying with the publication and posting requirements, consistent with the plain language of Section 9 of Republic Act No. 26.<br><br>Accordingly, I <b>CONCUR</b> with the <i>ponencia</i> and vote to <b>DENY</b> the Petition. The RTC did not err in ordering the cancellation of the Section 7 reservation.<br><br><br><hr width="60%" size="1" noshade="" align="LEFT"><sup style="COLOR: RGB(255, 0, 0);">[1] </sup>Republic Act No. 26 (1946), sec. 7 provides:<br><blockquote>SECTION 7. Reconstituted certificates of title shall have the same validity and legal effect as the originals thereof: <i>Provided, however,</i> That certificates of title reconstituted extrajudicially, in the manner stated in sections five and six hereof, shall be without prejudice to any party whose right or interest in the property was duly noted in the original, at the time it was lost or destroyed, but entry or notation of which has not been made on the reconstituted certificate of title. This reservation shall be noted as an encumbrance on the reconstituted certificate of title.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[2] </sup>Republic Act No. 26 (1946), An Act Providing a Special Procedure for the Reconstitution of Torrens Certificates of Title Lost or Destroyed.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3] </sup><i>Ponencia,</i> pp. 6-7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4] </sup>Republic Act No. 26 (1946), sec. 8 provides:<br><blockquote>SECTION 8. Any person whose right or interest was duly noted in the original of a certificate of title, at the time it was lost or destroyed, but does not appear so noted on the reconstituted certificate of title, which is subject to the reservation provided in the preceding section, may, while such reservation subsists, file a petition with the proper Court of First Instance for the annotation of such right or interest on said reconstituted certificate of title, and the court, after notice and hearing, shall determine the merits of the petition and render such judgment as justice and equity may require. The petition shall state the number of the reconstituted certificate of title and the nature, as well as a description, of the right or interest claimed.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[5] </sup><i>Id.,</i> sec. 9 provides:<br><blockquote>SECTION 9. A registered owner desiring to have his reconstituted certificate of title freed from the encumbrance mentioned in section seven of this Act, may file a petition to that end with the proper Court of First Instance, giving his reason or reasons therefor. A similar petition may, likewise, be filed by a mortgagee, lessees or other lien holder whose interest is annotated in the reconstituted certificate of title. Thereupon, the court shall cause a notice of the petition to be published, at the expense of the petitioner, twice in successive issues of the <i>Official Gazette,</i> and to be posted on the main entrance of the provincial building and of the municipal building of the municipality or city in which the land lies, at least thirty days prior to the date of hearing, and after hearing, shall determine the petition and render such judgment as justice and equity may require. The notice shall specify, among other things, the number of the certificate of title, the name of the registered owner, the names of the interested parties appearing in the reconstituted certificate of title, the location of the property, and the date on which all persons having an interest in the property must appear and file such claim as they may have. The petitioner shall, at the hearing, submit proof of the publication and posting of the notice: <i>Provided, however,</i> That after the expiration of two years from the date of the reconstitution of a certificate of title, if no petition has been filed within that period under the preceding section, the court shall, on motion <i>ex parte</i> by the registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the incumbrance mentioned in section seven hereof.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[6] </sup><i>See ponencia,</i> p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7] </sup>Presidential Decree No. 1529 (1978). Amending and Codifying the Laws Relative to Registration of Property and for Other Purposes, otherwise known as the "Property Registration Decree".<br><br><sup style="COLOR: RGB(255, 0, 0);">[8] </sup><i>Ponencia,</i> p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9] </sup>G.R. No. 260831, February 26, 2025 [Per J. Singh, Third Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[10] </sup>Presidential Decree No. 1529 (1978), sec. 110, as amended by Republic Act No. 6732 (1989), sec. 1, provides:<br><blockquote>Sec. 110. <i>Reconstitution of Lost or Destroyed Original of Torrens Title.</i> â Original copies of certificates of titles lost or destroyed in the offices of Register of Deeds as well as liens and encumbrances affecting the lands covered by such titles shall be reconstituted judicially in accordance with the procedure prescribed in Republic Act No. 26 insofar as not inconsistent with this Decree. The procedure relative to <b>administrative reconstitution of lost or destroyed certificate prescribed in said Act may be availed of only in case of substantial loss or destruction of land titles due to fire, flood or other <i>force majeure</i> as determined by the Administrator of the Land Registration Authority:</b> <i>Provided,</i> That the number of certificates of titles lost or damaged should be at least ten percent (10%) of the total number in the possession of the Office of the Register of Deeds: <i>Provided, further,</i> That in no case shall the number of certificates of titles lost or damaged be less than five hundred (500).<br><br>Notice of all hearings of.the petition for judicial reconstitution shall be furnished the Register of Deeds of the place where the land is situated and to the Administrator of the Land Registration Authority. No order or judgment ordering the reconstitution of a certificate of title shall become final until the lapse of fifteen (15) days from receipt by the Register of Deeds and by the Administrator of the Land Registration Authority of a notice of such order or judgment without any appeal having been filed by any such officials. (Emphasis supplied)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[11] </sup>Republic Act No. 6732 (1989), An Act Allowing Administrative Reconstitution of Original Copies of Certificates of Titles Lost or Destroyed Due to Fire, Flood and Other Force Majeure, Amending for the Purpose Section One Hundred Ten of Presidential Decree Numbered" Fifteen Twenty-Nine and Section Five of Republic Act Numbered Twenty-Six.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12] </sup><i>See</i> LRA Circular No. 001-16, Program for the Upgrade of all Manually-Issued Titles Within a 3-Year Period (January 26, 2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[13] </sup>LRA Circular. No. 02-2017, Addendum to LRA Circular No. 02-2016 with Subject: Program for the Upgrade of AH Manually-Issued Titles within a 3-Year Period (January 6, 2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[14] </sup><i>J.</i> Caguioa, Concurring Opinion in Republic v. Bella, G R. No. 260831, February 26,2025, pp. 6-8. This pinpoint citation refers to the copy of the Concurring Opinion uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15] </sup><i>Supra</i> note 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16] </sup><i>See</i> LRA. Circular No. 28-17, Implementation of the LRA System for Automated Client Entry for Certified True Copies of Certificates of Title ("ACE-CTC") (September 20, 2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[17] </sup><i>See</i> LRA Circular No. 15-2020, Implementation of the LRA Title Ready Program ("TRP") (August 18, 2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[18] </sup><i>See</i> Joint DAR-LRA Administrative Order No. 02, s. 2022, Registration and Annotation Requirements for Support to Parcelization of Land for Individual Titling and Annotation of the Conditions of the Order of Conversion (May 24, 2022). <i>See also</i> Joint DAR-LRA Administrative Order No. 01, s. 2024, Rules Governing the Re-Issuance of Owner's Duplicate Copy and Correction of Entries in the Collective Certificate of Land Ownership Award (CCLOA) Covered by Support to Parcelization of Lands for Individual Titling (SPLIT) Project (April 2,2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[19] </sup>G.R. No. 254046, November 25, 2024 [Per J. Caguioa, Third Division],<br><br><sup style="COLOR: RGB(255, 0, 0);">[20] </sup><i>Id.</i> at 35-36. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21] </sup><i>Supra</i> note 10.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,5 +1,35 @@
 import { describe, it, expect } from 'vitest';
-import { extractRccLeadingShortTitle, repairRccListMidItemLineBreaks, stripLegacyCodexArticleRunIn } from '../utils/codalMarkdown';
+import {
+    collapseBlankLinesInPipeTables,
+    extractRccLeadingShortTitle,
+    repairRccBrokenIncorporatorPipeHeaders,
+    repairRccListMidItemLineBreaks,
+    shieldGfmTables,
+    stripLegacyCodexArticleRunIn,
+} from '../utils/codalMarkdown';
+
+describe('repairRccBrokenIncorporatorPipeHeaders', () => {
+    it('merges split single-pipe Name/Nationality/Residence lines before the separator row', () => {
+        const raw =
+            'Fifth: … follows:\n\n' +
+            '| Name\n' +
+            '| Nationality\n' +
+            '| Residence\n' +
+            '| ___ | ___ | ___ |\n' +
+            '| --- | --- | --- |\n' +
+            '| a | b | c |\n';
+        const out = repairRccBrokenIncorporatorPipeHeaders(raw);
+        expect(out).toContain('| Name | Nationality | Residence |');
+        expect(out).not.toMatch(/\|\s*Name\s*\n\|\s*Nationality/s);
+    });
+
+    it('restores year placeholder when stripped to "20 in the City"', () => {
+        const raw =
+            'IN WITNESS WHEREOF, we have hereunto signed these Articles, this ______ day of ________, 20 in the City/Municipality of ________.';
+        const out = repairRccBrokenIncorporatorPipeHeaders(raw);
+        expect(out).toContain('20____ in the City/Municipality');
+    });
+});
 
 describe('stripLegacyCodexArticleRunIn', () => {
     it('removes Article 1 run-in with embedded ## Book / ## Title blocks', () => {
@@ -24,6 +54,14 @@ describe('stripLegacyCodexArticleRunIn', () => {
     it('is a no-op for normal RCC body (no leading Article line)', () => {
         const raw = '_Title of the Code. -_ This Code shall be known as the "RCC".';
         expect(stripLegacyCodexArticleRunIn(raw, '1')).toBe(raw);
+    });
+
+    it('removes Section 3 run-in when legacy cache used Section label', () => {
+        const raw =
+            'Section 3. Classes of Corporations. - Corporations formed or organized under this Code may be stock or nonstock corporations.';
+        const out = stripLegacyCodexArticleRunIn(raw, '3');
+        expect(out).not.toMatch(/^Section\s+3\./i);
+        expect(out).toContain('Classes of Corporations');
     });
 });
 
@@ -70,6 +108,60 @@ describe('extractRccLeadingShortTitle', () => {
         const { lead, body } = extractRccLeadingShortTitle(raw);
         expect(lead).toBe('Form of Articles of Incorporation.');
         expect(body).toBe('Unless otherwise prescribed by special law, the articles of incorporation');
+    });
+});
+
+describe('collapseBlankLinesInPipeTables', () => {
+    it('removes blank lines between pipe rows so GFM stays one table block', () => {
+        const md = '| A | B |\n\n| --- | --- |\n| x | y |';
+        expect(collapseBlankLinesInPipeTables(md)).toBe('| A | B |\n| --- | --- |\n| x | y |');
+    });
+
+    it('keeps blank lines after the table (before prose)', () => {
+        const md = '| A | B |\n| --- | --- |\n\nNext paragraph.';
+        expect(collapseBlankLinesInPipeTables(md)).toBe('| A | B |\n| --- | --- |\n\nNext paragraph.');
+    });
+});
+
+describe('shieldGfmTables', () => {
+    const articleNodeEnumerationPreprocess = (s) =>
+        String(s)
+            .replace(/([a-zA-Z0-9.,;:!?])\s+(\[\s*\([a-zA-Z0-9]{1,3}\)\s*)/g, '$1\n\n$2')
+            .replace(/([a-zA-Z0-9.,;:!?])\s*\n\s*(\([a-zA-Z0-9]{1,3}\)\s+)/g, '$1\n\n$2')
+            .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, '$1\n\n$2')
+            .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, '$1\n\n$2')
+            .replace(
+                /([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi,
+                '$1\n\n$2',
+            );
+
+    it('keeps GFM tables intact through ArticleNode enumeration preprocessing', () => {
+        const md =
+            'Fifth: follow.\n\n' +
+            '| Name | Nationality | Residence |\n' +
+            '| --- | --- | --- |\n' +
+            '| a | b | c |\n\n' +
+            'Sixth: next.';
+        const { protectedText, restore } = shieldGfmTables(md);
+        expect(restore(articleNodeEnumerationPreprocess(protectedText))).toBe(md);
+    });
+
+    it('round-trips RCC Article 14 style multi-row table block', () => {
+        const table =
+            '| Name of Subscriber | Nationality | No. of Shares Subscribed | Amount Subscribed | Amount Paid |\n' +
+            '| --- | --- | --- | --- | --- |\n' +
+            '|  |  |  |  |  |\n' +
+            '|  |  |  |  |  |';
+        const md = `Intro line.\n\n${table}\n\nAfter table.`;
+        const { protectedText, restore } = shieldGfmTables(md);
+        expect(restore(protectedText)).toBe(md);
+    });
+
+    it('shields tables that had a blank line between header and separator (invalid GFM until collapsed)', () => {
+        const md = '| Name | Nat |\n\n| --- | --- |\n| a | b |';
+        const collapsed = collapseBlankLinesInPipeTables(md);
+        const { protectedText, restore } = shieldGfmTables(collapsed);
+        expect(restore(articleNodeEnumerationPreprocess(protectedText))).toBe(collapsed);
     });
 });
 
