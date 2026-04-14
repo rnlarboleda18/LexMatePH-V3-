@@ -221,14 +221,18 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             setTocFabPos(null);
             return;
         }
+        // Use anchor only for horizontal position — top is fixed below the chrome so
+        // the FAB doesn't move when the page scrolls.
         const r = el.getBoundingClientRect();
         const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
-        const minTop = gh ? gh.getBoundingClientRect().bottom + 8 : (window.innerWidth >= 768 ? 64 : 48);
+        const headerBottom = gh ? gh.getBoundingClientRect().bottom : (window.innerWidth >= 768 ? 64 : 48);
+        const filterEl = lexFilterChromeRef.current;
+        const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
         setTocFabPos({
             left: r.left,
-            top: Math.max(minTop, r.top),
+            top: Math.max(headerBottom, chromeBottom) + 8,
         });
-    }, [isSidebarOpen]);
+    }, [isSidebarOpen, lexFilterChromeRef]);
 
     useLayoutEffect(() => {
         if (loading || error || !data) return undefined;
