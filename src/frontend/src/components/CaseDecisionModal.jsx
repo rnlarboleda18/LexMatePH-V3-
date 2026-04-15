@@ -277,7 +277,7 @@ const isMobileDigestPdfDisabled = () =>
 
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const { getToken, isSignedIn } = useAuth();
-    const { canAccess, openUpgradeModal } = useSubscription();
+    const { canAccess, openUpgradeModal, loading: subscriptionLoading } = useSubscription();
     const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
@@ -425,6 +425,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             getToken,
             isSignedIn,
             canAccess,
+            subscriptionLoading,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
@@ -446,6 +447,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             getToken,
             isSignedIn,
             canAccess,
+            subscriptionLoading,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');

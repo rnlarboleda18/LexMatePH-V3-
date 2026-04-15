@@ -82,7 +82,14 @@ function barQuestionYearIdSort(a, b) {
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
-  const { showUpgradeModal, closeUpgradeModal, tier, canAccess, openUpgradeModal } = useSubscription();
+  const {
+    showUpgradeModal,
+    closeUpgradeModal,
+    tier,
+    canAccess,
+    openUpgradeModal,
+    loading: subscriptionLoading,
+  } = useSubscription();
   const { user } = useUser();
   const { getToken, isSignedIn } = useAuth();
 
@@ -110,6 +117,7 @@ function App() {
           getToken,
           isSignedIn,
           canAccess,
+          subscriptionLoading,
         });
         if (!usage.allowed) {
           notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
@@ -118,7 +126,7 @@ function App() {
         selectGlobalCase(next);
       })();
     },
-    [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess],
+    [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading],
   );
 
   const tryOpenBarQuestion = useCallback(
@@ -129,6 +137,7 @@ function App() {
           getToken,
           isSignedIn,
           canAccess,
+          subscriptionLoading,
         });
         if (!usage.allowed) {
           notifyUsageBlocked(usage, openUpgradeModal, 'bar_question_unlimited');
@@ -137,7 +146,7 @@ function App() {
         setSelectedQuestion(q);
       })();
     },
-    [getToken, isSignedIn, openUpgradeModal, canAccess],
+    [getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading],
   );
 
   // --- URL ↔ mode mapping ---
@@ -442,6 +451,7 @@ function App() {
         getToken,
         isSignedIn,
         canAccess,
+        subscriptionLoading,
       });
       if (!usage.allowed) {
         notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');
@@ -466,6 +476,7 @@ function App() {
           getToken,
           isSignedIn,
           canAccess,
+          subscriptionLoading,
         });
         if (!usage.allowed) {
           notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');

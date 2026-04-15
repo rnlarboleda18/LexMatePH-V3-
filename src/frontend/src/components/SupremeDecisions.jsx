@@ -488,7 +488,7 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     const { getToken, isSignedIn } = useAuth();
-    const { openUpgradeModal, canAccess } = useSubscription();
+    const { openUpgradeModal, canAccess, loading: subscriptionLoading } = useSubscription();
 
     // Seed from ?q= so direct links and page-refreshes restore the search.
     const [searchTerm, setSearchTerm] = useState(() =>
@@ -862,6 +862,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 getToken,
                 isSignedIn,
                 canAccess,
+                subscriptionLoading,
             });
             if (!usage.allowed) {
                 notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
@@ -878,6 +879,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             getToken,
             isSignedIn,
             canAccess,
+            subscriptionLoading,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
@@ -992,6 +994,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             getToken,
             isSignedIn,
             canAccess,
+            subscriptionLoading,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');

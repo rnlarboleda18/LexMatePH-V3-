@@ -11,6 +11,22 @@ import { TRACK_USAGE_FEATURE_TO_UNLIMITED } from '../context/SubscriptionContext
 
 const ANON_STORAGE_KEY = 'lexmate_anonymous_usage_id';
 
+/**
+ * Anonymous bucket resets each full page load (F5) when:
+ * - production/staging: `VITE_ANON_USAGE_PER_PAGELOAD=true` at build time, or
+ * - Vite dev: default on unless `VITE_DEV_ANON_USAGE_PER_RELOAD=false`.
+ */
+function anonIdPerPageLoad() {
+  try {
+    if (import.meta.env.VITE_ANON_USAGE_PER_PAGELOAD === 'true') return true;
+    return import.meta.env.DEV && import.meta.env.VITE_DEV_ANON_USAGE_PER_RELOAD !== 'false';
+  } catch (_) {
+    return false;
+  }
+}
+
+let _pageLoadAnonId = null;
+
 /** @returns {boolean} */
 function isUuidString(s) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(s || ''));
@@ -18,9 +34,17 @@ function isUuidString(s) {
 
 /**
  * Stable anonymous id for free-tier usage (localStorage, then sessionStorage, then in-memory).
+ * Per-reload id when {@link anonIdPerPageLoad} is true (dev by default, or any build with
+ * `VITE_ANON_USAGE_PER_PAGELOAD=true`).
  * @returns {string|null}
  */
 export function getOrCreateAnonymousUsageId() {
+  if (anonIdPerPageLoad()) {
+    if (!_pageLoadAnonId && typeof crypto !== 'undefined' && crypto.randomUUID) {
+      _pageLoadAnonId = crypto.randomUUID();
+    }
+    return _pageLoadAnonId;
+  }
   try {
     let id = localStorage.getItem(ANON_STORAGE_KEY);
     if (id && isUuidString(id)) return id;
@@ -57,9 +81,36 @@ function getEphemeralAnonymousUsageId() {
  * @param {() => Promise<string|null|undefined>} opts.getToken Clerk session token (Bearer)
  * @param {boolean|undefined} opts.isSignedIn — Bearer only when strictly `true`
  * @param {(feature: string) => boolean} [opts.canAccess] — when provided, Amicus+ skips the network round-trip
- * @returns {Promise<{ allowed: boolean, skipped?: boolean, unlimited?: boolean, degraded?: boolean, blockedByLimit?: boolean, verifyFailed?: boolean, used?: number, limit?: number, anonymous?: boolean, status?: number }>}
+ * @param {boolean} [opts.subscriptionLoading] — when true with signed-in Clerk, skips metering until tier is known (avoids paid users hitting DB as “free” during cold start)
+ * @returns {Promise<{ allowed: boolean, skipped?: boolean, unlimited?: boolean, degraded?: boolean, blockedByLimit?: boolean, verifyFailed?: boolean, used?: number, limit?: number, anonymous?: boolean, status?: number, reason?: string }>}
  */
-export async function consumeFreeTierUsage({ feature, getToken, isSignedIn, canAccess }) {
+export async function consumeFreeTierUsage({
+  feature,
+  getToken,
+  isSignedIn,
+  canAccess,
+  subscriptionLoading = false,
+}) {
+  try {
+    const skipDev =
+      import.meta.env.DEV && import.meta.env.VITE_DEV_SKIP_FREE_TIER_TRACKING === 'true';
+    const skipAny = import.meta.env.VITE_SKIP_FREE_TIER_TRACKING === 'true';
+    if (skipDev || skipAny) {
+      return {
+        allowed: true,
+        skipped: true,
+        unlimited: true,
+        reason: skipAny ? 'skip_free_tier_tracking' : 'dev_skip_tracking',
+      };
+    }
+  } catch (_) {
+    /* ignore */
+  }
+
+  if (isSignedIn === true && subscriptionLoading) {
+    return { allowed: true, skipped: true, reason: 'subscription_loading' };
+  }
+
   const unlimitedKey = TRACK_USAGE_FEATURE_TO_UNLIMITED[feature];
   if (typeof canAccess === 'function' && unlimitedKey && canAccess(unlimitedKey)) {
     return { allowed: true, skipped: true, unlimited: true };

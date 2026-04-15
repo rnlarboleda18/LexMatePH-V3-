@@ -124,6 +124,19 @@ describe('consumeFreeTierUsage', () => {
       expect.objectContaining({ allowed: true, skipped: true, unlimited: true }),
     );
   });
+
+  it('skips track-usage while subscription is loading for signed-in users', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    const r = await consumeFreeTierUsage({
+      feature: 'case_digest',
+      getToken: async () => 'session-jwt',
+      isSignedIn: true,
+      canAccess: () => false,
+      subscriptionLoading: true,
+    });
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(r).toEqual(expect.objectContaining({ allowed: true, skipped: true, reason: 'subscription_loading' }));
+  });
 });
 
 describe('getOrCreateAnonymousUsageId', () => {
