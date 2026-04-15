@@ -192,7 +192,7 @@ const Updates = ({ isDarkMode = false }) => {
 
         <div className="relative mx-auto max-w-6xl space-y-10">
           {/* Hero */}
-          <header className="relative overflow-hidden rounded-[2rem] border border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
+          <header className="relative overflow-hidden rounded-lg border border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
             <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/30 to-fuchsia-500/20 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -227,7 +227,7 @@ const Updates = ({ isDarkMode = false }) => {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
             {/* Main column — unified feed */}
             <div className="space-y-8 lg:col-span-7">
-              <section className="relative overflow-hidden rounded-[2rem] border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
+              <section className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/35">
@@ -360,7 +360,7 @@ const Updates = ({ isDarkMode = false }) => {
 
             {/* Rail */}
             <aside className="space-y-6 lg:col-span-5">
-              <div className="relative overflow-hidden rounded-[2rem] border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
+              <div className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
                 <div className="mb-6 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                     <Gavel className="h-5 w-5" />
@@ -438,7 +438,7 @@ const Updates = ({ isDarkMode = false }) => {
                 })}
               </div>
 
-              <div className="overflow-hidden rounded-[2rem] border border-lex bg-white shadow-xl dark:border-lex dark:bg-zinc-900">
+              <div className="overflow-hidden rounded-lg border border-lex bg-white shadow-xl dark:border-lex dark:bg-zinc-900">
                 <div className="border-b border-lex bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-6 text-white dark:border-lex dark:from-slate-950 dark:to-black">
                   <div className="mb-2 flex items-center gap-2">
                     <Twitter className="h-5 w-5 text-sky-400" />
@@ -494,7 +494,7 @@ const Updates = ({ isDarkMode = false }) => {
                 </div>
               </div>
 
-              <div className="relative overflow-hidden rounded-[2rem] border border-amber-400/30 bg-gradient-to-br from-amber-500 via-amber-400 to-orange-500 p-6 text-white shadow-2xl">
+              <div className="relative overflow-hidden rounded-lg border border-amber-400/30 bg-gradient-to-br from-amber-500 via-amber-400 to-orange-500 p-6 text-white shadow-2xl">
                 <div className="pointer-events-none absolute -right-8 -top-8 opacity-25">
                   <Zap className="h-24 w-24 rotate-12" />
                 </div>

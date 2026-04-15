@@ -155,7 +155,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             <div className={`${LG_NEST} p-4 sm:p-5`}>
                                 <div className="flex items-end justify-center gap-3 sm:gap-4">
                                     <div
-                                        className="relative w-[36%] max-w-[140px] rounded-[1.15rem] border-[3px] border-slate-600/90 bg-slate-800 p-1 shadow-inner sm:max-w-[155px]"
+                                        className="relative w-[36%] max-w-[140px] rounded-lg border-[3px] border-slate-600/90 bg-slate-800 p-1 shadow-inner sm:max-w-[155px]"
                                         style={{ aspectRatio: '9 / 19' }}
                                     >
                                         <div className="flex h-full flex-col overflow-hidden rounded-lg bg-gradient-to-b from-slate-100 to-slate-200">

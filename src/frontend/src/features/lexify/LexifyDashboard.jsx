@@ -136,7 +136,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
         <FeaturePageShell>
             <PurpleGlassAmbient className="pb-4">
             {/* Dashboard only: full-screen exam UI lives in LexifyApp (other exam states). */}
-            <div className="flex flex-col overflow-hidden rounded-[2rem] border border-lex bg-white font-sans text-gray-900 shadow-lg dark:border-lex dark:bg-zinc-900 dark:text-gray-100">
+            <div className="flex flex-col overflow-hidden rounded-lg border border-lex bg-white font-sans text-gray-900 shadow-lg dark:border-lex dark:bg-zinc-900 dark:text-gray-100">
             <div className="flex h-12 shrink-0 select-none items-center justify-between border-b border-lex bg-neutral-50 px-4 sm:px-6 dark:border-lex dark:bg-zinc-950">
                 <div className="relative z-50 flex items-center gap-3">
                     <button type="button" onClick={() => setShowMenu(!showMenu)} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
@@ -209,7 +209,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
                 {activeTab === 'exams' ? (
                     <>
-                        <div className="relative mb-8 overflow-hidden rounded-[1.75rem] border border-lex bg-white px-5 py-8 text-center shadow-md dark:border-lex dark:bg-zinc-900 sm:px-8">
+                        <div className="relative mb-8 overflow-hidden rounded-lg border border-lex bg-white px-5 py-8 text-center shadow-md dark:border-lex dark:bg-zinc-900 sm:px-8">
                             <div className="pointer-events-none absolute -right-8 -top-12 h-36 w-36 rounded-full bg-gradient-to-br from-purple-400/30 to-fuchsia-500/20 blur-2xl" aria-hidden />
                             <div className="pointer-events-none absolute bottom-0 left-1/4 h-24 w-48 rounded-full bg-violet-400/15 blur-2xl" aria-hidden />
                             <div className="relative mx-auto inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-purple-800 shadow-sm dark:border-lex dark:bg-zinc-800/90 dark:text-purple-200">

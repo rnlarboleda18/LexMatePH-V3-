@@ -219,7 +219,7 @@ const PlaylistDrawer = () => {
             <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto p-6">
                 {displayPlaylist.length === 0 ? (
                     <div className="flex h-full flex-col items-center justify-center space-y-6 text-center">
-                        <div className="rounded-[40px] border border-lex bg-slate-50 p-6 dark:border-lex dark:bg-zinc-800/60">
+                        <div className="rounded-lg border border-lex bg-slate-50 p-6 dark:border-lex dark:bg-zinc-800/60">
                             <ListMusic size={64} className="text-gray-300 dark:text-zinc-600" />
                         </div>
                         <div className="space-y-2">

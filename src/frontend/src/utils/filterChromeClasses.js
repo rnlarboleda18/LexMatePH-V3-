@@ -3,9 +3,9 @@
  * in dark mode, with violet only for focus rings and the active sidebar rail.
  * Bar subject pills & digest doctrine colors stay in `colors.js`.
  *
- * Container borders use `border-lex` / `border-lex-strong` (slate greys from
- * `index.css` --lex-border*; 2px when paired with `border` / `border-t` / etc.
- * — see @layer utilities there).
+ * Container borders use `border-lex` / `border-lex-strong` (global slate/zinc
+ * greys in `index.css` --lex-border*; 2px when paired with `border` / `border-t`
+ * / etc. — see @layer utilities there).
  */
 
 /** Default structural border color (use with `border`, `border-b`, etc.) */

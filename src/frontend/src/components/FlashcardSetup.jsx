@@ -37,8 +37,8 @@ const FlashcardSetup = ({
             <div
                 className={
                     embedded
-                        ? 'relative flex w-full max-w-full min-w-0 flex-col rounded-[1.75rem] border border-lex bg-white p-5 shadow-lg dark:border-lex dark:bg-zinc-900 sm:p-6'
-                        : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-[1.75rem] border border-lex bg-white shadow-xl animate-in zoom-in-95 duration-200 dark:border-lex dark:bg-zinc-900'
+                        ? 'relative flex w-full max-w-full min-w-0 flex-col rounded-lg border border-lex bg-white p-5 shadow-lg dark:border-lex dark:bg-zinc-900 sm:p-6'
+                        : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-lex bg-white shadow-xl animate-in zoom-in-95 duration-200 dark:border-lex dark:bg-zinc-900'
                 }
             >
                 {(conceptsLoading || conceptsError || deckError) && (

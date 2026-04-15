@@ -35,6 +35,13 @@ export default {
                 sans: ['Outfit', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
                 display: ['"Playfair Display"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
             },
+            /** Panel / card radius — match Bar question cards (`rounded-lg` = 0.5rem) app-wide */
+            borderRadius: {
+                md: '0.5rem',
+                xl: '0.5rem',
+                '2xl': '0.5rem',
+                '3xl': '0.5rem',
+            },
         },
     },
     plugins: [
