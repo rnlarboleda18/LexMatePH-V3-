@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { apiUrl } from '../utils/apiUrl';
+import CardVioletInnerWash from './CardVioletInnerWash';
 
 /** Short-lived in-memory cache so reopening the same article avoids a round-trip. */
 const JURIS_SIDEBAR_CACHE_MS = 90_000;
@@ -177,8 +178,10 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                     return (
                         <div
                             key={group.caseId}
-                            className="bg-white/90 dark:bg-slate-800/70 rounded-lg border-2 border-slate-300/75 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow group overflow-hidden"
+                            className="group relative overflow-hidden rounded-lg border-2 border-slate-300/75 bg-white/90 shadow-sm transition-shadow hover:shadow-md dark:border-white/5 dark:bg-slate-800/70"
                         >
+                            <CardVioletInnerWash />
+                            <div className="relative z-[1]">
                             {/* Card Header: Case Info (Clickable for whole Digest) */}
                             <div
                                 onClick={() => onSelectRatio && onSelectRatio(group.caseId, firstLink.ratio_index)}
@@ -240,6 +243,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                                         </div>
                                     </div>
                                 ))}
+                            </div>
                             </div>
                         </div>
                     );

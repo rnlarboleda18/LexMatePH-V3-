@@ -14,6 +14,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import LandingPage from './components/LandingPage';
 import FeaturePageShell from './components/FeaturePageShell';
 import PurpleGlassAmbient from './components/PurpleGlassAmbient';
+import CardVioletInnerWash from './components/CardVioletInnerWash';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
@@ -692,7 +693,7 @@ function App() {
                     )
                   )}
                   {effectiveMode === 'browse_bar' && (
-                    <PurpleGlassAmbient className="min-h-screen w-full min-w-0 pb-6 font-sans text-gray-900 dark:text-gray-100">
+                    <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-6 font-sans text-gray-900 dark:text-gray-100">
                       {/* Search + filter — scrolls with page below xl; fixed at xl+ */}
                       <div
                         ref={barFilterChromeRef}
@@ -771,7 +772,9 @@ function App() {
                         className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                         style={xlFixedChrome ? { paddingTop: `${barFilterChromeHeight + 12}px` } : undefined}
                       >
-                      <div className="relative min-w-0 w-full rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
+                      <div className="relative min-w-0 w-full overflow-hidden rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
+                      <CardVioletInnerWash />
+                      <div className="relative z-[1] min-w-0">
                       {/* Page description */}
                       {!loading && (
                         <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
@@ -907,6 +910,7 @@ function App() {
                           </div>
                         );
                       })()}
+                      </div>
                       </div>{/* bar shell */}
                       </main>
                     </PurpleGlassAmbient>

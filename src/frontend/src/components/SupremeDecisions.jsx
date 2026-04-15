@@ -17,6 +17,7 @@ import { useSubscription } from '../context/SubscriptionContext';
 import { useDebounce } from '../hooks/useDebounce';
 import { HighlightText } from '../utils/highlight';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
+import CardVioletInnerWash from './CardVioletInnerWash';
 import {
     FILTER_CHROME_SURFACE,
     FILTER_SELECT,
@@ -1078,7 +1079,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     return (
-        <PurpleGlassAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
+        <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
             {/* Search + optional custom filters — in-flow below xl; fixed under app header at xl+ (xl:left-52 with persistent sidebar) */}
             <div
                 ref={filterChromeRef}
@@ -1261,7 +1262,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     </div>
                 )}
 
-                <div className="relative min-w-0 w-full rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
+                <div className="relative min-w-0 w-full overflow-hidden rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
+                <CardVioletInnerWash />
+                <div className="relative z-[1] min-w-0">
                 {hasInitialLoaded && !fetchError && (
                     <p className="mb-4 text-sm leading-relaxed text-neutral-800 dark:text-zinc-200">
                         <span className="font-semibold text-black dark:text-zinc-50">Supreme Court decisions</span>{' '}
@@ -1307,8 +1310,10 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className="group min-w-0 overflow-hidden rounded-lg border border-lex bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900"
+                                className="group relative min-w-0 overflow-hidden rounded-lg border border-lex bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900"
                             >
+                                <CardVioletInnerWash />
+                                <div className="relative z-[1] min-w-0">
                                 <div
                                     role="button"
                                     tabIndex={0}
@@ -1358,8 +1363,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     </button>
                                     {detailsOpen && (
                                         <div className="border-t border-lex px-3 pb-3">
-                                            <div className="mt-2 rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
-                                                <dl className="space-y-2.5">
+                                            <div className="relative mt-2 overflow-hidden rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
+                                                <CardVioletInnerWash />
+                                                <dl className="relative z-[1] space-y-2.5">
                                                     {decision.significance_category && (
                                                         <div className="flex gap-2.5">
                                                             <Landmark
@@ -1518,6 +1524,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                         </p>
                                     </div>
                                 </div>
+                                </div>
                             </div>
                         );
                     })}
@@ -1555,6 +1562,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
                     </div>
                 )}
+                </div>
                 </div>{/* content shell */}
             </main>
 

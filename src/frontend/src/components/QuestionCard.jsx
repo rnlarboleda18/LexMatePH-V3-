@@ -4,6 +4,7 @@ import { normalizeBarQuestionSubject } from '../utils/subjectNormalize';
 import { SubjectIcon } from '../utils/subjectIcons';
 
 import { HighlightText } from '../utils/highlight';
+import CardVioletInnerWash from './CardVioletInnerWash';
 
 const QuestionCard = ({ question, onClick, searchQuery }) => {
     const subjectKey = normalizeBarQuestionSubject(question) || question.subject;
@@ -15,6 +16,8 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
         <div
             className="group relative flex h-[15rem] flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900"
         >
+            <CardVioletInnerWash />
+            <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
             {/* Header: ID - Subject (Year) */}
             <div className={`mb-2 flex items-center gap-2 ${textColor}`}>
                 <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-lex-strong bg-slate-50 dark:border-lex-strong dark:bg-zinc-800">
@@ -49,6 +52,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
             >
                 View Details
             </button>
+            </div>
         </div>
     );
 };

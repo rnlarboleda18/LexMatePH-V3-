@@ -16,6 +16,7 @@ import Fuse from 'fuse.js';
 import { useDebounce } from '../hooks/useDebounce';
 import { HighlightText } from '../utils/highlight';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
+import CardVioletInnerWash from './CardVioletInnerWash';
 import {
     FILTER_CHROME_SURFACE,
     FILTER_SELECT,
@@ -854,6 +855,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                 className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg dark:border-lex dark:bg-zinc-900"
                 style={{ left: tocFixedLeft, ...fixedSidePanelStyle }}
             >
+                <CardVioletInnerWash />
+                <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
                 <div className="flex-none border-b border-lex bg-slate-50 p-4 pb-0 dark:border-lex dark:bg-zinc-800/80">
                     <div className="mb-4 flex items-center justify-between">
                         <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
@@ -881,6 +884,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         </div>
                     )}
                 </div>
+                </div>
             </div>,
             document.body
         );
@@ -894,6 +898,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                 className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg dark:border-lex dark:bg-zinc-900"
                 style={{ left: jurisFixedLeft, ...fixedSidePanelStyle }}
             >
+                <CardVioletInnerWash />
+                <div className="relative z-[1] flex min-h-0 min-w-0 flex-1 flex-col">
                 {activeJurisArticle && (
                     <LexCodeJurisSidebar
                         articleNum={activeJurisArticle}
@@ -941,7 +947,9 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                     key={idx}
                                     className="group relative overflow-hidden rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-lex dark:bg-zinc-800"
                                 >
-                                    <div className="absolute left-0 top-0 h-full w-1 bg-rose-500/80" />
+                                    <CardVioletInnerWash />
+                                    <div className="absolute left-0 top-0 z-[2] h-full w-1 bg-rose-500/80" />
+                                    <div className="relative z-[1]">
                                     <div className="mb-2 flex items-start justify-between pl-2">
                                         <h4 className="pr-2 text-sm font-bold leading-tight text-gray-900 dark:text-gray-100">{am.amendment_law}</h4>
                                         <span className="whitespace-nowrap rounded border border-rose-100 px-1.5 py-0.5 text-[10px] font-medium text-rose-600 dark:border-rose-900/30 dark:bg-rose-900/20 dark:text-rose-400">
@@ -967,18 +975,20 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                             </a>
                                         </div>
                                     )}
+                                    </div>
                                 </div>
                             ))}
                         </div>
                     </div>
                 )}
+                </div>
             </div>,
             document.body
         );
 
     return (
         <>
-        <PurpleGlassAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
+        <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
             {/* Codal picker + search — scrolls with page below xl; fixed at xl+ */}
             <div
                 ref={lexFilterChromeRef}
@@ -1068,7 +1078,9 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
                     onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
                 >
-                    <div className="flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg animate-in slide-in-from-left duration-300 dark:border-lex dark:bg-zinc-900">
+                    <div className="relative flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg animate-in slide-in-from-left duration-300 dark:border-lex dark:bg-zinc-900">
+                        <CardVioletInnerWash />
+                        <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
                         <div className="flex items-center justify-between border-b border-lex bg-slate-50 p-4 dark:border-lex dark:bg-zinc-800/80">
                             <span className="font-bold">Contents</span>
                             <button onClick={() => setIsSidebarOpen(false)}><X size={20} /></button>
@@ -1082,6 +1094,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                     {tocData.children.map(node => <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />)}
                                 </div>
                             )}
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -1108,6 +1121,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         id="main-content"
                         className="relative flex min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-violet-200/65 bg-white/45 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/85 glass"
                     >
+                    <CardVioletInnerWash />
+                    <div className="relative z-[1] flex min-h-0 w-full min-w-0 flex-1 flex-col">
 
                     {/* Toolbar — codal title + subtitle */}
                     <div className="flex flex-col rounded-t-2xl border-b border-white/20 bg-white/60 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
@@ -1127,6 +1142,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
                     <div className="custom-scrollbar min-w-0 max-w-full px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]">
                         {renderMainContent()}
+                    </div>
                     </div>
                     </div>
                     </div>
@@ -1285,6 +1301,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             }
                             onClick={(e) => e.stopPropagation()}
                         >
+                            <CardVioletInnerWash />
+                            <div className="relative z-[1] flex min-h-0 min-w-0 flex-1 flex-col">
                             {activeJurisArticle && (
                                 <div className="flex min-h-0 min-w-0 flex-1 flex-col">
                                     <LexCodeJurisSidebar
@@ -1332,6 +1350,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                     </div>
                                 </div>
                             )}
+                            </div>
                         </div>
                     </div>,
                     document.body

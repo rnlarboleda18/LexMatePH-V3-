@@ -435,33 +435,9 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   font-size: 16px;
 }
 
-/* Global Flat Header System: All headers match body size; light mode = black type */
-h1, h2, h3, h4, h5, h6,
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  font-size: 16px !important;
-  line-height: inherit !important;
-  font-weight: 400 !important;
-  color: #000000;
-}
-
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6,
-.dark .prose h1,
-.dark .prose h2,
-.dark .prose h3,
-.dark .prose h4 {
-  font-weight: 400 !important;
-  color: #fafafa;
-}
-
-/* Internal Markdown Headers are centered */
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  text-align: center !important;
-}
+/* Heading weight/size: use Tailwind utilities or @tailwindcss/typography defaults.
+   Avoid global h1–h6 { font-weight: 400 !important } — it overrides LexCode / LexCodeStream
+   (font-bold, font-extrabold) and other components. */
 
 /* 
    Manual Markdown List Styling 

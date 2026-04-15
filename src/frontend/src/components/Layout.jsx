@@ -145,7 +145,7 @@ const Layout = ({
                         </p>
                     </nav>
 
-                    <div className="relative z-10 flex shrink-0 items-center justify-end gap-1 md:gap-1.5">
+                    <div className="relative z-10 flex max-lg:ml-auto shrink-0 items-center justify-end gap-1 md:gap-1.5">
                         <button
                             onClick={toggleTheme}
                             type="button"
