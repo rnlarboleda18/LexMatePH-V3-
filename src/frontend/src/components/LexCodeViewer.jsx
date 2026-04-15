@@ -86,7 +86,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         'FC': { title: 'Family Code of the Philippines', subtitle: 'Executive Order No. 209, as amended' },
         'LABOR': { title: 'Labor Code of the Philippines', subtitle: 'Presidential Decree No. 442, as amended' },
         'ROC': { title: 'Rules of Court of the Philippines', subtitle: 'As amended, 2019' },
-        'RCC': { title: 'Revised Corporation Code of the Philippines', subtitle: 'Republic Act No. 11232, as amended' },
+        'RCC': { title: 'Revised Corporation Code of the Philippines', subtitle: 'Republic Act No. 11232' },
     };
     const codeKey = (shortName || '').toUpperCase();
     const codeTitle = codeTitleMap[codeKey]?.title || shortName || '';
@@ -1228,7 +1228,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     <button
                         type="button"
                         onClick={() => setIsSidebarOpen(true)}
-                        className="fixed z-[42] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
+                        /* z-[38]: above codal filter chrome (z-[30]), below Layout nav aside (z-40) */
+                        className="fixed z-[38] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
                         style={{ left: tocFabPos.left, top: tocFabPos.top }}
                         title="Table of contents"
                         aria-label="Open table of contents"
@@ -1243,7 +1244,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                 !isSidebarOpen &&
                 createPortal(
                     <div
-                        className="pointer-events-none fixed inset-x-0 z-[41] flex justify-center px-3 lg:hidden"
+                        className="pointer-events-none fixed inset-x-0 z-[37] flex justify-center px-3 lg:hidden"
                         style={{
                             bottom: 'calc(var(--player-height, 0px) + 0.5rem + env(safe-area-inset-bottom, 0px))',
                         }}

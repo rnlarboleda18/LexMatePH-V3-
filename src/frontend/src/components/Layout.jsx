@@ -203,22 +203,36 @@ const Layout = ({
                     document.body
                 )}
 
-            {/* Sidebar (Navigation Drawer) */}
-            {!hideAppChrome && (
-                <aside
-                    className={`fixed left-0 bottom-0 w-52 z-40 transform transition-transform duration-300 ease-in-out overflow-y-auto top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
-            ${SIDEBAR_ASIDE_SURFACE}
-            ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-            xl:translate-x-0 xl:block`}
-                    style={{ willChange: 'transform', filter: flashcardStudying ? 'blur(4px)' : 'none', transition: 'filter 0.3s ease' }}
-                >
-                    <div className="h-full flex flex-col pt-4 md:pt-8">
-                        {sidebarContent}
-                    </div>
-                </aside>
-            )}
+            {/* Sidebar + mobile scrim — portaled to document.body (same rationale as header) so fixed
+                z-40 stacks above LexCode TOC FAB and other body-level portals that only use z-[30]–z-[42]. */}
+            {!hideAppChrome &&
+                typeof document !== 'undefined' &&
+                createPortal(
+                    <div className={isDarkMode ? 'dark' : ''} data-lex-app-navigation>
+                        {isSidebarOpen && (
+                            <div
+                                className="fixed inset-0 z-[39] bg-black/50 xl:hidden"
+                                aria-hidden
+                                onClick={() => setIsSidebarOpen(false)}
+                            />
+                        )}
+                        <aside
+                            className={`fixed bottom-0 left-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out xl:block xl:translate-x-0 ${SIDEBAR_ASIDE_SURFACE} ${
+                                isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                            }`}
+                            style={{
+                                willChange: 'transform',
+                                filter: flashcardStudying ? 'blur(4px)' : 'none',
+                                transition: 'filter 0.3s ease',
+                            }}
+                        >
+                            <div className="flex h-full flex-col pt-4 md:pt-8">{sidebarContent}</div>
+                        </aside>
+                    </div>,
+                    document.body
+                )}
 
-            {/* Main Content Area — z-10 so mobile sidebar scrim can sit above and capture taps */}
+            {/* Main Content Area — z-10 so in-flow stacking stays predictable */}
             <main
                 className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]' : 'pt-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]'} min-h-screen
         ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
@@ -239,14 +253,6 @@ const Layout = ({
                 </div>
             </main>
 
-            {/* Mobile sidebar scrim: must be after <main> in DOM so it stacks above page content (z-35 < aside z-40 < header z-50) */}
-            {isSidebarOpen && !hideAppChrome && (
-                <div
-                    className="fixed inset-0 z-[35] bg-black/50 xl:hidden"
-                    aria-hidden
-                    onClick={() => setIsSidebarOpen(false)}
-                />
-            )}
             </div>
         </div>
     );

@@ -64,7 +64,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
         'LABOR': 'Presidential Decree No. 442, as amended',
         'FC': 'Executive Order No. 209, as amended',
         'ROC': 'As amended, 2019',
-        'RCC': 'Republic Act No. 11232, as amended',
+        'RCC': 'Republic Act No. 11232',
     };
     const docSubtitle = codeSubtitles[code.toUpperCase()] || null;
 
