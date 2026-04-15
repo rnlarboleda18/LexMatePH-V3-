@@ -556,7 +556,7 @@ function App() {
                     <AlertTriangle size={40} />
                   </div>
                   <div>
-                    <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-2 tracking-tight">Data Load Failed</h2>
+                    <h2 className="text-2xl font-black text-black dark:text-white mb-2 tracking-tight">Data Load Failed</h2>
                     <p className="text-sm text-gray-500 dark:text-gray-400 font-medium max-w-xs mx-auto">
                       {error}
                     </p>
@@ -643,7 +643,7 @@ function App() {
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
                     <div
-                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-violet-950/25 backdrop-blur-[2px] animate-in fade-in duration-200 md:!items-stretch dark:bg-black/40"
+                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-black/40 animate-in fade-in duration-200 md:!items-stretch dark:bg-black/50"
                       onClick={() => setFlashcardState('setup')}
                       role="presentation"
                     >
@@ -771,7 +771,7 @@ function App() {
                         className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                         style={xlFixedChrome ? { paddingTop: `${barFilterChromeHeight + 12}px` } : undefined}
                       >
-                      <div className="relative min-w-0 w-full rounded-[1.75rem] border-2 border-violet-200/60 bg-gradient-to-br from-white/70 via-violet-50/35 to-purple-100/30 p-5 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 sm:p-6">
+                      <div className="relative min-w-0 w-full rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
                       {/* Page description */}
                       {!loading && (
                         <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
@@ -786,7 +786,7 @@ function App() {
                       {showBarSuggestions && barSearchRect && typeof document !== 'undefined' &&
                         createPortal(
                           <div
-                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/98"
+                            className="fixed z-[200] max-h-72 overflow-y-auto rounded-lg border border-lex bg-white shadow-lg dark:bg-zinc-900"
                             style={{
                               top: barSearchRect.bottom + 4,
                               left: barSearchRect.left,
@@ -815,12 +815,12 @@ function App() {
                               }
                               return (
                                 <>
-                                  <div className="border-b border-gray-100 px-3 py-1.5 dark:border-white/10">
+                                  <div className="border-b border-lex px-3 py-1.5">
                                     <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                                       Top matches — click to open
                                     </span>
                                   </div>
-                                  <div className="divide-y divide-gray-100 dark:divide-white/5">
+                                  <div className="divide-y divide-lex">
                                     {hits.map((q) => (
                                       <button
                                         key={q.id}
@@ -829,9 +829,9 @@ function App() {
                                           setShowBarSuggestions(false);
                                           tryOpenBarQuestion(q);
                                         }}
-                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-zinc-800"
+                                        className="w-full px-3 py-2.5 text-left transition-colors hover:bg-neutral-100 dark:hover:bg-zinc-800"
                                       >
-                                        <p className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                        <p className="line-clamp-2 text-sm font-semibold text-black dark:text-gray-200">
                                           {q.question}
                                         </p>
                                         <p className="mt-0.5 text-[11px] text-gray-400 dark:text-gray-500">
@@ -884,7 +884,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage === 1}
-                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -898,7 +898,7 @@ function App() {
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
-                                className="flex items-center gap-2 rounded-lg border-2 border-violet-200/80 bg-white/90 px-4 py-2 text-sm font-medium text-gray-800 shadow-sm backdrop-blur-sm transition-colors hover:bg-white dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
                               >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -907,7 +907,7 @@ function App() {
                           </div>
                         );
                       })()}
-                      </div>{/* end glass layer */}
+                      </div>{/* bar shell */}
                       </main>
                     </PurpleGlassAmbient>
                   )}

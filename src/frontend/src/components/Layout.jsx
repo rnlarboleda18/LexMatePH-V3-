@@ -40,16 +40,13 @@ const Layout = ({
     }, [mode]);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-zinc-950 text-zinc-200' : 'bg-slate-100 text-slate-950 antialiased'}`}>
-            {/* Global Glassmorphism Background Orbs — GPU-composited, no external fetch */}
+        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-zinc-950 text-zinc-200' : 'bg-neutral-100 text-neutral-950 antialiased'}`}>
+            {/* Flat page background — no animated glass orbs */}
             <div
-                className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
-                style={{ contain: 'strict', filter: flashcardStudying ? 'blur(8px)' : 'none', transition: 'filter 0.3s ease' }}
-            >
-                <div className={`absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] animate-float ${isDarkMode ? 'bg-zinc-700 opacity-[0.12]' : 'bg-indigo-200 opacity-30'}`} style={{willChange:'transform'}}></div>
-                <div className={`absolute top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full filter blur-[80px] animate-float ${isDarkMode ? 'bg-zinc-600 opacity-[0.1]' : 'bg-purple-200 opacity-30'}`} style={{animationDelay: '1s', willChange:'transform'}}></div>
-                <div className={`absolute -bottom-[20%] left-[20%] w-[50%] h-[50%] rounded-full filter blur-[80px] animate-float ${isDarkMode ? 'bg-zinc-800 opacity-[0.08]' : 'bg-blue-200 opacity-20'}`} style={{animationDelay: '2s', willChange:'transform'}}></div>
-            </div>
+                className="fixed inset-0 z-0 bg-neutral-100 dark:bg-zinc-950"
+                style={{ filter: flashcardStudying ? 'blur(6px)' : 'none', transition: 'filter 0.3s ease' }}
+                aria-hidden
+            />
 
             {/* Flashcard blur overlay — removed; blur applied directly via filter on each element below */}
 
@@ -76,10 +73,10 @@ const Layout = ({
                         <button
                             type="button"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 transition-colors backdrop-blur-md ${
+                            className={`xl:hidden flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors backdrop-blur-md ${
                                 isDarkMode
                                     ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06] hover:bg-zinc-800 hover:text-white'
-                                    : 'border-violet-200/90 bg-white/45 text-violet-900 shadow-sm shadow-violet-200/20 ring-1 ring-inset ring-white/60 hover:bg-white/60 hover:text-violet-950'
+                                    : 'border-lex-strong bg-white text-black shadow-sm ring-1 ring-inset ring-neutral-200/80 hover:bg-neutral-50'
                             }`}
                             aria-label="Toggle Sidebar"
                         >
@@ -92,10 +89,10 @@ const Layout = ({
 
                         <div className="flex min-w-0 items-center gap-2 md:gap-2.5">
                             <div
-                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 backdrop-blur-md ${
+                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border backdrop-blur-md ${
                                     isDarkMode
                                         ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06]'
-                                        : 'border-violet-200/90 bg-white/45 text-violet-800 shadow-sm shadow-violet-200/20 ring-1 ring-inset ring-white/55'
+                                        : 'border-lex-strong bg-white text-black shadow-sm ring-1 ring-inset ring-neutral-200/80'
                                 }`}
                                 aria-hidden
                             >
@@ -106,14 +103,14 @@ const Layout = ({
                                     className={`select-none truncate font-semibold tracking-tight text-base sm:text-lg md:text-[1.125rem] ${
                                         isDarkMode
                                             ? 'text-zinc-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
-                                            : 'text-violet-950'
+                                            : 'text-black'
                                     }`}
                                 >
                                     LexMatePH
                                 </span>
                                 <span
-                                    className={`mt-0.5 hidden text-[10px] font-medium leading-tight tracking-tight sm:block sm:text-[11px] md:text-xs ${
-                                        isDarkMode ? 'text-zinc-400' : 'text-violet-800/80'
+                                    className={`mt-0.5 hidden text-[10px] font-semibold leading-tight tracking-tight sm:block sm:text-[11px] md:text-xs ${
+                                        isDarkMode ? 'text-zinc-400' : 'text-black'
                                     }`}
                                 >
                                     Your Law Companion
@@ -124,24 +121,24 @@ const Layout = ({
 
                     {/* Center links — flex-1 keeps spacing between brand and actions; wraps only on very narrow sm */}
                     <nav
-                        className="order-last hidden w-full min-w-0 justify-center border-t border-violet-200/60 px-1 pt-1.5 dark:border-zinc-800 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:border-t-0 sm:px-1 sm:pt-0 md:px-2"
+                        className="order-last hidden w-full min-w-0 justify-center border-t border-lex px-1 pt-1.5 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:border-t-0 sm:px-1 sm:pt-0 md:px-2"
                         aria-label="LexMatePH feature areas"
                     >
                         <p
                             className={`flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-center text-[10px] font-semibold leading-snug tracking-tight sm:text-[11px] md:text-xs lg:text-sm xl:text-[0.9375rem] ${
-                                isDarkMode ? 'text-zinc-300' : 'text-violet-900/90'
+                                isDarkMode ? 'text-zinc-300' : 'text-black'
                             }`}
                         >
                             <span className="whitespace-nowrap">Bar Questions</span>
-                            <span className="text-violet-500/55 dark:text-zinc-600" aria-hidden>
+                            <span className="text-neutral-400 dark:text-zinc-600" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">SC Decisions</span>
-                            <span className="text-violet-500/55 dark:text-zinc-600" aria-hidden>
+                            <span className="text-neutral-400 dark:text-zinc-600" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">Case Digests</span>
-                            <span className="text-violet-500/55 dark:text-zinc-600" aria-hidden>
+                            <span className="text-neutral-400 dark:text-zinc-600" aria-hidden>
                                 ·
                             </span>
                             <span className="whitespace-nowrap">Codals</span>
@@ -156,18 +153,18 @@ const Layout = ({
                             className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-medium transition-all duration-200 md:gap-2 md:px-2.5 md:py-1.5 md:text-base
                                 ${isDarkMode
                                     ? 'border border-transparent text-zinc-400 hover:border-zinc-700 hover:bg-zinc-800/80 hover:text-zinc-100'
-                                    : 'border-2 border-transparent text-violet-900/90 hover:border-violet-300/80 hover:bg-violet-100/90 hover:text-violet-950'
+                                    : 'border-2 border-transparent text-neutral-800 hover:border-lex-strong hover:bg-neutral-200/80 hover:text-neutral-950'
                                 }`}
                         >
                             {isDarkMode ? (
                                 <Sun size={17} className="shrink-0 text-amber-300 md:h-[18px] md:w-[18px]" />
                             ) : (
-                                <Moon size={17} className="shrink-0 text-violet-600 md:h-[18px] md:w-[18px]" />
+                                <Moon size={17} className="shrink-0 text-violet-700 md:h-[18px] md:w-[18px]" />
                             )}
                             <span className="hidden sm:inline">{isDarkMode ? 'Light' : 'Dark'}</span>
                         </button>
 
-                        <div className={`hidden sm:block h-4 w-px shrink-0 rounded-full md:h-5 ${isDarkMode ? 'bg-zinc-700' : 'bg-violet-300/70'}`} />
+                        <div className={`hidden sm:block h-4 w-px shrink-0 rounded-full md:h-5 ${isDarkMode ? 'bg-zinc-700' : 'bg-violet-200/80'}`} />
 
                         <div className="hidden items-center gap-1.5 md:flex">
                             <SignedIn>
@@ -184,7 +181,7 @@ const Layout = ({
                                     <SignInButton mode="modal">
                                         <button
                                             type="button"
-                                            className={`rounded-md px-2.5 py-1.5 text-sm font-semibold transition-all duration-200 md:px-3 md:text-[0.9375rem] ${isDarkMode ? 'text-zinc-300 hover:bg-zinc-800' : 'text-violet-800 hover:bg-violet-100/90'}`}
+                                            className={`rounded-md px-2.5 py-1.5 text-sm font-semibold transition-all duration-200 md:px-3 md:text-[0.9375rem] ${isDarkMode ? 'text-zinc-300 hover:bg-zinc-800' : 'text-black hover:bg-neutral-100'}`}
                                         >
                                             Log In
                                         </button>
@@ -192,7 +189,7 @@ const Layout = ({
                                     <SignUpButton mode="modal">
                                         <button
                                             type="button"
-                                            className="rounded-md bg-gradient-to-r from-violet-600 to-purple-700 px-2.5 py-1.5 text-sm font-semibold text-white shadow-md shadow-violet-900/25 transition-all duration-200 hover:opacity-95 md:px-3 md:text-[0.9375rem]"
+                                            className="rounded-md bg-gradient-to-r from-violet-800 to-purple-900 px-2.5 py-1.5 text-sm font-semibold text-white shadow-md shadow-violet-900/25 transition-all duration-200 hover:opacity-95 md:px-3 md:text-[0.9375rem]"
                                         >
                                             Sign Up
                                         </button>

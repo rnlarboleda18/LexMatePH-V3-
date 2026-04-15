@@ -192,16 +192,16 @@ const Updates = ({ isDarkMode = false }) => {
 
         <div className="relative mx-auto max-w-6xl space-y-10">
           {/* Hero */}
-          <header className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/55 px-6 py-10 shadow-[0_24px_80px_-24px_rgba(79,70,229,0.25)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/45 dark:shadow-[0_24px_80px_-24px_rgba(0,0,0,0.5)] sm:px-10">
+          <header className="relative overflow-hidden rounded-[2rem] border border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
             <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/30 to-fuchsia-500/20 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
               <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/60 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-600 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-indigo-300">
+                <div className="inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-600 shadow-sm dark:border-lex dark:bg-zinc-800/90 dark:text-indigo-300">
                   <Sparkles className="h-3.5 w-3.5" />
                   Live from the Court
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
                   Updates
                 </h1>
                 <p className="max-w-xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
@@ -215,7 +215,7 @@ const Updates = ({ isDarkMode = false }) => {
                 href="https://sc.judiciary.gov.ph/feed/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-white/60 bg-white/70 px-5 py-3 text-sm font-bold text-slate-800 shadow-lg backdrop-blur-md transition hover:border-indigo-300/60 hover:bg-white dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-lex bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-md transition hover:border-lex-strong hover:bg-neutral-50 dark:border-lex dark:bg-zinc-800/90 dark:text-white dark:hover:bg-zinc-800"
               >
                 <Rss className="h-4 w-4 text-indigo-500" />
                 RSS source
@@ -227,14 +227,14 @@ const Updates = ({ isDarkMode = false }) => {
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-8">
             {/* Main column — unified feed */}
             <div className="space-y-8 lg:col-span-7">
-              <section className="glass relative overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+              <section className="relative overflow-hidden rounded-[2rem] border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
                 <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/35">
                       <Rss className="h-6 w-6" />
                     </div>
                     <div>
-                      <h2 className="text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
+                      <h2 className="text-lg font-bold text-black dark:text-white sm:text-xl">
                         Judiciary pulse
                       </h2>
                       <p className="text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
@@ -242,7 +242,7 @@ const Updates = ({ isDarkMode = false }) => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-2 rounded-2xl border border-white/50 bg-white/40 p-1 backdrop-blur-md dark:border-white/10 dark:bg-slate-900/40">
+                  <div className="flex flex-wrap gap-2 rounded-2xl border border-lex bg-neutral-50 p-1 dark:border-lex dark:bg-zinc-800/80">
                     {FILTER_TABS.map((tab) => (
                       <button
                         key={tab.id}
@@ -261,7 +261,7 @@ const Updates = ({ isDarkMode = false }) => {
                 </div>
 
                 {/* Pinned Bar 2026 — curated, not RSS */}
-                <div className="mb-8 rounded-2xl border border-amber-200/50 bg-gradient-to-r from-amber-500/10 via-white/30 to-transparent p-4 backdrop-blur-sm dark:border-amber-500/20 dark:from-amber-500/10 dark:via-slate-900/20">
+                <div className="mb-8 rounded-2xl border border-lex bg-gradient-to-r from-amber-500/10 via-white to-transparent p-4 dark:border-lex dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-900">
                   <div className="mb-3 flex items-center gap-2 text-amber-900 dark:text-amber-200/90">
                     <Bookmark className="h-4 w-4 shrink-0" />
                     <span className="text-[11px] font-black uppercase tracking-widest">Bar 2026 · pinned</span>
@@ -273,7 +273,7 @@ const Updates = ({ isDarkMode = false }) => {
                         href={u.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-w-[200px] max-w-[260px] shrink-0 rounded-xl border border-white/60 bg-white/70 p-3 text-left shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:border-amber-300/60 dark:border-white/10 dark:bg-slate-900/50 dark:hover:border-amber-400/30"
+                        className="min-w-[200px] max-w-[260px] shrink-0 rounded-xl border border-lex bg-white p-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-lex-strong dark:border-lex dark:bg-zinc-800/90 dark:hover:border-lex-strong"
                       >
                         <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">{u.date}</p>
                         <p className="mt-1 line-clamp-2 text-xs font-bold text-slate-900 dark:text-white">{u.title}</p>
@@ -290,12 +290,12 @@ const Updates = ({ isDarkMode = false }) => {
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
                         key={i}
-                        className="h-24 animate-pulse rounded-2xl border border-white/40 bg-white/40 dark:border-white/5 dark:bg-slate-800/40"
+                        className="h-24 animate-pulse rounded-2xl border border-lex bg-neutral-100 dark:border-lex dark:bg-zinc-800/60"
                       />
                     ))}
                   </div>
                 ) : feedError && unifiedFeed.length === 0 ? (
-                  <div className="rounded-2xl border border-white/50 bg-white/50 p-8 text-center backdrop-blur-md dark:border-white/10 dark:bg-slate-900/40">
+                  <div className="rounded-2xl border border-lex bg-white p-8 text-center dark:border-lex dark:bg-zinc-900">
                     <p className="font-semibold text-slate-800 dark:text-slate-200">Could not load the live feed.</p>
                     <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Try the portal directly.</p>
                     <a
@@ -312,15 +312,15 @@ const Updates = ({ isDarkMode = false }) => {
                     No items in this filter.
                   </p>
                 ) : (
-                  <ul className="relative space-y-4 border-l border-indigo-200/60 pl-6 dark:border-indigo-500/20">
+                  <ul className="relative space-y-4 border-l border-lex pl-6 dark:border-lex">
                     {visibleFeed.map((item, idx) => (
                       <li key={`${item.link}-${idx}`} className="relative">
-                        <span className="absolute -left-[1.35rem] top-5 h-2.5 w-2.5 rounded-full border-2 border-white bg-indigo-500 shadow dark:border-slate-900 dark:bg-indigo-400" />
+                        <span className="absolute -left-[1.35rem] top-5 h-2.5 w-2.5 rounded-full border-2 border-lex bg-indigo-500 shadow dark:border-lex dark:bg-indigo-400" />
                         <a
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group block overflow-hidden rounded-2xl border border-white/60 bg-white/50 p-4 shadow-sm backdrop-blur-md transition hover:border-indigo-300/50 hover:bg-white/80 hover:shadow-lg dark:border-white/10 dark:bg-slate-900/35 dark:hover:border-indigo-400/30 dark:hover:bg-slate-900/55 sm:p-5"
+                          className="group block overflow-hidden rounded-2xl border border-lex bg-white p-4 shadow-sm transition hover:border-lex-strong hover:bg-neutral-50 hover:shadow-lg dark:border-lex dark:bg-zinc-800/80 dark:hover:border-lex-strong dark:hover:bg-zinc-800 sm:p-5"
                         >
                           <div className="mb-2 flex flex-wrap items-center gap-2">
                             {item._barHighlight ? (
@@ -360,13 +360,13 @@ const Updates = ({ isDarkMode = false }) => {
 
             {/* Rail */}
             <aside className="space-y-6 lg:col-span-5">
-              <div className="glass relative overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+              <div className="relative overflow-hidden rounded-[2rem] border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
                 <div className="mb-6 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                     <Gavel className="h-5 w-5" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white">Decision highlights</h2>
+                    <h2 className="text-lg font-bold text-black dark:text-white">Decision highlights</h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400">Official SC site · not LexMate digests</p>
                   </div>
                 </div>
@@ -385,7 +385,7 @@ const Updates = ({ isDarkMode = false }) => {
                         href={officialScDecisionUrl(decision)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block rounded-2xl border border-white/50 bg-white/45 p-4 backdrop-blur-md transition hover:border-indigo-300/50 hover:bg-white/70 dark:border-white/10 dark:bg-slate-900/40 dark:hover:bg-slate-900/60"
+                        className="block rounded-2xl border border-lex bg-white p-4 transition hover:border-lex-strong hover:bg-neutral-50 dark:border-lex dark:bg-zinc-800/90 dark:hover:bg-zinc-800"
                       >
                         <div className="mb-2 flex flex-wrap gap-2">
                           <span className="rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-white">
@@ -423,9 +423,9 @@ const Updates = ({ isDarkMode = false }) => {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group flex items-center gap-3 rounded-2xl border border-white/60 bg-gradient-to-br p-4 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-lg dark:border-white/10 ${item.accent} dark:from-white/5 dark:to-transparent`}
+                      className={`group flex items-center gap-3 rounded-2xl border border-lex bg-gradient-to-br p-4 shadow-md transition hover:-translate-y-0.5 hover:border-lex-strong hover:shadow-lg dark:border-lex ${item.accent} dark:from-zinc-800/80 dark:to-transparent`}
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/50 bg-white/60 dark:bg-slate-900/50">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-lex bg-white dark:border-lex dark:bg-zinc-800/80">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="min-w-0 text-left">
@@ -438,8 +438,8 @@ const Updates = ({ isDarkMode = false }) => {
                 })}
               </div>
 
-              <div className="glass overflow-hidden rounded-[2rem] shadow-xl">
-                <div className="border-b border-white/40 bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-6 text-white dark:border-white/10 dark:from-slate-950 dark:to-black">
+              <div className="overflow-hidden rounded-[2rem] border border-lex bg-white shadow-xl dark:border-lex dark:bg-zinc-900">
+                <div className="border-b border-lex bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-6 text-white dark:border-lex dark:from-slate-950 dark:to-black">
                   <div className="mb-2 flex items-center gap-2">
                     <Twitter className="h-5 w-5 text-sky-400" />
                     <h3 className="text-base font-bold">Social</h3>
@@ -450,7 +450,7 @@ const Updates = ({ isDarkMode = false }) => {
                       href="https://x.com/SCPh_PIO"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 py-2.5 text-xs font-bold transition hover:bg-white/20"
+                      className="flex items-center justify-center gap-2 rounded-xl border border-slate-600/80 bg-slate-800/60 py-2.5 text-xs font-bold transition hover:bg-slate-700/80"
                     >
                       <Twitter className="h-4 w-4" /> X
                     </a>
@@ -458,7 +458,7 @@ const Updates = ({ isDarkMode = false }) => {
                       href="https://www.facebook.com/SupremeCourtPhilippines"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/10 py-2.5 text-xs font-bold transition hover:bg-white/20"
+                      className="flex items-center justify-center gap-2 rounded-xl border border-slate-600/80 bg-slate-800/60 py-2.5 text-xs font-bold transition hover:bg-slate-700/80"
                     >
                       <Facebook className="h-4 w-4" /> Meta
                     </a>
@@ -469,7 +469,7 @@ const Updates = ({ isDarkMode = false }) => {
                     key={twitterEmbedSrc}
                     title="Supreme Court PIO posts on X"
                     src={twitterEmbedSrc}
-                    className="h-[420px] w-full rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/80 dark:bg-black"
+                    className="h-[420px] w-full rounded-2xl border border-lex bg-white dark:border-lex dark:bg-black"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     allow="encrypted-media; fullscreen"
@@ -486,7 +486,7 @@ const Updates = ({ isDarkMode = false }) => {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    className="rounded-2xl border border-slate-200/80 bg-white dark:border-slate-700/80 dark:bg-slate-900"
+                    className="rounded-2xl border border-lex bg-white dark:border-lex dark:bg-slate-900"
                   />
                   <p className="text-center text-[10px] text-slate-500 dark:text-slate-500">
                     Facebook blank? Set repo secret <code className="text-indigo-600 dark:text-indigo-400">VITE_FACEBOOK_APP_ID</code> and allow your domain in Meta.

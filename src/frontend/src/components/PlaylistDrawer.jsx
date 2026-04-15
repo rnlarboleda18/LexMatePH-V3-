@@ -53,28 +53,28 @@ const PlaylistDrawer = () => {
     }
 
     return (
-        <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-[420px] bg-white/[0.08] backdrop-blur-3xl shadow-2xl border-l border-white/10 flex flex-col animate-in slide-in-from-right duration-500 ease-out">
+        <div className="fixed inset-y-0 right-0 z-50 flex w-full flex-col border-l border-lex-strong bg-white shadow-2xl animate-in slide-in-from-right duration-500 ease-out dark:border-lex-strong dark:bg-zinc-900 sm:w-[420px]">
             {/* Drawer Header */}
-            <div className="p-6 lg:p-8 border-b border-white/10 flex justify-between items-center bg-gradient-to-r from-purple-600/20 to-purple-800/10">
-                <div className="flex items-center gap-4 text-white">
-                    <div className="p-2.5 bg-white/10 rounded-xl">
-                        <ListMusic className="w-6 h-6 text-purple-300" />
+            <div className="flex items-center justify-between border-b border-lex bg-violet-50 p-6 dark:border-lex dark:bg-zinc-800 lg:p-8">
+                <div className="flex items-center gap-4 text-gray-900 dark:text-white">
+                    <div className="rounded-xl border border-lex-strong bg-white p-2.5 shadow-sm dark:border-lex-strong dark:bg-zinc-700">
+                        <ListMusic className="h-6 w-6 text-violet-600 dark:text-violet-300" />
                     </div>
                     <div>
-                        <h2 className="font-bold text-xl tracking-tight">LexPlay Queue</h2>
-                        <p className="text-[10px] font-bold text-white/30 uppercase tracking-widest">{playlist.length} tracks today</p>
+                        <h2 className="text-xl font-bold tracking-tight">LexPlay Queue</h2>
+                        <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">{playlist.length} tracks today</p>
                     </div>
                 </div>
                 <button
                     onClick={() => setIsDrawerOpen(false)}
-                    className="p-3 rounded-2xl hover:bg-white/10 text-white/40 hover:text-white transition-all active:scale-90"
+                    className="rounded-2xl p-3 text-gray-500 transition-all hover:bg-white/80 hover:text-gray-900 active:scale-90 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white"
                 >
-                    <X className="w-6 h-6" />
+                    <X className="h-6 w-6" />
                 </button>
             </div>
 
             {/* Playlist Manager */}
-            <div className="p-6 border-b border-white/10 bg-white/[0.02]">
+            <div className="border-b border-lex bg-slate-50 p-6 dark:border-lex dark:bg-zinc-800/50">
                 {!isCreating ? (
                     <div className="flex items-center gap-3">
                         <select
@@ -82,14 +82,14 @@ const PlaylistDrawer = () => {
                             onChange={(e) => {
                                 if (e.target.value) loadSavedPlaylist(e.target.value);
                             }}
-                            className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl focus:ring-purple-600 focus:border-purple-600 block w-full p-3 transition-all outline-none"
+                            className="block w-full flex-1 rounded-2xl border border-lex-strong bg-white p-3 text-sm text-gray-900 outline-none transition-all focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-lex-strong dark:bg-zinc-800 dark:text-white dark:focus:border-violet-400"
                         >
                             <option value="" disabled className="bg-[#0f172a]">Select a Playlist...</option>
                             {savedPlaylists.map(p => (
                                 <option key={p.id} value={p.id} className="bg-[#0f172a]">{p.name} ({p.item_count || 0})</option>
                             ))}
                         </select>
-                        <button onClick={() => setIsCreating(true)} className="p-3 bg-white/5 text-white/60 rounded-2xl border border-white/10 hover:bg-white/10 hover:text-white transition-all shadow-lg shadow-black/20" title="Create Playlist">
+                        <button onClick={() => setIsCreating(true)} className="rounded-2xl border border-lex-strong bg-white p-3 text-gray-600 shadow-sm transition-all hover:bg-slate-50 hover:text-gray-900 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 dark:hover:text-white" title="Create Playlist">
                             <Plus className="w-6 h-6" />
                         </button>
                     </div>
@@ -100,7 +100,7 @@ const PlaylistDrawer = () => {
                             placeholder="Playlist name..."
                             value={newPlaylistName}
                             onChange={(e) => setNewPlaylistName(e.target.value)}
-                            className="flex-1 bg-white/5 border border-white/10 text-white text-sm rounded-2xl p-3 focus:ring-purple-600 focus:border-purple-600 outline-none transition-all placeholder:text-white/20"
+                            className="flex-1 rounded-2xl border border-lex-strong bg-white p-3 text-sm text-gray-900 outline-none transition-all placeholder:text-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-lex-strong dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-violet-400"
                             autoFocus
                         />
                         <button onClick={async () => {
@@ -112,7 +112,7 @@ const PlaylistDrawer = () => {
                         }} className="p-3 bg-green-500/20 text-green-400 rounded-2xl border border-green-500/30 hover:bg-green-500/30 transition-all">
                             <Save className="w-6 h-6" />
                         </button>
-                        <button onClick={() => setIsCreating(false)} className="p-3 bg-white/5 text-white/40 rounded-2xl border border-white/10 hover:bg-white/10 transition-all">
+                        <button onClick={() => setIsCreating(false)} className="rounded-2xl border border-lex-strong bg-white p-3 text-gray-500 transition-all hover:bg-slate-50 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700">
                             <X className="w-6 h-6" />
                         </button>
                     </div>
@@ -125,14 +125,14 @@ const PlaylistDrawer = () => {
                                 <button onClick={() => {
                                     setIsEditing(true);
                                     setEditPlaylistName(savedPlaylists.find(p => p.id === activePlaylistId)?.name || '');
-                                }} className="text-[10px] font-bold text-white/40 hover:text-purple-400 flex items-center gap-1 transition-all uppercase tracking-widest">
+                                }} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-500 transition-all hover:text-violet-600 dark:text-zinc-500 dark:hover:text-violet-400">
                                     <Edit2 className="w-3 h-3" /> Rename
                                 </button>
                                 <button onClick={() => {
                                     if(window.confirm("Are you sure you want to delete this playlist?")) {
                                         deletePlaylist(activePlaylistId);
                                     }
-                                }} className="text-[10px] font-bold text-white/40 hover:text-red-400 flex items-center gap-1 transition-all uppercase tracking-widest">
+                                }} className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-gray-500 transition-all hover:text-red-600 dark:text-zinc-500 dark:hover:text-red-400">
                                     <Trash2 className="w-3 h-3" /> Delete
                                 </button>
                             </>
@@ -142,7 +142,7 @@ const PlaylistDrawer = () => {
                                     type="text" 
                                     value={editPlaylistName} 
                                     onChange={(e) => setEditPlaylistName(e.target.value)} 
-                                    className="flex-1 bg-white/5 border border-white/10 text-white text-xs rounded-xl p-2 focus:ring-purple-600 focus:border-purple-600 outline-none" 
+                                    className="flex-1 rounded-xl border border-lex-strong bg-white p-2 text-xs text-gray-900 outline-none focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 dark:border-lex-strong dark:bg-zinc-800 dark:text-white dark:focus:border-violet-400" 
                                     autoFocus
                                 />
                                 <button onClick={() => {
@@ -151,7 +151,7 @@ const PlaylistDrawer = () => {
                                         setIsEditing(false);
                                     }
                                 }} className="p-2 text-green-400 hover:bg-green-500/10 rounded-xl transition-all"><Save className="w-4 h-4" /></button>
-                                <button onClick={() => setIsEditing(false)} className="p-2 text-white/40 hover:bg-white/10 rounded-xl transition-all"><X className="w-4 h-4" /></button>
+                                <button onClick={() => setIsEditing(false)} className="rounded-xl p-2 text-gray-500 transition-all hover:bg-slate-100 dark:text-zinc-400 dark:hover:bg-zinc-700"><X className="h-4 w-4" /></button>
                             </div>
                         )}
                     </div>
@@ -160,9 +160,9 @@ const PlaylistDrawer = () => {
 
             {/* Current Track Player Area */}
             {currentTrack && (
-                <div className="p-8 bg-white/5 border-b border-white/10">
-                    <div className="flex items-center gap-2 mb-4">
-                        <span className={`text-[10px] font-extrabold px-2 py-0.5 rounded-lg uppercase tracking-widest ${currentTrack.type === 'codal' ? 'bg-amber-500/20 text-amber-400' : 'bg-blue-500/20 text-blue-400'}`}>
+                <div className="border-b border-lex bg-slate-50 p-8 dark:border-lex dark:bg-zinc-800/40">
+                    <div className="mb-4 flex items-center gap-2">
+                        <span className={`rounded-lg px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-widest ${currentTrack.type === 'codal' ? 'bg-amber-100 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300' : 'bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-300'}`}>
                             {currentTrack.type}
                         </span>
                         <div className="flex items-center gap-1 h-3">
@@ -172,10 +172,10 @@ const PlaylistDrawer = () => {
                         </div>
                     </div>
                     
-                    <h3 className="font-bold text-white text-xl leading-tight tracking-tight line-clamp-2 mb-2">
+                    <h3 className="mb-2 line-clamp-2 text-xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white">
                         {currentTrack.title}
                     </h3>
-                    <p className="text-xs font-bold text-white/30 uppercase tracking-widest mb-8">
+                    <p className="mb-8 text-xs font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-400">
                         {currentTrack.subtitle}
                     </p>
 
@@ -184,7 +184,7 @@ const PlaylistDrawer = () => {
                         <div className="flex items-center gap-8">
                             <button
                                 onClick={handlePrevious}
-                                className="p-3 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all active:scale-90"
+                                className="rounded-full p-3 text-gray-500 transition-all hover:bg-slate-200 hover:text-gray-900 active:scale-90 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white"
                             >
                                 <SkipBack size={28} />
                             </button>
@@ -206,7 +206,7 @@ const PlaylistDrawer = () => {
                             </button>
                             <button
                                 onClick={handleNext}
-                                className="p-3 text-white/40 hover:text-white hover:bg-white/10 rounded-full transition-all active:scale-90"
+                                className="rounded-full p-3 text-gray-500 transition-all hover:bg-slate-200 hover:text-gray-900 active:scale-90 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white"
                             >
                                 <SkipForward size={28} />
                             </button>
@@ -216,15 +216,15 @@ const PlaylistDrawer = () => {
             )}
 
             {/* Playlist Queue */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4">
+            <div className="custom-scrollbar flex-1 space-y-4 overflow-y-auto p-6">
                 {displayPlaylist.length === 0 ? (
-                    <div className="h-full flex flex-col items-center justify-center text-center space-y-6">
-                        <div className="p-6 bg-white/5 rounded-[40px] border border-white/10">
-                            <ListMusic size={64} className="text-white/10" />
+                    <div className="flex h-full flex-col items-center justify-center space-y-6 text-center">
+                        <div className="rounded-[40px] border border-lex bg-slate-50 p-6 dark:border-lex dark:bg-zinc-800/60">
+                            <ListMusic size={64} className="text-gray-300 dark:text-zinc-600" />
                         </div>
                         <div className="space-y-2">
-                            <p className="font-bold text-xl text-white">Queue is empty</p>
-                            <p className="text-sm text-white/40 leading-relaxed max-w-[200px] mx-auto">Add cases or codals to start your audio journey.</p>
+                            <p className="text-xl font-bold text-gray-900 dark:text-white">Queue is empty</p>
+                            <p className="mx-auto max-w-[200px] text-sm leading-relaxed text-gray-500 dark:text-zinc-400">Add cases or codals to start your audio journey.</p>
                         </div>
                     </div>
                 ) : (
@@ -234,13 +234,13 @@ const PlaylistDrawer = () => {
                             return (
                                 <div
                                     key={`${item.id}-${idx}`}
-                                    className={`relative group flex items-start gap-4 p-4 rounded-3xl border transition-all duration-300 cursor-pointer ${isCurrent
-                                        ? 'bg-white/10 border-white/20 shadow-xl scale-[1.02]'
-                                        : 'bg-white/[0.03] border-white/5 hover:border-white/10 hover:bg-white/[0.06]'
+                                    className={`group relative flex cursor-pointer items-start gap-4 rounded-3xl border p-4 transition-all duration-300 ${isCurrent
+                                        ? 'scale-[1.02] border-lex-strong bg-violet-50 shadow-xl dark:border-lex-strong dark:bg-violet-950/30'
+                                        : 'border-lex bg-white hover:border-lex-strong hover:bg-slate-50 dark:border-lex dark:bg-zinc-800/40 dark:hover:border-lex-strong dark:hover:bg-zinc-800'
                                         }`}
                                     onClick={() => activatePlaylistRow(idx)}
                                 >
-                                    <div className="relative w-12 h-12 rounded-2xl bg-white/5 flex-shrink-0 overflow-hidden flex items-center justify-center border border-white/10">
+                                    <div className="relative flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-lex-strong bg-slate-100 dark:border-lex-strong dark:bg-zinc-700">
                                         <div className={`absolute inset-0 bg-purple-600/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10 ${isCurrent ? 'opacity-100' : ''}`}>
                                             {isCurrent && isLoading ? (
                                                 <div className="relative w-7 h-7 flex items-center justify-center">
@@ -254,15 +254,15 @@ const PlaylistDrawer = () => {
                                                 <Play size={20} fill="currentColor" />
                                             )}
                                         </div>
-                                        <span className={`text-[14px] font-bold ${isCurrent ? 'text-white' : 'text-white/20'}`}>
+                                        <span className={`text-[14px] font-bold ${isCurrent ? 'text-gray-900 dark:text-white' : 'text-gray-400 dark:text-zinc-500'}`}>
                                             {idx + 1}
                                         </span>
                                     </div>
 
                                     <div className="flex-1 min-w-0 pr-8">
                                         <div className="flex items-center gap-2 mb-1">
-                                            <span className={`text-[9px] font-extrabold px-2 py-0.5 rounded-lg uppercase tracking-widest ${item.type === 'codal' ? 'bg-amber-500/20 text-amber-400'
-                                                : 'bg-blue-500/20 text-blue-400'
+                                            <span className={`rounded-lg px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-widest ${item.type === 'codal' ? 'bg-amber-100 text-amber-900 dark:bg-amber-500/20 dark:text-amber-300'
+                                                : 'bg-blue-100 text-blue-900 dark:bg-blue-500/20 dark:text-blue-300'
                                                 }`}>
                                                 {item.type}
                                             </span>
@@ -272,10 +272,10 @@ const PlaylistDrawer = () => {
                                                 </span>
                                             )}
                                         </div>
-                                        <h4 className={`text-sm font-bold truncate ${isCurrent ? 'text-white' : 'text-white/80'}`}>
+                                        <h4 className={`truncate text-sm font-bold ${isCurrent ? 'text-gray-900 dark:text-white' : 'text-gray-800 dark:text-zinc-200'}`}>
                                             {item.title}
                                         </h4>
-                                        <p className="text-[10px] text-white/40 font-bold uppercase tracking-widest truncate mt-0.5">
+                                        <p className="mt-0.5 truncate text-[10px] font-bold uppercase tracking-widest text-gray-500 dark:text-zinc-500">
                                             {item.subtitle}
                                         </p>
                                     </div>
@@ -289,7 +289,7 @@ const PlaylistDrawer = () => {
                                                 removeFromPlaylist(idx);
                                             }
                                         }}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 text-white/20 hover:text-red-400 hover:bg-red-400/10 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-200"
+                                        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-xl p-2.5 text-gray-400 opacity-0 transition-all duration-200 hover:bg-red-50 hover:text-red-600 group-hover:opacity-100 dark:text-zinc-500 dark:hover:bg-red-950/40 dark:hover:text-red-400"
                                         title="Remove from playlist"
                                     >
                                         <Trash2 size={16} />

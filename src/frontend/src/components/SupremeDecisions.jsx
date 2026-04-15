@@ -151,7 +151,7 @@ const BulletedText = ({ text, onCaseClick }) => {
                         {/* Standard Bullet matching Jurisprudence Mapping */}
                         <div className="mt-2 w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 flex-shrink-0" />
                         <span className="text-sm text-gray-800 dark:text-gray-200 leading-relaxed">
-                            {header && <strong className="font-bold text-gray-900 dark:text-gray-100 mr-1">{header}</strong>}
+                            {header && <strong className="font-bold text-black dark:text-gray-100 mr-1">{header}</strong>}
                             <SmartLink text={content} onCaseClick={onCaseClick} />
                         </span>
                     </li>
@@ -171,7 +171,7 @@ const TimelineSection = ({ timeline }) => {
 
     return (
         <div className="mb-8">
-            <h4 className="text-md font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2 mb-4">
+            <h4 className="text-md font-bold text-black dark:text-gray-100 flex items-center gap-2 mb-4">
                 <Clock className="w-5 h-5 text-blue-500 dark:text-amber-500" />
                 TIMELINE OF EVENTS
             </h4>
@@ -197,8 +197,8 @@ const FlashcardSection = ({ flashcards }) => {
     if (cards.length === 0) return null;
 
     return (
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-            <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+        <div className="mt-8 pt-6 border-t border-lex">
+            <h4 className="text-lg font-bold text-black dark:text-white mb-4 flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-yellow-500 dark:text-amber-500" />
                 Study Flashcards
             </h4>
@@ -206,7 +206,7 @@ const FlashcardSection = ({ flashcards }) => {
                 {cards.map((card, idx) => (
                     <div key={idx} className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-700 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <div className="text-xs font-bold text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">{card.type}</div>
-                        <div className="font-sans font-bold text-gray-800 dark:text-gray-100 mb-3">{card.q}</div>
+                        <div className="font-sans font-bold text-black dark:text-gray-100 mb-3">{card.q}</div>
                         <div className="text-sm text-gray-700 dark:text-gray-300 border-t border-yellow-200 dark:border-yellow-700 pt-2">{card.a}</div>
                     </div>
                 ))}
@@ -297,7 +297,7 @@ const SignificanceSection = ({ narrative, category, complexity }) => {
 
     return (
         <section className="mb-8">
-            <h4 className="text-md font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-3 mb-4 uppercase tracking-wide flex items-center justify-between">
+            <h4 className="text-md font-bold text-black dark:text-gray-100 border-b border-lex pb-3 mb-4 uppercase tracking-wide flex items-center justify-between">
                 <span className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-500" />
                     Jurisprudential Impact and Bar Significance
@@ -309,7 +309,7 @@ const SignificanceSection = ({ narrative, category, complexity }) => {
                 )}
             </h4>
 
-            <div className="bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/10 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div className="bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/10 p-5 rounded-xl border border-lex shadow-sm relative overflow-hidden">
                 {/* Decorative background element */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-amber-200/10 dark:bg-amber-500/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
 
@@ -472,7 +472,7 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
         // Since we are pre-formatting into paragraphs, headers within markdown might not appear unless we preserved them as ###.
         // But our logic converts headers to "**Term:**" inside keys.
         // So we mostly rely on bold wrapper.
-        strong: ({ children }) => <strong className="font-bold text-gray-900 dark:text-gray-100">{children}</strong>,
+        strong: ({ children }) => <strong className="font-bold text-black dark:text-gray-100">{children}</strong>,
         ul: ({ children }) => <ul className="mb-4 list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-200">{children}</ul>,
         li: ({ children }) => <li className="pl-1 leading-relaxed"><SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper></li>
     };
@@ -1151,7 +1151,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                 />
                                 {loading && (
                                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                        <div className="h-3.5 w-3.5 animate-spin rounded-full border-b-2 border-violet-600 dark:border-zinc-500" />
+                                        <div className="h-3.5 w-3.5 animate-spin rounded-full border-b-2 border-neutral-600 dark:border-zinc-500" />
                                     </div>
                                 )}
                             </div>
@@ -1261,16 +1261,18 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     </div>
                 )}
 
-                <div className="relative min-w-0 w-full rounded-[1.75rem] border-2 border-violet-200/60 bg-gradient-to-br from-white/70 via-violet-50/35 to-purple-100/30 p-5 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 sm:p-6">
+                <div className="relative min-w-0 w-full rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
                 {/* Page description */}
                 {hasInitialLoaded && !fetchError && (
-                    <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                        <span className="font-medium text-slate-700 dark:text-slate-300">Supreme Court decisions</span>{' '}
+                    <div className="mb-4 rounded-lg border border-lex bg-neutral-50 px-4 py-3 dark:bg-zinc-800/80">
+                        <p className="text-sm leading-relaxed text-neutral-800 dark:text-zinc-200">
+                        <span className="font-semibold text-black dark:text-zinc-50">Supreme Court decisions</span>{' '}
                         with structured digests generated by AI from the full decision text. Each digest extracts the{' '}
-                        <span className="font-medium text-slate-700 dark:text-slate-300">main doctrine, facts, issues, ruling, and ratio decidendi</span>{' '}
+                        <span className="font-semibold text-black dark:text-zinc-50">main doctrine, facts, issues, ruling, and ratio decidendi</span>{' '}
                         directly from the Court's own language—no paraphrasing of holdings. Entries are tagged by Bar
                         subject and searchable by ponente, year, and significance.
                     </p>
+                    </div>
                 )}
 
                 {/* Results — codal-style compact cards (two columns on md+) */}
@@ -1306,7 +1308,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className="group min-w-0 overflow-hidden rounded-lg border-2 border-violet-300/80 bg-white/85 shadow-sm transition-shadow hover:shadow-lg dark:border-zinc-700 dark:bg-zinc-900/75"
+                                className="group min-w-0 overflow-hidden rounded-lg border border-lex bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900"
                             >
                                 <div
                                     role="button"
@@ -1320,10 +1322,10 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     }}
                                     onMouseEnter={() => prefetchDetails(decision.id)}
                                     onTouchStart={() => prefetchDetails(decision.id)}
-                                    className="p-3 cursor-pointer hover:bg-white/50 dark:hover:bg-slate-700/40 transition-colors"
+                                    className="p-3 cursor-pointer hover:bg-neutral-50 dark:hover:bg-zinc-800/80 transition-colors"
                                 >
                                     <div className="flex flex-col gap-2">
-                                        <h3 className="text-base font-bold leading-snug text-gray-900 transition-colors group-hover:text-violet-700 dark:text-gray-100 dark:group-hover:text-zinc-100">
+                                        <h3 className="text-base font-bold leading-snug text-black transition-colors group-hover:text-black dark:text-zinc-100 dark:group-hover:text-white">
                                             {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
                                         </h3>
 
@@ -1336,7 +1338,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     </div>
                                 </div>
 
-                                <div className="border-t border-white/15 dark:border-white/5">
+                                <div className="border-t border-lex">
                                     <button
                                         type="button"
                                         onClick={(e) => {
@@ -1346,7 +1348,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                 [decision.id]: !prev[decision.id],
                                             }));
                                         }}
-                                        className="w-full flex items-center justify-between gap-2 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 hover:bg-white/20 dark:hover:bg-white/5 transition-colors"
+                                        className="w-full flex items-center justify-between gap-2 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-neutral-600 dark:text-zinc-400 hover:bg-neutral-50 dark:hover:bg-zinc-800 transition-colors"
                                         aria-expanded={detailsOpen}
                                     >
                                         <span>Case details</span>
@@ -1356,8 +1358,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                         />
                                     </button>
                                     {detailsOpen && (
-                                        <div className="px-3 pb-3 border-t border-white/10 dark:border-white/5">
-                                            <div className="rounded-lg border border-white/35 bg-white/25 px-3 py-2.5 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/35">
+                                        <div className="border-t border-lex px-3 pb-3">
+                                            <div className="mt-2 rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
                                                 <dl className="space-y-2.5">
                                                     {decision.significance_category && (
                                                         <div className="flex gap-2.5">
@@ -1380,7 +1382,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                     )}
 
                                                     <div
-                                                        className={`flex gap-2.5 ${decision.significance_category ? 'border-t border-white/25 pt-2.5 dark:border-white/10' : ''}`}
+                                                        className={`flex gap-2.5 ${decision.significance_category ? 'border-t border-lex-strong pt-2.5' : ''}`}
                                                     >
                                                         <FileText
                                                             className="mt-0.5 h-4 w-4 shrink-0 text-slate-600 dark:text-slate-400"
@@ -1398,7 +1400,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                     </div>
 
                                                     <div
-                                                        className={`flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10`}
+                                                        className="flex gap-2.5 border-t border-lex-strong pt-2.5"
                                                     >
                                                         <Scale
                                                             className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
@@ -1415,9 +1417,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                         </div>
                                                     </div>
 
-                                                    <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                    <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
                                                         <BookOpen
-                                                            className="mt-0.5 h-4 w-4 shrink-0 text-violet-600 dark:text-zinc-400"
+                                                            className="mt-0.5 h-4 w-4 shrink-0 text-neutral-600 dark:text-zinc-400"
                                                             strokeWidth={2}
                                                             aria-hidden
                                                         />
@@ -1432,7 +1434,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                     </div>
 
                                                     {decision.ponente && (
-                                                        <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                        <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
                                                             <User
                                                                 className="mt-0.5 h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
                                                                 strokeWidth={2}
@@ -1450,7 +1452,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                     )}
 
                                                     {statutesParsed && (
-                                                        <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                        <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
                                                             <Book
                                                                 className="mt-0.5 h-4 w-4 shrink-0 text-teal-600 dark:text-teal-400"
                                                                 strokeWidth={2}
@@ -1469,7 +1471,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                     )}
 
                                                     {citationsParsed && (
-                                                        <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                                        <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
                                                             <Gavel
                                                                 className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
                                                                 strokeWidth={2}
@@ -1501,7 +1503,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                             handleCaseClick(decision);
                                         }
                                     }}
-                                    className="cursor-pointer border-t border-white/15 dark:border-white/5 p-3 hover:bg-white/30 dark:hover:bg-slate-700/30 transition-colors"
+                                    className="cursor-pointer border-t border-lex p-3 hover:bg-neutral-50 dark:hover:bg-zinc-800/60 transition-colors"
                                 >
                                     <div
                                         className={`relative flex h-[14rem] flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:h-[15.5rem] sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
@@ -1531,7 +1533,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage === 1 || loading}
-                                className="flex items-center gap-2 rounded-lg border border-violet-200/75 bg-white/50 px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm backdrop-blur-sm transition-colors hover:bg-violet-50/80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                                className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-5 py-2.5 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
                             >
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                                 Previous
@@ -1545,7 +1547,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage * ITEMS_PER_PAGE >= totalCount || loading}
-                                className="flex items-center gap-2 rounded-lg border border-violet-200/75 bg-white/50 px-5 py-2.5 text-sm font-medium text-gray-700 shadow-sm backdrop-blur-sm transition-colors hover:bg-violet-50/80 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900/80 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                                className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-5 py-2.5 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
                             >
                                 Next
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -1554,7 +1556,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
                     </div>
                 )}
-                </div>{/* end glass layer */}
+                </div>{/* content shell */}
             </main>
 
             {/* Detail Modal moved to Global App.jsx Level */}
@@ -1563,7 +1565,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
             {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
                 createPortal(
                     <div
-                        className="fixed z-[200] max-h-80 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/98"
+                        className="fixed z-[200] max-h-80 overflow-y-auto rounded-lg border border-lex bg-white shadow-lg dark:bg-zinc-900"
                         style={{
                             top: searchBoxRect.bottom + 4,
                             left: searchBoxRect.left,
@@ -1573,8 +1575,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                     >
                         {/* API results */}
                         <div>
-                            <div className="flex items-center justify-between border-b border-gray-100 px-3 py-1.5 dark:border-white/10">
-                                <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                            <div className="flex items-center justify-between border-b border-lex px-3 py-1.5">
+                                <span className="text-[10px] font-bold uppercase tracking-wider text-black dark:text-zinc-300">
                                     Matching cases
                                 </span>
                                 {searchTerm.trim().length >= 2 && !loading && (
@@ -1594,7 +1596,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     No cases match on the current filters / page.
                                 </p>
                             ) : (
-                                <div className="divide-y divide-gray-100 dark:divide-white/5">
+                                <div className="divide-y divide-lex">
                                     {searchResults.map((r) => (
                                         <button
                                             key={r.id}
@@ -1603,9 +1605,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                                 setShowSuggestions(false);
                                                 await handleCaseClick(r);
                                             }}
-                                            className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-zinc-800"
+                                            className="flex w-full flex-col gap-0.5 px-3 py-2.5 text-left transition-colors hover:bg-neutral-100 dark:hover:bg-zinc-800"
                                         >
-                                            <span className="line-clamp-2 text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                            <span className="line-clamp-2 text-sm font-semibold text-black dark:text-gray-200">
                                                 <HighlightText
                                                     text={r.short_title || r.title || r.case_number}
                                                     query={searchTerm}
@@ -1630,9 +1632,9 @@ const SeparateOpinionCard = ({ op, idx }) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div id={`sep-op-${idx}`} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-100 dark:border-gray-700/50">
+        <div id={`sep-op-${idx}`} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-lex">
             <div className="flex items-center justify-between mb-2">
-                <span className="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                <span className="font-bold text-black dark:text-gray-200 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-blue-500"></span>
                     {op.type ? op.type.toUpperCase() : "OPINION"}
                 </span>
@@ -1654,7 +1656,7 @@ const SeparateOpinionCard = ({ op, idx }) => {
                         </button>
                     ) : (
                         <div className="mt-3 animate-fadeIn">
-                            <div className="bg-white dark:bg-gray-800 p-4 rounded-md border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
+                            <div className="bg-white dark:bg-gray-800 p-4 rounded-md border border-lex-strong text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
                                 {op.text}
                             </div>
                             <button

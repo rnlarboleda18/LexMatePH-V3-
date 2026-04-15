@@ -48,7 +48,7 @@ const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
     return (
         <div className="fixed inset-0 z-[100] bg-gray-100 dark:bg-gray-900 flex flex-col animate-in fade-in duration-200">
             {/* STICKY TOP ACTION BAR */}
-            <div className="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between shadow-sm z-10 shrink-0">
+            <div className="bg-white dark:bg-slate-800 border-b border-lex p-4 flex items-center justify-between shadow-sm z-10 shrink-0">
                 <div className="flex items-center gap-3">
                     <button
                         onClick={onClose}

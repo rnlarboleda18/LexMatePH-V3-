@@ -57,7 +57,7 @@ const Register = ({ onRegisterSuccess, onSwitchToLogin }) => {
     };
 
     return (
-        <div className="max-w-md mx-auto mt-10 p-8 bg-white dark:bg-dark-card rounded-2xl shadow-xl border border-gray-100 dark:border-gray-800">
+        <div className="max-w-md mx-auto mt-10 p-8 bg-white dark:bg-dark-card rounded-2xl shadow-xl border border-lex">
             <div className="text-center mb-8">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 mb-4">
                     <UserPlus size={32} />

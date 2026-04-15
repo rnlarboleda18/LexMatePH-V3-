@@ -49,7 +49,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
             </button>
 
             {isExpanded && (
-                <div className="flex flex-col gap-0.5 ml-3 border-l border-gray-100 dark:border-gray-800 pl-2">
+                <div className="flex flex-col gap-0.5 ml-3 border-l border-lex pl-2">
                     {node.articles.map(art => (
                         <button
                             key={art.id}
@@ -851,10 +851,10 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         isSidebarOpen &&
         createPortal(
             <div
-                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-violet-200/70 bg-white/50 shadow-[0_28px_55px_-12px_rgba(109,40,217,0.28)] backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/90"
+                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg dark:border-lex dark:bg-zinc-900"
                 style={{ left: tocFixedLeft, ...fixedSidePanelStyle }}
             >
-                <div className="flex-none border-b border-white/20 bg-white/30 p-4 pb-0 dark:border-white/5 dark:bg-slate-800/30">
+                <div className="flex-none border-b border-lex bg-slate-50 p-4 pb-0 dark:border-lex dark:bg-zinc-800/80">
                     <div className="mb-4 flex items-center justify-between">
                         <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
                         <button type="button" onClick={() => setIsSidebarOpen(false)} className="rounded-md p-1 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -891,7 +891,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         (activeJurisArticle || activeAmendmentArticle) &&
         createPortal(
             <div
-                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-violet-200/70 bg-white/50 shadow-[0_28px_55px_-12px_rgba(109,40,217,0.28)] backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/90"
+                className="fixed z-[28] flex w-80 max-w-[min(20rem,calc(100vw-1.5rem))] min-h-0 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg dark:border-lex dark:bg-zinc-900"
                 style={{ left: jurisFixedLeft, ...fixedSidePanelStyle }}
             >
                 {activeJurisArticle && (
@@ -926,7 +926,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                 )}
                 {activeAmendmentArticle && !activeJurisArticle && (
                     <div className="flex min-h-0 flex-1 flex-col bg-transparent">
-                        <div className="flex flex-none items-center justify-between border-b border-white/20 bg-white/30 p-4 backdrop-blur-sm dark:border-white/5 dark:bg-slate-800/30">
+                        <div className="flex flex-none items-center justify-between border-b border-lex bg-slate-50 p-4 dark:border-lex dark:bg-zinc-800/80">
                             <div>
                                 <h3 className="font-serif text-lg font-bold text-rose-700 dark:text-rose-400">Amendments</h3>
                                 <div className="text-xs font-bold uppercase tracking-wider text-stone-500">Article {activeAmendmentArticle.article_num}</div>
@@ -939,7 +939,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             {(activeAmendmentArticle.amendment_links || []).map((am, idx) => (
                                 <div
                                     key={idx}
-                                    className="group relative overflow-hidden rounded-xl border border-white/40 bg-white/90 p-5 shadow-sm dark:border-white/5 dark:bg-slate-800/70"
+                                    className="group relative overflow-hidden rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-lex dark:bg-zinc-800"
                                 >
                                     <div className="absolute left-0 top-0 h-full w-1 bg-rose-500/80" />
                                     <div className="mb-2 flex items-start justify-between pl-2">
@@ -1068,8 +1068,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
                     onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
                 >
-                    <div className="flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-violet-200/75 bg-white/95 shadow-[0_24px_55px_-14px_rgba(109,40,217,0.28)] backdrop-blur-xl animate-in slide-in-from-left duration-300 dark:border-zinc-700 dark:bg-zinc-900/95 glass">
-                        <div className="p-4 border-b border-white/20 dark:border-white/5 flex justify-between items-center bg-white/30 dark:bg-slate-800/30">
+                    <div className="flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg animate-in slide-in-from-left duration-300 dark:border-lex dark:bg-zinc-900">
+                        <div className="flex items-center justify-between border-b border-lex bg-slate-50 p-4 dark:border-lex dark:bg-zinc-800/80">
                             <span className="font-bold">Contents</span>
                             <button onClick={() => setIsSidebarOpen(false)}><X size={20} /></button>
                         </div>
@@ -1146,7 +1146,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
                 createPortal(
                     <div
-                        className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-violet-200/80 bg-white/95 shadow-[0_24px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/98"
+                        className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-lex bg-white shadow-lg dark:border-lex dark:bg-zinc-900"
                         style={{
                             top: searchBoxRect.bottom + 4,
                             left: searchBoxRect.left,
@@ -1176,12 +1176,12 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             </div>
                         ) : (
                             <>
-                                <div className="border-b border-gray-100 px-3 py-1.5 dark:border-white/5">
+                                <div className="border-b border-lex px-3 py-1.5">
                                     <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
                                         {searchSuggestions.length} article{searchSuggestions.length !== 1 ? 's' : ''} found — click to jump
                                     </span>
                                 </div>
-                                <div className="divide-y divide-gray-100 dark:divide-white/5">
+                                <div className="divide-y divide-lex">
                                     {searchSuggestions.map((art) => {
                                         const titleText =
                                             art.article_title ||
@@ -1274,7 +1274,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         onClick={handleCloseMobileLexPanels}
                     >
                         <div
-                            className="lex-modal-card glass relative flex w-full max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                            className="lex-modal-card relative flex w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                             role="dialog"
                             aria-modal="true"
                             aria-label={

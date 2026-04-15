@@ -79,7 +79,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
             onClick={(e) => e.stopPropagation()}
         >
             <div
-                className={`mt-px flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-stone-300/80 bg-white/90 shadow-sm dark:border-white/10 dark:bg-slate-800/90 ${textColor}`}
+                className={`mt-px flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex-strong bg-white shadow-sm dark:border-lex-strong dark:bg-zinc-800 ${textColor}`}
                 title={rawSubjectLabel}
             >
                 <SubjectIcon subject={subjectForColor} className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
@@ -117,8 +117,8 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
     const renderFaceActions = (tone) => {
         const bar =
             tone === 'front'
-                ? 'border-t border-violet-200/70 bg-violet-50/40 dark:border-purple-500/20 dark:bg-black/25'
-                : 'border-t border-purple-200/80 bg-purple-100/35 dark:border-fuchsia-500/15 dark:bg-black/30';
+                ? 'border-t border-lex bg-violet-50/50 dark:border-lex dark:bg-zinc-900/80'
+                : 'border-t border-lex bg-purple-50/60 dark:border-lex dark:bg-zinc-900/80';
         return (
             <div className={`flex shrink-0 items-center gap-1.5 px-2 py-2 sm:gap-2 sm:px-2.5 sm:py-2 ${bar}`} onClick={(e) => e.stopPropagation()}>
                 {/* LexPlay button — gated at Juris */}
@@ -129,7 +129,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                     className={`touch-manipulation flex h-[36px] w-[36px] shrink-0 items-center justify-center rounded-lg border shadow-sm transition-colors active:scale-[0.99] sm:h-[38px] sm:w-[38px] ${
                         canLexPlay
                             ? 'border-purple-300/80 bg-purple-50 text-purple-700 hover:bg-purple-100 dark:border-purple-700/60 dark:bg-purple-900/30 dark:text-purple-300 dark:hover:bg-purple-900/50'
-                            : 'border-stone-300/70 bg-white/70 text-stone-400 dark:border-white/10 dark:bg-white/5 dark:text-white/30'
+                            : 'border-lex bg-white text-stone-400 dark:border-lex dark:bg-zinc-800 dark:text-zinc-500'
                     }`}
                 >
                     {canLexPlay ? (
@@ -144,7 +144,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         e.stopPropagation();
                         setIsFlipped((f) => !f);
                     }}
-                    className="touch-manipulation flex min-h-[36px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-violet-300/80 bg-white/95 px-2 py-1.5 text-[11px] font-bold leading-tight text-violet-950 shadow-sm transition-colors hover:bg-violet-50 active:scale-[0.99] dark:border-purple-500/30 dark:bg-slate-800 dark:text-violet-100 dark:hover:bg-slate-700/90 sm:min-h-[38px] sm:text-xs"
+                    className="touch-manipulation flex min-h-[36px] flex-1 items-center justify-center gap-1.5 rounded-lg border border-lex-strong bg-white px-2 py-1.5 text-[11px] font-bold leading-tight text-violet-950 shadow-sm transition-colors hover:bg-violet-50 active:scale-[0.99] dark:border-lex-strong dark:bg-zinc-800 dark:text-violet-100 dark:hover:bg-zinc-700 sm:min-h-[38px] sm:text-xs"
                 >
                     <RotateCcw size={14} className="shrink-0" strokeWidth={2.25} />
                     {isFlipped ? 'Front' : 'Flip'}
@@ -166,14 +166,14 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderFrontFace = () => (
         <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-violet-300/80 bg-gradient-to-b from-white via-violet-50/40 to-fuchsia-50/30 shadow-[0_22px_48px_-18px_rgba(109,40,217,0.22),0_2px_6px_rgba(0,0,0,0.06)] dark:border-purple-400/35 dark:from-slate-800 dark:via-purple-950/40 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
+            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border border-lex bg-gradient-to-b from-white via-violet-50/40 to-fuchsia-50/30 shadow-md dark:border-lex dark:from-zinc-900 dark:via-purple-950/40 dark:to-zinc-950 ${faceTypography}`}
             style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
                 transform: 'rotateY(0deg)',
             }}
         >
-            {renderFaceHeader('border-violet-200/80 dark:border-purple-500/25')}
+            {renderFaceHeader('border-lex dark:border-lex')}
             <div className="flex min-h-0 flex-1 flex-col px-2.5 pb-1.5 pt-2 sm:px-3 sm:pb-2 sm:pt-2.5">
                 <span
                     className={`mb-1 shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-900/85 dark:text-amber-400/95 ${!isBar ? 'text-center' : ''}`}
@@ -201,7 +201,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         card.subQuestions?.map((sub, i) => (
                             <p
                                 key={i}
-                                className="mt-4 border-t border-stone-300/70 pt-4 text-left text-[15px] font-medium leading-relaxed text-stone-800 dark:border-white/10 dark:text-stone-200 whitespace-pre-wrap break-words"
+                                className="mt-4 border-t border-lex pt-4 text-left text-[15px] font-medium leading-relaxed text-stone-800 dark:border-lex dark:text-stone-200 whitespace-pre-wrap break-words"
                             >
                                 {sub.text}
                             </p>
@@ -217,14 +217,14 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     const renderBackFace = () => (
         <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border-2 border-violet-300/80 bg-gradient-to-b from-violet-50 via-purple-50/80 to-fuchsia-50/70 shadow-[0_22px_48px_-16px_rgba(109,40,217,0.28),0_2px_6px_rgba(0,0,0,0.05)] dark:border-purple-400/35 dark:from-purple-950/95 dark:via-slate-950 dark:to-slate-950 dark:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.55)] ${faceTypography}`}
+            className={`absolute inset-0 flex flex-col overflow-hidden rounded-xl border border-lex bg-gradient-to-b from-violet-50 via-purple-50/80 to-fuchsia-50/70 shadow-md dark:border-lex dark:from-purple-950/95 dark:via-slate-950 dark:to-zinc-950 ${faceTypography}`}
             style={{
                 backfaceVisibility: 'hidden',
                 WebkitBackfaceVisibility: 'hidden',
                 transform: 'rotateY(180deg)',
             }}
         >
-            {renderFaceHeader('border-purple-200/75 dark:border-purple-500/25')}
+            {renderFaceHeader('border-lex dark:border-lex')}
             <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-2.5 pb-2 pt-2 sm:px-3 sm:pb-2 sm:pt-2.5">
                 {isBar ? (
                     <>
@@ -236,7 +236,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                 {card.answer || 'Answer not available.'}
                             </p>
                             {card.subQuestions?.map((sub, i) => (
-                                <div key={i} className="relative mt-4 border-t border-violet-200/80 pt-4 dark:border-purple-500/20">
+                                <div key={i} className="relative mt-4 border-t border-lex pt-4 dark:border-lex">
                                     <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] whitespace-pre-wrap break-words">
                                         {sub.answer || 'Answer not available.'}
                                     </p>
@@ -258,7 +258,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                                     <span className="mb-1 mt-3 block text-[8px] font-bold uppercase tracking-[0.14em] text-stone-500 dark:text-stone-400">
                                         Latest case
                                     </span>
-                                    <div className="rounded-lg border border-stone-300/90 bg-white p-2 text-xs shadow-sm dark:border-white/10 dark:bg-slate-900/40">
+                                    <div className="rounded-lg border border-lex-strong bg-white p-2 text-xs shadow-sm dark:border-lex-strong dark:bg-zinc-800">
                                         {sources.map((src) => (
                                             <div key={`${src.case_id}-${src.case_number}`}>
                                                 <div className="font-semibold text-stone-900 dark:text-stone-100 line-clamp-2">

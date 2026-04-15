@@ -37,7 +37,7 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-[300px] p-8 bg-slate-900/50 backdrop-blur-xl border border-white/10 rounded-[32px] text-center space-y-6 animate-in fade-in zoom-in duration-300">
+        <div className="flex min-h-[300px] flex-col items-center justify-center space-y-6 rounded-[32px] border border-lex-strong bg-zinc-900 p-8 text-center animate-in fade-in zoom-in duration-300">
           <div className="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center text-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.3)]">
             <AlertTriangle size={40} />
           </div>
@@ -58,7 +58,7 @@ class ErrorBoundary extends React.Component {
               </button>
               <button
                 onClick={this.handleHardReset}
-                className="px-8 py-3 bg-white/5 text-white/40 border border-white/10 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-white/10 transition-all"
+                className="rounded-2xl border border-lex-strong bg-zinc-800 px-8 py-3 font-black text-xs uppercase tracking-widest text-zinc-400 transition-all hover:bg-zinc-700 hover:text-zinc-200"
               >
                 Hard Reset
               </button>

@@ -180,7 +180,7 @@ export default function PaymentForm({
   return (
     <div className="flex flex-col">
       {/* Header */}
-      <div className="flex items-center gap-3 border-b border-gray-100 dark:border-white/10 px-5 py-4">
+      <div className="flex items-center gap-3 border-b border-lex px-5 py-4">
         <button
           type="button"
           onClick={onCancel}
@@ -220,7 +220,7 @@ export default function PaymentForm({
               onChange={e => setCardNumber(formatCardNumber(e.target.value))}
               required
               disabled={loading}
-              className="w-full rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-800 px-4 py-3 pr-10 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
+              className="w-full rounded-xl border border-lex-strong bg-white dark:bg-slate-800 px-4 py-3 pr-10 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
             />
             <CreditCard
               size={16}
@@ -242,7 +242,7 @@ export default function PaymentForm({
             value={cardName}
             onChange={e => setCardName(e.target.value)}
             disabled={loading}
-            className="w-full rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
+            className="w-full rounded-xl border border-lex-strong bg-white dark:bg-slate-800 px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
           />
         </div>
 
@@ -262,7 +262,7 @@ export default function PaymentForm({
               onChange={e => setExpiry(formatExpiry(e.target.value))}
               required
               disabled={loading}
-              className="w-full rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
+              className="w-full rounded-xl border border-lex-strong bg-white dark:bg-slate-800 px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -279,7 +279,7 @@ export default function PaymentForm({
               onChange={e => setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))}
               required
               disabled={loading}
-              className="w-full rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-slate-800 px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
+              className="w-full rounded-xl border border-lex-strong bg-white dark:bg-slate-800 px-4 py-3 text-sm text-gray-900 dark:text-white placeholder-gray-400 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition disabled:opacity-50"
             />
           </div>
         </div>

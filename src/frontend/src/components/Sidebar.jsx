@@ -41,8 +41,8 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                                 }}
                             />
                             <div className="flex min-w-0 flex-col">
-                                <span className="text-sm font-semibold text-violet-950 dark:text-zinc-100">Account</span>
-                                <span className="text-xs text-violet-800/75 dark:text-zinc-400">Profile & settings</span>
+                                <span className="text-sm font-semibold text-black dark:text-zinc-100">Account</span>
+                                <span className="text-xs text-neutral-700 dark:text-zinc-400">Profile & settings</span>
                             </div>
                         </div>
                     </SignedIn>
@@ -51,7 +51,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                             <SignInButton mode="modal">
                                 <button
                                     type="button"
-                                    className="flex w-full min-h-11 items-center justify-center gap-2 rounded-xl border-2 border-violet-300/85 bg-white/92 px-3 py-2.5 text-center text-xs font-semibold leading-tight tracking-tight text-violet-950 shadow-md shadow-violet-200/25 backdrop-blur-sm transition-all active:scale-[0.98] dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-100 sm:text-[13px]"
+                                    className="flex w-full min-h-11 items-center justify-center gap-2 rounded-xl border-2 border-lex-strong bg-white px-3 py-2.5 text-center text-xs font-semibold leading-tight tracking-tight text-black shadow-md transition-all active:scale-[0.98] hover:bg-neutral-50 dark:bg-zinc-900 dark:text-zinc-100 sm:text-[13px]"
                                 >
                                     <LogIn className="h-4 w-4 shrink-0" strokeWidth={2.25} aria-hidden />
                                     <span className="min-w-0">Log In</span>

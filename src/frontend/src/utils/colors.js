@@ -1,3 +1,23 @@
+/**
+ * Bar-subject and digest **content** colors (badges, cards, doctrine panels).
+ * App chrome uses white / black / grey + subtle purple (`filterChromeClasses.js`);
+ * subject pills in modals and digest doctrine panels always use the palette below.
+ */
+
+import { normalizeBarQuestionSubject, normalizeBarSubject } from './subjectNormalize';
+
+/** Canonical Bar subject key → same classes as `subjectColors` (modals, cards). */
+export function getSubjectColorForBarQuestion(question) {
+    if (!question || typeof question !== 'object') return getSubjectColor('Political Law');
+    return getSubjectColor(normalizeBarQuestionSubject(question));
+}
+
+/** Free-text subject line (e.g. doctrinal index) → canonical key, then pill classes. */
+export function getSubjectColorForRawSubject(raw) {
+    const key = normalizeBarSubject(typeof raw === 'string' ? raw : '');
+    return getSubjectColor(key || 'Political Law');
+}
+
 export const subjectColors = {
     "Political Law": "text-purple-500 border-purple-500 shadow-purple-500/50",
     "Political Law and Intl Law": "text-purple-500 border-purple-500 shadow-purple-500/50",
@@ -16,7 +36,7 @@ export const subjectColors = {
 };
 
 export const getSubjectColor = (subject) => {
-    return subjectColors[subject] || "text-gray-500 border-gray-500";
+    return subjectColors[subject] || 'text-neutral-600 border-neutral-400 shadow-neutral-500/20';
 };
 
 export const subjectAnswerColors = {
@@ -32,7 +52,7 @@ export const subjectAnswerColors = {
 };
 
 export const getSubjectAnswerColor = (subject) => {
-    return subjectAnswerColors[subject] || "bg-gray-50 dark:bg-gray-800/50 border-gray-100 dark:border-gray-800";
+    return subjectAnswerColors[subject] || "bg-gray-50 dark:bg-gray-800/50 border-lex";
 };
 
 /** Map free-text / Primary: … subject strings to a bar subject key for theming. */

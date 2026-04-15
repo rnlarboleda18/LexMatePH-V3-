@@ -79,10 +79,10 @@ const History = ({ userInfo }) => {
         <div className="max-w-5xl mx-auto space-y-6">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">My Exam History</h2>
             
-            <div className="bg-white dark:bg-dark-card rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="bg-white dark:bg-dark-card rounded-xl shadow-sm border border-lex overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
-                        <thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
+                        <thead className="bg-gray-50 dark:bg-gray-800/50 border-b border-lex">
                             <tr>
                                 <th className="px-6 py-4 text-sm font-semibold text-gray-500 uppercase tracking-wider">Date</th>
                                 <th className="px-6 py-4 text-sm font-semibold text-gray-500 uppercase tracking-wider">Subject</th>

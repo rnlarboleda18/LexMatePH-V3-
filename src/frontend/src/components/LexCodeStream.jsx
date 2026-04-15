@@ -473,7 +473,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                 }
 
                                 return (
-                                    <div key={i} className={`my-2 ${ (h.type === 'BOOK' || h.type === 'TITLE' || h.type === 'PREAMBLE' || h.type === 'CHAPTER' || h.type === 'SECTION' || h.type === 'RULE') ? 'text-center border-b-[1px] border-gray-100 dark:border-gray-800 pb-1 mb-4' : '' }`}>
+                                    <div key={i} className={`my-2 ${ (h.type === 'BOOK' || h.type === 'TITLE' || h.type === 'PREAMBLE' || h.type === 'CHAPTER' || h.type === 'SECTION' || h.type === 'RULE') ? 'text-center border-b-[1px] border-lex pb-1 mb-4' : '' }`}>
                                         {/* Add Main Header just once before the Preamble or First Book */}
                                         {h.type === 'PREAMBLE' && (
                                             <h1 className="text-[16px] font-extrabold text-gray-900 dark:text-gray-100 mb-2 tracking-wide font-sans">

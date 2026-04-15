@@ -1,7 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getSubjectColor } from '../utils/colors';
+import { getSubjectColorForBarQuestion } from '../utils/colors';
+import { normalizeBarQuestionSubject } from '../utils/subjectNormalize';
 import { HighlightText } from '../utils/highlight';
 import { useLexPlay } from '../features/lexplay';
 import { useSubscription } from '../context/SubscriptionContext';
@@ -18,8 +19,9 @@ const QuestionDetailModal = ({
 }) => {
     if (!question) return null;
 
-    const colorClass = getSubjectColor(question.subject);
-    const textColor = colorClass.split(' ').find(c => c.startsWith('text-'));
+    const subjectKey = normalizeBarQuestionSubject(question);
+    const colorClass = getSubjectColorForBarQuestion(question);
+    const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
 
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
@@ -86,7 +88,7 @@ const QuestionDetailModal = ({
     return createPortal(
         <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={handleClose}>
             <div
-                className="lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                className="lex-modal-card relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}
@@ -97,7 +99,7 @@ const QuestionDetailModal = ({
                 <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
                 
                 {/* Header: headphones + subject left · prev/next centered · year + close right */}
-                <div className="relative z-10 grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 border-b-2 border-slate-300/85 bg-white/25 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/15 sm:px-2 md:px-3">
+                <div className="relative z-10 grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 border-b border-lex bg-neutral-50 px-1.5 py-1.5 dark:border-lex dark:bg-zinc-950 sm:px-2 md:px-3">
                     <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
                         <button
                             type="button"
@@ -112,7 +114,7 @@ const QuestionDetailModal = ({
                             <Headphones className="h-3 w-3" strokeWidth={2} />
                         </button>
                         <span className={`min-w-0 truncate text-[15px] font-medium leading-snug md:text-[17px] ${textColor}`}>
-                            {question.subject}
+                            {subjectKey}
                         </span>
                     </div>
                     <div className="flex justify-center justify-self-center">
@@ -121,7 +123,7 @@ const QuestionDetailModal = ({
                                 type="button"
                                 onClick={onPrev}
                                 disabled={!hasPrev}
-                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-white/15 dark:bg-white/8 dark:text-white/70 dark:hover:border-white/25 dark:hover:bg-white/12 dark:hover:text-white"
+                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-lex-strong bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                 title="Previous question"
                                 aria-label="Previous question"
                             >
@@ -132,7 +134,7 @@ const QuestionDetailModal = ({
                                 type="button"
                                 onClick={onNext}
                                 disabled={!hasNext}
-                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:border-slate-400 hover:bg-slate-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-white/15 dark:bg-white/8 dark:text-white/70 dark:hover:border-white/25 dark:hover:bg-white/12 dark:hover:text-white"
+                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-lex-strong bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                 title="Next question"
                                 aria-label="Next question"
                             >
@@ -158,7 +160,7 @@ const QuestionDetailModal = ({
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
-                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(75dvh,100%)] overflow-y-auto lex-modal-scroll bg-white dark:bg-dark-card border-b border-gray-100 dark:border-gray-800 shadow-2xl animate-in slide-in-from-top duration-300 p-4 md:p-6">
+                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(75dvh,100%)] overflow-y-auto lex-modal-scroll bg-white dark:bg-dark-card border-b border-lex shadow-2xl animate-in slide-in-from-top duration-300 p-4 md:p-6">
                         <div className="flex justify-between items-center mb-3 md:mb-4">
                             <h3 className="text-sm md:text-lg font-extrabold text-gray-900 dark:text-white flex items-center gap-1.5 md:gap-2">
                                 <ListMusic className="text-purple-500 w-4 h-4 md:w-5 md:h-5" />
@@ -181,7 +183,7 @@ const QuestionDetailModal = ({
                                             <button
                                                 key={pl.id}
                                                 onClick={() => handleAddToPlaylist(pl.id)}
-                                                className="w-full text-left p-2.5 md:p-3 rounded-lg border border-gray-100 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/10 transition-all flex items-center justify-between group"
+                                                className="w-full text-left p-2.5 md:p-3 rounded-lg border border-lex hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/10 transition-all flex items-center justify-between group"
                                             >
                                                 <span className="font-bold text-sm md:text-base text-gray-700 dark:text-gray-200">{pl.name}</span>
                                                 <Plus size={14} className="text-gray-300 group-hover:text-purple-500 md:w-[16px] md:h-[16px]" />
@@ -192,13 +194,13 @@ const QuestionDetailModal = ({
                             </div>
 
                             {/* Create New */}
-                            <div className="md:border-l border-t md:border-t-0 pt-4 md:pt-0 border-gray-100 dark:border-gray-800 md:pl-6">
+                            <div className="md:border-l border-t md:border-t-0 pt-4 md:pt-0 border-lex md:pl-6">
                                 <h4 className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 md:mb-3">Create New</h4>
                                 <div className="space-y-2.5 md:space-y-3">
                                     <input 
                                         type="text" 
                                         placeholder="Playlist Name"
-                                        className="w-full p-2 md:p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm focus:ring-2 focus:ring-purple-500 outline-none text-gray-900 dark:text-white"
+                                        className="w-full p-2 md:p-2.5 rounded-lg border border-lex bg-gray-50 dark:bg-gray-800 text-sm focus:ring-2 focus:ring-purple-500 outline-none text-gray-900 dark:text-white"
                                         value={newPlaylistName}
                                         onChange={(e) => setNewPlaylistName(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleCreateAndAdd()}
@@ -240,7 +242,7 @@ const QuestionDetailModal = ({
                                 </h4>
                                 <div className={`h-px flex-1 bg-gradient-to-r to-transparent ${textColor.replace('text-', 'from-')}`} />
                             </div>
-                            <div className="relative overflow-hidden rounded-xl border border-white/60 bg-gradient-to-br from-blue-50/60 to-white/40 p-3 glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:border-white/10 dark:from-slate-800/60 dark:to-slate-900/40 sm:p-5 md:rounded-2xl md:p-8">
+                            <div className="relative overflow-hidden rounded-xl border border-lex bg-gradient-to-br from-blue-50/80 to-white p-3 shadow-md dark:border-lex dark:from-slate-800/80 dark:to-zinc-900 sm:p-5 md:rounded-2xl md:p-8">
                                 <div className="absolute top-0 left-0 h-full w-[4px] bg-gradient-to-b from-blue-400 to-indigo-600 md:w-1.5" />
                                 <div className="text-[15px] leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap">
                                     <HighlightText text={question.answer || 'Answer not available.'} query={searchQuery} />
@@ -273,7 +275,7 @@ const QuestionDetailModal = ({
                                     </h4>
                                     <div className={`h-px flex-1 bg-gradient-to-r to-transparent ${textColor.replace('text-', 'from-')}`} />
                                 </div>
-                                <div className="relative overflow-hidden rounded-xl border border-white/60 bg-gradient-to-br from-blue-50/60 to-white/40 p-3 glass shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:border-white/10 dark:from-slate-800/60 dark:to-slate-900/40 sm:p-5 md:rounded-2xl md:p-8">
+                                <div className="relative overflow-hidden rounded-xl border border-lex bg-gradient-to-br from-blue-50/80 to-white p-3 shadow-md dark:border-lex dark:from-slate-800/80 dark:to-zinc-900 sm:p-5 md:rounded-2xl md:p-8">
                                     <div className="absolute top-0 left-0 h-full w-[4px] bg-gradient-to-b from-blue-400 to-indigo-600 md:w-1.5" />
                                     <div className="text-[15px] leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap">
                                         <HighlightText text={sub.answer || 'Answer not available.'} query={searchQuery} />

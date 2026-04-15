@@ -12,7 +12,7 @@ const PLANS = [
     icon: <Shield className="w-6 h-6" />,
     price: { monthly: 0, yearly: 0 },
     color: 'from-gray-400 to-slate-500',
-    borderColor: 'border-gray-200 dark:border-gray-700',
+    borderColor: 'border-lex',
     accentColor: 'text-gray-600 dark:text-gray-400',
     badgeBg: 'bg-gray-100 dark:bg-gray-800',
     planKey: { monthly: null, yearly: null },
@@ -214,7 +214,7 @@ export default function SubscriptionModal({ onClose }) {
   const MAX_LOCKED_SHOWN = 3;
 
   const billingToggleDesktop = (
-    <div className="inline-flex max-w-full shrink-0 items-center gap-0.5 rounded-xl border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
+    <div className="inline-flex max-w-full shrink-0 items-center gap-0.5 rounded-xl border border-white/25 bg-black/20 p-1">
       {['monthly', 'yearly'].map((b) => (
         <button
           key={b}
@@ -416,7 +416,7 @@ export default function SubscriptionModal({ onClose }) {
     : 'fixed inset-0 z-[540] flex items-center justify-center overflow-y-auto overscroll-contain bg-black/60 p-4 backdrop-blur-md animate-in fade-in duration-200 sm:p-6 md:p-8';
 
   const cardClass = isMobileLayout
-    ? 'lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45'
+    ? 'lex-modal-card relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900'
     : 'relative mx-auto flex w-full max-w-5xl max-h-[min(92vh,56rem)] flex-col overflow-hidden rounded-2xl border-0 bg-white shadow-[0_24px_64px_-12px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300 dark:bg-slate-900 dark:shadow-[0_24px_64px_-12px_rgba(88,28,135,0.45)]';
 
   // ── Payment form view (after create-checkout returns a payment_intent_id) ──

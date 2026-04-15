@@ -13,11 +13,11 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className="group relative flex h-[15rem] flex-col overflow-hidden rounded-lg border-2 border-violet-300/80 bg-white/85 p-3 shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60"
+            className="group relative flex h-[15rem] flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900"
         >
             {/* Header: ID - Subject (Year) */}
-            <div className={`flex items-center gap-2 mb-2 ${textColor}`}>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-white/60 bg-white/80 dark:border-white/10 dark:bg-slate-900/50">
+            <div className={`mb-2 flex items-center gap-2 ${textColor}`}>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-lex-strong bg-slate-50 dark:border-lex-strong dark:bg-zinc-800">
                     <SubjectIcon subject={subjectKey} className="h-4 w-4" />
                 </span>
                 <span className="min-w-0 text-sm font-bold leading-tight">
@@ -26,9 +26,9 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
             </div>
 
             {/* Source Label */}
-            <div className="flex items-center gap-2 mb-2">
+            <div className="mb-2 flex items-center gap-2">
                 <span
-                    className={`px-2 py-0.5 rounded-full text-[11px] font-semibold border bg-white/75 dark:bg-slate-900/60 ${textColor} ${borderColor}`}
+                    className={`rounded-full border px-2 py-0.5 text-[11px] font-semibold bg-white dark:bg-zinc-800/80 ${textColor} ${borderColor}`}
                 >
                     {question.year} Bar Exam Question {question.source_label && `(${question.source_label})`}
                 </span>
@@ -41,11 +41,11 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
                 </p>
             </div>
 
-            {/* Footer Button — subject outline to match modal accents */}
+            {/* Footer — neutral frame; subject color on label text only */}
             <button
                 type="button"
                 onClick={onClick}
-                className={`w-full rounded-lg border-2 py-2 text-sm font-semibold transition-colors shadow-sm bg-white/90 hover:bg-white dark:bg-slate-900/70 dark:hover:bg-slate-800/90 ${borderColor} ${textColor}`}
+                className={`w-full rounded-lg border border-lex-strong bg-white py-2 text-sm font-semibold shadow-sm transition-colors hover:bg-slate-50 dark:border-lex-strong dark:bg-zinc-800 dark:hover:bg-zinc-700 ${textColor}`}
             >
                 View Details
             </button>

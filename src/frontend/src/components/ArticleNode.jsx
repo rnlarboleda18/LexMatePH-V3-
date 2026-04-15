@@ -1169,7 +1169,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
             {/* Elements Box */}
             {showElements && parsedElements && parsedElements.length > 0 && (
-                <div className="mt-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <div className="mt-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-lex">
                     <h4 className="text-[16px] font-bold text-gray-700 dark:text-gray-300 mb-2">Elements of the Crime</h4>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
                         {parsedElements.map((el, idx) => (

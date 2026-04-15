@@ -106,16 +106,16 @@ const About = () => {
         />
 
         <div className="relative mx-auto w-full max-w-7xl space-y-10">
-          <header className="relative overflow-hidden rounded-[2rem] border border-purple-200/50 bg-gradient-to-br from-white/85 via-white/55 to-purple-100/40 px-6 py-10 shadow-[0_24px_80px_-28px_rgba(109,40,217,0.35)] backdrop-blur-2xl dark:border-white/10 dark:from-slate-950/80 dark:via-slate-950/50 dark:to-purple-950/40 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.55)] sm:px-10">
+          <header className="relative overflow-hidden rounded-[2rem] border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-6 py-10 shadow-lg dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)] sm:px-10">
             <div className="pointer-events-none absolute -right-12 -top-20 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/35 to-fuchsia-500/25 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/4 h-28 w-56 rounded-full bg-violet-400/15 blur-2xl" />
             <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
               <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 rounded-full border border-purple-200/70 bg-white/70 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-purple-700 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-purple-300">
+                <div className="inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-purple-700 shadow-sm dark:border-lex dark:bg-zinc-800/80 dark:text-purple-300">
                   <Sparkles className="h-3.5 w-3.5" />
                   LexMatePH
                 </div>
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
                   About this workspace
                 </h1>
                 <p className="max-w-2xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
@@ -123,7 +123,7 @@ const About = () => {
                   Supreme Court materials, and study tools in one purple-tinted glass workspace.
                 </p>
               </div>
-              <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-white/60 bg-white/50 px-5 py-4 shadow-lg backdrop-blur-md dark:border-white/10 dark:bg-slate-900/50">
+              <div className="flex shrink-0 items-center gap-3 rounded-2xl border border-lex bg-white px-5 py-4 shadow-md dark:border-lex dark:bg-zinc-800/90">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-600/35">
                   <Scale className="h-6 w-6" />
                 </div>
@@ -139,9 +139,9 @@ const About = () => {
 
           <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
             <div className="flex min-h-0 flex-col lg:col-span-7 lg:h-full">
-              <section className="glass relative flex h-full min-h-0 flex-col overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+              <section className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-[2rem] border border-lex bg-white p-6 shadow-xl sm:p-8 dark:border-lex dark:bg-zinc-900">
                 <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-purple-500/10 blur-2xl" />
-                <h2 className="relative text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
+                <h2 className="relative text-lg font-bold text-black dark:text-white sm:text-xl">
                   What you are using
                 </h2>
                 <p className="relative mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
@@ -149,7 +149,7 @@ const About = () => {
                   materials, and study aids together without hopping between siloed sites.
                 </p>
                 <ul className="relative mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-400">
-                  <li className="flex gap-3 rounded-xl border border-purple-100/60 bg-white/40 p-3 dark:border-white/5 dark:bg-slate-900/30">
+                  <li className="flex gap-3 rounded-xl border border-lex bg-white p-3 shadow-sm dark:border-lex dark:bg-zinc-800/60">
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-purple-600/15 text-purple-700 dark:text-purple-300">
                       <Book className="h-3.5 w-3.5" />
                     </span>
@@ -158,7 +158,7 @@ const About = () => {
                       actual past Philippine Bar Examination questions, with suggested answers to support your review.
                     </span>
                   </li>
-                  <li className="flex gap-3 rounded-xl border border-purple-100/60 bg-white/40 p-3 dark:border-white/5 dark:bg-slate-900/30">
+                  <li className="flex gap-3 rounded-xl border border-lex bg-white p-3 shadow-sm dark:border-lex dark:bg-zinc-800/60">
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-violet-600/15 text-violet-700 dark:text-violet-300">
                       <Gavel className="h-3.5 w-3.5" />
                     </span>
@@ -179,14 +179,14 @@ const About = () => {
             </div>
 
             <aside className="flex min-h-0 flex-col lg:col-span-5 lg:h-full">
-              <section className="glass relative flex h-full min-h-0 flex-col overflow-hidden rounded-[2rem] p-6 shadow-xl sm:p-8">
+              <section className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-[2rem] border border-lex bg-white p-6 shadow-xl sm:p-8 dark:border-lex dark:bg-zinc-900">
                 <div className="pointer-events-none absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-violet-500/15 blur-2xl" />
                 <div className="relative mb-5 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30">
                     <Shield className="h-5 w-5" />
                   </div>
                   <div>
-                    <h2 className="text-base font-bold text-slate-900 dark:text-white sm:text-lg">
+                    <h2 className="text-base font-bold text-black dark:text-white sm:text-lg">
                       The LexMatePH standard
                     </h2>
                     <p className="text-xs text-slate-500 dark:text-slate-400">Engineered case digests</p>
@@ -200,12 +200,12 @@ const About = () => {
                   {STANDARD_PILLARS.map(({ icon: Icon, title, body }) => (
                     <div
                       key={title}
-                      className="rounded-2xl border border-white/50 bg-white/45 p-4 shadow-sm backdrop-blur-md transition hover:border-purple-300/50 hover:bg-white/70 dark:border-white/10 dark:bg-slate-900/40 dark:hover:border-purple-500/30 dark:hover:bg-slate-900/60"
+                      className="rounded-2xl border border-lex bg-white p-4 shadow-sm transition hover:border-lex-strong hover:shadow-md dark:border-lex dark:bg-zinc-800/70 dark:hover:border-lex-strong dark:hover:bg-zinc-800"
                     >
                       <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-purple-500/15 text-purple-700 dark:text-purple-300">
                         <Icon className="h-4 w-4" strokeWidth={2} />
                       </div>
-                      <h3 className="text-xs font-bold text-slate-900 dark:text-white">{title}</h3>
+                      <h3 className="text-xs font-bold text-black dark:text-white">{title}</h3>
                       <p className="mt-1.5 text-[11px] leading-relaxed text-slate-600 dark:text-slate-400">{body}</p>
                     </div>
                   ))}
@@ -225,7 +225,7 @@ const About = () => {
               {FEATURES.map(({ icon: Icon, title, description, accent }) => (
                 <div
                   key={title}
-                  className="group relative overflow-hidden rounded-2xl border border-white/60 bg-white/50 p-5 shadow-md backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-purple-300/40 hover:shadow-xl dark:border-white/10 dark:bg-slate-900/40 dark:hover:border-purple-500/25"
+                  className="group relative overflow-hidden rounded-2xl border border-lex bg-white p-5 shadow-md transition hover:-translate-y-0.5 hover:border-lex-strong hover:shadow-xl dark:border-lex dark:bg-zinc-900 dark:hover:border-lex-strong"
                 >
                   <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-purple-400/10 blur-2xl transition group-hover:bg-purple-400/20" />
                   <div
@@ -233,7 +233,7 @@ const About = () => {
                   >
                     <Icon className="h-6 w-6" strokeWidth={2} />
                   </div>
-                  <h3 className="relative text-base font-bold text-slate-900 dark:text-white">{title}</h3>
+                  <h3 className="relative text-base font-bold text-black dark:text-white">{title}</h3>
                   <p className="relative mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                     {description}
                   </p>

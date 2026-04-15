@@ -782,7 +782,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden bg-white/90 shadow-[0_-4px_20px_-8px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950/92 dark:backdrop-blur-xl dark:shadow-[0_-8px_32px_-8px_rgba(0,0,0,0.55)] dark:ring-1 dark:ring-inset dark:ring-white/[0.06]"
+                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden border-t border-lex bg-white shadow-[0_-4px_24px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950 dark:shadow-[0_-8px_32px_-8px_rgba(0,0,0,0.4)]"
             >
                 {/* Top edge: scrub line, full viewport width */}
                 <div
@@ -794,7 +794,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
 
                 {/* Mobile: label row above transport. Desktop/tablet: label left, transport centered. */}
                 <div
-                    className="relative flex w-full flex-col cursor-pointer hover:bg-white/95 dark:hover:bg-white/[0.04]
+                    className="relative flex w-full flex-col cursor-pointer hover:bg-neutral-50 dark:hover:bg-zinc-900/80
                         pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(2.25rem,env(safe-area-inset-right,0px))] py-0 pb-0.5 md:py-1 md:pb-1 md:pr-[max(2.75rem,env(safe-area-inset-right,0px))]"
                     onClick={onExpand}
                 >
@@ -805,7 +805,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 e.stopPropagation();
                                 onCloseMini();
                             }}
-                            className="absolute right-[max(0.25rem,env(safe-area-inset-right,0px))] top-0.5 z-30 flex h-8 w-8 items-center justify-center rounded-full border border-gray-200/90 bg-white/95 text-gray-600 shadow-sm transition-colors hover:bg-gray-50 hover:text-gray-900 active:scale-95 md:top-1 dark:border-white/12 dark:bg-white/[0.08] dark:text-white/80 dark:hover:bg-white/12"
+                            className="absolute right-[max(0.25rem,env(safe-area-inset-right,0px))] top-0.5 z-30 flex h-8 w-8 items-center justify-center rounded-full border border-lex-strong bg-white text-neutral-600 shadow-sm transition-colors hover:bg-neutral-100 hover:text-neutral-900 active:scale-95 md:top-1 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
                             title="Close LexPlayer"
                             aria-label="Close LexPlayer"
                         >
@@ -837,7 +837,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                     disabled={playlist.length === 0}
                                     aria-label="Previous track"
                                 >
@@ -847,7 +847,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                     disabled={playlist.length === 0}
-                                    className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_4px_14px_-4px_rgba(124,58,237,0.45)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-700 text-white shadow-md transition-all hover:bg-violet-800 active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100 dark:bg-violet-600 dark:hover:bg-violet-500"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
                                 >
                                     {isLoading ? (
@@ -872,7 +872,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                     disabled={playlist.length === 0}
                                     aria-label="Next track"
                                 >
@@ -911,7 +911,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                     disabled={playlist.length === 0}
                                     aria-label="Previous track"
                                 >
@@ -921,7 +921,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                     disabled={playlist.length === 0}
-                                    className="group flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_6px_20px_-6px_rgba(124,58,237,0.5)] ring-1 ring-white/15 transition-all hover:scale-[1.03] hover:shadow-[0_8px_24px_-6px_rgba(168,85,247,0.45)] active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100"
+                                    className="group flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-violet-700 text-white shadow-md transition-all hover:bg-violet-800 active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100 dark:bg-violet-600 dark:hover:bg-violet-500"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
                                 >
                                     {isLoading ? (
@@ -946,7 +946,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 <button
                                     type="button"
                                     onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-gray-200/90 bg-gray-100/70 text-gray-600 shadow-sm transition-all hover:border-purple-200/90 hover:bg-purple-50/90 hover:text-purple-700 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/18 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                    className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                     disabled={playlist.length === 0}
                                     aria-label="Next track"
                                 >

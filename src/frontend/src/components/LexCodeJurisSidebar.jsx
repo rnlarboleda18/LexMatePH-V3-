@@ -119,10 +119,10 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
     return (
         <div className="h-full min-h-0 flex flex-col bg-transparent transition-all duration-300">
             {/* Header */}
-            <div className="p-3 bg-slate-50/90 dark:bg-slate-800/30 backdrop-blur-sm border-b border-slate-200/80 dark:border-white/5 flex flex-col gap-2 sticky top-0 z-10">
+            <div className="p-3 bg-slate-50 dark:bg-zinc-800 border-b border-lex flex flex-col gap-2 sticky top-0 z-10">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h3 className="text-[16px] font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wide">Jurisprudence</h3>
+                        <h3 className="text-[16px] font-bold text-black dark:text-zinc-100 uppercase tracking-wide">Jurisprudence</h3>
                         <p className="text-xs text-slate-500 dark:text-gray-400">Atomic Ratios for Art. {articleNum}</p>
                     </div>
                     <button

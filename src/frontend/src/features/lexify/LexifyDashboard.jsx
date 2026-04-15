@@ -121,9 +121,9 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
         }
     };
 
-    /** Unified purple glass cards (About-style); day copy still distinguishes sessions in text. */
+    /** Exam cards — same structural border as rest of app (`border-lex`). */
     const EXAM_CARD_SHELL =
-        'border border-purple-200/50 bg-gradient-to-br from-white/80 via-violet-50/40 to-purple-100/35 shadow-[0_18px_48px_-22px_rgba(109,40,217,0.22)] backdrop-blur-md dark:border-zinc-700 dark:bg-zinc-900/80 dark:shadow-[0_12px_40px_-16px_rgba(0,0,0,0.45)] dark:backdrop-blur-md';
+        'rounded-2xl border border-lex bg-white shadow-md dark:border-lex dark:bg-zinc-900';
 
     const WEIGHT_COLOR = (w) =>
         w === '25%'
@@ -136,14 +136,14 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
         <FeaturePageShell>
             <PurpleGlassAmbient className="pb-4">
             {/* Dashboard only: full-screen exam UI lives in LexifyApp (other exam states). */}
-            <div className="flex flex-col overflow-hidden rounded-[2rem] border-2 border-violet-200/70 bg-white/50 font-sans text-gray-900 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-900/90 dark:text-gray-100 dark:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.5)] dark:backdrop-blur-xl">
-            <div className="flex h-12 shrink-0 select-none items-center justify-between border-b-2 border-violet-200/60 bg-white/55 px-4 sm:px-6 dark:border-zinc-800 dark:bg-zinc-950/90 dark:backdrop-blur-md">
+            <div className="flex flex-col overflow-hidden rounded-[2rem] border border-lex bg-white font-sans text-gray-900 shadow-lg dark:border-lex dark:bg-zinc-900 dark:text-gray-100">
+            <div className="flex h-12 shrink-0 select-none items-center justify-between border-b border-lex bg-neutral-50 px-4 sm:px-6 dark:border-lex dark:bg-zinc-950">
                 <div className="relative z-50 flex items-center gap-3">
                     <button type="button" onClick={() => setShowMenu(!showMenu)} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
                         <span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" />
                     </button>
                     {showMenu && (
-                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border border-violet-200/80 bg-white/95 py-2 shadow-[0_20px_50px_-12px_rgba(109,40,217,0.25)] backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/98">
+                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border border-lex bg-white py-2 shadow-lg dark:border-lex dark:bg-zinc-900">
                             <button type="button" onClick={() => { setShowPrefsModal(true); setShowMenu(false); }} className="w-full px-4 py-2.5 text-left text-sm text-slate-800 transition hover:bg-violet-50 dark:text-slate-100 dark:hover:bg-white/10">Preferences</button>
                             <button type="button" onClick={handleStartNewAttempt} className="w-full px-4 py-2.5 text-left text-sm text-emerald-700 transition hover:bg-emerald-50/80 dark:text-emerald-400 dark:hover:bg-white/10">Start new attempt</button>
                             
@@ -157,7 +157,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                             </button>
 
                             {showSampleSubmenu && (
-                                <div className="max-h-48 overflow-y-auto border-y border-gray-100 bg-slate-50/50 py-1 dark:border-white/5 dark:bg-black/20">
+                                <div className="max-h-48 overflow-y-auto border-y border-lex bg-neutral-50 py-1 dark:border-lex dark:bg-zinc-800/80">
                                     {[
                                         { id: 'political-pil',   short: 'Political & PIL' },
                                         { id: 'commercial-tax',  short: 'Commercial & Tax' },
@@ -177,7 +177,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                                 </div>
                             )}
 
-                            <hr className="my-1 border-gray-200 dark:border-white/10" />
+                            <hr className="my-1 border-0 border-t border-lex" />
                             <button onClick={onClose} className="w-full px-4 py-2.5 text-left text-sm text-rose-600 transition hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-white/10">✕ Exit to LexMatePH</button>
                         </div>
                     )}
@@ -190,7 +190,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
             </div>
             <div className="mx-auto w-full max-w-5xl flex-1 overflow-y-auto px-4 py-4 sm:px-6">
                 {/* Tabs Selection Navbar */}
-                <div className="mb-6 flex select-none justify-center gap-8 border-b border-purple-200/40 dark:border-purple-500/20">
+                <div className="mb-6 flex select-none justify-center gap-8 border-b border-lex">
                     <button
                         type="button"
                         onClick={() => setActiveTab('exams')}
@@ -209,10 +209,10 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
                 {activeTab === 'exams' ? (
                     <>
-                        <div className="relative mb-8 overflow-hidden rounded-[1.75rem] border border-purple-200/50 bg-gradient-to-br from-white/85 via-violet-50/40 to-purple-100/35 px-5 py-8 text-center shadow-[0_20px_60px_-28px_rgba(109,40,217,0.28)] backdrop-blur-xl dark:border-white/10 dark:from-slate-950/75 dark:via-purple-950/35 dark:to-slate-950/60 sm:px-8">
+                        <div className="relative mb-8 overflow-hidden rounded-[1.75rem] border border-lex bg-white px-5 py-8 text-center shadow-md dark:border-lex dark:bg-zinc-900 sm:px-8">
                             <div className="pointer-events-none absolute -right-8 -top-12 h-36 w-36 rounded-full bg-gradient-to-br from-purple-400/30 to-fuchsia-500/20 blur-2xl" aria-hidden />
                             <div className="pointer-events-none absolute bottom-0 left-1/4 h-24 w-48 rounded-full bg-violet-400/15 blur-2xl" aria-hidden />
-                            <div className="relative mx-auto inline-flex items-center gap-2 rounded-full border border-purple-200/70 bg-white/70 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-purple-800 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-white/5 dark:text-purple-200">
+                            <div className="relative mx-auto inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-purple-800 shadow-sm dark:border-lex dark:bg-zinc-800/90 dark:text-purple-200">
                                 <Sparkles className="h-3.5 w-3.5 text-purple-600 dark:text-purple-300" aria-hidden />
                                 Simulated secure testing environment
                             </div>
@@ -241,7 +241,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                         })()}
 
                         {rosterRefreshing && (
-                            <div className="mb-4 flex items-center justify-center gap-2 rounded-xl border border-violet-200/60 bg-violet-50/50 px-3 py-2 text-xs font-medium text-violet-800 backdrop-blur-sm dark:border-purple-500/25 dark:bg-purple-950/30 dark:text-violet-200">
+                            <div className="mb-4 flex items-center justify-center gap-2 rounded-xl border border-lex bg-violet-50 px-3 py-2 text-xs font-medium text-violet-800 dark:border-lex dark:bg-zinc-800 dark:text-violet-200">
                                 <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin" aria-hidden />
                                 Syncing live question counts from the server…
                             </div>
@@ -276,7 +276,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                                             </div>
                                         </div>
 
-                                        <div className="flex items-center justify-between border-t border-purple-200/40 bg-white/45 px-5 py-3.5 backdrop-blur-sm dark:border-purple-500/15 dark:bg-slate-950/35">
+                                        <div className="flex items-center justify-between border-t border-lex bg-neutral-50 px-5 py-3.5 dark:border-lex dark:bg-zinc-800/90">
                                             <div className="flex flex-wrap items-center gap-2">
                                                 {isTaken ? (
                                                     <span className="rounded-full border border-emerald-300/80 bg-emerald-50 px-2 py-0.5 text-[11px] text-emerald-800 dark:border-emerald-500/30 dark:bg-emerald-950/40 dark:text-emerald-300">
@@ -341,10 +341,10 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                             </div>
                         ) : (
                             Object.entries(attempts.history).reverse().map(([attemptNum, subjectMap]) => (
-                                <div key={attemptNum} className="rounded-2xl border border-purple-200/50 bg-white/50 p-5 shadow-[0_16px_40px_-20px_rgba(109,40,217,0.15)] backdrop-blur-md dark:border-purple-500/25 dark:bg-slate-900/45">
-                                    <div className="mb-4 flex items-center justify-between border-b border-purple-200/40 pb-2 dark:border-purple-500/20">
+                                <div key={attemptNum} className="rounded-2xl border border-lex bg-white p-5 shadow-md dark:border-lex dark:bg-zinc-900">
+                                    <div className="mb-4 flex items-center justify-between border-b border-lex pb-2 dark:border-lex">
                                         <h3 className="text-base font-bold text-violet-900 dark:text-violet-200">Mock bar attempt no. {attemptNum}</h3>
-                                        <span className="rounded-full border border-gray-200 bg-gray-50 px-2 py-0.5 text-[10px] text-gray-600 dark:border-white/10 dark:bg-white/5 dark:text-gray-400">
+                                        <span className="rounded-full border border-lex-strong bg-neutral-50 px-2 py-0.5 text-[10px] text-gray-600 dark:border-lex-strong dark:bg-zinc-800 dark:text-gray-400">
                                             {Object.keys(subjectMap).length} Subjects Completed
                                         </span>
                                     </div>
@@ -353,7 +353,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                                             const exam = exams.find(e => e.id === examId);
                                             const label = exam ? exam.label : examId.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
                                             return (
-                                                <div key={examId} className="flex items-center justify-between rounded-xl border border-gray-100 bg-white/60 px-4 py-3 transition-colors hover:bg-white dark:border-white/5 dark:bg-white/5 dark:hover:bg-white/10">
+                                                <div key={examId} className="flex items-center justify-between rounded-xl border border-lex bg-white px-4 py-3 transition-colors hover:bg-neutral-50 dark:border-lex dark:bg-zinc-800/80 dark:hover:bg-zinc-800">
                                                     <div>
                                                         <p className="text-sm font-bold text-gray-900 dark:text-gray-100">{label}</p>
                                                         <p className="mt-0.5 flex items-center gap-2 text-[10px] text-gray-500 dark:text-gray-400">
@@ -390,8 +390,8 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
             {/* Exam Details & Grading Info Modal */}
             {showDetailsModal && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-violet-950/40 p-4 backdrop-blur-md dark:bg-purple-950/50">
-                    <div className="relative w-full max-w-md rounded-2xl border border-violet-200/80 bg-white/95 p-6 shadow-[0_28px_70px_-20px_rgba(109,40,217,0.35)] backdrop-blur-xl dark:border-purple-500/30 dark:bg-slate-900/95">
+                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4 dark:bg-black/60">
+                    <div className="relative w-full max-w-md rounded-2xl border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900">
                         <button type="button" onClick={() => setShowDetailsModal(null)} className="absolute right-4 top-4 text-slate-400 transition hover:text-slate-900 dark:text-slate-500 dark:hover:text-white">✕</button>
                         
                         <div className="mb-4">
@@ -400,7 +400,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                         </div>
 
                         {/* Breakdown */}
-                        <div className="mb-4 rounded-xl border border-purple-100/80 bg-violet-50/50 p-4 dark:border-white/10 dark:bg-slate-800/50">
+                        <div className="mb-4 rounded-xl border border-lex bg-violet-50/80 p-4 dark:border-lex dark:bg-zinc-800/90">
                             <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">Subject sub-topics</h4>
                             <div className="space-y-2">
                                 {showDetailsModal.breakdown.map((b, i) => (
@@ -420,11 +420,11 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                         </div>
 
                         {/* Grading Information */}
-                        <div className="rounded-xl border border-violet-200/80 bg-violet-50/90 p-4 text-sm text-violet-950 dark:border-purple-500/30 dark:bg-purple-950/40 dark:text-violet-100">
+                        <div className="rounded-xl border border-lex bg-violet-50 p-4 text-sm text-violet-950 dark:border-lex dark:bg-zinc-800 dark:text-violet-100">
                             <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-violet-900 dark:text-violet-200">Grading (2026)</h4>
                             <div className="space-y-2 text-xs leading-relaxed text-violet-900/95 dark:text-violet-200/90">
                                 <p>This exam is AI-graded (Google Gemini) against suggested answers using 2026 qualitative 0–5 criteria.</p>
-                                <div className="mt-2 space-y-1 border-t border-violet-200/60 pt-2 text-[11px] text-violet-800/95 dark:border-purple-500/25 dark:text-violet-200/85">
+                                <div className="mt-2 space-y-1 border-t border-lex pt-2 text-[11px] text-violet-800/95 dark:border-lex dark:text-violet-200/85">
                                     <p><strong>• Layer A (Raw Score)</strong>: 20 Questions sums to an absolute max 100%.</p>
                                     <p><strong>• Layer B (Weights)</strong>: Multiplies Raw % by official 2026 category weight factors (e.g. 15%, 20%, 25%).</p>
                                     <p><strong>• Layer C (General Average)</strong>: Total sum sum across Layer B slots with 75% passing threshold. Rule 138 disqualification kicks in if any Layer A falls below 50%.</p>
@@ -441,8 +441,8 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
             {/* Proctor Password Modal */}
             {showPasswordModal && selectedExam && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-violet-950/40 p-4 backdrop-blur-md dark:bg-purple-950/50">
-                    <div className="w-full max-w-md rounded-2xl border border-violet-200/80 bg-white/95 p-8 shadow-[0_28px_70px_-20px_rgba(109,40,217,0.35)] backdrop-blur-xl dark:border-purple-500/30 dark:bg-slate-900/95">
+                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4 dark:bg-black/60">
+                    <div className="w-full max-w-md rounded-2xl border border-lex bg-white p-8 shadow-xl dark:border-lex dark:bg-zinc-900">
                         <div className="mb-6 text-center">
                             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-violet-500/25 to-purple-600/25 text-2xl ring-2 ring-violet-300/50 dark:ring-purple-500/30">🔒</div>
                             <h3 className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Proctor authorization</h3>
@@ -456,12 +456,12 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                             onChange={(e) => { setPassword(e.target.value); setPasswordError(''); }}
                             onKeyDown={(e) => e.key === 'Enter' && handlePasswordSubmit()}
                             placeholder="Enter proctor password"
-                            className="mb-2 w-full rounded-xl border border-violet-200/80 bg-white px-4 py-3 text-center text-lg tracking-[0.35em] text-slate-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-500/25 dark:border-purple-500/30 dark:bg-slate-800/80 dark:text-white dark:focus:border-violet-400"
+                            className="mb-2 w-full rounded-xl border border-lex-strong bg-white px-4 py-3 text-center text-lg tracking-[0.35em] text-slate-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-500/25 dark:border-lex-strong dark:bg-zinc-800 dark:text-white dark:focus:border-violet-400"
                         />
                         <p className="mb-2 text-center text-xs text-slate-500 dark:text-slate-500">Hint: ask your proctor after the second bell</p>
                         {passwordError && <div className="mb-2 rounded-lg border border-rose-200 bg-rose-50 px-4 py-2 text-center text-sm text-rose-800 dark:border-rose-500/30 dark:bg-rose-950/40 dark:text-rose-300">{passwordError}</div>}
                         <div className="mt-4 flex gap-3">
-                            <button type="button" onClick={() => setShowPasswordModal(false)} className="flex-1 rounded-xl border border-slate-200 py-2 text-sm text-slate-600 transition hover:bg-slate-50 dark:border-white/10 dark:text-slate-300 dark:hover:bg-white/5">Cancel</button>
+                            <button type="button" onClick={() => setShowPasswordModal(false)} className="flex-1 rounded-xl border border-lex py-2 text-sm text-slate-600 transition hover:bg-neutral-50 dark:border-lex dark:text-slate-300 dark:hover:bg-zinc-800">Cancel</button>
                             <button type="button" onClick={handlePasswordSubmit} className="flex-1 rounded-xl border border-violet-500/30 bg-gradient-to-r from-violet-600 to-purple-600 py-2 text-sm font-bold text-white shadow-sm transition hover:from-violet-500 hover:to-fuchsia-600">Confirm</button>
                         </div>
                     </div>
@@ -470,13 +470,13 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
             {/* Preferences Modal */}
             {showPrefsModal && (
-                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-violet-950/40 p-4 backdrop-blur-md dark:bg-purple-950/50">
-                    <div className="w-full max-w-sm rounded-2xl border border-violet-200/80 bg-white/95 p-8 shadow-[0_28px_70px_-20px_rgba(109,40,217,0.35)] backdrop-blur-xl dark:border-purple-500/30 dark:bg-slate-900/95">
+                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 p-4 dark:bg-black/60">
+                    <div className="w-full max-w-sm rounded-2xl border border-lex bg-white p-8 shadow-xl dark:border-lex dark:bg-zinc-900">
                         <h3 className="mb-5 text-lg font-bold tracking-tight text-slate-900 dark:text-white">Preferences</h3>
                         <label className="mb-1 block text-xs font-bold text-slate-600 dark:text-slate-400">Alarm reminder (HH:MM:SS)</label>
                         <p className="mb-2 text-xs text-slate-500 dark:text-slate-500">Alert when this much time remains</p>
                         <input type="text" value={alarmTime} onChange={(e) => setAlarmTime(e.target.value)} placeholder="00:30:00"
-                            className="w-full rounded-xl border border-violet-200/80 bg-white px-4 py-2 text-center text-sm tabular-nums tracking-wide text-slate-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-500/25 dark:border-purple-500/30 dark:bg-slate-800/80 dark:text-white" />
+                            className="w-full rounded-xl border border-lex-strong bg-white px-4 py-2 text-center text-sm tabular-nums tracking-wide text-slate-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-500/25 dark:border-lex-strong dark:bg-zinc-800 dark:text-white" />
                         <button type="button" onClick={() => setShowPrefsModal(false)} className="mt-5 w-full rounded-xl border border-violet-500/30 bg-gradient-to-r from-violet-600 to-purple-600 py-2 text-sm font-bold text-white shadow-sm transition hover:from-violet-500 hover:to-fuchsia-600">Save</button>
                     </div>
                 </div>

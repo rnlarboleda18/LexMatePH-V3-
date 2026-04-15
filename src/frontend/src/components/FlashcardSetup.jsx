@@ -37,12 +37,12 @@ const FlashcardSetup = ({
             <div
                 className={
                     embedded
-                        ? 'relative flex w-full max-w-full min-w-0 flex-col rounded-[1.75rem] border-2 border-violet-200/60 bg-gradient-to-br from-white/70 via-violet-50/35 to-purple-100/30 p-5 shadow-[0_24px_60px_-24px_rgba(109,40,217,0.22)] backdrop-blur-xl dark:border-purple-500/30 dark:from-slate-900/70 dark:via-purple-950/25 dark:to-slate-900/60 sm:p-6'
-                        : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-[1.75rem] border-2 border-violet-200/70 bg-white/55 shadow-[0_28px_70px_-24px_rgba(109,40,217,0.28)] backdrop-blur-xl animate-in zoom-in-95 duration-200 dark:border-purple-500/30 dark:bg-slate-900/50 glass'
+                        ? 'relative flex w-full max-w-full min-w-0 flex-col rounded-[1.75rem] border border-lex bg-white p-5 shadow-lg dark:border-lex dark:bg-zinc-900 sm:p-6'
+                        : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-[1.75rem] border border-lex bg-white shadow-xl animate-in zoom-in-95 duration-200 dark:border-lex dark:bg-zinc-900'
                 }
             >
                 {(conceptsLoading || conceptsError || deckError) && (
-                    <div className="flex flex-col gap-2 border-b border-violet-200/30 px-1 pb-3 pt-0 dark:border-white/10 sm:px-0">
+                    <div className="flex flex-col gap-2 border-b border-lex px-1 pb-3 pt-0 dark:border-lex sm:px-0">
                         {conceptsLoading && (
                             <p className="text-sm text-gray-500 dark:text-gray-400">Loading SC concepts…</p>
                         )}
@@ -69,7 +69,7 @@ const FlashcardSetup = ({
 
                 <div className={embedded ? 'min-w-0 flex-1 space-y-6' : 'flex-1 space-y-10 overflow-y-auto p-6 sm:p-8'}>
                     <section className="min-w-0 max-w-full">
-                        <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-violet-800 dark:text-violet-300">
+                        <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">
                             Legal concepts (SC digests)
                         </h3>
                         <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
@@ -84,7 +84,7 @@ const FlashcardSetup = ({
                             items stay out unless you widen the deck with the options below.
                         </p>
                         {typeof onBar2026OnlyChange === 'function' && (
-                            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-violet-200/70 bg-white/45 px-3 py-2.5 dark:border-purple-500/20 dark:bg-slate-900/35">
+                            <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-lex bg-white px-3 py-2.5 dark:border-lex dark:bg-zinc-800/80">
                                 <input
                                     type="checkbox"
                                     className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600 focus:ring-violet-500 dark:border-slate-600"
@@ -104,7 +104,7 @@ const FlashcardSetup = ({
                             </label>
                         )}
                         {typeof onRelaxedBarMatchChange === 'function' && (
-                            <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-violet-200/70 bg-white/45 px-3 py-2.5 dark:border-purple-500/20 dark:bg-slate-900/35">
+                            <label className="mb-4 flex cursor-pointer items-start gap-3 rounded-xl border border-lex bg-white px-3 py-2.5 dark:border-lex dark:bg-zinc-800/80">
                                 <input
                                     type="checkbox"
                                     className="mt-0.5 h-4 w-4 shrink-0 rounded border-slate-300 text-violet-600 focus:ring-violet-500 dark:border-slate-600"
@@ -133,11 +133,11 @@ const FlashcardSetup = ({
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border-2 border-violet-300/80 bg-white/85 p-4 text-left shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border border-lex bg-white p-4 text-left shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-800/90 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
                             >
                                 <div className="min-w-0 space-y-2">
                                     <span className="flex items-start gap-2.5 text-sm font-bold text-slate-800 dark:text-slate-100">
-                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-violet-200/80 bg-white/90 text-violet-700 shadow-sm dark:border-purple-500/30 dark:bg-slate-800/90 dark:text-violet-200">
+                                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-lex bg-white text-violet-700 shadow-sm dark:border-lex dark:bg-zinc-900 dark:text-violet-200">
                                             <AllSubjectsIcon className="h-5 w-5" strokeWidth={2} aria-hidden />
                                         </span>
                                         <span className="min-w-0 pt-0.5 leading-snug">Random / All subjects</span>
@@ -163,11 +163,11 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border-2 border-violet-300/80 bg-white/85 p-4 text-left shadow-sm transition-shadow hover:shadow-lg dark:border-purple-400/35 dark:bg-slate-800/60 disabled:pointer-events-none disabled:opacity-50"
+                                        className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border border-lex bg-white p-4 text-left shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-800/90 disabled:pointer-events-none disabled:opacity-50"
                                     >
                                         <div className="min-w-0 space-y-2">
                                             <span className={`flex items-start gap-2.5 text-sm font-bold ${textColor}`}>
-                                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/70 bg-white/85 shadow-sm dark:border-white/10 dark:bg-slate-900/60">
+                                                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-lex-strong bg-white shadow-sm dark:border-lex-strong dark:bg-zinc-800">
                                                     <SubjectIcon subject={subject} className="h-5 w-5" />
                                                 </span>
                                                 <span className="min-w-0 break-words pt-0.5 leading-snug">{subject}</span>
@@ -188,7 +188,7 @@ const FlashcardSetup = ({
                 </div>
 
                 {!embedded && (
-                    <div className="p-6 border-t border-white/25 dark:border-white/10 bg-white/20 dark:bg-black/10 flex justify-center">
+                    <div className="flex justify-center border-t border-lex bg-slate-50 p-6 dark:border-lex dark:bg-zinc-800/60">
                         <button
                             type="button"
                             onClick={() => onStart('CANCEL')}

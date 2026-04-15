@@ -8,6 +8,11 @@ export default {
     theme: {
         extend: {
             colors: {
+                /** Panel / card / chrome borders — from `index.css` :root & `.dark` */
+                lex: {
+                    DEFAULT: 'var(--lex-border)',
+                    strong: 'var(--lex-border-strong)',
+                },
                 // Dark Mode
                 dark: {
                     bg: '#242424',
@@ -29,7 +34,7 @@ export default {
             fontFamily: {
                 sans: ['Outfit', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
                 display: ['"Playfair Display"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
-            }
+            },
         },
     },
     plugins: [

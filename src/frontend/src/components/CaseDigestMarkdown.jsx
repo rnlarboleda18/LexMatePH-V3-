@@ -151,7 +151,7 @@ function useMarkdownComponents(onCaseClick, includeTables) {
             ),
             thead: ({ children }) => <thead className="bg-gray-100 dark:bg-gray-800/80">{children}</thead>,
             tbody: ({ children }) => <tbody>{children}</tbody>,
-            tr: ({ children }) => <tr className="border-b border-gray-200 dark:border-gray-700">{children}</tr>,
+            tr: ({ children }) => <tr className="border-b border-lex">{children}</tr>,
             th: ({ children }) => (
                 <th className="border border-gray-300 px-2 py-2 align-top font-semibold dark:border-gray-600">{children}</th>
             ),

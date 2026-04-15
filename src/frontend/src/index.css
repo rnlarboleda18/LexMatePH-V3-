@@ -13,6 +13,16 @@
   --lex-light-border: rgba(51, 65, 85, 0.28);
   --lex-light-border-strong: rgba(30, 41, 59, 0.38);
   --lex-light-surface: rgba(255, 255, 255, 0.94);
+  /* Structural UI — cool slate grays (≈1px via Tailwind `border`); slightly darker than slate-200 for card edges */
+  --lex-border: #cbd5e1;
+  --lex-border-strong: #94a3b8;
+}
+
+.dark {
+  --lex-border: #52525b;
+  --lex-border-strong: #71717a;
+  --glass-border: var(--lex-border);
+  --dark-glass-border: var(--lex-border);
 }
 
 /* sm+: tagline + center nav row — header is taller than phone-only */
@@ -221,11 +231,11 @@ body {
 /* Glassmorphism & Premium Design Tokens */
 :root {
   --glass-bg: rgba(255, 255, 255, 0.88);
-  --glass-border: var(--lex-light-border);
+  --glass-border: var(--lex-border);
   --glass-blur: blur(12px);
   
   --dark-glass-bg: rgba(17, 24, 39, 0.7);
-  --dark-glass-border: rgba(255, 255, 255, 0.1);
+  --dark-glass-border: var(--lex-border);
 
   --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
   --premium-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -235,7 +245,7 @@ body {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 2px solid var(--glass-border);
+  border: 1px solid var(--glass-border);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
@@ -265,7 +275,7 @@ body {
   );
   backdrop-filter: blur(26px) saturate(1.78);
   -webkit-backdrop-filter: blur(26px) saturate(1.78);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--lex-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.92),
     inset 0 -1px 0 rgba(148, 163, 184, 0.18),
@@ -281,7 +291,7 @@ html.dark .landing-page .landing-glass {
     rgba(30, 41, 59, 0.72) 48%,
     rgba(15, 23, 42, 0.86) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--lex-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
     inset 0 -1px 0 rgba(0, 0, 0, 0.28),
@@ -302,7 +312,7 @@ html.dark .landing-page .landing-glass {
   );
   backdrop-filter: blur(34px) saturate(1.88);
   -webkit-backdrop-filter: blur(34px) saturate(1.88);
-  border: 1px solid rgba(255, 255, 255, 0.78);
+  border: 1px solid var(--lex-border);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.95),
     inset 0 -2px 8px rgba(148, 163, 184, 0.14),
@@ -319,7 +329,7 @@ html.dark .landing-page .landing-glass-hero {
     rgba(51, 65, 85, 0.58) 34%,
     rgba(15, 23, 42, 0.9) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.17);
+  border: 1px solid var(--lex-border);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.2),
     inset 0 -2px 10px rgba(0, 0, 0, 0.38),
@@ -351,7 +361,7 @@ html.dark .landing-page .landing-glass-nested {
     rgba(51, 65, 85, 0.5) 0%,
     rgba(15, 23, 42, 0.62) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.11);
+  border: 1px solid var(--lex-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 8px 32px -6px rgba(0, 0, 0, 0.45);
@@ -419,11 +429,25 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   font-size: 16px;
 }
 
-/* Global Flat Header System: All headers match body size */
+/* Global Flat Header System: All headers match body size; light mode = black type */
 h1, h2, h3, h4, h5, h6,
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-size: 16px !important;
   line-height: inherit !important;
+  color: #000000;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6,
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
+  color: #fafafa;
 }
 
 /* Internal Markdown Headers are centered */

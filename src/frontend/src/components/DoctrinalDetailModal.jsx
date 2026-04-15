@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X, BookOpen, Scale, Gavel, AlertCircle, Zap } from 'lucide-react';
-import { getSubjectColor } from '../utils/colors';
+import { getSubjectColorForRawSubject } from '../utils/colors';
 
 const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
     if (!caseData) return null;
@@ -16,7 +16,7 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
         'source_label': sourceLabel
     } = caseData;
 
-    const subjectColorClass = getSubjectColor(subject);
+    const subjectColorClass = getSubjectColorForRawSubject(subject);
     const [isCompactView, setIsCompactView] = useState(false);
 
     // Helper to highlight search terms
@@ -61,13 +61,13 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
     return createPortal(
         <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
             <div 
-                className="lex-modal-card glass relative flex max-w-3xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                className="lex-modal-card relative flex max-w-3xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
-                <div className="p-3 md:p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-start bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-800/50">
+                <div className="p-3 md:p-6 border-b border-lex flex justify-between items-start bg-gradient-to-r from-gray-50 to-white dark:from-gray-800 dark:to-gray-800/50">
                     <div className="flex-1 pr-2 md:pr-4">
                         <div className={`flex flex-wrap items-center gap-1.5 md:gap-2 mb-1.5 ${isCompactView ? 'hidden sm:flex' : 'flex'}`}>
                             <span className={`px-2 py-0.5 text-[9px] md:text-xs font-bold border rounded-full ${subjectColorClass}`}>
@@ -99,7 +99,7 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
                         </button>
                         <button
                             onClick={onClose}
-                            className="p-1 md:p-1.5 sm:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-500 transition-colors bg-gray-50/50 dark:bg-gray-800/30 border border-gray-100 dark:border-gray-700/50"
+                            className="p-1 md:p-1.5 sm:p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-gray-500 transition-colors bg-gray-50/50 dark:bg-gray-800/30 border border-lex"
                         >
                             <X size={20} className="md:w-[24px] md:h-[24px]" />
                         </button>
@@ -156,7 +156,7 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
                 </div>
 
                 {/* Footer */}
-                <div className="p-3 md:p-6 border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/50 flex justify-end">
+                <div className="p-3 md:p-6 border-t border-lex bg-gray-50 dark:bg-gray-800/50 flex justify-end">
                     <button
                         onClick={onClose}
                         className="px-4 py-1.5 md:px-6 md:py-2.5 rounded-md md:rounded-lg text-sm md:text-base bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-medium hover:opacity-90 transition-opacity"

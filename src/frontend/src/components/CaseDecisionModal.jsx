@@ -83,7 +83,7 @@ const FlashcardSection = React.memo(({ flashcards }) => {
     if (cards.length === 0) return null;
 
     return (
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-8 pt-6 border-t border-lex">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <Lightbulb className="w-5 h-5 text-yellow-500 dark:text-amber-500" />
                 Study Flashcards
@@ -146,14 +146,14 @@ const SignificanceSection = React.memo(({ narrative, category }) => {
 
     return (
         <section className="mb-8 pt-4 md:pt-6">
-            <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-3 mb-4 uppercase tracking-wide flex items-center justify-between">
+            <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-lex pb-3 mb-4 uppercase tracking-wide flex items-center justify-between">
                 <span className="flex items-center gap-2">
                     <AlertTriangle className="w-4 h-4 text-amber-500" />
                     Jurisprudential Impact
                 </span>
                 {category && <span className={`text-[12px] px-3 py-1.5 rounded-md border text-xs ${getCategoryColor(category)} uppercase tracking-wider font-extrabold ml-2 shadow-sm`}>{category}</span>}
             </h4>
-            <div className="bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/10 p-5 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden">
+            <div className="bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/10 p-5 rounded-xl border border-lex shadow-sm relative overflow-hidden">
                 <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm relative z-10">
                     <ReactMarkdown components={{
                         p: ({ node, ...props }) => <p className="mb-4 last:mb-0 text-left leading-relaxed" {...props} />,
@@ -186,7 +186,7 @@ const StatutesSection = React.memo(({ statutes }) => {
 
     return (
         <div className="mb-8">
-            <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 flex items-center gap-2">
+            <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-lex pb-2 mb-4 flex items-center gap-2">
                 <Book className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 STATUTES INVOLVED
             </h4>
@@ -234,13 +234,13 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
 
     return (
         <div className="mb-8 pt-4 md:pt-6">
-            <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4 flex items-center gap-2">
+            <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-lex pb-2 mb-4 flex items-center gap-2">
                 <Gavel className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                 CITED JURISPRUDENCE
             </h4>
             <div className="space-y-3">
                 {items.map((item, idx) => (
-                    <div key={idx} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors shadow-sm">
+                    <div key={idx} className="bg-white dark:bg-gray-800 border border-lex rounded-lg p-3 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors shadow-sm">
                         <div className="flex justify-between items-start gap-3 mb-1">
                             <h5 className="text-[16px] font-bold text-gray-900 dark:text-white flex-grow">
                                 <SmartLink text={item.case_title || item.title} onCaseClick={onCaseClick} />
@@ -252,7 +252,7 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
                             )}
                         </div>
                         {item.elaboration && (
-                            <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed border-l-2 border-gray-200 dark:border-gray-600 pl-2">
+                            <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed border-l-2 border-lex-strong pl-2">
                                 <ReactMarkdown components={{
                                     p: ({ node, ...props }) => <p className="mb-1 last:mb-0" {...props} />,
                                     strong: ({ node, ...props }) => <strong className="font-semibold text-gray-800 dark:text-gray-300" {...props} />,
@@ -610,7 +610,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     return createPortal(
         <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={handleClose}>
             <div
-                className="lex-modal-card glass relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                className="lex-modal-card relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}
@@ -622,7 +622,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* PLAYLIST SELECTOR OVERLAY */}
                 {showPlaylistSelector && (
-                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(80dvh,100%)] overflow-y-auto lex-modal-scroll glass bg-white/60 dark:bg-slate-900/60 backdrop-blur-2xl border-b-2 border-slate-300/85 dark:border-white/10 shadow-2xl animate-in slide-in-from-top duration-300 p-4 sm:p-6">
+                    <div className="absolute inset-x-0 top-0 z-[60] max-h-[min(80dvh,100%)] overflow-y-auto lex-modal-scroll border-b border-lex bg-neutral-50 shadow-2xl animate-in slide-in-from-top duration-300 p-4 dark:border-lex dark:bg-zinc-950 sm:p-6">
                         <div className="flex justify-between items-center mb-4">
                             <h3 className="text-[16px] font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
                                 <ListMusic className="text-purple-500" />
@@ -645,7 +645,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                             <button
                                                 key={pl.id}
                                                 onClick={() => handleAddToPlaylist(pl.id)}
-                                                className="w-full text-left p-3 rounded-lg border border-gray-100 dark:border-gray-800 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/10 transition-all flex items-center justify-between group"
+                                                className="w-full text-left p-3 rounded-lg border border-lex hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/10 transition-all flex items-center justify-between group"
                                             >
                                                 <span className="font-bold text-gray-700 dark:text-gray-200">{pl.name}</span>
                                                 <Plus size={16} className="text-gray-300 group-hover:text-purple-500" />
@@ -656,13 +656,13 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             </div>
 
                             {/* Create New */}
-                            <div className="md:border-l border-t md:border-t-0 border-gray-100 dark:border-gray-800 pt-4 md:pt-0 md:pl-6">
+                            <div className="md:border-l border-t md:border-t-0 border-lex pt-4 md:pt-0 md:pl-6">
                                 <h4 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Create New</h4>
                                 <div className="space-y-3">
                                     <input 
                                         type="text" 
                                         placeholder="Playlist Name (e.g. Remedial Law)"
-                                        className="w-full p-2.5 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-sm focus:ring-2 focus:ring-purple-500 outline-none"
+                                        className="w-full p-2.5 rounded-lg border border-lex bg-gray-50 dark:bg-gray-800 text-sm focus:ring-2 focus:ring-purple-500 outline-none"
                                         value={newPlaylistName}
                                         onChange={(e) => setNewPlaylistName(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleCreateAndAdd()}
@@ -681,7 +681,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 )}
 
                 {/* HEADER — must stack above scroll body (both were z-10; scroll came later in DOM and ate taps on the X on mobile) */}
-                <div className="relative z-30 shrink-0 border-b-2 border-slate-300/85 bg-white/20 backdrop-blur-sm dark:border-white/10 dark:bg-black/10">
+                <div className="relative z-30 shrink-0 border-b border-lex bg-white dark:border-lex dark:bg-zinc-900">
                     <div className="flex min-w-0 items-start gap-1.5 px-1.5 pt-1.5 pb-1 sm:gap-2 sm:px-2 md:px-3">
                         <button
                             type="button"
@@ -726,7 +726,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         </div>
                     </div>
 
-                    <div className="border-t border-white/20 px-1.5 py-1 sm:px-2 md:px-3 dark:border-white/10">
+                    <div className="border-t border-lex px-1.5 py-1 sm:px-2 md:px-3 dark:border-lex">
                         <p
                             className="w-full truncate text-left font-mono text-[12px] font-medium leading-snug text-gray-600 dark:text-gray-400 sm:text-[13px]"
                             title={
@@ -746,7 +746,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     </div>
 
                     <div className={`px-4 pb-3 sm:px-6 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
-                        <div className="rounded-lg border border-white/35 bg-white/25 px-3 py-2.5 backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/35">
+                        <div className="rounded-lg border border-lex bg-neutral-50 px-3 py-2.5 dark:border-lex dark:bg-zinc-800/90">
                             <dl className="space-y-2.5">
                                 {fullDecision.significance_category && (
                                     <div className="flex gap-2.5">
@@ -769,7 +769,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 )}
 
                                 <div
-                                    className={`flex gap-2.5 ${fullDecision.significance_category ? 'border-t border-white/25 pt-2.5 dark:border-white/10' : ''}`}
+                                    className={`flex gap-2.5 ${fullDecision.significance_category ? 'border-t border-lex pt-2.5 dark:border-lex' : ''}`}
                                 >
                                     <Scale
                                         className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
@@ -786,7 +786,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                     </div>
                                 </div>
 
-                                <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                     <BookOpen
                                         className="mt-0.5 h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400"
                                         strokeWidth={2}
@@ -803,7 +803,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 </div>
 
                                 {fullDecision.ponente && (
-                                    <div className="flex gap-2.5 border-t border-white/25 pt-2.5 dark:border-white/10">
+                                    <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                         <User
                                             className="mt-0.5 h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
                                             strokeWidth={2}
@@ -830,7 +830,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     {viewMode === 'digest' ? (
                         <>
                              {fullDecision.main_doctrine && (
-                                <div className={`glass relative mb-6 overflow-hidden rounded-2xl border border-white/60 bg-gradient-to-br ${doctrinePanel.card} p-4 shadow-[0_8px_30px_rgb(0,0,0,0.12)] sm:mb-10 dark:border-white/10 sm:p-6 md:p-8`}>
+                                <div className={`relative mb-6 overflow-hidden rounded-2xl border border-lex bg-gradient-to-br ${doctrinePanel.card} p-4 shadow-md sm:mb-10 dark:border-lex sm:p-6 md:p-8`}>
                                     <div className={`absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b ${doctrinePanel.stripe}`}></div>
                                     <h4 className={`mb-4 flex items-center gap-2 bg-gradient-to-r ${doctrinePanel.title} bg-clip-text text-[13px] font-black uppercase tracking-widest text-transparent`}>
                                         <Lightbulb className={`h-5 w-5 drop-shadow-sm ${doctrinePanel.icon}`} />
@@ -846,7 +846,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.digest_facts && (
                                 <section className="mb-6 sm:mb-10">
                                     <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
-                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                        <span className="rounded-xl border border-lex bg-white p-2 shadow-sm dark:border-lex dark:bg-zinc-800/90">
                                             <FileText className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                                         </span>
                                         <span className="text-[15px] uppercase tracking-wide">Facts</span>
@@ -865,7 +865,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.digest_issues && (
                                 <section className="mb-6 sm:mb-10 pt-4 md:pt-6">
                                     <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
-                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                        <span className="rounded-xl border border-lex bg-white p-2 shadow-sm dark:border-lex dark:bg-zinc-800/90">
                                             <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />
                                         </span>
                                         <span className="text-[15px] uppercase tracking-wide">Issue</span>
@@ -881,7 +881,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.digest_ruling && (
                                 <section className="mb-6 sm:mb-10">
                                     <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
-                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                        <span className="rounded-xl border border-lex bg-white p-2 shadow-sm dark:border-lex dark:bg-zinc-800/90">
                                             <Gavel className="w-5 h-5 text-blue-500 dark:text-blue-400" />
                                         </span>
                                         <span className="text-[15px] uppercase tracking-wide">Ruling</span>
@@ -897,7 +897,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.digest_ratio && (
                                 <section className="mb-6 sm:mb-10">
                                     <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
-                                        <span className="p-2 glass bg-white/60 dark:bg-white/10 rounded-xl border border-white/50 dark:border-white/10 shadow-sm">
+                                        <span className="rounded-xl border border-lex bg-white p-2 shadow-sm dark:border-lex dark:bg-zinc-800/90">
                                             <BookOpen className="w-5 h-5 text-purple-500 dark:text-purple-400" />
                                         </span>
                                         <span className="text-[15px] uppercase tracking-wide">Ratio Decidendi</span>
@@ -933,7 +933,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     ) : (
                         // FULL TEXT VIEW — content deferred until fullTextReady to keep UI responsive
                         <div className="animate-in fade-in duration-300">
-                            <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-lex">
                                 <h3 className="text-[16px] font-bold text-center text-gray-900 dark:text-white mb-2">
                                     {fullDecision.short_title}
                                 </h3>
@@ -961,7 +961,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* FOOTER — same visual language as header strip */}
-                <div className="relative z-20 flex shrink-0 items-center justify-end gap-0.5 border-t-2 border-slate-300/85 bg-white/20 px-1.5 py-1.5 backdrop-blur-sm dark:border-white/10 dark:bg-black/10 sm:gap-1 sm:px-2 md:px-3">
+                <div className="relative z-20 flex shrink-0 items-center justify-end gap-0.5 border-t border-lex bg-white px-1.5 py-1.5 dark:border-lex dark:bg-zinc-900 sm:gap-1 sm:px-2 md:px-3">
                     {viewMode === 'digest' && (
                         <button
                             type="button"
@@ -988,7 +988,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 setFullTextReady(false);
                             }
                         }}
-                        className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-white/50 bg-white/40 text-gray-700 transition-all hover:bg-white/70 active:scale-95 dark:border-white/15 dark:bg-white/10 dark:text-gray-200 dark:hover:bg-white/20"
+                        className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-700 transition-all hover:bg-neutral-100 active:scale-95 dark:border-lex dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
                         title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
                         aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
                     >
@@ -1019,7 +1019,7 @@ const SeparateOpinionCard = React.memo(({ op, idx }) => {
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div id={`sep-op-${idx}`} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-gray-100 dark:border-gray-700/50">
+        <div id={`sep-op-${idx}`} className="bg-gray-50 dark:bg-gray-700/30 p-4 rounded-lg border border-lex">
             <div className="flex items-center justify-between mb-2">
                 <span className="font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-blue-500"></span>
@@ -1043,7 +1043,7 @@ const SeparateOpinionCard = React.memo(({ op, idx }) => {
                         </button>
                     ) : (
                         <div className="mt-3 animate-fadeIn">
-                            <div className="bg-white dark:bg-gray-800 p-4 rounded-md border border-gray-200 dark:border-gray-600 text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
+                            <div className="bg-white dark:bg-gray-800 p-4 rounded-md border border-lex-strong text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
                                 {op.text}
                             </div>
                             <button
