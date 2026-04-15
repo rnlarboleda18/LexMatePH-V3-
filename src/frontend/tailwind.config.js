@@ -35,12 +35,16 @@ export default {
                 sans: ['Outfit', 'Inter', 'system-ui', 'Avenir', 'Helvetica', 'Arial', 'sans-serif'],
                 display: ['"Playfair Display"', 'Georgia', 'Cambria', 'Times New Roman', 'serif'],
             },
-            /** Panel / card radius — match Bar question cards (`rounded-lg` = 0.5rem) app-wide */
+            /**
+             * Panel / card radius — slightly curvier than the prior 0.5rem flattening.
+             * `rounded-lg` is the default “card” step; larger utilities scale up for modals / hero cards.
+             */
             borderRadius: {
-                md: '0.5rem',
-                xl: '0.5rem',
-                '2xl': '0.5rem',
-                '3xl': '0.5rem',
+                md: '0.625rem',
+                lg: '0.75rem',
+                xl: '0.875rem',
+                '2xl': '1.125rem',
+                '3xl': '1.375rem',
             },
         },
     },
