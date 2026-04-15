@@ -93,33 +93,6 @@
   }
 }
 
-/* Tablet + phone: when LexPlay mini is docked, keep modal stacks above the bar (see LexPlayer z-[650])
-   and pin modal cards to the top edge of the mini player with a capped height. */
-@media (max-width: 1023px) {
-  html[data-lex-mini-visible='1'] .lex-modal-overlay {
-    align-items: flex-end !important;
-    justify-content: center !important;
-  }
-  html[data-lex-mini-visible='1'] .lex-modal-card {
-    max-height: calc(
-      100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - var(--player-height, 0px) - 1.25rem
-    ) !important;
-  }
-}
-
-@media (max-width: 767px) {
-  html[data-lex-mini-visible='1'] .lex-modal-overlay {
-    top: calc(env(safe-area-inset-top, 0px) + 0.5rem) !important;
-    bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px) + 0.5rem) !important;
-    left: calc(env(safe-area-inset-left, 0px) + 0.5rem) !important;
-    right: calc(env(safe-area-inset-right, 0px) + 0.5rem) !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
-
 .lex-modal-scroll {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
@@ -604,5 +577,51 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
   .divide-x.divide-lex > :not([hidden]) ~ :not([hidden]),
   .divide-x.divide-lex-strong > :not([hidden]) ~ :not([hidden]) {
     border-left-width: var(--lex-ui-border-width);
+  }
+}
+
+/*
+ * LexPlay mini (z-[10050]) + portaled modals (.lex-modal-overlay / .lex-modal-card).
+ * Placed AFTER @layer utilities so `!important` beats utilities like `md:!items-stretch`.
+ * html[data-lex-mini-visible] is set from LexPlayer while the docked mini bar is mounted.
+ */
+@media (max-width: 1023px) {
+  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px) + 0.35rem) !important;
+    left: calc(env(safe-area-inset-left, 0px) + 0.5rem) !important;
+    right: calc(env(safe-area-inset-right, 0px) + 0.5rem) !important;
+    padding: 0 !important;
+  }
+
+  html[data-lex-mini-visible='1'] .lex-modal-card {
+    height: auto !important;
+    max-height: calc(
+      100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - var(--player-height, 0px) - 1.25rem
+    ) !important;
+    flex: 0 1 auto !important;
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+    top: calc(env(safe-area-inset-top, 0px) + 0.5rem) !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+    top: calc(var(--app-header-height, 3.5rem) + env(safe-area-inset-top, 0px) + 0.25rem) !important;
+  }
+
+  html[data-lex-mini-visible='1'] .lex-modal-card {
+    max-height: calc(
+      100dvh - var(--app-header-height, 3.5rem) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) -
+        var(--player-height, 0px) - 1.25rem
+    ) !important;
   }
 }

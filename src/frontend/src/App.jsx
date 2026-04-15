@@ -655,7 +655,7 @@ function App() {
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'active' && createPortal(
                     <div
-                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-black/40 animate-in fade-in duration-200 md:!items-stretch dark:bg-black/50"
+                      className="fixed inset-0 z-[540] lex-modal-overlay justify-center bg-black/40 animate-in fade-in duration-200 dark:bg-black/50"
                       onClick={() => setFlashcardState('setup')}
                       role="presentation"
                     >

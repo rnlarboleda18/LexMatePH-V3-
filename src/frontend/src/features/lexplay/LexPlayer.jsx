@@ -546,7 +546,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 clearInterval(timerRef.current);
                 timerRef.current = null;
                 handleStop();
-                openUpgradeModal('lexplay_unlimited');
+                // Defer so stop state flushes first; opens global SubscriptionModal (upgradeContext).
+                queueMicrotask(() => openUpgradeModal('lexplay_unlimited'));
             }
         }, 1000);
 
@@ -554,6 +555,51 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPlaying, currentTrack?.type, currentTrack?.id, tier, userId]);
     // ───────────────────────────────────────────────────────────────────────────
+
+    // Codal queue started from elsewhere (e.g. playNow) while already at daily cap — stop + subscription modal.
+    useEffect(() => {
+        if (!isPlaying || currentTrack?.type !== 'codal' || !hasLimit) return;
+        const used = getLexPlayUsedSeconds(userId);
+        if (used >= dailyLimit) {
+            queueMicrotask(() => {
+                handleStop();
+                openUpgradeModal('lexplay_unlimited');
+            });
+        }
+    }, [isPlaying, currentTrack?.type, currentTrack?.id, hasLimit, dailyLimit, userId, handleStop, openUpgradeModal]);
+
+    const handlePlayPauseWithCodalLimit = useCallback(() => {
+        const a = audioRef?.current;
+        const willStartPlayback = Boolean(a?.paused);
+        if (!willStartPlayback) {
+            handlePlayPause();
+            return;
+        }
+        if (hasLimit) {
+            const used = getLexPlayUsedSeconds(userId);
+            if (used >= dailyLimit) {
+                const wouldPlayCodal =
+                    currentTrack?.type === 'codal' ||
+                    (!currentTrack && playlist.length > 0 && playlist[0]?.type === 'codal');
+                if (wouldPlayCodal) {
+                    handleStop();
+                    openUpgradeModal('lexplay_unlimited');
+                    return;
+                }
+            }
+        }
+        handlePlayPause();
+    }, [
+        audioRef,
+        hasLimit,
+        dailyLimit,
+        userId,
+        currentTrack,
+        playlist,
+        handlePlayPause,
+        handleStop,
+        openUpgradeModal,
+    ]);
 
     const progressBarRef = useRef(null);
     const miniBarRef = useRef(null);
@@ -757,27 +803,44 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
         document.documentElement.classList.toggle('dark', isDarkMode);
     }, [isMinimized, isDarkMode]);
 
-    // Expose mini player height so Layout/main content can pad above the fixed bar (--player-height in index.css).
-    // `data-lex-mini-visible` lets global modal CSS snap overlays above the docked mini bar (tablet/mobile).
-    useEffect(() => {
+    // Expose mini player height (--player-height) + `data-lex-mini-visible` for global modal snap CSS.
+    // Ref is often null on the first commit — retry via rAF until mounted so --player-height is never stuck at 0.
+    useLayoutEffect(() => {
         if (!isMinimized) {
             document.documentElement.style.setProperty('--player-height', '0px');
             document.documentElement.removeAttribute('data-lex-mini-visible');
             return;
         }
         document.documentElement.setAttribute('data-lex-mini-visible', 'true');
-        const el = miniBarRef.current;
-        if (!el) return;
+        let ro = null;
+        let raf = 0;
+        let cancelled = false;
         const sync = () => {
-            const h = Math.ceil(el.getBoundingClientRect().height);
+            const node = miniBarRef.current;
+            if (!node) return;
+            const h = Math.ceil(node.getBoundingClientRect().height);
             document.documentElement.style.setProperty('--player-height', `${h}px`);
         };
-        sync();
-        const ro = new ResizeObserver(sync);
-        ro.observe(el);
-        window.addEventListener('orientationchange', sync);
+        const bind = () => {
+            if (cancelled) return;
+            const node = miniBarRef.current;
+            if (!node) {
+                raf = requestAnimationFrame(bind);
+                return;
+            }
+            sync();
+            ro = new ResizeObserver(sync);
+            ro.observe(node);
+            window.addEventListener('orientationchange', sync);
+        };
+        raf = requestAnimationFrame(bind);
         return () => {
-            ro.disconnect();
+            cancelled = true;
+            cancelAnimationFrame(raf);
+            if (ro) {
+                ro.disconnect();
+                ro = null;
+            }
             window.removeEventListener('orientationchange', sync);
             document.documentElement.style.setProperty('--player-height', '0px');
             document.documentElement.removeAttribute('data-lex-mini-visible');
@@ -791,7 +854,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[650] flex flex-col overflow-hidden border-t border-lex bg-white shadow-lg transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950"
+                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[10050] flex flex-col overflow-hidden border-t border-lex bg-white shadow-lg transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950"
             >
                 {/* Scrub strip — no extra border (shell `border-t` is the only top chrome line) */}
                 <div
@@ -854,7 +917,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
+                                    onClick={(e) => { e.stopPropagation(); handlePlayPauseWithCodalLimit(); }}
                                     disabled={playlist.length === 0}
                                     className="group flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-700 text-white shadow-md transition-all hover:bg-violet-800 active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100 dark:bg-violet-600 dark:hover:bg-violet-500"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
@@ -928,7 +991,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 </button>
                                 <button
                                     type="button"
-                                    onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
+                                    onClick={(e) => { e.stopPropagation(); handlePlayPauseWithCodalLimit(); }}
                                     disabled={playlist.length === 0}
                                     className="group flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-violet-700 text-white shadow-md transition-all hover:bg-violet-800 active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100 dark:bg-violet-600 dark:hover:bg-violet-500"
                                     aria-label={isPlaying ? 'Pause' : 'Play'}
@@ -1147,7 +1210,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
 
                                             <button
                                                 type="button"
-                                                onClick={handlePlayPause}
+                                                onClick={handlePlayPauseWithCodalLimit}
                                                 disabled={playlist.length === 0}
                                                 className="group flex h-[7.5rem] w-[7.5rem] shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-violet-600 text-white shadow-[0_16px_44px_-6px_rgba(124,58,237,0.55)] ring-2 ring-white/10 transition-all hover:scale-[1.03] hover:shadow-[0_20px_48px_-6px_rgba(168,85,247,0.5)] active:scale-95 disabled:opacity-45 disabled:hover:scale-100 sm:h-[8.25rem] sm:w-[8.25rem] md:max-lg:h-[9rem] md:max-lg:w-[9rem] lg:h-[6.5rem] lg:w-[6.5rem] lg:ring-1"
                                                 aria-label={isPlaying ? 'Pause' : 'Play'}
