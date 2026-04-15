@@ -805,6 +805,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
 
     // Expose mini player height (--player-height) + `data-lex-mini-visible` for global modal snap CSS.
     // Ref is often null on the first commit — retry via rAF until mounted so --player-height is never stuck at 0.
+    // Snap rules use `html[data-lex-mini-visible]` (presence), not `='1'`.
     useLayoutEffect(() => {
         if (!isMinimized) {
             document.documentElement.style.setProperty('--player-height', '0px');

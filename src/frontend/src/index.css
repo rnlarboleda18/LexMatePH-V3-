@@ -586,7 +586,8 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
  * html[data-lex-mini-visible] is set from LexPlayer while the docked mini bar is mounted.
  */
 @media (max-width: 1023px) {
-  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+  /* Presence selector: LexPlayer sets value "true" (not "1"); must match or snap never runs. */
+  html[data-lex-mini-visible] .lex-modal-overlay {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -597,7 +598,7 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
     padding: 0 !important;
   }
 
-  html[data-lex-mini-visible='1'] .lex-modal-card {
+  html[data-lex-mini-visible] .lex-modal-card {
     height: auto !important;
     max-height: calc(
       100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - var(--player-height, 0px) - 1.25rem
@@ -608,20 +609,27 @@ html:not(.dark) ::-webkit-scrollbar-thumb:hover {
 }
 
 @media (max-width: 767px) {
-  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+  html[data-lex-mini-visible] .lex-modal-overlay {
     top: calc(env(safe-area-inset-top, 0px) + 0.5rem) !important;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+  html[data-lex-mini-visible] .lex-modal-overlay {
     top: calc(var(--app-header-height, 3.5rem) + env(safe-area-inset-top, 0px) + 0.25rem) !important;
   }
 
-  html[data-lex-mini-visible='1'] .lex-modal-card {
+  html[data-lex-mini-visible] .lex-modal-card {
     max-height: calc(
       100dvh - var(--app-header-height, 3.5rem) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) -
         var(--player-height, 0px) - 1.25rem
     ) !important;
+  }
+}
+
+/* lg+: overlay already uses bottom: player-height; some cards use max-h-[92vh] which ignores the mini bar. */
+@media (min-width: 1024px) {
+  html[data-lex-mini-visible] .lex-modal-card {
+    max-height: 100% !important;
   }
 }
