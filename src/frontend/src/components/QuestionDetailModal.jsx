@@ -88,7 +88,7 @@ const QuestionDetailModal = ({
     return createPortal(
         <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={handleClose}>
             <div
-                className="lex-modal-card relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
+                className="lex-modal-card relative flex min-h-0 max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}
@@ -98,9 +98,9 @@ const QuestionDetailModal = ({
                 <div className="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
                 <div className="absolute bottom-[-20%] right-[-10%] w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
                 
-                {/* Header: headphones + subject left · prev/next centered · year + close right */}
-                <div className="relative z-10 grid shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-1 border-b border-lex bg-neutral-50 px-1.5 py-1.5 dark:border-lex dark:bg-zinc-950 sm:px-2 md:px-3">
-                    <div className="flex min-w-0 items-center gap-1.5 sm:gap-2">
+                {/* Header: headphones + subject left · year + close right */}
+                <div className="relative z-10 flex shrink-0 items-center justify-between gap-2 border-b border-lex bg-neutral-50 px-2 py-2 dark:border-lex dark:bg-zinc-950 sm:px-3 md:px-4">
+                    <div className="flex min-w-0 flex-1 items-center gap-1.5 sm:gap-2">
                         <button
                             type="button"
                             onClick={() => {
@@ -117,34 +117,8 @@ const QuestionDetailModal = ({
                             {subjectKey}
                         </span>
                     </div>
-                    <div className="flex justify-center justify-self-center">
-                        <div className="flex items-center gap-1.5">
-                            <button
-                                type="button"
-                                onClick={onPrev}
-                                disabled={!hasPrev}
-                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-lex-strong bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
-                                title="Previous question"
-                                aria-label="Previous question"
-                            >
-                                <ChevronLeft className="h-4 w-4 shrink-0" strokeWidth={2.5} />
-                                <span className="hidden sm:inline">Prev</span>
-                            </button>
-                            <button
-                                type="button"
-                                onClick={onNext}
-                                disabled={!hasNext}
-                                className="touch-manipulation flex h-8 items-center gap-1 rounded-lg border border-lex-strong bg-white px-2.5 py-1 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
-                                title="Next question"
-                                aria-label="Next question"
-                            >
-                                <span className="hidden sm:inline">Next</span>
-                                <ChevronRight className="h-4 w-4 shrink-0" strokeWidth={2.5} />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="flex items-center justify-end gap-1.5 sm:gap-2">
-                        <span className="shrink-0 tabular-nums text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
+                    <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+                        <span className="tabular-nums text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
                             {question.year}
                         </span>
                         <button
@@ -284,6 +258,32 @@ const QuestionDetailModal = ({
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* Prev / Next — own row at bottom; full width, ends aligned */}
+                <div className="relative z-10 flex shrink-0 items-center justify-between gap-3 border-t border-lex bg-neutral-50 px-3 py-2.5 dark:border-lex dark:bg-zinc-950 sm:px-4 sm:py-3">
+                    <button
+                        type="button"
+                        onClick={onPrev}
+                        disabled={!hasPrev}
+                        className="touch-manipulation inline-flex h-9 min-w-[5.5rem] items-center justify-center gap-1 rounded-lg border border-lex-strong bg-white px-3 text-xs font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white sm:h-10 sm:min-w-[6.5rem] sm:text-sm"
+                        title="Previous question"
+                        aria-label="Previous question"
+                    >
+                        <ChevronLeft className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+                        Previous
+                    </button>
+                    <button
+                        type="button"
+                        onClick={onNext}
+                        disabled={!hasNext}
+                        className="touch-manipulation inline-flex h-9 min-w-[5.5rem] items-center justify-center gap-1 rounded-lg border border-lex-strong bg-white px-3 text-xs font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white sm:h-10 sm:min-w-[6.5rem] sm:text-sm"
+                        title="Next question"
+                        aria-label="Next question"
+                    >
+                        Next
+                        <ChevronRight className="h-4 w-4 shrink-0" strokeWidth={2.5} />
+                    </button>
                 </div>
             </div>
         </div>,

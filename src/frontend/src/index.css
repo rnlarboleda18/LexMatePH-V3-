@@ -93,6 +93,33 @@
   }
 }
 
+/* Tablet + phone: when LexPlay mini is docked, keep modal stacks above the bar (see LexPlayer z-[650])
+   and pin modal cards to the top edge of the mini player with a capped height. */
+@media (max-width: 1023px) {
+  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+    align-items: flex-end !important;
+    justify-content: center !important;
+  }
+  html[data-lex-mini-visible='1'] .lex-modal-card {
+    max-height: calc(
+      100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - var(--player-height, 0px) - 1.25rem
+    ) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html[data-lex-mini-visible='1'] .lex-modal-overlay {
+    top: calc(env(safe-area-inset-top, 0px) + 0.5rem) !important;
+    bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px) + 0.5rem) !important;
+    left: calc(env(safe-area-inset-left, 0px) + 0.5rem) !important;
+    right: calc(env(safe-area-inset-right, 0px) + 0.5rem) !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
 .lex-modal-scroll {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
