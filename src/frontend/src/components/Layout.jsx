@@ -121,7 +121,7 @@ const Layout = ({
 
                     {/* Center links — flex-1 keeps spacing between brand and actions; wraps only on very narrow sm */}
                     <nav
-                        className="order-last hidden w-full min-w-0 justify-center border-t border-lex px-1 pt-1.5 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:border-t-0 sm:px-1 sm:pt-0 md:px-2"
+                        className="order-last hidden w-full min-w-0 justify-center px-1 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:px-1 md:px-2"
                         aria-label="LexMatePH feature areas"
                     >
                         <p

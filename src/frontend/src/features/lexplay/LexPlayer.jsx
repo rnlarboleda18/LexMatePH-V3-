@@ -782,11 +782,11 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden border-t border-lex bg-white shadow-[0_-4px_24px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950 dark:shadow-[0_-8px_32px_-8px_rgba(0,0,0,0.4)]"
+                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden border-t border-lex bg-white shadow-none transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950"
             >
-                {/* Top edge: scrub line, full viewport width */}
+                {/* Scrub strip — no extra border (shell `border-t` is the only top chrome line) */}
                 <div
-                    className="w-full shrink-0 border-b-2 border-slate-300/85 dark:border-zinc-800"
+                    className="w-full shrink-0 bg-neutral-50/90 dark:bg-zinc-900/90"
                     onClick={(e) => e.stopPropagation()}
                 >
                     <PlaybackProgress audioRef={audioRef} isPlaying={isPlaying} isMinimized />

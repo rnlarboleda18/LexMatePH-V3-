@@ -9,13 +9,14 @@
   --player-height: 0px;
   /* Fixed app header — used by Layout, sticky toolbars, modals (keep in sync) */
   --app-header-height: 2.5rem;
-  /* Light mode: stronger chrome for borders & type (overridden in .dark via existing tokens) */
+  /* Light mode: marketing / auxiliary chrome (structural panels use --lex-border*) */
   --lex-light-border: rgba(51, 65, 85, 0.28);
   --lex-light-border-strong: rgba(30, 41, 59, 0.38);
   --lex-light-surface: rgba(255, 255, 255, 0.94);
-  /* Structural UI — cool slate grays (≈1px via Tailwind `border`); slightly darker than slate-200 for card edges */
+  /* Structural UI — cool slate greys (2px via --lex-ui-border-width + @layer utilities) */
   --lex-border: #cbd5e1;
   --lex-border-strong: #94a3b8;
+  --lex-ui-border-width: 2px;
 }
 
 .dark {
@@ -245,13 +246,13 @@ body {
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
+  border: var(--lex-ui-border-width) solid var(--glass-border);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
 .dark .glass {
   background: var(--dark-glass-bg);
-  border: 1px solid var(--dark-glass-border);
+  border: var(--lex-ui-border-width) solid var(--dark-glass-border);
   box-shadow: none;
 }
 
@@ -275,7 +276,7 @@ body {
   );
   backdrop-filter: blur(26px) saturate(1.78);
   -webkit-backdrop-filter: blur(26px) saturate(1.78);
-  border: 1px solid var(--lex-border);
+  border: var(--lex-ui-border-width) solid var(--lex-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.92),
     inset 0 -1px 0 rgba(148, 163, 184, 0.18),
@@ -291,7 +292,7 @@ html.dark .landing-page .landing-glass {
     rgba(30, 41, 59, 0.72) 48%,
     rgba(15, 23, 42, 0.86) 100%
   );
-  border: 1px solid var(--lex-border);
+  border: var(--lex-ui-border-width) solid var(--lex-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.16),
     inset 0 -1px 0 rgba(0, 0, 0, 0.28),
@@ -312,7 +313,7 @@ html.dark .landing-page .landing-glass {
   );
   backdrop-filter: blur(34px) saturate(1.88);
   -webkit-backdrop-filter: blur(34px) saturate(1.88);
-  border: 1px solid var(--lex-border);
+  border: var(--lex-ui-border-width) solid var(--lex-border);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.95),
     inset 0 -2px 8px rgba(148, 163, 184, 0.14),
@@ -329,7 +330,7 @@ html.dark .landing-page .landing-glass-hero {
     rgba(51, 65, 85, 0.58) 34%,
     rgba(15, 23, 42, 0.9) 100%
   );
-  border: 1px solid var(--lex-border);
+  border: var(--lex-ui-border-width) solid var(--lex-border);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.2),
     inset 0 -2px 10px rgba(0, 0, 0, 0.38),
@@ -361,7 +362,7 @@ html.dark .landing-page .landing-glass-nested {
     rgba(51, 65, 85, 0.5) 0%,
     rgba(15, 23, 42, 0.62) 100%
   );
-  border: 1px solid var(--lex-border);
+  border: var(--lex-ui-border-width) solid var(--lex-border);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 8px 32px -6px rgba(0, 0, 0, 0.45);
@@ -541,4 +542,57 @@ h1, h2, h3, h4, h5, h6,
   /* Gray-800 */
   color: #e5e7eb;
   /* Gray-200 */
+}
+
+/* Thicker structural frames when Tailwind lex border colors are used */
+@layer utilities {
+  .border.border-lex,
+  .border.border-lex-strong {
+    border-width: var(--lex-ui-border-width);
+  }
+  .border-t.border-lex,
+  .border-t.border-lex-strong {
+    border-top-width: var(--lex-ui-border-width);
+  }
+  /* Responsive `border-*-0` must beat the 2px rules above (higher specificity). */
+  @media (min-width: 640px) {
+    .sm\:border-t-0.border-t.border-lex,
+    .sm\:border-t-0.border-t.border-lex-strong {
+      border-top-width: 0;
+    }
+    .sm\:border-b-0.border-b.border-lex,
+    .sm\:border-b-0.border-b.border-lex-strong {
+      border-bottom-width: 0;
+    }
+  }
+  .border-b.border-lex,
+  .border-b.border-lex-strong {
+    border-bottom-width: var(--lex-ui-border-width);
+  }
+  .border-l.border-lex,
+  .border-l.border-lex-strong {
+    border-left-width: var(--lex-ui-border-width);
+  }
+  .border-r.border-lex,
+  .border-r.border-lex-strong {
+    border-right-width: var(--lex-ui-border-width);
+  }
+  .border-x.border-lex,
+  .border-x.border-lex-strong {
+    border-left-width: var(--lex-ui-border-width);
+    border-right-width: var(--lex-ui-border-width);
+  }
+  .border-y.border-lex,
+  .border-y.border-lex-strong {
+    border-top-width: var(--lex-ui-border-width);
+    border-bottom-width: var(--lex-ui-border-width);
+  }
+  .divide-y.divide-lex > :not([hidden]) ~ :not([hidden]),
+  .divide-y.divide-lex-strong > :not([hidden]) ~ :not([hidden]) {
+    border-top-width: var(--lex-ui-border-width);
+  }
+  .divide-x.divide-lex > :not([hidden]) ~ :not([hidden]),
+  .divide-x.divide-lex-strong > :not([hidden]) ~ :not([hidden]) {
+    border-left-width: var(--lex-ui-border-width);
+  }
 }
