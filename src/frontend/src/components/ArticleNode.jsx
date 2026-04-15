@@ -15,6 +15,7 @@ import {
     shieldGfmTables,
 } from '../utils/codalMarkdown';
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
+import { fcJurisProvisionIdFromArticle } from '../utils/fcJurisProvisionId';
 
 /** RCC chrome: remove trailing dash glue (E-Library “Title. -” before body). */
 function cleanRccSectionHeaderFragment(s) {
@@ -293,6 +294,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     const currentArtNum = article_num || article_number;
     const stableId = id || currentArtNum;
     const lookup_id = key_id || String(currentArtNum);
+    /** Family Code: align with FAM provision_id in codal_case_links (see fcJurisProvisionId.js). */
+    const jurisProvisionId =
+        docCode === 'fc' ? fcJurisProvisionIdFromArticle(article, stableId) : lookup_id;
 
     const parsedElements = typeof elements === 'string' ? JSON.parse(elements) : elements;
     let parsedAmendments = typeof amendments === 'string' ? JSON.parse(amendments) : amendments;
@@ -505,7 +509,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     // Header click - General concept (-1)
                                                     onClick={() => {
                                                         if (typeof onToggleJurisprudence === 'function') {
-                                                            onToggleJurisprudence(lookup_id, -1);
+                                                            onToggleJurisprudence(jurisProvisionId, -1);
                                                         }
                                                     }}
                                                     title={`${generalLinkCount} general concept cases`}
@@ -1063,7 +1067,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                     style={{ gap: '0.35rem' }}
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
-                                                                        if (onToggleJurisprudence) onToggleJurisprudence(lookup_id, paragraphIndex);
+                                                                        if (onToggleJurisprudence) onToggleJurisprudence(jurisProvisionId, paragraphIndex);
                                                                     }}
                                                                     title={`${linkCount} cited cases linked to this paragraph`}
                                                                 >
@@ -1105,7 +1109,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                 style={{ gap: '0.35rem' }}
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
-                                                                        if (onToggleJurisprudence) onToggleJurisprudence(lookup_id, paragraphIndex);
+                                                                        if (onToggleJurisprudence) onToggleJurisprudence(jurisProvisionId, paragraphIndex);
                                                                     }}
                                                                     title={`${linkCount} cited cases linked to this paragraph`}
                                                                 >

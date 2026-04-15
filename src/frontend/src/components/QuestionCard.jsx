@@ -1,12 +1,12 @@
 import React from 'react';
 import { getSubjectColor } from '../utils/colors';
-import { normalizeBarSubject } from '../utils/subjectNormalize';
+import { normalizeBarQuestionSubject } from '../utils/subjectNormalize';
 import { SubjectIcon } from '../utils/subjectIcons';
 
 import { HighlightText } from '../utils/highlight';
 
 const QuestionCard = ({ question, onClick, searchQuery }) => {
-    const subjectKey = normalizeBarSubject(question.subject) || question.subject;
+    const subjectKey = normalizeBarQuestionSubject(question) || question.subject;
     const colorClass = getSubjectColor(subjectKey);
     const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
     const borderColor = colorClass.split(' ').find((c) => c.startsWith('border-'));

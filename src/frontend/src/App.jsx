@@ -16,7 +16,7 @@ import FeaturePageShell from './components/FeaturePageShell';
 import PurpleGlassAmbient from './components/PurpleGlassAmbient';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
-import { normalizeBarSubject } from './utils/subjectNormalize';
+import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
 import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage';
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
@@ -70,6 +70,14 @@ const MODE_TO_PATH = {
 const PATH_TO_MODE = Object.fromEntries(
   Object.entries(MODE_TO_PATH).map(([m, p]) => [p, m])
 );
+
+/** Newest Bar year first, then stable id (interleaved load order is not chronological). */
+function barQuestionYearIdSort(a, b) {
+  const yb = Number(b.year) || 0;
+  const ya = Number(a.year) || 0;
+  if (yb !== ya) return yb - ya;
+  return (Number(a.id) || 0) - (Number(b.id) || 0);
+}
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
@@ -260,8 +268,9 @@ function App() {
     barFuseRef.current = new Fuse(questions, {
       keys: [
         { name: 'question', weight: 0.5 },
-        { name: 'answer',   weight: 0.3 },
-        { name: 'subject',  weight: 0.2 },
+        { name: 'answer', weight: 0.3 },
+        { name: 'subject', weight: 0.12 },
+        { name: 'sub_topic', weight: 0.08 },
       ],
       threshold: 0.4,
       distance: 400,
@@ -310,25 +319,30 @@ function App() {
   const filteredBarQuestions = useMemo(() => {
     let pool = questions;
     if (currentSubject) {
-      pool = pool.filter(
-        (q) => normalizeBarSubject(q.subject) === currentSubject
-      );
+      pool = pool.filter((q) => normalizeBarQuestionSubject(q) === currentSubject);
     }
-    if (!searchTerm.trim()) return pool;
+    if (!searchTerm.trim()) {
+      return currentSubject ? [...pool].sort(barQuestionYearIdSort) : pool;
+    }
     if (barFuseRef.current) {
       const matchedIds = new Set(
         barFuseRef.current.search(searchTerm).map((r) => r.item.id)
       );
-      return pool.filter((q) => matchedIds.has(q.id));
+      const out = pool.filter((q) => matchedIds.has(q.id));
+      return currentSubject ? [...out].sort(barQuestionYearIdSort) : out;
     }
     // Fuse index not ready yet — fall back to includes.
     const lq = searchTerm.toLowerCase();
-    return pool.filter(
+    const out = pool.filter(
       (q) =>
         (q.question || '').toLowerCase().includes(lq) ||
         (q.answer || '').toLowerCase().includes(lq) ||
-        (q.subject || '').toLowerCase().includes(lq)
+        (q.subject || '').toLowerCase().includes(lq) ||
+        String(q.sub_topic || '')
+          .toLowerCase()
+          .includes(lq)
     );
+    return currentSubject ? [...out].sort(barQuestionYearIdSort) : out;
   }, [questions, currentSubject, searchTerm, barFuseReady]);
 
   // Intercept playNow signals to force full-screen LexPlay
@@ -952,7 +966,10 @@ function App() {
 
       {/* Question Detail Modal */}
       {selectedQuestion && (() => {
-        const currentList = questions.filter((q) => !currentSubject || normalizeBarSubject(q.subject) === currentSubject);
+        let currentList = questions.filter(
+          (q) => !currentSubject || normalizeBarQuestionSubject(q) === currentSubject
+        );
+        if (currentSubject) currentList = [...currentList].sort(barQuestionYearIdSort);
         const idx = currentList.findIndex(q => q.id === selectedQuestion.id);
         return (
           <Suspense fallback={null}>

@@ -465,49 +465,55 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=401,
         )
 
-    gate_conn = None
+    provision_id = req.params.get('provision_id')
+    statute_id = req.params.get('statute_id')
+    subject_filter = req.params.get('subject')
+    if not provision_id or not statute_id:
+        return func.HttpResponse(json.dumps({"error": "statute_id and provision_id required"}), status_code=400)
+
+    # One pooled connection for tier check + links (avoids two checkout round-trips per open).
+    conn = None
+    cur = None
     try:
-        gate_conn = get_db_connection()
-        with gate_conn.cursor() as cur:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        try:
             cur.execute(
                 "SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s",
                 (clerk_id,),
             )
             row = cur.fetchone()
-            user_tier = (row[0] if row else "free") or "free"
-            is_admin = (row[1] if row else False) or False
-        if not is_admin and TIER_ORDER.index(user_tier) < TIER_ORDER.index(REQUIRED_TIER):
-            return func.HttpResponse(
-                json.dumps({
-                    "error": "Juris subscription required",
-                    "required_tier": REQUIRED_TIER,
-                    "current_tier": user_tier,
-                }),
-                mimetype="application/json", status_code=403,
-            )
-    except Exception as gate_err:
-        logging.warning("codex/jurisprudence tier check error (allowing through): %s", gate_err)
-    finally:
-        if gate_conn:
-            put_db_connection(gate_conn)
-    # ──────────────────────────────────────────────────────────────────────────
+            user_tier = (row.get("subscription_tier") if row else None) or "free"
+            is_admin = bool((row.get("is_admin") if row else False) or False)
+            try:
+                tier_idx = TIER_ORDER.index(user_tier)
+            except ValueError:
+                tier_idx = 0
+            if not is_admin and tier_idx < TIER_ORDER.index(REQUIRED_TIER):
+                return func.HttpResponse(
+                    json.dumps({
+                        "error": "Juris subscription required",
+                        "required_tier": REQUIRED_TIER,
+                        "current_tier": user_tier,
+                    }),
+                    mimetype="application/json", status_code=403,
+                )
+        except Exception as gate_err:
+            logging.warning("codex/jurisprudence tier check error (allowing through): %s", gate_err)
 
-    provision_id = req.params.get('provision_id')
-    statute_id = req.params.get('statute_id')
-    subject_filter = req.params.get('subject')
-    if not provision_id or not statute_id:
-         return func.HttpResponse(json.dumps({"error": "statute_id and provision_id required"}), status_code=400)
-    conn = None
-    try:
-        conn = get_db_connection()
-        cur = conn.cursor(cursor_factory=RealDictCursor)
         STATUTE_MAPPING = {'FC': 'FAM', 'LABOR': 'LAB'}
         statute_id = STATUTE_MAPPING.get(statute_id.upper(), statute_id.upper())
         clean_id = provision_id.lower().replace('article', '').replace('art.', '').strip().rstrip('.').upper()
         target_ids = list(set([provision_id, clean_id]))
+        # FAM links in DB use the display article segment (e.g. "1"), not raw fc_codal keys (e.g. "FC-I-1").
+        if statute_id == 'FAM' and '-' in str(provision_id):
+            tail = str(provision_id).split('-')[-1].strip()
+            if tail:
+                target_ids = list(set(target_ids + [tail]))
         if statute_id == 'RPC':
             mapping = {'266-A': ['266-A', '335'], '266-B': ['266-B', '335'], '335': ['335', '266-A']}
-            if clean_id in mapping: target_ids = mapping[clean_id]
+            if clean_id in mapping:
+                target_ids = mapping[clean_id]
         or_conditions = []
         params = [statute_id]
         for tid in target_ids:
@@ -515,7 +521,7 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             params.extend([tid, tid, tid])
         where_clause = " OR ".join(or_conditions)
         cur.execute(f"""
-            SELECT l.id as link_id, l.case_id, 
+            SELECT l.id as link_id, l.case_id,
             CASE WHEN l.specific_ruling = 'General' OR l.specific_ruling IS NULL OR l.specific_ruling = '' THEN COALESCE(s.main_doctrine, s.digest_ruling, s.digest_ratio, 'View full case for details.') ELSE l.specific_ruling END as specific_ruling,
             l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente
             FROM codal_case_links l JOIN sc_decided_cases s ON l.case_id = s.id
@@ -524,10 +530,12 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             ORDER BY s.date DESC, l.citation_rank ASC
         """, tuple(params + ([subject_filter] if subject_filter else [])))
         rows = cur.fetchall()
-        cur.close()
         return compressed_json_response(rows, req, 200, max_age=1800)
     except Exception as e:
         logging.error(f"Codex Jurisprudence API Error: {e}")
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
-        if conn: put_db_connection(conn)
+        if cur:
+            cur.close()
+        if conn:
+            put_db_connection(conn)

@@ -22,6 +22,8 @@ import {
     FILTER_SEARCH_INPUT,
     FILTER_SEARCH_ICON_CLASS,
 } from '../utils/filterChromeClasses';
+import { apiUrl, normalizeScDecisionsRouteId } from '../utils/apiUrl';
+import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 
 
 // Recursive TOC Node Component
@@ -441,6 +443,16 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         setActiveAmendmentArticle(null);
     }, [canAccess, openUpgradeModal, setActiveJurisArticle, setActiveJurisParagraph, setActiveAmendmentArticle]);
 
+    /** Mobile juris/amendments sheet — same stack/ghost-tap pattern as CaseDecisionModal (portaled). */
+    const clearMobileLexPanels = useCallback(() => {
+        setActiveJurisArticle(null);
+        setActiveJurisParagraph(null);
+        setActiveAmendmentArticle(null);
+    }, []);
+
+    const handleCloseMobileLexPanels = useCallback(() => {
+        closeModalAbsorbingGhostTap(clearMobileLexPanels);
+    }, [clearMobileLexPanels]);
 
     // Close active info when clicking outside
     useEffect(() => {
@@ -892,13 +904,20 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             setActiveJurisParagraph(null);
                         }}
                         onSelectRatio={async (caseId, ratioIndex) => {
+                            const idSeg = normalizeScDecisionsRouteId(caseId);
+                            if (!idSeg) {
+                                console.error('LexCode juris: invalid case id', caseId);
+                                return;
+                            }
                             try {
-                                const res = await fetch(`/api/sc_decisions/${caseId}`);
-                                if (res.ok) {
-                                    const caseData = await res.json();
-                                    caseData.scrollToRatioIndex = ratioIndex;
-                                    onCaseSelect && onCaseSelect(caseData);
+                                const res = await fetch(apiUrl(`/api/sc_decisions/${idSeg}`));
+                                const caseData = await res.json().catch(() => ({}));
+                                if (!res.ok || !caseData || caseData.error) {
+                                    console.error('LexCode juris: case detail failed', res.status, caseData);
+                                    return;
                                 }
+                                caseData.scrollToRatioIndex = ratioIndex;
+                                onCaseSelect && onCaseSelect(caseData);
                             } catch (err) {
                                 console.error('Failed to fetch case:', err);
                             }
@@ -1246,56 +1265,76 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     document.body
                 )}
 
-            {/* Mobile Overlay for Right Sidebar */}
-            {(activeJurisArticle || activeAmendmentArticle) && (
-                <div
-                    className="lg:hidden fixed inset-0 z-[540] flex items-center justify-center bg-black/60 animate-in fade-in duration-200"
-                    style={{
-                        backdropFilter: 'blur(16px)',
-                        WebkitBackdropFilter: 'blur(16px)',
-                        paddingTop: 'max(env(safe-area-inset-top, 0px), 0.5rem)',
-                        paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 0.5rem)',
-                        paddingLeft: 'max(env(safe-area-inset-left, 0px), 0.5rem)',
-                        paddingRight: 'max(env(safe-area-inset-right, 0px), 0.5rem)',
-                    }}
-                    onClick={(e) => { if (e.target === e.currentTarget) { setActiveJurisArticle(null); setActiveAmendmentArticle(null); } }}
-                >
-                    <div className="lex-modal-card glass relative flex flex-col overflow-hidden rounded-2xl border-2 border-violet-200/80 bg-white/92 shadow-[0_28px_70px_-20px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300 dark:border-zinc-700 dark:bg-zinc-900/95">
-                        {activeJurisArticle && (
-                            <LexCodeJurisSidebar
-                                articleNum={activeJurisArticle}
-                                statuteId={shortName}
-                                paragraphFilter={activeJurisParagraph}
-                                onClose={() => {
-                                    setActiveJurisArticle(null);
-                                    setActiveJurisParagraph(null);
-                                }}
-                                onSelectRatio={async (caseId, ratioIndex) => {
-                                    try {
-                                        const res = await fetch(`/api/sc_decisions/${caseId}`);
-                                        if (res.ok) {
-                                            const caseData = await res.json();
-                                            caseData.scrollToRatioIndex = ratioIndex;
-                                            onCaseSelect && onCaseSelect(caseData);
-                                        }
-                                    } catch (err) {
-                                        console.error('Failed to fetch case:', err);
-                                    }
-                                }}
-                            />
-                        )}
-                        {activeAmendmentArticle && !activeJurisArticle && (
-                            <div className="h-full flex flex-col p-4 overflow-y-auto font-sans">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold text-lg text-rose-700">Amendments</h3>
-                                    <button onClick={() => setActiveAmendmentArticle(null)}><X size={18} /></button>
+            {/* Mobile juris/amendments — portaled + lex-modal-* (same as CaseDecisionModal) */}
+            {typeof document !== 'undefined' &&
+                (activeJurisArticle || activeAmendmentArticle) &&
+                createPortal(
+                    <div
+                        className="lg:hidden fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+                        onClick={handleCloseMobileLexPanels}
+                    >
+                        <div
+                            className="lex-modal-card glass relative flex w-full max-w-5xl flex-col overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white/92 shadow-2xl animate-in zoom-in-95 duration-300 dark:border-white/10 dark:bg-slate-900/45"
+                            role="dialog"
+                            aria-modal="true"
+                            aria-label={
+                                activeJurisArticle
+                                    ? 'Jurisprudence linked to this provision'
+                                    : 'Amendments for this article'
+                            }
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {activeJurisArticle && (
+                                <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+                                    <LexCodeJurisSidebar
+                                        articleNum={activeJurisArticle}
+                                        statuteId={shortName}
+                                        paragraphFilter={activeJurisParagraph}
+                                        onClose={handleCloseMobileLexPanels}
+                                        onSelectRatio={async (caseId, ratioIndex) => {
+                                            const idSeg = normalizeScDecisionsRouteId(caseId);
+                                            if (!idSeg) {
+                                                console.error('LexCode juris: invalid case id', caseId);
+                                                return;
+                                            }
+                                            try {
+                                                const res = await fetch(apiUrl(`/api/sc_decisions/${idSeg}`));
+                                                const caseData = await res.json().catch(() => ({}));
+                                                if (!res.ok || !caseData || caseData.error) {
+                                                    console.error('LexCode juris: case detail failed', res.status, caseData);
+                                                    return;
+                                                }
+                                                caseData.scrollToRatioIndex = ratioIndex;
+                                                onCaseSelect && onCaseSelect(caseData);
+                                            } catch (err) {
+                                                console.error('Failed to fetch case:', err);
+                                            }
+                                        }}
+                                    />
                                 </div>
-                                <div className="text-sm">Article {activeAmendmentArticle.article_num}</div>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
+                            )}
+                            {activeAmendmentArticle && !activeJurisArticle && (
+                                <div className="lex-modal-scroll flex min-h-0 flex-1 flex-col overflow-y-auto p-4 font-sans sm:p-6">
+                                    <div className="mb-4 flex shrink-0 items-center justify-between">
+                                        <h3 className="text-lg font-bold text-rose-700 dark:text-rose-400">Amendments</h3>
+                                        <button
+                                            type="button"
+                                            onClick={handleCloseMobileLexPanels}
+                                            className="touch-manipulation rounded-full p-1.5 text-stone-400 transition-colors hover:bg-stone-200 dark:hover:bg-gray-700"
+                                            aria-label="Close"
+                                        >
+                                            <X size={18} />
+                                        </button>
+                                    </div>
+                                    <div className="text-sm text-gray-700 dark:text-gray-300">
+                                        Article {activeAmendmentArticle.article_num}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>,
+                    document.body
+                )}
                 </div>
             </div>
         </PurpleGlassAmbient>

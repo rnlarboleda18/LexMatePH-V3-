@@ -1,10 +1,32 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
+import { apiUrl } from '../utils/apiUrl';
+
+/** Short-lived in-memory cache so reopening the same article avoids a round-trip. */
+const JURIS_SIDEBAR_CACHE_MS = 90_000;
+const _jurisSidebarCache = new Map();
+
+function _jurisSidebarCacheKey(statuteId, articleNum, subject, paragraphFilter) {
+    return `${statuteId || ''}\t${articleNum || ''}\t${subject || ''}\t${paragraphFilter ?? '\x00'}`;
+}
+
+function _jurisSidebarCacheGet(key) {
+    const e = _jurisSidebarCache.get(key);
+    if (!e) return null;
+    if (Date.now() > e.exp) {
+        _jurisSidebarCache.delete(key);
+        return null;
+    }
+    return e.value;
+}
+
+function _jurisSidebarCacheSet(key, value) {
+    _jurisSidebarCache.set(key, { exp: Date.now() + JURIS_SIDEBAR_CACHE_MS, value });
+}
 
 const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, onSelectRatio, paragraphFilter }) => {
     const { getToken } = useAuth();
-    const [groupedLinks, setGroupedLinks] = useState({});
+    const [groupedLinks, setGroupedLinks] = useState([]);
     const [availablePonentes, setAvailablePonentes] = useState([]);
     const [ponenteFilter, setPonenteFilter] = useState('');
     const [loading, setLoading] = useState(false);
@@ -13,18 +35,30 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
     useEffect(() => {
         if (!articleNum) return;
 
+        const ctrl = new AbortController();
+        const cacheKey = _jurisSidebarCacheKey(statuteId, articleNum, subject, paragraphFilter);
+        const cached = _jurisSidebarCacheGet(cacheKey);
+        if (cached) {
+            setGroupedLinks(cached.sortedGroups);
+            setAvailablePonentes(cached.pentes);
+            setLoading(false);
+            setError(null);
+            return () => ctrl.abort();
+        }
+
         const fetchLinks = async () => {
             setLoading(true);
             setError(null);
             try {
-                let url = `/api/codex/jurisprudence?statute_id=${statuteId}&provision_id=${articleNum}`;
-                if (subject) url += `&subject=${subject}`;
+                let path = `/api/codex/jurisprudence?statute_id=${encodeURIComponent(statuteId)}&provision_id=${encodeURIComponent(articleNum)}`;
+                if (subject) path += `&subject=${encodeURIComponent(subject)}`;
+                const url = apiUrl(path);
 
                 let token = null;
                 try { token = await getToken(); } catch (_) { /* ignore */ }
                 const headers = token ? { 'X-Clerk-Authorization': `Bearer ${token}` } : {};
 
-                const res = await fetch(url, { headers });
+                const res = await fetch(url, { headers, signal: ctrl.signal });
                 if (!res.ok) throw new Error("Failed to fetch jurisprudence");
 
                 const data = await res.json();
@@ -39,16 +73,17 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                         if (link.target_paragraph_index !== paragraphFilter) return;
                     }
 
-                    if (!groups[link.case_id]) {
-                        groups[link.case_id] = {
-                            caseId: link.case_id,
+                    const cid = link.case_id;
+                    if (!groups[cid]) {
+                        groups[cid] = {
+                            caseId: cid,
                             shortTitle: link.short_title,
                             date: link.case_date,
                             ponente: link.ponente,
                             ratios: []
                         };
                     }
-                    groups[link.case_id].ratios.push(link);
+                    groups[cid].ratios.push(link);
                 });
 
                 // Convert to array and Sort by Date DESC
@@ -57,13 +92,15 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                     const dateB = new Date(b.date);
                     return dateB - dateA; // Newest first
                 });
-                
+
                 // Extract unique ponentes, filtering out falsy values
                 const ponentes = [...new Set(sortedGroups.map(g => g.ponente).filter(Boolean))].sort();
 
                 setGroupedLinks(sortedGroups);
                 setAvailablePonentes(ponentes);
+                _jurisSidebarCacheSet(cacheKey, { sortedGroups, pentes: ponentes });
             } catch (err) {
+                if (err?.name === 'AbortError') return;
                 console.error(err);
                 setError(err.message);
             } finally {
@@ -71,7 +108,8 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
             }
         };
 
-        fetchLinks();
+        void fetchLinks();
+        return () => ctrl.abort();
     // getToken is a stable function reference from Clerk — safe to omit
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [articleNum, statuteId, subject, paragraphFilter]);
@@ -126,13 +164,13 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                     </div>
                 )}
 
-                {!loading && !error && Object.keys(groupedLinks).length === 0 && (
+                {!loading && !error && groupedLinks.length === 0 && (
                     <div className="text-center p-8 text-gray-500 text-sm">
                         No jurisprudence linked to Article {articleNum} yet.
                     </div>
                 )}
 
-                {Object.values(groupedLinks)
+                {groupedLinks
                     .filter(group => !ponenteFilter || group.ponente === ponenteFilter)
                     .map((group) => {
                     const firstLink = group.ratios[0];
