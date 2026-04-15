@@ -12,14 +12,17 @@ if _api not in sys.path:
     sys.path.insert(0, _api)
 from codal_text import normalize_storage_markdown
 
-from parse_amendment import parse_amendment_document
+from parse_amendment import parse_amendment_document, parse_ra10951_offline_rpc_articles_134_to_136
 from apply_amendment import apply_amendment_with_ai
 
 def get_db_connection():
+    conn_str = os.environ.get("DB_CONNECTION_STRING", "").strip()
+    if conn_str:
+        return psycopg2.connect(conn_str)
+    api_settings = _REPO_ROOT / "api" / "local.settings.json"
     try:
-        with open('local.settings.json') as f:
-            settings = json.load(f)
-            conn_str = settings['Values']['DB_CONNECTION_STRING']
+        with open(api_settings, encoding="utf-8") as f:
+            conn_str = json.load(f)["Values"]["DB_CONNECTION_STRING"]
     except Exception:
         conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
     return psycopg2.connect(conn_str)
@@ -97,26 +100,40 @@ def fetch_article_history(conn, code_id, article_number):
 def parse_article_title_body(text):
     """
     Extracts title and body from article text.
-    Format: "Article 123. The Title. - Body..."
+    Formats:
+      - "Article 123. The Title. - Body..." / "Art. 123. *Title* – Body..."
+      - "Article 123. Title. Body" (first sentence break)
     """
-    # Regex for "Article X. Title. - Body" or "Article X. Title. Body"
-    # Note: verify_art5 previously showed titles can be long.
-    match = re.search(r'Article\s+\d+\.\s+(.*?)(?:\.\s*-\s*|\.\s+)(.*)', text, re.DOTALL)
+    text = (text or "").strip()
+    if not text:
+        return None, ""
+
+    # RA-style italic run-in title after Art. N. … *title* – body (en dash or hyphen)
+    m_italic = re.match(
+        r"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s*\*(.+?)\*\s*[–-]\s*(.+)$",
+        text,
+        re.DOTALL | re.IGNORECASE,
+    )
+    if m_italic:
+        return m_italic.group(2).strip(), m_italic.group(3).strip()
+
+    # "Article N." or "Art. N." then title until ". - " or ". " before body
+    match = re.search(
+        r"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s+(.*?)(?:\.\s*-\s+|\.\s+)(.*)$",
+        text,
+        re.DOTALL | re.IGNORECASE,
+    )
     if match:
-        title = match.group(1).strip()
-        body = match.group(2).strip()
+        title = match.group(2).strip()
+        body = match.group(3).strip()
         return title, body
-    
-    # Fallback: Split by newline if header is on separate line
-    lines = text.split('\n', 1)
-    if len(lines) > 0:
-        # Check if first line resembles a header
-        header = lines[0]
-        if "Article" in header:
-             # Try to strip "Article X. "
-             title_part = re.sub(r'Article\s+\d+\.\s*', '', header).strip()
-             return title_part, lines[1] if len(lines) > 1 else ""
-             
+
+    # Fallback: first line starts with Article (full word) and body on following lines
+    lines = text.split("\n", 1)
+    if lines and "Article" in lines[0] and re.search(r"Article\s+\d+", lines[0], re.IGNORECASE):
+        title_part = re.sub(r"Article\s+\d+\.\s*", "", lines[0]).strip()
+        return title_part, lines[1] if len(lines) > 1 else ""
+
     return None, text
 
 def update_const_codal(conn, article_number, new_content, amendment_id, amendment_date, description, code_short_name):
@@ -225,25 +242,62 @@ def update_rpc_codal(conn, article_number, new_content, amendment_id, amendment_
             
         else:
             print(f"    [SYNC] Article {article_number} not found in rpc_codal. Inserting new record.")
-            # Insert new record
-            # We lack Book/Title/Chapter structure, so we default to NULL or 'Unknown'.
-            # Ideally we would infer this from neighbors, but for now getting the content visible is priority.
-            
-            initial_amendments = json.dumps([{
-                "id": amendment_id,
-                "date": amendment_date,
-                "description": description
-            }])
-            
-            insert_sql = """
-                INSERT INTO rpc_codal 
-                (article_num, article_title, content_md, amendments, created_at, updated_at)
-                VALUES (%s, %s, %s, %s, NOW(), NOW())
-            """
-            print(f"DEBUG: Executing INSERT for {article_number}")
-            print(f"DEBUG: SQL: {insert_sql}")
-            print(f"DEBUG: Values: {(article_number, title, body[:20], initial_amendments)}")
-            cur.execute(insert_sql, (article_number, title, body, initial_amendments))
+            # Copy Book/Title/Chapter from Art. 134 (RA 6968 inserts 134-A immediately after 134).
+            cur.execute(
+                """
+                SELECT book, book_label, title_num, title_label, chapter_label, chapter_num,
+                       section_label, section_num
+                FROM rpc_codal
+                WHERE article_num = '134'
+                LIMIT 1
+                """
+            )
+            anchor = cur.fetchone()
+            initial_amendments = json.dumps(
+                [{"id": amendment_id, "date": amendment_date, "description": description}]
+            )
+            if anchor:
+                (
+                    book,
+                    book_label,
+                    title_num,
+                    title_label,
+                    chapter_label,
+                    chapter_num,
+                    section_label,
+                    section_num,
+                ) = anchor
+                insert_sql = """
+                    INSERT INTO rpc_codal
+                    (article_num, article_title, content_md, amendments,
+                     book, book_label, title_num, title_label, chapter_label, chapter_num,
+                     section_label, section_num, created_at, updated_at)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
+                """
+                cur.execute(
+                    insert_sql,
+                    (
+                        article_number,
+                        title,
+                        body,
+                        initial_amendments,
+                        book,
+                        book_label,
+                        title_num,
+                        title_label,
+                        chapter_label,
+                        chapter_num,
+                        section_label,
+                        section_num,
+                    ),
+                )
+            else:
+                insert_sql = """
+                    INSERT INTO rpc_codal
+                    (article_num, article_title, content_md, amendments, created_at, updated_at)
+                    VALUES (%s, %s, %s, %s, NOW(), NOW())
+                """
+                cur.execute(insert_sql, (article_number, title, body, initial_amendments))
             
     except Exception as e:
         print(f"    [!] Failed to sync rpc_codal: {e}")
@@ -252,30 +306,62 @@ def update_rpc_codal(conn, article_number, new_content, amendment_id, amendment_
     finally:
         cur.close()
 
-def apply_amendment_to_database(conn, code_id, article_number, new_content, amendment_id, amendment_date, description=None, code_short_name="RPC"):
+def apply_amendment_to_database(
+    conn,
+    code_id,
+    article_number,
+    new_content,
+    amendment_id,
+    amendment_date,
+    description=None,
+    code_short_name="RPC",
+    replace_active_version=False,
+):
     """
     Updates the database with a new article version.
+
+    If replace_active_version is True, updates the current open row (valid_to IS NULL) in place
+    instead of closing it and inserting a duplicate tip — used when --force re-applies the same
+    amendment_id to correct bad content.
     """
     cur = conn.cursor()
     
     try:
-        # Step 1: Close current version
-        update_query = """
-            UPDATE article_versions
-            SET valid_to = %s
-            WHERE code_id = %s
-            AND article_number = %s
-            AND valid_to IS NULL
-        """
-        cur.execute(update_query, (amendment_date, code_id, article_number))
-        
-        # Step 2: Insert new version
-        insert_query = """
-            INSERT INTO article_versions
-            (code_id, article_number, content, valid_from, valid_to, amendment_id, amendment_description)
-            VALUES (%s, %s, %s, %s, NULL, %s, %s)
-        """
-        cur.execute(insert_query, (code_id, article_number, new_content, amendment_date, amendment_id, description))
+        if replace_active_version:
+            cur.execute(
+                """
+                UPDATE article_versions
+                SET content = %s, amendment_description = %s
+                WHERE code_id = %s
+                  AND article_number = %s
+                  AND valid_to IS NULL
+                """,
+                (new_content, description, code_id, article_number),
+            )
+            if cur.rowcount == 0:
+                replace_active_version = False
+
+        if not replace_active_version:
+            # Step 1: Close current version
+            update_query = """
+                UPDATE article_versions
+                SET valid_to = %s
+                WHERE code_id = %s
+                AND article_number = %s
+                AND valid_to IS NULL
+            """
+            cur.execute(update_query, (amendment_date, code_id, article_number))
+
+            # Step 2: Insert new version
+            insert_query = """
+                INSERT INTO article_versions
+                (code_id, article_number, content, valid_from, valid_to, amendment_id, amendment_description)
+                VALUES (%s, %s, %s, %s, NULL, %s, %s)
+            """
+            cur.execute(
+                insert_query,
+                (code_id, article_number, new_content, amendment_date, amendment_id, description),
+            )
         
         # Step 3: Sync to main Present View
         if code_short_name == "RPC":
@@ -292,7 +378,7 @@ def apply_amendment_to_database(conn, code_id, article_number, new_content, amen
         except Exception as map_err:
             print(f"    [WARN] Failed to generate structural map: {map_err}")
 
-        print(f"DEBUG: Committing transaction to {conn.dsn}...")
+        print("DEBUG: Committing transaction...")
         try:
             conn.commit()
             print("DEBUG: Commit successful.")
@@ -310,15 +396,58 @@ def apply_amendment_to_database(conn, code_id, article_number, new_content, amen
     finally:
         cur.close()
 
-def process_amendment(amendment_file, code_short_name="RPC", dry_run=False):
+def process_amendment(
+    amendment_file,
+    code_short_name="RPC",
+    dry_run=False,
+    force=False,
+    only_article=None,
+    offline_ra6968=False,
+    offline_ra10951_rpc=False,
+):
     print(f"\n{'='*70}")
     print(f"CODEX AMENDMENT PROCESSOR")
     print(f"{'='*70}\n")
+
+    path = Path(amendment_file)
+    if not path.is_file():
+        path = _REPO_ROOT / amendment_file
+    if not path.is_file():
+        return {"success": False, "error": f"Amendment file not found: {amendment_file}"}
+    amendment_file = str(path.resolve())
+
+    only_key = str(only_article).strip() if only_article is not None else None
+
+    if offline_ra6968 and offline_ra10951_rpc:
+        return {
+            "success": False,
+            "error": "Use only one of --offline-ra6968 or --offline-ra10951-rpc.",
+        }
+    if offline_ra6968 and "ra_6968" not in str(amendment_file).lower():
+        return {
+            "success": False,
+            "error": "--offline-ra6968 is only valid for LexCode/Codals/md/ra_6968_1990.md",
+        }
+    if offline_ra10951_rpc and "ra_10951" not in str(amendment_file).lower():
+        return {
+            "success": False,
+            "error": "--offline-ra10951-rpc is only valid for LexCode/Codals/md/ra_10951_2017.md",
+        }
+
+    use_literal_offline = bool(offline_ra6968 or offline_ra10951_rpc)
     
     # Step 1: Parse amendment
     print(f"[1/5] Parsing amendment document...")
     try:
-        amendment = parse_amendment_document(amendment_file)
+        if offline_ra10951_rpc:
+            amendment = parse_ra10951_offline_rpc_articles_134_to_136(amendment_file)
+            if not amendment or not amendment.get("changes"):
+                raise ValueError(
+                    "Offline RA 10951 RPC extract failed (expected Section 6 / Article 136 block)."
+                )
+            print("  [OK] Using offline RA 10951 RPC extract (Article 136 only in this source).")
+        else:
+            amendment = parse_amendment_document(amendment_file)
         if not amendment.get('date'):
             raise ValueError(f"No valid date found in {amendment_file}")
         print(f"  [OK] Amendment ID: {amendment['amendment_id']}")
@@ -349,23 +478,34 @@ def process_amendment(amendment_file, code_short_name="RPC", dry_run=False):
     # Step 3: Process each change
     print(f"\n[3/5] Processing amendments...")
     results = []
+    matched_changes = 0
     
     for idx, change in enumerate(amendment['changes'], 1):
         article_num = change['article_number']
+        if only_key is not None and str(article_num) != only_key:
+            continue
+        matched_changes += 1
         print(f"\n  Article {article_num} ({idx}/{len(amendment['changes'])}):")
         
         # Fetch current version
         current_article = fetch_current_article(conn, code_id, article_num)
         
         final_content = None
+        replace_active = bool(
+            force
+            and current_article
+            and current_article.get("amendment_id") == amendment["amendment_id"]
+        )
         
         if current_article:
              # IDEMPOTENCY CHECK:
              # If the latest version was already modified by THIS amendment, skip it.
-             if current_article.get('amendment_id') == amendment['amendment_id']:
+             if current_article.get('amendment_id') == amendment['amendment_id'] and not force:
                  print(f"    [SKIP] Article {article_num} already updated by {amendment['amendment_id']}")
                  results.append({"article": article_num, "success": True, "note": "Already applied"})
                  continue
+             if replace_active:
+                 print(f"    [FORCE] Re-applying {amendment['amendment_id']} on Article {article_num} (in-place active version)")
             
              # CHECK FOR REPEAL ACTION
              if change.get('action') == 'repeal':
@@ -374,6 +514,18 @@ def process_amendment(amendment_file, code_short_name="RPC", dry_run=False):
                  final_content = f"REPEALED BY {amendment['amendment_id']}"
                  description = f"Repealed Article {article_num} via {amendment['amendment_id']}."
                  ai_result = {'success': True, 'new_text': final_content, 'validation_result': {'confidence_score': 1.0}, 'description': description}
+             elif use_literal_offline:
+                 print(f"    [OFFLINE] Applying literal new_text from amendment markdown (no merge model).")
+                 final_content = normalize_storage_markdown(change["new_text"])
+                 description = (
+                     f"Literal codal text from {amendment['amendment_id']} source file (offline pipeline)."
+                 )
+                 ai_result = {
+                     "success": True,
+                     "new_text": final_content,
+                     "validation_result": {"confidence_score": 1.0},
+                     "description": description,
+                 }
              else:
                  print(f"    Current version (valid from {current_article['valid_from']})")
                  
@@ -415,13 +567,17 @@ def process_amendment(amendment_file, code_short_name="RPC", dry_run=False):
                  description = ai_result['description']
         else:
              print(f"    [!] Article {article_num} not found in database - Treating as NEW INSERTION.")
-             # For new insertions, we verify the text looks complete
-             final_content = change['new_text']
-             # Basic cleanup if not done by parser
-             final_content = final_content.strip('"').strip()
-            
-             # Create a dummy result for reporting
-             description = f"Inserted Article {article_num} via {amendment['amendment_id']}."
+             if use_literal_offline:
+                 final_content = normalize_storage_markdown(change["new_text"])
+                 description = (
+                     f"Inserted Article {article_num} via {amendment['amendment_id']} (offline literal)."
+                 )
+             else:
+                 # For new insertions, we verify the text looks complete
+                 final_content = change['new_text']
+                 # Basic cleanup if not done by parser
+                 final_content = final_content.strip('"').strip()
+                 description = f"Inserted Article {article_num} via {amendment['amendment_id']}."
              ai_result = {'success': True, 'new_text': final_content, 'validation_result': {'confidence_score': 1.0}, 'description': description}
 
         # Update database
@@ -432,7 +588,8 @@ def process_amendment(amendment_file, code_short_name="RPC", dry_run=False):
                 amendment['amendment_id'],
                 amendment['date'],
                 description=description,
-                code_short_name=code_short_name
+                code_short_name=code_short_name,
+                replace_active_version=replace_active,
             )
             if success:
                 print(f"    [OK] Database updated")
@@ -444,6 +601,13 @@ def process_amendment(amendment_file, code_short_name="RPC", dry_run=False):
             print(f"    [/] Dry run - database not updated")
             results.append({"article": article_num, "success": True, "dry_run": True})
     
+    if only_key is not None and matched_changes == 0:
+        conn.close()
+        return {
+            "success": False,
+            "error": f"No amendment change matched --only-article {only_key!r}",
+        }
+
     # Step 4: Generate report
     print(f"\n{'='*70}")
     print(f"SUMMARY REPORT")
@@ -475,10 +639,42 @@ def main():
     parser.add_argument("--file", required=True, help="Path to amendment markdown file")
     parser.add_argument("--code", default="RPC", help="Code short name (default: RPC)")
     parser.add_argument("--dry-run", action="store_true", help="Don't update database, just validate")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-apply even if article_versions already shows this amendment_id (fixes bad prior apply).",
+    )
+    parser.add_argument(
+        "--only-article",
+        default=None,
+        metavar="NUM",
+        help="Process only this article_number from the parsed changes (e.g. 136).",
+    )
+    parser.add_argument(
+        "--offline-ra6968",
+        action="store_true",
+        help="For ra_6968_1990.md: use literal Section extracts (no Gemini merge). Requires deterministic parse.",
+    )
+    parser.add_argument(
+        "--offline-ra10951-rpc",
+        action="store_true",
+        help=(
+            "For ra_10951_2017.md: extract RA 10951 Section 6 (RPC Art. 136 fines) only; apply literally. "
+            "Articles 134, 134-A, and 135 are not amended by RA 10951 in this markdown."
+        ),
+    )
     
     args = parser.parse_args()
     
-    result = process_amendment(args.file, args.code, args.dry_run)
+    result = process_amendment(
+        args.file,
+        args.code,
+        args.dry_run,
+        force=args.force,
+        only_article=args.only_article,
+        offline_ra6968=args.offline_ra6968,
+        offline_ra10951_rpc=args.offline_ra10951_rpc,
+    )
     
     if not result["success"]:
         sys.exit(1)
