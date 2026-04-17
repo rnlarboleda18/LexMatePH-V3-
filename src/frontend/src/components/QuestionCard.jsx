@@ -14,7 +14,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className="group relative flex h-[15rem] max-sm:h-[30rem] flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900"
+            className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900 max-sm:mx-auto max-sm:aspect-square max-sm:min-h-0 max-sm:min-w-0 max-sm:max-w-[min(30rem,calc(100dvh-14rem),calc(100vw-2.5rem))] sm:aspect-auto sm:h-[15rem] sm:max-w-none sm:mx-0"
         >
             <CardVioletInnerWash />
             <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
