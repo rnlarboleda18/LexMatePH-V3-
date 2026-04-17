@@ -790,7 +790,7 @@ function App() {
                       <div className="relative z-[1] flex min-w-0 flex-col gap-4 lg:gap-0">
                       {/* Page description — own card on phone/tablet; inside shell on lg+ */}
                       {!loading && (
-                        <div className="max-lg:rounded-lg max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:border-lex dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-4 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
+                        <div className="max-lg:rounded-lg max-lg:border-2 max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:border-lex dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-4 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
                           <p className="mb-0 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                             <span className="font-medium text-slate-700 dark:text-slate-300">Bar examination questions</span>{' '}
                             from past Philippine Bar exams, organized by subject. Tap a card to view the suggested answer,

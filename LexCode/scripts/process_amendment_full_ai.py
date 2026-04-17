@@ -13,7 +13,11 @@ from apply_amendment import apply_amendment_with_ai
 from process_amendment import get_db_connection, fetch_current_article, apply_amendment_to_database
 
 # Configuration
-API_KEY = "REDACTED_API_KEY_HIDDEN"
+API_KEY = os.environ.get("GEMINI_API_KEY")
+if not API_KEY:
+    print("  [FAILED] GEMINI_API_KEY environment variable not set.")
+    sys.exit(1)
+
 # Initialize Client
 client = genai.Client(api_key=API_KEY)
 
@@ -93,21 +97,21 @@ def process_amendment_full_ai(file_path, code_short_name="RPC", dry_run=False):
             if len(data) > 0:
                 data = data[0]
             else:
-                print(f"  ✗ AI returned empty list. Raw: {response.text}")
+                print(f"  [FAILED] AI returned empty list. Raw: {response.text}")
                 return
         
         # Save to file for verification
         with open("ai_extraction_result.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
 
-        print(f"  ✓ Amendment ID: {data.get('amendment_id')}")
-        print(f"  ✓ Date: {data.get('date')}")
-        print(f"  ✓ Changes found: {len(data.get('changes', []))}")
+        print(f"  [OK] Amendment ID: {data.get('amendment_id')}")
+        print(f"  [OK] Date: {data.get('date')}")
+        print(f"  [OK] Changes found: {len(data.get('changes', []))}")
         
     except Exception as e:
         import traceback
         traceback.print_exc()
-        print(f"  ✗ AI Extraction Failed: {e}")
+        print(f"  [FAILED] AI Extraction Failed: {e}")
         try:
              print(f"  Raw Response: {response.text}")
         except: pass
@@ -124,11 +128,11 @@ def process_amendment_full_ai(file_path, code_short_name="RPC", dry_run=False):
         cur.execute("SELECT code_id FROM legal_codes WHERE short_name = %s", (code_short_name,))
         row = cur.fetchone()
         if not row:
-            print(f"  ✗ Code '{code_short_name}' not found")
+            print(f"  [FAILED] Code '{code_short_name}' not found")
             return
         code_id = row[0]
     except Exception as e:
-        print(f"  ✗ DB Error: {e}")
+        print(f"  [FAILED] DB Error: {e}")
         return
 
     # 4. Processing Loop (AI Application)
@@ -144,7 +148,7 @@ def process_amendment_full_ai(file_path, code_short_name="RPC", dry_run=False):
         # Fetch current
         current = fetch_current_article(conn, code_id, art_num)
         if not current:
-            print(f"    ✗ Article {art_num} not found in DB")
+            print(f"    [FAILED] Article {art_num} not found in DB")
             continue
             
         print(f"    Current version found (valid from {current['valid_from']})")
@@ -157,7 +161,7 @@ def process_amendment_full_ai(file_path, code_short_name="RPC", dry_run=False):
         ai_result = apply_amendment_with_ai(current['content'], new_text_raw)
         
         if ai_result['success']:
-             print(f"    ✓ AI application successful (confidence: {ai_result['validation_result']['confidence_score']:.2f})")
+             print(f"    [OK] AI application successful (confidence: {ai_result['validation_result']['confidence_score']:.2f})")
              
              if not dry_run:
                  success = apply_amendment_to_database(
@@ -180,7 +184,7 @@ def process_amendment_full_ai(file_path, code_short_name="RPC", dry_run=False):
                 results.append({"article": art_num, "success": True, "note": "No substantive change"})
                 continue
             
-            print(f"    ✗ AI Application Failed: {ai_result['error']}")
+            print(f"    [FAILED] AI Application Failed: {ai_result['error']}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Full AI Amendment Processor")

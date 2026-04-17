@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import ArticleNode from './ArticleNode';
 import { toTitleCase, fixRccStructuralHeadingGlue } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
