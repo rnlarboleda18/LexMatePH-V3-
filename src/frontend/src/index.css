@@ -9,6 +9,8 @@
   --player-height: 0px;
   /* Fixed app header — used by Layout, sticky toolbars, modals (keep in sync) */
   --app-header-height: 2.5rem;
+  /* Shared vertical trim from the bottom for all `.lex-modal-overlay` shells */
+  --lex-modal-bottom-trim: 1cm;
   /* Light mode: marketing / auxiliary chrome (structural panels use --lex-border*) */
   --lex-light-border: rgba(51, 65, 85, 0.28);
   --lex-light-border-strong: rgba(30, 41, 59, 0.38);
@@ -57,7 +59,7 @@
   right: 0 !important;
   /* Dynamic Island & Safe Area Protection on Mobile */
   padding-top: calc(env(safe-area-inset-top, 0px) + 0.5rem) !important;
-  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem) !important;
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem + var(--lex-modal-bottom-trim)) !important;
   padding-left: calc(env(safe-area-inset-left, 0px) + 0.5rem) !important;
   padding-right: calc(env(safe-area-inset-right, 0px) + 0.5rem) !important;
   
@@ -69,9 +71,9 @@
 @media (min-width: 768px) {
   .lex-modal-overlay {
     padding: 2rem !important;
-    /* md+: constrain below header and above player */
+    /* md+: constrain below header and above player; trim lifts the overlay bottom by --lex-modal-bottom-trim */
     top: calc(var(--app-header-height) + env(safe-area-inset-top, 0px)) !important;
-    bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px) + var(--lex-modal-bottom-trim)) !important;
   }
 }
 
