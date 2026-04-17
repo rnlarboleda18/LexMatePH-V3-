@@ -510,6 +510,24 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
         refreshCacheForDisplayPlaylist,
     } = useLexPlay();
 
+    /** Audio lives in LexPlayProvider; closing the UI must tear down playback, not only hide the shell. */
+    const closeMiniAndStop = useCallback(
+        (e) => {
+            e?.stopPropagation?.();
+            handleStop();
+            onCloseMini?.();
+        },
+        [handleStop, onCloseMini]
+    );
+    const closeFullAndStop = useCallback(
+        (e) => {
+            e?.stopPropagation?.();
+            handleStop();
+            onCloseFull?.();
+        },
+        [handleStop, onCloseFull]
+    );
+
     // ── Subscription + LexPlay timer ───────────────────────────────────────────
     const { tier, canAccess, openUpgradeModal } = useSubscription();
     const { user } = useUser();
@@ -806,10 +824,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                     {typeof onCloseMini === 'function' && (
                         <button
                             type="button"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                onCloseMini();
-                            }}
+                            onClick={closeMiniAndStop}
                             className="absolute right-[max(0.25rem,env(safe-area-inset-right,0px))] top-0.5 z-30 flex h-8 w-8 items-center justify-center rounded-full border border-lex-strong bg-white text-neutral-600 shadow-sm transition-colors hover:bg-neutral-100 hover:text-neutral-900 active:scale-95 md:top-1 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700"
                             title="Close LexPlayer"
                             aria-label="Close LexPlayer"
@@ -1024,7 +1039,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                         {typeof onCloseFull === 'function' && (
                             <button
                                 type="button"
-                                onClick={(e) => { e.stopPropagation(); onCloseFull(); }}
+                                onClick={closeFullAndStop}
                                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                 title="Close LexPlayer"
                                 aria-label="Close LexPlayer"
@@ -1048,7 +1063,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                     {typeof onCloseFull === 'function' && (
                         <button
                             type="button"
-                            onClick={(e) => { e.stopPropagation(); onCloseFull(); }}
+                            onClick={closeFullAndStop}
                             className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
                             title="Close LexPlayer"
                             aria-label="Close LexPlayer"

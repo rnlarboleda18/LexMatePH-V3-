@@ -523,13 +523,38 @@ export const LexPlayProvider = ({ children }) => {
         loadPlaybackState();
     }, [fetchPlaylists, loadPlaybackState]);
 
+    /** Pause, detach audio, revoke blob URLs, clear prefetch — LexPlayer UI can unmount while `<audio>` lives in this provider. */
     const handleStop = useCallback(() => {
+        clearNextPrefetch();
         if (audioRef.current) {
-            audioRef.current.pause();
-            audioRef.current.currentTime = 0;
-            setIsPlaying(false);
+            const a = audioRef.current;
+            a.pause();
+            a.currentTime = 0;
+            if (a.src?.startsWith('blob:')) {
+                try {
+                    URL.revokeObjectURL(a.src);
+                } catch {
+                    /* ignore */
+                }
+            }
+            a.removeAttribute('src');
+            try {
+                a.load();
+            } catch {
+                /* ignore */
+            }
         }
-    }, [audioRef]);
+        setIsPlaying(false);
+        setIsLoading(false);
+        if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
+            try {
+                navigator.mediaSession.metadata = null;
+                navigator.mediaSession.playbackState = 'none';
+            } catch {
+                /* ignore */
+            }
+        }
+    }, [audioRef, clearNextPrefetch]);
 
     const loadSavedPlaylist = useCallback(async (playlistId) => {
         try {
@@ -1084,15 +1109,25 @@ export const LexPlayProvider = ({ children }) => {
     useEffect(() => {
         if (!('mediaSession' in navigator)) return;
 
-        if (currentTrack) {
+        const a = audioRef.current;
+        const hasAudioSrc = a?.src && a.src !== window.location.href;
+
+        if (currentTrack && hasAudioSrc) {
             navigator.mediaSession.metadata = new MediaMetadata({
                 title: currentTrack.title,
                 artist: 'LexMatePH - Bar Reviewer',
                 album: currentTrack.type === 'codal' ? 'Codal Provisions' : 'Case Digests'
             });
+        } else {
+            try {
+                navigator.mediaSession.metadata = null;
+            } catch {
+                /* ignore */
+            }
+        }
 
-            // Register handlers ONCE (using stable refs)
-            // This prevents the "session drop" on iOS and "controls flicker" on Android
+        if (currentTrack) {
+            // Register handlers (using stable refs) whenever there is a queue item
             navigator.mediaSession.setActionHandler('play', () => playPauseRef.current?.());
             navigator.mediaSession.setActionHandler('pause', () => playPauseRef.current?.());
             navigator.mediaSession.setActionHandler('previoustrack', () => prevTrackRef.current?.());
@@ -1108,7 +1143,7 @@ export const LexPlayProvider = ({ children }) => {
         }
 
         // Sync playback state for iOS lock screen and Android notifications
-        navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+        navigator.mediaSession.playbackState = hasAudioSrc ? (isPlaying ? 'playing' : 'paused') : 'none';
 
         // Update position state for high-fidelity progress bars (Android/Tablets)
         const updatePosition = () => {
