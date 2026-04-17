@@ -799,13 +799,13 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
     }, [isMinimized]);
 
     if (isMinimized) {
-        /** Portaled to body + z above modals (z-[520]): avoids blur/cover from modal overlay when mini bar lived under Layout's stacking context. */
+        /** Portaled to body. `lg+`: z-[530] (below modals). Phone/tablet (`max-lg`): z-[580] above modal shells (540/560), below full LexPlayer (600). */
         const miniPlayer = (
             <div
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] flex flex-col overflow-hidden border-t border-lex bg-white shadow-none transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950"
+                className="pointer-events-auto fixed bottom-0 left-0 right-0 z-[530] max-lg:z-[580] flex flex-col overflow-hidden border-t border-lex bg-white shadow-none transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950"
             >
                 {/* Scrub strip — no extra border (shell `border-t` is the only top chrome line) */}
                 <div
