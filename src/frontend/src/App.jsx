@@ -783,17 +783,21 @@ function App() {
                         className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                         style={xlFixedChrome ? { paddingTop: `${barFilterChromeHeight + 12}px` } : undefined}
                       >
-                      <div className="relative min-w-0 w-full overflow-hidden rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
-                      <CardVioletInnerWash />
-                      <div className="relative z-[1] min-w-0">
-                      {/* Page description */}
+                      <div className="flex flex-col gap-4 lg:relative lg:min-w-0 lg:w-full lg:overflow-hidden lg:rounded-xl lg:border lg:border-lex lg:bg-white lg:p-5 lg:shadow-sm lg:dark:bg-zinc-900 lg:sm:p-6">
+                      <div className="pointer-events-none hidden lg:block">
+                        <CardVioletInnerWash />
+                      </div>
+                      <div className="relative z-[1] flex min-w-0 flex-col gap-4 lg:gap-0">
+                      {/* Page description — own card on phone/tablet; inside shell on lg+ */}
                       {!loading && (
-                        <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                          <span className="font-medium text-slate-700 dark:text-slate-300">Bar examination questions</span>{' '}
-                          from past Philippine Bar exams, organized by subject. Tap a card to view the suggested answer,
-                          relevant doctrines, and related case citations. Filter by subject or search by keyword to target
-                          specific topics.
-                        </p>
+                        <div className="max-lg:rounded-xl max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-4 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
+                          <p className="mb-0 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                            <span className="font-medium text-slate-700 dark:text-slate-300">Bar examination questions</span>{' '}
+                            from past Philippine Bar exams, organized by subject. Tap a card to view the suggested answer,
+                            relevant doctrines, and related case citations. Filter by subject or search by keyword to target
+                            specific topics.
+                          </p>
+                        </div>
                       )}
 
                       {/* Bar search suggestions — portaled to body so it escapes overflow-hidden */}

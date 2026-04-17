@@ -37,12 +37,18 @@ const FlashcardSetup = ({
             <div
                 className={
                     embedded
-                        ? 'relative flex w-full max-w-full min-w-0 flex-col rounded-lg border border-lex bg-white p-5 shadow-lg dark:border-lex dark:bg-zinc-900 sm:p-6'
+                        ? 'relative flex w-full max-w-full min-w-0 flex-col gap-4 lg:rounded-lg lg:border lg:border-lex lg:bg-white lg:p-5 lg:shadow-lg dark:lg:border-lex dark:lg:bg-zinc-900 lg:sm:p-6'
                         : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-lex bg-white shadow-xl animate-in zoom-in-95 duration-200 dark:border-lex dark:bg-zinc-900'
                 }
             >
                 {(conceptsLoading || conceptsError || deckError) && (
-                    <div className="flex flex-col gap-2 border-b border-lex px-1 pb-3 pt-0 dark:border-lex sm:px-0">
+                    <div
+                        className={`flex flex-col gap-2 border-b border-lex px-1 pb-3 pt-0 dark:border-lex sm:px-0 ${
+                            embedded
+                                ? 'max-lg:rounded-xl max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:bg-zinc-900 lg:rounded-none lg:border-0 lg:border-b lg:bg-transparent lg:p-0 lg:px-1 lg:pb-3 lg:pt-0 lg:shadow-none dark:lg:bg-transparent'
+                                : ''
+                        }`}
+                    >
                         {conceptsLoading && (
                             <p className="text-sm text-gray-500 dark:text-gray-400">Loading SC concepts…</p>
                         )}
@@ -69,20 +75,41 @@ const FlashcardSetup = ({
 
                 <div className={embedded ? 'min-w-0 flex-1 space-y-6' : 'flex-1 space-y-10 overflow-y-auto p-6 sm:p-8'}>
                     <section className="min-w-0 max-w-full">
-                        <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">
-                            Legal concepts (SC digests)
-                        </h3>
-                        <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                            <span className="font-medium text-slate-700 dark:text-slate-300">Legal concepts</span> are
-                            short, exam-style distillations of doctrines and holdings drawn from Supreme Court digest
-                            summaries in the app. They are tagged to the Philippine Bar’s{' '}
-                            <span className="font-medium text-slate-700 dark:text-slate-300">
-                                Table of Specifications
-                            </span>{' '}
-                            so you drill what the syllabus actually weights—useful for quick recall and issue-spotting
-                            under time pressure. The default deck favors strong syllabus matches; clearly peripheral
-                            items stay out unless you widen the deck with the options below.
-                        </p>
+                        {embedded ? (
+                            <div className="mb-4 max-lg:rounded-xl max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-6 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
+                                <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">
+                                    Legal concepts (SC digests)
+                                </h3>
+                                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                                    <span className="font-medium text-slate-700 dark:text-slate-300">Legal concepts</span>{' '}
+                                    are short, exam-style distillations of doctrines and holdings drawn from Supreme Court
+                                    digest summaries in the app. They are tagged to the Philippine Bar’s{' '}
+                                    <span className="font-medium text-slate-700 dark:text-slate-300">
+                                        Table of Specifications
+                                    </span>{' '}
+                                    so you drill what the syllabus actually weights—useful for quick recall and
+                                    issue-spotting under time pressure. The default deck favors strong syllabus matches;
+                                    clearly peripheral items stay out unless you widen the deck with the options below.
+                                </p>
+                            </div>
+                        ) : (
+                            <>
+                                <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">
+                                    Legal concepts (SC digests)
+                                </h3>
+                                <p className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                                    <span className="font-medium text-slate-700 dark:text-slate-300">Legal concepts</span>{' '}
+                                    are short, exam-style distillations of doctrines and holdings drawn from Supreme Court
+                                    digest summaries in the app. They are tagged to the Philippine Bar’s{' '}
+                                    <span className="font-medium text-slate-700 dark:text-slate-300">
+                                        Table of Specifications
+                                    </span>{' '}
+                                    so you drill what the syllabus actually weights—useful for quick recall and
+                                    issue-spotting under time pressure. The default deck favors strong syllabus matches;
+                                    clearly peripheral items stay out unless you widen the deck with the options below.
+                                </p>
+                            </>
+                        )}
                         {typeof onBar2026OnlyChange === 'function' && (
                             <label className="mb-3 flex cursor-pointer items-start gap-3 rounded-xl border border-lex bg-white px-3 py-2.5 dark:border-lex dark:bg-zinc-800/80">
                                 <input
