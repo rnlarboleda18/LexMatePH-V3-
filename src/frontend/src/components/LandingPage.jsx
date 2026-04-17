@@ -1,5 +1,4 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
 import {
     ArrowRight,
     BookOpen,
@@ -10,7 +9,6 @@ import {
     Scale,
     Shield,
     Smartphone,
-    Sparkles,
     Sun,
     Zap,
 } from 'lucide-react';
@@ -26,16 +24,19 @@ const LG_NEST = 'landing-glass-nested';
  * Copy echoes About: one workspace, engineered digests, verify primary sources.
  */
 const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
-    const landingHeader =
-        typeof document !== 'undefined' ? (
-            createPortal(
+    return (
+        <div className="landing-page min-h-screen bg-transparent font-sans text-gray-900 dark:text-gray-100">
+            <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-3 pb-20 pt-[max(1rem,env(safe-area-inset-top))] sm:gap-4 sm:px-5 sm:pb-24 sm:pt-6 lg:px-6">
                 <div className={isDarkMode ? 'dark' : ''} data-lex-landing-chrome>
-                    <header className="landing-page fixed top-0 left-0 right-0 z-50 px-3 pt-[max(0.5rem,env(safe-area-inset-top))] pb-2 sm:px-5">
+                    <header className="landing-page relative w-full">
                         <div
-                            className={`${LG} landing-glass-header mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5`}
+                            className={`${LG} landing-glass-header flex w-full items-center justify-between gap-3 px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6`}
                         >
                             <div className="flex min-w-0 items-center gap-2.5">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-indigo-200/90 bg-gradient-to-br from-indigo-50/95 to-blue-50/90 text-indigo-600 shadow-sm dark:border-indigo-800/70 dark:from-slate-800/90 dark:to-indigo-950/50 dark:text-indigo-300 sm:h-10 sm:w-10">
+                                <div
+                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-md shadow-purple-600/30"
+                                    aria-hidden
+                                >
                                     <Scale className="h-5 w-5" strokeWidth={2} />
                                 </div>
                                 <div className="min-w-0">
@@ -82,19 +83,10 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             </div>
                         </div>
                     </header>
-                </div>,
-                document.body
-            )
-        ) : null;
-
-    return (
-        <div className="landing-page min-h-screen bg-transparent font-sans text-gray-900 dark:text-gray-100">
-            {landingHeader}
-            <div className="lex-landing-header-spacer shrink-0" aria-hidden />
-
-            <div className="mx-auto max-w-6xl space-y-10 px-3 pb-20 pt-4 sm:space-y-12 sm:px-5 sm:pb-24 sm:pt-6">
-                {/* Hero — large glass panel */}
-                <section className="relative">
+                </div>
+                {/* Single 12-col grid: hero spans full row; twin tiles span 6+6 — identical track widths */}
+                <div className="grid w-full min-w-0 grid-cols-1 gap-3 md:grid-cols-12 md:gap-4">
+                <section className="relative col-span-12 min-w-0">
                     <div
                         className="pointer-events-none absolute -left-16 top-1/4 h-56 w-56 rounded-full bg-indigo-400/35 blur-[56px] dark:bg-indigo-500/25"
                         aria-hidden
@@ -107,7 +99,9 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         className="pointer-events-none absolute left-1/3 top-0 h-40 w-72 -translate-x-1/2 rounded-full bg-amber-300/25 blur-[48px] dark:bg-amber-500/12"
                         aria-hidden
                     />
-                    <div className={`${LG_HERO} relative p-6 sm:p-8 md:p-10 lg:grid lg:grid-cols-[1fr_minmax(0,380px)] lg:items-center lg:gap-10`}>
+                    <div
+                        className={`${LG_HERO} relative w-full min-w-0 max-w-full p-6 sm:p-8 lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:items-center lg:gap-8`}
+                    >
                         {/* Specular + rim light (does not participate in grid) */}
                         <div
                             className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]"
@@ -118,10 +112,6 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent dark:via-white/25" />
                         </div>
                         <div className="relative z-10 min-w-0">
-                            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-indigo-300/60 bg-indigo-50/70 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-indigo-800 shadow-sm shadow-indigo-500/10 backdrop-blur-md dark:border-indigo-400/25 dark:bg-indigo-950/55 dark:text-indigo-100 dark:shadow-indigo-950/40">
-                                <Sparkles className="h-3.5 w-3.5" />
-                                Philippine Bar &amp; practice
-                            </p>
                             <h1 className="font-display text-3xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl">
                                 Master the Bar
                                 <span className="mt-1 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200">
@@ -151,7 +141,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         </div>
 
                         {/* Device mockup — nested glass layer */}
-                        <div className="relative z-10 mt-10 min-w-0 lg:mt-0" aria-hidden>
+                        <div className="relative z-10 mt-6 min-w-0 lg:mt-0" aria-hidden>
                             <div className={`${LG_NEST} p-4 sm:p-5`}>
                                 <div className="flex items-end justify-center gap-3 sm:gap-4">
                                     <div
@@ -191,9 +181,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                     </div>
                 </section>
 
-                {/* Problem / approach — twin glass cards */}
-                <section className="grid gap-6 md:grid-cols-2 md:gap-8">
-                    <div className={`${LG} p-6 sm:p-8`}>
+                    <div className={`${LG} col-span-12 min-w-0 p-6 sm:p-8 md:col-span-6`}>
                         <h2 className="font-display text-xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-2xl">
                             When prep feels heavier than the syllabus
                         </h2>
@@ -203,7 +191,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             inside a PDF reader.
                         </p>
                     </div>
-                    <div className={`${LG} p-6 sm:p-8`}>
+                    <div className={`${LG} col-span-12 min-w-0 p-6 sm:p-8 md:col-span-6`}>
                         <h2 className="font-display text-xl font-semibold tracking-tight text-gray-900 dark:text-white sm:text-2xl">
                             One workspace, built for the Philippine setting
                         </h2>
@@ -213,7 +201,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             tools.
                         </p>
                     </div>
-                </section>
+                </div>
 
                 {/* Pillars — icon colors echo About.jsx feature chips */}
                 <section>
@@ -221,10 +209,10 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         Why candidates open LexMatePH
                     </h2>
                     <p className="mx-auto mt-2 max-w-2xl text-center text-sm text-gray-600 dark:text-gray-400">
-                        Same spirit as the rest of the app: structured review, literal attention to sources, and room
-                        to verify against reporters and current law.
+                        Same spirit as the rest of the app: structured review, literal attention to sources, LexMatePH is
+                        your all-in-one legal companion.
                     </p>
-                    <div className="mt-10 grid gap-6 md:grid-cols-3">
+                    <div className="mt-4 grid gap-3 md:grid-cols-3 md:gap-4">
                         {[
                             {
                                 icon: Zap,
@@ -245,7 +233,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                                 body: 'Major codals and past Philippine Bar Examination questions with suggested answers, side by side with LexCode and Lexify where your plan allows.',
                             },
                         ].map(({ icon: Icon, chip, title, body }) => (
-                            <div key={title} className={`${LG} p-6 sm:p-7`}>
+                            <div key={title} className={`${LG} p-6 sm:p-8`}>
                                 <div className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl ${chip}`}>
                                     <Icon className="h-6 w-6" strokeWidth={2} />
                                 </div>
@@ -254,7 +242,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             </div>
                         ))}
                     </div>
-                    <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                    <div className="mt-3 grid gap-3 sm:grid-cols-2 sm:gap-4">
                         <div className={`${LG} flex gap-4 p-5 sm:p-6`}>
                             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
                                 <Headphones className="h-5 w-5" strokeWidth={2} />
@@ -284,7 +272,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
 
                 {/* Reliability — no cross-device sync claims */}
                 <section>
-                    <div className={`${LG} flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:gap-8 sm:p-8`}>
+                    <div className={`${LG} flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:gap-6 sm:p-8`}>
                         <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-sky-100 text-sky-800 dark:bg-sky-900/35 dark:text-sky-300">
                             <Shield className="h-7 w-7" strokeWidth={2} />
                         </div>
@@ -303,7 +291,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                 </section>
 
                 {/* Install */}
-                <section id="install" className="scroll-mt-24">
+                <section id="install" className="scroll-mt-8">
                     <div className={`${LG_HERO} relative overflow-hidden p-6 sm:p-8`}>
                         <div className="pointer-events-none absolute inset-0" aria-hidden>
                             <div className="absolute -left-16 top-1/2 h-44 w-44 -translate-y-1/2 rounded-full bg-indigo-400/25 blur-3xl dark:bg-indigo-500/18" />
@@ -317,7 +305,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         <p className="mt-2 max-w-2xl text-sm text-gray-600 dark:text-gray-400 sm:text-base">
                             LexMatePH is a website you can pin like an app—full-screen icon, no store approval drama.
                         </p>
-                        <ol className="mt-8 grid gap-5 md:grid-cols-3">
+                        <ol className="mt-5 grid gap-3 md:grid-cols-3 md:gap-4">
                             {[
                                 {
                                     step: '1',
@@ -353,7 +341,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
 
                 {/* Closing — glass + CTA */}
                 <section>
-                    <div className={`${LG} p-8 text-center sm:p-10`}>
+                    <div className={`${LG} p-6 text-center sm:p-8`}>
                         <p className="font-display text-lg font-medium italic leading-snug text-gray-800 dark:text-gray-200 sm:text-xl md:text-2xl">
                             Active recall, careful reading, and respect for the text of the law—tools for the pace of
                             Philippine legal study.

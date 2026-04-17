@@ -179,7 +179,7 @@ const Updates = ({ isDarkMode = false }) => {
 
   return (
     <FeaturePageShell>
-      <div className="animate-in fade-in relative pb-16 duration-700">
+      <div className="animate-in fade-in relative pb-12 duration-700">
         {/* Ambient orbs — same vocabulary as landing / app chrome */}
         <div
           className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl dark:bg-violet-600/15"
@@ -190,13 +190,13 @@ const Updates = ({ isDarkMode = false }) => {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-6xl space-y-6">
+        <div className="relative mx-auto max-w-6xl space-y-5">
           {/* Hero */}
           <header className="relative overflow-hidden rounded-lg border border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
             <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/30 to-fuchsia-500/20 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
-            <div className="relative flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-              <div className="space-y-3">
+            <div className="relative flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+              <div className="space-y-2">
                 <div className="inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-600 shadow-sm dark:border-lex dark:bg-zinc-800/90 dark:text-indigo-300">
                   <Sparkles className="h-3.5 w-3.5" />
                   Live from the Court
@@ -224,11 +224,11 @@ const Updates = ({ isDarkMode = false }) => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-5">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-4">
             {/* Main column — unified feed */}
-            <div className="space-y-5 lg:col-span-7">
+            <div className="space-y-4 lg:col-span-7">
               <section className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
-                <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/35">
                       <Rss className="h-6 w-6" />
@@ -261,8 +261,8 @@ const Updates = ({ isDarkMode = false }) => {
                 </div>
 
                 {/* Pinned Bar 2026 — curated, not RSS */}
-                <div className="mb-5 rounded-2xl border border-lex bg-gradient-to-r from-amber-500/10 via-white to-transparent p-4 dark:border-lex dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-900">
-                  <div className="mb-3 flex items-center gap-2 text-amber-900 dark:text-amber-200/90">
+                <div className="mb-4 rounded-2xl border border-lex bg-gradient-to-r from-amber-500/10 via-white to-transparent p-4 dark:border-lex dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-900">
+                  <div className="mb-2 flex items-center gap-2 text-amber-900 dark:text-amber-200/90">
                     <Bookmark className="h-4 w-4 shrink-0" />
                     <span className="text-[11px] font-black uppercase tracking-widest">Bar 2026 · pinned</span>
                   </div>
@@ -286,7 +286,7 @@ const Updates = ({ isDarkMode = false }) => {
                 </div>
 
                 {feedLoading ? (
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
                         key={i}
@@ -312,7 +312,7 @@ const Updates = ({ isDarkMode = false }) => {
                     No items in this filter.
                   </p>
                 ) : (
-                  <ul className="relative space-y-3 border-l border-lex pl-6 dark:border-lex">
+                  <ul className="relative space-y-2 border-l border-lex pl-6 dark:border-lex">
                     {visibleFeed.map((item, idx) => (
                       <li key={`${item.link}-${idx}`} className="relative">
                         <span className="absolute -left-[1.35rem] top-5 h-2.5 w-2.5 rounded-full border-2 border-lex bg-indigo-500 shadow dark:border-lex dark:bg-indigo-400" />
@@ -359,9 +359,9 @@ const Updates = ({ isDarkMode = false }) => {
             </div>
 
             {/* Rail */}
-            <aside className="space-y-4 lg:col-span-5">
+            <aside className="space-y-3 lg:col-span-5">
               <div className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
-                <div className="mb-4 flex items-center gap-3">
+                <div className="mb-3 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                     <Gavel className="h-5 w-5" />
                   </div>
@@ -414,7 +414,7 @@ const Updates = ({ isDarkMode = false }) => {
                 )}
               </div>
 
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 lg:grid-cols-1">
+              <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3 lg:grid-cols-1">
                 {NEWS_LINKS.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -464,7 +464,7 @@ const Updates = ({ isDarkMode = false }) => {
                     </a>
                   </div>
                 </div>
-                <div className="space-y-3 bg-slate-50/80 p-4 dark:bg-slate-950/50">
+                <div className="space-y-2 bg-slate-50/80 p-4 dark:bg-slate-950/50">
                   <iframe
                     key={twitterEmbedSrc}
                     title="Supreme Court PIO posts on X"

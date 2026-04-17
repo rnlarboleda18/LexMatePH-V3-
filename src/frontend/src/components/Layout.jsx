@@ -87,33 +87,20 @@ const Layout = ({
                             )}
                         </button>
 
-                        <div className="flex min-w-0 items-center gap-2 md:gap-2.5">
+                        {/* Same logo lockup as LandingPage.jsx (official marketing branding) */}
+                        <div className="flex min-w-0 items-center gap-2.5">
                             <div
-                                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border backdrop-blur-md ${
-                                    isDarkMode
-                                        ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06]'
-                                        : 'border-lex-strong bg-white text-black shadow-sm ring-1 ring-inset ring-neutral-200/80'
-                                }`}
+                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-md shadow-purple-600/30"
                                 aria-hidden
                             >
-                                <Scale className="h-[1.1rem] w-[1.1rem]" strokeWidth={2} />
+                                <Scale className="h-5 w-5" strokeWidth={2} />
                             </div>
-                            <div className="flex min-w-0 flex-col justify-center leading-tight">
-                                <span
-                                    className={`select-none truncate font-semibold tracking-tight text-base sm:text-lg md:text-[1.125rem] ${
-                                        isDarkMode
-                                            ? 'text-zinc-50 drop-shadow-[0_1px_0_rgba(0,0,0,0.35)]'
-                                            : 'text-black'
-                                    }`}
-                                >
+                            <div className="min-w-0">
+                                <span className="font-display block truncate text-lg font-semibold tracking-tight text-black dark:text-zinc-50 sm:text-xl">
                                     LexMatePH
                                 </span>
-                                <span
-                                    className={`mt-0.5 hidden text-[10px] font-semibold leading-tight tracking-tight sm:block sm:text-[11px] md:text-xs ${
-                                        isDarkMode ? 'text-zinc-400' : 'text-black'
-                                    }`}
-                                >
-                                    Your Law Companion
+                                <span className="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 sm:block">
+                                    Your legal companion
                                 </span>
                             </div>
                         </div>
