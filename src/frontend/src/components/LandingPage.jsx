@@ -8,7 +8,6 @@ import {
     Moon,
     Scale,
     Shield,
-    Smartphone,
     Sun,
     Zap,
 } from 'lucide-react';
@@ -18,7 +17,6 @@ import LandingPwaInstallAnimation from './LandingPwaInstallAnimation';
 /** Scoped “premium glass” — see index.css `.landing-page .landing-glass*`. */
 const LG = 'landing-glass rounded-2xl';
 const LG_HERO = 'landing-glass-hero';
-const LG_NEST = 'landing-glass-nested';
 
 /**
  * Marketing landing — pronounced glassmorphism (scoped CSS + layered highlights).
@@ -85,8 +83,67 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         </div>
                     </header>
                 </div>
-                {/* Single 12-col grid: hero spans full row; twin tiles span 6+6 — identical track widths */}
+                {/* Single 12-col grid: install steps first (compact), then hero; twin tiles span 6+6 */}
                 <div className="grid w-full min-w-0 grid-cols-1 gap-3 md:grid-cols-12 md:gap-4">
+                <section id="install" className="scroll-mt-8 col-span-12 min-w-0">
+                    <div className={`${LG_HERO} relative overflow-hidden p-2 sm:p-2.5`}>
+                        <div className="pointer-events-none absolute inset-0" aria-hidden>
+                            <div className="absolute -left-12 top-1/2 h-16 w-16 -translate-y-1/2 rounded-full bg-indigo-400/20 blur-xl dark:bg-indigo-500/14" />
+                            <div className="absolute -right-8 bottom-0 h-14 w-14 rounded-full bg-violet-400/18 blur-xl dark:bg-violet-500/12" />
+                            <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20" />
+                        </div>
+                        <div className="relative z-10">
+                            <h2 className="font-display text-base font-semibold text-gray-900 dark:text-white sm:text-lg">
+                                Install in a few steps
+                            </h2>
+                            <ol className="mt-1.5 grid gap-1.5 md:grid-cols-2 xl:grid-cols-5 md:gap-1.5">
+                                {[
+                                    {
+                                        step: '1',
+                                        title: 'Open in Safari or Chrome',
+                                        body: 'Use this site on your phone, tablet, or desktop browser.',
+                                    },
+                                    {
+                                        step: '2',
+                                        title: 'Share or install (in the bar)',
+                                        body: 'iOS: Share (arrow-up in the address bar). Android / desktop: install icon inside the address bar, or ⋮ for the menu.',
+                                    },
+                                    {
+                                        step: '3',
+                                        title: 'Add or Install',
+                                        body: 'Choose “Add to Home Screen” or “Install app”. Core assets cache for a smoother launch next time.',
+                                    },
+                                    {
+                                        step: '4',
+                                        title: 'Open as Web App (iOS)',
+                                        body: 'When offered, turn on Open as Web App, then launch LexMatePH from your Home Screen.',
+                                    },
+                                    {
+                                        step: '5',
+                                        title: 'On your Home Screen',
+                                        body: 'LexMatePH shows the official icon next to your other apps—tap to open anytime.',
+                                    },
+                                ].map(({ step, title, body }) => (
+                                    <li key={step} className={`${LG} relative overflow-hidden p-2 sm:p-2`}>
+                                        <span className="absolute right-1.5 top-1 font-display text-lg font-bold tabular-nums text-gray-200/80 dark:text-white/[0.07]">
+                                            {step}
+                                        </span>
+                                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-[10px] font-bold leading-none text-indigo-900 dark:bg-indigo-900/50 dark:text-indigo-200">
+                                            {step}
+                                        </span>
+                                        <h3 className="mt-1 font-display text-xs font-semibold leading-tight text-gray-900 dark:text-white sm:text-[13px]">
+                                            {title}
+                                        </h3>
+                                        <p className="mt-0.5 text-[11px] leading-snug text-gray-600 dark:text-gray-400">
+                                            {body}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
                 <section className="relative col-span-12 min-w-0">
                     <div
                         className="pointer-events-none absolute -left-16 top-1/4 h-56 w-56 rounded-full bg-indigo-400/35 blur-[56px] dark:bg-indigo-500/25"
@@ -112,11 +169,11 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             <div className="absolute -bottom-1/4 -right-1/4 h-[70%] w-[65%] rounded-full bg-gradient-to-tl from-amber-200/45 via-fuchsia-200/22 to-transparent opacity-55 blur-2xl dark:from-amber-400/14 dark:via-fuchsia-500/10 dark:to-transparent dark:opacity-85" />
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent dark:via-white/25" />
                         </div>
-                        <div className="relative z-10 min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
-                            <h1 className="font-display text-3xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl lg:text-2xl lg:leading-snug xl:text-3xl">
+                        <div className="relative z-10 min-w-0 lg:max-w-[27rem] xl:max-w-[32rem]">
+                            <h1 className="font-display text-3xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white sm:text-4xl md:text-5xl lg:text-[1.75rem] lg:leading-snug xl:text-3xl 2xl:text-4xl">
                                 Master the Bar
-                                <span className="mt-1 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200 lg:mt-0.5">
-                                    without the burnout.
+                                <span className="mt-1.5 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200 sm:mt-2 lg:mt-1.5">
+                                    without the burnout with your all-in-one legal companion
                                 </span>
                             </h1>
                             <p className="mt-5 max-w-xl text-base leading-relaxed text-gray-600 dark:text-gray-400 sm:text-lg lg:mt-4 lg:max-w-none lg:text-sm lg:leading-relaxed xl:text-[0.95rem]">
@@ -141,15 +198,9 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             </div>
                         </div>
 
-                        {/* Compact PWA install walkthrough — same animation as #install, scaled for hero column */}
-                        <div className="relative z-10 mt-6 min-w-0 lg:mt-0">
-                            <div className={`${LG_NEST} overflow-x-hidden p-3 sm:p-4`}>
-                                <LandingPwaInstallAnimation compact />
-                            </div>
-                            <p className="mt-2 text-center text-[10px] font-medium text-gray-500 dark:text-gray-400 sm:text-[11px]">
-                                <Smartphone className="mr-1 inline h-3.5 w-3.5 align-text-bottom text-indigo-500 dark:text-indigo-400" />
-                                Browser or installed PWA — same LexMatePH experience.
-                            </p>
+                        {/* Compact PWA install walkthrough — no extra glass shell; sits in hero grid cell */}
+                        <div className="relative z-10 mt-6 min-w-0 overflow-x-hidden lg:mt-0">
+                            <LandingPwaInstallAnimation compact />
                         </div>
                     </div>
                 </section>
@@ -259,66 +310,6 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                                 not legal advice; always confirm critical points against primary sources and the latest
                                 jurisprudence.
                             </p>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Install */}
-                <section id="install" className="scroll-mt-8">
-                    <div className={`${LG_HERO} relative overflow-hidden p-6 sm:p-8`}>
-                        <div className="pointer-events-none absolute inset-0" aria-hidden>
-                            <div className="absolute -left-16 top-1/2 h-44 w-44 -translate-y-1/2 rounded-full bg-indigo-400/25 blur-3xl dark:bg-indigo-500/18" />
-                            <div className="absolute -right-10 bottom-0 h-36 w-36 rounded-full bg-violet-400/20 blur-3xl dark:bg-violet-500/14" />
-                            <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20" />
-                        </div>
-                        <div className="relative z-10">
-                        <h2 className="font-display text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">
-                            Install in a few steps
-                        </h2>
-                        <p className="mt-2 max-w-2xl text-sm text-gray-600 dark:text-gray-400 sm:text-base">
-                            LexMatePH is a website you can pin like an app—full-screen icon, no store approval drama. The
-                            hero above shows the same install flow in compact form.
-                        </p>
-                        <ol className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-5 md:gap-4">
-                            {[
-                                {
-                                    step: '1',
-                                    title: 'Open in Safari or Chrome',
-                                    body: 'Use this site on your phone, tablet, or desktop browser.',
-                                },
-                                {
-                                    step: '2',
-                                    title: 'Share or install (in the bar)',
-                                    body: 'iOS: Share (arrow-up in the address bar). Android / desktop: install icon inside the address bar, or ⋮ for the menu.',
-                                },
-                                {
-                                    step: '3',
-                                    title: 'Add or Install',
-                                    body: 'Choose “Add to Home Screen” or “Install app”. Core assets cache for a smoother launch next time.',
-                                },
-                                {
-                                    step: '4',
-                                    title: 'Open as Web App (iOS)',
-                                    body: 'When offered, turn on Open as Web App, then launch LexMatePH from your Home Screen.',
-                                },
-                                {
-                                    step: '5',
-                                    title: 'On your Home Screen',
-                                    body: 'LexMatePH shows the official icon next to your other apps—tap to open anytime.',
-                                },
-                            ].map(({ step, title, body }) => (
-                                <li key={step} className={`${LG} relative overflow-hidden p-5`}>
-                                    <span className="absolute right-3 top-3 font-display text-4xl font-bold tabular-nums text-gray-200/80 dark:text-white/[0.07]">
-                                        {step}
-                                    </span>
-                                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 text-sm font-bold text-indigo-900 dark:bg-indigo-900/50 dark:text-indigo-200">
-                                        {step}
-                                    </span>
-                                    <h3 className="mt-3 font-display text-base font-semibold text-gray-900 dark:text-white">{title}</h3>
-                                    <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-400">{body}</p>
-                                </li>
-                            ))}
-                        </ol>
                         </div>
                     </div>
                 </section>

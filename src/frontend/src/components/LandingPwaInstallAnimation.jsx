@@ -1,10 +1,14 @@
 import React from 'react';
-import { MonitorDown, MoreVertical, SquareArrowUp } from 'lucide-react';
+import { MonitorDown, MoreVertical, Smartphone, SquareArrowUp } from 'lucide-react';
 
 /** Same asset as manifest / tab icons (`public/pwa-192x192.png`). */
 const PWA_ICON_SRC = '/pwa-192x192.png';
 
 const LOOP_S = 20;
+
+/** Domain text shown in demo address bars (matches production marketing URL). */
+const MOCK_URL_IN_BAR = 'www.lexmateph.com';
+const MOCK_URL_IN_BAR_HTTPS = 'https://www.lexmateph.com';
 
 /** Official mark for in-demo “app icon” slots (gradient + Scale from build script). */
 function OfficialAppIcon({ className = 'h-8 w-8', rounded = 'rounded-lg' }) {
@@ -48,7 +52,7 @@ function InDeviceHomeScreenGrid({ variant, compact }) {
     const ph = compact;
     const lbl = ph ? 'text-[5px]' : 'text-[6px]';
     const icoLm = ph ? 'h-7 w-7' : 'h-9 w-9';
-    const icoPl = ph ? 'h-8 w-8' : 'h-10 w-10';
+    const icoPl = ph ? 'h-11 w-11' : 'h-10 w-10';
     const rnd = ph ? 'rounded-md' : 'rounded-xl';
     return (
         <div className="landing-pwa-home-screen pointer-events-none absolute inset-0 z-30 overflow-hidden" aria-hidden>
@@ -130,7 +134,17 @@ function LandingPwaInstallAnimation({ compact = false }) {
                             <figcaption className={fig(true)}>Phone (iOS)</figcaption>
                             <PhoneMock compact />
                         </figure>
-                        <div className="flex min-w-0 flex-1 flex-col items-center gap-2 sm:gap-2.5">
+                        <div className="flex min-w-0 flex-1 flex-col items-center gap-2 sm:gap-3">
+                            <p className="mb-0.5 flex w-full items-center justify-center gap-2 text-center text-sm font-medium leading-snug text-gray-800 dark:text-gray-100 sm:mb-1 sm:gap-2.5 sm:text-base">
+                                <Smartphone
+                                    className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400 sm:h-5 sm:w-5"
+                                    strokeWidth={2}
+                                    aria-hidden
+                                />
+                                <span className="min-w-0">
+                                    Browser or installed PWA — same LexMatePH experience.
+                                </span>
+                            </p>
                             <DesktopChromeMock compact />
                             <figure className="flex w-full min-w-0 flex-col items-center">
                                 <figcaption className={fig(true)}>Tablet (Android)</figcaption>
@@ -182,33 +196,35 @@ function LandingPwaInstallAnimation({ compact = false }) {
 }
 
 function PhoneMock({ compact }) {
-    const outer = compact ? 'w-[158px]' : 'w-[142px]';
-    const innerH = compact ? 'h-[338px]' : 'h-[288px]';
-    const round = compact ? 'rounded-[1.35rem] border-2' : 'rounded-[1.65rem] border-[3px]';
-    const innerRound = compact ? 'rounded-[1.1rem]' : 'rounded-[1.35rem]';
+    const outer = compact ? 'w-[182px]' : 'w-[142px]';
+    const innerH = compact ? 'h-[388px]' : 'h-[288px]';
+    const round = compact ? 'rounded-[1.5rem] border-2' : 'rounded-[1.65rem] border-[3px]';
+    const innerRound = compact ? 'rounded-[1.2rem]' : 'rounded-[1.35rem]';
     const barPad = compact ? 'px-2 py-1.5' : 'px-2 py-1.5';
-    const barH = compact ? 'h-8' : 'h-8';
-    const urlText = compact ? 'text-[7px]' : 'text-[8px]';
-    const shareBox = compact ? 'h-6 w-6' : 'h-7 w-7';
-    const shareIco = compact ? 'h-3.5 w-3.5' : 'h-4 w-4';
-    const logoBox = compact ? 'h-8 w-8 mb-1' : 'h-9 w-9 mb-2';
-    const p = compact ? 'p-1.5' : 'p-2';
-    const bottomBar = compact ? 'h-7 px-2' : 'h-8 px-4';
+    const barH = compact ? 'h-10' : 'h-9';
+    const urlText = compact ? 'text-[14px]' : 'text-[13px]';
+    const shareBox = compact ? 'h-7 w-7' : 'h-7 w-7';
+    const shareIco = compact ? 'h-4 w-4' : 'h-4 w-4';
+    const logoBox = compact ? 'h-9 w-9 mb-1' : 'h-9 w-9 mb-2';
+    const p = compact ? 'p-2' : 'p-2';
+    const bottomBar = compact ? 'h-8 px-2' : 'h-8 px-4';
 
     return (
         <div className={`${outer} shrink-0`}>
             <div className={`${round} border-slate-700 bg-slate-800 p-[2px] shadow-xl ring-1 ring-black/20 dark:border-slate-600`}>
                 <div className={`flex ${innerH} flex-col overflow-hidden ${innerRound} bg-white dark:bg-zinc-950`}>
-                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? 'h-6' : 'h-5'}`}>
-                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? 'h-0.5 w-10' : 'h-0.5 w-8'}`} />
+                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? 'h-7' : 'h-5'}`}>
+                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? 'h-0.5 w-11' : 'h-0.5 w-8'}`} />
                     </div>
                     <div className={`shrink-0 border-b border-slate-200/90 bg-[#e8e8ed] dark:border-zinc-800 dark:bg-zinc-900 ${barPad}`}>
                         <div
                             className={`flex ${barH} w-full items-center gap-1 rounded-md bg-white px-1.5 shadow-sm ring-1 ring-black/[0.06] dark:bg-zinc-800 dark:ring-white/10`}
                         >
                             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500/90" aria-hidden />
-                            <span className={`min-w-0 flex-1 truncate text-center font-medium text-gray-800 dark:text-gray-100 ${urlText}`}>
-                                lexmate.ph
+                            <span
+                                className={`min-w-0 flex-1 truncate text-center font-medium tabular-nums text-gray-800 dark:text-gray-100 ${urlText}`}
+                            >
+                                {MOCK_URL_IN_BAR}
                             </span>
                             <div
                                 className={`landing-pwa-share-ios flex shrink-0 items-center justify-center rounded text-blue-600 dark:text-blue-400 ${shareBox}`}
@@ -221,7 +237,7 @@ function PhoneMock({ compact }) {
                         <div className="landing-pwa-content-glow pointer-events-none absolute inset-0 opacity-80" aria-hidden />
                         <div className={`relative ${p}`}>
                             <div className={`mx-auto flex items-center justify-center overflow-hidden rounded-lg shadow-md ring-1 ring-black/10 ${logoBox}`}>
-                                <OfficialAppIcon className={compact ? 'h-8 w-8' : 'h-9 w-9'} rounded={compact ? 'rounded-lg' : 'rounded-xl'} />
+                                <OfficialAppIcon className="h-9 w-9" rounded={compact ? 'rounded-lg' : 'rounded-xl'} />
                             </div>
                             <div className="mx-auto h-1 w-4/5 rounded bg-white/50 dark:bg-white/10" />
                             <div className="mx-auto mt-0.5 h-1 w-3/5 rounded bg-white/35 dark:bg-white/5" />
@@ -294,16 +310,18 @@ function PhoneMock({ compact }) {
 }
 
 function TabletMock({ compact }) {
-    const w = compact ? 'w-[min(100%,304px)]' : 'w-[228px]';
-    const h = compact ? 'h-[198px]' : 'h-[188px]';
+    const w = compact ? 'w-[min(100%,448px)]' : 'w-[228px]';
+    const h = compact ? 'h-[304px]' : 'h-[188px]';
     const border = compact ? 'border-4' : 'border-[6px]';
-    const omni = compact ? 'h-9 gap-1 px-2 py-1 text-[7px]' : 'h-9 gap-1 px-2 py-1 text-[8px]';
-    const ico = compact ? 'h-6 w-6' : 'h-7 w-7';
-    const mv = compact ? 'h-3 w-3' : 'h-3.5 w-3.5';
-    const md = compact ? 'h-6 w-6' : 'h-7 w-7';
-    const pIco = compact ? 'p-2' : 'p-3';
-    const logo = compact ? 'h-10 w-10 mb-1' : 'h-10 w-10 mb-2';
-    const sheet = compact ? 'right-2 top-10 w-[8rem]' : 'right-2 top-10 w-[9.5rem]';
+    const omni = compact
+        ? 'min-h-[52px] gap-2 px-3.5 py-2 text-[15px]'
+        : 'h-10 gap-1 px-2 py-1 text-[13px]';
+    const ico = compact ? 'h-9 w-9' : 'h-7 w-7';
+    const mv = compact ? 'h-[18px] w-[18px]' : 'h-3.5 w-3.5';
+    const md = compact ? 'h-9 w-9' : 'h-7 w-7';
+    const pIco = compact ? 'p-3.5' : 'p-3';
+    const logo = compact ? 'h-14 w-14 mb-1' : 'h-10 w-10 mb-2';
+    const sheet = compact ? 'right-3 top-16 w-[12rem]' : 'right-2 top-10 w-[9.5rem]';
 
     return (
         <div className={`${w} shrink-0`}>
@@ -314,13 +332,15 @@ function TabletMock({ compact }) {
                             className={`flex w-full min-w-0 items-center rounded-full bg-[#202124] ring-1 ring-black/35 ${omni}`}
                         >
                             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400/90" aria-hidden />
-                            <span className="min-w-0 flex-1 truncate pl-0.5 leading-none text-[#e8eaed]">lexmate.ph</span>
+                            <span className="min-w-0 flex-1 truncate pl-0.5 font-medium leading-none tabular-nums text-[#e8eaed]">
+                                {MOCK_URL_IN_BAR}
+                            </span>
                             <div className="flex shrink-0 items-center gap-0.5 border-l border-white/10 pl-0.5">
                                 <span className={`flex items-center justify-center text-[#9aa0a6] ${ico}`} aria-hidden>
                                     <MoreVertical className={mv} strokeWidth={2.25} />
                                 </span>
                                 <div className={`landing-pwa-chrome-install flex items-center justify-center rounded text-[#bdc1c6] ${md}`}>
-                                    <ChromePwaInstallIcon className={compact ? 'h-3.5 w-3.5' : 'h-3.5 w-3.5'} />
+                                    <ChromePwaInstallIcon className={compact ? 'h-5 w-5' : 'h-3.5 w-3.5'} />
                                 </div>
                             </div>
                         </div>
@@ -330,21 +350,21 @@ function TabletMock({ compact }) {
                             <div className="landing-pwa-content-glow pointer-events-none absolute inset-0 opacity-70" aria-hidden />
                             <div className={`relative ${pIco}`}>
                                 <div className={`mx-auto overflow-hidden rounded-lg shadow ring-1 ring-black/10 ${logo}`}>
-                                    <OfficialAppIcon className="h-10 w-10" rounded="rounded-lg" />
+                                    <OfficialAppIcon className={compact ? 'h-14 w-14' : 'h-10 w-10'} rounded="rounded-lg" />
                                 </div>
                                 <div className="mx-auto h-1 w-3/4 rounded bg-white/60 dark:bg-white/10" />
                             </div>
                             <div
                                 className={`landing-pwa-sheet-android pointer-events-none absolute z-10 overflow-hidden rounded border border-slate-200 bg-white shadow-xl dark:border-zinc-600 dark:bg-zinc-900 ${sheet}`}
                             >
-                                <div className={`px-2 py-1 font-semibold text-slate-500 dark:text-zinc-400 ${compact ? 'text-[7px]' : 'text-[9px]'}`}>
+                                <div className="px-2 py-1 text-[9px] font-semibold text-slate-500 dark:text-zinc-400">
                                     Chrome menu
                                 </div>
-                                <div className={`flex items-center gap-1 border-t border-slate-100 px-2 py-1 dark:border-zinc-800 ${compact ? 'gap-1.5 py-1.5' : 'gap-2 px-3 py-2'}`}>
-                                    <div className={`shrink-0 overflow-hidden rounded-md ring-1 ring-black/10 ${compact ? 'h-6 w-6' : 'h-7 w-7'}`}>
-                                        <OfficialAppIcon className={compact ? 'h-6 w-6' : 'h-7 w-7'} rounded="rounded-md" />
+                                <div className={`flex items-center gap-1 border-t border-slate-100 px-2 py-1 dark:border-zinc-800 ${compact ? 'gap-2 py-2.5 px-3' : 'gap-2 px-3 py-2'}`}>
+                                    <div className={`shrink-0 overflow-hidden rounded-md ring-1 ring-black/10 ${compact ? 'h-8 w-8' : 'h-7 w-7'}`}>
+                                        <OfficialAppIcon className={compact ? 'h-8 w-8' : 'h-7 w-7'} rounded="rounded-md" />
                                     </div>
-                                    <span className={`font-semibold text-slate-800 dark:text-slate-100 ${compact ? 'text-[8px]' : 'text-[10px]'}`}>Install app</span>
+                                    <span className={`font-semibold text-slate-800 dark:text-slate-100 ${compact ? 'text-[10px]' : 'text-[10px]'}`}>Install app</span>
                                 </div>
                             </div>
                             <InDeviceHomeScreenGrid variant="tablet" compact={compact} />
@@ -364,10 +384,12 @@ function DesktopChromeMock({ compact }) {
                     Desktop
                 </p>
                 <div className="overflow-hidden rounded-lg border border-slate-300 bg-[#35363a] shadow-md ring-1 ring-black/15 dark:border-slate-600">
-                    <div className="flex h-11 items-center px-2 py-1">
-                        <div className="flex h-9 w-full min-w-0 items-center gap-1.5 rounded-md bg-[#202124] px-2 py-1 ring-1 ring-black/25">
+                    <div className="flex h-12 items-center px-2 py-1">
+                        <div className="flex h-10 w-full min-w-0 items-center gap-1.5 rounded-md bg-[#202124] px-2 py-1 ring-1 ring-black/25">
                             <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400/90" aria-hidden />
-                            <span className="min-w-0 flex-1 truncate text-left text-[8px] text-[#e8eaed] sm:text-[9px]">lexmate.ph</span>
+                            <span className="min-w-0 flex-1 truncate text-left text-[14px] font-medium tabular-nums text-[#e8eaed] sm:text-[15px]">
+                                {MOCK_URL_IN_BAR}
+                            </span>
                             <div className="landing-pwa-chrome-install flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-[#bdc1c6]">
                                 <ChromePwaInstallIcon className="h-4 w-4" />
                             </div>
@@ -383,10 +405,12 @@ function DesktopChromeMock({ compact }) {
                 Desktop (Chrome / Edge)
             </p>
             <div className="overflow-hidden rounded-lg border border-slate-300 bg-[#35363a] shadow-lg ring-1 ring-black/15 dark:border-slate-600">
-                <div className="flex h-11 items-center px-2.5 py-1.5">
-                    <div className="flex h-9 w-full min-w-0 items-center gap-2 rounded-lg bg-[#202124] px-2.5 py-2 ring-1 ring-black/25">
+                <div className="flex h-[3.25rem] items-center px-2.5 py-1.5">
+                    <div className="flex h-11 w-full min-w-0 items-center gap-2 rounded-lg bg-[#202124] px-2.5 py-2 ring-1 ring-black/25">
                         <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400/90" aria-hidden />
-                        <span className="min-w-0 flex-1 truncate text-left text-[10px] text-[#e8eaed]">https://lexmate.ph</span>
+                        <span className="min-w-0 flex-1 truncate text-left text-[15px] font-medium tabular-nums text-[#e8eaed] sm:text-[16px]">
+                            {MOCK_URL_IN_BAR_HTTPS}
+                        </span>
                         <div className="landing-pwa-chrome-install flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-[#bdc1c6]">
                             <ChromePwaInstallIcon className="h-[18px] w-[18px]" />
                         </div>
