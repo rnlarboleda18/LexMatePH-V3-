@@ -1,6 +1,6 @@
 /**
  * Build PWA + favicon PNGs from vector art matching LandingPage / Layout:
- * purple→violet gradient squircle + white Scale icon (Lucide-style).
+ * purple→violet gradient squircle + Lucide Scale icon (same paths as `Scale` in the header).
  * Run: cd src/frontend && node scripts/generate-icons.mjs
  */
 import sharp from 'sharp';
@@ -12,29 +12,22 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const frontendRoot = path.join(__dirname, '..');
 const publicDir = path.join(frontendRoot, 'public');
 
-/** Tailwind purple-600 → violet-600, bg-gradient-to-br (matches header mark). */
+/** Lucide `scale` v0.555 iconNode — must stay in sync with lucide-react `Scale` in the app shell. */
+const LUCIDE_SCALE_PATHS = [
+  'M12 3v18',
+  'm19 8 3 8a5 5 0 0 1-6 0zV7',
+  'M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1',
+  'm5 8 3 8a5 5 0 0 1-6 0zV7',
+  'M7 21h10',
+];
+
+/** Tailwind purple-600 → violet-600, `rounded-xl` on a 40px mark → rx = 12/40 of size. */
 function buildSVG(size) {
   const r = Math.round((size * 12) / 40);
-  const strokeW = Math.max(2, Math.round((size * 2) / 40));
-  const pad = size * 0.18;
-  const w = size - pad * 2;
-  const cx = size / 2;
-
-  const postTop = pad + w * 0.08;
-  const postBottom = pad + w * 0.85;
-  const baseHalfW = w * 0.28;
-  const beamY = postTop + w * 0.05;
-  const beamHalfW = w * 0.36;
-  const leftPivotX = cx - beamHalfW;
-  const rightPivotX = cx + beamHalfW;
-  const panCenterY = beamY + w * 0.26;
-  const panRadius = w * 0.15;
-  const chainHalfW = w * 0.12;
-
-  const llx = leftPivotX - chainHalfW;
-  const lrx = leftPivotX + chainHalfW;
-  const rlx = rightPivotX - chainHalfW;
-  const rrx = rightPivotX + chainHalfW;
+  const s = size / 48;
+  const paths = LUCIDE_SCALE_PATHS.map(
+    (d) => `<path d="${d}"/>`
+  ).join('\n    ');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
@@ -45,14 +38,9 @@ function buildSVG(size) {
     </linearGradient>
   </defs>
   <rect width="${size}" height="${size}" rx="${r}" ry="${r}" fill="url(#lexGrad)"/>
-  <g stroke="#ffffff" stroke-width="${strokeW}" stroke-linecap="round" stroke-linejoin="round" fill="none">
-    <line x1="${cx}" y1="${postTop}" x2="${cx}" y2="${postBottom}"/>
-    <line x1="${cx - baseHalfW}" y1="${postBottom}" x2="${cx + baseHalfW}" y2="${postBottom}"/>
-    <line x1="${leftPivotX}" y1="${beamY}" x2="${rightPivotX}" y2="${beamY}"/>
-    <polyline points="${leftPivotX},${beamY} ${llx},${panCenterY} ${lrx},${panCenterY}"/>
-    <path d="M ${llx} ${panCenterY} A ${panRadius} ${panRadius} 0 0 0 ${lrx} ${panCenterY}"/>
-    <polyline points="${rightPivotX},${beamY} ${rlx},${panCenterY} ${rrx},${panCenterY}"/>
-    <path d="M ${rlx} ${panCenterY} A ${panRadius} ${panRadius} 0 0 0 ${rrx} ${panCenterY}"/>
+  <g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+     transform="translate(${size / 2} ${size / 2}) scale(${s}) translate(-12 -12)">
+    ${paths}
   </g>
 </svg>`;
 }
