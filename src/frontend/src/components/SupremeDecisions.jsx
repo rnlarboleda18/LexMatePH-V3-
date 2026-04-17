@@ -1518,7 +1518,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     className="cursor-pointer border-t border-lex p-3 hover:bg-neutral-50 dark:hover:bg-zinc-800/60 transition-colors"
                                 >
                                     <div
-                                        className={`relative flex h-[15.5rem] max-sm:h-[30rem] flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
+                                        className={`relative flex h-[15.5rem] max-sm:h-[calc(30rem-1cm)] max-sm:max-h-[calc(30rem-1cm)] max-sm:min-h-[calc(30rem-1cm)] max-sm:shrink-0 flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
                                     >
                                         <h4
                                             className={`mb-2 flex shrink-0 items-center gap-2 text-[11px] font-black uppercase tracking-widest sm:text-[12px] ${subjectAccentText}`}
