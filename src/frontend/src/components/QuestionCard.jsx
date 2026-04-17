@@ -14,7 +14,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className="group relative flex h-[15rem] flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900"
+            className="group relative flex h-[15rem] max-sm:h-[30rem] flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900"
         >
             <CardVioletInnerWash />
             <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
@@ -39,7 +39,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
             {/* Question Preview */}
             <div className="mb-3 min-h-0 flex-1">
-                <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed line-clamp-4">
+                <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed line-clamp-4 max-sm:line-clamp-8">
                     <HighlightText text={question.text} query={searchQuery} />
                 </p>
             </div>

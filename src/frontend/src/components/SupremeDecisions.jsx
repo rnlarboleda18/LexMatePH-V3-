@@ -1514,7 +1514,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                     className="cursor-pointer border-t border-lex p-3 hover:bg-neutral-50 dark:hover:bg-zinc-800/60 transition-colors"
                                 >
                                     <div
-                                        className={`relative flex h-[14rem] flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:h-[15.5rem] sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
+                                        className={`relative flex h-[15.5rem] max-sm:h-[30rem] flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
                                     >
                                         <h4
                                             className={`mb-2 flex shrink-0 items-center gap-2 text-[11px] font-black uppercase tracking-widest sm:text-[12px] ${subjectAccentText}`}
@@ -1522,7 +1522,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                             <Lightbulb className={`h-4 w-4 shrink-0 ${subjectAccentText}`} strokeWidth={2} aria-hidden />
                                             Main doctrine
                                         </h4>
-                                        <p className="pl-0.5 text-sm leading-relaxed text-gray-800 dark:text-gray-200 line-clamp-8 sm:line-clamp-9">
+                                        <p className="pl-0.5 text-sm leading-relaxed text-gray-800 dark:text-gray-200 line-clamp-8 sm:line-clamp-9 max-sm:line-clamp-[16]">
                                             {decision.main_doctrine || decision.snippet || 'No snippet available.'}
                                         </p>
                                     </div>
