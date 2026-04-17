@@ -45,7 +45,7 @@ const FlashcardSetup = ({
                     <div
                         className={`flex flex-col gap-2 border-b border-lex px-1 pb-3 pt-0 dark:border-lex sm:px-0 ${
                             embedded
-                                ? 'max-lg:rounded-xl max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:bg-zinc-900 lg:rounded-none lg:border-0 lg:border-b lg:bg-transparent lg:p-0 lg:px-1 lg:pb-3 lg:pt-0 lg:shadow-none dark:lg:bg-transparent'
+                                ? 'max-lg:rounded-lg max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:border-lex dark:max-lg:bg-zinc-900 lg:rounded-none lg:border-0 lg:border-b lg:bg-transparent lg:p-0 lg:px-1 lg:pb-3 lg:pt-0 lg:shadow-none dark:lg:bg-transparent'
                                 : ''
                         }`}
                     >
@@ -76,7 +76,7 @@ const FlashcardSetup = ({
                 <div className={embedded ? 'min-w-0 flex-1 space-y-6' : 'flex-1 space-y-10 overflow-y-auto p-6 sm:p-8'}>
                     <section className="min-w-0 max-w-full">
                         {embedded ? (
-                            <div className="mb-4 max-lg:rounded-xl max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-6 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
+                            <div className="mb-4 max-lg:rounded-lg max-lg:border max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:border-lex dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-6 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
                                 <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">
                                     Legal concepts (SC digests)
                                 </h3>
