@@ -158,7 +158,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         aria-hidden
                     />
                     <div
-                        className={`${LG_HERO} relative w-full min-w-0 max-w-full p-6 sm:p-8 lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-6 lg:gap-x-6 lg:p-6 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:gap-x-8 xl:p-7`}
+                        className={`${LG_HERO} relative w-full min-w-0 max-w-full px-6 py-[calc(1.5rem-0.5cm)] sm:px-8 sm:py-[calc(2rem-0.5cm)] lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-5 lg:gap-x-6 lg:px-6 lg:py-[calc(1.5rem-0.5cm)] xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:gap-x-8 xl:px-7 xl:py-[calc(1.75rem-0.5cm)]`}
                     >
                         {/* Specular + rim light (does not participate in grid) */}
                         <div
@@ -199,7 +199,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         </div>
 
                         {/* Compact PWA install walkthrough — no extra glass shell; sits in hero grid cell */}
-                        <div className="relative z-10 mt-6 min-w-0 overflow-x-hidden lg:mt-0">
+                        <div className="relative z-10 mt-4 min-w-0 overflow-x-hidden lg:mt-0">
                             <LandingPwaInstallAnimation compact />
                         </div>
                     </div>

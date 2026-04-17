@@ -6,7 +6,6 @@ import {
   Gavel,
   Library,
   Book,
-  Sparkles,
   Shield,
   FileCheck,
   ScanEye,
@@ -110,25 +109,23 @@ const About = () => {
             <div className="pointer-events-none absolute -right-12 -top-20 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/35 to-fuchsia-500/25 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/4 h-28 w-56 rounded-full bg-violet-400/15 blur-2xl" />
             <div className="relative flex flex-col gap-4">
-              <div className="inline-flex w-max items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-purple-700 shadow-sm dark:border-lex dark:bg-zinc-800/80 dark:text-purple-300">
-                <Sparkles className="h-3.5 w-3.5" />
-                LexMatePH
-              </div>
               <div className="flex max-w-2xl flex-col gap-4">
-                <div
-                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-600/35"
-                  aria-hidden
-                >
-                  <Scale className="h-7 w-7" strokeWidth={2} />
-                </div>
-                <div className="space-y-2">
-                  <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
-                    Your Legal Companion
-                  </h1>
-                  <p className="text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300">
-                    Philippine law focus
-                  </p>
-                  <p className="text-sm text-slate-500 dark:text-slate-400">Official sources first, always.</p>
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+                  <div
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-600/35"
+                    aria-hidden
+                  >
+                    <Scale className="h-7 w-7" strokeWidth={2} />
+                  </div>
+                  <div className="min-w-0 flex-1 space-y-2 text-left">
+                    <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
+                      Your Legal Companion
+                    </h1>
+                    <p className="text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                      Philippine law focus
+                    </p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Official sources first, always.</p>
+                  </div>
                 </div>
                 <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
                   Built for law students, teachers, bar candidates, and practitioners: codals, past bar questions,
