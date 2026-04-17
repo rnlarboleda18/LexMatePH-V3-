@@ -105,11 +105,11 @@ const About = () => {
           aria-hidden
         />
 
-        <div className="relative mx-auto w-full max-w-7xl space-y-10">
+        <div className="relative mx-auto w-full max-w-7xl space-y-6">
           <header className="relative overflow-hidden rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-6 py-10 shadow-lg dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)] sm:px-10">
             <div className="pointer-events-none absolute -right-12 -top-20 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/35 to-fuchsia-500/25 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/4 h-28 w-56 rounded-full bg-violet-400/15 blur-2xl" />
-            <div className="relative flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+            <div className="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div className="space-y-3">
                 <div className="inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-purple-700 shadow-sm dark:border-lex dark:bg-zinc-800/80 dark:text-purple-300">
                   <Sparkles className="h-3.5 w-3.5" />
@@ -137,7 +137,7 @@ const About = () => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-12 lg:gap-6">
             <div className="flex min-h-0 flex-col lg:col-span-7 lg:h-full">
               <section className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl sm:p-8 dark:border-lex dark:bg-zinc-900">
                 <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-purple-500/10 blur-2xl" />
@@ -148,7 +148,7 @@ const About = () => {
                   LexMatePH is built for more than bar review alone. Explore codals, past bar questions, Supreme Court
                   materials, and study aids together without hopping between siloed sites.
                 </p>
-                <ul className="relative mt-5 space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                <ul className="relative mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400">
                   <li className="flex gap-3 rounded-xl border border-lex bg-white p-3 shadow-sm dark:border-lex dark:bg-zinc-800/60">
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-purple-600/15 text-purple-700 dark:text-purple-300">
                       <Book className="h-3.5 w-3.5" />
@@ -170,7 +170,7 @@ const About = () => {
                   </li>
                 </ul>
                 <div className="min-h-3 flex-1" aria-hidden />
-                <div className="relative mt-6 rounded-2xl border border-amber-200/40 bg-amber-50/50 p-4 text-xs leading-relaxed text-amber-950/90 backdrop-blur-sm dark:border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-100/90">
+                <div className="relative mt-4 rounded-2xl border border-amber-200/40 bg-amber-50/50 p-4 text-xs leading-relaxed text-amber-950/90 backdrop-blur-sm dark:border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-100/90">
                   <strong className="font-bold">Disclaimer:</strong> Content is for education and research, not legal
                   advice. Verify critical points with primary sources, current jurisprudence, and applicable statutes.
                   LexMatePH does not replace professional judgment or counsel.
@@ -181,7 +181,7 @@ const About = () => {
             <aside className="flex min-h-0 flex-col lg:col-span-5 lg:h-full">
               <section className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl sm:p-8 dark:border-lex dark:bg-zinc-900">
                 <div className="pointer-events-none absolute -left-8 bottom-0 h-40 w-40 rounded-full bg-violet-500/15 blur-2xl" />
-                <div className="relative mb-5 flex items-center gap-3">
+                <div className="relative mb-4 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30">
                     <Shield className="h-5 w-5" />
                   </div>
@@ -192,11 +192,11 @@ const About = () => {
                     <p className="text-xs text-slate-500 dark:text-slate-400">Engineered case digests</p>
                   </div>
                 </div>
-                <p className="relative mb-5 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:text-sm">
+                <p className="relative mb-4 text-xs leading-relaxed text-slate-600 dark:text-slate-400 sm:text-sm">
                   Built for the Philippine bar: a high-fidelity pipeline so digests stay grounded in the text you
                   would cite in practice.
                 </p>
-                <div className="relative grid flex-1 grid-cols-1 content-start gap-3 sm:grid-cols-2">
+                <div className="relative grid flex-1 grid-cols-1 content-start gap-2 sm:grid-cols-2">
                   {STANDARD_PILLARS.map(({ icon: Icon, title, body }) => (
                     <div
                       key={title}
@@ -214,14 +214,14 @@ const About = () => {
             </aside>
           </div>
 
-          <section className="space-y-5">
+          <section className="space-y-3">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
               <h2 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">Tools at a glance</h2>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-purple-600/80 dark:text-purple-400/90">
                 Same app, one glass surface
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {FEATURES.map(({ icon: Icon, title, description, accent }) => (
                 <div
                   key={title}
