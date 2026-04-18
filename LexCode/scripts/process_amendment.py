@@ -1,3 +1,21 @@
+"""
+Apply codal amendments to PostgreSQL with LexMatePH textual-fidelity rules (non-AI paths).
+
+**Literal / deterministic ingestion (no generative rewrite of statute text)**
+  Manual JSON (``--amendment-json``): hand-authored specs (e.g. structural laws like RA 8353).
+  The ``new_text`` values are treated as immutable source blobs; only ``codal_text.normalize_storage_markdown``
+  applies safe storage fixes (quotes, newlines), not paraphrase or summarization.
+
+  Deterministic markdown (``deterministic_lexcode``, ``--offline-ra6968``, ``--offline-ra10951-rpc``):
+  regex/slice extracts; same literal apply path as manual JSON.
+
+**Audit trail**
+  Successful writes close the prior row and insert into ``article_versions`` (``valid_from`` / ``valid_to``,
+  ``amendment_id``, ``amendment_description``), preserving a chronological chain from the baseline
+  through each Republic Act for comparison and rollback analysis.
+
+Generative merge behavior lives in ``apply_amendment.py`` (unchanged here).
+"""
 from __future__ import annotations
 
 import os
@@ -343,7 +361,11 @@ def apply_amendment_to_database(
     replace_active_version=False,
 ):
     """
-    Updates the database with a new article version.
+    Persist one new article version and extend the audit trail in ``article_versions``.
+
+    Each ingest closes the current open version (sets ``valid_to``) and inserts the new row with
+    ``valid_from``, ``amendment_id``, and optional ``amendment_description``, so the full history
+    from the baseline through each Act remains queryable (chain of custody).
 
     If replace_active_version is True, updates the current open row (valid_to IS NULL) in place
     instead of closing it and inserting a duplicate tip — used when --force re-applies the same

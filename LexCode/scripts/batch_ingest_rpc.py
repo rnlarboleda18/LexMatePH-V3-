@@ -4,7 +4,7 @@ batch_ingest_rpc.py
 Sequentially ingest all 24 direct RPC amendatory laws using the
 full-AI pipeline (process_amendment_full_ai.py).
 
-Primary model  : gemini-2.5-pro
+Primary model  : gemini-3-flash-preview
 Fallback model : gemini-2.5-flash-lite
 
 Usage:
@@ -81,7 +81,7 @@ def main():
     print("=" * 70)
     print(f"  BATCH RPC AMENDMENT INGESTION")
     print(f"  Mode    : {'DRY RUN' if args.dry_run else 'LIVE'}")
-    print(f"  Model   : gemini-2.5-pro  (fallback: gemini-2.5-flash-lite)")
+    print(f"  Model   : gemini-3-flash-preview  (fallback: gemini-2.5-flash-lite)")
     print(f"  Files   : {total}")
     print("=" * 70)
 

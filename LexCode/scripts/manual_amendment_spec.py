@@ -1,8 +1,13 @@
 """
-Load and validate hand-authored RPC amendment specs (JSON, no AI).
+**Literal ingestion** for RPC amendments: hand-authored JSON, no AI.
 
-Used by ``process_amendment.py --amendment-json``. Every change is applied
-literally (same code path as offline deterministic parsers).
+Use this path when a law implies **complex structural changes** (e.g. reclassification under
+RA 8353): the statute text in the JSON is the **immutable blob**—the system must not paraphrase,
+summarize, or reformat it. ``process_amendment --amendment-json`` applies each ``new_text`` as
+literal codal content (same storage rules as deterministic offline extracts: ``normalize_storage_markdown``
+only for safe fixes in ``codal_text``).
+
+This bypasses generative parsing so punctuation and wording match the Republic Act exactly.
 """
 
 from __future__ import annotations

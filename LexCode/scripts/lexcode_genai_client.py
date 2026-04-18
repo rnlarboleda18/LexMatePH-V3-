@@ -14,7 +14,7 @@ Authentication (pick one; the SDK does not allow mixing):
 **Google AI Studio** — leave Vertex flags unset; ``genai.Client(api_key=...)`` uses the
 Developer API (``generativelanguage.googleapis.com``).
 
-Model defaults: ``gemini-2.5-pro`` as primary, ``gemini-2.5-pro`` as fallback.
+Model defaults: ``gemini-3-flash-preview`` as primary, ``gemini-3-flash-preview`` as fallback.
 """
 
 from __future__ import annotations
@@ -82,10 +82,20 @@ def is_vertex_genai() -> bool:
     global _vertex_mode
     if _vertex_mode is not None:
         return _vertex_mode
-    
-    # FORCED FOR MASTER RE-INGESTION
-    _vertex_mode = True
-    return True
+    if _truthy(os.environ.get("GOOGLE_GENAI_USE_VERTEXAI")):
+        _vertex_mode = True
+        return True
+    if _truthy(os.environ.get("GEMINI_USE_VERTEX_AI")):
+        _vertex_mode = True
+        return True
+    if _truthy(_setting_str("GOOGLE_GENAI_USE_VERTEXAI")):
+        _vertex_mode = True
+        return True
+    if _truthy(_setting_str("GEMINI_USE_VERTEX_AI")):
+        _vertex_mode = True
+        return True
+    _vertex_mode = False
+    return False
 
 
 def get_google_cloud_project() -> str:
@@ -116,7 +126,15 @@ def get_amendment_primary_model() -> str:
     v = (_setting_str("GEMINI_AMENDMENT_MODEL") or "").strip()
     if v:
         return v
-    return "gemini-1.5-flash"
+    return "gemini-2.5-flash"
+
+_SESSION = None
+
+def get_session():
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = requests.Session()
+    return _SESSION
 
 
 class MockResponse:
@@ -129,13 +147,13 @@ class MockModels:
 
     def list(self, config=None):
         model_ids = [
-            "gemini-2.5-pro",
+            "gemini-3-flash-preview",
             "gemini-3.1-flash-preview",
-            "gemini-2.5-pro",
+            "gemini-3-flash-preview",
             "gemini-3-flash-preview",
             "gemini-2.5-flash-lite",
             "gemini-2.5-flash",
-            "gemini-2.5-pro",
+            "gemini-3-flash-preview",
         ]
         
         class MockModelInfo:
@@ -148,27 +166,34 @@ class MockModels:
     def generate_content(self, model, contents, config=None):
         import subprocess
         use_vertex = is_vertex_genai()
-        try:
-            # Try ADC/Gcloud first
-            token = subprocess.check_output('gcloud auth print-access-token', shell=True, stderr=subprocess.DEVNULL).decode('utf-8').strip()
-            project_id = get_google_cloud_project() or "gen-lang-client-0565960161"
-            location = get_google_cloud_location()
-            url = f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{location}/publishers/google/models/{model}:generateContent"
-            headers = {
-                "Content-Type": "application/json",
-                "Authorization": f"Bearer {token}"
-            }
-        except Exception:
-            # Fallback to API Key
-            if use_vertex:
-                # Vertex AI REST via API Key uses aiplatform domain
-                url = f"https://aiplatform.googleapis.com/v1/publishers/google/models/{model}:generateContent?key={self.api_key}"
-            else:
-                # Google AI Studio
-                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={self.api_key}"
-            headers = {"Content-Type": "application/json"}
+        use_vertex = is_vertex_genai()
+        token = getattr(self, '_token_cache', None)
         
-        # print(f"DEBUG: use_vertex={use_vertex}, url={url.split('?')[0]}") # Debugging
+        # 1. Try manually provided token first (the long AQ... string)
+        if not token:
+            if self.api_key and (self.api_key.startswith("AQ.") or len(self.api_key) > 60):
+                token = self.api_key
+            else:
+                try:
+                    # 2. Try ADC/Gcloud
+                    token = subprocess.check_output('gcloud auth print-access-token', shell=True, stderr=subprocess.DEVNULL).decode('utf-8').strip()
+                    self._token_cache = token
+                except Exception:
+                    token = None
+
+        # Determine if we should use Bearer token or API Key
+        is_token = self.api_key.startswith(("ya29.", "AQ.")) or len(self.api_key) > 100
+        
+        if False:  # Force fallback for now due to Vertex timeouts
+            pass
+        else:
+            # Google AI Studio / Developer API Domain (More reliable in this env)
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+            if is_token:
+                headers = {"Content-Type": "application/json", "Authorization": f"Bearer {token}"}
+            else:
+                url += f"?key={self.api_key}"
+                headers = {"Content-Type": "application/json"}
         
         # Standardize contents
         if isinstance(contents, str):
@@ -211,33 +236,37 @@ class MockModels:
         # Simple retry
         for attempt in range(3):
             try:
-                response = requests.post(url, headers=headers, json=payload, timeout=60)
+                # print(f"  [AI] Calling {model} (Attempt {attempt+1})...")
+                response = get_session().post(url, headers=headers, json=payload, timeout=120)
                 if response.status_code == 200:
                     data = response.json()
-                    text = data['candidates'][0]['content']['parts'][0]['text']
-                    return MockResponse(text)
+                    if 'candidates' in data and data['candidates']:
+                        text = data['candidates'][0]['content']['parts'][0]['text']
+                        return MockResponse(text)
+                    else:
+                        logger.error(f"Vertex AI Response missing candidates: {data}")
+                        raise RuntimeError("AI response error: No candidates found")
                 else:
                     logger.error(f"Vertex AI API Error: {response.status_code} - {response.text}")
+                    if response.status_code in [404, 403, 401] and is_vertex_genai():
+                        logger.warning("Vertex AI endpoint unavailable/misconfigured. Falling back to Developer API (AI Studio)...")
+                        # Swap URL to Developer API domain
+                        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+                        if not is_token:
+                            url += f"?key={self.api_key}"
+                        # Try again with the new URL
+                        continue
                     if response.status_code in [429, 500, 503]:
                         time.sleep(2 ** attempt)
                         continue
-                    
-                    # Check fallback
-                    fallback = (os.environ.get("GEMINI_FALLBACK_MODEL") or "").strip() or "gemini-2.5-pro"
-                    if model != fallback:
-                        logger.warning(f"Primary model {model} failed with {response.status_code}. Retrying with fallback {fallback}...")
-                        return self.generate_content(fallback, contents, config)
-                        
-                    raise ValueError(f"Vertex AI API returned {response.status_code}: {response.text}")
-            except Exception as e:
-                if attempt == 2:
-                    fallback = (os.environ.get("GEMINI_FALLBACK_MODEL") or "").strip() or "gemini-2.5-pro"
-                    if model != fallback:
-                        logger.warning(f"Primary model {model} failed. Retrying with fallback {fallback}...")
-                        return self.generate_content(fallback, contents, config)
-                    raise
-                time.sleep(2 ** attempt)
-        
+                    else:
+                        raise RuntimeError(f"Vertex AI API Error: {response.status_code} - {response.text}")
+            except requests.exceptions.RequestException as re:
+                logger.error(f"Network error calling AI: {re}")
+                if attempt == 2: raise
+                time.sleep(1)
+
+        raise RuntimeError("AI call failed after 3 attempts")
         raise ValueError("Failed to call Vertex AI API")
 
 class MockGenAIClient:
@@ -259,7 +288,7 @@ def get_amendment_chunk_model() -> str:
     v = (_setting_str("GEMINI_AMENDMENT_CHUNK_MODEL") or "").strip()
     if v:
         return v
-    return "gemini-1.5-pro"
+    return "gemini-3-flash-preview"
 
 
 def get_genai_client() -> MockGenAIClient:

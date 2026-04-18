@@ -27,9 +27,21 @@ def call_vertex_ai(
     if not API_KEY:
         raise ValueError("GOOGLE_API_KEY or GEMINI_API_KEY environment variable is not set.")
 
-    url = f"https://aiplatform.googleapis.com/v1/publishers/google/models/{model}:generateContent?key={API_KEY}"
+    is_token = API_KEY.startswith(("ya29.", "AQ.")) or len(API_KEY) > 100
     
-    # Standardize contents structure
+    # Intelligently route based on whether we have an OAuth token or a standard API key
+    if is_token:
+        # Vertex AI requires OAuth Bearer token
+        # Defaulting to us-central1 and explicit project ID
+        project_id = os.environ.get("GOOGLE_CLOUD_PROJECT", "gen-lang-client-0565960161")
+        location = os.environ.get("GOOGLE_CLOUD_LOCATION", "us-central1")
+        url = f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{location}/publishers/google/models/{model}:generateContent"
+        headers = {"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"}
+    else:
+        # standard API Key -> use Developer API
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={API_KEY}"
+        headers = {"Content-Type": "application/json"}
+
     if isinstance(prompt, str):
         contents = [{"role": "user", "parts": [{"text": prompt}]}]
     else:
@@ -48,8 +60,6 @@ def call_vertex_ai(
         payload["system_instruction"] = {
             "parts": [{"text": system_instruction}]
         }
-
-    headers = {"Content-Type": "application/json"}
     
     last_error = None
     for attempt in range(retries):

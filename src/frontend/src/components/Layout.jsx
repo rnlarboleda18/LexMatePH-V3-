@@ -59,8 +59,9 @@ const Layout = ({
                 createPortal(
                     <div className={isDarkMode ? 'dark' : ''} data-lex-app-chrome>
                         <header
-                            className={`fixed top-[var(--app-header-top-gap)] left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
-                    min-h-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
+                            className={`fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pb-[max(0px,calc(0.375rem-2mm))] sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-[calc(0.5rem-2mm)] lg:gap-x-4 lg:px-5
+                    min-h-[calc(var(--app-header-top-gap)+env(safe-area-inset-top,0px)+var(--app-header-height)+var(--app-header-bottom-pad))]
+                    pt-[calc(var(--app-header-top-gap)+env(safe-area-inset-top,0px))]
                     ${APP_HEADER_SURFACE}`}
                             style={{
                                 filter: flashcardStudying ? 'blur(4px)' : 'none',

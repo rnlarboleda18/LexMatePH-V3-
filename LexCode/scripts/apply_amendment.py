@@ -7,7 +7,7 @@ import os
 import re
 import json
 from codex_validator import CodexValidator
-from lexcode_genai_client import get_genai_client
+from lexcode_genai_client import get_genai_client, get_amendment_primary_model
 
 # Initialize Shared Client (supports Vertex AI redirection)
 client = get_genai_client()
@@ -135,6 +135,9 @@ def apply_amendment_with_ai(current_text, amendment_text, amendment_id, prior_am
     """
     
     try:
+        if not model_name:
+            model_name = get_amendment_primary_model()
+            
         # Configure model with safety settings off
         config = {
             "temperature": 0.0,  # Maximum determinism

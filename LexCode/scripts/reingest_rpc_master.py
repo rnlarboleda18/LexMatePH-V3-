@@ -1,12 +1,24 @@
+"""
+Master **chronological** RPC re-ingestion: reconstruct legal history in order, not only “current law.”
+
+**Textual fidelity (non-AI layers)** — Order is fixed: ``RPC.md`` baseline (1932) first, then each
+file in ``AMENDMENTS`` in sequence. Each step writes ``article_versions`` so the database holds a
+**chain of custody** from the original Penal Code through every listed Act (compare versions,
+identify which Republic Act changed which sentence, support rollback if a bad artifact is detected).
+
+**Route by source** — Baseline uses ``ingest_baseline_deterministic``; RA 8353 uses ``--amendment-json``
+(literal blob); RA 6968 uses ``--offline-ra6968``; others use ``process_amendment`` (parser + merge
+as configured). See module docstrings on ``deterministic_lexcode`` and ``process_amendment``.
+"""
 import subprocess
 import sys
 import os
 from pathlib import Path
 
-# Enforce Vertex AI usage to avoid expired Gemini API keys
-os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "true"
-os.environ["GOOGLE_CLOUD_PROJECT"] = "gen-lang-client-0565960161"
-os.environ["GOOGLE_CLOUD_LOCATION"] = "us-central1"
+# Vertex AI usage is now configured in local.settings.json
+# os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "true"
+# os.environ["GOOGLE_CLOUD_PROJECT"] = "gen-lang-client-0565960161"
+# os.environ["GOOGLE_CLOUD_LOCATION"] = "us-central1"
 
 # Repository Root (Assuming script is in LexCode/scripts/)
 REPO_ROOT = Path(__file__).resolve().parents[2]

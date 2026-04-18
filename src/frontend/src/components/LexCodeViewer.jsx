@@ -1062,7 +1062,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
             <div
                 className="relative z-0 w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
-                style={xlFixedChrome ? { paddingTop: `${lexFilterChromeHeight + 12}px` } : undefined}
+                style={xlFixedChrome ? { paddingTop: `${lexFilterChromeHeight + 2}px` } : undefined}
             >
                 <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 lg:flex-row lg:items-start lg:gap-6">
                     {/* TOC layout spacer — real panel is `position:fixed` via portal */}

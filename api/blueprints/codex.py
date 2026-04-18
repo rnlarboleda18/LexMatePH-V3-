@@ -274,6 +274,11 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                  if chapter_n and str(chapter_n) not in ['0', 'None', ''] and short_name.upper() not in ['CONST', 'FC']:
                      chapter_lbl = f"Chapter {int_to_roman(chapter_n)} - {chapter_lbl}" if chapter_lbl else f"Chapter {int_to_roman(chapter_n)}"
 
+                 # NEW: Prepend Section number for RPC/General codals
+                 section_n = r.get('section_num')
+                 if section_n and str(section_n) not in ['0', 'None', ''] and short_name.upper() not in ['CONST', 'FC']:
+                     section_lbl = f"Section {section_n} - {section_lbl}" if section_lbl else f"Section {section_n}"
+
                  # Injection
                  injections = []
 
