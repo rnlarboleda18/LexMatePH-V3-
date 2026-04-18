@@ -559,7 +559,9 @@ def process_amendment(
                  # Apply amendment with AI
                  print(f"    Applying amendment with AI...")
                  print(f"    [DEBUG] Current len: {len(current_article['content'])}")
-                 print(f"    [DEBUG] Amendment text: {change['new_text'][:100]}...")
+                 # Safe print for windows terminals
+                 safe_text = change['new_text'][:100].encode('cp1252', 'replace').decode('cp1252')
+                 print(f"    [DEBUG] Amendment text: {safe_text}...")
                  
                  # Extract prior info
                  prior_id = current_article.get('amendment_id')
@@ -646,7 +648,7 @@ def process_amendment(
     print(f"Failed: {failed}")
     
     if dry_run:
-        print(f"\n⚠ DRY RUN MODE - No database changes were made")
+        print(f"\n[!] DRY RUN MODE - No database changes were made")
     
     conn.close()
     

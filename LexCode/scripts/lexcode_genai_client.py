@@ -156,17 +156,28 @@ class MockModels:
 
     def generate_content(self, model, contents, config=None):
         import subprocess
+        use_vertex = is_vertex_genai()
         try:
+            # Try ADC/Gcloud first
             token = subprocess.check_output('gcloud auth print-access-token', shell=True, stderr=subprocess.DEVNULL).decode('utf-8').strip()
-            project_id = "gen-lang-client-0565960161"
-            url = f"https://us-central1-aiplatform.googleapis.com/v1/projects/{project_id}/locations/us-central1/publishers/google/models/{model}:generateContent"
+            project_id = get_google_cloud_project() or "gen-lang-client-0565960161"
+            location = get_google_cloud_location()
+            url = f"https://{location}-aiplatform.googleapis.com/v1/projects/{project_id}/locations/{location}/publishers/google/models/{model}:generateContent"
             headers = {
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {token}"
             }
         except Exception:
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={self.api_key}"
+            # Fallback to API Key
+            if use_vertex:
+                # Vertex AI REST via API Key uses aiplatform domain
+                url = f"https://aiplatform.googleapis.com/v1/publishers/google/models/{model}:generateContent?key={self.api_key}"
+            else:
+                # Google AI Studio
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={self.api_key}"
             headers = {"Content-Type": "application/json"}
+        
+        # print(f"DEBUG: use_vertex={use_vertex}, url={url.split('?')[0]}") # Debugging
         
         # Standardize contents
         if isinstance(contents, str):
