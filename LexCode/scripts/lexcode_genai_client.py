@@ -184,10 +184,14 @@ class MockModels:
         # Determine if we should use Bearer token or API Key
         is_token = self.api_key.startswith(("ya29.", "AQ.")) or len(self.api_key) > 100
         
-        if False:  # Force fallback for now due to Vertex timeouts
-            pass
+        if is_vertex_genai():
+            # Vertex AI REST Endpoint (Primary)
+            project = get_google_cloud_project()
+            location = get_google_cloud_location()
+            url = f"https://{location}-aiplatform.googleapis.com/v1/projects/{project}/locations/{location}/publishers/google/models/{model}:generateContent"
+            headers = {"Content-Type": "application/json", "Authorization": f"Bearer {token}"}
         else:
-            # Google AI Studio / Developer API Domain (More reliable in this env)
+            # Google AI Studio / Developer API (Fallback)
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
             if is_token:
                 headers = {"Content-Type": "application/json", "Authorization": f"Bearer {token}"}
@@ -288,7 +292,7 @@ def get_amendment_chunk_model() -> str:
     v = (_setting_str("GEMINI_AMENDMENT_CHUNK_MODEL") or "").strip()
     if v:
         return v
-    return "gemini-3-flash-preview"
+    return "gemini-2.5-flash"
 
 
 def get_genai_client() -> MockGenAIClient:

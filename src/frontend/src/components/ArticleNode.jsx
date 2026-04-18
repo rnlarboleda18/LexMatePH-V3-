@@ -1,4 +1,5 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Info, Gavel, FileSignature, X, Headphones } from 'lucide-react';
@@ -30,9 +31,21 @@ function cleanRccSectionHeaderFragment(s) {
 const ArticleNode = React.memo(({ article, highlight, showElements = true, showHistory = false, hiddenPhrases = [], centerLayout = false, onToggleJurisprudence, onToggleAmendment, codeId }) => {
     if (!article) return null;
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    const [isMobileViewport, setIsMobileViewport] = useState(() =>
+        typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches,
+    );
 
     // --- HOOKS MUST BE CALLED TOP-LEVEL ---
     const { playNow } = useLexPlayApi();
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return;
+        const mq = window.matchMedia('(max-width: 639px)');
+        const sync = () => setIsMobileViewport(mq.matches);
+        mq.addEventListener('change', sync);
+        return () => mq.removeEventListener('change', sync);
+    }, []);
+
     const docCode = (codeId || article?.code_id || "").toLowerCase();
     const isRcc = docCode === 'rcc' || (article?.code_id || '').toLowerCase() === 'rcc';
     const rccSectionLabel = 'Section';
@@ -390,6 +403,38 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                !/^(SECTION|ARTICLE|PREAMBLE)/i.test(cleanFirstSeg) &&
                                !cleanFirstSeg.includes('(');
 
+    const amendmentHistoryBody = (
+        <>
+            <div className="flex justify-between items-start mb-3">
+                <h4 className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase flex items-center gap-2">
+                    <Info size={14} /> Amendment History
+                </h4>
+                <button
+                    type="button"
+                    onClick={() => setIsHistoryOpen(false)}
+                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                    aria-label="Close amendment history"
+                >
+                    <X size={16} />
+                </button>
+            </div>
+
+            <div className="max-h-[300px] overflow-y-auto space-y-3 pr-1 custom-scrollbar">
+                {[...parsedAmendments].reverse().map((am, idx) => (
+                    <div key={idx} className="text-xs text-gray-700 dark:text-gray-300">
+                        <div className="font-semibold text-orange-700 dark:text-orange-300 mb-1 flex justify-between">
+                            <span>{am.id || am.law || 'Unknown Law'}</span>
+                            <span className="text-gray-500 dark:text-gray-500 font-normal">{am.date || 'No Date'}</span>
+                        </div>
+                        <div className="bg-orange-50 dark:bg-orange-900/10 p-2.5 rounded border border-orange-100 dark:border-orange-900/20 leading-relaxed">
+                            {am.description || am.summary || 'No Description'}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </>
+    );
+
     return (
         <div id={`article-${stableId}`} className="group relative mt-4 min-w-0 max-w-full">
 
@@ -403,11 +448,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         {isAmended && (
                             <button
                                 type="button"
-                                onClick={() => setIsHistoryOpen(prev => !prev)}
-                                className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 transition-colors cursor-pointer"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsHistoryOpen((prev) => !prev);
+                                }}
+                                className="touch-manipulation inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 transition-colors cursor-pointer"
                                 title="View Amendment History"
+                                aria-expanded={isHistoryOpen}
+                                aria-haspopup="dialog"
                             >
-                                <Info size={20} />
+                                <Info size={20} aria-hidden />
                             </button>
                         )}
 
@@ -536,38 +586,33 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         )}
                     </div>
 
-                    {/* Amendment History (Floating Popover) */}
+                    {/* Amendment History: portaled on mobile so fixed layers escape overflow-hidden / backdrop-blur on codal shell */}
                     {isAmended && isHistoryOpen && (
                         <>
-                            {/* Mobile backdrop to close on tap outside */}
-                            <div className="fixed inset-0 z-40 sm:hidden" onClick={() => setIsHistoryOpen(false)} />
-                            <div className="fixed inset-x-4 top-1/4 sm:inset-auto sm:absolute sm:top-8 sm:left-0 z-50 sm:w-[500px] max-w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-orange-200 dark:border-orange-900/50 animate-in fade-in zoom-in-95 duration-200">
-                                <div className="flex justify-between items-start mb-3">
-                                <h4 className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase flex items-center gap-2">
-                                    <Info size={14} /> Amendment History
-                                </h4>
-                                <button
-                                    onClick={() => setIsHistoryOpen(false)}
-                                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                                >
-                                    <X size={16} />
-                                </button>
-                            </div>
-
-                            <div className="max-h-[300px] overflow-y-auto space-y-3 pr-1 custom-scrollbar">
-                                {[...parsedAmendments].reverse().map((am, idx) => (
-                                    <div key={idx} className="text-xs text-gray-700 dark:text-gray-300">
-                                        <div className="font-semibold text-orange-700 dark:text-orange-300 mb-1 flex justify-between">
-                                            <span>{am.id || am.law || 'Unknown Law'}</span>
-                                            <span className="text-gray-500 dark:text-gray-500 font-normal">{am.date || 'No Date'}</span>
+                            {isMobileViewport &&
+                                typeof document !== 'undefined' &&
+                                createPortal(
+                                    <>
+                                        <div
+                                            role="presentation"
+                                            className="fixed inset-0 z-[160] bg-black/35"
+                                            onClick={() => setIsHistoryOpen(false)}
+                                        />
+                                        <div
+                                            className="fixed left-4 right-4 top-[18%] z-[161] max-h-[min(72vh,520px)] w-auto max-w-full overflow-hidden rounded-xl border border-orange-200 bg-white p-4 shadow-2xl dark:border-orange-900/50 dark:bg-gray-800 animate-in fade-in zoom-in-95 duration-200"
+                                            role="dialog"
+                                            aria-label="Amendment history"
+                                        >
+                                            {amendmentHistoryBody}
                                         </div>
-                                        <div className="bg-orange-50 dark:bg-orange-900/10 p-2.5 rounded border border-orange-100 dark:border-orange-900/20 leading-relaxed">
-                                            {am.description || am.summary || 'No Description'}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                                    </>,
+                                    document.body,
+                                )}
+                            {!isMobileViewport && (
+                                <div className="absolute left-0 top-8 z-50 w-[500px] max-w-full rounded-xl border border-orange-200 bg-white p-4 shadow-2xl dark:border-orange-900/50 dark:bg-gray-800 animate-in fade-in zoom-in-95 duration-200">
+                                    {amendmentHistoryBody}
+                                </div>
+                            )}
                         </>
                     )}
                 </div>

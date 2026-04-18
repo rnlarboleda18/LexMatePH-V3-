@@ -1,7 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth, useUser } from '@clerk/clerk-react';
+import { isFoundingPromoBarrister, isFoundingPromoModalActive } from '../utils/subscriptionFoundingPromo';
 
 const SubscriptionContext = createContext(null);
+
+/** Guest closed plans modal while founding promo was full — reopen after sign-up if they are not on founding promo. */
+const SESSION_REOPEN_SUBSCRIPTION_AFTER_SIGNUP = 'lexmate_reopen_subscription_after_signup';
 
 const TIER_ORDER = ['free', 'amicus', 'juris', 'barrister'];
 
@@ -75,11 +79,14 @@ export function SubscriptionProvider({ children }) {
   const [status, setStatus] = useState('inactive');
   const [expiresAt, setExpiresAt] = useState(null);
   const [subscriptionSource, setSubscriptionSource] = useState(null);
+  const [foundingPromoSlot, setFoundingPromoSlot] = useState(null);
+  const [foundingPromoPending, setFoundingPromoPending] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [upgradeContext, setUpgradeContext] = useState(null);
   const [testTier, setTestTier] = useState(() => getTestTierOverride());
+  const [foundingPromoSlotsRemaining, setFoundingPromoSlotsRemaining] = useState(null);
 
   // Incremented to schedule a retry when getToken() returns null on cold start.
   const [tokenRetry, setTokenRetry] = useState(0);
@@ -87,12 +94,33 @@ export function SubscriptionProvider({ children }) {
   const userRef = useRef(user);
   userRef.current = user;
 
+  // Effective tier: admin override, then test tier override, then API tier.
+  const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
+
+  const hideSubscriptionModalForFoundingPromo = isFoundingPromoModalActive(
+    foundingPromoPending,
+    isFoundingPromoBarrister(tier, subscriptionSource, foundingPromoSlot),
+  );
+
+  useEffect(() => {
+    fetch('/api/available-plans')
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.founding_promo_slots_remaining === 'number') {
+          setFoundingPromoSlotsRemaining(data.founding_promo_slots_remaining);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const fetchSubscriptionStatus = useCallback(async () => {
     if (!isSignedIn) {
       setTier('free');
       setStatus('inactive');
       setIsAdmin(false);
       setSubscriptionSource(null);
+      setFoundingPromoSlot(null);
+      setFoundingPromoPending(false);
       setExpiresAt(null);
       setLoading(false);
       return;
@@ -108,6 +136,8 @@ export function SubscriptionProvider({ children }) {
       setIsAdmin(true);
       setTier('barrister');
       setStatus('active');
+      setFoundingPromoSlot(null);
+      setFoundingPromoPending(false);
       setLoading(false);
       return;
     }
@@ -151,16 +181,26 @@ export function SubscriptionProvider({ children }) {
         setStatus(data.status || 'inactive');
         setExpiresAt(data.expires_at || null);
         setSubscriptionSource(data.subscription_source || null);
+        setFoundingPromoSlot(
+          data.founding_promo_slot !== undefined && data.founding_promo_slot !== null
+            ? data.founding_promo_slot
+            : null,
+        );
+        setFoundingPromoPending(data.founding_promo_pending === true);
         setIsAdmin(backendAdmin);
         setTokenRetry(0);
         console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
       } else {
         console.warn(`[Subscription] Backend API failed (${res.status}). Using test tier: ${testTier || 'free'}`);
         if (testTier) setTier(testTier);
+        setFoundingPromoSlot(null);
+        setFoundingPromoPending(false);
       }
     } catch (err) {
       console.error('[Subscription] Failed to fetch status:', err);
       if (testTier) setTier(testTier);
+      setFoundingPromoSlot(null);
+      setFoundingPromoPending(false);
     } finally {
       setLoading(false);
     }
@@ -178,8 +218,28 @@ export function SubscriptionProvider({ children }) {
   // Cleanup pending retry timers on unmount.
   useEffect(() => () => clearTimeout(retryTimerRef.current), []);
 
-  // Effective tier takes admin override first, then test tier, then real tier
-  const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
+  useEffect(() => {
+    if (!showUpgradeModal) return;
+    if (!hideSubscriptionModalForFoundingPromo) return;
+    setShowUpgradeModal(false);
+    setUpgradeContext(null);
+  }, [showUpgradeModal, hideSubscriptionModalForFoundingPromo]);
+
+  // After sign-up: reopen subscription modal if guest had dismissed it while founding promo was full
+  // (so they are not steered away from choosing a paid plan).
+  useEffect(() => {
+    if (!isLoaded || !isSignedIn || loading) return;
+    try {
+      const flag = sessionStorage.getItem(SESSION_REOPEN_SUBSCRIPTION_AFTER_SIGNUP);
+      if (flag !== '1') return;
+      if (hideSubscriptionModalForFoundingPromo) {
+        sessionStorage.removeItem(SESSION_REOPEN_SUBSCRIPTION_AFTER_SIGNUP);
+        return;
+      }
+      sessionStorage.removeItem(SESSION_REOPEN_SUBSCRIPTION_AFTER_SIGNUP);
+      setShowUpgradeModal(true);
+    } catch (_) {}
+  }, [isLoaded, isSignedIn, loading, hideSubscriptionModalForFoundingPromo]);
 
   const isTrial = !isAdmin && subscriptionSource === 'trial' && status === 'active';
   const trialExpiresAt = isTrial ? expiresAt : null;
@@ -193,6 +253,7 @@ export function SubscriptionProvider({ children }) {
 
   const requireAccess = (feature) => {
     if (canAccess(feature)) return true;
+    if (hideSubscriptionModalForFoundingPromo) return false;
     const required = FEATURE_REQUIREMENTS[feature];
     setUpgradeContext({ feature, requiredTier: required });
     setShowUpgradeModal(true);
@@ -200,6 +261,7 @@ export function SubscriptionProvider({ children }) {
   };
 
   const openUpgradeModal = (feature = null) => {
+    if (hideSubscriptionModalForFoundingPromo) return;
     if (feature) {
       setUpgradeContext({ feature, requiredTier: FEATURE_REQUIREMENTS[feature] || 'amicus' });
     }
@@ -209,6 +271,15 @@ export function SubscriptionProvider({ children }) {
   const closeUpgradeModal = () => {
     setShowUpgradeModal(false);
     setUpgradeContext(null);
+    try {
+      if (
+        isLoaded &&
+        !isSignedIn &&
+        foundingPromoSlotsRemaining === 0
+      ) {
+        sessionStorage.setItem(SESSION_REOPEN_SUBSCRIPTION_AFTER_SIGNUP, '1');
+      }
+    } catch (_) {}
   };
 
   const refreshStatus = () => fetchSubscriptionStatus();
@@ -237,6 +308,9 @@ export function SubscriptionProvider({ children }) {
         isTrial,
         trialExpiresAt,
         subscriptionSource,
+        foundingPromoSlot,
+        foundingPromoPending,
+        hideSubscriptionModalForFoundingPromo,
         loading,
         canAccess,
         requireAccess,

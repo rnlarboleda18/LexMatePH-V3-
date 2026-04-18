@@ -21,7 +21,7 @@ const TIER_BG = {
 };
 
 const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onToggleLexCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
-    const { tier, tierLabel, openUpgradeModal, isAdmin, loading } = useSubscription();
+    const { tier, tierLabel, openUpgradeModal, isAdmin, loading, hideSubscriptionModalForFoundingPromo } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
 
     return (
@@ -102,7 +102,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                                 <p className="text-[10px] text-amber-600 dark:text-amber-400">Full access</p>
                             )}
                         </div>
-                        {!isAdmin && tier !== 'barrister' && (
+                        {!isAdmin && tier !== 'barrister' && !hideSubscriptionModalForFoundingPromo && (
                             <button
                                 onClick={() => openUpgradeModal()}
                                 className="shrink-0 px-2 py-1 rounded-lg text-[10px] font-bold text-white bg-gradient-to-r from-violet-600 to-purple-700 shadow-sm hover:opacity-90 transition-opacity"

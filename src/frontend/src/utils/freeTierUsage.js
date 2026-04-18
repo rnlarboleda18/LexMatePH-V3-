@@ -2,7 +2,9 @@
  * Daily metering for case digests, bar questions, flashcards, and digest downloads.
  *
  * - **Amicus+** (`canAccess` on the matching `*_unlimited` feature): no `/api/track-usage` call.
- * - **Free (signed-out or `free` tier)**: POST `/api/track-usage` with Clerk Bearer or `anonymousId`.
+ * - **Free tier (signed-in or guest)**: POST `/api/track-usage` with Clerk Bearer or `anonymousId`.
+ *   Same daily caps for both; only **registered** users can get a **24-hour paid-tier trial**
+ *   (see subscription / `grant_trial_for_tier` — guests never receive that trial).
  *
  * `TRACK_USAGE_FEATURE_TO_UNLIMITED` lives in `SubscriptionContext.jsx` — keep keys aligned.
  */

@@ -19,13 +19,13 @@ import LandingPage from '../components/LandingPage';
 
 describe('LandingPage', () => {
   it('renders the product name', () => {
-    render(<LandingPage isDarkMode={false} toggleTheme={() => {}} onEnterApp={() => {}} />);
+    render(<LandingPage isDarkMode={false} onEnterApp={() => {}} />);
     expect(screen.getAllByText(/LexMatePH/i).length).toBeGreaterThan(0);
   });
 
   it('calls onEnterApp when the enter / CTA button is clicked', async () => {
     const onEnterApp = vi.fn();
-    render(<LandingPage isDarkMode={false} toggleTheme={() => {}} onEnterApp={onEnterApp} />);
+    render(<LandingPage isDarkMode={false} onEnterApp={onEnterApp} />);
     const cta = screen.getAllByRole('button').find(
       (b) => /enter|start|explore|begin|open|get started|try/i.test(b.textContent)
     );

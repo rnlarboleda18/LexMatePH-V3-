@@ -10,8 +10,13 @@ import psycopg
 import requests
 
 from utils.clerk_auth import get_authenticated_user_id
-from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
-from utils.trial import expire_trial_for_user
+from utils.founding_promo import (
+    compute_founding_promo_pending,
+    expire_founding_promo_for_user,
+    get_founding_promo_slots_remaining,
+    try_grant_founding_promo,
+)
+from utils.trial import expire_trial_for_user, grant_trial_for_tier
 
 paymongo_bp = func.Blueprint()
 
@@ -216,7 +221,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
         )
     try:
         # Expire + try grant in its own transaction so a rollback on fallback SELECT cannot undo it.
-        # try_grant fixes missed/delayed Clerk webhooks (user gets Barrister on first subscription-status).
+        # Founding promo grant may run here if missed on webhook.
         try:
             with _get_db() as conn:
                 with conn.cursor() as cur:
@@ -244,7 +249,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     cur.execute(
                         """
                         SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email,
-                               founding_promo_slot, subscription_source
+                               founding_promo_slot, subscription_source, founding_promo_eligible
                         FROM users WHERE clerk_id = %s
                         """,
                         (clerk_id,),
@@ -263,7 +268,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     if row:
                         tier, email = row
                         status, expires_at, is_admin = "inactive", None, False
-                        row = (tier, status, expires_at, is_admin, email, None, None)
+                        row = (tier, status, expires_at, is_admin, email, None, None, None)
 
                 logging.info(f"[subscription-status] clerk_id: {clerk_id}, found: {row is not None}")
                 
@@ -275,7 +280,8 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         headers={"Cache-Control": "no-store, no-cache, must-revalidate"}
                     )
                 
-                tier, status, expires_at, is_admin, email, founding_slot, sub_source = row
+                tier, status, expires_at, is_admin, email, founding_slot, sub_source, eligible = row
+                slots_remaining = get_founding_promo_slots_remaining(cur)
                 
                 # Check for hardcoded admin bypass
                 if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
@@ -289,6 +295,14 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         conn.rollback()
                         logging.warning("Could not self-heal is_admin column (probably missing)")
 
+                founding_pending = compute_founding_promo_pending(
+                    bool(is_admin),
+                    eligible,
+                    founding_slot,
+                    sub_source,
+                    tier,
+                    slots_remaining,
+                )
 
                 return func.HttpResponse(
                     json.dumps({
@@ -299,6 +313,9 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         "email": email,
                         "founding_promo_slot": founding_slot,
                         "subscription_source": sub_source,
+                        "founding_promo_eligible": bool(eligible) if eligible is not None else False,
+                        "founding_promo_slots_remaining": slots_remaining,
+                        "founding_promo_pending": founding_pending,
                     }),
                     mimetype="application/json", 
                     status_code=200,
@@ -341,15 +358,31 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 )
             with _get_db() as conn:
                 with conn.cursor() as cur:
-                    cur.execute(
-                        "UPDATE users SET subscription_tier = %s, subscription_status = 'active' WHERE clerk_id = %s",
-                        (tier, clerk_id)
-                    )
+                    granted = grant_trial_for_tier(cur, clerk_id, tier)
                     conn.commit()
-            logging.info(f"[BYPASS] Granted tier '{tier}' to clerk_id={clerk_id}")
+            if not granted:
+                return func.HttpResponse(
+                    json.dumps(
+                        {
+                            "error": "Trial not granted",
+                            "detail": "User may already have a subscription or trial. Use an account on free tier.",
+                        }
+                    ),
+                    mimetype="application/json",
+                    status_code=409,
+                )
+            logging.info(f"[BYPASS] 24h {tier} trial granted to clerk_id={clerk_id}")
             return func.HttpResponse(
-                json.dumps({"tier": tier, "bypass": True, "message": f"Bypass: granted {tier} tier."}),
-                mimetype="application/json", status_code=200
+                json.dumps(
+                    {
+                        "tier": tier,
+                        "bypass": True,
+                        "trial": True,
+                        "message": f"Bypass: 24-hour {tier} trial (expires in 24h).",
+                    }
+                ),
+                mimetype="application/json",
+                status_code=200,
             )
         # ────────────────────────────────────────────────────────────────────────
 
@@ -377,7 +410,8 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         # Determine return URL
         frontend_url = os.environ.get("FRONTEND_URL", "https://lexmateph.com")
 
-        # Create subscription via PayMongo
+        # Create subscription via PayMongo. Trial length and first charge timing are defined
+        # on each Plan in the PayMongo dashboard (align plans with your 24h trial policy).
         payload = {
             "data": {
                 "attributes": {
@@ -521,11 +555,12 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
 # ─────────────────────────────────────────────────────────────────────────────
 @paymongo_bp.route(route="track-usage", methods=["POST"])
 def track_usage(req: func.HttpRequest) -> func.HttpResponse:
-    """Track free-tier daily usage. Returns {allowed, used, limit}.
+    """Track free-tier daily usage (same caps for signed-in free tier and guests).
 
     Authenticated: Clerk Bearer in X-Clerk-Authorization or Authorization.
-    Anonymous (same free caps): JSON body must include ``anonymousId`` (a UUID).
-    Rows are stored with ``clerk_id = 'anon:<uuid>'``.
+    Anonymous: JSON body must include ``anonymousId`` (UUID). Guests get the same
+    daily limits as registered Free tier; they do not receive paid-tier trials
+    (trials require an account — see ``grant_trial_for_tier`` / subscription flows).
 
     If a Bearer header is present but invalid/expired, a valid ``anonymousId`` in
     the body still counts as anonymous (avoids blocking guests with stray headers).
@@ -679,12 +714,21 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
 @paymongo_bp.route(route="available-plans", methods=["GET"])
 def available_plans(req: func.HttpRequest) -> func.HttpResponse:
     """Return available plan IDs and public key for the frontend to use."""
+    payload = {
+        **AVAILABLE_PLANS,
+        "bypass_mode": PAYMONGO_BYPASS,
+        "public_key": PAYMONGO_PUBLIC_KEY,
+    }
+    try:
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                n = get_founding_promo_slots_remaining(cur)
+                if n is not None:
+                    payload["founding_promo_slots_remaining"] = n
+    except Exception as e:
+        logging.debug("available_plans: founding slots optional: %s", e)
     return func.HttpResponse(
-        json.dumps({
-            **AVAILABLE_PLANS,
-            "bypass_mode": PAYMONGO_BYPASS,
-            "public_key": PAYMONGO_PUBLIC_KEY,
-        }),
+        json.dumps(payload),
         mimetype="application/json", status_code=200
     )
 

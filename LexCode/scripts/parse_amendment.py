@@ -107,8 +107,8 @@ def parse_chunked_document_ai(content):
     """
     Splits large documents into chunks (by Section) and processes them iteratively.
     """
-    # 1. Extract Metadata from the first 5000 chars
-    metadata = parse_metadata_ai(content[:5000])
+    # 1. Extract Metadata from the start and end (dates are often at bottom)
+    metadata = parse_metadata_ai(content[:5000] + "\n" + content[-2000:])
 
     # 2. Split by "**Section" or "Section"
     sections = re.split(r'(?=\n\s*(?:\*\*|)?Section\s+\d+)', content.strip())

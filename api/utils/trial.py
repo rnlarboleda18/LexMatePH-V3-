@@ -1,45 +1,50 @@
 """
-Universal 24-hour Barrister trial granted to every new user on sign-up.
+24-hour trials per paid tier (amicus, juris, barrister), stored in-app.
 Uses subscription_source = 'trial' and subscription_expires_at for expiry.
-Founding promo winners overwrite this with a 30-day slot (higher priority).
+PayMongo production billing after trial should be configured on each Plan in the PayMongo dashboard
+(trial length / first charge timing); this module handles DB-backed trials for dev bypass and parity.
+
+Founding promo winners use a separate path (higher priority in clerk webhook).
 """
 import logging
 from psycopg import errors as pg_errors
 
 logger = logging.getLogger(__name__)
 
+VALID_TRIAL_TIERS = frozenset({"amicus", "juris", "barrister"})
 
-def try_grant_trial(cur, clerk_id: str) -> bool:
+
+def grant_trial_for_tier(cur, clerk_id: str, tier: str) -> bool:
     """
-    Grant a 24-hour Barrister trial to a newly created user.
-    Only activates if the user has no existing subscription (source is NULL/empty).
-    Returns True if the trial was granted.
+    Grant a 24-hour trial of the given paid tier.
+    Only applies to users who are still on free tier with no subscription source set.
+    Returns True if a row was updated.
     """
-    if not clerk_id:
+    if not clerk_id or tier not in VALID_TRIAL_TIERS:
         return False
     try:
         cur.execute(
             """
             UPDATE users SET
-                subscription_tier      = 'barrister',
-                subscription_status    = 'active',
-                subscription_source    = 'trial',
+                subscription_tier       = %s,
+                subscription_status     = 'active',
+                subscription_source     = 'trial',
                 subscription_expires_at = NOW() + INTERVAL '24 hours'
             WHERE clerk_id = %s
               AND (subscription_source IS NULL OR subscription_source = '')
               AND (subscription_tier IS NULL OR subscription_tier = 'free')
             """,
-            (clerk_id,),
+            (tier, clerk_id),
         )
         granted = cur.rowcount > 0
         if granted:
-            logger.info("24h trial granted to clerk_id=%s", clerk_id)
+            logger.info("24h %s trial granted to clerk_id=%s", tier, clerk_id)
         return granted
     except (pg_errors.UndefinedColumn, pg_errors.UndefinedTable) as e:
-        logger.warning("try_grant_trial skipped (columns missing): %s", e)
+        logger.warning("grant_trial_for_tier skipped (columns missing): %s", e)
         return False
     except Exception:
-        logger.exception("try_grant_trial error for clerk_id=%s", clerk_id)
+        logger.exception("grant_trial_for_tier error for clerk_id=%s", clerk_id)
         return False
 
 

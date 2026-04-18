@@ -7,8 +7,6 @@ from psycopg import errors as pg_errors
 from svix.webhooks import Webhook, WebhookVerificationError
 
 from utils.founding_promo import try_grant_founding_promo
-from utils.trial import try_grant_trial
-
 clerk_webhook_bp = func.Blueprint()
 
 
@@ -116,18 +114,11 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                             WHERE clerk_id = %s;
                         """, (clerk_id,))
                     elif evt_type == "user.created":
-                        # Founding promo first (slots limited); trial is the fallback for everyone else
-                        granted_promo = False
+                        # Founding promo only — no automatic tier trial on sign-up (trials start when user chooses a plan).
                         try:
                             try_grant_founding_promo(cur, clerk_id, is_admin)
-                            cur.execute("SELECT subscription_source FROM users WHERE clerk_id = %s", (clerk_id,))
-                            src_row = cur.fetchone()
-                            granted_promo = src_row and src_row[0] == "founding_promo"
                         except Exception as promo_err:
                             logging.warning("founding promo grant error: %s", promo_err)
-
-                        if not granted_promo:
-                            try_grant_trial(cur, clerk_id)
 
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")

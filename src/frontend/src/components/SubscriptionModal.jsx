@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Check, Zap, Star, Crown, Shield, Loader2 } from 'lucide-react';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useClerk } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import PaymentForm from './PaymentForm';
 
@@ -110,7 +110,10 @@ const MOBILE_SUBSCRIPTION_MQ = '(max-width: 767px)';
 
 export default function SubscriptionModal({ onClose }) {
   const { tier, refreshStatus } = useSubscription();
-  const { getToken } = useAuth();
+  const { getToken, isSignedIn, isLoaded } = useAuth();
+  const clerk = useClerk();
+  /** Guests still get tier "free" in context; only signed-in users are "on" Free as a plan. */
+  const isRegisteredForPlanUi = isLoaded && isSignedIn;
   const [billing, setBilling] = useState('monthly');
   const [availablePlans, setAvailablePlans] = useState({});
   const [publicKey, setPublicKey] = useState('');
@@ -164,13 +167,24 @@ export default function SubscriptionModal({ onClose }) {
           },
           body: JSON.stringify({ plan_key: planKey }),
         });
-        const data = await res.json();
+        let data = {};
+        try {
+          data = await res.json();
+        } catch (_) {
+          data = {};
+        }
         if (data.bypass && data.tier) {
           setSuccessPlan(data.tier);
           await refreshStatus();
           setTimeout(() => onClose(), 1500);
         } else {
-          setErrorMsg(data.error || 'Bypass failed.');
+          setErrorMsg(
+            (typeof data.detail === 'string' && data.detail) ||
+              data.error ||
+              (res.status === 409
+                ? 'Trial already active or account not on free tier.'
+                : 'Bypass failed.'),
+          );
         }
         return;
       }
@@ -295,8 +309,13 @@ export default function SubscriptionModal({ onClose }) {
           className={`grid grid-cols-1 gap-4 md:grid-cols-4 md:items-stretch ${isMobileLayout ? 'p-4 sm:p-5' : 'p-5'}`}
         >
           {PLANS.map(plan => {
-            const isCurrent = plan.id === tier;
-            const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
+            const isCurrentPlan =
+              plan.id === tier && (plan.id !== 'free' || isRegisteredForPlanUi);
+            const isFreeGuestSignUp = plan.id === 'free' && isLoaded && !isSignedIn;
+            const isDisabled =
+              loadingPlan ||
+              isCurrentPlan ||
+              (plan.id === 'free' && (isSignedIn || !isLoaded));
             const price = plan.price[billing];
             const visibleLocked = plan.locked.slice(0, MAX_LOCKED_SHOWN);
             const hiddenCount = plan.locked.length - visibleLocked.length;
@@ -304,15 +323,15 @@ export default function SubscriptionModal({ onClose }) {
             return (
               <div
                 key={plan.id}
-                className={`relative flex flex-col overflow-visible rounded-2xl border-2 ${plan.borderColor} ${isCurrent ? plan.badgeBg : 'bg-white/60 dark:bg-slate-800/60'} p-4 pt-6 transition-all hover:shadow-lg`}
+                className={`relative flex flex-col overflow-visible rounded-2xl border-2 ${plan.borderColor} ${isCurrentPlan ? plan.badgeBg : 'bg-white/60 dark:bg-slate-800/60'} p-4 pt-6 transition-all hover:shadow-lg`}
               >
                 {/* Badges */}
-                {plan.popular && !isCurrent && (
+                {plan.popular && !isCurrentPlan && (
                   <div className="absolute left-1/2 top-2 z-[1] -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-purple-500 to-violet-600 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow">
                     Most Popular
                   </div>
                 )}
-                {isCurrent && (
+                {isCurrentPlan && (
                   <div className="absolute left-1/2 top-2 z-[1] -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-gray-600 to-slate-700 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wide text-white shadow">
                     Current Plan
                   </div>
@@ -364,15 +383,24 @@ export default function SubscriptionModal({ onClose }) {
                 {/* CTA */}
                 <button
                   disabled={!!isDisabled}
-                  onClick={() => handleSubscribe(plan)}
+                  onClick={() => {
+                    if (isFreeGuestSignUp) {
+                      clerk.openSignUp({});
+                      onClose();
+                      return;
+                    }
+                    handleSubscribe(plan);
+                  }}
                   className={`w-full rounded-xl py-2.5 text-xs font-extrabold transition-all flex items-center justify-center gap-2
                     ${successPlan === plan.id
                       ? 'bg-green-500 text-white'
-                      : isCurrent
-                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-default'
-                        : plan.id === 'free'
-                          ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-default'
-                          : `text-white bg-gradient-to-r ${plan.color} hover:opacity-90 active:scale-95 shadow-md`
+                      : isFreeGuestSignUp
+                        ? `text-white bg-gradient-to-r ${plan.color} hover:opacity-90 active:scale-95 shadow-md`
+                        : isCurrentPlan
+                          ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-default'
+                          : plan.id === 'free'
+                            ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 cursor-default'
+                            : `text-white bg-gradient-to-r ${plan.color} hover:opacity-90 active:scale-95 shadow-md`
                     }
                   `}
                 >
@@ -380,8 +408,10 @@ export default function SubscriptionModal({ onClose }) {
                     <><Check className="w-4 h-4" /> Activated!</>
                   ) : loadingPlan === plan.id ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : isCurrent ? (
+                  ) : isCurrentPlan ? (
                     'Current Plan'
+                  ) : isFreeGuestSignUp ? (
+                    'Sign up'
                   ) : plan.id === 'free' ? (
                     'Basic Access'
                   ) : (

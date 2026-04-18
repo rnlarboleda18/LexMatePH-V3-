@@ -91,6 +91,7 @@ function App() {
     canAccess,
     openUpgradeModal,
     loading: subscriptionLoading,
+    hideSubscriptionModalForFoundingPromo,
   } = useSubscription();
   const { user } = useUser();
   const { getToken, isSignedIn } = useAuth();
@@ -370,7 +371,8 @@ function App() {
 
   const handleEnterFromLanding = useCallback(() => {
     setMode('supreme_decisions');
-  }, []);
+    openUpgradeModal();
+  }, [openUpgradeModal]);
 
   useEffect(() => {
     if (mode === 'lexplay') setLexPlayMiniDismissed(false);
@@ -607,7 +609,6 @@ function App() {
                     <div className="relative z-10">
                       <LandingPage
                         isDarkMode={isDarkMode}
-                        toggleTheme={toggleTheme}
                         onEnterApp={handleEnterFromLanding}
                       />
                     </div>
@@ -1014,8 +1015,8 @@ function App() {
           </Suspense>
         );
       })()}
-      {/* Global Subscription Upgrade Modal */}
-      {showUpgradeModal && (
+      {/* Global Subscription Upgrade Modal — hidden during founding promo (pending or granted) */}
+      {showUpgradeModal && !hideSubscriptionModalForFoundingPromo && (
         <Suspense fallback={null}>
           <SubscriptionModal onClose={closeUpgradeModal} />
         </Suspense>

@@ -4,6 +4,7 @@ After FOUNDING_PROMO_DURATION_DAYS (default 30), they revert to Free unless they
 """
 import logging
 import os
+from typing import Any, Optional
 
 from psycopg import errors as pg_errors
 
@@ -22,6 +23,55 @@ def get_promo_slot_limit() -> int:
         return max(0, int(os.environ.get("FOUNDING_PROMO_LIMIT", "20")))
     except ValueError:
         return 20
+
+
+def get_founding_promo_slots_remaining(cur) -> Optional[int]:
+    """Slots left in the founding promo pool, or None if state table is unavailable."""
+    try:
+        limit = get_promo_slot_limit()
+        if limit <= 0:
+            return 0
+        cur.execute("SELECT claimed_count FROM founding_promo_state WHERE id = 1")
+        row = cur.fetchone()
+        if not row:
+            return None
+        claimed = row[0]
+        return max(0, limit - int(claimed))
+    except (pg_errors.UndefinedColumn, pg_errors.UndefinedTable) as e:
+        logger.debug("get_founding_promo_slots_remaining: %s", e)
+        return None
+    except Exception:
+        logger.exception("get_founding_promo_slots_remaining: unexpected")
+        return None
+
+
+def compute_founding_promo_pending(
+    is_admin: bool,
+    eligible: Optional[bool],
+    founding_slot: Any,
+    sub_source: Optional[str],
+    tier: Optional[str],
+    slots_remaining: Optional[int],
+) -> bool:
+    """
+    True when global slots remain and this user is queued for an automatic grant
+    (eligible, no slot yet, free tier, not paymongo/trial/admin).
+    """
+    if is_admin:
+        return False
+    if eligible is not True:
+        return False
+    if founding_slot is not None:
+        return False
+    if slots_remaining is None or slots_remaining <= 0:
+        return False
+    src = (sub_source or "").strip().lower()
+    if src in ("paymongo", "admin_override", "trial"):
+        return False
+    t = (tier or "").strip().lower() or "free"
+    if t != "free":
+        return False
+    return True
 
 
 def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:

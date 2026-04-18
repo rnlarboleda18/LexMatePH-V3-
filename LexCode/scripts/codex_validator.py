@@ -88,12 +88,13 @@ class CodexValidator:
         
         change_ratio = abs(new_len - old_len) / old_len
         
-        # If text changed by more than 1000%, it's suspicious (very relaxed for amendments)
-        if change_ratio > 10.0:
+        # If text changed by more than 1000%, it's suspicious 
+        # (BUT ignore if original was just a placeholder/very short under 200 chars)
+        if change_ratio > 10.0 and old_len > 200:
             self.errors.append(
                 f"Extreme length change: {old_len} chars -> {new_len} chars ({change_ratio:.1%} change). Possible hallucination."
             )
-        elif change_ratio > 5.0:
+        elif change_ratio > 5.0 and old_len > 200:
             self.warnings.append(
                 f"Significant length change: {old_len} chars -> {new_len} chars ({change_ratio:.1%} change)."
             )
