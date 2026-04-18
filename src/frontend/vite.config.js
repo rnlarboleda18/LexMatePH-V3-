@@ -44,13 +44,14 @@ export default defineConfig(({ mode }) => {
           'favicon-16.png',
         ],
         manifest: {
+          id: '/',
           name: 'LexMatePH',
           short_name: 'LexMatePH',
           description: 'Your Law Companion — Philippine bar review, SC decisions, case digests, and codals.',
           theme_color: '#0f172a',
           background_color: '#0f172a',
           display: 'standalone',
-          orientation: 'portrait-primary',
+          prefer_related_applications: false,
           scope: '/',
           start_url: '/',
           icons: [
