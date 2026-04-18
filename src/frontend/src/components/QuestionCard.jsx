@@ -14,7 +14,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900 max-sm:mx-auto max-sm:h-[var(--lex-flashcard-mobile-inner-height)] max-sm:min-h-0 max-sm:min-w-0 max-sm:max-h-[var(--lex-flashcard-mobile-inner-height)] max-sm:max-w-[var(--lex-flashcard-mobile-inner-width)] max-sm:shrink-0 sm:h-[15rem] sm:max-w-none sm:mx-0"
+            className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900 max-sm:mx-auto max-sm:h-[14rem] max-sm:min-h-0 max-sm:min-w-0 max-sm:max-h-[14rem] max-sm:w-full max-sm:shrink-0 sm:h-[15rem] sm:max-w-none sm:mx-0"
         >
             <CardVioletInnerWash />
             <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
@@ -39,7 +39,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
             {/* Question Preview */}
             <div className="mb-3 min-h-0 flex-1">
-                <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed line-clamp-4 max-sm:line-clamp-8">
+                <p className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed line-clamp-4 max-sm:line-clamp-3">
                     <HighlightText text={question.text} query={searchQuery} />
                 </p>
             </div>
