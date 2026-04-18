@@ -1088,7 +1088,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 ref={filterChromeRef}
                 className={`z-20 ${FILTER_CHROME_SURFACE} ${
                     xlFixedChrome
-                        ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
+                        ? 'fixed left-0 right-0 top-[var(--app-header-offset)] xl:left-52'
                         : 'relative'
                 }`}
             >

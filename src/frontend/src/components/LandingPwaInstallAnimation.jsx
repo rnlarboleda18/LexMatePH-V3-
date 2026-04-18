@@ -310,7 +310,8 @@ function PhoneMock({ compact }) {
 }
 
 function TabletMock({ compact }) {
-    const w = compact ? 'w-[min(100%,448px)]' : 'w-[228px]';
+    // Compact (landing hero): match width of DesktopChromeMock address bar in the same column (`w-full`).
+    const w = compact ? 'w-full' : 'w-[228px]';
     const h = compact ? 'h-[304px]' : 'h-[188px]';
     const border = compact ? 'border-4' : 'border-[6px]';
     const omni = compact

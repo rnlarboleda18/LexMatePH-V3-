@@ -302,9 +302,9 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
     const fixedPanelStyle = useMemo(
         () => ({
-            top: 'calc(var(--app-header-height) + env(safe-area-inset-top, 0px) + 4.25rem)',
+            top: 'calc(var(--app-header-offset) + 4.25rem)',
             maxHeight:
-                'calc(100dvh - var(--player-height, 0px) - var(--app-header-height) - 5.25rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))',
+                'calc(100dvh - var(--player-height, 0px) - var(--app-header-offset) - 5.25rem - env(safe-area-inset-bottom, 0px))',
         }),
         []
     );
@@ -994,7 +994,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                 ref={lexFilterChromeRef}
                 className={`z-[30] ${FILTER_CHROME_SURFACE} ${
                     xlFixedChrome
-                        ? 'fixed left-0 right-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] xl:left-52'
+                        ? 'fixed left-0 right-0 top-[var(--app-header-offset)] xl:left-52'
                         : 'relative'
                 }`}
             >
@@ -1075,7 +1075,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             {/* Mobile/Overlay Sidebar (for smaller screens) */}
             {isSidebarOpen && (
                 <div
-                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]"
+                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[var(--app-header-offset)]"
                     onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
                 >
                     <div className="relative flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg animate-in slide-in-from-left duration-300 dark:border-lex dark:bg-zinc-900">

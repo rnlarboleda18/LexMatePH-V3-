@@ -6,21 +6,11 @@ Amendment Applicator: Uses AI to apply amendments with strict literal fidelity
 import os
 import re
 import json
-from google import genai
 from codex_validator import CodexValidator
+from lexcode_genai_client import get_genai_client
 
-# Configure Gemini
-API_KEY = "REDACTED_API_KEY_HIDDEN"
-try:
-    with open('local.settings.json') as f:
-        settings = json.load(f)
-        if 'GOOGLE_API_KEY' in settings['Values']:
-            API_KEY = settings['Values']['GOOGLE_API_KEY']
-except:
-    pass
-
-# Initialize Client
-client = genai.Client(api_key=API_KEY)
+# Initialize Shared Client (supports Vertex AI redirection)
+client = get_genai_client()
 
 SYSTEM_PROMPT = """You are a legal document specialist with ABSOLUTE LITERAL FIDELITY as your core directive.
 
@@ -74,10 +64,12 @@ You will be given:
 Remember: You are a TRANSCRIPTION tool, not an interpretation tool. Literal fidelity AND formatting preservation are paramount. DO NOT create false amendments - if the text doesn't actually change, say NO_SUBSTANTIVE_CHANGE."""
 
 
-def generate_amendment_description(current_text, new_text, amendment_id, prior_amendment_id, prior_date, history=None, model_name="gemini-3-flash-preview"):
+def generate_amendment_description(current_text, new_text, amendment_id, prior_amendment_id, prior_date, history=None, model_name=None):
     """
     Generates a detailed description of the changes made by an amendment.
     """
+    if model_name is None:
+        model_name = get_amendment_primary_model()
     try:
         # Default fallback if prior info is missing
         if not prior_amendment_id: prior_amendment_id = "Original/Previous Law"
@@ -118,7 +110,7 @@ def generate_amendment_description(current_text, new_text, amendment_id, prior_a
         print(f"    [!] Failed to generate description: {e}")
         return None
 
-def apply_amendment_with_ai(current_text, amendment_text, amendment_id, prior_amendment_id=None, prior_date=None, history=None, model_name="gemini-3-flash-preview"):
+def apply_amendment_with_ai(current_text, amendment_text, amendment_id, prior_amendment_id=None, prior_date=None, history=None, model_name=None):
     """
     Uses Gemini AI to apply an amendment to an article.
     

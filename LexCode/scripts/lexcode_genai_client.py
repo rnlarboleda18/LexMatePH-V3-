@@ -82,20 +82,10 @@ def is_vertex_genai() -> bool:
     global _vertex_mode
     if _vertex_mode is not None:
         return _vertex_mode
-    if _truthy(os.environ.get("GOOGLE_GENAI_USE_VERTEXAI")):
-        _vertex_mode = True
-        return True
-    if _truthy(os.environ.get("GEMINI_USE_VERTEX_AI")):
-        _vertex_mode = True
-        return True
-    if _truthy(_setting_str("GOOGLE_GENAI_USE_VERTEXAI")):
-        _vertex_mode = True
-        return True
-    if _truthy(_setting_str("GEMINI_USE_VERTEX_AI")):
-        _vertex_mode = True
-        return True
-    _vertex_mode = False
-    return False
+    
+    # FORCED FOR MASTER RE-INGESTION
+    _vertex_mode = True
+    return True
 
 
 def get_google_cloud_project() -> str:
@@ -104,6 +94,7 @@ def get_google_cloud_project() -> str:
         or (os.environ.get("VERTEX_AI_PROJECT") or "").strip()
         or _setting_str("GOOGLE_CLOUD_PROJECT")
         or _setting_str("VERTEX_AI_PROJECT")
+        or "gen-lang-client-0565960161"
     )
 
 
@@ -125,7 +116,7 @@ def get_amendment_primary_model() -> str:
     v = (_setting_str("GEMINI_AMENDMENT_MODEL") or "").strip()
     if v:
         return v
-    return "gemini-2.5-pro"
+    return "gemini-1.5-flash"
 
 
 class MockResponse:
@@ -268,7 +259,7 @@ def get_amendment_chunk_model() -> str:
     v = (_setting_str("GEMINI_AMENDMENT_CHUNK_MODEL") or "").strip()
     if v:
         return v
-    return "gemini-2.5-pro"
+    return "gemini-1.5-pro"
 
 
 def get_genai_client() -> MockGenAIClient:

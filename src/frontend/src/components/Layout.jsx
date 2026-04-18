@@ -59,7 +59,7 @@ const Layout = ({
                 createPortal(
                     <div className={isDarkMode ? 'dark' : ''} data-lex-app-chrome>
                         <header
-                            className={`fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
+                            className={`fixed top-[var(--app-header-top-gap)] left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pt-[env(safe-area-inset-top,0px)] pb-1.5 sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-2 lg:gap-x-4 lg:px-5
                     min-h-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]
                     ${APP_HEADER_SURFACE}`}
                             style={{
@@ -178,7 +178,7 @@ const Layout = ({
                             />
                         )}
                         <aside
-                            className={`fixed bottom-0 left-0 top-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out xl:block xl:translate-x-0 ${SIDEBAR_ASIDE_SURFACE} ${
+                            className={`fixed bottom-0 left-0 top-[var(--app-header-offset)] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out xl:block xl:translate-x-0 ${SIDEBAR_ASIDE_SURFACE} ${
                                 isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                             }`}
                             style={{
@@ -195,7 +195,7 @@ const Layout = ({
 
             {/* Main Content Area — z-10 so in-flow stacking stays predictable */}
             <main
-                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]' : 'pt-[calc(var(--app-header-height)+env(safe-area-inset-top,0px))]'} min-h-screen
+                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[var(--app-header-offset)]' : 'pt-[var(--app-header-offset)]'} min-h-screen
         ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >

@@ -6,17 +6,10 @@ import json
 from google import genai
 from google.genai import types
 
-# --- Configuration ---
-API_KEY = "REDACTED_API_KEY_HIDDEN"
-try:
-    with open('local.settings.json') as f:
-        settings = json.load(f)
-        if 'GOOGLE_API_KEY' in settings['Values']:
-            API_KEY = settings['Values']['GOOGLE_API_KEY']
-except:
-    pass
+from lexcode_genai_client import get_genai_client, get_amendment_primary_model, get_amendment_chunk_model
 
-client = genai.Client(api_key=API_KEY)
+# Initialize Shared Client (supports Vertex AI redirection)
+client = get_genai_client()
 
 def clean_text(text):
     """
@@ -211,8 +204,9 @@ def parse_metadata_ai(header_content):
     """ + f"```\n{header_content}\n```"
 
     try:
+        model = get_amendment_primary_model()
         response = client.models.generate_content(
-            model="gemini-3-flash-preview",
+            model=model,
             contents=prompt,
             config={"response_mime_type": "application/json", "temperature": 0.0}
         )
@@ -226,8 +220,9 @@ def parse_full_document_ai(content):
     """
     prompt = get_parser_prompt(content)
     try:
+        model = get_amendment_primary_model()
         response = client.models.generate_content(
-            model="gemini-3-flash-preview",
+            model=model,
             contents=prompt,
             config={"response_mime_type": "application/json", "temperature": 0.0}
         )
@@ -269,8 +264,9 @@ def parse_chunked_document_ai(content):
         
         prompt = get_parser_prompt(batch_text, extract_metadata=False)
         try:
+            model = get_amendment_chunk_model()
             response = client.models.generate_content(
-                model="gemini-3.0-flash",
+                model=model,
                 contents=prompt,
                 config={"response_mime_type": "application/json", "temperature": 0.0}
             )

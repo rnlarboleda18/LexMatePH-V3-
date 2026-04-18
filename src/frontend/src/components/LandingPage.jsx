@@ -3,11 +3,14 @@ import {
     ArrowRight,
     BookOpen,
     Gavel,
+    Globe,
     Headphones,
     Library,
     Moon,
     Scale,
+    Share2,
     Shield,
+    Smartphone,
     Sun,
     Zap,
 } from 'lucide-react';
@@ -17,6 +20,27 @@ import LandingPwaInstallAnimation from './LandingPwaInstallAnimation';
 /** Scoped “premium glass” — see index.css `.landing-page .landing-glass*`. */
 const LG = 'landing-glass rounded-2xl';
 const LG_HERO = 'landing-glass-hero';
+
+const INSTALL_STEPS = [
+    {
+        step: '1',
+        title: 'Open LexMatePH',
+        body: 'Use Safari on iPhone and iPad. Use Chrome on Android tablets, phones, and desktop.',
+        Icon: Globe,
+    },
+    {
+        step: '2',
+        title: 'Install the app',
+        body: 'iPhone: Share (↑), then Add to Home Screen. Android or desktop: tap Install, or ⋮ → Install app.',
+        Icon: Share2,
+    },
+    {
+        step: '3',
+        title: 'Open from your home screen',
+        body: 'Tap the LexMatePH icon. On iPhone, turn on Open as Web App if you see that option.',
+        Icon: Smartphone,
+    },
+];
 
 /**
  * Marketing landing — pronounced glassmorphism (scoped CSS + layered highlights).
@@ -86,57 +110,36 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                 {/* Single 12-col grid: install steps first (compact), then hero; twin tiles span 6+6 */}
                 <div className="grid w-full min-w-0 grid-cols-1 gap-3 md:grid-cols-12 md:gap-4">
                 <section id="install" className="scroll-mt-8 col-span-12 min-w-0">
-                    <div className={`${LG_HERO} relative overflow-hidden p-2 sm:p-2.5`}>
+                    <div className={`${LG_HERO} relative overflow-hidden p-3 sm:p-4`}>
                         <div className="pointer-events-none absolute inset-0" aria-hidden>
                             <div className="absolute -left-12 top-1/2 h-16 w-16 -translate-y-1/2 rounded-full bg-indigo-400/20 blur-xl dark:bg-indigo-500/14" />
                             <div className="absolute -right-8 bottom-0 h-14 w-14 rounded-full bg-violet-400/18 blur-xl dark:bg-violet-500/12" />
                             <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent dark:via-white/20" />
                         </div>
                         <div className="relative z-10">
-                            <h2 className="font-display text-base font-semibold text-gray-900 dark:text-white sm:text-lg">
-                                Install in a few steps
+                            <h2 className="font-display text-lg font-semibold text-gray-900 dark:text-white sm:text-xl">
+                                Install in three steps
                             </h2>
-                            <ol className="mt-1.5 grid gap-1.5 md:grid-cols-2 xl:grid-cols-5 md:gap-1.5">
-                                {[
-                                    {
-                                        step: '1',
-                                        title: 'Open in Safari or Chrome',
-                                        body: 'Use this site on your phone, tablet, or desktop browser.',
-                                    },
-                                    {
-                                        step: '2',
-                                        title: 'Share or install (in the bar)',
-                                        body: 'iOS: Share (arrow-up in the address bar). Android / desktop: install icon inside the address bar, or ⋮ for the menu.',
-                                    },
-                                    {
-                                        step: '3',
-                                        title: 'Add or Install',
-                                        body: 'Choose “Add to Home Screen” or “Install app”. Core assets cache for a smoother launch next time.',
-                                    },
-                                    {
-                                        step: '4',
-                                        title: 'Open as Web App (iOS)',
-                                        body: 'When offered, turn on Open as Web App, then launch LexMatePH from your Home Screen.',
-                                    },
-                                    {
-                                        step: '5',
-                                        title: 'On your Home Screen',
-                                        body: 'LexMatePH shows the official icon next to your other apps—tap to open anytime.',
-                                    },
-                                ].map(({ step, title, body }) => (
-                                    <li key={step} className={`${LG} relative overflow-hidden p-2 sm:p-2`}>
-                                        <span className="absolute right-1.5 top-1 font-display text-lg font-bold tabular-nums text-gray-200/80 dark:text-white/[0.07]">
-                                            {step}
-                                        </span>
-                                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-indigo-100 text-[10px] font-bold leading-none text-indigo-900 dark:bg-indigo-900/50 dark:text-indigo-200">
-                                            {step}
-                                        </span>
-                                        <h3 className="mt-1 font-display text-xs font-semibold leading-tight text-gray-900 dark:text-white sm:text-[13px]">
-                                            {title}
-                                        </h3>
-                                        <p className="mt-0.5 text-[11px] leading-snug text-gray-600 dark:text-gray-400">
-                                            {body}
-                                        </p>
+                            <ol className="mt-3 grid list-none gap-3 pl-0 sm:grid-cols-3 sm:gap-4">
+                                {INSTALL_STEPS.map(({ step, title, body, Icon }) => (
+                                    <li key={step} className={`${LG} flex gap-3 p-3 sm:p-4`}>
+                                        <div
+                                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md dark:bg-indigo-500"
+                                            aria-hidden
+                                        >
+                                            <Icon className="h-5 w-5" strokeWidth={2} />
+                                        </div>
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-[11px] font-bold uppercase tracking-wide text-indigo-600 dark:text-indigo-400">
+                                                Step {step}
+                                            </p>
+                                            <h3 className="mt-0.5 font-display text-sm font-semibold leading-snug text-gray-900 dark:text-white sm:text-base">
+                                                {title}
+                                            </h3>
+                                            <p className="mt-2 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
+                                                {body}
+                                            </p>
+                                        </div>
                                     </li>
                                 ))}
                             </ol>

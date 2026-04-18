@@ -8,7 +8,10 @@
   font-family: 'Outfit', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --player-height: 0px;
   /* Fixed app header — used by Layout, sticky toolbars, modals (keep in sync) */
+  --app-header-top-gap: 3mm;
   --app-header-height: 2.5rem;
+  /* Viewport top → bottom edge of fixed header (gap + header band + safe-area padding) */
+  --app-header-offset: calc(var(--app-header-top-gap) + var(--app-header-height) + env(safe-area-inset-top, 0px));
   /* Shared vertical trim from the bottom for all `.lex-modal-overlay` shells */
   --lex-modal-bottom-trim: 1cm;
   /* Phone-only: additional bottom trim (see `.lex-modal-overlay` max-sm rule) */
@@ -97,7 +100,7 @@
   .lex-modal-overlay {
     padding: 2rem !important;
     /* md+: constrain below header and above player; trim lifts the overlay bottom by --lex-modal-bottom-trim */
-    top: calc(var(--app-header-height) + env(safe-area-inset-top, 0px)) !important;
+    top: var(--app-header-offset) !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px) + var(--lex-modal-bottom-trim)) !important;
   }
 }
