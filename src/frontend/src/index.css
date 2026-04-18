@@ -397,6 +397,31 @@ body {
   }
 }
 
+/* Tighter pulse for compact hero on narrow phones — matches smaller device mocks */
+@keyframes landing-pwa-pulse-affordance-sm {
+  0%,
+  19% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    filter: none;
+  }
+  20%,
+  39% {
+    transform: scale(1.12);
+    box-shadow:
+      0 0 0 4px rgba(239, 68, 68, 0.5),
+      0 0 0 8px rgba(248, 113, 113, 0.24),
+      0 0 18px rgba(220, 38, 38, 0.55);
+    filter: drop-shadow(0 0 5px rgba(248, 113, 113, 0.9));
+  }
+  40%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    filter: none;
+  }
+}
+
 .landing-pwa-share-ios,
 .landing-pwa-chrome-install {
   animation: landing-pwa-pulse-affordance 20s ease-in-out infinite;
@@ -464,6 +489,24 @@ body {
   }
 }
 
+@keyframes landing-pwa-sheet-android-sm {
+  0%,
+  44% {
+    transform: translateY(4px) scale(0.96);
+    opacity: 0;
+  }
+  45%,
+  58% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  59%,
+  100% {
+    transform: translateY(4px) scale(0.96);
+    opacity: 0;
+  }
+}
+
 .landing-pwa-sheet-android {
   animation: landing-pwa-sheet-android 20s ease-in-out infinite;
 }
@@ -489,6 +532,19 @@ body {
   79% {
     opacity: 0;
     transform: translateY(8px) scale(0.97);
+  }
+  80%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes landing-pwa-home-screen-sm {
+  0%,
+  79% {
+    opacity: 0;
+    transform: translateY(5px) scale(0.97);
   }
   80%,
   100% {
@@ -531,6 +587,52 @@ body {
 .landing-pwa-installed-icon {
   border-radius: 0.75rem;
   animation: landing-pwa-installed-pulse 20s ease-in-out infinite;
+}
+
+@keyframes landing-pwa-installed-pulse-sm {
+  0%,
+  79% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    filter: none;
+  }
+  82%,
+  88%,
+  95% {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 0 6px rgba(239, 68, 68, 0.5),
+      0 0 0 11px rgba(248, 113, 113, 0.24),
+      0 0 22px rgba(220, 38, 38, 0.5);
+    filter: drop-shadow(0 0 7px rgba(248, 113, 113, 0.85));
+  }
+  85%,
+  91%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    filter: none;
+  }
+}
+
+/* Compact landing hero: smaller mocks + proportional motion on narrow viewports */
+@media (max-width: 639px) {
+  .landing-pwa-install-anim--compact .landing-pwa-share-ios,
+  .landing-pwa-install-anim--compact .landing-pwa-chrome-install {
+    animation-name: landing-pwa-pulse-affordance-sm;
+  }
+
+  .landing-pwa-install-anim--compact .landing-pwa-sheet-android {
+    animation-name: landing-pwa-sheet-android-sm;
+  }
+
+  .landing-pwa-install-anim--compact .landing-pwa-home-screen {
+    animation-name: landing-pwa-home-screen-sm;
+  }
+
+  .landing-pwa-install-anim--compact .landing-pwa-installed-icon {
+    animation-name: landing-pwa-installed-pulse-sm;
+  }
 }
 /* ===================================== */
 
