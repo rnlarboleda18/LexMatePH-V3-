@@ -74,7 +74,7 @@ const Layout = ({
                         <button
                             type="button"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors backdrop-blur-md ${
+                            className={`xl:hidden flex h-9 w-9 max-sm:h-8 max-sm:w-8 shrink-0 items-center justify-center rounded-lg border transition-colors backdrop-blur-md ${
                                 isDarkMode
                                     ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06] hover:bg-zinc-800 hover:text-white'
                                     : 'border-lex-strong bg-white text-black shadow-sm ring-1 ring-inset ring-neutral-200/80 hover:bg-neutral-50'
@@ -82,19 +82,19 @@ const Layout = ({
                             aria-label="Toggle Sidebar"
                         >
                             {isSidebarOpen ? (
-                                <X className="h-[1.1rem] w-[1.1rem]" strokeWidth={2} />
+                                <X className="h-[1.1rem] w-[1.1rem] max-sm:h-[0.9375rem] max-sm:w-[0.9375rem]" strokeWidth={2} />
                             ) : (
-                                <Menu className="h-[1.1rem] w-[1.1rem]" strokeWidth={2} />
+                                <Menu className="h-[1.1rem] w-[1.1rem] max-sm:h-[0.9375rem] max-sm:w-[0.9375rem]" strokeWidth={2} />
                             )}
                         </button>
 
                         {/* Same logo lockup as LandingPage.jsx (official marketing branding) */}
-                        <div className="flex min-w-0 items-center gap-2.5">
+                        <div className="flex min-w-0 items-center gap-2.5 max-sm:gap-2">
                             <div
-                                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-md shadow-purple-600/30"
+                                className="flex h-10 w-10 max-sm:h-8 max-sm:w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-md shadow-purple-600/30 max-sm:rounded-lg"
                                 aria-hidden
                             >
-                                <Scale className="h-5 w-5" strokeWidth={2} />
+                                <Scale className="h-5 w-5 max-sm:h-[0.9375rem] max-sm:w-[0.9375rem]" strokeWidth={2} />
                             </div>
                             <div className="min-w-0">
                                 <span className="font-display block truncate text-lg font-semibold tracking-tight text-black dark:text-zinc-50 sm:text-xl">
