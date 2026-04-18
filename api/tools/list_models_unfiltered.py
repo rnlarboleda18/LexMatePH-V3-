@@ -1,6 +1,13 @@
+import os
+import sys
+
 import requests
 
-API_KEY = "AIzaSyANtmAjiEpDZCXB-oDUwDOX0FvTKpjgIPk"
+API_KEY = (os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY") or "").strip()
+if not API_KEY:
+    print("Set GOOGLE_API_KEY or GEMINI_API_KEY.", file=sys.stderr)
+    sys.exit(1)
+
 url = f"https://generativelanguage.googleapis.com/v1beta/models?key={API_KEY}"
 
 try:

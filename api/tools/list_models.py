@@ -1,7 +1,12 @@
+import os
+import sys
+
 import requests
 
-# Use the new key provided by the user
-API_KEY = "AIzaSyANtmAjiEpDZCXB-oDUwDOX0FvTKpjgIPk"
+API_KEY = (os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY") or "").strip()
+if not API_KEY:
+    print("Set GOOGLE_API_KEY or GEMINI_API_KEY.", file=sys.stderr)
+    sys.exit(1)
 
 url = f"https://generativelanguage.googleapis.com/v1beta/models?key={API_KEY}"
 
@@ -12,7 +17,6 @@ try:
         models = resp.json().get("models", [])
         print("\n=== Available Models ===")
         for m in models:
-            # We filter for flash-lite to find your exact match
             if "flash" in m.get("name", "").lower():
                 print(f"- {m.get('name')}  ({m.get('displayName')})")
     else:
