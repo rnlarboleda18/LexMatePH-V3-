@@ -4,7 +4,7 @@ import { Book, Calendar, ListTree, X, Gavel, ChevronDown, ChevronRight, Info, Se
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
 import LexCodeJurisSidebar from './LexCodeJurisSidebar';
-import { toTitleCase } from '../utils/textUtils';
+import { ensureCodalArticleHeadingTerminalStop, toTitleCase } from '../utils/textUtils';
 import { lexCache } from '../utils/cache';
 import {
     CODAL_LEXCACHE_REVISION,
@@ -1199,11 +1199,12 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                 </div>
                                 <div className="divide-y divide-lex">
                                     {searchSuggestions.map((art) => {
-                                        const titleText =
+                                        const titleText = ensureCodalArticleHeadingTerminalStop(
                                             art.article_title ||
-                                            (art.article_number
-                                                ? `${codalProvisionLabel} ${art.article_number}`
-                                                : codalProvisionLabel);
+                                                (art.article_number
+                                                    ? `${codalProvisionLabel} ${art.article_number}`
+                                                    : codalProvisionLabel),
+                                        );
                                         const rawSnippet = (art.content || art.content_md || '')
                                             .replace(/[#*`_~]/g, '')
                                             .trim()

@@ -87,3 +87,16 @@ export const toTitleCase = (str, skipRomanKeywords = []) => {
         return word.toLowerCase();
     }).join('');
 };
+
+/**
+ * RPC / codal ingest often stores `article_title` without a trailing period (see LexCode
+ * `rpc_md_stream_parser` flush). Restore a full stop for display when the title does
+ * not already end with sentence punctuation.
+ */
+export function ensureCodalArticleHeadingTerminalStop(s) {
+    if (s == null || s === '') return s;
+    const t = String(s).trimEnd();
+    if (!t) return s;
+    if (/[.!?]\s*$/.test(t)) return s;
+    return `${t}.`;
+}

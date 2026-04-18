@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Info, Gavel, FileSignature, X, Headphones } from 'lucide-react';
 import { useLexPlayApi } from '../features/lexplay/useLexPlay';
-import { toTitleCase } from '../utils/textUtils';
+import { ensureCodalArticleHeadingTerminalStop, toTitleCase } from '../utils/textUtils';
 import {
     collapseBlankLinesInPipeTables,
     extractRccLeadingShortTitle,
@@ -107,7 +107,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             // General Codal Fallback - Append the specific item's title (if any) directly to the main display track
             if (article.article_title) {
                  // Remove any trailing periods on the display title for neat concatenation
-                 displayTitle = `${displayTitle.replace(/\.$/, '')}. ${toTitleCase(article.article_title, skipKeywords)}`;
+                 displayTitle = ensureCodalArticleHeadingTerminalStop(
+                     `${displayTitle.replace(/\.$/, '')}. ${toTitleCase(article.article_title, skipKeywords)}`,
+                 );
             }
         }
 
@@ -442,7 +444,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 if (displayNum.trim().toUpperCase() === String(article_title).trim().toUpperCase()) {
                                                     return toTitleCase(displayNum, skipKeywords);
                                                 }
-                                                return toTitleCase(`${displayNum}. ${article_title}`, skipKeywords);
+                                                return ensureCodalArticleHeadingTerminalStop(
+                                                    toTitleCase(`${displayNum}. ${article_title}`, skipKeywords),
+                                                );
                                             })()
                                             : (() => {
                                                 if (rccInlineLeadTitle) {
@@ -493,9 +497,13 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 }
                                                 const prefix = `Article ${article_num}`;
                                                 if (article_title && String(article_title).trim().toUpperCase().startsWith(prefix.toUpperCase())) {
-                                                    return toTitleCase(article_title, skipKeywords);
+                                                    return ensureCodalArticleHeadingTerminalStop(
+                                                        toTitleCase(article_title, skipKeywords),
+                                                    );
                                                 }
-                                                return toTitleCase(`${prefix}. ${article_title || ''}`, skipKeywords);
+                                                return ensureCodalArticleHeadingTerminalStop(
+                                                    toTitleCase(`${prefix}. ${article_title || ''}`, skipKeywords),
+                                                );
                                             })()
                                     }
                                     {/* General concept gavel icon */}
