@@ -111,31 +111,53 @@ def parse_article_title_body(text):
     if not text:
         return None, ""
 
-    # RA-style italic run-in title after Art. N. … *title* – body (en dash or hyphen)
+    # RA-style italic run-in title after Art. N. ... *title* - body
+    # Using a comprehensive dash set: hyphen (-), en-dash (–), em-dash (—)
+    DASHES = r"[-–—]"
+    
     m_italic = re.match(
-        r"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s*\*(.+?)\*\s*[–-]\s*(.+)$",
+        rf"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s*\*(.+?)\*\s*{DASHES}\s*(.+)$",
         text,
         re.DOTALL | re.IGNORECASE,
     )
-    if m_italic:
-        return m_italic.group(2).strip(), m_italic.group(3).strip()
+    def clean_title(t):
+        if not t: return ""
+        # Remove markdown bold/italic markers
+        t = re.sub(r"[\*_]+", "", t).strip()
+        # Title case but keep Roman numerals or specific legal acronyms if possible 
+        # (For now simple .title() is requested)
+        return t.title()
 
-    # "Article N." or "Art. N." then title until ". - " or ". " before body
-    match = re.search(
-        r"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s+(.*?)(?:\.\s*-\s+|\.\s+)(.*)$",
+    if m_italic:
+        title = m_italic.group(2)
+        return clean_title(title), m_italic.group(3).strip()
+
+    # Generic split: "Article N. Title [Separator] Body"
+    # Prioritize ". - " or ".* - " or " - " (even without period if starred)
+    m_dash = re.search(
+        rf"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s+(.*?[\.\*]?)\s*{DASHES}\s+(.*)$",
         text,
         re.DOTALL | re.IGNORECASE,
     )
-    if match:
-        title = match.group(2).strip()
-        body = match.group(3).strip()
-        return title, body
+    if m_dash:
+        title = m_dash.group(2)
+        return clean_title(title), m_dash.group(3).strip()
+
+    # Try with first sentence period (restricted to first line to prevent greediness)
+    m_period = re.search(
+        r"^(?:Article|Art\.)\s+(\d+[A-Za-z-]*)\.\s+([^\n.]+?)\.\s+(.*)$",
+        text,
+        re.DOTALL | re.IGNORECASE,
+    )
+    if m_period:
+        title = m_period.group(2)
+        return clean_title(title), m_period.group(3).strip()
 
     # Fallback: first line starts with Article (full word) and body on following lines
     lines = text.split("\n", 1)
     if lines and "Article" in lines[0] and re.search(r"Article\s+\d+", lines[0], re.IGNORECASE):
-        title_part = re.sub(r"Article\s+\d+\.\s*", "", lines[0]).strip()
-        return title_part, lines[1] if len(lines) > 1 else ""
+        title_part = re.sub(r"Article\s+\d+\.\s*", "", lines[0])
+        return clean_title(title_part), lines[1] if len(lines) > 1 else ""
 
     return None, text
 
@@ -711,6 +733,7 @@ def main():
         only_article=args.only_article,
         offline_ra6968=args.offline_ra6968,
         offline_ra10951_rpc=args.offline_ra10951_rpc,
+        amendment_json_path=args.amendment_json,
     )
     
     if not result["success"]:
