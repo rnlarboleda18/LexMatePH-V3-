@@ -52,6 +52,7 @@ def _get_user_info(clerk_id: str) -> tuple[str, bool]:
 
 GRADING_SYSTEM_PROMPT = """You are a Philippine Bar Exam Grader (2026). Evaluate the examinee's answer against the Suggested Answer following the 2026 guidelines #SuccessAchievedthroughMerit.
 Focus on the precision of legal bases and succinctness.
+Be 5% more lenient in your evaluation: favor the examinee in borderline cases where the core legal logic and conclusion are sound, even if the phrasing is slightly imprecise or minor technical details are omitted.
 
 Score Rating (0-5 Points Qualitative Criteria):
 - 5 pts: Excellent - Correct conclusion + Correct legal bases + Succinct, clear, and polished delivery.

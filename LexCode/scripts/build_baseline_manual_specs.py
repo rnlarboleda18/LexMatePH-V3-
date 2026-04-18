@@ -21,19 +21,23 @@ _MD = _REPO / "LexCode" / "Codals" / "md"
 _OUT_DIR = _REPO / "LexCode" / "Codals" / "manual_amendments" / "specs"
 _MANIFEST = _REPO / "LexCode" / "Codals" / "manual_amendments" / "manifest.json"
 
-# MD filename -> output JSON stem (deterministic parse in parse_amendment_document)
+# MD filename -> output JSON stem (mostly via parse_amendment_document; RA 10951 uses offline helper only)
 _BASELINE_SOURCES: list[tuple[str, str]] = [
     ("Act No. 3999, December 05, 1932.md", "act_3999"),
     ("act_4117_1933.md", "act_4117"),
     ("ca_99_1936.md", "ca_99"),
     ("ca_235_1937.md", "ca_235"),
     ("ra_6968_1990.md", "ra_6968"),
+    ("ra_10951_2017.md", "ra_10951"),
 ]
 
 
 def main() -> int:
     sys.path.insert(0, str(_REPO / "LexCode" / "scripts"))
-    from parse_amendment import parse_amendment_document  # noqa: WPS433
+    from parse_amendment import (  # noqa: WPS433
+        parse_amendment_document,
+        parse_ra10951_offline_rpc_articles_134_to_136,
+    )
 
     _OUT_DIR.mkdir(parents=True, exist_ok=True)
     steps: list[dict[str, str]] = []
@@ -43,13 +47,24 @@ def main() -> int:
         if not md_path.is_file():
             print(f"[SKIP] Missing markdown: {md_path.relative_to(_REPO)}")
             continue
-        data = parse_amendment_document(str(md_path))
+        if md_name == "ra_10951_2017.md":
+            data = parse_ra10951_offline_rpc_articles_134_to_136(str(md_path))
+            if not data:
+                print(f"[SKIP] Offline RA 10951 parse failed (Section 6 / Art. 136): {md_path}")
+                continue
+            notes = (
+                f"Generated from LexCode/Codals/md/{md_name} via parse_ra10951_offline_rpc_articles_134_to_136 "
+                "(no AI)."
+            )
+        else:
+            data = parse_amendment_document(str(md_path))
+            notes = f"Generated from LexCode/Codals/md/{md_name} via offline/deterministic parse."
         data.pop("raw_content", None)
         payload = {
             "amendment_id": data["amendment_id"],
             "date": data["date"],
             "title": data.get("title") or "",
-            "notes": f"Generated from LexCode/Codals/md/{md_name} via offline/deterministic parse.",
+            "notes": notes,
             "changes": [
                 {
                     "article_number": c["article_number"],

@@ -176,6 +176,15 @@ def parse_amendment_document(filepath):
             print("  [OK] Using offline deterministic parser for Republic Act No. 6968.")
             return process_ai_result(offline, content)
 
+    if base == "ra_10951_2017.md":
+        offline_ra10951 = parse_ra10951_offline_rpc_articles_134_to_136(filepath)
+        if offline_ra10951:
+            print(
+                "  [OK] Using offline deterministic parser for Republic Act No. 10951 "
+                "(RPC Art. 136 fines / Section 6)."
+            )
+            return offline_ra10951
+
     # Check size - if small (< 30k chars), use single shot
     if len(content) < 30000:
         try:

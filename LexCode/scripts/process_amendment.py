@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 import json
 import sys
@@ -14,6 +16,7 @@ from codal_text import normalize_storage_markdown
 
 from parse_amendment import parse_amendment_document, parse_ra10951_offline_rpc_articles_134_to_136
 from apply_amendment import apply_amendment_with_ai
+from manual_amendment_spec import load_manual_amendment
 
 def get_db_connection():
     conn_str = os.environ.get("DB_CONNECTION_STRING", "").strip()
@@ -397,49 +400,73 @@ def apply_amendment_to_database(
         cur.close()
 
 def process_amendment(
-    amendment_file,
+    amendment_file=None,
     code_short_name="RPC",
     dry_run=False,
     force=False,
     only_article=None,
     offline_ra6968=False,
     offline_ra10951_rpc=False,
+    amendment_json_path=None,
 ):
     print(f"\n{'='*70}")
     print(f"CODEX AMENDMENT PROCESSOR")
     print(f"{'='*70}\n")
 
-    path = Path(amendment_file)
-    if not path.is_file():
-        path = _REPO_ROOT / amendment_file
-    if not path.is_file():
-        return {"success": False, "error": f"Amendment file not found: {amendment_file}"}
-    amendment_file = str(path.resolve())
-
     only_key = str(only_article).strip() if only_article is not None else None
 
-    if offline_ra6968 and offline_ra10951_rpc:
+    json_path: Path | None = None
+    if amendment_json_path:
+        json_path = Path(amendment_json_path)
+        if not json_path.is_file():
+            json_path = _REPO_ROOT / amendment_json_path
+        if not json_path.is_file():
+            return {"success": False, "error": f"Amendment JSON not found: {amendment_json_path}"}
+        json_path = json_path.resolve()
+
+    if json_path and (offline_ra6968 or offline_ra10951_rpc):
         return {
             "success": False,
-            "error": "Use only one of --offline-ra6968 or --offline-ra10951-rpc.",
-        }
-    if offline_ra6968 and "ra_6968" not in str(amendment_file).lower():
-        return {
-            "success": False,
-            "error": "--offline-ra6968 is only valid for LexCode/Codals/md/ra_6968_1990.md",
-        }
-    if offline_ra10951_rpc and "ra_10951" not in str(amendment_file).lower():
-        return {
-            "success": False,
-            "error": "--offline-ra10951-rpc is only valid for LexCode/Codals/md/ra_10951_2017.md",
+            "error": "Do not combine --amendment-json with --offline-ra6968 or --offline-ra10951-rpc.",
         }
 
-    use_literal_offline = bool(offline_ra6968 or offline_ra10951_rpc)
-    
-    # Step 1: Parse amendment
+    if not json_path:
+        if not amendment_file:
+            return {"success": False, "error": "Provide amendment_file or amendment_json_path."}
+        path = Path(amendment_file)
+        if not path.is_file():
+            path = _REPO_ROOT / amendment_file
+        if not path.is_file():
+            return {"success": False, "error": f"Amendment file not found: {amendment_file}"}
+        amendment_file = str(path.resolve())
+
+        if offline_ra6968 and offline_ra10951_rpc:
+            return {
+                "success": False,
+                "error": "Use only one of --offline-ra6968 or --offline-ra10951-rpc.",
+            }
+        if offline_ra6968 and "ra_6968" not in str(amendment_file).lower():
+            return {
+                "success": False,
+                "error": "--offline-ra6968 is only valid for LexCode/Codals/md/ra_6968_1990.md",
+            }
+        if offline_ra10951_rpc and "ra_10951" not in str(amendment_file).lower():
+            return {
+                "success": False,
+                "error": "--offline-ra10951-rpc is only valid for LexCode/Codals/md/ra_10951_2017.md",
+            }
+
+    apply_literal = bool(json_path or offline_ra6968 or offline_ra10951_rpc)
+
+    # Step 1: Parse amendment (markdown / offline flags) or load manual JSON
     print(f"[1/5] Parsing amendment document...")
     try:
-        if offline_ra10951_rpc:
+        if json_path:
+            amendment = load_manual_amendment(json_path)
+            if not amendment.get("changes"):
+                raise ValueError("Manual spec has no changes")
+            print(f"  [OK] Loaded manual JSON: {json_path}")
+        elif offline_ra10951_rpc:
             amendment = parse_ra10951_offline_rpc_articles_134_to_136(amendment_file)
             if not amendment or not amendment.get("changes"):
                 raise ValueError(
@@ -448,8 +475,8 @@ def process_amendment(
             print("  [OK] Using offline RA 10951 RPC extract (Article 136 only in this source).")
         else:
             amendment = parse_amendment_document(amendment_file)
-        if not amendment.get('date'):
-            raise ValueError(f"No valid date found in {amendment_file}")
+        if not amendment.get("date"):
+            raise ValueError("No valid date in amendment payload")
         print(f"  [OK] Amendment ID: {amendment['amendment_id']}")
         print(f"  [OK] Date: {amendment['date']}")
         print(f"  [OK] Changes found: {len(amendment['changes'])}")
@@ -514,8 +541,8 @@ def process_amendment(
                  final_content = f"REPEALED BY {amendment['amendment_id']}"
                  description = f"Repealed Article {article_num} via {amendment['amendment_id']}."
                  ai_result = {'success': True, 'new_text': final_content, 'validation_result': {'confidence_score': 1.0}, 'description': description}
-             elif use_literal_offline:
-                 print(f"    [OFFLINE] Applying literal new_text from amendment markdown (no merge model).")
+             elif apply_literal:
+                 print(f"    [LITERAL] Applying literal new_text (no merge model).")
                  final_content = normalize_storage_markdown(change["new_text"])
                  description = (
                      f"Literal codal text from {amendment['amendment_id']} source file (offline pipeline)."
@@ -567,7 +594,7 @@ def process_amendment(
                  description = ai_result['description']
         else:
              print(f"    [!] Article {article_num} not found in database - Treating as NEW INSERTION.")
-             if use_literal_offline:
+             if apply_literal:
                  final_content = normalize_storage_markdown(change["new_text"])
                  description = (
                      f"Inserted Article {article_num} via {amendment['amendment_id']} (offline literal)."
@@ -636,7 +663,15 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Process legal amendment documents")
-    parser.add_argument("--file", required=True, help="Path to amendment markdown file")
+    src = parser.add_mutually_exclusive_group(required=True)
+    src.add_argument("--file", default=None, help="Path to amendment markdown file")
+    src.add_argument(
+        "--amendment-json",
+        dest="amendment_json",
+        default=None,
+        metavar="PATH",
+        help="Manual amendment spec JSON (literal apply, no AI merge). Used by reingest_rpc_manual_pipeline.py.",
+    )
     parser.add_argument("--code", default="RPC", help="Code short name (default: RPC)")
     parser.add_argument("--dry-run", action="store_true", help="Don't update database, just validate")
     parser.add_argument(
