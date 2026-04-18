@@ -81,7 +81,7 @@ const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a 
         <div className="relative w-full min-w-0 flex-1" ref={selectRef}>
             <button
                 type="button"
-                className="flex w-full items-center justify-between rounded-2xl border-2 border-slate-300/85 bg-white p-4 text-left text-sm text-slate-900 shadow-sm outline-none transition-all hover:bg-slate-50 dark:border-white/10 dark:bg-white/[0.03] dark:text-white dark:hover:bg-white/10"
+                className="flex w-full items-center justify-between rounded-xl border border-lex bg-white p-4 text-left text-sm text-slate-900 shadow-sm outline-none transition-all hover:bg-slate-50 dark:border-lex dark:bg-zinc-900/80 dark:text-white dark:hover:bg-zinc-800/80"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <span className={`mr-2 min-w-0 flex-1 truncate ${!selectedOption ? 'font-normal text-slate-400 dark:text-white/40' : 'font-bold text-slate-900 dark:text-white'}`}>
@@ -90,7 +90,7 @@ const CustomPlaylistSelect = ({ value, onChange, options, placeholder="Select a 
                 <ChevronDown size={18} className={`shrink-0 text-slate-400 transition-transform dark:text-white/40 ${isOpen ? 'rotate-180' : ''}`} />
             </button>
             {isOpen && (
-                <div className="absolute z-50 mt-2 max-h-60 w-full overflow-y-auto rounded-2xl border-2 border-slate-300/85 bg-white py-2 shadow-2xl backdrop-blur-3xl dark:border-white/10 dark:bg-[#0f172a]/95">
+                <div className="absolute z-50 mt-2 max-h-60 w-full overflow-y-auto rounded-xl border border-lex bg-white py-2 shadow-2xl backdrop-blur-3xl dark:border-lex dark:bg-zinc-950">
                     {options?.length === 0 && (
                         <div className="px-4 py-3 text-center text-sm italic text-slate-500 dark:text-white/40">No playlists found</div>
                     )}
@@ -264,7 +264,7 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                     style={{ width: `${progressPercent}%` }}
                 />
                 <div
-                    className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-slate-300 bg-white shadow-md ring-2 ring-purple-500/40 transition-transform duration-200 max-lg:h-3.5 max-lg:w-3.5 max-lg:scale-100 max-lg:border lg:h-4 lg:w-4 lg:border-2 lg:ring-purple-500/40 dark:border-white/95 dark:ring-purple-500/35 lg:dark:border-white/90 ${isScrubbing ? 'scale-110' : 'max-lg:scale-100 lg:scale-0 lg:group-hover:scale-100'}`}
+                    className={`absolute top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-lex-strong bg-white shadow-md ring-2 ring-purple-500/40 transition-transform duration-200 max-lg:h-3.5 max-lg:w-3.5 max-lg:scale-100 max-lg:border lg:h-4 lg:w-4 lg:border-lex-strong lg:ring-purple-500/40 dark:border-lex-strong dark:ring-purple-500/35 dark:bg-zinc-900 ${isScrubbing ? 'scale-110' : 'max-lg:scale-100 lg:scale-0 lg:group-hover:scale-100'}`}
                     style={{ left: `${progressPercent}%` }}
                 />
             </div>
@@ -305,14 +305,14 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
             className={`relative group flex items-center gap-3 rounded-2xl border transition-all duration-300 pl-1 pr-3 py-2.5 md:py-3 ${
                 isActive
                     ? 'border-purple-300/80 bg-gradient-to-r from-purple-100/90 via-purple-50/50 to-white shadow-[0_8px_32px_-12px_rgba(88,28,135,0.2)] ring-1 ring-purple-200/50 dark:from-purple-500/15 dark:via-white/[0.07] dark:to-white/[0.04] dark:border-purple-400/35 dark:shadow-[0_8px_32px_-12px_rgba(88,28,135,0.45)] dark:ring-white/10'
-                    : 'border-slate-200/90 bg-white/90 hover:border-slate-300 hover:bg-slate-50/90 dark:border-white/[0.06] dark:bg-white/[0.02] dark:hover:border-white/15 dark:hover:bg-white/[0.04]'
+                    : 'border-lex bg-white/90 hover:bg-slate-50/90 dark:border-lex dark:bg-white/[0.02] dark:hover:bg-white/[0.04]'
             }`}
         >
             <div
                 className={`absolute left-0 top-2 bottom-2 w-1 rounded-full transition-colors ${isActive ? 'bg-gradient-to-b from-fuchsia-400 to-purple-600 opacity-100' : 'bg-transparent opacity-0'}`}
                 aria-hidden
             />
-            <div className={`relative ml-1 flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border ${isActive ? 'border-purple-300/80 bg-purple-600/90 shadow-[0_0_20px_rgba(168,85,247,0.25)] dark:border-white/20 dark:shadow-[0_0_20px_rgba(168,85,247,0.35)]' : 'border-slate-200/90 bg-slate-100/90 dark:border-white/[0.08] dark:bg-white/[0.06]'}`}>
+            <div className={`relative ml-1 flex h-11 w-11 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border ${isActive ? 'border-purple-300/80 bg-purple-600/90 shadow-[0_0_20px_rgba(168,85,247,0.25)] dark:border-white/20 dark:shadow-[0_0_20px_rgba(168,85,247,0.35)]' : 'border-lex bg-slate-100/90 dark:border-lex dark:bg-white/[0.06]'}`}>
                 
                 {/* Action Overlay: Hover state, or Active+Paused state, or Loading state */}
                 <div className={`absolute inset-0 z-20 bg-gradient-to-br from-purple-600/90 to-indigo-900/90 flex items-center justify-center transition-opacity backdrop-blur-[2px] ${((isActive && !isPlaying) || (isActive && isLoading)) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
@@ -373,7 +373,7 @@ const PlaylistItem = React.memo(({ item, index, isActive, isPlaying, isLoading, 
                                 e.stopPropagation();
                                 onClearDownload?.(item);
                             }}
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border-2 border-slate-300/85 bg-white text-slate-500 transition-colors hover:border-rose-400/50 hover:bg-rose-50 hover:text-rose-700 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/50 dark:hover:border-rose-500/35 dark:hover:bg-rose-500/15 dark:hover:text-rose-200"
+                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-lex-strong bg-white text-slate-500 transition-colors hover:border-rose-400/50 hover:bg-rose-50 hover:text-rose-700 dark:border-lex-strong dark:bg-white/[0.04] dark:text-white/50 dark:hover:border-rose-500/35 dark:hover:bg-rose-500/15 dark:hover:text-rose-200"
                             title="Remove offline copy from device"
                         >
                             <Eraser size={16} strokeWidth={2.25} />
@@ -424,8 +424,8 @@ const VirtualizedPlaylist = ({ items, currentIndex, isPlaying, isLoading, onPlay
 
     if (items.length === 0) {
         return (
-            <div className="flex h-full min-h-[12rem] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-400/70 bg-slate-50/80 px-6 py-12 text-center dark:border-white/[0.08] dark:bg-white/[0.02]">
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-slate-200/80 bg-gradient-to-br from-purple-100/80 to-indigo-50/80 dark:from-purple-500/20 dark:to-indigo-600/10 dark:border-white/10">
+            <div className="flex h-full min-h-[12rem] flex-col items-center justify-center rounded-3xl border border-dashed border-lex bg-slate-50/80 px-6 py-12 text-center dark:border-lex dark:bg-white/[0.02]">
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-lex bg-gradient-to-br from-purple-100/80 to-indigo-50/80 dark:from-purple-500/20 dark:to-indigo-600/10 dark:border-lex">
                     <ListMusic size={32} className="text-slate-400 dark:text-white/35" strokeWidth={1.5} />
                 </div>
                 <p className="text-sm font-bold tracking-tight text-slate-600 dark:text-white/50">Nothing in queue</p>
@@ -1000,17 +1000,17 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
             />
 
             <div
-                className={`relative h-full min-h-0 w-full max-md:max-h-[100dvh] overflow-hidden border shadow-2xl backdrop-blur-[40px] animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 md:h-[calc(100vh-8rem)] md:w-[90vw] md:max-w-6xl md:rounded-lg lg:w-[85vw] xl:w-[80vw] ${
+                className={`relative h-full min-h-0 w-full max-md:max-h-[100dvh] overflow-hidden border border-lex backdrop-blur-[40px] animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 shadow-2xl md:h-[calc(100vh-8rem)] md:w-[90vw] md:max-w-6xl md:rounded-2xl lg:w-[85vw] xl:w-[80vw] dark:border-lex ${
                     isDarkMode
-                        ? 'border-white/20 bg-gradient-to-br from-white/10 via-[#ffffff05] to-transparent shadow-[0_32px_64px_-16px_rgba(31,38,135,0.4)]'
-                        : 'border-slate-200/90 bg-white/98 shadow-xl'
+                        ? 'bg-gradient-to-br from-white/10 via-[#ffffff05] to-transparent'
+                        : 'bg-white/98'
                 }`}
             >
                 {/* Inner shine layer for glass effect */}
                 <div className="pointer-events-none absolute inset-0 z-0 opacity-0 bg-gradient-to-b from-white/10 to-transparent dark:opacity-30" aria-hidden />
                 {/* Mobile + tablet (<lg): centered pills + minimize; lg+ uses floating minimize only */}
                 <div className="pointer-events-none absolute inset-x-0 top-[max(0.75rem,env(safe-area-inset-top,0px))] z-[60] h-10 sm:h-11 lg:hidden">
-                    <div className="pointer-events-auto absolute left-1/2 top-1/2 z-[60] flex w-max max-w-[min(100%-9.5rem,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-slate-300/85 bg-white/95 p-1 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
+                    <div className="pointer-events-auto absolute left-1/2 top-1/2 z-[60] flex w-max max-w-[min(100%-9.5rem,12rem)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-lex bg-white/95 p-1 shadow-xl backdrop-blur-xl dark:border-lex dark:bg-zinc-900/90">
                         <button
                             type="button"
                             onClick={() => setActiveTab('player')}
@@ -1030,7 +1030,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                         <button
                             type="button"
                             onClick={(e) => { e.stopPropagation(); onMinimize?.(); }}
-                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-white text-slate-600 shadow-md backdrop-blur-3xl transition-all hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-lex-strong dark:bg-zinc-900 dark:text-white/80 dark:hover:bg-zinc-800 dark:hover:text-white"
                             title="Minimize LexPlayer"
                             aria-label="Minimize LexPlayer"
                         >
@@ -1040,7 +1040,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                             <button
                                 type="button"
                                 onClick={closeFullAndStop}
-                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-3xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-white text-slate-600 shadow-md backdrop-blur-3xl transition-all hover:bg-slate-50 hover:text-slate-900 active:scale-95 sm:h-9 sm:w-9 dark:border-lex-strong dark:bg-zinc-900 dark:text-white/80 dark:hover:bg-zinc-800 dark:hover:text-white"
                                 title="Close LexPlayer"
                                 aria-label="Close LexPlayer"
                             >
@@ -1054,7 +1054,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                     <button
                         type="button"
                         onClick={(e) => { e.stopPropagation(); onMinimize?.(); }}
-                        className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                        className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-white text-slate-600 shadow-md backdrop-blur-xl transition-all hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-lex-strong dark:bg-zinc-900 dark:text-white/80 dark:hover:bg-zinc-800 dark:hover:text-white"
                         title="Minimize LexPlayer"
                         aria-label="Minimize LexPlayer"
                     >
@@ -1064,7 +1064,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                         <button
                             type="button"
                             onClick={closeFullAndStop}
-                            className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-xl backdrop-blur-xl transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-white/10 dark:bg-white/[0.04] dark:text-white/80 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                            className="group pointer-events-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-white text-slate-600 shadow-md backdrop-blur-xl transition-all hover:bg-slate-50 hover:text-slate-900 active:scale-[0.98] dark:border-lex-strong dark:bg-zinc-900 dark:text-white/80 dark:hover:bg-zinc-800 dark:hover:text-white"
                             title="Close LexPlayer"
                             aria-label="Close LexPlayer"
                         >
@@ -1076,7 +1076,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 <div className="flex h-full w-full flex-col lg:flex-row-reverse">
 
                     {/* Right Area: Player Stage — lg+ = original centered column; max-lg = mobile/tablet layout */}
-                    <div className={`relative flex min-h-0 flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-50 via-white to-slate-100/95 backdrop-blur-2xl transition-all duration-500 ease-in-out dark:from-slate-950/90 dark:via-[#0c1222]/95 dark:to-slate-950/90 lg:overflow-y-auto lg:overscroll-contain lg:border-l-2 lg:border-slate-300/80 lg:shadow-none dark:lg:border-white/[0.07] dark:lg:shadow-[inset_-1px_0_0_rgba(255,255,255,0.04)] ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
+                    <div className={`relative flex min-h-0 flex-1 flex-col overflow-y-auto scrollbar-hide bg-gradient-to-b from-slate-50 via-white to-slate-100/95 backdrop-blur-2xl transition-all duration-500 ease-in-out dark:from-slate-950/90 dark:via-[#0c1222]/95 dark:to-slate-950/90 lg:overflow-y-auto lg:overscroll-contain lg:border-l lg:border-lex lg:shadow-none dark:lg:border-lex ${activeTab === 'player' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-purple-500/[0.04] via-transparent to-indigo-100/30 dark:from-purple-500/[0.06] dark:to-indigo-950/20" />
                         <div className="pointer-events-none absolute left-1/2 top-[38%] h-[min(360px,50vh)] w-[min(380px,78vw)] -translate-x-1/2 rounded-full bg-purple-400/10 blur-[90px] dark:bg-purple-500/10 md:top-[42%] md:h-[min(220px,38vh)] md:w-[min(260px,85%)] lg:top-[42%]" />
 
@@ -1108,7 +1108,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 <div className="relative flex w-full max-w-[min(100%,18rem)] shrink-0 justify-center md:max-lg:max-w-none md:max-lg:w-[40%] md:max-lg:min-w-0 md:max-lg:self-center lg:max-w-none lg:w-full">
                                     <div className="group relative flex-shrink-0">
                                         <div className="pointer-events-none absolute -inset-3 rounded-lg bg-gradient-to-br from-purple-500/25 via-fuchsia-500/12 to-transparent opacity-80 blur-2xl transition-opacity group-hover:opacity-100 md:-inset-2.5 md:rounded-xl lg:-inset-4 lg:rounded-lg" />
-                                        <div className="relative mx-auto flex h-[12rem] w-[12rem] max-h-[min(36vh,210px)] max-w-[min(36vh,210px)] items-center justify-center overflow-hidden rounded-2xl border-2 border-slate-300/85 bg-white shadow-[0_12px_48px_-16px_rgba(88,28,135,0.15)] ring-1 ring-slate-200/60 backdrop-blur-sm sm:h-56 sm:w-56 sm:max-h-[min(38vh,220px)] sm:max-w-[min(38vh,220px)] md:max-lg:h-44 md:max-lg:w-44 md:max-lg:max-h-none md:max-lg:max-w-none md:max-lg:rounded-2xl lg:mx-0 lg:h-48 lg:w-48 lg:max-h-none lg:max-w-none lg:rounded-lg dark:border-white/[0.1] dark:bg-white/[0.04] dark:shadow-[0_12px_48px_-16px_rgba(88,28,135,0.45)] dark:ring-white/[0.08]">
+                                        <div className="relative mx-auto flex h-[12rem] w-[12rem] max-h-[min(36vh,210px)] max-w-[min(36vh,210px)] items-center justify-center overflow-hidden rounded-lg border border-lex bg-white shadow-md backdrop-blur-sm sm:h-56 sm:w-56 sm:max-h-[min(38vh,220px)] sm:max-w-[min(38vh,220px)] md:max-lg:h-44 md:max-lg:w-44 md:max-lg:max-h-none md:max-lg:max-w-none md:max-lg:rounded-lg lg:mx-0 lg:h-48 lg:w-48 lg:max-h-none lg:max-w-none lg:rounded-lg dark:border-lex dark:bg-white/[0.04] dark:shadow-[0_12px_48px_-16px_rgba(88,28,135,0.45)]">
                                             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white via-slate-50/80 to-transparent dark:from-white/[0.12] dark:via-white/[0.03]" />
                                             <Headphones className={`relative z-10 h-[4.75rem] w-[4.75rem] text-purple-600 drop-shadow-[0_8px_24px_rgba(124,58,237,0.25)] transition-transform duration-700 dark:text-white/90 dark:drop-shadow-[0_8px_24px_rgba(124,58,237,0.45)] sm:h-[5rem] sm:w-[5rem] md:max-lg:h-24 md:max-lg:w-24 lg:h-[7.25rem] lg:w-[7.25rem] ${isPlaying ? '-translate-y-3 scale-95 md:max-lg:-translate-y-2 lg:-translate-y-3' : 'group-hover:scale-105'}`} strokeWidth={1.25} />
                                             {isPlaying && (
@@ -1150,7 +1150,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                                 type="button"
                                                 onClick={handlePrevious}
                                                 disabled={playlist.length === 0}
-                                                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-md transition-all hover:border-purple-200 hover:bg-purple-50 hover:text-purple-800 active:scale-95 disabled:pointer-events-none disabled:opacity-25 sm:h-14 sm:w-14 md:max-lg:h-[3.75rem] md:max-lg:w-[3.75rem] lg:h-11 lg:w-11 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80 dark:hover:border-white/18 dark:hover:bg-white/[0.1] dark:hover:text-white"
+                                                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-white text-slate-600 shadow-md transition-all hover:border-purple-200 hover:bg-purple-50 hover:text-purple-800 active:scale-95 disabled:pointer-events-none disabled:opacity-25 sm:h-14 sm:w-14 md:max-lg:h-[3.75rem] md:max-lg:w-[3.75rem] lg:h-11 lg:w-11 dark:border-lex-strong dark:bg-white/[0.06] dark:text-white/80 dark:hover:border-purple-400/35 dark:hover:bg-white/[0.1] dark:hover:text-white"
                                                 aria-label="Previous track"
                                             >
                                                 <SkipBack className="h-6 w-6 sm:h-7 sm:w-7 md:max-lg:h-8 md:max-lg:w-8 lg:h-6 lg:w-6" fill="currentColor" />
@@ -1187,7 +1187,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                                 type="button"
                                                 onClick={handleNext}
                                                 disabled={playlist.length === 0}
-                                                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-slate-300/85 bg-white text-slate-600 shadow-md transition-all hover:border-purple-200 hover:bg-purple-50 hover:text-purple-800 active:scale-95 disabled:pointer-events-none disabled:opacity-25 sm:h-14 sm:w-14 md:max-lg:h-[3.75rem] md:max-lg:w-[3.75rem] lg:h-11 lg:w-11 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80 dark:hover:border-white/18 dark:hover:bg-white/[0.1] dark:hover:text-white"
+                                                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-white text-slate-600 shadow-md transition-all hover:border-purple-200 hover:bg-purple-50 hover:text-purple-800 active:scale-95 disabled:pointer-events-none disabled:opacity-25 sm:h-14 sm:w-14 md:max-lg:h-[3.75rem] md:max-lg:w-[3.75rem] lg:h-11 lg:w-11 dark:border-lex-strong dark:bg-white/[0.06] dark:text-white/80 dark:hover:border-purple-400/35 dark:hover:bg-white/[0.1] dark:hover:text-white"
                                                 aria-label="Next track"
                                             >
                                                 <SkipForward className="h-6 w-6 sm:h-7 sm:w-7 md:max-lg:h-8 md:max-lg:w-8 lg:h-6 lg:w-6" fill="currentColor" />
@@ -1210,8 +1210,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                     </div>
 
                     {/* Left Area: Playlist — side panel from lg+; full-width sheet on mobile/tablet tab */}
-                    <div className={`z-20 flex h-full w-full shrink-0 flex-col border-b-2 border-slate-300/80 bg-gradient-to-b from-slate-50 via-white to-slate-100/95 shadow-sm backdrop-blur-2xl transition-all duration-500 ease-in-out dark:border-white/[0.07] dark:from-slate-950/90 dark:via-[#0c1222]/95 dark:to-slate-950/90 dark:shadow-[inset_1px_0_0_rgba(255,255,255,0.04),-12px_0_40px_-8px_rgba(0,0,0,0.4)] lg:w-80 lg:border-b-0 lg:border-r lg:border-slate-200/80 dark:lg:border-white/[0.07] xl:w-[420px] ${activeTab === 'playlist' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
-                        <div className="flex items-center justify-between gap-3 border-b-2 border-slate-300/80 bg-slate-50/90 p-4 max-lg:pt-[calc(env(safe-area-inset-top,0px)+3.75rem)] md:gap-4 dark:border-white/[0.06] dark:bg-white/[0.02] lg:p-5 lg:pt-5">
+                    <div className={`z-20 flex h-full w-full shrink-0 flex-col border-b border-lex bg-gradient-to-b from-slate-50 via-white to-slate-100/95 shadow-sm backdrop-blur-2xl transition-all duration-500 ease-in-out dark:border-lex dark:from-slate-950/90 dark:via-[#0c1222]/95 dark:to-slate-950/90 dark:shadow-[inset_1px_0_0_rgba(255,255,255,0.04),-12px_0_40px_-8px_rgba(0,0,0,0.4)] lg:w-80 lg:border-b-0 lg:border-r lg:border-lex dark:lg:border-lex xl:w-[420px] ${activeTab === 'playlist' ? 'translate-x-0 opacity-100' : 'hidden -translate-x-10 opacity-0 lg:flex lg:translate-x-0 lg:opacity-100'}`}>
+                        <div className="flex items-center justify-between gap-3 border-b border-lex bg-slate-50/90 p-4 max-lg:pt-[calc(env(safe-area-inset-top,0px)+3.75rem)] md:gap-4 dark:border-lex dark:bg-white/[0.02] lg:p-5 lg:pt-5">
                             <div className="min-w-0 flex-1 flex items-center justify-start gap-3 md:gap-3.5 text-left">
                                 <button
                                     type="button"
@@ -1226,7 +1226,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                         {activePlaylistName || 'LexPlaylist'}
                                     </h3>
                                     <div className="mt-1 flex items-center gap-2">
-                                        <span className="inline-flex items-center rounded-full border-2 border-slate-300/85 bg-white px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-500 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/45">
+                                        <span className="inline-flex items-center rounded-full border border-lex bg-white px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-slate-500 dark:border-lex dark:bg-white/[0.04] dark:text-white/45">
                                             {displayPlaylist.length} {displayPlaylist.length === 1 ? 'track' : 'tracks'}
                                         </span>
                                     </div>
@@ -1238,7 +1238,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                         <button
                                             type="button"
                                             onClick={canDownloadAll ? handleBulkCacheDownloadClick : () => openUpgradeModal('download_tracks')}
-                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${!canDownloadAll ? 'border-amber-300/70 bg-amber-50/80 text-amber-600 hover:border-amber-400/60 hover:bg-amber-100/80 dark:border-amber-500/25 dark:bg-amber-500/10 dark:text-amber-300 dark:hover:border-amber-400/40 dark:hover:bg-amber-500/15' : isBulkDownloading ? 'border-rose-300 bg-rose-50 text-rose-800 hover:bg-rose-100 dark:border-rose-500/35 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25' : cachedCount === displayPlaylist.length ? 'border-emerald-300/80 bg-emerald-50 text-emerald-700 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-emerald-400' : 'border-slate-200/90 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/55 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white'}`}
+                                            className={`flex h-11 w-11 md:h-12 md:w-12 items-center justify-center rounded-2xl border transition-all ${!canDownloadAll ? 'border-amber-300/70 bg-amber-50/80 text-amber-600 hover:border-amber-400/60 hover:bg-amber-100/80 dark:border-amber-500/25 dark:bg-amber-500/10 dark:text-amber-300 dark:hover:border-amber-400/40 dark:hover:bg-amber-500/15' : isBulkDownloading ? 'border-rose-300 bg-rose-50 text-rose-800 hover:bg-rose-100 dark:border-rose-500/35 dark:bg-rose-500/15 dark:text-rose-100 dark:hover:bg-rose-500/25' : cachedCount === displayPlaylist.length ? 'border-emerald-300/80 bg-emerald-50 text-emerald-700 dark:border-emerald-500/25 dark:bg-emerald-500/10 dark:text-emerald-400' : 'border-lex bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 dark:border-lex dark:bg-white/[0.04] dark:text-white/55 dark:hover:bg-white/[0.08] dark:hover:text-white'}`}
                                             title={
                                                 !canDownloadAll
                                                     ? 'Juris plan required — Download all for offline'
@@ -1293,7 +1293,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
 
                         {/* Bulk Download Progress Bar Overlay */}
                         {isBulkDownloading && (
-                            <div className="border-b-2 border-slate-300/80 bg-gradient-to-r from-purple-100/90 via-violet-50/80 to-transparent px-5 py-3.5 animate-in slide-in-from-top-4 duration-300 dark:border-white/[0.06] dark:from-purple-500/12 dark:via-violet-500/8 dark:to-transparent">
+                            <div className="border-b border-lex bg-gradient-to-r from-purple-100/90 via-violet-50/80 to-transparent px-5 py-3.5 animate-in slide-in-from-top-4 duration-300 dark:border-lex dark:from-purple-500/12 dark:via-violet-500/8 dark:to-transparent">
                                 <div className="mb-2 flex items-center justify-between">
                                     <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-purple-900 dark:text-purple-100/90">{bulkDownloadStatusText}</span>
                                     <span className="tabular-nums text-[10px] font-bold text-purple-800 dark:text-purple-200">{bulkDownloadProgress}%</span>
@@ -1307,7 +1307,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                             </div>
                         )}
 
-                        <div className="border-b-2 border-slate-300/80 bg-gradient-to-b from-slate-50/95 to-transparent px-3 py-3 dark:border-white/[0.05] dark:from-white/[0.03] md:px-5 md:py-5">
+                        <div className="border-b border-lex bg-gradient-to-b from-slate-50/95 to-transparent px-3 py-3 dark:border-lex dark:from-white/[0.03] md:px-5 md:py-5">
                             {!isCreating ? (
                                 <>
                                     <div className="flex flex-row items-stretch gap-2 md:gap-3">
@@ -1343,11 +1343,11 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                 </>
                             ) : (
                                 <div className="flex flex-wrap items-center gap-2">
-                                    <input type="text" placeholder="Playlist name…" value={newPlaylistName} onChange={(e) => setNewPlaylistName(e.target.value)} className="min-w-[10rem] flex-1 rounded-2xl border-2 border-slate-300/85 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none ring-0 focus:border-purple-400/50 focus:bg-white dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:placeholder:text-white/25 dark:focus:border-purple-400/40 dark:focus:bg-white/[0.07]" autoFocus />
+                                    <input type="text" placeholder="Playlist name…" value={newPlaylistName} onChange={(e) => setNewPlaylistName(e.target.value)} className="min-w-[10rem] flex-1 rounded-2xl border border-lex-strong bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 outline-none ring-0 focus:border-purple-400/50 focus:bg-white dark:border-lex-strong dark:bg-white/[0.05] dark:text-white dark:placeholder:text-white/25 dark:focus:border-purple-400/40 dark:focus:bg-white/[0.07]" autoFocus />
                                     <button type="button" onClick={async () => { if(newPlaylistName.trim()){ await createPlaylist(newPlaylistName.trim()); setNewPlaylistName(''); setIsCreating(false); }}} className="flex h-11 w-11 items-center justify-center rounded-2xl border border-purple-400/50 bg-purple-100 text-purple-900 transition-all hover:bg-purple-200 dark:border-purple-400/40 dark:bg-purple-500/20 dark:text-purple-100 dark:hover:bg-purple-500/35" aria-label="Save playlist">
                                         <Save size={20} strokeWidth={2.25} />
                                     </button>
-                                    <button type="button" onClick={() => setIsCreating(false)} className="flex h-11 w-11 items-center justify-center rounded-2xl border-2 border-slate-300/85 bg-white text-slate-500 transition-all hover:bg-slate-50 hover:text-slate-800 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/45 dark:hover:bg-white/[0.08] dark:hover:text-white" aria-label="Cancel">
+                                    <button type="button" onClick={() => setIsCreating(false)} className="flex h-11 w-11 items-center justify-center rounded-2xl border border-lex-strong bg-white text-slate-500 transition-all hover:bg-slate-50 hover:text-slate-800 dark:border-lex-strong dark:bg-zinc-900 dark:text-white/45 dark:hover:bg-zinc-800 dark:hover:text-white" aria-label="Cancel">
                                         <X size={20} strokeWidth={2.25} />
                                     </button>
                                 </div>
@@ -1360,7 +1360,7 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                                 <button
                                                     type="button"
                                                     onClick={() => { setIsEditing(true); setEditPlaylistName(savedPlaylists.find(p => p.id === activePlaylistId)?.name || ''); }}
-                                                    className="inline-flex items-center gap-1 rounded-lg border-2 border-slate-300/85 bg-white px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 lg:gap-1.5 lg:rounded-xl lg:px-3 lg:py-2 lg:text-[10px] lg:tracking-wider dark:border-white/12 dark:bg-white/[0.04] dark:text-white/70 dark:hover:border-white/20 dark:hover:bg-white/[0.08] dark:hover:text-white"
+                                                    className="inline-flex items-center gap-1 rounded-lg border border-lex bg-white px-2 py-1 text-[9px] font-bold uppercase tracking-wide text-slate-700 transition-all hover:bg-slate-50 hover:text-slate-900 lg:gap-1.5 lg:rounded-xl lg:px-3 lg:py-2 lg:text-[10px] lg:tracking-wider dark:border-lex dark:bg-white/[0.04] dark:text-white/70 dark:hover:bg-white/[0.08] dark:hover:text-white"
                                                 >
                                                     <Edit2 className="h-2.5 w-2.5 lg:h-3 lg:w-3" strokeWidth={2.5} /> Rename
                                                 </button>
@@ -1388,11 +1388,11 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                         </div>
                                     ) : (
                                         <div className="flex w-full flex-wrap items-center gap-1.5 md:gap-2">
-                                            <input type="text" value={editPlaylistName} onChange={(e) => setEditPlaylistName(e.target.value)} className="min-w-0 flex-1 rounded-xl border-2 border-slate-300/85 bg-white px-3 py-2 text-xs text-slate-900 outline-none focus:border-purple-400/50 dark:border-white/12 dark:bg-white/[0.05] dark:text-white dark:focus:border-purple-400/40" autoFocus />
+                                            <input type="text" value={editPlaylistName} onChange={(e) => setEditPlaylistName(e.target.value)} className="min-w-0 flex-1 rounded-xl border border-lex-strong bg-white px-3 py-2 text-xs text-slate-900 outline-none focus:border-purple-400/50 dark:border-lex-strong dark:bg-white/[0.05] dark:text-white dark:focus:border-purple-400/40" autoFocus />
                                             <button type="button" onClick={() => { if(editPlaylistName.trim()){ renamePlaylist(activePlaylistId, editPlaylistName.trim()); setIsEditing(false); }}} className="flex h-9 w-9 items-center justify-center rounded-xl border border-purple-400/50 bg-purple-100 text-purple-900 hover:bg-purple-200 dark:border-purple-400/35 dark:bg-purple-500/20 dark:text-purple-200 dark:hover:bg-purple-500/30" aria-label="Save name">
                                                 <Save size={16} strokeWidth={2.5} />
                                             </button>
-                                            <button type="button" onClick={() => setIsEditing(false)} className="flex h-9 w-9 items-center justify-center rounded-xl border-2 border-slate-300/85 bg-white text-slate-500 hover:text-slate-800 dark:border-white/10 dark:bg-white/[0.04] dark:text-white/45 dark:hover:text-white" aria-label="Cancel rename">
+                                            <button type="button" onClick={() => setIsEditing(false)} className="flex h-9 w-9 items-center justify-center rounded-xl border border-lex-strong bg-white text-slate-500 hover:text-slate-800 dark:border-lex-strong dark:bg-zinc-900 dark:text-white/45 dark:hover:text-white" aria-label="Cancel rename">
                                                 <X size={16} strokeWidth={2.5} />
                                             </button>
                                         </div>
@@ -1420,8 +1420,8 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                 {/* Bulk Add Modal */}
                 {showBulkModal && (
                     <div className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-3xl dark:bg-black/70">
-                        <div className="w-full max-w-md overflow-hidden rounded-lg border-2 border-slate-300/85 bg-white shadow-2xl backdrop-blur-3xl dark:border-white/10 dark:bg-[#1e293b]/40">
-                            <div className="flex items-center justify-between border-b-2 border-slate-300/80 bg-slate-50/95 px-8 py-6 dark:border-white/5 dark:bg-white/[0.02]">
+                        <div className="w-full max-w-md overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl backdrop-blur-3xl dark:border-lex dark:bg-zinc-900">
+                            <div className="flex items-center justify-between border-b border-lex bg-slate-50/95 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
                                 <div>
                                     <h3 className="flex items-center gap-2 text-xl font-black tracking-tight text-slate-900 dark:text-white">Add Tracks</h3>
                                     <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">Bulk create audio queue</p>
@@ -1461,10 +1461,10 @@ const LexPlayer = ({ isMinimized, onExpand, onMinimize, onCloseMini, onCloseFull
                                          bulkForm.codal === 'CONST' ? 'Article / Section Range (Optional)' : 
                                          'Article Range (Optional)'}
                                     </label>
-                                    <input type="text" placeholder="e.g. 1-20" value={bulkForm.range} onChange={e => setBulkForm({...bulkForm, range: e.target.value})} className="w-full rounded-2xl border-2 border-slate-300/85 bg-white p-4 text-sm font-bold text-slate-900 outline-none placeholder:text-slate-400 dark:border-white/10 dark:bg-white/5 dark:text-white" />
+                                    <input type="text" placeholder="e.g. 1-20" value={bulkForm.range} onChange={e => setBulkForm({...bulkForm, range: e.target.value})} className="w-full rounded-2xl border border-lex-strong bg-white p-4 text-sm font-bold text-slate-900 outline-none placeholder:text-slate-400 dark:border-lex-strong dark:bg-zinc-950 dark:text-white" />
                                 </div>
                             </div>
-                            <div className="flex justify-end gap-4 border-t-2 border-slate-300/80 bg-slate-50/90 px-8 py-6 dark:border-white/5 dark:bg-white/[0.02]">
+                            <div className="flex justify-end gap-4 border-t border-lex bg-slate-50/90 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
                                 <button type="button" onClick={() => setShowBulkModal(false)} className="text-xs font-black uppercase tracking-widest text-slate-500 transition-all hover:text-slate-800 dark:text-white/30 dark:hover:text-white">Cancel</button>
                                 <button type="button" onClick={handleAddBulkItems} disabled={isBulking} className="rounded-lg bg-purple-600 px-10 py-4 text-xs font-black uppercase tracking-widest text-white shadow-xl shadow-purple-500/20 transition-all hover:bg-purple-500 disabled:opacity-50 active:scale-95 dark:bg-purple-500 dark:hover:bg-purple-400">
                                     {isBulking ? "Adding..." : "Add to Tracks"}

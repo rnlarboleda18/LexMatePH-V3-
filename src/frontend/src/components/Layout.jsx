@@ -187,7 +187,7 @@ const Layout = ({
                                 transition: 'filter 0.3s ease',
                             }}
                         >
-                            <div className="flex h-full flex-col pt-4 md:pt-8">{sidebarContent}</div>
+                            <div className="flex h-full flex-col pt-2 md:pt-3">{sidebarContent}</div>
                         </aside>
                     </div>,
                     document.body

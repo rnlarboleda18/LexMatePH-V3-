@@ -28,7 +28,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
         <nav className="space-y-1 px-1.5 sm:px-2 pb-[calc(var(--app-header-height)+var(--player-height,0px))]">
 
             {/* Mobile Only Actions */}
-            <div className="lg:hidden mb-5 space-y-4">
+            <div className="mb-3 space-y-3 lg:hidden">
                 {/* Auth Section for Mobile */}
                 <div className={SIDEBAR_MOBILE_AUTH_CARD}>
                     <SignedIn>
@@ -70,16 +70,13 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                     </SignedOut>
                 </div>
 
-                <div className="my-3 h-0.5 rounded-full bg-violet-300/70 dark:bg-zinc-700" />
+                <div className="my-2 h-0.5 rounded-full bg-violet-300/70 dark:bg-zinc-700" />
             </div>
-
-
-
 
             {/* Subscription Tier Badge */}
             <SignedIn>
                 {loading ? (
-                    <div className="mb-3 mt-1 flex items-center gap-3 rounded-xl border-2 border-violet-200/70 dark:border-purple-500/30 bg-violet-50/80 dark:bg-slate-900/70 p-3 shadow-sm animate-pulse">
+                    <div className="mb-3 mt-0 flex items-center gap-3 rounded-xl border-2 border-violet-200/70 dark:border-purple-500/30 bg-violet-50/80 dark:bg-slate-900/70 p-3 shadow-sm animate-pulse">
                         <div className="w-8 h-8 rounded-lg bg-slate-300 dark:bg-slate-700 shrink-0" />
                         <div className="flex-1 space-y-1.5">
                             <div className="h-2.5 w-20 rounded bg-slate-300 dark:bg-slate-700" />
@@ -87,7 +84,7 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
                         </div>
                     </div>
                 ) : (
-                    <div className={`mb-3 mt-1 flex items-center gap-3 rounded-xl border p-3 shadow-sm backdrop-blur-md ring-1 ring-inset ring-white/35 dark:ring-white/[0.06] ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}>
+                    <div className={`mb-3 mt-0 flex items-center gap-3 rounded-xl border p-3 shadow-sm backdrop-blur-md ring-1 ring-inset ring-white/35 dark:ring-white/[0.06] ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}>
                         <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${isAdmin ? TIER_COLOR.admin : TIER_COLOR[tier]} bg-white/60 dark:bg-black/20`}>
                             <TierIcon size={16} />
                         </div>
