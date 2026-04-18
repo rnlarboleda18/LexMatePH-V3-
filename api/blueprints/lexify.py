@@ -6,43 +6,12 @@ import requests
 import psycopg
 
 from utils.clerk_auth import get_authenticated_user_id
+from utils.ai_client import call_vertex_ai_json
 
 lexify_bp = func.Blueprint()
 
 
-def _resolve_gemini_api_key() -> str | None:
-    """Gemini key from env. Order matches typical Azure + local naming."""
-    for name in (
-        "GEMINI_API_KEY",
-        "GOOGLE_API_KEY",
-        "AI_API_KEY",  # some Azure app settings use this label
-    ):
-        v = os.environ.get(name)
-        if v and str(v).strip():
-            return str(v).strip()
-    return None
 
-
-def _gemini_error_user_message(response_data: dict) -> str | None:
-    """Return a short message if the failure is key-related (for 400/403)."""
-    try:
-        err = response_data.get("error") or {}
-        msg = (err.get("message") or "").lower()
-        status = (err.get("status") or "").upper()
-        if status == "INVALID_ARGUMENT" and ("api key" in msg or "expired" in msg):
-            return (
-                "Gemini API key is missing, invalid, or expired. "
-                "Set GEMINI_API_KEY, GOOGLE_API_KEY, or AI_API_KEY to match your Azure Function App configuration "
-                "(for local dev: api/local.settings.json → Values)."
-            )
-        if "api key" in msg or "api_key_invalid" in str(response_data).lower():
-            return (
-                "Gemini API key rejected. Renew the key in Google AI Studio and update "
-                "the same app setting you use in Azure (GEMINI_API_KEY / GOOGLE_API_KEY / AI_API_KEY)."
-            )
-    except Exception:
-        pass
-    return None
 
 
 ADMIN_EMAILS = [
@@ -133,14 +102,6 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=400
             )
 
-        api_key = _resolve_gemini_api_key()
-        if not api_key:
-            return func.HttpResponse(
-                json.dumps({"error": "Gemini API key not configured"}),
-                mimetype="application/json",
-                status_code=500
-            )
-
         # Context: include question text if available
         user_content_parts = []
         if subject:
@@ -152,64 +113,29 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
         user_content_parts.append(f"[Examinee Answer]: {student_answer}")
         user_content = "\n\n".join(user_content_parts)
 
-        # Use Gemini 2.0 Flash for better reasoning
-        gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
-
-        payload = {
-            "system_instruction": {
-                "parts": [{"text": GRADING_SYSTEM_PROMPT}]
-            },
-            "contents": [{
-                "parts": [{"text": user_content}]
-            }],
-            "generationConfig": {
-                "response_mime_type": "application/json",
-                "temperature": 0.1,  # Low temperature for deterministic grading
-                "maxOutputTokens": 1024
-            }
-        }
-
-        response = requests.post(
-            gemini_url,
-            json=payload,
-            headers={'Content-Type': 'application/json'},
-            timeout=30
-        )
-        response_data = response.json()
-
-        if response.status_code != 200:
-            logging.error(f"Gemini API error: {response_data}")
-            friendly = _gemini_error_user_message(response_data if isinstance(response_data, dict) else {})
-            if friendly:
-                return func.HttpResponse(
-                    json.dumps({"error": friendly}),
-                    mimetype="application/json",
-                    status_code=502
-                )
-            return func.HttpResponse(
-                json.dumps({"error": "AI Grading service error", "detail": str(response_data)}),
-                mimetype="application/json",
-                status_code=502
-            )
-
-        # Extract and validate JSON response
         try:
-            output_text = response_data['candidates'][0]['content']['parts'][0]['text']
-            parsed_json = json.loads(output_text)
+            # Use Vertex AI for grading
+            # The ai_client automatically uses GOOGLE_API_KEY and follows Vertex AI protocol
+            parsed_json = call_vertex_ai_json(
+                prompt=user_content,
+                system_instruction=GRADING_SYSTEM_PROMPT,
+                temperature=0.1,
+                max_tokens=1024
+            )
 
             # Validate the schema
             if 'score' not in parsed_json:
-                raise ValueError("Unexpected AI response format")
+                raise ValueError("Unexpected AI response format: 'score' missing")
 
             # Clamp score to valid range [0, 5]
             parsed_json['score'] = max(0, min(5, float(parsed_json['score'])))
 
         except Exception as e:
-            logging.error(f"Error parsing Gemini JSON: {e} — raw: {output_text[:200]}")
+            logging.error(f"Vertex AI Grading error: {e}")
             return func.HttpResponse(
-                json.dumps({"error": "AI returned an unexpected format"}),
+                json.dumps({"error": "AI Grading service error", "detail": str(e)}),
                 mimetype="application/json",
-                status_code=500
+                status_code=502
             )
 
         return func.HttpResponse(

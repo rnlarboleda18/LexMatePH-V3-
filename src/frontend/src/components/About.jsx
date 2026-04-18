@@ -117,14 +117,10 @@ const About = () => {
                   >
                     <Scale className="h-7 w-7" strokeWidth={2} />
                   </div>
-                  <div className="min-w-0 flex-1 space-y-2 text-left">
+                  <div className="min-w-0 flex-1 text-left">
                     <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
                       Your Legal Companion
                     </h1>
-                    <p className="text-xs font-bold uppercase tracking-wider text-purple-700 dark:text-purple-300">
-                      Philippine law focus
-                    </p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">Official sources first, always.</p>
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
@@ -213,12 +209,7 @@ const About = () => {
           </div>
 
           <section className="space-y-2">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-              <h2 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">Tools at a glance</h2>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-purple-600/80 dark:text-purple-400/90">
-                Same app, one glass surface
-              </p>
-            </div>
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">Tools at a glance</h2>
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
               {FEATURES.map(({ icon: Icon, title, description, accent }) => (
                 <div

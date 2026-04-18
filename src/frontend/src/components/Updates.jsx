@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Twitter,
   Facebook,
@@ -10,10 +10,10 @@ import {
   Zap,
   Bookmark,
   Rss,
-  Sparkles,
   Gavel,
 } from 'lucide-react';
 import FeaturePageShell from './FeaturePageShell';
+import { useTwitterTimeline } from '../hooks/useTwitterTimeline';
 import { apiUrl } from '../utils/apiUrl';
 import { buildUnifiedFeed } from '../utils/scJudiciaryFeed';
 
@@ -116,10 +116,8 @@ const Updates = ({ isDarkMode = false }) => {
   const [feedFilter, setFeedFilter] = useState('all');
 
   const fbIframeSrc = useMemo(() => buildFacebookPagePluginSrc(), []);
-  const twitterEmbedSrc = useMemo(
-    () => apiUrl(`/api/embeds/twitter-scpio?theme=${isDarkMode ? 'dark' : 'light'}`),
-    [isDarkMode],
-  );
+  const twitterTimelineRef = useRef(null);
+  useTwitterTimeline(twitterTimelineRef, [isDarkMode]);
 
   useEffect(() => {
     let cancelled = false;
@@ -197,10 +195,6 @@ const Updates = ({ isDarkMode = false }) => {
             <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
             <div className="relative flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
               <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 rounded-full border border-lex bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-indigo-600 shadow-sm dark:border-lex dark:bg-zinc-800/90 dark:text-indigo-300">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  Live from the Court
-                </div>
                 <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
                   Updates
                 </h1>
@@ -465,15 +459,23 @@ const Updates = ({ isDarkMode = false }) => {
                   </div>
                 </div>
                 <div className="space-y-2 bg-slate-50/80 p-4 dark:bg-slate-950/50">
-                  <iframe
-                    key={twitterEmbedSrc}
-                    title="Supreme Court PIO posts on X"
-                    src={twitterEmbedSrc}
-                    className="h-[420px] w-full rounded-2xl border border-lex bg-white dark:border-lex dark:bg-black"
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allow="encrypted-media; fullscreen"
-                  />
+                  <div
+                    ref={twitterTimelineRef}
+                    role="region"
+                    aria-label="Supreme Court PIO posts on X"
+                    className="min-h-[420px] w-full overflow-hidden rounded-2xl border border-lex bg-white dark:border-lex dark:bg-black"
+                  >
+                    <a
+                      className="twitter-timeline"
+                      data-width="100%"
+                      data-height="580"
+                      data-theme={isDarkMode ? 'dark' : 'light'}
+                      data-chrome="noheader nofooter noborders transparent"
+                      href="https://twitter.com/SCPh_PIO"
+                    >
+                      Posts by @SCPh_PIO
+                    </a>
+                  </div>
                   <iframe
                     title="Supreme Court of the Philippines on Facebook"
                     src={fbIframeSrc}

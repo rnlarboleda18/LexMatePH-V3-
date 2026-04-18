@@ -106,33 +106,7 @@ const Layout = ({
                         </div>
                     </div>
 
-                    {/* Center links — flex-1 keeps spacing between brand and actions; wraps only on very narrow sm */}
-                    <nav
-                        className="order-last hidden w-full min-w-0 justify-center px-1 sm:order-none sm:flex sm:w-auto sm:flex-1 sm:basis-0 sm:px-1 md:px-2"
-                        aria-label="LexMatePH feature areas"
-                    >
-                        <p
-                            className={`flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5 text-center text-[10px] font-semibold leading-snug tracking-tight sm:text-[11px] md:text-xs lg:text-sm xl:text-[0.9375rem] ${
-                                isDarkMode ? 'text-zinc-300' : 'text-black'
-                            }`}
-                        >
-                            <span className="whitespace-nowrap">Bar Questions</span>
-                            <span className="text-neutral-400 dark:text-zinc-600" aria-hidden>
-                                ·
-                            </span>
-                            <span className="whitespace-nowrap">SC Decisions</span>
-                            <span className="text-neutral-400 dark:text-zinc-600" aria-hidden>
-                                ·
-                            </span>
-                            <span className="whitespace-nowrap">Case Digests</span>
-                            <span className="text-neutral-400 dark:text-zinc-600" aria-hidden>
-                                ·
-                            </span>
-                            <span className="whitespace-nowrap">Codals</span>
-                        </p>
-                    </nav>
-
-                    <div className="relative z-10 flex max-lg:ml-auto shrink-0 items-center justify-end gap-1 md:gap-1.5">
+                    <div className="relative z-10 ml-auto flex shrink-0 items-center justify-end gap-1 md:gap-1.5">
                         <button
                             onClick={toggleTheme}
                             type="button"
