@@ -10,6 +10,7 @@ const PwaInstallBanner = ({
   visible,
   canPrompt,
   isIos,
+  isAndroid = false,
   onInstall,
   onDismiss,
 }) => {
@@ -30,18 +31,48 @@ const PwaInstallBanner = ({
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold leading-snug">Install LexMatePH</p>
           {isIos ? (
-            <p className="mt-0.5 text-xs text-neutral-600 dark:text-zinc-400">
-              Tap{' '}
-              <span className="inline-flex items-center gap-0.5 font-medium text-violet-700 dark:text-violet-300">
-                <Share2 className="inline h-3.5 w-3.5" aria-hidden />
-                Share
-              </span>{' '}
-              → <strong>Add to Home Screen</strong> for a full-screen app icon and offline access.
-            </p>
+            <div className="mt-0.5 space-y-1.5 text-xs text-neutral-600 dark:text-zinc-400">
+              <p>
+                Tap{' '}
+                <span className="inline-flex items-center gap-0.5 font-medium text-violet-700 dark:text-violet-300">
+                  <Share2 className="inline h-3.5 w-3.5" aria-hidden />
+                  Share
+                </span>{' '}
+                → <strong>Add to Home Screen</strong> for a full-screen app icon and offline access.
+              </p>
+              <p>
+                <span className="font-semibold text-neutral-700 dark:text-zinc-300">iPad / iPhone Chrome:</span> Apple
+                does not allow the usual “Install app” store-style flow in third-party browsers; use{' '}
+                <strong>Share → Add to Home Screen</strong> (same as Safari).
+              </p>
+            </div>
           ) : (
-            <p className="mt-0.5 text-xs text-neutral-600 dark:text-zinc-400">
-              Add LexMatePH to your home screen for faster launch and offline-ready study.
-            </p>
+            <div className="mt-0.5 space-y-1.5 text-xs text-neutral-600 dark:text-zinc-400">
+              <p>Add LexMatePH to your home screen for faster launch and offline-ready study.</p>
+              {isAndroid && canPrompt && (
+                <p className="text-[11px] leading-snug text-neutral-500 dark:text-zinc-500">
+                  On Android Chrome you may not see an address bar install icon (that is normal) — use{' '}
+                  <strong>Install</strong> here or <strong>⋮ → Install app</strong>.
+                </p>
+              )}
+              {isAndroid && !canPrompt && (
+                <p>
+                  <span className="font-semibold text-neutral-700 dark:text-zinc-300">Android (tablet or phone):</span>{' '}
+                  Chrome often <strong>does not show</strong> an install icon in the address bar anymore. Open{' '}
+                  <strong>⋮</strong> → <strong>Install app</strong> or <strong>Add to Home screen</strong>. If missing,
+                  turn off <strong>Desktop site</strong> (⋮ menu) so the page is in mobile layout, then check again. Not
+                  available in <strong>Incognito</strong>.
+                </p>
+              )}
+              {!isAndroid && !canPrompt && (
+                <p>
+                  <span className="font-semibold text-neutral-700 dark:text-zinc-300">No install button here?</span>{' '}
+                  Chrome does not offer PWA install in <strong>Incognito</strong>. In a normal tab, use the{' '}
+                  <strong>⋮</strong> menu → install or add to home; on some versions{' '}
+                  <strong>Save and share → Install page as app</strong>.
+                </p>
+              )}
+            </div>
           )}
         </div>
         <div className="flex shrink-0 items-center justify-end gap-2">

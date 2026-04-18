@@ -16,6 +16,12 @@ function getIsIos() {
   return navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
 }
 
+/** Chrome / WebView on Android (phones + tablets). Used for install UX copy — omnibox install is often hidden. */
+function getIsAndroid() {
+  if (typeof navigator === 'undefined') return false;
+  return /Android/i.test(navigator.userAgent || '');
+}
+
 /**
  * When `active` (e.g. user is past the marketing landing route), surface install UX.
  * Chromium exposes `beforeinstallprompt`; iOS has no API — caller shows Add-to-Home guidance.
@@ -66,6 +72,7 @@ export function usePwaInstallPrompt(active) {
     showBanner,
     canPrompt,
     isIos: getIsIos(),
+    isAndroid: getIsAndroid(),
     isStandalone: getIsStandalone(),
     install,
     dismiss,

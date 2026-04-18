@@ -44,6 +44,7 @@ export default defineConfig(({ mode }) => {
           'favicon-16.png',
         ],
         manifest: {
+          // Same-origin relative id/scope/start_url — survives apex vs www as long as the page and manifest share one origin.
           id: '/',
           name: 'LexMatePH',
           short_name: 'LexMatePH',
@@ -51,6 +52,8 @@ export default defineConfig(({ mode }) => {
           theme_color: '#0f172a',
           background_color: '#0f172a',
           display: 'standalone',
+          // Helps Android tablets (mobile + landscape) pass installability; portrait-only blocked some Chrome paths.
+          orientation: 'any',
           prefer_related_applications: false,
           scope: '/',
           start_url: '/',

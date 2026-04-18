@@ -1026,6 +1026,7 @@ function App() {
         visible={pwaInstall.showBanner}
         canPrompt={pwaInstall.canPrompt}
         isIos={pwaInstall.isIos}
+        isAndroid={pwaInstall.isAndroid}
         onInstall={pwaInstall.install}
         onDismiss={pwaInstall.dismiss}
       />
