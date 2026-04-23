@@ -1,4 +1,5 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Info, Gavel, FileSignature, X, Headphones } from 'lucide-react';
@@ -27,11 +28,211 @@ function cleanRccSectionHeaderFragment(s) {
         .trim();
 }
 
+/** Amendment blurbs are markdown; model output often glues `###` headings to the prior sentence. */
+function normalizeAmendmentHistoryMarkdown(raw) {
+    if (raw == null || raw === '') return '';
+    let s = String(raw).replace(/\r\n/g, '\n');
+    s = s.replace(/([^\n])\s*(#{1,6}\s+)/g, '$1\n\n$2');
+    return s.replace(/\n{3,}/g, '\n\n').trim();
+}
+
+/** RPC Art. 25 — centered scale headings; body lines after each category label use leading NBSP (RPC `p` renderer). */
+const RPC_ART25_CENTER_HEADINGS = new Set(['SCALE', 'PRINCIPAL PENALTIES', 'ACCESSORY PENALTIES']);
+
+function rpcArt25StripLeadingIndent(s) {
+    return String(s).replace(/^[\u00A0\u200C\s]+/, '');
+}
+
+/** True for short single-colon labels like "Capital punishment:" — never indent these, only lines below. */
+function rpcArt25IsColonCategoryLine(line) {
+    const s = String(line).trim();
+    if (!s.endsWith(':')) return false;
+    if (s.length >= 140) return false;
+    if (RPC_ART25_CENTER_HEADINGS.has(s.toUpperCase())) return false;
+    if ((s.match(/:/g) || []).length !== 1) return false;
+    return true;
+}
+
+function formatRpcArticle25Segments(segments) {
+    const NBSP = '\u00A0';
+    const indentPrefix = NBSP.repeat(8);
+    let indentBody = false;
+    const out = [];
+    for (let i = 0; i < segments.length; i++) {
+        const seg = segments[i];
+        if (typeof seg !== 'string') {
+            out.push(seg);
+            continue;
+        }
+        const t = seg.trim();
+        const upper = t.toUpperCase();
+
+        if (RPC_ART25_CENTER_HEADINGS.has(upper)) {
+            indentBody = upper === 'ACCESSORY PENALTIES';
+            out.push(seg);
+            continue;
+        }
+
+        // Merged segment "Header:\nBody" — keep header flush, indent following lines only
+        if (seg.includes('\n')) {
+            const rawLines = seg.split('\n');
+            const firstTrimEnd = rawLines[0].trimEnd();
+            if (rpcArt25IsColonCategoryLine(firstTrimEnd)) {
+                indentBody = true;
+                out.push(rpcArt25StripLeadingIndent(rawLines[0]));
+                for (let li = 1; li < rawLines.length; li++) {
+                    const line = rawLines[li];
+                    const lt = line.trim();
+                    if (!lt) continue;
+                    const lineTrimEnd = line.trimEnd();
+                    if (rpcArt25IsColonCategoryLine(lineTrimEnd)) {
+                        indentBody = true;
+                        out.push(rpcArt25StripLeadingIndent(line));
+                    } else if (indentBody) {
+                        out.push(indentPrefix + rpcArt25StripLeadingIndent(line));
+                    } else {
+                        out.push(line);
+                    }
+                }
+                continue;
+            }
+        }
+
+        if (rpcArt25IsColonCategoryLine(t)) {
+            indentBody = true;
+            out.push(rpcArt25StripLeadingIndent(seg));
+            continue;
+        }
+
+        if (indentBody && t) {
+            if (rpcArt25IsColonCategoryLine(seg.trimEnd())) {
+                indentBody = true;
+                out.push(rpcArt25StripLeadingIndent(seg));
+                continue;
+            }
+            out.push(indentPrefix + rpcArt25StripLeadingIndent(seg));
+            continue;
+        }
+
+        out.push(seg);
+    }
+    return out;
+}
+
+const amendmentHistorySectionHeadingClass =
+    'mb-1.5 mt-3 border-b border-orange-200/70 pb-1 text-[11px] font-bold uppercase tracking-wide text-amber-900 first:mt-0 dark:border-orange-800/55 dark:text-amber-200/95';
+
+/** Markdown mapping for amendment popover: body stays smaller than the “Amendment History” chrome; inline code matches body text. */
+const amendmentHistoryMarkdownComponents = {
+    p: ({ children, ...props }) => (
+        <p className="mb-2.5 mt-0 text-[11px] leading-relaxed text-gray-700 last:mb-0 dark:text-gray-300" {...props}>
+            {children}
+        </p>
+    ),
+    strong: ({ children, ...props }) => (
+        <strong className="font-semibold text-gray-900 dark:text-gray-50" {...props}>
+            {children}
+        </strong>
+    ),
+    code: ({ inline, children, ...props }) => {
+        if (inline) {
+            return (
+                <span
+                    className="rounded-sm bg-amber-100/95 px-1 py-px font-sans text-[1em] font-normal not-italic leading-[inherit] tracking-normal text-inherit dark:bg-amber-950/45"
+                    {...props}
+                >
+                    {children}
+                </span>
+            );
+        }
+        return (
+            <pre className="my-2 overflow-x-auto rounded-md border border-orange-200/70 bg-white/95 p-3 text-[11px] dark:border-orange-900/35 dark:bg-gray-900/55">
+                <code className="font-mono text-[11px] leading-relaxed text-gray-800 dark:text-gray-200" {...props}>
+                    {children}
+                </code>
+            </pre>
+        );
+    },
+    ul: ({ children, ...props }) => (
+        <ul
+            className="my-2 list-disc space-y-1.5 pl-4 text-[11px] leading-relaxed marker:text-amber-800 dark:marker:text-amber-400/95"
+            {...props}
+        >
+            {children}
+        </ul>
+    ),
+    ol: ({ children, ...props }) => (
+        <ol
+            className="my-2 list-decimal space-y-1.5 pl-4 text-[11px] leading-relaxed marker:font-medium marker:text-amber-800 dark:marker:text-amber-400/95"
+            {...props}
+        >
+            {children}
+        </ol>
+    ),
+    li: ({ children, ...props }) => (
+        <li className="text-[11px] leading-relaxed text-gray-700 dark:text-gray-300" {...props}>
+            {children}
+        </li>
+    ),
+    h1: ({ children, ...props }) => (
+        <h5 className={amendmentHistorySectionHeadingClass} {...props}>
+            {children}
+        </h5>
+    ),
+    h2: ({ children, ...props }) => (
+        <h5 className={amendmentHistorySectionHeadingClass} {...props}>
+            {children}
+        </h5>
+    ),
+    h3: ({ children, ...props }) => (
+        <h5 className={amendmentHistorySectionHeadingClass} {...props}>
+            {children}
+        </h5>
+    ),
+    h4: ({ children, ...props }) => (
+        <h6 className="mb-1 mt-2 text-[11px] font-semibold text-gray-900 dark:text-gray-100" {...props}>
+            {children}
+        </h6>
+    ),
+    blockquote: ({ children, ...props }) => (
+        <blockquote
+            className="my-2 border-l-2 border-amber-400/75 pl-3 text-[11px] italic leading-relaxed text-gray-600 dark:text-gray-400"
+            {...props}
+        >
+            {children}
+        </blockquote>
+    ),
+    hr: (props) => <hr className="my-3 border-0 border-t border-orange-200/80 dark:border-orange-800/60" {...props} />,
+    a: ({ href, children, ...props }) => (
+        <a
+            href={href}
+            className="font-medium text-amber-800 underline decoration-amber-800/40 underline-offset-2 hover:text-amber-900 dark:text-amber-300 dark:decoration-amber-400/40"
+            target="_blank"
+            rel="noopener noreferrer"
+            {...props}
+        >
+            {children}
+        </a>
+    ),
+};
+
 const ArticleNode = React.memo(({ article, highlight, showElements = true, showHistory = false, hiddenPhrases = [], centerLayout = false, onToggleJurisprudence, onToggleAmendment, codeId }) => {
     if (!article) return null;
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    /** Below `sm`, LexCode’s codal shell uses `overflow-hidden` + backdrop blur; `fixed` descendants are clipped unless portaled. */
+    const [amendHistoryUsePortal, setAmendHistoryUsePortal] = useState(() =>
+        typeof window !== 'undefined' && window.matchMedia('(max-width: 639px)').matches,
+    );
 
     // --- HOOKS MUST BE CALLED TOP-LEVEL ---
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 639px)');
+        const apply = () => setAmendHistoryUsePortal(mq.matches);
+        apply();
+        mq.addEventListener('change', apply);
+        return () => mq.removeEventListener('change', apply);
+    }, []);
+
     const { playNow } = useLexPlayApi();
     const docCode = (codeId || article?.code_id || "").toLowerCase();
     const isRcc = docCode === 'rcc' || (article?.code_id || '').toLowerCase() === 'rcc';
@@ -401,11 +602,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         {isAmended && (
                             <button
                                 type="button"
-                                onClick={() => setIsHistoryOpen(prev => !prev)}
-                                className="text-orange-500 hover:text-orange-600 dark:text-orange-400 dark:hover:text-orange-300 transition-colors cursor-pointer"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsHistoryOpen((prev) => !prev);
+                                }}
+                                className="relative z-[6] flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-lg text-orange-500 transition-colors hover:bg-orange-500/10 hover:text-orange-600 active:bg-orange-500/15 dark:text-orange-400 dark:hover:text-orange-300"
                                 title="View Amendment History"
+                                aria-expanded={isHistoryOpen}
+                                aria-haspopup="dialog"
                             >
-                                <Info size={20} />
+                                <Info size={20} aria-hidden />
                             </button>
                         )}
 
@@ -528,41 +734,87 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         )}
                     </div>
 
-                    {/* Amendment History (Floating Popover) */}
-                    {isAmended && isHistoryOpen && (
-                        <>
-                            {/* Mobile backdrop to close on tap outside */}
-                            <div className="fixed inset-0 z-40 sm:hidden" onClick={() => setIsHistoryOpen(false)} />
-                            <div className="fixed inset-x-4 top-1/4 sm:inset-auto sm:absolute sm:top-8 sm:left-0 z-50 sm:w-[500px] max-w-full bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-orange-200 dark:border-orange-900/50 animate-in fade-in zoom-in-95 duration-200">
-                                <div className="flex justify-between items-start mb-3">
-                                <h4 className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase flex items-center gap-2">
-                                    <Info size={14} /> Amendment History
-                                </h4>
-                                <button
-                                    onClick={() => setIsHistoryOpen(false)}
-                                    className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                                >
-                                    <X size={16} />
-                                </button>
-                            </div>
-
-                            <div className="max-h-[300px] overflow-y-auto space-y-3 pr-1 custom-scrollbar">
-                                {[...parsedAmendments].reverse().map((am, idx) => (
-                                    <div key={idx} className="text-xs text-gray-700 dark:text-gray-300">
-                                        <div className="font-semibold text-orange-700 dark:text-orange-300 mb-1 flex justify-between">
-                                            <span>{am.id || am.law || 'Unknown Law'}</span>
-                                            <span className="text-gray-500 dark:text-gray-500 font-normal">{am.date || 'No Date'}</span>
+                    {/* Amendment History — portaled on narrow screens so it is not clipped by codal `overflow-hidden` / backdrop-filter */}
+                    {isAmended &&
+                        isHistoryOpen &&
+                        (() => {
+                            const panel = (
+                                <>
+                                    <div
+                                        className={
+                                            amendHistoryUsePortal
+                                                ? 'fixed inset-0 z-[100] bg-black/20 dark:bg-black/40'
+                                                : 'fixed inset-0 z-40 sm:hidden'
+                                        }
+                                        onClick={() => setIsHistoryOpen(false)}
+                                        aria-hidden
+                                    />
+                                    <div
+                                        role="dialog"
+                                        aria-modal="true"
+                                        aria-label="Amendment history"
+                                        className={
+                                            amendHistoryUsePortal
+                                                ? 'fixed inset-x-4 top-[max(1.5rem,env(safe-area-inset-top))] z-[101] flex min-h-0 max-h-[min(72vh,calc(100dvh-2rem))] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-orange-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-orange-900/50 dark:bg-gray-800'
+                                                : 'fixed inset-x-4 top-[22%] z-50 flex min-h-0 max-h-[min(72vh,520px)] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-orange-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-orange-900/50 dark:bg-gray-800 sm:inset-auto sm:absolute sm:left-0 sm:top-8 sm:max-h-[min(85vh,480px)] sm:w-[500px]'
+                                        }
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <div className="flex shrink-0 items-start justify-between gap-2 border-b border-orange-100/90 px-4 pb-3 pt-4 dark:border-orange-900/30">
+                                            <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400">
+                                                <Info size={16} className="shrink-0" strokeWidth={2.25} /> Amendment History
+                                            </h4>
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsHistoryOpen(false)}
+                                                className="shrink-0 rounded-full p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-gray-700 dark:hover:text-gray-200"
+                                                aria-label="Close amendment history"
+                                            >
+                                                <X size={18} />
+                                            </button>
                                         </div>
-                                        <div className="bg-orange-50 dark:bg-orange-900/10 p-2.5 rounded border border-orange-100 dark:border-orange-900/20 leading-relaxed">
-                                            {am.description || am.summary || 'No Description'}
+
+                                        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 [scrollbar-gutter:stable] custom-scrollbar">
+                                            <div className="space-y-4 pb-1">
+                                                {[...parsedAmendments].reverse().map((am, idx) => {
+                                                    const body = am.description || am.summary;
+                                                    const hasBody = body && String(body).trim();
+                                                    return (
+                                                        <div key={idx} className="text-gray-700 dark:text-gray-300">
+                                                            <div className="mb-2 flex justify-between gap-3 text-xs font-semibold text-orange-800 dark:text-orange-300">
+                                                                <span className="min-w-0 leading-snug">{am.id || am.law || 'Unknown Law'}</span>
+                                                                <span className="shrink-0 font-normal tabular-nums text-gray-500 dark:text-gray-500">
+                                                                    {am.date || 'No Date'}
+                                                                </span>
+                                                            </div>
+                                                            <div className="rounded-lg border border-orange-100/90 bg-orange-50/95 px-4 py-3.5 dark:border-orange-900/25 dark:bg-orange-950/20">
+                                                                {!hasBody ? (
+                                                                    <span className="text-xs text-gray-500 dark:text-gray-400">No Description</span>
+                                                                ) : (
+                                                                    <div className="amendment-history-md text-gray-700 dark:text-gray-300">
+                                                                        <ReactMarkdown
+                                                                            remarkPlugins={[remarkGfm]}
+                                                                            components={amendmentHistoryMarkdownComponents}
+                                                                        >
+                                                                            {normalizeAmendmentHistoryMarkdown(body)}
+                                                                        </ReactMarkdown>
+                                                                    </div>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                        </>
-                    )}
-                </div>
+                                </>
+                            );
+                            if (amendHistoryUsePortal && typeof document !== 'undefined') {
+                                return createPortal(panel, document.body);
+                            }
+                            return panel;
+                        })()}
+                    </div>
                 </div>
             )}
 
@@ -686,6 +938,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             merged.push(seg);
                         }
                         segments = merged;
+                    }
+
+                    if (
+                        (codeId && String(codeId).toLowerCase() === 'rpc') ||
+                        (article?.code_id && String(article.code_id).toLowerCase() === 'rpc')
+                    ) {
+                        const an = String(article_num ?? article_number ?? '').trim();
+                        if (an === '25') {
+                            segments = formatRpcArticle25Segments(segments);
+                        }
                     }
 
                     // Determine if this is an "Added Article" (e.g. "266-A")
@@ -825,18 +1087,29 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             /^[A-Z]/.test(cleanSeg) &&
                             !looksLikeLetteredOrSubnumberedLine;
 
+                        const art25Key = String(article_num ?? article_number ?? '').trim();
+                        const isRpcArt25ColonFlush =
+                            isRpc && art25Key === '25' && rpcArt25IsColonCategoryLine(cleanSeg);
+                        const isRpcArt25CenterHeading =
+                            isRpc && art25Key === '25' && RPC_ART25_CENTER_HEADINGS.has(cleanSeg.toUpperCase());
+
                         const shouldInheritEnumIndent =
                             indentationLevel === 0 &&
                             lastEnumLevel > 0 &&
                             cleanSeg &&
                             !isSubHeader &&
                             !cleanSeg.startsWith('#') &&
-                            !rccProseOutdent;
+                            !rccProseOutdent &&
+                            !isRpcArt25ColonFlush &&
+                            !isRpcArt25CenterHeading;
 
                         const effectiveLevel = shouldInheritEnumIndent ? lastEnumLevel : indentationLevel;
 
                         // Update tracker ΓÇö reset on section headers, update on new markers
                         if (cleanSeg.startsWith('#')) {
+                            lastEnumLevel = 0;
+                            lastNumericEnumLevel = 0;
+                        } else if (isRpcArt25ColonFlush || isRpcArt25CenterHeading) {
                             lastEnumLevel = 0;
                             lastNumericEnumLevel = 0;
                         } else if (indentationLevel > 0) {
@@ -1011,7 +1284,27 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     const leadingMatch = textContent.match(/^[\u200C\u00A0\s]*/);
                                                     const leadingSpaces = leadingMatch ? leadingMatch[0] : '';
                                                     const strippedFromLeading = textContent.substring(leadingSpaces.length);
-                                                    
+
+                                                    const isRpcDoc =
+                                                        (codeId && String(codeId).toLowerCase() === 'rpc') ||
+                                                        (article?.code_id && String(article.code_id).toLowerCase() === 'rpc');
+                                                    const isRpcArt25 =
+                                                        isRpcDoc && String(article_num ?? article_number ?? '').trim() === '25';
+                                                    if (
+                                                        isRpcArt25 &&
+                                                        RPC_ART25_CENTER_HEADINGS.has(strippedFromLeading.trim().toUpperCase())
+                                                    ) {
+                                                        return (
+                                                            <p
+                                                                {...props}
+                                                                className="!m-0 mb-1 mt-3 max-w-full text-center text-[15px] font-bold uppercase tracking-wide text-gray-900 dark:text-gray-200"
+                                                            >
+                                                                {children}
+                                                                {'\u00A0'}
+                                                            </p>
+                                                        );
+                                                    }
+
                                                      // Check for enumeration markers
                                                      // We EXCLUDE ordinals from the inner p-renderer's hanging indent entirely
                                                      // so they just rely on the outer PL-X classes and wrap normally.
