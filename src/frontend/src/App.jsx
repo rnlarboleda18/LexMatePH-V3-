@@ -605,11 +605,7 @@ function App() {
                   )}
                   {effectiveMode === 'landing' && (
                     <div className="relative z-10">
-                      <LandingPage
-                        isDarkMode={isDarkMode}
-                        toggleTheme={toggleTheme}
-                        onEnterApp={handleEnterFromLanding}
-                      />
+                      <LandingPage onEnterApp={handleEnterFromLanding} />
                     </div>
                   )}
                   {effectiveMode === 'about' && (
