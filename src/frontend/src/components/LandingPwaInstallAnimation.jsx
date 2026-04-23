@@ -112,9 +112,9 @@ function InDeviceHomeScreenGrid({ variant, compact }) {
 }
 
 /**
- * @param {{ compact?: boolean }} props — `compact`: hero tile (narrow column); default: full #install section
+ * @param {{ compact?: boolean; dense?: boolean }} props — `compact`: hero column layout; `dense`: shorter mocks for above-the-fold landing
  */
-function LandingPwaInstallAnimation({ compact = false }) {
+function LandingPwaInstallAnimation({ compact = false, dense = false }) {
     const cap = 'text-xs sm:text-sm';
     const capTray = 'min-h-[5rem] sm:min-h-[4.5rem] mt-5 px-2';
 
@@ -129,15 +129,19 @@ function LandingPwaInstallAnimation({ compact = false }) {
         >
             {compact ? (
                 <div className="flex w-full min-w-0 flex-col">
-                    <div className="flex flex-row items-end justify-center gap-3 sm:gap-4 lg:gap-5">
+                    <div
+                        className={`flex flex-row items-end justify-center ${dense ? 'gap-1.5 sm:gap-2 lg:gap-2.5' : 'gap-3 sm:gap-4 lg:gap-5'}`}
+                    >
                         <figure className="flex min-w-0 shrink-0 flex-col items-center">
                             <figcaption className={fig(true)}>Phone (iOS)</figcaption>
-                            <PhoneMock compact />
+                            <PhoneMock compact dense={dense} />
                         </figure>
-                        <div className="flex min-w-0 flex-1 flex-col items-center gap-2 sm:gap-3">
-                            <p className="mb-0.5 flex w-full items-center justify-center gap-2 text-center text-sm font-medium leading-snug text-gray-800 dark:text-gray-100 sm:mb-1 sm:gap-2.5 sm:text-base">
+                        <div className={`flex min-w-0 flex-1 flex-col items-center ${dense ? 'gap-1 sm:gap-1.5' : 'gap-2 sm:gap-3'}`}>
+                            <p
+                                className={`mb-0 flex w-full items-center justify-center gap-1.5 text-center font-medium leading-snug text-gray-800 dark:text-gray-100 ${dense ? 'text-[11px] sm:text-xs' : 'mb-0.5 text-sm sm:mb-1 sm:gap-2.5 sm:text-base'}`}
+                            >
                                 <Smartphone
-                                    className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400 sm:h-5 sm:w-5"
+                                    className={`shrink-0 text-indigo-600 dark:text-indigo-400 ${dense ? 'h-3 w-3 sm:h-3.5 sm:w-3.5' : 'h-4 w-4 sm:h-5 sm:w-5'}`}
                                     strokeWidth={2}
                                     aria-hidden
                                 />
@@ -145,11 +149,11 @@ function LandingPwaInstallAnimation({ compact = false }) {
                                     Browser or installed PWA — same LexMatePH experience.
                                 </span>
                             </p>
-                            <DesktopChromeMock compact />
+                            <DesktopChromeMock compact dense={dense} />
                             <figure className="flex w-full min-w-0 flex-col items-center">
                                 <figcaption className={fig(true)}>Tablet (Android)</figcaption>
                                 <div className="flex w-full justify-center">
-                                    <TabletMock compact />
+                                    <TabletMock compact dense={dense} />
                                 </div>
                             </figure>
                         </div>
@@ -195,25 +199,25 @@ function LandingPwaInstallAnimation({ compact = false }) {
     );
 }
 
-function PhoneMock({ compact }) {
-    const outer = compact ? 'w-[182px]' : 'w-[142px]';
-    const innerH = compact ? 'h-[388px]' : 'h-[288px]';
+function PhoneMock({ compact, dense = false }) {
+    const outer = compact ? (dense ? 'w-[118px]' : 'w-[182px]') : 'w-[142px]';
+    const innerH = compact ? (dense ? 'h-[232px]' : 'h-[388px]') : 'h-[288px]';
     const round = compact ? 'rounded-[1.5rem] border-2' : 'rounded-[1.65rem] border-[3px]';
     const innerRound = compact ? 'rounded-[1.2rem]' : 'rounded-[1.35rem]';
     const barPad = compact ? 'px-2 py-1.5' : 'px-2 py-1.5';
-    const barH = compact ? 'h-10' : 'h-9';
-    const urlText = compact ? 'text-[14px]' : 'text-[13px]';
-    const shareBox = compact ? 'h-7 w-7' : 'h-7 w-7';
-    const shareIco = compact ? 'h-4 w-4' : 'h-4 w-4';
-    const logoBox = compact ? 'h-9 w-9 mb-1' : 'h-9 w-9 mb-2';
-    const p = compact ? 'p-2' : 'p-2';
-    const bottomBar = compact ? 'h-8 px-2' : 'h-8 px-4';
+    const barH = compact ? (dense ? 'h-8' : 'h-10') : 'h-9';
+    const urlText = compact ? (dense ? 'text-[10px]' : 'text-[14px]') : 'text-[13px]';
+    const shareBox = compact ? (dense ? 'h-6 w-6' : 'h-7 w-7') : 'h-7 w-7';
+    const shareIco = compact ? (dense ? 'h-3 w-3' : 'h-4 w-4') : 'h-4 w-4';
+    const logoBox = compact ? (dense ? 'h-7 w-7 mb-0.5' : 'h-9 w-9 mb-1') : 'h-9 w-9 mb-2';
+    const p = compact ? (dense ? 'p-1' : 'p-2') : 'p-2';
+    const bottomBar = compact ? (dense ? 'h-6 px-1.5' : 'h-8 px-2') : 'h-8 px-4';
 
     return (
         <div className={`${outer} shrink-0`}>
             <div className={`${round} border-slate-700 bg-slate-800 p-[2px] shadow-xl ring-1 ring-black/20 dark:border-slate-600`}>
                 <div className={`flex ${innerH} flex-col overflow-hidden ${innerRound} bg-white dark:bg-zinc-950`}>
-                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? 'h-7' : 'h-5'}`}>
+                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? (dense ? 'h-5' : 'h-7') : 'h-5'}`}>
                         <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? 'h-0.5 w-11' : 'h-0.5 w-8'}`} />
                     </div>
                     <div className={`shrink-0 border-b border-slate-200/90 bg-[#e8e8ed] dark:border-zinc-800 dark:bg-zinc-900 ${barPad}`}>
@@ -237,7 +241,10 @@ function PhoneMock({ compact }) {
                         <div className="landing-pwa-content-glow pointer-events-none absolute inset-0 opacity-80" aria-hidden />
                         <div className={`relative ${p}`}>
                             <div className={`mx-auto flex items-center justify-center overflow-hidden rounded-lg shadow-md ring-1 ring-black/10 ${logoBox}`}>
-                                <OfficialAppIcon className="h-9 w-9" rounded={compact ? 'rounded-lg' : 'rounded-xl'} />
+                                <OfficialAppIcon
+                                    className={compact ? (dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-9 w-9'}
+                                    rounded={compact ? 'rounded-lg' : 'rounded-xl'}
+                                />
                             </div>
                             <div className="mx-auto h-1 w-4/5 rounded bg-white/50 dark:bg-white/10" />
                             <div className="mx-auto mt-0.5 h-1 w-3/5 rounded bg-white/35 dark:bg-white/5" />
@@ -309,20 +316,22 @@ function PhoneMock({ compact }) {
     );
 }
 
-function TabletMock({ compact }) {
+function TabletMock({ compact, dense = false }) {
     // Compact (landing hero): match width of DesktopChromeMock address bar in the same column (`w-full`).
     const w = compact ? 'w-full' : 'w-[228px]';
-    const h = compact ? 'h-[304px]' : 'h-[188px]';
+    const h = compact ? (dense ? 'h-[188px]' : 'h-[304px]') : 'h-[188px]';
     const border = compact ? 'border-4' : 'border-[6px]';
     const omni = compact
-        ? 'min-h-[52px] gap-2 px-3.5 py-2 text-[15px]'
+        ? dense
+            ? 'min-h-[36px] gap-1 px-2 py-1 text-[11px]'
+            : 'min-h-[52px] gap-2 px-3.5 py-2 text-[15px]'
         : 'h-10 gap-1 px-2 py-1 text-[13px]';
-    const ico = compact ? 'h-9 w-9' : 'h-7 w-7';
-    const mv = compact ? 'h-[18px] w-[18px]' : 'h-3.5 w-3.5';
-    const md = compact ? 'h-9 w-9' : 'h-7 w-7';
-    const pIco = compact ? 'p-3.5' : 'p-3';
-    const logo = compact ? 'h-14 w-14 mb-1' : 'h-10 w-10 mb-2';
-    const sheet = compact ? 'right-3 top-16 w-[12rem]' : 'right-2 top-10 w-[9.5rem]';
+    const ico = compact ? (dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-7 w-7';
+    const mv = compact ? (dense ? 'h-3.5 w-3.5' : 'h-[18px] w-[18px]') : 'h-3.5 w-3.5';
+    const md = compact ? (dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-7 w-7';
+    const pIco = compact ? (dense ? 'p-2' : 'p-3.5') : 'p-3';
+    const logo = compact ? (dense ? 'h-9 w-9 mb-0.5' : 'h-14 w-14 mb-1') : 'h-10 w-10 mb-2';
+    const sheet = compact ? (dense ? 'right-2 top-10 w-[8.5rem]' : 'right-3 top-16 w-[12rem]') : 'right-2 top-10 w-[9.5rem]';
 
     return (
         <div className={`${w} shrink-0`}>
@@ -341,7 +350,7 @@ function TabletMock({ compact }) {
                                     <MoreVertical className={mv} strokeWidth={2.25} />
                                 </span>
                                 <div className={`landing-pwa-chrome-install flex items-center justify-center rounded text-[#bdc1c6] ${md}`}>
-                                    <ChromePwaInstallIcon className={compact ? 'h-5 w-5' : 'h-3.5 w-3.5'} />
+                                    <ChromePwaInstallIcon className={compact ? (dense ? 'h-4 w-4' : 'h-5 w-5') : 'h-3.5 w-3.5'} />
                                 </div>
                             </div>
                         </div>
@@ -351,7 +360,10 @@ function TabletMock({ compact }) {
                             <div className="landing-pwa-content-glow pointer-events-none absolute inset-0 opacity-70" aria-hidden />
                             <div className={`relative ${pIco}`}>
                                 <div className={`mx-auto overflow-hidden rounded-lg shadow ring-1 ring-black/10 ${logo}`}>
-                                    <OfficialAppIcon className={compact ? 'h-14 w-14' : 'h-10 w-10'} rounded="rounded-lg" />
+                                    <OfficialAppIcon
+                                        className={compact ? (dense ? 'h-9 w-9' : 'h-14 w-14') : 'h-10 w-10'}
+                                        rounded="rounded-lg"
+                                    />
                                 </div>
                                 <div className="mx-auto h-1 w-3/4 rounded bg-white/60 dark:bg-white/10" />
                             </div>
@@ -377,22 +389,28 @@ function TabletMock({ compact }) {
     );
 }
 
-function DesktopChromeMock({ compact }) {
+function DesktopChromeMock({ compact, dense = false }) {
     if (compact) {
         return (
             <div className="w-full min-w-0 self-stretch">
-                <p className="mb-1 text-center text-[8px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 sm:text-[9px]">
+                <p className="mb-0.5 text-center text-[8px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 sm:text-[9px]">
                     Desktop
                 </p>
                 <div className="overflow-hidden rounded-lg border border-slate-300 bg-[#35363a] shadow-md ring-1 ring-black/15 dark:border-slate-600">
-                    <div className="flex h-12 items-center px-2 py-1">
-                        <div className="flex h-10 w-full min-w-0 items-center gap-1.5 rounded-md bg-[#202124] px-2 py-1 ring-1 ring-black/25">
+                    <div className={`flex items-center px-2 py-0.5 ${dense ? 'h-9' : 'h-12'}`}>
+                        <div
+                            className={`flex w-full min-w-0 items-center gap-1.5 rounded-md bg-[#202124] px-2 ring-1 ring-black/25 ${dense ? 'h-7 py-0.5' : 'h-10 py-1'}`}
+                        >
                             <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400/90" aria-hidden />
-                            <span className="min-w-0 flex-1 truncate text-left text-[14px] font-medium tabular-nums text-[#e8eaed] sm:text-[15px]">
+                            <span
+                                className={`min-w-0 flex-1 truncate text-left font-medium tabular-nums text-[#e8eaed] ${dense ? 'text-[11px] sm:text-xs' : 'text-[14px] sm:text-[15px]'}`}
+                            >
                                 {MOCK_URL_IN_BAR}
                             </span>
-                            <div className="landing-pwa-chrome-install flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-[#bdc1c6]">
-                                <ChromePwaInstallIcon className="h-4 w-4" />
+                            <div
+                                className={`landing-pwa-chrome-install flex shrink-0 items-center justify-center rounded-md text-[#bdc1c6] ${dense ? 'h-6 w-6' : 'h-7 w-7'}`}
+                            >
+                                <ChromePwaInstallIcon className={dense ? 'h-3 w-3' : 'h-4 w-4'} />
                             </div>
                         </div>
                     </div>
