@@ -73,6 +73,8 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
+    # SWA upload/poll can exceed the action’s ~10m internal window; allow the job to finish retries.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -86,23 +88,35 @@ jobs:
           cache: 'npm'
           cache-dependency-path: src/frontend/package-lock.json
 
-      - name: Build And Deploy
-        id: builddeploy
-        uses: Azure/static-web-apps-deploy@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_DUNE_0466B8110 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-          action: "upload"
-          ###### Repository/Build Configurations ######
-          app_location: "src/frontend" # App source code path
-          api_location: "api" # Api source code path - optional
-          output_location: "dist" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
+      # Build here (with Vite env) so Oryx only packages `dist` + builds the API — shorter, stabler deploy than full Oryx frontend build.
+      - name: Frontend production build (for SWA skip_app_build)
+        working-directory: src/frontend
+        run: |
+          npm ci
+          npm run build
         env:
           VITE_CLERK_PUBLISHABLE_KEY: ${{ secrets.VITE_CLERK_PUBLISHABLE_KEY }}
-          # Optional: Meta app ID for the Facebook Page Plugin on the Updates page (repository secret).
           VITE_FACEBOOK_APP_ID: ${{ secrets.VITE_FACEBOOK_APP_ID }}
-          # Skip Puppeteer's massive Chromium download in CI (causes build timeouts)
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      # Azure SWA often fails with "Upload Timed Out" after ~600s polling; retry is the practical mitigation (see Azure/static-web-apps#942).
+      - name: Build And Deploy
+        id: builddeploy
+        uses: Wandalen/wretry.action@v3.8.0
+        with:
+          attempt_limit: 3
+          attempt_delay: 60000
+          action: Azure/static-web-apps-deploy@v1
+          with: |
+            azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_DUNE_0466B8110 }}
+            repo_token: ${{ secrets.GITHUB_TOKEN }}
+            action: upload
+            app_location: src/frontend
+            api_location: api
+            output_location: dist
+            skip_app_build: true
+        env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
           PUPPETEER_SKIP_DOWNLOAD: "true"
 
