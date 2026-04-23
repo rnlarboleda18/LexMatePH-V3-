@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => {
       setupFiles: ['./src/test/setup.js'],
     },
     build: {
+      sourcemap: false,
       // Warn when any individual chunk exceeds 600 kB (gzip). Main bundle currently ~850 kB raw;
       // flag intentionally set above current size to avoid blocking CI—lower as code is split further.
       chunkSizeWarningLimit: 900,

@@ -1,16 +1,14 @@
 azure-functions
-psycopg[binary,pool]
+# Pool extra removed: database.py (unused AsyncConnectionPool) dropped to save deploy size on SWA Free (250 MiB cap).
+psycopg[binary]
 python-dotenv
-groq
-google-generativeai
 pyjwt
 cryptography
 requests
-beautifulsoup4
 psycopg2-binary
 redis
 azure-cognitiveservices-speech
 azure-storage-blob
-gTTS
 svix
 edge-tts
+# Gemini via REST in utils/gemini_rest.py — avoids google-generativeai + gRPC (~100+ MiB in site-packages).

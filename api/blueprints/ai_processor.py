@@ -4,15 +4,10 @@ import os
 import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
-import google.generativeai as genai
 from db_pool import get_db_connection, put_db_connection
+from utils.gemini_rest import gemini_generate_text
 
 ai_processor_bp = func.Blueprint()
-
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
 
 # Using shared get_db_connection from db_pool
 
@@ -20,7 +15,6 @@ def generate_html_clean(raw_text):
     if not raw_text or not raw_text.strip():
         return None
 
-    model = genai.GenerativeModel('gemini-3-flash-preview')
     prompt = f"""
     You are a Senior Legal Editor. Transform this raw legal text into pristine HTML.
     RULES:
@@ -33,8 +27,8 @@ def generate_html_clean(raw_text):
     TEXT:
     {raw_text}
     """
-    response = model.generate_content(prompt)
-    content = response.text.replace('```html', '').replace('```', '').strip()
+    raw = gemini_generate_text("gemini-3-flash-preview", prompt)
+    content = raw.replace('```html', '').replace('```', '').strip()
     return content
 
 @ai_processor_bp.route(route="ai/clean/{id:int}", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
@@ -89,7 +83,6 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
         content = row['full_text_md']
         safe_content = content.replace("'", "").replace('"', "")
 
-        model = genai.GenerativeModel('gemini-3-flash-preview')
         prompt = f"""
             You are a Senior Legal Editor and Bar Review Lecturer for the Philippine Supreme Court.
 
@@ -226,8 +219,12 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
             }}
             """
         
-        response = model.generate_content(prompt, generation_config={"response_mime_type": "application/json"})
-        data = json.loads(response.text)
+        raw = gemini_generate_text(
+            "gemini-3-flash-preview",
+            prompt,
+            response_mime_type="application/json",
+        )
+        data = json.loads(raw)
         
         # Save results
         cur.execute("""
@@ -315,7 +312,6 @@ def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
         if not row or not row['digest_facts']:
             return func.HttpResponse(json.dumps({"error": "Digest not found for this case"}), status_code=404)
 
-        model = genai.GenerativeModel('gemini-3-flash-preview')
         prompt = f"""
         You are a Bar Examiner. Based on the following Supreme Court case digest, generate 3 challenging Bar Exam questions (Multiple Choice or Short Essay).
         Include answer keys and brief explanations citing the doctrine.
@@ -332,8 +328,12 @@ def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
         ]
         """
         
-        response = model.generate_content(prompt, generation_config={"response_mime_type": "application/json"})
-        questions = json.loads(response.text)
+        raw = gemini_generate_text(
+            "gemini-3-flash-preview",
+            prompt,
+            response_mime_type="application/json",
+        )
+        questions = json.loads(raw)
         
         return func.HttpResponse(json.dumps(questions), mimetype="application/json", status_code=200)
 
