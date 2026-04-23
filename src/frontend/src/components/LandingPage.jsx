@@ -84,7 +84,7 @@ const LandingPage = ({ onEnterApp }) => {
                         aria-hidden
                     />
                     <div
-                        className={`${LG_HERO} relative w-full min-w-0 max-w-full px-4 py-4 sm:px-5 sm:py-5 lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6 xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] xl:gap-6 xl:px-7 xl:py-7`}
+                        className={`${LG_HERO} relative flex w-full min-w-0 max-w-full flex-col gap-3 px-3 py-3 max-lg:flex-row max-lg:items-stretch max-lg:gap-2.5 sm:max-lg:gap-3 sm:px-4 sm:py-4 lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6 xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] xl:gap-6 xl:px-7 xl:py-7`}
                     >
                         <div
                             className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]"
@@ -94,36 +94,38 @@ const LandingPage = ({ onEnterApp }) => {
                             <div className="absolute -bottom-1/4 -right-1/4 h-[70%] w-[65%] rounded-full bg-gradient-to-tl from-amber-200/45 via-fuchsia-200/22 to-transparent opacity-55 blur-2xl dark:from-amber-400/14 dark:via-fuchsia-500/10 dark:to-transparent dark:opacity-85" />
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent dark:via-white/25" />
                         </div>
-                        <div className="relative z-10 min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
-                            <h1 className="font-display text-2xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white sm:text-3xl lg:text-[1.55rem] lg:leading-snug xl:text-2xl 2xl:text-3xl">
+                        <div className="relative z-10 min-w-0 flex-1 max-lg:min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
+                            <h1 className="font-display text-xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white max-lg:leading-snug sm:max-lg:text-2xl lg:text-[1.55rem] lg:leading-snug xl:text-2xl 2xl:text-3xl">
                                 Master the Bar
                                 <span className="mt-1 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200 sm:mt-1.5 lg:mt-1">
                                     without the burnout with your all-in-one legal companion
                                 </span>
                             </h1>
-                            <p className="mt-2.5 max-w-xl text-sm leading-relaxed text-gray-700 dark:text-gray-300 sm:mt-3 sm:text-[0.9375rem] lg:mt-2.5 lg:text-sm xl:text-[0.95rem]">
+                            <p className="mt-2 max-w-xl text-xs leading-relaxed text-gray-700 dark:text-gray-300 max-lg:max-w-none sm:mt-3 sm:max-lg:text-sm lg:mt-2.5 lg:text-sm xl:text-[0.95rem]">
                                 Built for law students, bar candidates, and practitioners: past bar questions, Supreme
                                 Court decisions, evidence-grounded digests, major codals, flashcards, and LexPlay
                                 listening—together in one fast, installable workspace.
                             </p>
-                            <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-5 lg:mt-3.5 lg:gap-2.5">
+                            <div className="mt-3 flex flex-wrap items-center gap-1.5 sm:mt-5 sm:gap-2 lg:mt-3.5 lg:gap-2.5">
                                 <button
                                     type="button"
                                     onClick={onEnterApp}
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-amber-900/30 ring-1 ring-amber-400/50 transition-all hover:bg-amber-500 hover:shadow-[0_0_28px_-4px_rgba(245,158,11,0.5)] active:scale-[0.99] sm:px-6 sm:py-3 sm:text-base lg:px-5 lg:py-2.5 lg:text-sm xl:px-6 xl:py-3 xl:text-base"
+                                    className="inline-flex max-w-full items-center justify-center gap-1.5 rounded-xl bg-amber-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-amber-900/30 ring-1 ring-amber-400/50 transition-all hover:bg-amber-500 hover:shadow-[0_0_28px_-4px_rgba(245,158,11,0.5)] active:scale-[0.99] sm:gap-2 sm:px-6 sm:py-3 sm:text-base lg:px-5 lg:py-2.5 lg:text-sm xl:px-6 xl:py-3 xl:text-base"
                                 >
-                                    Start reviewing — it&apos;s free
-                                    <ArrowRight className="h-4 w-4 shrink-0 sm:h-5 sm:w-5 lg:h-4 lg:w-4 xl:h-5 xl:w-5" strokeWidth={2.25} />
+                                    <span className="min-w-0 text-left leading-tight max-lg:max-w-[11rem] sm:max-lg:max-w-none">
+                                        Start reviewing — it&apos;s free
+                                    </span>
+                                    <ArrowRight className="h-3.5 w-3.5 shrink-0 sm:h-5 sm:w-5 lg:h-4 lg:w-4 xl:h-5 xl:w-5" strokeWidth={2.25} />
                                 </button>
                                 <SignedOut>
-                                    <span className="text-xs text-gray-600 dark:text-gray-400 sm:text-sm lg:text-xs xl:text-sm">
+                                    <span className="basis-full text-[10px] leading-snug text-gray-600 dark:text-gray-400 sm:text-sm lg:basis-auto lg:text-xs xl:text-sm">
                                         No credit card. Sign in when you&apos;re ready.
                                     </span>
                                 </SignedOut>
                             </div>
                         </div>
-                        <div className="relative z-10 mt-3 min-w-0 overflow-x-hidden sm:mt-4 lg:mt-0">
-                            <LandingPwaInstallAnimation compact dense />
+                        <div className="relative z-10 mt-0 flex shrink-0 items-center justify-center max-lg:w-[min(7.25rem,28vw)] max-lg:self-center min-[480px]:max-lg:w-[min(8rem,30vw)] lg:mt-0 lg:block lg:min-w-0 lg:w-auto lg:overflow-x-hidden">
+                            <LandingPwaInstallAnimation compact dense heroMobile />
                         </div>
                     </div>
                 </section>

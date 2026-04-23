@@ -112,10 +112,12 @@ function InDeviceHomeScreenGrid({ variant, compact }) {
 }
 
 /**
- * @param {{ compact?: boolean; dense?: boolean; tight?: boolean }} props — `tight`: smallest hero mocks (use with compact+dense)
+ * @param {{ compact?: boolean; dense?: boolean; tight?: boolean; heroMobile?: boolean }} props
+ * `heroMobile`: below `lg`, hero shows only a smaller iPhone mock (no desktop bar / tablet); use beside hero copy.
  */
-function LandingPwaInstallAnimation({ compact = false, dense = false, tight = false }) {
+function LandingPwaInstallAnimation({ compact = false, dense = false, tight = false, heroMobile = false }) {
     const heroTight = Boolean(compact && dense && tight);
+    const isHeroMobile = Boolean(compact && dense && heroMobile);
     const cap = 'text-xs sm:text-sm';
     const capTray = 'min-h-[5rem] sm:min-h-[4.5rem] mt-5 px-2';
 
@@ -124,23 +126,27 @@ function LandingPwaInstallAnimation({ compact = false, dense = false, tight = fa
 
     return (
         <div
-            className={`landing-pwa-install-anim mx-auto w-full ${compact ? 'landing-pwa-install-anim--compact mt-0 max-w-full' : 'mt-6 max-w-3xl'}`}
+            className={`landing-pwa-install-anim mx-auto w-full ${compact ? `landing-pwa-install-anim--compact mt-0 max-w-full${isHeroMobile ? ' max-lg:mx-0' : ''}` : 'mt-6 max-w-3xl'}`}
             role="img"
             aria-label={`Animated loop (${LOOP_S} seconds): open LexMatePH, use Share or install in the address bar, add to Home Screen or install, enable Open as Web App on iOS, then see LexMatePH with the official icon on the Home Screen inside each device preview.`}
         >
             {compact ? (
                 <div className="flex w-full min-w-0 flex-col">
                     <div
-                        className={`flex flex-row items-end justify-center ${
-                            heroTight ? 'gap-1 sm:gap-1.5' : dense ? 'gap-1.5 sm:gap-2 lg:gap-2.5' : 'gap-3 sm:gap-4 lg:gap-5'
-                        }`}
+                        className={`flex flex-row justify-center max-lg:justify-center lg:justify-center ${
+                            isHeroMobile ? 'items-start max-lg:gap-0 lg:items-end' : 'items-end'
+                        } ${heroTight ? 'gap-1 sm:gap-1.5' : dense ? 'gap-1.5 sm:gap-2 lg:gap-2.5' : 'gap-3 sm:gap-4 lg:gap-5'}`}
                     >
-                        <figure className="flex min-w-0 shrink-0 flex-col items-center">
-                            <figcaption className={`${fig(true)} ${heroTight ? '!mb-0' : ''}`}>Phone (iOS)</figcaption>
-                            <PhoneMock compact dense={dense} tight={heroTight} />
+                        <figure className="flex min-w-0 shrink-0 flex-col items-center max-lg:max-w-full">
+                            <figcaption
+                                className={`${fig(true)} ${heroTight ? '!mb-0' : ''} ${isHeroMobile ? 'max-lg:sr-only max-lg:!mb-0' : ''}`}
+                            >
+                                Phone (iOS)
+                            </figcaption>
+                            <PhoneMock compact dense={dense} tight={heroTight} heroMobile={isHeroMobile} />
                         </figure>
                         <div
-                            className={`flex min-w-0 flex-1 flex-col items-center ${
+                            className={`hidden min-w-0 flex-1 flex-col items-center lg:flex ${
                                 heroTight ? 'gap-0.5' : dense ? 'gap-1 sm:gap-1.5' : 'gap-2 sm:gap-3'
                             }`}
                         >
@@ -224,26 +230,27 @@ function LandingPwaInstallAnimation({ compact = false, dense = false, tight = fa
     );
 }
 
-function PhoneMock({ compact, dense = false, tight = false }) {
-    const outer = compact ? (tight ? 'w-[92px]' : dense ? 'w-[160px]' : 'w-[182px]') : 'w-[142px]';
-    const innerH = compact ? (tight ? 'h-[188px]' : dense ? 'h-[372px]' : 'h-[388px]') : 'h-[288px]';
+function PhoneMock({ compact, dense = false, tight = false, heroMobile = false }) {
+    const hm = Boolean(compact && dense && heroMobile);
+    const outer = compact ? (hm ? 'w-[104px]' : tight ? 'w-[92px]' : dense ? 'w-[160px]' : 'w-[182px]') : 'w-[142px]';
+    const innerH = compact ? (hm ? 'h-[214px]' : tight ? 'h-[188px]' : dense ? 'h-[372px]' : 'h-[388px]') : 'h-[288px]';
     const round = compact ? 'rounded-[1.5rem] border-2' : 'rounded-[1.65rem] border-[3px]';
     const innerRound = compact ? 'rounded-[1.2rem]' : 'rounded-[1.35rem]';
     const barPad = compact ? 'px-2 py-1.5' : 'px-2 py-1.5';
-    const barH = compact ? (tight ? 'h-7' : dense ? 'h-9' : 'h-10') : 'h-9';
-    const urlText = compact ? (tight ? 'text-[8px]' : dense ? 'text-[11px]' : 'text-[14px]') : 'text-[13px]';
-    const shareBox = compact ? (tight ? 'h-5 w-5' : dense ? 'h-7 w-7' : 'h-7 w-7') : 'h-7 w-7';
-    const shareIco = compact ? (tight ? 'h-2.5 w-2.5' : dense ? 'h-3.5 w-3.5' : 'h-4 w-4') : 'h-4 w-4';
-    const logoBox = compact ? (tight ? 'h-6 w-6 mb-0' : dense ? 'h-8 w-8 mb-0.5' : 'h-9 w-9 mb-1') : 'h-9 w-9 mb-2';
-    const p = compact ? (tight ? 'p-0.5' : dense ? 'p-1.5' : 'p-2') : 'p-2';
-    const bottomBar = compact ? (tight ? 'h-5 px-1' : dense ? 'h-7 px-2' : 'h-8 px-2') : 'h-8 px-4';
+    const barH = compact ? (hm ? 'h-7' : tight ? 'h-7' : dense ? 'h-9' : 'h-10') : 'h-9';
+    const urlText = compact ? (hm ? 'text-[8px]' : tight ? 'text-[8px]' : dense ? 'text-[11px]' : 'text-[14px]') : 'text-[13px]';
+    const shareBox = compact ? (hm ? 'h-5 w-5' : tight ? 'h-5 w-5' : dense ? 'h-7 w-7' : 'h-7 w-7') : 'h-7 w-7';
+    const shareIco = compact ? (hm ? 'h-2.5 w-2.5' : tight ? 'h-2.5 w-2.5' : dense ? 'h-3.5 w-3.5' : 'h-4 w-4') : 'h-4 w-4';
+    const logoBox = compact ? (hm ? 'h-6 w-6 mb-0' : tight ? 'h-6 w-6 mb-0' : dense ? 'h-8 w-8 mb-0.5' : 'h-9 w-9 mb-1') : 'h-9 w-9 mb-2';
+    const p = compact ? (hm ? 'p-0.5' : tight ? 'p-0.5' : dense ? 'p-1.5' : 'p-2') : 'p-2';
+    const bottomBar = compact ? (hm ? 'h-5 px-1' : tight ? 'h-5 px-1' : dense ? 'h-7 px-2' : 'h-8 px-2') : 'h-8 px-4';
 
     return (
         <div className={`${outer} shrink-0`}>
             <div className={`${round} border-slate-700 bg-slate-800 p-[2px] shadow-xl ring-1 ring-black/20 dark:border-slate-600`}>
                 <div className={`flex ${innerH} flex-col overflow-hidden ${innerRound} bg-white dark:bg-zinc-950`}>
-                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? (tight ? 'h-4' : dense ? 'h-6' : 'h-7') : 'h-5'}`}>
-                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? (tight ? 'h-0.5 w-11' : dense ? 'h-0.5 w-12' : 'h-0.5 w-11') : 'h-0.5 w-8'}`} />
+                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? (hm ? 'h-4' : tight ? 'h-4' : dense ? 'h-6' : 'h-7') : 'h-5'}`}>
+                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? (hm ? 'h-0.5 w-10' : tight ? 'h-0.5 w-11' : dense ? 'h-0.5 w-12' : 'h-0.5 w-11') : 'h-0.5 w-8'}`} />
                     </div>
                     <div className={`shrink-0 border-b border-slate-200/90 bg-[#e8e8ed] dark:border-zinc-800 dark:bg-zinc-900 ${barPad}`}>
                         <div
@@ -267,7 +274,7 @@ function PhoneMock({ compact, dense = false, tight = false }) {
                         <div className={`relative ${p}`}>
                             <div className={`mx-auto flex items-center justify-center overflow-hidden rounded-lg shadow-md ring-1 ring-black/10 ${logoBox}`}>
                                 <OfficialAppIcon
-                                    className={compact ? (tight ? 'h-6 w-6' : dense ? 'h-8 w-8' : 'h-9 w-9') : 'h-9 w-9'}
+                                    className={compact ? (hm ? 'h-6 w-6' : tight ? 'h-6 w-6' : dense ? 'h-8 w-8' : 'h-9 w-9') : 'h-9 w-9'}
                                     rounded={compact ? 'rounded-lg' : 'rounded-xl'}
                                 />
                             </div>
