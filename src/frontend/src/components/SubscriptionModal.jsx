@@ -292,7 +292,7 @@ export default function SubscriptionModal({ onClose }) {
         }
       >
         <div
-          className={`grid grid-cols-1 gap-4 md:grid-cols-4 md:items-stretch ${isMobileLayout ? 'p-4 sm:p-5' : 'p-5'}`}
+          className={`grid grid-cols-1 gap-tile md:grid-cols-4 md:items-stretch ${isMobileLayout ? 'p-4 sm:p-5' : 'p-5'}`}
         >
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;

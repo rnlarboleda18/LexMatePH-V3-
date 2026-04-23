@@ -46,6 +46,10 @@ export default {
                 '2xl': '1.125rem',
                 '3xl': '1.375rem',
             },
+            /** Card / tile grids — from `index.css` `--lex-tile-gap` */
+            spacing: {
+                tile: 'var(--lex-tile-gap)',
+            },
         },
     },
     plugins: [

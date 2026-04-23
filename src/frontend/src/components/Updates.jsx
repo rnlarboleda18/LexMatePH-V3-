@@ -218,7 +218,7 @@ const Updates = ({ isDarkMode = false }) => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-12 lg:gap-4">
+          <div className="grid grid-cols-1 gap-tile lg:grid-cols-12">
             {/* Main column — unified feed */}
             <div className="space-y-4 lg:col-span-7">
               <section className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
@@ -408,7 +408,7 @@ const Updates = ({ isDarkMode = false }) => {
                 )}
               </div>
 
-              <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-3 lg:grid-cols-1">
+              <div className="grid grid-cols-1 gap-tile sm:grid-cols-3 lg:grid-cols-1">
                 {NEWS_LINKS.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -439,7 +439,7 @@ const Updates = ({ isDarkMode = false }) => {
                     <h3 className="text-base font-bold">Social</h3>
                   </div>
                   <p className="text-xs text-slate-400">PIO on X · Facebook (iframes may be blocked by extensions)</p>
-                  <div className="mt-4 grid grid-cols-2 gap-2">
+                  <div className="mt-4 grid grid-cols-2 gap-tile">
                     <a
                       href="https://x.com/SCPh_PIO"
                       target="_blank"

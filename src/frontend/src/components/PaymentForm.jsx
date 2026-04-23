@@ -247,7 +247,7 @@ export default function PaymentForm({
         </div>
 
         {/* Expiry + CVC */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-tile">
           <div className="flex flex-col gap-1.5">
             <label className="text-xs font-semibold text-gray-700 dark:text-gray-300">
               Expiry

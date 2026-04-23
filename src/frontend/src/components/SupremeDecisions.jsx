@@ -203,7 +203,7 @@ const FlashcardSection = ({ flashcards }) => {
                 <Lightbulb className="w-5 h-5 text-yellow-500 dark:text-amber-500" />
                 Study Flashcards
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-tile md:grid-cols-3">
                 {cards.map((card, idx) => (
                     <div key={idx} className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-700 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <div className="text-xs font-bold text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">{card.type}</div>
@@ -1163,7 +1163,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
                         {showCustomFilters && (
                             <div className={`max-h-[38vh] overflow-y-auto ${FILTER_CHROME_DIVIDER}`}>
-                                <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                                <div className="grid w-full grid-cols-1 gap-tile sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                                     <div className="min-w-0 flex flex-col">
                                         <label className={FILTER_FIELD_LABEL}>Year</label>
                                         <select
@@ -1285,7 +1285,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 )}
 
                 {/* Results — codal-style compact cards (two columns on md+) */}
-                <div className="grid grid-cols-1 gap-2 sm:gap-3 md:grid-cols-2 md:gap-3">
+                <div className="grid grid-cols-1 gap-tile md:grid-cols-2">
                     {hasInitialLoaded && !fetchError && searchResults.length === 0 && !loading && (
                         <div className="text-center py-8 text-gray-500">
                             <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />

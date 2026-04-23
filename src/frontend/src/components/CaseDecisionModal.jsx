@@ -88,7 +88,7 @@ const FlashcardSection = React.memo(({ flashcards }) => {
                 <Lightbulb className="w-5 h-5 text-yellow-500 dark:text-amber-500" />
                 Study Flashcards
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-tile md:grid-cols-3">
                 {cards.map((card, idx) => (
                     <div key={idx} className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-700 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <div className="text-xs font-bold text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">{card.type}</div>
@@ -635,7 +635,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             </button>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <div className="grid grid-cols-1 gap-tile md:grid-cols-2">
                             {/* Existing Playlists */}
                             <div>
                                 <h4 className="text-sm md:text-[16px] font-bold text-gray-400 uppercase tracking-widest mb-3">Your Playlists</h4>

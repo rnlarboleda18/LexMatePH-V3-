@@ -145,7 +145,7 @@ const QuestionDetailModal = ({
                             </button>
                         </div>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                        <div className="grid grid-cols-1 gap-tile md:grid-cols-2">
                             {/* Existing Playlists */}
                             <div>
                                 <h4 className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2 md:mb-3">Your Playlists</h4>

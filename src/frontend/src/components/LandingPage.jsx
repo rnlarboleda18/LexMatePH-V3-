@@ -108,7 +108,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                     </header>
                 </div>
                 {/* Single 12-col grid: install steps first (compact), then hero; twin tiles span 6+6 */}
-                <div className="grid w-full min-w-0 grid-cols-1 gap-3 md:grid-cols-12 md:gap-4">
+                <div className="grid w-full min-w-0 grid-cols-1 gap-tile md:grid-cols-12">
                 <section id="install" className="scroll-mt-8 col-span-12 min-w-0">
                     <div className={`${LG_HERO} relative overflow-hidden p-3 sm:p-4`}>
                         <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -120,7 +120,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             <h2 className="font-display text-lg font-semibold text-gray-900 dark:text-white sm:text-xl">
                                 Install in three steps
                             </h2>
-                            <ol className="mt-3 grid list-none gap-3 pl-0 sm:grid-cols-3 sm:gap-4">
+                            <ol className="mt-3 grid list-none gap-tile pl-0 sm:grid-cols-3">
                                 {INSTALL_STEPS.map(({ step, title, body, Icon }) => (
                                     <li key={step} className={`${LG} flex gap-3 p-3 sm:p-4`}>
                                         <div
@@ -161,7 +161,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         aria-hidden
                     />
                     <div
-                        className={`${LG_HERO} relative w-full min-w-0 max-w-full px-6 py-[calc(1.5rem-0.5cm)] sm:px-8 sm:py-[calc(2rem-0.5cm)] lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-5 lg:gap-x-6 lg:px-6 lg:py-[calc(1.5rem-0.5cm)] xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:gap-x-8 xl:px-7 xl:py-[calc(1.75rem-0.5cm)]`}
+                        className={`${LG_HERO} relative w-full min-w-0 max-w-full px-6 py-[calc(1.5rem-0.5cm)] sm:px-8 sm:py-[calc(2rem-0.5cm)] lg:grid lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-tile lg:px-6 lg:py-[calc(1.5rem-0.5cm)] xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:px-7 xl:py-[calc(1.75rem-0.5cm)]`}
                     >
                         {/* Specular + rim light (does not participate in grid) */}
                         <div
@@ -239,7 +239,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                         Same spirit as the rest of the app: structured review, literal attention to sources, LexMatePH is
                         your all-in-one legal companion.
                     </p>
-                    <div className="mt-4 grid gap-3 md:grid-cols-3 md:gap-4">
+                    <div className="mt-4 grid gap-tile md:grid-cols-3">
                         {[
                             {
                                 icon: Zap,
@@ -269,7 +269,7 @@ const LandingPage = ({ isDarkMode, toggleTheme, onEnterApp }) => {
                             </div>
                         ))}
                     </div>
-                    <div className="mt-3 grid gap-3 sm:grid-cols-2 sm:gap-4">
+                    <div className="mt-3 grid gap-tile sm:grid-cols-2">
                         <div className={`${LG} flex gap-4 p-5 sm:p-6`}>
                             <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400">
                                 <Headphones className="h-5 w-5" strokeWidth={2} />

@@ -155,7 +155,7 @@ const FlashcardSetup = ({
                                 No digest cards loaded yet. Deploy the latest API (it merges legal_concepts and digest flashcards), then Retry.
                             </p>
                         )}
-                        <div className="grid min-w-0 grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2 md:items-stretch">
+                        <div className="grid min-w-0 grid-cols-1 gap-tile md:grid-cols-2 md:items-stretch">
                             <button
                                 type="button"
                                 onClick={() => onStart(null)}

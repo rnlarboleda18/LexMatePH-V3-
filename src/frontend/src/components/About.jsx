@@ -104,7 +104,7 @@ const About = () => {
           aria-hidden
         />
 
-        <div className="relative mx-auto w-full max-w-7xl space-y-5">
+        <div className="relative mx-auto w-full max-w-7xl space-y-tile">
           <header className="relative overflow-hidden rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-6 py-10 shadow-lg dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)] sm:px-10">
             <div className="pointer-events-none absolute -right-12 -top-20 h-48 w-48 rounded-full bg-gradient-to-br from-purple-400/35 to-fuchsia-500/25 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/4 h-28 w-56 rounded-full bg-violet-400/15 blur-2xl" />
@@ -131,7 +131,7 @@ const About = () => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 lg:gap-5">
+          <div className="grid grid-cols-1 items-stretch gap-tile lg:grid-cols-12">
             <div className="flex min-h-0 flex-col lg:col-span-7 lg:h-full">
               <section className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl sm:p-8 dark:border-lex dark:bg-zinc-900">
                 <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-purple-500/10 blur-2xl" />
@@ -190,7 +190,7 @@ const About = () => {
                   Built for the Philippine bar: a high-fidelity pipeline so digests stay grounded in the text you
                   would cite in practice.
                 </p>
-                <div className="relative grid flex-1 grid-cols-1 content-start gap-1.5 sm:grid-cols-2">
+                <div className="relative grid flex-1 grid-cols-1 content-start gap-tile sm:grid-cols-2">
                   {STANDARD_PILLARS.map(({ icon: Icon, title, body }) => (
                     <div
                       key={title}
@@ -210,7 +210,7 @@ const About = () => {
 
           <section className="space-y-2">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">Tools at a glance</h2>
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-tile sm:grid-cols-2 xl:grid-cols-3">
               {FEATURES.map(({ icon: Icon, title, description, accent }) => (
                 <div
                   key={title}
