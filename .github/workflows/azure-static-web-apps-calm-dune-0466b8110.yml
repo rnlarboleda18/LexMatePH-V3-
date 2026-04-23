@@ -88,7 +88,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: src/frontend/package-lock.json
 
-      # Build here (with Vite env) so Oryx only packages `dist` + builds the API — shorter, stabler deploy than full Oryx frontend build.
+      # Build here (with Vite env) so Oryx only packages `dist` + builds the API — shorter than a full Oryx frontend build.
       - name: Frontend production build (for SWA skip_app_build)
         working-directory: src/frontend
         run: |
@@ -100,25 +100,59 @@ jobs:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
           PUPPETEER_SKIP_DOWNLOAD: "true"
 
-      # Azure SWA often fails with "Upload Timed Out" after ~600s polling; retry is the practical mitigation (see Azure/static-web-apps#942).
-      - name: Build And Deploy
-        id: builddeploy
-        uses: Wandalen/wretry.action@v3.8.0
+      - name: Verify paths for SWA (Oryx validates these inside /github/workspace)
+        run: |
+          set -e
+          test -d src/frontend
+          test -d src/frontend/dist
+          test -d api
+          ls -la src/frontend | head -20
+
+      # Do not wrap in Wandalen/wretry: it invokes Wandalen/static-web-apps-deploy and breaks app_location (repo not mounted as expected).
+      - name: Deploy to Azure Static Web Apps
+        id: swa_deploy_1
+        continue-on-error: true
+        uses: Azure/static-web-apps-deploy@v1
         with:
-          attempt_limit: 3
-          attempt_delay: 60000
-          action: Azure/static-web-apps-deploy@v1
-          with: |
-            azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_DUNE_0466B8110 }}
-            repo_token: ${{ secrets.GITHUB_TOKEN }}
-            action: upload
-            app_location: src/frontend
-            api_location: api
-            output_location: dist
-            skip_app_build: true
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_DUNE_0466B8110 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: src/frontend
+          api_location: api
+          output_location: dist
+          skip_app_build: true
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
           PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Deploy to Azure Static Web Apps (retry after upload timeout)
+        id: swa_deploy_2
+        if: steps.swa_deploy_1.outcome == 'failure'
+        continue-on-error: true
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_DUNE_0466B8110 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: src/frontend
+          api_location: api
+          output_location: dist
+          skip_app_build: true
+        env:
+          PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
+          PUPPETEER_SKIP_DOWNLOAD: "true"
+
+      - name: Require deploy success
+        if: always()
+        run: |
+          o1="${{ steps.swa_deploy_1.outcome }}"
+          o2="${{ steps.swa_deploy_2.outcome }}"
+          if [ "$o1" = "success" ] || [ "$o2" = "success" ]; then
+            echo "Deploy succeeded (attempt 1: $o1, attempt 2: $o2)"
+            exit 0
+          fi
+          echo "Deploy failed after retries (attempt 1: $o1, attempt 2: $o2)"
+          exit 1
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
