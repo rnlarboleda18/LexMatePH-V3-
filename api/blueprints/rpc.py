@@ -6,6 +6,7 @@ import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
+from rpc_case_link_counts import attach_rpc_link_counts
 
 rpc_bp = func.Blueprint()
 
@@ -36,43 +37,7 @@ def get_rpc_by_book(req: func.HttpRequest) -> func.HttpResponse:
         if 'conn' in locals(): put_db_connection(conn)
 
 def attach_link_counts(cur, articles):
-    if not articles:
-        return
-
-    article_nums = [str(a['article_num']) for a in articles]
-    
-    # Query for counts grouped by article and paragraph
-    query = """
-        SELECT provision_id, target_paragraph_index, COUNT(*) as link_count
-        FROM codal_case_links 
-        WHERE statute_id = 'RPC' 
-          AND provision_id = ANY(%s)
-          AND target_paragraph_index IS NOT NULL
-        GROUP BY provision_id, target_paragraph_index
-        ORDER BY provision_id, target_paragraph_index
-    """
-    
-    cur.execute(query, (article_nums,))
-    rows = cur.fetchall()
-    
-    # Map to structure: { "123": { "0": 5, "1": 2 } }
-    link_map = {}
-    for r in rows:
-        art = r['provision_id']
-        idx = r['target_paragraph_index']
-        count = r['link_count']
-        
-        if art not in link_map:
-            link_map[art] = {}
-        link_map[art][idx] = count
-        
-    # Attach to articles
-    for art in articles:
-        anum = str(art['article_num'])
-        if anum in link_map:
-            art['paragraph_links'] = link_map[anum]
-        else:
-            art['paragraph_links'] = {}
+    attach_rpc_link_counts(cur, articles)
 
 @rpc_bp.route(route="rpc/title/{title_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_rpc_by_title(req: func.HttpRequest) -> func.HttpResponse:

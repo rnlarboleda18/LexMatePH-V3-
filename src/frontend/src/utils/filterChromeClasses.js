@@ -55,3 +55,30 @@ export const SIDEBAR_NAV_IDLE =
 export const SIDEBAR_MOBILE_AUTH_CARD =
     'rounded-xl border border-lex bg-white p-4 shadow-sm dark:bg-zinc-900';
 
+/** Lift + border emphasis (pair with your own `hover:shadow-*` if needed, e.g. Lexify brand glow). */
+export const CHROME_INTERACTIVE_TILE_HOVER_MOTION =
+    'transition-all duration-200 hover:-translate-y-0.5 hover:border-lex-strong';
+
+/**
+ * Lift + shadow only (no border color change) — e.g. cards that keep a custom border treatment.
+ */
+export const CHROME_INTERACTIVE_TILE_ELEVATE =
+    'transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg';
+
+/**
+ * Default clickable tile hover: motion + `hover:shadow-lg` (Updates rail, feeds, etc.).
+ */
+export const CHROME_INTERACTIVE_TILE_HOVER = `${CHROME_INTERACTIVE_TILE_HOVER_MOTION} hover:shadow-lg`;
+
+/** Often paired with CHROME_INTERACTIVE_TILE_HOVER on light feed/list rows. */
+export const CHROME_INTERACTIVE_TILE_HOVER_BG =
+    'hover:bg-neutral-50 dark:hover:bg-zinc-800/80';
+
+/** Trailing chevron on gradient link tiles (e.g. Judiciary News rail). */
+export const CHROME_INTERACTIVE_CHEVRON =
+    'h-4 w-4 shrink-0 opacity-40 transition group-hover:translate-x-0.5 group-hover:opacity-100';
+
+/** Chevron nudge for inline “read more” lines (no opacity fade). */
+export const CHROME_INTERACTIVE_CHEVRON_NUDGE =
+    'h-4 w-4 transition group-hover:translate-x-0.5';
+

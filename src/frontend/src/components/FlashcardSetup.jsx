@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { RefreshCw } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 import { SubjectIcon, AllSubjectsIcon } from '../utils/subjectIcons';
+import { CHROME_INTERACTIVE_TILE_HOVER } from '../utils/filterChromeClasses';
 
 const subjects = [
     'Civil Law',
@@ -160,7 +161,7 @@ const FlashcardSetup = ({
                                 type="button"
                                 onClick={() => onStart(null)}
                                 disabled={conceptsLoading || countFor('all') === 0}
-                                className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border border-lex bg-white p-4 text-left shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-800/90 disabled:pointer-events-none disabled:opacity-50 md:col-span-2"
+                                className={`group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border border-lex bg-white p-4 text-left shadow-sm dark:border-lex dark:bg-zinc-800/90 disabled:pointer-events-none disabled:opacity-50 md:col-span-2 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                             >
                                 <div className="min-w-0 space-y-2">
                                     <span className="flex items-start gap-2.5 text-sm font-bold text-slate-800 dark:text-slate-100">
@@ -190,7 +191,7 @@ const FlashcardSetup = ({
                                         key={`c-${subject}`}
                                         onClick={() => onStart(subject)}
                                         disabled={conceptsLoading || n === 0}
-                                        className="group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border border-lex bg-white p-4 text-left shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-800/90 disabled:pointer-events-none disabled:opacity-50"
+                                        className={`group relative flex min-h-[14rem] w-full min-w-0 flex-col justify-between gap-3 rounded-lg border border-lex bg-white p-4 text-left shadow-sm dark:border-lex dark:bg-zinc-800/90 disabled:pointer-events-none disabled:opacity-50 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                                     >
                                         <div className="min-w-0 space-y-2">
                                             <span className={`flex items-start gap-2.5 text-sm font-bold ${textColor}`}>

@@ -13,6 +13,7 @@ import {
   Scale,
 } from 'lucide-react';
 import FeaturePageShell from './FeaturePageShell';
+import { CHROME_INTERACTIVE_TILE_HOVER } from '../utils/filterChromeClasses';
 
 /** Feature cards (excludes About / Updates in nav). Purple-forward accents on glass. */
 const FEATURES = [
@@ -194,7 +195,7 @@ const About = () => {
                   {STANDARD_PILLARS.map(({ icon: Icon, title, body }) => (
                     <div
                       key={title}
-                      className="rounded-2xl border border-lex bg-white p-4 shadow-sm transition hover:border-lex-strong hover:shadow-md dark:border-lex dark:bg-zinc-800/70 dark:hover:border-lex-strong dark:hover:bg-zinc-800"
+                      className={`rounded-2xl border border-lex bg-white p-4 shadow-sm dark:border-lex dark:bg-zinc-800/70 dark:hover:bg-zinc-800 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                     >
                       <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-purple-500/15 text-purple-700 dark:text-purple-300">
                         <Icon className="h-4 w-4" strokeWidth={2} />
@@ -214,7 +215,7 @@ const About = () => {
               {FEATURES.map(({ icon: Icon, title, description, accent }) => (
                 <div
                   key={title}
-                  className="group relative overflow-hidden rounded-2xl border border-lex bg-white p-5 shadow-md transition hover:-translate-y-0.5 hover:border-lex-strong hover:shadow-xl dark:border-lex dark:bg-zinc-900 dark:hover:border-lex-strong"
+                  className={`group relative overflow-hidden rounded-2xl border border-lex bg-white p-5 shadow-md dark:border-lex dark:bg-zinc-900 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                 >
                   <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-purple-400/10 blur-2xl transition group-hover:bg-purple-400/20" />
                   <div

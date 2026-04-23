@@ -5,6 +5,7 @@ import { SubjectIcon } from '../utils/subjectIcons';
 
 import { HighlightText } from '../utils/highlight';
 import CardVioletInnerWash from './CardVioletInnerWash';
+import { CHROME_INTERACTIVE_TILE_HOVER } from '../utils/filterChromeClasses';
 
 const QuestionCard = ({ question, onClick, searchQuery }) => {
     const subjectKey = normalizeBarQuestionSubject(question) || question.subject;
@@ -14,7 +15,7 @@ const QuestionCard = ({ question, onClick, searchQuery }) => {
 
     return (
         <div
-            className="group relative flex w-full flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm transition-shadow hover:shadow-md dark:border-lex dark:bg-zinc-900 max-sm:mx-auto max-sm:h-[14rem] max-sm:min-h-0 max-sm:min-w-0 max-sm:max-h-[14rem] max-sm:w-full max-sm:shrink-0 sm:h-[15rem] sm:max-w-none sm:mx-0"
+            className={`group relative flex w-full flex-col overflow-hidden rounded-lg border border-lex bg-white p-3 shadow-sm dark:border-lex dark:bg-zinc-900 max-sm:mx-auto max-sm:h-[14rem] max-sm:min-h-0 max-sm:min-w-0 max-sm:max-h-[14rem] max-sm:w-full max-sm:shrink-0 sm:h-[15rem] sm:max-w-none sm:mx-0 ${CHROME_INTERACTIVE_TILE_HOVER}`}
         >
             <CardVioletInnerWash />
             <div className="relative z-[1] flex min-h-0 flex-1 flex-col">

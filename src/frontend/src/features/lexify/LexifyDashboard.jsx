@@ -3,6 +3,7 @@ import { Calendar, Clock, Loader2, Sparkles } from 'lucide-react';
 import FeaturePageShell from '../../components/FeaturePageShell';
 import PurpleGlassAmbient from '../../components/PurpleGlassAmbient';
 import { apiUrl } from '../../utils/apiUrl';
+import { CHROME_INTERACTIVE_TILE_HOVER_MOTION } from '../../utils/filterChromeClasses';
 
 const PROCTOR_PASSWORD = 'LEXIFY2025';
 
@@ -262,7 +263,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                                 return (
                                     <div
                                         key={exam.id}
-                                        className={`group flex flex-col justify-between overflow-hidden rounded-2xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_22px_50px_-18px_rgba(109,40,217,0.28)] ${EXAM_CARD_SHELL}`}
+                                        className={`group flex flex-col justify-between overflow-hidden rounded-2xl ${CHROME_INTERACTIVE_TILE_HOVER_MOTION} hover:shadow-[0_22px_50px_-18px_rgba(109,40,217,0.28)] ${EXAM_CARD_SHELL}`}
                                     >
                                         <div className="min-h-[85px] flex-1 p-5">
                                             <div className="mb-3 flex items-start justify-between gap-3">

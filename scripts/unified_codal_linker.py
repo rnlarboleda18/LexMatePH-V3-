@@ -30,6 +30,8 @@ from psycopg2.pool import ThreadedConnectionPool
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from google import genai
 
+from linker_genai_client import get_linker_genai_client, get_linker_model_name
+
 # ---------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------
@@ -37,10 +39,8 @@ DB_URL = (
     os.environ.get("DB_CONNECTION_STRING")
     or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 )
-MODEL_NAME = "gemini-2.0-flash"
-API_KEY = "REDACTED_API_KEY_HIDDEN"
-
-client = genai.Client(api_key=API_KEY)
+MODEL_NAME = get_linker_model_name()
+client = get_linker_genai_client()
 db_pool: ThreadedConnectionPool = None  # type: ignore
 
 # Code configuration – table, human name, how to sort, optional WHERE filter

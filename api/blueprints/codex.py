@@ -8,6 +8,7 @@ import re
 import gzip
 from db_pool import get_db_connection, put_db_connection
 from utils.clerk_auth import get_authenticated_user_id
+from rpc_case_link_counts import attach_rpc_link_counts, rpc_statute_sql_predicate
 
 codex_bp = func.Blueprint()
 
@@ -68,6 +69,9 @@ def clean_structural_label(label):
 
 def _attach_link_counts(cur, articles, statute_id):
     if not articles: return
+    if statute_id == 'RPC':
+        attach_rpc_link_counts(cur, articles)
+        return
     article_nums = [str(a.get('key_id') or a.get('article_number') or "").strip() for a in articles]
     query = """
         SELECT provision_id, target_paragraph_index, COUNT(*) as link_count
@@ -520,12 +524,25 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             if clean_id in mapping:
                 target_ids = mapping[clean_id]
         or_conditions = []
-        params = [statute_id]
+        params: list = []
         for tid in target_ids:
             or_conditions.append("(l.provision_id = %s OR l.provision_id ILIKE 'Article ' || %s OR l.provision_id ILIKE 'Art. ' || %s)")
             params.extend([tid, tid, tid])
         where_clause = " OR ".join(or_conditions)
-        cur.execute(f"""
+        if statute_id == 'RPC':
+            statute_clause = rpc_statute_sql_predicate('l.statute_id')
+            sql = f"""
+            SELECT l.id as link_id, l.case_id,
+            CASE WHEN l.specific_ruling = 'General' OR l.specific_ruling IS NULL OR l.specific_ruling = '' THEN COALESCE(s.main_doctrine, s.digest_ruling, s.digest_ratio, 'View full case for details.') ELSE l.specific_ruling END as specific_ruling,
+            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente
+            FROM codal_case_links l JOIN sc_decided_cases s ON l.case_id = s.id
+            WHERE {statute_clause} AND ({where_clause})
+            {'AND l.subject_area = %s' if subject_filter else ''}
+            ORDER BY s.date DESC, l.citation_rank ASC
+        """
+        else:
+            params = [statute_id] + params
+            sql = f"""
             SELECT l.id as link_id, l.case_id,
             CASE WHEN l.specific_ruling = 'General' OR l.specific_ruling IS NULL OR l.specific_ruling = '' THEN COALESCE(s.main_doctrine, s.digest_ruling, s.digest_ratio, 'View full case for details.') ELSE l.specific_ruling END as specific_ruling,
             l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente
@@ -533,7 +550,11 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             WHERE l.statute_id = %s AND ({where_clause})
             {'AND l.subject_area = %s' if subject_filter else ''}
             ORDER BY s.date DESC, l.citation_rank ASC
-        """, tuple(params + ([subject_filter] if subject_filter else [])))
+        """
+        cur.execute(
+            sql,
+            tuple(params + ([subject_filter] if subject_filter else [])),
+        )
         rows = cur.fetchall()
         return compressed_json_response(rows, req, 200, max_age=1800)
     except Exception as e:

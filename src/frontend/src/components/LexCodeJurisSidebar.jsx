@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { apiUrl } from '../utils/apiUrl';
 import CardVioletInnerWash from './CardVioletInnerWash';
+import { CHROME_INTERACTIVE_TILE_ELEVATE } from '../utils/filterChromeClasses';
 
 /** Short-lived in-memory cache so reopening the same article avoids a round-trip. */
 const JURIS_SIDEBAR_CACHE_MS = 90_000;
@@ -23,6 +24,30 @@ function _jurisSidebarCacheGet(key) {
 
 function _jurisSidebarCacheSet(key, value) {
     _jurisSidebarCache.set(key, { exp: Date.now() + JURIS_SIDEBAR_CACHE_MS, value });
+}
+
+/**
+ * Client-side paragraph filter for juris rows.
+ * RPC linker rows often use target_paragraph_index NULL or -1 for whole-article / general links,
+ * while LexCode opens the sidebar with paragraphFilter -1 for the header gavel. Strict !== would
+ * drop every row (null !== -1). For a specific paragraph, NULL/-1 still means the case ties to
+ * the whole article and should appear (same idea as Civil / Family paragraph-level browsing).
+ */
+function linkMatchesParagraphFilter(targetParagraphIndex, paragraphFilter) {
+    if (paragraphFilter === null || paragraphFilter === undefined) return true;
+    const f = Number(paragraphFilter);
+    if (Number.isNaN(f)) return true;
+
+    const raw = targetParagraphIndex;
+    const li =
+        raw === null || raw === undefined ? null : Number(raw);
+    const liNorm = li !== null && Number.isNaN(li) ? null : li;
+
+    if (f === -1) {
+        return liNorm === null || liNorm === -1;
+    }
+    if (liNorm === null || liNorm === -1) return true;
+    return liNorm === f;
 }
 
 const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, onSelectRatio, paragraphFilter }) => {
@@ -63,15 +88,13 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                 if (!res.ok) throw new Error("Failed to fetch jurisprudence");
 
                 const data = await res.json();
+                const rows = Array.isArray(data) ? data : [];
 
                 // Group by Case ID
                 const groups = {};
-                data.forEach(link => {
-                    // Filter by paragraph if specified
-                    // Note: paragraphFilter can be 0, so check strict null/undefined
-                    if (paragraphFilter !== null && paragraphFilter !== undefined) {
-                        // API returns integer indices
-                        if (link.target_paragraph_index !== paragraphFilter) return;
+                rows.forEach(link => {
+                    if (!linkMatchesParagraphFilter(link.target_paragraph_index, paragraphFilter)) {
+                        return;
                     }
 
                     const cid = link.case_id;
@@ -178,7 +201,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                     return (
                         <div
                             key={group.caseId}
-                            className="group relative overflow-hidden rounded-lg border-2 border-slate-300/75 bg-white/90 shadow-sm transition-shadow hover:shadow-md dark:border-white/5 dark:bg-slate-800/70"
+                            className={`group relative overflow-hidden rounded-lg border-2 border-slate-300/75 bg-white/90 shadow-sm dark:border-white/5 dark:bg-slate-800/70 ${CHROME_INTERACTIVE_TILE_ELEVATE}`}
                         >
                             <CardVioletInnerWash />
                             <div className="relative z-[1]">

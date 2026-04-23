@@ -18,12 +18,12 @@ import time
 from google import genai
 import argparse
 
+from linker_genai_client import get_linker_genai_client, get_linker_model_name
+
 # --- CONFIG ---
 DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
-MODEL_NAME = "gemini-3-flash-preview"
-API_KEY = "REDACTED_API_KEY_HIDDEN"
-
-client = genai.Client(api_key=API_KEY)
+MODEL_NAME = get_linker_model_name()
+client = get_linker_genai_client()
 
 def load_rpc_articles(cur):
     """Load all RPC articles with their sentence structure"""

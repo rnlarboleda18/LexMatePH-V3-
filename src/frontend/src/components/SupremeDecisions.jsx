@@ -26,6 +26,7 @@ import {
     FILTER_CHROME_DIVIDER,
     FILTER_SEARCH_ICON_CLASS,
     FILTER_FIELD_LABEL,
+    CHROME_INTERACTIVE_TILE_HOVER,
 } from '../utils/filterChromeClasses';
 
 /** Read fetch body as JSON once; throws with actionable text if empty or non-JSON (common when API is down or returns HTML). */
@@ -1317,7 +1318,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                         return (
                             <div
                                 key={decision.id}
-                                className="group relative min-w-0 overflow-hidden rounded-lg border border-lex bg-white shadow-sm transition-shadow hover:shadow-md dark:bg-zinc-900"
+                                className={`group relative min-w-0 overflow-hidden rounded-lg border border-lex bg-white shadow-sm dark:bg-zinc-900 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                             >
                                 <CardVioletInnerWash />
                                 <div className="relative z-[1] min-w-0">

@@ -16,6 +16,12 @@ import FeaturePageShell from './FeaturePageShell';
 import { useTwitterTimeline } from '../hooks/useTwitterTimeline';
 import { apiUrl } from '../utils/apiUrl';
 import { buildUnifiedFeed } from '../utils/scJudiciaryFeed';
+import {
+  CHROME_INTERACTIVE_TILE_HOVER,
+  CHROME_INTERACTIVE_TILE_HOVER_BG,
+  CHROME_INTERACTIVE_CHEVRON,
+  CHROME_INTERACTIVE_CHEVRON_NUDGE,
+} from '../utils/filterChromeClasses';
 
 /** Official SC portal — full decisions index (not LexMate digests). */
 const SC_DECISIONS_INDEX = 'https://sc.judiciary.gov.ph/decisions/';
@@ -267,7 +273,7 @@ const Updates = ({ isDarkMode = false }) => {
                         href={u.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-w-[200px] max-w-[260px] shrink-0 rounded-xl border border-lex bg-white p-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-lex-strong dark:border-lex dark:bg-zinc-800/90 dark:hover:border-lex-strong"
+                        className={`min-w-[200px] max-w-[260px] shrink-0 rounded-xl border border-lex bg-white p-3 text-left shadow-sm dark:border-lex dark:bg-zinc-800/90 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                       >
                         <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">{u.date}</p>
                         <p className="mt-1 line-clamp-2 text-xs font-bold text-slate-900 dark:text-white">{u.title}</p>
@@ -314,7 +320,7 @@ const Updates = ({ isDarkMode = false }) => {
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group block overflow-hidden rounded-2xl border border-lex bg-white p-4 shadow-sm transition hover:border-lex-strong hover:bg-neutral-50 hover:shadow-lg dark:border-lex dark:bg-zinc-800/80 dark:hover:border-lex-strong dark:hover:bg-zinc-800 sm:p-5"
+                          className={`group block overflow-hidden rounded-2xl border border-lex bg-white p-4 shadow-sm dark:border-lex dark:bg-zinc-800/80 sm:p-5 ${CHROME_INTERACTIVE_TILE_HOVER} ${CHROME_INTERACTIVE_TILE_HOVER_BG} dark:hover:bg-zinc-800`}
                         >
                           <div className="mb-2 flex flex-wrap items-center gap-2">
                             {item._barHighlight ? (
@@ -342,7 +348,7 @@ const Updates = ({ isDarkMode = false }) => {
                             <p className="mt-2 line-clamp-2 text-xs text-slate-600 dark:text-slate-400">{item.snippet}</p>
                           )}
                           <div className="mt-3 flex items-center gap-1 text-xs font-bold text-slate-400 transition group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                            Read on SC site <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                            Read on SC site <ChevronRight className={CHROME_INTERACTIVE_CHEVRON_NUDGE} />
                           </div>
                         </a>
                       </li>
@@ -379,7 +385,7 @@ const Updates = ({ isDarkMode = false }) => {
                         href={officialScDecisionUrl(decision)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block rounded-2xl border border-lex bg-white p-4 transition hover:border-lex-strong hover:bg-neutral-50 dark:border-lex dark:bg-zinc-800/90 dark:hover:bg-zinc-800"
+                        className={`block rounded-2xl border border-lex bg-white p-4 dark:border-lex dark:bg-zinc-800/90 ${CHROME_INTERACTIVE_TILE_HOVER} ${CHROME_INTERACTIVE_TILE_HOVER_BG} dark:hover:bg-zinc-800`}
                       >
                         <div className="mb-2 flex flex-wrap gap-2">
                           <span className="rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-white">
@@ -417,7 +423,7 @@ const Updates = ({ isDarkMode = false }) => {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group flex items-center gap-3 rounded-2xl border border-lex bg-gradient-to-br p-4 shadow-md transition hover:-translate-y-0.5 hover:border-lex-strong hover:shadow-lg dark:border-lex ${item.accent} dark:from-zinc-800/80 dark:to-transparent`}
+                      className={`group flex items-center gap-3 rounded-2xl border border-lex bg-gradient-to-br p-4 shadow-md dark:border-lex ${item.accent} dark:from-zinc-800/80 dark:to-transparent ${CHROME_INTERACTIVE_TILE_HOVER}`}
                     >
                       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-lex bg-white dark:border-lex dark:bg-zinc-800/80">
                         <Icon className="h-5 w-5" />
@@ -426,7 +432,7 @@ const Updates = ({ isDarkMode = false }) => {
                         <p className="text-sm font-bold text-slate-900 dark:text-white">{item.label}</p>
                         <p className="text-[11px] text-slate-500 dark:text-slate-400">{item.desc}</p>
                       </div>
-                      <ChevronRight className="h-4 w-4 shrink-0 opacity-40 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                      <ChevronRight className={CHROME_INTERACTIVE_CHEVRON} />
                     </a>
                   );
                 })}
