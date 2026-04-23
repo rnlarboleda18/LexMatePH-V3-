@@ -2,7 +2,7 @@ import os
 
 files = [
     "LexCode/scripts/lexcode_genai_client.py",
-    "LexCode/scripts/batch_ingest_rpc.py"
+    "LexCode/scripts/ai_amendment_pipeline.py"
 ]
 
 for fpath in files:

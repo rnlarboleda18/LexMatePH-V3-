@@ -19,6 +19,54 @@ from typing import Any
 
 _DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
+# Columns on ``rpc_codal`` that amendments may override (e.g. new chapter under RA 8353).
+_RPC_CODAL_KEYS = frozenset(
+    {
+        "book",
+        "book_label",
+        "title_num",
+        "title_label",
+        "chapter_label",
+        "chapter_num",
+        "section_label",
+        "section_num",
+    }
+)
+
+
+def _normalize_rpc_codal_payload(raw: Any, *, index: int) -> dict[str, Any] | None:
+    if raw is None:
+        return None
+    if not isinstance(raw, dict):
+        raise ValueError(f"changes[{index}].rpc_codal must be an object when present")
+    out: dict[str, Any] = {}
+    for k, v in raw.items():
+        if k not in _RPC_CODAL_KEYS:
+            raise ValueError(f"changes[{index}].rpc_codal: unknown key {k!r}")
+        if v is None:
+            continue
+        if k in ("book", "title_num", "chapter_num", "section_num"):
+            if isinstance(v, bool):
+                raise ValueError(f"changes[{index}].rpc_codal.{k}: invalid boolean")
+            if isinstance(v, str) and v.strip().lstrip("-").isdigit():
+                out[k] = int(v.strip())
+            elif isinstance(v, (int, float)) and not isinstance(v, bool):
+                out[k] = int(v)
+            else:
+                raise ValueError(
+                    f"changes[{index}].rpc_codal.{k} must be a number, got {type(v).__name__}"
+                )
+        else:
+            if not isinstance(v, str):
+                raise ValueError(
+                    f"changes[{index}].rpc_codal.{k} must be a string, got {type(v).__name__}"
+                )
+            s = v.strip()
+            if not s:
+                continue
+            out[k] = s
+    return out or None
+
 
 def load_manual_amendment(path: Path) -> dict[str, Any]:
     """
@@ -28,7 +76,14 @@ def load_manual_amendment(path: Path) -> dict[str, Any]:
       - amendment_id: str (non-empty)
       - date: str YYYY-MM-DD
       - title: str (optional)
-      - changes: list of { article_number, new_text, action? }
+      - amendment_description: str (optional) — default narrative for all changes on literal
+        apply when a change has no ``amendment_description`` (stored in ``article_versions`` /
+        ``rpc_codal.amendments``).
+      - changes: list of { article_number, new_text, action?, rpc_codal?, amendment_description? }
+        Per-change ``amendment_description`` overrides the top-level default for that article.
+        Optional ``rpc_codal`` sets ``rpc_codal`` present-view columns when syncing (new chapter,
+        title move, etc.). Keys: book, book_label, title_num, title_label, chapter_num,
+        chapter_label, section_num, section_label (numeric fields as JSON numbers).
       - notes: str (optional, informational only)
     """
     path = path.resolve()
@@ -83,12 +138,20 @@ def validate_manual_amendment_payload(
             "action": action,
             "literal_apply": True,
         }
+        ch_desc = (ch.get("amendment_description") or "").strip()
+        if ch_desc:
+            entry["amendment_description"] = ch_desc
+        rc = _normalize_rpc_codal_payload(ch.get("rpc_codal"), index=i)
+        if rc:
+            entry["rpc_codal"] = rc
         changes_out.append(entry)
 
     title = data.get("title")
     title_s = title.strip() if isinstance(title, str) else ""
     notes = data.get("notes")
     notes_s = notes.strip() if isinstance(notes, str) else ""
+    top_desc = data.get("amendment_description")
+    top_desc_s = top_desc.strip() if isinstance(top_desc, str) else ""
 
     out: dict[str, Any] = {
         "amendment_id": aid,
@@ -98,6 +161,8 @@ def validate_manual_amendment_payload(
     }
     if title_s:
         out["title"] = title_s
+    if top_desc_s:
+        out["amendment_description"] = top_desc_s
     if notes_s:
         out["notes"] = notes_s
     if source_path is not None:
@@ -114,6 +179,45 @@ def _self_test() -> None:
         }
     )
     assert good["changes"][0]["literal_apply"] is True
+    with_struct = validate_manual_amendment_payload(
+        {
+            "amendment_id": "Republic Act No. 8353",
+            "date": "1997-09-30",
+            "changes": [
+                {
+                    "article_number": "266-A",
+                    "action": "insert",
+                    "new_text": "Article 266-A. Rape.",
+                    "rpc_codal": {
+                        "book": 2,
+                        "book_label": "BOOK TWO",
+                        "title_num": 8,
+                        "title_label": "CRIMES AGAINST PERSONS",
+                        "chapter_num": 3,
+                        "chapter_label": "RAPE",
+                    },
+                }
+            ],
+        }
+    )
+    assert with_struct["changes"][0]["rpc_codal"]["chapter_num"] == 3
+    with_desc = validate_manual_amendment_payload(
+        {
+            "amendment_id": "Republic Act No. 6968",
+            "date": "1990-10-24",
+            "amendment_description": "Default card for all changes.",
+            "changes": [
+                {
+                    "article_number": "100",
+                    "new_text": "Art. 100. Body.",
+                    "action": "amend",
+                    "amendment_description": "Per-article override.",
+                }
+            ],
+        }
+    )
+    assert with_desc["amendment_description"] == "Default card for all changes."
+    assert with_desc["changes"][0]["amendment_description"] == "Per-article override."
     try:
         validate_manual_amendment_payload({"amendment_id": "x", "date": "bad", "changes": []})
     except ValueError:

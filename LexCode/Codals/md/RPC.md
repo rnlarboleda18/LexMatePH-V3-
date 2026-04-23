@@ -636,7 +636,7 @@ For the purpose of graduating the penalties which, according to the provisions o
 
 **TABULATION OF THE PROVISIONS OF THIS CHAPTER**
 
-| | Penalty prescribed for the crime | Penalty to be imposed upon the principal in a frustrated crime, and the accomplice in a consummated crime | Penalty to be imposed upon the principal in an attempted crime, the accessory in the consummated crime, and the accomplices in a frustrated crime | Penalty to be imposed upon the accessory in a frustrated crime, and the accomplices in an attempted crime | Penalty to be imposed upon the accessory in an attempted crime |
+| Case | Penalty prescribed for the crime | Penalty to be imposed upon the principal in a frustrated crime, and the accomplice in a consummated crime | Penalty to be imposed upon the principal in an attempted crime, the accessory in the consummated crime, and the accomplices in a frustrated crime | Penalty to be imposed upon the accessory in a frustrated crime, and the accomplices in an attempted crime | Penalty to be imposed upon the accessory in an attempted crime |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | First case | Death | *Reclusion perpetua* | *Reclusion temporal* | *Prision mayor* | *Prision correccional* |
 | Second case | *Reclusion perpetua* to death. | *Reclusion temporal.* | *Prision mayor.* | *Prision correccional.* | *Aresto mayor.* |

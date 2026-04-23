@@ -4,7 +4,7 @@ Deterministic LexCode ingestion: **textual fidelity without a generative model**
 **Baseline** — ``parse_rpc_baseline_markdown`` splits ``RPC.md``-style markdown (``##### Article …``)
 into discrete articles for the 1932 baseline layer. Regex only; no summarization.
 
-**Amendments** — ``try_deterministic_amendment_parse`` dispatches known files (e.g. RA 6968, RA 10951
+**Amendments** — ``try_deterministic_amendment_parse`` dispatches known files (e.g. RA 10951
 Section 6) using fixed slices and string cleanup. Extracted ``new_text`` is normalized with
 ``normalize_amendment_payload`` (quote stripping, Art. 136 tail guard), not rewritten for style.
 
@@ -30,7 +30,6 @@ DEFAULT_RPC_BASELINE_PATH = _REPO_ROOT / "LexCode" / "Codals" / "md" / "RPC.md"
 # Filenames with a dedicated offline parser (extend as you add handlers).
 DETERMINISTIC_AMENDMENT_BASENAMES: frozenset[str] = frozenset(
     {
-        "ra_6968_1990.md",
         "ra_10951_2017.md",
     }
 )
@@ -44,6 +43,45 @@ def clean_text(text: str) -> str:
         .replace("â€", '"')
         .replace("â€™", "'")
     )
+
+
+def canonicalize_amendment_id(amendment_id: Any, raw_content: str) -> Any:
+    """
+    Normalize AI-extracted law labels to the same form used elsewhere (e.g. ``Republic Act No. 7659``).
+
+    Chunked parsers often return bare ``7659`` or ``RA 7659``. Bare digits are only upgraded to RA when
+    the document header clearly refers to a Republic Act with that number (avoids mis-labeling
+    ``Act No. 3999``-style statutes).
+    """
+    if amendment_id is None:
+        return None
+    s = str(amendment_id).strip()
+    if not s:
+        return amendment_id
+    head = (raw_content or "")[:12000]
+
+    m = re.match(r"^republic\s+act\s+no\.?\s*(\d+)\s*$", s, re.IGNORECASE)
+    if m:
+        return f"Republic Act No. {m.group(1)}"
+
+    m = re.match(r"^r\.?\s*a\.?\s*no\.?\s*(\d+)\s*$", s, re.IGNORECASE)
+    if m:
+        return f"Republic Act No. {m.group(1)}"
+
+    m = re.match(r"^r\.?\s*a\.?\s+(\d+)\s*$", s, re.IGNORECASE)
+    if m:
+        return f"Republic Act No. {m.group(1)}"
+
+    m = re.match(r"^(\d+)$", s)
+    if m:
+        n = m.group(1)
+        if re.search(rf"republic\s+act\s+no\.?\s*{n}\b", head, re.IGNORECASE):
+            return f"Republic Act No. {n}"
+        if re.search(rf"\br\.?\s*a\.?\s*no\.?\s*{n}\b", head, re.IGNORECASE):
+            return f"Republic Act No. {n}"
+        return amendment_id
+
+    return amendment_id
 
 
 def strip_trailing_act_sections_from_rpc136(new_text: str, article_number: str) -> str:
@@ -93,8 +131,10 @@ def normalize_amendment_payload(result: dict[str, Any], raw_content: str) -> dic
             }
         )
 
+    aid = canonicalize_amendment_id(result.get("amendment_id"), raw_content)
+
     return {
-        "amendment_id": result.get("amendment_id"),
+        "amendment_id": aid,
         "date": result.get("date"),
         "title": result.get("title"),
         "changes": cleaned_changes,
@@ -279,10 +319,6 @@ def try_deterministic_amendment_parse(
         text = clean_text(content) if content is not None else clean_text(path.read_text(encoding="utf-8"))
     except OSError:
         return None
-
-    if base == "ra_6968_1990.md":
-        raw = parse_ra6968_offline(text)
-        return normalize_amendment_payload(raw, text) if raw else None
 
     if base == "ra_10951_2017.md":
         return parse_ra10951_offline_rpc_articles_134_to_136(path, content=text)

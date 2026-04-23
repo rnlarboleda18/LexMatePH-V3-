@@ -4,13 +4,19 @@ Handles switching between local development and production Azure environment
 """
 import os
 
-# Environment detection
+
+def _env_truthy(name: str) -> bool:
+    return os.getenv(name, "").strip().lower() in ("1", "true", "yes", "on")
+
+
+# Environment detection (developer workstation vs deployed app — unrelated to DB host)
 IS_LOCAL_DEV = os.getenv("ENVIRONMENT", "production").lower() == "local"
 
-# Database connection (LOCAL_DB_CONNECTION_STRING wins when ENVIRONMENT=local)
+# Local Postgres is opt-in only. Otherwise always use cloud (DB_CONNECTION_STRING / DATABASE_URL).
+USE_LOCAL_POSTGRES = _env_truthy("USE_LOCAL_POSTGRES")
 DB_CONNECTION_STRING = (
-    os.getenv("LOCAL_DB_CONNECTION_STRING")
-    if IS_LOCAL_DEV and os.getenv("LOCAL_DB_CONNECTION_STRING")
+    (os.getenv("LOCAL_DB_CONNECTION_STRING") or "").strip()
+    if USE_LOCAL_POSTGRES and os.getenv("LOCAL_DB_CONNECTION_STRING")
     else (os.getenv("DB_CONNECTION_STRING") or os.getenv("DATABASE_URL") or "")
 )
 
@@ -45,5 +51,5 @@ FLASHCARD_BAR_2026_ONLY_DEFAULT = os.getenv("FLASHCARD_BAR_2026_ONLY", "").lower
 # Logging
 import logging
 logging.info(f"Environment: {'LOCAL' if IS_LOCAL_DEV else 'PRODUCTION'}")
-logging.info(f"Database: {'Local PostgreSQL' if IS_LOCAL_DEV else 'Azure PostgreSQL'}")
+logging.info(f"Database: {'Local PostgreSQL' if USE_LOCAL_POSTGRES else 'Cloud PostgreSQL'}")
 logging.info(f"Redis: {'Enabled' if REDIS_ENABLED else 'Disabled'}")

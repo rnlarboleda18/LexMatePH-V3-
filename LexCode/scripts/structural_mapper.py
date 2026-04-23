@@ -4,9 +4,26 @@ import difflib
 import json
 import re
 import os
+import sys
+from pathlib import Path
 
-# Use env var or default
-CONN_STR = os.environ.get("DB_CONNECTION_STRING") or "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
+
+def _resolve_conn_str() -> str:
+    env = os.environ.get("DB_CONNECTION_STRING")
+    if env:
+        return env
+    settings = Path(__file__).resolve().parents[2] / "api" / "local.settings.json"
+    try:
+        if settings.is_file():
+            raw = json.loads(settings.read_text(encoding="utf-8"))
+            v = raw.get("Values", {}).get("DB_CONNECTION_STRING")
+            if v:
+                return v
+    except OSError:
+        pass
+    return os.environ.get("DB_CONNECTION_STRING") or (
+        "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
+    )
 
 def split_paragraphs(text):
     if not text:
@@ -21,7 +38,7 @@ def generate_and_save_map(article_num, conn=None):
     """
     should_close = False
     if conn is None:
-        conn = psycopg2.connect(CONN_STR)
+        conn = psycopg2.connect(_resolve_conn_str())
         should_close = True
         
     try:
@@ -44,17 +61,20 @@ def generate_and_save_map(article_num, conn=None):
         # Let's map Amendment Database ID -> Index in the 'amendments' array (1-based).
         amendment_map = { a['id']: i+1 for i, a in enumerate(amendments_data) }
         
-        # 2. Fetch History ordered by valid_from
+        # 2. Fetch History ordered by valid_from (STRICTLY for RPC code_id)
+        cur.execute("SELECT code_id FROM legal_codes WHERE short_name = 'RPC'")
+        rpc_code_id = cur.fetchone()[0]
+        
         query = """
         SELECT 
-            content, 
-            amendment_id,
-            valid_from
-        FROM article_versions 
-        WHERE article_number = %s
-        ORDER BY valid_from ASC NULLS FIRST, created_at ASC;
+            av.content, 
+            av.amendment_id,
+            av.valid_from
+        FROM article_versions av
+        WHERE av.article_number = %s AND av.code_id = %s
+        ORDER BY av.valid_from ASC NULLS FIRST, av.created_at ASC;
         """
-        cur.execute(query, (str(article_num),))
+        cur.execute(query, (str(article_num), rpc_code_id))
         versions = cur.fetchall()
         
         if not versions:
@@ -84,8 +104,13 @@ def generate_and_save_map(article_num, conn=None):
             
             for tag, i1, i2, j1, j2 in matcher.get_opcodes():
                 if tag == 'equal':
+                    # Paragraph text unchanged vs prior version, but a new statute still "passes"
+                    # the whole article — list items that are word-identical must still show this
+                    # amendment layer (e.g. RA 10592 re-enacted Art. 29 including items 1 and 2).
                     for k in range(j2 - j1):
-                        new_map.append(current_map[i1 + k])
+                        old_hist = current_map[i1 + k]
+                        new_hist = sorted(list(set(old_hist + [source_id])))
+                        new_map.append(new_hist)
                 elif tag == 'replace':
                     # Inherit history + Add New Source
                     # Only take history from the first replaced block to avoid explosion
@@ -106,7 +131,7 @@ def generate_and_save_map(article_num, conn=None):
             current_paras = new_paras
             current_map = new_map
             
-        print(f"Generated Map for Art {article_num}: {len(current_map)} paras")
+        print(f"Generated Map for Art {article_num}: {len(current_map)} paras", flush=True)
         
         # Save to DB
         # Save to DB
@@ -121,6 +146,37 @@ def generate_and_save_map(article_num, conn=None):
         if should_close and conn:
             conn.close()
 
+def _natural_sort_key(s):
+    return [int(t) if t.isdigit() else t.lower() for t in re.split(r"(\d+)", str(s))]
+
+
 if __name__ == "__main__":
-    # Test on Art 80
-    generate_and_save_map(80)
+    args = [a for a in sys.argv[1:] if a]
+    if args and args[0] in ("-h", "--help"):
+        print("Usage: python structural_mapper.py [article_num] | --all")
+        print("  Regenerates rpc_codal.structural_map from article_versions (paragraph lineage).")
+        sys.exit(0)
+    if args and args[0] == "--all":
+        conn = psycopg2.connect(_resolve_conn_str())
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT DISTINCT av.article_number::text
+            FROM article_versions av
+            INNER JOIN legal_codes lc ON lc.code_id = av.code_id
+            WHERE lc.short_name = 'RPC'
+            """
+        )
+        nums = [r[0] for r in cur.fetchall()]
+        cur.close()
+        conn.close()
+        nums.sort(key=_natural_sort_key)
+        print(f"Regenerating structural_map for {len(nums)} RPC articles with version history…", flush=True)
+        for anum in nums:
+            print(f"  Article {anum}…", flush=True)
+            generate_and_save_map(anum)
+        print("Done.", flush=True)
+    elif args:
+        generate_and_save_map(args[0])
+    else:
+        generate_and_save_map("29")

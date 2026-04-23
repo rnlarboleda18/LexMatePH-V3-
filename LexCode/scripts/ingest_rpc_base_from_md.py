@@ -1,236 +1,251 @@
 """
-Ingest structured LexCode/Codals/md/RPC.md into article_versions + rpc_codal (clean re-ingest).
+Load baseline RPC text from ``LexCode/Codals/md/RPC.md`` into ``article_versions``
+and ``rpc_codal`` (structural columns + ``content_md``), using the same stream
+parser as the rest of the LexCode RPC toolchain.
 
-Purpose: Phase 1 of the RPC pipeline — reset codal + version history from the base markdown,
-before running LexCode/scripts/process_amendment.py for direct amendments.
+Intended as **phase 1** of ``scripts/reingest_rpc_pipeline.py`` and
+``scripts/reingest_rpc_manual_pipeline.py``.
 
-Env: DB_CONNECTION_STRING (preferred) or api/local.settings.json Values.DB_CONNECTION_STRING.
+Preserves ``article_versions`` row(s) for article number ``0`` (preamble), if any,
+since ``RPC.md`` does not emit a ``##### Article 0`` block.
 
-Usage:
-  python LexCode/scripts/ingest_rpc_base_from_md.py
-  python LexCode/scripts/ingest_rpc_base_from_md.py --md-path LexCode/Codals/md/RPC.md --dry-run
+By default, deletes ``rpc_codal`` rows whose ``article_num`` does not appear in the
+parsed ``RPC.md`` (e.g. articles introduced only by amendatory laws). Use
+``--keep-orphan-rpc-rows`` to retain them.
+
+Environment: ``DB_CONNECTION_STRING`` or ``api/local.settings.json`` (same as
+``process_amendment.py``).
 """
 
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
-import re
 import sys
 from pathlib import Path
 
-_REPO_ROOT = Path(__file__).resolve().parents[2]
-_API = _REPO_ROOT / "api"
+_REPO = Path(__file__).resolve().parents[2]
+_API = _REPO / "api"
+_PIPE = _REPO / "LexCode" / "pipelines"
 if str(_API) not in sys.path:
     sys.path.insert(0, str(_API))
+if str(_PIPE) not in sys.path:
+    sys.path.insert(0, str(_PIPE))
 
-from codal_text import normalize_storage_markdown  # noqa: E402
+import psycopg2
 
-_PIPE_DIR = Path(__file__).resolve().parent.parent / "pipelines" / "rpc"
-_spec = importlib.util.spec_from_file_location(
-    "rpc_md_stream_parser",
-    _PIPE_DIR / "rpc_md_stream_parser.py",
+from codal_text import normalize_storage_markdown
+from rpc.rpc_md_stream_parser import (
+    RpcArticleRecord,
+    chapter_num_from_chapter_heading,
+    parse_rpc_codex_md,
 )
-if _spec is None or _spec.loader is None:
-    raise RuntimeError("Cannot load rpc_md_stream_parser")
-_rpc_mod = importlib.util.module_from_spec(_spec)
-sys.modules.setdefault("rpc_md_stream_parser", _rpc_mod)
-_spec.loader.exec_module(_rpc_mod)
-parse_rpc_codex_md = _rpc_mod.parse_rpc_codex_md
-chapter_num_from_chapter_heading = _rpc_mod.chapter_num_from_chapter_heading
+
+_DEFAULT_MD = _REPO / "LexCode" / "Codals" / "md" / "RPC.md"
+_BASELINE_AMENDMENT_ID = "Act No. 3815"
+_BASELINE_DATE = "1932-01-01"
+_BASELINE_DESC = "Revised Penal Code baseline ingested from RPC.md"
 
 
 def get_db_connection():
     conn_str = os.environ.get("DB_CONNECTION_STRING", "").strip()
     if conn_str:
-        import psycopg2
-
         return psycopg2.connect(conn_str)
+    api_settings = _REPO / "api" / "local.settings.json"
     try:
-        import psycopg2
-
-        with open(_REPO_ROOT / "api" / "local.settings.json", encoding="utf-8") as f:
+        with open(api_settings, encoding="utf-8") as f:
             conn_str = json.load(f)["Values"]["DB_CONNECTION_STRING"]
-        return psycopg2.connect(conn_str)
     except Exception:
-        import psycopg2
+        conn_str = (
+            "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@"
+            "localhost:5432/lexmateph-ea-db"
+        )
+    return psycopg2.connect(conn_str)
 
-        raise SystemExit(
-            "Set DB_CONNECTION_STRING or create api/local.settings.json with DB credentials."
-        ) from None
+
+def _rpc_code_id(cur) -> str:
+    cur.execute("SELECT code_id FROM legal_codes WHERE short_name = 'RPC' LIMIT 1")
+    row = cur.fetchone()
+    if not row:
+        raise RuntimeError("legal_codes has no row with short_name = 'RPC'")
+    return str(row[0])
 
 
-def _rpc_codal_columns(cur) -> set[str]:
+def _row_struct(rec: RpcArticleRecord) -> tuple:
+    chapter_label = rec.chapter_merged()
+    chapter_num = chapter_num_from_chapter_heading(rec.chapter)
+    return (
+        rec.article_title,
+        normalize_storage_markdown(rec.content_md),
+        rec.book,
+        rec.book_label_merged(),
+        rec.title_num,
+        rec.title_label_merged(),
+        chapter_label,
+        chapter_num,
+        rec.section_num,
+        rec.section_label,
+        rec.article_num,
+    )
+
+
+def _upsert_rpc_codal(cur, rec: RpcArticleRecord) -> None:
+    t = _row_struct(rec)
     cur.execute(
         """
-        SELECT column_name FROM information_schema.columns
-        WHERE table_schema = 'public' AND table_name = 'rpc_codal'
-        """
+        UPDATE rpc_codal
+        SET article_title = %s,
+            content_md = %s,
+            book = %s,
+            book_label = %s,
+            title_num = %s,
+            title_label = %s,
+            chapter_label = %s,
+            chapter_num = %s,
+            section_num = %s,
+            section_label = %s,
+            amendments = '[]'::jsonb,
+            structural_map = '[]'::jsonb,
+            updated_at = NOW()
+        WHERE article_num = %s
+        """,
+        t,
     )
-    return {r[0] for r in cur.fetchall()}
+    if cur.rowcount:
+        return
+    cur.execute(
+        """
+        INSERT INTO rpc_codal
+        (article_num, article_title, content_md, amendments,
+         book, book_label, title_num, title_label, chapter_label, chapter_num,
+         section_label, section_num, created_at, updated_at)
+        VALUES (%s, %s, %s, '[]'::jsonb, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), NOW())
+        """,
+        (
+            rec.article_num,
+            rec.article_title,
+            normalize_storage_markdown(rec.content_md),
+            rec.book,
+            rec.book_label_merged(),
+            rec.title_num,
+            rec.title_label_merged(),
+            rec.chapter_merged(),
+            chapter_num_from_chapter_heading(rec.chapter),
+            rec.section_label,
+            rec.section_num,
+        ),
+    )
 
 
-def _structural_map_for_body(body: str) -> str:
-    norm = normalize_storage_markdown(body or "")
-    segs = [p for p in norm.split("\n\n") if p.strip()]
-    m = [[0] for _ in segs] if segs else [[0]]
-    return json.dumps(m)
+def main() -> None:
+    ap = argparse.ArgumentParser(description="Ingest RPC.md baseline into Postgres")
+    ap.add_argument(
+        "--md-path",
+        type=Path,
+        default=_DEFAULT_MD,
+        help=f"Path to RPC markdown (default: {_DEFAULT_MD})",
+    )
+    ap.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Parse RPC.md and print summary only; no database access",
+    )
+    ap.add_argument(
+        "--wipe-rpc-links",
+        action="store_true",
+        help="DELETE codal_case_links rows with statute_id = 'RPC' before ingest",
+    )
+    ap.add_argument(
+        "--keep-orphan-rpc-rows",
+        action="store_true",
+        help=(
+            "Keep rpc_codal rows whose article_num is not in RPC.md (e.g. 134-A from a prior run). "
+            "Default: delete those rows so amendments can re-insert them."
+        ),
+    )
+    args = ap.parse_args()
+    md_path = args.md_path.resolve()
+    if not md_path.is_file():
+        sys.exit(f"RPC markdown not found: {md_path}")
 
+    records = parse_rpc_codex_md(md_path)
+    nums = [r.article_num for r in records]
+    print(f"Parsed {len(records)} articles from {md_path}")
 
-def ingest(
-    md_path: Path,
-    *,
-    dry_run: bool,
-    wipe_rpc_links: bool,
-) -> int:
-    arts = parse_rpc_codex_md(md_path)
-    if dry_run:
-        print(f"[dry-run] Parsed {len(arts)} articles from {md_path}")
-        return len(arts)
+    if args.dry_run:
+        print("[dry-run] Skipping database writes.")
+        print(f"  First: Article {nums[0]!r}, last: Article {nums[-1]!r}")
+        return
 
     conn = get_db_connection()
     cur = conn.cursor()
     try:
+        if args.wipe_rpc_links:
+            cur.execute("DELETE FROM codal_case_links WHERE statute_id = 'RPC'")
+            print(f"[wipe-rpc-links] Deleted {cur.rowcount} codal_case_links rows.")
+
+        code_id = _rpc_code_id(cur)
+
         cur.execute(
-            "SELECT code_id FROM legal_codes WHERE short_name = %s",
-            ("RPC",),
+            """
+            DELETE FROM article_versions
+            WHERE code_id = %s AND article_number <> '0'
+            """,
+            (code_id,),
         )
-        row = cur.fetchone()
-        if not row:
+        print(f"Deleted {cur.rowcount} article_versions rows (RPC, except article 0).")
+
+        allowed_article_nums = tuple({str(r.article_num) for r in records})
+        if not args.keep_orphan_rpc_rows:
             cur.execute(
                 """
-                INSERT INTO legal_codes (full_name, short_name, description)
-                VALUES ('Revised Penal Code', 'RPC',
-                        'The Revised Penal Code of the Philippines (Act No. 3815)')
-                RETURNING code_id
-                """
+                DELETE FROM rpc_codal
+                WHERE CAST(article_num AS TEXT) NOT IN %s
+                """,
+                (allowed_article_nums,),
             )
-            code_id = cur.fetchone()[0]
-        else:
-            code_id = row[0]
+            print(f"Deleted {cur.rowcount} orphan rpc_codal rows (article_num not present in RPC.md).")
 
-        if wipe_rpc_links:
+        cur.execute(
+            """
+            UPDATE rpc_codal
+            SET amendments = '[]'::jsonb,
+                structural_map = '[]'::jsonb
+            """
+        )
+        print(f"Reset amendments/structural_map on {cur.rowcount} rpc_codal rows.")
+
+        for i, rec in enumerate(records, start=1):
+            _upsert_rpc_codal(cur, rec)
+            content = normalize_storage_markdown(rec.version_markdown)
             cur.execute(
-                "DELETE FROM codal_case_links WHERE statute_id = %s",
-                ("RPC",),
-            )
-
-        cur.execute("DELETE FROM article_versions WHERE code_id = %s", (code_id,))
-        cur.execute("DELETE FROM rpc_codal")
-
-        cols = _rpc_codal_columns(cur)
-
-        av_batch = []
-        for a in arts:
-            norm_ver = normalize_storage_markdown(a.version_markdown)
-            norm_body = normalize_storage_markdown(a.content_md)
-            av_batch.append(
-                (
-                    code_id,
-                    a.article_num,
-                    norm_ver,
-                    "1932-01-01",
-                    None,
-                    "Act No. 3815",
-                )
-            )
-
-            merged_book = a.book_label_merged()
-            merged_title = a.title_label_merged()
-            merged_chapter = a.chapter_merged()
-
-            row_dict: dict = {
-                "article_title": a.article_title,
-                "content_md": norm_body,
-                "book": a.book,
-                "title_num": a.title_num,
-                "title_label": merged_title,
-                "section_num": a.section_num,
-                "section_label": a.section_label,
-                "structural_map": _structural_map_for_body(norm_body),
-            }
-            anum_full = a.article_num
-            if "article_suffix" in cols:
-                m_hyp = re.match(r"^(\d+)-([A-Za-z]+)$", anum_full)
-                if m_hyp:
-                    row_dict["article_num"] = m_hyp.group(1)
-                    row_dict["article_suffix"] = m_hyp.group(2)
-                else:
-                    row_dict["article_num"] = anum_full
-                    row_dict["article_suffix"] = None
-            else:
-                row_dict["article_num"] = anum_full
-
-            if "book_label" in cols:
-                row_dict["book_label"] = merged_book
-            if "chapter" in cols:
-                row_dict["chapter"] = merged_chapter
-            if "chapter_label" in cols:
-                row_dict["chapter_label"] = merged_chapter
-            if "chapter_num" in cols:
-                row_dict["chapter_num"] = chapter_num_from_chapter_heading(a.chapter)
-            if "amendments" in cols:
-                row_dict["amendments"] = json.dumps([])
-
-            insert_cols = [c for c in row_dict if c in cols]
-            values = [row_dict[c] for c in insert_cols]
-            col_sql = ", ".join(insert_cols)
-            ph_parts = ["%s"] * len(values)
-            if "created_at" in cols and "created_at" not in insert_cols:
-                col_sql += ", created_at"
-                ph_parts.append("NOW()")
-            if "updated_at" in cols and "updated_at" not in insert_cols:
-                col_sql += ", updated_at"
-                ph_parts.append("NOW()")
-            placeholders = ", ".join(ph_parts)
-            cur.execute(
-                f"INSERT INTO rpc_codal ({col_sql}) VALUES ({placeholders})",
-                values,
-            )
-
-        if av_batch:
-            from psycopg2.extras import execute_batch
-
-            execute_batch(
-                cur,
                 """
                 INSERT INTO article_versions
-                (code_id, article_number, content, valid_from, valid_to, amendment_id)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                (code_id, article_number, content, valid_from, valid_to,
+                 amendment_id, amendment_description)
+                VALUES (%s, %s, %s, %s, NULL, %s, %s)
                 """,
-                av_batch,
+                (
+                    code_id,
+                    rec.article_num,
+                    content,
+                    _BASELINE_DATE,
+                    _BASELINE_AMENDMENT_ID,
+                    _BASELINE_DESC,
+                ),
             )
+            if i % 100 == 0:
+                print(f"  ... {i}/{len(records)} articles")
 
         conn.commit()
-        print(f"Ingested {len(arts)} RPC articles into rpc_codal + article_versions (code_id={code_id}).")
-        return len(arts)
+        print(f"Ingest complete: {len(records)} articles written.")
     except Exception:
         conn.rollback()
         raise
     finally:
+        cur.close()
         conn.close()
-
-
-def main():
-    p = argparse.ArgumentParser(description="Ingest base RPC.md into Postgres")
-    p.add_argument(
-        "--md-path",
-        default=str(_REPO_ROOT / "LexCode" / "Codals" / "md" / "RPC.md"),
-        help="Path to structured RPC.md",
-    )
-    p.add_argument("--dry-run", action="store_true")
-    p.add_argument(
-        "--wipe-rpc-links",
-        action="store_true",
-        help="Also DELETE codal_case_links for statute_id=RPC (destructive).",
-    )
-    args = p.parse_args()
-    md_path = Path(args.md_path)
-    if not md_path.is_file():
-        raise SystemExit(f"RPC markdown not found: {md_path}")
-    ingest(md_path, dry_run=args.dry_run, wipe_rpc_links=args.wipe_rpc_links)
 
 
 if __name__ == "__main__":

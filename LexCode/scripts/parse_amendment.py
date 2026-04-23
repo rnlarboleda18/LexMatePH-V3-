@@ -40,9 +40,7 @@ def parse_amendment_document(filepath):
     det = try_deterministic_amendment_parse(filepath, content=content)
     if det:
         base = os.path.basename(filepath).replace("\\", "/").lower()
-        if base == "ra_6968_1990.md":
-            print("  [OK] Using offline deterministic parser for Republic Act No. 6968.")
-        elif base == "ra_10951_2017.md":
+        if base == "ra_10951_2017.md":
             print(
                 "  [OK] Using offline deterministic parser for Republic Act No. 10951 "
                 "(RPC Art. 136 fines / Section 6)."
@@ -70,7 +68,12 @@ def parse_metadata_ai(header_content):
     """
     prompt = """Extract metadata from this legal document header.
     Return JSON: { "amendment_id": "string", "date": "YYYY-MM-DD", "title": "string" }
-    
+
+    For **amendment_id**, use the full formal statute label as printed in the source, e.g.
+    ``Republic Act No. 7659`` (not bare ``7659``, not ``RA 7659`` alone). Use the same pattern
+    for other Republic Acts. For older statutes use ``Act No. …``, ``Commonwealth Act No. …``, etc.
+    as appropriate to the document title.
+
     Header content:
     """ + f"```\n{header_content}\n```"
 
@@ -107,8 +110,8 @@ def parse_chunked_document_ai(content):
     """
     Splits large documents into chunks (by Section) and processes them iteratively.
     """
-    # 1. Extract Metadata from the first 5000 chars
-    metadata = parse_metadata_ai(content[:5000])
+    # 1. Extract Metadata from the start and end (dates are often at bottom)
+    metadata = parse_metadata_ai(content[:5000] + "\n" + content[-2000:])
 
     # 2. Split by "**Section" or "Section"
     sections = re.split(r'(?=\n\s*(?:\*\*|)?Section\s+\d+)', content.strip())

@@ -1,0 +1,232 @@
+## POLITICAL AND PUBLIC INTERNATIONAL LAW (15%)
+
+- 1987 Constitution
+- Executive Order No. 2
+- R.A. 10173
+- R.A. 11032
+- R.A. 11659
+- R.A. 6770
+- R.A. 7438
+- R.A. 8371
+- R.A. 9225
+
+## COMMERCIAL AND TAXATION LAWS (20%)
+
+- Civil Code of the Philippines (NCC)
+- Commonwealth Act 146
+- Local Government Code (R.A. 7160) — where cited
+- National Internal Revenue Code of 1997 (NIRC), as amended
+- P.D. 612
+- R.A. 10142
+- R.A. 10167
+- R.A. 10365
+- R.A. 10372
+- R.A. 10607
+- R.A. 10667
+- R.A. 10927
+- R.A. 11211
+- R.A. 11232
+- R.A. 11521
+- R.A. 11647
+- R.A. 11659
+- R.A. 11840
+- R.A. 1405
+- R.A. 3591
+- R.A. 6426
+- R.A. 7042
+- R.A. 7160
+- R.A. 7653
+- R.A. 8179
+- R.A. 8293
+- R.A. 8791
+- R.A. 8792
+- R.A. 8799
+- R.A. 9150
+- R.A. 9160
+- R.A. 9194
+- R.A. 9502
+
+## CIVIL LAW AND LAND TITLES AND DEEDS (20%)
+
+- 1987 Constitution
+- Civil Code of the Philippines (NCC)
+- Executive Order No. 209
+- Executive Order No. 292 — Revised Administrative Code of 1987 (Book I, etc., as cited)
+- Family Code (E.O. 209 as amended)
+- P.D. 1067
+- P.D. 1529
+- R.A. 10172
+- R.A. 11057
+- R.A. 11222
+- R.A. 11232
+- R.A. 11573
+- R.A. 11596
+- R.A. 11642
+- R.A. 11767
+- R.A. 11909
+- R.A. 26
+- R.A. 6552
+- R.A. 6809
+- R.A. 8043
+- R.A. 9048
+- R.A. 9255
+- R.A. 9520
+- R.A. 9858
+- Rules of Court (specific Rules cited in syllabus)
+
+## LABOR AND SOCIAL LEGISLATION (10%)
+
+- 1987 Constitution
+- Civil Code of the Philippines (NCC)
+- D.O. 112
+- D.O. 147
+- D.O. 149
+- D.O. 151
+- D.O. 174
+- D.O. 183
+- D.O. 19
+- D.O. 205
+- D.O. 221
+- D.O. 242
+- D.O. 283
+- E.O. 126
+- E.O. 203
+- E.O. 251
+- Labor Code of the Philippines (LC)
+- R.A. 10022
+- R.A. 10028
+- R.A. 10151
+- R.A. 10361
+- R.A. 10396
+- R.A. 10757
+- R.A. 10869
+- R.A. 10911
+- R.A. 10966
+- R.A. 11165
+- R.A. 11199
+- R.A. 11210
+- R.A. 11230
+- R.A. 11313
+- R.A. 11360
+- R.A. 11861
+- R.A. 12021
+- R.A. 6727
+- R.A. 7192
+- R.A. 7277
+- R.A. 7610
+- R.A. 7641
+- R.A. 7686
+- R.A. 7699
+- R.A. 7877
+- R.A. 8042
+- R.A. 8187
+- R.A. 8188
+- R.A. 8291
+- R.A. 8558
+- R.A. 8972
+- R.A. 9178
+- R.A. 9262
+- R.A. 9347
+- R.A. 9492
+- R.A. 9504
+- R.A. 9710
+- R.A. 9849
+- Revised Penal Code (RPC)
+
+## CRIMINAL LAW (10%)
+
+- A.M. 18-03-16-
+- A.M. 20-06-14-
+- B.P. 22
+- Commonwealth Act 148
+- P.D. 1602
+- P.D. 1612
+- P.D. 1613
+- P.D. 1689
+- P.D. 1829
+- P.D. 532
+- P.D. 533
+- P.D. 968
+- R.A. 10168
+- R.A. 10175
+- R.A. 10389
+- R.A. 10591
+- R.A. 10592
+- R.A. 10640
+- R.A. 10883
+- R.A. 11053
+- R.A. 11235
+- R.A. 11313
+- R.A. 11362
+- R.A. 11479
+- R.A. 11596
+- R.A. 11648
+- R.A. 11930
+- R.A. 3019
+- R.A. 6713
+- R.A. 6805
+- R.A. 7080
+- R.A. 7610
+- R.A. 8049
+- R.A. 8344
+- R.A. 8792
+- R.A. 9165
+- R.A. 9208
+- R.A. 9262
+- R.A. 9287
+- R.A. 9344
+- R.A. 9745
+- R.A. 9851
+- R.A. 9995
+- Revised Penal Code (RPC)
+
+## REMEDIAL LAW, LEGAL AND JUDICIAL ETHICS, WITH PRACTICAL EXERCISES (25%)
+
+- 1987 Constitution
+- A.M. 01-7-01-
+- A.M. 02-8-13-
+- A.M. 02-9-02-
+- A.M. 03-04-04-
+- A.M. 03-05-01-
+- A.M. 03-1-09-
+- A.M. 04-07-
+- A.M. 06-11-5-
+- A.M. 07-9-12-
+- A.M. 08-1-16-
+- A.M. 08-8-7-
+- A.M. 09-6-8-
+- A.M. 10-3-7-
+- A.M. 11-9-4-
+- A.M. 12-8-8-
+- A.M. 13-05-05-
+- A.M. 15-06-10-
+- A.M. 17-11-03-
+- A.M. 19-03-24-
+- A.M. 19-10-20-
+- A.M. 20-07-04-
+- A.M. 21-06-08
+- A.M. 21-06-08-
+- A.M. 21-08-09-
+- A.M. 22-09-01-
+- A.M. 22-11-01-
+- A.M. 25-02-17-
+- B.P. 22
+- Civil Code of the Philippines (NCC)
+- Local Government Code (R.A. 7160) — where cited
+- R.A. 10071
+- R.A. 10172
+- R.A. 10389
+- R.A. 10752
+- R.A. 11576
+- R.A. 6657
+- R.A. 6713
+- R.A. 7160
+- R.A. 7662
+- R.A. 876
+- R.A. 8791
+- R.A. 8974
+- R.A. 9048
+- R.A. 910
+- R.A. 9285
+- R.A. 9700
+- Rules of Court (specific Rules cited in syllabus)
