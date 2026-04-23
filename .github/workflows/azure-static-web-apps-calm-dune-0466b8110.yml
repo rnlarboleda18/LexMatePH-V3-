@@ -51,7 +51,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
           cache: 'pip'
           cache-dependency-path: api/requirements.txt
 
@@ -107,6 +107,10 @@ jobs:
           test -d src/frontend/dist
           test -d api
           ls -la src/frontend | head -20
+          echo "---- Size hints (SWA Free ~250 MiB app package limit) ----"
+          du -sh src/frontend/dist api || true
+          echo "api/runtime.txt (must match staticwebapp.config.json apiRuntime):"
+          cat api/runtime.txt
 
       # Do not wrap in Wandalen/wretry: it invokes Wandalen/static-web-apps-deploy and breaks app_location (repo not mounted as expected).
       - name: Deploy to Azure Static Web Apps
@@ -152,6 +156,8 @@ jobs:
             exit 0
           fi
           echo "Deploy failed after retries (attempt 1: $o1, attempt 2: $o2)"
+          echo "Open the logs for 'Deploy to Azure Static Web Apps' above — that step contains the real error (Oryx build, package size, token, timeout)."
+          echo "Check api/runtime.txt matches staticwebapp.config.json platform.apiRuntime (unsupported Python breaks the API build)."
           exit 1
 
   close_pull_request_job:
