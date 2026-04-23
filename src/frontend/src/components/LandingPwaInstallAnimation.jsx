@@ -112,9 +112,10 @@ function InDeviceHomeScreenGrid({ variant, compact }) {
 }
 
 /**
- * @param {{ compact?: boolean; dense?: boolean }} props — `compact`: hero column layout; `dense`: shorter mocks for above-the-fold landing
+ * @param {{ compact?: boolean; dense?: boolean; tight?: boolean }} props — `tight`: smallest hero mocks (use with compact+dense)
  */
-function LandingPwaInstallAnimation({ compact = false, dense = false }) {
+function LandingPwaInstallAnimation({ compact = false, dense = false, tight = false }) {
+    const heroTight = Boolean(compact && dense && tight);
     const cap = 'text-xs sm:text-sm';
     const capTray = 'min-h-[5rem] sm:min-h-[4.5rem] mt-5 px-2';
 
@@ -130,18 +131,32 @@ function LandingPwaInstallAnimation({ compact = false, dense = false }) {
             {compact ? (
                 <div className="flex w-full min-w-0 flex-col">
                     <div
-                        className={`flex flex-row items-end justify-center ${dense ? 'gap-1.5 sm:gap-2 lg:gap-2.5' : 'gap-3 sm:gap-4 lg:gap-5'}`}
+                        className={`flex flex-row items-end justify-center ${
+                            heroTight ? 'gap-1 sm:gap-1.5' : dense ? 'gap-1.5 sm:gap-2 lg:gap-2.5' : 'gap-3 sm:gap-4 lg:gap-5'
+                        }`}
                     >
                         <figure className="flex min-w-0 shrink-0 flex-col items-center">
-                            <figcaption className={fig(true)}>Phone (iOS)</figcaption>
-                            <PhoneMock compact dense={dense} />
+                            <figcaption className={`${fig(true)} ${heroTight ? '!mb-0' : ''}`}>Phone (iOS)</figcaption>
+                            <PhoneMock compact dense={dense} tight={heroTight} />
                         </figure>
-                        <div className={`flex min-w-0 flex-1 flex-col items-center ${dense ? 'gap-1 sm:gap-1.5' : 'gap-2 sm:gap-3'}`}>
+                        <div
+                            className={`flex min-w-0 flex-1 flex-col items-center ${
+                                heroTight ? 'gap-0.5' : dense ? 'gap-1 sm:gap-1.5' : 'gap-2 sm:gap-3'
+                            }`}
+                        >
                             <p
-                                className={`mb-0 flex w-full items-center justify-center gap-1.5 text-center font-medium leading-snug text-gray-800 dark:text-gray-100 ${dense ? 'text-[11px] sm:text-xs' : 'mb-0.5 text-sm sm:mb-1 sm:gap-2.5 sm:text-base'}`}
+                                className={`mb-0 flex w-full items-center justify-center gap-1 text-center font-medium text-gray-800 dark:text-gray-100 ${
+                                    heroTight
+                                        ? 'text-[9px] leading-tight sm:text-[10px]'
+                                        : dense
+                                          ? 'leading-snug text-[11px] sm:text-xs'
+                                          : 'mb-0.5 text-sm sm:mb-1 sm:gap-2.5 sm:text-base'
+                                }`}
                             >
                                 <Smartphone
-                                    className={`shrink-0 text-indigo-600 dark:text-indigo-400 ${dense ? 'h-3 w-3 sm:h-3.5 sm:w-3.5' : 'h-4 w-4 sm:h-5 sm:w-5'}`}
+                                    className={`shrink-0 text-indigo-600 dark:text-indigo-400 ${
+                                        heroTight ? 'h-2.5 w-2.5 sm:h-3 sm:w-3' : dense ? 'h-3 w-3 sm:h-3.5 sm:w-3.5' : 'h-4 w-4 sm:h-5 sm:w-5'
+                                    }`}
                                     strokeWidth={2}
                                     aria-hidden
                                 />
@@ -149,13 +164,23 @@ function LandingPwaInstallAnimation({ compact = false, dense = false }) {
                                     Browser or installed PWA — same LexMatePH experience.
                                 </span>
                             </p>
-                            <DesktopChromeMock compact dense={dense} />
-                            <figure className="flex w-full min-w-0 flex-col items-center">
-                                <figcaption className={fig(true)}>Tablet (Android)</figcaption>
-                                <div className="flex w-full justify-center">
-                                    <TabletMock compact dense={dense} />
-                                </div>
-                            </figure>
+                            <div
+                                className={`mx-auto w-full min-w-0 ${
+                                    heroTight
+                                        ? 'max-w-[15rem] sm:max-w-[16rem]'
+                                        : dense
+                                          ? 'max-w-[23rem] sm:max-w-[24.5rem]'
+                                          : 'max-w-xl sm:max-w-2xl'
+                                }`}
+                            >
+                                <DesktopChromeMock compact dense={dense} tight={heroTight} />
+                                <figure className="mt-0 flex w-full min-w-0 flex-col items-center">
+                                    <figcaption className={`${fig(true)} ${heroTight ? '!mb-0' : ''}`}>Tablet (Android)</figcaption>
+                                    <div className="flex w-full justify-center">
+                                        <TabletMock compact dense={dense} tight={heroTight} />
+                                    </div>
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,26 +224,26 @@ function LandingPwaInstallAnimation({ compact = false, dense = false }) {
     );
 }
 
-function PhoneMock({ compact, dense = false }) {
-    const outer = compact ? (dense ? 'w-[118px]' : 'w-[182px]') : 'w-[142px]';
-    const innerH = compact ? (dense ? 'h-[232px]' : 'h-[388px]') : 'h-[288px]';
+function PhoneMock({ compact, dense = false, tight = false }) {
+    const outer = compact ? (tight ? 'w-[92px]' : dense ? 'w-[160px]' : 'w-[182px]') : 'w-[142px]';
+    const innerH = compact ? (tight ? 'h-[188px]' : dense ? 'h-[372px]' : 'h-[388px]') : 'h-[288px]';
     const round = compact ? 'rounded-[1.5rem] border-2' : 'rounded-[1.65rem] border-[3px]';
     const innerRound = compact ? 'rounded-[1.2rem]' : 'rounded-[1.35rem]';
     const barPad = compact ? 'px-2 py-1.5' : 'px-2 py-1.5';
-    const barH = compact ? (dense ? 'h-8' : 'h-10') : 'h-9';
-    const urlText = compact ? (dense ? 'text-[10px]' : 'text-[14px]') : 'text-[13px]';
-    const shareBox = compact ? (dense ? 'h-6 w-6' : 'h-7 w-7') : 'h-7 w-7';
-    const shareIco = compact ? (dense ? 'h-3 w-3' : 'h-4 w-4') : 'h-4 w-4';
-    const logoBox = compact ? (dense ? 'h-7 w-7 mb-0.5' : 'h-9 w-9 mb-1') : 'h-9 w-9 mb-2';
-    const p = compact ? (dense ? 'p-1' : 'p-2') : 'p-2';
-    const bottomBar = compact ? (dense ? 'h-6 px-1.5' : 'h-8 px-2') : 'h-8 px-4';
+    const barH = compact ? (tight ? 'h-7' : dense ? 'h-9' : 'h-10') : 'h-9';
+    const urlText = compact ? (tight ? 'text-[8px]' : dense ? 'text-[11px]' : 'text-[14px]') : 'text-[13px]';
+    const shareBox = compact ? (tight ? 'h-5 w-5' : dense ? 'h-7 w-7' : 'h-7 w-7') : 'h-7 w-7';
+    const shareIco = compact ? (tight ? 'h-2.5 w-2.5' : dense ? 'h-3.5 w-3.5' : 'h-4 w-4') : 'h-4 w-4';
+    const logoBox = compact ? (tight ? 'h-6 w-6 mb-0' : dense ? 'h-8 w-8 mb-0.5' : 'h-9 w-9 mb-1') : 'h-9 w-9 mb-2';
+    const p = compact ? (tight ? 'p-0.5' : dense ? 'p-1.5' : 'p-2') : 'p-2';
+    const bottomBar = compact ? (tight ? 'h-5 px-1' : dense ? 'h-7 px-2' : 'h-8 px-2') : 'h-8 px-4';
 
     return (
         <div className={`${outer} shrink-0`}>
             <div className={`${round} border-slate-700 bg-slate-800 p-[2px] shadow-xl ring-1 ring-black/20 dark:border-slate-600`}>
                 <div className={`flex ${innerH} flex-col overflow-hidden ${innerRound} bg-white dark:bg-zinc-950`}>
-                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? (dense ? 'h-5' : 'h-7') : 'h-5'}`}>
-                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? 'h-0.5 w-11' : 'h-0.5 w-8'}`} />
+                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? (tight ? 'h-4' : dense ? 'h-6' : 'h-7') : 'h-5'}`}>
+                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? (tight ? 'h-0.5 w-11' : dense ? 'h-0.5 w-12' : 'h-0.5 w-11') : 'h-0.5 w-8'}`} />
                     </div>
                     <div className={`shrink-0 border-b border-slate-200/90 bg-[#e8e8ed] dark:border-zinc-800 dark:bg-zinc-900 ${barPad}`}>
                         <div
@@ -242,7 +267,7 @@ function PhoneMock({ compact, dense = false }) {
                         <div className={`relative ${p}`}>
                             <div className={`mx-auto flex items-center justify-center overflow-hidden rounded-lg shadow-md ring-1 ring-black/10 ${logoBox}`}>
                                 <OfficialAppIcon
-                                    className={compact ? (dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-9 w-9'}
+                                    className={compact ? (tight ? 'h-6 w-6' : dense ? 'h-8 w-8' : 'h-9 w-9') : 'h-9 w-9'}
                                     rounded={compact ? 'rounded-lg' : 'rounded-xl'}
                                 />
                             </div>
@@ -316,22 +341,25 @@ function PhoneMock({ compact, dense = false }) {
     );
 }
 
-function TabletMock({ compact, dense = false }) {
-    // Compact (landing hero): match width of DesktopChromeMock address bar in the same column (`w-full`).
+function TabletMock({ compact, dense = false, tight = false }) {
+    // Compact: `w-full` inside shared max-width wrapper with DesktopChromeMock so tablet matches bar width.
     const w = compact ? 'w-full' : 'w-[228px]';
-    const h = compact ? (dense ? 'h-[188px]' : 'h-[304px]') : 'h-[188px]';
+    // Dense hero: landscape tablet (~1.35:1 outer frame) — bar + tablet share width above; height stays shorter than width.
+    const h = compact ? (tight ? 'h-[120px]' : dense ? 'h-[292px]' : 'h-[304px]') : 'h-[188px]';
     const border = compact ? 'border-4' : 'border-[6px]';
     const omni = compact
-        ? dense
-            ? 'min-h-[36px] gap-1 px-2 py-1 text-[11px]'
-            : 'min-h-[52px] gap-2 px-3.5 py-2 text-[15px]'
+        ? tight
+            ? 'min-h-[28px] gap-0.5 px-1.5 py-0.5 text-[9px]'
+            : dense
+              ? 'min-h-[36px] gap-1 px-2 py-1 text-[11px]'
+              : 'min-h-[52px] gap-2 px-3.5 py-2 text-[15px]'
         : 'h-10 gap-1 px-2 py-1 text-[13px]';
-    const ico = compact ? (dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-7 w-7';
-    const mv = compact ? (dense ? 'h-3.5 w-3.5' : 'h-[18px] w-[18px]') : 'h-3.5 w-3.5';
-    const md = compact ? (dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-7 w-7';
-    const pIco = compact ? (dense ? 'p-2' : 'p-3.5') : 'p-3';
-    const logo = compact ? (dense ? 'h-9 w-9 mb-0.5' : 'h-14 w-14 mb-1') : 'h-10 w-10 mb-2';
-    const sheet = compact ? (dense ? 'right-2 top-10 w-[8.5rem]' : 'right-3 top-16 w-[12rem]') : 'right-2 top-10 w-[9.5rem]';
+    const ico = compact ? (tight ? 'h-5 w-5' : dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-7 w-7';
+    const mv = compact ? (tight ? 'h-3 w-3' : dense ? 'h-3.5 w-3.5' : 'h-[18px] w-[18px]') : 'h-3.5 w-3.5';
+    const md = compact ? (tight ? 'h-5 w-5' : dense ? 'h-7 w-7' : 'h-9 w-9') : 'h-7 w-7';
+    const pIco = compact ? (tight ? 'p-1' : dense ? 'p-2' : 'p-3.5') : 'p-3';
+    const logo = compact ? (tight ? 'h-7 w-7 mb-0' : dense ? 'h-9 w-9 mb-0.5' : 'h-14 w-14 mb-1') : 'h-10 w-10 mb-2';
+    const sheet = compact ? (tight ? 'right-1 top-8 w-[7rem]' : dense ? 'right-2 top-[3.75rem] w-[8.5rem]' : 'right-3 top-16 w-[12rem]') : 'right-2 top-10 w-[9.5rem]';
 
     return (
         <div className={`${w} shrink-0`}>
@@ -350,7 +378,7 @@ function TabletMock({ compact, dense = false }) {
                                     <MoreVertical className={mv} strokeWidth={2.25} />
                                 </span>
                                 <div className={`landing-pwa-chrome-install flex items-center justify-center rounded text-[#bdc1c6] ${md}`}>
-                                    <ChromePwaInstallIcon className={compact ? (dense ? 'h-4 w-4' : 'h-5 w-5') : 'h-3.5 w-3.5'} />
+                                    <ChromePwaInstallIcon className={compact ? (tight ? 'h-3 w-3' : dense ? 'h-4 w-4' : 'h-5 w-5') : 'h-3.5 w-3.5'} />
                                 </div>
                             </div>
                         </div>
@@ -361,7 +389,7 @@ function TabletMock({ compact, dense = false }) {
                             <div className={`relative ${pIco}`}>
                                 <div className={`mx-auto overflow-hidden rounded-lg shadow ring-1 ring-black/10 ${logo}`}>
                                     <OfficialAppIcon
-                                        className={compact ? (dense ? 'h-9 w-9' : 'h-14 w-14') : 'h-10 w-10'}
+                                        className={compact ? (tight ? 'h-7 w-7' : dense ? 'h-9 w-9' : 'h-14 w-14') : 'h-10 w-10'}
                                         rounded="rounded-lg"
                                     />
                                 </div>
@@ -389,28 +417,28 @@ function TabletMock({ compact, dense = false }) {
     );
 }
 
-function DesktopChromeMock({ compact, dense = false }) {
+function DesktopChromeMock({ compact, dense = false, tight = false }) {
     if (compact) {
         return (
             <div className="w-full min-w-0 self-stretch">
-                <p className="mb-0.5 text-center text-[8px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 sm:text-[9px]">
+                <p className="mb-0 text-center text-[7px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 sm:text-[8px]">
                     Desktop
                 </p>
                 <div className="overflow-hidden rounded-lg border border-slate-300 bg-[#35363a] shadow-md ring-1 ring-black/15 dark:border-slate-600">
-                    <div className={`flex items-center px-2 py-0.5 ${dense ? 'h-9' : 'h-12'}`}>
+                    <div className={`flex items-center px-1.5 py-0.5 ${tight ? 'h-7' : 'h-12'}`}>
                         <div
-                            className={`flex w-full min-w-0 items-center gap-1.5 rounded-md bg-[#202124] px-2 ring-1 ring-black/25 ${dense ? 'h-7 py-0.5' : 'h-10 py-1'}`}
+                            className={`flex w-full min-w-0 items-center gap-1 rounded-md bg-[#202124] px-1.5 ring-1 ring-black/25 ${tight ? 'h-6 py-0' : dense ? 'h-10 py-0.5' : 'h-10 py-1'}`}
                         >
-                            <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-400/90" aria-hidden />
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400/90 sm:h-2 sm:w-2" aria-hidden />
                             <span
-                                className={`min-w-0 flex-1 truncate text-left font-medium tabular-nums text-[#e8eaed] ${dense ? 'text-[11px] sm:text-xs' : 'text-[14px] sm:text-[15px]'}`}
+                                className={`min-w-0 flex-1 truncate text-left font-medium tabular-nums text-[#e8eaed] ${tight ? 'text-[9px] sm:text-[10px]' : dense ? 'text-[11px] sm:text-xs' : 'text-[14px] sm:text-[15px]'}`}
                             >
                                 {MOCK_URL_IN_BAR}
                             </span>
                             <div
-                                className={`landing-pwa-chrome-install flex shrink-0 items-center justify-center rounded-md text-[#bdc1c6] ${dense ? 'h-6 w-6' : 'h-7 w-7'}`}
+                                className={`landing-pwa-chrome-install flex shrink-0 items-center justify-center rounded-md text-[#bdc1c6] ${tight ? 'h-5 w-5' : dense ? 'h-6 w-6' : 'h-7 w-7'}`}
                             >
-                                <ChromePwaInstallIcon className={dense ? 'h-3 w-3' : 'h-4 w-4'} />
+                                <ChromePwaInstallIcon className={tight ? 'h-2.5 w-2.5' : dense ? 'h-3 w-3' : 'h-4 w-4'} />
                             </div>
                         </div>
                     </div>
