@@ -6,6 +6,7 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
 from utils.gemini_rest import gemini_generate_text
+from utils.azure_speech_rest import synthesize_ssml_wav
 
 ai_processor_bp = func.Blueprint()
 
@@ -344,8 +345,6 @@ def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
 
 @ai_processor_bp.route(route="ai/tts", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
 def ai_tts_proxy(req: func.HttpRequest) -> func.HttpResponse:
-    import azure.cognitiveservices.speech as speechsdk
-    
     try:
         req_body = req.get_json()
         text = req_body.get('text')
@@ -362,17 +361,8 @@ def ai_tts_proxy(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=501
             )
 
-        speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
-        # Globalized JennyMultilingual
         voice_name = os.environ.get("AZURE_VOICE_NAME", "en-US-JennyMultilingualNeural")
-        speech_config.speech_synthesis_voice_name = voice_name 
-        
-        pull_stream = speechsdk.audio.PullAudioOutputStream()
-        audio_config = speechsdk.audio.AudioConfig(stream=pull_stream)
-        
-        synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
-        
-        # Convert plain text to SSML to enforce the global 0.85 Jenny Multilingual speed
+
         safe_text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
         ssml = (
             f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='en-US'>"
@@ -380,20 +370,9 @@ def ai_tts_proxy(req: func.HttpRequest) -> func.HttpResponse:
             f"<prosody rate='0.85'>{safe_text}</prosody>"
             f"</voice></speak>"
         )
-        
-        result = synthesizer.speak_ssml_async(ssml).get()
 
-        if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-            audio_data = result.audio_data
-            return func.HttpResponse(audio_data, mimetype="audio/wav", status_code=200)
-        elif result.reason == speechsdk.ResultReason.Canceled:
-            cancellation_details = result.cancellation_details
-            logging.error(f"Speech synthesis canceled: {cancellation_details.reason}")
-            if cancellation_details.reason == speechsdk.CancellationReason.Error:
-                logging.error(f"Error details: {cancellation_details.error_details}")
-            return func.HttpResponse(json.dumps({"error": f"Speech synthesis failed: {cancellation_details.reason}"}), status_code=500)
-
-        return func.HttpResponse(json.dumps({"error": "Unknown synthesis error"}), status_code=500)
+        audio_data = synthesize_ssml_wav(ssml, subscription_key=speech_key, region=speech_region)
+        return func.HttpResponse(audio_data, mimetype="audio/wav", status_code=200)
 
     except Exception as e:
         logging.error(f"TTS Error: {e}")

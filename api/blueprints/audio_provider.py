@@ -37,12 +37,13 @@ from codal_structural import fetch_codal_family_bounds, normalize_codal_label_ke
 # Azure Storage (optional - used for caching)
 from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPermissions, ContentSettings
 
-# Azure Speech (optional - used if key is available)
-try:
-    import azure.cognitiveservices.speech as speechsdk
-    AZURE_SPEECH_AVAILABLE = True
-except Exception:
-    AZURE_SPEECH_AVAILABLE = False
+# Azure Speech via REST only (no Speech SDK — smaller Linux deploy for SWA Free tier).
+def _azure_speech_configured():
+    k = (os.environ.get("SPEECH_KEY") or "").strip()
+    return bool(k and "<insert" not in k.lower())
+
+
+AZURE_SPEECH_AVAILABLE = _azure_speech_configured()
 
 audio_provider_bp = func.Blueprint()
 
@@ -1466,7 +1467,7 @@ def get_audio_stream(req: func.HttpRequest) -> func.HttpResponse:
                 _TTS_LOCK.release()
         elif _USE_AZURE_SPEECH and not AZURE_SPEECH_AVAILABLE:
             return func.HttpResponse(
-                json.dumps({"error": "LEXPLAY_USE_AZURE_SPEECH is set but Azure Speech SDK is not available."}),
+                json.dumps({"error": "LEXPLAY_USE_AZURE_SPEECH is set but SPEECH_KEY is not configured."}),
                 status_code=503,
                 mimetype="application/json",
             )
