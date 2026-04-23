@@ -9,6 +9,7 @@ import {
     rccSectionNumberDisplayWithPeriod,
     stripLegacyCodexArticleRunIn,
 } from '../utils/codalMarkdown';
+import { mergeRpcImpliedAmendmentsIntoArticles } from '../utils/mergeRpcImpliedAmendments';
 import { Play, Loader2 } from 'lucide-react';
 
 const INITIAL_CHUNK = 30; // articles to render at first load
@@ -176,7 +177,12 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
 
             try {
                 await lexCache.swr('codals', cacheKey, fetcher, (data) => {
-                    setArticles(data || []);
+                    const raw = data || [];
+                    setArticles(
+                        String(code).toUpperCase() === 'RPC'
+                            ? mergeRpcImpliedAmendmentsIntoArticles(raw)
+                            : raw
+                    );
                     setLoading(false);
                 });
             } catch (err) {

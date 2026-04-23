@@ -537,7 +537,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         const legacyMapped = article.amendment_links.map(am => ({
             id: am.amendment_law,
             date: am.valid_from,
-            description: am.description
+            description: am.description,
+            implied: false,
         }));
         // Avoid duplicate rendering if the item was already migrated
         legacyMapped.forEach(leg => {
@@ -548,6 +549,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     }
 
     const isAmended = parsedAmendments && parsedAmendments.length > 0;
+    const hasDirectAmendmentEntries =
+        parsedAmendments && parsedAmendments.some((a) => a && !a.implied);
+    const amendHistoryIconRed = Boolean(isAmended && !hasDirectAmendmentEntries);
 
     // Rainbow Band Logic
     const rainbowColors = [
@@ -606,8 +610,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                     e.stopPropagation();
                                     setIsHistoryOpen((prev) => !prev);
                                 }}
-                                className="relative z-[6] flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-lg text-orange-500 transition-colors hover:bg-orange-500/10 hover:text-orange-600 active:bg-orange-500/15 dark:text-orange-400 dark:hover:text-orange-300"
-                                title="View Amendment History"
+                                className={
+                                    amendHistoryIconRed
+                                        ? 'relative z-[6] flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-lg text-red-600 transition-colors hover:bg-red-500/10 hover:text-red-700 active:bg-red-500/15 dark:text-red-400 dark:hover:text-red-300'
+                                        : 'relative z-[6] flex h-11 w-11 shrink-0 touch-manipulation items-center justify-center rounded-lg text-orange-500 transition-colors hover:bg-orange-500/10 hover:text-orange-600 active:bg-orange-500/15 dark:text-orange-400 dark:hover:text-orange-300'
+                                }
+                                title={
+                                    amendHistoryIconRed
+                                        ? 'Supplementary amendment context (special laws)'
+                                        : 'View Amendment History'
+                                }
                                 aria-expanded={isHistoryOpen}
                                 aria-haspopup="dialog"
                             >
@@ -754,15 +766,34 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                         aria-modal="true"
                                         aria-label="Amendment history"
                                         className={
-                                            amendHistoryUsePortal
-                                                ? 'fixed inset-x-4 top-[max(1.5rem,env(safe-area-inset-top))] z-[101] flex min-h-0 max-h-[min(72vh,calc(100dvh-2rem))] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-orange-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-orange-900/50 dark:bg-gray-800'
-                                                : 'fixed inset-x-4 top-[22%] z-50 flex min-h-0 max-h-[min(72vh,520px)] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-orange-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-orange-900/50 dark:bg-gray-800 sm:inset-auto sm:absolute sm:left-0 sm:top-8 sm:max-h-[min(85vh,480px)] sm:w-[500px]'
+                                            amendHistoryIconRed
+                                                ? amendHistoryUsePortal
+                                                    ? 'fixed inset-x-4 top-[max(1.5rem,env(safe-area-inset-top))] z-[101] flex min-h-0 max-h-[min(72vh,calc(100dvh-2rem))] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-red-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-red-900/50 dark:bg-gray-800'
+                                                    : 'fixed inset-x-4 top-[22%] z-50 flex min-h-0 max-h-[min(72vh,520px)] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-red-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-red-900/50 dark:bg-gray-800 sm:inset-auto sm:absolute sm:left-0 sm:top-8 sm:max-h-[min(85vh,480px)] sm:w-[500px]'
+                                                : amendHistoryUsePortal
+                                                  ? 'fixed inset-x-4 top-[max(1.5rem,env(safe-area-inset-top))] z-[101] flex min-h-0 max-h-[min(72vh,calc(100dvh-2rem))] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-orange-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-orange-900/50 dark:bg-gray-800'
+                                                  : 'fixed inset-x-4 top-[22%] z-50 flex min-h-0 max-h-[min(72vh,520px)] w-[min(100%,28rem)] max-w-full flex-col rounded-xl border border-orange-200 bg-white shadow-2xl animate-in fade-in zoom-in-95 duration-200 dark:border-orange-900/50 dark:bg-gray-800 sm:inset-auto sm:absolute sm:left-0 sm:top-8 sm:max-h-[min(85vh,480px)] sm:w-[500px]'
                                         }
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        <div className="flex shrink-0 items-start justify-between gap-2 border-b border-orange-100/90 px-4 pb-3 pt-4 dark:border-orange-900/30">
-                                            <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400">
-                                                <Info size={16} className="shrink-0" strokeWidth={2.25} /> Amendment History
+                                        <div
+                                            className={
+                                                amendHistoryIconRed
+                                                    ? 'flex shrink-0 items-start justify-between gap-2 border-b border-red-100/90 px-4 pb-3 pt-4 dark:border-red-900/30'
+                                                    : 'flex shrink-0 items-start justify-between gap-2 border-b border-orange-100/90 px-4 pb-3 pt-4 dark:border-orange-900/30'
+                                            }
+                                        >
+                                            <h4
+                                                className={
+                                                    amendHistoryIconRed
+                                                        ? 'flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-red-600 dark:text-red-400'
+                                                        : 'flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400'
+                                                }
+                                            >
+                                                <Info size={16} className="shrink-0" strokeWidth={2.25} />{' '}
+                                                {amendHistoryIconRed
+                                                    ? 'Supplementary amendment context'
+                                                    : 'Amendment History'}
                                             </h4>
                                             <button
                                                 type="button"
@@ -779,15 +810,28 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 {[...parsedAmendments].reverse().map((am, idx) => {
                                                     const body = am.description || am.summary;
                                                     const hasBody = body && String(body).trim();
+                                                    const rowImplied = Boolean(am.implied);
                                                     return (
                                                         <div key={idx} className="text-gray-700 dark:text-gray-300">
-                                                            <div className="mb-2 flex justify-between gap-3 text-xs font-semibold text-orange-800 dark:text-orange-300">
+                                                            <div
+                                                                className={
+                                                                    rowImplied
+                                                                        ? 'mb-2 flex justify-between gap-3 text-xs font-semibold text-red-800 dark:text-red-300'
+                                                                        : 'mb-2 flex justify-between gap-3 text-xs font-semibold text-orange-800 dark:text-orange-300'
+                                                                }
+                                                            >
                                                                 <span className="min-w-0 leading-snug">{am.id || am.law || 'Unknown Law'}</span>
                                                                 <span className="shrink-0 font-normal tabular-nums text-gray-500 dark:text-gray-500">
                                                                     {am.date || 'No Date'}
                                                                 </span>
                                                             </div>
-                                                            <div className="rounded-lg border border-orange-100/90 bg-orange-50/95 px-4 py-3.5 dark:border-orange-900/25 dark:bg-orange-950/20">
+                                                            <div
+                                                                className={
+                                                                    rowImplied
+                                                                        ? 'rounded-lg border border-red-100/90 bg-red-50/95 px-4 py-3.5 dark:border-red-900/25 dark:bg-red-950/20'
+                                                                        : 'rounded-lg border border-orange-100/90 bg-orange-50/95 px-4 py-3.5 dark:border-orange-900/25 dark:bg-orange-950/20'
+                                                                }
+                                                            >
                                                                 {!hasBody ? (
                                                                     <span className="text-xs text-gray-500 dark:text-gray-400">No Description</span>
                                                                 ) : (
