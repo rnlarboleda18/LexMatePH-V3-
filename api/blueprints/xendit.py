@@ -153,8 +153,10 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
     if not last_name:
         last_name = "."
 
-    ref_id = f"lexmate-{clerk_id}"
-    # Current Xendit Customer API schema: reference_id + nested individual_detail
+    # Use a unique reference_id per attempt to avoid conflicts with customers
+    # created via the old client_reference API. The customer_id returned is
+    # what we persist and reuse — the reference_id is just a one-time key.
+    ref_id = f"lm-{clerk_id[:20]}-{uuid.uuid4().hex[:8]}"
     payload = {
         "reference_id": ref_id,
         "type": "INDIVIDUAL",
@@ -175,27 +177,6 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         customer_id = resp.json().get("id", "")
         if not customer_id:
             raise RuntimeError(f"Xendit customer creation: no id in response: {resp.text}")
-    elif resp.status_code == 409 or (resp.status_code == 400 and "DUPLICATE" in resp.text):
-        # Customer already exists — fetch by reference_id
-        fetch_resp = requests.get(
-            f"{XENDIT_BASE_URL}/customers?reference_id={ref_id}",
-            headers=_xendit_headers(),
-            timeout=15,
-        )
-        if fetch_resp.status_code != 200:
-            raise RuntimeError(
-                f"Xendit customer lookup failed ({fetch_resp.status_code}): {fetch_resp.text}"
-            )
-        data = fetch_resp.json()
-        items = data.get("data", data) if isinstance(data, dict) else data
-        if isinstance(items, list) and items:
-            customer_id = items[0].get("id", "")
-        elif isinstance(items, dict):
-            customer_id = items.get("id", "")
-        else:
-            raise RuntimeError(f"Xendit customer lookup: unexpected response: {fetch_resp.text}")
-        if not customer_id:
-            raise RuntimeError(f"Xendit customer lookup: no id in response: {fetch_resp.text}")
     else:
         raise RuntimeError(f"Xendit customer creation failed ({resp.status_code}): {resp.text}")
 
