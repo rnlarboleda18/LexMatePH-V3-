@@ -755,31 +755,61 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
 def _handle_payment_succeeded(data: dict):
     """
     payment.capture / payment.succeeded — initial payment from the PAY session succeeded.
-    Grant the subscription tier immediately so the user doesn't have to wait for
-    the recurring plan webhook (which fires shortly after but with a delay).
+    Grant the subscription tier immediately.
+
+    Lookup priority:
+    1. customer_id  → xendit_customer_id in DB
+    2. metadata.clerk_id → clerk_id directly (always present in our session metadata)
+    3. reference_id prefix → parse clerk_id from our lm-{clerk_id[:20]}-{ts} pattern
     """
+    clerk_id = None
+    plan_key = None
+
     customer_id = data.get("customer_id", "")
-    if not customer_id:
-        logging.warning("payment.capture: missing customer_id — cannot grant tier")
+    if customer_id:
+        try:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "SELECT clerk_id, xendit_pending_plan_key FROM users WHERE xendit_customer_id = %s",
+                        (customer_id,),
+                    )
+                    row = cur.fetchone()
+                    if row:
+                        clerk_id, plan_key = row[0], row[1]
+        except Exception as e:
+            logging.warning(f"payment.succeeded: customer_id lookup failed: {e}")
+
+    if not clerk_id:
+        metadata = data.get("metadata") or {}
+        clerk_id = metadata.get("clerk_id", "")
+        if clerk_id:
+            try:
+                with _get_db() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "SELECT xendit_pending_plan_key FROM users WHERE clerk_id = %s",
+                            (clerk_id,),
+                        )
+                        row = cur.fetchone()
+                        if row:
+                            plan_key = row[0]
+            except Exception as e:
+                logging.warning(f"payment.succeeded: metadata clerk_id lookup failed: {e}")
+
+    if not clerk_id:
+        logging.warning(f"payment.succeeded: cannot identify user (customer_id={customer_id}, data keys={list(data.keys())})")
         return
+
+    if not plan_key or plan_key not in PLAN_CONFIGS:
+        logging.warning(f"payment.succeeded: no pending plan_key for clerk_id={clerk_id}")
+        return
+
+    tier = PLAN_KEY_TO_TIER.get(plan_key, "free")
+    if tier == "free":
+        return
+
     try:
-        with _get_db() as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    "SELECT clerk_id, xendit_pending_plan_key FROM users WHERE xendit_customer_id = %s",
-                    (customer_id,),
-                )
-                row = cur.fetchone()
-        if not row:
-            logging.warning(f"payment.capture: no user found for customer_id={customer_id}")
-            return
-        clerk_id, plan_key = row[0], row[1]
-        if not plan_key or plan_key not in PLAN_CONFIGS:
-            logging.warning(f"payment.capture: no pending plan_key for clerk_id={clerk_id}")
-            return
-        tier = PLAN_KEY_TO_TIER.get(plan_key, "free")
-        if tier == "free":
-            return
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
@@ -791,9 +821,9 @@ def _handle_payment_succeeded(data: dict):
                     (tier, clerk_id),
                 )
                 conn.commit()
-        logging.info(f"payment.capture: granted tier '{tier}' to clerk_id={clerk_id}")
+        logging.info(f"payment.succeeded: granted tier '{tier}' to clerk_id={clerk_id}")
     except Exception as e:
-        logging.error(f"payment.capture handler error: {e}")
+        logging.error(f"payment.succeeded handler error: {e}")
 
 
 def _handle_payment_token_activated(data: dict):
@@ -801,34 +831,55 @@ def _handle_payment_token_activated(data: dict):
     payment_token.activation — user saved their payment method during checkout.
     We use payment_token_id + customer_id to create the recurring subscription plan.
     The pending plan key was stored in DB when checkout was initiated.
+
+    Note: Xendit test events may omit customer_id; fall back to metadata.clerk_id.
     """
     customer_id = data.get("customer_id", "")
     payment_token_id = data.get("payment_token_id", "")
 
-    if not customer_id:
-        logging.error("payment_token.activation: missing customer_id")
-        return
     if not payment_token_id:
         logging.error("payment_token.activation: missing payment_token_id")
         return
 
-    try:
-        with _get_db() as conn:
-            with conn.cursor() as cur:
-                cur.execute(
-                    "SELECT clerk_id, xendit_pending_plan_key FROM users WHERE xendit_customer_id = %s",
-                    (customer_id,),
-                )
-                row = cur.fetchone()
-    except Exception as e:
-        logging.error(f"payment_token.activation: DB lookup failed: {e}")
-        return
+    clerk_id = None
+    plan_key = None
 
-    if not row:
-        logging.error(f"payment_token.activation: no user found for customer_id={customer_id}")
-        return
+    if customer_id:
+        try:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "SELECT clerk_id, xendit_pending_plan_key FROM users WHERE xendit_customer_id = %s",
+                        (customer_id,),
+                    )
+                    row = cur.fetchone()
+                    if row:
+                        clerk_id, plan_key = row[0], row[1]
+        except Exception as e:
+            logging.error(f"payment_token.activation: DB lookup failed: {e}")
 
-    clerk_id, plan_key = row[0], row[1]
+    if not clerk_id:
+        metadata = data.get("metadata") or {}
+        clerk_id = metadata.get("clerk_id", "")
+        if clerk_id:
+            try:
+                with _get_db() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "SELECT xendit_customer_id, xendit_pending_plan_key FROM users WHERE clerk_id = %s",
+                            (clerk_id,),
+                        )
+                        row = cur.fetchone()
+                        if row:
+                            if not customer_id:
+                                customer_id = row[0] or ""
+                            plan_key = row[1]
+            except Exception as e:
+                logging.error(f"payment_token.activation: metadata clerk_id lookup failed: {e}")
+
+    if not clerk_id:
+        logging.error(f"payment_token.activation: cannot identify user (customer_id={customer_id})")
+        return
     if not plan_key or plan_key not in PLAN_CONFIGS:
         logging.warning(
             f"payment_token.activation: clerk_id={clerk_id} has no pending plan_key — "
