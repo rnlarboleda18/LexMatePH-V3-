@@ -161,8 +161,12 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         timeout=15,
     )
     if resp.status_code not in (200, 201):
-        # If a customer with this reference_id already exists, try to fetch it
-        if resp.status_code == 409:
+        # Xendit returns 400 DUPLICATE_END_CUSTOMER_ERROR or 409 when client_reference already exists
+        is_duplicate = (
+            resp.status_code == 409
+            or (resp.status_code == 400 and "DUPLICATE_END_CUSTOMER_ERROR" in resp.text)
+        )
+        if is_duplicate:
             fetch_resp = requests.get(
                 f"{XENDIT_BASE_URL}/customers?client_reference={client_ref}",
                 headers=_xendit_headers(),
@@ -176,7 +180,7 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
                 elif isinstance(items, dict):
                     customer_id = items.get("id") or items.get("end_customer_id", "")
                 else:
-                    raise RuntimeError(f"Xendit customer lookup failed after 409: {fetch_resp.text}")
+                    raise RuntimeError(f"Xendit customer lookup failed after duplicate: {fetch_resp.text}")
             else:
                 raise RuntimeError(f"Xendit customer creation failed: {resp.text}")
         else:
