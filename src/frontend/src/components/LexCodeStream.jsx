@@ -247,7 +247,23 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
         return art;
     }), [articles]);
 
-    if (loading) return <div className="p-8 text-center text-gray-500 animate-pulse">Loading Codal Stream...</div>;
+    if (loading) {
+        return (
+            <div
+                className="flex min-h-[40vh] flex-col items-center justify-center gap-3 p-8 text-gray-500 dark:text-gray-400"
+                role="status"
+                aria-live="polite"
+                aria-busy="true"
+                aria-label="Loading codal stream"
+            >
+                <div
+                    className="h-10 w-10 shrink-0 animate-spin rounded-full border-2 border-amber-500/30 border-t-amber-600 dark:border-amber-400/20 dark:border-t-amber-400"
+                    aria-hidden
+                />
+                <p className="hidden text-sm font-medium lg:block">Loading Codal Stream…</p>
+            </div>
+        );
+    }
     if (error) return <div className="p-8 text-center text-red-500">Error: {error}</div>;
     if (articles.length === 0) return <div className="p-8 text-center text-gray-400">No articles found.</div>;
 

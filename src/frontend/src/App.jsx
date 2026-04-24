@@ -628,7 +628,11 @@ function App() {
                   )}
                   {effectiveMode === 'codex' && (
                     <div className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      <Suspense fallback={<PageLoadingFallback label="Loading LexCode…" />}>
+                      <Suspense
+                        fallback={
+                          <PageLoadingFallback label="Loading LexCode…" labelVisibility="lgAndUp" />
+                        }
+                      >
                         <LexCodeViewer
                           shortName={selectedCodalCode ? selectedCodalCode.toUpperCase() : ''}
                           codalOptions={CODAL_FILTER_OPTIONS}
