@@ -160,7 +160,9 @@ export default function SubscriptionModal({ onClose }) {
       try { data = text ? JSON.parse(text) : {}; } catch { data = { error: text || `HTTP ${res.status}` }; }
 
       if (!res.ok) {
-        setErrorMsg(data.error || data.message || `Server error (${res.status})`);
+        const detail = res.headers.get('X-Debug-Error') || data.trace || '';
+        const msg = data.error || data.message || `Server error (${res.status})`;
+        setErrorMsg(detail ? `${msg} — ${detail}` : msg);
         return;
       }
 

@@ -502,10 +502,14 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             )
         raise
     except Exception as e:
-        logging.error(f"create_checkout error: {e}")
+        import traceback
+        detail = traceback.format_exc()
+        logging.error(f"create_checkout error: {e}\n{detail}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
-            mimetype="application/json", status_code=500,
+            json.dumps({"error": str(e) or "Unknown internal error", "trace": detail[-400:]}),
+            mimetype="application/json",
+            status_code=500,
+            headers={"X-Debug-Error": str(e)[:200]},
         )
 
 
