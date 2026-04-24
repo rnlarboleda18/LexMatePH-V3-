@@ -229,10 +229,12 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token
         },
         "description": f"LexMatePH {cfg['label']} subscription",
     }
+    # Recurring plans API requires api-version: 2026-01-01
+    recurring_headers = {**_xendit_headers(), "api-version": "2026-01-01"}
     resp = requests.post(
         f"{XENDIT_BASE_URL}/recurring/plans",
         json=payload,
-        headers=_xendit_headers(),
+        headers=recurring_headers,
         timeout=20,
     )
     if resp.status_code not in (200, 201, 202):
@@ -798,8 +800,11 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
         logging.info(f"Xendit webhook received: {evt_type} (id={data_id})")
 
+        # Grant tier immediately when initial payment succeeds (before plan is created)
+        if evt_type in ("payment.capture", "payment.succeeded"):
+            _handle_payment_succeeded(evt_data)
         # v3 uses "payment_token.activation"; older docs said "payment_token.activated"
-        if evt_type in ("payment_token.activated", "payment_token.activation"):
+        elif evt_type in ("payment_token.activated", "payment_token.activation"):
             _handle_payment_token_activated(evt_data)
         elif evt_type in ("recurring.plan.activated", "recurring_plan.activated"):
             _handle_plan_activated(evt_data)
@@ -822,6 +827,50 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
 
 # ── Webhook handlers ──────────────────────────────────────────────────────────
+
+def _handle_payment_succeeded(data: dict):
+    """
+    payment.capture / payment.succeeded — initial payment from the PAY session succeeded.
+    Grant the subscription tier immediately so the user doesn't have to wait for
+    the recurring plan webhook (which fires shortly after but with a delay).
+    """
+    customer_id = data.get("customer_id", "")
+    if not customer_id:
+        logging.warning("payment.capture: missing customer_id — cannot grant tier")
+        return
+    try:
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT clerk_id, xendit_pending_plan_key FROM users WHERE xendit_customer_id = %s",
+                    (customer_id,),
+                )
+                row = cur.fetchone()
+        if not row:
+            logging.warning(f"payment.capture: no user found for customer_id={customer_id}")
+            return
+        clerk_id, plan_key = row[0], row[1]
+        if not plan_key or plan_key not in PLAN_CONFIGS:
+            logging.warning(f"payment.capture: no pending plan_key for clerk_id={clerk_id}")
+            return
+        tier = PLAN_KEY_TO_TIER.get(plan_key, "free")
+        if tier == "free":
+            return
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """UPDATE users SET
+                           subscription_tier   = %s,
+                           subscription_status = 'active',
+                           subscription_source = 'xendit'
+                       WHERE clerk_id = %s""",
+                    (tier, clerk_id),
+                )
+                conn.commit()
+        logging.info(f"payment.capture: granted tier '{tier}' to clerk_id={clerk_id}")
+    except Exception as e:
+        logging.error(f"payment.capture handler error: {e}")
+
 
 def _handle_payment_token_activated(data: dict):
     """
