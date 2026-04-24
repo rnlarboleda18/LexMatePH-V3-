@@ -59,15 +59,18 @@ const LandingPage = ({ onEnterApp }) => {
                         </div>
                         <div className="relative z-10 min-w-0 flex-1 max-lg:min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
                             <h1 className="font-display text-xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white max-lg:leading-snug sm:max-lg:text-2xl lg:text-[1.55rem] lg:leading-snug xl:text-2xl 2xl:text-3xl">
-                                Master the Bar
+                                Study Smart
                                 <span className="mt-1 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200 sm:mt-1.5 lg:mt-1">
                                     without the burnout with your all-in-one legal companion
                                 </span>
                             </h1>
                             <p className="mt-2 max-w-xl text-xs leading-relaxed text-gray-700 dark:text-gray-300 max-lg:max-w-none sm:mt-3 sm:max-lg:text-sm lg:mt-2.5 lg:text-sm xl:text-[0.95rem]">
                                 Built for law students, bar candidates, and practitioners: past bar questions, Supreme
-                                Court decisions, evidence-grounded digests, major codals, flashcards, and LexPlay
-                                listening—together in one fast, installable workspace.
+                                Court decisions, evidence-grounded digests, major codals, flashcards, and{' '}
+                                <strong className="font-bold text-gray-900 dark:text-gray-100">
+                                    LexPlay Podcast style your favorite codals, cases digest, Bar questions
+                                </strong>
+                                —together in one fast, installable workspace.
                             </p>
                             <div className="mt-3 hidden flex-wrap items-center gap-1.5 sm:mt-5 sm:gap-2 lg:mt-3.5 lg:flex lg:gap-2.5">
                                 <button
