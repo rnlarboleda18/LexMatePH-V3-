@@ -725,7 +725,7 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
         logging.info(f"Xendit webhook received: {evt_type} (id={data_id})")
 
         # Grant tier immediately when initial payment succeeds (before plan is created)
-        if evt_type in ("payment.capture", "payment.succeeded"):
+        if evt_type in ("payment.capture", "payment.succeeded", "payment_session.completed"):
             _handle_payment_succeeded(evt_data)
         # v3 uses "payment_token.activation"; older docs said "payment_token.activated"
         elif evt_type in ("payment_token.activated", "payment_token.activation"):
@@ -765,7 +765,13 @@ def _handle_payment_succeeded(data: dict):
     clerk_id = None
     plan_key = None
 
-    customer_id = data.get("customer_id", "")
+    # customer_id may be top-level or nested under payment object
+    customer_id = (
+        data.get("customer_id")
+        or data.get("payment", {}).get("customer_id", "")
+        or ""
+    )
+
     if customer_id:
         try:
             with _get_db() as conn:
@@ -781,7 +787,8 @@ def _handle_payment_succeeded(data: dict):
             logging.warning(f"payment.succeeded: customer_id lookup failed: {e}")
 
     if not clerk_id:
-        metadata = data.get("metadata") or {}
+        # metadata is present in payment.capture and payment_session.completed
+        metadata = data.get("metadata") or data.get("payment", {}).get("metadata") or {}
         clerk_id = metadata.get("clerk_id", "")
         if clerk_id:
             try:
