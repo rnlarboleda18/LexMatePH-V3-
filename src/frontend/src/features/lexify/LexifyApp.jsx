@@ -160,43 +160,62 @@ const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }
             : {};
 
         try {
-            // Grade each question individually and collect results
-            const results = await Promise.all(
-                activeQuestions.map(async (q, i) => {
-                    const answer = userAnswers[i] || '';
-                    if (!answer.replace(/<[^>]*>?/gm, '').trim()) {
-                        return null; // skipped / no answer
-                    }
-                    try {
-                        const res = await fetch('/api/lexify_grade', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json', ...authHeaders },
-                            body: JSON.stringify({
-                                answer: answer.replace(/<[^>]*>?/gm, ''),
-                                suggested_answer: q.answer || q.suggested_answer || '',
-                                subject: q.subject || '',
-                                question_text: q.text || ''
-                            })
-                        });
-                        if (!res.ok) {
-                            const errData = await res.json().catch(() => ({}));
-                            const msg =
-                                errData.error ||
-                                errData.detail ||
-                                `Grading failed (Status ${res.status})`;
-                            if (!firstApiError) firstApiError = msg;
-                            return null;
-                        }
-                        return await res.json();
-                    } catch {
-                        if (!firstApiError) {
-                            firstApiError =
-                                'Network error calling the grading API. Is the Functions host running on port 7071?';
-                        }
-                        return null;
-                    }
+            const stripHtml = (html) => (html || '').replace(/<[^>]*>?/gm, '').trim();
+            const items = activeQuestions
+                .map((q, i) => {
+                    const plain = stripHtml(userAnswers[i] || '');
+                    if (!plain) return null;
+                    return {
+                        index: i,
+                        answer: plain,
+                        suggested_answer: q.answer || q.suggested_answer || '',
+                        subject: q.subject || '',
+                        question_text: q.text || ''
+                    };
                 })
-            );
+                .filter(Boolean);
+
+            const results = activeQuestions.map(() => null);
+
+            if (items.length === 0) {
+                // nothing to send; results stay all null
+            } else {
+                try {
+                    const res = await fetch('/api/lexify_grade_batch', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', ...authHeaders },
+                        body: JSON.stringify({ items })
+                    });
+                    if (!res.ok) {
+                        const errData = await res.json().catch(() => ({}));
+                        firstApiError =
+                            errData.error ||
+                            errData.detail ||
+                            `Grading failed (Status ${res.status})`;
+                    } else {
+                        const data = await res.json();
+                        const list = Array.isArray(data.results) ? data.results : [];
+                        for (const row of list) {
+                            const idx = row.index;
+                            if (
+                                typeof idx === 'number' &&
+                                idx >= 0 &&
+                                idx < results.length &&
+                                row.score != null
+                            ) {
+                                results[idx] = {
+                                    score: Number(row.score),
+                                    feedback: row.feedback || '',
+                                    comparison_highlight: row.comparison_highlight || ''
+                                };
+                            }
+                        }
+                    }
+                } catch {
+                    firstApiError =
+                        'Network error calling the grading API. Is the Functions host running on port 7071?';
+                }
+            }
 
             const anyScore = results.some((r) => r != null);
             if (!anyScore) {

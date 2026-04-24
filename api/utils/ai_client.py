@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import threading
 import time
 from typing import Any, Dict, List, Optional, Union
 
@@ -15,6 +16,14 @@ DEFAULT_MODEL = os.environ.get("GEMINI_VERTEX_MODEL") or "gemini-3-flash-preview
 logger = logging.getLogger(__name__)
 
 _CLOUD_PLATFORM_SCOPE = ("https://www.googleapis.com/auth/cloud-platform",)
+
+# Reuse OAuth credentials across concurrent Lexify calls (avoid a token refresh per question).
+_vertex_creds_lock = threading.Lock()
+_vertex_creds: Optional[Any] = None
+
+# Keep-alive to Vertex (same process serves many parallel grades).
+_http_session: Optional[requests.Session] = None
+_http_session_lock = threading.Lock()
 
 
 def _maybe_use_gcloud_application_default_credentials_file() -> None:
@@ -75,15 +84,29 @@ def _vertex_generate_url(*, project_id: str, location: str, model: str) -> str:
 
 
 def _get_vertex_bearer_token() -> str:
-    credentials = _get_google_credentials()
-    credentials.refresh(GoogleAuthRequest())
-    token = getattr(credentials, "token", None)
-    if not token:
-        raise ValueError(
-            "Could not get an OAuth access token for Vertex. "
-            "Use a service account (e.g. GOOGLE_APPLICATION_CREDENTIALS) or valid ADC."
-        )
-    return token
+    global _vertex_creds
+    with _vertex_creds_lock:
+        if _vertex_creds is None:
+            _vertex_creds = _get_google_credentials()
+        if not _vertex_creds.valid:
+            _vertex_creds.refresh(GoogleAuthRequest())
+        token = _vertex_creds.token
+        if not token:
+            raise ValueError(
+                "Could not get an OAuth access token for Vertex. "
+                "Use a service account (e.g. GOOGLE_APPLICATION_CREDENTIALS) or valid ADC."
+            )
+        return token
+
+
+def _vertex_http_session() -> requests.Session:
+    global _http_session
+    with _http_session_lock:
+        if _http_session is None:
+            s = requests.Session()
+            s.headers.update({"Connection": "keep-alive"})
+            _http_session = s
+        return _http_session
 
 
 def call_vertex_ai(
@@ -134,10 +157,11 @@ def call_vertex_ai(
     if system_instruction:
         payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
 
+    session = _vertex_http_session()
     last_error: Optional[str] = None
     for attempt in range(retries):
         try:
-            response = requests.post(url, headers=headers, data=json.dumps(payload), timeout=60)
+            response = session.post(url, headers=headers, data=json.dumps(payload), timeout=60)
 
             if response.status_code == 200:
                 data = response.json()

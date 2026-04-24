@@ -133,10 +133,11 @@
   }
 }
 
-/* Default md+ overlay reserves bottom space for LexPlay + trim; use --full-bleed for case/detail modals (no undimmed strip). */
+/* Default md+ overlay reserves bottom space for LexPlay + trim. Full-bleed still avoids the bottom “trim” gap but must
+   sit above the fixed LexPlayer mini bar (--player-height), same as the global md+ .lex-modal-overlay rule. */
 @media (min-width: 768px) {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
-    bottom: env(safe-area-inset-bottom, 0px) !important;
+    bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
 
