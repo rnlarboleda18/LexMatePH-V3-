@@ -201,7 +201,7 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
     return customer_id
 
 
-def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, plan_key: str) -> str:
+def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token_id: str, plan_key: str) -> str:
     """Create a Xendit recurring plan for the given customer. Returns plan_id."""
     cfg = PLAN_CONFIGS[plan_key]
     ref_id = f"lm-plan-{int(time.time())}-{uuid.uuid4().hex[:6]}"
@@ -210,6 +210,8 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, plan_key: str
         "customer_id": customer_id,
         "currency": "PHP",
         "amount": cfg["amount"],
+        # payment_tokens is REQUIRED — without it Xendit has no card to charge on future cycles
+        "payment_tokens": [{"payment_token_id": payment_token_id, "rank": 1}],
         "schedule": {
             "interval": cfg["interval"],
             "interval_count": cfg["interval_count"],
@@ -218,7 +220,7 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, plan_key: str
             "retry_interval_count": 3,
             "total_retry": 3,
         },
-        "immediate_payment": False,  # first payment collected via the PAY session
+        "immediate_payment": False,  # first payment already collected via the PAY session
         "failed_cycle_action": "RESUME",
         "notification_channels": ["EMAIL"],
         "metadata": {
@@ -449,7 +451,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         payload = {
             "reference_id": session_ref,
             "session_type": "PAY",
-            "allow_save_payment_method": "OPTIONAL",
+            "allow_save_payment_method": "FORCED",
             "currency": "PHP",
             "amount": cfg["amount"],
             "mode": "PAYMENT_LINK",
@@ -494,6 +496,19 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 json.dumps({"error": "No checkout URL returned by payment provider", "detail": resp_data}),
                 mimetype="application/json", status_code=503,
             )
+
+        # Save the customer_id Xendit auto-created from the inline customer object.
+        # The payment_token.activation webhook identifies users by this customer_id.
+        xendit_customer_id = resp_data.get("customer_id", "")
+        if xendit_customer_id:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "UPDATE users SET xendit_customer_id = %s WHERE clerk_id = %s",
+                        (xendit_customer_id, clerk_id),
+                    )
+                    conn.commit()
+            logging.info(f"create_checkout: saved customer_id={xendit_customer_id} for clerk_id={clerk_id}")
 
         return func.HttpResponse(
             json.dumps({
@@ -758,8 +773,11 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
         evt_type = event.get("event", "")
         evt_data = event.get("data", {})
 
-        # Idempotency key: use event type + data id when available
-        data_id = evt_data.get("id", "") if isinstance(evt_data, dict) else ""
+        # Idempotency key: payment_token events use payment_token_id, others use id
+        if isinstance(evt_data, dict):
+            data_id = (evt_data.get("payment_token_id") or evt_data.get("id", ""))
+        else:
+            data_id = ""
         idempotency_key = f"xendit-{evt_type}-{data_id}" if data_id else None
 
         if idempotency_key:
@@ -807,13 +825,18 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
 def _handle_payment_token_activated(data: dict):
     """
-    payment_token.activated — user saved their payment method.
-    We use this to create the recurring subscription plan.
+    payment_token.activation — user saved their payment method during checkout.
+    We use payment_token_id + customer_id to create the recurring subscription plan.
     The pending plan key was stored in DB when checkout was initiated.
     """
     customer_id = data.get("customer_id", "")
+    payment_token_id = data.get("payment_token_id", "")
+
     if not customer_id:
-        logging.error("payment_token.activated: missing customer_id")
+        logging.error("payment_token.activation: missing customer_id")
+        return
+    if not payment_token_id:
+        logging.error("payment_token.activation: missing payment_token_id")
         return
 
     try:
@@ -825,26 +848,26 @@ def _handle_payment_token_activated(data: dict):
                 )
                 row = cur.fetchone()
     except Exception as e:
-        logging.error(f"payment_token.activated: DB lookup failed: {e}")
+        logging.error(f"payment_token.activation: DB lookup failed: {e}")
         return
 
     if not row:
-        logging.error(f"payment_token.activated: no user found for customer_id={customer_id}")
+        logging.error(f"payment_token.activation: no user found for customer_id={customer_id}")
         return
 
     clerk_id, plan_key = row[0], row[1]
     if not plan_key or plan_key not in PLAN_CONFIGS:
         logging.warning(
-            f"payment_token.activated: clerk_id={clerk_id} has no pending plan_key — "
-            "recurring plan creation skipped (token saved for future use)"
+            f"payment_token.activation: clerk_id={clerk_id} has no pending plan_key — "
+            "recurring plan creation skipped"
         )
         return
 
     try:
-        plan_id = _create_xendit_recurring_plan(clerk_id, customer_id, plan_key)
-        logging.info(f"payment_token.activated: created plan {plan_id} for clerk_id={clerk_id}, plan={plan_key}")
+        plan_id = _create_xendit_recurring_plan(clerk_id, customer_id, payment_token_id, plan_key)
+        logging.info(f"payment_token.activation: created plan {plan_id} for clerk_id={clerk_id}, plan={plan_key}")
     except Exception as e:
-        logging.error(f"payment_token.activated: plan creation failed for clerk_id={clerk_id}: {e}")
+        logging.error(f"payment_token.activation: plan creation failed for clerk_id={clerk_id}: {e}")
 
 
 def _handle_plan_activated(data: dict):
