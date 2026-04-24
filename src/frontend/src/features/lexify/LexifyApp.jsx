@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 import LexifyDashboard from './LexifyDashboard';
 import LexifySidebar from './LexifySidebar';
 import LexifyWorkspace from './LexifyWorkspace';
@@ -10,6 +11,7 @@ import LexifyResults from './LexifyResults';
 // ... state definitions intact
 
 const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }) => {
+    const { getToken } = useAuth();
     const [examState, setExamState] = useState(0);
     const [activeQuestions, setActiveQuestions] = useState(propQuestions || []);
     const [examLabel, setExamLabel] = useState('');
@@ -144,6 +146,19 @@ const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }
 
     const runGrading = async () => {
         setGradingError('');
+        let firstApiError = '';
+        let token = null;
+        try {
+            if (typeof getToken === 'function') {
+                token = await getToken().catch(() => null);
+            }
+        } catch {
+            token = null;
+        }
+        const authHeaders = token
+            ? { 'X-Clerk-Authorization': `Bearer ${token}` }
+            : {};
+
         try {
             // Grade each question individually and collect results
             const results = await Promise.all(
@@ -155,7 +170,7 @@ const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }
                     try {
                         const res = await fetch('/api/lexify_grade', {
                             method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
+                            headers: { 'Content-Type': 'application/json', ...authHeaders },
                             body: JSON.stringify({
                                 answer: answer.replace(/<[^>]*>?/gm, ''),
                                 suggested_answer: q.answer || q.suggested_answer || '',
@@ -165,19 +180,30 @@ const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }
                         });
                         if (!res.ok) {
                             const errData = await res.json().catch(() => ({}));
-                            setGradingError(errData.error || errData.detail || `Grading failed (Status ${res.status})`);
+                            const msg =
+                                errData.error ||
+                                errData.detail ||
+                                `Grading failed (Status ${res.status})`;
+                            if (!firstApiError) firstApiError = msg;
                             return null;
                         }
                         return await res.json();
-                    } catch (e) {
+                    } catch {
+                        if (!firstApiError) {
+                            firstApiError =
+                                'Network error calling the grading API. Is the Functions host running on port 7071?';
+                        }
                         return null;
                     }
                 })
             );
 
-            // Check if all are null (everything failed)
-            if (results.every(r => r === null) && !gradingError) {
-                setGradingError('All grading requests failed. Please check your AI API key configurations.');
+            const anyScore = results.some((r) => r != null);
+            if (!anyScore) {
+                setGradingError(
+                    firstApiError ||
+                        'No scores returned. Add text answers, or check Vertex credentials in api/local.settings.json (see GOOGLE_APPLICATION_CREDENTIALS / GOOGLE_SERVICE_ACCOUNT_JSON).'
+                );
             }
 
             setGradingResults(results);

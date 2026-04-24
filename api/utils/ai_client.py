@@ -17,6 +17,21 @@ logger = logging.getLogger(__name__)
 _CLOUD_PLATFORM_SCOPE = ("https://www.googleapis.com/auth/cloud-platform",)
 
 
+def _maybe_use_gcloud_application_default_credentials_file() -> None:
+    """Help local `func start`: pick up `gcloud auth application-default login` without editing local.settings."""
+    if (os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or "").strip():
+        return
+    if os.name == "nt":
+        appdata = (os.environ.get("APPDATA") or "").strip()
+        if not appdata:
+            return
+        path = os.path.join(appdata, "gcloud", "application_default_credentials.json")
+    else:
+        path = os.path.join(os.path.expanduser("~"), ".config", "gcloud", "application_default_credentials.json")
+    if path and os.path.isfile(path):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = path
+
+
 def _get_google_credentials():
     """
     Credentials for Vertex (OAuth access token).
@@ -40,6 +55,7 @@ def _get_google_credentials():
         return service_account.Credentials.from_service_account_info(
             info, scopes=_CLOUD_PLATFORM_SCOPE
         )
+    _maybe_use_gcloud_application_default_credentials_file()
     credentials, _ = google_auth_default(scopes=_CLOUD_PLATFORM_SCOPE)
     return credentials
 

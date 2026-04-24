@@ -25,6 +25,18 @@ describe('CaseFullTextMarkdown', () => {
         expect(container.textContent).toMatch(/docket/);
     });
 
+    it(
+        'renders GFM for very long full text (normalization + parse)',
+        { timeout: 60_000 },
+        () => {
+            const padding = 'x'.repeat(80_100);
+            const md = `${padding}\n\n## En Banc Long Case\n\nBody line.`;
+            const { container } = render(<CaseFullTextMarkdown content={md} />);
+            expect(container.querySelector('pre')).toBeNull();
+            expect(screen.getByRole('heading', { name: /En Banc Long Case/i })).toBeTruthy();
+        }
+    );
+
     it('centers up to eight SC caption blocks then left-aligns the rest', () => {
         const lines = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
         const md = lines.map((l) => `**${l}**`).join('\n\n');

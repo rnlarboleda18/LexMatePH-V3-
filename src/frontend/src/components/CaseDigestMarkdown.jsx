@@ -326,27 +326,18 @@ export const DigestMarkdownText = React.memo(({ content, variant = 'default', co
 });
 
 /**
- * Full decision text from `full_text_md` — always remark-gfm (tables, footnotes, etc.)
- * plus `normalizeFullTextMarkdownForGfm`. Kept separate from digest markdown so footer/layout
- * edits in CaseDecisionModal cannot drop this pipeline by accident.
- *
- * Content over PLAIN_TEXT_THRESHOLD characters is shown as plain preformatted text instead of
- * running through the remark parser, which would block the main thread for multi-second hangs on
- * very long SC decisions (100 KB+). A notice is shown so the user understands why formatting
- * differs from the digest view.
+ * Full decision text from `full_text_md` — always `normalizeFullTextMarkdownForGfm` + remark-gfm
+ * (tables, footnotes, etc.). Kept separate from digest markdown so CaseDecisionModal cannot drop
+ * this pipeline by accident.
  */
-const PLAIN_TEXT_THRESHOLD = 80_000;
-
 export const CaseFullTextMarkdown = React.memo(({ content }) => {
     const fullTextPIdx = useRef(0);
     const scCaptionEndRef = useRef(false);
 
-    const processedContent = useMemo(() => {
-        if (!content) return content;
-        // Skip the normalization pipeline for very long content to avoid quadratic regex cost
-        if (content.length > PLAIN_TEXT_THRESHOLD) return content;
-        return normalizeFullTextMarkdownForGfm(content);
-    }, [content]);
+    const processedContent = useMemo(
+        () => (content ? normalizeFullTextMarkdownForGfm(content) : content),
+        [content]
+    );
 
     const components = useMarkdownComponents(undefined, true, {
         scFullTextCaption: true,
@@ -356,21 +347,6 @@ export const CaseFullTextMarkdown = React.memo(({ content }) => {
     });
 
     if (!content) return null;
-
-    // Large SC decisions (100 KB+) would freeze the browser if parsed by remark; render as
-    // plain text with a notice instead.
-    if (processedContent.length > PLAIN_TEXT_THRESHOLD) {
-        return (
-            <div className="text-gray-800 dark:text-gray-200 text-left text-sm">
-                <p className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-xs text-amber-800 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200">
-                    This decision is very long. Showing as plain text to keep the app responsive. Formatting may differ from the digest view.
-                </p>
-                <pre className="whitespace-pre-wrap break-words leading-relaxed font-sans">
-                    {processedContent}
-                </pre>
-            </div>
-        );
-    }
 
     // Reset before each full-text parse so SC caption heuristics restart.
     fullTextPIdx.current = 0;
