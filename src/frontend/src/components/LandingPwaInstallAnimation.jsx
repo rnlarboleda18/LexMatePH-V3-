@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MonitorDown, MoreVertical, Smartphone, SquareArrowUp } from 'lucide-react';
 
 /** Same asset as manifest / tab icons (`public/pwa-192x192.png`). */
@@ -232,25 +232,161 @@ function LandingPwaInstallAnimation({ compact = false, dense = false, tight = fa
 
 function PhoneMock({ compact, dense = false, tight = false, heroMobile = false }) {
     const hm = Boolean(compact && dense && heroMobile);
-    const outer = compact ? (hm ? 'w-[104px]' : tight ? 'w-[92px]' : dense ? 'w-[160px]' : 'w-[182px]') : 'w-[142px]';
-    const innerH = compact ? (hm ? 'h-[214px]' : tight ? 'h-[188px]' : dense ? 'h-[372px]' : 'h-[388px]') : 'h-[288px]';
+    const [isLg, setIsLg] = useState(false);
+    useEffect(() => {
+        if (typeof window === 'undefined') return undefined;
+        const m = window.matchMedia('(min-width: 1024px)');
+        const apply = () => setIsLg(!!m.matches);
+        apply();
+        m.addEventListener('change', apply);
+        return () => m.removeEventListener('change', apply);
+    }, []);
+    /** Hero + mobile: keep a narrow phone beside copy below lg; at lg+ match dense mock scale (proportional to tablet / desktop bar). */
+    const hrx = Boolean(hm && isLg);
+    const smallHero = Boolean(hm && !hrx);
+    const outer = compact
+        ? hrx
+            ? 'w-[180px]'
+            : smallHero
+              ? 'w-[110px]'
+              : tight
+                ? 'w-[92px]'
+                : dense
+                  ? 'w-[180px]'
+                  : 'w-[192px]'
+        : 'w-[142px]';
+    const innerH = compact
+        ? hrx
+            ? 'h-[390px]'
+            : smallHero
+              ? 'h-[238px]'
+              : tight
+                ? 'h-[188px]'
+                : dense
+                  ? 'h-[390px]'
+                  : 'h-[400px]'
+        : 'h-[288px]';
     const round = compact ? 'rounded-[1.5rem] border-2' : 'rounded-[1.65rem] border-[3px]';
     const innerRound = compact ? 'rounded-[1.2rem]' : 'rounded-[1.35rem]';
     const barPad = compact ? 'px-2 py-1.5' : 'px-2 py-1.5';
-    const barH = compact ? (hm ? 'h-7' : tight ? 'h-7' : dense ? 'h-9' : 'h-10') : 'h-9';
-    const urlText = compact ? (hm ? 'text-[8px]' : tight ? 'text-[8px]' : dense ? 'text-[11px]' : 'text-[14px]') : 'text-[13px]';
-    const shareBox = compact ? (hm ? 'h-5 w-5' : tight ? 'h-5 w-5' : dense ? 'h-7 w-7' : 'h-7 w-7') : 'h-7 w-7';
-    const shareIco = compact ? (hm ? 'h-2.5 w-2.5' : tight ? 'h-2.5 w-2.5' : dense ? 'h-3.5 w-3.5' : 'h-4 w-4') : 'h-4 w-4';
-    const logoBox = compact ? (hm ? 'h-6 w-6 mb-0' : tight ? 'h-6 w-6 mb-0' : dense ? 'h-8 w-8 mb-0.5' : 'h-9 w-9 mb-1') : 'h-9 w-9 mb-2';
-    const p = compact ? (hm ? 'p-0.5' : tight ? 'p-0.5' : dense ? 'p-1.5' : 'p-2') : 'p-2';
-    const bottomBar = compact ? (hm ? 'h-5 px-1' : tight ? 'h-5 px-1' : dense ? 'h-7 px-2' : 'h-8 px-2') : 'h-8 px-4';
+    const barH = compact
+        ? hrx
+            ? 'h-9'
+            : smallHero
+              ? 'h-7'
+              : tight
+                ? 'h-7'
+                : dense
+                  ? 'h-9'
+                  : 'h-10'
+        : 'h-9';
+    const urlText = compact
+        ? hrx
+            ? 'text-[11px]'
+            : smallHero
+              ? 'text-[8px]'
+              : tight
+                ? 'text-[8px]'
+                : dense
+                  ? 'text-[11px]'
+                  : 'text-[14px]'
+        : 'text-[13px]';
+    const shareBox = compact
+        ? hrx
+            ? 'h-7 w-7'
+            : smallHero
+              ? 'h-5 w-5'
+              : tight
+                ? 'h-5 w-5'
+                : dense
+                  ? 'h-7 w-7'
+                  : 'h-7 w-7'
+        : 'h-7 w-7';
+    const shareIco = compact
+        ? hrx
+            ? 'h-3.5 w-3.5'
+            : smallHero
+              ? 'h-2.5 w-2.5'
+              : tight
+                ? 'h-2.5 w-2.5'
+                : dense
+                  ? 'h-3.5 w-3.5'
+                  : 'h-4 w-4'
+        : 'h-4 w-4';
+    const logoBox = compact
+        ? hrx
+            ? 'h-8 w-8 mb-0.5'
+            : smallHero
+              ? 'h-6 w-6 mb-0'
+              : tight
+                ? 'h-6 w-6 mb-0'
+                : dense
+                  ? 'h-8 w-8 mb-0.5'
+                  : 'h-9 w-9 mb-1'
+        : 'h-9 w-9 mb-2';
+    const p = compact
+        ? hrx
+            ? 'p-1.5'
+            : smallHero
+              ? 'p-0.5'
+              : tight
+                ? 'p-0.5'
+                : dense
+                  ? 'p-1.5'
+                  : 'p-2'
+        : 'p-2';
+    const bottomBar = compact
+        ? hrx
+            ? 'h-7 px-2'
+            : smallHero
+              ? 'h-5 px-1'
+              : tight
+                ? 'h-5 px-1'
+                : dense
+                  ? 'h-7 px-2'
+                  : 'h-8 px-2'
+        : 'h-8 px-4';
+    const topEarH = compact
+        ? hrx
+            ? 'h-6'
+            : smallHero
+              ? 'h-4'
+              : tight
+                ? 'h-4'
+                : dense
+                  ? 'h-6'
+                  : 'h-7'
+        : 'h-5';
+    const topPillW = compact
+        ? hrx
+            ? 'h-0.5 w-12'
+            : smallHero
+              ? 'h-0.5 w-10'
+              : tight
+                ? 'h-0.5 w-11'
+                : dense
+                  ? 'h-0.5 w-12'
+                  : 'h-0.5 w-11'
+        : 'h-0.5 w-8';
+    const appIconLg = compact
+        ? hrx
+            ? 'h-8 w-8'
+            : smallHero
+              ? 'h-6 w-6'
+              : tight
+                ? 'h-6 w-6'
+                : dense
+                  ? 'h-8 w-8'
+                  : 'h-9 w-9'
+        : 'h-9 w-9';
+    const gridPh = hrx ? false : compact;
 
     return (
         <div className={`${outer} shrink-0`}>
             <div className={`${round} border-slate-700 bg-slate-800 p-[2px] shadow-xl ring-1 ring-black/20 dark:border-slate-600`}>
                 <div className={`flex ${innerH} flex-col overflow-hidden ${innerRound} bg-white dark:bg-zinc-950`}>
-                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${compact ? (hm ? 'h-4' : tight ? 'h-4' : dense ? 'h-6' : 'h-7') : 'h-5'}`}>
-                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${compact ? (hm ? 'h-0.5 w-10' : tight ? 'h-0.5 w-11' : dense ? 'h-0.5 w-12' : 'h-0.5 w-11') : 'h-0.5 w-8'}`} />
+                    <div className={`flex shrink-0 items-center justify-center bg-slate-100 pt-0.5 dark:bg-zinc-900 ${topEarH}`}>
+                        <div className={`rounded-full bg-slate-300/90 dark:bg-zinc-700 ${topPillW}`} />
                     </div>
                     <div className={`shrink-0 border-b border-slate-200/90 bg-[#e8e8ed] dark:border-zinc-800 dark:bg-zinc-900 ${barPad}`}>
                         <div
@@ -274,7 +410,7 @@ function PhoneMock({ compact, dense = false, tight = false, heroMobile = false }
                         <div className={`relative ${p}`}>
                             <div className={`mx-auto flex items-center justify-center overflow-hidden rounded-lg shadow-md ring-1 ring-black/10 ${logoBox}`}>
                                 <OfficialAppIcon
-                                    className={compact ? (hm ? 'h-6 w-6' : tight ? 'h-6 w-6' : dense ? 'h-8 w-8' : 'h-9 w-9') : 'h-9 w-9'}
+                                    className={appIconLg}
                                     rounded={compact ? 'rounded-lg' : 'rounded-xl'}
                                 />
                             </div>
@@ -333,7 +469,7 @@ function PhoneMock({ compact, dense = false, tight = false, heroMobile = false }
                                 </p>
                             </div>
                         </div>
-                        <InDeviceHomeScreenGrid variant="phone" compact={compact} />
+                        <InDeviceHomeScreenGrid variant="phone" compact={gridPh} />
                     </div>
                     <div
                         className={`flex shrink-0 items-center justify-between border-t border-slate-200/90 bg-white/95 dark:border-zinc-800 dark:bg-zinc-950 ${bottomBar}`}
