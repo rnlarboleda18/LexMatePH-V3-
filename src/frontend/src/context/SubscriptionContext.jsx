@@ -95,11 +95,11 @@ export function SubscriptionProvider({ children }) {
       setSubscriptionSource(null);
       setExpiresAt(null);
       setLoading(false);
-      return;
+      return 'free';
     }
 
     const u = userRef.current;
-    if (!u) return;
+    if (!u) return null;
 
     const emails = u.emailAddresses || [];
     const clerkAdmin = isAdminEmail(emails);
@@ -109,7 +109,7 @@ export function SubscriptionProvider({ children }) {
       setTier('barrister');
       setStatus('active');
       setLoading(false);
-      return;
+      return 'barrister';
     }
 
     setIsAdmin(false);
@@ -154,13 +154,16 @@ export function SubscriptionProvider({ children }) {
         setIsAdmin(backendAdmin);
         setTokenRetry(0);
         console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
+        return effectiveTier;
       } else {
         console.warn(`[Subscription] Backend API failed (${res.status}). Using test tier: ${testTier || 'free'}`);
         if (testTier) setTier(testTier);
+        return testTier || 'free';
       }
     } catch (err) {
       console.error('[Subscription] Failed to fetch status:', err);
       if (testTier) setTier(testTier);
+      return testTier || null;
     } finally {
       setLoading(false);
     }
@@ -185,30 +188,33 @@ export function SubscriptionProvider({ children }) {
     if (typeof window === 'undefined') return;
     const params = new URLSearchParams(window.location.search);
     if (params.get('xendit_payment') !== 'success') return;
+    if (!isLoaded || !userLoaded || !isSignedIn || !user) return;
 
     // Remove the query params from the URL immediately (cosmetic)
     const cleanUrl = window.location.pathname + window.location.hash;
     window.history.replaceState({}, '', cleanUrl);
 
     let attempts = 0;
-    const MAX_ATTEMPTS = 12;  // up to ~24 s
+    let cancelled = false;
+    let timer = null;
+    const MAX_ATTEMPTS = 20;  // up to ~40 s
     const INTERVAL_MS  = 2000;
 
-    const poll = setInterval(async () => {
+    const poll = async () => {
+      if (cancelled) return;
       attempts += 1;
-      await fetchSubscriptionStatus();
-      // Stop polling once we have a paid tier or max attempts reached
-      setTier(prev => {
-        if (prev !== 'free' || attempts >= MAX_ATTEMPTS) {
-          clearInterval(poll);
-        }
-        return prev;
-      });
-    }, INTERVAL_MS);
+      const latestTier = await fetchSubscriptionStatus();
+      if (cancelled || latestTier !== 'free' || attempts >= MAX_ATTEMPTS) return;
+      timer = setTimeout(poll, INTERVAL_MS);
+    };
 
-    return () => clearInterval(poll);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    void poll();
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [isLoaded, userLoaded, isSignedIn, user, fetchSubscriptionStatus]);
 
   // Effective tier takes admin override first, then test tier, then real tier
   const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
