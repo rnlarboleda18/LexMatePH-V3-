@@ -102,12 +102,17 @@ export default defineConfig(({ mode }) => {
                 cacheableResponse: { statuses: [0, 200] },
               },
             },
+            // Live RSS bundle: never serve a stale/empty cache on slow mobile (NetworkFirst timeout used to miss first load).
+            {
+              urlPattern: /\/api\/sc_judiciary_feed/i,
+              handler: 'NetworkOnly',
+            },
             {
               urlPattern: /^\/api\/.*/i,
               handler: 'NetworkFirst',
               options: {
                 cacheName: 'api-cache',
-                networkTimeoutSeconds: 12,
+                networkTimeoutSeconds: 30,
                 expiration: { maxEntries: 80, maxAgeSeconds: 60 * 60 * 12 },
                 cacheableResponse: { statuses: [0, 200] },
               },

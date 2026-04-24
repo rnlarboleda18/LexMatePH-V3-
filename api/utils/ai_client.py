@@ -9,8 +9,8 @@ from google.auth import default as google_auth_default
 from google.auth.transport.requests import Request as GoogleAuthRequest
 from google.oauth2 import service_account
 
-# Lexify grading and other callers: override with GEMINI_VERTEX_MODEL. Gemini 3.1 Pro uses global Vertex.
-DEFAULT_MODEL = os.environ.get("GEMINI_VERTEX_MODEL") or "gemini-3.1-pro-preview"
+# Lexify grading and other callers: override with GEMINI_VERTEX_MODEL. Use Flash on global Vertex for lower latency.
+DEFAULT_MODEL = os.environ.get("GEMINI_VERTEX_MODEL") or "gemini-3-flash-preview"
 
 logger = logging.getLogger(__name__)
 

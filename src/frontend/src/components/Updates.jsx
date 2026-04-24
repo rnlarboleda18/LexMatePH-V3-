@@ -66,14 +66,15 @@ const FB_PAGE_PLUGIN_HEIGHT = 640;
  * the right, so we pass the measured host width. `hide_cover` avoids the cover band in the frame.
  */
 function buildFacebookPagePluginSrc(widthPx) {
-  const w = Math.max(200, Math.min(500, Math.round(widthPx || 400)));
+  const w = Math.max(180, Math.min(500, Math.round(widthPx || 400)));
   const base = 'https://www.facebook.com/plugins/page.php';
   const params = new URLSearchParams({
     href: 'https://www.facebook.com/SupremeCourtPhilippines',
     tabs: 'timeline',
     width: String(w),
     height: String(FB_PAGE_PLUGIN_HEIGHT),
-    small_header: 'false',
+    // Narrow columns (typical phone): smaller chrome; Meta recommends for mobile-width embeds.
+    small_header: w < 420 ? 'true' : 'false',
     adapt_container_width: 'true',
     hide_cover: 'true',
     show_facepile: 'false',
@@ -163,7 +164,7 @@ const Updates = ({ isDarkMode = false }) => {
       const w = Math.floor(wRaw);
       if (w < 1) return;
       setFbPluginWidth((prev) => {
-        const next = Math.max(200, Math.min(500, w));
+        const next = Math.max(180, Math.min(500, w));
         return prev === next ? prev : next;
       });
     };
@@ -178,11 +179,33 @@ const Updates = ({ isDarkMode = false }) => {
 
   useEffect(() => {
     let cancelled = false;
+    const url = apiUrl('/api/sc_judiciary_feed?limit=22&include_bar=1&bar_limit=18');
+    const fetchJson = () =>
+      fetch(url, {
+        cache: 'no-store',
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+      }).then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const err = new Error(data?.error || `HTTP ${res.status}`);
+          err._data = data;
+          throw err;
+        }
+        return data;
+      });
+
     setFeedLoading(true);
     setFeedError(null);
-    fetch(apiUrl('/api/sc_judiciary_feed?limit=22&include_bar=1&bar_limit=18'))
-      .then((res) => res.json())
-      .then((data) => {
+    (async () => {
+      try {
+        let data;
+        try {
+          data = await fetchJson();
+        } catch {
+          await new Promise((r) => setTimeout(r, 600));
+          data = await fetchJson();
+        }
         if (cancelled) return;
         if (data?.error && (!data.items || data.items.length === 0)) {
           setFeedError(data.error);
@@ -192,17 +215,16 @@ const Updates = ({ isDarkMode = false }) => {
           setFeedItems(Array.isArray(data?.items) ? data.items : []);
           setBarFeedItems(Array.isArray(data?.bar_items) ? data.bar_items : []);
         }
-      })
-      .catch(() => {
+      } catch {
         if (!cancelled) {
           setFeedError('network');
           setFeedItems([]);
           setBarFeedItems([]);
         }
-      })
-      .finally(() => {
+      } finally {
         if (!cancelled) setFeedLoading(false);
-      });
+      }
+    })();
     return () => {
       cancelled = true;
     };
@@ -538,6 +560,22 @@ const Updates = ({ isDarkMode = false }) => {
                     ref={fbPluginHostRef}
                     className="w-full min-w-0 max-w-full overflow-hidden rounded-lg border border-lex bg-white dark:border-lex dark:bg-zinc-900"
                   >
+                    <div className="sm:hidden border-b border-lex bg-gradient-to-r from-indigo-50 to-white p-4 dark:border-lex dark:from-indigo-950/50 dark:to-zinc-900">
+                      <p className="text-xs font-semibold text-slate-800 dark:text-slate-100">Supreme Court on Facebook</p>
+                      <p className="mt-1 text-[11px] leading-snug text-slate-600 dark:text-slate-400">
+                        Embedded timelines often fail on mobile browsers (tracking protection). Open the official page
+                        below—this always works.
+                      </p>
+                      <a
+                        href="https://www.facebook.com/SupremeCourtPhilippines"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-[#1877F2] py-3 text-sm font-bold text-white shadow-md transition hover:bg-[#166FE5]"
+                      >
+                        <Facebook className="h-5 w-5 shrink-0" aria-hidden />
+                        Open in Facebook
+                      </a>
+                    </div>
                     <iframe
                       key={fbIframeSrc}
                       title="Supreme Court of the Philippines on Facebook"
@@ -546,14 +584,15 @@ const Updates = ({ isDarkMode = false }) => {
                       height={FB_PAGE_PLUGIN_HEIGHT}
                       frameBorder="0"
                       allowFullScreen={true}
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
+                      loading="eager"
+                      referrerPolicy="strict-origin-when-cross-origin"
                       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                       className="block w-full min-w-0 max-w-full border-0 align-top bg-white dark:bg-zinc-900"
                     />
                   </div>
                   <p className="text-center text-[10px] text-slate-500 dark:text-slate-500">
-                    Facebook blank? Set repo secret <code className="text-indigo-600 dark:text-indigo-400">VITE_FACEBOOK_APP_ID</code> and allow your domain in Meta.
+                    Desktop embed still blank? Set <code className="text-indigo-600 dark:text-indigo-400">VITE_FACEBOOK_APP_ID</code>{' '}
+                    and add your site domain in the Meta app settings.
                   </p>
                 </div>
               </div>

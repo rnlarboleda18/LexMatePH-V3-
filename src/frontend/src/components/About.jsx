@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   Brain,
   SquareStack,
@@ -127,6 +128,13 @@ const About = () => {
                 <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
                   Built for law students, teachers, bar candidates, and practitioners: codals, past bar questions,
                   Supreme Court materials, and study tools in one purple-tinted glass workspace.
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-500">
+                  Official Judiciary RSS and social embeds (SC news) live on the{' '}
+                  <Link to="/updates" className="font-semibold text-indigo-600 underline-offset-2 hover:underline dark:text-indigo-400">
+                    Updates
+                  </Link>{' '}
+                  page.
                 </p>
               </div>
             </div>

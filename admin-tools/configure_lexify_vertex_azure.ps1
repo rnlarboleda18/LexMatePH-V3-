@@ -84,7 +84,7 @@ if ($existing -and $existing.properties) {
 }
 $merged["GOOGLE_CLOUD_PROJECT"]       = $GoogleCloudProject
 $merged["GOOGLE_CLOUD_LOCATION"]      = "global"
-$merged["GEMINI_VERTEX_MODEL"]        = "gemini-3.1-pro-preview"
+$merged["GEMINI_VERTEX_MODEL"]        = "gemini-3-flash-preview"
 $merged["GOOGLE_SERVICE_ACCOUNT_JSON"] = $rawSa
 
 $bodyObj = @{ properties = $merged }

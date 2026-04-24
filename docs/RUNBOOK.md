@@ -125,7 +125,7 @@ WHERE clerk_id = '<clerk_id>';
 
 ## 8. Lexify AI grading (Vertex AI)
 
-Lexify mock-exam scoring calls Vertex only (`api/utils/ai_client.py`). It needs a **Google Cloud project**, **global** location for Gemini 3.1 Pro preview, and a **service account** that can call Vertex.
+Lexify mock-exam scoring calls Vertex only (`api/utils/ai_client.py`). It needs a **Google Cloud project**, **global** location for **Gemini 3 Flash preview** (default model), and a **service account** that can call Vertex.
 
 ### A. Google Cloud (one-time)
 
@@ -141,8 +141,8 @@ Lexify mock-exam scoring calls Vertex only (`api/utils/ai_client.py`). It needs 
 2. In `api/local.settings.json` under `Values`, set:
    - `GOOGLE_APPLICATION_CREDENTIALS` = full path to that file (Windows: escaped backslashes or forward slashes are fine in JSON).
    - `GOOGLE_CLOUD_PROJECT` = project id.
-   - `GOOGLE_CLOUD_LOCATION` = `global` (required for `gemini-3.1-pro-preview` on Vertex).
-   - `GEMINI_VERTEX_MODEL` = `gemini-3.1-pro-preview` (optional if code default matches).
+   - `GOOGLE_CLOUD_LOCATION` = `global` (Gemini 3 Flash preview on Vertex).
+   - `GEMINI_VERTEX_MODEL` = `gemini-3-flash-preview` (optional if code default matches).
 3. Restart **Azure Functions** locally (`func start` or your usual command). Do **not** set `GOOGLE_SERVICE_ACCOUNT_JSON` if you use the file path.
 
 ### C. Production (Azure Static Web Apps API)
@@ -153,7 +153,7 @@ The API is deployed with the Static Web App (`api/`). Configure **Application se
 2. Add or confirm:
    - `GOOGLE_CLOUD_PROJECT` — GCP project id.
    - `GOOGLE_CLOUD_LOCATION` — `global`.
-   - `GEMINI_VERTEX_MODEL` — `gemini-3.1-pro-preview`.
+   - `GEMINI_VERTEX_MODEL` — `gemini-3-flash-preview` (Lexify grading; faster than Pro).
 3. **Credentials — pick one:**
    - **Recommended (no file on disk):** Add `GOOGLE_SERVICE_ACCOUNT_JSON` whose value is the **entire** service account JSON as a **single line** (minified). In Azure, paste the JSON into the value field; the portal stores it as a secret. The API reads this variable first.
    - **Alternative:** If the host allows a mounted path, set `GOOGLE_APPLICATION_CREDENTIALS` to that path (less common on consumption/serverless).
