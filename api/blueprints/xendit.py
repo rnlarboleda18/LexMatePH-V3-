@@ -489,22 +489,16 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=200,
         )
 
-    except RuntimeError as e:
-        if "XENDIT_API_KEY" in str(e):
-            logging.error("create_checkout: %s", e)
-            return func.HttpResponse(
-                json.dumps({
-                    "error": "Payment provider is not configured",
-                    "detail": str(e),
-                }),
-                mimetype="application/json",
-                status_code=503,
-            )
-        raise
     except Exception as e:
         import traceback
         detail = traceback.format_exc()
         logging.error(f"create_checkout error: {e}\n{detail}")
+        if "XENDIT_API_KEY" in str(e):
+            return func.HttpResponse(
+                json.dumps({"error": "Payment provider is not configured", "detail": str(e)}),
+                mimetype="application/json",
+                status_code=503,
+            )
         return func.HttpResponse(
             json.dumps({"error": str(e) or "Unknown internal error", "trace": detail[-600:]}),
             mimetype="application/json",
