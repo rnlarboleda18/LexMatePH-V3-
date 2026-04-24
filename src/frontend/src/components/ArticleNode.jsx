@@ -18,6 +18,14 @@ import {
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
 import { fcJurisProvisionIdFromArticle } from '../utils/fcJurisProvisionId';
 
+/** RPC LexCode: article H3 should end with a full stop (no duplicate if already ends with `.`). */
+function rpcArticleHeaderTerminalPeriod(s) {
+    const t = String(s ?? '').trimEnd();
+    if (!t) return '';
+    if (/\.\s*$/.test(t)) return t;
+    return `${t}.`;
+}
+
 /** RCC chrome: remove trailing dash glue (E-Library “Title. -” before body). */
 function cleanRccSectionHeaderFragment(s) {
     if (s == null || s === '') return '';
@@ -115,6 +123,51 @@ function formatRpcArticle25Segments(segments) {
         }
 
         out.push(seg);
+    }
+    return out;
+}
+
+/** Stray line from ingest/amendments: only "Art." — H3 already names the article. */
+function rpcSegmentIsArtOnlyMarker(raw) {
+    const t = String(raw ?? '').trim();
+    if (!t) return false;
+    const plain = t.replace(/\*+/g, '').replace(/_/g, '').replace(/\s+/g, ' ').trim();
+    return /^art\.?$/i.test(plain);
+}
+
+/**
+ * Remove duplicate RPC opener still in body (H3 already shows Article N. title).
+ * E.g. **267. Kidnapping… -** … or Art. 267. … - … — keeps segment indices for paragraph_links.
+ */
+function stripRpcRuninDuplicateTitle(text, articleNumKey) {
+    const key = String(articleNumKey ?? '').trim();
+    if (!key || /header/i.test(key)) return text;
+    const esc = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const patterns = [
+        new RegExp(`^\\*\\*\\s*${esc}\\.\\s+[\\s\\S]+?\\s*\\*\\*\\s*[-–—]\\s+`, 'i'),
+        new RegExp(`^\\*\\*\\s*${esc}\\.\\s+[\\s\\S]+?[-–—]\\s*\\*\\*\\s+`, 'i'),
+        new RegExp(`^${esc}\\.\\s+.+?\\.\\s*[-–—]\\s+`, 'i'),
+        new RegExp(`^"?\\s*Art\\.\\s*${esc}\\.\\s+.+?\\.\\s*[-–—]\\s+`, 'i'),
+        new RegExp(`^"?\\s*Art\\.\\s*${esc}\\.\\s+.+?[-–—]\\s+`, 'i'),
+    ];
+    let t = text;
+    for (const re of patterns) {
+        const n = t.replace(re, '').trimStart();
+        if (n.length > 0 && n !== t) return n;
+    }
+    return t;
+}
+
+function applyRpcStripDuplicateOpeners(segments, articleNumKey) {
+    if (!Array.isArray(segments) || articleNumKey == null) return segments;
+    const key = String(articleNumKey).trim();
+    if (!key || key.includes('Header')) return segments;
+    const out = segments.slice();
+    for (let i = 0; i < out.length; i++) {
+        if (typeof out[i] !== 'string') continue;
+        if (rpcSegmentIsArtOnlyMarker(out[i])) continue;
+        out[i] = stripRpcRuninDuplicateTitle(String(out[i]), key);
+        break;
     }
     return out;
 }
@@ -336,6 +389,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     };
 
     const isRpcLike = (codeId || '').toLowerCase() === 'rpc' || (article?.code_id || '').toLowerCase() === 'rpc';
+    const rpcTitle = (s) => (isRpcLike ? rpcArticleHeaderTerminalPeriod(s) : s);
 
     // Stale DB: Article 266 row sometimes still opens with a 266-A fragment; recover real Art. 266 body.
     // Never clear the whole article: the strict \n\n anchor often fails (single newlines, OCR spacing).
@@ -444,7 +498,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             } else {
                 customHeaderNode = (
                     <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
-                        {toTitleCase(boldPart, skipKeywords)}
+                        {rpcTitle(toTitleCase(boldPart, skipKeywords))}
                     </h3>
                 );
 
@@ -455,7 +509,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             // Fallback: Just render the whole first block as H3
             customHeaderNode = (
                 <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
-                    {toTitleCase(headerBlock.replace(/\*\*/g, ''), skipKeywords)}
+                    {rpcTitle(toTitleCase(headerBlock.replace(/\*\*/g, ''), skipKeywords))}
                 </h3>
             );
             contentToDisplay = parts.slice(1).join('\n\n');
@@ -633,7 +687,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         {customHeaderNode ? customHeaderNode : (
                             String(article_num) === '0' ? (
                                 <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
-                                    {isRcc ? 'Preliminary Section' : 'Preliminary Article'}
+                                    {isRcc
+                                        ? 'Preliminary Section'
+                                        : isRpcLike
+                                          ? rpcArticleHeaderTerminalPeriod('Preliminary Article')
+                                          : 'Preliminary Article'}
                                 </h3>
                             ) : (
                                 <h3
@@ -655,12 +713,12 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 if (codeId === 'roc' || (article.code_id && article.code_id.toLowerCase() === 'roc')) {
                                                     displayNum = displayNum.replace(/^Rule\s+[^,]+,\s*/i, '');
                                                 }
-                                                if (!article_title) return toTitleCase(displayNum, skipKeywords);
+                                                if (!article_title) return rpcTitle(toTitleCase(displayNum, skipKeywords));
                                                 // Deduplicate: If Title equals Num (e.g. PREAMBLE == PREAMBLE), hide Title
                                                 if (displayNum.trim().toUpperCase() === String(article_title).trim().toUpperCase()) {
-                                                    return toTitleCase(displayNum, skipKeywords);
+                                                    return rpcTitle(toTitleCase(displayNum, skipKeywords));
                                                 }
-                                                return toTitleCase(`${displayNum}. ${article_title}`, skipKeywords);
+                                                return rpcTitle(toTitleCase(`${displayNum}. ${article_title}`, skipKeywords));
                                             })()
                                             : (() => {
                                                 if (rccInlineLeadTitle) {
@@ -711,9 +769,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 }
                                                 const prefix = `Article ${article_num}`;
                                                 if (article_title && String(article_title).trim().toUpperCase().startsWith(prefix.toUpperCase())) {
-                                                    return toTitleCase(article_title, skipKeywords);
+                                                    return rpcTitle(toTitleCase(article_title, skipKeywords));
                                                 }
-                                                return toTitleCase(`${prefix}. ${article_title || ''}`, skipKeywords);
+                                                return rpcTitle(toTitleCase(`${prefix}. ${article_title || ''}`, skipKeywords));
                                             })()
                                     }
                                     {/* General concept gavel icon */}
@@ -1006,6 +1064,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         const an = String(article_num ?? article_number ?? '').trim();
                         if (an === '25') {
                             segments = formatRpcArticle25Segments(segments);
+                        } else if (an !== '0') {
+                            segments = applyRpcStripDuplicateOpeners(segments, an);
                         }
                     }
 
@@ -1037,6 +1097,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         if (isRocOrRpc && typeof segment === 'string' && segment.trim() === '') {
                             // Explicit vertical spacing for intentional source blank lines
                             return <div key={`${lookup_id}-${segIdx}`} className="h-4" />;
+                        }
+
+                        if (isRpc && typeof segment === 'string' && rpcSegmentIsArtOnlyMarker(segment)) {
+                            return <React.Fragment key={`${lookup_id}-${segIdx}-rpc-art-skip`} />;
                         }
 
                         let activeSources = [...globalSources];
