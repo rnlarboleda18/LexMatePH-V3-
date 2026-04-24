@@ -16,7 +16,8 @@ from utils.trial import expire_trial_for_user
 xendit_bp = func.Blueprint()
 
 # ── Config ────────────────────────────────────────────────────────────────────
-XENDIT_API_KEY      = os.environ.get("XENDIT_API_KEY", "")
+# Read XENDIT_API_KEY at request time in _xendit_headers() so cold starts and
+# app setting updates are picked up reliably; do not cache at import.
 XENDIT_WEBHOOK_TOKEN = os.environ.get("XENDIT_WEBHOOK_TOKEN", "")
 XENDIT_BASE_URL     = "https://api.xendit.co"
 
@@ -54,7 +55,10 @@ FREE_TIER_DAILY_LIMITS = {
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _xendit_headers() -> dict:
-    encoded = base64.b64encode(f"{XENDIT_API_KEY}:".encode()).decode()
+    key = (os.environ.get("XENDIT_API_KEY") or "").strip()
+    if not key:
+        raise RuntimeError("XENDIT_API_KEY is not set")
+    encoded = base64.b64encode(f"{key}:".encode()).decode()
     return {
         "Authorization": f"Basic {encoded}",
         "Content-Type": "application/json",
@@ -141,8 +145,9 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
     if not last_name:
         last_name = "."
 
+    client_ref = f"lexmate-{clerk_id}"
     payload = {
-        "reference_id": f"lexmate-{clerk_id}",
+        "client_reference": client_ref,
         "type": "INDIVIDUAL",
         "individual_detail": {
             "given_names": first_name,
@@ -160,7 +165,7 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         # If a customer with this reference_id already exists, try to fetch it
         if resp.status_code == 409:
             fetch_resp = requests.get(
-                f"{XENDIT_BASE_URL}/customers?reference_id=lexmate-{clerk_id}",
+                f"{XENDIT_BASE_URL}/customers?client_reference={client_ref}",
                 headers=_xendit_headers(),
                 timeout=15,
             )
@@ -392,6 +397,18 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             )
         # ─────────────────────────────────────────────────────────────────────
 
+        if not (os.environ.get("XENDIT_API_KEY") or "").strip():
+            logging.error("create-checkout: XENDIT_API_KEY is empty in app settings")
+            return func.HttpResponse(
+                json.dumps({
+                    "error": "Payment provider is not configured",
+                    "detail": "XENDIT_API_KEY is missing. Add the Xendit secret key to Azure "
+                    "Static Web App → Environment variables, or to api/local.settings.json locally.",
+                }),
+                mimetype="application/json",
+                status_code=503,
+            )
+
         cfg = PLAN_CONFIGS[plan_key]
 
         # Get user email from DB
@@ -472,6 +489,18 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=200,
         )
 
+    except RuntimeError as e:
+        if "XENDIT_API_KEY" in str(e):
+            logging.error("create_checkout: %s", e)
+            return func.HttpResponse(
+                json.dumps({
+                    "error": "Payment provider is not configured",
+                    "detail": str(e),
+                }),
+                mimetype="application/json",
+                status_code=503,
+            )
+        raise
     except Exception as e:
         logging.error(f"create_checkout error: {e}")
         return func.HttpResponse(
