@@ -739,7 +739,8 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
         logging.info(f"Xendit webhook received: {evt_type} (id={data_id})")
 
-        if evt_type == "payment_token.activated":
+        # v3 uses "payment_token.activation"; older docs said "payment_token.activated"
+        if evt_type in ("payment_token.activated", "payment_token.activation"):
             _handle_payment_token_activated(evt_data)
         elif evt_type in ("recurring.plan.activated", "recurring_plan.activated"):
             _handle_plan_activated(evt_data)

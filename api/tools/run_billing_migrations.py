@@ -1,10 +1,11 @@
 """
-Apply PayMongo-related SQL migrations to DB_CONNECTION_STRING.
+Apply billing-related SQL migrations to DB_CONNECTION_STRING.
 
 Migrations applied (in order):
   1. sql/paymongo_migration.sql           — subscription columns + usage_logs table
   2. sql/founding_promo_migration.sql     — founding promo columns
   3. sql/webhook_events_idempotency.sql   — webhook deduplication table
+  4. sql/xendit_migration.sql             — Xendit customer/plan/pending columns
 
 Loads api/local.settings.json Values into os.environ (same pattern as run_migration.py).
 Run from repo root: python api/tools/run_billing_migrations.py
@@ -60,6 +61,7 @@ def main() -> int:
         root / "sql" / "paymongo_migration.sql",
         root / "sql" / "founding_promo_migration.sql",
         root / "sql" / "webhook_events_idempotency.sql",
+        root / "sql" / "xendit_migration.sql",
     ]
     for p in files:
         if not p.is_file():

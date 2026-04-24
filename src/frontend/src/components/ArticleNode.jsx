@@ -29,10 +29,41 @@ function escapeForAttrSelector(s) {
 
 /** Unified juris gavel chip (all codals: header −1 links + paragraph-level links). Rounded rect, middle-aligned to the line. */
 const LEXCODE_GAVEL_CHIP_CLASS =
-    'inline-flex shrink-0 cursor-pointer select-none items-center gap-1 rounded-md border border-purple-200 bg-purple-50 px-1.5 py-0.5 align-middle shadow-sm transition-colors hover:bg-purple-100 dark:border-purple-800/60 dark:bg-purple-900/40 dark:hover:bg-purple-900/60';
+    'inline-flex shrink-0 cursor-pointer select-none flex-row flex-nowrap items-center gap-1.5 rounded-md border border-purple-200 bg-purple-50 px-2 py-0.5 align-middle shadow-sm transition-colors hover:bg-purple-100 dark:border-purple-800/60 dark:bg-purple-900/40 dark:hover:bg-purple-900/60';
 
 const LEXCODE_GAVEL_COUNT_CLASS =
-    'text-[11.5px] font-bold tabular-nums leading-none text-purple-600 dark:text-purple-400';
+    'min-w-[1.25em] shrink-0 text-right text-[11.5px] font-bold tabular-nums leading-none text-purple-600 dark:text-purple-400';
+
+/** Lucide strokes extend past the nominal box; clip so the digit is never painted over. */
+function LexcodeJurisprudenceChip({ count, title, onOpen, className = '', stopPropagationOnClick = false }) {
+    if (!count || count <= 0) return null;
+    return (
+        <span
+            className={`${LEXCODE_GAVEL_CHIP_CLASS} ${className}`.trim()}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onOpen?.();
+                }
+            }}
+            onClick={(e) => {
+                if (stopPropagationOnClick) e.stopPropagation();
+                onOpen?.();
+            }}
+            title={title}
+        >
+            <span
+                className="inline-flex size-4 shrink-0 items-center justify-center overflow-hidden"
+                aria-hidden
+            >
+                <Gavel size={14} className="block max-h-[14px] max-w-[14px] shrink-0" strokeWidth={2} />
+            </span>
+            <span className={LEXCODE_GAVEL_COUNT_CLASS}>{count}</span>
+        </span>
+    );
+}
 
 const LEXCODE_LEXPLAY_CHIP_CLASS =
     'inline-flex shrink-0 cursor-pointer select-none items-center justify-center rounded-md border border-purple-200 bg-purple-50/90 p-1 align-middle shadow-sm transition-colors hover:bg-purple-100 hover:text-purple-700 dark:border-purple-800/60 dark:bg-purple-900/30 dark:hover:bg-purple-900/55 dark:hover:text-purple-300 text-purple-600 dark:text-purple-400';
@@ -862,26 +893,16 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                         // SUPPRESS for Constitution: These are combined into Paragraph 0 inline gavel
                                         if (generalLinkCount > 0 && !isConstCode) {
                                             return (
-                                                <span
-                                                    className={`${LEXCODE_GAVEL_CHIP_CLASS} ml-1.5`}
-                                                    role="button"
-                                                    tabIndex={0}
-                                                    onKeyDown={(e) => {
-                                                        if (e.key === 'Enter' || e.key === ' ') {
-                                                            e.preventDefault();
-                                                            onToggleJurisprudence?.(jurisProvisionId, -1);
-                                                        }
-                                                    }}
-                                                    onClick={() => {
+                                                <LexcodeJurisprudenceChip
+                                                    className="ml-1.5"
+                                                    count={generalLinkCount}
+                                                    title={`${generalLinkCount} general concept cases`}
+                                                    onOpen={() => {
                                                         if (typeof onToggleJurisprudence === 'function') {
                                                             onToggleJurisprudence(jurisProvisionId, -1);
                                                         }
                                                     }}
-                                                    title={`${generalLinkCount} general concept cases`}
-                                                >
-                                                    <Gavel size={14} className="shrink-0" strokeWidth={2} aria-hidden />
-                                                    <span className={LEXCODE_GAVEL_COUNT_CLASS}>{generalLinkCount}</span>
-                                                </span>
+                                                />
                                             );
                                         }
                                         return null;
@@ -1663,95 +1684,143 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     const cleanSegments = [...segmentsArr];
                                                     cleanSegments[0] = strippedFromLeading;
 
+                                                    const showLexplayTail =
+                                                        isLastSegment &&
+                                                        (article.id || article.key_id) &&
+                                                        !isSubHeader;
+                                                    const useFlexTail =
+                                                        !isSubHeader && (linkCount > 0 || showLexplayTail);
+
+                                                    const textBlockStyle = {
+                                                        paddingLeft: isSubHeader ? '0' : `${finalPadding}rem`,
+                                                        textIndent: isSubHeader ? '0' : finalIndent,
+                                                        maxWidth: '100%',
+                                                        overflowWrap: 'anywhere',
+                                                        wordBreak: 'break-word',
+                                                    };
+
+                                                    if (useFlexTail) {
+                                                        /* Full-width inline-block keeps chips in the same flow as the text (after the
+                                                           sentence), not in a separate flex column pinned to the far right. */
+                                                        return (
+                                                            <p
+                                                                {...props}
+                                                                className={`!m-0 max-w-full [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : ""}`}
+                                                                style={textBlockStyle}
+                                                            >
+                                                                <span className="inline-block w-full max-w-full whitespace-pre-wrap break-words align-top [overflow-wrap:anywhere]">
+                                                                    {cleanSegments}
+                                                                    {linkCount > 0 && (
+                                                                        <LexcodeJurisprudenceChip
+                                                                            className="ml-1.5"
+                                                                            count={linkCount}
+                                                                            title={`${linkCount} cited cases linked to this paragraph`}
+                                                                            stopPropagationOnClick
+                                                                            onOpen={() =>
+                                                                                onToggleJurisprudence?.(
+                                                                                    jurisProvisionId,
+                                                                                    paragraphIndex
+                                                                                )
+                                                                            }
+                                                                        />
+                                                                    )}
+                                                                    {showLexplayTail && (
+                                                                        <button
+                                                                            type="button"
+                                                                            onClick={handleAddToPlaylist}
+                                                                            className={`${LEXCODE_LEXPLAY_CHIP_CLASS} ml-1.5 hover:scale-[1.02] active:scale-[0.98]`}
+                                                                            title="Add to LexPlay Playlist"
+                                                                        >
+                                                                            <Headphones
+                                                                                size={14}
+                                                                                strokeWidth={2}
+                                                                                aria-hidden
+                                                                            />
+                                                                        </button>
+                                                                    )}
+                                                                </span>
+                                                            </p>
+                                                        );
+                                                    }
+
                                                     return (
                                                         <p
                                                             {...props}
                                                             className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : ""}`}
-                                                            style={{
-                                                                paddingLeft: isSubHeader ? '0' : `${finalPadding}rem`,
-                                                                textIndent: isSubHeader ? '0' : finalIndent,
-                                                                maxWidth: '100%',
-                                                                overflowWrap: 'anywhere',
-                                                                wordBreak: 'break-word',
-                                                            }}
+                                                            style={textBlockStyle}
                                                         >
-                                                             {cleanSegments}
-                                                             {linkCount > 0 && (
-                                                                <span
-                                                                    className={`${LEXCODE_GAVEL_CHIP_CLASS} ml-1.5`}
-                                                                    role="button"
-                                                                    tabIndex={0}
-                                                                    onKeyDown={(e) => {
-                                                                        if (e.key === 'Enter' || e.key === ' ') {
-                                                                            e.preventDefault();
-                                                                            onToggleJurisprudence?.(jurisProvisionId, paragraphIndex);
-                                                                        }
-                                                                    }}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        if (onToggleJurisprudence) onToggleJurisprudence(jurisProvisionId, paragraphIndex);
-                                                                    }}
-                                                                    title={`${linkCount} cited cases linked to this paragraph`}
-                                                                >
-                                                                    <Gavel size={14} className="shrink-0" strokeWidth={2} aria-hidden />
-                                                                    <span className={LEXCODE_GAVEL_COUNT_CLASS}>{linkCount}</span>
-                                                                </span>
-                                                            )}
-
-                                                             {isLastSegment && (article.id || article.key_id) && !isSubHeader && (
-                                                                 <button
-                                                                     type="button"
-                                                                     onClick={handleAddToPlaylist}
-                                                                     className={`${LEXCODE_LEXPLAY_CHIP_CLASS} ml-1.5 hover:scale-[1.02] active:scale-[0.98]`}
-                                                                     title="Add to LexPlay Playlist"
-                                                                 >
-                                                                     <Headphones size={14} strokeWidth={2} aria-hidden />
-                                                                 </button>
-                                                             )}
+                                                            {cleanSegments}
                                                         </p>
                                                     );
                                                 }
 
                                                 // Fallback for standard paragraphs
+                                                const showLexplayTailFb =
+                                                    isLastSegment &&
+                                                    (article.id || article.key_id) &&
+                                                    !isSubHeader;
+                                                const useFlexTailFb =
+                                                    !isSubHeader && (linkCount > 0 || showLexplayTailFb);
+
+                                                if (useFlexTailFb) {
+                                                    return (
+                                                        <p
+                                                            {...props}
+                                                            className={`!m-0 max-w-full [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : ''}`}
+                                                            style={{
+                                                                maxWidth: '100%',
+                                                                overflowWrap: 'anywhere',
+                                                                wordBreak: 'break-word',
+                                                            }}
+                                                        >
+                                                            <span
+                                                                className={`inline-block w-full max-w-full whitespace-pre-wrap break-words align-top [overflow-wrap:anywhere] ${isSubHeader ? '' : 'text-justify'}`}
+                                                            >
+                                                                {children}
+                                                                {linkCount > 0 && (
+                                                                    <LexcodeJurisprudenceChip
+                                                                        className="ml-1.5"
+                                                                        count={linkCount}
+                                                                        title={`${linkCount} cited cases linked to this paragraph`}
+                                                                        stopPropagationOnClick
+                                                                        onOpen={() =>
+                                                                            onToggleJurisprudence?.(
+                                                                                jurisProvisionId,
+                                                                                paragraphIndex
+                                                                            )
+                                                                        }
+                                                                    />
+                                                                )}
+                                                                {showLexplayTailFb && (
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={handleAddToPlaylist}
+                                                                        className={`${LEXCODE_LEXPLAY_CHIP_CLASS} ml-1.5 hover:scale-[1.02] active:scale-[0.98]`}
+                                                                        title="Add to LexPlay Playlist"
+                                                                    >
+                                                                        <Headphones
+                                                                            size={14}
+                                                                            strokeWidth={2}
+                                                                            aria-hidden
+                                                                        />
+                                                                    </button>
+                                                                )}
+                                                            </span>
+                                                        </p>
+                                                    );
+                                                }
+
                                                 return (
                                                     <p
                                                         {...props}
                                                         className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : 'text-justify'}`}
-                                                        style={{ maxWidth: '100%', overflowWrap: 'anywhere', wordBreak: 'break-word' }}
+                                                        style={{
+                                                            maxWidth: '100%',
+                                                            overflowWrap: 'anywhere',
+                                                            wordBreak: 'break-word',
+                                                        }}
                                                     >
-                                                         {children}
-                                                         {linkCount > 0 && (
-                                                            <span
-                                                                className={`${LEXCODE_GAVEL_CHIP_CLASS} ml-1.5`}
-                                                                role="button"
-                                                                tabIndex={0}
-                                                                onKeyDown={(e) => {
-                                                                    if (e.key === 'Enter' || e.key === ' ') {
-                                                                        e.preventDefault();
-                                                                        onToggleJurisprudence?.(jurisProvisionId, paragraphIndex);
-                                                                    }
-                                                                }}
-                                                                    onClick={(e) => {
-                                                                        e.stopPropagation();
-                                                                        if (onToggleJurisprudence) onToggleJurisprudence(jurisProvisionId, paragraphIndex);
-                                                                    }}
-                                                                    title={`${linkCount} cited cases linked to this paragraph`}
-                                                                >
-                                                                    <Gavel size={14} className="shrink-0" strokeWidth={2} aria-hidden />
-                                                                    <span className={LEXCODE_GAVEL_COUNT_CLASS}>{linkCount}</span>
-                                                                </span>
-                                                            )}
-
-                                                             {isLastSegment && (article.id || article.key_id) && !isSubHeader && (
-                                                                 <button
-                                                                     type="button"
-                                                                     onClick={handleAddToPlaylist}
-                                                                     className={`${LEXCODE_LEXPLAY_CHIP_CLASS} ml-1.5 hover:scale-[1.02] active:scale-[0.98]`}
-                                                                     title="Add to LexPlay Playlist"
-                                                                 >
-                                                                     <Headphones size={14} strokeWidth={2} aria-hidden />
-                                                                 </button>
-                                                             )}
+                                                        {children}
                                                     </p>
                                                 );
                                             },
