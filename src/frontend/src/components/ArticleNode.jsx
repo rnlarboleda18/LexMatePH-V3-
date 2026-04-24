@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -17,6 +17,15 @@ import {
 } from '../utils/codalMarkdown';
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
 import { fcJurisProvisionIdFromArticle } from '../utils/fcJurisProvisionId';
+
+/** For querySelector on data attributes that may need escaping (marker strings). */
+function escapeForAttrSelector(s) {
+    const str = String(s);
+    if (typeof CSS !== 'undefined' && typeof CSS.escape === 'function') {
+        return CSS.escape(str);
+    }
+    return str.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+}
 
 /** Unified juris gavel chip (all codals: header −1 links + paragraph-level links). Rounded rect, middle-aligned to the line. */
 const LEXCODE_GAVEL_CHIP_CLASS =
@@ -637,6 +646,67 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
     // Keep track of which footnote popover is open
     const [activeFootnoteMarker, setActiveFootnoteMarker] = useState(null);
+    /** Client rect of #lexcode-codal-article so the portaled popover lines up with the codal column (not full viewport). */
+    const [codalColumnBox, setCodalColumnBox] = useState(null);
+    /** Open marker button rect (fixed positioning so popover follows scroll next to the superscript). */
+    const [footnoteAnchorBox, setFootnoteAnchorBox] = useState(null);
+
+    const copyDomRect = useCallback((r) => (
+        { top: r.top, left: r.left, right: r.right, bottom: r.bottom, width: r.width, height: r.height }
+    ), []);
+
+    const updateFootnoteLayout = useCallback(() => {
+        if (activeFootnoteMarker == null) {
+            return;
+        }
+        const el = document.getElementById('lexcode-codal-article');
+        if (!el) {
+            setCodalColumnBox(null);
+            return;
+        }
+        const r = el.getBoundingClientRect();
+        setCodalColumnBox({ left: r.left, top: r.top, width: r.width, height: r.height });
+        const btn = document.querySelector(
+            `[data-lexcode-footnote-marker="${escapeForAttrSelector(activeFootnoteMarker)}"]`
+        );
+        if (btn) {
+            setFootnoteAnchorBox(copyDomRect(btn.getBoundingClientRect()));
+        }
+    }, [activeFootnoteMarker, copyDomRect]);
+
+    useLayoutEffect(() => {
+        if (activeFootnoteMarker == null) {
+            setCodalColumnBox(null);
+            setFootnoteAnchorBox(null);
+            return;
+        }
+        updateFootnoteLayout();
+    }, [activeFootnoteMarker, updateFootnoteLayout]);
+
+    useEffect(() => {
+        if (activeFootnoteMarker == null) return undefined;
+        const onScrollOrResize = () => updateFootnoteLayout();
+        window.addEventListener('resize', onScrollOrResize);
+        window.addEventListener('scroll', onScrollOrResize, true);
+        return () => {
+            window.removeEventListener('resize', onScrollOrResize);
+            window.removeEventListener('scroll', onScrollOrResize, true);
+        };
+    }, [activeFootnoteMarker, updateFootnoteLayout]);
+
+    /** Close footnote when user taps or clicks outside trigger + popover (capture — runs before in-dialog handlers). */
+    useEffect(() => {
+        if (activeFootnoteMarker == null) return undefined;
+        const onPointerDown = (e) => {
+            const el = e.target;
+            if (el && typeof el.closest === 'function' && el.closest('[data-lexcode-footnote-ui]')) {
+                return;
+            }
+            setActiveFootnoteMarker(null);
+        };
+        document.addEventListener('pointerdown', onPointerDown, true);
+        return () => document.removeEventListener('pointerdown', onPointerDown, true);
+    }, [activeFootnoteMarker]);
 
     // Bypassing empty articles AFTER all hooks have been initialized
     if (!hasContent) return null;
@@ -1367,46 +1437,155 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                                                     const isOpen = activeFootnoteMarker === marker;
 
+                                                    const footnotePanel = (
+                                                        <>
+                                                            <div className="flex justify-between items-center mb-2 gap-2">
+                                                                <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex min-w-0 flex-1 items-center gap-1">
+                                                                    <Info size={14} className="inline shrink-0" />{' '}
+                                                                    <span className="min-w-0 break-words">
+                                                                        Footnote {marker}
+                                                                    </span>
+                                                                </span>
+                                                                <button
+                                                                    type="button"
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        e.stopPropagation();
+                                                                        setActiveFootnoteMarker(null);
+                                                                    }}
+                                                                    className="shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
+                                                                >
+                                                                    <X size={14} />
+                                                                </button>
+                                                            </div>
+                                                            <div className="text-sm font-sans font-normal text-gray-700 dark:text-gray-300 leading-relaxed max-h-[min(50dvh,20rem)] overflow-y-auto custom-scrollbar">
+                                                                {footnoteText}
+                                                            </div>
+                                                        </>
+                                                    );
+
+                                                    const pad = 8;
+                                                    let colLeft;
+                                                    let colW;
+                                                    let popStyle = {};
+                                                    if (typeof document !== 'undefined' && isOpen) {
+                                                        const b =
+                                                            codalColumnBox ??
+                                                            (() => {
+                                                                const el = document.getElementById('lexcode-codal-article');
+                                                                if (!el) return null;
+                                                                const r = el.getBoundingClientRect();
+                                                                return { left: r.left, top: r.top, width: r.width, height: r.height };
+                                                            })();
+                                                        if (b) {
+                                                            colW = Math.min(352, Math.max(0, b.width - pad * 2));
+                                                            const colL = b.left + pad;
+                                                            const colR = b.left + b.width - pad;
+                                                            const aBox =
+                                                                footnoteAnchorBox ??
+                                                                (() => {
+                                                                    if (typeof document === 'undefined') return null;
+                                                                    const el = document.querySelector(
+                                                                        `[data-lexcode-footnote-marker="${escapeForAttrSelector(marker)}"]`
+                                                                    );
+                                                                    if (!el) return null;
+                                                                    return copyDomRect(el.getBoundingClientRect());
+                                                                })();
+                                                            if (aBox) {
+                                                                colLeft = Math.min(
+                                                                    Math.max(aBox.left, colL),
+                                                                    Math.max(colL, colR - colW)
+                                                                );
+                                                            } else {
+                                                                colLeft = colL;
+                                                            }
+                                                            if (aBox) {
+                                                                const gap = 6;
+                                                                const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
+                                                                const minGap = 120;
+                                                                const spaceBelow = vh - aBox.bottom;
+                                                                const spaceAbove = aBox.top;
+                                                                const showAbove = spaceBelow < minGap && spaceAbove > minGap;
+                                                                if (showAbove) {
+                                                                    popStyle = {
+                                                                        left: colLeft,
+                                                                        width: colW,
+                                                                        top: aBox.top,
+                                                                        transform: `translateY(calc(-100% - ${gap}px))`,
+                                                                    };
+                                                                } else {
+                                                                    popStyle = {
+                                                                        left: colLeft,
+                                                                        width: colW,
+                                                                        top: aBox.bottom + gap,
+                                                                    };
+                                                                }
+                                                            } else {
+                                                                popStyle = { left: colLeft, width: colW, top: 12 };
+                                                            }
+                                                        } else {
+                                                            colW = Math.min(352, (typeof window !== 'undefined' ? window.innerWidth : 400) - 24);
+                                                            colLeft = 12;
+                                                            popStyle = { left: colLeft, width: colW, top: 12 };
+                                                        }
+                                                    }
+
                                                     return (
-                                                        <span className="relative inline-block ml-1 align-super -mt-1 group/footnote z-20">
+                                                        <span className="relative z-30 ml-1 inline-block align-super group/footnote">
                                                             <button
+                                                                type="button"
+                                                                data-lexcode-footnote-ui
+                                                                data-lexcode-footnote-marker={marker}
                                                                 onClick={(e) => {
                                                                     e.preventDefault();
                                                                     e.stopPropagation();
-                                                                    setActiveFootnoteMarker(isOpen ? null : marker);
+                                                                    if (isOpen) {
+                                                                        setActiveFootnoteMarker(null);
+                                                                    } else {
+                                                                        setFootnoteAnchorBox(
+                                                                            copyDomRect(e.currentTarget.getBoundingClientRect())
+                                                                        );
+                                                                        setActiveFootnoteMarker(marker);
+                                                                    }
                                                                 }}
-                                                                className="inline-flex items-center justify-center min-w-[1.2rem] h-[1.2rem] px-1 text-[10px] font-bold text-white bg-indigo-500 hover:bg-indigo-600 rounded shadow-sm hover:shadow-md transition-all cursor-pointer"
+                                                                className="relative -m-1 inline-flex min-h-[1.5rem] min-w-[1.5rem] touch-manipulation cursor-pointer items-center justify-center rounded p-0.5 text-[9px] font-bold text-white shadow-sm transition-all hover:shadow-md active:opacity-90"
                                                                 title={`Footnote ${marker}`}
+                                                                aria-expanded={isOpen}
+                                                                aria-haspopup="dialog"
                                                             >
-                                                                {marker}
+                                                                <span
+                                                                    aria-hidden
+                                                                    className="inline-flex h-[1.1rem] min-w-[1.1rem] items-center justify-center rounded bg-indigo-500 px-0.5 leading-none text-white"
+                                                                >
+                                                                    {marker}
+                                                                </span>
                                                             </button>
 
-                                                            {isOpen && (
-                                                                <>
-                                                                    {/* Mobile backdrop to close on tap outside */}
-                                                                    <div className="fixed inset-0 z-40 sm:hidden" onClick={(e) => { e.preventDefault(); e.stopPropagation(); setActiveFootnoteMarker(null); }} />
-                                                                    <div className="fixed inset-x-4 top-1/3 sm:inset-auto sm:absolute sm:bottom-full sm:left-1/2 sm:-translate-x-1/2 sm:mb-2 max-w-full sm:w-80 bg-white dark:bg-gray-800 p-4 rounded-xl shadow-2xl border border-indigo-200 dark:border-indigo-900/50 animate-in fade-in zoom-in-95 duration-200 z-50 text-left cursor-default" onClick={e => e.stopPropagation()}>
-                                                                        <div className="flex justify-between items-center mb-2">
-                                                                            <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 capitalize flex items-center gap-1">
-                                                                                <Info size={14} className="inline" /> Footnote {marker}
-                                                                            </span>
-                                                                            <button
-                                                                                onClick={(e) => {
-                                                                                    e.preventDefault();
-                                                                                    e.stopPropagation();
-                                                                                    setActiveFootnoteMarker(null);
-                                                                                }}
-                                                                                className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-                                                                            >
-                                                                                <X size={14} />
-                                                                            </button>
+                                                            {isOpen && typeof document !== 'undefined' && colW != null && colLeft != null &&
+                                                                createPortal(
+                                                                    <>
+                                                                        <div
+                                                                            className="fixed inset-0 z-[575] touch-manipulation bg-black/20"
+                                                                            role="presentation"
+                                                                            onClick={() => {
+                                                                                setActiveFootnoteMarker(null);
+                                                                            }}
+                                                                            aria-hidden
+                                                                        />
+                                                                        <div
+                                                                            data-lexcode-footnote-ui
+                                                                            role="dialog"
+                                                                            aria-modal="true"
+                                                                            aria-label={`Footnote ${marker}`}
+                                                                            className="fixed z-[580] max-h-[min(70dvh,32rem)] max-w-full cursor-default overflow-y-auto rounded-2xl border border-indigo-200 bg-white p-4 text-left shadow-2xl animate-in fade-in duration-200 dark:border-indigo-900/50 dark:bg-gray-800"
+                                                                            style={popStyle}
+                                                                            onClick={(e) => e.stopPropagation()}
+                                                                        >
+                                                                            {footnotePanel}
                                                                         </div>
-                                                                        <div className="text-sm font-sans font-normal text-gray-700 dark:text-gray-300 leading-relaxed max-h-48 overflow-y-auto custom-scrollbar">
-                                                                            {footnoteText}
-                                                                        </div>
-                                                                    </div>
-                                                                </>
-                                                            )}
+                                                                    </>,
+                                                                    document.body
+                                                                )}
                                                         </span>
                                                     );
                                                 }

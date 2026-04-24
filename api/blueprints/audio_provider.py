@@ -48,7 +48,7 @@ AZURE_SPEECH_AVAILABLE = _azure_speech_configured()
 audio_provider_bp = func.Blueprint()
 
 # ----- Configuration & Versioning -----
-CACHE_VERSION = "v27"  # v27: RCC "Section N." in spoken header; v26: TTS "one (1)" collapse; RCC lead/UI parity
+CACHE_VERSION = "v28"  # v28: strip [1] footnote markers in codal TTS; v27: RCC "Section N." in header
 
 # Global lock: Azure Speech F0 allows only 1 concurrent real-time synthesis.
 # This prevents 429 errors when multiple requests overlap (e.g. fast track skipping).

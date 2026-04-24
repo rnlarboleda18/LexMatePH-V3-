@@ -178,6 +178,38 @@ export function SubscriptionProvider({ children }) {
   // Cleanup pending retry timers on unmount.
   useEffect(() => () => clearTimeout(retryTimerRef.current), []);
 
+  // When Xendit redirects the user back after payment (success_return_url includes
+  // ?xendit_payment=success), poll subscription-status until the tier is upgraded
+  // (webhook may fire a few seconds after return) then clean up the URL.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('xendit_payment') !== 'success') return;
+
+    // Remove the query params from the URL immediately (cosmetic)
+    const cleanUrl = window.location.pathname + window.location.hash;
+    window.history.replaceState({}, '', cleanUrl);
+
+    let attempts = 0;
+    const MAX_ATTEMPTS = 12;  // up to ~24 s
+    const INTERVAL_MS  = 2000;
+
+    const poll = setInterval(async () => {
+      attempts += 1;
+      await fetchSubscriptionStatus();
+      // Stop polling once we have a paid tier or max attempts reached
+      setTier(prev => {
+        if (prev !== 'free' || attempts >= MAX_ATTEMPTS) {
+          clearInterval(poll);
+        }
+        return prev;
+      });
+    }, INTERVAL_MS);
+
+    return () => clearInterval(poll);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Effective tier takes admin override first, then test tier, then real tier
   const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
 

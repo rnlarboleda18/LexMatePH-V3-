@@ -3,7 +3,6 @@ import { createPortal } from 'react-dom';
 import { X, Check, Zap, Star, Crown, Shield, Loader2 } from 'lucide-react';
 import { useAuth } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
-import PaymentForm from './PaymentForm';
 
 const PLANS = [
   {
@@ -112,15 +111,10 @@ export default function SubscriptionModal({ onClose }) {
   const { tier, refreshStatus } = useSubscription();
   const { getToken } = useAuth();
   const [billing, setBilling] = useState('monthly');
-  const [availablePlans, setAvailablePlans] = useState({});
-  const [publicKey, setPublicKey] = useState('');
   const [bypassMode, setBypassMode] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState(null);
   const [successPlan, setSuccessPlan] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
-  // paymentSession — set after create-checkout creates a subscription+PI.
-  // Shape: { paymentIntentId, clientKey, subscriptionId, planLabel, token }
-  const [paymentSession, setPaymentSession] = useState(null);
   const [isMobileLayout, setIsMobileLayout] = useState(() =>
     typeof window !== 'undefined' && window.matchMedia(MOBILE_SUBSCRIPTION_MQ).matches
   );
@@ -137,9 +131,7 @@ export default function SubscriptionModal({ onClose }) {
     fetch('/api/available-plans')
       .then(r => r.json())
       .then(data => {
-        setAvailablePlans(data);
         setBypassMode(data.bypass_mode === true);
-        if (data.public_key) setPublicKey(data.public_key);
       })
       .catch(() => {});
   }, []);
@@ -152,58 +144,34 @@ export default function SubscriptionModal({ onClose }) {
 
     try {
       const token = await getToken();
+      const planKey = plan.planKey[billing]; // e.g. 'amicus_monthly'
 
-      // ── BYPASS MODE: skip PayMongo, grant tier instantly ──────────────────
-      if (bypassMode) {
-        const planKey = plan.planKey[billing]; // e.g. 'amicus_monthly'
-        const res = await fetch('/api/create-checkout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Clerk-Authorization': `Bearer ${token}`,
-          },
-          body: JSON.stringify({ plan_key: planKey }),
-        });
-        const data = await res.json();
-        if (data.bypass && data.tier) {
-          setSuccessPlan(data.tier);
-          await refreshStatus();
-          setTimeout(() => onClose(), 1500);
-        } else {
-          setErrorMsg(data.error || 'Bypass failed.');
-        }
-        return;
-      }
-      // ─────────────────────────────────────────────────────────────────────
-
-      // Normal PayMongo flow — create subscription, then show card form
-      const key = plan.planKey[billing];
-      const planId = availablePlans[key];
-      if (!planId) {
-        setErrorMsg('Plan not configured yet. Please try again later.');
-        return;
-      }
       const res = await fetch('/api/create-checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-Clerk-Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ plan_id: planId }),
+        body: JSON.stringify({ plan_key: planKey }),
       });
       const data = await res.json();
-      if (data.payment_intent_id) {
-        // Show inline card-payment form
-        setPaymentSession({
-          paymentIntentId: data.payment_intent_id,
-          clientKey: data.client_key,
-          subscriptionId: data.subscription_id,
-          planLabel: `${plan.name} ${billing === 'yearly' ? 'Yearly' : 'Monthly'}`,
-          token,
-        });
-      } else {
-        setErrorMsg(data.error || 'Failed to create checkout session.');
+
+      // ── BYPASS MODE: tier granted instantly, no redirect needed ──────────
+      if (data.bypass && data.tier) {
+        setSuccessPlan(data.tier);
+        await refreshStatus();
+        setTimeout(() => onClose(), 1500);
+        return;
       }
+      // ─────────────────────────────────────────────────────────────────────
+
+      // Normal Xendit flow — redirect to hosted checkout page
+      if (data.checkout_url) {
+        window.location.href = data.checkout_url;
+        return;
+      }
+
+      setErrorMsg(data.error || 'Failed to create checkout session.');
     } catch (err) {
       setErrorMsg('Network error. Please try again.');
     } finally {
@@ -265,7 +233,7 @@ export default function SubscriptionModal({ onClose }) {
               Upgrade Your Plan
             </h2>
             <p className="mt-0.5 text-[11px] font-medium text-white/70">
-              GCash · Maya · Card · GrabPay · BSP Regulated
+              GCash · Maya · Card · GrabPay · Powered by Xendit
             </p>
           </div>
           <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-2 sm:w-auto sm:justify-end sm:gap-3">
@@ -404,7 +372,7 @@ export default function SubscriptionModal({ onClose }) {
         <p
           className={`text-center text-xs text-gray-400 dark:text-gray-600 ${isMobileLayout ? 'px-4 pb-4 sm:px-5 sm:pb-5' : 'px-5 pb-5'}`}
         >
-          Secured by PayMongo · Cancel anytime
+          Secured by Xendit · Cancel anytime
         </p>
       </div>
     </>
@@ -419,56 +387,6 @@ export default function SubscriptionModal({ onClose }) {
     ? 'lex-modal-card relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900'
     : 'relative mx-auto flex w-full max-w-5xl max-h-[min(92vh,56rem)] flex-col overflow-hidden rounded-2xl border-0 bg-white shadow-[0_24px_64px_-12px_rgba(109,40,217,0.35)] animate-in zoom-in-95 duration-300 dark:bg-slate-900 dark:shadow-[0_24px_64px_-12px_rgba(88,28,135,0.45)]';
 
-  // ── Payment form view (after create-checkout returns a payment_intent_id) ──
-  const paymentView = paymentSession && (
-    <>
-      {/* Keep the same gradient header for visual continuity */}
-      <div className="relative z-30 shrink-0 overflow-hidden bg-gradient-to-br from-violet-600 via-purple-600 to-indigo-600">
-        <div className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-        <div className="relative flex items-center justify-between px-5 py-4">
-          <div>
-            <h2
-              id="subscription-modal-title"
-              className="text-base font-extrabold tracking-tight text-white drop-shadow-sm"
-            >
-              Complete Payment
-            </h2>
-            <p className="mt-0.5 text-[11px] font-medium text-white/70">
-              {paymentSession.planLabel}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-full p-2 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
-            aria-label="Close"
-          >
-            <X size={20} />
-          </button>
-        </div>
-      </div>
-
-      {/* Card form */}
-      <div className="overflow-y-auto bg-white dark:bg-slate-900">
-        <PaymentForm
-          publicKey={publicKey}
-          paymentIntentId={paymentSession.paymentIntentId}
-          clientKey={paymentSession.clientKey}
-          subscriptionId={paymentSession.subscriptionId}
-          planLabel={paymentSession.planLabel}
-          clerkToken={paymentSession.token}
-          onSuccess={async () => {
-            await refreshStatus();
-            setSuccessPlan(tier);
-            setPaymentSession(null);
-            setTimeout(() => onClose(), 1500);
-          }}
-          onCancel={() => setPaymentSession(null)}
-        />
-      </div>
-    </>
-  );
-
   return createPortal(
     <div className={overlayClass} onClick={onClose}>
       <div
@@ -478,7 +396,7 @@ export default function SubscriptionModal({ onClose }) {
         aria-labelledby="subscription-modal-title"
         onClick={(e) => e.stopPropagation()}
       >
-        {paymentSession ? paymentView : panelContent}
+        {panelContent}
       </div>
     </div>,
     document.body

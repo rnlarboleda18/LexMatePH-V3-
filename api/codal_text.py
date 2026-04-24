@@ -98,6 +98,11 @@ def tts_flatten_codal_body(content: str) -> str:
     clean = str(content).strip()
     clean = clean.replace("\r\n", "\n").replace("\r", "\n")
 
+    # Labor Code and others: inline footnote markers like [1] [2] in the article body
+    # (ingested for LexCode; not meant to be spoken by TTS). Remove before we strip
+    # brackets, which would leave a stray digit the engine still reads.
+    clean = re.sub(r"\[\d{1,3}\]\s*", " ", clean)
+
     # Strip a leading standalone source-reference number that some codals (Family Code,
     # Old Civil Code) prepend to the body — e.g. "5\nThe legal separation may be claimed…"
     # where 5 refers to the corresponding article in the prior law.
