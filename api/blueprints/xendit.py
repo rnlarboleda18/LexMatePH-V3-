@@ -21,7 +21,7 @@ xendit_bp = func.Blueprint()
 XENDIT_WEBHOOK_TOKEN = os.environ.get("XENDIT_WEBHOOK_TOKEN", "")
 XENDIT_BASE_URL     = "https://api.xendit.co"
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com")
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
 
 ADMIN_EMAILS = [
     "rnlarboleda@gmail.com",
@@ -392,8 +392,9 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             "country": "PH",
             "locale": "en",
             "description": f"LexMatePH — {cfg['label']}",
-            "success_return_url": f"{FRONTEND_URL}/?xendit_payment=success&plan={plan_key}",
-            "cancel_return_url": f"{FRONTEND_URL}/?xendit_payment=cancelled",
+            # Return to the main app (Case Digest), not marketing `/`, so paid users are not dropped on the landing page.
+            "success_return_url": f"{FRONTEND_URL}/decisions?xendit_payment=success&plan={plan_key}",
+            "cancel_return_url": f"{FRONTEND_URL}/decisions?xendit_payment=cancelled",
             "metadata": {
                 "clerk_id": clerk_id,
                 "plan_key": plan_key,
