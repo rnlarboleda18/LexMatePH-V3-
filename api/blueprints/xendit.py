@@ -124,7 +124,11 @@ def _next_anchor_date(interval: str) -> str:
 
 
 def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
-    """Return existing Xendit customer_id from DB, or create one via API."""
+    """Return valid Xendit customer_id (cust-xxx, 41 chars) from DB, or create/fetch via API.
+
+    The Sessions API requires customer_id to be exactly 41 chars starting with 'cust-'.
+    We validate the stored value and re-create if it looks wrong (e.g. from old API).
+    """
     first_name = None
     last_name = None
     with _get_db() as conn:
@@ -134,9 +138,11 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
                 (clerk_id,),
             )
             row = cur.fetchone()
-            if row and row[0]:
-                return row[0]
             if row:
+                stored_id = (row[0] or "").strip()
+                # Only reuse if it matches the cust-xxx format (41 chars)
+                if stored_id.startswith("cust-") and len(stored_id) == 41:
+                    return stored_id
                 first_name = row[1]
                 last_name = row[2]
 
@@ -145,13 +151,15 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
     if not last_name:
         last_name = "."
 
-    client_ref = f"lexmate-{clerk_id}"
-    # Xendit Customer API with client_reference uses a flat schema (no individual_detail wrapper)
+    ref_id = f"lexmate-{clerk_id}"
+    # Current Xendit Customer API schema: reference_id + nested individual_detail
     payload = {
-        "client_reference": client_ref,
+        "reference_id": ref_id,
         "type": "INDIVIDUAL",
-        "given_name": first_name,
-        "surname": last_name,
+        "individual_detail": {
+            "given_names": first_name[:50],
+            "surname": (last_name or ".")[:50],
+        },
         "email": email,
     }
     resp = requests.post(
@@ -160,36 +168,34 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         headers=_xendit_headers(),
         timeout=15,
     )
-    if resp.status_code not in (200, 201):
-        # Xendit returns 400 DUPLICATE_END_CUSTOMER_ERROR or 409 when client_reference already exists
-        is_duplicate = (
-            resp.status_code == 409
-            or (resp.status_code == 400 and "DUPLICATE_END_CUSTOMER_ERROR" in resp.text)
-        )
-        if is_duplicate:
-            fetch_resp = requests.get(
-                f"{XENDIT_BASE_URL}/customers?client_reference={client_ref}",
-                headers=_xendit_headers(),
-                timeout=15,
-            )
-            if fetch_resp.status_code == 200:
-                data = fetch_resp.json()
-                items = data.get("data", data) if isinstance(data, dict) else data
-                if isinstance(items, list) and items:
-                    customer_id = items[0].get("id") or items[0].get("end_customer_id", "")
-                elif isinstance(items, dict):
-                    customer_id = items.get("id") or items.get("end_customer_id", "")
-                else:
-                    raise RuntimeError(f"Xendit customer lookup failed after duplicate: {fetch_resp.text}")
-            else:
-                raise RuntimeError(f"Xendit customer creation failed: {resp.text}")
-        else:
-            raise RuntimeError(f"Xendit customer creation failed ({resp.status_code}): {resp.text}")
-    else:
-        resp_data = resp.json()
-        customer_id = resp_data.get("id") or resp_data.get("end_customer_id", "")
+
+    if resp.status_code in (200, 201):
+        customer_id = resp.json().get("id", "")
         if not customer_id:
             raise RuntimeError(f"Xendit customer creation: no id in response: {resp.text}")
+    elif resp.status_code == 409 or (resp.status_code == 400 and "DUPLICATE" in resp.text):
+        # Customer already exists — fetch by reference_id
+        fetch_resp = requests.get(
+            f"{XENDIT_BASE_URL}/customers?reference_id={ref_id}",
+            headers=_xendit_headers(),
+            timeout=15,
+        )
+        if fetch_resp.status_code != 200:
+            raise RuntimeError(
+                f"Xendit customer lookup failed ({fetch_resp.status_code}): {fetch_resp.text}"
+            )
+        data = fetch_resp.json()
+        items = data.get("data", data) if isinstance(data, dict) else data
+        if isinstance(items, list) and items:
+            customer_id = items[0].get("id", "")
+        elif isinstance(items, dict):
+            customer_id = items.get("id", "")
+        else:
+            raise RuntimeError(f"Xendit customer lookup: unexpected response: {fetch_resp.text}")
+        if not customer_id:
+            raise RuntimeError(f"Xendit customer lookup: no id in response: {fetch_resp.text}")
+    else:
+        raise RuntimeError(f"Xendit customer creation failed ({resp.status_code}): {resp.text}")
 
     with _get_db() as conn:
         with conn.cursor() as cur:
