@@ -166,8 +166,10 @@ export default function SubscriptionModal({ onClose }) {
       }
 
       if (!res.ok) {
-        const detail = data.trace ? ` — ${data.trace}` : '';
-        setErrorMsg((data.error || data.message || `Server error (${res.status})`) + detail);
+        const detailStr = data.detail
+          ? ` — ${typeof data.detail === 'object' ? JSON.stringify(data.detail) : data.detail}`
+          : (data.trace ? ` — ${data.trace}` : '');
+        setErrorMsg((data.error || data.message || `Server error (${res.status})`) + detailStr);
         return;
       }
 
