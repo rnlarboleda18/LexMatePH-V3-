@@ -157,12 +157,17 @@ export default function SubscriptionModal({ onClose }) {
 
       let data = {};
       const text = await res.text();
-      try { data = text ? JSON.parse(text) : {}; } catch { data = { error: text || `HTTP ${res.status}` }; }
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        // Non-JSON response (e.g. Cloudflare HTML error page)
+        const isHtml = text.trim().startsWith('<');
+        data = { error: isHtml ? `Gateway error (${res.status}) — the server is temporarily unavailable. Please try again in a minute.` : (text || `HTTP ${res.status}`) };
+      }
 
       if (!res.ok) {
-        const detail = res.headers.get('X-Debug-Error') || data.trace || '';
-        const msg = data.error || data.message || `Server error (${res.status})`;
-        setErrorMsg(detail ? `${msg} — ${detail}` : msg);
+        const detail = data.trace ? ` — ${data.trace}` : '';
+        setErrorMsg((data.error || data.message || `Server error (${res.status})`) + detail);
         return;
       }
 
