@@ -606,6 +606,8 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
     t0 = time.time()
 
     if workers > 1:
+        hb_every = 90.0  # seconds; shows the pool is alive when Vertex is slow
+        last_hb = time.time()
         with ThreadPoolExecutor(max_workers=workers) as pool:
             futs = {pool.submit(process_case, c, article_index, dry_run): c for c in cases}
             for i, fut in enumerate(as_completed(futs), 1):
@@ -616,6 +618,13 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
                     f"  [{i}/{len(cases)}] {c['short_title'][:45]} -> {n} links",
                     flush=True,
                 )
+                now = time.time()
+                if now - last_hb >= hb_every:
+                    print(
+                        f"  [...] heartbeat {now - t0:.0f}s in; completed {i}/{len(cases)} cases",
+                        flush=True,
+                    )
+                    last_hb = now
     else:
         for i, case in enumerate(cases, 1):
             print(f"[{i}/{len(cases)}] {case['short_title'][:55]}", flush=True)

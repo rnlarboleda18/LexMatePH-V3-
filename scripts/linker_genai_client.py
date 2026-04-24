@@ -10,6 +10,8 @@ Required:
 Optional:
   GOOGLE_CLOUD_LOCATION — region (default ``global``, per Gemini 3 Flash global endpoint)
   GEMINI_LINKER_MODEL — override model id (default: :data:`DEFAULT_LINKER_VERTEX_MODEL`)
+  GEMINI_LINKER_HTTP_TIMEOUT_MS — per-request HTTP timeout in ms for Vertex calls
+    (default ``300000`` = 5 minutes). Without this, hung RPCs can stall all thread-pool workers.
 
 Missing keys are filled from ``api/local.settings.json`` (``Values``) when that file exists,
 only for environment variables that are unset or empty.
@@ -89,7 +91,22 @@ def get_linker_genai_client():
         or "global"
     ).strip()
 
-    _genai_client = genai.Client(vertexai=True, project=project, location=location)
+    raw_to = (os.environ.get("GEMINI_LINKER_HTTP_TIMEOUT_MS") or "").strip()
+    try:
+        timeout_ms = int(raw_to) if raw_to else 300_000
+    except ValueError:
+        timeout_ms = 300_000
+    if timeout_ms < 10_000:
+        timeout_ms = 10_000
+
+    from google.genai import types as genai_types
+
+    _genai_client = genai.Client(
+        vertexai=True,
+        project=project,
+        location=location,
+        http_options=genai_types.HttpOptions(timeout=timeout_ms),
+    )
     return _genai_client
 
 

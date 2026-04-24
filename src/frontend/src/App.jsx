@@ -22,6 +22,7 @@ import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage'
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
+import { useLandingBackgroundPrefetch } from './hooks/useLandingBackgroundPrefetch';
 import {
   FILTER_CHROME_SURFACE,
   FILTER_SELECT,
@@ -173,6 +174,7 @@ function App() {
    *  App to the React Router context, which would cause an extra re-render on every
    *  navigate() call and make child components (e.g. SupremeDecisions) re-render needlessly. */
   const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'landing');
+  useLandingBackgroundPrefetch(mode === 'landing');
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
