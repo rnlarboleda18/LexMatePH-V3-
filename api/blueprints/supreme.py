@@ -249,6 +249,129 @@ def bar_subject_canon_sql(col: str = "subject") -> str:
     )"""
 
 
+def normalize_ponente_text(ponente):
+    """
+    Normalize ponente name to standard format: "LASTNAME, J.:"
+    Examples:
+        "Antonio T. Carpio" -> "CARPIO, J.:"
+        "carpio, j." -> "CARPIO, J.:"
+        "CARPIO, J" -> "CARPIO, J.:"
+        "Carpio" -> "CARPIO, J.:"
+        "J.B.L. Reyes" -> "REYES, J.B.L., J.:"
+    """
+    if not ponente or not isinstance(ponente, str):
+        return None
+
+    # Clean up the input
+    ponente = ponente.strip()
+    if not ponente:
+        return None
+
+    # Special handling for "Per Curiam"
+    if "curiam" in ponente.lower():
+        return "Per Curiam"
+
+    # Handle known special cases first (Multi-word lastnames or initials)
+    # These are names where strict "last word" logic fails or we want specific formatting
+    special_map = {
+        "J.B.L. REYES": "REYES, J.B.L.",
+        "J. B. L. REYES": "REYES, J.B.L.",
+        "JOSE C. REYES, JR.": "J.C. REYES, JR.",
+        "J. REYES, JR.": "J.C. REYES, JR.",
+        "ANDRES B. REYES, JR.": "A. REYES, JR.",
+        "A. REYES, JR.": "A. REYES, JR.",
+        "RUBEN T. REYES": "REYES, R.T.",
+        "R.T. REYES": "REYES, R.T.",
+        "CONCHITA CARPIO MORALES": "CARPIO MORALES",
+        "CONCHITA CARPIO-MORALES": "CARPIO-MORALES",
+        "MARTIN S. VILLARAMA, JR.": "VILLARAMA, JR.",
+        "VILLARAMA, JR.": "VILLARAMA, JR.",
+        "PREBITERO J. VELASCO, JR.": "VELASCO, JR.",
+        "VELASCO, JR.": "VELASCO, JR.",
+        "PRESBITERO J. VELASCO, JR.": "VELASCO, JR.",
+    }
+
+    # Check if we have a direct map for the upper version (before adding J.:)
+    upper_raw = ponente.upper().replace(", J.:", "").replace(", J.", "").strip()
+    if upper_raw in special_map:
+        return f"{special_map[upper_raw]}, J.:"
+
+    # Extract the lastname
+    lastname = None
+
+    # Pattern 1: "LASTNAME, J." or "LASTNAME, J.:" or "Lastname, J."
+    if ', J' in ponente.upper():
+        lastname = ponente.split(',')[0].strip()
+
+    # Pattern 2: "Firstname Middlename Lastname" (full name format)
+    elif ' ' in ponente and ',' not in ponente:
+        # Take the last word as lastname
+        parts = ponente.split()
+        lastname = parts[-1]
+
+    # Pattern 3: Just lastname alone
+    else:
+        lastname = ponente
+
+    if lastname:
+        # Remove any trailing periods or colons
+        lastname = lastname.rstrip('.:').strip()
+
+        # Cleanup any stray initials if they got caught (unlikely with simple logic but possible)
+
+        # Convert to uppercase and add standard suffix
+        return f"{lastname.upper()}, J.:"
+
+    return None
+
+
+# Built from sc_decided_cases.ponente so list filters match the same normalization as
+# /sc_decisions/ponentes (which dedupes by normalize_ponente_text, not by raw string).
+_PONENTE_NORM_TO_RAWS = None
+_PONENTE_NORM_TO_RAWS_AT = 0.0
+_PONENTE_NORM_TO_RAWS_TTL = 300.0
+
+
+def invalidate_ponente_norm_to_raws_cache() -> None:
+    """Call after mass ponente updates (e.g. fix_ponentes) so the next list uses fresh variants."""
+    global _PONENTE_NORM_TO_RAWS, _PONENTE_NORM_TO_RAWS_AT
+    _PONENTE_NORM_TO_RAWS = None
+    _PONENTE_NORM_TO_RAWS_AT = 0.0
+
+
+def get_ponente_raw_variants_for_filter(cur, normalized_or_raw_filter: str) -> list:
+    """
+    The ponente dropdown is deduped by normalize_ponente_text(), but many rows still store
+    legacy spellings. Match every DB value that normalizes to the same label as the filter.
+    """
+    q = (normalized_or_raw_filter or "").strip()
+    if not q:
+        return []
+    global _PONENTE_NORM_TO_RAWS, _PONENTE_NORM_TO_RAWS_AT
+    now = time.time()
+    if _PONENTE_NORM_TO_RAWS is None or (now - _PONENTE_NORM_TO_RAWS_AT) > _PONENTE_NORM_TO_RAWS_TTL:
+        cur.execute(
+            "SELECT DISTINCT ponente FROM sc_decided_cases "
+            "WHERE ponente IS NOT NULL AND TRIM(ponente) != ''"
+        )
+        m = {}
+        for (raw,) in cur.fetchall():
+            if not raw:
+                continue
+            n = normalize_ponente_text(raw)
+            if n:
+                m.setdefault(n, []).append(raw)
+        _PONENTE_NORM_TO_RAWS = m
+        _PONENTE_NORM_TO_RAWS_AT = now
+    m = _PONENTE_NORM_TO_RAWS or {}
+    if q in m:
+        return m[q]
+    nq = normalize_ponente_text(q)
+    if nq and nq in m:
+        return m[nq]
+    return [q]
+
+
 @supreme_bp.route(route="sc_decisions", auth_level=func.AuthLevel.ANONYMOUS)
 def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Processing Supreme Decisions request.')
@@ -1105,129 +1228,6 @@ def supreme_decision_models(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
-
-def normalize_ponente_text(ponente):
-    """
-    Normalize ponente name to standard format: "LASTNAME, J.:"
-    Examples:
-        "Antonio T. Carpio" -> "CARPIO, J.:"
-        "carpio, j." -> "CARPIO, J.:"
-        "CARPIO, J" -> "CARPIO, J.:"
-        "Carpio" -> "CARPIO, J.:"
-        "J.B.L. Reyes" -> "REYES, J.B.L., J.:"
-    """
-    if not ponente or not isinstance(ponente, str):
-        return None
-    
-    # Clean up the input
-    ponente = ponente.strip()
-    if not ponente:
-        return None
-        
-    # Special handling for "Per Curiam"
-    if "curiam" in ponente.lower():
-        return "Per Curiam"
-
-    # Handle known special cases first (Multi-word lastnames or initials)
-    # These are names where strict "last word" logic fails or we want specific formatting
-    special_map = {
-        "J.B.L. REYES": "REYES, J.B.L.",
-        "J. B. L. REYES": "REYES, J.B.L.",
-        "JOSE C. REYES, JR.": "J.C. REYES, JR.",
-        "J. REYES, JR.": "J.C. REYES, JR.",
-        "ANDRES B. REYES, JR.": "A. REYES, JR.",
-        "A. REYES, JR.": "A. REYES, JR.",
-        "RUBEN T. REYES": "REYES, R.T.",
-        "R.T. REYES": "REYES, R.T.",
-        "CONCHITA CARPIO MORALES": "CARPIO MORALES",
-        "CONCHITA CARPIO-MORALES": "CARPIO-MORALES",
-        "MARTIN S. VILLARAMA, JR.": "VILLARAMA, JR.",
-        "VILLARAMA, JR.": "VILLARAMA, JR.",
-        "PREBITERO J. VELASCO, JR.": "VELASCO, JR.",
-        "VELASCO, JR.": "VELASCO, JR.",
-        "PRESBITERO J. VELASCO, JR.": "VELASCO, JR."
-    }
-    
-    # Check if we have a direct map for the upper version (before adding J.:)
-    upper_raw = ponente.upper().replace(", J.:", "").replace(", J.", "").strip()
-    if upper_raw in special_map:
-        return f"{special_map[upper_raw]}, J.:"
-
-    # Extract the lastname
-    lastname = None
-    
-    # Pattern 1: "LASTNAME, J." or "LASTNAME, J.:" or "Lastname, J."
-    if ', J' in ponente.upper():
-        lastname = ponente.split(',')[0].strip()
-    
-    # Pattern 2: "Firstname Middlename Lastname" (full name format)
-    elif ' ' in ponente and ',' not in ponente:
-        # Take the last word as lastname
-        parts = ponente.split()
-        lastname = parts[-1]
-    
-    # Pattern 3: Just lastname alone
-    else:
-        lastname = ponente
-    
-    if lastname:
-        # Remove any trailing periods or colons
-        lastname = lastname.rstrip('.:').strip()
-        
-        # Cleanup any stray initials if they got caught (unlikely with simple logic but possible)
-        
-        # Convert to uppercase and add standard suffix
-        return f"{lastname.upper()}, J.:"
-    
-    return None
-
-
-# Built from sc_decided_cases.ponente so list filters match the same normalization as
-# /sc_decisions/ponentes (which dedupes by normalize_ponente_text, not by raw string).
-_PONENTE_NORM_TO_RAWS = None
-_PONENTE_NORM_TO_RAWS_AT = 0.0
-_PONENTE_NORM_TO_RAWS_TTL = 300.0
-
-
-def invalidate_ponente_norm_to_raws_cache() -> None:
-    """Call after mass ponente updates (e.g. fix_ponentes) so the next list uses fresh variants."""
-    global _PONENTE_NORM_TO_RAWS, _PONENTE_NORM_TO_RAWS_AT
-    _PONENTE_NORM_TO_RAWS = None
-    _PONENTE_NORM_TO_RAWS_AT = 0.0
-
-
-def get_ponente_raw_variants_for_filter(cur, normalized_or_raw_filter: str) -> list:
-    """
-    The ponente dropdown is deduped by normalize_ponente_text(), but many rows still store
-    legacy spellings. Match every DB value that normalizes to the same label as the filter.
-    """
-    q = (normalized_or_raw_filter or "").strip()
-    if not q:
-        return []
-    global _PONENTE_NORM_TO_RAWS, _PONENTE_NORM_TO_RAWS_AT
-    now = time.time()
-    if _PONENTE_NORM_TO_RAWS is None or (now - _PONENTE_NORM_TO_RAWS_AT) > _PONENTE_NORM_TO_RAWS_TTL:
-        cur.execute(
-            "SELECT DISTINCT ponente FROM sc_decided_cases "
-            "WHERE ponente IS NOT NULL AND TRIM(ponente) != ''"
-        )
-        m = {}
-        for (raw,) in cur.fetchall():
-            if not raw:
-                continue
-            n = normalize_ponente_text(raw)
-            if n:
-                m.setdefault(n, []).append(raw)
-        _PONENTE_NORM_TO_RAWS = m
-        _PONENTE_NORM_TO_RAWS_AT = now
-    m = _PONENTE_NORM_TO_RAWS or {}
-    if q in m:
-        return m[q]
-    nq = normalize_ponente_text(q)
-    if nq and nq in m:
-        return m[nq]
-    return [q]
-
 
 @supreme_bp.route(route="fix_ponentes", auth_level=func.AuthLevel.ANONYMOUS)
 def fix_ponentes_endpoint(req: func.HttpRequest) -> func.HttpResponse:
