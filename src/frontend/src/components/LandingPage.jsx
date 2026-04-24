@@ -28,48 +28,11 @@ const INSTALL_STEPS = [
     },
 ];
 
-/** Install steps + hero; on lg the two glass panels are vertically centered in the viewport (scroll if content is taller). */
+/** Hero (value prop) first, then install steps; on lg the two glass panels are vertically centered in the viewport (scroll if content is taller). */
 const LandingPage = ({ onEnterApp }) => {
     return (
         <div className="landing-page flex min-h-[100dvh] flex-col bg-transparent font-sans text-gray-900 dark:text-gray-100 lg:h-[100dvh] lg:overflow-hidden">
             <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-2 overflow-y-auto px-3 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:gap-2.5 sm:px-4 sm:pb-4 sm:pt-4 lg:min-h-0 lg:justify-center lg:gap-4 lg:overflow-y-auto lg:px-6 lg:py-3">
-                <section id="install" className="scroll-mt-4 shrink-0">
-                    <div className={`${LG} px-3 py-3 sm:px-4 sm:py-3.5 lg:px-5 lg:py-4`}>
-                        <h2 className="font-display text-base font-semibold tracking-tight text-gray-900 dark:text-white sm:text-lg">
-                            Install in three steps
-                        </h2>
-                        <p className="mt-0.5 max-w-2xl font-sans text-xs leading-snug text-slate-800 dark:text-zinc-200 sm:text-[13px]">
-                            Add LexMatePH to your home screen for a focused, app-like experience.
-                        </p>
-                        <ol className="mt-2 grid list-none gap-2 pl-0 sm:mt-2.5 sm:grid-cols-3 sm:gap-2.5 lg:gap-3">
-                            {INSTALL_STEPS.map(({ step, title, body, Icon }) => (
-                                <li
-                                    key={step}
-                                    className="flex gap-2 rounded-lg border border-lex bg-white/95 p-2 dark:bg-slate-900/65 sm:gap-2.5 sm:p-2.5"
-                                >
-                                    <div
-                                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-violet-600 to-indigo-700 text-white shadow-md shadow-indigo-900/25 ring-1 ring-indigo-900/20 dark:ring-white/10 sm:h-9 sm:w-9"
-                                        aria-hidden
-                                    >
-                                        <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2} />
-                                    </div>
-                                    <div className="min-w-0 flex-1">
-                                        <p className="font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
-                                            Step {step}
-                                        </p>
-                                        <h3 className="mt-0.5 font-display text-xs font-semibold leading-snug text-gray-900 dark:text-white sm:text-sm">
-                                            {title}
-                                        </h3>
-                                        <p className="mt-1 font-sans text-xs font-normal leading-snug text-slate-800 dark:text-zinc-200 sm:text-[13px] sm:leading-relaxed">
-                                            {body}
-                                        </p>
-                                    </div>
-                                </li>
-                            ))}
-                        </ol>
-                    </div>
-                </section>
-
                 <section className="relative min-h-0 min-w-0 shrink-0 lg:shrink">
                     <div
                         className="pointer-events-none absolute -left-12 top-1/4 h-40 w-40 rounded-full bg-indigo-400/30 blur-[48px] dark:bg-indigo-500/20 lg:h-32 lg:w-32"
@@ -146,6 +109,43 @@ const LandingPage = ({ onEnterApp }) => {
                                 <LandingPwaInstallAnimation compact dense heroMobile />
                             </div>
                         </div>
+                    </div>
+                </section>
+
+                <section id="install" className="scroll-mt-4 shrink-0">
+                    <div className={`${LG} px-3 py-3 sm:px-4 sm:py-3.5 lg:px-5 lg:py-4`}>
+                        <h2 className="font-display text-base font-semibold tracking-tight text-gray-900 dark:text-white sm:text-lg">
+                            Install in three steps
+                        </h2>
+                        <p className="mt-0.5 max-w-2xl font-sans text-xs leading-snug text-slate-800 dark:text-zinc-200 sm:text-[13px]">
+                            Add LexMatePH to your home screen for a focused, app-like experience.
+                        </p>
+                        <ol className="mt-2 grid list-none gap-2 pl-0 sm:mt-2.5 sm:grid-cols-3 sm:gap-2.5 lg:gap-3">
+                            {INSTALL_STEPS.map(({ step, title, body, Icon }) => (
+                                <li
+                                    key={step}
+                                    className="flex gap-2 rounded-lg border border-lex bg-white/95 p-2 dark:bg-slate-900/65 sm:gap-2.5 sm:p-2.5"
+                                >
+                                    <div
+                                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-gradient-to-br from-violet-600 to-indigo-700 text-white shadow-md shadow-indigo-900/25 ring-1 ring-indigo-900/20 dark:ring-white/10 sm:h-9 sm:w-9"
+                                        aria-hidden
+                                    >
+                                        <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2} />
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                        <p className="font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">
+                                            Step {step}
+                                        </p>
+                                        <h3 className="mt-0.5 font-display text-xs font-semibold leading-snug text-gray-900 dark:text-white sm:text-sm">
+                                            {title}
+                                        </h3>
+                                        <p className="mt-1 font-sans text-xs font-normal leading-snug text-slate-800 dark:text-zinc-200 sm:text-[13px] sm:leading-relaxed">
+                                            {body}
+                                        </p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ol>
                     </div>
                 </section>
             </div>

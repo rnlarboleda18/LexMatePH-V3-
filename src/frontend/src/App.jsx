@@ -970,6 +970,7 @@ function App() {
           <LexPlayer
             isMinimized={true}
             isDarkMode={isDarkMode}
+            lowerMiniBarOnMobile={mode === 'landing'}
             onExpand={() => {
               setPreviousMode(mode);
               setMode('lexplay');

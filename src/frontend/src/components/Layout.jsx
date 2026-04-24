@@ -40,7 +40,11 @@ const Layout = ({
     }, [mode]);
 
     return (
-        <div className={`min-h-screen transition-colors duration-300 relative ${isDarkMode ? 'dark bg-zinc-950 text-zinc-200' : 'bg-neutral-100 text-[color:var(--lex-ink)] antialiased'}`}>
+        <div
+            className={`min-h-screen transition-colors duration-300 relative ${
+                mode === 'landing' ? 'max-lg:z-[40] max-lg:isolation-isolate' : ''
+            } ${isDarkMode ? 'dark bg-zinc-950 text-zinc-200' : 'bg-neutral-100 text-[color:var(--lex-ink)] antialiased'}`}
+        >
             {/* Flat page background — no animated glass orbs */}
             <div
                 className="fixed inset-0 z-0 bg-neutral-100 dark:bg-zinc-950"
