@@ -419,11 +419,11 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
 
         cfg = PLAN_CONFIGS[plan_key]
 
-        # Get user email + name from DB
+        # Get user email from DB
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT email, first_name, last_name FROM users WHERE clerk_id = %s",
+                    "SELECT email FROM users WHERE clerk_id = %s",
                     (clerk_id,),
                 )
                 row = cur.fetchone()
@@ -432,10 +432,19 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                         json.dumps({"error": "User not found in database"}),
                         mimetype="application/json", status_code=404,
                     )
-                email, first_name, last_name = row
+                email = row[0]
 
-        if not first_name:
-            first_name = email.split("@")[0].replace(".", " ").replace("_", " ").title() or "User"
+        # Get or create Xendit customer — handles duplicates gracefully.
+        # This must happen before the session so we can pass customer_id (not an
+        # inline customer object whose reference_id would fail on retry).
+        try:
+            xendit_customer_id = _get_or_create_xendit_customer(clerk_id, email)
+        except Exception as cust_err:
+            logging.error(f"create_checkout: customer fetch/create failed: {cust_err}")
+            return func.HttpResponse(
+                json.dumps({"error": "Failed to set up customer profile", "detail": str(cust_err)}),
+                mimetype="application/json", status_code=503,
+            )
 
         # Store pending plan key — the payment_token.activated webhook handler reads this
         with _get_db() as conn:
@@ -446,9 +455,8 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 )
                 conn.commit()
 
-        # POST /sessions — the correct Xendit hosted-checkout endpoint.
-        # We pass an inline customer object (no separate customer creation needed).
-        # allow_save_payment_method=OPTIONAL saves the card for future recurring cycles.
+        # POST /sessions — Xendit hosted-checkout endpoint.
+        # Pass customer_id (not inline customer) so retries never hit a duplicate reference_id.
         session_ref = f"lm-{clerk_id[:20]}-{int(time.time())}"
         payload = {
             "reference_id": session_ref,
@@ -460,15 +468,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             "country": "PH",
             "locale": "en",
             "description": f"LexMatePH — {cfg['label']}",
-            "customer": {
-                "reference_id": f"lexmate-{clerk_id}",
-                "type": "INDIVIDUAL",
-                "email": email,
-                "individual_detail": {
-                    "given_names": first_name,
-                    "surname": last_name or ".",
-                },
-            },
+            "customer_id": xendit_customer_id,
             "success_return_url": f"{FRONTEND_URL}/?xendit_payment=success&plan={plan_key}",
             "cancel_return_url": f"{FRONTEND_URL}/?xendit_payment=cancelled",
             "metadata": {
@@ -498,19 +498,6 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 json.dumps({"error": "No checkout URL returned by payment provider", "detail": resp_data}),
                 mimetype="application/json", status_code=503,
             )
-
-        # Save the customer_id Xendit auto-created from the inline customer object.
-        # The payment_token.activation webhook identifies users by this customer_id.
-        xendit_customer_id = resp_data.get("customer_id", "")
-        if xendit_customer_id:
-            with _get_db() as conn:
-                with conn.cursor() as cur:
-                    cur.execute(
-                        "UPDATE users SET xendit_customer_id = %s WHERE clerk_id = %s",
-                        (xendit_customer_id, clerk_id),
-                    )
-                    conn.commit()
-            logging.info(f"create_checkout: saved customer_id={xendit_customer_id} for clerk_id={clerk_id}")
 
         return func.HttpResponse(
             json.dumps({
