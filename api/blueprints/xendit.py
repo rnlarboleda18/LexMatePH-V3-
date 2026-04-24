@@ -172,9 +172,9 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
                 data = fetch_resp.json()
                 items = data.get("data", data) if isinstance(data, dict) else data
                 if isinstance(items, list) and items:
-                    customer_id = items[0]["id"]
+                    customer_id = items[0].get("id") or items[0].get("end_customer_id", "")
                 elif isinstance(items, dict):
-                    customer_id = items.get("id", "")
+                    customer_id = items.get("id") or items.get("end_customer_id", "")
                 else:
                     raise RuntimeError(f"Xendit customer lookup failed after 409: {fetch_resp.text}")
             else:
@@ -182,7 +182,8 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         else:
             raise RuntimeError(f"Xendit customer creation failed ({resp.status_code}): {resp.text}")
     else:
-        customer_id = resp.json().get("id", "")
+        resp_data = resp.json()
+        customer_id = resp_data.get("id") or resp_data.get("end_customer_id", "")
         if not customer_id:
             raise RuntimeError(f"Xendit customer creation: no id in response: {resp.text}")
 
