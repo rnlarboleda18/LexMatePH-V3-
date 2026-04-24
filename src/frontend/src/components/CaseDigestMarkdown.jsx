@@ -48,8 +48,9 @@ function scrollInPageHashIntoView(anchorEl, hash) {
     return true;
 }
 
-export const SmartLink = React.memo(({ text, onCaseClick }) => {
+export const SmartLink = React.memo(({ text, onCaseClick, plain }) => {
     if (!text) return null;
+    if (plain) return <span>{text}</span>;
     const parts = text.split(SMART_LINK_REGEX).filter((p) => p !== undefined);
 
     if (parts.length === 1) return <span>{text}</span>;
@@ -78,7 +79,21 @@ export const SmartLink = React.memo(({ text, onCaseClick }) => {
     );
 });
 
-const SmartLinkWrapper = React.memo(({ children, onCaseClick }) => {
+const SmartLinkWrapper = React.memo(({ children, onCaseClick, linkless }) => {
+    if (linkless) {
+        if (typeof children === 'string') return <span>{children}</span>;
+        if (Array.isArray(children)) {
+            return (
+                <>
+                    {children.map((child, idx) => {
+                        if (typeof child === 'string') return <span key={idx}>{child}</span>;
+                        return <React.Fragment key={idx}>{child}</React.Fragment>;
+                    })}
+                </>
+            );
+        }
+        return <>{children}</>;
+    }
     if (typeof children === 'string') return <SmartLink text={children} onCaseClick={onCaseClick} />;
     if (Array.isArray(children)) {
         return (
@@ -92,6 +107,21 @@ const SmartLinkWrapper = React.memo(({ children, onCaseClick }) => {
     }
     return <>{children}</>;
 });
+
+/** Renders GFM/MD links and footnote refs as non-interactive text (case digest + full text). */
+function MarkdownLinkAsSpan({ children, className, node: _n, href: _h, rel: _r, target: _t, download: _d, ref, ...rest }) {
+    return (
+        <span
+            ref={ref}
+            className={['text-inherit', 'no-underline', 'font-inherit', 'not-italic', 'cursor-text', className]
+                .filter(Boolean)
+                .join(' ')}
+            {...rest}
+        >
+            {children}
+        </span>
+    );
+}
 
 /** Flatten React node children to plain string (for full-text SC caption heuristics). */
 function plainTextFromChildren(children) {
@@ -133,9 +163,10 @@ function isScPonenteOrBodyStartLine(plain) {
  * @param {boolean} [options.scFullTextCaption] – full text: center SC E-Lib caption (p + h1–h6)
  * @param {React.MutableRefObject<number> | null} [options.pIdxRef] – block index; reset each render
  * @param {React.MutableRefObject<boolean> | null} [options.scCaptionEndRef] – set true when ponente/“Before the Court” seen; all later lines stay left
+ * @param {boolean} [options.linkless] – no &lt;a&gt; or SmartLink highlights (digest and full text use true)
  */
 function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
-    const { scFullTextCaption = false, pIdxRef = null, scCaptionEndRef = null } = options;
+    const { scFullTextCaption = false, pIdxRef = null, scCaptionEndRef = null, linkless = true } = options;
 
     const onHashLinkClick = useCallback((e) => {
         const a = e.currentTarget;
@@ -183,7 +214,9 @@ function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
                     <Tag
                         className={`mb-2 font-bold text-gray-900 dark:text-gray-100 ${sizeClass} ${a}`}
                     >
-                        <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
+                        <SmartLinkWrapper onCaseClick={onCaseClick} linkless={linkless}>
+                            {children}
+                        </SmartLinkWrapper>
                     </Tag>
                 );
             };
@@ -193,7 +226,9 @@ function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
                 const a = getCaptionTextAlign(children);
                 return (
                     <div className={`mb-4 text-gray-800 dark:text-gray-200 leading-relaxed max-w-none ${a}`}>
-                        <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
+                        <SmartLinkWrapper onCaseClick={onCaseClick} linkless={linkless}>
+                            {children}
+                        </SmartLinkWrapper>
                     </div>
                 );
             },
@@ -207,34 +242,41 @@ function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
             ul: ({ children }) => <ul className="mb-4 list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-200">{children}</ul>,
             li: ({ children }) => (
                 <li className="pl-1 leading-relaxed">
-                    <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
+                    <SmartLinkWrapper onCaseClick={onCaseClick} linkless={linkless}>
+                        {children}
+                    </SmartLinkWrapper>
                 </li>
             ),
         };
-        if (!includeTables) return base;
+        const linkAsSpan = linkless ? { a: MarkdownLinkAsSpan } : {};
+        if (!includeTables) {
+            return { ...base, ...linkAsSpan };
+        }
         return {
             ...base,
-            a: ({ href, children, node: _node, ...props }) => {
-                if (typeof href === 'string' && href.startsWith('#')) {
-                    return (
-                        <a
-                            {...props}
-                            href={href}
-                            onClick={onHashLinkClick}
-                            className={[props.className, 'text-blue-700 underline-offset-2 hover:underline dark:text-amber-400']
-                                .filter(Boolean)
-                                .join(' ')}
-                        >
-                            {children}
-                        </a>
-                    );
-                }
-                return (
-                    <a {...props} href={href}>
-                        {children}
-                    </a>
-                );
-            },
+            a: linkless
+                ? MarkdownLinkAsSpan
+                : ({ href, children, node: _node, ...props }) => {
+                      if (typeof href === 'string' && href.startsWith('#')) {
+                          return (
+                              <a
+                                  {...props}
+                                  href={href}
+                                  onClick={onHashLinkClick}
+                                  className={[props.className, 'text-blue-700 underline-offset-2 hover:underline dark:text-amber-400']
+                                      .filter(Boolean)
+                                      .join(' ')}
+                              >
+                                  {children}
+                              </a>
+                          );
+                      }
+                      return (
+                          <a {...props} href={href}>
+                              {children}
+                          </a>
+                      );
+                  },
             table: ({ children }) => (
                 <div className="my-4 w-full overflow-x-auto">
                     <table className="min-w-full border-collapse border border-gray-300 text-left text-sm dark:border-gray-600">
@@ -250,15 +292,17 @@ function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
             ),
             td: ({ children }) => (
                 <td className="border border-gray-200 px-2 py-2 align-top dark:border-gray-700">
-                    <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
+                    <SmartLinkWrapper onCaseClick={onCaseClick} linkless={linkless}>
+                        {children}
+                    </SmartLinkWrapper>
                 </td>
             ),
         };
-    }, [onCaseClick, includeTables, onHashLinkClick, scFullTextCaption, pIdxRef, scCaptionEndRef]);
+    }, [onCaseClick, includeTables, onHashLinkClick, scFullTextCaption, pIdxRef, scCaptionEndRef, linkless]);
 }
 
 /** Digest sections (facts, issues, ruling, ratio) — no GFM tables. */
-export const DigestMarkdownText = React.memo(({ content, onCaseClick, variant = 'default', contextRef }) => {
+export const DigestMarkdownText = React.memo(({ content, variant = 'default', contextRef }) => {
     const processedContent = useMemo(() => {
         if (!content) return content;
         let p = content;
@@ -268,7 +312,7 @@ export const DigestMarkdownText = React.memo(({ content, onCaseClick, variant = 
         return p;
     }, [content, variant]);
 
-    const components = useMarkdownComponents(onCaseClick, false);
+    const components = useMarkdownComponents(undefined, false);
 
     if (!content) return null;
 
@@ -293,7 +337,7 @@ export const DigestMarkdownText = React.memo(({ content, onCaseClick, variant = 
  */
 const PLAIN_TEXT_THRESHOLD = 80_000;
 
-export const CaseFullTextMarkdown = React.memo(({ content, onCaseClick }) => {
+export const CaseFullTextMarkdown = React.memo(({ content }) => {
     const fullTextPIdx = useRef(0);
     const scCaptionEndRef = useRef(false);
 
@@ -304,10 +348,11 @@ export const CaseFullTextMarkdown = React.memo(({ content, onCaseClick }) => {
         return normalizeFullTextMarkdownForGfm(content);
     }, [content]);
 
-    const components = useMarkdownComponents(onCaseClick, true, {
+    const components = useMarkdownComponents(undefined, true, {
         scFullTextCaption: true,
         pIdxRef: fullTextPIdx,
         scCaptionEndRef,
+        linkless: true,
     });
 
     if (!content) return null;

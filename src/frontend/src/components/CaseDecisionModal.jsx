@@ -216,7 +216,7 @@ const StatutesSection = React.memo(({ statutes }) => {
     );
 });
 
-const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
+const CitedCasesSection = React.memo(({ citations }) => {
     if (!citations) return null;
     let items = [];
     try {
@@ -243,7 +243,7 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
                     <div key={idx} className="bg-white dark:bg-gray-800 border border-lex rounded-lg p-3 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors shadow-sm">
                         <div className="flex justify-between items-start gap-3 mb-1">
                             <h5 className="text-[16px] font-bold text-gray-900 dark:text-white flex-grow">
-                                <SmartLink text={item.case_title || item.title} onCaseClick={onCaseClick} />
+                                <SmartLink text={item.case_title || item.title} plain />
                             </h5>
                             {item.type && (
                                 <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wide border ${getTypeColor(item.type)} whitespace-nowrap`}>
@@ -256,7 +256,12 @@ const CitedCasesSection = React.memo(({ citations, onCaseClick }) => {
                                 <ReactMarkdown components={{
                                     p: ({ node, ...props }) => <p className="mb-1 last:mb-0" {...props} />,
                                     strong: ({ node, ...props }) => <strong className="font-semibold text-gray-800 dark:text-gray-300" {...props} />,
-                                    em: ({ node, ...props }) => <em className="italic text-gray-700 dark:text-gray-300" {...props} />
+                                    em: ({ node, ...props }) => <em className="italic text-gray-700 dark:text-gray-300" {...props} />,
+                                    a: ({ children, className, node: _n, href: _h, ref, ..._r }) => (
+                                        <span ref={ref} className={className}>
+                                            {children}
+                                        </span>
+                                    )
                                 }}>
                                     {item.elaboration}
                                 </ReactMarkdown>
@@ -361,52 +366,6 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         mq.addEventListener('change', onViewportChange);
         return () => mq.removeEventListener('change', onViewportChange);
     }, []);
-
-    // Internal Smart Link Handler — search rows omit long digest fields (e.g. digest_significance); merge detail like SupremeDecisions.handleCaseClick.
-    const handleSmartCaseClick = useCallback(async (caseRef) => {
-        const mergeDetail = async (row) => {
-            if (!row?.id) {
-                onCaseSelect(row);
-                return;
-            }
-            try {
-                const res = await fetch(apiUrl(`/api/sc_decisions/${row.id}`));
-                const detail = await res.json();
-                if (res.ok && detail && !detail.error) {
-                    onCaseSelect({ ...row, ...detail });
-                } else {
-                    onCaseSelect(row);
-                }
-            } catch (e) {
-                console.error(e);
-                onCaseSelect(row);
-            }
-        };
-
-        try {
-            document.body.style.cursor = 'wait';
-            let res = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(caseRef)}&limit=1`));
-            let data = await res.json();
-            if (data.data?.length > 0) {
-                await mergeDetail(data.data[0]);
-                return;
-            }
-            const cleaned = caseRef.replace(/\s*\([^)]{5,}\)$/, '').trim();
-            if (cleaned !== caseRef) {
-                res = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(cleaned)}&limit=1`));
-                data = await res.json();
-                if (data.data?.length > 0) {
-                    await mergeDetail(data.data[0]);
-                    return;
-                }
-            }
-            alert(`Case not found: "${caseRef}"`);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            document.body.style.cursor = 'default';
-        }
-    }, [onCaseSelect]);
 
     const handleClose = useCallback(
         (e) => {
@@ -842,7 +801,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         Main Doctrine
                                     </h4>
                                     <div className="text-gray-800 dark:text-gray-100 text-sm leading-relaxed font-medium">
-                                        <SmartLink text={fullDecision.main_doctrine} onCaseClick={handleSmartCaseClick} />
+                                        <SmartLink text={fullDecision.main_doctrine} plain />
                                     </div>
                                 </div>
                             )}
@@ -858,7 +817,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={fullDecision.digest_facts} variant="facts" onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={fullDecision.digest_facts} variant="facts" />
                                     </div>
                                 </section>
                             )}
@@ -877,7 +836,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={fullDecision.digest_issues} onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={fullDecision.digest_issues} />
                                     </div>
                                 </section>
                             )}
@@ -893,7 +852,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={fullDecision.digest_ruling} onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={fullDecision.digest_ruling} />
                                     </div>
                                 </section>
                             )}
@@ -909,13 +868,13 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} onCaseClick={handleSmartCaseClick} />
+                                        <DigestMarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} />
                                     </div>
                                 </section>
                             )}
 
                             <StatutesSection statutes={fullDecision.statutes_involved} />
-                            <CitedCasesSection citations={fullDecision.cited_cases} onCaseClick={handleSmartCaseClick} />
+                            <CitedCasesSection citations={fullDecision.cited_cases} />
 
                             <LegalConceptsSection concepts={fullDecision.legal_concepts} />
                             <SignificanceSection narrative={fullDecision.digest_significance} category={fullDecision.significance_category} />
@@ -956,7 +915,6 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify">
                                     <CaseFullTextMarkdown
                                         content={fullDecision.full_text_md || '*Content not available in Markdown format.*'}
-                                        onCaseClick={handleSmartCaseClick}
                                     />
                                 </div>
                             )}
