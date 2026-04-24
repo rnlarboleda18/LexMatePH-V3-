@@ -100,8 +100,10 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     const [error, setError] = useState(null);
     const [viewDate, setViewDate] = useState('');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    /** One-time mobile hint for edge-swipe TOC (sessionStorage dismiss). */
-    const [tocEdgeHintVisible, setTocEdgeHintVisible] = useState(false);
+    /** max-width 1023px: TOC uses modal + FAB; lg+ uses side panel + FAB. */
+    const [isMobileViewport, setIsMobileViewport] = useState(() =>
+        typeof window !== 'undefined' && window.matchMedia('(max-width: 1023px)').matches
+    );
     const [activeTab, setActiveTab] = useState('toc');
     const [tocData, setTocData] = useState({ id: 'root', children: [], articles: [] });
     const [expandedGroups, setExpandedGroups] = useState({});
@@ -131,6 +133,13 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     useEffect(() => {
         const mq = window.matchMedia('(min-width: 1280px)');
         const on = () => setXlFixedChrome(mq.matches);
+        on();
+        mq.addEventListener('change', on);
+        return () => mq.removeEventListener('change', on);
+    }, []);
+    useEffect(() => {
+        const mq = window.matchMedia('(max-width: 1023px)');
+        const on = () => setIsMobileViewport(mq.matches);
         on();
         mq.addEventListener('change', on);
         return () => mq.removeEventListener('change', on);
@@ -228,28 +237,33 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             setTocFabPos(null);
             return;
         }
-        // Mobile uses bottom Contents chip; side FAB + anchor only at lg (1024px).
-        if (window.innerWidth < 1024) {
-            setTocFabPos(null);
-            return;
+        const w = window.innerWidth;
+        const narrow = w < 1024;
+        let left;
+        if (narrow) {
+            const shell = codalShellRef.current;
+            if (!shell) {
+                setTocFabPos(null);
+                return;
+            }
+            left = shell.getBoundingClientRect().left;
+        } else {
+            const el = tocFabAnchorRef.current;
+            if (!el) {
+                setTocFabPos(null);
+                return;
+            }
+            left = el.getBoundingClientRect().left;
         }
-        const el = tocFabAnchorRef.current;
-        if (!el) {
-            setTocFabPos(null);
-            return;
-        }
-        // Use anchor only for horizontal position — top is fixed below the chrome so
-        // the FAB doesn't move when the page scrolls.
-        const r = el.getBoundingClientRect();
         const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
-        const headerBottom = gh ? gh.getBoundingClientRect().bottom : (window.innerWidth >= 768 ? 64 : 48);
+        const headerBottom = gh ? gh.getBoundingClientRect().bottom : (w >= 768 ? 64 : 48);
         const filterEl = lexFilterChromeRef.current;
         const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
         setTocFabPos({
-            left: r.left,
+            left,
             top: Math.max(headerBottom, chromeBottom),
         });
-    }, [isSidebarOpen, lexFilterChromeRef]);
+    }, [isSidebarOpen]);
 
     useLayoutEffect(() => {
         if (loading || error || !data) return undefined;
@@ -280,7 +294,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             ro.disconnect();
             if (rafId) cancelAnimationFrame(rafId);
         };
-    }, [loading, error, data, isSidebarOpen, syncTocFabPosition, lexFilterChromeHeight]);
+    }, [loading, error, data, isSidebarOpen, isMobileViewport, syncTocFabPosition, lexFilterChromeHeight]);
 
     /** After TOC/juris spacer width finishes transitioning, remeasure FAB (avoids stale coords on first layout frame). */
     useLayoutEffect(() => {
@@ -319,100 +333,28 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         return { top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight };
     }, [fixedPanelTopPx, fixedPanelStyle.top, fixedPanelStyle.maxHeight]);
 
-    // Body-scroll lock ΓÇö simple overflow:hidden (no reflow, no scrollTo)
-    // Only lock on mobile screens (<1024px) where the sidebar renders as a full-screen overlay
+    // Body-scroll lock on small viewports when TOC modal or juris/amendment overlay is open
     const isSidebarActive = !!(activeJurisArticle || activeAmendmentArticle);
     useEffect(() => {
-        if (!isSidebarActive || window.innerWidth >= 1024) return;
-        document.body.style.overflow = 'hidden';
-        return () => { document.body.style.overflow = ''; };
-    }, [isSidebarActive]);
-
-    const dismissTocEdgeHint = useCallback(() => {
-        setTocEdgeHintVisible(false);
-        try {
-            sessionStorage.setItem('lexmate_lexcode_toc_edge_hint_dismissed', '1');
-        } catch {
-            /* private mode */
-        }
-    }, []);
-
-    useEffect(() => {
-        if (loading || error || !data) return;
-        if (typeof window === 'undefined' || window.innerWidth >= 1024) return;
-        try {
-            if (sessionStorage.getItem('lexmate_lexcode_toc_edge_hint_dismissed') === '1') return;
-        } catch {
-            /* ignore */
-        }
-        setTocEdgeHintVisible(true);
-    }, [loading, error, data]);
-
-    useEffect(() => {
-        if (!isSidebarOpen) return;
-        setTocEdgeHintVisible(false);
-        try {
-            sessionStorage.setItem('lexmate_lexcode_toc_edge_hint_dismissed', '1');
-        } catch {
-            /* ignore */
-        }
-    }, [isSidebarOpen]);
-
-    /** Mobile: swipe right from left screen edge opens TOC (lg+ uses side FAB). */
-    useEffect(() => {
-        if (loading || error || !data) return undefined;
-
-        const EDGE_PX = 32;
-        const MIN_DX = 76;
-        const MAX_ABS_DY = 110;
-
-        let active = false;
-        let sx = 0;
-        let sy = 0;
-
-        const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 1024;
-
-        const onTouchStart = (e) => {
-            if (!isMobile() || isSidebarOpen) return;
-            const t = e.touches?.[0];
-            if (!t) return;
-            const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
-            const belowHeader = gh ? t.clientY >= gh.getBoundingClientRect().bottom + 4 : t.clientY >= 56;
-            if (t.clientX <= EDGE_PX && belowHeader) {
-                active = true;
-                sx = t.clientX;
-                sy = t.clientY;
+        const apply = () => {
+            if (typeof window === 'undefined') return;
+            if (window.innerWidth >= 1024) {
+                document.body.style.overflow = '';
+                return;
+            }
+            if (isSidebarOpen || isSidebarActive) {
+                document.body.style.overflow = 'hidden';
             } else {
-                active = false;
+                document.body.style.overflow = '';
             }
         };
-
-        const onTouchEnd = (e) => {
-            if (!active) return;
-            active = false;
-            if (!isMobile() || isSidebarOpen) return;
-            const t = e.changedTouches?.[0];
-            if (!t) return;
-            const dx = t.clientX - sx;
-            const dy = Math.abs(t.clientY - sy);
-            if (dx >= MIN_DX && dy <= MAX_ABS_DY) {
-                setIsSidebarOpen(true);
-            }
-        };
-
-        const onTouchCancel = () => {
-            active = false;
-        };
-
-        document.addEventListener('touchstart', onTouchStart, { capture: true, passive: true });
-        document.addEventListener('touchend', onTouchEnd, { capture: true, passive: true });
-        document.addEventListener('touchcancel', onTouchCancel, { capture: true, passive: true });
+        apply();
+        window.addEventListener('resize', apply);
         return () => {
-            document.removeEventListener('touchstart', onTouchStart, true);
-            document.removeEventListener('touchend', onTouchEnd, true);
-            document.removeEventListener('touchcancel', onTouchCancel, true);
+            window.removeEventListener('resize', apply);
+            document.body.style.overflow = '';
         };
-    }, [loading, error, data, isSidebarOpen]);
+    }, [isSidebarOpen, isSidebarActive]);
 
     // Toggle TOC group expansion
     const toggleGroup = (idx) => {
@@ -986,6 +928,68 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             document.body
         );
 
+    const mobileTocModalPortal =
+        typeof document !== 'undefined' &&
+        isMobileViewport &&
+        isSidebarOpen &&
+        createPortal(
+            <div
+                className="lex-modal-overlay fixed inset-0 z-[540] animate-in bg-black/60 fade-in duration-200 backdrop-blur-sm lg:hidden"
+                onClick={(e) => {
+                    if (e.target === e.currentTarget) setIsSidebarOpen(false);
+                }}
+            >
+                <div
+                    className="lex-modal-card relative flex min-h-0 w-full min-w-0 max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label="Table of contents"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <CardVioletInnerWash />
+                    <div className="relative z-[1] flex min-h-0 w-full min-w-0 max-w-full flex-1 flex-col [max-height:min(90dvh,calc(100dvh-var(--app-header-offset)-var(--player-height,0px)-1.5rem))]">
+                        <div className="flex shrink-0 items-center justify-between border-b border-lex bg-slate-50 p-4 dark:border-lex dark:bg-zinc-800/80">
+                            <span className="font-sans font-bold text-gray-800 dark:text-gray-200">Contents</span>
+                            <button
+                                type="button"
+                                onClick={() => setIsSidebarOpen(false)}
+                                className="rounded-md p-1 text-gray-500 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+                                aria-label="Close contents"
+                            >
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <div className="lex-modal-scroll custom-scrollbar min-h-0 flex-1 overflow-y-auto p-4">
+                            {tocData && (
+                                <div key={tocVersion} className="space-y-1">
+                                    {tocData.articles.map((art) => (
+                                        <button
+                                            key={art.id}
+                                            type="button"
+                                            onClick={() => scrollToArticle(art.id)}
+                                            className="w-full truncate rounded px-2 py-1.5 text-left font-sans text-xs text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-800 dark:text-gray-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                                        >
+                                            {art.label}
+                                        </button>
+                                    ))}
+                                    {tocData.children.map((node) => (
+                                        <TocNode
+                                            key={node.id}
+                                            node={node}
+                                            expanded={expandedGroups}
+                                            onToggle={toggleGroup}
+                                            onArticleClick={scrollToArticle}
+                                        />
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>,
+            document.body
+        );
+
     return (
         <>
         <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
@@ -1076,37 +1080,9 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         aria-hidden
                     />
 
-            {/* Mobile/Overlay Sidebar (for smaller screens) */}
-            {isSidebarOpen && (
-                <div
-                    className="lg:hidden fixed inset-x-0 bottom-0 z-40 flex items-start bg-black/50 p-4 backdrop-blur-sm top-[var(--app-header-offset)]"
-                    onClick={(e) => { if (e.target === e.currentTarget) setIsSidebarOpen(false); }}
-                >
-                    <div className="relative flex max-h-[80vh] w-80 flex-col overflow-hidden rounded-xl border border-lex bg-white shadow-lg animate-in slide-in-from-left duration-300 dark:border-lex dark:bg-zinc-900">
-                        <CardVioletInnerWash />
-                        <div className="relative z-[1] flex min-h-0 flex-1 flex-col">
-                        <div className="flex items-center justify-between border-b border-lex bg-slate-50 p-4 dark:border-lex dark:bg-zinc-800/80">
-                            <span className="font-bold">Contents</span>
-                            <button onClick={() => setIsSidebarOpen(false)}><X size={20} /></button>
-                        </div>
-                        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-                            {tocData && (
-                                <div key={tocVersion} className="space-y-1">
-                                    {tocData.articles.map(art => (
-                                        <button key={art.id} onClick={() => scrollToArticle(art.id)} className="w-full truncate rounded px-2 py-1.5 text-left font-sans text-xs text-gray-700 transition-colors hover:bg-violet-50 hover:text-violet-800 dark:text-gray-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100">{art.label}</button>
-                                    ))}
-                                    {tocData.children.map(node => <TocNode key={node.id} node={node} expanded={expandedGroups} onToggle={toggleGroup} onArticleClick={scrollToArticle} />)}
-                                </div>
-                            )}
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
             {/* Codal stream — grows with content; scrolls with the main page */}
             <div className={`relative mt-0 min-w-0 flex-1 transition-all duration-300 ${(activeJurisArticle || activeAmendmentArticle) ? 'max-w-3xl' : 'max-w-4xl'}`}>
-                {/* TOC: lg = anchor + side FAB; small viewports = full-width codal + edge-swipe to open */}
+                {/* TOC: lg = anchor + side FAB; below-lg = same FAB + portaled modal (matches other lex-modal overlays) */}
                 <div className="flex min-w-0 items-start gap-1.5 sm:gap-2 lg:gap-2.5">
                     {!isSidebarOpen && (
                         <div
@@ -1161,6 +1137,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             />
 
             {desktopTocPortal}
+            {mobileTocModalPortal}
 
             {/* Search dropdown — portaled to body so it escapes overflow-hidden on the codal shell */}
             {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
@@ -1249,7 +1226,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         type="button"
                         onClick={() => setIsSidebarOpen(true)}
                         /* z-[38]: above codal filter chrome (z-[30]), below Layout nav aside (z-40) */
-                        className="fixed z-[38] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
+                        className="fixed z-[38] flex h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
                         style={{
                             left: tocFabPos.left,
                             top: `calc(${tocFabPos.top}px + var(--lex-tile-gap))`,
@@ -1259,33 +1236,6 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                     >
                         <ListTree className="h-6 w-6" strokeWidth={2.25} aria-hidden />
                     </button>,
-                    document.body
-                )}
-
-            {typeof document !== 'undefined' &&
-                tocEdgeHintVisible &&
-                !isSidebarOpen &&
-                createPortal(
-                    <div
-                        className="pointer-events-none fixed inset-x-0 z-[37] flex justify-center px-3 lg:hidden"
-                        style={{
-                            bottom: 'calc(var(--player-height, 0px) + 0.5rem + env(safe-area-inset-bottom, 0px))',
-                        }}
-                    >
-                        <div className="pointer-events-auto flex max-w-sm items-center gap-2 rounded-2xl border-2 border-slate-700 bg-slate-900 px-3 py-2.5 shadow-[0_10px_40px_rgba(0,0,0,0.45)] ring-2 ring-black/20 dark:border-slate-500 dark:bg-slate-950 dark:ring-white/10">
-                            <p className="text-center text-xs font-medium leading-snug text-white">
-                                Swipe from the left edge of the screen to open contents.
-                            </p>
-                            <button
-                                type="button"
-                                onClick={dismissTocEdgeHint}
-                                className="shrink-0 rounded-lg p-1 text-white hover:bg-white/15"
-                                aria-label="Dismiss hint"
-                            >
-                                <X size={16} strokeWidth={2} />
-                            </button>
-                        </div>
-                    </div>,
                     document.body
                 )}
 
