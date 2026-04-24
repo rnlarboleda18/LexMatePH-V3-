@@ -33,6 +33,7 @@ import sys
 import json
 import time
 import argparse
+import threading
 import psycopg2
 
 
@@ -606,25 +607,45 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
     t0 = time.time()
 
     if workers > 1:
-        hb_every = 90.0  # seconds; shows the pool is alive when Vertex is slow
-        last_hb = time.time()
-        with ThreadPoolExecutor(max_workers=workers) as pool:
-            futs = {pool.submit(process_case, c, article_index, dry_run): c for c in cases}
-            for i, fut in enumerate(as_completed(futs), 1):
-                c = futs[fut]
-                n = fut.result()
-                total_links += n
+        # Heartbeat even when zero cases have finished yet (slow Vertex / cold start).
+        progress = {"done": 0}
+        prog_lock = threading.Lock()
+        stop_hb = threading.Event()
+
+        def _heartbeat_loop():
+            interval = 30.0
+            while not stop_hb.wait(interval):
+                with prog_lock:
+                    d = progress["done"]
+                elapsed = time.time() - t0
                 print(
-                    f"  [{i}/{len(cases)}] {c['short_title'][:45]} -> {n} links",
+                    f"  [...] heartbeat {elapsed:.0f}s: {d}/{len(cases)} cases finished "
+                    f"(workers={workers}; still waiting on Vertex if d is 0)",
                     flush=True,
                 )
-                now = time.time()
-                if now - last_hb >= hb_every:
+
+        hb_thread = threading.Thread(target=_heartbeat_loop, daemon=True)
+        hb_thread.start()
+        try:
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                futs = {pool.submit(process_case, c, article_index, dry_run): c for c in cases}
+                print(
+                    f"[*] Pool running: {len(cases)} cases, {workers} workers — "
+                    "first [n/total] line may take 1-3 min.",
+                    flush=True,
+                )
+                for i, fut in enumerate(as_completed(futs), 1):
+                    c = futs[fut]
+                    n = fut.result()
+                    total_links += n
+                    with prog_lock:
+                        progress["done"] = i
                     print(
-                        f"  [...] heartbeat {now - t0:.0f}s in; completed {i}/{len(cases)} cases",
+                        f"  [{i}/{len(cases)}] {c['short_title'][:45]} -> {n} links",
                         flush=True,
                     )
-                    last_hb = now
+        finally:
+            stop_hb.set()
     else:
         for i, case in enumerate(cases, 1):
             print(f"[{i}/{len(cases)}] {case['short_title'][:55]}", flush=True)
