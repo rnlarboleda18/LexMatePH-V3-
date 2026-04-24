@@ -85,18 +85,19 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
         try:
             with psycopg.connect(conn_string) as conn:
                 with conn.cursor() as cur:
-                    # 1. Link an existing email-only row (no clerk_id yet)
+                    # 1. Link or re-link any existing row for this email (covers both
+                    #    email-only rows AND re-registrations where the clerk_id changed)
                     cur.execute("""
                         UPDATE users
                         SET clerk_id = %s,
                             first_name = COALESCE(%s, first_name),
                             last_name  = COALESCE(%s, last_name),
                             founding_promo_eligible = TRUE
-                        WHERE LOWER(email) = LOWER(%s) AND clerk_id IS NULL;
-                    """, (clerk_id, first_name, last_name, email))
+                        WHERE LOWER(email) = LOWER(%s) AND (clerk_id IS NULL OR clerk_id != %s);
+                    """, (clerk_id, first_name, last_name, email, clerk_id))
 
                     if cur.rowcount == 0:
-                        # 2. Upsert by clerk_id (normal path)
+                        # 2. Upsert by clerk_id (normal new-user path)
                         cur.execute("""
                             INSERT INTO users (clerk_id, email, first_name, last_name, is_admin, founding_promo_eligible)
                             VALUES (%s, %s, %s, %s, %s, TRUE)
