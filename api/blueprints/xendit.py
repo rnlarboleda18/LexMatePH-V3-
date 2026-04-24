@@ -127,6 +127,70 @@ def _next_anchor_date(interval: str) -> str:
 
 
 
+def _ensure_user_exists(clerk_id: str, req: func.HttpRequest):
+    """Create a DB row for this Clerk user if one doesn't exist yet.
+
+    Fallback for when the Clerk webhook failed to deliver. Fetches user details
+    from the Clerk API using the Bearer token already in the request headers.
+    """
+    with _get_db() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT 1 FROM users WHERE clerk_id = %s", (clerk_id,))
+            if cur.fetchone():
+                return  # already exists
+
+    # User missing — fetch details from Clerk API
+    try:
+        clerk_secret = os.environ.get("CLERK_SECRET_KEY", "")
+        if not clerk_secret:
+            logging.warning("_ensure_user_exists: CLERK_SECRET_KEY not set, cannot auto-create user")
+            return
+        clerk_resp = requests.get(
+            f"https://api.clerk.com/v1/users/{clerk_id}",
+            headers={"Authorization": f"Bearer {clerk_secret}"},
+            timeout=10,
+        )
+        if clerk_resp.status_code != 200:
+            logging.warning(f"_ensure_user_exists: Clerk API returned {clerk_resp.status_code}")
+            return
+        u = clerk_resp.json()
+        emails = u.get("email_addresses") or []
+        primary_id = u.get("primary_email_address_id")
+        email = None
+        for e in emails:
+            if e.get("id") == primary_id:
+                email = e.get("email_address")
+                break
+        if not email and emails:
+            email = emails[0].get("email_address")
+        if not email:
+            logging.warning(f"_ensure_user_exists: no email for clerk_id={clerk_id}")
+            return
+        first_name = (u.get("first_name") or "").strip() or None
+        last_name  = (u.get("last_name")  or "").strip() or None
+        ADMIN_EMAILS = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
+        is_admin = email.lower() in [e.lower() for e in ADMIN_EMAILS]
+
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    INSERT INTO users (clerk_id, email, first_name, last_name, is_admin, founding_promo_eligible)
+                    VALUES (%s, %s, %s, %s, %s, TRUE)
+                    ON CONFLICT (clerk_id) DO NOTHING
+                """, (clerk_id, email, first_name, last_name, is_admin))
+                # Also link if the email row exists with no clerk_id (or stale one)
+                cur.execute("""
+                    UPDATE users SET clerk_id = %s,
+                        first_name = COALESCE(%s, first_name),
+                        last_name  = COALESCE(%s, last_name)
+                    WHERE LOWER(email) = LOWER(%s) AND (clerk_id IS NULL OR clerk_id != %s)
+                """, (clerk_id, first_name, last_name, email, clerk_id))
+                conn.commit()
+        logging.info(f"_ensure_user_exists: auto-created user {clerk_id} ({email})")
+    except Exception as e:
+        logging.error(f"_ensure_user_exists: failed for clerk_id={clerk_id}: {e}")
+
+
 def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token_id: str, plan_key: str) -> str:
     """Create a Xendit recurring plan for the given customer. Returns plan_id."""
     cfg = PLAN_CONFIGS[plan_key]
@@ -194,6 +258,8 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
             json.dumps({"error": "Unauthorized", "detail": error}),
             mimetype="application/json", status_code=401,
         )
+    # Auto-create DB row if Clerk webhook missed this user
+    _ensure_user_exists(clerk_id, req)
     try:
         try:
             with _get_db() as conn:
@@ -344,6 +410,9 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             )
 
         cfg = PLAN_CONFIGS[plan_key]
+
+        # Auto-create DB row if Clerk webhook missed this user
+        _ensure_user_exists(clerk_id, req)
 
         # Get user info and any stored Xendit customer ID from DB
         with _get_db() as conn:
