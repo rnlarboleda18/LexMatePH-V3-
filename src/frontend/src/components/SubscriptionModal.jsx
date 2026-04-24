@@ -154,7 +154,15 @@ export default function SubscriptionModal({ onClose }) {
         },
         body: JSON.stringify({ plan_key: planKey }),
       });
-      const data = await res.json();
+
+      let data = {};
+      const text = await res.text();
+      try { data = text ? JSON.parse(text) : {}; } catch { data = { error: text || `HTTP ${res.status}` }; }
+
+      if (!res.ok) {
+        setErrorMsg(data.error || data.message || `Server error (${res.status})`);
+        return;
+      }
 
       // ── BYPASS MODE: tier granted instantly, no redirect needed ──────────
       if (data.bypass && data.tier) {
@@ -173,7 +181,7 @@ export default function SubscriptionModal({ onClose }) {
 
       setErrorMsg(data.error || 'Failed to create checkout session.');
     } catch (err) {
-      setErrorMsg('Network error. Please try again.');
+      setErrorMsg(`Network error: ${err.message}`);
     } finally {
       setLoadingPlan(null);
     }
