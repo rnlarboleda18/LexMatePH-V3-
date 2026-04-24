@@ -26,6 +26,7 @@ from config import (
     FLASHCARD_BAR_2026_ONLY_DEFAULT,
 )
 import re
+import time
 
 from utils.flashcard_legal_concepts import (
     FLASHCARD_SOURCE_YEAR_MAX,
@@ -282,7 +283,6 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
                     status_code=200
                 )
 
-        import time
         t_start = time.time()
         
         logging.info("Request started. Getting connection from pool...")
@@ -352,8 +352,16 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
         if doctrinal_filter and doctrinal_filter.lower() == 'true':
             base_where += " AND is_doctrinal = TRUE"
         if ponente_filter:
-            base_where += " AND ponente = %s"
-            base_params.append(ponente_filter)
+            raw_variants = get_ponente_raw_variants_for_filter(cur, ponente_filter)
+            if not raw_variants:
+                base_where += " AND 1=0"
+            elif len(raw_variants) == 1:
+                base_where += " AND ponente = %s"
+                base_params.append(raw_variants[0])
+            else:
+                placeholders = ",".join(["%s"] * len(raw_variants))
+                base_where += f" AND ponente IN ({placeholders})"
+                base_params.extend(raw_variants)
         if significance_filter:
             base_where += " AND significance_category = %s"
             base_params.append(significance_filter)
@@ -1173,6 +1181,54 @@ def normalize_ponente_text(ponente):
     
     return None
 
+
+# Built from sc_decided_cases.ponente so list filters match the same normalization as
+# /sc_decisions/ponentes (which dedupes by normalize_ponente_text, not by raw string).
+_PONENTE_NORM_TO_RAWS = None
+_PONENTE_NORM_TO_RAWS_AT = 0.0
+_PONENTE_NORM_TO_RAWS_TTL = 300.0
+
+
+def invalidate_ponente_norm_to_raws_cache() -> None:
+    """Call after mass ponente updates (e.g. fix_ponentes) so the next list uses fresh variants."""
+    global _PONENTE_NORM_TO_RAWS, _PONENTE_NORM_TO_RAWS_AT
+    _PONENTE_NORM_TO_RAWS = None
+    _PONENTE_NORM_TO_RAWS_AT = 0.0
+
+
+def get_ponente_raw_variants_for_filter(cur, normalized_or_raw_filter: str) -> list:
+    """
+    The ponente dropdown is deduped by normalize_ponente_text(), but many rows still store
+    legacy spellings. Match every DB value that normalizes to the same label as the filter.
+    """
+    q = (normalized_or_raw_filter or "").strip()
+    if not q:
+        return []
+    global _PONENTE_NORM_TO_RAWS, _PONENTE_NORM_TO_RAWS_AT
+    now = time.time()
+    if _PONENTE_NORM_TO_RAWS is None or (now - _PONENTE_NORM_TO_RAWS_AT) > _PONENTE_NORM_TO_RAWS_TTL:
+        cur.execute(
+            "SELECT DISTINCT ponente FROM sc_decided_cases "
+            "WHERE ponente IS NOT NULL AND TRIM(ponente) != ''"
+        )
+        m = {}
+        for (raw,) in cur.fetchall():
+            if not raw:
+                continue
+            n = normalize_ponente_text(raw)
+            if n:
+                m.setdefault(n, []).append(raw)
+        _PONENTE_NORM_TO_RAWS = m
+        _PONENTE_NORM_TO_RAWS_AT = now
+    m = _PONENTE_NORM_TO_RAWS or {}
+    if q in m:
+        return m[q]
+    nq = normalize_ponente_text(q)
+    if nq and nq in m:
+        return m[nq]
+    return [q]
+
+
 @supreme_bp.route(route="fix_ponentes", auth_level=func.AuthLevel.ANONYMOUS)
 def fix_ponentes_endpoint(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Triggering Manual Ponente Fix...')
@@ -1211,6 +1267,7 @@ def fix_ponentes_endpoint(req: func.HttpRequest) -> func.HttpResponse:
             cache_delete("sc_decisions:ponentes")
             cache_clear_pattern("sc_decisions:*")
             logging.info("Cache cleared for ponentes and decisions.")
+        invalidate_ponente_norm_to_raws_cache()
 
         return func.HttpResponse(
             json.dumps({"message": "Ponentes Normalized", "updates_count": updates}),
