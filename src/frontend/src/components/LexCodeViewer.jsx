@@ -174,7 +174,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
             const headerBottom = gh ? gh.getBoundingClientRect().bottom : (window.innerWidth >= 768 ? 64 : 48);
             const filterEl = lexFilterChromeRef.current;
             const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
-            setFixedPanelTopPx(Math.max(headerBottom, chromeBottom) + 8);
+            setFixedPanelTopPx(Math.max(headerBottom, chromeBottom));
         } else {
             setFixedPanelTopPx(null);
         }
@@ -247,7 +247,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
         setTocFabPos({
             left: r.left,
-            top: Math.max(headerBottom, chromeBottom) + 8,
+            top: Math.max(headerBottom, chromeBottom),
         });
     }, [isSidebarOpen, lexFilterChromeRef]);
 
@@ -312,8 +312,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     const fixedSidePanelStyle = useMemo(() => {
         if (fixedPanelTopPx != null) {
             return {
-                top: fixedPanelTopPx,
-                maxHeight: `calc(100dvh - ${fixedPanelTopPx}px - var(--player-height, 0px) - env(safe-area-inset-bottom, 0px) - 12px)`,
+                top: `calc(${fixedPanelTopPx}px + var(--lex-tile-gap))`,
+                maxHeight: `calc(100dvh - ${fixedPanelTopPx}px - var(--lex-tile-gap) - var(--player-height, 0px) - env(safe-area-inset-bottom, 0px) - 12px)`,
             };
         }
         return { top: fixedPanelStyle.top, maxHeight: fixedPanelStyle.maxHeight };
@@ -1062,7 +1062,11 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
             <div
                 className="relative z-0 w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
-                style={xlFixedChrome ? { paddingTop: `${lexFilterChromeHeight + 2}px` } : undefined}
+                style={
+                    xlFixedChrome
+                        ? { paddingTop: `calc(${lexFilterChromeHeight}px + var(--lex-tile-gap))` }
+                        : undefined
+                }
             >
                 <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 lg:flex-row lg:items-start lg:gap-6">
                     {/* TOC layout spacer — real panel is `position:fixed` via portal */}
@@ -1246,7 +1250,10 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         onClick={() => setIsSidebarOpen(true)}
                         /* z-[38]: above codal filter chrome (z-[30]), below Layout nav aside (z-40) */
                         className="fixed z-[38] hidden h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 lg:flex dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
-                        style={{ left: tocFabPos.left, top: tocFabPos.top }}
+                        style={{
+                            left: tocFabPos.left,
+                            top: `calc(${tocFabPos.top}px + var(--lex-tile-gap))`,
+                        }}
                         title="Table of contents"
                         aria-label="Open table of contents"
                     >

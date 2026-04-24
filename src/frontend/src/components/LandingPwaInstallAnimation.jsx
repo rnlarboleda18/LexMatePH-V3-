@@ -135,7 +135,7 @@ function LandingPwaInstallAnimation({ compact = false, dense = false, tight = fa
                     <div
                         className={`flex flex-row justify-center max-lg:justify-center lg:justify-center ${
                             isHeroMobile ? 'items-start max-lg:gap-0 lg:items-end' : 'items-end'
-                        } ${heroTight ? 'gap-1 sm:gap-1.5' : dense ? 'gap-1.5 sm:gap-2 lg:gap-2.5' : 'gap-3 sm:gap-4 lg:gap-5'}`}
+                        } ${heroTight ? 'gap-1 sm:gap-1.5' : dense ? 'gap-1.5 sm:gap-2 lg:gap-1' : 'gap-3 sm:gap-4 lg:gap-5'}`}
                     >
                         <figure className="flex min-w-0 shrink-0 flex-col items-center max-lg:max-w-full">
                             <figcaption

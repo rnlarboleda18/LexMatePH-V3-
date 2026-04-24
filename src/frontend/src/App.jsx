@@ -970,6 +970,7 @@ function App() {
           <LexPlayer
             isMinimized={true}
             isDarkMode={isDarkMode}
+            belowHighZOverlays={!!(globalSelectedCase || selectedQuestion)}
             lowerMiniBarOnMobile={mode === 'landing'}
             onExpand={() => {
               setPreviousMode(mode);

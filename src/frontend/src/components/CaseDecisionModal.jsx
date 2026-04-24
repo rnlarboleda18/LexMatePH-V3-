@@ -610,9 +610,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         : '';
 
     return createPortal(
-        <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-sm animate-in fade-in duration-200" onClick={handleClose}>
+        <div
+            className="lex-modal-overlay lex-modal-overlay--full-bleed fixed inset-0 z-[540] bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={handleClose}
+        >
             <div
-                className="lex-modal-card relative flex max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
+                className="lex-modal-card relative flex w-full min-w-0 max-w-5xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                 role="dialog"
                 aria-modal="true"
                 onClick={(e) => e.stopPropagation()}
@@ -962,8 +965,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 </div>
 
-                {/* FOOTER — same visual language as header strip */}
-                <div className="relative z-20 flex shrink-0 items-center justify-end gap-0.5 border-t border-lex bg-white px-1.5 py-1.5 dark:border-lex dark:bg-zinc-900 sm:gap-1 sm:px-2 md:px-3">
+                {/* FOOTER — full-bleed width of the card (no side inset); same chrome as filter tiles */}
+                <div className="relative z-20 flex w-full min-w-0 shrink-0 self-stretch items-center justify-end gap-1 border-t border-lex bg-white px-tile py-2.5 dark:border-lex dark:bg-zinc-900 sm:gap-1.5">
                     {viewMode === 'digest' && (
                         <button
                             type="button"

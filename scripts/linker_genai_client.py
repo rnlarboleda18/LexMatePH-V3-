@@ -35,6 +35,19 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
+# Env vars that make ``google.genai`` prefer the Gemini Developer API; linkers use Vertex only.
+_LINKER_STRIP_KEYS = (
+    "GOOGLE_API_KEY",
+    "GEMINI_API_KEY",
+    "GOOGLE_GENAI_API_KEY",
+)
+
+
+def _strip_developer_api_keys_from_env() -> None:
+    for k in _LINKER_STRIP_KEYS:
+        os.environ.pop(k, None)
+
+
 def merge_local_settings_into_env() -> None:
     path = _repo_root() / "api" / "local.settings.json"
     if not path.is_file():
@@ -58,6 +71,7 @@ def get_linker_genai_client():
         return _genai_client
 
     merge_local_settings_into_env()
+    _strip_developer_api_keys_from_env()
     from google import genai
 
     project = (

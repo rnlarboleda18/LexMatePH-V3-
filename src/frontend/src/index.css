@@ -133,6 +133,13 @@
   }
 }
 
+/* Default md+ overlay reserves bottom space for LexPlay + trim; use --full-bleed for case/detail modals (no undimmed strip). */
+@media (min-width: 768px) {
+  .lex-modal-overlay.lex-modal-overlay--full-bleed {
+    bottom: env(safe-area-inset-bottom, 0px) !important;
+  }
+}
+
 /* Shared modal card — uniform sizing and shape across all modals on mobile.
    On mobile: card fills the full available window (overlay handles safe gaps).
    On md+: reverts to centered floating card with max-height. */

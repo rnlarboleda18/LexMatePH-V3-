@@ -59,7 +59,10 @@ const DoctrinalDetailModal = ({ caseData, onClose, searchQuery }) => {
     const isPIL = sourceLabel === 'PIL';
 
     return createPortal(
-        <div className="fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200" onClick={onClose}>
+        <div
+            className="lex-modal-overlay lex-modal-overlay--full-bleed fixed inset-0 z-[540] bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
+            onClick={onClose}
+        >
             <div 
                 className="lex-modal-card relative flex max-w-3xl flex-col overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl animate-in zoom-in-95 duration-300 dark:border-lex dark:bg-zinc-900"
                 role="dialog"
