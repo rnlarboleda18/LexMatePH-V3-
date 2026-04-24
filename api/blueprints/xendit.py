@@ -146,13 +146,12 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         last_name = "."
 
     client_ref = f"lexmate-{clerk_id}"
+    # Xendit Customer API with client_reference uses a flat schema (no individual_detail wrapper)
     payload = {
         "client_reference": client_ref,
         "type": "INDIVIDUAL",
-        "individual_detail": {
-            "given_name": first_name,
-            "surname": last_name,
-        },
+        "given_name": first_name,
+        "surname": last_name,
         "email": email,
     }
     resp = requests.post(
