@@ -379,7 +379,9 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 )
                 conn.commit()
 
-        session_ref = f"lm-{clerk_id[:20]}-{int(time.time())}"
+        # Encode full clerk_id in reference_id (no truncation) so the webhook
+        # handler can parse it as a reliable fallback if metadata/customer_id lookup fails.
+        session_ref = f"lm-{clerk_id}-{int(time.time())}"
         payload = {
             "reference_id": session_ref,
             "session_type": "PAY",
@@ -803,6 +805,28 @@ def _handle_payment_succeeded(data: dict):
                             plan_key = row[0]
             except Exception as e:
                 logging.warning(f"payment.succeeded: metadata clerk_id lookup failed: {e}")
+
+    if not clerk_id:
+        # Last resort: parse clerk_id from our session reference_id pattern lm-{clerk_id}-{timestamp}
+        import re
+        ref_id = data.get("reference_id", "")
+        m = re.match(r'^lm-(.+)-\d+$', ref_id)
+        if m:
+            parsed_clerk = m.group(1)
+            try:
+                with _get_db() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "SELECT xendit_pending_plan_key FROM users WHERE clerk_id = %s",
+                            (parsed_clerk,),
+                        )
+                        row = cur.fetchone()
+                        if row:
+                            clerk_id = parsed_clerk
+                            plan_key = row[0]
+                            logging.info(f"payment.succeeded: found user via reference_id parse: {clerk_id}")
+            except Exception as e:
+                logging.warning(f"payment.succeeded: reference_id parse lookup failed: {e}")
 
     if not clerk_id:
         logging.warning(f"payment.succeeded: cannot identify user (customer_id={customer_id}, data keys={list(data.keys())})")
