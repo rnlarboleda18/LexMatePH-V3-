@@ -125,69 +125,6 @@ def _next_anchor_date(interval: str) -> str:
     return target.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
-    """Return valid Xendit customer_id (cust-xxx, 41 chars) from DB, or create/fetch via API.
-
-    The Sessions API requires customer_id to be exactly 41 chars starting with 'cust-'.
-    We validate the stored value and re-create if it looks wrong (e.g. from old API).
-    """
-    first_name = None
-    last_name = None
-    with _get_db() as conn:
-        with conn.cursor() as cur:
-            cur.execute(
-                "SELECT xendit_customer_id, first_name, last_name FROM users WHERE clerk_id = %s",
-                (clerk_id,),
-            )
-            row = cur.fetchone()
-            if row:
-                stored_id = (row[0] or "").strip()
-                # Only reuse if it matches the cust-xxx format (41 chars)
-                if stored_id.startswith("cust-") and len(stored_id) == 41:
-                    return stored_id
-                first_name = row[1]
-                last_name = row[2]
-
-    if not first_name:
-        first_name = email.split("@")[0].replace(".", " ").replace("_", " ").title() or "User"
-    if not last_name:
-        last_name = "."
-
-    # Use a unique reference_id per attempt to avoid conflicts with customers
-    # created via the old client_reference API. The customer_id returned is
-    # what we persist and reuse — the reference_id is just a one-time key.
-    ref_id = f"lm-{clerk_id[:20]}-{uuid.uuid4().hex[:8]}"
-    payload = {
-        "reference_id": ref_id,
-        "type": "INDIVIDUAL",
-        "individual_detail": {
-            "given_names": first_name[:50],
-            "surname": (last_name or ".")[:50],
-        },
-        "email": email,
-    }
-    resp = requests.post(
-        f"{XENDIT_BASE_URL}/customers",
-        json=payload,
-        headers=_xendit_headers(),
-        timeout=15,
-    )
-
-    if resp.status_code in (200, 201):
-        customer_id = resp.json().get("id", "")
-        if not customer_id:
-            raise RuntimeError(f"Xendit customer creation: no id in response: {resp.text}")
-    else:
-        raise RuntimeError(f"Xendit customer creation failed ({resp.status_code}): {resp.text}")
-
-    with _get_db() as conn:
-        with conn.cursor() as cur:
-            cur.execute(
-                "UPDATE users SET xendit_customer_id = %s WHERE clerk_id = %s",
-                (customer_id, clerk_id),
-            )
-            conn.commit()
-    return customer_id
 
 
 def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token_id: str, plan_key: str) -> str:
@@ -408,11 +345,11 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
 
         cfg = PLAN_CONFIGS[plan_key]
 
-        # Get user email from DB
+        # Get user info and any stored Xendit customer ID from DB
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT email FROM users WHERE clerk_id = %s",
+                    "SELECT email, first_name, last_name, xendit_customer_id FROM users WHERE clerk_id = %s",
                     (clerk_id,),
                 )
                 row = cur.fetchone()
@@ -421,19 +358,17 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                         json.dumps({"error": "User not found in database"}),
                         mimetype="application/json", status_code=404,
                     )
-                email = row[0]
+                email, first_name, last_name, stored_customer_id = row
 
-        # Get or create Xendit customer — handles duplicates gracefully.
-        # This must happen before the session so we can pass customer_id (not an
-        # inline customer object whose reference_id would fail on retry).
-        try:
-            xendit_customer_id = _get_or_create_xendit_customer(clerk_id, email)
-        except Exception as cust_err:
-            logging.error(f"create_checkout: customer fetch/create failed: {cust_err}")
-            return func.HttpResponse(
-                json.dumps({"error": "Failed to set up customer profile", "detail": str(cust_err)}),
-                mimetype="application/json", status_code=503,
-            )
+        if not first_name:
+            first_name = email.split("@")[0].replace(".", " ").replace("_", " ").title() or "User"
+
+        # Determine how to identify the customer in the session:
+        # - If we have a valid cust-xxx ID from a previous session, pass it as customer_id.
+        # - Otherwise, pass an inline customer object. Use a UUID reference_id so it
+        #   never conflicts with previous attempts.
+        valid_stored = (stored_customer_id or "").strip()
+        has_valid_customer = valid_stored.startswith("cust-") and len(valid_stored) == 41
 
         # Store pending plan key — the payment_token.activated webhook handler reads this
         with _get_db() as conn:
@@ -444,8 +379,6 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 )
                 conn.commit()
 
-        # POST /sessions — Xendit hosted-checkout endpoint.
-        # Pass customer_id (not inline customer) so retries never hit a duplicate reference_id.
         session_ref = f"lm-{clerk_id[:20]}-{int(time.time())}"
         payload = {
             "reference_id": session_ref,
@@ -457,7 +390,6 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             "country": "PH",
             "locale": "en",
             "description": f"LexMatePH — {cfg['label']}",
-            "customer_id": xendit_customer_id,
             "success_return_url": f"{FRONTEND_URL}/?xendit_payment=success&plan={plan_key}",
             "cancel_return_url": f"{FRONTEND_URL}/?xendit_payment=cancelled",
             "metadata": {
@@ -465,6 +397,22 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 "plan_key": plan_key,
             },
         }
+
+        if has_valid_customer:
+            # Reuse existing customer — avoids any duplicate reference_id issue
+            payload["customer_id"] = valid_stored
+        else:
+            # First checkout: create customer inline with a unique reference_id.
+            # The session response will contain customer_id which we save to DB.
+            payload["customer"] = {
+                "reference_id": f"lm-{uuid.uuid4().hex}",
+                "type": "INDIVIDUAL",
+                "email": email,
+                "individual_detail": {
+                    "given_names": (first_name or "User")[:50],
+                    "surname": (last_name or ".")[:50],
+                },
+            }
         resp = requests.post(
             f"{XENDIT_BASE_URL}/sessions",
             json=payload,
