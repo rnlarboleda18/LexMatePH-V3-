@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 import { useAuth } from '@clerk/clerk-react';
 import { apiUrl } from '../utils/apiUrl';
 import CardVioletInnerWash from './CardVioletInnerWash';
@@ -55,8 +56,11 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
     const [groupedLinks, setGroupedLinks] = useState([]);
     const [availablePonentes, setAvailablePonentes] = useState([]);
     const [ponenteFilter, setPonenteFilter] = useState('');
-    const [loading, setLoading] = useState(false);
+    /** Start true: first paint must not show the empty state before useEffect runs (fetch is async). */
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const provisionLabel = statuteId === 'RCC' ? 'Section' : 'Article';
 
     useEffect(() => {
         if (!articleNum) return;
@@ -72,9 +76,12 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
             return () => ctrl.abort();
         }
 
+        setLoading(true);
+        setError(null);
+        setGroupedLinks([]);
+        setAvailablePonentes([]);
+
         const fetchLinks = async () => {
-            setLoading(true);
-            setError(null);
             try {
                 let path = `/api/codex/jurisprudence?statute_id=${encodeURIComponent(statuteId)}&provision_id=${encodeURIComponent(articleNum)}`;
                 if (subject) path += `&subject=${encodeURIComponent(subject)}`;
@@ -128,7 +135,9 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                 console.error(err);
                 setError(err.message);
             } finally {
-                setLoading(false);
+                if (!ctrl.signal.aborted) {
+                    setLoading(false);
+                }
             }
         };
 
@@ -147,7 +156,9 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                 <div className="flex justify-between items-center">
                     <div>
                         <h3 className="text-[16px] font-bold text-black dark:text-zinc-100 uppercase tracking-wide">Jurisprudence</h3>
-                        <p className="text-xs text-slate-500 dark:text-gray-400">Atomic Ratios for Art. {articleNum}</p>
+                        <p className="text-xs text-slate-500 dark:text-gray-400">
+                            Atomic ratios for {provisionLabel} {articleNum}
+                        </p>
                     </div>
                     <button
                         onClick={onClose}
@@ -177,8 +188,14 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                 style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
             >
                 {loading && (
-                    <div className="flex justify-center p-8">
-                        <div className="animate-spin h-6 w-6 border-2 border-indigo-500 rounded-full border-t-transparent"></div>
+                    <div
+                        className="flex flex-col items-center justify-center gap-3 py-12 text-slate-600 dark:text-slate-400"
+                        role="status"
+                        aria-live="polite"
+                        aria-busy="true"
+                    >
+                        <Loader2 className="h-8 w-8 shrink-0 animate-spin text-indigo-500 dark:text-indigo-400" aria-hidden />
+                        <p className="text-center text-sm font-medium">Loading linked cases…</p>
                     </div>
                 )}
 
@@ -190,7 +207,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
 
                 {!loading && !error && groupedLinks.length === 0 && (
                     <div className="text-center p-8 text-gray-500 text-sm">
-                        No jurisprudence linked to Article {articleNum} yet.
+                        No jurisprudence linked to {provisionLabel} {articleNum} yet.
                     </div>
                 )}
 

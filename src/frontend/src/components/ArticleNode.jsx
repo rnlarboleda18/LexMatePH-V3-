@@ -18,6 +18,16 @@ import {
 import { RPC_ARTICLE_266_BODY_MD, isCorruptedRpcArticle266Body } from '../data/rpcArticle266Fallback';
 import { fcJurisProvisionIdFromArticle } from '../utils/fcJurisProvisionId';
 
+/** Unified juris gavel chip (all codals: header −1 links + paragraph-level links). Rounded rect, middle-aligned to the line. */
+const LEXCODE_GAVEL_CHIP_CLASS =
+    'inline-flex shrink-0 cursor-pointer select-none items-center gap-1 rounded-md border border-purple-200 bg-purple-50 px-1.5 py-0.5 align-middle shadow-sm transition-colors hover:bg-purple-100 dark:border-purple-800/60 dark:bg-purple-900/40 dark:hover:bg-purple-900/60';
+
+const LEXCODE_GAVEL_COUNT_CLASS =
+    'text-[11.5px] font-bold tabular-nums leading-none text-purple-600 dark:text-purple-400';
+
+const LEXCODE_LEXPLAY_CHIP_CLASS =
+    'inline-flex shrink-0 cursor-pointer select-none items-center justify-center rounded-md border border-purple-200 bg-purple-50/90 p-1 align-middle shadow-sm transition-colors hover:bg-purple-100 hover:text-purple-700 dark:border-purple-800/60 dark:bg-purple-900/30 dark:hover:bg-purple-900/55 dark:hover:text-purple-300 text-purple-600 dark:text-purple-400';
+
 /** RPC LexCode: article H3 should end with a full stop (no duplicate if already ends with `.`). */
 function rpcArticleHeaderTerminalPeriod(s) {
     const t = String(s ?? '').trimEnd();
@@ -656,7 +666,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                 {/* Floating Badge */}
                 <div className="flex flex-col mb-1 relative">
-                    <div className={`flex items-center gap-2 ${centerLayout ? 'justify-center' : ''}`}>
+                    <div
+                        className={`flex flex-wrap items-baseline gap-x-2 gap-y-1 ${centerLayout ? 'justify-center' : ''}`}
+                    >
                         {isAmended && (
                             <button
                                 type="button"
@@ -697,9 +709,9 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                 <h3
                                     className={
                                         rccInlineLeadTitle
-                                            ? `flex min-w-0 flex-1 flex-row flex-nowrap items-baseline gap-x-1.5 overflow-x-auto text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
+                                            ? `inline-flex min-w-0 max-w-full flex-row flex-wrap items-baseline gap-x-1.5 text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
                                             : isRcc && article_title
-                                              ? `flex min-w-0 flex-1 flex-row flex-nowrap items-baseline gap-x-1.5 overflow-x-auto text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
+                                              ? `inline-flex min-w-0 max-w-full flex-row flex-wrap items-baseline gap-x-1.5 text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
                                               : `text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
                                     }
                                 >
@@ -727,7 +739,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     return (
                                                         <>
                                                             <span className="shrink-0 whitespace-nowrap font-bold">{label}</span>
-                                                            <span className="min-w-0 flex-1 font-bold leading-snug">
+                                                            <span className="min-w-0 font-bold leading-snug">
                                                                 {toTitleCase(lead, skipKeywords)}
                                                             </span>
                                                         </>
@@ -755,7 +767,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                 <span className="shrink-0 whitespace-nowrap font-bold">
                                                                     {`${rccSectionLabel}\u00a0${rccSectionNumDisplay}`}
                                                                 </span>
-                                                                <span className="min-w-0 flex-1 font-bold leading-snug">
+                                                                <span className="min-w-0 font-bold leading-snug">
                                                                     {toTitleCase(tail, skipKeywords)}
                                                                 </span>
                                                             </>
@@ -781,8 +793,15 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                         if (generalLinkCount > 0 && !isConstCode) {
                                             return (
                                                 <span
-                                                    className="inline-flex items-center gap-1 ml-2 cursor-pointer text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
-                                                    // Header click - General concept (-1)
+                                                    className={`${LEXCODE_GAVEL_CHIP_CLASS} ml-1.5`}
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    onKeyDown={(e) => {
+                                                        if (e.key === 'Enter' || e.key === ' ') {
+                                                            e.preventDefault();
+                                                            onToggleJurisprudence?.(jurisProvisionId, -1);
+                                                        }
+                                                    }}
                                                     onClick={() => {
                                                         if (typeof onToggleJurisprudence === 'function') {
                                                             onToggleJurisprudence(jurisProvisionId, -1);
@@ -790,8 +809,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     }}
                                                     title={`${generalLinkCount} general concept cases`}
                                                 >
-                                                    <Gavel size={16} className="inline" />
-                                                    <span className="text-sm font-semibold">{generalLinkCount}</span>
+                                                    <Gavel size={14} className="shrink-0" strokeWidth={2} aria-hidden />
+                                                    <span className={LEXCODE_GAVEL_COUNT_CLASS}>{generalLinkCount}</span>
                                                 </span>
                                             );
                                         }
@@ -1478,23 +1497,25 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                             }}
                                                         >
                                                              {cleanSegments}
-                                                             {"\u00A0"}
                                                              {linkCount > 0 && (
                                                                 <span
-                                                                    className="inline-flex items-center ml-3 px-2 py-0.5 bg-purple-50 dark:bg-purple-900/40 rounded border border-purple-200 dark:border-purple-800/60 cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-colors align-middle"
-                                                                    style={{ gap: '0.35rem' }}
+                                                                    className={`${LEXCODE_GAVEL_CHIP_CLASS} ml-1.5`}
+                                                                    role="button"
+                                                                    tabIndex={0}
+                                                                    onKeyDown={(e) => {
+                                                                        if (e.key === 'Enter' || e.key === ' ') {
+                                                                            e.preventDefault();
+                                                                            onToggleJurisprudence?.(jurisProvisionId, paragraphIndex);
+                                                                        }
+                                                                    }}
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
                                                                         if (onToggleJurisprudence) onToggleJurisprudence(jurisProvisionId, paragraphIndex);
                                                                     }}
                                                                     title={`${linkCount} cited cases linked to this paragraph`}
                                                                 >
-                                                                    <div className="flex-shrink-0 flex items-center justify-center text-purple-600 dark:text-purple-400">
-                                                                        <Gavel size={14} />
-                                                                    </div>
-                                                                    <div className="text-[11.5px] font-bold whitespace-nowrap leading-none flex items-center justify-center mt-[1px] text-purple-600 dark:text-purple-400" style={{ textIndent: '0' }}>
-                                                                        {linkCount}
-                                                                    </div>
+                                                                    <Gavel size={14} className="shrink-0" strokeWidth={2} aria-hidden />
+                                                                    <span className={LEXCODE_GAVEL_COUNT_CLASS}>{linkCount}</span>
                                                                 </span>
                                                             )}
 
@@ -1502,10 +1523,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                  <button
                                                                      type="button"
                                                                      onClick={handleAddToPlaylist}
-                                                                     className="inline-flex items-center justify-center ml-2 cursor-pointer text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors bg-purple-50 dark:bg-purple-900/20 p-1 rounded-full border border-purple-200 dark:border-purple-800 shadow-sm hover:scale-105 align-baseline"
+                                                                     className={`${LEXCODE_LEXPLAY_CHIP_CLASS} ml-1.5 hover:scale-[1.02] active:scale-[0.98]`}
                                                                      title="Add to LexPlay Playlist"
                                                                  >
-                                                                     <Headphones size={14} />
+                                                                     <Headphones size={14} strokeWidth={2} aria-hidden />
                                                                  </button>
                                                              )}
                                                         </p>
@@ -1520,23 +1541,25 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                         style={{ maxWidth: '100%', overflowWrap: 'anywhere', wordBreak: 'break-word' }}
                                                     >
                                                          {children}
-                                                         {"\u00A0"}
                                                          {linkCount > 0 && (
                                                             <span
-                                                                className="inline-flex items-center ml-3 px-2 py-0.5 bg-purple-50 dark:bg-purple-900/40 rounded border border-purple-200 dark:border-purple-800/60 cursor-pointer hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-colors align-middle"
-                                                                style={{ gap: '0.35rem' }}
+                                                                className={`${LEXCODE_GAVEL_CHIP_CLASS} ml-1.5`}
+                                                                role="button"
+                                                                tabIndex={0}
+                                                                onKeyDown={(e) => {
+                                                                    if (e.key === 'Enter' || e.key === ' ') {
+                                                                        e.preventDefault();
+                                                                        onToggleJurisprudence?.(jurisProvisionId, paragraphIndex);
+                                                                    }
+                                                                }}
                                                                     onClick={(e) => {
                                                                         e.stopPropagation();
                                                                         if (onToggleJurisprudence) onToggleJurisprudence(jurisProvisionId, paragraphIndex);
                                                                     }}
                                                                     title={`${linkCount} cited cases linked to this paragraph`}
                                                                 >
-                                                                    <div className="flex-shrink-0 flex items-center justify-center text-purple-600 dark:text-purple-400">
-                                                                        <Gavel size={14} />
-                                                                    </div>
-                                                                    <div className="text-[11.5px] font-bold whitespace-nowrap leading-none flex items-center justify-center mt-[1px] text-purple-600 dark:text-purple-400" style={{ textIndent: '0' }}>
-                                                                        {linkCount}
-                                                                    </div>
+                                                                    <Gavel size={14} className="shrink-0" strokeWidth={2} aria-hidden />
+                                                                    <span className={LEXCODE_GAVEL_COUNT_CLASS}>{linkCount}</span>
                                                                 </span>
                                                             )}
 
@@ -1544,10 +1567,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                                  <button
                                                                      type="button"
                                                                      onClick={handleAddToPlaylist}
-                                                                     className="inline-flex items-center justify-center ml-2 cursor-pointer text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors bg-purple-50 dark:bg-purple-900/20 p-1 rounded-full border border-purple-200 dark:border-purple-800 shadow-sm hover:scale-105 align-baseline"
+                                                                     className={`${LEXCODE_LEXPLAY_CHIP_CLASS} ml-1.5 hover:scale-[1.02] active:scale-[0.98]`}
                                                                      title="Add to LexPlay Playlist"
                                                                  >
-                                                                     <Headphones size={14} />
+                                                                     <Headphones size={14} strokeWidth={2} aria-hidden />
                                                                  </button>
                                                              )}
                                                     </p>

@@ -7,13 +7,16 @@ GenAI: Vertex AI only (ADC), via ``linker_genai_client`` — set ``GOOGLE_CLOUD_
 
 How it works:
   PASS 1 (Router): The AI reads the case digest ONCE and returns a list of
-                   (code_id, article_num) pairs it thinks are relevant.
-  DB Fetch:        The script fetches the FULL TEXT only of those specific
-                   articles from the database.
-  PASS 2 (Granular): The AI re-reads the case digest + the actual article texts
+                   (code_id, provision id) pairs it thinks are relevant.
+  DB Fetch:        The script fetches the FULL TEXT only of those provisions
+                   (RPC: articles; RCC: sections — DB column is still ``article_num``).
+  PASS 2 (Granular): The AI re-reads the case digest + the provision texts
                    and identifies the exact 0-based paragraph index.
 
-This saves tokens vs the old approach (which fed ALL articles each time) while
+Dry run (default) prints proposed links only — it does **not** write to
+``codal_case_links`` or codal tables. Use ``--commit`` to persist.
+
+This saves tokens vs the old approach (which fed ALL provisions each time) while
 still achieving paragraph-level granularity.
 
 Usage:
@@ -109,8 +112,9 @@ _STATUTE_PROMPT_LINES: dict = {
         '  RPC: Revised Penal Code — format: bare article number as in the code (e.g. "6", "48")'
     ),
     "RCC": (
-        '  RCC: Revised Corporation Code — format: bare section number as stored (e.g. "23"); '
-        'omit the word "Section"'
+        "  RCC: Revised Corporation Code — the Code has **Sections**, not Articles. "
+        'Format: bare section number as stored (e.g. "23"); omit the word "Section". '
+        'JSON still uses the field name "article" for every code; for RCC its value is the section number.'
     ),
 }
 
@@ -154,7 +158,8 @@ def load_article_index() -> dict:
         }
     For CONST, provision_key is the section_label (e.g. 'SECTION 2') —
     the same value that const.py API sends to the frontend as article_num.
-    For all other codes, it is the bare article_num (e.g. '1306').
+    For other codes, the key is the bare ``article_num`` after stripping labels (e.g. CIV ``1306``).
+    RCC uses the same DB column but legally those are **section** numbers.
     """
     conn = get_db_connection()
     cur = conn.cursor()
@@ -216,7 +221,7 @@ def load_article_index() -> dict:
 
 
 # ---------------------------------------------------------------------------
-# PASS 1 – Router pass: which code + article numbers does this case touch?
+# PASS 1 – Router pass: which code + provision numbers does this case touch?
 # ---------------------------------------------------------------------------
 
 PASS1_SCHEMA = """
@@ -232,15 +237,16 @@ PASS1_SCHEMA = """
 def pass1_route(case: dict) -> list:
     """
     Ask the AI: 'does this case interpret a provision from any of the configured codes?
-    If so, which code_id and article number?'
+    If so, which code_id and provision identifier?'
     Returns a list of dicts: [{'code_id': 'RPC', 'article': '6'}, ...]
+    (JSON field remains ``article`` for all codes; RCC values are section numbers.)
     """
     prompt = f"""
 You are a Philippine legal expert. Analyse the case digest below and list every
 specific provision from these Philippine statutes that this case INTERPRETS or APPLIES
 (not just mentions).
 
-AVAILABLE STATUTES AND THEIR ARTICLE FORMAT:
+AVAILABLE STATUTES AND NUMBERING FORMAT:
 {_codes_detail_prompt()}
 
 CASE:
@@ -253,11 +259,12 @@ Ruling: {case.get('digest_ruling') or ''}
 Significance: {case.get('digest_significance') or ''}
 
 TASK (CORE CONSIDERATION):
-Your PRIMARY basis for identifying the correct statute and article are the **Issues** and the **Ratio Decidendi**. The Facts and Doctrine provide essential context but the binding legal link is found in the correspondence between the specific legal issues raised and the court's reasoning.
+Your PRIMARY basis for identifying the correct statute and provision are the **Issues** and the **Ratio Decidendi**. The Facts and Doctrine provide essential context but the binding legal link is found in the correspondence between the specific legal issues raised and the court's reasoning.
 
 RULES:
 - Output ONLY valid code_id values from the list above.
-- Use the exact article format shown per code above.
+- Use the exact numbering format shown per code (RPC: article numbers; RCC: **section** numbers only — the RCC has no "Articles").
+- Each hit must use JSON key **"article"** even for RCC; the value is still the bare section number string.
   Constitution example: "III-2" means Article III, Section 2.
 - If no provision from these statutes is interpreted, return {{"hits": []}}
 
@@ -280,7 +287,7 @@ OUTPUT FORMAT (JSON only):
 
 
 # ---------------------------------------------------------------------------
-# PASS 2 – Granular pass: exact paragraph index given the full article text
+# PASS 2 – Granular pass: exact paragraph index given the full provision text
 # ---------------------------------------------------------------------------
 
 PASS2_SCHEMA = """
@@ -491,6 +498,8 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, statutes=None):
     print("\n" + "=" * 70)
     print(f"  Unified 2-Pass RAG Linker   Mode: {'DRY RUN' if dry_run else 'COMMIT'}")
+    if dry_run:
+        print("  (Dry run: no writes to codal_case_links or codal body tables.)")
     print(f"  Vertex model: {MODEL_NAME}")
 
     global CODE_CONFIGS
@@ -517,13 +526,14 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
     print(f"  Years: {range_str}   Workers: {workers}")
     print("=" * 70 + "\n")
 
-    # Load article index once
-    print("[*] Building article index...")
+    # Load provision index once (column name article_num; RCC = sections)
+    print("[*] Building provision index from codal tables...")
     article_index = load_article_index()
     total_arts = sum(len(v) for v in article_index.values())
     for cid, arts in article_index.items():
-        print(f"   {cid}: {len(arts)} articles")
-    print(f"   Total: {total_arts} articles\n")
+        unit = "sections" if cid == "RCC" else "articles"
+        print(f"   {cid}: {len(arts)} {unit}")
+    print(f"   Total: {total_arts} provisions indexed\n")
 
     # Fetch cases
     conn = get_db_connection()
