@@ -473,7 +473,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             logging.error(f"Xendit session creation failed: {resp_data}")
             return func.HttpResponse(
                 json.dumps({"error": "Failed to create checkout session", "detail": resp_data}),
-                mimetype="application/json", status_code=502,
+                mimetype="application/json", status_code=503,
             )
 
         checkout_url = resp_data.get("payment_link_url", "")
@@ -481,7 +481,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             logging.error(f"Xendit session: no payment_link_url in response: {resp_data}")
             return func.HttpResponse(
                 json.dumps({"error": "No checkout URL returned by payment provider"}),
-                mimetype="application/json", status_code=502,
+                mimetype="application/json", status_code=503,
             )
 
         return func.HttpResponse(
