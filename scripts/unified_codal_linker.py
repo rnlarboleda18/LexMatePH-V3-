@@ -3,6 +3,8 @@ unified_codal_linker.py
 ========================
 Token-Efficient 2-Pass RAG Linker for Philippine Legal Codes.
 
+GenAI: Vertex AI only (ADC), via ``linker_genai_client`` — set ``GOOGLE_CLOUD_PROJECT`` and authenticate.
+
 How it works:
   PASS 1 (Router): The AI reads the case digest ONCE and returns a list of
                    (code_id, article_num) pairs it thinks are relevant.
@@ -17,6 +19,9 @@ still achieving paragraph-level granularity.
 Usage:
   python unified_codal_linker.py --limit 5 --commit
   python unified_codal_linker.py --year 2024 --workers 5 --commit
+  python unified_codal_linker.py --statutes CIV,LAB,CONST,FAM --limit 10  # optional: other codes
+
+Default statutes are RPC and RCC only. Use ``--statutes`` to add or replace the set.
 """
 
 import os
@@ -30,11 +35,16 @@ from psycopg2.pool import ThreadedConnectionPool
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from google import genai
 
-from linker_genai_client import get_linker_genai_client, get_linker_model_name
+from linker_genai_client import (
+    get_linker_genai_client,
+    get_linker_model_name,
+    merge_local_settings_into_env,
+)
 
 # ---------------------------------------------------------------------------
 # CONFIG
 # ---------------------------------------------------------------------------
+merge_local_settings_into_env()
 DB_URL = (
     os.environ.get("DB_CONNECTION_STRING")
     or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
@@ -43,8 +53,8 @@ MODEL_NAME = get_linker_model_name()
 client = get_linker_genai_client()
 db_pool: ThreadedConnectionPool = None  # type: ignore
 
-# Code configuration – table, human name, how to sort, optional WHERE filter
-CODE_CONFIGS: dict = {
+# Full registry (use ``--statutes`` to enable CIV/LAB/CONST/FAM). Default run = RPC + RCC only.
+FULL_CODE_CONFIGS: dict = {
     "CIV": {
         "table": "civ_codal",
         "name": "Civil Code of the Philippines",
@@ -56,25 +66,64 @@ CODE_CONFIGS: dict = {
         "subject_area": "Labor Law",
     },
     "CONST": {
-        "table": "const_codal",
+        "table": "consti_codal",
         "name": "1987 Philippine Constitution",
         "subject_area": "Political Law",
         "sort_by_id": True,
     },
     "FAM": {
-        "table": "const_codal",
+        "table": "fc_codal",
         "name": "Family Code of the Philippines",
         "subject_area": "Civil Law",
-        "where": "book_code = 'FC'",
-        # The FC API maps article_num like 'FC-IX-220' -> '220' (last segment after '-')
         "provision_id_transform": lambda num: num.split('-')[-1] if '-' in num else num,
     },
-    # RPC is excluded — its links are already processed by universal_rpc_linker.py
+    "RPC": {
+        "table": "rpc_codal",
+        "name": "Revised Penal Code of the Philippines",
+        "subject_area": "Criminal Law",
+        "where": "book IS NOT NULL",
+    },
+    "RCC": {
+        "table": "rcc_codal",
+        "name": "Revised Corporation Code of the Philippines",
+        "subject_area": "Corporate Law",
+    },
 }
 
-CODES_SUMMARY = "\n".join(
-    f"  {cid}: {cfg['name']}" for cid, cfg in CODE_CONFIGS.items()
-)
+DEFAULT_LINKER_STATUTES: tuple = ("RPC", "RCC")
+
+# Active set — reassigned at the start of each ``run()`` (default: RPC, RCC).
+CODE_CONFIGS: dict = {
+    k: FULL_CODE_CONFIGS[k] for k in DEFAULT_LINKER_STATUTES
+}
+
+_STATUTE_PROMPT_LINES: dict = {
+    "CIV": '  CIV: Civil Code of the Philippines — format: bare article number (e.g. "1306")',
+    "LAB": '  LAB: Labor Code of the Philippines — format: bare article number (e.g. "301")',
+    "CONST": (
+        "  CONST: 1987 Philippine Constitution — format: Article-Section like \"III-1\" "
+        '(Article III Section 1), "VIII-15" (Article VIII Section 15)'
+    ),
+    "FAM": '  FAM: Family Code of the Philippines — format: bare article number (e.g. "36")',
+    "RPC": (
+        '  RPC: Revised Penal Code — format: bare article number as in the code (e.g. "6", "48")'
+    ),
+    "RCC": (
+        '  RCC: Revised Corporation Code — format: bare section number as stored (e.g. "23"); '
+        'omit the word "Section"'
+    ),
+}
+
+_STATUTE_ORDER: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "RCC")
+
+
+def _codes_detail_prompt() -> str:
+    lines = [
+        _STATUTE_PROMPT_LINES[cid]
+        for cid in _STATUTE_ORDER
+        if cid in CODE_CONFIGS and cid in _STATUTE_PROMPT_LINES
+    ]
+    return "\n".join(lines)
 
 # ---------------------------------------------------------------------------
 # DB helpers
@@ -133,8 +182,7 @@ def load_article_index() -> dict:
                     "paragraph_count": len(paragraphs),
                 }
         elif code_id == "FAM":
-            # FC articles in const_codal use article_num like 'FC-IX-220'.
-            # The FC API sends article_num.split('-')[-1] = '220' to the frontend.
+            # fc_codal uses article_num like 'FC-IX-220'; match FC API key (last segment).
             transform = cfg.get("provision_id_transform", lambda x: x)
             cur.execute(
                 f"SELECT article_num, content_md FROM {table} {where}"
@@ -174,27 +222,18 @@ def load_article_index() -> dict:
 PASS1_SCHEMA = """
 {
   "hits": [
-    {"code_id": "CIV", "article": "1306"},
-    {"code_id": "CONST", "article": "III-1"}
+    {"code_id": "RPC", "article": "6"},
+    {"code_id": "RCC", "article": "23"}
   ]
 }
 """
 
-# Hint shown in PASS 1 prompt so AI knows the expected format per code
-CODES_DETAIL = (
-    "  CIV: Civil Code of the Philippines — format: bare article number (e.g. \"1306\")\n"
-    "  LAB: Labor Code of the Philippines — format: bare article number (e.g. \"301\")\n"
-    "  CONST: 1987 Philippine Constitution — format: Article-Section like \"III-1\" "
-    "(Article III Section 1), \"VIII-15\" (Article VIII Section 15)\n"
-    "  FAM: Family Code of the Philippines — format: bare article number (e.g. \"36\")"
-)
-
 
 def pass1_route(case: dict) -> list:
     """
-    Ask the AI: 'does this case interpret a provision from any of the five codes?
+    Ask the AI: 'does this case interpret a provision from any of the configured codes?
     If so, which code_id and article number?'
-    Returns a list of dicts: [{'code_id': 'CIV', 'article': '1306'}, ...]
+    Returns a list of dicts: [{'code_id': 'RPC', 'article': '6'}, ...]
     """
     prompt = f"""
 You are a Philippine legal expert. Analyse the case digest below and list every
@@ -202,7 +241,7 @@ specific provision from these Philippine statutes that this case INTERPRETS or A
 (not just mentions).
 
 AVAILABLE STATUTES AND THEIR ARTICLE FORMAT:
-{CODES_DETAIL}
+{_codes_detail_prompt()}
 
 CASE:
 Title: {case.get('short_title', '')}
@@ -248,14 +287,21 @@ PASS2_SCHEMA = """
 {
   "links": [
     {
-      "code_id": "CIV",
-      "article": "1306",
+      "code_id": "RPC",
+      "article": "6",
       "paragraph_index": -1,
       "summary": "..."
     }
   ]
 }
 """
+
+
+def _candidate_heading(code_id: str, art_num: str) -> str:
+    """RCC provisions are labeled Section in the product; others use Article."""
+    if code_id == "RCC":
+        return f"[{code_id}] Section {art_num}:"
+    return f"[{code_id}] Article {art_num}:"
 
 
 def pass2_granular(case: dict, candidates: list, article_index: dict) -> list:
@@ -276,7 +322,7 @@ def pass2_granular(case: dict, candidates: list, article_index: dict) -> list:
         if not entry:
             continue
         article_blocks.append(
-            f"[{code_id}] Article {art_num}:\n{entry['content'][:800]}"
+            f"{_candidate_heading(code_id, art_num)}\n{entry['content'][:800]}"
         )
 
     if not article_blocks:
@@ -307,7 +353,7 @@ For EACH candidate provision above:
 3. Write a concise one-to-two sentence summary of the holding regarding that provision.
 
 RULES:
-- "article" = just the number, no "Article" prefix.
+- "article" = bare number/string as in the candidate heading (no 'Article' / 'Section' prefix).
 - "paragraph_index" = integer (-1 for general).
 
 OUTPUT (JSON only):
@@ -391,8 +437,9 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 
     if dry_run:
         for lk in final_links:
+            prov = "Sec." if lk["code_id"] == "RCC" else "Art."
             print(
-                f"   [DRY] {lk['code_id']} Art.{lk['provision_id']} "
+                f"   [DRY] {lk['code_id']} {prov}{lk['provision_id']} "
                 f"¶{lk['paragraph_index']}: {lk['summary'][:60]}..."
             )
         return len(final_links)
@@ -444,16 +491,20 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, statutes=None):
     print("\n" + "=" * 70)
     print(f"  Unified 2-Pass RAG Linker   Mode: {'DRY RUN' if dry_run else 'COMMIT'}")
+    print(f"  Vertex model: {MODEL_NAME}")
 
-    # Filter CODE_CONFIGS if statutes are provided
     global CODE_CONFIGS
     if statutes:
-        filtered_configs = {cid: CODE_CONFIGS[cid] for cid in statutes if cid in CODE_CONFIGS}
+        filtered_configs = {
+            cid: FULL_CODE_CONFIGS[cid] for cid in statutes if cid in FULL_CODE_CONFIGS
+        }
         if not filtered_configs:
             print(f"❌ Error: None of the provided statutes {statutes} are configured.")
             return
         CODE_CONFIGS = filtered_configs
-        print(f"[*] Targeting statutes: {', '.join(CODE_CONFIGS.keys())}")
+    else:
+        CODE_CONFIGS = {k: FULL_CODE_CONFIGS[k] for k in DEFAULT_LINKER_STATUTES}
+    print(f"[*] Statutes: {', '.join(CODE_CONFIGS.keys())}")
     
     range_str = "ALL"
     if start_year and end_year:
@@ -564,7 +615,14 @@ if __name__ == "__main__":
     parser.add_argument("--end_year", type=int, help="Filter by end year")
     parser.add_argument("--workers", type=int, default=1, help="Parallel workers")
     parser.add_argument("--commit", action="store_true", help="Write to DB (default: dry-run)")
-    parser.add_argument("--statutes", type=str, help="Comma-separated code IDs (e.g. CIV,LAB)")
+    parser.add_argument(
+        "--statutes",
+        type=str,
+        help=(
+            "Comma-separated code IDs (default: RPC,RCC). "
+            "e.g. CIV,LAB,CONST,FAM,RPC,RCC"
+        ),
+    )
     args = parser.parse_args()
 
     try:
@@ -575,7 +633,11 @@ if __name__ == "__main__":
             start_year = args.year
             end_year = args.year
 
-        statutes = args.statutes.split(",") if args.statutes else None
+        statutes = (
+            [s.strip() for s in args.statutes.split(",") if s.strip()]
+            if args.statutes
+            else None
+        )
 
         run(
             limit=args.limit,

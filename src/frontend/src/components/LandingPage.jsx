@@ -84,7 +84,7 @@ const LandingPage = ({ onEnterApp }) => {
                         aria-hidden
                     />
                     <div
-                        className={`${LG_HERO} relative flex w-full min-w-0 max-w-full flex-col gap-3 px-3 py-3 max-lg:flex-row max-lg:items-stretch max-lg:gap-2.5 sm:max-lg:gap-3 sm:px-4 sm:py-4 lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6 xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] xl:gap-6 xl:px-7 xl:py-7`}
+                        className={`${LG_HERO} relative flex w-full min-w-0 max-w-full flex-col gap-3 px-3 py-3 max-lg:flex-col max-lg:items-center max-lg:gap-4 sm:max-lg:gap-4 sm:px-4 sm:py-4 lg:grid lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-center lg:gap-5 lg:px-6 lg:py-6 xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] xl:gap-6 xl:px-7 xl:py-7`}
                     >
                         <div
                             className="pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit]"
@@ -94,7 +94,7 @@ const LandingPage = ({ onEnterApp }) => {
                             <div className="absolute -bottom-1/4 -right-1/4 h-[70%] w-[65%] rounded-full bg-gradient-to-tl from-amber-200/45 via-fuchsia-200/22 to-transparent opacity-55 blur-2xl dark:from-amber-400/14 dark:via-fuchsia-500/10 dark:to-transparent dark:opacity-85" />
                             <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/90 to-transparent dark:via-white/25" />
                         </div>
-                        <div className="relative z-10 min-w-0 flex-1 max-lg:min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
+                        <div className="relative z-10 min-w-0 w-full max-lg:flex-1 max-lg:min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
                             <h1 className="font-display text-xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white max-lg:leading-snug sm:max-lg:text-2xl lg:text-[1.55rem] lg:leading-snug xl:text-2xl 2xl:text-3xl">
                                 Master the Bar
                                 <span className="mt-1 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200 sm:mt-1.5 lg:mt-1">
