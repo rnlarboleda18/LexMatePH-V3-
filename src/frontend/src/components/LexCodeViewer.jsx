@@ -1226,7 +1226,8 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         type="button"
                         onClick={() => setIsSidebarOpen(true)}
                         /* z-[38]: above codal filter chrome (z-[30]), below Layout nav aside (z-40) */
-                        className="fixed z-[38] flex h-12 w-12 touch-manipulation items-center justify-center rounded-xl border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-[0_8px_28px_rgba(109,40,217,0.45)] ring-2 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
+                        /* Match Layout header logo: h-8 max-sm, h-10 sm–lg, h-12 lg+ (see Layout.jsx brand tile) */
+                        className="fixed z-[38] flex h-8 w-8 touch-manipulation items-center justify-center rounded-lg border border-violet-400/80 bg-gradient-to-br from-violet-600 via-purple-600 to-fuchsia-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-white/30 transition-transform hover:scale-[1.04] active:scale-95 sm:h-10 sm:w-10 sm:rounded-xl sm:shadow-lg sm:ring-2 lg:h-12 lg:w-12 lg:shadow-[0_8px_28px_rgba(109,40,217,0.45)] dark:border-zinc-600 dark:from-zinc-700 dark:via-zinc-800 dark:to-zinc-900 dark:ring-zinc-950/50"
                         style={{
                             left: tocFabPos.left,
                             top: `calc(${tocFabPos.top}px + var(--lex-tile-gap))`,
@@ -1234,7 +1235,11 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                         title="Table of contents"
                         aria-label="Open table of contents"
                     >
-                        <ListTree className="h-6 w-6" strokeWidth={2.25} aria-hidden />
+                        <ListTree
+                            className="h-[0.9375rem] w-[0.9375rem] sm:h-5 sm:w-5 lg:h-6 lg:w-6"
+                            strokeWidth={2.25}
+                            aria-hidden
+                        />
                     </button>,
                     document.body
                 )}

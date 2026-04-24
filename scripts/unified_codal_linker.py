@@ -29,10 +29,25 @@ Default statutes are RPC and RCC only. Use ``--statutes`` to add or replace the 
 
 import os
 import re
+import sys
 import json
 import time
 import argparse
 import psycopg2
+
+
+def _configure_stdio_utf8() -> None:
+    """Windows consoles often use cp1252; avoid UnicodeEncodeError on status output."""
+    for stream in (sys.stdout, sys.stderr):
+        if stream is None or not hasattr(stream, "reconfigure"):
+            continue
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (OSError, ValueError, AttributeError):
+            pass
+
+
+_configure_stdio_utf8()
 from psycopg2.extras import RealDictCursor
 from psycopg2.pool import ThreadedConnectionPool
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -282,7 +297,7 @@ OUTPUT FORMAT (JSON only):
         data = json.loads(response.text)
         return data.get("hits", []) if isinstance(data, dict) else []
     except Exception as exc:
-        print(f"    ⚠️  PASS-1 error: {exc}")
+        print(f"    [WARN] PASS-1 error: {exc}", flush=True)
         return []
 
 
@@ -377,7 +392,7 @@ OUTPUT (JSON only):
         data = json.loads(response.text)
         return data.get("links", []) if isinstance(data, dict) else []
     except Exception as exc:
-        print(f"    ⚠️  PASS-2 error: {exc}")
+        print(f"    [WARN] PASS-2 error: {exc}", flush=True)
         return []
 
 
@@ -479,12 +494,10 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
             )
         conn.commit()
         cur.close()
-        print(
-            f"   💾 {len(final_links)} links → {title}"
-        )
+        print(f"   [saved] {len(final_links)} links -> {title}", flush=True)
     except Exception as exc:
         conn.rollback()
-        print(f"   ❌ DB error for {title}: {exc}")
+        print(f"   [ERR] DB error for {title}: {exc}", flush=True)
     finally:
         release(conn)
 
@@ -508,7 +521,7 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
             cid: FULL_CODE_CONFIGS[cid] for cid in statutes if cid in FULL_CODE_CONFIGS
         }
         if not filtered_configs:
-            print(f"❌ Error: None of the provided statutes {statutes} are configured.")
+            print(f"[ERR] None of the provided statutes {statutes} are configured.")
             return
         CODE_CONFIGS = filtered_configs
     else:
@@ -584,10 +597,10 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
     release(conn)
 
     if not cases:
-        print("✅ No pending cases found.")
+        print("[ok] No pending cases found.")
         return
 
-    print(f"🔍 {len(cases)} cases to analyse\n" + "=" * 70)
+    print(f"[*] {len(cases)} cases to analyse\n" + "=" * 70, flush=True)
 
     total_links = 0
     t0 = time.time()
@@ -599,10 +612,13 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
                 c = futs[fut]
                 n = fut.result()
                 total_links += n
-                print(f"  [{i}/{len(cases)}] {c['short_title'][:45]} → {n} links")
+                print(
+                    f"  [{i}/{len(cases)}] {c['short_title'][:45]} -> {n} links",
+                    flush=True,
+                )
     else:
         for i, case in enumerate(cases, 1):
-            print(f"[{i}/{len(cases)}] {case['short_title'][:55]}")
+            print(f"[{i}/{len(cases)}] {case['short_title'][:55]}", flush=True)
             total_links += process_case(case, article_index, dry_run)
 
     elapsed = time.time() - t0
@@ -658,7 +674,7 @@ if __name__ == "__main__":
             statutes=statutes,
         )
     except KeyboardInterrupt:
-        print("\n🛑 Interrupted.")
+        print("\n[stopped] Interrupted.")
     finally:
         if db_pool:
             db_pool.closeall()
