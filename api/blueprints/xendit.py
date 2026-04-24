@@ -150,7 +150,7 @@ def _get_or_create_xendit_customer(clerk_id: str, email: str) -> str:
         "client_reference": client_ref,
         "type": "INDIVIDUAL",
         "individual_detail": {
-            "given_names": first_name,
+            "given_name": first_name,
             "surname": last_name,
         },
         "email": email,
