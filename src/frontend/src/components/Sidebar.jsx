@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book } from 'lucide-react';
+import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, FileText } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import { SIDEBAR_NAV_ACTIVE, SIDEBAR_NAV_IDLE, SIDEBAR_MOBILE_AUTH_CARD } from '../utils/filterChromeClasses';
@@ -20,7 +20,18 @@ const TIER_BG = {
     admin: 'bg-rose-50/90 border-2 border-rose-200 dark:border-zinc-600 dark:bg-zinc-900/75 dark:backdrop-blur-md',
 };
 
-const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupremeDecisions, onToggleLexCode, mode, onToggleLexPlay, onToggleFlashcard, onSelectSubject }) => {
+const Sidebar = ({
+  onToggleQuiz,
+  onToggleAbout,
+  onToggleLegal,
+  onToggleUpdates,
+  onToggleSupremeDecisions,
+  onToggleLexCode,
+  mode,
+  onToggleLexPlay,
+  onToggleFlashcard,
+  onSelectSubject,
+}) => {
     const { tier, tierLabel, openUpgradeModal, isAdmin, loading } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
 
@@ -126,6 +137,23 @@ const Sidebar = ({ onToggleQuiz, onToggleAbout, onToggleUpdates, onToggleSupreme
             >
                 <Info size={20} className={`${mode === 'about' ? 'text-sky-700 dark:text-sky-400' : 'text-sky-600 dark:text-sky-400'} group-hover:scale-110 transition-all duration-200`} />
                 About
+            </button>
+
+            <button
+                type="button"
+                onClick={() => {
+                    if (onToggleLegal) onToggleLegal();
+                }}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                ${mode === 'legal' ? SIDEBAR_NAV_ACTIVE : SIDEBAR_NAV_IDLE}`}
+            >
+                <FileText
+                    size={20}
+                    className={`${
+                        mode === 'legal' ? 'text-slate-800 dark:text-slate-200' : 'text-slate-600 dark:text-slate-400'
+                    } group-hover:scale-110 transition-all duration-200`}
+                />
+                Legal
             </button>
 
             {/* Updates Button */}

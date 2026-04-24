@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useUser, useAuth } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, Search } from 'lucide-react';
 import Fuse from 'fuse.js';
@@ -15,6 +15,7 @@ import LandingPage from './components/LandingPage';
 import FeaturePageShell from './components/FeaturePageShell';
 import PurpleGlassAmbient from './components/PurpleGlassAmbient';
 import CardVioletInnerWash from './components/CardVioletInnerWash';
+import PublicLayout from './components/PublicLayout';
 import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
@@ -32,6 +33,7 @@ import {
 } from './utils/filterChromeClasses';
 
 const About = lazy(() => import('./components/About'));
+const LegalPage = lazy(() => import('./components/LegalPage'));
 const Updates = lazy(() => import('./components/Updates'));
 const LexCodeViewer = lazy(() => import('./components/LexCodeViewer'));
 const LexifyApp = lazy(() => import('./features/lexify/LexifyApp'));
@@ -64,6 +66,7 @@ const MODE_TO_PATH = {
   flashcard: '/flashcards',
   quiz: '/lexify',
   about: '/about',
+  legal: '/legal',
   updates: '/updates',
   browse_bar: '/bar-questions',
   lexplay: '/lexplay',
@@ -152,6 +155,7 @@ function App() {
 
   // --- URL ↔ mode mapping ---
   const navigate = useNavigate();
+  const location = useLocation();
 
   // --- State ---
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -242,18 +246,11 @@ function App() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
-  // Sync URL → mode for browser back/forward navigation.
-  // popstate fires on history.back() / history.forward() but NOT on replaceState,
-  // so this handler only activates for genuine browser navigation gestures.
-  useEffect(() => {
-    const handlePopState = () => {
-      const m = PATH_TO_MODE[window.location.pathname];
-      if (m) setMode(m);
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  // Empty deps: listener is registered once; setMode is stable.
-  }, []);
+  // Sync URL → mode (e.g. <Link to="/legal">, client navigation, back/forward).
+  useLayoutEffect(() => {
+    const m = PATH_TO_MODE[location.pathname];
+    if (m) setMode(m);
+  }, [location.pathname]);
 
   // Persist bar-questions search term in the URL (?q=) so users can share / refresh.
   // Uses window.history.replaceState directly (no React Router) to avoid triggering
@@ -417,6 +414,10 @@ function App() {
     setMode('about');
   };
 
+  const handleToggleLegal = useCallback(() => {
+    setMode('legal');
+  }, []);
+
   const handleSelectSubject = (subject) => {
     setCurrentSubject(subject === 'All Subjects' ? null : subject);
     setSearchTerm(''); // Clear search when picking a subject
@@ -511,7 +512,27 @@ function App() {
     setMode('codex');
   }, []);
 
-  // --- Render ---
+  const isPublicDocumentMode = mode === 'legal' || mode === 'about';
+
+  // --- Public /legal and /about (no dashboard sidebar) ---
+  if (isPublicDocumentMode) {
+    return (
+      <PublicLayout isDarkMode={isDarkMode} toggleTheme={toggleTheme} onGoToApp={() => setMode('supreme_decisions')}>
+        {mode === 'legal' && (
+          <Suspense fallback={<PageLoadingFallback label="Loading legal information…" />}>
+            <LegalPage />
+          </Suspense>
+        )}
+        {mode === 'about' && (
+          <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
+            <About />
+          </Suspense>
+        )}
+      </PublicLayout>
+    );
+  }
+
+  // --- Main app (sidebar) ---
   return (
     <Layout
       isDarkMode={isDarkMode}
@@ -534,6 +555,7 @@ function App() {
           onToggleQuiz={handleToggleQuiz}
           onSelectSubject={handleSelectSubject}
           onToggleAbout={handleToggleAbout}
+          onToggleLegal={handleToggleLegal}
           onToggleUpdates={() => setMode('updates')}
           onToggleSupremeDecisions={() => setMode('supreme_decisions')}
           onToggleFlashcard={handleToggleFlashcard}
@@ -615,11 +637,6 @@ function App() {
                     <div className="relative z-30">
                       <LandingPage onEnterApp={handleEnterFromLanding} />
                     </div>
-                  )}
-                  {effectiveMode === 'about' && (
-                    <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
-                      <About />
-                    </Suspense>
                   )}
                   {effectiveMode === 'updates' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
