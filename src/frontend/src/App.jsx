@@ -204,6 +204,15 @@ function App() {
     mq.addEventListener('change', on);
     return () => mq.removeEventListener('change', on);
   }, []);
+
+  useEffect(() => {
+    const r = document.getElementById('root');
+    if (!r) return;
+    if (mode === 'landing') r.classList.add('lexmate-landing-elevate');
+    else r.classList.remove('lexmate-landing-elevate');
+    return () => r.classList.remove('lexmate-landing-elevate');
+  }, [mode]);
+
   const barCloseSuggestionsTimerRef = useRef(null);
   const barFuseRef = useRef(null);
   const [barFuseReady, setBarFuseReady] = useState(false);
@@ -601,7 +610,7 @@ function App() {
                     </div>
                   )}
                   {effectiveMode === 'landing' && (
-                    <div className="relative z-10">
+                    <div className="relative z-30">
                       <LandingPage onEnterApp={handleEnterFromLanding} />
                     </div>
                   )}
@@ -971,7 +980,7 @@ function App() {
             isMinimized={true}
             isDarkMode={isDarkMode}
             belowHighZOverlays={!!(globalSelectedCase || selectedQuestion)}
-            lowerMiniBarOnMobile={mode === 'landing'}
+            isLanding={mode === 'landing'}
             onExpand={() => {
               setPreviousMode(mode);
               setMode('lexplay');

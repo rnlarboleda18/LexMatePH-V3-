@@ -6,7 +6,7 @@ PowerShell launchers for common tasks. From a terminal, `cd` to the repo root, t
 |------|-----|
 | **E-Library case digest pipeline** (fetch, MD named by case + date, DB, Gemini digest) | [`admin-tools/case-digest-pipeline/Run-ElibCaseDigestPipeline.ps1`](admin-tools/case-digest-pipeline/Run-ElibCaseDigestPipeline.ps1) |
 | Same (legacy filename) | [`admin-tools/case-digest-pipeline/run-elib-pipeline.ps1`](admin-tools/case-digest-pipeline/run-elib-pipeline.ps1) |
-| ROC linking batch (if you use it) | [`scripts/run_roc_linking_batch.ps1`](scripts/run_roc_linking_batch.ps1) |
+| **Codal ↔ case linking** (RPC/RCC, Vertex) | `cd scripts; python unified_codal_linker.py --year 2025 --workers 5 --commit` |
 
 ## E-Library pipeline examples (PowerShell)
 

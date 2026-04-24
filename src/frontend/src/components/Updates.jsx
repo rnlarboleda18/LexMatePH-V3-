@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   Twitter,
   Facebook,
@@ -58,16 +58,24 @@ const NEWS_LINKS = [
   },
 ];
 
-function buildFacebookPagePluginSrc() {
+/** Iframe `height` and the `height` query param to page.php must match or Meta’s embed crops. */
+const FB_PAGE_PLUGIN_HEIGHT = 640;
+
+/**
+ * Facebook Page plugin: width 180–500px. A fixed 500 in a ~360px column can clip the header on
+ * the right, so we pass the measured host width. `hide_cover` avoids the cover band in the frame.
+ */
+function buildFacebookPagePluginSrc(widthPx) {
+  const w = Math.max(200, Math.min(500, Math.round(widthPx || 400)));
   const base = 'https://www.facebook.com/plugins/page.php';
   const params = new URLSearchParams({
     href: 'https://www.facebook.com/SupremeCourtPhilippines',
     tabs: 'timeline',
-    width: '500',
-    height: '600',
-    small_header: 'true',
+    width: String(w),
+    height: String(FB_PAGE_PLUGIN_HEIGHT),
+    small_header: 'false',
     adapt_container_width: 'true',
-    hide_cover: 'false',
+    hide_cover: 'true',
     show_facepile: 'false',
   });
   const appId = import.meta.env.VITE_FACEBOOK_APP_ID;
@@ -120,10 +128,53 @@ const Updates = ({ isDarkMode = false }) => {
   const [feedLoading, setFeedLoading] = useState(true);
   const [feedError, setFeedError] = useState(null);
   const [feedFilter, setFeedFilter] = useState('all');
+  const [fbPluginWidth, setFbPluginWidth] = useState(400);
+  const [twitterPanelWidth, setTwitterPanelWidth] = useState(400);
+  const fbPluginHostRef = useRef(null);
 
-  const fbIframeSrc = useMemo(() => buildFacebookPagePluginSrc(), []);
+  const fbIframeSrc = useMemo(() => buildFacebookPagePluginSrc(fbPluginWidth), [fbPluginWidth]);
   const twitterTimelineRef = useRef(null);
-  useTwitterTimeline(twitterTimelineRef, [isDarkMode]);
+  useTwitterTimeline(twitterTimelineRef, [isDarkMode, twitterPanelWidth]);
+
+  useLayoutEffect(() => {
+    const el = twitterTimelineRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const apply = (wRaw) => {
+      const px = Math.floor(wRaw);
+      if (px < 1) return;
+      setTwitterPanelWidth((prev) => {
+        const next = Math.max(180, Math.min(520, px));
+        return prev === next ? prev : next;
+      });
+    };
+    apply(el.getBoundingClientRect().width);
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect?.width;
+      if (w != null) apply(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const el = fbPluginHostRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const setFromWidth = (wRaw) => {
+      const w = Math.floor(wRaw);
+      if (w < 1) return;
+      setFbPluginWidth((prev) => {
+        const next = Math.max(200, Math.min(500, w));
+        return prev === next ? prev : next;
+      });
+    };
+    setFromWidth(el.getBoundingClientRect().width);
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect?.width;
+      if (w != null) setFromWidth(w);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -196,7 +247,7 @@ const Updates = ({ isDarkMode = false }) => {
 
         <div className="relative mx-auto max-w-6xl space-y-5">
           {/* Hero */}
-          <header className="relative overflow-hidden rounded-lg border border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
+          <header className="relative overflow-hidden rounded-lg border-2 border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
             <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/30 to-fuchsia-500/20 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
             <div className="relative flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
@@ -215,7 +266,7 @@ const Updates = ({ isDarkMode = false }) => {
                 href="https://sc.judiciary.gov.ph/feed/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border border-lex bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-md transition hover:border-lex-strong hover:bg-neutral-50 dark:border-lex dark:bg-zinc-800/90 dark:text-white dark:hover:bg-zinc-800"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl border-2 border-lex bg-white px-5 py-3 text-sm font-bold text-slate-800 shadow-md transition hover:border-lex-strong hover:bg-neutral-50 dark:border-lex dark:bg-zinc-800/90 dark:text-white dark:hover:bg-zinc-800"
               >
                 <Rss className="h-4 w-4 text-indigo-500" />
                 RSS source
@@ -224,10 +275,10 @@ const Updates = ({ isDarkMode = false }) => {
             </div>
           </header>
 
-          <div className="grid grid-cols-1 gap-tile lg:grid-cols-12">
+          <div className="grid min-w-0 grid-cols-1 gap-tile lg:grid-cols-12">
             {/* Main column — unified feed */}
-            <div className="space-y-4 lg:col-span-7">
-              <section className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
+            <div className="min-w-0 space-y-4 lg:col-span-7">
+              <section className="relative overflow-hidden rounded-lg border-2 border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
                 <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-600 text-white shadow-lg shadow-indigo-500/35">
@@ -242,7 +293,7 @@ const Updates = ({ isDarkMode = false }) => {
                       </p>
                     </div>
                   </div>
-                  <div className="flex flex-wrap gap-2 rounded-2xl border border-lex bg-neutral-50 p-1 dark:border-lex dark:bg-zinc-800/80">
+                  <div className="flex flex-wrap gap-2 rounded-2xl border-2 border-lex bg-neutral-50 p-1 dark:border-lex dark:bg-zinc-800/80">
                     {FILTER_TABS.map((tab) => (
                       <button
                         key={tab.id}
@@ -261,7 +312,7 @@ const Updates = ({ isDarkMode = false }) => {
                 </div>
 
                 {/* Pinned Bar 2026 — curated, not RSS */}
-                <div className="mb-4 rounded-2xl border border-lex bg-gradient-to-r from-amber-500/10 via-white to-transparent p-4 dark:border-lex dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-900">
+                <div className="mb-4 rounded-2xl border-2 border-lex bg-gradient-to-r from-amber-500/10 via-white to-transparent p-4 dark:border-lex dark:from-amber-500/10 dark:via-zinc-900 dark:to-zinc-900">
                   <div className="mb-2 flex items-center gap-2 text-amber-900 dark:text-amber-200/90">
                     <Bookmark className="h-4 w-4 shrink-0" />
                     <span className="text-[11px] font-black uppercase tracking-widest">Bar 2026 · pinned</span>
@@ -273,7 +324,7 @@ const Updates = ({ isDarkMode = false }) => {
                         href={u.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`min-w-[200px] max-w-[260px] shrink-0 rounded-xl border border-lex bg-white p-3 text-left shadow-sm dark:border-lex dark:bg-zinc-800/90 ${CHROME_INTERACTIVE_TILE_HOVER}`}
+                        className={`min-w-[200px] max-w-[260px] shrink-0 rounded-xl border-2 border-lex bg-white p-3 text-left shadow-sm dark:border-lex dark:bg-zinc-800/90 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                       >
                         <p className="text-[10px] font-bold uppercase tracking-wide text-slate-400">{u.date}</p>
                         <p className="mt-1 line-clamp-2 text-xs font-bold text-slate-900 dark:text-white">{u.title}</p>
@@ -290,12 +341,12 @@ const Updates = ({ isDarkMode = false }) => {
                     {[1, 2, 3, 4, 5].map((i) => (
                       <div
                         key={i}
-                        className="h-24 animate-pulse rounded-2xl border border-lex bg-neutral-100 dark:border-lex dark:bg-zinc-800/60"
+                        className="h-24 animate-pulse rounded-2xl border-2 border-lex bg-neutral-100 dark:border-lex dark:bg-zinc-800/60"
                       />
                     ))}
                   </div>
                 ) : feedError && unifiedFeed.length === 0 ? (
-                  <div className="rounded-2xl border border-lex bg-white p-8 text-center dark:border-lex dark:bg-zinc-900">
+                  <div className="rounded-2xl border-2 border-lex bg-white p-8 text-center dark:border-lex dark:bg-zinc-900">
                     <p className="font-semibold text-slate-800 dark:text-slate-200">Could not load the live feed.</p>
                     <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">Try the portal directly.</p>
                     <a
@@ -312,7 +363,7 @@ const Updates = ({ isDarkMode = false }) => {
                     No items in this filter.
                   </p>
                 ) : (
-                  <ul className="relative space-y-2 border-l border-lex pl-6 dark:border-lex">
+                  <ul className="relative space-y-2 border-l-2 border-lex pl-6 dark:border-lex">
                     {visibleFeed.map((item, idx) => (
                       <li key={`${item.link}-${idx}`} className="relative">
                         <span className="absolute -left-[1.35rem] top-5 h-2.5 w-2.5 rounded-full border-2 border-lex bg-indigo-500 shadow dark:border-lex dark:bg-indigo-400" />
@@ -320,7 +371,7 @@ const Updates = ({ isDarkMode = false }) => {
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`group block overflow-hidden rounded-2xl border border-lex bg-white p-4 shadow-sm dark:border-lex dark:bg-zinc-800/80 sm:p-5 ${CHROME_INTERACTIVE_TILE_HOVER} ${CHROME_INTERACTIVE_TILE_HOVER_BG} dark:hover:bg-zinc-800`}
+                          className={`group block overflow-hidden rounded-2xl border-2 border-lex bg-white p-4 shadow-sm dark:border-lex dark:bg-zinc-800/80 sm:p-5 ${CHROME_INTERACTIVE_TILE_HOVER} ${CHROME_INTERACTIVE_TILE_HOVER_BG} dark:hover:bg-zinc-800`}
                         >
                           <div className="mb-2 flex flex-wrap items-center gap-2">
                             {item._barHighlight ? (
@@ -359,8 +410,8 @@ const Updates = ({ isDarkMode = false }) => {
             </div>
 
             {/* Rail */}
-            <aside className="space-y-3 lg:col-span-5">
-              <div className="relative overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
+            <aside className="min-w-0 space-y-3 lg:col-span-5">
+              <div className="relative overflow-hidden rounded-lg border-2 border-lex bg-white p-6 shadow-xl dark:border-lex dark:bg-zinc-900 sm:p-8">
                 <div className="mb-3 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
                     <Gavel className="h-5 w-5" />
@@ -385,7 +436,7 @@ const Updates = ({ isDarkMode = false }) => {
                         href={officialScDecisionUrl(decision)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`block rounded-2xl border border-lex bg-white p-4 dark:border-lex dark:bg-zinc-800/90 ${CHROME_INTERACTIVE_TILE_HOVER} ${CHROME_INTERACTIVE_TILE_HOVER_BG} dark:hover:bg-zinc-800`}
+                        className={`block rounded-2xl border-2 border-lex bg-white p-4 dark:border-lex dark:bg-zinc-800/90 ${CHROME_INTERACTIVE_TILE_HOVER} ${CHROME_INTERACTIVE_TILE_HOVER_BG} dark:hover:bg-zinc-800`}
                       >
                         <div className="mb-2 flex flex-wrap gap-2">
                           <span className="rounded-full bg-indigo-600 px-2 py-0.5 text-[10px] font-black uppercase tracking-wider text-white">
@@ -423,9 +474,9 @@ const Updates = ({ isDarkMode = false }) => {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`group flex items-center gap-3 rounded-2xl border border-lex bg-gradient-to-br p-4 shadow-md dark:border-lex ${item.accent} dark:from-zinc-800/80 dark:to-transparent ${CHROME_INTERACTIVE_TILE_HOVER}`}
+                      className={`group flex items-center gap-3 rounded-2xl border-2 border-lex bg-gradient-to-br p-4 shadow-md dark:border-lex ${item.accent} dark:from-zinc-800/80 dark:to-transparent ${CHROME_INTERACTIVE_TILE_HOVER}`}
                     >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-lex bg-white dark:border-lex dark:bg-zinc-800/80">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 border-lex bg-white dark:border-lex dark:bg-zinc-800/80">
                         <Icon className="h-5 w-5" />
                       </div>
                       <div className="min-w-0 text-left">
@@ -438,8 +489,8 @@ const Updates = ({ isDarkMode = false }) => {
                 })}
               </div>
 
-              <div className="overflow-hidden rounded-lg border border-lex bg-white shadow-xl dark:border-lex dark:bg-zinc-900">
-                <div className="border-b border-lex bg-gradient-to-br from-slate-900 to-slate-800 px-6 py-6 text-white dark:border-lex dark:from-slate-950 dark:to-black">
+              <div className="min-w-0 overflow-hidden rounded-lg border-2 border-lex bg-white shadow-xl dark:border-lex dark:bg-zinc-900">
+                <div className="min-w-0 border-b-2 border-lex bg-gradient-to-br from-slate-900 to-slate-800 px-4 py-5 text-white sm:px-5 sm:py-6 dark:border-lex dark:from-slate-950 dark:to-black">
                   <div className="mb-2 flex items-center gap-2">
                     <Twitter className="h-5 w-5 text-sky-400" />
                     <h3 className="text-base font-bold">Social</h3>
@@ -464,45 +515,50 @@ const Updates = ({ isDarkMode = false }) => {
                     </a>
                   </div>
                 </div>
-                <div className="space-y-2 bg-slate-50/80 p-4 dark:bg-slate-950/50">
+                <div className="min-w-0 space-y-2 bg-slate-50/80 p-2 sm:p-3 dark:bg-slate-950/50">
                   <div
                     ref={twitterTimelineRef}
                     role="region"
                     aria-label="Supreme Court PIO posts on X"
-                    className="min-h-[420px] w-full overflow-hidden rounded-2xl border border-lex bg-white dark:border-lex dark:bg-black"
+                    className="min-h-[420px] w-full min-w-0 max-w-full overflow-x-auto overflow-y-hidden rounded-2xl border-2 border-lex bg-white dark:border-lex dark:bg-black"
                   >
                     <a
+                      key={`${twitterPanelWidth}-${isDarkMode ? 'd' : 'l'}`}
                       className="twitter-timeline"
-                      data-width="100%"
+                      data-width={String(twitterPanelWidth)}
                       data-height="580"
                       data-theme={isDarkMode ? 'dark' : 'light'}
-                      data-chrome="noheader nofooter noborders transparent"
-                      href="https://twitter.com/SCPh_PIO"
+                      data-lang="en"
+                      href="https://twitter.com/SCPh_PIO?ref_src=twsrc%5Etfw"
                     >
                       Posts by @SCPh_PIO
                     </a>
                   </div>
-                  <iframe
-                    title="Supreme Court of the Philippines on Facebook"
-                    src={fbIframeSrc}
-                    width="100%"
-                    height="480"
-                    style={{ border: 'none', overflow: 'hidden' }}
-                    scrolling="no"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    className="rounded-2xl border border-lex bg-white dark:border-lex dark:bg-slate-900"
-                  />
+                  <div
+                    ref={fbPluginHostRef}
+                    className="w-full min-w-0 max-w-full overflow-hidden rounded-lg border border-lex bg-white dark:border-lex dark:bg-zinc-900"
+                  >
+                    <iframe
+                      key={fbIframeSrc}
+                      title="Supreme Court of the Philippines on Facebook"
+                      src={fbIframeSrc}
+                      width="100%"
+                      height={FB_PAGE_PLUGIN_HEIGHT}
+                      frameBorder="0"
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                      className="block w-full min-w-0 max-w-full border-0 align-top bg-white dark:bg-zinc-900"
+                    />
+                  </div>
                   <p className="text-center text-[10px] text-slate-500 dark:text-slate-500">
                     Facebook blank? Set repo secret <code className="text-indigo-600 dark:text-indigo-400">VITE_FACEBOOK_APP_ID</code> and allow your domain in Meta.
                   </p>
                 </div>
               </div>
 
-              <div className="relative overflow-hidden rounded-lg border border-amber-400/30 bg-gradient-to-br from-amber-500 via-amber-400 to-orange-500 p-6 text-white shadow-2xl">
+              <div className="relative overflow-hidden rounded-lg border-2 border-amber-400/30 bg-gradient-to-br from-amber-500 via-amber-400 to-orange-500 p-6 text-white shadow-2xl">
                 <div className="pointer-events-none absolute -right-8 -top-8 opacity-25">
                   <Zap className="h-24 w-24 rotate-12" />
                 </div>

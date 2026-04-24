@@ -13,4 +13,4 @@ For detailed architecture and ingestion guides, please refer to the **[Codex Ing
 *   **`pipelines/`**: Contains the "Triple Pipeline" scripts for ingesting various legal codes (RPC, Civil Code, etc.).
 *   **`data/`**: Stores raw and interim data files.
 
-*Note: The AI RPC linking logic is in `LexCode/linker/universal_rpc_linker.py`.*
+*Note: AI codal ↔ case linking lives in `scripts/unified_codal_linker.py` (RPC, RCC, and optional codes via `--statutes`).*

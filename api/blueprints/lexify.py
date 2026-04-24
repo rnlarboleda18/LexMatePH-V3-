@@ -115,8 +115,7 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
         user_content = "\n\n".join(user_content_parts)
 
         try:
-            # Use Vertex AI for grading
-            # The ai_client automatically uses GOOGLE_API_KEY and follows Vertex AI protocol
+            # Vertex AI only (ADC / service account). See utils/ai_client.py.
             parsed_json = call_vertex_ai_json(
                 prompt=user_content,
                 system_instruction=GRADING_SYSTEM_PROMPT,

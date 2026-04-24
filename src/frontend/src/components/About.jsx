@@ -136,14 +136,14 @@ const About = () => {
             <div className="flex min-h-0 flex-col lg:col-span-7 lg:h-full">
               <section className="relative flex h-full min-h-0 flex-col overflow-hidden rounded-lg border border-lex bg-white p-6 shadow-xl sm:p-8 dark:border-lex dark:bg-zinc-900">
                 <div className="pointer-events-none absolute right-0 top-0 h-32 w-32 rounded-full bg-purple-500/10 blur-2xl" />
-                <h2 className="relative text-lg font-bold text-black dark:text-white sm:text-xl">
+                <h2 className="relative shrink-0 text-lg font-bold text-black dark:text-white sm:text-xl">
                   What you are using
                 </h2>
-                <p className="relative mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                <p className="relative mt-2 shrink-0 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                   LexMatePH is built for more than bar review alone. Explore codals, past bar questions, Supreme Court
                   materials, and study aids together without hopping between siloed sites.
                 </p>
-                <ul className="relative mt-3 space-y-1.5 text-sm text-slate-600 dark:text-slate-400">
+                <ul className="relative mt-3 shrink-0 space-y-1.5 text-sm text-slate-600 dark:text-slate-400">
                   <li className="flex gap-2.5 rounded-xl border border-lex bg-white p-3 shadow-sm dark:border-lex dark:bg-zinc-800/60">
                     <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-purple-600/15 text-purple-700 dark:text-purple-300">
                       <Book className="h-3.5 w-3.5" />
@@ -164,11 +164,15 @@ const About = () => {
                     </span>
                   </li>
                 </ul>
-                <div className="min-h-3 flex-1" aria-hidden />
-                <div className="relative mt-3 rounded-2xl border border-amber-200/40 bg-amber-50/50 p-4 text-xs leading-relaxed text-amber-950/90 backdrop-blur-sm dark:border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-100/90">
-                  <strong className="font-bold">Disclaimer:</strong> Content is for education and research, not legal
-                  advice. Verify critical points with primary sources, current jurisprudence, and applicable statutes.
-                  LexMatePH does not replace professional judgment or counsel.
+                <div className="relative mt-3 flex min-h-0 flex-1 flex-col justify-center overflow-auto rounded-2xl border border-amber-200/40 bg-amber-50/50 px-5 py-6 text-sm leading-relaxed text-amber-950/90 backdrop-blur-sm sm:px-6 sm:py-8 sm:text-base sm:leading-relaxed dark:border-amber-500/20 dark:bg-amber-950/20 dark:text-amber-100/90">
+                  <p className="max-w-none text-pretty">
+                    <strong className="text-base font-bold text-amber-950 sm:text-lg dark:text-amber-50">
+                      Disclaimer:
+                    </strong>{' '}
+                    Content is for education and research, not legal advice. Verify critical points with primary
+                    sources, current jurisprudence, and applicable statutes. LexMatePH does not replace professional
+                    judgment or counsel.
+                  </p>
                 </div>
               </section>
             </div>

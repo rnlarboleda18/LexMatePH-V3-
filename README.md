@@ -30,7 +30,7 @@ The project is organized into three main components:
 *   **Role**: The engine room for data ingestion and processing.
 *   **Key Pipelines**:
     *   **Ingestion**: Scrapes, parses, and structures raw legal text (`LexCode/pipelines/`).
-    *   **Linking**: `LexCode/linker/universal_rpc_linker.py` orchestrates the AI linking process.
+    *   **Linking**: `scripts/unified_codal_linker.py` orchestrates AI linking (codal provisions ↔ cases).
 
 ## 🛠️ Getting Started
 
@@ -60,5 +60,5 @@ For detailed instructions on adding new legal codes or managing the data pipelin
 ## 🧹 Maintenance
 
 The project structure is kept clean by concentrating active development logic in specific directories. 
-*   **Core Scripts**: Found in `LexCode/` (including `LexCode/linker/universal_rpc_linker.py`).
+*   **Core Scripts**: Found in `LexCode/` (pipelines) and `scripts/` (e.g. `unified_codal_linker.py`).
 *   **Cleanup**: Use `scripts/cleanup_clutter.py` (if available) or manual removal for temporary debug scripts.

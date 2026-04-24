@@ -481,8 +481,8 @@ const LexPlayer = ({
     onCloseMini,
     onCloseFull,
     isDarkMode = true,
-    /** Mobile only: stack mini bar below main app (e.g. marketing landing) so page chrome/CTAs stay tappable. */
-    lowerMiniBarOnMobile = false,
+    /** When true, dock LexPlay under in-app content (marketing landing) on all breakpoints; lg+ was z-[530] otherwise. */
+    isLanding = false,
     /** Full-screen modals (case digest, bar question) use z-[540]; keep mini bar under them so the dock does not “float” on top. */
     belowHighZOverlays = false,
 }) => {
@@ -810,11 +810,13 @@ const LexPlayer = ({
     }, [isMinimized]);
 
     if (isMinimized) {
-        /** Portaled to body. `lg+`: z-[530]. `max-lg`: z-[580] above App except landing (z-[25]) and when a z-[540] modal is open (z-[500]). Full LexPlayer stays z-[600]. */
-        const miniZMobile = lowerMiniBarOnMobile ? 'max-lg:z-[25]' : 'max-lg:z-[580]';
+        /** Portaled to body. Default: `lg+` z-[530], `max-lg` z-[580] (except below). `isLanding`: z-20 (below landing shell z-30). With modals: z-500. Full LexPlayer z-[600]. */
+        const miniZMobile = isLanding ? '' : 'max-lg:z-[580]';
         const miniZIndex = belowHighZOverlays
             ? 'z-[500]'
-            : `z-[530] ${miniZMobile}`;
+            : isLanding
+              ? 'z-20'
+              : `z-[530] ${miniZMobile}`.trim();
         const miniPlayer = (
             <div
                 ref={miniBarRef}
