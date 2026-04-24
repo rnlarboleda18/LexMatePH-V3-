@@ -181,6 +181,18 @@ export function SubscriptionProvider({ children }) {
   // Cleanup pending retry timers on unmount.
   useEffect(() => () => clearTimeout(retryTimerRef.current), []);
 
+  // After sign-up redirect: if ?subscribe=<plan_id> is in the URL, open the
+  // upgrade modal automatically so the user can complete their purchase.
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (!isLoaded || !userLoaded || !isSignedIn) return;
+    const params = new URLSearchParams(window.location.search);
+    if (!params.get('subscribe')) return;
+    // Clean URL immediately
+    window.history.replaceState({}, '', window.location.pathname + window.location.hash);
+    setShowUpgradeModal(true);
+  }, [isLoaded, userLoaded, isSignedIn]);
+
   // When Xendit redirects the user back after payment (success_return_url includes
   // ?xendit_payment=success), poll subscription-status until the tier is upgraded
   // (webhook may fire a few seconds after return) then clean up the URL.

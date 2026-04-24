@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Check, Zap, Star, Crown, Shield, Loader2 } from 'lucide-react';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useClerk } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 
 const PLANS = [
@@ -109,7 +109,8 @@ const MOBILE_SUBSCRIPTION_MQ = '(max-width: 767px)';
 
 export default function SubscriptionModal({ onClose }) {
   const { tier, refreshStatus } = useSubscription();
-  const { getToken } = useAuth();
+  const { getToken, isSignedIn } = useAuth();
+  const { redirectToSignUp } = useClerk();
   const [billing, setBilling] = useState('monthly');
   const [bypassMode, setBypassMode] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState(null);
@@ -138,6 +139,16 @@ export default function SubscriptionModal({ onClose }) {
 
   const handleSubscribe = async (plan) => {
     if (plan.id === 'free' || plan.id === tier) return;
+
+    // Unauthenticated user — redirect to sign-up with a return URL so they
+    // land back on the pricing page after registering.
+    if (!isSignedIn) {
+      redirectToSignUp({
+        redirectUrl: window.location.pathname + '?subscribe=' + plan.id,
+      });
+      return;
+    }
+
     setLoadingPlan(plan.id);
     setErrorMsg('');
     setSuccessPlan(null);
