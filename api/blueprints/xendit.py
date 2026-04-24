@@ -54,16 +54,18 @@ FREE_TIER_DAILY_LIMITS = {
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def _xendit_headers() -> dict:
+def _xendit_headers(api_version: str | None = None) -> dict:
     key = (os.environ.get("XENDIT_API_KEY") or "").strip()
     if not key:
         raise RuntimeError("XENDIT_API_KEY is not set")
     encoded = base64.b64encode(f"{key}:".encode()).decode()
-    return {
+    headers = {
         "Authorization": f"Basic {encoded}",
         "Content-Type": "application/json",
-        "api-version": "2022-07-31",
     }
+    if api_version:
+        headers["api-version"] = api_version
+    return headers
 
 
 def _get_db():
@@ -236,7 +238,7 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token
         "description": f"LexMatePH {cfg['label']} subscription",
     }
     # Recurring plans API requires api-version: 2026-01-01
-    recurring_headers = {**_xendit_headers(), "api-version": "2026-01-01"}
+    recurring_headers = _xendit_headers(api_version="2026-01-01")
     resp = requests.post(
         f"{XENDIT_BASE_URL}/recurring/plans",
         json=payload,
