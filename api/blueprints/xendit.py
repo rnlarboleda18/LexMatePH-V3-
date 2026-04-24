@@ -415,20 +415,23 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
 
         cfg = PLAN_CONFIGS[plan_key]
 
-        # Get user email from DB
+        # Get user email + name from DB
         with _get_db() as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT email FROM users WHERE clerk_id = %s", (clerk_id,))
+                cur.execute(
+                    "SELECT email, first_name, last_name FROM users WHERE clerk_id = %s",
+                    (clerk_id,),
+                )
                 row = cur.fetchone()
                 if not row:
                     return func.HttpResponse(
                         json.dumps({"error": "User not found in database"}),
                         mimetype="application/json", status_code=404,
                     )
-                email = row[0]
+                email, first_name, last_name = row
 
-        # Get/create Xendit customer
-        customer_id = _get_or_create_xendit_customer(clerk_id, email)
+        if not first_name:
+            first_name = email.split("@")[0].replace(".", " ").replace("_", " ").title() or "User"
 
         # Store pending plan key — the payment_token.activated webhook handler reads this
         with _get_db() as conn:
@@ -439,21 +442,29 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                 )
                 conn.commit()
 
-        # Create Xendit payment session:
-        # session_type=PAY with allow_save_payment_method=FORCED
-        # → charges first period AND saves payment method for future recurring cycles
+        # POST /sessions — the correct Xendit hosted-checkout endpoint.
+        # We pass an inline customer object (no separate customer creation needed).
+        # allow_save_payment_method=OPTIONAL saves the card for future recurring cycles.
         session_ref = f"lm-{clerk_id[:20]}-{int(time.time())}"
         payload = {
             "reference_id": session_ref,
-            "customer_id": customer_id,
             "session_type": "PAY",
-            "allow_save_payment_method": "FORCED",
+            "allow_save_payment_method": "OPTIONAL",
             "currency": "PHP",
             "amount": cfg["amount"],
             "mode": "PAYMENT_LINK",
             "country": "PH",
             "locale": "en",
             "description": f"LexMatePH — {cfg['label']}",
+            "customer": {
+                "reference_id": f"lexmate-{clerk_id}",
+                "type": "INDIVIDUAL",
+                "email": email,
+                "individual_detail": {
+                    "given_names": first_name,
+                    "surname": last_name or ".",
+                },
+            },
             "success_return_url": f"{FRONTEND_URL}/?xendit_payment=success&plan={plan_key}",
             "cancel_return_url": f"{FRONTEND_URL}/?xendit_payment=cancelled",
             "metadata": {
@@ -462,7 +473,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             },
         }
         resp = requests.post(
-            f"{XENDIT_BASE_URL}/payment_session",
+            f"{XENDIT_BASE_URL}/sessions",
             json=payload,
             headers=_xendit_headers(),
             timeout=20,
@@ -470,7 +481,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         resp_data = resp.json()
 
         if resp.status_code not in (200, 201):
-            logging.error(f"Xendit session creation failed: {resp_data}")
+            logging.error(f"Xendit session creation failed ({resp.status_code}): {resp_data}")
             return func.HttpResponse(
                 json.dumps({"error": "Failed to create checkout session", "detail": resp_data}),
                 mimetype="application/json", status_code=503,
@@ -480,7 +491,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         if not checkout_url:
             logging.error(f"Xendit session: no payment_link_url in response: {resp_data}")
             return func.HttpResponse(
-                json.dumps({"error": "No checkout URL returned by payment provider"}),
+                json.dumps({"error": "No checkout URL returned by payment provider", "detail": resp_data}),
                 mimetype="application/json", status_code=503,
             )
 
