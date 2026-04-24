@@ -122,27 +122,22 @@ def normalize_bar_subject_label(raw: Any) -> str:
     s = t.lower()
     if "civil service" in s or "civil-service" in s or re.search(r"\bcsc\b", s):
         return "Labor Law"
-    # Word-boundary style: avoid "penalties"→penal, "belabor"→labor (aligned with frontend subjectNormalize).
-    if re.search(r"\bcommercial\b", s) or re.search(r"\bmercantile\b", s):
+    if "civil" in s:
+        return "Civil Law"
+    if "commercial" in s or "mercantile" in s:
         return "Commercial Law"
-    if re.search(r"\bcriminal\b", s) or re.search(r"\bpenal\b", s):
+    if "criminal" in s or "penal" in s:
         return "Criminal Law"
-    if re.search(r"\blabor\b", s) or "social legislat" in s:
+    if "labor" in s or "social legislat" in s:
         return "Labor Law"
-    if re.search(r"\bethics\b", s) or "judicial ethics" in s:
+    if "ethics" in s or "judicial ethics" in s:
         return "Legal Ethics"
-    if re.search(r"\bpolitical\b", s) or re.search(r"\bconstitutional\b", s):
+    if "political" in s or "constitutional" in s:
         return "Political Law"
-    if re.search(r"\bremedial\b", s) or re.search(r"\bprocedure\b", s) or re.search(r"\brules of court\b", s):
+    if "remedial" in s or "procedure" in s:
         return "Remedial Law"
-    if "practical exercise" in s:
-        return "Remedial Law"
-    if "land title" in s:
-        return "Civil Law"
-    if "taxation" in s or re.search(r"\btax\b", s):
+    if "taxation" in s or "tax" in s:
         return "Taxation Law"
-    if re.search(r"\bcivil\b", s):
-        return "Civil Law"
     return t
 
 
