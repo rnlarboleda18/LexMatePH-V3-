@@ -123,6 +123,63 @@ WHERE clerk_id = '<clerk_id>';
 
 ---
 
-## 8. Who to contact
+## 8. Lexify AI grading (Vertex AI)
+
+Lexify mock-exam scoring calls Vertex only (`api/utils/ai_client.py`). It needs a **Google Cloud project**, **global** location for Gemini 3.1 Pro preview, and a **service account** that can call Vertex.
+
+### A. Google Cloud (one-time)
+
+1. Open [Google Cloud Console](https://console.cloud.google.com/) and select the **same project** as `GOOGLE_CLOUD_PROJECT` (e.g. billing enabled).
+2. Enable **Vertex AI API** for that project (APIs & Services → Enable APIs → “Vertex AI API”).
+3. **IAM & Admin → Service Accounts → Create service account** (any name, e.g. `lexify-vertex`).
+4. Grant the account a role that can use Vertex generative models, e.g. **Vertex AI User** (`roles/aiplatform.user`).
+5. **Keys → Add key → JSON** — download the file. **Do not commit it.** Rotate the key if it was ever committed or leaked.
+
+### B. Local development (file path)
+
+1. Save the JSON somewhere **outside the repo** (e.g. `C:\secrets\your-project-vertex-sa.json`).
+2. In `api/local.settings.json` under `Values`, set:
+   - `GOOGLE_APPLICATION_CREDENTIALS` = full path to that file (Windows: escaped backslashes or forward slashes are fine in JSON).
+   - `GOOGLE_CLOUD_PROJECT` = project id.
+   - `GOOGLE_CLOUD_LOCATION` = `global` (required for `gemini-3.1-pro-preview` on Vertex).
+   - `GEMINI_VERTEX_MODEL` = `gemini-3.1-pro-preview` (optional if code default matches).
+3. Restart **Azure Functions** locally (`func start` or your usual command). Do **not** set `GOOGLE_SERVICE_ACCOUNT_JSON` if you use the file path.
+
+### C. Production (Azure Static Web Apps API)
+
+The API is deployed with the Static Web App (`api/`). Configure **Application settings** in Azure:
+
+1. Azure Portal → your **Static Web App** → **Settings** → **Environment variables** (or linked **Function App** → **Configuration** → **Application settings**, depending on how your SWA shows the managed API).
+2. Add or confirm:
+   - `GOOGLE_CLOUD_PROJECT` — GCP project id.
+   - `GOOGLE_CLOUD_LOCATION` — `global`.
+   - `GEMINI_VERTEX_MODEL` — `gemini-3.1-pro-preview`.
+3. **Credentials — pick one:**
+   - **Recommended (no file on disk):** Add `GOOGLE_SERVICE_ACCOUNT_JSON` whose value is the **entire** service account JSON as a **single line** (minified). In Azure, paste the JSON into the value field; the portal stores it as a secret. The API reads this variable first.
+   - **Alternative:** If the host allows a mounted path, set `GOOGLE_APPLICATION_CREDENTIALS` to that path (less common on consumption/serverless).
+
+4. Save and wait for the app to restart. Test Lexify grading; on failure, check Function logs for Vertex or JSON parse errors.
+
+**Note:** Storing the full JSON in an app setting is normal for serverless; restrict portal access and prefer **Key Vault references** for production hardening if your subscription supports them.
+
+### D. Azure CLI (automated)
+
+**Warning:** A raw `PUT` to Static Web App `config/appsettings` **replaces** all settings. The repo script **merges** with existing keys so `DB_CONNECTION_STRING` is not wiped.
+
+From the repo root, after `az login` and `az account set --subscription …`:
+
+```powershell
+.\admin-tools\configure_lexify_vertex_azure.ps1 `
+  -ResourceGroup "YOUR_AZURE_RESOURCE_GROUP" `
+  -ServiceAccountJsonPath "C:\path\to\your-gcp-sa.json"
+```
+
+Optional: `-StaticWebAppName` if yours is not `swa-lexmateph-us`, `-GoogleCloudProject` if not the default in the script, `-DryRun` to print the `az rest` command only.
+
+List your Static Web Apps: `az staticwebapp list -o table`
+
+---
+
+## 9. Who to contact
 
 This is a solo / small-team project. For production incidents, the developer can be reached via the contact information in the repo or organization settings.

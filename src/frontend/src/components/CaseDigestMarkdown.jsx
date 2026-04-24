@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { normalizeFullTextMarkdownForGfm } from '../utils/fullTextMarkdown';
@@ -93,7 +93,50 @@ const SmartLinkWrapper = React.memo(({ children, onCaseClick }) => {
     return <>{children}</>;
 });
 
-function useMarkdownComponents(onCaseClick, includeTables) {
+/** Flatten React node children to plain string (for full-text SC caption heuristics). */
+function plainTextFromChildren(children) {
+    if (children == null) return '';
+    if (typeof children === 'string' || typeof children === 'number') return String(children);
+    if (Array.isArray(children)) return children.map(plainTextFromChildren).join('');
+    if (typeof children === 'object' && children !== null && 'props' in children) {
+        return plainTextFromChildren(children.props?.children);
+    }
+    return '';
+}
+
+/**
+ * After caption lines (first division, docket, party lines split across 2+ blocks, ### Decision)
+ * the next line is the ponente or the opening of the discussion — keep left. Up to
+ * `SC_CAPTION_MAX_BLOCKS` earlier blocks are centered unless this matches.
+ * (Seven lines = indices 0–6, e.g. division + docket + several party lines + ### Decision.)
+ */
+const SC_CAPTION_MAX_BLOCKS = 8;
+
+/** Title line for the disposition (often `### Decision` / `### Resolution` after the party caption). */
+function isScDecisionOrResolutionTitle(plain) {
+    const t = plain.replace(/\s+/g, ' ').trim();
+    return /^(Decision|Resolution)\s*$/i.test(t);
+}
+
+function isScPonenteOrBodyStartLine(plain) {
+    const t = plain.replace(/\s+/g, ' ').trim();
+    if (t.length < 4) return false;
+    if (/^Before the Court\b/i.test(t)) return true;
+    if (t.length > 500) return false;
+    // Sole justice / per curiam byline: e.g. "…, J.:" or "…, C.J.:" at end of the block
+    if (/,\s*(?:J\.J?\.|J\.|C\.J\.|A\.J\.)\s*:\s*$/i.test(t)) return true;
+    return false;
+}
+
+/**
+ * @param {object} [options]
+ * @param {boolean} [options.scFullTextCaption] – full text: center SC E-Lib caption (p + h1–h6)
+ * @param {React.MutableRefObject<number> | null} [options.pIdxRef] – block index; reset each render
+ * @param {React.MutableRefObject<boolean> | null} [options.scCaptionEndRef] – set true when ponente/“Before the Court” seen; all later lines stay left
+ */
+function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
+    const { scFullTextCaption = false, pIdxRef = null, scCaptionEndRef = null } = options;
+
     const onHashLinkClick = useCallback((e) => {
         const a = e.currentTarget;
         const href = a.getAttribute('href');
@@ -104,12 +147,62 @@ function useMarkdownComponents(onCaseClick, includeTables) {
     }, []);
 
     return useMemo(() => {
+        /**
+         * Full-text `prose text-justify` on the parent overrides `text-center` on children.
+         * Up to `SC_CAPTION_MAX_BLOCKS` top-level p / headings: center with `!text-center` + `not-prose`
+         * unless the line is ponente (…, J.:) or the opening "Before the Court…".
+         */
+        const getCaptionTextAlign = (children) => {
+            if (!pIdxRef || !scFullTextCaption) return 'text-left';
+            if (scCaptionEndRef?.current) {
+                pIdxRef.current += 1;
+                return 'text-left';
+            }
+            const plain = plainTextFromChildren(children);
+            const i = pIdxRef.current;
+            pIdxRef.current += 1;
+            if (isScPonenteOrBodyStartLine(plain)) {
+                if (scCaptionEndRef) scCaptionEndRef.current = true;
+                return 'text-left';
+            }
+            // Standalone "Decision" / "Resolution" stays centered even when past the general cap (7th+ line).
+            if (isScDecisionOrResolutionTitle(plain) && !scCaptionEndRef?.current) {
+                return 'not-prose !text-center';
+            }
+            if (i >= SC_CAPTION_MAX_BLOCKS) {
+                if (scCaptionEndRef) scCaptionEndRef.current = true;
+                return 'text-left';
+            }
+            return 'not-prose !text-center';
+        };
+
+        const H = (Tag, sizeClass) =>
+            function CenterAwareHeading({ children }) {
+                const a = getCaptionTextAlign(children);
+                return (
+                    <Tag
+                        className={`mb-2 font-bold text-gray-900 dark:text-gray-100 ${sizeClass} ${a}`}
+                    >
+                        <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
+                    </Tag>
+                );
+            };
+
         const base = {
-            p: ({ children }) => (
-                <div className="mb-4 text-gray-800 dark:text-gray-200 leading-relaxed text-left">
-                    <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
-                </div>
-            ),
+            p: ({ children }) => {
+                const a = getCaptionTextAlign(children);
+                return (
+                    <div className={`mb-4 text-gray-800 dark:text-gray-200 leading-relaxed max-w-none ${a}`}>
+                        <SmartLinkWrapper onCaseClick={onCaseClick}>{children}</SmartLinkWrapper>
+                    </div>
+                );
+            },
+            h1: H('h1', 'text-2xl'),
+            h2: H('h2', 'text-xl'),
+            h3: H('h3', 'text-lg'),
+            h4: H('h4', 'text-base'),
+            h5: H('h5', 'text-sm'),
+            h6: H('h6', 'text-sm'),
             strong: ({ children }) => <strong className="font-bold text-gray-900 dark:text-gray-100">{children}</strong>,
             ul: ({ children }) => <ul className="mb-4 list-disc pl-5 space-y-2 text-gray-800 dark:text-gray-200">{children}</ul>,
             li: ({ children }) => (
@@ -161,7 +254,7 @@ function useMarkdownComponents(onCaseClick, includeTables) {
                 </td>
             ),
         };
-    }, [onCaseClick, includeTables, onHashLinkClick]);
+    }, [onCaseClick, includeTables, onHashLinkClick, scFullTextCaption, pIdxRef, scCaptionEndRef]);
 }
 
 /** Digest sections (facts, issues, ruling, ratio) — no GFM tables. */
@@ -201,6 +294,9 @@ export const DigestMarkdownText = React.memo(({ content, onCaseClick, variant = 
 const PLAIN_TEXT_THRESHOLD = 80_000;
 
 export const CaseFullTextMarkdown = React.memo(({ content, onCaseClick }) => {
+    const fullTextPIdx = useRef(0);
+    const scCaptionEndRef = useRef(false);
+
     const processedContent = useMemo(() => {
         if (!content) return content;
         // Skip the normalization pipeline for very long content to avoid quadratic regex cost
@@ -208,7 +304,11 @@ export const CaseFullTextMarkdown = React.memo(({ content, onCaseClick }) => {
         return normalizeFullTextMarkdownForGfm(content);
     }, [content]);
 
-    const components = useMarkdownComponents(onCaseClick, true);
+    const components = useMarkdownComponents(onCaseClick, true, {
+        scFullTextCaption: true,
+        pIdxRef: fullTextPIdx,
+        scCaptionEndRef,
+    });
 
     if (!content) return null;
 
@@ -227,8 +327,11 @@ export const CaseFullTextMarkdown = React.memo(({ content, onCaseClick }) => {
         );
     }
 
+    // Reset before each full-text parse so SC caption heuristics restart.
+    fullTextPIdx.current = 0;
+    scCaptionEndRef.current = false;
     return (
-        <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-left text-sm">
+        <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm">
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
                 {processedContent}
             </ReactMarkdown>

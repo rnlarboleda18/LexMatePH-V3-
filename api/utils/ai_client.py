@@ -7,6 +7,7 @@ from typing import Any, Dict, List, Optional, Union
 import requests
 from google.auth import default as google_auth_default
 from google.auth.transport.requests import Request as GoogleAuthRequest
+from google.oauth2 import service_account
 
 # Lexify grading and other callers: override with GEMINI_VERTEX_MODEL. Gemini 3.1 Pro uses global Vertex.
 DEFAULT_MODEL = os.environ.get("GEMINI_VERTEX_MODEL") or "gemini-3.1-pro-preview"
@@ -14,6 +15,33 @@ DEFAULT_MODEL = os.environ.get("GEMINI_VERTEX_MODEL") or "gemini-3.1-pro-preview
 logger = logging.getLogger(__name__)
 
 _CLOUD_PLATFORM_SCOPE = ("https://www.googleapis.com/auth/cloud-platform",)
+
+
+def _get_google_credentials():
+    """
+    Credentials for Vertex (OAuth access token).
+
+    Prefer inline JSON for Azure/serverless (GOOGLE_SERVICE_ACCOUNT_JSON).
+    Otherwise use Application Default Credentials (GOOGLE_APPLICATION_CREDENTIALS
+    file path, gcloud user creds, etc.).
+    """
+    raw = (
+        os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
+        or os.environ.get("GOOGLE_CREDENTIALS_JSON")
+        or ""
+    ).strip()
+    if raw:
+        try:
+            info = json.loads(raw)
+        except json.JSONDecodeError as e:
+            raise ValueError(
+                "GOOGLE_SERVICE_ACCOUNT_JSON must be valid JSON (a Google service account key)."
+            ) from e
+        return service_account.Credentials.from_service_account_info(
+            info, scopes=_CLOUD_PLATFORM_SCOPE
+        )
+    credentials, _ = google_auth_default(scopes=_CLOUD_PLATFORM_SCOPE)
+    return credentials
 
 
 def _vertex_generate_url(*, project_id: str, location: str, model: str) -> str:
@@ -31,7 +59,7 @@ def _vertex_generate_url(*, project_id: str, location: str, model: str) -> str:
 
 
 def _get_vertex_bearer_token() -> str:
-    credentials, _ = google_auth_default(scopes=_CLOUD_PLATFORM_SCOPE)
+    credentials = _get_google_credentials()
     credentials.refresh(GoogleAuthRequest())
     token = getattr(credentials, "token", None)
     if not token:
@@ -54,7 +82,8 @@ def call_vertex_ai(
 ) -> str:
     """
     Vertex AI generateContent only (no Gemini Developer API fallback).
-    Requires GOOGLE_CLOUD_PROJECT and Application Default Credentials.
+    Requires GOOGLE_CLOUD_PROJECT and either GOOGLE_SERVICE_ACCOUNT_JSON (Azure)
+    or ADC (e.g. GOOGLE_APPLICATION_CREDENTIALS to a key file locally).
     """
     project_id = (
         os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("VERTEX_AI_PROJECT") or ""
