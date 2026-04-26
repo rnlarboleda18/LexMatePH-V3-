@@ -3,7 +3,6 @@ import json
 import os
 import logging
 import psycopg
-from psycopg import errors as pg_errors
 from svix.webhooks import Webhook, WebhookVerificationError
 
 from utils.founding_promo import try_grant_founding_promo
@@ -28,6 +27,17 @@ def _clerk_primary_email(data: dict):
             return addr.strip() if isinstance(addr, str) else addr
     return None
 
+
+def _svix_header_dict(req: func.HttpRequest) -> dict:
+    """Build Svix header dict for verification (case-insensitive; proxies may vary)."""
+    lower = {k.lower(): v for k, v in req.headers.items()}
+    return {
+        "svix-id": lower.get("svix-id", ""),
+        "svix-timestamp": lower.get("svix-timestamp", ""),
+        "svix-signature": lower.get("svix-signature", ""),
+    }
+
+
 @clerk_webhook_bp.route(route="clerk-webhook", methods=["POST"])
 def clerk_webhook_hyphen(req: func.HttpRequest) -> func.HttpResponse:
     return clerk_webhook_core(req)
@@ -37,13 +47,14 @@ def clerk_webhook_underscore(req: func.HttpRequest) -> func.HttpResponse:
     return clerk_webhook_core(req)
 
 def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
-    # 1. Get headers for verification
-    svix_id = req.headers.get("svix-id")
-    svix_timestamp = req.headers.get("svix-timestamp")
-    svix_signature = req.headers.get("svix-signature")
-    
+    # 1. Get headers for verification (case-insensitive — some CDNs vary casing)
+    h = _svix_header_dict(req)
+    svix_id = h["svix-id"]
+    svix_timestamp = h["svix-timestamp"]
+    svix_signature = h["svix-signature"]
+
     if not svix_id or not svix_timestamp or not svix_signature:
-        logging.error("Missing Svix headers")
+        logging.error("Missing Svix headers (have keys: %s)", list((req.headers or {}).keys())[:20])
         return func.HttpResponse("Missing headers", status_code=400)
     
     # 2. Get the signing secret
@@ -57,11 +68,14 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
     wh = Webhook(webhook_secret)
     
     try:
-        evt = wh.verify(payload, {
-            "svix-id": svix_id,
-            "svix-timestamp": svix_timestamp,
-            "svix-signature": svix_signature,
-        })
+        evt = wh.verify(
+            payload,
+            {
+                "svix-id": svix_id,
+                "svix-timestamp": svix_timestamp,
+                "svix-signature": svix_signature,
+            },
+        )
     except WebhookVerificationError as e:
         logging.error(f"Webhook verification failed: {e}")
         return func.HttpResponse("Invalid signature", status_code=400)
@@ -77,6 +91,14 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
         email = _clerk_primary_email(data)
         first_name = (data.get("first_name") or "").strip() or None
         last_name  = (data.get("last_name")  or "").strip() or None
+
+        if not email:
+            logging.warning(
+                "Clerk webhook %s: no email in payload for user %s; skipping DB sync",
+                evt_type,
+                clerk_id,
+            )
+            return func.HttpResponse("OK", status_code=200)
 
         ADMIN_EMAILS = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
         is_admin = email.lower() in [e.lower() for e in ADMIN_EMAILS] if email else False

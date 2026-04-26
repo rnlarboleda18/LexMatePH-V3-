@@ -92,14 +92,20 @@ WHERE clerk_id = '<clerk_id>';
 
 ## 5. Clerk webhook not syncing users
 
-**Symptoms:** New users can sign up but are not in the database; subscription features not available.
+**Symptoms:** New users can sign up but are not in the database; "User not found in database" on subscribe; or subscription badge stuck.
 
-**Steps:**
+**What should happen:** Clerk sends `user.created` / `user.updated` to `POST /api/clerk-webhook` with Svix headers. The API inserts/updates the `users` row.
 
-1. Check Clerk Dashboard → Webhooks → delivery logs.
-2. Verify `CLERK_WEBHOOK_SECRET` in Application Settings matches the webhook signing secret in Clerk Dashboard.
-3. The handler at `api/blueprints/clerk_webhook.py` verifies the Svix HMAC signature — a wrong secret returns 400.
-4. Check Clerk webhook endpoint URL is set to `https://<your-app>/api/clerk-webhook` (hyphen variant).
+**Fallback:** The API also **creates the user on first request** (subscription-status / create-checkout) if they are missing, using the Clerk API — set `CLERK_SECRET_KEY` in Application Settings. If the webhook is broken, users can still get a DB row after the next deploy; fixing the webhook keeps data in sync immediately.
+
+**Troubleshooting steps:**
+
+1. **Clerk Dashboard → Webhooks →** select your endpoint → **Message Attempts** / **Delivery** logs. Note HTTP status: **400** often means **signature mismatch**; **500** is usually DB; **200** is success.
+2. **Endpoint URL** must be the same host your API actually uses. Prefer the Azure Static Web Apps direct hostname, e.g. `https://<name>.1.azurestaticapps.net/api/clerk-webhook` (or your custom domain if traffic truly hits that SWA with `/api/...` routed to Functions). Wrong host = 404/502 and no row in `users`.
+3. **Signing secret:** In Azure, `CLERK_WEBHOOK_SECRET` must be the **Signing Secret** from that same Clerk endpoint (value starting with `whsec_...`). If you rotate the secret in Clerk, update Azure and Save.
+4. **Events:** subscribe at least to `user.created`, `user.updated`, and `user.deleted`.
+5. **Code:** `api/blueprints/clerk_webhook.py` — Svix verification; wrong secret → `400 Invalid signature`. Missing `svix-*` headers → `400 Missing headers` (rare; proxies should forward these headers as-is).
+6. **Manual retry:** In Clerk, open a failed delivery and use **Resend** after fixing the URL or secret.
 
 ---
 
