@@ -2,10 +2,31 @@
 Transactional email via Azure Communication Services (ACS) Email.
 
 Required environment variables:
-  ACS_EMAIL_CONNECTION_STRING  — from ACS resource → Keys → Connection string
-  ACS_SENDER_EMAIL             — verified sender address, e.g.
-                                 DoNotReply@<resource>.azurecomm.net
-                                 or a custom verified domain address
+  ACS_EMAIL_CONNECTION_STRING  — from ACS resource ``lexmateph-comms`` → Keys → Connection string
+  ACS_SENDER_EMAIL             — any **verified** sender, e.g.
+                                 DoNotReply@<guid>.azurecomm.net (default Azure domain), or
+                                 e.g. DoNotReply@lexmateph.com (after custom domain is verified)
+
+**Using your own mail domain (e.g. lexmateph.com for the site https://www.lexmateph.com):**
+  Email is sent from addresses on the **apex** domain (``@lexmateph.com``), not the ``www.``
+  website hostname. The app only reads ``ACS_SENDER_EMAIL``; no code change is required
+  after Azure + DNS are done.
+
+  In this subscription, the Email Communication Service is ``lexmateph-email`` (resource group
+  ``LexMatePH``). It currently has only the Azure-managed domain (``.azurecomm.net``). To add
+  ``lexmateph.com``:
+  1) Azure Portal: open ``lexmateph-email`` → Email → **Domains** → **Add domain** → choose
+     customer-managed domain, or use ``az communication email domain create`` with
+     ``--domain-management CustomerManaged`` (CLI extension: communication, preview).
+  2) In your DNS (where **lexmateph.com** is hosted), add the **TXT** / **SPF** / **DKIM**
+     records shown in the portal. Wait until all verification steps show *Verified*.
+  3) Add a **MailFrom** address in Azure (e.g. local part ``DoNotReply``), or
+     ``az communication email domain sender-username create`` for the new domain resource.
+  4) Set ``ACS_SENDER_EMAIL`` to the full address (e.g. ``DoNotReply@lexmateph.com``) in
+     ``local.settings.json`` and in the **Function App** application settings in Azure.
+  5) Keep using the same ``ACS_EMAIL_CONNECTION_STRING`` from ``lexmateph-comms``.
+
+  See: https://learn.microsoft.com/en-us/azure/communication-services/concepts/email/prepare-email-communication-resource
 
 The azure-communication-email package must be in requirements.txt.
 If the env vars are not set the functions are no-ops (log a warning only)

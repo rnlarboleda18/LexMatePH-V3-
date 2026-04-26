@@ -392,11 +392,15 @@ function App() {
 
   // Auth guard: if Clerk has finished loading and the user is not signed in,
   // snap them back to the landing page. Public routes (about, legal) are exempt.
+  // Payment returns (?xendit_payment, ?payment) are also exempt — Clerk needs
+  // a moment to re-establish its session after a full-page redirect from Xendit.
   const UNPROTECTED_MODES = useMemo(() => new Set(['landing', 'about', 'legal']), []);
   useEffect(() => {
     if (!authLoaded) return;
     if (isSignedIn) return;
     if (UNPROTECTED_MODES.has(mode)) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('xendit_payment')) return;
     setMode('landing');
   }, [authLoaded, isSignedIn, mode, UNPROTECTED_MODES]);
 

@@ -100,8 +100,9 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
             )
             return func.HttpResponse("OK", status_code=200)
 
-        ADMIN_EMAILS = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
-        is_admin = email.lower() in [e.lower() for e in ADMIN_EMAILS] if email else False
+        raw = os.environ.get("ADMIN_EMAILS", "rnlarboleda@gmail.com,rnlarboleda18@gmail.com")
+        ADMIN_EMAILS = [e.strip().lower() for e in raw.split(",") if e.strip()]
+        is_admin = email.lower() in ADMIN_EMAILS if email else False
 
         conn_string = os.environ.get("DB_CONNECTION_STRING")
         try:
