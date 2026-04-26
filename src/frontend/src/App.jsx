@@ -42,6 +42,7 @@ const Flashcard = lazy(() => import('./components/Flashcard'));
 const CaseDecisionModal = lazy(() => import('./components/CaseDecisionModal'));
 const QuestionDetailModal = lazy(() => import('./components/QuestionDetailModal'));
 const SubscriptionModal = lazy(() => import('./components/SubscriptionModal'));
+const AccountBillingModal = lazy(() => import('./components/AccountBillingModal'));
 const UpgradeWall = lazy(() => import('./components/UpgradeWall'));
 
 /** Codal picker options (sidebar submenu removed; filter lives on LexCode page). */
@@ -89,6 +90,8 @@ function App() {
   const {
     showUpgradeModal,
     closeUpgradeModal,
+    showAccountBillingModal,
+    closeAccountBillingModal,
     tier,
     canAccess,
     openUpgradeModal,
@@ -1044,6 +1047,11 @@ function App() {
       {showUpgradeModal && (
         <Suspense fallback={null}>
           <SubscriptionModal onClose={closeUpgradeModal} />
+        </Suspense>
+      )}
+      {showAccountBillingModal && (
+        <Suspense fallback={null}>
+          <AccountBillingModal onClose={closeAccountBillingModal} />
         </Suspense>
       )}
 

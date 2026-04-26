@@ -287,7 +287,8 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     cur.execute(
                         """
                         SELECT subscription_tier, subscription_status, subscription_expires_at,
-                               is_admin, email, founding_promo_slot, subscription_source
+                               is_admin, email, founding_promo_slot, subscription_source,
+                               xendit_plan_id
                         FROM users WHERE clerk_id = %s
                         """,
                         (clerk_id,),
@@ -297,25 +298,31 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     logging.warning(f"Full user fetch failed: {db_err}")
                     conn.rollback()
                     cur.execute(
-                        "SELECT subscription_tier, email FROM users WHERE clerk_id = %s",
+                        "SELECT subscription_tier, email, xendit_plan_id FROM users WHERE clerk_id = %s",
                         (clerk_id,),
                     )
                     row = cur.fetchone()
                     if row:
-                        tier, email = row
-                        row = (tier, "inactive", None, False, email, None, None)
+                        tier, email, plan_id = row
+                        row = (tier, "inactive", None, False, email, None, None, plan_id)
 
                 logging.info(f"[subscription-status] clerk_id={clerk_id}, found={row is not None}")
 
                 if not row:
                     return func.HttpResponse(
-                        json.dumps({"tier": "free", "status": "inactive", "expires_at": None,
-                                    "is_admin": False, "debug": "User not in DB"}),
+                        json.dumps({
+                            "tier": "free",
+                            "status": "inactive",
+                            "expires_at": None,
+                            "is_admin": False,
+                            "debug": "User not in DB",
+                            "can_cancel_xendit": False,
+                        }),
                         mimetype="application/json", status_code=200,
                         headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
                     )
 
-                tier, status, expires_at, is_admin, email, founding_slot, sub_source = row
+                tier, status, expires_at, is_admin, email, founding_slot, sub_source, xendit_plan_id = row
 
                 if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
                     is_admin = True
@@ -326,15 +333,26 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     except Exception:
                         conn.rollback()
 
+                is_admin_eff = bool(is_admin)
+                tier_norm = (tier or "free")
+                sub_low = (sub_source or "").strip().lower()
+                # Paid Xendit users may lack xendit_plan_id if payment_token.activation
+                # webhooks were delayed or missed after payment_session.completed granted tier.
+                can_cancel_xendit = (not is_admin_eff) and (
+                    bool(xendit_plan_id)
+                    or (sub_low == "xendit" and tier_norm != "free")
+                )
+
                 return func.HttpResponse(
                     json.dumps({
                         "tier": tier or "free",
                         "status": status or "inactive",
                         "expires_at": expires_at.isoformat() if expires_at else None,
-                        "is_admin": is_admin or False,
+                        "is_admin": is_admin_eff,
                         "email": email,
                         "founding_promo_slot": founding_slot,
                         "subscription_source": sub_source,
+                        "can_cancel_xendit": can_cancel_xendit,
                     }),
                     mimetype="application/json", status_code=200,
                     headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
@@ -549,28 +567,45 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT xendit_plan_id FROM users WHERE clerk_id = %s",
+                    """SELECT xendit_plan_id, subscription_source, subscription_tier
+                       FROM users WHERE clerk_id = %s""",
                     (clerk_id,),
                 )
                 row = cur.fetchone()
-                if not row or not row[0]:
-                    return func.HttpResponse(
-                        json.dumps({"error": "No active subscription found"}),
-                        mimetype="application/json", status_code=404,
-                    )
-                plan_id = row[0]
 
-        # Cancel via Xendit API: POST /recurring/plans/{id}/inactivate
-        cancel_resp = requests.post(
-            f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}/deactivate",
-            headers=_xendit_headers(),
-            timeout=15,
-        )
-        if cancel_resp.status_code not in (200, 201):
-            logging.warning(
-                f"Xendit cancel returned {cancel_resp.status_code}: {cancel_resp.text}"
+        if not row:
+            return func.HttpResponse(
+                json.dumps({"error": "User not found"}),
+                mimetype="application/json", status_code=404,
             )
-            # Still downgrade locally so the user is not stuck on a paid tier
+
+        plan_id, sub_source, sub_tier = row[0], row[1] or "", row[2] or "free"
+        sub_low = sub_source.strip().lower() if sub_source else ""
+        paid = (sub_tier or "free") != "free"
+
+        if plan_id:
+            # Cancel via Xendit API: POST /recurring/plans/{id}/deactivate
+            cancel_resp = requests.post(
+                f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}/deactivate",
+                headers=_xendit_headers(),
+                timeout=15,
+            )
+            if cancel_resp.status_code not in (200, 201):
+                logging.warning(
+                    f"Xendit cancel returned {cancel_resp.status_code}: {cancel_resp.text}"
+                )
+                # Still downgrade locally so the user is not stuck on a paid tier
+        elif sub_low == "xendit" and paid:
+            logging.warning(
+                "cancel_subscription: paid xendit user clerk_id=%s has no xendit_plan_id; "
+                "downgrading locally only (recurring plan may never have been linked)",
+                clerk_id,
+            )
+        else:
+            return func.HttpResponse(
+                json.dumps({"error": "No active subscription found"}),
+                mimetype="application/json", status_code=404,
+            )
 
         with _get_db() as conn:
             with conn.cursor() as cur:
@@ -584,8 +619,13 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
                 )
                 conn.commit()
 
+        msg = (
+            "Subscription ended. LexMatePH access is now Free."
+            if not plan_id
+            else "Subscription cancelled successfully"
+        )
         return func.HttpResponse(
-            json.dumps({"message": "Subscription cancelled successfully"}),
+            json.dumps({"message": msg}),
             mimetype="application/json", status_code=200,
         )
     except Exception as e:

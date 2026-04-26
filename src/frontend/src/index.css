@@ -125,6 +125,25 @@
   }
 }
 
+/* App header + LexPlay mini (portaled to body) — same visual-viewport box as modals; keeps chrome pinned on iOS PWA. */
+header.lex-pin-visual-header {
+  top: var(--lex-vv-top, 0px) !important;
+  left: var(--lex-vv-left, 0px) !important;
+  right: auto !important;
+  width: var(--lex-vv-width, 100vw) !important;
+  max-width: 100%;
+  backface-visibility: hidden;
+}
+
+/* Bottom mini bar: keep bottom:0, align horizontal span to the visual viewport */
+.lex-pin-visual-minibar {
+  left: var(--lex-vv-left, 0px) !important;
+  right: auto !important;
+  width: var(--lex-vv-width, 100vw) !important;
+  max-width: 100%;
+  backface-visibility: hidden;
+}
+
 /* Phone only: extra bottom inset so modals sit slightly higher (matches max-sm mobile scope elsewhere). */
 @media (max-width: 639px) {
   .lex-modal-overlay {

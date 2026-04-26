@@ -75,9 +75,11 @@ export function SubscriptionProvider({ children }) {
   const [status, setStatus] = useState('inactive');
   const [expiresAt, setExpiresAt] = useState(null);
   const [subscriptionSource, setSubscriptionSource] = useState(null);
+  const [canCancelXendit, setCanCancelXendit] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [showAccountBillingModal, setShowAccountBillingModal] = useState(false);
   const [upgradeContext, setUpgradeContext] = useState(null);
   const [testTier, setTestTier] = useState(() => getTestTierOverride());
 
@@ -93,6 +95,7 @@ export function SubscriptionProvider({ children }) {
       setStatus('inactive');
       setIsAdmin(false);
       setSubscriptionSource(null);
+      setCanCancelXendit(false);
       setExpiresAt(null);
       setLoading(false);
       return 'free';
@@ -108,6 +111,7 @@ export function SubscriptionProvider({ children }) {
       setIsAdmin(true);
       setTier('barrister');
       setStatus('active');
+      setCanCancelXendit(false);
       setLoading(false);
       return 'barrister';
     }
@@ -151,6 +155,7 @@ export function SubscriptionProvider({ children }) {
         setStatus(data.status || 'inactive');
         setExpiresAt(data.expires_at || null);
         setSubscriptionSource(data.subscription_source || null);
+        setCanCancelXendit(data.can_cancel_xendit === true);
         setIsAdmin(backendAdmin);
         setTokenRetry(0);
         console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
@@ -261,6 +266,14 @@ export function SubscriptionProvider({ children }) {
     setUpgradeContext(null);
   };
 
+  const openAccountBillingModal = () => {
+    setShowAccountBillingModal(true);
+  };
+
+  const closeAccountBillingModal = () => {
+    setShowAccountBillingModal(false);
+  };
+
   const refreshStatus = () => fetchSubscriptionStatus();
 
   // Dev helper: switch test tier from the browser console
@@ -287,14 +300,18 @@ export function SubscriptionProvider({ children }) {
         isTrial,
         trialExpiresAt,
         subscriptionSource,
+        canCancelXendit,
         loading,
         canAccess,
         requireAccess,
         showUpgradeModal,
+        showAccountBillingModal,
         upgradeContext,
         isAdmin,
         openUpgradeModal,
         closeUpgradeModal,
+        openAccountBillingModal,
+        closeAccountBillingModal,
         refreshStatus,
         tierLabel: isAdmin
           ? 'Administrator'
