@@ -104,7 +104,7 @@ def main():
                 cur.execute(RESET_SQL, (email, ADMIN_EMAIL))
                 updated = cur.fetchall()
                 if updated:
-                    print(f"  RESET OK:      {email}  (clerk_id cleared, tier→free)")
+                    print(f"  RESET OK:      {email}  (clerk_id cleared, tier -> free)")
                 else:
                     print(f"  NO ROWS UPDATED for {email} (check email spelling?)")
 
