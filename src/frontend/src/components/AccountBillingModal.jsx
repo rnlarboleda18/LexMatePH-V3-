@@ -54,7 +54,9 @@ export default function AccountBillingModal({ onClose }) {
 
   const handleCancelSubscription = async () => {
     if (!canCancelXendit || isAdmin) return;
-    if (!window.confirm('Cancel your paid subscription? You will be moved to the Free plan.')) {
+    if (!window.confirm(
+      'Cancel your subscription? You will keep full access until the end of your current paid period, then automatically move to the Free plan.'
+    )) {
       return;
     }
     setBusy(true);
@@ -90,7 +92,8 @@ export default function AccountBillingModal({ onClose }) {
   };
 
   const sourceLabel = formatSource(subscriptionSource);
-  const showCancel = !isAdmin && canCancelXendit;
+  const alreadyCancelled = status === 'cancelled';
+  const showCancel = !isAdmin && canCancelXendit && !alreadyCancelled;
 
   const overlayClass = isMobileLayout
     ? 'fixed inset-0 z-[540] lex-modal-overlay bg-black/60 backdrop-blur-md animate-in fade-in duration-200'
@@ -142,15 +145,29 @@ export default function AccountBillingModal({ onClose }) {
                 <dd className="text-right text-gray-800 dark:text-zinc-200">{sourceLabel}</dd>
               </div>
             )}
-            {expiresAt && (
+            {expiresAt && status === 'cancelled' && (
               <div className="flex justify-between gap-3">
-                <dt className="text-gray-500 dark:text-gray-400">Renews / ends</dt>
+                <dt className="text-gray-500 dark:text-gray-400">Access until</dt>
+                <dd className="text-right font-medium text-amber-700 dark:text-amber-400">
+                  {new Date(expiresAt).toLocaleDateString()}
+                </dd>
+              </div>
+            )}
+            {expiresAt && status !== 'cancelled' && (
+              <div className="flex justify-between gap-3">
+                <dt className="text-gray-500 dark:text-gray-400">Next renewal</dt>
                 <dd className="text-right text-gray-800 dark:text-zinc-200">
                   {new Date(expiresAt).toLocaleDateString()}
                 </dd>
               </div>
             )}
           </dl>
+
+          {status === 'cancelled' && expiresAt && tier !== 'free' && (
+            <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
+              Your subscription is cancelled. You keep full {tierLabel} access until <strong>{new Date(expiresAt).toLocaleDateString()}</strong>, then your account moves to the Free plan automatically.
+            </p>
+          )}
 
           {errorMsg && (
             <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-300">

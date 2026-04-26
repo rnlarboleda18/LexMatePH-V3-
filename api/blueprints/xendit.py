@@ -11,7 +11,7 @@ from datetime import datetime, timezone, timedelta
 
 from utils.clerk_auth import get_authenticated_user_id
 from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
-from utils.trial import expire_trial_for_user
+from utils.trial import expire_trial_for_user, expire_cancelled_xendit_sub
 
 xendit_bp = func.Blueprint()
 
@@ -265,6 +265,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
             with _get_db() as conn:
                 with conn.cursor() as cur:
                     expire_trial_for_user(cur, clerk_id)
+                    expire_cancelled_xendit_sub(cur, clerk_id)
                     expire_founding_promo_for_user(cur, clerk_id)
                     cur.execute(
                         "SELECT is_admin, email FROM users WHERE clerk_id = %s",
@@ -582,23 +583,31 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
         plan_id, sub_source, sub_tier = row[0], row[1] or "", row[2] or "free"
         sub_low = sub_source.strip().lower() if sub_source else ""
         paid = (sub_tier or "free") != "free"
+        xendit_deactivated = False
 
         if plan_id:
-            # Cancel via Xendit API: POST /recurring/plans/{id}/deactivate
+            # Step 1: deactivate at Xendit — this stops all future billing cycles.
             cancel_resp = requests.post(
                 f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}/deactivate",
                 headers=_xendit_headers(),
                 timeout=15,
             )
-            if cancel_resp.status_code not in (200, 201):
-                logging.warning(
-                    f"Xendit cancel returned {cancel_resp.status_code}: {cancel_resp.text}"
+            if cancel_resp.status_code in (200, 201):
+                xendit_deactivated = True
+                logging.info(
+                    "cancel_subscription: Xendit plan %s deactivated for clerk_id=%s",
+                    plan_id, clerk_id,
                 )
-                # Still downgrade locally so the user is not stuck on a paid tier
+            else:
+                logging.warning(
+                    "cancel_subscription: Xendit deactivate returned %s for plan %s — "
+                    "proceeding with local cancellation; review plan in Xendit dashboard",
+                    cancel_resp.status_code, plan_id,
+                )
         elif sub_low == "xendit" and paid:
             logging.warning(
                 "cancel_subscription: paid xendit user clerk_id=%s has no xendit_plan_id; "
-                "downgrading locally only (recurring plan may never have been linked)",
+                "local cancellation only (recurring plan may never have been linked)",
                 clerk_id,
             )
         else:
@@ -607,25 +616,78 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
                 mimetype="application/json", status_code=404,
             )
 
+        # Step 2: determine end of current paid period so we can keep access until then.
+        # Stored expires_at (from the last cycle.succeeded) is the most accurate.
+        # Fallback: query Xendit for the plan schedule; last resort: +30 or +365 days.
+        expires_at_value = None
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    "SELECT subscription_expires_at FROM users WHERE clerk_id = %s",
+                    (clerk_id,),
+                )
+                ea_row = cur.fetchone()
+                if ea_row and ea_row[0]:
+                    expires_at_value = ea_row[0]
+
+        if expires_at_value is None and plan_id:
+            # Query Xendit for the plan to find its schedule anchor / interval.
+            try:
+                plan_resp = requests.get(
+                    f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}",
+                    headers=_xendit_headers(api_version="2026-01-01"),
+                    timeout=10,
+                )
+                if plan_resp.status_code == 200:
+                    plan_data = plan_resp.json()
+                    # Xendit returns next_action_time or schedule.anchor_date
+                    schedule = plan_data.get("schedule") or {}
+                    next_action = plan_data.get("next_action_time") or schedule.get("next_action_time", "")
+                    if next_action:
+                        expires_at_value = datetime.fromisoformat(next_action.replace("Z", "+00:00"))
+                    else:
+                        # Derive from anchor_date + 1 interval
+                        anchor = schedule.get("anchor_date", "")
+                        interval = (schedule.get("interval") or "MONTH").upper()
+                        if anchor:
+                            anchor_dt = datetime.fromisoformat(anchor.replace("Z", "+00:00"))
+                            delta = timedelta(days=365 if interval == "YEAR" else 30)
+                            expires_at_value = anchor_dt + delta
+            except Exception as ex:
+                logging.warning("cancel_subscription: could not query Xendit plan: %s", ex)
+
+        if expires_at_value is None:
+            # Last resort: grant 30 days from now (covers one monthly cycle)
+            expires_at_value = datetime.now(timezone.utc) + timedelta(days=30)
+            logging.info(
+                "cancel_subscription: expires_at fallback to +30d for clerk_id=%s", clerk_id
+            )
+
+        # Step 3: mark as cancelled in DB but keep tier until expires_at.
+        # The existing expire_cancelled_xendit_sub() called on every subscription-status
+        # request will downgrade to Free once NOW() > expires_at.
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     """UPDATE users SET
-                           subscription_tier   = 'free',
-                           subscription_status = 'cancelled',
-                           xendit_plan_id      = NULL
+                           subscription_status     = 'cancelled',
+                           subscription_expires_at = %s,
+                           xendit_plan_id          = NULL
                        WHERE clerk_id = %s""",
-                    (clerk_id,),
+                    (expires_at_value, clerk_id),
                 )
                 conn.commit()
 
-        msg = (
-            "Subscription ended. LexMatePH access is now Free."
-            if not plan_id
-            else "Subscription cancelled successfully"
+        logging.info(
+            "cancel_subscription: clerk_id=%s tier kept until %s, xendit_deactivated=%s",
+            clerk_id, expires_at_value, xendit_deactivated,
         )
         return func.HttpResponse(
-            json.dumps({"message": msg}),
+            json.dumps({
+                "message": "Subscription cancelled. You keep access until the end of your paid period.",
+                "access_until": expires_at_value.isoformat() if hasattr(expires_at_value, "isoformat") else str(expires_at_value),
+                "xendit_deactivated": xendit_deactivated,
+            }),
             mimetype="application/json", status_code=200,
         )
     except Exception as e:
@@ -1092,7 +1154,12 @@ def _handle_plan_activated(data: dict):
 
 
 def _handle_plan_inactivated(data: dict):
-    """recurring.plan.inactivated — plan ended or was cancelled."""
+    """recurring.plan.inactivated — Xendit confirms plan is cancelled / ended.
+
+    If the user still has paid days remaining (subscription_expires_at > NOW()),
+    keep their tier and let the normal expiry path downgrade them at period end.
+    If no expiry is set (edge case) downgrade immediately.
+    """
     plan_id = data.get("id", "")
     if not plan_id:
         logging.warning("recurring.plan.inactivated: missing plan id")
@@ -1100,35 +1167,77 @@ def _handle_plan_inactivated(data: dict):
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
+                # Always clear plan_id and mark cancelled.
+                # Only drop tier immediately when no unexpired period remains.
                 cur.execute(
                     """UPDATE users SET
-                           subscription_tier   = 'free',
                            subscription_status = 'cancelled',
-                           xendit_plan_id      = NULL
+                           xendit_plan_id      = NULL,
+                           subscription_tier   = CASE
+                               WHEN subscription_expires_at IS NOT NULL
+                                AND subscription_expires_at > NOW()
+                               THEN subscription_tier   -- keep until period ends
+                               ELSE 'free'
+                           END
                        WHERE xendit_plan_id = %s""",
                     (plan_id,),
                 )
                 conn.commit()
-        logging.info(f"recurring.plan.inactivated: plan_id={plan_id}")
+        logging.info(f"recurring.plan.inactivated: plan_id={plan_id} — tier kept if expires_at in future")
     except Exception as e:
         logging.error(f"recurring.plan.inactivated: DB update failed: {e}")
 
 
 def _handle_cycle_succeeded(data: dict):
-    """recurring.cycle.succeeded — renewal payment successful."""
+    """recurring.cycle.succeeded — renewal payment successful.
+
+    Updates subscription_status to 'active' and records the next billing date
+    in subscription_expires_at. Knowing the next date lets cancel_subscription
+    keep the user on their paid tier until that date rather than cutting them
+    off immediately.
+    """
     plan_id = data.get("recurring_plan_id", "")
     if not plan_id:
         logging.warning("recurring.cycle.succeeded: missing recurring_plan_id")
         return
+
+    # Xendit puts the next scheduled date in scheduled_timestamp / next_action_time
+    next_billing_raw = (
+        data.get("next_action_time")
+        or data.get("scheduled_timestamp")
+        or data.get("next_billing_date")
+        or ""
+    )
+    next_billing_dt = None
+    if next_billing_raw:
+        try:
+            next_billing_dt = datetime.fromisoformat(
+                str(next_billing_raw).replace("Z", "+00:00")
+            )
+        except (ValueError, TypeError):
+            pass
+
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
-                cur.execute(
-                    "UPDATE users SET subscription_status = 'active' WHERE xendit_plan_id = %s",
-                    (plan_id,),
-                )
+                if next_billing_dt:
+                    cur.execute(
+                        """UPDATE users
+                           SET subscription_status     = 'active',
+                               subscription_expires_at = %s
+                           WHERE xendit_plan_id = %s""",
+                        (next_billing_dt, plan_id),
+                    )
+                else:
+                    cur.execute(
+                        "UPDATE users SET subscription_status = 'active' WHERE xendit_plan_id = %s",
+                        (plan_id,),
+                    )
                 conn.commit()
-        logging.info(f"recurring.cycle.succeeded: plan_id={plan_id}")
+        logging.info(
+            "recurring.cycle.succeeded: plan_id=%s next_billing=%s",
+            plan_id, next_billing_dt,
+        )
     except Exception as e:
         logging.error(f"recurring.cycle.succeeded: DB update failed: {e}")
 
