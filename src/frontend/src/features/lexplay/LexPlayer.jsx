@@ -999,6 +999,7 @@ const LexPlayer = ({
     const fullScreenUi = (
         <div
             className={`fixed inset-0 z-[600] flex items-stretch justify-center md:items-center ${isDarkMode ? 'dark' : ''}`}
+            data-lexplay-fullview-root
             data-lexplay-theme={isDarkMode ? 'dark' : 'light'}
         >
             {/* Backdrop Overlay — explicit light/dark so it matches Layout (not only html.dark timing) */}
@@ -1010,7 +1011,7 @@ const LexPlayer = ({
             />
 
             <div
-                className={`relative h-full min-h-0 w-full max-md:max-h-[100dvh] overflow-hidden border border-lex backdrop-blur-[40px] animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 shadow-2xl md:h-[calc(100vh-8rem)] md:w-[90vw] md:max-w-6xl md:rounded-2xl lg:w-[85vw] xl:w-[80vw] dark:border-lex ${
+                className={`relative h-full min-h-0 w-full max-md:max-h-full overflow-hidden border border-lex backdrop-blur-[40px] animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 shadow-2xl md:h-[calc(100vh-8rem)] md:w-[90vw] md:max-w-6xl md:rounded-2xl lg:w-[85vw] xl:w-[80vw] dark:border-lex ${
                     isDarkMode
                         ? 'bg-gradient-to-br from-white/10 via-[#ffffff05] to-transparent'
                         : 'bg-white/98'
@@ -1429,7 +1430,7 @@ const LexPlayer = ({
                 
                 {/* Bulk Add Modal */}
                 {showBulkModal && (
-                    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-3xl dark:bg-black/70">
+                    <div className="lex-vv-surface fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-3xl dark:bg-black/70">
                         <div className="w-full max-w-md overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl backdrop-blur-3xl dark:border-lex dark:bg-zinc-900">
                             <div className="flex items-center justify-between border-b border-lex bg-slate-50/95 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
                                 <div>

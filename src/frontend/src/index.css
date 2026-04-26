@@ -50,6 +50,11 @@
   --lex-container-radius: 0.75rem;
   /* Light mode primary text — deeper than slate-900 (#0f172a), normal weight in global heading rule */
   --lex-ink: #020617;
+  /* Filled from JS via `applyVisualViewportToCssVars` — matches iOS visual viewport */
+  --lex-vv-top: 0px;
+  --lex-vv-left: 0px;
+  --lex-vv-width: 100vw;
+  --lex-vv-height: 100dvh;
 }
 
 .dark {
@@ -93,6 +98,31 @@
   /* Strong blur to obscure the background */
   backdrop-filter: blur(16px) !important;
   -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* iOS / PWA: fixed modal rect tracks `visualViewport` (Reachability, status bar) — narrow widths only. */
+@media (max-width: 767px) {
+  .lex-modal-overlay {
+    top: var(--lex-vv-top, 0px) !important;
+    left: var(--lex-vv-left, 0px) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--lex-vv-width, 100vw) !important;
+    height: var(--lex-vv-height, 100dvh) !important;
+  }
+}
+
+/* Fullscreen LexPlayer + portaled full sheets on phones / small tablets (see `data-lexplay-fullview-root`, `.lex-vv-surface`) */
+@media (max-width: 1023px) {
+  [data-lexplay-fullview-root],
+  .lex-vv-surface {
+    top: var(--lex-vv-top, 0px) !important;
+    left: var(--lex-vv-left, 0px) !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: var(--lex-vv-width, 100vw) !important;
+    height: var(--lex-vv-height, 100dvh) !important;
+  }
 }
 
 /* Phone only: extra bottom inset so modals sit slightly higher (matches max-sm mobile scope elsewhere). */

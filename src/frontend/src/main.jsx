@@ -58,6 +58,7 @@ class ErrorBoundary extends React.Component {
 }
 
 import { BrowserRouter } from 'react-router-dom'
+import { VisualViewportRoot } from './components/VisualViewportRoot.jsx'
 import { LexPlayProvider } from './features/lexplay'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { SubscriptionProvider } from './context/SubscriptionContext'
@@ -82,6 +83,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
+        <VisualViewportRoot />
         <ClerkProvider
           publishableKey={PUBLISHABLE_KEY}
           afterSignOutUrl="/decisions"
