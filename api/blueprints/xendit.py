@@ -928,25 +928,58 @@ def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
 
 def _handle_payment_succeeded(data: dict):
     """
-    payment.capture / payment.succeeded — initial payment from the PAY session succeeded.
-    Grant the subscription tier immediately.
+    payment_session.completed / payment.capture / payment.succeeded
 
-    Lookup priority:
-    1. customer_id  → xendit_customer_id in DB
-    2. metadata.clerk_id → clerk_id directly (always present in our session metadata)
-    3. reference_id prefix → parse clerk_id from our lm-{clerk_id[:20]}-{ts} pattern
+    1. Grants the subscription tier immediately.
+    2. Stores xendit_customer_id so future sessions reuse the same customer.
+    3. If payment_token_id is present in the payload (always true for PAY sessions
+       with allow_save_payment_method=FORCED), creates the Xendit recurring plan
+       right here — no need to wait for the separate payment_token.activation event.
+       payment_token.activation remains a reliable backup if this step fails.
+
+    Lookup priority for clerk_id:
+    1. metadata.clerk_id (always present in our session metadata)
+    2. customer_id → xendit_customer_id in DB
+    3. reference_id prefix → parse clerk_id from lm-{clerk_id}-{ts}
     """
     clerk_id = None
     plan_key = None
 
-    # customer_id may be top-level or nested under payment object
+    # payment_token_id and customer_id are top-level in payment_session.completed
+    payment_token_id = (
+        data.get("payment_token_id")
+        or data.get("payment", {}).get("payment_token_id", "")
+        or ""
+    )
     customer_id = (
         data.get("customer_id")
         or data.get("payment", {}).get("customer_id", "")
         or ""
     )
 
-    if customer_id:
+    # Priority 1: metadata.clerk_id (most reliable — we always embed it at checkout)
+    metadata = data.get("metadata") or data.get("payment", {}).get("metadata") or {}
+    clerk_id = metadata.get("clerk_id", "")
+    plan_key_meta = metadata.get("plan_key", "")
+    if clerk_id:
+        try:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "SELECT xendit_pending_plan_key FROM users WHERE clerk_id = %s",
+                        (clerk_id,),
+                    )
+                    row = cur.fetchone()
+                    if row:
+                        plan_key = row[0] or plan_key_meta
+                    else:
+                        plan_key = plan_key_meta
+        except Exception as e:
+            logging.warning(f"payment.succeeded: metadata clerk_id lookup failed: {e}")
+            plan_key = plan_key_meta
+
+    # Priority 2: customer_id → xendit_customer_id column
+    if not clerk_id and customer_id:
         try:
             with _get_db() as conn:
                 with conn.cursor() as cur:
@@ -960,26 +993,8 @@ def _handle_payment_succeeded(data: dict):
         except Exception as e:
             logging.warning(f"payment.succeeded: customer_id lookup failed: {e}")
 
+    # Priority 3: parse clerk_id from our reference_id pattern lm-{clerk_id}-{timestamp}
     if not clerk_id:
-        # metadata is present in payment.capture and payment_session.completed
-        metadata = data.get("metadata") or data.get("payment", {}).get("metadata") or {}
-        clerk_id = metadata.get("clerk_id", "")
-        if clerk_id:
-            try:
-                with _get_db() as conn:
-                    with conn.cursor() as cur:
-                        cur.execute(
-                            "SELECT xendit_pending_plan_key FROM users WHERE clerk_id = %s",
-                            (clerk_id,),
-                        )
-                        row = cur.fetchone()
-                        if row:
-                            plan_key = row[0]
-            except Exception as e:
-                logging.warning(f"payment.succeeded: metadata clerk_id lookup failed: {e}")
-
-    if not clerk_id:
-        # Last resort: parse clerk_id from our session reference_id pattern lm-{clerk_id}-{timestamp}
         import re
         ref_id = data.get("reference_id", "")
         m = re.match(r'^lm-(.+)-\d+$', ref_id)
@@ -1004,29 +1019,84 @@ def _handle_payment_succeeded(data: dict):
         logging.warning(f"payment.succeeded: cannot identify user (customer_id={customer_id}, data keys={list(data.keys())})")
         return
 
+    # Fall back to metadata plan_key if pending key was already cleared
+    if not plan_key:
+        plan_key = plan_key_meta
+
     if not plan_key or plan_key not in PLAN_CONFIGS:
-        logging.warning(f"payment.succeeded: no pending plan_key for clerk_id={clerk_id}")
+        logging.warning(f"payment.succeeded: no valid plan_key for clerk_id={clerk_id} (plan_key={plan_key!r})")
         return
 
     tier = PLAN_KEY_TO_TIER.get(plan_key, "free")
     if tier == "free":
         return
 
+    # Step 1: grant tier and store xendit_customer_id
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
-                cur.execute(
-                    """UPDATE users SET
-                           subscription_tier   = %s,
-                           subscription_status = 'active',
-                           subscription_source = 'xendit'
-                       WHERE clerk_id = %s""",
-                    (tier, clerk_id),
-                )
+                if customer_id:
+                    cur.execute(
+                        """UPDATE users SET
+                               subscription_tier   = %s,
+                               subscription_status = 'active',
+                               subscription_source = 'xendit',
+                               xendit_customer_id  = COALESCE(xendit_customer_id, %s)
+                           WHERE clerk_id = %s""",
+                        (tier, customer_id, clerk_id),
+                    )
+                else:
+                    cur.execute(
+                        """UPDATE users SET
+                               subscription_tier   = %s,
+                               subscription_status = 'active',
+                               subscription_source = 'xendit'
+                           WHERE clerk_id = %s""",
+                        (tier, clerk_id),
+                    )
                 conn.commit()
         logging.info(f"payment.succeeded: granted tier '{tier}' to clerk_id={clerk_id}")
     except Exception as e:
         logging.error(f"payment.succeeded handler error: {e}")
+        return
+
+    # Step 2: create the Xendit recurring plan immediately using the payment token
+    # from this same event. This eliminates the dependency on payment_token.activation.
+    if payment_token_id and customer_id:
+        # Only create if no plan exists yet for this user
+        try:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        "SELECT xendit_plan_id FROM users WHERE clerk_id = %s",
+                        (clerk_id,),
+                    )
+                    existing = cur.fetchone()
+            if existing and existing[0]:
+                logging.info(
+                    "payment.succeeded: recurring plan already exists (%s), skipping creation",
+                    existing[0],
+                )
+            else:
+                plan_id = _create_xendit_recurring_plan(
+                    clerk_id, customer_id, payment_token_id, plan_key
+                )
+                logging.info(
+                    "payment.succeeded: created recurring plan %s for clerk_id=%s plan=%s",
+                    plan_id, clerk_id, plan_key,
+                )
+        except Exception as e:
+            logging.warning(
+                "payment.succeeded: recurring plan creation failed for clerk_id=%s: %s — "
+                "payment_token.activation webhook will retry",
+                clerk_id, e,
+            )
+    else:
+        logging.info(
+            "payment.succeeded: no payment_token_id in payload for clerk_id=%s — "
+            "waiting for payment_token.activation webhook",
+            clerk_id,
+        )
 
 
 def _handle_payment_token_activated(data: dict):
