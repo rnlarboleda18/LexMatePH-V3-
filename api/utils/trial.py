@@ -2,20 +2,33 @@
 Universal 24-hour Barrister trial granted to every new user on sign-up.
 Uses subscription_source = 'trial' and subscription_expires_at for expiry.
 Founding promo winners overwrite this with a 30-day slot (higher priority).
+
+Disable entirely by setting TRIAL_ENABLED=false in app settings / local.settings.json.
 """
 import logging
+import os
 from psycopg import errors as pg_errors
 
 logger = logging.getLogger(__name__)
+
+
+def _trial_enabled() -> bool:
+    """Returns False when TRIAL_ENABLED is explicitly set to 'false', '0', or 'no'."""
+    val = os.environ.get("TRIAL_ENABLED", "true").strip().lower()
+    return val not in ("false", "0", "no")
 
 
 def try_grant_trial(cur, clerk_id: str) -> bool:
     """
     Grant a 24-hour Barrister trial to a newly created user.
     Only activates if the user has no existing subscription (source is NULL/empty).
+    Skipped entirely when TRIAL_ENABLED=false.
     Returns True if the trial was granted.
     """
     if not clerk_id:
+        return False
+    if not _trial_enabled():
+        logger.info("try_grant_trial skipped: TRIAL_ENABLED=false")
         return False
     try:
         cur.execute(
