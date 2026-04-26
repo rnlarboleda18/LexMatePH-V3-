@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useUser, useAuth } from '@clerk/clerk-react';
+import { useUser, useAuth, useClerk } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, Search } from 'lucide-react';
 import Fuse from 'fuse.js';
 import Layout from './components/Layout';
@@ -98,7 +98,8 @@ function App() {
     loading: subscriptionLoading,
   } = useSubscription();
   const { user } = useUser();
-  const { getToken, isSignedIn } = useAuth();
+  const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
+  const { openSignIn } = useClerk();
 
   // --- Hooks ---
   const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions();
@@ -377,14 +378,38 @@ function App() {
   }, [isDrawerOpen, mode, setIsDrawerOpen]);
 
   const handleEnterFromLanding = useCallback(() => {
+    if (!isSignedIn) {
+      openSignIn();
+      return;
+    }
     setMode('supreme_decisions');
-  }, []);
+  }, [isSignedIn, openSignIn]);
 
   useEffect(() => {
     if (mode === 'lexplay') setLexPlayMiniDismissed(false);
   }, [mode]);
 
-  // No manual session check needed with Clerk
+  // Auth guard: if Clerk has finished loading and the user is not signed in,
+  // snap them back to the landing page. Public routes (about, legal) are exempt.
+  const UNPROTECTED_MODES = useMemo(() => new Set(['landing', 'about', 'legal']), []);
+  useEffect(() => {
+    if (!authLoaded) return;
+    if (isSignedIn) return;
+    if (UNPROTECTED_MODES.has(mode)) return;
+    setMode('landing');
+  }, [authLoaded, isSignedIn, mode, UNPROTECTED_MODES]);
+
+  // Auto-advance: detect the transition from signed-out → signed-in while still
+  // on the landing page and move into the app automatically.
+  const prevSignedInRef = useRef(false);
+  useEffect(() => {
+    if (!authLoaded) return;
+    const wasSignedOut = !prevSignedInRef.current;
+    prevSignedInRef.current = !!isSignedIn;
+    if (isSignedIn && wasSignedOut && mode === 'landing') {
+      setMode('supreme_decisions');
+    }
+  }, [authLoaded, isSignedIn, mode]);
 
 
   // Spinner only when user is on Flashcards and we still have nothing to show.

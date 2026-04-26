@@ -86,7 +86,7 @@ createRoot(document.getElementById('root')).render(
         <VisualViewportRoot />
         <ClerkProvider
           publishableKey={PUBLISHABLE_KEY}
-          afterSignOutUrl="/decisions"
+          afterSignOutUrl="/"
         >
           <SubscriptionProvider>
             <LexPlayProvider>

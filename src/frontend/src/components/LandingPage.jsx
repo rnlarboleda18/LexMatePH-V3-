@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight, Globe, Share2, Smartphone } from 'lucide-react';
-import { SignedOut } from '@clerk/clerk-react';
 import LandingPwaInstallAnimation from './LandingPwaInstallAnimation';
 
 /** Panels use scoped landing glass + global `--lex-border` / `--lex-ui-border-width` from index.css */
@@ -79,15 +78,13 @@ const LandingPage = ({ onEnterApp }) => {
                                     className="inline-flex max-w-full items-center justify-center gap-1.5 rounded-xl bg-amber-600 px-3 py-2 text-xs font-bold text-white shadow-lg shadow-amber-900/30 ring-1 ring-amber-400/50 transition-all hover:bg-amber-500 hover:shadow-[0_0_28px_-4px_rgba(245,158,11,0.5)] active:scale-[0.99] sm:gap-2 sm:px-6 sm:py-3 sm:text-base lg:px-5 lg:py-2.5 lg:text-sm xl:px-6 xl:py-3 xl:text-base"
                                 >
                                     <span className="min-w-0 text-left leading-tight sm:max-w-none">
-                                        Start reviewing — it&apos;s free
+                                        Get started — it&apos;s free
                                     </span>
                                     <ArrowRight className="h-3.5 w-3.5 shrink-0 sm:h-5 sm:w-5 lg:h-4 lg:w-4 xl:h-5 xl:w-5" strokeWidth={2.25} />
                                 </button>
-                                <SignedOut>
-                                    <span className="basis-full text-[10px] leading-snug text-gray-600 dark:text-gray-400 sm:text-sm lg:basis-auto lg:text-xs xl:text-sm">
-                                        No credit card. Sign in when you&apos;re ready.
-                                    </span>
-                                </SignedOut>
+                                <span className="basis-full text-[10px] leading-snug text-gray-600 dark:text-gray-400 sm:text-sm lg:basis-auto lg:text-xs xl:text-sm">
+                                    Free plan available · No credit card needed.
+                                </span>
                             </div>
                         </div>
                         <div className="relative z-10 mt-0 flex max-lg:w-[min(12.5rem,34vw)] max-lg:min-w-0 max-lg:shrink-0 max-lg:flex-col max-lg:items-center max-lg:gap-2.5 min-[480px]:max-lg:w-[min(14rem,36vw)] lg:mt-0 lg:block lg:min-w-0 lg:w-auto lg:overflow-x-hidden">
@@ -98,15 +95,13 @@ const LandingPage = ({ onEnterApp }) => {
                                     className="inline-flex w-full min-w-0 max-w-full items-center justify-center gap-1.5 rounded-xl bg-amber-600 px-2.5 py-2 text-xs font-bold text-white shadow-lg shadow-amber-900/30 ring-1 ring-amber-400/50 transition-all hover:bg-amber-500 hover:shadow-[0_0_28px_-4px_rgba(245,158,11,0.5)] active:scale-[0.99] sm:gap-2 sm:px-4 sm:py-2.5 sm:text-sm"
                                 >
                                     <span className="min-w-0 text-center leading-tight sm:text-left">
-                                        Start reviewing — it&apos;s free
+                                        Get started — it&apos;s free
                                     </span>
                                     <ArrowRight className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" strokeWidth={2.25} />
                                 </button>
-                                <SignedOut>
-                                    <span className="text-center text-[10px] leading-snug text-gray-600 dark:text-gray-400 sm:text-xs">
-                                        No credit card. Sign in when you&apos;re ready.
-                                    </span>
-                                </SignedOut>
+                                <span className="text-center text-[10px] leading-snug text-gray-600 dark:text-gray-400 sm:text-xs">
+                                    Free plan available · No credit card needed.
+                                </span>
                             </div>
                             <div className="flex w-full max-w-full shrink-0 items-center justify-center max-lg:max-w-[min(7.25rem,28vw)] max-lg:mx-auto min-[480px]:max-lg:max-w-[min(8rem,30vw)]">
                                 <LandingPwaInstallAnimation compact dense heroMobile />
