@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { normalizeFullTextMarkdownForGfm } from '../utils/fullTextMarkdown';
+import { normalizeFullTextMarkdownForGfm, repairUtf8Latin1Mojibake } from '../utils/fullTextMarkdown';
 
 export const SMART_LINK_REGEX = /(G\.R\. Nos?\.\s?\d+[\w\,&\s-]*)|(Republic Act No\.\s?\d+)/gi;
 
@@ -305,7 +305,7 @@ function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
 export const DigestMarkdownText = React.memo(({ content, variant = 'default', contextRef }) => {
     const processedContent = useMemo(() => {
         if (!content) return content;
-        let p = content;
+        let p = repairUtf8Latin1Mojibake(content);
         if (variant === 'facts') {
             p = p.replace(/([^\n])\n(\*\*.*?\*\*[:?])/g, '$1\n\n$2');
         }

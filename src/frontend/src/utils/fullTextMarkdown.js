@@ -3,6 +3,29 @@
  * Fixes common E-Library / conversion artifacts so tables, footnotes, and headings display correctly.
  */
 
+const UTF8_LATIN1_MOJIBAKE_RE = /[ÃÂ][\u0080-\u00ff]|Ã.|Â.|â€|â€™|â€œ|â€\u009d/;
+
+function mojibakeScore(text) {
+    if (!text) return 0;
+    const hits = text.match(/[ÃÂ][\u0080-\u00ff]|Ã.|Â.|â€|â€™|â€œ|â€\u009d|�/g);
+    return hits ? hits.length : 0;
+}
+
+/**
+ * Repair UTF-8 that was accidentally decoded as Latin-1 / CP1252.
+ * Example: "EspaÃ±a" -> "España".
+ */
+export function repairUtf8Latin1Mojibake(text) {
+    if (!text || !UTF8_LATIN1_MOJIBAKE_RE.test(text)) return text;
+    try {
+        const bytes = Uint8Array.from([...text].map((ch) => ch.charCodeAt(0) & 0xff));
+        const decoded = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+        return mojibakeScore(decoded) < mojibakeScore(text) ? decoded : text;
+    } catch {
+        return text;
+    }
+}
+
 /**
  * UTF-8 punctuation decoded as Windows-1252 (each byte → one BMP char): â + € + third.
  * Third-byte map from `new TextDecoder('windows-1252').decode(Uint8Array.from(utf8Bytes))`.
@@ -116,7 +139,8 @@ export function normalizeLooseFootnoteCarets(mdText) {
 
 export function normalizeFullTextMarkdownForGfm(mdText) {
     if (!mdText) return mdText;
-    let s = repairFullTextMojibake(mdText);
+    let s = repairUtf8Latin1Mojibake(mdText);
+    s = repairFullTextMojibake(s);
     s = repairFullTextBracketGlitches(s);
     s = escapeLegalCaptionCommaAsterisks(s);
     s = splitSpacedHeadingFromCaseTitleLines(s);

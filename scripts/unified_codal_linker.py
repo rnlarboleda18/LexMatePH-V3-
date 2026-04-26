@@ -9,7 +9,7 @@ How it works:
   PASS 1 (Router): The AI reads the case digest ONCE and returns a list of
                    (code_id, provision id) pairs it thinks are relevant.
   DB Fetch:        The script fetches the FULL TEXT only of those provisions
-                   (RPC: articles; RCC: sections — DB column is still ``article_num``).
+                   (RPC: ``article_num``; RCC: sections; ROC: ``rule_section_label`` + body text).
   PASS 2 (Granular): The AI re-reads the case digest + the provision texts
                    and identifies the exact 0-based paragraph index.
 
@@ -24,7 +24,8 @@ Usage:
   python unified_codal_linker.py --year 2024 --workers 5 --commit
   python unified_codal_linker.py --statutes CIV,LAB,CONST,FAM --limit 10  # optional: other codes
 
-Default statutes are RPC and RCC only. Use ``--statutes`` to add or replace the set.
+Default statutes are RPC and RCC only. Use ``--statutes`` to add or replace the set
+(e.g. ``RPC,ROC`` for Penal Code + Rules of Court).
 """
 
 import os
@@ -32,6 +33,7 @@ import re
 import sys
 import json
 import time
+from typing import Optional
 import argparse
 import threading
 import psycopg2
@@ -107,6 +109,11 @@ FULL_CODE_CONFIGS: dict = {
         "name": "Revised Corporation Code of the Philippines",
         "subject_area": "Corporate Law",
     },
+    "ROC": {
+        "table": "roc_codal",
+        "name": "Rules of Court of the Philippines",
+        "subject_area": "Remedial Law",
+    },
 }
 
 DEFAULT_LINKER_STATUTES: tuple = ("RPC", "RCC")
@@ -132,9 +139,14 @@ _STATUTE_PROMPT_LINES: dict = {
         'Format: bare section number as stored (e.g. "23"); omit the word "Section". '
         'JSON still uses the field name "article" for every code; for RCC its value is the section number.'
     ),
+    "ROC": (
+        "  ROC: Rules of Court — use the exact **rule_section_label** string as stored in the codal "
+        '(typically like "Rule 39, Section 3" with "Rule" and comma; match spacing and numbering to the index). '
+        'JSON key remains **"article"**; value is that full label, not a bare section number alone.'
+    ),
 }
 
-_STATUTE_ORDER: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "RCC")
+_STATUTE_ORDER: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "ROC", "RCC")
 
 
 def _codes_detail_prompt() -> str:
@@ -176,6 +188,7 @@ def load_article_index() -> dict:
     the same value that const.py API sends to the frontend as article_num.
     For other codes, the key is the bare ``article_num`` after stripping labels (e.g. CIV ``1306``).
     RCC uses the same DB column but legally those are **section** numbers.
+    ROC uses ``rule_section_label`` as the provision key and ``content_md`` or ``section_content`` as body.
     """
     conn = get_db_connection()
     cur = conn.cursor()
@@ -186,7 +199,40 @@ def load_article_index() -> dict:
         table = cfg["table"]
         where = f"WHERE {cfg['where']}" if "where" in cfg else ""
 
-        if code_id == "CONST":
+        if code_id == "ROC":
+            cur.execute(
+                """
+                SELECT column_name FROM information_schema.columns
+                WHERE table_schema = 'public' AND table_name = %s
+                """,
+                (table,),
+            )
+            roc_cols = {str(r[0]) for r in cur.fetchall()}
+            if "section_content" in roc_cols and "content_md" in roc_cols:
+                body_expr = (
+                    "COALESCE(NULLIF(TRIM(content_md), ''), NULLIF(TRIM(section_content), ''))"
+                )
+            elif "section_content" in roc_cols:
+                body_expr = "NULLIF(TRIM(section_content), '')"
+            else:
+                body_expr = "NULLIF(TRIM(content_md), '')"
+            cur.execute(
+                f"""
+                SELECT rule_section_label, {body_expr} AS body
+                FROM {table} {where}
+                """
+            )
+            for row in cur.fetchall():
+                key = str(row[0] or "").strip()
+                if not key:
+                    continue
+                text = str(row[1] or "")
+                paragraphs = [p.strip() for p in re.split(r"\n\n+", text) if p.strip()]
+                index[code_id][key] = {
+                    "content": text,
+                    "paragraph_count": len(paragraphs),
+                }
+        elif code_id == "CONST":
             # Use raw article_num (e.g. 'III-1') — unique and what const.py stores.
             # section_label ('SECTION 2') is ambiguous (20 dupes across articles).
             cur.execute(
@@ -236,6 +282,19 @@ def load_article_index() -> dict:
     return index
 
 
+def _canonical_provision_key(code_id: str, article_index: dict, art_clean: str) -> Optional[str]:
+    """Map model output to index key; ROC labels are matched case-insensitively."""
+    bucket = article_index.get(code_id) or {}
+    if art_clean in bucket:
+        return art_clean
+    if code_id == "ROC":
+        cf = art_clean.casefold()
+        for k in bucket:
+            if k.casefold() == cf:
+                return k
+    return None
+
+
 # ---------------------------------------------------------------------------
 # PASS 1 – Router pass: which code + provision numbers does this case touch?
 # ---------------------------------------------------------------------------
@@ -244,6 +303,7 @@ PASS1_SCHEMA = """
 {
   "hits": [
     {"code_id": "RPC", "article": "6"},
+    {"code_id": "ROC", "article": "Rule 39, Section 3"},
     {"code_id": "RCC", "article": "23"}
   ]
 }
@@ -255,7 +315,7 @@ def pass1_route(case: dict) -> list:
     Ask the AI: 'does this case interpret a provision from any of the configured codes?
     If so, which code_id and provision identifier?'
     Returns a list of dicts: [{'code_id': 'RPC', 'article': '6'}, ...]
-    (JSON field remains ``article`` for all codes; RCC values are section numbers.)
+    (JSON field remains ``article`` for all codes; RCC: section number; ROC: full rule_section_label.)
     """
     prompt = f"""
 You are a Philippine legal expert. Analyse the case digest below and list every
@@ -279,8 +339,8 @@ Your PRIMARY basis for identifying the correct statute and provision are the **I
 
 RULES:
 - Output ONLY valid code_id values from the list above.
-- Use the exact numbering format shown per code (RPC: article numbers; RCC: **section** numbers only — the RCC has no "Articles").
-- Each hit must use JSON key **"article"** even for RCC; the value is still the bare section number string.
+- Use the exact numbering format shown per code (RPC: article numbers; RCC: **section** numbers only — the RCC has no "Articles"; ROC: full **rule_section_label** as listed).
+- Each hit must use JSON key **"article"** for every code; for RCC the value is the bare section number string; for ROC the value is the full Rules label (e.g. "Rule 39, Section 3"), not a lone section number.
   Constitution example: "III-2" means Article III, Section 2.
 - If no provision from these statutes is interpreted, return {{"hits": []}}
 
@@ -321,9 +381,11 @@ PASS2_SCHEMA = """
 
 
 def _candidate_heading(code_id: str, art_num: str) -> str:
-    """RCC provisions are labeled Section in the product; others use Article."""
+    """RCC: Section; ROC: rule_section_label as-is; others: Article."""
     if code_id == "RCC":
         return f"[{code_id}] Section {art_num}:"
+    if code_id == "ROC":
+        return f"[{code_id}] {art_num}:"
     return f"[{code_id}] Article {art_num}:"
 
 
@@ -376,7 +438,8 @@ For EACH candidate provision above:
 3. Write a concise one-to-two sentence summary of the holding regarding that provision.
 
 RULES:
-- "article" = bare number/string as in the candidate heading (no 'Article' / 'Section' prefix).
+- "article" = for RPC/RCC, bare number/string as in the candidate heading (no leading "Article" / "Section" prefix where the heading used Article/Section).
+  For **ROC**, "article" must be the **full** provision label exactly as in the bracket line (e.g. "Rule 39, Section 3"), including "Rule" and punctuation as shown.
 - "paragraph_index" = integer (-1 for general).
 
 OUTPUT (JSON only):
@@ -420,8 +483,9 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 
         if code_id not in article_index:
             continue
-        if art_clean in article_index[code_id]:
-            valid_candidates.append((code_id, art_clean))
+        canon = _canonical_provision_key(code_id, article_index, art_clean)
+        if canon:
+            valid_candidates.append((code_id, canon))
 
     if not valid_candidates:
         return 0
@@ -442,7 +506,10 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 
         if code_id not in article_index:
             continue
-        entry = article_index[code_id].get(art_clean)
+        canon = _canonical_provision_key(code_id, article_index, art_clean)
+        if not canon:
+            continue
+        entry = article_index[code_id].get(canon)
         if not entry:
             continue
 
@@ -452,7 +519,7 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 
         final_links.append({
             "code_id": code_id,
-            "provision_id": art_clean,  # already in the correct API-matching format
+            "provision_id": canon,  # canonical DB / API key
             "paragraph_index": para_idx,
             "summary": str(link.get("summary", ""))[:4000],
             "subject_area": CODE_CONFIGS[code_id]["subject_area"],
@@ -676,7 +743,7 @@ if __name__ == "__main__":
         type=str,
         help=(
             "Comma-separated code IDs (default: RPC,RCC). "
-            "e.g. CIV,LAB,CONST,FAM,RPC,RCC"
+            "e.g. CIV,LAB,CONST,FAM,RPC,ROC,RCC"
         ),
     )
     args = parser.parse_args()

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
-import { CaseFullTextMarkdown } from '../components/CaseDigestMarkdown';
+import { CaseFullTextMarkdown, DigestMarkdownText } from '../components/CaseDigestMarkdown';
 
 describe('CaseFullTextMarkdown', () => {
     it('renders GFM pipe tables as a table element', () => {
@@ -23,6 +23,11 @@ describe('CaseFullTextMarkdown', () => {
         const { container } = render(<CaseFullTextMarkdown content={md} />);
         expect(container.querySelectorAll('a')).toHaveLength(0);
         expect(container.textContent).toMatch(/docket/);
+    });
+
+    it('repairs mojibake in full text so ñ renders correctly', () => {
+        const { container } = render(<CaseFullTextMarkdown content={'EspaÃ±a y PeÃ±a'} />);
+        expect(container.textContent).toContain('España y Peña');
     });
 
     it(
@@ -87,5 +92,12 @@ describe('CaseFullTextMarkdown', () => {
         expect(pBlocks[3].className).toMatch(/text-left/);
         expect(pBlocks[3].className).not.toMatch(/!text-center/);
         expect(pBlocks[4].className).toMatch(/text-left/);
+    });
+});
+
+describe('DigestMarkdownText', () => {
+    it('repairs mojibake in digest text so ñ renders correctly', () => {
+        const { container } = render(<DigestMarkdownText content={'SeÃ±or niÃ±o'} />);
+        expect(container.textContent).toContain('Señor niño');
     });
 });
