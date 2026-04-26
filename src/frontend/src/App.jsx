@@ -12,6 +12,7 @@ import SupremeDecisions from './components/SupremeDecisions';
 import PageLoadingFallback from './components/PageLoadingFallback';
 import ErrorBoundary from './components/ErrorBoundary';
 import LandingPage from './components/LandingPage';
+import PastDueBanner from './components/PastDueBanner';
 import FeaturePageShell from './components/FeaturePageShell';
 import PurpleGlassAmbient from './components/PurpleGlassAmbient';
 import CardVioletInnerWash from './components/CardVioletInnerWash';
@@ -607,6 +608,8 @@ function App() {
 
         return (
           <>
+            <PastDueBanner />
+
             {/* Control Bar Visibility */}
             {false && (
               <ControlBar

@@ -43,7 +43,6 @@ const TIER_LABELS = {
 
 // ─── Hardcoded admin emails (purely frontend, no DB needed) ───────────────────
 const ADMIN_EMAILS = [
-  'rnlarboleda@gmail.com',
   'rnlarboleda18@gmail.com',
 ];
 

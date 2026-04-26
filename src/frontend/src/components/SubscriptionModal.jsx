@@ -36,7 +36,7 @@ const PLANS = [
     id: 'amicus',
     name: 'Amicus',
     icon: <Zap className="w-6 h-6" />,
-    price: { monthly: 199, yearly: 1990 },
+    price: { monthly: 299, yearly: 2990 },
     color: 'from-blue-500 to-indigo-600',
     borderColor: 'border-blue-300 dark:border-blue-700',
     accentColor: 'text-blue-600 dark:text-blue-400',

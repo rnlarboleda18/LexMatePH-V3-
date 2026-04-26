@@ -113,6 +113,82 @@ def expire_cancelled_xendit_sub(cur, clerk_id: str) -> int:
         return 0
 
 
+def expire_past_due_xendit_sub(cur, clerk_id: str) -> int:
+    """
+    Downgrade a user who has been past_due for more than 30 days.
+    The 30-day grace period end is stored in subscription_expires_at when
+    _handle_cycle_failed fires.
+
+    Called on every subscription-status request.
+    Returns the number of rows updated (0 or 1).
+    """
+    try:
+        cur.execute(
+            """
+            UPDATE users SET
+                subscription_tier       = 'free',
+                subscription_status     = 'inactive',
+                subscription_source     = NULL,
+                subscription_expires_at = NULL,
+                xendit_plan_id          = NULL
+            WHERE clerk_id = %s
+              AND subscription_status = 'past_due'
+              AND subscription_source = 'xendit'
+              AND subscription_expires_at IS NOT NULL
+              AND subscription_expires_at < NOW()
+            """,
+            (clerk_id,),
+        )
+        n = cur.rowcount
+        if n:
+            logger.info("Past-due Xendit sub expired for clerk_id=%s — downgraded to free", clerk_id)
+        return n
+    except (pg_errors.UndefinedColumn, pg_errors.UndefinedTable) as e:
+        logger.debug("expire_past_due_xendit_sub skipped: %s", e)
+        return 0
+    except Exception:
+        logger.exception("expire_past_due_xendit_sub error for clerk_id=%s", clerk_id)
+        return 0
+
+
+def expire_all_past_due_xendit_subs(conn) -> int:
+    """
+    Batch downgrade of all past_due users whose 30-day grace period has elapsed.
+    Can be called from a nightly timer.
+    """
+    try:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                UPDATE users SET
+                    subscription_tier       = 'free',
+                    subscription_status     = 'inactive',
+                    subscription_source     = NULL,
+                    subscription_expires_at = NULL,
+                    xendit_plan_id          = NULL
+                WHERE subscription_status = 'past_due'
+                  AND subscription_source = 'xendit'
+                  AND subscription_expires_at IS NOT NULL
+                  AND subscription_expires_at < NOW()
+                RETURNING clerk_id
+                """
+            )
+            rows = cur.fetchall()
+            conn.commit()
+            n = len(rows)
+            if n:
+                logger.info("Batch past-due expiry: %s users downgraded to free", n)
+            return n
+    except (pg_errors.UndefinedColumn, pg_errors.UndefinedTable) as e:
+        logger.warning("expire_all_past_due_xendit_subs skipped: %s", e)
+        conn.rollback()
+        return 0
+    except Exception as e:
+        logger.error("expire_all_past_due_xendit_subs error: %s", e)
+        conn.rollback()
+        return 0
+
+
 def expire_all_cancelled_xendit_subs(conn) -> int:
     """
     Batch expiry for all cancelled Xendit subs whose period has elapsed.

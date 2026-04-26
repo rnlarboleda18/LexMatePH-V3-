@@ -11,7 +11,8 @@ from datetime import datetime, timezone, timedelta
 
 from utils.clerk_auth import get_authenticated_user_id
 from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
-from utils.trial import expire_trial_for_user, expire_cancelled_xendit_sub
+from utils.trial import expire_trial_for_user, expire_cancelled_xendit_sub, expire_past_due_xendit_sub
+from utils.email import send_cancellation_email
 
 xendit_bp = func.Blueprint()
 
@@ -35,8 +36,8 @@ XENDIT_BYPASS = os.environ.get("XENDIT_BYPASS", "").lower() in ("true", "1", "ye
 # ── Plan definitions ──────────────────────────────────────────────────────────
 # amount is in PHP (whole number, not centavos — Xendit PHP uses whole amounts)
 PLAN_CONFIGS = {
-    "amicus_monthly":    {"amount": 199,  "interval": "MONTH", "interval_count": 1, "tier": "amicus",    "label": "Amicus Monthly"},
-    "amicus_yearly":     {"amount": 1990, "interval": "YEAR",  "interval_count": 1, "tier": "amicus",    "label": "Amicus Yearly"},
+    "amicus_monthly":    {"amount": 299,  "interval": "MONTH", "interval_count": 1, "tier": "amicus",    "label": "Amicus Monthly"},
+    "amicus_yearly":     {"amount": 2990, "interval": "YEAR",  "interval_count": 1, "tier": "amicus",    "label": "Amicus Yearly"},
     "juris_monthly":     {"amount": 499,  "interval": "MONTH", "interval_count": 1, "tier": "juris",     "label": "Juris Monthly"},
     "juris_yearly":      {"amount": 4990, "interval": "YEAR",  "interval_count": 1, "tier": "juris",     "label": "Juris Yearly"},
     "barrister_monthly": {"amount": 999,  "interval": "MONTH", "interval_count": 1, "tier": "barrister", "label": "Barrister Monthly"},
@@ -266,6 +267,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                 with conn.cursor() as cur:
                     expire_trial_for_user(cur, clerk_id)
                     expire_cancelled_xendit_sub(cur, clerk_id)
+                    expire_past_due_xendit_sub(cur, clerk_id)
                     expire_founding_promo_for_user(cur, clerk_id)
                     cur.execute(
                         "SELECT is_admin, email FROM users WHERE clerk_id = %s",
@@ -568,7 +570,7 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    """SELECT xendit_plan_id, subscription_source, subscription_tier
+                    """SELECT xendit_plan_id, subscription_source, subscription_tier, email
                        FROM users WHERE clerk_id = %s""",
                     (clerk_id,),
                 )
@@ -580,7 +582,7 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
                 mimetype="application/json", status_code=404,
             )
 
-        plan_id, sub_source, sub_tier = row[0], row[1] or "", row[2] or "free"
+        plan_id, sub_source, sub_tier, user_email = row[0], row[1] or "", row[2] or "free", row[3] or ""
         sub_low = sub_source.strip().lower() if sub_source else ""
         paid = (sub_tier or "free") != "free"
         xendit_deactivated = False
@@ -682,6 +684,20 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
             "cancel_subscription: clerk_id=%s tier kept until %s, xendit_deactivated=%s",
             clerk_id, expires_at_value, xendit_deactivated,
         )
+
+        # Send cancellation confirmation email (non-blocking — failure is logged, not raised).
+        if user_email:
+            _TIER_LABELS = {
+                "amicus": "Amicus", "juris": "Juris", "barrister": "Barrister",
+            }
+            tier_label = _TIER_LABELS.get(sub_tier.lower(), sub_tier.capitalize())
+            access_until_str = (
+                expires_at_value.strftime("%B %d, %Y")
+                if hasattr(expires_at_value, "strftime")
+                else str(expires_at_value)
+            )
+            send_cancellation_email(user_email, tier_label, access_until_str)
+
         return func.HttpResponse(
             json.dumps({
                 "message": "Subscription cancelled. You keep access until the end of your paid period.",
@@ -1313,36 +1329,59 @@ def _handle_cycle_succeeded(data: dict):
 
 
 def _handle_cycle_failed(data: dict):
-    """recurring.cycle.failed — all retries exhausted."""
+    """recurring.cycle.failed — all retries exhausted.
+
+    Sets status to past_due and records a 30-day grace period in
+    subscription_expires_at. If the payment is not resolved within 30 days,
+    expire_past_due_xendit_sub() will downgrade the user to Free on their
+    next subscription-status request.
+    """
     plan_id = data.get("recurring_plan_id", "")
     if not plan_id:
         logging.warning("recurring.cycle.failed: missing recurring_plan_id")
         return
+    grace_until = datetime.now(timezone.utc) + timedelta(days=30)
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "UPDATE users SET subscription_status = 'past_due' WHERE xendit_plan_id = %s",
-                    (plan_id,),
+                    """UPDATE users SET
+                           subscription_status     = 'past_due',
+                           subscription_expires_at = %s
+                       WHERE xendit_plan_id = %s
+                         AND (subscription_expires_at IS NULL
+                              OR subscription_expires_at < %s)""",
+                    (grace_until, plan_id, grace_until),
                 )
                 conn.commit()
-        logging.warning(f"recurring.cycle.failed: plan_id={plan_id}")
+        logging.warning(
+            "recurring.cycle.failed: plan_id=%s — grace period until %s",
+            plan_id, grace_until,
+        )
     except Exception as e:
         logging.error(f"recurring.cycle.failed: DB update failed: {e}")
 
 
 def _handle_cycle_retrying(data: dict):
-    """recurring.cycle.retrying — payment failed, retry scheduled."""
+    """recurring.cycle.retrying — payment failed, Xendit is scheduling a retry.
+
+    Sets past_due but does NOT overwrite an existing grace period expiry
+    (that was already set by cycle.failed or a previous retrying event).
+    """
     plan_id = data.get("recurring_plan_id", "")
     if not plan_id:
         logging.warning("recurring.cycle.retrying: missing recurring_plan_id")
         return
+    grace_until = datetime.now(timezone.utc) + timedelta(days=30)
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
                 cur.execute(
-                    "UPDATE users SET subscription_status = 'past_due' WHERE xendit_plan_id = %s",
-                    (plan_id,),
+                    """UPDATE users SET
+                           subscription_status     = 'past_due',
+                           subscription_expires_at = COALESCE(subscription_expires_at, %s)
+                       WHERE xendit_plan_id = %s""",
+                    (grace_until, plan_id),
                 )
                 conn.commit()
         logging.info(f"recurring.cycle.retrying: plan_id={plan_id}")

@@ -9,7 +9,7 @@ const TIER_INFO = {
     textColor: 'text-blue-600 dark:text-blue-400',
     borderColor: 'border-blue-200 dark:border-blue-800',
     bgColor: 'bg-blue-50 dark:bg-blue-900/20',
-    price: '₱199/mo',
+    price: '₱299/mo',
   },
   juris: {
     icon: <Star className="w-6 h-6" />,
