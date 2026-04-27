@@ -581,7 +581,6 @@ function App() {
           onToggleQuiz={handleToggleQuiz}
           onSelectSubject={handleSelectSubject}
           onToggleAbout={handleToggleAbout}
-          onToggleLegal={handleToggleLegal}
           onToggleUpdates={() => setMode('updates')}
           onToggleSupremeDecisions={() => setMode('supreme_decisions')}
           onToggleFlashcard={handleToggleFlashcard}
