@@ -136,13 +136,16 @@ header.lex-pin-visual-header {
   backface-visibility: hidden;
 }
 
-/* Bottom mini bar — same horizontal tracking; transform forces GPU compositing.
-   Vertical position uses Tailwind bottom-0 (anchored to layout-viewport bottom). */
+/* Bottom mini bar — tracks visual viewport horizontally; transform forces GPU compositing.
+   bottom offset uses --lex-keyboard-height to counteract iOS 15+ behaviour where
+   position:fixed bottom:0 tracks the visual viewport top (i.e. rises above the keyboard).
+   Subtracting keyboardHeight pushes the bar back to the physical screen bottom. */
 .lex-pin-visual-minibar {
   left: var(--lex-vv-left, 0px) !important;
   right: auto !important;
   width: var(--lex-vv-width, 100vw) !important;
   max-width: 100%;
+  bottom: calc(var(--lex-keyboard-height, 0px) * -1) !important;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
