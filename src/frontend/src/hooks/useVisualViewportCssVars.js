@@ -25,13 +25,31 @@ export function applyVisualViewportToCssVars() {
 
 function createRafThrottledSync() {
     let raf = 0;
-    return () => {
-        if (raf) return;
+    let settle = 0;
+
+    function run() {
+        // Debounce: cancel any queued RAF so the last event's values always win.
+        // The old "skip if pending" approach could drop the final keyboard-dismiss
+        // resize, leaving --lex-vv-height permanently stuck at the keyboard height.
+        if (raf) cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => {
             raf = 0;
             applyVisualViewportToCssVars();
+            // Settle pass: iOS keyboard animations complete ~300 ms after the last
+            // resize event — re-sync once to pick up the fully-restored height.
+            clearTimeout(settle);
+            settle = setTimeout(applyVisualViewportToCssVars, 300);
         });
+    }
+
+    run.cancel = () => {
+        cancelAnimationFrame(raf);
+        clearTimeout(settle);
+        raf = 0;
+        settle = 0;
     };
+
+    return run;
 }
 
 /**
@@ -54,10 +72,15 @@ export function useVisualViewportCssVars() {
 
         if (vv) {
             vv.addEventListener('resize', run);
-            vv.addEventListener('scroll', run);
+            // 'scroll' intentionally omitted: visualViewport.scroll fires on every
+            // page scroll but offsetTop/offsetLeft don't change during normal
+            // scrolling — only during Reachability/keyboard transitions, which
+            // already fire 'resize'. Listening to 'scroll' caused the header and
+            // mini player to jitter on iOS during rubber-band / Reachability scroll.
         }
 
         return () => {
+            run.cancel();
             window.removeEventListener('resize', run);
             window.removeEventListener('orientationchange', run);
             document.removeEventListener('visibilitychange', run);
@@ -65,7 +88,6 @@ export function useVisualViewportCssVars() {
             window.removeEventListener('pageshow', run);
             if (vv) {
                 vv.removeEventListener('resize', run);
-                vv.removeEventListener('scroll', run);
             }
         };
     }, []);
