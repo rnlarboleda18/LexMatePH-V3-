@@ -591,7 +591,7 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
             # Step 1: deactivate at Xendit — this stops all future billing cycles.
             cancel_resp = requests.post(
                 f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}/deactivate",
-                headers=_xendit_headers(),
+                headers=_xendit_headers(api_version="2026-01-01"),
                 timeout=15,
             )
             if cancel_resp.status_code in (200, 201):
@@ -1096,7 +1096,7 @@ def _handle_payment_succeeded(data: dict):
                 try:
                     deact_resp = requests.post(
                         f"{XENDIT_BASE_URL}/recurring/plans/{existing_plan_id}/deactivate",
-                        headers=_xendit_headers(),
+                        headers=_xendit_headers(api_version="2026-01-01"),
                         timeout=15,
                     )
                     if deact_resp.status_code in (200, 201):
