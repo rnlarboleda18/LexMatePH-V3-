@@ -260,25 +260,9 @@ export default function SubscriptionModal({ onClose }) {
             >
               Upgrade Your Plan
             </h2>
-            <div className="mt-1.5 flex flex-wrap items-center gap-1">
-              {[
-                { name: 'GCash',        bg: '#007DFF' },
-                { name: 'Maya',         bg: '#00B562' },
-                { name: 'GrabPay',      bg: '#00B14F' },
-                { name: 'Card',         bg: '#1A1F36' },
-                { name: 'QR Ph',        bg: '#CC0000' },
-                { name: 'Direct Debit', bg: '#4F46E5' },
-              ].map(({ name, bg }) => (
-                <span
-                  key={name}
-                  style={{ backgroundColor: bg }}
-                  className="rounded px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white"
-                >
-                  {name}
-                </span>
-              ))}
-              <span className="ml-0.5 text-[10px] text-white/50">· Powered by Xendit</span>
-            </div>
+            <p className="mt-0.5 text-[11px] font-medium text-white/75">
+              GCash · Maya · GrabPay · Card · QR Ph · Direct Debit · <span className="text-white/50">Powered by Xendit</span>
+            </p>
           </div>
           <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-2 sm:w-auto sm:justify-end sm:gap-3">
             <div className="min-w-0 flex-1 overflow-x-auto pb-0.5 sm:flex-initial sm:overflow-visible">
