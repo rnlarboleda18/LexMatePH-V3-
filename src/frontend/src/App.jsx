@@ -679,7 +679,7 @@ function App() {
                     </Suspense>
                   )}
                   {effectiveMode === 'codex' && (
-                    <div className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                    <PurpleGlassAmbient showAmbient className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
                       <Suspense
                         fallback={
                           <PageLoadingFallback label="Loading LexCode…" labelVisibility="lgAndUp" />
@@ -697,10 +697,10 @@ function App() {
                           subscriptionTier={tier}
                         />
                       </Suspense>
-                    </div>
+                    </PurpleGlassAmbient>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
-                    <PurpleGlassAmbient className="min-h-screen w-full bg-transparent pb-28 font-sans text-gray-900 dark:text-gray-100 sm:pb-32">
+                    <PurpleGlassAmbient showAmbient className="min-h-screen w-full bg-transparent pb-28 font-sans text-gray-900 dark:text-gray-100 sm:pb-32">
                       <main className="mx-auto min-w-0 max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
                         <Suspense fallback={<PageLoadingFallback label="Loading Flashcards…" />}>
                           <FlashcardSetup

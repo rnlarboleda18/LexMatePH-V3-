@@ -234,7 +234,7 @@ const PlaybackProgress = ({ audioRef, isPlaying, isMinimized }) => {
                 aria-valuemax={duration && !Number.isNaN(duration) ? Math.round(duration) : 100}
                 aria-label="Playback position"
             >
-                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 bg-gray-200 dark:bg-gray-700 rounded-none overflow-hidden">
+                <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-0.5 bg-gray-200 dark:bg-zinc-700 rounded-none overflow-hidden">
                     <div className="h-full bg-primary" style={{ width: `${progressPercent}%` }} />
                 </div>
                 <div
@@ -666,7 +666,7 @@ const LexPlayer = ({
         if (error) return 'text-red-500 dark:text-red-400';
         if (isLoading) return 'text-purple-600 dark:text-purple-300 animate-pulse';
         if (currentTrack) return 'text-gray-900 dark:text-white';
-        return 'text-gray-500 dark:text-gray-400';
+        return 'text-gray-500 dark:text-zinc-400';
     }, [error, isLoading, currentTrack]);
 
     const handlePlaylistRemove = useCallback((item, index) => {
@@ -1005,15 +1005,25 @@ const LexPlayer = ({
             {/* Backdrop Overlay — explicit light/dark so it matches Layout (not only html.dark timing) */}
             <div
                 className={`absolute inset-0 backdrop-blur-md transition-opacity duration-500 animate-in fade-in ${
-                    isDarkMode ? 'bg-[#0f172a]/80' : 'bg-slate-900/15'
+                    isDarkMode
+                        ? 'bg-gradient-to-br from-violet-950/55 via-zinc-950/88 to-purple-950/45'
+                        : 'bg-slate-900/15'
                 }`}
                 onClick={onMinimize}
-            />
+            >
+                {isDarkMode && (
+                    <>
+                        <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-violet-600/15 blur-3xl" aria-hidden />
+                        <div className="pointer-events-none absolute right-0 top-32 h-80 w-80 rounded-full bg-purple-500/12 blur-3xl" aria-hidden />
+                        <div className="pointer-events-none absolute bottom-16 left-1/4 h-56 w-[min(100%,24rem)] rounded-full bg-indigo-500/10 blur-3xl" aria-hidden />
+                    </>
+                )}
+            </div>
 
             <div
                 className={`relative h-full min-h-0 w-full max-md:max-h-full overflow-hidden border border-lex backdrop-blur-[40px] animate-in zoom-in-95 slide-in-from-bottom-10 duration-500 shadow-2xl md:h-[calc(100vh-8rem)] md:w-[90vw] md:max-w-6xl md:rounded-2xl lg:w-[85vw] xl:w-[80vw] dark:border-lex ${
                     isDarkMode
-                        ? 'bg-gradient-to-br from-white/10 via-[#ffffff05] to-transparent'
+                        ? 'bg-zinc-900/90'
                         : 'bg-white/98'
                 }`}
             >
