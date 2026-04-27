@@ -7,6 +7,7 @@ from svix.webhooks import Webhook, WebhookVerificationError
 
 from utils.founding_promo import try_grant_founding_promo
 from utils.trial import try_grant_trial
+from utils.email import send_founding_promo_notification
 
 clerk_webhook_bp = func.Blueprint()
 
@@ -104,6 +105,8 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
         ADMIN_EMAILS = [e.strip().lower() for e in raw.split(",") if e.strip()]
         is_admin = email.lower() in ADMIN_EMAILS if email else False
 
+        granted_promo = False
+        promo_slot = None
         conn_string = os.environ.get("DB_CONNECTION_STRING")
         try:
             with psycopg.connect(conn_string) as conn:
@@ -141,12 +144,15 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                         """, (clerk_id,))
                     elif evt_type == "user.created":
                         # Founding promo first (slots limited); trial is the fallback for everyone else
-                        granted_promo = False
                         try:
                             try_grant_founding_promo(cur, clerk_id, is_admin)
-                            cur.execute("SELECT subscription_source FROM users WHERE clerk_id = %s", (clerk_id,))
+                            cur.execute(
+                                "SELECT subscription_source, founding_promo_slot FROM users WHERE clerk_id = %s",
+                                (clerk_id,),
+                            )
                             src_row = cur.fetchone()
-                            granted_promo = src_row and src_row[0] == "founding_promo"
+                            granted_promo = bool(src_row and src_row[0] == "founding_promo")
+                            promo_slot = src_row[1] if granted_promo else None
                         except Exception as promo_err:
                             logging.warning("founding promo grant error: %s", promo_err)
 
@@ -155,6 +161,13 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
 
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")
+            if granted_promo:
+                user_display = f"{first_name or ''} {last_name or ''}".strip() or email
+                send_founding_promo_notification(
+                    user_name=user_display,
+                    user_email=email,
+                    slot=promo_slot,
+                )
         except Exception as e:
             logging.error(f"Database error syncing user: {e}")
             return func.HttpResponse("Database error", status_code=500)
