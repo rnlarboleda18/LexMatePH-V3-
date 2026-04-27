@@ -112,17 +112,13 @@
   }
 }
 
-/* Fullscreen LexPlayer + portaled full sheets on phones / small tablets (see `data-lexplay-fullview-root`, `.lex-vv-surface`) */
-@media (max-width: 1023px) {
-  [data-lexplay-fullview-root],
-  .lex-vv-surface {
-    top: var(--lex-vv-top, 0px) !important;
-    left: var(--lex-vv-left, 0px) !important;
-    right: auto !important;
-    bottom: auto !important;
-    width: var(--lex-vv-width, 100vw) !important;
-    height: var(--lex-vv-height, 100dvh) !important;
-  }
+/* Fullscreen LexPlayer + portaled full sheets — position:fixed inset-0 from Tailwind covers
+   the full layout viewport (including bottom safe-area) natively on iOS. The old
+   height:var(--lex-vv-height) override could fall short of the safe-area zone, creating a
+   transparent gap at the bottom through which underlying modals (e.g. case digest) bled. */
+[data-lexplay-fullview-root],
+.lex-vv-surface {
+  backface-visibility: hidden;
 }
 
 /* App header + LexPlay mini bar — position:fixed on iOS is already visual-viewport-relative,
