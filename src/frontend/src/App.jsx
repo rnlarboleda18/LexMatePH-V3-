@@ -545,22 +545,15 @@ function App() {
     setMode('codex');
   }, []);
 
-  const isPublicDocumentMode = mode === 'legal' || mode === 'about';
+  const isPublicDocumentMode = mode === 'legal';
 
-  // --- Public /legal and /about (no dashboard sidebar) ---
+  // --- Public /legal (no dashboard sidebar) ---
   if (isPublicDocumentMode) {
     return (
       <PublicLayout isDarkMode={isDarkMode} toggleTheme={toggleTheme} onGoToApp={() => setMode('supreme_decisions')}>
-        {mode === 'legal' && (
-          <Suspense fallback={<PageLoadingFallback label="Loading legal information…" />}>
-            <LegalPage />
-          </Suspense>
-        )}
-        {mode === 'about' && (
-          <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
-            <About />
-          </Suspense>
-        )}
+        <Suspense fallback={<PageLoadingFallback label="Loading legal information…" />}>
+          <LegalPage />
+        </Suspense>
       </PublicLayout>
     );
   }
@@ -672,6 +665,11 @@ function App() {
                     <div className="relative z-30">
                       <LandingPage onEnterApp={handleEnterFromLanding} />
                     </div>
+                  )}
+                  {effectiveMode === 'about' && (
+                    <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
+                      <About />
+                    </Suspense>
                   )}
                   {effectiveMode === 'updates' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
