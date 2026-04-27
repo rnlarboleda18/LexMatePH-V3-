@@ -237,6 +237,7 @@ export function SubscriptionProvider({ children }) {
 
   const isTrial = !isAdmin && subscriptionSource === 'trial' && status === 'active';
   const trialExpiresAt = isTrial ? expiresAt : null;
+  const isFoundingPromo = !isAdmin && subscriptionSource === 'founding_promo' && status === 'active';
 
   const canAccess = (feature) => {
     if (isAdmin) return true;
@@ -298,6 +299,7 @@ export function SubscriptionProvider({ children }) {
         expiresAt,
         isTrial,
         trialExpiresAt,
+        isFoundingPromo,
         subscriptionSource,
         canCancelXendit,
         loading,
@@ -314,9 +316,11 @@ export function SubscriptionProvider({ children }) {
         refreshStatus,
         tierLabel: isAdmin
           ? 'Administrator'
-          : isTrial
-            ? `${TIER_LABELS[effectiveTier] || 'Free'} (Trial)`
-            : (TIER_LABELS[effectiveTier] || 'Free'),
+          : isFoundingPromo
+            ? 'Founding Promo 30-Days Trial'
+            : isTrial
+              ? `${TIER_LABELS[effectiveTier] || 'Free'} (Trial)`
+              : (TIER_LABELS[effectiveTier] || 'Free'),
         TIER_LABELS,
         FEATURE_REQUIREMENTS,
         testTier,

@@ -19,7 +19,7 @@ def get_promo_duration_days() -> int:
 
 def get_promo_slot_limit() -> int:
     try:
-        return max(0, int(os.environ.get("FOUNDING_PROMO_LIMIT", "20")))
+        return max(0, int(os.environ.get("FOUNDING_PROMO_LIMIT", "30")))
     except ValueError:
         return 20
 
@@ -33,7 +33,7 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
         cur.execute(
             """
             INSERT INTO founding_promo_state (id, claimed_count, max_slots)
-            VALUES (1, 0, 20)
+            VALUES (1, 0, 30)
             ON CONFLICT (id) DO NOTHING
             """
         )
@@ -114,8 +114,8 @@ def _expire_sql():
           AND founding_promo_granted_at IS NOT NULL
           AND founding_promo_granted_at < NOW() - make_interval(days => %s)
           AND (
-              paymongo_subscription_id IS NULL
-              OR TRIM(COALESCE(paymongo_subscription_id, '')) = ''
+              xendit_plan_id IS NULL
+              OR TRIM(COALESCE(xendit_plan_id, '')) = ''
           )
         """,
         (days,),
@@ -139,8 +139,8 @@ def expire_founding_promo_for_user(cur, clerk_id: str) -> int:
               AND founding_promo_granted_at IS NOT NULL
               AND founding_promo_granted_at < NOW() - make_interval(days => %s)
               AND (
-                  paymongo_subscription_id IS NULL
-                  OR TRIM(COALESCE(paymongo_subscription_id, '')) = ''
+                  xendit_plan_id IS NULL
+                  OR TRIM(COALESCE(xendit_plan_id, '')) = ''
               )
             """,
             (clerk_id, days),
