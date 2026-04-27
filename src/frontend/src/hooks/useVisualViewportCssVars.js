@@ -1,59 +1,72 @@
 import { useEffect } from 'react';
 
+// Change-detection cache — style.setProperty is only called when a value actually
+// changes. This makes the visualViewport 'scroll' listener a true no-op during normal
+// page scroll (offsetTop stays 0), eliminating the iOS fixed-element repaint jitter
+// that the original implementation had.
+const _cache = { top: null, left: null, width: null, height: null };
+
 /**
- * Writes window.visualViewport into :root so fixed layers (modals, LexPlayer) track
- * the visible iOS area after Reachability, virtual keyboard, and similar changes.
- * Falls back to full-layout viewport when VisualViewport is missing.
+ * Writes window.visualViewport into :root so fixed layers (header, modals, LexPlayer)
+ * track the visible iOS area after Reachability, virtual keyboard, and orientation changes.
+ * Falls back to CSS units when VisualViewport API is unavailable.
  */
 export function applyVisualViewportToCssVars() {
     if (typeof document === 'undefined') return;
     const el = document.documentElement;
     const vv = typeof window !== 'undefined' && window.visualViewport;
+
+    let top, left, width, height;
     if (!vv) {
-        el.style.setProperty('--lex-vv-top', '0px');
-        el.style.setProperty('--lex-vv-left', '0px');
-        el.style.setProperty('--lex-vv-width', '100vw');
-        el.style.setProperty('--lex-vv-height', '100dvh');
-        return;
+        top = '0px'; left = '0px'; width = '100vw'; height = '100dvh';
+    } else {
+        const px = (n) => `${Math.max(0, Math.round(n * 100) / 100)}px`;
+        top    = px(vv.offsetTop);
+        left   = px(vv.offsetLeft);
+        width  = px(vv.width);
+        height = px(vv.height);
     }
-    const px = (n) => `${Math.max(0, Math.round(n * 100) / 100)}px`;
-    el.style.setProperty('--lex-vv-top', px(vv.offsetTop));
-    el.style.setProperty('--lex-vv-left', px(vv.offsetLeft));
-    el.style.setProperty('--lex-vv-width', px(vv.width));
-    el.style.setProperty('--lex-vv-height', px(vv.height));
+
+    if (top    !== _cache.top)    { el.style.setProperty('--lex-vv-top',    top);    _cache.top    = top;    }
+    if (left   !== _cache.left)   { el.style.setProperty('--lex-vv-left',   left);   _cache.left   = left;   }
+    if (width  !== _cache.width)  { el.style.setProperty('--lex-vv-width',  width);  _cache.width  = width;  }
+    if (height !== _cache.height) { el.style.setProperty('--lex-vv-height', height); _cache.height = height; }
 }
 
 function createRafThrottledSync() {
     let raf = 0;
-    let settle = 0;
+    let settle1 = 0;
+    let settle2 = 0;
 
     function run() {
-        // Debounce: cancel any queued RAF so the last event's values always win.
-        // The old "skip if pending" approach could drop the final keyboard-dismiss
-        // resize, leaving --lex-vv-height permanently stuck at the keyboard height.
+        // Debounce: cancel any pending RAF so the last event's values always win.
         if (raf) cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => {
             raf = 0;
             applyVisualViewportToCssVars();
-            // Settle pass: iOS keyboard animations complete ~300 ms after the last
-            // resize event — re-sync once to pick up the fully-restored height.
-            clearTimeout(settle);
-            settle = setTimeout(applyVisualViewportToCssVars, 300);
+            // Two settle passes cover keyboard-dismiss animations that fire a single
+            // resize event mid-animation (leaving --lex-vv-height at a stale value):
+            // first pass at 200 ms catches most devices; second at 600 ms catches slow
+            // ones whose keyboard animation outlasts the first settle.
+            clearTimeout(settle1);
+            clearTimeout(settle2);
+            settle1 = setTimeout(applyVisualViewportToCssVars, 200);
+            settle2 = setTimeout(applyVisualViewportToCssVars, 600);
         });
     }
 
     run.cancel = () => {
         cancelAnimationFrame(raf);
-        clearTimeout(settle);
-        raf = 0;
-        settle = 0;
+        clearTimeout(settle1);
+        clearTimeout(settle2);
+        raf = 0; settle1 = 0; settle2 = 0;
     };
 
     return run;
 }
 
 /**
- * Subscribes once at app root; keeps --lex-vv-* in sync.
+ * Subscribes once at app root; keeps --lex-vv-* in sync with the iOS visual viewport.
  */
 export function useVisualViewportCssVars() {
     useEffect(() => {
@@ -70,13 +83,22 @@ export function useVisualViewportCssVars() {
         window.addEventListener('focus', run);
         window.addEventListener('pageshow', run);
 
+        // focusout fires when any input loses focus (keyboard dismiss). On iOS,
+        // visualViewport.resize sometimes does not fire after a programmatic keyboard
+        // dismiss — this is a reliable fallback to restore --lex-vv-height.
+        const onFocusOut = () => {
+            setTimeout(applyVisualViewportToCssVars, 350);
+            setTimeout(applyVisualViewportToCssVars, 750);
+        };
+        document.addEventListener('focusout', onFocusOut, true);
+
         if (vv) {
             vv.addEventListener('resize', run);
-            // 'scroll' intentionally omitted: visualViewport.scroll fires on every
-            // page scroll but offsetTop/offsetLeft don't change during normal
-            // scrolling — only during Reachability/keyboard transitions, which
-            // already fire 'resize'. Listening to 'scroll' caused the header and
-            // mini player to jitter on iOS during rubber-band / Reachability scroll.
+            // 'scroll' fires when the visual viewport scrolls within the layout viewport,
+            // which includes iOS Reachability (offsetTop changes). With change detection
+            // in applyVisualViewportToCssVars, this is a no-op during normal page scroll
+            // (offsetTop stays 0), so it cannot cause fixed-element repaint jitter.
+            vv.addEventListener('scroll', run);
         }
 
         return () => {
@@ -86,8 +108,10 @@ export function useVisualViewportCssVars() {
             document.removeEventListener('visibilitychange', run);
             window.removeEventListener('focus', run);
             window.removeEventListener('pageshow', run);
+            document.removeEventListener('focusout', onFocusOut, true);
             if (vv) {
                 vv.removeEventListener('resize', run);
+                vv.removeEventListener('scroll', run);
             }
         };
     }, []);

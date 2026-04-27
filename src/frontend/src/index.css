@@ -121,15 +121,29 @@
   backface-visibility: hidden;
 }
 
-/* App header + LexPlay mini bar — position:fixed on iOS is already visual-viewport-relative,
-   so top:0/bottom:0/left:0/right:0 from Tailwind correctly anchor to the visible area.
-   JS-var overrides (--lex-vv-top/left/width) were causing Reachability scroll jitter
-   because the scroll listener updated these vars on every page scroll frame. */
+/* App header — tracks visualViewport so it stays in the visible area during iOS
+   Reachability (offsetTop > 0) and keyboard display. The scroll listener is re-added
+   in useVisualViewportCssVars but change-detection makes it a no-op during normal page
+   scroll (offsetTop stays 0), eliminating repaint jitter. transform:translateZ(0)
+   promotes to a GPU-composited layer for smoother rendering. */
 header.lex-pin-visual-header {
+  top: var(--lex-vv-top, 0px) !important;
+  left: var(--lex-vv-left, 0px) !important;
+  right: auto !important;
+  width: var(--lex-vv-width, 100vw) !important;
+  max-width: 100%;
+  transform: translateZ(0);
   backface-visibility: hidden;
 }
 
+/* Bottom mini bar — same horizontal tracking; transform forces GPU compositing.
+   Vertical position uses Tailwind bottom-0 (anchored to layout-viewport bottom). */
 .lex-pin-visual-minibar {
+  left: var(--lex-vv-left, 0px) !important;
+  right: auto !important;
+  width: var(--lex-vv-width, 100vw) !important;
+  max-width: 100%;
+  transform: translateZ(0);
   backface-visibility: hidden;
 }
 
