@@ -188,6 +188,18 @@ export default function AccountBillingModal({ onClose }) {
                 View plans
               </button>
             )}
+            {!isAdmin && alreadyCancelled && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  openUpgradeModal();
+                }}
+                className="order-2 rounded-xl bg-gradient-to-r from-violet-600 to-purple-700 px-4 py-2.5 text-sm font-bold text-white shadow-md transition-opacity hover:opacity-95 sm:order-1"
+              >
+                Resubscribe
+              </button>
+            )}
             {showCancel && (
               <button
                 type="button"

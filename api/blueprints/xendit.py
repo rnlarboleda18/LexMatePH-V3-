@@ -1078,8 +1078,8 @@ def _handle_payment_succeeded(data: dict):
 
     # Step 2: create the Xendit recurring plan immediately using the payment token
     # from this same event. This eliminates the dependency on payment_token.activation.
+    # On upgrade, the old plan is deactivated first so the user isn't double-billed.
     if payment_token_id and customer_id:
-        # Only create if no plan exists yet for this user
         try:
             with _get_db() as conn:
                 with conn.cursor() as cur:
@@ -1088,19 +1088,55 @@ def _handle_payment_succeeded(data: dict):
                         (clerk_id,),
                     )
                     existing = cur.fetchone()
-            if existing and existing[0]:
-                logging.info(
-                    "payment.succeeded: recurring plan already exists (%s), skipping creation",
-                    existing[0],
-                )
-            else:
-                plan_id = _create_xendit_recurring_plan(
-                    clerk_id, customer_id, payment_token_id, plan_key
-                )
-                logging.info(
-                    "payment.succeeded: created recurring plan %s for clerk_id=%s plan=%s",
-                    plan_id, clerk_id, plan_key,
-                )
+            existing_plan_id = existing[0] if existing else None
+
+            if existing_plan_id:
+                # Upgrade path: deactivate the old recurring plan so the user
+                # isn't charged at the old rate on the next billing cycle.
+                try:
+                    deact_resp = requests.post(
+                        f"{XENDIT_BASE_URL}/recurring/plans/{existing_plan_id}/deactivate",
+                        headers=_xendit_headers(),
+                        timeout=15,
+                    )
+                    if deact_resp.status_code in (200, 201):
+                        logging.info(
+                            "payment.succeeded: deactivated old plan %s for upgrade (clerk_id=%s)",
+                            existing_plan_id, clerk_id,
+                        )
+                    else:
+                        logging.warning(
+                            "payment.succeeded: deactivate old plan %s returned %s — proceeding",
+                            existing_plan_id, deact_resp.status_code,
+                        )
+                except Exception as deact_err:
+                    logging.warning(
+                        "payment.succeeded: could not deactivate old plan %s: %s — proceeding",
+                        existing_plan_id, deact_err,
+                    )
+                # Clear old plan_id so _create_xendit_recurring_plan can write the new one.
+                try:
+                    with _get_db() as conn:
+                        with conn.cursor() as cur:
+                            cur.execute(
+                                "UPDATE users SET xendit_plan_id = NULL WHERE clerk_id = %s",
+                                (clerk_id,),
+                            )
+                            conn.commit()
+                except Exception as clear_err:
+                    logging.warning(
+                        "payment.succeeded: could not clear old xendit_plan_id for clerk_id=%s: %s",
+                        clerk_id, clear_err,
+                    )
+
+            plan_id = _create_xendit_recurring_plan(
+                clerk_id, customer_id, payment_token_id, plan_key
+            )
+            logging.info(
+                "payment.succeeded: created recurring plan %s for clerk_id=%s plan=%s%s",
+                plan_id, clerk_id, plan_key,
+                " (upgrade — old plan deactivated)" if existing_plan_id else "",
+            )
         except Exception as e:
             logging.warning(
                 "payment.succeeded: recurring plan creation failed for clerk_id=%s: %s — "
