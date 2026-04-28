@@ -815,7 +815,7 @@ const LexPlayer = ({
                 ref={miniBarRef}
                 role="region"
                 aria-label="LexPlay mini player"
-                className={`lex-pin-visual-minibar pointer-events-auto fixed bottom-0 left-0 right-0 ${miniZIndex} flex w-full min-w-0 flex-col overflow-hidden border-t border-lex bg-white shadow-none transition-[transform,opacity,filter] duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950`}
+                className={`pointer-events-auto fixed bottom-0 left-0 right-0 ${miniZIndex} flex w-full min-w-0 flex-col overflow-hidden border-t border-lex bg-white shadow-none transition-all duration-300 touch-manipulation pb-[env(safe-area-inset-bottom,0px)] dark:bg-zinc-950`}
             >
                 {/* Scrub strip — no extra border (shell `border-t` is the only top chrome line) */}
                 <div

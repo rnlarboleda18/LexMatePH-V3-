@@ -121,33 +121,6 @@
   backface-visibility: hidden;
 }
 
-/* App header — tracks visualViewport so it stays in the visible area during iOS
-   Reachability (offsetTop > 0) and keyboard display. backface-visibility:hidden gives
-   compositing hints without adding a CSS transform — important because the header has
-   no transition-transform, but adding transform could interact with iOS's compositor-
-   managed fixed-position adjustments and cause visual glitches. */
-header.lex-pin-visual-header {
-  top: var(--lex-vv-top, 0px) !important;
-  left: var(--lex-vv-left, 0px) !important;
-  right: auto !important;
-  width: var(--lex-vv-width, 100vw) !important;
-  max-width: 100%;
-  backface-visibility: hidden;
-}
-
-/* Bottom mini bar — same horizontal tracking. NO transform: translateZ(0) here because
-   the element carries transition-[transform] (Tailwind); adding a CSS transform would
-   make iOS's compositor-managed fixed-position repositioning animate via that transition,
-   causing the "sliding up/down" jitter. backface-visibility:hidden is enough for
-   compositing without the side-effect. */
-.lex-pin-visual-minibar {
-  left: var(--lex-vv-left, 0px) !important;
-  right: auto !important;
-  width: var(--lex-vv-width, 100vw) !important;
-  max-width: 100%;
-  backface-visibility: hidden;
-}
-
 /* Phone only: extra bottom inset so modals sit slightly higher (matches max-sm mobile scope elsewhere). */
 @media (max-width: 639px) {
   .lex-modal-overlay {
