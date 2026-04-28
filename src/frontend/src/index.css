@@ -131,16 +131,20 @@ header.lex-pin-visual-header {
   width: var(--lex-vv-width, 100vw) !important;
   max-width: 100%;
   backface-visibility: hidden;
+  touch-action: none;
 }
 
 /* Bottom mini bar: keep bottom:0 (iOS anchors it above keyboard naturally),
-   explicit width to prevent sub-pixel overflow, GPU compositing via backface-visibility. */
+   explicit width to prevent sub-pixel overflow, GPU compositing via backface-visibility.
+   touch-action:none prevents pan gestures on the bar from scrolling the page — all
+   player interactions (play, scrub, close) use pointer events which still fire normally. */
 .lex-pin-visual-minibar {
   left: var(--lex-vv-left, 0px) !important;
   right: auto !important;
   width: var(--lex-vv-width, 100vw) !important;
   max-width: 100%;
   backface-visibility: hidden;
+  touch-action: none;
 }
 
 /* Phone only: extra bottom inset so modals sit slightly higher (matches max-sm mobile scope elsewhere). */
