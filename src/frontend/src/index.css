@@ -121,6 +121,28 @@
   backface-visibility: hidden;
 }
 
+/* App header + LexPlay mini (portaled to body) — backface-visibility promotes to a GPU
+   compositing layer so iOS routes touch events correctly and the fixed elements sit above
+   the document scroll container. width/right are explicit so no sub-pixel overflow occurs. */
+header.lex-pin-visual-header {
+  top: var(--lex-vv-top, 0px) !important;
+  left: var(--lex-vv-left, 0px) !important;
+  right: auto !important;
+  width: var(--lex-vv-width, 100vw) !important;
+  max-width: 100%;
+  backface-visibility: hidden;
+}
+
+/* Bottom mini bar: keep bottom:0 (iOS anchors it above keyboard naturally),
+   explicit width to prevent sub-pixel overflow, GPU compositing via backface-visibility. */
+.lex-pin-visual-minibar {
+  left: var(--lex-vv-left, 0px) !important;
+  right: auto !important;
+  width: var(--lex-vv-width, 100vw) !important;
+  max-width: 100%;
+  backface-visibility: hidden;
+}
+
 /* Phone only: extra bottom inset so modals sit slightly higher (matches max-sm mobile scope elsewhere). */
 @media (max-width: 639px) {
   .lex-modal-overlay {
