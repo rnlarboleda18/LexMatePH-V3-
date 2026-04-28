@@ -197,8 +197,11 @@ const Layout = ({
 
             {/* Main Content Area — z-10 so in-flow stacking stays predictable */}
             <main
-                className={`relative z-10 ${hideAppChrome ? 'pt-0' : lexPlayFullscreen ? 'pt-0 lg:pt-[var(--app-header-offset)]' : 'pt-[var(--app-header-offset)]'} min-h-screen
-        ${hideAppChrome ? 'w-full !ml-0 max-w-full px-0' : `xl:ml-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'} pb-[var(--player-height,0px)]`}`}
+                className={`fixed z-10 left-0 right-0 overflow-y-auto
+        ${hideAppChrome
+            ? 'top-0 bottom-0 px-0'
+            : `${lexPlayFullscreen ? 'top-0 lg:top-[var(--app-header-offset)]' : 'top-[var(--app-header-offset)]'} bottom-[var(--player-height,0px)] xl:left-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'}`
+        }`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
                 <div
