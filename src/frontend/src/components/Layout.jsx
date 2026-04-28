@@ -185,7 +185,6 @@ const Layout = ({
                                 isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                             }`}
                             style={{
-                                willChange: 'transform',
                                 filter: flashcardStudying ? 'blur(4px)' : 'none',
                                 transition: 'filter 0.3s ease',
                             }}

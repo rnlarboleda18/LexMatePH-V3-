@@ -11,7 +11,7 @@ const _cache = { top: null, left: null, width: null, height: null, keyboardHeigh
  * track the visible iOS area after Reachability, virtual keyboard, and orientation changes.
  * Falls back to CSS units when VisualViewport API is unavailable.
  */
-export function applyVisualViewportToCssVars() {
+export function applyVisualViewportToCssVars(forceReflow = false) {
     if (typeof document === 'undefined') return;
     const el = document.documentElement;
     const vv = typeof window !== 'undefined' && window.visualViewport;
@@ -38,8 +38,9 @@ export function applyVisualViewportToCssVars() {
     if (keyboardHeight !== _cache.keyboardHeight) { el.style.setProperty('--lex-keyboard-height',  keyboardHeight); _cache.keyboardHeight = keyboardHeight; changed = true; }
 
     // Force WebKit to flush its CSS-var dependency cache so elements that use
-    // --lex-vv-height / --lex-keyboard-height re-layout synchronously.
-    if (changed) void document.body.offsetHeight;
+    // --lex-vv-height re-layout synchronously. Only done on keyboard-dismiss
+    // paths (forceReflow=true) to avoid layout thrash during Reachability scroll.
+    if (changed && forceReflow) void document.body.offsetHeight;
 }
 
 function createRafThrottledSync() {
@@ -59,8 +60,8 @@ function createRafThrottledSync() {
             // ones whose keyboard animation outlasts the first settle.
             clearTimeout(settle1);
             clearTimeout(settle2);
-            settle1 = setTimeout(applyVisualViewportToCssVars, 200);
-            settle2 = setTimeout(applyVisualViewportToCssVars, 600);
+            settle1 = setTimeout(() => applyVisualViewportToCssVars(true), 200);
+            settle2 = setTimeout(() => applyVisualViewportToCssVars(true), 600);
         });
     }
 
@@ -99,8 +100,8 @@ export function useVisualViewportCssVars() {
         // visualViewport.resize sometimes does not fire after a programmatic keyboard
         // dismiss — this is a reliable fallback to restore --lex-vv-height.
         const onFocusOut = () => {
-            setTimeout(applyVisualViewportToCssVars, 350);
-            setTimeout(applyVisualViewportToCssVars, 750);
+            setTimeout(() => applyVisualViewportToCssVars(true), 350);
+            setTimeout(() => applyVisualViewportToCssVars(true), 750);
         };
         document.addEventListener('focusout', onFocusOut, true);
 
