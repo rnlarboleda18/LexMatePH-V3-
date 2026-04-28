@@ -7,7 +7,7 @@ from svix.webhooks import Webhook, WebhookVerificationError
 
 from utils.founding_promo import try_grant_founding_promo
 from utils.trial import try_grant_trial
-from utils.email import send_founding_promo_notification
+from utils.email import send_new_signup_notification
 
 clerk_webhook_bp = func.Blueprint()
 
@@ -106,6 +106,7 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
         is_admin = email.lower() in ADMIN_EMAILS if email else False
 
         granted_promo = False
+        granted_trial = False
         promo_slot = None
         conn_string = os.environ.get("DB_CONNECTION_STRING")
         try:
@@ -157,15 +158,21 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                             logging.warning("founding promo grant error: %s", promo_err)
 
                         if not granted_promo:
-                            try_grant_trial(cur, clerk_id)
+                            granted_trial = try_grant_trial(cur, clerk_id)
 
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")
-            if granted_promo:
+            if evt_type == "user.created" and not is_admin:
                 user_display = f"{first_name or ''} {last_name or ''}".strip() or email
-                send_founding_promo_notification(
+                signup_source = (
+                    "founding_promo" if granted_promo
+                    else "trial" if granted_trial
+                    else None
+                )
+                send_new_signup_notification(
                     user_name=user_display,
                     user_email=email,
+                    source=signup_source,
                     slot=promo_slot,
                 )
         except Exception as e:

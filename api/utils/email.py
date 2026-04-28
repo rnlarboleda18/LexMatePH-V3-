@@ -247,6 +247,153 @@ def send_cancellation_email(
         return False
 
 
+# ─── Generic new-signup admin notification ────────────────────────────────────
+
+_SOURCE_LABELS = {
+    "founding_promo": "Founding Member",
+    "trial":          "24h Trial",
+    "admin_override": "Admin",
+}
+
+
+def _new_signup_notify_html(
+    user_name: str,
+    user_email: str,
+    source: str | None,
+    slot: int | None,
+) -> str:
+    source_label = _SOURCE_LABELS.get(source or "", "Free")
+    slot_row = (
+        f"""<p style="margin:0 0 4px;font-size:13px;color:#6b7280;font-weight:600;">Founding Slot</p>
+                    <p style="margin:0 0 12px;font-size:22px;font-weight:800;color:#4c1d95;">#{slot}</p>"""
+        if slot else ""
+    )
+    now_str = datetime.now(timezone.utc).strftime("%B %d, %Y at %H:%M UTC")
+    badge_color = "#7c3aed" if source == "founding_promo" else ("#0369a1" if source == "trial" else "#374151")
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>New Signup</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:'Segoe UI',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0"
+               style="background:#ffffff;border-radius:16px;overflow:hidden;
+                      box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:600px;width:100%;">
+          <tr>
+            <td style="background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 50%,#4f46e5 100%);
+                        padding:32px 40px;text-align:center;">
+              <h1 style="margin:0;font-size:26px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">
+                LexMate<span style="color:#fbbf24;">PH</span>
+              </h1>
+              <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.8);
+                         letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">
+                Admin Notification
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:36px 40px 28px;">
+              <h2 style="margin:0 0 6px;font-size:20px;font-weight:700;color:#1e1b4b;">
+                New Signup
+              </h2>
+              <p style="margin:0 0 20px;">
+                <span style="display:inline-block;background:{badge_color};color:#fff;
+                              font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;
+                              letter-spacing:0.06em;text-transform:uppercase;">{source_label}</span>
+              </p>
+              <table width="100%" cellpadding="0" cellspacing="0"
+                     style="background:#faf5ff;border:1.5px solid #ddd6fe;border-radius:12px;margin-bottom:24px;">
+                <tr>
+                  <td style="padding:20px 24px;">
+                    {slot_row}
+                    <p style="margin:0 0 4px;font-size:13px;color:#6b7280;font-weight:600;">Name</p>
+                    <p style="margin:0 0 12px;font-size:15px;color:#111827;">{user_name}</p>
+                    <p style="margin:0 0 4px;font-size:13px;color:#6b7280;font-weight:600;">Email</p>
+                    <p style="margin:0 0 12px;font-size:15px;color:#111827;">{user_email}</p>
+                    <p style="margin:0 0 4px;font-size:13px;color:#6b7280;font-weight:600;">Signed up at</p>
+                    <p style="margin:0;font-size:15px;color:#111827;">{now_str}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 40px;text-align:center;">
+              <p style="margin:0;font-size:12px;color:#9ca3af;line-height:1.6;">
+                LexMatePH Admin &bull; Automated notification
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>"""
+
+
+def _new_signup_notify_text(
+    user_name: str,
+    user_email: str,
+    source: str | None,
+    slot: int | None,
+) -> str:
+    source_label = _SOURCE_LABELS.get(source or "", "Free")
+    slot_line = f"Slot:       #{slot}\n" if slot else ""
+    now_str = datetime.now(timezone.utc).strftime("%B %d, %Y at %H:%M UTC")
+    return f"""[LexMatePH] New Signup — {source_label}
+
+{slot_line}Name:       {user_name}
+Email:      {user_email}
+Signed up:  {now_str}
+
+— LexMatePH Admin Notification
+"""
+
+
+def send_new_signup_notification(
+    user_name: str,
+    user_email: str,
+    source: str | None,
+    slot: int | None = None,
+) -> bool:
+    """Notify admin of any new user signup (free, trial, or founding promo). Non-blocking."""
+    client = _get_client()
+    sender = _sender()
+    if not client or not sender:
+        return False
+
+    source_label = _SOURCE_LABELS.get(source or "", "Free")
+    slot_part = f" — Slot #{slot}" if slot else ""
+    subject = f"[LexMatePH] New Signup — {source_label}{slot_part}: {user_name}"
+
+    try:
+        message = {
+            "senderAddress": sender,
+            "recipients": {"to": [{"address": _ADMIN_NOTIFY_EMAIL}]},
+            "content": {
+                "subject": subject,
+                "html": _new_signup_notify_html(user_name, user_email, source, slot),
+                "plainText": _new_signup_notify_text(user_name, user_email, source, slot),
+            },
+        }
+        poller = client.begin_send(message)
+        result = poller.result()
+        logger.info(
+            "Signup notification sent for %s source=%s slot=%s — messageId=%s",
+            user_email, source, slot,
+            result.get("id") if isinstance(result, dict) else result,
+        )
+        return True
+    except Exception as e:
+        logger.error("send_new_signup_notification failed for %s: %s", user_email, e)
+        return False
+
+
 # ─── Founding promo admin notification ────────────────────────────────────────
 
 def _founding_promo_notify_html(user_name: str, user_email: str, slot: int | None) -> str:
