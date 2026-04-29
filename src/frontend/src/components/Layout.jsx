@@ -195,27 +195,29 @@ const Layout = ({
                     document.body
                 )}
 
-            {/* Main Content Area — z-10 so in-flow stacking stays predictable */}
+            {/* Main Content Area — fixed full-width scroll container; sidebar offset handled inside via padding */}
             <main
-                className={`fixed z-10 left-0 right-0 overflow-y-auto
+                className={`fixed z-10 left-0 right-0 overflow-y-auto overflow-x-hidden
         ${hideAppChrome
-            ? 'top-0 bottom-0 px-0'
-            : `${lexPlayFullscreen ? 'top-0 lg:top-[var(--app-header-offset)]' : 'top-[var(--app-header-offset)]'} bottom-[var(--player-height,0px)] xl:left-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'}`
+            ? 'top-0 bottom-0'
+            : `${lexPlayFullscreen ? 'top-0 lg:top-[var(--app-header-offset)]' : 'top-[var(--app-header-offset)]'} bottom-[var(--player-height,0px)]`
         }`}
                 style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
             >
-                <div
-                    className={`${
-                        hideAppChrome
-                            ? 'max-w-full'
-                            : ['codex', 'about', 'updates', 'quiz', 'landing', 'supreme_decisions', 'browse_bar', 'flashcard'].includes(mode)
-                              ? 'max-w-full ml-0'
-                              : mainFullWidth
-                                ? 'mx-auto w-full max-w-none'
-                                : 'mx-auto max-w-7xl'
-                    }`}
-                >
-                    {children}
+                <div className={hideAppChrome ? '' : `xl:pl-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'}`}>
+                    <div
+                        className={`${
+                            hideAppChrome
+                                ? 'max-w-full'
+                                : ['codex', 'about', 'updates', 'quiz', 'landing', 'supreme_decisions', 'browse_bar', 'flashcard'].includes(mode)
+                                  ? 'max-w-full ml-0'
+                                  : mainFullWidth
+                                    ? 'mx-auto w-full max-w-none'
+                                    : 'mx-auto max-w-7xl'
+                        }`}
+                    >
+                        {children}
+                    </div>
                 </div>
             </main>
 
