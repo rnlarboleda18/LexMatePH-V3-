@@ -53,7 +53,7 @@ export default function BackupTab() {
     try {
       const h = await authHdr();
       const res = await fetch('/api/admin/db-stats', { headers: h });
-      if (!res.ok) throw new Error((await res.json()).error || res.statusText);
+      if (!res.ok) { let m = res.statusText; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
       setStats(await res.json());
     } catch (e) {
       setStatsError(e.message);

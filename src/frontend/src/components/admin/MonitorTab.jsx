@@ -203,7 +203,7 @@ function ObservationsPanel({ resource, authHdr }) {
         headers: { ...h, 'Content-Type': 'application/json' },
         body: JSON.stringify({ resource, body: text.trim() }),
       });
-      if (!res.ok) throw new Error((await res.json()).error || 'Failed to save');
+      if (!res.ok) { let m = 'Failed to save'; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
       setText('');
       await load();
     } catch (e) {
@@ -446,7 +446,7 @@ export default function MonitorTab() {
     try {
       const h = await authHdr();
       const res = await fetch('/api/admin/azure-metrics', { headers: h });
-      if (!res.ok) throw new Error((await res.json()).error || res.statusText);
+      if (!res.ok) { let m = res.statusText; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
       setData(await res.json());
     } catch (e) {
       setError(e.message);
