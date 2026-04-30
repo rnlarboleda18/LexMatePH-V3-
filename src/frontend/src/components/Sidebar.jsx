@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book } from 'lucide-react';
+import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import { SIDEBAR_NAV_ACTIVE, SIDEBAR_NAV_IDLE, SIDEBAR_MOBILE_AUTH_CARD } from '../utils/filterChromeClasses';
@@ -30,6 +30,7 @@ const Sidebar = ({
   onToggleLexPlay,
   onToggleFlashcard,
   onSelectSubject,
+  onToggleAdminTools,
 }) => {
     const { tier, tierLabel, openUpgradeModal, openAccountBillingModal, isAdmin, loading } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
@@ -136,6 +137,25 @@ const Sidebar = ({
                     </div>
                 )}
             </SignedIn>
+
+            {/* Admin Tools — only visible to admins */}
+            {isAdmin && (
+                <>
+                    <div className="my-1.5 h-px rounded-full bg-rose-200/80 dark:bg-zinc-700" />
+                    <button
+                        onClick={() => { if (onToggleAdminTools) onToggleAdminTools(); }}
+                        className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                        ${mode === 'admin_tools'
+                            ? SIDEBAR_NAV_ACTIVE
+                            : SIDEBAR_NAV_IDLE
+                        }`}
+                    >
+                        <Terminal size={20} className={`${mode === 'admin_tools' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
+                        Admin Tools
+                    </button>
+                    <div className="my-1.5 h-px rounded-full bg-violet-300/70 dark:bg-zinc-700" />
+                </>
+            )}
 
             <button
                 onClick={() => {

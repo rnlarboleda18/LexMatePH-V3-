@@ -1,0 +1,694 @@
+"""
+Admin-only Azure Functions blueprint.
+All routes require is_admin=true in the users table.
+"""
+import azure.functions as func
+import csv
+import io
+import json
+import logging
+import os
+import threading
+import uuid
+import zipfile
+from datetime import datetime, timedelta, timezone
+
+import psycopg2
+from psycopg2.extras import RealDictCursor
+
+import requests
+
+from db_pool import get_db_connection, put_db_connection
+from utils.clerk_auth import get_authenticated_user_id
+
+admin_bp = func.Blueprint()
+
+# ── In-memory backup job store ────────────────────────────────────────────────
+# Persists within a single Azure Functions worker lifetime.
+_backup_jobs: dict = {}
+_backup_lock = threading.Lock()
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _json(data, status=200):
+    return func.HttpResponse(
+        json.dumps(data, default=str),
+        mimetype="application/json",
+        status_code=status,
+        headers={"Access-Control-Allow-Origin": "*"},
+    )
+
+
+def _check_admin(req: func.HttpRequest):
+    """Returns (clerk_id, error_response). Callers must return error_response if not None."""
+    clerk_id, err = get_authenticated_user_id(req)
+    if err or not clerk_id:
+        return None, _json({"error": "Unauthorized"}, 401)
+
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("SELECT is_admin FROM users WHERE clerk_id = %s", (clerk_id,))
+            row = cur.fetchone()
+            if not row or not row.get("is_admin"):
+                return None, _json({"error": "Forbidden"}, 403)
+    except Exception as exc:
+        logging.error("Admin check DB error: %s", exc)
+        return None, _json({"error": "Internal error"}, 500)
+    finally:
+        put_db_connection(conn)
+
+    return clerk_id, None
+
+
+def _get_azure_token():
+    """Obtain an Azure management-plane bearer token.
+    Tries managed identity first (works when deployed on Azure),
+    then falls back to service-principal env vars.
+    """
+    try:
+        resp = requests.get(
+            "http://169.254.169.254/metadata/identity/oauth2/token",
+            params={"api-version": "2019-08-01", "resource": "https://management.azure.com/"},
+            headers={"Metadata": "true"},
+            timeout=3,
+        )
+        if resp.ok:
+            return resp.json().get("access_token")
+    except Exception:
+        pass
+
+    tenant = os.environ.get("AZURE_TENANT_ID")
+    client_id = os.environ.get("AZURE_CLIENT_ID")
+    client_secret = os.environ.get("AZURE_CLIENT_SECRET")
+    if tenant and client_id and client_secret:
+        try:
+            resp = requests.post(
+                f"https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token",
+                data={
+                    "grant_type": "client_credentials",
+                    "client_id": client_id,
+                    "client_secret": client_secret,
+                    "scope": "https://management.azure.com/.default",
+                },
+                timeout=10,
+            )
+            if resp.ok:
+                return resp.json().get("access_token")
+        except Exception as exc:
+            logging.warning("Azure SP auth failed: %s", exc)
+
+    return None
+
+
+# ── DB STATS ──────────────────────────────────────────────────────────────────
+
+@admin_bp.route(route="admin/db-stats", methods=["GET"])
+def admin_db_stats(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(
+                "SELECT pg_size_pretty(pg_database_size(current_database())) AS db_size,"
+                "       pg_database_size(current_database()) AS db_size_bytes"
+            )
+            size_row = cur.fetchone()
+
+            cur.execute("""
+                SELECT
+                    t.relname                                       AS table_name,
+                    s.n_live_tup                                    AS live_rows,
+                    s.n_dead_tup                                    AS dead_rows,
+                    pg_size_pretty(pg_total_relation_size(t.oid))   AS total_size,
+                    pg_total_relation_size(t.oid)                   AS total_size_bytes,
+                    pg_size_pretty(pg_relation_size(t.oid))         AS table_size,
+                    pg_size_pretty(pg_indexes_size(t.oid))          AS index_size,
+                    s.last_autovacuum,
+                    s.last_autoanalyze
+                FROM pg_class t
+                JOIN pg_stat_user_tables s ON t.oid = s.relid
+                WHERE t.relkind = 'r'
+                ORDER BY pg_total_relation_size(t.oid) DESC
+            """)
+            tables = [dict(r) for r in cur.fetchall()]
+
+            cur.execute("""
+                SELECT ROUND(
+                    100.0 * sum(heap_blks_hit) /
+                    NULLIF(sum(heap_blks_hit) + sum(heap_blks_read), 0),
+                    2
+                ) AS cache_hit_ratio
+                FROM pg_statio_user_tables
+            """)
+            cache_row = cur.fetchone()
+
+            cur.execute("""
+                SELECT count(*) AS active,
+                       (SELECT setting::int FROM pg_settings WHERE name = 'max_connections') AS max_conn
+                FROM pg_stat_activity
+                WHERE state = 'active'
+            """)
+            conn_row = cur.fetchone()
+
+            cur.execute("""
+                SELECT ROUND(
+                    100.0 * sum(idx_blks_hit) /
+                    NULLIF(sum(idx_blks_hit) + sum(idx_blks_read), 0),
+                    2
+                ) AS index_hit_ratio
+                FROM pg_statio_user_indexes
+            """)
+            idx_row = cur.fetchone()
+
+            cur.execute(
+                "SELECT xact_commit + xact_rollback AS total_txn"
+                " FROM pg_stat_database WHERE datname = current_database()"
+            )
+            txn_row = cur.fetchone()
+
+        total_dead = sum(int(t.get("dead_rows") or 0) for t in tables)
+
+        return _json({
+            "db_size":            size_row["db_size"],
+            "db_size_bytes":      int(size_row["db_size_bytes"] or 0),
+            "cache_hit_ratio":    float(cache_row["cache_hit_ratio"] or 0),
+            "index_hit_ratio":    float(idx_row["index_hit_ratio"] or 0),
+            "active_connections": int(conn_row["active"] or 0),
+            "max_connections":    int(conn_row["max_conn"] or 100),
+            "total_dead_tuples":  total_dead,
+            "total_transactions": int(txn_row["total_txn"] or 0),
+            "tables":             tables,
+        })
+    except Exception as exc:
+        logging.error("admin/db-stats: %s", exc)
+        return _json({"error": str(exc)}, 500)
+    finally:
+        put_db_connection(conn)
+
+
+# ── BACKUP ────────────────────────────────────────────────────────────────────
+
+def _run_backup(job_id: str):
+    """Background thread: dump all tables as CSVs into a ZIP, track progress."""
+    conn = None
+    try:
+        from config import DB_CONNECTION_STRING
+        conn = psycopg2.connect(DB_CONNECTION_STRING, connect_timeout=30)
+
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("""
+                SELECT relname FROM pg_class
+                WHERE relkind = 'r'
+                  AND relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = 'public')
+                ORDER BY relname
+            """)
+            tables = [r["relname"] for r in cur.fetchall()]
+
+        total = len(tables)
+        buf = io.BytesIO()
+
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+            for i, table in enumerate(tables):
+                with _backup_lock:
+                    _backup_jobs[job_id].update({
+                        "pct":          int((i / max(total, 1)) * 95),
+                        "current_table": table,
+                        "done_tables":  i,
+                        "total_tables": total,
+                    })
+
+                try:
+                    with conn.cursor() as cur:
+                        sio = io.StringIO()
+                        writer = csv.writer(sio)
+                        cur.execute(f"SELECT * FROM {table} LIMIT 0")
+                        cols = [d[0] for d in cur.description]
+                        writer.writerow(cols)
+                        cur.execute(f"SELECT * FROM {table}")
+                        writer.writerows(cur.fetchall())
+                        zf.writestr(f"{table}.csv", sio.getvalue())
+                except Exception as te:
+                    logging.warning("Backup table %s skipped: %s", table, te)
+                    zf.writestr(f"{table}.ERROR.txt", str(te))
+
+        zip_bytes = buf.getvalue()
+        ts = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M")
+
+        with _backup_lock:
+            _backup_jobs[job_id].update({
+                "status":       "done",
+                "pct":          100,
+                "done":         True,
+                "filename":     f"lexmate_backup_{ts}.zip",
+                "data":         zip_bytes,
+                "size_bytes":   len(zip_bytes),
+                "current_table": None,
+                "finished_at":  datetime.now(timezone.utc).isoformat(),
+            })
+
+    except Exception as exc:
+        logging.error("Backup job %s failed: %s", job_id, exc)
+        with _backup_lock:
+            _backup_jobs[job_id].update({
+                "status": "error",
+                "done":   True,
+                "error":  str(exc),
+            })
+    finally:
+        if conn:
+            try:
+                conn.close()
+            except Exception:
+                pass
+
+
+@admin_bp.route(route="admin/backup/start", methods=["POST"])
+def admin_backup_start(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    with _backup_lock:
+        running = [j for j in _backup_jobs.values() if j.get("status") == "running"]
+        if running:
+            return _json({"error": "A backup is already in progress"}, 409)
+
+        job_id = str(uuid.uuid4())[:8]
+        _backup_jobs[job_id] = {
+            "status":       "running",
+            "pct":          0,
+            "current_table": None,
+            "done_tables":  0,
+            "total_tables": 0,
+            "done":         False,
+            "error":        None,
+            "started_at":   datetime.now(timezone.utc).isoformat(),
+        }
+
+    threading.Thread(target=_run_backup, args=(job_id,), daemon=True).start()
+    return _json({"job_id": job_id})
+
+
+@admin_bp.route(route="admin/backup/status", methods=["GET"])
+def admin_backup_status(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    job_id = req.params.get("job_id", "")
+    with _backup_lock:
+        job = _backup_jobs.get(job_id)
+
+    if not job:
+        return _json({"error": "Job not found"}, 404)
+
+    return _json({k: v for k, v in job.items() if k != "data"})
+
+
+@admin_bp.route(route="admin/backup/download", methods=["GET"])
+def admin_backup_download(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    job_id = req.params.get("job_id", "")
+    with _backup_lock:
+        job = _backup_jobs.get(job_id)
+
+    if not job or not job.get("done") or job.get("status") != "done":
+        return _json({"error": "Backup not ready"}, 404)
+
+    return func.HttpResponse(
+        body=job["data"],
+        status_code=200,
+        headers={
+            "Content-Type": "application/zip",
+            "Content-Disposition": f'attachment; filename="{job.get("filename", "backup.zip")}"',
+        },
+    )
+
+
+# ── PIPELINE STATS ────────────────────────────────────────────────────────────
+
+@admin_bp.route(route="admin/pipeline-stats", methods=["GET"])
+def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("SELECT COUNT(*) AS total FROM sc_decided_cases")
+            total = int(cur.fetchone()["total"] or 0)
+
+            cur.execute(
+                "SELECT COUNT(*) AS n FROM sc_decided_cases"
+                " WHERE digest IS NOT NULL AND digest != ''"
+            )
+            with_digest = int(cur.fetchone()["n"] or 0)
+
+            cur.execute(
+                "SELECT COUNT(*) AS n FROM sc_decided_cases"
+                " WHERE full_text_md IS NOT NULL AND full_text_md != ''"
+            )
+            with_md = int(cur.fetchone()["n"] or 0)
+
+            try:
+                cur.execute("SELECT COUNT(*) AS n FROM legal_concepts")
+                concepts = int(cur.fetchone()["n"] or 0)
+            except Exception:
+                concepts = None
+
+            try:
+                cur.execute(
+                    "SELECT MIN(date_decided) AS oldest, MAX(date_decided) AS latest"
+                    " FROM sc_decided_cases WHERE date_decided IS NOT NULL"
+                )
+                date_row = cur.fetchone()
+                oldest_date = date_row["oldest"]
+                latest_date = date_row["latest"]
+            except Exception:
+                oldest_date = latest_date = None
+
+        return _json({
+            "total_cases":        total,
+            "with_digest":        with_digest,
+            "without_digest":     total - with_digest,
+            "with_full_text_md":  with_md,
+            "legal_concepts":     concepts,
+            "oldest_case_date":   oldest_date,
+            "latest_case_date":   latest_date,
+            "digest_coverage_pct": round(100 * with_digest / max(total, 1), 1),
+            "md_coverage_pct":    round(100 * with_md / max(total, 1), 1),
+        })
+    except Exception as exc:
+        logging.error("admin/pipeline-stats: %s", exc)
+        return _json({"error": str(exc)}, 500)
+    finally:
+        put_db_connection(conn)
+
+
+# ── AZURE METRICS + COST ──────────────────────────────────────────────────────
+
+@admin_bp.route(route="admin/azure-metrics", methods=["GET"])
+def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    sub_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
+    rg     = os.environ.get("AZURE_RESOURCE_GROUP")
+
+    if not sub_id or not rg:
+        return _json({
+            "configured": False,
+            "message": (
+                "Set AZURE_SUBSCRIPTION_ID and AZURE_RESOURCE_GROUP in your "
+                "Function App Application Settings to enable Azure metrics."
+            ),
+        })
+
+    token = _get_azure_token()
+    if not token:
+        return _json({
+            "configured": False,
+            "message": (
+                "Azure credentials not found. Add AZURE_CLIENT_ID, AZURE_CLIENT_SECRET, "
+                "and AZURE_TENANT_ID to your Application Settings, or enable Managed Identity."
+            ),
+        })
+
+    hdrs = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
+    base = f"https://management.azure.com/subscriptions/{sub_id}"
+    now  = datetime.now(timezone.utc)
+
+    # 24-hour window for metrics
+    timespan = (
+        f"{(now - timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%SZ')}/"
+        f"{now.strftime('%Y-%m-%dT%H:%M:%SZ')}"
+    )
+
+    result: dict = {"configured": True, "resources": {}, "skus": {}}
+
+    # ── PostgreSQL Flexible Server ────────────────────────────────────────────
+    pg_name = os.environ.get("AZURE_POSTGRES_SERVER_NAME")
+    if pg_name:
+        pg_rid = (
+            f"{base}/resourceGroups/{rg}"
+            f"/providers/Microsoft.DBforPostgreSQL/flexibleServers/{pg_name}"
+        )
+        try:
+            r = requests.get(f"{pg_rid}?api-version=2023-06-01-preview", headers=hdrs, timeout=10)
+            pg_meta = r.json() if r.ok else {}
+            sku = pg_meta.get("sku", {})
+            props = pg_meta.get("properties", {})
+            storage = props.get("storage", {})
+        except Exception:
+            sku = props = storage = {}
+
+        metric_names = "cpu_percent,memory_percent,storage_percent,active_connections,iops"
+        try:
+            r = requests.get(
+                f"{pg_rid}/providers/microsoft.insights/metrics",
+                params={
+                    "api-version":  "2018-01-01",
+                    "metricnames":  metric_names,
+                    "timespan":     timespan,
+                    "interval":     "PT1H",
+                    "aggregation":  "Average",
+                },
+                headers=hdrs,
+                timeout=15,
+            )
+            pg_metrics = r.json().get("value", []) if r.ok else []
+        except Exception:
+            pg_metrics = []
+
+        result["resources"]["postgresql"] = {
+            "name":         pg_name,
+            "sku":          sku,
+            "storage_mb":   storage.get("storageSizeGB", 0) * 1024 if storage else 0,
+            "storage_gb":   storage.get("storageSizeGB", 0),
+            "tier":         sku.get("tier", "Unknown"),
+            "metrics":      pg_metrics,
+        }
+        result["skus"]["postgresql"] = {
+            "name":        sku.get("name", "Unknown"),
+            "tier":        sku.get("tier", "Unknown"),
+            # Free tier limits
+            "max_storage_gb":     32 if sku.get("tier") == "Burstable" else 1024,
+            "max_connections":    50  if sku.get("tier") == "Burstable" else 500,
+            "free_compute_hours": 750,
+        }
+
+    # ── Function App ──────────────────────────────────────────────────────────
+    func_name = os.environ.get("AZURE_FUNCTION_APP_NAME")
+    if func_name:
+        func_rid = (
+            f"{base}/resourceGroups/{rg}"
+            f"/providers/Microsoft.Web/sites/{func_name}"
+        )
+        try:
+            r = requests.get(f"{func_rid}?api-version=2023-01-01", headers=hdrs, timeout=10)
+            func_meta = r.json() if r.ok else {}
+        except Exception:
+            func_meta = {}
+
+        metric_names = "FunctionExecutionCount,FunctionExecutionUnits,Http5xx,Http4xx,AverageResponseTime,MemoryWorkingSet"
+        try:
+            r = requests.get(
+                f"{func_rid}/providers/microsoft.insights/metrics",
+                params={
+                    "api-version": "2018-01-01",
+                    "metricnames": metric_names,
+                    "timespan":    timespan,
+                    "interval":    "PT1H",
+                    "aggregation": "Total,Average",
+                },
+                headers=hdrs,
+                timeout=15,
+            )
+            func_metrics = r.json().get("value", []) if r.ok else []
+        except Exception:
+            func_metrics = []
+
+        result["resources"]["function_app"] = {
+            "name":    func_name,
+            "kind":    func_meta.get("kind", ""),
+            "metrics": func_metrics,
+        }
+        result["skus"]["function_app"] = {
+            "plan": "Consumption",
+            "free_executions_per_month": 1_000_000,
+            "free_gb_seconds_per_month": 400_000,
+        }
+
+    # ── Static Web App ────────────────────────────────────────────────────────
+    swa_name = os.environ.get("AZURE_STATIC_WEB_APP_NAME")
+    if swa_name:
+        swa_rid = (
+            f"{base}/resourceGroups/{rg}"
+            f"/providers/Microsoft.Web/staticSites/{swa_name}"
+        )
+        try:
+            r = requests.get(f"{swa_rid}?api-version=2023-01-01", headers=hdrs, timeout=10)
+            swa_meta = r.json() if r.ok else {}
+            swa_sku = swa_meta.get("sku", {})
+        except Exception:
+            swa_sku = {}
+
+        result["resources"]["static_web_app"] = {
+            "name":    swa_name,
+            "sku":     swa_sku,
+            "metrics": [],
+        }
+        result["skus"]["static_web_app"] = {
+            "tier":                 swa_sku.get("tier", "Free"),
+            "free_bandwidth_gb":    100,
+            "free_builds_per_month": 2,
+        }
+
+    # ── Cost Management ───────────────────────────────────────────────────────
+    billing_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    days_elapsed  = now.day
+    # last day of current month
+    next_month    = (billing_start + timedelta(days=32)).replace(day=1)
+    billing_end   = next_month - timedelta(days=1)
+    days_in_month = billing_end.day
+
+    try:
+        r = requests.post(
+            f"{base}/providers/Microsoft.CostManagement/query?api-version=2023-11-01",
+            headers=hdrs,
+            json={
+                "type":       "ActualCost",
+                "timeframe":  "Custom",
+                "timePeriod": {
+                    "from": billing_start.strftime("%Y-%m-%dT00:00:00Z"),
+                    "to":   now.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                },
+                "dataset": {
+                    "granularity": "Daily",
+                    "aggregation": {"totalCost": {"name": "Cost", "function": "Sum"}},
+                    "grouping": [{"type": "Dimension", "name": "ServiceName"}],
+                },
+            },
+            timeout=20,
+        )
+        cost_data = r.json() if r.ok else {"error": r.text[:300]}
+    except Exception as exc:
+        cost_data = {"error": str(exc)}
+
+    result["cost"] = cost_data
+    result["billing"] = {
+        "period_start":  billing_start.strftime("%Y-%m-%d"),
+        "period_end":    billing_end.strftime("%Y-%m-%d"),
+        "days_elapsed":  days_elapsed,
+        "days_in_month": days_in_month,
+        "days_remaining": days_in_month - days_elapsed,
+    }
+
+    return _json(result)
+
+
+# ── OBSERVATIONS ──────────────────────────────────────────────────────────────
+
+def _ensure_obs_table(cur):
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS admin_observations (
+            id              SERIAL PRIMARY KEY,
+            resource        VARCHAR(100)  NOT NULL DEFAULT 'general',
+            body            TEXT          NOT NULL,
+            author_clerk_id VARCHAR(100),
+            created_at      TIMESTAMPTZ   DEFAULT NOW()
+        )
+    """)
+
+
+@admin_bp.route(route="admin/observations", methods=["GET"])
+def admin_get_observations(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    resource = req.params.get("resource", "general")
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            _ensure_obs_table(cur)
+            conn.commit()
+            cur.execute(
+                "SELECT id, resource, body, author_clerk_id, created_at"
+                " FROM admin_observations WHERE resource = %s ORDER BY created_at DESC LIMIT 50",
+                (resource,),
+            )
+            rows = [dict(r) for r in cur.fetchall()]
+        return _json(rows)
+    except Exception as exc:
+        logging.error("observations GET: %s", exc)
+        conn.rollback()
+        return _json({"error": str(exc)}, 500)
+    finally:
+        put_db_connection(conn)
+
+
+@admin_bp.route(route="admin/observations", methods=["POST"])
+def admin_post_observation(req: func.HttpRequest) -> func.HttpResponse:
+    clerk_id, err = _check_admin(req)
+    if err:
+        return err
+
+    try:
+        body = req.get_json()
+    except Exception:
+        return _json({"error": "Invalid JSON"}, 400)
+
+    resource = (body.get("resource") or "general").strip()
+    text     = (body.get("body") or "").strip()
+    if not text:
+        return _json({"error": "body is required"}, 400)
+
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            _ensure_obs_table(cur)
+            cur.execute(
+                "INSERT INTO admin_observations (resource, body, author_clerk_id)"
+                " VALUES (%s, %s, %s) RETURNING id, created_at",
+                (resource, text, clerk_id),
+            )
+            row = cur.fetchone()
+            conn.commit()
+        return _json({"ok": True, "id": row["id"], "created_at": row["created_at"]})
+    except Exception as exc:
+        logging.error("observations POST: %s", exc)
+        conn.rollback()
+        return _json({"error": str(exc)}, 500)
+    finally:
+        put_db_connection(conn)
+
+
+@admin_bp.route(route="admin/observations/{obs_id}", methods=["DELETE"])
+def admin_delete_observation(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    obs_id = req.route_params.get("obs_id")
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cur:
+            cur.execute("DELETE FROM admin_observations WHERE id = %s", (obs_id,))
+            conn.commit()
+        return _json({"ok": True})
+    except Exception as exc:
+        conn.rollback()
+        return _json({"error": str(exc)}, 500)
+    finally:
+        put_db_connection(conn)

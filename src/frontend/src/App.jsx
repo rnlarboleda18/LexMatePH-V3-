@@ -34,6 +34,7 @@ import {
 } from './utils/filterChromeClasses';
 
 const About = lazy(() => import('./components/About'));
+const AdminTools = lazy(() => import('./components/admin/AdminTools'));
 const LegalPage = lazy(() => import('./components/LegalPage'));
 const Updates = lazy(() => import('./components/Updates'));
 const LexCodeViewer = lazy(() => import('./components/LexCodeViewer'));
@@ -72,6 +73,7 @@ const MODE_TO_PATH = {
   updates: '/updates',
   browse_bar: '/bar-questions',
   lexplay: '/lexplay',
+  admin_tools: '/admin',
 };
 
 const PATH_TO_MODE = Object.fromEntries(
@@ -97,6 +99,7 @@ function App() {
     canAccess,
     openUpgradeModal,
     loading: subscriptionLoading,
+    isAdmin,
   } = useSubscription();
   const { user } = useUser();
   const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
@@ -589,6 +592,7 @@ function App() {
             setMode('lexplay');
           }}
           onToggleLexCode={handleToggleLexCode}
+          onToggleAdminTools={() => setMode('admin_tools')}
           mode={mode}
         />
       }
@@ -989,6 +993,11 @@ function App() {
                       </div>{/* bar shell */}
                       </main>
                     </PurpleGlassAmbient>
+                  )}
+                  {effectiveMode === 'admin_tools' && isAdmin && (
+                    <Suspense fallback={<PageLoadingFallback label="Loading Admin Tools…" />}>
+                      <AdminTools />
+                    </Suspense>
                   )}
                   </>
                 </ErrorBoundary>
