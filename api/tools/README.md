@@ -80,6 +80,7 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `clean_roc_criminal.py` | Clean criminal-law RoC data |
 | `fix_ligatures.py` | Fix text ligature encoding issues |
 | `manual_fix_admins.py` | Manually fix admin flags |
+| `_reset_all_except_admin.py` | **Danger:** reset all users to unregistered except the admin email (use `--dry-run` first) |
 | `polish_fixes.py` | Final polish on codal content |
 | `precache_rpc.py` | Pre-warm RPC audio cache |
 | `print_all_pdf.py` | Debug PDF content dump |

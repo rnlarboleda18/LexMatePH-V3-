@@ -8,6 +8,7 @@ import io
 import json
 import logging
 import os
+import shutil
 import subprocess
 import sys
 import threading
@@ -115,11 +116,88 @@ def _get_azure_token():
         except Exception as exc:
             logging.warning("Azure SP auth failed: %s", exc)
 
+    # Local dev fallback: use Azure CLI signed-in session.
+    az = shutil.which("az")
+    if az:
+        try:
+            token = subprocess.check_output(
+                [
+                    az,
+                    "account",
+                    "get-access-token",
+                    "--resource",
+                    "https://management.azure.com/",
+                    "--query",
+                    "accessToken",
+                    "-o",
+                    "tsv",
+                ],
+                stderr=subprocess.DEVNULL,
+                text=True,
+                timeout=8,
+            ).strip()
+            if token:
+                return token
+        except Exception:
+            pass
+
     return None
 
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
+
+
+def _first_env(*names):
+    for name in names:
+        val = (os.environ.get(name) or "").strip()
+        if val:
+            return val
+    return None
+
+
+def _az_cli_tsv(args):
+    az = shutil.which("az")
+    if not az:
+        return None
+    try:
+        out = subprocess.check_output(
+            [az] + args,
+            stderr=subprocess.DEVNULL,
+            text=True,
+            timeout=8,
+        ).strip()
+        return out or None
+    except Exception:
+        return None
+
+
+def _resolve_subscription_id():
+    return _first_env("AZURE_SUBSCRIPTION_ID", "AZURE_SUBSCRIPTION") or _az_cli_tsv(
+        ["account", "show", "--query", "id", "-o", "tsv"]
+    )
+
+
+def _resolve_resource_group():
+    rg = _first_env("AZURE_RESOURCE_GROUP", "AZURE_POSTGRES_RG")
+    if rg:
+        return rg
+    # Practical local default in this workspace.
+    exists = _az_cli_tsv(["group", "exists", "--name", "LexMatePH"])
+    return "LexMatePH" if exists == "true" else None
+
+
+def _arm_list_first_name(base_url, headers, provider_path):
+    try:
+        r = requests.get(f"{base_url}/{provider_path}", headers=headers, timeout=10)
+        if not r.ok:
+            return None
+        values = r.json().get("value", [])
+        if not values:
+            return None
+        return values[0].get("name")
+    except Exception:
+        return None
 
 
 def _refresh_pipeline_state_locked() -> None:
@@ -549,15 +627,16 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
     if err:
         return err
 
-    sub_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
-    rg     = os.environ.get("AZURE_RESOURCE_GROUP")
+    sub_id = _resolve_subscription_id()
+    rg = _resolve_resource_group()
 
     if not sub_id or not rg:
         return _json({
             "configured": False,
             "message": (
                 "Set AZURE_SUBSCRIPTION_ID and AZURE_RESOURCE_GROUP in your "
-                "Function App Application Settings to enable Azure metrics."
+                "Function App Application Settings (or sign in with Azure CLI locally) "
+                "to enable Azure metrics."
             ),
         })
 
@@ -584,7 +663,13 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
     result: dict = {"configured": True, "resources": {}, "skus": {}}
 
     # ── PostgreSQL Flexible Server ────────────────────────────────────────────
-    pg_name = os.environ.get("AZURE_POSTGRES_SERVER_NAME")
+    pg_name = _first_env("AZURE_POSTGRES_SERVER_NAME", "AZURE_POSTGRES_SERVER")
+    if not pg_name:
+        pg_name = _arm_list_first_name(
+            base,
+            hdrs,
+            f"resourceGroups/{rg}/providers/Microsoft.DBforPostgreSQL/flexibleServers?api-version=2023-06-01-preview",
+        )
     if pg_name:
         pg_rid = (
             f"{base}/resourceGroups/{rg}"
@@ -635,7 +720,13 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
         }
 
     # ── Function App ──────────────────────────────────────────────────────────
-    func_name = os.environ.get("AZURE_FUNCTION_APP_NAME")
+    func_name = _first_env("AZURE_FUNCTION_APP_NAME")
+    if not func_name:
+        func_name = _arm_list_first_name(
+            base,
+            hdrs,
+            f"resourceGroups/{rg}/providers/Microsoft.Web/sites?api-version=2023-01-01",
+        )
     if func_name:
         func_rid = (
             f"{base}/resourceGroups/{rg}"
@@ -677,7 +768,13 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
         }
 
     # ── Static Web App ────────────────────────────────────────────────────────
-    swa_name = os.environ.get("AZURE_STATIC_WEB_APP_NAME")
+    swa_name = _first_env("AZURE_STATIC_WEB_APP_NAME")
+    if not swa_name:
+        swa_name = _arm_list_first_name(
+            base,
+            hdrs,
+            f"resourceGroups/{rg}/providers/Microsoft.Web/staticSites?api-version=2023-01-01",
+        )
     if swa_name:
         swa_rid = (
             f"{base}/resourceGroups/{rg}"
