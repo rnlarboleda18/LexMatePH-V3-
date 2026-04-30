@@ -17,7 +17,6 @@
 
 ## Project layout
 ```
-admin_app/         Admin dashboard (Next.js frontend + Python backend)
 api/               Main Flask API
   blueprints/      Route modules (auth, search, payments, …)
   brain/           AI linking engine
@@ -43,7 +42,6 @@ docs/              Architecture & planning docs
 ## Files Claude should focus on
 - `api/` — all Python source
 - `src/` — frontend + backend source
-- `admin_app/` — admin tooling
 - `LexCode/pipelines/`, `LexCode/scripts/` — data pipeline logic
 
 ## Files Claude should ignore

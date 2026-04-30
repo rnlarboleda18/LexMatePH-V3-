@@ -1,7 +1,6 @@
 ﻿<#
   LexMatePH v3 - start local dev stack (cloud DB via api/local.settings.json).
   Order: Azure Functions (:7071) -> wait -> Vite (:5173) -> wait -> SWA (:4280)
-         Admin backend (:8000) + Admin frontend (:3000) started alongside.
 #>
 
 $Root = $PSScriptRoot
@@ -22,10 +21,7 @@ $env:ENVIRONMENT = $null
 # -- Paths --------------------------------------------------------------------
 $apiDir           = Join-Path $Root "api"
 $frontendDir      = Join-Path $Root "src\frontend"
-$adminBackendDir  = Join-Path $Root "admin_app\backend"
-$adminFrontendDir = Join-Path $Root "admin_app\frontend"
 $venvActivate     = Join-Path $apiDir ".venv\Scripts\activate.bat"
-$adminVenvPython  = Join-Path $adminBackendDir ".venv\Scripts\python.exe"
 $localSettings    = Join-Path $apiDir "local.settings.json"
 
 # -- Prerequisites ------------------------------------------------------------
@@ -40,16 +36,6 @@ if (-not (Test-Path $venvActivate)) {
 }
 if (-not (Test-Path (Join-Path $frontendDir "node_modules"))) {
     Write-Host "[WARN]  node_modules missing - run: cd src\frontend && npm install" -ForegroundColor Yellow
-}
-if (-not (Test-Path $adminVenvPython)) {
-    Write-Host "[WARN]  Admin backend venv not found. To set it up:" -ForegroundColor Yellow
-    Write-Host "          cd admin_app\backend" -ForegroundColor Yellow
-    Write-Host "          python -m venv .venv" -ForegroundColor Yellow
-    Write-Host "          .\.venv\Scripts\pip install -r requirements.txt" -ForegroundColor Yellow
-    Write-Host "        Admin backend (port 8000) will be skipped." -ForegroundColor DarkYellow
-}
-if (-not (Test-Path (Join-Path $adminFrontendDir "node_modules"))) {
-    Write-Host "[WARN]  admin_app\frontend\node_modules missing - run: cd admin_app\frontend && npm install" -ForegroundColor Yellow
 }
 
 $funcCmd = Get-Command func -ErrorAction SilentlyContinue
@@ -71,8 +57,6 @@ Write-Host "[INFO] Access URLs once running:" -ForegroundColor Yellow
 Write-Host "       Main app  (SWA):         http://localhost:4280" -ForegroundColor Green
 Write-Host "       Main app  (Vite direct): http://localhost:5173" -ForegroundColor DarkGray
 Write-Host "       Main API  (Functions):   http://localhost:7071" -ForegroundColor DarkGray
-Write-Host "       Admin app (Next.js):     http://localhost:3000" -ForegroundColor Green
-Write-Host "       Admin API (FastAPI):     http://localhost:8000" -ForegroundColor Green
 Write-Host "       LAN:                     http://$($localIp):4280" -ForegroundColor Green
 Write-Host ""
 
@@ -213,31 +197,6 @@ if (-not $swaExists) {
     Start-Process cmd -ArgumentList "/k", "`"$swaBat`""
 }
 
-# -- 4. Admin backend (:8000) -------------------------------------------------
-if (Test-Path $adminVenvPython) {
-    Write-Host "`n[START] Admin backend (FastAPI) -> http://localhost:8000" -ForegroundColor Yellow
-    $adminApiBat = Join-Path $env:TEMP "lexmate_admin_api.bat"
-    $adminApiBatContent = "@echo off`r`n"
-    $adminApiBatContent += "cd /d `"$adminBackendDir`"`r`n"
-    $adminApiBatContent += "echo [ADMIN API] Starting on http://localhost:8000 ...`r`n"
-    $adminApiBatContent += "`"$adminVenvPython`" -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload`r`n"
-    Set-Content -Path $adminApiBat -Value $adminApiBatContent -Encoding ASCII
-    Start-Process cmd -ArgumentList "/k", "`"$adminApiBat`""
-} else {
-    Write-Host "`n[SKIP] Admin backend - venv not set up (see warnings above)." -ForegroundColor DarkGray
-}
-
-# -- 5. Admin frontend (:3000) ------------------------------------------------
-Write-Host "`n[START] Admin frontend (Next.js) -> http://localhost:3000" -ForegroundColor Yellow
-$adminFeBat = Join-Path $env:TEMP "lexmate_admin_fe.bat"
-$adminFeBatContent = "@echo off`r`n"
-$adminFeBatContent += "cd /d `"$adminFrontendDir`"`r`n"
-$adminFeBatContent += "if not exist node_modules call npm install`r`n"
-$adminFeBatContent += "echo [ADMIN FE] Starting on http://localhost:3000 ...`r`n"
-$adminFeBatContent += "npm run dev`r`n"
-Set-Content -Path $adminFeBat -Value $adminFeBatContent -Encoding ASCII
-Start-Process cmd -ArgumentList "/k", "`"$adminFeBat`""
-
 # -- Done ---------------------------------------------------------------------
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
@@ -245,8 +204,6 @@ Write-Host "  All processes launched." -ForegroundColor Green
 Write-Host ""
 Write-Host "  Main app:   http://localhost:4280  (SWA - recommended)" -ForegroundColor Green
 Write-Host "              http://localhost:5173  (Vite direct)" -ForegroundColor DarkGray
-Write-Host "  Admin app:  http://localhost:3000  (Next.js)" -ForegroundColor Green
-Write-Host "  Admin API:  http://localhost:8000  (FastAPI)" -ForegroundColor Green
 Write-Host "  LAN:        http://$($localIp):4280" -ForegroundColor Green
 Write-Host ""
 Write-Host "  Close CMD windows or run restart_all.ps1 to stop." -ForegroundColor DarkGray

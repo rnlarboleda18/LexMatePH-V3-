@@ -8,10 +8,13 @@ import io
 import json
 import logging
 import os
+import subprocess
+import sys
 import threading
 import uuid
 import zipfile
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -27,6 +30,18 @@ admin_bp = func.Blueprint()
 # Persists within a single Azure Functions worker lifetime.
 _backup_jobs: dict = {}
 _backup_lock = threading.Lock()
+
+# ── In-memory pipeline process state ───────────────────────────────────────────
+# Persists within a single Azure Functions worker lifetime.
+_pipeline_lock = threading.Lock()
+_pipeline_proc: subprocess.Popen | None = None
+_pipeline_state: dict = {
+    "mode": None,
+    "status": "idle",
+    "started_at": None,
+    "finished_at": None,
+    "last_exit_code": None,
+}
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -100,6 +115,86 @@ def _get_azure_token():
             logging.warning("Azure SP auth failed: %s", exc)
 
     return None
+
+
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[2]
+
+
+def _refresh_pipeline_state_locked() -> None:
+    """Refresh in-memory pipeline state from subprocess status (lock must be held)."""
+    global _pipeline_proc
+    if _pipeline_proc is None:
+        return
+    rc = _pipeline_proc.poll()
+    if rc is None:
+        return
+    _pipeline_state["status"] = "done" if rc == 0 else "failed"
+    _pipeline_state["finished_at"] = datetime.now(timezone.utc).isoformat()
+    _pipeline_state["last_exit_code"] = int(rc)
+    _pipeline_proc = None
+
+
+def _pipeline_snapshot() -> dict:
+    with _pipeline_lock:
+        _refresh_pipeline_state_locked()
+        return {
+            "running": _pipeline_proc is not None,
+            "mode": _pipeline_state.get("mode"),
+            "status": _pipeline_state.get("status"),
+            "started_at": _pipeline_state.get("started_at"),
+            "finished_at": _pipeline_state.get("finished_at"),
+            "last_exit_code": _pipeline_state.get("last_exit_code"),
+        }
+
+
+def _start_pipeline(mode: str) -> tuple[dict | None, str | None]:
+    """
+    Start a pipeline subprocess.
+    Returns (result, error_message). Caller serializes result or error.
+    """
+    global _pipeline_proc
+
+    root = _repo_root()
+    if mode == "full":
+        script = root / "scripts" / "elib_digest_pipeline.py"
+        cmd = [sys.executable, "-u", str(script)]
+    elif mode == "resume":
+        # Resume mode: continue pending digest work on already-ingested rows.
+        script = root / "scripts" / "finish_elib_pipeline_digests.py"
+        cmd = [sys.executable, "-u", str(script), "--max-passes", "1"]
+    else:
+        return None, "Unsupported pipeline mode"
+
+    if not script.exists():
+        return None, f"Pipeline script not found: {script}"
+
+    with _pipeline_lock:
+        _refresh_pipeline_state_locked()
+        if _pipeline_proc is not None:
+            return None, "Pipeline is already running"
+        try:
+            _pipeline_proc = subprocess.Popen(
+                cmd,
+                cwd=str(root),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            _pipeline_state["mode"] = mode
+            _pipeline_state["status"] = "running"
+            _pipeline_state["started_at"] = datetime.now(timezone.utc).isoformat()
+            _pipeline_state["finished_at"] = None
+            _pipeline_state["last_exit_code"] = None
+            return {
+                "ok": True,
+                "mode": mode,
+                "pid": int(_pipeline_proc.pid),
+                "status": "running",
+                "started_at": _pipeline_state["started_at"],
+            }, None
+        except Exception as exc:
+            _pipeline_proc = None
+            return None, str(exc)
 
 
 # ── DB STATS ──────────────────────────────────────────────────────────────────
@@ -392,6 +487,57 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
         return _json({"error": str(exc)}, 500)
     finally:
         put_db_connection(conn)
+
+
+@admin_bp.route(route="admin/pipeline/start", methods=["POST"])
+def admin_pipeline_start(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+    result, start_err = _start_pipeline("full")
+    if start_err:
+        status = 409 if "already running" in start_err.lower() else 500
+        return _json({"error": start_err}, status)
+    return _json(result, 200)
+
+
+@admin_bp.route(route="admin/pipeline/resume", methods=["POST"])
+def admin_pipeline_resume(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+    result, start_err = _start_pipeline("resume")
+    if start_err:
+        status = 409 if "already running" in start_err.lower() else 500
+        return _json({"error": start_err}, status)
+    return _json(result, 200)
+
+
+@admin_bp.route(route="admin/pipeline/stop", methods=["POST"])
+def admin_pipeline_stop(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    global _pipeline_proc
+    with _pipeline_lock:
+        _refresh_pipeline_state_locked()
+        if _pipeline_proc is None:
+            return _json({"error": "Pipeline is not running"}, 409)
+        try:
+            _pipeline_proc.terminate()
+            _pipeline_state["status"] = "stopping"
+            return _json({"ok": True, "status": "stopping"}, 200)
+        except Exception as exc:
+            return _json({"error": str(exc)}, 500)
+
+
+@admin_bp.route(route="admin/pipeline/status", methods=["GET"])
+def admin_pipeline_status(req: func.HttpRequest) -> func.HttpResponse:
+    _, err = _check_admin(req)
+    if err:
+        return err
+    return _json(_pipeline_snapshot(), 200)
 
 
 # ── AZURE METRICS + COST ──────────────────────────────────────────────────────
