@@ -15,6 +15,7 @@ import uuid
 import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Optional, Tuple
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -34,7 +35,7 @@ _backup_lock = threading.Lock()
 # ── In-memory pipeline process state ───────────────────────────────────────────
 # Persists within a single Azure Functions worker lifetime.
 _pipeline_lock = threading.Lock()
-_pipeline_proc: subprocess.Popen | None = None
+_pipeline_proc: Optional[subprocess.Popen] = None
 _pipeline_state: dict = {
     "mode": None,
     "status": "idle",
@@ -148,7 +149,7 @@ def _pipeline_snapshot() -> dict:
         }
 
 
-def _start_pipeline(mode: str) -> tuple[dict | None, str | None]:
+def _start_pipeline(mode: str) -> Tuple[Optional[dict], Optional[str]]:
     """
     Start a pipeline subprocess.
     Returns (result, error_message). Caller serializes result or error.
@@ -199,7 +200,7 @@ def _start_pipeline(mode: str) -> tuple[dict | None, str | None]:
 
 # ── DB STATS ──────────────────────────────────────────────────────────────────
 
-@admin_bp.route(route="admin/db-stats", methods=["GET"])
+@admin_bp.route(route="ops/db-stats", methods=["GET"])
 def admin_db_stats(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -362,7 +363,7 @@ def _run_backup(job_id: str):
                 pass
 
 
-@admin_bp.route(route="admin/backup/start", methods=["POST"])
+@admin_bp.route(route="ops/backup/start", methods=["POST"])
 def admin_backup_start(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -389,7 +390,7 @@ def admin_backup_start(req: func.HttpRequest) -> func.HttpResponse:
     return _json({"job_id": job_id})
 
 
-@admin_bp.route(route="admin/backup/status", methods=["GET"])
+@admin_bp.route(route="ops/backup/status", methods=["GET"])
 def admin_backup_status(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -405,7 +406,7 @@ def admin_backup_status(req: func.HttpRequest) -> func.HttpResponse:
     return _json({k: v for k, v in job.items() if k != "data"})
 
 
-@admin_bp.route(route="admin/backup/download", methods=["GET"])
+@admin_bp.route(route="ops/backup/download", methods=["GET"])
 def admin_backup_download(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -430,7 +431,7 @@ def admin_backup_download(req: func.HttpRequest) -> func.HttpResponse:
 
 # ── PIPELINE STATS ────────────────────────────────────────────────────────────
 
-@admin_bp.route(route="admin/pipeline-stats", methods=["GET"])
+@admin_bp.route(route="ops/pipeline-stats", methods=["GET"])
 def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -489,7 +490,7 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
         put_db_connection(conn)
 
 
-@admin_bp.route(route="admin/pipeline/start", methods=["POST"])
+@admin_bp.route(route="ops/pipeline/start", methods=["POST"])
 def admin_pipeline_start(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -501,7 +502,7 @@ def admin_pipeline_start(req: func.HttpRequest) -> func.HttpResponse:
     return _json(result, 200)
 
 
-@admin_bp.route(route="admin/pipeline/resume", methods=["POST"])
+@admin_bp.route(route="ops/pipeline/resume", methods=["POST"])
 def admin_pipeline_resume(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -513,7 +514,7 @@ def admin_pipeline_resume(req: func.HttpRequest) -> func.HttpResponse:
     return _json(result, 200)
 
 
-@admin_bp.route(route="admin/pipeline/stop", methods=["POST"])
+@admin_bp.route(route="ops/pipeline/stop", methods=["POST"])
 def admin_pipeline_stop(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -532,7 +533,7 @@ def admin_pipeline_stop(req: func.HttpRequest) -> func.HttpResponse:
             return _json({"error": str(exc)}, 500)
 
 
-@admin_bp.route(route="admin/pipeline/status", methods=["GET"])
+@admin_bp.route(route="ops/pipeline/status", methods=["GET"])
 def admin_pipeline_status(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -542,7 +543,7 @@ def admin_pipeline_status(req: func.HttpRequest) -> func.HttpResponse:
 
 # ── AZURE METRICS + COST ──────────────────────────────────────────────────────
 
-@admin_bp.route(route="admin/azure-metrics", methods=["GET"])
+@admin_bp.route(route="ops/azure-metrics", methods=["GET"])
 def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -757,7 +758,7 @@ def _ensure_obs_table(cur):
     """)
 
 
-@admin_bp.route(route="admin/observations", methods=["GET"])
+@admin_bp.route(route="ops/observations", methods=["GET"])
 def admin_get_observations(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
@@ -784,7 +785,7 @@ def admin_get_observations(req: func.HttpRequest) -> func.HttpResponse:
         put_db_connection(conn)
 
 
-@admin_bp.route(route="admin/observations", methods=["POST"])
+@admin_bp.route(route="ops/observations", methods=["POST"])
 def admin_post_observation(req: func.HttpRequest) -> func.HttpResponse:
     clerk_id, err = _check_admin(req)
     if err:
@@ -820,7 +821,7 @@ def admin_post_observation(req: func.HttpRequest) -> func.HttpResponse:
         put_db_connection(conn)
 
 
-@admin_bp.route(route="admin/observations/{obs_id}", methods=["DELETE"])
+@admin_bp.route(route="ops/observations/{obs_id}", methods=["DELETE"])
 def admin_delete_observation(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:

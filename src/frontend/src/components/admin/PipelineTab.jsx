@@ -71,7 +71,7 @@ export default function PipelineTab() {
     setStatsError(null);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/admin/pipeline-stats', { headers: h });
+      const res = await fetch('/api/ops/pipeline-stats', { headers: h });
       if (!res.ok) { let m = res.statusText; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
       setStats(await res.json());
     } catch (e) {
@@ -131,7 +131,7 @@ export default function PipelineTab() {
 
         <div className="mb-5 flex flex-wrap gap-3">
           <ActionButton
-            onClick={() => callPipeline('/api/admin/pipeline/start', 'Full pipeline')}
+            onClick={() => callPipeline('/api/ops/pipeline/start', 'Full pipeline')}
             disabled={actionLoading}
             icon={Play}
           >
@@ -140,7 +140,7 @@ export default function PipelineTab() {
           </ActionButton>
 
           <ActionButton
-            onClick={() => callPipeline('/api/admin/pipeline/resume', 'Resume pipeline')}
+            onClick={() => callPipeline('/api/ops/pipeline/resume', 'Resume pipeline')}
             disabled={actionLoading}
             variant="secondary"
             icon={SkipForward}
@@ -150,7 +150,7 @@ export default function PipelineTab() {
           </ActionButton>
 
           <ActionButton
-            onClick={() => callPipeline('/api/admin/pipeline/stop', 'Stop pipeline')}
+            onClick={() => callPipeline('/api/ops/pipeline/stop', 'Stop pipeline')}
             disabled={actionLoading}
             variant="danger"
             icon={Square}
