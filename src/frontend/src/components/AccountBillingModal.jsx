@@ -26,6 +26,8 @@ export default function AccountBillingModal({ onClose }) {
     subscriptionSource,
     canCancelXendit,
     isAdmin,
+    isFoundingPromo,
+    foundingPromoDaysLeft,
     refreshStatus,
     openUpgradeModal,
   } = useSubscription();
@@ -155,9 +157,17 @@ export default function AccountBillingModal({ onClose }) {
             )}
             {expiresAt && status !== 'cancelled' && (
               <div className="flex justify-between gap-3">
-                <dt className="text-gray-500 dark:text-gray-400">Next renewal</dt>
+                <dt className="text-gray-500 dark:text-gray-400">{isFoundingPromo ? 'Trial ends' : 'Next renewal'}</dt>
                 <dd className="text-right text-gray-800 dark:text-zinc-200">
                   {new Date(expiresAt).toLocaleDateString()}
+                </dd>
+              </div>
+            )}
+            {isFoundingPromo && foundingPromoDaysLeft !== null && (
+              <div className="flex justify-between gap-3">
+                <dt className="text-gray-500 dark:text-gray-400">Days remaining</dt>
+                <dd className="text-right font-semibold text-amber-700 dark:text-amber-400">
+                  {foundingPromoDaysLeft} day{foundingPromoDaysLeft !== 1 ? 's' : ''}
                 </dd>
               </div>
             )}
@@ -167,6 +177,15 @@ export default function AccountBillingModal({ onClose }) {
             <p className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
               Your subscription is cancelled. You keep full {tierLabel} access until <strong>{new Date(expiresAt).toLocaleDateString()}</strong>, then your account moves to the Free plan automatically.
             </p>
+          )}
+
+          {isFoundingPromo && (
+            <div className="rounded-lg border border-violet-200 bg-violet-50 p-3 text-xs text-violet-900 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-200">
+              <p className="font-semibold mb-1">Founding Promo — 30-Day Free Trial</p>
+              <p>
+                After your trial ends{expiresAt ? <> on <strong>{new Date(expiresAt).toLocaleDateString()}</strong></> : null}, your account will automatically be converted to the <strong>Free tier</strong> unless you upgrade to a paid plan. Upgrade anytime to keep full access.
+              </p>
+            </div>
           )}
 
           {errorMsg && (

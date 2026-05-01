@@ -101,7 +101,10 @@ export function SubscriptionProvider({ children }) {
     }
 
     const u = userRef.current;
-    if (!u) return null;
+    if (!u) {
+      setLoading(true);
+      return null;
+    }
 
     const emails = u.emailAddresses || [];
     const clerkAdmin = isAdminEmail(emails);
@@ -232,12 +235,26 @@ export function SubscriptionProvider({ children }) {
     };
   }, [isLoaded, userLoaded, isSignedIn, user, fetchSubscriptionStatus]);
 
+  // Auto-open Account & Billing modal once per browser session when a founding promo user signs in
+  useEffect(() => {
+    if (loading || !isSignedIn || !user?.id) return;
+    const isPromo = subscriptionSource === 'founding_promo' && status === 'active';
+    if (!isPromo) return;
+    const key = `fp_welcome_${user.id}`;
+    if (sessionStorage.getItem(key)) return;
+    sessionStorage.setItem(key, '1');
+    setShowAccountBillingModal(true);
+  }, [loading, isSignedIn, user?.id, subscriptionSource, status]);
+
   // Effective tier takes admin override first, then test tier, then real tier
   const effectiveTier = isAdmin ? 'barrister' : (testTier || tier);
 
   const isTrial = !isAdmin && subscriptionSource === 'trial' && status === 'active';
   const trialExpiresAt = isTrial ? expiresAt : null;
   const isFoundingPromo = !isAdmin && subscriptionSource === 'founding_promo' && status === 'active';
+  const foundingPromoDaysLeft = isFoundingPromo && expiresAt
+    ? Math.max(0, Math.ceil((new Date(expiresAt) - Date.now()) / (1000 * 60 * 60 * 24)))
+    : null;
 
   const canAccess = (feature) => {
     if (isAdmin) return true;
@@ -300,6 +317,7 @@ export function SubscriptionProvider({ children }) {
         isTrial,
         trialExpiresAt,
         isFoundingPromo,
+        foundingPromoDaysLeft,
         subscriptionSource,
         canCancelXendit,
         loading,

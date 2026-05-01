@@ -291,7 +291,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         """
                         SELECT subscription_tier, subscription_status, subscription_expires_at,
                                is_admin, email, founding_promo_slot, subscription_source,
-                               xendit_plan_id
+                               xendit_plan_id, founding_promo_granted_at
                         FROM users WHERE clerk_id = %s
                         """,
                         (clerk_id,),
@@ -307,7 +307,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     row = cur.fetchone()
                     if row:
                         tier, email, plan_id = row
-                        row = (tier, "inactive", None, False, email, None, None, plan_id)
+                        row = (tier, "inactive", None, False, email, None, None, plan_id, None)
 
                 logging.info(f"[subscription-status] clerk_id={clerk_id}, found={row is not None}")
 
@@ -325,7 +325,14 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
                     )
 
-                tier, status, expires_at, is_admin, email, founding_slot, sub_source, xendit_plan_id = row
+                tier, status, expires_at, is_admin, email, founding_slot, sub_source, xendit_plan_id, founding_granted_at = row
+
+                # Founding promo stores expiry via founding_promo_granted_at + N days.
+                # Back-fill expires_at for users granted before this fix was deployed.
+                if not expires_at and (sub_source or "").strip().lower() == "founding_promo" and founding_granted_at:
+                    from datetime import timedelta
+                    from utils.founding_promo import get_promo_duration_days
+                    expires_at = founding_granted_at + timedelta(days=get_promo_duration_days())
 
                 if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
                     is_admin = True

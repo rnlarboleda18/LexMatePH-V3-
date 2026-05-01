@@ -244,7 +244,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     cur.execute(
                         """
                         SELECT subscription_tier, subscription_status, subscription_expires_at, is_admin, email,
-                               founding_promo_slot, subscription_source
+                               founding_promo_slot, subscription_source, founding_promo_granted_at
                         FROM users WHERE clerk_id = %s
                         """,
                         (clerk_id,),
@@ -263,20 +263,26 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     if row:
                         tier, email = row
                         status, expires_at, is_admin = "inactive", None, False
-                        row = (tier, status, expires_at, is_admin, email, None, None)
+                        row = (tier, status, expires_at, is_admin, email, None, None, None)
 
                 logging.info(f"[subscription-status] clerk_id: {clerk_id}, found: {row is not None}")
-                
+
                 if not row:
                     return func.HttpResponse(
                         json.dumps({"tier": "free", "status": "inactive", "expires_at": None, "is_admin": False, "debug": "User not in DB"}),
-                        mimetype="application/json", 
+                        mimetype="application/json",
                         status_code=200,
                         headers={"Cache-Control": "no-store, no-cache, must-revalidate"}
                     )
-                
-                tier, status, expires_at, is_admin, email, founding_slot, sub_source = row
-                
+
+                tier, status, expires_at, is_admin, email, founding_slot, sub_source, founding_granted_at = row
+
+                # Back-fill expires_at for founding promo users granted before this fix.
+                if not expires_at and (sub_source or "").strip().lower() == "founding_promo" and founding_granted_at:
+                    from datetime import timedelta
+                    from utils.founding_promo import get_promo_duration_days
+                    expires_at = founding_granted_at + timedelta(days=get_promo_duration_days())
+
                 # Check for hardcoded admin bypass
                 if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
                     is_admin = True

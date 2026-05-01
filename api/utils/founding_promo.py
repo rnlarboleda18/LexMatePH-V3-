@@ -77,6 +77,7 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
             return
         slot = slot_row[0]
 
+        days = get_promo_duration_days()
         cur.execute(
             """
             UPDATE users SET
@@ -85,10 +86,10 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
                 founding_promo_slot     = %s,
                 founding_promo_granted_at = NOW(),
                 subscription_source     = 'founding_promo',
-                subscription_expires_at = NULL
+                subscription_expires_at = NOW() + make_interval(days => %s)
             WHERE clerk_id = %s AND founding_promo_slot IS NULL
             """,
-            (slot, clerk_id),
+            (slot, days, clerk_id),
         )
         if cur.rowcount:
             logger.info("Founding promo granted slot %s to clerk_id=%s", slot, clerk_id)

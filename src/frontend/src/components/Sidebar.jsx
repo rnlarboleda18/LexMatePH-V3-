@@ -32,7 +32,7 @@ const Sidebar = ({
   onSelectSubject,
   onToggleAdminTools,
 }) => {
-    const { tier, tierLabel, openUpgradeModal, openAccountBillingModal, isAdmin, loading } = useSubscription();
+    const { tier, tierLabel, openUpgradeModal, openAccountBillingModal, isAdmin, loading, isFoundingPromo, foundingPromoDaysLeft } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
 
     return (
@@ -114,13 +114,20 @@ const Sidebar = ({
                                 {isAdmin && (
                                     <p className="text-[10px] text-rose-600 dark:text-rose-400 font-bold italic">Unlimited Access</p>
                                 )}
-                                {!isAdmin && tier === 'free' && (
+                                {!isAdmin && isFoundingPromo && (
+                                    <p className="text-[10px] text-amber-600 dark:text-amber-400">
+                                        {foundingPromoDaysLeft !== null
+                                            ? `${foundingPromoDaysLeft} day${foundingPromoDaysLeft !== 1 ? 's' : ''} left · tap for billing`
+                                            : 'Full access · tap for billing'}
+                                    </p>
+                                )}
+                                {!isAdmin && !isFoundingPromo && tier === 'free' && (
                                     <p className="text-[10px] text-gray-400 dark:text-gray-500">Limited access · tap for billing</p>
                                 )}
-                                {!isAdmin && tier === 'barrister' && (
+                                {!isAdmin && !isFoundingPromo && tier === 'barrister' && (
                                     <p className="text-[10px] text-amber-600 dark:text-amber-400">Full access · tap for billing</p>
                                 )}
-                                {!isAdmin && tier !== 'free' && tier !== 'barrister' && (
+                                {!isAdmin && !isFoundingPromo && tier !== 'free' && tier !== 'barrister' && (
                                     <p className="text-[10px] text-gray-500 dark:text-gray-400">Tap for account & billing</p>
                                 )}
                             </div>
