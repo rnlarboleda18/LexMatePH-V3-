@@ -297,6 +297,18 @@ function PostgreSQLPanel({ data, skus, billing, costData, authHdr }) {
   const cpuSeries = extractSeries(metrics, 'cpu_percent');
   const memSeries = extractSeries(metrics, 'memory_percent');
 
+  // API / Functions (same Azure Monitor series as Function App tab) — shown here to relate traffic to DB load.
+  const funcSku     = skus?.function_app;
+  const funcMetrics = data?.resources?.function_app?.metrics || [];
+  const execCount   = extractSum(funcMetrics, 'FunctionExecutionCount');
+  const execUnits   = extractSum(funcMetrics, 'FunctionExecutionUnits');
+  const http5xx     = extractSum(funcMetrics, 'Http5xx');
+  const http4xx     = extractSum(funcMetrics, 'Http4xx');
+  const avgResp     = extractLatest(funcMetrics, 'AverageResponseTime');
+  const apiErrRate  = execCount && (http5xx != null)
+    ? ((http5xx / execCount) * 100).toFixed(2)
+    : null;
+
   const freeWarnings = [];
   if (sku?.tier === 'Burstable') {
     if (storagePct != null && storagePct > 70) freeWarnings.push(`Storage at ${storagePct.toFixed(0)}% of ${sku.max_storage_gb} GB free tier limit.`);
@@ -326,6 +338,35 @@ function PostgreSQLPanel({ data, skus, billing, costData, authHdr }) {
         <MetricCard label="IOPS" value={iops != null ? Math.round(iops) : null}
           tooltip="Input/Output Operations Per Second — how many read/write operations the disk is handling. Sustained high IOPS can throttle your free tier." />
       </div>
+
+      <div className="rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <h3 className="mb-1 flex items-center gap-2 text-sm font-bold text-black dark:text-zinc-100">
+          <Zap size={14} className="text-amber-600" />
+          API traffic (last 24 hours)
+        </h3>
+        <p className="mb-4 text-xs text-gray-500 dark:text-zinc-400">
+          Function executions and HTTP errors from your backend — most requests drive PostgreSQL work. Full detail stays on the Function App tab.
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+          <MetricCard label="API executions (24h)" value={execCount != null ? Math.round(execCount).toLocaleString() : null}
+            sub={funcSku ? `~${(funcSku.free_executions_per_month / 1e6).toFixed(0)}M free/month cap` : undefined}
+            tooltip="Each count is an invocation of your HTTP API (Azure Functions). This is the closest measure to overall API call volume in this dashboard." />
+          <MetricCard label="GB-seconds (24h)" value={execUnits != null ? (execUnits / 1e6).toFixed(2) : null}
+            tooltip="Compute time used by the API over 24 hours — heavier handlers use more." />
+          <MetricCard label="API 5xx (24h)" value={http5xx != null ? Math.round(http5xx).toLocaleString() : null}
+            highlight={http5xx > 10 ? 'warn' : undefined}
+            tooltip="Server errors returned by the API. These often correlate with database timeouts or connection limits." />
+          <MetricCard label="API 4xx (24h)" value={http4xx != null ? Math.round(http4xx).toLocaleString() : null}
+            tooltip="Client errors (auth, not found, validation). Not always database-related but useful alongside traffic volume." />
+          <MetricCard label="Avg API response" value={avgResp != null ? avgResp.toFixed(0) : null} unit="ms"
+            showBar barPct={avgResp != null ? Math.min(100, (avgResp / 3000) * 100) : null} warn={50} crit={80}
+            tooltip="Average API latency. Slow responses often mean slow queries or connection pressure on PostgreSQL." />
+          <MetricCard label="API 5xx rate" value={apiErrRate} unit="%"
+            showBar warn={1} crit={5}
+            tooltip="Share of executions that ended in a 5xx response in this window." />
+        </div>
+      </div>
+
       <CostCard billing={billing} costData={costData} />
       <ObservationsPanel resource="postgresql" authHdr={authHdr} />
     </div>
