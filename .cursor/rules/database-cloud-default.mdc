@@ -8,7 +8,8 @@ alwaysApply: true
 For this project, **always assume the user works against their cloud database**, not a local Postgres instance.
 
 - Prefer **`DB_CONNECTION_STRING`** (or the project’s documented cloud/Azure URL) in examples, `local.settings.json` guidance, migrations, and scripts.
-- **Do not** recommend or switch to **`LOCAL_DB_CONNECTION_STRING`**, **`ENVIRONMENT=local`**, or **`localhost`** / local Postgres **unless the user explicitly asks** to use a local DB.
+- The API reads **`DB_CONNECTION_STRING` only** (no app-level switch to local Postgres). **`LOCAL_DB_CONNECTION_STRING`** in `local.settings.json` is for **offline scripts** (sync, copy tools), not the running Functions app.
+- **Do not** recommend **`ENVIRONMENT=local`** or **`localhost`** Postgres for normal local API runs **unless the user explicitly asks** to use a local DB for scripts or one-off work.
 - When debugging connection issues, assume cloud credentials/network/ssl first; mention local DB only as an optional alternative if they say they use it.
 
 If the user later says they want local DB, then local-only settings are fine.

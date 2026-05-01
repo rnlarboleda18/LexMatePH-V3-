@@ -115,8 +115,10 @@ export default function BackupTab() {
   };
 
   const isRunning = job && !job.done;
-  const isDone    = job?.done && job?.status === 'done';
-  const isFailed  = job?.done && job?.status === 'error';
+  const isDoneOk  = job?.done && job?.status === 'done';
+  const isMirrorFail = job?.done && job?.status === 'error' && job?.dump_ok && job?.mirror_failed;
+  const isFailed  = job?.done && job?.status === 'error' && !isMirrorFail;
+  const isDone    = isDoneOk || isMirrorFail;
   const pct       = job?.pct ?? 0;
 
   return (
@@ -125,18 +127,19 @@ export default function BackupTab() {
       {/* ── Header ── */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-base font-bold text-black dark:text-zinc-100">Local Back-Up</h2>
+          <h2 className="text-base font-bold text-black dark:text-zinc-100">Cloud backup &amp; local mirror</h2>
           <p className="mt-1 max-w-lg text-sm text-gray-500 dark:text-zinc-400">
-            Runs <span className="font-mono text-gray-600 dark:text-zinc-300">pg_dump</span> in PostgreSQL{' '}
-            <span className="font-mono text-gray-600 dark:text-zinc-300">custom format (-Fc)</span> and downloads a{' '}
-            <span className="font-mono text-gray-600 dark:text-zinc-300">.dump</span> file you can restore with{' '}
-            <span className="font-mono text-gray-600 dark:text-zinc-300">pg_restore</span> (see api/tools scripts if the server has no client tools).
+            Dumps the cloud database with <span className="font-mono text-gray-600 dark:text-zinc-300">pg_dump -Fc</span>.
+            If <span className="font-mono text-gray-600 dark:text-zinc-300">LOCAL_DB_CONNECTION_STRING</span> is set in{' '}
+            <span className="font-mono text-gray-600 dark:text-zinc-300">api/local.settings.json</span> and you run the API
+            locally (<span className="font-mono">func start</span>), the same action runs{' '}
+            <span className="font-mono text-gray-600 dark:text-zinc-300">pg_restore</span> into that Postgres so you get a
+            local copy. You can still download the <span className="font-mono text-gray-600 dark:text-zinc-300">.dump</span> file afterward.
           </p>
           <p className="mt-2 max-w-xl text-[10px] leading-snug text-gray-400 dark:text-zinc-500">
-            Refresh a local mirror: from <span className="font-mono">api/</span> run{' '}
-            <span className="font-mono break-all text-gray-600 dark:text-zinc-400">
-              python tools/pg_restore_local_mirror.py --dump YOUR.dump --dbname YOUR_LOCAL_CONNECTION_URI
-            </span>
+            Requires PostgreSQL client tools (<span className="font-mono">pg_dump</span>, <span className="font-mono">pg_restore</span>) on your PATH.
+            Hosted Azure Functions cannot reach your laptop Postgres; use download +{' '}
+            <span className="font-mono">tools/pg_restore_local_mirror.py</span> there.
           </p>
         </div>
         <div className="flex shrink-0 gap-2">
@@ -171,7 +174,8 @@ export default function BackupTab() {
       {(isRunning || isDone || isFailed) && (
         <div
           className={`rounded-xl border-2 p-5 transition-colors ${
-            isDone   ? 'border-emerald-300 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/20'
+            isDoneOk   ? 'border-emerald-300 bg-emerald-50/70 dark:border-emerald-800 dark:bg-emerald-950/20'
+            : isMirrorFail ? 'border-amber-300 bg-amber-50/70 dark:border-amber-800 dark:bg-amber-950/20'
             : isFailed ? 'border-red-300 bg-red-50/70 dark:border-red-800 dark:bg-red-950/20'
             : 'border-violet-200 bg-violet-50/70 dark:border-violet-800/60 dark:bg-violet-950/20'
           }`}
@@ -180,11 +184,18 @@ export default function BackupTab() {
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               {isRunning && <div className="h-3 w-3 animate-pulse rounded-full bg-violet-500" />}
-              {isDone    && <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400" />}
+              {isDoneOk    && <CheckCircle2 size={16} className="text-emerald-600 dark:text-emerald-400" />}
+              {isMirrorFail && <AlertCircle size={16} className="text-amber-600 dark:text-amber-400" />}
               {isFailed  && <AlertCircle size={16} className="text-red-600" />}
               <span className="font-semibold text-black dark:text-zinc-100">
-                {isRunning && `Backing up… ${pct}%`}
-                {isDone    && `Backup complete · ${fmtBytes(job.size_bytes)}`}
+                {isRunning && `Working… ${pct}%`}
+                {isDoneOk && (
+                  <>
+                    {job?.mirror_restored ? 'Cloud dump + local mirror complete · ' : 'Cloud dump complete · '}
+                    {fmtBytes(job.size_bytes)}
+                  </>
+                )}
+                {isMirrorFail && 'Dump saved — local pg_restore failed'}
                 {isFailed  && 'Backup failed'}
               </span>
             </div>
@@ -210,7 +221,8 @@ export default function BackupTab() {
           <div className="relative h-3 overflow-hidden rounded-full bg-white/70 dark:bg-black/30">
             <div
               className={`absolute inset-y-0 left-0 rounded-full transition-[width] duration-500 ${
-                isDone   ? 'bg-emerald-500'
+                isDoneOk   ? 'bg-emerald-500'
+                : isMirrorFail ? 'bg-amber-500'
                 : isFailed ? 'bg-red-500'
                 : 'bg-violet-500'
               }`}

@@ -55,6 +55,20 @@ def _json(data, status=200):
     )
 
 
+def _running_on_azure_host() -> bool:
+    """True when Functions runs in Azure (not local Core Tools). Local mirror restore must not run there."""
+    return bool(os.getenv("WEBSITE_INSTANCE_ID") or os.getenv("WEBSITE_SITE_NAME"))
+
+
+def _mirror_restore_enabled() -> bool:
+    """Admin backup can pg_restore into LOCAL_DB when configured and API runs on a dev machine."""
+    from config import LOCAL_DB_CONNECTION_STRING
+
+    if _running_on_azure_host():
+        return False
+    return bool((LOCAL_DB_CONNECTION_STRING or "").strip())
+
+
 def _check_admin(req: func.HttpRequest):
     """Returns (clerk_id, error_response). Callers must return error_response if not None."""
     clerk_id, err = get_authenticated_user_id(req)
@@ -365,15 +379,54 @@ def admin_db_stats(req: func.HttpRequest) -> func.HttpResponse:
 
 # ── BACKUP (pg_dump custom format) ───────────────────────────────────────────
 
+def _run_pg_restore_mirror(job_id: str, dump_path: str, local_uri: str) -> None:
+    """Restore custom-format dump into local Postgres (same flags as tools/pg_restore_local_mirror.py)."""
+    pg_restore_bin = shutil.which("pg_restore")
+    if not pg_restore_bin:
+        raise RuntimeError(
+            "pg_restore was not found on PATH. Install PostgreSQL client tools, or run "
+            "`python tools/pg_restore_local_mirror.py` manually with your downloaded .dump file."
+        )
+    cmd = [
+        pg_restore_bin,
+        "--clean",
+        "--if-exists",
+        "--no-owner",
+        "--no-acl",
+        f"--dbname={local_uri}",
+        dump_path,
+    ]
+    with _backup_lock:
+        _backup_jobs[job_id].update({
+            "pct":           55,
+            "current_table": "pg_restore · LOCAL_DB_CONNECTION_STRING",
+        })
+    logging.info("Backup job %s: invoking pg_restore into local mirror", job_id)
+    proc = subprocess.run(cmd, capture_output=True, timeout=7200, text=False)
+    if proc.returncode != 0:
+        tail = (proc.stderr or b"").decode("utf-8", errors="replace")[-4000:]
+        raise RuntimeError(f"pg_restore failed (exit {proc.returncode}): {tail.strip() or 'no stderr'}")
+
+
 def _run_pg_dump_backup(job_id: str):
-    """Background thread: run pg_dump -Fc; store bytes for one-shot download."""
+    """Background thread: pg_dump cloud DB (-Fc), optional pg_restore to LOCAL_DB, then expose dump for download."""
     tmp_path = None
     try:
-        from config import DB_CONNECTION_STRING
+        from config import DB_CONNECTION_STRING, LOCAL_DB_CONNECTION_STRING
 
         uri = (DB_CONNECTION_STRING or "").strip()
         if not uri:
             raise RuntimeError("DB_CONNECTION_STRING is not configured")
+
+        local_uri = (LOCAL_DB_CONNECTION_STRING or "").strip()
+        run_mirror = bool(local_uri) and not _running_on_azure_host()
+
+        if local_uri and _running_on_azure_host():
+            logging.info(
+                "Backup job %s: LOCAL_DB_CONNECTION_STRING is set but mirror restore is skipped "
+                "(hosted API cannot reach your workstation Postgres).",
+                job_id,
+            )
 
         pg_dump_bin = shutil.which("pg_dump")
         if not pg_dump_bin:
@@ -386,7 +439,7 @@ def _run_pg_dump_backup(job_id: str):
         with _backup_lock:
             _backup_jobs[job_id].update({
                 "pct":           5,
-                "current_table": "pg_dump · PostgreSQL custom format (-Fc)",
+                "current_table": "pg_dump · cloud database (-Fc)",
                 "done_tables":   0,
                 "total_tables":  0,
             })
@@ -417,19 +470,55 @@ def _run_pg_dump_backup(job_id: str):
             dump_bytes = f.read()
 
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M")
+        filename = f"lexmate_pg_backup_{ts}.dump"
+
+        mirror_restored = False
+        mirror_error = None
+        if run_mirror:
+            try:
+                with _backup_lock:
+                    _backup_jobs[job_id].update({
+                        "pct":           45,
+                        "current_table": "pg_restore · local PostgreSQL mirror",
+                    })
+                _run_pg_restore_mirror(job_id, tmp_path, local_uri)
+                mirror_restored = True
+                logging.info("Backup job %s: pg_restore finished", job_id)
+            except Exception as rex:
+                mirror_error = str(rex)
+                logging.error("Backup job %s: pg_restore failed: %s", job_id, rex)
+
+        finished = {
+            "pct":             100,
+            "done":            True,
+            "filename":        filename,
+            "data":            dump_bytes,
+            "size_bytes":      len(dump_bytes),
+            "current_table":   None,
+            "finished_at":     datetime.now(timezone.utc).isoformat(),
+            "mirror_restored": mirror_restored,
+            "dump_ok":         True,
+        }
+
+        if mirror_error:
+            finished.update({
+                "status":        "error",
+                "error":         mirror_error,
+                "mirror_failed": True,
+            })
+        else:
+            finished["status"] = "done"
+            finished["error"] = None
+            finished["mirror_failed"] = False
 
         with _backup_lock:
-            _backup_jobs[job_id].update({
-                "status":        "done",
-                "pct":           100,
-                "done":          True,
-                "filename":      f"lexmate_pg_backup_{ts}.dump",
-                "data":          dump_bytes,
-                "size_bytes":    len(dump_bytes),
-                "current_table": None,
-                "finished_at":   datetime.now(timezone.utc).isoformat(),
-            })
-        logging.info("Backup job %s: pg_dump finished (%s bytes)", job_id, len(dump_bytes))
+            _backup_jobs[job_id].update(finished)
+        logging.info(
+            "Backup job %s: pg_dump finished (%s bytes), mirror_restored=%s",
+            job_id,
+            len(dump_bytes),
+            mirror_restored,
+        )
 
     except subprocess.TimeoutExpired:
         logging.error("Backup job %s: pg_dump timed out", job_id)
@@ -471,14 +560,15 @@ def admin_backup_start(req: func.HttpRequest) -> func.HttpResponse:
 
         job_id = str(uuid.uuid4())[:8]
         _backup_jobs[job_id] = {
-            "status":        "running",
-            "pct":           0,
-            "current_table": None,
-            "done_tables":   0,
-            "total_tables":  0,
-            "done":          False,
-            "error":         None,
-            "started_at":    datetime.now(timezone.utc).isoformat(),
+            "status":                  "running",
+            "pct":                     0,
+            "current_table":           None,
+            "done_tables":             0,
+            "total_tables":            0,
+            "done":                    False,
+            "error":                   None,
+            "started_at":              datetime.now(timezone.utc).isoformat(),
+            "mirror_restore_planned":  _mirror_restore_enabled(),
         }
 
     threading.Thread(target=_run_pg_dump_backup, args=(job_id,), daemon=True).start()
@@ -511,7 +601,13 @@ def admin_backup_download(req: func.HttpRequest) -> func.HttpResponse:
     with _backup_lock:
         job = _backup_jobs.get(job_id)
 
-    if not job or not job.get("done") or job.get("status") != "done":
+    if not job or not job.get("data"):
+        return _json({"error": "Backup not ready"}, 404)
+    if job.get("status") == "done":
+        pass
+    elif job.get("status") == "error" and job.get("dump_ok"):
+        pass
+    else:
         return _json({"error": "Backup not ready"}, 404)
 
     return func.HttpResponse(

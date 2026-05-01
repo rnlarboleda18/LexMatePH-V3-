@@ -1,6 +1,9 @@
 ﻿<#
   LexMatePH v3 - start local dev stack (cloud DB via api/local.settings.json).
   Order: Azure Functions (:7071) -> wait -> Vite (:5173) -> wait -> SWA (:4280)
+
+  Bootstraps: Python .venv + pip, frontend npm deps, uses npx for func/swa if global CLIs missing.
+  Requires: Node.js (LTS), Python 3.11+, api/local.settings.json — nothing else to run by hand.
 #>
 
 $Root = $PSScriptRoot
@@ -17,6 +20,8 @@ Write-Host ""
 # Clear stale env vars that would shadow local.settings.json
 $env:DB_CONNECTION_STRING = $null
 $env:ENVIRONMENT = $null
+$env:USE_LOCAL_POSTGRES = $null
+$env:LOCAL_DB_CONNECTION_STRING = $null
 
 # -- Paths --------------------------------------------------------------------
 $apiDir           = Join-Path $Root "api"
@@ -29,19 +34,121 @@ if (-not (Test-Path $localSettings)) {
     Write-Host "[FATAL] Missing $localSettings" -ForegroundColor Red
     exit 1
 }
-if (-not (Test-Path $venvActivate)) {
-    Write-Host "[FATAL] Python venv not found: $venvActivate" -ForegroundColor Red
-    Write-Host "        cd api && python -m venv .venv && .\.venv\Scripts\pip install -r requirements.txt" -ForegroundColor Yellow
-    exit 1
+
+# Timer triggers need AzureWebJobsStorage. Empty -> Functions tries Azurite on 127.0.0.1:10000.
+# If AZURE_STORAGE_CONNECTION_STRING is set but AzureWebJobsStorage is blank, copy it into local.settings.json (backup first).
+try {
+    $lsObj = Get-Content $localSettings -Raw -Encoding UTF8 | ConvertFrom-Json
+    $vals = $lsObj.Values
+    if ($null -ne $vals) {
+        $aw = [string]$vals.AzureWebJobsStorage
+        $az = [string]$vals.AZURE_STORAGE_CONNECTION_STRING
+        $awMissing = ($null -eq $aw -or [string]::IsNullOrWhiteSpace($aw))
+        if ($awMissing -and $az -and -not [string]::IsNullOrWhiteSpace($az)) {
+            $bak = "$localSettings.start_all.bak"
+            Copy-Item -LiteralPath $localSettings -Destination $bak -Force -ErrorAction Stop
+            $lsObj.Values.AzureWebJobsStorage = $az.Trim()
+            $jsonOut = $lsObj | ConvertTo-Json -Depth 40
+            [System.IO.File]::WriteAllText($localSettings, $jsonOut, [System.Text.UTF8Encoding]::new($false))
+            Write-Host "[INFO] AzureWebJobsStorage was empty — copied from AZURE_STORAGE_CONNECTION_STRING (backup: $bak)." -ForegroundColor Green
+        }
+        elseif ($awMissing) {
+            Write-Host "[WARN]  Set AzureWebJobsStorage or AZURE_STORAGE_CONNECTION_STRING in api\local.settings.json or timer triggers may fail." -ForegroundColor Yellow
+        }
+    }
 }
-if (-not (Test-Path (Join-Path $frontendDir "node_modules"))) {
-    Write-Host "[WARN]  node_modules missing - run: cd src\frontend && npm install" -ForegroundColor Yellow
+catch {
+    Write-Host "[WARN]  Could not sync AzureWebJobsStorage in local.settings.json: $_" -ForegroundColor Yellow
 }
 
-$funcCmd = Get-Command func -ErrorAction SilentlyContinue
-if (-not $funcCmd) {
-    Write-Host "[FATAL] Azure Functions Core Tools not found. Install: npm i -g azure-functions-core-tools@4 --unsafe-perm" -ForegroundColor Red
+# -- Toolchain (Node + Python) ------------------------------------------------
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
+    Write-Host "[FATAL] Node.js not found. Install LTS from https://nodejs.org (needed for npm/npx, Vite, SWA)." -ForegroundColor Red
     exit 1
+}
+
+$pyCmd = $null
+if (Get-Command python -ErrorAction SilentlyContinue) {
+    try {
+        $v = & python -c "import sys; print('%d.%d' % sys.version_info[:2])" 2>$null
+        if ($v -and [version]$v -ge [version]"3.10") { $pyCmd = "python" }
+    } catch {}
+}
+if (-not $pyCmd -and (Get-Command py -ErrorAction SilentlyContinue)) {
+    $pyCmd = "py"
+}
+
+if (-not $pyCmd) {
+    Write-Host "[FATAL] Python 3.10+ not found. Install from https://www.python.org or use the py launcher." -ForegroundColor Red
+    exit 1
+}
+
+# Create / refresh venv and install api/requirements.txt when needed
+$venvPython = Join-Path $apiDir ".venv\Scripts\python.exe"
+$requirements = Join-Path $apiDir "requirements.txt"
+if (-not (Test-Path $venvPython)) {
+    Write-Host "[BOOT] Creating Python venv in api\.venv ..." -ForegroundColor Yellow
+    Push-Location $apiDir
+    try {
+        if ($pyCmd -eq "py") {
+            & py -3 -m venv .venv
+        } else {
+            & python -m venv .venv
+        }
+        if ($LASTEXITCODE -ne 0) { throw "venv exit $LASTEXITCODE" }
+    } finally {
+        Pop-Location
+    }
+    if (-not (Test-Path $venvPython)) {
+        Write-Host "[FATAL] Could not create api\.venv" -ForegroundColor Red
+        exit 1
+    }
+    Write-Host "[BOOT] pip install -r api\requirements.txt (first run)..." -ForegroundColor Yellow
+    & $venvPython -m pip install --upgrade pip --quiet
+    & $venvPython -m pip install -r $requirements
+    if ($LASTEXITCODE -ne 0) { exit 1 }
+}
+elseif ((Test-Path $requirements) -and ((Get-Item $requirements).LastWriteTime -gt (Get-Item $venvPython).LastWriteTime)) {
+    Write-Host "[BOOT] requirements.txt changed — pip install ..." -ForegroundColor Yellow
+    & $venvPython -m pip install -r $requirements
+    if ($LASTEXITCODE -ne 0) { exit 1 }
+}
+
+if (-not (Test-Path $venvActivate)) {
+    Write-Host "[FATAL] venv activate script missing: $venvActivate" -ForegroundColor Red
+    exit 1
+}
+
+# Frontend deps when missing or lockfile newer than node_modules
+$nmRoot = Join-Path $frontendDir "node_modules"
+$lockFile = Join-Path $frontendDir "package-lock.json"
+$needsNpm = -not (Test-Path $nmRoot)
+$pkgJson = Join-Path $frontendDir "package.json"
+if (-not $needsNpm -and (Test-Path $lockFile)) {
+    if ((Get-Item $lockFile).LastWriteTime -gt (Get-Item $nmRoot).LastWriteTime) { $needsNpm = $true }
+}
+if (-not $needsNpm -and (Test-Path $pkgJson)) {
+    if ((Get-Item $pkgJson).LastWriteTime -gt (Get-Item $nmRoot).LastWriteTime) { $needsNpm = $true }
+}
+if ($needsNpm) {
+    Write-Host "[BOOT] npm install in src\frontend ..." -ForegroundColor Yellow
+    Push-Location $frontendDir
+    try {
+        npm install
+        if ($LASTEXITCODE -ne 0) { exit 1 }
+    } finally {
+        Pop-Location
+    }
+}
+
+# Prefer global CLIs if installed; otherwise npx (first run may download).
+$funcStartLine = "npx --yes azure-functions-core-tools@4 start"
+if (Get-Command func -ErrorAction SilentlyContinue) {
+    $funcStartLine = "func start"
+}
+$swaStartLine = "npx --yes @azure/static-web-apps-cli start --config-name bar-project-v2"
+if (Get-Command swa -ErrorAction SilentlyContinue) {
+    $swaStartLine = "swa start --config-name bar-project-v2"
 }
 
 # -- Local IP -----------------------------------------------------------------
@@ -164,7 +271,7 @@ $apiBatContent += "set DB_CONNECTION_STRING=`r`n"
 $apiBatContent += "set ENVIRONMENT=`r`n"
 $apiBatContent += "set PYTHONPATH=.`r`n"
 $apiBatContent += "echo [API] Starting on http://localhost:7071 ...`r`n"
-$apiBatContent += "func start`r`n"
+$apiBatContent += "$funcStartLine`r`n"
 Set-Content -Path $apiBat -Value $apiBatContent -Encoding ASCII
 Start-Process cmd -ArgumentList "/k", "`"$apiBat`""
 Wait-Port "Azure Functions" 7071
@@ -181,21 +288,17 @@ Set-Content -Path $viteBat -Value $viteBatContent -Encoding ASCII
 Start-Process cmd -ArgumentList "/k", "`"$viteBat`""
 Wait-Port "Vite" 5173
 
-# -- 3. SWA CLI emulator (:4280) ----------------------------------------------
-$swaExists = Get-Command swa -ErrorAction SilentlyContinue
-if (-not $swaExists) {
-    Write-Host "`n[WARN] SWA CLI not found. Install: npm i -g @azure/static-web-apps-cli" -ForegroundColor Yellow
-    Write-Host "       Use http://localhost:5173 directly." -ForegroundColor DarkGray
-} else {
-    Write-Host "`n[START] SWA CLI emulator -> http://localhost:4280" -ForegroundColor Yellow
-    $swaBat = Join-Path $env:TEMP "lexmate_swa.bat"
-    $swaBatContent = "@echo off`r`n"
-    $swaBatContent += "cd /d `"$Root`"`r`n"
-    $swaBatContent += "echo [SWA] Starting on http://localhost:4280 ...`r`n"
-    $swaBatContent += "swa start --config-name bar-project-v2`r`n"
-    Set-Content -Path $swaBat -Value $swaBatContent -Encoding ASCII
-    Start-Process cmd -ArgumentList "/k", "`"$swaBat`""
-}
+# -- 3. SWA CLI emulator (:4280) — npx so no global @azure/static-web-apps-cli install ----------
+Write-Host "`n[START] SWA CLI emulator -> http://localhost:4280" -ForegroundColor Yellow
+$swaBat = Join-Path $env:TEMP "lexmate_swa.bat"
+$swaBatContent = "@echo off`r`n"
+$swaBatContent += "cd /d `"$Root`"`r`n"
+$swaBatContent += "echo [SWA] Starting on http://localhost:4280 ...`r`n"
+$swaBatContent += "$swaStartLine`r`n"
+Set-Content -Path $swaBat -Value $swaBatContent -Encoding ASCII
+Start-Process cmd -ArgumentList "/k", "`"$swaBat`""
+# First SWA run may download packages; allow extra time before the port opens.
+Wait-Port "SWA emulator" 4280 240
 
 # -- Done ---------------------------------------------------------------------
 Write-Host ""

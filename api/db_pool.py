@@ -12,7 +12,7 @@ import threading
 import logging
 import psycopg2
 
-# Single source of truth: config.py resolves LOCAL_DB_CONNECTION_STRING when ENVIRONMENT=local
+# Single source of truth: config.DB_CONNECTION_STRING (cloud Postgres).
 from config import DB_CONNECTION_STRING
 
 _local = threading.local()
@@ -21,8 +21,7 @@ _local = threading.local()
 def _new_conn():
     if not DB_CONNECTION_STRING or not str(DB_CONNECTION_STRING).strip():
         raise RuntimeError(
-            "Database not configured: set DB_CONNECTION_STRING, or ENVIRONMENT=local with LOCAL_DB_CONNECTION_STRING "
-            "(see api/config.py)."
+            "Database not configured: set DB_CONNECTION_STRING (cloud Postgres) in Application Settings or api/local.settings.json."
         )
     conn = psycopg2.connect(
         DB_CONNECTION_STRING,

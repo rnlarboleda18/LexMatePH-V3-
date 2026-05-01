@@ -38,7 +38,11 @@ npm install
 ```powershell
 # API — copy sample and fill in cloud credentials
 cp api/local.settings.sample.json api/local.settings.json
-# Edit api/local.settings.json: DB_CONNECTION_STRING, CLERK_*, PAYMONGO_*, etc.
+# Edit api/local.settings.json:
+#   DB_CONNECTION_STRING — cloud Postgres (local API always uses this; there is no in-app “local DB” mode).
+#   AZURE_STORAGE_CONNECTION_STRING — optional but recommended; timer triggers need storage.
+#   If AzureWebJobsStorage is left empty, ./start_all.ps1 copies AZURE_STORAGE_CONNECTION_STRING into it (backup .bak).
+#   LOCAL_DB_CONNECTION_STRING — optional; when set, Admin → backup runs pg_restore into this DB after a cloud pg_dump (local func only).
 
 # Frontend
 cp src/frontend/.env.example src/frontend/.env.local
@@ -46,6 +50,8 @@ cp src/frontend/.env.example src/frontend/.env.local
 ```
 
 ### 3. Start both servers
+
+Prerequisites: **Node.js (LTS)** and **Python 3.10+** on your PATH. From the repo root, **`start_all.ps1`** creates `api/.venv` and installs pip/npm deps when needed, starts Azure Functions (via `func` or `npx azure-functions-core-tools`), Vite, and the SWA emulator (`npx @azure/static-web-apps-cli`). You still need **`api/local.settings.json`** with your cloud credentials.
 
 ```powershell
 # From repo root
