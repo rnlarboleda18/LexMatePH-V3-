@@ -737,7 +737,11 @@ export default function MonitorTab() {
     }
   }, [authHdr]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => {
+    load();
+    const timer = setInterval(load, 5 * 60 * 1000);
+    return () => clearInterval(timer);
+  }, [load]);
 
   const notConfigured = data && !data.configured;
 

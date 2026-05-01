@@ -43,6 +43,18 @@ _pipeline_state: dict = {
     "last_exit_code": None,
 }
 
+# ── In-memory eLib scan process state ───────────────────────────────────────────
+_scan_lock = threading.Lock()
+_scan_proc: Optional[subprocess.Popen] = None
+_scan_state: dict = {
+    "status": "idle",   # idle | running | done | failed
+    "started_at": None,
+    "finished_at": None,
+    "last_exit_code": None,
+}
+# Where the scan script writes its JSON output
+_SCAN_RESULTS_PATH = Path(__file__).resolve().parents[2] / "admin-tools" / "case-digest-pipeline" / "scan_results.json"
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -693,21 +705,59 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
                 n_linked = n_links = 0
                 links_by_statute = {}
 
+            # ── Last eLib case in DB — the scan anchor ────────────────────────
+            # The scan script probes from (elib_id + 1) onwards. Surfaced in the
+            # UI so admins can confirm the exact starting point before scanning.
+            last_elib_case = None
+            try:
+                cur.execute(
+                    """
+                    SELECT
+                        sc_url,
+                        CAST(SUBSTRING(sc_url FROM '/showdocs/1/([0-9]+)') AS INTEGER) AS elib_id,
+                        COALESCE(NULLIF(TRIM(case_number),''), NULLIF(TRIM(short_title),''), '') AS case_label,
+                        date
+                    FROM sc_decided_cases
+                    WHERE sc_url ILIKE %s
+                      AND sc_url ~ %s
+                    ORDER BY
+                        CAST(SUBSTRING(sc_url FROM '/showdocs/1/([0-9]+)') AS INTEGER) DESC
+                    LIMIT 1
+                    """,
+                    (
+                        "%elibrary.judiciary.gov.ph%thebookshelf/showdocs/1/%",
+                        r"/showdocs/1/[0-9]+",
+                    ),
+                )
+                erow = cur.fetchone()
+                if erow and erow["elib_id"]:
+                    last_elib_case = {
+                        "elib_id":      int(erow["elib_id"]),
+                        "sc_url":       erow["sc_url"],
+                        "case_label":   (erow["case_label"] or "").strip(),
+                        "date":         str(erow["date"]) if erow["date"] else None,
+                        "next_scan_id": int(erow["elib_id"]) + 1,
+                    }
+            except Exception as _exc:
+                logging.warning("Could not fetch last eLib case: %s", _exc)
+
         return _json({
-            "total_cases":        total,
-            "with_digest":        with_digest,
-            "without_digest":     total - with_digest,
-            "with_full_text_md":  with_md,
-            "legal_concepts":     concepts,
-            "oldest_case_date":   oldest_date,
-            "latest_case_date":   latest_date,
+            "total_cases":         total,
+            "with_digest":         with_digest,
+            "without_digest":      total - with_digest,
+            "with_full_text_md":   with_md,
+            "legal_concepts":      concepts,
+            "oldest_case_date":    oldest_date,
+            "latest_case_date":    latest_date,
             "digest_coverage_pct": round(100 * with_digest / max(total, 1), 1),
-            "md_coverage_pct":    round(100 * with_md / max(total, 1), 1),
+            "md_coverage_pct":     round(100 * with_md / max(total, 1), 1),
             # Codal linking metrics
-            "linked_cases":       n_linked,
-            "total_links":        n_links,
-            "link_coverage_pct":  round(100 * n_linked / max(total, 1), 1),
-            "links_by_statute":   links_by_statute,
+            "linked_cases":        n_linked,
+            "total_links":         n_links,
+            "link_coverage_pct":   round(100 * n_linked / max(total, 1), 1),
+            "links_by_statute":    links_by_statute,
+            # eLib scan anchor — where the next scan starts from
+            "last_elib_case":      last_elib_case,
         })
     except Exception as exc:
         logging.error("admin/pipeline-stats: %s", exc)
@@ -765,6 +815,109 @@ def admin_pipeline_status(req: func.HttpRequest) -> func.HttpResponse:
     if err:
         return err
     return _json(_pipeline_snapshot(), 200)
+
+
+# ── eLib Scan ─────────────────────────────────────────────────────────────────
+
+def _refresh_scan_state_locked() -> None:
+    """Poll scan subprocess and update _scan_state (lock must be held)."""
+    global _scan_proc
+    if _scan_proc is None:
+        return
+    rc = _scan_proc.poll()
+    if rc is None:
+        return
+    _scan_state["status"] = "done" if rc == 0 else "failed"
+    _scan_state["finished_at"] = datetime.now(timezone.utc).isoformat()
+    _scan_state["last_exit_code"] = int(rc)
+    _scan_proc = None
+
+
+def _scan_snapshot() -> dict:
+    with _scan_lock:
+        _refresh_scan_state_locked()
+        return {
+            "running":        _scan_proc is not None,
+            "status":         _scan_state.get("status"),
+            "started_at":     _scan_state.get("started_at"),
+            "finished_at":    _scan_state.get("finished_at"),
+            "last_exit_code": _scan_state.get("last_exit_code"),
+        }
+
+
+@admin_bp.route(route="ops/pipeline/scan", methods=["POST"])
+def admin_pipeline_scan(req: func.HttpRequest) -> func.HttpResponse:
+    """Start the eLib scan subprocess (read-only — no DB writes)."""
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    global _scan_proc
+    root = _repo_root()
+    script = root / "scripts" / "scan_elib_new_cases.py"
+    if not script.exists():
+        return _json({"error": f"Scan script not found: {script}"}, 500)
+
+    # Parse optional overrides from request body
+    try:
+        body = req.get_json(silent=True) or {}
+    except Exception:
+        body = {}
+    max_probe  = int(body.get("max_probe",  400))
+    start_after = body.get("start_after")  # None means auto-detect from DB
+
+    cmd = [
+        sys.executable, "-u", str(script),
+        "--max-probe", str(max_probe),
+        "--output", str(_SCAN_RESULTS_PATH),
+    ]
+    if start_after is not None:
+        cmd += ["--start-after", str(int(start_after))]
+
+    with _scan_lock:
+        _refresh_scan_state_locked()
+        if _scan_proc is not None:
+            return _json({"error": "Scan is already running"}, 409)
+        try:
+            _SCAN_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+            _scan_proc = subprocess.Popen(
+                cmd,
+                cwd=str(root),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            _scan_state["status"] = "running"
+            _scan_state["started_at"] = datetime.now(timezone.utc).isoformat()
+            _scan_state["finished_at"] = None
+            _scan_state["last_exit_code"] = None
+            return _json({
+                "ok": True,
+                "pid": int(_scan_proc.pid),
+                "status": "running",
+                "started_at": _scan_state["started_at"],
+                "max_probe": max_probe,
+            }, 200)
+        except Exception as exc:
+            _scan_proc = None
+            return _json({"error": str(exc)}, 500)
+
+
+@admin_bp.route(route="ops/pipeline/scan-results", methods=["GET"])
+def admin_pipeline_scan_results(req: func.HttpRequest) -> func.HttpResponse:
+    """Return the latest scan results JSON + current scan process status."""
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    state = _scan_snapshot()
+    results = None
+    if _SCAN_RESULTS_PATH.exists():
+        try:
+            results = json.loads(_SCAN_RESULTS_PATH.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logging.warning("Could not read scan results: %s", exc)
+
+    return _json({"scan": state, "results": results}, 200)
 
 
 # ── AZURE METRICS + COST ──────────────────────────────────────────────────────

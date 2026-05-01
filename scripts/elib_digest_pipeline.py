@@ -761,8 +761,12 @@ def main() -> int:
     parser.add_argument(
         "--digest-model",
         type=str,
-        default="gemini-2.5-flash",
-        help="Gemini model id for generate_sc_digests_gemini.py",
+        default=(
+            os.environ.get("GEMINI_DIGEST_MODEL")
+            or os.environ.get("GEMINI_VERTEX_MODEL")
+            or "gemini-3-flash-preview"
+        ),
+        help="Gemini model id for generate_sc_digests_gemini.py (default: GEMINI_DIGEST_MODEL env, else gemini-3-flash-preview)",
     )
     parser.add_argument(
         "--workers",
@@ -1030,13 +1034,15 @@ def main() -> int:
                         rep.digest_error = None
                         exit_code = 0
 
-            # ── Stage 4: Codal Linking ────────────────────────────────────────
+            # ── Stage 4: Codal Linking ───────────────────────────────────────────
             # Run unified_codal_linker.py for newly digested IDs against all 7
-            # LexCode codals. Skipped if GOOGLE_CLOUD_PROJECT is unset (Vertex AI
-            # not configured) or if --linker-workers 0 is passed explicitly.
-            gcp_project = os.environ.get("GOOGLE_CLOUD_PROJECT", "").strip()
+            # LexCode codals. Uses Google AI Studio API key (GOOGLE_API_KEY) or
+            # falls back to Vertex AI (GOOGLE_CLOUD_PROJECT). Skipped if neither
+            # credential is configured or --linker-workers 0 is passed.
+            from linker_genai_client import is_linker_configured
             linker_workers = getattr(args, "linker_workers", 3)
-            if new_db_ids and gcp_project and linker_workers > 0:
+            linker_ready = is_linker_configured()
+            if new_db_ids and linker_ready and linker_workers > 0:
                 with _live_progress_bar(
                     "Codal linking", len(new_db_ids), use_progress
                 ) as link_bar:
@@ -1051,11 +1057,11 @@ def main() -> int:
                         rep.link_ok = False
                         rep.link_error = str(e)
                         log.error("Codal linker subprocess failed: %s", e)
-            elif new_db_ids and not gcp_project:
+            elif new_db_ids and not linker_ready:
                 log.warning(
-                    "GOOGLE_CLOUD_PROJECT not set; skipping codal linking for "
-                    "%s new case(s). Add GOOGLE_CLOUD_PROJECT to "
-                    "api/local.settings.json to enable.",
+                    "No AI credential for codal linking (%s case(s) skipped). "
+                    "Set GOOGLE_API_KEY (Google AI Studio) in api/local.settings.json "
+                    "to enable Stage 4 linking.",
                     len(new_db_ids),
                 )
             elif new_db_ids and linker_workers == 0:

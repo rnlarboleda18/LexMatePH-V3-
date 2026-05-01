@@ -3,7 +3,7 @@ unified_codal_linker.py
 ========================
 Token-Efficient 2-Pass RAG Linker for Philippine Legal Codes.
 
-GenAI: Vertex AI only (ADC), via ``linker_genai_client`` — set ``GOOGLE_CLOUD_PROJECT`` and authenticate.
+GenAI: Google AI Studio API key (preferred) or Vertex AI ADC — via ``linker_genai_client``.
 
 How it works:
   PASS 1 (Router): The AI reads the case digest ONCE and returns a list of

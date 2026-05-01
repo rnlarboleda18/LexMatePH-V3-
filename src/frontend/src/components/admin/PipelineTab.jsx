@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import {
   Play, SkipForward, Square, RefreshCw,
-  AlertCircle, CheckCircle2, Link2,
+  AlertCircle, CheckCircle2, Link2, Search, ExternalLink, Clock,
 } from 'lucide-react';
 import { MetricCard } from './MetricCard';
 
@@ -71,6 +71,13 @@ export default function PipelineTab() {
   const [actionOk, setActionOk]         = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
 
+  // Scan state
+  const [scanState,   setScanState]   = useState(null);   // {running, status, started_at, ...}
+  const [scanResults, setScanResults] = useState(null);   // the JSON results object
+  const [scanLoading, setScanLoading] = useState(false);
+  const [scanErr,     setScanErr]     = useState(null);
+  const pollRef = useRef(null);
+
   const authHdr = useCallback(async () => {
     const token = await getToken();
     return { 'X-Clerk-Authorization': `Bearer ${token}` };
@@ -97,6 +104,55 @@ export default function PipelineTab() {
 
   useEffect(() => { loadStats(); }, [loadStats]);
 
+  // ── Scan helpers ────────────────────────────────────────────────────────
+  const authHdrRef = useRef(authHdr);
+  useEffect(() => { authHdrRef.current = authHdr; }, [authHdr]);
+
+  const fetchScanResults = useCallback(async () => {
+    try {
+      const h = await authHdr();
+      const res = await fetch('/api/ops/pipeline/scan-results', { headers: h });
+      if (!res.ok) return;
+      const data = await res.json();
+      setScanState(data.scan);
+      if (data.results) setScanResults(data.results);
+      // Stop polling when scan is no longer running
+      if (!data.scan?.running && pollRef.current) {
+        clearInterval(pollRef.current);
+        pollRef.current = null;
+      }
+    } catch (_) {}
+  }, [authHdr]);
+
+  // Start polling when scan is running
+  const startPolling = useCallback(() => {
+    if (pollRef.current) return; // already polling
+    pollRef.current = setInterval(fetchScanResults, 4000);
+  }, [fetchScanResults]);
+
+  // Load scan results once on mount (shows previous scan if any)
+  useEffect(() => {
+    fetchScanResults();
+    return () => { if (pollRef.current) clearInterval(pollRef.current); };
+  }, [fetchScanResults]);
+
+  const startScan = async () => {
+    setScanErr(null);
+    setScanLoading(true);
+    try {
+      const h = await authHdr();
+      const res = await fetch('/api/ops/pipeline/scan', { method: 'POST', headers: h });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Scan failed (${res.status})`);
+      setScanState({ running: true, status: 'running', started_at: data.started_at });
+      startPolling();
+    } catch (e) {
+      setScanErr(e.message);
+    } finally {
+      setScanLoading(false);
+    }
+  };
+
   const callPipeline = async (path, label) => {
     setActionErr(null);
     setActionOk(null);
@@ -118,6 +174,7 @@ export default function PipelineTab() {
   const fmtDate = (d) =>
     d ? new Date(d).toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
   const fmtNum = (n) => (n != null ? n.toLocaleString() : null);
+  const fmtTs  = (iso) => iso ? new Date(iso).toLocaleString('en-PH') : '—';
 
   return (
     <div className="space-y-7 px-4 py-5 sm:px-6 lg:px-8">
@@ -147,6 +204,18 @@ export default function PipelineTab() {
         <SectionHeading>Pipeline Controls</SectionHeading>
 
         <div className="mb-5 flex flex-wrap gap-3">
+          <ActionButton
+            onClick={startScan}
+            disabled={scanLoading || scanState?.running}
+            variant="secondary"
+            icon={Search}
+          >
+            {scanState?.running ? 'Scanning…' : 'Scan eLib'}
+            <span className="ml-1 text-[10px] font-normal opacity-70">
+              find new cases
+            </span>
+          </ActionButton>
+
           <ActionButton
             onClick={() => callPipeline('/api/ops/pipeline/start', 'Full pipeline')}
             disabled={actionLoading}
@@ -186,8 +255,36 @@ export default function PipelineTab() {
           runs Gemini digest, then links each case to all 7 LexCode codals via Vertex AI.{' '}
           <strong className="font-semibold text-gray-700 dark:text-zinc-300">Resume</strong>
           {' '}— skips scraping; re-runs digest on incomplete rows, then links any unlinked
-          digested cases (capped at 500 per run).
+          digested cases (capped at 500 per run).{' '}
+          <strong className="font-semibold text-gray-700 dark:text-zinc-300">Scan eLib</strong>
+          {' '}— read-only probe; discovers new case URLs not yet in the database without
+          ingesting anything. Results appear below.
         </div>
+
+        {/* Scan anchor info — shows where the next scan starts */}
+        {stats?.last_elib_case && (
+          <div className="mt-3 flex flex-wrap items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2.5 text-xs dark:border-blue-800 dark:bg-blue-950/20">
+            <Search size={12} className="shrink-0 text-blue-500" />
+            <span className="font-semibold text-blue-700 dark:text-blue-400">Scan anchor:</span>
+            <span className="text-blue-600 dark:text-blue-300">
+              Last case in DB is{' '}
+              <a
+                href={stats.last_elib_case.sc_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono font-bold underline underline-offset-2"
+              >
+                eLib #{stats.last_elib_case.elib_id}
+              </a>
+              {stats.last_elib_case.case_label ? ` — ${stats.last_elib_case.case_label}` : ''}
+              {stats.last_elib_case.date ? ` (${stats.last_elib_case.date})` : ''}
+            </span>
+            <span className="ml-auto text-blue-500 dark:text-blue-400">
+              Next scan starts at{' '}
+              <strong className="font-mono">#{stats.last_elib_case.next_scan_id}</strong>
+            </span>
+          </div>
+        )}
 
         {/* Feedback banners */}
         {(actionErr || actionOk) && (
@@ -200,7 +297,165 @@ export default function PipelineTab() {
             {actionErr || actionOk}
           </div>
         )}
+        {scanErr && (
+          <div className="mt-4 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
+            <AlertCircle size={15} />
+            {scanErr}
+          </div>
+        )}
       </div>
+
+      {/* ── Scan Results Panel ── */}
+      {(scanState || scanResults) && (
+        <div className="rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="mb-4 flex items-center justify-between">
+            <SectionHeading>
+              <span className="flex items-center gap-1.5">
+                <Search size={11} />
+                eLib Scan Results
+              </span>
+            </SectionHeading>
+            <button
+              onClick={fetchScanResults}
+              className="flex items-center gap-1 rounded-md px-2 py-1 text-[11px] text-gray-500 hover:bg-gray-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+            >
+              <RefreshCw size={11} className={scanState?.running ? 'animate-spin' : ''} />
+              Refresh
+            </button>
+          </div>
+
+          {/* Status badge */}
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+              scanState?.running
+                ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400'
+                : scanState?.status === 'done'
+                ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400'
+                : scanState?.status === 'failed'
+                ? 'bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-400'
+                : 'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400'
+            }`}>
+              {scanState?.running && <Clock size={10} className="animate-pulse" />}
+              {scanState?.running ? 'Scanning…' : (scanState?.status ?? 'idle')}
+            </span>
+            {scanResults?.scanned_at && (
+              <span className="text-[11px] text-gray-400 dark:text-zinc-500">
+                Last scan: {fmtTs(scanResults.scanned_at)}
+              </span>
+            )}
+          </div>
+
+          {/* last_in_db anchor line in results */}
+          {scanResults?.last_in_db?.elib_id > 0 && (
+            <div className="mb-4 flex flex-wrap items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[11px] text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400">
+              <span className="font-semibold text-gray-600 dark:text-zinc-300">Scan started after:</span>
+              <a
+                href={scanResults.last_in_db.sc_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono font-semibold text-violet-600 hover:underline dark:text-violet-400"
+              >
+                eLib #{scanResults.last_in_db.elib_id}
+              </a>
+              {scanResults.last_in_db.case_label && (
+                <span className="truncate max-w-xs">— {scanResults.last_in_db.case_label}</span>
+              )}
+              {scanResults.last_in_db.date && (
+                <span className="ml-auto text-gray-400">{scanResults.last_in_db.date}</span>
+              )}
+            </div>
+          )}
+
+          {/* Summary metrics */}
+          {scanResults && (
+            <>
+              <div className="mb-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
+                <MetricCard
+                  label="IDs Probed"
+                  value={fmtNum(scanResults.total_probed)}
+                  loading={scanState?.running}
+                  tooltip={`Probed eLib IDs ${scanResults.probed_from}–${scanResults.probed_to}`}
+                />
+                <MetricCard
+                  label="New Cases Found"
+                  value={fmtNum(scanResults.total_new_found)}
+                  loading={scanState?.running}
+                  tooltip="New G.R. cases found on eLib that are not yet in the database."
+                  highlight={scanResults.total_new_found > 0 ? 'warn' : undefined}
+                />
+                <MetricCard
+                  label="DB High-Water ID"
+                  value={fmtNum(scanResults.max_elib_id_in_db)}
+                  loading={false}
+                  tooltip="The highest eLib numeric ID already stored in sc_decided_cases."
+                />
+                {scanResults.stopped_reason && (
+                  <MetricCard
+                    label="Stopped"
+                    value={scanResults.stopped_reason === 'consecutive_misses' ? '35 misses' : 'max probe'}
+                    loading={false}
+                    tooltip={`Scan stopped because: ${scanResults.stopped_reason}`}
+                  />
+                )}
+              </div>
+
+              {/* Case list */}
+              {scanResults.cases && scanResults.cases.length > 0 ? (
+                <div>
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-zinc-500">
+                    {scanResults.total_new_found} new case{scanResults.total_new_found !== 1 ? 's' : ''} pending ingestion
+                  </p>
+                  <div className="max-h-80 overflow-y-auto rounded-lg border border-lex bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800/40">
+                    <table className="w-full text-xs">
+                      <thead className="sticky top-0 bg-gray-100 dark:bg-zinc-800">
+                        <tr>
+                          <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">eLib ID</th>
+                          <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">G.R. No.</th>
+                          <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">Date Decided</th>
+                          <th className="px-3 py-2 text-right font-semibold text-gray-500 dark:text-zinc-400">Link</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100 dark:divide-zinc-700">
+                        {scanResults.cases.map((c) => (
+                          <tr key={c.elib_id} className="hover:bg-gray-100 dark:hover:bg-zinc-700/50">
+                            <td className="px-3 py-2 tabular-nums font-mono text-gray-500 dark:text-zinc-400">
+                              #{c.elib_id}
+                            </td>
+                            <td className="px-3 py-2 font-medium text-gray-800 dark:text-zinc-200">
+                              {c.gr_number || c.case_label || '—'}
+                            </td>
+                            <td className="px-3 py-2 text-gray-600 dark:text-zinc-400">
+                              {c.date_decided || '—'}
+                            </td>
+                            <td className="px-3 py-2 text-right">
+                              {c.sc_url ? (
+                                <a
+                                  href={c.sc_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-violet-600 hover:underline dark:text-violet-400"
+                                >
+                                  <ExternalLink size={11} />
+                                  eLib
+                                </a>
+                              ) : <span className="text-gray-400">—</span>}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : scanResults.total_new_found === 0 && !scanState?.running ? (
+                <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400">
+                  <CheckCircle2 size={15} />
+                  No new cases found — the database is up to date with eLib.
+                </div>
+              ) : null}
+            </>
+          )}
+        </div>
+      )}
 
       {/* ── Stats ── */}
       {statsError ? (

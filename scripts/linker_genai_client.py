@@ -1,20 +1,12 @@
 """
-Shared Google GenAI client for codal linker scripts — Vertex AI only (ADC).
+Shared Google GenAI client for codal linker scripts — AI Studio API key only.
 
-Authentication: Application Default Credentials only (``gcloud auth application-default login``
-or ``GOOGLE_APPLICATION_CREDENTIALS``). API keys are not used for linkers.
+Auth: GOOGLE_API_KEY (or GEMINI_API_KEY) from api/local.settings.json → Values.
 
-Required:
-  GOOGLE_CLOUD_PROJECT — GCP project id
-
-Optional:
-  GOOGLE_CLOUD_LOCATION — region (default ``global``, per Gemini 3 Flash global endpoint)
-  GEMINI_LINKER_MODEL — override model id (default: :data:`DEFAULT_LINKER_VERTEX_MODEL`)
-  GEMINI_LINKER_HTTP_TIMEOUT_MS — per-request HTTP timeout in ms for Vertex calls
-    (default ``300000`` = 5 minutes). Without this, hung RPCs can stall all thread-pool workers.
-
-Missing keys are filled from ``api/local.settings.json`` (``Values``) when that file exists,
-only for environment variables that are unset or empty.
+Optional env vars:
+  GEMINI_LINKER_MODEL           — override model id (default: gemini-3-flash-preview)
+  GEMINI_DIGEST_FALLBACK_MODEL  — fallback model (default: gemini-2.5-flash)
+  GEMINI_LINKER_HTTP_TIMEOUT_MS — per-request timeout in ms (default 300000)
 
 Probe availability::
 
@@ -27,8 +19,8 @@ import os
 import sys
 from pathlib import Path
 
-# Vertex model id (public preview) — see Google Cloud "Gemini 3 Flash" model docs.
-DEFAULT_LINKER_VERTEX_MODEL = "gemini-3-flash-preview"
+DEFAULT_LINKER_MODEL  = "gemini-3-flash-preview"
+FALLBACK_LINKER_MODEL = "gemini-2.5-flash"
 
 _genai_client = None
 
@@ -37,20 +29,8 @@ def _repo_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 
-# Env vars that make ``google.genai`` prefer the Gemini Developer API; linkers use Vertex only.
-_LINKER_STRIP_KEYS = (
-    "GOOGLE_API_KEY",
-    "GEMINI_API_KEY",
-    "GOOGLE_GENAI_API_KEY",
-)
-
-
-def _strip_developer_api_keys_from_env() -> None:
-    for k in _LINKER_STRIP_KEYS:
-        os.environ.pop(k, None)
-
-
 def merge_local_settings_into_env() -> None:
+    """Populate missing env vars from api/local.settings.json → Values."""
     path = _repo_root() / "api" / "local.settings.json"
     if not path.is_file():
         return
@@ -66,78 +46,83 @@ def merge_local_settings_into_env() -> None:
             os.environ[str(k)] = str(v) if v is not None else ""
 
 
+def _resolve_api_key() -> str:
+    """Return the first non-empty Google AI Studio API key found in the env."""
+    for var in ("GOOGLE_API_KEY", "GEMINI_API_KEY", "GOOGLE_GENAI_API_KEY"):
+        val = (os.environ.get(var) or "").strip()
+        if val:
+            return val
+    return ""
+
+
 def get_linker_genai_client():
-    """Return a shared ``google.genai.Client`` using Vertex AI and ADC."""
+    """Return a shared ``google.genai.Client`` using Google AI Studio API key."""
     global _genai_client
     if _genai_client is not None:
         return _genai_client
 
     merge_local_settings_into_env()
-    _strip_developer_api_keys_from_env()
+
+    # Force AI Studio mode — clear any Vertex-routing env vars that
+    # the google.genai SDK picks up automatically.
+    for _v in ("GOOGLE_GENAI_USE_VERTEXAI", "GOOGLE_CLOUD_PROJECT",
+               "GOOGLE_CLOUD_LOCATION", "VERTEX_AI_PROJECT", "VERTEX_AI_LOCATION"):
+        os.environ.pop(_v, None)
+
     from google import genai
-
-    project = (
-        os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("VERTEX_AI_PROJECT") or ""
-    ).strip()
-    if not project:
-        raise RuntimeError(
-            "Linkers require Vertex AI: set GOOGLE_CLOUD_PROJECT and use ADC "
-            "(gcloud auth application-default login or GOOGLE_APPLICATION_CREDENTIALS)."
-        )
-
-    location = (
-        os.environ.get("GOOGLE_CLOUD_LOCATION")
-        or os.environ.get("VERTEX_AI_LOCATION")
-        or "global"
-    ).strip()
+    from google.genai import types as genai_types
 
     raw_to = (os.environ.get("GEMINI_LINKER_HTTP_TIMEOUT_MS") or "").strip()
     try:
         timeout_ms = int(raw_to) if raw_to else 300_000
     except ValueError:
         timeout_ms = 300_000
-    if timeout_ms < 10_000:
-        timeout_ms = 10_000
+    timeout_ms = max(timeout_ms, 10_000)
 
-    from google.genai import types as genai_types
+    api_key = _resolve_api_key()
+    if not api_key:
+        raise RuntimeError(
+            "Codal linker requires GOOGLE_API_KEY (Google AI Studio).\n"
+            "Add it to api/local.settings.json → Values."
+        )
 
     _genai_client = genai.Client(
-        vertexai=True,
-        project=project,
-        location=location,
+        api_key=api_key,
         http_options=genai_types.HttpOptions(timeout=timeout_ms),
     )
     return _genai_client
 
 
 def get_linker_model_name(*, fallback: str | None = None) -> str:
-    """Resolved model id: ``GEMINI_LINKER_MODEL`` env, else ``fallback``, else default Flash 3 preview."""
+    """Resolved model id.
+
+    Priority:
+      1. GEMINI_LINKER_MODEL env var
+      2. fallback argument
+      3. gemini-3-flash-preview  (default)
+    """
     merge_local_settings_into_env()
     m = (os.environ.get("GEMINI_LINKER_MODEL") or "").strip()
     if m:
         return m
     if fallback:
         return fallback
-    return DEFAULT_LINKER_VERTEX_MODEL
+    return DEFAULT_LINKER_MODEL
 
 
-def probe_linker_vertex() -> None:
-    """One minimal ``generateContent`` call to verify ADC, project, location, and model."""
+def is_linker_configured() -> bool:
+    """Return True if GOOGLE_API_KEY is available."""
     merge_local_settings_into_env()
-    from google import genai
+    return bool(_resolve_api_key())
 
+
+def probe_linker() -> None:
+    """One minimal generateContent call to verify the API key and model."""
+    merge_local_settings_into_env()
     client = get_linker_genai_client()
-    model = get_linker_model_name()
-    project = (
-        os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("VERTEX_AI_PROJECT") or ""
-    ).strip()
-    location = (
-        os.environ.get("GOOGLE_CLOUD_LOCATION")
-        or os.environ.get("VERTEX_AI_LOCATION")
-        or "global"
-    ).strip()
-
-    print(f"Vertex probe: project={project!r} location={location!r} model={model!r}")
+    model  = get_linker_model_name()
+    print(f"Linker probe: mode='AI Studio (API key)'  model={model!r}")
+    from google import genai
     response = client.models.generate_content(
         model=model,
         contents='Reply with a single JSON object: {"ok": true, "model_probe": "linker"}',
@@ -150,7 +135,7 @@ def probe_linker_vertex() -> None:
 
 if __name__ == "__main__":
     try:
-        probe_linker_vertex()
+        probe_linker()
     except Exception as exc:
         print("PROBE_FAILED:", exc, file=sys.stderr)
         sys.exit(1)

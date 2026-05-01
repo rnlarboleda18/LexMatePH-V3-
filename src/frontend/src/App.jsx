@@ -994,10 +994,12 @@ function App() {
                       </main>
                     </PurpleGlassAmbient>
                   )}
-                  {effectiveMode === 'admin_tools' && isAdmin && (
-                    <Suspense fallback={<PageLoadingFallback label="Loading Admin Tools…" />}>
-                      <AdminTools />
-                    </Suspense>
+                  {isAdmin && (
+                    <div style={{ display: effectiveMode === 'admin_tools' ? 'block' : 'none' }}>
+                      <Suspense fallback={<PageLoadingFallback label="Loading Admin Tools…" />}>
+                        <AdminTools />
+                      </Suspense>
+                    </div>
                   )}
                   </>
                 </ErrorBoundary>
