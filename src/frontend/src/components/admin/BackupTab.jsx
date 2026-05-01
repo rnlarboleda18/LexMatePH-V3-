@@ -109,7 +109,7 @@ export default function BackupTab() {
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
     a.href     = url;
-    a.download = job?.filename || 'backup.zip';
+    a.download = job?.filename || 'lexmate_pg_backup.dump';
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -127,8 +127,16 @@ export default function BackupTab() {
         <div>
           <h2 className="text-base font-bold text-black dark:text-zinc-100">Local Back-Up</h2>
           <p className="mt-1 max-w-lg text-sm text-gray-500 dark:text-zinc-400">
-            Exports every database table as CSV files bundled into a ZIP archive,
-            then downloads it directly to your machine.
+            Runs <span className="font-mono text-gray-600 dark:text-zinc-300">pg_dump</span> in PostgreSQL{' '}
+            <span className="font-mono text-gray-600 dark:text-zinc-300">custom format (-Fc)</span> and downloads a{' '}
+            <span className="font-mono text-gray-600 dark:text-zinc-300">.dump</span> file you can restore with{' '}
+            <span className="font-mono text-gray-600 dark:text-zinc-300">pg_restore</span> (see api/tools scripts if the server has no client tools).
+          </p>
+          <p className="mt-2 max-w-xl text-[10px] leading-snug text-gray-400 dark:text-zinc-500">
+            Refresh a local mirror: from <span className="font-mono">api/</span> run{' '}
+            <span className="font-mono break-all text-gray-600 dark:text-zinc-400">
+              python tools/pg_restore_local_mirror.py --dump YOUR.dump --dbname YOUR_LOCAL_CONNECTION_URI
+            </span>
           </p>
         </div>
         <div className="flex shrink-0 gap-2">
@@ -213,19 +221,30 @@ export default function BackupTab() {
           {/* Table progress detail */}
           {isRunning && (
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 dark:text-zinc-400">
-              {job?.current_table && (
-                <span className="flex items-center gap-1.5">
-                  <Table2 size={11} />
-                  Dumping&nbsp;
-                  <span className="font-mono font-medium text-violet-700 dark:text-violet-400">
-                    {job.current_table}
+              {job?.total_tables > 0 ? (
+                <>
+                  {job?.current_table && (
+                    <span className="flex items-center gap-1.5">
+                      <Table2 size={11} />
+                      Dumping&nbsp;
+                      <span className="font-mono font-medium text-violet-700 dark:text-violet-400">
+                        {job.current_table}
+                      </span>
+                    </span>
+                  )}
+                  <span>
+                    {job.done_tables} / {job.total_tables} tables
                   </span>
-                </span>
-              )}
-              {job?.total_tables > 0 && (
-                <span>
-                  {job.done_tables} / {job.total_tables} tables
-                </span>
+                </>
+              ) : (
+                job?.current_table && (
+                  <span className="flex items-center gap-1.5">
+                    <Table2 size={11} />
+                    <span className="font-mono font-medium text-violet-700 dark:text-violet-400">
+                      {job.current_table}
+                    </span>
+                  </span>
+                )
               )}
             </div>
           )}

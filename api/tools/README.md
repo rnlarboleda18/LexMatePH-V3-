@@ -56,6 +56,8 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `check_roc_years.py` / `_alt` / `_local` | RoC year range checks |
 | `inspect_db_state.py` | General DB state dump |
 | `run_cloud_vacuum.py` | Manual `VACUUM ANALYZE` on cloud DB (`DB_CONNECTION_STRING` / `local.settings.json`) |
+| `pg_dump_cloud.py` | Cloud DB backup to `.dump` via local `pg_dump -Fc` (when Functions host has no client tools) |
+| `pg_restore_local_mirror.py` | Restore `.dump` into local/other Postgres via `pg_restore` |
 | `inspect_mcq.py` | MCQ question inspection |
 | `inspect_roc_detail.py` / `inspect_roc_rules.py` / `_v2` | RoC content inspection |
 | `inspect_row_3.py` / `inspect_rpc_schema.py` / `inspect_section_7.py` / `inspect_tables.py` | Targeted DB inspection |

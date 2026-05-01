@@ -3,17 +3,15 @@ Admin-only Azure Functions blueprint.
 All routes require is_admin=true in the users table.
 """
 import azure.functions as func
-import csv
-import io
 import json
 import logging
 import os
 import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 import uuid
-import zipfile
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional, Tuple
@@ -365,66 +363,85 @@ def admin_db_stats(req: func.HttpRequest) -> func.HttpResponse:
         put_db_connection(conn)
 
 
-# ── BACKUP ────────────────────────────────────────────────────────────────────
+# ── BACKUP (pg_dump custom format) ───────────────────────────────────────────
 
-def _run_backup(job_id: str):
-    """Background thread: dump all tables as CSVs into a ZIP, track progress."""
-    conn = None
+def _run_pg_dump_backup(job_id: str):
+    """Background thread: run pg_dump -Fc; store bytes for one-shot download."""
+    tmp_path = None
     try:
         from config import DB_CONNECTION_STRING
-        conn = psycopg2.connect(DB_CONNECTION_STRING, connect_timeout=30)
 
-        with conn.cursor(cursor_factory=RealDictCursor) as cur:
-            cur.execute("""
-                SELECT relname FROM pg_class
-                WHERE relkind = 'r'
-                  AND relnamespace = (SELECT oid FROM pg_namespace WHERE nspname = 'public')
-                ORDER BY relname
-            """)
-            tables = [r["relname"] for r in cur.fetchall()]
+        uri = (DB_CONNECTION_STRING or "").strip()
+        if not uri:
+            raise RuntimeError("DB_CONNECTION_STRING is not configured")
 
-        total = len(tables)
-        buf = io.BytesIO()
+        pg_dump_bin = shutil.which("pg_dump")
+        if not pg_dump_bin:
+            raise RuntimeError(
+                "pg_dump was not found on PATH. Install PostgreSQL client tools on this machine, "
+                "or from the api/ folder run: python tools/pg_dump_cloud.py --output … "
+                "(same dump format, runs where pg_dump is installed)."
+            )
 
-        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
-            for i, table in enumerate(tables):
-                with _backup_lock:
-                    _backup_jobs[job_id].update({
-                        "pct":          int((i / max(total, 1)) * 95),
-                        "current_table": table,
-                        "done_tables":  i,
-                        "total_tables": total,
-                    })
+        with _backup_lock:
+            _backup_jobs[job_id].update({
+                "pct":           5,
+                "current_table": "pg_dump · PostgreSQL custom format (-Fc)",
+                "done_tables":   0,
+                "total_tables":  0,
+            })
 
-                try:
-                    with conn.cursor() as cur:
-                        sio = io.StringIO()
-                        writer = csv.writer(sio)
-                        cur.execute(f"SELECT * FROM {table} LIMIT 0")
-                        cols = [d[0] for d in cur.description]
-                        writer.writerow(cols)
-                        cur.execute(f"SELECT * FROM {table}")
-                        writer.writerows(cur.fetchall())
-                        zf.writestr(f"{table}.csv", sio.getvalue())
-                except Exception as te:
-                    logging.warning("Backup table %s skipped: %s", table, te)
-                    zf.writestr(f"{table}.ERROR.txt", str(te))
+        fd, tmp_path = tempfile.mkstemp(suffix=".dump")
+        os.close(fd)
 
-        zip_bytes = buf.getvalue()
+        cmd = [
+            pg_dump_bin,
+            "--format=custom",
+            "--no-owner",
+            "--no-acl",
+            f"--file={tmp_path}",
+            f"--dbname={uri}",
+        ]
+        logging.info("Backup job %s: invoking pg_dump", job_id)
+        proc = subprocess.run(
+            cmd,
+            capture_output=True,
+            timeout=7200,
+            text=False,
+        )
+        if proc.returncode != 0:
+            tail = (proc.stderr or b"").decode("utf-8", errors="replace")[-4000:]
+            raise RuntimeError(f"pg_dump failed (exit {proc.returncode}): {tail.strip() or 'no stderr'}")
+
+        with open(tmp_path, "rb") as f:
+            dump_bytes = f.read()
+
         ts = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M")
 
         with _backup_lock:
             _backup_jobs[job_id].update({
-                "status":       "done",
-                "pct":          100,
-                "done":         True,
-                "filename":     f"lexmate_backup_{ts}.zip",
-                "data":         zip_bytes,
-                "size_bytes":   len(zip_bytes),
+                "status":        "done",
+                "pct":           100,
+                "done":          True,
+                "filename":      f"lexmate_pg_backup_{ts}.dump",
+                "data":          dump_bytes,
+                "size_bytes":    len(dump_bytes),
                 "current_table": None,
-                "finished_at":  datetime.now(timezone.utc).isoformat(),
+                "finished_at":   datetime.now(timezone.utc).isoformat(),
             })
+        logging.info("Backup job %s: pg_dump finished (%s bytes)", job_id, len(dump_bytes))
 
+    except subprocess.TimeoutExpired:
+        logging.error("Backup job %s: pg_dump timed out", job_id)
+        with _backup_lock:
+            _backup_jobs[job_id].update({
+                "status": "error",
+                "done":   True,
+                "error": (
+                    "pg_dump exceeded the 2 hour limit. Run "
+                    "`python tools/pg_dump_cloud.py --output …` from api/ on your workstation instead."
+                ),
+            })
     except Exception as exc:
         logging.error("Backup job %s failed: %s", job_id, exc)
         with _backup_lock:
@@ -434,10 +451,10 @@ def _run_backup(job_id: str):
                 "error":  str(exc),
             })
     finally:
-        if conn:
+        if tmp_path:
             try:
-                conn.close()
-            except Exception:
+                os.unlink(tmp_path)
+            except OSError:
                 pass
 
 
@@ -454,17 +471,17 @@ def admin_backup_start(req: func.HttpRequest) -> func.HttpResponse:
 
         job_id = str(uuid.uuid4())[:8]
         _backup_jobs[job_id] = {
-            "status":       "running",
-            "pct":          0,
+            "status":        "running",
+            "pct":           0,
             "current_table": None,
-            "done_tables":  0,
-            "total_tables": 0,
-            "done":         False,
-            "error":        None,
-            "started_at":   datetime.now(timezone.utc).isoformat(),
+            "done_tables":   0,
+            "total_tables":  0,
+            "done":          False,
+            "error":         None,
+            "started_at":    datetime.now(timezone.utc).isoformat(),
         }
 
-    threading.Thread(target=_run_backup, args=(job_id,), daemon=True).start()
+    threading.Thread(target=_run_pg_dump_backup, args=(job_id,), daemon=True).start()
     return _json({"job_id": job_id})
 
 
@@ -501,8 +518,8 @@ def admin_backup_download(req: func.HttpRequest) -> func.HttpResponse:
         body=job["data"],
         status_code=200,
         headers={
-            "Content-Type": "application/zip",
-            "Content-Disposition": f'attachment; filename="{job.get("filename", "backup.zip")}"',
+            "Content-Type": "application/octet-stream",
+            "Content-Disposition": f'attachment; filename="{job.get("filename", "lexmate_pg_backup.dump")}"',
         },
     )
 
