@@ -9,6 +9,7 @@ Read this file fully before making any change to this repository.
 - **Frontend**: React 18, Vite, Tailwind, React Router — `src/frontend/`
 - **API**: Azure Functions v2 Python 3.11 — `api/`
 - **Database**: PostgreSQL on Azure — always `DB_CONNECTION_STRING` (cloud). Never switch to local DB unless the user explicitly asks.
+- **Azure Postgres operations**: Be proactive on maintenance and diagnostics (firewall, connectivity, server settings). Prefer **Azure CLI** (`az postgres flexible-server …` and related commands) instead of deferring to the Portal; run them when the shell has access. Never expose DB passwords or full connection strings in chat or commits. Confirm before destructive production actions.
 - **Cache**: Redis (`REDIS_URL`)
 - **Auth**: Clerk (`CLERK_*` env vars)
 - **Payments**: PayMongo (`PAYMONGO_*` env vars)

@@ -1,0 +1,13 @@
+---
+description: Proactive Azure Postgres tasks; prefer Azure CLI over Portal handoffs
+alwaysApply: true
+---
+
+# Azure Database: proactive, CLI-first
+
+When a task involves **Azure Database for PostgreSQL** (Flexible Server) or closely related cloud DB ops — firewall rules, connectivity, server parameters, SKU/storage visibility, backup windows, maintenance diagnostics:
+
+- **Be proactive**: run safe checks and routine operations yourself when the environment supports it (`az` available, logged-in subscription correct). Do **not** stop at “you should do this in the Portal” unless CLI is unavailable, permissions are missing, or the action is destructive and needs explicit confirmation.
+- **Prefer Azure CLI** over Portal clicks for operational work: `az postgres flexible-server …`, related `az network …` / `az monitor …` where relevant. Put **repeatable** flows in `scripts/` or `api/tools/` with a short README note when useful.
+- **Secrets**: follow `.cursor/rules/secrets-and-env.mdc` — never commit or paste real connection strings or admin passwords; use placeholders in docs and samples.
+- **Destructive or irreversible** steps (deleting a server, dropping production data, mass updates): summarize the exact CLI/commands and **confirm with the user** before executing.

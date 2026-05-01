@@ -11,6 +11,7 @@ This file is read by AI coding agents (Claude Code, OpenAI Codex, etc.).
 - **Frontend**: React 18, Vite, Tailwind, React Router — `src/frontend/`
 - **API**: Azure Functions v2 Python 3.11 — `api/`
 - **Database**: PostgreSQL — always use `DB_CONNECTION_STRING` (cloud). Never switch to local DB unless explicitly asked.
+- **Azure Postgres operations**: Be proactive on maintenance and diagnostics (firewall, connectivity, server settings). Prefer **Azure CLI** (`az postgres flexible-server …` and related commands) instead of deferring to the Portal; run them when the shell has access. Never expose DB passwords or full connection strings in chat or commits. Confirm before destructive production actions.
 - **Cache**: Redis (`REDIS_URL`) — cache module at `api/cache.py`
 - **Auth**: Clerk
 - **Payments**: PayMongo
