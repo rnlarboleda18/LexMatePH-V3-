@@ -576,7 +576,7 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 # Orchestrator
 # ---------------------------------------------------------------------------
 
-def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, statutes=None):
+def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, statutes=None, target_ids=None):
     print("\n" + "=" * 70)
     print(f"  Unified 2-Pass RAG Linker   Mode: {'DRY RUN' if dry_run else 'COMMIT'}")
     if dry_run:
@@ -596,15 +596,17 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
         CODE_CONFIGS = {k: FULL_CODE_CONFIGS[k] for k in DEFAULT_LINKER_STATUTES}
     print(f"[*] Statutes: {', '.join(CODE_CONFIGS.keys())}")
     
-    range_str = "ALL"
-    if start_year and end_year:
-        range_str = f"{start_year}-{end_year}"
-    elif start_year:
-        range_str = f"{start_year}+"
-    elif end_year:
-        range_str = f"up to {end_year}"
-        
-    print(f"  Years: {range_str}   Workers: {workers}")
+    if target_ids:
+        print(f"  Target IDs: {len(target_ids)} specific case(s)   Workers: {workers}")
+    else:
+        range_str = "ALL"
+        if start_year and end_year:
+            range_str = f"{start_year}-{end_year}"
+        elif start_year:
+            range_str = f"{start_year}+"
+        elif end_year:
+            range_str = f"up to {end_year}"
+        print(f"  Years: {range_str}   Workers: {workers}")
     print("=" * 70 + "\n")
 
     # Load provision index once (column name article_num; RCC = sections)
@@ -631,31 +633,37 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
     """
     params = []
 
-    if start_year and end_year:
-        query += " AND date BETWEEN %s AND %s"
-        params += [f"{start_year}-01-01", f"{end_year}-12-31"]
-    elif start_year:
-        query += " AND date >= %s"
-        params += [f"{start_year}-01-01"]
-    elif end_year:
-        query += " AND date <= %s"
-        params += [f"{end_year}-12-31"]
+    if target_ids:
+        # Pipeline mode: link only these specific row IDs; bypass year + already-linked filters
+        # so freshly digested cases are always processed regardless of existing links.
+        placeholders = ",".join(["%s"] * len(target_ids))
+        query += f" AND id IN ({placeholders})"
+        params.extend(target_ids)
+    else:
+        if start_year and end_year:
+            query += " AND date BETWEEN %s AND %s"
+            params += [f"{start_year}-01-01", f"{end_year}-12-31"]
+        elif start_year:
+            query += " AND date >= %s"
+            params += [f"{start_year}-01-01"]
+        elif end_year:
+            query += " AND date <= %s"
+            params += [f"{end_year}-12-31"]
 
-    if not dry_run:
-        # If specific statutes are requested, only exclude links for those statutes
-        # Otherwise, exclude any case that has any links for any configured statute
-        target_statutes = list(CODE_CONFIGS.keys())
-        query += """
-            AND NOT EXISTS (
-                SELECT 1 FROM codal_case_links
-                WHERE case_id = sc_decided_cases.id
-                  AND statute_id = ANY(%s)
-            )
-        """
-        params.append(target_statutes)
+        if not dry_run:
+            # Exclude cases already linked for all configured statutes
+            target_statutes = list(CODE_CONFIGS.keys())
+            query += """
+                AND NOT EXISTS (
+                    SELECT 1 FROM codal_case_links
+                    WHERE case_id = sc_decided_cases.id
+                      AND statute_id = ANY(%s)
+                )
+            """
+            params.append(target_statutes)
 
     query += " ORDER BY id DESC"
-    if limit:
+    if limit and not target_ids:
         query += " LIMIT %s"
         params.append(limit)
 
@@ -730,12 +738,16 @@ def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, sta
 # Entry-point
 # ---------------------------------------------------------------------------
 
+# All 7 supported codals — used by --all-statutes flag
+_ALL_STATUTES = list(FULL_CODE_CONFIGS.keys())  # CIV, LAB, CONST, FAM, RPC, ROC, RCC
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Unified 2-Pass RAG Codal Linker")
-    parser.add_argument("--limit", type=int, help="Max cases to process")
-    parser.add_argument("--year", type=int, help="Filter by case year")
-    parser.add_argument("--start_year", type=int, help="Filter by start year")
-    parser.add_argument("--end_year", type=int, help="Filter by end year")
+    parser.add_argument("--limit", type=int, help="Max cases to process (ignored with --target-ids)")
+    parser.add_argument("--year", type=int, help="Filter by case year (ignored with --target-ids)")
+    parser.add_argument("--start_year", type=int, help="Filter by start year (ignored with --target-ids)")
+    parser.add_argument("--end_year", type=int, help="Filter by end year (ignored with --target-ids)")
     parser.add_argument("--workers", type=int, default=1, help="Parallel workers")
     parser.add_argument("--commit", action="store_true", help="Write to DB (default: dry-run)")
     parser.add_argument(
@@ -744,6 +756,21 @@ if __name__ == "__main__":
         help=(
             "Comma-separated code IDs (default: RPC,RCC). "
             "e.g. CIV,LAB,CONST,FAM,RPC,ROC,RCC"
+        ),
+    )
+    parser.add_argument(
+        "--all-statutes",
+        action="store_true",
+        help="Shorthand for --statutes CIV,LAB,CONST,FAM,RPC,ROC,RCC (all 7 codals).",
+    )
+    parser.add_argument(
+        "--target-ids",
+        type=str,
+        dest="target_ids",
+        help=(
+            "Comma-separated sc_decided_cases.id values to link. "
+            "When set, year filters and the already-linked exclusion are bypassed. "
+            "Intended for pipeline use after a fresh digest run."
         ),
     )
     args = parser.parse_args()
@@ -756,11 +783,20 @@ if __name__ == "__main__":
             start_year = args.year
             end_year = args.year
 
-        statutes = (
-            [s.strip() for s in args.statutes.split(",") if s.strip()]
-            if args.statutes
-            else None
-        )
+        # Resolve statutes
+        if args.all_statutes:
+            statutes = _ALL_STATUTES
+        elif args.statutes:
+            statutes = [s.strip() for s in args.statutes.split(",") if s.strip()]
+        else:
+            statutes = None
+
+        # Resolve target IDs
+        target_ids = None
+        if args.target_ids:
+            target_ids = [
+                int(x.strip()) for x in args.target_ids.split(",") if x.strip()
+            ]
 
         run(
             limit=args.limit,
@@ -769,6 +805,7 @@ if __name__ == "__main__":
             workers=args.workers,
             dry_run=not args.commit,
             statutes=statutes,
+            target_ids=target_ids,
         )
     except KeyboardInterrupt:
         print("\n[stopped] Interrupted.")

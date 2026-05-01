@@ -2,8 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import {
   Play, SkipForward, Square, RefreshCw,
-  AlertCircle, CheckCircle2, FileText, Brain, BookOpen,
-  Calendar, TrendingUp,
+  AlertCircle, CheckCircle2, Link2,
 } from 'lucide-react';
 import { MetricCard } from './MetricCard';
 
@@ -15,8 +14,7 @@ function SectionHeading({ children }) {
   );
 }
 
-function CoverageBar({ label, pct, color = 'bg-violet-500', tooltip }) {
-  const [tip, setTip] = useState(false);
+function CoverageBar({ label, pct, color = 'bg-violet-500' }) {
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between text-xs">
@@ -35,9 +33,9 @@ function CoverageBar({ label, pct, color = 'bg-violet-500', tooltip }) {
 
 function ActionButton({ onClick, disabled, variant = 'default', icon: Icon, children }) {
   const variants = {
-    default:  'bg-violet-600 text-white hover:opacity-90',
-    secondary:'border border-lex-strong bg-white text-gray-700 hover:bg-gray-50 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800',
-    danger:   'border border-red-300 bg-red-50 text-red-700 hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400 dark:hover:bg-red-950/50',
+    default:   'bg-violet-600 text-white hover:opacity-90',
+    secondary: 'border border-lex-strong bg-white text-gray-700 hover:bg-gray-50 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800',
+    danger:    'border border-red-300 bg-red-50 text-red-700 hover:bg-red-100 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400 dark:hover:bg-red-950/50',
   };
   return (
     <button
@@ -51,14 +49,26 @@ function ActionButton({ onClick, disabled, variant = 'default', icon: Icon, chil
   );
 }
 
+// Ordered statute labels for the badge row
+const STATUTE_ORDER = ['RPC', 'CIV', 'LAB', 'CONST', 'FAM', 'ROC', 'RCC'];
+const STATUTE_COLORS = {
+  RPC:   'bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-400',
+  CIV:   'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400',
+  LAB:   'bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400',
+  CONST: 'bg-violet-100 text-violet-700 dark:bg-violet-950/40 dark:text-violet-400',
+  FAM:   'bg-pink-100 text-pink-700 dark:bg-pink-950/40 dark:text-pink-400',
+  ROC:   'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400',
+  RCC:   'bg-cyan-100 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400',
+};
+
 export default function PipelineTab() {
   const { getToken } = useAuth();
 
-  const [stats, setStats]           = useState(null);
+  const [stats, setStats]               = useState(null);
   const [statsLoading, setStatsLoading] = useState(true);
-  const [statsError, setStatsError] = useState(null);
-  const [actionErr, setActionErr]   = useState(null);
-  const [actionOk, setActionOk]     = useState(null);
+  const [statsError, setStatsError]     = useState(null);
+  const [actionErr, setActionErr]       = useState(null);
+  const [actionOk, setActionOk]         = useState(null);
   const [actionLoading, setActionLoading] = useState(false);
 
   const authHdr = useCallback(async () => {
@@ -72,7 +82,11 @@ export default function PipelineTab() {
     try {
       const h = await authHdr();
       const res = await fetch('/api/ops/pipeline-stats', { headers: h });
-      if (!res.ok) { let m = res.statusText; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
+      if (!res.ok) {
+        let m = res.statusText;
+        try { m = (await res.json()).error || m; } catch (_) {}
+        throw new Error(m);
+      }
       setStats(await res.json());
     } catch (e) {
       setStatsError(e.message);
@@ -101,7 +115,9 @@ export default function PipelineTab() {
     }
   };
 
-  const fmtDate = (d) => d ? new Date(d).toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+  const fmtDate = (d) =>
+    d ? new Date(d).toLocaleDateString('en-PH', { year: 'numeric', month: 'short', day: 'numeric' }) : '—';
+  const fmtNum = (n) => (n != null ? n.toLocaleString() : null);
 
   return (
     <div className="space-y-7 px-4 py-5 sm:px-6 lg:px-8">
@@ -112,7 +128,8 @@ export default function PipelineTab() {
           <h2 className="text-base font-bold text-black dark:text-zinc-100">Digest Pipeline</h2>
           <p className="mt-1 max-w-lg text-sm text-gray-500 dark:text-zinc-400">
             Scrapes new Supreme Court decisions from eLib, converts them to Markdown,
-            ingests to the database, and generates AI digests via Gemini.
+            ingests to the database, generates AI digests via Gemini, then links each
+            case to the relevant LexCode codal articles via Vertex AI.
           </p>
         </div>
         <button
@@ -136,7 +153,9 @@ export default function PipelineTab() {
             icon={Play}
           >
             Full Run
-            <span className="ml-1 text-[10px] font-normal opacity-70">scrape → convert → ingest → digest</span>
+            <span className="ml-1 text-[10px] font-normal opacity-70">
+              scrape → convert → ingest → digest → link
+            </span>
           </ActionButton>
 
           <ActionButton
@@ -146,7 +165,9 @@ export default function PipelineTab() {
             icon={SkipForward}
           >
             Resume
-            <span className="ml-1 text-[10px] font-normal opacity-70">skip scrape/convert</span>
+            <span className="ml-1 text-[10px] font-normal opacity-70">
+              digest + link unfinished cases
+            </span>
           </ActionButton>
 
           <ActionButton
@@ -161,9 +182,11 @@ export default function PipelineTab() {
 
         <div className="rounded-lg border border-lex bg-gray-50 p-3 text-xs text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
           <strong className="font-semibold text-gray-700 dark:text-zinc-300">Full Run</strong>
-          {' '}— fetches new cases from eLib, converts HTML to Markdown, uploads to DB, then runs Gemini digest on all pending cases.{' '}
+          {' '}— fetches new cases from eLib, converts HTML to Markdown, uploads to DB,
+          runs Gemini digest, then links each case to all 7 LexCode codals via Vertex AI.{' '}
           <strong className="font-semibold text-gray-700 dark:text-zinc-300">Resume</strong>
-          {' '}— skips scraping and conversion; re-runs only ingest + digest on already-converted files.
+          {' '}— skips scraping; re-runs digest on incomplete rows, then links any unlinked
+          digested cases (capped at 500 per run).
         </div>
 
         {/* Feedback banners */}
@@ -187,58 +210,59 @@ export default function PipelineTab() {
         </div>
       ) : (
         <>
+          {/* ── Corpus Overview ── */}
           <div>
             <SectionHeading>Corpus Overview</SectionHeading>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
               <MetricCard
                 label="Total Cases"
-                value={stats ? stats.total_cases.toLocaleString() : null}
+                value={fmtNum(stats?.total_cases)}
                 loading={statsLoading}
-                tooltip="Total number of Supreme Court decisions stored in the database across all years."
+                tooltip="Total number of Supreme Court decisions stored in the database."
               />
               <MetricCard
                 label="With Digest"
-                value={stats ? stats.with_digest.toLocaleString() : null}
+                value={fmtNum(stats?.with_digest)}
                 loading={statsLoading}
-                tooltip="Cases that have been processed through the Gemini AI digest pipeline — metadata, statutes cited, holding, and ratio decidendi extracted."
+                tooltip="Cases processed by the Gemini AI digest pipeline — facts, issues, ruling, ratio, and metadata extracted."
               />
               <MetricCard
                 label="Pending Digest"
-                value={stats ? stats.without_digest.toLocaleString() : null}
+                value={fmtNum(stats?.without_digest)}
                 loading={statsLoading}
-                tooltip="Cases in the database that have not yet been digested by the AI pipeline. Run the pipeline to process these."
+                tooltip="Cases not yet digested. Run Full Run to process these."
                 highlight={stats?.without_digest > 100 ? 'warn' : undefined}
               />
               <MetricCard
                 label="With Full Text"
-                value={stats ? stats.with_full_text_md.toLocaleString() : null}
+                value={fmtNum(stats?.with_full_text_md)}
                 loading={statsLoading}
-                tooltip="Cases where the full decision text has been converted to Markdown and stored. These are ready for AI digest."
+                tooltip="Cases where the full decision text has been converted to Markdown and stored."
               />
               {stats?.legal_concepts != null && (
                 <MetricCard
                   label="Legal Concepts"
-                  value={stats.legal_concepts.toLocaleString()}
+                  value={fmtNum(stats.legal_concepts)}
                   loading={statsLoading}
-                  tooltip="Total distinct legal concepts extracted from digested cases. These power the Flashcards and LexCode linking features."
+                  tooltip="Total distinct legal concepts extracted from digested cases."
                 />
               )}
               <MetricCard
                 label="Oldest Case"
                 value={fmtDate(stats?.oldest_case_date)}
                 loading={statsLoading}
-                tooltip="The date of the earliest Supreme Court decision currently in the database."
+                tooltip="The date of the earliest Supreme Court decision in the database."
               />
               <MetricCard
                 label="Newest Case"
                 value={fmtDate(stats?.latest_case_date)}
                 loading={statsLoading}
-                tooltip="The most recent Supreme Court decision date in the database. Gaps here indicate new cases on eLib not yet scraped."
+                tooltip="The most recent Supreme Court decision date. Gaps indicate new cases on eLib not yet scraped."
               />
             </div>
           </div>
 
-          {/* Coverage bars */}
+          {/* ── Coverage bars ── */}
           {!statsLoading && stats && (
             <div className="rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
               <SectionHeading>Coverage</SectionHeading>
@@ -247,7 +271,11 @@ export default function PipelineTab() {
                   <CoverageBar
                     label="Digest Coverage"
                     pct={stats.digest_coverage_pct}
-                    color={stats.digest_coverage_pct >= 80 ? 'bg-emerald-500' : stats.digest_coverage_pct >= 50 ? 'bg-amber-500' : 'bg-red-500'}
+                    color={
+                      stats.digest_coverage_pct >= 80 ? 'bg-emerald-500'
+                      : stats.digest_coverage_pct >= 50 ? 'bg-amber-500'
+                      : 'bg-red-500'
+                    }
                   />
                   <p className="mt-1 text-[11px] text-gray-400 dark:text-zinc-500">
                     {stats.with_digest.toLocaleString()} of {stats.total_cases.toLocaleString()} cases digested
@@ -257,13 +285,92 @@ export default function PipelineTab() {
                   <CoverageBar
                     label="Full-Text Markdown"
                     pct={stats.md_coverage_pct}
-                    color={stats.md_coverage_pct >= 80 ? 'bg-blue-500' : stats.md_coverage_pct >= 50 ? 'bg-amber-500' : 'bg-red-500'}
+                    color={
+                      stats.md_coverage_pct >= 80 ? 'bg-blue-500'
+                      : stats.md_coverage_pct >= 50 ? 'bg-amber-500'
+                      : 'bg-red-500'
+                    }
                   />
                   <p className="mt-1 text-[11px] text-gray-400 dark:text-zinc-500">
                     {stats.with_full_text_md.toLocaleString()} of {stats.total_cases.toLocaleString()} cases have Markdown text
                   </p>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* ── Codal Links ── */}
+          {!statsLoading && stats && stats.linked_cases != null && (
+            <div className="rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+              <SectionHeading>
+                <span className="flex items-center gap-1.5">
+                  <Link2 size={11} />
+                  Codal Links
+                </span>
+              </SectionHeading>
+
+              {/* Metric cards */}
+              <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+                <MetricCard
+                  label="Linked Cases"
+                  value={fmtNum(stats.linked_cases)}
+                  loading={false}
+                  tooltip="Cases linked to at least one LexCode codal article via Vertex AI."
+                />
+                <MetricCard
+                  label="Total Links"
+                  value={fmtNum(stats.total_links)}
+                  loading={false}
+                  tooltip="Total case-to-article links across all 7 codals in codal_case_links."
+                />
+                <MetricCard
+                  label="Unlinked Cases"
+                  value={fmtNum(stats.total_cases - stats.linked_cases)}
+                  loading={false}
+                  tooltip="Digested cases not yet linked to any codal article. Run Resume to process."
+                  highlight={(stats.total_cases - stats.linked_cases) > 1000 ? 'warn' : undefined}
+                />
+              </div>
+
+              {/* Link coverage bar */}
+              <div className="mb-4 space-y-1.5">
+                <CoverageBar
+                  label="Link Coverage"
+                  pct={stats.link_coverage_pct}
+                  color={
+                    stats.link_coverage_pct >= 80 ? 'bg-violet-500'
+                    : stats.link_coverage_pct >= 40 ? 'bg-amber-500'
+                    : 'bg-red-500'
+                  }
+                />
+                <p className="text-[11px] text-gray-400 dark:text-zinc-500">
+                  {stats.linked_cases.toLocaleString()} of {stats.total_cases.toLocaleString()} cases linked to LexCode codals
+                </p>
+              </div>
+
+              {/* Per-statute badge row */}
+              {stats.links_by_statute && Object.keys(stats.links_by_statute).length > 0 && (
+                <div>
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-zinc-500">
+                    Links by Codal
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {STATUTE_ORDER.map((code) => {
+                      const n = stats.links_by_statute[code];
+                      if (n == null) return null;
+                      return (
+                        <span
+                          key={code}
+                          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${STATUTE_COLORS[code] ?? 'bg-gray-100 text-gray-600'}`}
+                        >
+                          {code}
+                          <span className="tabular-nums opacity-80">{n.toLocaleString()}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </>

@@ -40,6 +40,9 @@ from load_local_settings_env import load_api_local_settings_into_environ
 
 import psycopg2
 
+# Import the codal linker launcher from the main pipeline script.
+from elib_digest_pipeline import run_codal_linker_subprocess  # noqa: E402
+
 SOURCE = "E-Library digest pipeline"
 
 log = logging.getLogger(__name__)
@@ -88,6 +91,35 @@ def _pending_row_ids(conn, all_sources: bool = False) -> list[int]:
              OR ({_incomplete_digest_sql_fragment().strip()})
           )
         ORDER BY id
+        """,
+        params,
+    )
+    return [int(r[0]) for r in cur.fetchall()]
+
+
+def _pending_link_row_ids(conn, all_sources: bool = False, cap: int = 500) -> list[int]:
+    """IDs that are digested but have NO entry in codal_case_links yet.
+
+    Uses a cap to avoid linking tens of thousands of cases in a single Resume
+    run (each case requires 2 Vertex AI calls).
+    """
+    cur = conn.cursor()
+    source_clause = "" if all_sources else "AND scrape_source = %s"
+    params: tuple = (cap,) if all_sources else (SOURCE, cap)
+    cur.execute(
+        f"""
+        SELECT id
+        FROM sc_decided_cases
+        WHERE digest_ruling IS NOT NULL
+          AND btrim(digest_ruling) <> ''
+          AND coalesce(digest_significance, '') <> 'BLOCKED_SAFETY'
+          {source_clause}
+          AND NOT EXISTS (
+              SELECT 1 FROM codal_case_links
+              WHERE case_id = sc_decided_cases.id
+          )
+        ORDER BY id DESC
+        LIMIT %s
         """,
         params,
     )
@@ -150,6 +182,24 @@ def main() -> int:
         default=3,
         metavar="N",
         help="Re-query pending rows and run digest chunks up to N times (default 3). Use 1 for a single sweep.",
+    )
+    p.add_argument(
+        "--max-link-cases",
+        type=int,
+        default=500,
+        metavar="N",
+        help="Max number of unlinked cases to link per Resume run (default 500). Use 0 to skip linking.",
+    )
+    p.add_argument(
+        "--skip-linking",
+        action="store_true",
+        help="Skip codal linking phase even if GOOGLE_CLOUD_PROJECT is set.",
+    )
+    p.add_argument(
+        "--linker-workers",
+        type=int,
+        default=3,
+        help="Parallel workers for unified_codal_linker.py (default 3).",
     )
     args = p.parse_args()
 
@@ -246,6 +296,41 @@ def main() -> int:
                 len(remaining),
                 remaining[:20],
             )
+
+        # ── Codal Linking Phase ──────────────────────────────────────
+        # After all digest passes, link any digested cases that have no codal
+        # links yet. Capped at --max-link-cases per run to control Vertex cost.
+        gcp_project = os.environ.get("GOOGLE_CLOUD_PROJECT", "").strip()
+        link_cap = int(args.max_link_cases)
+        linker_workers = int(args.linker_workers)
+        if args.skip_linking or linker_workers == 0 or link_cap == 0:
+            log.info("Codal linking skipped (--skip-linking or --max-link-cases 0 or --linker-workers 0).")
+        elif not gcp_project:
+            log.warning(
+                "GOOGLE_CLOUD_PROJECT not set; skipping codal linking. "
+                "Add it to api/local.settings.json to enable."
+            )
+        elif args.dry_run:
+            unlinked = _pending_link_row_ids(conn, all_sources=all_src, cap=link_cap)
+            log.info("Dry-run: %s case(s) would be sent to codal linker (cap=%s).", len(unlinked), link_cap)
+        else:
+            unlinked = _pending_link_row_ids(conn, all_sources=all_src, cap=link_cap)
+            if unlinked:
+                log.info(
+                    "Codal linking: %s unlinked case(s) found (cap=%s); running linker...",
+                    len(unlinked), link_cap,
+                )
+                try:
+                    run_codal_linker_subprocess(
+                        unlinked,
+                        workers=linker_workers,
+                    )
+                    log.info("Codal linking complete.")
+                except Exception as exc:
+                    log.error("Codal linker failed: %s", exc)
+            else:
+                log.info("Codal linking: all digested cases already linked.")
+
         return 0
     finally:
         conn.close()

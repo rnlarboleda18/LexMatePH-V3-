@@ -239,6 +239,8 @@ class PipelineReport:
     digest_row_ids: list[int] = field(default_factory=list)
     digest_ok: bool | None = None
     digest_error: str | None = None
+    link_ok: bool | None = None
+    link_error: str | None = None
     fatal_error: str | None = None
 
     def add(
@@ -318,6 +320,12 @@ class PipelineReport:
                 lines.append("Digest subprocess: not run.")
         else:
             lines.append("Digest: not run (no new rows).")
+        if self.link_ok is True:
+            lines.append("Codal linking: completed OK.")
+        elif self.link_ok is False and self.link_error:
+            lines.append(f"Codal linking: FAILED - {self.link_error}")
+        elif self.link_ok is None and self.digest_row_ids:
+            lines.append("Codal linking: skipped (GOOGLE_CLOUD_PROJECT not set).")
         if self.fatal_error:
             lines.append(f"Fatal: {self.fatal_error}")
         lines.append("=" * 64)
@@ -508,6 +516,44 @@ def run_digest_subprocess(
             else:
                 log.error("Additional parallel digest failure: %s", extra)
         raise errors[0]
+
+
+def run_codal_linker_subprocess(
+    case_ids: list[int],
+    *,
+    workers: int = 3,
+    statutes: str = "CIV,LAB,CONST,FAM,RPC,ROC,RCC",
+    live_bar: _LiveBarProto | None = None,
+) -> None:
+    """Run unified_codal_linker.py for the given case IDs against all 7 codals.
+
+    Uses --target-ids so only the specified cases are processed and the
+    already-linked exclusion filter is bypassed (idempotent: linker deletes
+    old links for the same statutes before re-inserting).
+    """
+    if not case_ids:
+        return
+    script = _REPO_ROOT / "scripts" / "unified_codal_linker.py"
+    if not script.exists():
+        log.warning("Codal linker script not found: %s", script)
+        return
+    joined = ",".join(str(i) for i in case_ids)
+    cmd = [
+        sys.executable,
+        str(script),
+        "--target-ids", joined,
+        "--statutes", statutes,
+        "--workers", str(max(1, min(int(workers), len(case_ids)))),
+        "--commit",
+    ]
+    log.info("Running codal linker: %s case(s), statutes=%s", len(case_ids), statutes)
+    if live_bar:
+        live_bar.set_postfix_str(f"Linking {len(case_ids)} case(s) to codals")
+    proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
+    if proc.returncode != 0:
+        raise subprocess.CalledProcessError(proc.returncode, cmd)
+    if live_bar:
+        live_bar.update(len(case_ids))
 
 
 def _digest_blocked_safety_row_ids(db_url: str, row_ids: list[int]) -> list[int]:
@@ -746,6 +792,12 @@ def main() -> int:
         action="store_true",
         help="Disable live progress on stderr (default: show when stderr is a terminal)",
     )
+    parser.add_argument(
+        "--linker-workers",
+        type=int,
+        default=3,
+        help="Parallel workers for the codal linker subprocess (default 3); 0 to skip linking.",
+    )
     args = parser.parse_args()
     if args.workers < 1:
         parser.error("--workers must be >= 1")
@@ -977,8 +1029,39 @@ def main() -> int:
                         rep.digest_ok = True
                         rep.digest_error = None
                         exit_code = 0
-            else:
-                rep.digest_ok = None
+
+            # ── Stage 4: Codal Linking ────────────────────────────────────────
+            # Run unified_codal_linker.py for newly digested IDs against all 7
+            # LexCode codals. Skipped if GOOGLE_CLOUD_PROJECT is unset (Vertex AI
+            # not configured) or if --linker-workers 0 is passed explicitly.
+            gcp_project = os.environ.get("GOOGLE_CLOUD_PROJECT", "").strip()
+            linker_workers = getattr(args, "linker_workers", 3)
+            if new_db_ids and gcp_project and linker_workers > 0:
+                with _live_progress_bar(
+                    "Codal linking", len(new_db_ids), use_progress
+                ) as link_bar:
+                    try:
+                        run_codal_linker_subprocess(
+                            new_db_ids,
+                            workers=linker_workers,
+                            live_bar=link_bar,
+                        )
+                        rep.link_ok = True
+                    except subprocess.CalledProcessError as e:
+                        rep.link_ok = False
+                        rep.link_error = str(e)
+                        log.error("Codal linker subprocess failed: %s", e)
+            elif new_db_ids and not gcp_project:
+                log.warning(
+                    "GOOGLE_CLOUD_PROJECT not set; skipping codal linking for "
+                    "%s new case(s). Add GOOGLE_CLOUD_PROJECT to "
+                    "api/local.settings.json to enable.",
+                    len(new_db_ids),
+                )
+            elif new_db_ids and linker_workers == 0:
+                log.info("Codal linking skipped (--linker-workers 0).")
+        else:
+            rep.digest_ok = None
 
     except Exception as e:
         rep.fatal_error = str(e)

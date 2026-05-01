@@ -666,6 +666,33 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
             except Exception:
                 oldest_date = latest_date = None
 
+            try:
+                # Codal link coverage — how many distinct cases have at least one link
+                cur.execute(
+                    """
+                    SELECT
+                        COUNT(DISTINCT case_id) AS linked_cases,
+                        COUNT(*)                AS total_links
+                    FROM codal_case_links
+                    """
+                )
+                link_row = cur.fetchone()
+                n_linked = int(link_row["linked_cases"] or 0)
+                n_links  = int(link_row["total_links"]  or 0)
+                # Per-statute breakdown
+                cur.execute(
+                    """
+                    SELECT statute_id, COUNT(*) AS n
+                    FROM codal_case_links
+                    GROUP BY statute_id
+                    ORDER BY statute_id
+                    """
+                )
+                links_by_statute = {r["statute_id"]: int(r["n"]) for r in cur.fetchall()}
+            except Exception:
+                n_linked = n_links = 0
+                links_by_statute = {}
+
         return _json({
             "total_cases":        total,
             "with_digest":        with_digest,
@@ -676,6 +703,11 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
             "latest_case_date":   latest_date,
             "digest_coverage_pct": round(100 * with_digest / max(total, 1), 1),
             "md_coverage_pct":    round(100 * with_md / max(total, 1), 1),
+            # Codal linking metrics
+            "linked_cases":       n_linked,
+            "total_links":        n_links,
+            "link_coverage_pct":  round(100 * n_linked / max(total, 1), 1),
+            "links_by_statute":   links_by_statute,
         })
     except Exception as exc:
         logging.error("admin/pipeline-stats: %s", exc)
