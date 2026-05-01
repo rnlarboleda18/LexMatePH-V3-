@@ -55,6 +55,7 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `check_progress.py` | Migration progress check |
 | `check_roc_years.py` / `_alt` / `_local` | RoC year range checks |
 | `inspect_db_state.py` | General DB state dump |
+| `run_cloud_vacuum.py` | Manual `VACUUM ANALYZE` on cloud DB (`DB_CONNECTION_STRING` / `local.settings.json`) |
 | `inspect_mcq.py` | MCQ question inspection |
 | `inspect_roc_detail.py` / `inspect_roc_rules.py` / `_v2` | RoC content inspection |
 | `inspect_row_3.py` / `inspect_rpc_schema.py` / `inspect_section_7.py` / `inspect_tables.py` | Targeted DB inspection |
