@@ -634,9 +634,11 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
             cur.execute("SELECT COUNT(*) AS total FROM sc_decided_cases")
             total = int(cur.fetchone()["total"] or 0)
 
+            # 'digest' is split into digest_facts/digest_ruling/etc. — a case is
+            # considered digested when digest_ruling is populated (core field).
             cur.execute(
                 "SELECT COUNT(*) AS n FROM sc_decided_cases"
-                " WHERE digest IS NOT NULL AND digest != ''"
+                " WHERE digest_ruling IS NOT NULL AND digest_ruling != ''"
             )
             with_digest = int(cur.fetchone()["n"] or 0)
 
@@ -653,13 +655,14 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
                 concepts = None
 
             try:
+                # The date column is called 'date', not 'date_decided'
                 cur.execute(
-                    "SELECT MIN(date_decided) AS oldest, MAX(date_decided) AS latest"
-                    " FROM sc_decided_cases WHERE date_decided IS NOT NULL"
+                    "SELECT MIN(date) AS oldest, MAX(date) AS latest"
+                    " FROM sc_decided_cases WHERE date IS NOT NULL"
                 )
                 date_row = cur.fetchone()
-                oldest_date = date_row["oldest"]
-                latest_date = date_row["latest"]
+                oldest_date = str(date_row["oldest"]) if date_row["oldest"] else None
+                latest_date = str(date_row["latest"]) if date_row["latest"] else None
             except Exception:
                 oldest_date = latest_date = None
 
@@ -767,9 +770,15 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
     base = f"https://management.azure.com/subscriptions/{sub_id}"
     now  = datetime.now(timezone.utc)
 
-    # 24-hour window for metrics
+    # 24-hour window for metrics (DB, Functions)
     timespan = (
         f"{(now - timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%SZ')}/"
+        f"{now.strftime('%Y-%m-%dT%H:%M:%SZ')}"
+    )
+    # Billing-period window (start of month → now) for SWA bandwidth and Speech usage
+    billing_start_ts = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    monthly_timespan = (
+        f"{billing_start_ts.strftime('%Y-%m-%dT%H:%M:%SZ')}/"
         f"{now.strftime('%Y-%m-%dT%H:%M:%SZ')}"
     )
 
@@ -900,16 +909,149 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
         except Exception:
             swa_sku = {}
 
+        # SWA valid metrics: BytesSent, SiteHits, SiteErrors, CdnRequestCount, CdnResponseSize, CdnTotalLatency
+        swa_metric_names = "BytesSent,SiteHits,SiteErrors,CdnRequestCount,CdnResponseSize,CdnTotalLatency"
+        try:
+            r = requests.get(
+                f"{swa_rid}/providers/microsoft.insights/metrics",
+                params={
+                    "api-version": "2018-01-01",
+                    "metricnames": swa_metric_names,
+                    "timespan":    monthly_timespan,
+                    "interval":    "PT1H",
+                    "aggregation": "Total,Average",
+                },
+                headers=hdrs,
+                timeout=15,
+            )
+            swa_metrics = r.json().get("value", []) if r.ok else []
+        except Exception:
+            swa_metrics = []
+
         result["resources"]["static_web_app"] = {
             "name":    swa_name,
             "sku":     swa_sku,
-            "metrics": [],
+            "metrics": swa_metrics,
         }
         result["skus"]["static_web_app"] = {
-            "tier":                 swa_sku.get("tier", "Free"),
-            "free_bandwidth_gb":    100,
+            "tier":                  swa_sku.get("tier", "Free"),
+            "free_bandwidth_gb":     100,
             "free_builds_per_month": 2,
         }
+
+    # ── LexPlay Speech (Azure Cognitive Services – Speech) ─────────────────
+    # Correct metric names verified from Azure Monitor API error response
+    _cog_metrics = "TotalCalls,SuccessfulCalls,TotalErrors,BlockedCalls,Latency,SynthesizedCharacters,TotalTokenCalls"
+
+    def _fetch_cog(name, env_var):
+        res_name = _first_env(env_var) or name
+        rid = f"{base}/resourceGroups/{rg}/providers/Microsoft.CognitiveServices/accounts/{res_name}"
+        try:
+            rm = requests.get(f"{rid}?api-version=2023-05-01", headers=hdrs, timeout=10)
+            meta = rm.json() if rm.ok else {}
+            meta_ok = rm.ok
+        except Exception:
+            meta = {}; meta_ok = False
+        sku_raw = meta.get("sku", {})
+        try:
+            rr = requests.get(
+                f"{rid}/providers/microsoft.insights/metrics",
+                params={
+                    "api-version": "2018-01-01",
+                    "metricnames": _cog_metrics,
+                    "timespan":    monthly_timespan,
+                    "interval":    "PT1H",
+                    "aggregation": "Total,Average",
+                },
+                headers=hdrs,
+                timeout=15,
+            )
+            met = rr.json().get("value", []) if rr.ok else []
+        except Exception:
+            met = []
+        is_free = sku_raw.get("name", "F0") in ("F0", "Free")
+        return {
+            "resource": {
+                "name":    res_name,
+                "kind":    meta.get("kind", "SpeechServices"),
+                "sku":     sku_raw,
+                "metrics": met,
+                "meta_ok":    meta_ok,
+            },
+            "sku": {
+                "name": sku_raw.get("name", "F0"),
+                "tier": sku_raw.get("tier", "Free"),
+                "is_free": is_free,
+                "free_tts_chars_per_month":     500_000,
+                "free_stt_hours_per_month":     5,
+                "free_tts_audio_minutes_month": 30,
+            },
+        }
+
+    sp = _fetch_cog("lexplayspeech",  "AZURE_LEXPLAYSPEECH_NAME")
+    result["resources"]["lexplay_speech"]  = sp["resource"]
+    result["skus"]["lexplay_speech"]       = sp["sku"]
+
+    # ── LexPlay Audio18 (Azure Blob Storage – StorageV2) ─────────────────────
+    audio18_name = _first_env("AZURE_LEXPLAYAUDIO18_NAME") or "lexplayaudio18"
+    audio18_rid  = f"{base}/resourceGroups/{rg}/providers/Microsoft.Storage/storageAccounts/{audio18_name}"
+    try:
+        ra = requests.get(f"{audio18_rid}?api-version=2023-01-01", headers=hdrs, timeout=10)
+        audio18_meta = ra.json() if ra.ok else {}
+    except Exception:
+        audio18_meta = {}
+    audio18_sku_raw = audio18_meta.get("sku", {})
+
+    # Account-level metrics (transactions, ingress, egress, latency, availability)
+    try:
+        r_acct = requests.get(
+            f"{audio18_rid}/providers/microsoft.insights/metrics",
+            params={
+                "api-version": "2018-01-01",
+                "metricnames": "Transactions,Ingress,Egress,SuccessServerLatency,Availability",
+                "timespan":    timespan,
+                "interval":    "PT1H",
+                "aggregation": "Total,Average",
+            },
+            headers=hdrs,
+            timeout=15,
+        )
+        audio18_acct_met = r_acct.json().get("value", []) if r_acct.ok else []
+    except Exception:
+        audio18_acct_met = []
+
+    # Blob-service-level metrics (capacity, count, containers)
+    try:
+        r_blob = requests.get(
+            f"{audio18_rid}/blobServices/default/providers/microsoft.insights/metrics",
+            params={
+                "api-version": "2018-01-01",
+                "metricnames": "BlobCapacity,BlobCount,ContainerCount",
+                "timespan":    timespan,
+                "interval":    "PT1H",
+                "aggregation": "Average",
+            },
+            headers=hdrs,
+            timeout=15,
+        )
+        audio18_blob_met = r_blob.json().get("value", []) if r_blob.ok else []
+    except Exception:
+        audio18_blob_met = []
+
+    result["resources"]["lexplay_audio18"] = {
+        "name":    audio18_name,
+        "kind":    audio18_meta.get("kind", "StorageV2"),
+        "sku":     audio18_sku_raw,
+        "metrics": audio18_acct_met + audio18_blob_met,
+    }
+    result["skus"]["lexplay_audio18"] = {
+        "name":               audio18_sku_raw.get("name", "Standard_LRS"),
+        "tier":               audio18_sku_raw.get("tier", "Standard"),
+        "kind":               audio18_meta.get("kind", "StorageV2"),
+        "free_storage_gb":    5,
+        "hot_per_gb_usd":     0.018,
+        "free_egress_gb":     100,
+    }
 
     # ── Cost Management ───────────────────────────────────────────────────────
     billing_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)

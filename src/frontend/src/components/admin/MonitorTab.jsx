@@ -4,6 +4,7 @@ import {
   Database, Zap, Globe, RefreshCw, AlertCircle,
   Settings, DollarSign, MessageSquarePlus, Trash2,
   ChevronRight, TrendingUp, TrendingDown, Minus,
+  Mic, Volume2,
 } from 'lucide-react';
 import { MetricCard, Sparkline } from './MetricCard';
 
@@ -33,11 +34,13 @@ function extractLatest(metrics, metricName) {
   return series.length ? series[series.length - 1] : null;
 }
 
-/** Sum a time series (for counts like execution count). */
+/** Sum a time series (for counts like execution count). Returns 0 if metric exists but has no data (idle resource), null if metric not found at all. */
 function extractSum(metrics, metricName) {
   const m = metrics?.find(m => m.name?.value === metricName || m.name?.localizedValue === metricName);
-  if (!m?.timeseries?.[0]?.data) return null;
-  return m.timeseries[0].data.reduce((acc, d) => acc + (d.total ?? d.average ?? 0), 0);
+  if (!m) return null;                           // metric not in response at all
+  const data = m.timeseries?.[0]?.data ?? [];
+  if (data.length === 0) return 0;               // metric found but no data points → idle
+  return data.reduce((acc, d) => acc + (d.total ?? d.average ?? 0), 0);
 }
 
 // ── SKU Badge ─────────────────────────────────────────────────────────────────
@@ -345,7 +348,7 @@ function PostgreSQLPanel({ data, skus, billing, costData, authHdr }) {
           API traffic (last 24 hours)
         </h3>
         <p className="mb-4 text-xs text-gray-500 dark:text-zinc-400">
-          Function executions and HTTP errors from your backend — most requests drive PostgreSQL work. Full detail stays on the Function App tab.
+          Function executions and HTTP errors from your backend — most requests drive PostgreSQL work.
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
           <MetricCard label="API executions (24h)" value={execCount != null ? Math.round(execCount).toLocaleString() : null}
@@ -432,31 +435,268 @@ function FunctionAppPanel({ data, skus, billing, costData, authHdr }) {
 function StaticWebAppPanel({ data, skus, billing, costData, authHdr }) {
   const res = data?.resources?.static_web_app;
   const sku = skus?.static_web_app;
+  const metrics = res?.metrics || [];
+
+  // BytesSent and SiteHits now use monthly_timespan — sentGB is billing-period total
+  const bytesSent24h  = extractSum(metrics, 'BytesSent');
+  const siteHits      = extractSum(metrics, 'SiteHits');
+  const siteErrors    = extractSum(metrics, 'SiteErrors');
+  const cdnLatency    = extractLatest(metrics, 'CdnTotalLatency');
+  const cdnRequests   = extractSum(metrics, 'CdnRequestCount');
+  const sentGB24h     = bytesSent24h != null ? bytesSent24h / 1_073_741_824 : null;
+  const limitGB       = sku?.free_bandwidth_gb || 100;
+  const bwBarPct      = sentGB24h != null ? Math.min(100, (sentGB24h / limitGB) * 100) : null;
+
+  const freeWarnings = sku?.tier === 'Free' ? [
+    `Free tier: ${limitGB} GB bandwidth/month — monitor during traffic spikes.`,
+    `Max ${sku.free_builds_per_month} GitHub Actions builds/month included.`,
+    ...(sentGB24h != null && sentGB24h > limitGB * 0.6
+      ? [`Monthly bandwidth ${sentGB24h.toFixed(1)} GB — approaching ${limitGB} GB limit.`]
+      : []),
+  ] : [];
 
   return (
     <div className="space-y-5">
       <SkuBadge
         name={res?.sku?.name || 'Free'}
         tier={sku?.tier || 'Free'}
-        freeWarnings={sku?.tier === 'Free' ? [
-          `Free tier allows ${sku.free_bandwidth_gb} GB bandwidth/month — monitor during traffic spikes.`,
-          `Max ${sku.free_builds_per_month} GitHub Actions builds/month included.`,
-        ] : []}
+        freeWarnings={freeWarnings}
       />
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-        <MetricCard label="Bandwidth Limit" value={`${sku?.free_bandwidth_gb || 100} GB`}
-          tooltip="Maximum data transfer your Static Web App can serve per month on the free tier. Exceeding this may result in your site being throttled or billed." />
+        <MetricCard
+          label="Bandwidth Used (this month)"
+          value={sentGB24h != null ? sentGB24h.toFixed(3) : null}
+          unit="GB"
+          sub={sentGB24h != null ? `of ${limitGB} GB free/month` : `limit: ${limitGB} GB/month`}
+          showBar={bwBarPct != null}
+          barPct={bwBarPct}
+          warn={60} crit={85}
+          tooltip={`Bytes served by your SWA this billing month. Free tier allows ${limitGB} GB/month before throttling.`}
+        />
+        <MetricCard
+          label="Requests (this month)"
+          value={siteHits != null ? Math.round(siteHits).toLocaleString() : null}
+          tooltip="Total site hits served by your SWA this billing month."
+        />
+        <MetricCard
+          label="Errors (this month)"
+          value={siteErrors != null ? Math.round(siteErrors).toLocaleString() : null}
+          highlight={siteErrors > 10 ? 'warn' : undefined}
+          tooltip="Total site errors returned this billing month."
+        />
         <MetricCard label="Free Builds/Month" value={sku?.free_builds_per_month || 2}
-          tooltip="Number of automated deployments (GitHub Actions builds) included in your plan per month. Each push to your deployment branch uses one build." />
+          tooltip="Number of automated deployments (GitHub Actions builds) included in your plan per month." />
         <MetricCard label="Custom Domains" value="Unlimited"
-          tooltip="Static Web Apps on the free tier support unlimited custom domains with free SSL certificates." />
+          tooltip="Static Web Apps on the free tier support unlimited custom domains with free SSL." />
+        {cdnLatency != null && (
+          <MetricCard
+            label="CDN Latency"
+            value={cdnLatency.toFixed(0)} unit="ms"
+            showBar barPct={Math.min(100, (cdnLatency / 500) * 100)} warn={50} crit={80}
+            tooltip="Average CDN edge latency for requests to your SWA."
+          />
+        )}
+        {cdnRequests != null && (
+          <MetricCard
+            label="CDN Requests"
+            value={Math.round(cdnRequests).toLocaleString()}
+            tooltip="Total CDN requests served this billing month."
+          />
+        )}
       </div>
-      <p className="rounded-lg border border-lex bg-gray-50 px-4 py-3 text-xs text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
-        Azure Monitor metrics are limited for Static Web Apps. Bandwidth and request-level telemetry
-        can be viewed in the Azure Portal under Monitoring → Metrics for your SWA resource.
-      </p>
+      {bytesSent24h == null && (
+        <p className="rounded-lg border border-lex bg-gray-50 px-4 py-3 text-xs text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
+          Bandwidth telemetry unavailable from Azure Monitor for this SWA — check the Azure Portal under Monitoring → Metrics.
+        </p>
+      )}
       <CostCard billing={billing} costData={costData} />
       <ObservationsPanel resource="static_web_app" authHdr={authHdr} />
+    </div>
+  );
+}
+
+// ── Cognitive Services (Speech) panel ─────────────────────────────────────────
+
+function CognitiveServicesPanel({ resourceKey, label, data, skus, billing, costData, authHdr }) {
+  const res     = data?.resources?.[resourceKey];
+  const sku     = skus?.[resourceKey];
+  const metrics = res?.metrics || [];
+
+  // Correct Azure Monitor metric names for Microsoft.CognitiveServices/accounts
+  const totalCalls    = extractSum(metrics, 'TotalCalls');
+  const successCalls  = extractSum(metrics, 'SuccessfulCalls');
+  const totalErrors   = extractSum(metrics, 'TotalErrors');
+  const blockedCalls  = extractSum(metrics, 'BlockedCalls');
+  const latency       = extractLatest(metrics, 'Latency');
+  const synthChars    = extractSum(metrics, 'SynthesizedCharacters');   // Neural TTS chars
+  const tokenCalls    = extractSum(metrics, 'TotalTokenCalls');
+
+  const errRate = (totalCalls && totalErrors != null)
+    ? ((totalErrors / Math.max(totalCalls, 1)) * 100).toFixed(2)
+    : null;
+
+  // Estimate monthly TTS usage from the synthesized characters metric
+  const estMonthlyChars   = synthChars   != null ? synthChars   : null; // already monthly
+  const freeCharLimit     = sku?.free_tts_chars_per_month || 500_000;
+  const freeSttHours      = sku?.free_stt_hours_per_month || 5;
+  const isFree            = sku?.is_free ?? true;
+  const charBarPct        = estMonthlyChars != null ? Math.min(100, (estMonthlyChars / freeCharLimit) * 100) : null;
+  const freeWarnings      = [];
+  if (isFree && charBarPct != null && charBarPct > 60) {
+    freeWarnings.push(`${Math.round(estMonthlyChars).toLocaleString()} TTS chars this month — ${freeCharLimit.toLocaleString()} free limit.`);
+  }
+
+  const noActivity = res?.meta_ok && totalCalls === 0;
+
+  return (
+    <div className="space-y-5">
+      <SkuBadge
+        name={res?.kind || 'SpeechServices'}
+        tier={sku ? `${sku.name} — ${sku.tier}` : '—'}
+        freeWarnings={isFree ? [
+          `Free tier (F0): ${(freeCharLimit/1000).toFixed(0)}K Neural TTS chars/month`,
+          `${freeSttHours} audio hours/month STT free`,
+          ...freeWarnings,
+        ] : freeWarnings}
+      />
+
+      {noActivity && (
+        <p className="rounded-lg border border-lex bg-gray-50 px-4 py-3 text-xs text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
+          No Speech API activity recorded this billing month — metrics will populate once calls are made.
+        </p>
+      )}
+
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+        <MetricCard label="Total Calls" value={totalCalls != null ? Math.round(totalCalls).toLocaleString() : null}
+          tooltip="Total API calls to this Speech resource this billing month." />
+        <MetricCard label="Successful" value={successCalls != null ? Math.round(successCalls).toLocaleString() : null}
+          tooltip="Calls that completed without an error this billing month." />
+        <MetricCard label="Errors" value={totalErrors != null ? Math.round(totalErrors).toLocaleString() : null}
+          highlight={totalErrors > 5 ? 'warn' : undefined}
+          tooltip="Total error count from this Speech resource this billing month." />
+        <MetricCard label="Blocked" value={blockedCalls != null ? Math.round(blockedCalls).toLocaleString() : null}
+          tooltip="Calls blocked due to rate limiting or quota this billing month." />
+        <MetricCard label="Error Rate" value={errRate} unit="%"
+          showBar warn={1} crit={5}
+          tooltip="Percentage of calls that resulted in an error." />
+        <MetricCard label="Avg Latency" value={latency != null ? latency.toFixed(0) : null} unit="ms"
+          showBar barPct={latency != null ? Math.min(100, (latency / 5000) * 100) : null} warn={50} crit={80}
+          tooltip="Average response latency from this Speech resource." />
+        <MetricCard
+          label="TTS Chars (this month)"
+          value={synthChars != null ? Math.round(synthChars).toLocaleString() : null}
+          sub={synthChars != null && isFree
+            ? `of ${freeCharLimit.toLocaleString()} free/month`
+            : undefined}
+          showBar={charBarPct != null && isFree}
+          barPct={charBarPct}
+          warn={60} crit={85}
+          tooltip={`Neural TTS characters synthesized this billing month. Free tier: ${(freeCharLimit/1000).toFixed(0)}K chars/month.`}
+        />
+        {tokenCalls != null && (
+          <MetricCard label="Token Calls" value={Math.round(tokenCalls).toLocaleString()}
+            tooltip="Total calls using the token-based API this billing month." />
+        )}
+      </div>
+
+      <CostCard billing={billing} costData={costData} />
+      <ObservationsPanel resource={resourceKey} authHdr={authHdr} />
+    </div>
+  );
+}
+
+// ── Blob Storage panel (lexplay_audio18) ─────────────────────────────────────
+
+function BlobStoragePanel({ data, skus, billing, costData, authHdr }) {
+  const res     = data?.resources?.lexplay_audio18;
+  const sku     = skus?.lexplay_audio18;
+  const metrics = res?.metrics || [];
+
+  // Account-level (Total aggregation)
+  const transactions = extractSum(metrics, 'Transactions');
+  const ingressBytes = extractSum(metrics, 'Ingress');
+  const egressBytes  = extractSum(metrics, 'Egress');
+  const latency      = extractLatest(metrics, 'SuccessServerLatency');
+  const availability = extractLatest(metrics, 'Availability');
+
+  // Blob-service-level (Average snapshot)
+  const blobCapBytes   = extractLatest(metrics, 'BlobCapacity');
+  const blobCount      = extractLatest(metrics, 'BlobCount');
+  const containerCount = extractLatest(metrics, 'ContainerCount');
+
+  const ingressGB  = ingressBytes  != null ? ingressBytes  / 1_073_741_824 : null;
+  const egressGB   = egressBytes   != null ? egressBytes   / 1_073_741_824 : null;
+  const capacityGB = blobCapBytes  != null ? blobCapBytes  / 1_073_741_824 : null;
+
+  const freeGB    = sku?.free_storage_gb || 5;
+  const capBarPct = capacityGB != null ? Math.min(100, (capacityGB / freeGB) * 100) : null;
+
+  return (
+    <div className="space-y-5">
+      <SkuBadge
+        name={res?.kind || sku?.name || 'StorageV2'}
+        tier={`${sku?.name || 'Standard_LRS'} — ${sku?.tier || 'Standard'}`}
+        freeWarnings={[
+          `Azure Free Account: ${freeGB} GB LRS storage free (12-month benefit)`,
+          `After free period: ~$${sku?.hot_per_gb_usd ?? 0.018}/GB/month (Hot tier)`,
+          `First ${sku?.free_egress_gb ?? 100} GB egress/month free`,
+        ]}
+      />
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+        <MetricCard
+          label="Blob Capacity"
+          value={capacityGB != null ? capacityGB.toFixed(3) : null}
+          unit="GB"
+          sub={capacityGB != null ? `of ${freeGB} GB free tier` : `limit: ${freeGB} GB free`}
+          showBar={capBarPct != null}
+          barPct={capBarPct}
+          warn={60} crit={85}
+          tooltip={`Total blob storage used. Azure Free Account includes ${freeGB} GB LRS for 12 months.`}
+        />
+        <MetricCard
+          label="Blob Count"
+          value={blobCount != null ? Math.round(blobCount).toLocaleString() : null}
+          tooltip="Total number of blobs (audio files) stored in this account."
+        />
+        <MetricCard
+          label="Containers"
+          value={containerCount != null ? Math.round(containerCount) : null}
+          tooltip="Number of blob containers in this storage account."
+        />
+        <MetricCard
+          label="Transactions (24h)"
+          value={transactions != null ? Math.round(transactions).toLocaleString() : null}
+          tooltip="Total read/write requests to this storage account in the last 24 hours."
+        />
+        <MetricCard
+          label="Ingress (24h)"
+          value={ingressGB != null ? ingressGB.toFixed(4) : null}
+          unit="GB"
+          tooltip="Data written to this storage account in the last 24 hours (e.g. audio uploads)."
+        />
+        <MetricCard
+          label="Egress (24h)"
+          value={egressGB != null ? egressGB.toFixed(4) : null}
+          unit="GB"
+          tooltip={`Data read from this account in the last 24 hours (audio served to users). First ${sku?.free_egress_gb ?? 100} GB/month is free.`}
+        />
+        <MetricCard
+          label="Server Latency"
+          value={latency != null ? latency.toFixed(0) : null}
+          unit="ms"
+          showBar barPct={latency != null ? Math.min(100, (latency / 500) * 100) : null}
+          warn={50} crit={80}
+          tooltip="Average server-side latency for successful storage requests."
+        />
+        <MetricCard
+          label="Availability"
+          value={availability != null ? availability.toFixed(2) : null}
+          unit="%"
+          tooltip="Storage account availability. Should be near 100%."
+        />
+      </div>
+      <CostCard billing={billing} costData={costData} />
+      <ObservationsPanel resource="lexplay_audio18" authHdr={authHdr} />
     </div>
   );
 }
@@ -464,9 +704,10 @@ function StaticWebAppPanel({ data, skus, billing, costData, authHdr }) {
 // ── Main component ────────────────────────────────────────────────────────────
 
 const SUB_TABS = [
-  { id: 'postgresql',      label: 'PostgreSQL',      icon: Database },
-  { id: 'function_app',    label: 'Function App',    icon: Zap },
-  { id: 'static_web_app',  label: 'Static Web App',  icon: Globe },
+  { id: 'postgresql',       label: 'PostgreSQL',       icon: Database },
+  { id: 'static_web_app',   label: 'Static Web App',   icon: Globe },
+  { id: 'lexplay_speech',   label: 'LexPlay Speech',   icon: Mic },
+  { id: 'lexplay_audio18',  label: 'LexPlay Audio18',  icon: Volume2 },
 ];
 
 export default function MonitorTab() {
@@ -586,11 +827,14 @@ export default function MonitorTab() {
           {!loading && data && activeResource === 'postgresql' && (
             <PostgreSQLPanel data={data} skus={data.skus} billing={data.billing} costData={data.cost} authHdr={authHdr} />
           )}
-          {!loading && data && activeResource === 'function_app' && (
-            <FunctionAppPanel data={data} skus={data.skus} billing={data.billing} costData={data.cost} authHdr={authHdr} />
-          )}
           {!loading && data && activeResource === 'static_web_app' && (
             <StaticWebAppPanel data={data} skus={data.skus} billing={data.billing} costData={data.cost} authHdr={authHdr} />
+          )}
+          {!loading && data && activeResource === 'lexplay_speech' && (
+            <CognitiveServicesPanel resourceKey="lexplay_speech" label="LexPlay Speech" data={data} skus={data.skus} billing={data.billing} costData={data.cost} authHdr={authHdr} />
+          )}
+          {!loading && data && activeResource === 'lexplay_audio18' && (
+            <BlobStoragePanel data={data} skus={data.skus} billing={data.billing} costData={data.cost} authHdr={authHdr} />
           )}
         </>
       )}
