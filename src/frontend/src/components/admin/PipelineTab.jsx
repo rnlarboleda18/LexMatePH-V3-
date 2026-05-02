@@ -169,7 +169,10 @@ export default function PipelineTab() {
       const data = await res.json();
       setGapScanState(data.scan);
       if (data.results) setGapScanResults(data.results);
-      if (!data.scan?.running && gapPollRef.current) {
+      if (data.scan?.running) {
+        if (!gapPollRef.current)
+          gapPollRef.current = setInterval(fetchGapResults, 4000);
+      } else if (gapPollRef.current) {
         clearInterval(gapPollRef.current);
         gapPollRef.current = null;
       }
