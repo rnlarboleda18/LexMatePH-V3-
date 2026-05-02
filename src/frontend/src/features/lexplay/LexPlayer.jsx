@@ -1441,8 +1441,8 @@ const LexPlayer = ({
                 {/* Bulk Add Modal */}
                 {showBulkModal && (
                     <div className="lex-vv-surface fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-3xl dark:bg-black/70">
-                        <div className="w-full max-w-md overflow-hidden rounded-2xl border border-lex bg-white shadow-2xl backdrop-blur-3xl dark:border-lex dark:bg-zinc-900">
-                            <div className="flex items-center justify-between border-b border-lex bg-slate-50/95 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
+                        <div className="w-full max-w-md rounded-2xl border border-lex bg-white shadow-2xl backdrop-blur-3xl dark:border-lex dark:bg-zinc-900">
+                            <div className="flex items-center justify-between rounded-t-2xl border-b border-lex bg-slate-50/95 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
                                 <div>
                                     <h3 className="flex items-center gap-2 text-xl font-black tracking-tight text-slate-900 dark:text-white">Add Tracks</h3>
                                     <p className="mt-1 text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">Bulk create audio queue</p>
@@ -1453,18 +1453,18 @@ const LexPlayer = ({
                                 {bulkError && <div className="rounded-2xl border border-red-300/80 bg-red-50 p-4 text-xs font-black uppercase text-red-800 dark:border-red-500/40 dark:bg-red-500/20 dark:text-red-400">{bulkError}</div>}
                                 <div className="space-y-2">
                                     <label className="ml-1 block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">Destination Playlist</label>
-                                    <CustomPlaylistSelect 
-                                        value={bulkForm.targetPlaylist} 
-                                        onChange={val => setBulkForm({...bulkForm, targetPlaylist: val})}
+                                    <CustomPlaylistSelect
+                                        value={bulkForm.targetPlaylist}
+                                        onChange={val => setBulkForm(prev => ({...prev, targetPlaylist: val}))}
                                         options={savedPlaylists.map(p => ({ value: p.id, label: p.name }))}
                                         placeholder="Select a playlist..."
                                     />
                                 </div>
                                 <div className="space-y-2">
                                     <label className="ml-1 block text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 dark:text-white/30">Select Codal</label>
-                                    <CustomPlaylistSelect 
-                                        value={bulkForm.codal} 
-                                        onChange={val => setBulkForm({...bulkForm, codal: val})}
+                                    <CustomPlaylistSelect
+                                        value={bulkForm.codal}
+                                        onChange={val => setBulkForm(prev => ({...prev, codal: val}))}
                                         options={[
                                             { value: "RPC", label: "Revised Penal Code" },
                                             { value: "CIV", label: "Civil Code" },
@@ -1485,7 +1485,7 @@ const LexPlayer = ({
                                     <input type="text" placeholder="e.g. 1-20" value={bulkForm.range} onChange={e => setBulkForm({...bulkForm, range: e.target.value})} className="w-full rounded-2xl border border-lex-strong bg-white p-4 text-sm font-bold text-slate-900 outline-none placeholder:text-slate-400 dark:border-lex-strong dark:bg-zinc-950 dark:text-white" />
                                 </div>
                             </div>
-                            <div className="flex justify-end gap-4 border-t border-lex bg-slate-50/90 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
+                            <div className="flex justify-end gap-4 rounded-b-2xl border-t border-lex bg-slate-50/90 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
                                 <button type="button" onClick={() => setShowBulkModal(false)} className="text-xs font-black uppercase tracking-widest text-slate-500 transition-all hover:text-slate-800 dark:text-white/30 dark:hover:text-white">Cancel</button>
                                 <button type="button" onClick={handleAddBulkItems} disabled={isBulking} className="rounded-lg bg-purple-600 px-10 py-4 text-xs font-black uppercase tracking-widest text-white shadow-xl shadow-purple-500/20 transition-all hover:bg-purple-500 disabled:opacity-50 active:scale-95 dark:bg-purple-500 dark:hover:bg-purple-400">
                                     {isBulking ? "Adding..." : "Add to Tracks"}
