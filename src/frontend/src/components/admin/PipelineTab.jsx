@@ -189,15 +189,27 @@ export default function PipelineTab() {
     return () => { if (gapPollRef.current) clearInterval(gapPollRef.current); };
   }, [fetchGapResults]);
 
-  const startGapScan = async (resume = false) => {
+  const stopGapScan = async () => {
+    setGapScanLoading(true);
+    try {
+      const h = await authHdr();
+      await fetch('/api/ops/pipeline/stop-gap-scan', { method: 'POST', headers: h });
+      if (gapPollRef.current) { clearInterval(gapPollRef.current); gapPollRef.current = null; }
+      setGapScanState(s => ({ ...(s || {}), running: false, status: 'idle' }));
+    } catch (_) {}
+    finally { setGapScanLoading(false); }
+  };
+
+  const startGapScan = async (resume = false, fresh = false) => {
     setGapScanErr(null);
     setGapScanLoading(true);
+    if (fresh) setGapScanResults(null);
     try {
       const h = await authHdr();
       const res = await fetch('/api/ops/pipeline/scan-gaps', {
         method: 'POST',
         headers: { ...h, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resume }),
+        body: JSON.stringify({ resume, fresh }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || `Gap scan failed (${res.status})`);
@@ -305,26 +317,49 @@ export default function PipelineTab() {
             Stop Pipeline
           </ActionButton>
 
-          <ActionButton
-            onClick={() => startGapScan(false)}
-            disabled={gapScanLoading || gapScanState?.running}
-            variant="secondary"
-            icon={ScanSearch}
-          >
-            {gapScanState?.running ? 'Scanning gaps…' : 'Scan Gaps'}
-            <span className="ml-1 text-[10px] font-normal opacity-70">
-              find skipped cases
-            </span>
-          </ActionButton>
+          {!gapScanState?.running && (
+            <ActionButton
+              onClick={() => startGapScan(false)}
+              disabled={gapScanLoading}
+              variant="secondary"
+              icon={ScanSearch}
+            >
+              Scan Gaps
+              <span className="ml-1 text-[10px] font-normal opacity-70">find skipped cases</span>
+            </ActionButton>
+          )}
+
+          {gapScanState?.running && (
+            <ActionButton
+              onClick={stopGapScan}
+              disabled={gapScanLoading}
+              variant="danger"
+              icon={Square}
+            >
+              Stop Scan
+            </ActionButton>
+          )}
 
           {gapScanResults && !gapScanState?.running && (
             <ActionButton
               onClick={() => startGapScan(true)}
-              disabled={gapScanLoading || gapScanState?.running}
+              disabled={gapScanLoading}
               variant="secondary"
               icon={ScanSearch}
             >
               Resume Gap Scan
+            </ActionButton>
+          )}
+
+          {gapScanResults && !gapScanState?.running && (
+            <ActionButton
+              onClick={() => startGapScan(false, true)}
+              disabled={gapScanLoading}
+              variant="danger"
+              icon={RefreshCw}
+            >
+              New Scan
+              <span className="ml-1 text-[10px] font-normal opacity-70">clears previous</span>
             </ActionButton>
           )}
         </div>

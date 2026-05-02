@@ -979,6 +979,7 @@ def admin_pipeline_scan_gaps(req: func.HttpRequest) -> func.HttpResponse:
 
     max_probe  = body.get("max_probe")    # None = scan all gaps
     resume     = bool(body.get("resume", False))
+    fresh      = bool(body.get("fresh",  False))
     range_from = body.get("range_from")
     range_to   = body.get("range_to")
 
@@ -998,7 +999,19 @@ def admin_pipeline_scan_gaps(req: func.HttpRequest) -> func.HttpResponse:
     with _gap_scan_lock:
         _refresh_gap_scan_state_locked()
         if _gap_scan_proc is not None:
-            return _json({"error": "Gap scan is already running"}, 409)
+            if fresh:
+                try:
+                    _gap_scan_proc.terminate()
+                except Exception:
+                    pass
+                _gap_scan_proc = None
+            else:
+                return _json({"error": "Gap scan is already running"}, 409)
+        if fresh and _GAP_RESULTS_PATH.exists():
+            try:
+                _GAP_RESULTS_PATH.unlink()
+            except Exception:
+                pass
         try:
             _GAP_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
             _gap_scan_proc = subprocess.Popen(
@@ -1038,6 +1051,27 @@ def admin_pipeline_gap_results(req: func.HttpRequest) -> func.HttpResponse:
             logging.warning("Could not read gap results: %s", exc)
 
     return _json({"scan": state, "results": results}, 200)
+
+
+@admin_bp.route(route="ops/pipeline/stop-gap-scan", methods=["POST"])
+def admin_pipeline_stop_gap_scan(req: func.HttpRequest) -> func.HttpResponse:
+    """Terminate the running gap scan subprocess."""
+    _, err = _check_admin(req)
+    if err:
+        return err
+    global _gap_scan_proc
+    with _gap_scan_lock:
+        _refresh_gap_scan_state_locked()
+        if _gap_scan_proc is None:
+            return _json({"ok": True, "stopped": False}, 200)
+        try:
+            _gap_scan_proc.terminate()
+        except Exception:
+            pass
+        _gap_scan_proc = None
+        _gap_scan_state["status"] = "idle"
+        _gap_scan_state["finished_at"] = datetime.now(timezone.utc).isoformat()
+    return _json({"ok": True, "stopped": True}, 200)
 
 
 # ── AZURE METRICS + COST ──────────────────────────────────────────────────────
