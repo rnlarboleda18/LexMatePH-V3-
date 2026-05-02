@@ -176,19 +176,23 @@ def _norm_case_number(s: str) -> str:
 
 def _get_present_case_numbers(conn) -> set[str]:
     """Return normalised G.R. case_numbers already in sc_decided_cases."""
-    cur = conn.cursor()
-    cur.execute(
-        r"""
-        SELECT case_number FROM sc_decided_cases
-        WHERE case_number IS NOT NULL
-          AND btrim(case_number) != ''
-          AND case_number ~* '^\s*G\.?\s*R\.?'
-        """
-    )
-    nums = {_norm_case_number(row[0]) for row in cur.fetchall()}
-    cur.close()
-    log.info("Loaded %s G.R. case numbers from DB for cross-check.", len(nums))
-    return nums
+    try:
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT case_number FROM sc_decided_cases
+            WHERE case_number IS NOT NULL
+              AND btrim(case_number) != ''
+              AND case_number ~* '^[[:space:]]*G[.]?[[:space:]]*R[.]?'
+            """
+        )
+        nums = {_norm_case_number(row[0]) for row in cur.fetchall()}
+        cur.close()
+        log.info("Loaded %s G.R. case numbers from DB for cross-check.", len(nums))
+        return nums
+    except Exception as exc:
+        log.warning("Could not load case numbers for cross-check (skipping): %s", exc)
+        return set()
 
 
 # ── eLib probe (same logic as scan_elib_new_cases.py) ────────────────────────
@@ -421,7 +425,11 @@ def main() -> int:
         log.info("Scanning range:   %s – %s", range_from, range_to)
 
         present_ids = _get_present_ids(conn, range_from, range_to)
-        present_case_numbers = _get_present_case_numbers(conn)
+        try:
+            present_case_numbers = _get_present_case_numbers(conn)
+        except Exception as exc:
+            log.warning("Case-number cross-check unavailable (%s) — proceeding without it.", exc)
+            present_case_numbers = set()
     finally:
         conn.close()
 
