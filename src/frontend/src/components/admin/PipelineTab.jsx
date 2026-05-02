@@ -203,7 +203,11 @@ export default function PipelineTab() {
   const startGapScan = async (resume = false, fresh = false) => {
     setGapScanErr(null);
     setGapScanLoading(true);
-    if (fresh) setGapScanResults(null);
+    if (fresh) {
+      // Stop polling first so an in-flight fetchGapResults can't restore old results
+      if (gapPollRef.current) { clearInterval(gapPollRef.current); gapPollRef.current = null; }
+      setGapScanResults(null);
+    }
     try {
       const h = await authHdr();
       const res = await fetch('/api/ops/pipeline/scan-gaps', {
