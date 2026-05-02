@@ -166,16 +166,17 @@ def _get_present_ids(conn, min_id: int, max_id: int) -> set[int]:
     return ids
 
 
-def _norm_case_number(s: str) -> str:
-    """Normalise a case-number string for cross-checking."""
-    s = re.sub(r"\s+", " ", s.strip()).lower()
-    s = s.replace("nos.", "no.")
-    s = s.replace(" & ", " and ")
-    return s
+def _extract_gr_numbers(case_number: str) -> frozenset[str]:
+    """Extract bare GR numeric identifiers (5+ digits) from a case number string."""
+    return frozenset(re.findall(r'\b\d{5,}\b', case_number))
 
 
 def _get_present_case_numbers(conn) -> set[str]:
-    """Return normalised G.R. case_numbers already in sc_decided_cases."""
+    """Return a flat set of 5+ digit GR number tokens from sc_decided_cases.
+
+    Matching on bare numeric tokens (e.g. "152072") rather than full formatted
+    strings avoids false negatives from punctuation / spacing differences.
+    """
     try:
         cur = conn.cursor()
         cur.execute(
@@ -183,13 +184,14 @@ def _get_present_case_numbers(conn) -> set[str]:
             SELECT case_number FROM sc_decided_cases
             WHERE case_number IS NOT NULL
               AND btrim(case_number) != ''
-              AND case_number ~* '^[[:space:]]*G[.]?[[:space:]]*R[.]?'
             """
         )
-        nums = {_norm_case_number(row[0]) for row in cur.fetchall()}
+        tokens: set[str] = set()
+        for (cn,) in cur.fetchall():
+            tokens.update(_extract_gr_numbers(cn))
         cur.close()
-        log.info("Loaded %s G.R. case numbers from DB for cross-check.", len(nums))
-        return nums
+        log.info("Loaded %s GR number tokens from DB for cross-check.", len(tokens))
+        return tokens
     except Exception as exc:
         log.warning("Could not load case numbers for cross-check (skipping): %s", exc)
         return set()
@@ -485,8 +487,9 @@ def main() -> int:
 
         if status == "ok_gr":
             meta = _extract_case_meta(snippet, elib_id)
-            # Skip if already ingested under a different eLib ID
-            if meta["gr_number"] and _norm_case_number(meta["gr_number"]) in present_case_numbers:
+            # Skip if any extracted GR number is already in the DB
+            extracted_nums = _extract_gr_numbers(meta["gr_number"]) if meta["gr_number"] else frozenset()
+            if extracted_nums and extracted_nums & present_case_numbers:
                 total_non_gr += 1
                 consecutive_misses = 0
                 log.info("[ALREADY IN DB] eLib #%s  %s", elib_id, meta["gr_number"])
