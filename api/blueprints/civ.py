@@ -6,12 +6,17 @@ import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
+from utils.codal_static_cache import codal_try_get, codal_set
 
 civ_bp = func.Blueprint()
 
 @civ_bp.route(route="civ/preliminary", auth_level=func.AuthLevel.ANONYMOUS)
 def get_civ_preliminary(req: func.HttpRequest) -> func.HttpResponse:
     """Return Preliminary Title articles (book IS NULL, i.e. Arts 1-36)."""
+    ck = "codal:civ:v1:preliminary"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -25,7 +30,9 @@ def get_civ_preliminary(req: func.HttpRequest) -> func.HttpResponse:
         results = cur.fetchall()
         attach_link_counts(cur, results)
         attach_amendment_links(cur, results)
-        return func.HttpResponse(json.dumps(results, default=str), mimetype="application/json")
+        payload = [dict(r) for r in results]
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
@@ -34,6 +41,10 @@ def get_civ_preliminary(req: func.HttpRequest) -> func.HttpResponse:
 @civ_bp.route(route="civ/book/{book_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_civ_by_book(req: func.HttpRequest) -> func.HttpResponse:
     book_num = req.route_params.get('book_num')
+    ck = f"codal:civ:v1:book:{book_num}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -51,8 +62,10 @@ def get_civ_by_book(req: func.HttpRequest) -> func.HttpResponse:
         # Attach link counts
         attach_link_counts(cur, results)
         attach_amendment_links(cur, results)
-        
-        return func.HttpResponse(json.dumps(results, default=str), mimetype="application/json")
+
+        payload = [dict(r) for r in results]
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
@@ -153,13 +166,15 @@ def attach_amendment_links(cur, articles):
 @civ_bp.route(route="civ/title/{title_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_civ_by_title(req: func.HttpRequest) -> func.HttpResponse:
     title_num = req.route_params.get('title_num')
+    book_param = req.params.get('book')
+    ck = f"codal:civ:v1:title:{title_num}:book:{book_param or 'none'}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
-        
-        # Check for book context
-        book_param = req.params.get('book')
-        
+
         query = "SELECT * FROM civ_codal WHERE title_num = %s"
         params = [title_num]
         
@@ -174,7 +189,9 @@ def get_civ_by_title(req: func.HttpRequest) -> func.HttpResponse:
         results = cur.fetchall()
         attach_link_counts(cur, results)
         attach_amendment_links(cur, results)
-        return func.HttpResponse(json.dumps(results, default=str), mimetype="application/json")
+        payload = [dict(r) for r in results]
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
@@ -183,6 +200,10 @@ def get_civ_by_title(req: func.HttpRequest) -> func.HttpResponse:
 @civ_bp.route(route="civ/article/{article_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_civ_article(req: func.HttpRequest) -> func.HttpResponse:
     article_num = req.route_params.get('article_num')
+    ck = f"codal:civ:v1:article:{article_num}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -196,7 +217,9 @@ def get_civ_article(req: func.HttpRequest) -> func.HttpResponse:
         if result:
             attach_link_counts(cur, [result])
             attach_amendment_links(cur, [result])
-            return func.HttpResponse(json.dumps(result, default=str), mimetype="application/json")
+            payload = dict(result)
+            codal_set(ck, payload)
+            return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
         else:
              return func.HttpResponse(json.dumps({"error": "Not Found"}), status_code=404)
     except Exception as e:

@@ -1,81 +1,74 @@
 """
-Thread-local lazy-reconnect DB connection.
+Bounded PostgreSQL connection pool (thread-safe).
 
-Each worker thread keeps one persistent connection. If the connection is
-lost (idle timeout, server restart, etc.), it is automatically recreated on
-the next call. This gives connection reuse without any borrow/return ceremony
-— all callers just use get_db_connection() and put_db_connection() as before,
-but put_db_connection() is now a no-op (the connection stays open for the
-lifetime of the thread).
+Replaces per-thread persistent connections so concurrent Azure Functions requests
+cannot exhaust the server's max_connections limit.
+
+Configure via DB_POOL_MIN_CONN / DB_POOL_MAX_CONN (defaults 2 / 15).
 """
-import threading
 import logging
 import psycopg2
+import psycopg2.pool
 
-# Single source of truth: config.DB_CONNECTION_STRING (cloud Postgres).
-from config import DB_CONNECTION_STRING
+from config import DB_CONNECTION_STRING, DB_POOL_MIN_CONN, DB_POOL_MAX_CONN
 
-_local = threading.local()
+_pool = None
 
 
-def _new_conn():
-    if not DB_CONNECTION_STRING or not str(DB_CONNECTION_STRING).strip():
-        raise RuntimeError(
-            "Database not configured: set DB_CONNECTION_STRING (cloud Postgres) in Application Settings or api/local.settings.json."
+def _get_pool():
+    global _pool
+    if _pool is None:
+        if not DB_CONNECTION_STRING or not str(DB_CONNECTION_STRING).strip():
+            raise RuntimeError(
+                "Database not configured: set DB_CONNECTION_STRING (cloud Postgres) "
+                "in Application Settings or api/local.settings.json."
+            )
+        minconn = DB_POOL_MIN_CONN
+        maxconn = DB_POOL_MAX_CONN
+        logging.info("DB: initializing ThreadedConnectionPool min=%s max=%s", minconn, maxconn)
+        _pool = psycopg2.pool.ThreadedConnectionPool(
+            minconn=minconn,
+            maxconn=maxconn,
+            dsn=str(DB_CONNECTION_STRING).strip(),
+            connect_timeout=10,
         )
-    conn = psycopg2.connect(
-        DB_CONNECTION_STRING,
-        connect_timeout=10
-    )
-    conn.autocommit = False
-    return conn
-
+    return _pool
 
 
 def get_db_connection():
-    """
-    Return the thread-local connection, creating or reconnecting as needed.
-    Callers do NOT need to close or return it — the connection persists for
-    the lifetime of the worker thread.
-    """
-    conn = getattr(_local, "conn", None)
-    if conn is None or conn.closed:
-        logging.info("DB: opening new thread-local connection")
-        _local.conn = _new_conn()
-    else:
-        # Quick liveness check — rolls back any previous failed transaction
-        try:
-            if conn.status == psycopg2.extensions.STATUS_IN_TRANSACTION:
-                conn.rollback()
-        except Exception:
-            logging.warning("DB: dead connection detected, reconnecting")
-            try:
-                conn.close()
-            except Exception:
-                pass
-            _local.conn = _new_conn()
-    return _local.conn
+    """Borrow a connection from the pool. Always pair with put_db_connection(conn)."""
+    conn = _get_pool().getconn()
+    try:
+        conn.autocommit = False
+    except Exception:
+        pass
+    return conn
 
 
 def put_db_connection(conn):
-    """
-    No-op — the thread-local connection is kept alive for reuse.
-    Only rolls back any uncommitted state so the next caller gets a clean tx.
-    """
+    """Return a connection to the pool after rollback."""
+    if conn is None:
+        return
+    pool = _get_pool()
     try:
-        if conn and not conn.closed:
+        if not conn.closed:
             conn.rollback()
     except Exception:
-        pass
+        logging.warning("DB: rollback before putconn failed; closing connection")
+        try:
+            pool.putconn(conn, close=True)
+        except Exception as ex:
+            logging.warning("DB: putconn(close=True) failed: %s", ex)
+        return
+    try:
+        pool.putconn(conn)
+    except Exception as ex:
+        logging.warning("DB: putconn failed: %s", ex)
 
 
 class get_db_conn:
-    """
-    Optional context manager for callers that want RAII style:
+    """Context manager: checkout from pool and return in __exit__."""
 
-        with get_db_conn() as conn:
-            cur = conn.cursor(...)
-    """
     def __enter__(self):
         self.conn = get_db_connection()
         return self.conn

@@ -28,6 +28,12 @@ CACHE_TTL_FILTERS = int(os.getenv("CACHE_TTL_FILTERS", "300"))  # 5 minutes
 CACHE_TTL_SC_JUDICIARY_FEED = int(os.getenv("CACHE_TTL_SC_JUDICIARY_FEED", "900"))  # 15 minutes
 # Table-backed payload is stable; digest merge is rare. Long TTL = fewer DB reads & Redis rebuilds.
 CACHE_TTL_FLASHCARD_CONCEPTS = int(os.getenv("CACHE_TTL_FLASHCARD_CONCEPTS", "86400"))  # default 24h
+# LexCode / codal static JSON (legal text + link counts) — long TTL; bump key version on major ingest.
+CACHE_TTL_CODAL_STATIC = int(os.getenv("CACHE_TTL_CODAL_STATIC", "86400"))  # default 24h
+
+# PostgreSQL ThreadedConnectionPool — keep maxconn below Azure max_connections (reserve headroom per instance).
+DB_POOL_MIN_CONN = int(os.getenv("DB_POOL_MIN_CONN", "2"))
+DB_POOL_MAX_CONN = int(os.getenv("DB_POOL_MAX_CONN", "15"))
 
 # Redis key for GET /sc_decisions/flashcard_concepts — invalidate after populating flashcard_concepts (see scripts/populate_flashcard_concepts_from_digest.py)
 FLASHCARD_CONCEPTS_CACHE_KEY = os.getenv(

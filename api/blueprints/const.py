@@ -6,12 +6,17 @@ import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
+from utils.codal_static_cache import codal_try_get, codal_set
 
 const_bp = func.Blueprint()
 
 @const_bp.route(route="const/book/{book_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_const_by_book(req: func.HttpRequest) -> func.HttpResponse:
     book_num = req.route_params.get('book_num')
+    ck = f"codal:const:v1:book:{book_num}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -69,7 +74,8 @@ def get_const_by_book(req: func.HttpRequest) -> func.HttpResponse:
         
         # Attach link counts to mapped results
         attach_link_counts(cur, mapped_results)
-        
+
+        codal_set(ck, mapped_results)
         return func.HttpResponse(json.dumps(mapped_results, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
@@ -80,6 +86,10 @@ def get_const_by_book(req: func.HttpRequest) -> func.HttpResponse:
 @const_bp.route(route="fc/all", auth_level=func.AuthLevel.ANONYMOUS)
 def get_family_code(req: func.HttpRequest) -> func.HttpResponse:
     """Returns all Family Code articles."""
+    ck = "codal:fc:v1:all"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -124,6 +134,7 @@ def get_family_code(req: func.HttpRequest) -> func.HttpResponse:
         # Attach jurisprudence link counts for Family Code
         attach_fam_link_counts(cur, mapped_results)
 
+        codal_set(ck, mapped_results)
         return func.HttpResponse(json.dumps(mapped_results, default=str), mimetype="application/json")
     except Exception as e:
         logging.error(f"Error in get_family_code: {e}")

@@ -7,6 +7,7 @@ from psycopg2.extras import RealDictCursor
 import re
 import gzip
 from db_pool import get_db_connection, put_db_connection
+from utils.codal_static_cache import codal_try_get, codal_set
 from utils.clerk_auth import get_authenticated_user_id
 from rpc_case_link_counts import attach_rpc_link_counts, rpc_statute_sql_predicate
 
@@ -112,12 +113,16 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
 
+    cv_ck = f"codal:codex:v1:versions:{short_name.upper()}:{target_date or 'latest'}"
+    cached_v = codal_try_get(req, cv_ck)
+    if cached_v is not None:
+        ma = (0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400
+        return compressed_json_response(cached_v, req, 200, max_age=ma)
+
     conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
-        import db_pool
-        logging.info(f"CODAL API: Using DB_CONNECTION_STRING={db_pool.DB_CONNECTION_STRING}")
 
         # 1. Get Code ID
         cur.execute("SELECT code_id, full_name, description FROM legal_codes WHERE short_name = %s", (short_name.upper(),))
@@ -353,11 +358,18 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                  })
                  
              _attach_link_counts(cur, mapped_rows, short_name.upper())
-             return compressed_json_response({
-                "metadata": code_meta,
+             payload_out = {
+                "metadata": dict(code_meta),
                 "articles": mapped_rows,
-                "date": target_date or "latest"
-             }, req, 200, max_age=(0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400)
+                "date": target_date or "latest",
+             }
+             codal_set(cv_ck, payload_out)
+             return compressed_json_response(
+                payload_out,
+                req,
+                200,
+                max_age=(0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400,
+             )
 
         # 2. Query Active Versions
         if target_date:
@@ -405,13 +417,20 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
             row['amendment_history'] = history_map.get(row['article_number'], [])
         
         active_rows.sort(key=lambda x: natural_keys(x['article_number']))
-        
+
+        payload_out = {
+            "metadata": dict(code_meta),
+            "articles": [dict(r) for r in active_rows],
+            "date": target_date or "latest",
+        }
+        codal_set(cv_ck, payload_out)
         cur.close()
-        return compressed_json_response({
-            "metadata": code_meta, 
-            "articles": active_rows, 
-            "date": target_date or "latest"
-        }, req, 200, max_age=3600 if not target_date else 86400)
+        return compressed_json_response(
+            payload_out,
+            req,
+            200,
+            max_age=3600 if not target_date else 86400,
+        )
 
     except Exception as e:
         logging.error(f"Codex API Error: {e}")
@@ -425,6 +444,10 @@ def get_codex_amendments(req: func.HttpRequest) -> func.HttpResponse:
     short_name = req.params.get('short_name')
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
+    ck = f"codal:codex:v1:amendments:{short_name.upper()}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return compressed_json_response(hit, req, 200, max_age=7200)
     conn = None
     try:
         conn = get_db_connection()
@@ -443,8 +466,10 @@ def get_codex_amendments(req: func.HttpRequest) -> func.HttpResponse:
         rows = cur.fetchall()
         for row in rows:
             if row['articles']: row['articles'].sort(key=natural_keys)
+        rows_out = [dict(r) for r in rows]
+        codal_set(ck, rows_out)
         cur.close()
-        return compressed_json_response(rows, req, 200, max_age=7200)
+        return compressed_json_response(rows_out, req, 200, max_age=7200)
     except Exception as e:
         logging.error(f"Codex Amendments API Error: {e}")
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)

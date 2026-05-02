@@ -10,6 +10,7 @@ TTL / invalidation reference (see config.py for env-tunable defaults):
 | sc_decisions:ponentes           | 300 s        | CACHE_TTL_PONENTES; auto-expires             |
 | sc_decisions:filters            | 300 s        | CACHE_TTL_FILTERS; auto-expires              |
 | sc_judiciary_feed               | 900 s        | CACHE_TTL_SC_JUDICIARY_FEED; auto-expires    |
+| codal:*                         | 86400 s (1d) | CACHE_TTL_CODAL_STATIC; invalidate via Redis DEL or bump key prefix after codal ingest |
 | flashcard_concepts:v*:bar_2026  | 86400 s (1d) | Run scripts/populate_flashcard_concepts_from_digest.py,
 |                                 |              | then bump FLASHCARD_CONCEPTS_CACHE_KEY in env.
 |                                 |              | Or call cache_delete(FLASHCARD_CONCEPTS_CACHE_KEY) directly.

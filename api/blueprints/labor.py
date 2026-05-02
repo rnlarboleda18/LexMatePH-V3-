@@ -4,7 +4,8 @@ import os
 import azure.functions as func
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from .codex import get_db_connection
+from db_pool import get_db_connection, put_db_connection
+from utils.codal_static_cache import codal_try_get, codal_set
 
 labor_bp = func.Blueprint()
 
@@ -55,6 +56,11 @@ def attach_labor_link_counts(cur, articles):
 @labor_bp.route(route="labor/books", auth_level=func.AuthLevel.ANONYMOUS, methods=["GET"])
 def get_labor_books(req: func.HttpRequest) -> func.HttpResponse:
     """Returns the list of books in the Labor Code."""
+    ck = "codal:labor:v1:books"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit), mimetype="application/json")
+    conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -65,8 +71,7 @@ def get_labor_books(req: func.HttpRequest) -> func.HttpResponse:
         """)
         rows = cur.fetchall()
         cur.close()
-        conn.close()
-        
+
         books = []
         for row in rows:
             book_num = row['book']
@@ -75,15 +80,25 @@ def get_labor_books(req: func.HttpRequest) -> func.HttpResponse:
                 books.append({'id': str(book_num), 'name': f"Book {book_num} - {book_label}"})
             else:
                 books.append({'id': "preliminary", 'name': book_label}) # "PRELIMINARY TITLE"
-                
-        return func.HttpResponse(json.dumps({'books': books}), mimetype="application/json")
+
+        payload = {'books': books}
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500, mimetype="application/json")
+    finally:
+        if conn is not None:
+            put_db_connection(conn)
 
 @labor_bp.route(route="labor/books/{book_id}", auth_level=func.AuthLevel.ANONYMOUS, methods=["GET"])
 def get_labor_book_content(req: func.HttpRequest) -> func.HttpResponse:
     """Returns the articles for a specific book in the Labor Code."""
     book_id = req.route_params.get('book_id')
+    ck = f"codal:labor:v1:book:{book_id}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
+    conn = None
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -121,8 +136,12 @@ def get_labor_book_content(req: func.HttpRequest) -> func.HttpResponse:
             
         attach_labor_link_counts(cur, articles)
         cur.close()
-        conn.close()
-            
-        return func.HttpResponse(json.dumps({'articles': articles}, default=str), mimetype="application/json")
+
+        payload = {'articles': articles}
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500, mimetype="application/json")
+    finally:
+        if conn is not None:
+            put_db_connection(conn)

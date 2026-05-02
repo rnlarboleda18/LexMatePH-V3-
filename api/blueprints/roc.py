@@ -6,6 +6,7 @@ import psycopg2
 import re
 from psycopg2.extras import RealDictCursor
 from db_pool import get_db_connection, put_db_connection
+from utils.codal_static_cache import codal_try_get, codal_set
 
 roc_bp = func.Blueprint()
 
@@ -38,6 +39,10 @@ def clean_roman_rules(text):
 @roc_bp.route(route="roc/book/{book_num}", auth_level=func.AuthLevel.ANONYMOUS)
 def get_roc_by_book(req: func.HttpRequest) -> func.HttpResponse:
     book_num = req.route_params.get('book_num')
+    ck = f"codal:roc:v1:book:{book_num}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -72,8 +77,10 @@ def get_roc_by_book(req: func.HttpRequest) -> func.HttpResponse:
         
         # Attach link counts (optional, but good for consistency)
         attach_link_counts(cur, results)
-        
-        return func.HttpResponse(json.dumps(results, default=str), mimetype="application/json")
+
+        payload = [dict(r) for r in results]
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
@@ -131,6 +138,10 @@ def natural_keys(text):
 
 @roc_bp.route(route="roc/all", auth_level=func.AuthLevel.ANONYMOUS)
 def get_roc_all(req: func.HttpRequest) -> func.HttpResponse:
+    ck = "codal:roc:v1:all"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return func.HttpResponse(json.dumps(hit, default=str), mimetype="application/json")
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -161,7 +172,9 @@ def get_roc_all(req: func.HttpRequest) -> func.HttpResponse:
                     r[field] = clean_roman_rules(r[field])
         
         attach_link_counts(cur, results)
-        return func.HttpResponse(json.dumps(results, default=str), mimetype="application/json")
+        payload = [dict(r) for r in results]
+        codal_set(ck, payload)
+        return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:

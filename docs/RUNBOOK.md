@@ -14,7 +14,18 @@ Quick reference for diagnosing and resolving common production incidents.
 2. Verify `DB_CONNECTION_STRING` is set in Azure Functions Application Settings (Azure Portal → Function App → Configuration → Application settings).
 3. Check the PostgreSQL **firewall rules** — Azure Functions outbound IPs change; use "Allow Azure services" option or update IP allowlist.
 4. Check SSL: connection string must include `?sslmode=require`.
-5. Check `max_connections` on the DB — if exhausted, connections queue or fail. Consider increasing the pool size limit in `api/db_pool.py`.
+5. Check `max_connections` on the DB — Azure Flexible Server reserves a few slots for superuser. The API uses a **bounded pool** (`ThreadedConnectionPool` in `api/db_pool.py`); tune `DB_POOL_MAX_CONN` / `DB_POOL_MIN_CONN` in Application Settings so **instances × maxconn** stays below the server limit.
+
+**Optional Postgres tuning (B-series / burstable):** After validating workload, you can raise sort/hash memory and trim idle transactions, for example:
+
+```bash
+az postgres flexible-server parameter set --resource-group "<RG>" --server-name "<SERVER>" --name work_mem --value 8192
+az postgres flexible-server parameter set --resource-group "<RG>" --server-name "<SERVER>" --name idle_in_transaction_session_timeout --value 300000
+```
+
+(`work_mem` in KB; `idle_in_transaction_session_timeout` in ms.) Confirm resource group and server name from Azure Portal; avoid destructive changes during peak traffic.
+
+**Suggested indexes:** See `scripts/sql/hot_path_indexes.sql` — run statements one at a time with `CONCURRENTLY` during a maintenance window.
 
 **Emergency:** If DB is down and you need the app to degrade gracefully, the frontend will show a "Data Load Failed" error on the bar questions section; other features (LexPlay audio cache, codal content) may still work from Redis/Blob cache.
 

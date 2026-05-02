@@ -61,7 +61,8 @@ def ai_clean_case(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
-        if 'conn' in locals(): conn.close()
+        if conn is not None:
+            put_db_connection(conn)
 
 @ai_processor_bp.route(route="ai/digest/{id:int}", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
 def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
@@ -294,7 +295,8 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
         logging.error(f"Digestion error: {e}")
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
-        if 'conn' in locals(): conn.close()
+        if conn is not None:
+            put_db_connection(conn)
 
 @ai_processor_bp.route(route="ai/mock-exam/{id:int}", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
 def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
@@ -341,7 +343,8 @@ def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
     finally:
-        if 'conn' in locals(): conn.close()
+        if conn is not None:
+            put_db_connection(conn)
 
 @ai_processor_bp.route(route="ai/tts", auth_level=func.AuthLevel.ANONYMOUS, methods=["POST"])
 def ai_tts_proxy(req: func.HttpRequest) -> func.HttpResponse:
