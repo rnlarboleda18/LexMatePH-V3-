@@ -1440,8 +1440,8 @@ const LexPlayer = ({
                 
                 {/* Bulk Add Modal */}
                 {showBulkModal && (
-                    <div className="lex-vv-surface fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 p-4 backdrop-blur-3xl dark:bg-black/70">
-                        <div className="w-full max-w-md rounded-2xl border border-lex bg-white shadow-2xl backdrop-blur-3xl dark:border-lex dark:bg-zinc-900">
+                    <div className="lex-vv-surface fixed inset-0 z-[200] flex items-center justify-center bg-slate-900/40 p-4 dark:bg-black/70">
+                        <div className="w-full max-w-md rounded-2xl border border-lex bg-white shadow-2xl dark:border-lex dark:bg-zinc-900">
                             <div className="flex items-center justify-between rounded-t-2xl border-b border-lex bg-slate-50/95 px-8 py-6 dark:border-lex dark:bg-white/[0.02]">
                                 <div>
                                     <h3 className="flex items-center gap-2 text-xl font-black tracking-tight text-slate-900 dark:text-white">Add Tracks</h3>
