@@ -150,33 +150,31 @@ def tts_flatten_codal_body(content: str) -> str:
 
 
 _SPELL_WORD_TO_INT = {
-    "one": 1,
-    "two": 2,
-    "three": 3,
-    "four": 4,
-    "five": 5,
-    "six": 6,
-    "seven": 7,
-    "eight": 8,
-    "nine": 9,
-    "ten": 10,
-    "eleven": 11,
-    "twelve": 12,
-    "thirteen": 13,
-    "fourteen": 14,
-    "fifteen": 15,
-    "sixteen": 16,
-    "seventeen": 17,
-    "eighteen": 18,
-    "nineteen": 19,
-    "twenty": 20,
+    "one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+    "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
+    "eleven": 11, "twelve": 12, "thirteen": 13, "fourteen": 14,
+    "fifteen": 15, "sixteen": 16, "seventeen": 17, "eighteen": 18,
+    "nineteen": 19, "twenty": 20,
+    "thirty": 30, "forty": 40, "fifty": 50, "sixty": 60,
+    "seventy": 70, "eighty": 80, "ninety": 90,
 }
 
 
-def _collapse_redundant_word_digit_parentheticals(text: str) -> str:
-    """Remove `(N)` when it only repeats a preceding spelled-out number (LexPlay TTS)."""
+_SPELL_WORDS_PAT = (
+    r"one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|"
+    r"sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety"
+)
 
-    def repl(m):
+
+def _collapse_redundant_word_digit_parentheticals(text: str) -> str:
+    """Remove redundant number parentheticals to prevent TTS double-reading (LexPlay TTS).
+
+    Handles both directions:
+      "thirty (30)"  → "thirty"   (word then digit-in-parens)
+      "30 (thirty)"  → "thirty"   (digit then word-in-parens)
+    """
+
+    def repl_word_digit(m):
         w = m.group(1).lower()
         try:
             n = int(m.group(2))
@@ -186,13 +184,29 @@ def _collapse_redundant_word_digit_parentheticals(text: str) -> str:
             return w
         return m.group(0)
 
-    return re.sub(
-        r"\b(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|"
-        r"sixteen|seventeen|eighteen|nineteen|twenty)\s*\(\s*(\d+)\s*\)",
-        repl,
+    def repl_digit_word(m):
+        try:
+            n = int(m.group(1))
+        except ValueError:
+            return m.group(0)
+        w = m.group(2).lower()
+        if _SPELL_WORD_TO_INT.get(w) == n:
+            return w
+        return m.group(0)
+
+    text = re.sub(
+        rf"\b({_SPELL_WORDS_PAT})\s*\(\s*(\d+)\s*\)",
+        repl_word_digit,
         text,
         flags=re.IGNORECASE,
     )
+    text = re.sub(
+        rf"\b(\d+)\s*\(({_SPELL_WORDS_PAT})\)",
+        repl_digit_word,
+        text,
+        flags=re.IGNORECASE,
+    )
+    return text
 
 
 def rcc_section_number_from_article_num(article_num: Optional[str]) -> str:
@@ -667,12 +681,14 @@ def tts_format_structural_label(label: str, num, level_name: str) -> str:
     if not label and num is None:
         return ""
 
-    # Attempt to strip an embedded "LEVEL_NAME (N|ROMAN|WORD) [-:—.] " prefix
+    # Attempt to strip an embedded "LEVEL_NAME (N|ROMAN|WORD) [-:—.] " prefix.
+    # Separator is optional (some RPC labels use only whitespace: "TITLE ONE CRIMES...").
+    # En-dash (–) is included alongside em-dash (—).
     prefix_pat = re.compile(
         r"^" + re.escape(level_name) + r"\s+"
         r"([IVX]+|\d+|ONE|TWO|THREE|FOUR|FIVE|SIX|SEVEN|EIGHT|NINE|TEN"
         r"|ELEVEN|TWELVE|THIRTEEN|FOURTEEN|FIFTEEN|SIXTEEN|SEVENTEEN|EIGHTEEN)"
-        r"\s*[-:—.]\s*",
+        r"\s*[-–:—.]?\s*",
         re.IGNORECASE,
     )
     m = prefix_pat.match(label)

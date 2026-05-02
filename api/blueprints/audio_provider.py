@@ -250,8 +250,9 @@ def _apply_custom_pronunciations(text):
     for name, phonetic in FILIPINO_NAME_REPLACEMENTS.items():
         text = re.sub(fr'(?i)\b{name}\b', phonetic, text)
         
-    # 5. Cleanup redundant figures in parentheses e.g. "one (1)" -> "one"
+    # 5. Cleanup redundant figures in parentheses e.g. "one (1)" -> "one", "1 (one)" -> "one"
     text = re.sub(r'([a-zA-Z-]+)\s*\(\d+\)', r'\1', text)
+    text = re.sub(r'\b(\d+)\s*\(([a-zA-Z][a-zA-Z -]*)\)', r'\2', text)
     
     # 6. Bar Question specific: Fix "NO" (word) vs "No." (number)
     # Force uppercase NO to lowercase to prevent spelling out (N-O)
