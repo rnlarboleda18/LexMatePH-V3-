@@ -166,6 +166,31 @@ def _get_present_ids(conn, min_id: int, max_id: int) -> set[int]:
     return ids
 
 
+def _norm_case_number(s: str) -> str:
+    """Normalise a case-number string for cross-checking."""
+    s = re.sub(r"\s+", " ", s.strip()).lower()
+    s = s.replace("nos.", "no.")
+    s = s.replace(" & ", " and ")
+    return s
+
+
+def _get_present_case_numbers(conn) -> set[str]:
+    """Return normalised G.R. case_numbers already in sc_decided_cases."""
+    cur = conn.cursor()
+    cur.execute(
+        r"""
+        SELECT case_number FROM sc_decided_cases
+        WHERE case_number IS NOT NULL
+          AND btrim(case_number) != ''
+          AND case_number ~* '^\s*G\.?\s*R\.?'
+        """
+    )
+    nums = {_norm_case_number(row[0]) for row in cur.fetchall()}
+    cur.close()
+    log.info("Loaded %s G.R. case numbers from DB for cross-check.", len(nums))
+    return nums
+
+
 # ── eLib probe (same logic as scan_elib_new_cases.py) ────────────────────────
 
 def _probe_page(session: requests.Session, elib_id: int) -> tuple[str, str]:
@@ -203,7 +228,9 @@ def _probe_page(session: requests.Session, elib_id: int) -> tuple[str, str]:
     if not _DECISION_PATTERN.search(text):
         return "miss", ""
 
-    if _GR_PATTERN.search(text[:120000]):
+    # Check only the header area (~12 KB) so that G.R. citations in the
+    # body of A.M./A.C./MTJ/RTJ decisions don't cause false positives.
+    if _GR_PATTERN.search(text[:12000]):
         return "ok_gr", text[:10000]
     return "ok_not_gr", text[:3000]
 
@@ -394,6 +421,7 @@ def main() -> int:
         log.info("Scanning range:   %s – %s", range_from, range_to)
 
         present_ids = _get_present_ids(conn, range_from, range_to)
+        present_case_numbers = _get_present_case_numbers(conn)
     finally:
         conn.close()
 
@@ -449,18 +477,22 @@ def main() -> int:
 
         if status == "ok_gr":
             meta = _extract_case_meta(snippet, elib_id)
-            sc_url = f"{ELIB_SHOWDOCS}{elib_id}"
-            missed_cases.append({
-                "elib_id":      elib_id,
-                "sc_url":       sc_url,
-                "gr_number":    meta["gr_number"],
-                "date_decided": meta["date_decided"],
-                "case_label":   meta["case_label"],
-            })
-            consecutive_misses = 0
-            log.info(
-                "[MISSED G.R.] eLib #%s  %s", elib_id, meta["case_label"]
-            )
+            # Skip if already ingested under a different eLib ID
+            if meta["gr_number"] and _norm_case_number(meta["gr_number"]) in present_case_numbers:
+                total_non_gr += 1
+                consecutive_misses = 0
+                log.info("[ALREADY IN DB] eLib #%s  %s", elib_id, meta["gr_number"])
+            else:
+                sc_url = f"{ELIB_SHOWDOCS}{elib_id}"
+                missed_cases.append({
+                    "elib_id":      elib_id,
+                    "sc_url":       sc_url,
+                    "gr_number":    meta["gr_number"],
+                    "date_decided": meta["date_decided"],
+                    "case_label":   meta["case_label"],
+                })
+                consecutive_misses = 0
+                log.info("[MISSED G.R.] eLib #%s  %s", elib_id, meta["case_label"])
 
         elif status == "ok_not_gr":
             total_non_gr += 1

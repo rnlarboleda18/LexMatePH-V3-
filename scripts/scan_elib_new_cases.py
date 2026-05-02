@@ -178,7 +178,9 @@ def _probe_page(session: requests.Session, elib_id: int) -> tuple[str, str]:
     if not _DECISION_PATTERN.search(text):
         return "miss", ""
 
-    if _GR_PATTERN.search(text[:120000]):
+    # Check only the header area (~12 KB) so that G.R. citations in the
+    # body of A.M./A.C./MTJ/RTJ decisions don't cause false positives.
+    if _GR_PATTERN.search(text[:12000]):
         return "ok_gr", text[:10000]   # pass 10 KB to extraction for better date coverage
     return "ok_not_gr", text[:3000]
 
