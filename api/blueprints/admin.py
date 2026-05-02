@@ -55,6 +55,17 @@ _scan_state: dict = {
 # Where the scan script writes its JSON output
 _SCAN_RESULTS_PATH = Path(__file__).resolve().parents[2] / "admin-tools" / "case-digest-pipeline" / "scan_results.json"
 
+# ── In-memory eLib GAP scan process state ────────────────────────────────────
+_gap_scan_lock = threading.Lock()
+_gap_scan_proc: Optional[subprocess.Popen] = None
+_gap_scan_state: dict = {
+    "status": "idle",   # idle | running | done | failed
+    "started_at": None,
+    "finished_at": None,
+    "last_exit_code": None,
+}
+_GAP_RESULTS_PATH = Path(__file__).resolve().parents[2] / "admin-tools" / "case-digest-pipeline" / "gap_results.json"
+
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -916,6 +927,115 @@ def admin_pipeline_scan_results(req: func.HttpRequest) -> func.HttpResponse:
             results = json.loads(_SCAN_RESULTS_PATH.read_text(encoding="utf-8"))
         except Exception as exc:
             logging.warning("Could not read scan results: %s", exc)
+
+    return _json({"scan": state, "results": results}, 200)
+
+
+# ── eLib GAP Scan ─────────────────────────────────────────────────────────────
+
+def _refresh_gap_scan_state_locked() -> None:
+    """Poll gap scan subprocess and update _gap_scan_state (lock must be held)."""
+    global _gap_scan_proc
+    if _gap_scan_proc is None:
+        return
+    rc = _gap_scan_proc.poll()
+    if rc is None:
+        return
+    _gap_scan_state["status"] = "done" if rc == 0 else "failed"
+    _gap_scan_state["finished_at"] = datetime.now(timezone.utc).isoformat()
+    _gap_scan_state["last_exit_code"] = int(rc)
+    _gap_scan_proc = None
+
+
+def _gap_scan_snapshot() -> dict:
+    with _gap_scan_lock:
+        _refresh_gap_scan_state_locked()
+        return {
+            "running":        _gap_scan_proc is not None,
+            "status":         _gap_scan_state.get("status"),
+            "started_at":     _gap_scan_state.get("started_at"),
+            "finished_at":    _gap_scan_state.get("finished_at"),
+            "last_exit_code": _gap_scan_state.get("last_exit_code"),
+        }
+
+
+@admin_bp.route(route="ops/pipeline/scan-gaps", methods=["POST"])
+def admin_pipeline_scan_gaps(req: func.HttpRequest) -> func.HttpResponse:
+    """Start the eLib gap scan subprocess (read-only — finds missing G.R. cases)."""
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    global _gap_scan_proc
+    root = _repo_root()
+    script = root / "scripts" / "scan_elib_gaps.py"
+    if not script.exists():
+        return _json({"error": f"Gap scan script not found: {script}"}, 500)
+
+    try:
+        body = req.get_json(silent=True) or {}
+    except Exception:
+        body = {}
+
+    max_probe  = body.get("max_probe")    # None = scan all gaps
+    resume     = bool(body.get("resume", False))
+    range_from = body.get("range_from")
+    range_to   = body.get("range_to")
+
+    cmd = [
+        sys.executable, "-u", str(script),
+        "--output", str(_GAP_RESULTS_PATH),
+    ]
+    if max_probe is not None:
+        cmd += ["--max-probe", str(int(max_probe))]
+    if resume:
+        cmd += ["--resume"]
+    if range_from is not None:
+        cmd += ["--range-from", str(int(range_from))]
+    if range_to is not None:
+        cmd += ["--range-to", str(int(range_to))]
+
+    with _gap_scan_lock:
+        _refresh_gap_scan_state_locked()
+        if _gap_scan_proc is not None:
+            return _json({"error": "Gap scan is already running"}, 409)
+        try:
+            _GAP_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+            _gap_scan_proc = subprocess.Popen(
+                cmd,
+                cwd=str(root),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            _gap_scan_state["status"] = "running"
+            _gap_scan_state["started_at"] = datetime.now(timezone.utc).isoformat()
+            _gap_scan_state["finished_at"] = None
+            _gap_scan_state["last_exit_code"] = None
+            return _json({
+                "ok": True,
+                "pid": int(_gap_scan_proc.pid),
+                "status": "running",
+                "started_at": _gap_scan_state["started_at"],
+            }, 200)
+        except Exception as exc:
+            _gap_scan_proc = None
+            return _json({"error": str(exc)}, 500)
+
+
+@admin_bp.route(route="ops/pipeline/gap-results", methods=["GET"])
+def admin_pipeline_gap_results(req: func.HttpRequest) -> func.HttpResponse:
+    """Return the latest gap scan results JSON + current process status."""
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    state = _gap_scan_snapshot()
+    results = None
+    if _GAP_RESULTS_PATH.exists():
+        try:
+            results = json.loads(_GAP_RESULTS_PATH.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logging.warning("Could not read gap results: %s", exc)
 
     return _json({"scan": state, "results": results}, 200)
 

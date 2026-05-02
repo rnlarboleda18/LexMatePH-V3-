@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import {
   Play, SkipForward, Square, RefreshCw,
-  AlertCircle, CheckCircle2, Link2, Search, ExternalLink, Clock,
+  AlertCircle, CheckCircle2, Link2, Search, ExternalLink, Clock, ScanSearch,
 } from 'lucide-react';
 import { MetricCard } from './MetricCard';
 
@@ -72,11 +72,18 @@ export default function PipelineTab() {
   const [actionLoading, setActionLoading] = useState(false);
 
   // Scan state
-  const [scanState,   setScanState]   = useState(null);   // {running, status, started_at, ...}
-  const [scanResults, setScanResults] = useState(null);   // the JSON results object
+  const [scanState,   setScanState]   = useState(null);
+  const [scanResults, setScanResults] = useState(null);
   const [scanLoading, setScanLoading] = useState(false);
   const [scanErr,     setScanErr]     = useState(null);
   const pollRef = useRef(null);
+
+  // Gap scan state
+  const [gapScanState,   setGapScanState]   = useState(null);
+  const [gapScanResults, setGapScanResults] = useState(null);
+  const [gapScanLoading, setGapScanLoading] = useState(false);
+  const [gapScanErr,     setGapScanErr]     = useState(null);
+  const gapPollRef = useRef(null);
 
   const authHdr = useCallback(async () => {
     const token = await getToken();
@@ -150,6 +157,53 @@ export default function PipelineTab() {
       setScanErr(e.message);
     } finally {
       setScanLoading(false);
+    }
+  };
+
+  // ── Gap scan helpers ────────────────────────────────────────────────────────
+  const fetchGapResults = useCallback(async () => {
+    try {
+      const h = await authHdr();
+      const res = await fetch('/api/ops/pipeline/gap-results', { headers: h });
+      if (!res.ok) return;
+      const data = await res.json();
+      setGapScanState(data.scan);
+      if (data.results) setGapScanResults(data.results);
+      if (!data.scan?.running && gapPollRef.current) {
+        clearInterval(gapPollRef.current);
+        gapPollRef.current = null;
+      }
+    } catch (_) {}
+  }, [authHdr]);
+
+  const startGapPolling = useCallback(() => {
+    if (gapPollRef.current) return;
+    gapPollRef.current = setInterval(fetchGapResults, 4000);
+  }, [fetchGapResults]);
+
+  useEffect(() => {
+    fetchGapResults();
+    return () => { if (gapPollRef.current) clearInterval(gapPollRef.current); };
+  }, [fetchGapResults]);
+
+  const startGapScan = async (resume = false) => {
+    setGapScanErr(null);
+    setGapScanLoading(true);
+    try {
+      const h = await authHdr();
+      const res = await fetch('/api/ops/pipeline/scan-gaps', {
+        method: 'POST',
+        headers: { ...h, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ resume }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Gap scan failed (${res.status})`);
+      setGapScanState({ running: true, status: 'running', started_at: data.started_at });
+      startGapPolling();
+    } catch (e) {
+      setGapScanErr(e.message);
+    } finally {
+      setGapScanLoading(false);
     }
   };
 
@@ -247,6 +301,29 @@ export default function PipelineTab() {
           >
             Stop Pipeline
           </ActionButton>
+
+          <ActionButton
+            onClick={() => startGapScan(false)}
+            disabled={gapScanLoading || gapScanState?.running}
+            variant="secondary"
+            icon={ScanSearch}
+          >
+            {gapScanState?.running ? 'Scanning gaps…' : 'Scan Gaps'}
+            <span className="ml-1 text-[10px] font-normal opacity-70">
+              find skipped cases
+            </span>
+          </ActionButton>
+
+          {gapScanResults && !gapScanState?.running && (
+            <ActionButton
+              onClick={() => startGapScan(true)}
+              disabled={gapScanLoading || gapScanState?.running}
+              variant="secondary"
+              icon={ScanSearch}
+            >
+              Resume Gap Scan
+            </ActionButton>
+          )}
         </div>
 
         <div className="rounded-lg border border-lex bg-gray-50 p-3 text-xs text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
@@ -452,6 +529,152 @@ export default function PipelineTab() {
                   No new cases found — the database is up to date with eLib.
                 </div>
               ) : null}
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ── Gap Scan Results Panel ── */}
+      {(gapScanState || gapScanResults) && (
+        <div className="rounded-xl border border-lex bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="mb-4 flex items-center justify-between">
+            <SectionHeading>
+              <span className="flex items-center gap-1.5">
+                <ScanSearch size={11} />
+                Gap Scan Results
+              </span>
+            </SectionHeading>
+            <button
+              onClick={fetchGapResults}
+              className="flex items-center gap-1 rounded-md px-2 py-1 text-[11px] text-gray-500 hover:bg-gray-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+            >
+              <RefreshCw size={11} className={gapScanState?.running ? 'animate-spin' : ''} />
+              Refresh
+            </button>
+          </div>
+
+          {/* Status badge */}
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+              gapScanState?.running
+                ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400'
+                : gapScanState?.status === 'done'
+                ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400'
+                : gapScanState?.status === 'failed'
+                ? 'bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-400'
+                : 'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400'
+            }`}>
+              {gapScanState?.running && <Clock size={10} className="animate-pulse" />}
+              {gapScanState?.running ? 'Scanning gaps…' : (gapScanState?.status ?? 'idle')}
+            </span>
+            {gapScanResults?.scanned_at && (
+              <span className="text-[11px] text-gray-400 dark:text-zinc-500">
+                Last scan: {fmtTs(gapScanResults.scanned_at)}
+              </span>
+            )}
+          </div>
+
+          {gapScanResults && (
+            <>
+              {/* Summary metrics */}
+              <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <MetricCard
+                  label="Gap IDs Found"
+                  value={fmtNum(gapScanResults.total_gap_ids)}
+                  loading={gapScanState?.running}
+                  tooltip={`Total eLib IDs missing from your DB between #${gapScanResults.db_min_id} and #${gapScanResults.db_max_id}`}
+                />
+                <MetricCard
+                  label="G.R. Cases Missed"
+                  value={fmtNum(gapScanResults.total_gr_missed)}
+                  loading={gapScanState?.running}
+                  tooltip="Real G.R. cases found on eLib that were skipped during earlier ingestion runs."
+                  highlight={gapScanResults.total_gr_missed > 0 ? 'warn' : undefined}
+                />
+                <MetricCard
+                  label="Non-G.R. Gaps"
+                  value={fmtNum(gapScanResults.total_non_gr)}
+                  loading={gapScanState?.running}
+                  tooltip="Gap IDs that exist on eLib but are A.M., A.C., or other non-G.R. dockets — expected."
+                />
+                <MetricCard
+                  label="Empty / Errors"
+                  value={fmtNum(gapScanResults.total_empty)}
+                  loading={gapScanState?.running}
+                  tooltip="Gap IDs with no content on eLib (404s, deleted pages, etc.)."
+                />
+              </div>
+
+              {/* DB range info */}
+              <div className="mb-4 flex flex-wrap items-center gap-2 rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-[11px] text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/40 dark:text-zinc-400">
+                <span className="font-semibold text-gray-600 dark:text-zinc-300">Range scanned:</span>
+                <span className="font-mono">eLib #{fmtNum(gapScanResults.db_min_id)} – #{fmtNum(gapScanResults.db_max_id)}</span>
+                <span className="ml-auto">
+                  {fmtNum(gapScanResults.total_probed)} of {fmtNum(gapScanResults.total_gap_ids)} gaps probed
+                </span>
+              </div>
+
+              {/* Missed cases list */}
+              {gapScanResults.missed_cases && gapScanResults.missed_cases.length > 0 ? (
+                <div>
+                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-amber-600 dark:text-amber-400">
+                    ⚠ {gapScanResults.total_gr_missed} G.R. case{gapScanResults.total_gr_missed !== 1 ? 's' : ''} missing from DB — run Full Pipeline to ingest
+                  </p>
+                  <div className="max-h-80 overflow-y-auto rounded-lg border border-lex bg-gray-50 dark:border-zinc-700 dark:bg-zinc-800/40">
+                    <table className="w-full text-xs">
+                      <thead className="sticky top-0 bg-gray-100 dark:bg-zinc-800">
+                        <tr>
+                          <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">eLib ID</th>
+                          <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">G.R. No.</th>
+                          <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">Date Decided</th>
+                          <th className="px-3 py-2 text-right font-semibold text-gray-500 dark:text-zinc-400">Link</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-gray-100 dark:divide-zinc-700">
+                        {gapScanResults.missed_cases.map((c) => (
+                          <tr key={c.elib_id} className="hover:bg-amber-50 dark:hover:bg-amber-950/20">
+                            <td className="px-3 py-2 tabular-nums font-mono text-gray-500 dark:text-zinc-400">
+                              #{c.elib_id}
+                            </td>
+                            <td className="px-3 py-2 font-medium text-gray-800 dark:text-zinc-200">
+                              {c.gr_number || c.case_label || '—'}
+                            </td>
+                            <td className="px-3 py-2 text-gray-600 dark:text-zinc-400">
+                              {c.date_decided || '—'}
+                            </td>
+                            <td className="px-3 py-2 text-right">
+                              {c.sc_url ? (
+                                <a
+                                  href={c.sc_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1 text-violet-600 hover:underline dark:text-violet-400"
+                                >
+                                  <ExternalLink size={11} />
+                                  eLib
+                                </a>
+                              ) : <span className="text-gray-400">—</span>}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              ) : gapScanResults.total_gr_missed === 0 && !gapScanState?.running ? (
+                <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400">
+                  <CheckCircle2 size={15} />
+                  No missing G.R. cases found — your database has no gaps in this range.
+                </div>
+              ) : null}
+
+              {/* Gap scan error banner */}
+              {gapScanErr && (
+                <div className="mt-4 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
+                  <AlertCircle size={15} />
+                  {gapScanErr}
+                </div>
+              )}
             </>
           )}
         </div>
