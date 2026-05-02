@@ -295,8 +295,8 @@ def main() -> int:
         help="Maximum number of IDs above the DB max to probe (default 400).",
     )
     parser.add_argument(
-        "--stop-after-consecutive-misses", type=int, default=35,
-        help="Stop scanning after this many consecutive blank/error IDs (default 35).",
+        "--stop-after-consecutive-misses", type=int, default=100,
+        help="Stop scanning after this many consecutive blank/error IDs (default 100).",
     )
     parser.add_argument(
         "--request-delay", type=float, default=0.8,
