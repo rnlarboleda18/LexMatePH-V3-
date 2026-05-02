@@ -285,16 +285,16 @@ def repair_truncated_json(json_str):
     if is_string:
         json_str += '"'
     
-    # If it ends with a key (e.g. "q"), it will fail parse because of missing : and value.
-    # We look for a pattern like "key" at the end of the string (after stripping whitespace).
+    # Handle truncation patterns that leave a key without a value.
     json_str_trimmed = json_str.rstrip()
-    if json_str_trimmed.endswith('"'):
-        # Primitive check: if the last brace/bracket was { or [ and we just closed a string
-        # we might need a colon and a value. 
-        # More robust: check if the string before the last quote was preceded by { or ,
-        content_around = json_str_trimmed[-20:]
-        if re.search(r'[\{\,]\s*"[^"]+"$', json_str_trimmed):
-            json_str += ': "TRUNCATED"'
+    # Case 1: ends with  "key":   (colon present, value missing)
+    if re.search(r'"[^"]+"\s*:\s*$', json_str_trimmed):
+        json_str = json_str_trimmed + '"TRUNCATED"'
+        json_str_trimmed = json_str
+    # Case 2: ends with bare  "key"  (no colon, no value — inside an object)
+    elif json_str_trimmed.endswith('"') and re.search(r'[\{,]\s*"[^"]+"\s*$', json_str_trimmed):
+        json_str = json_str_trimmed + ': "TRUNCATED"'
+        json_str_trimmed = json_str
     
     # Remove trailing comma if present (whitespace safe)
     json_str = json_str.rstrip()
@@ -830,7 +830,6 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                         system_instruction=sys_instruction,
                         temperature=0.1,
                         max_output_tokens=65536,
-                        response_mime_type='application/json',
                         safety_settings=[
                             types.SafetySetting(
                                 category=types.HarmCategory.HARM_CATEGORY_HARASSMENT,
