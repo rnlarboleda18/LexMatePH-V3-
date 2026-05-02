@@ -449,11 +449,21 @@ def run_digest_subprocess(
     model: str,
     workers: int = 5,
     live_bar: _LiveBarProto | None = None,
+    vertex_project: str | None = None,
+    vertex_location: str | None = None,
 ) -> None:
     if not new_case_ids:
         return
     script = _REPO_ROOT / "scripts" / "generate_sc_digests_gemini.py"
     workers = max(1, min(int(workers), len(new_case_ids)))
+
+    def _vertex_flags() -> list[str]:
+        flags: list[str] = []
+        if vertex_project:
+            flags += ["--vertex-project", vertex_project]
+            if vertex_location:
+                flags += ["--vertex-location", vertex_location]
+        return flags
 
     def _run_one(case_id: int) -> None:
         cmd = [
@@ -467,6 +477,7 @@ def run_digest_subprocess(
             "1",
             "--workers",
             "1",
+            *_vertex_flags(),
         ]
         log.info("Running digest subprocess: %s", " ".join(cmd))
         if live_bar:
@@ -490,6 +501,7 @@ def run_digest_subprocess(
             str(len(new_case_ids)),
             "--workers",
             "1",
+            *_vertex_flags(),
         ]
         log.info("Running digest subprocess: %s", " ".join(cmd))
         if live_bar:
@@ -780,6 +792,18 @@ def main() -> int:
         help="Parallel digest worker processes (Gemini + Grok fallback); default 5",
     )
     parser.add_argument(
+        "--vertex-project",
+        type=str,
+        default=None,
+        help="Vertex AI project ID for Gemini digest (overrides GOOGLE_CLOUD_PROJECT env var)",
+    )
+    parser.add_argument(
+        "--vertex-location",
+        type=str,
+        default="us-central1",
+        help="Vertex AI location for Gemini digest (default: us-central1)",
+    )
+    parser.add_argument(
         "--start-after",
         type=int,
         default=None,
@@ -973,9 +997,17 @@ def main() -> int:
 
             rep.digest_row_ids = list(new_db_ids)
             if new_db_ids:
-                if not os.environ.get("GOOGLE_API_KEY"):
+                _has_gemini_auth = (
+                    os.environ.get("GOOGLE_API_KEY")
+                    or os.environ.get("GEMINI_API_KEY")
+                    or os.environ.get("GOOGLE_CLOUD_PROJECT")
+                    or getattr(args, "vertex_project", None)
+                )
+                if not _has_gemini_auth:
                     rep.fatal_error = (
-                        f"GOOGLE_API_KEY is not set; required to digest {len(new_db_ids)} new row(s)."
+                        f"No Gemini auth found; set GOOGLE_API_KEY (AI Studio) or "
+                        f"GOOGLE_CLOUD_PROJECT / --vertex-project (Vertex AI) "
+                        f"to digest {len(new_db_ids)} new row(s)."
                     )
                     exit_code = 3
                 else:
@@ -989,6 +1021,8 @@ def main() -> int:
                                 model=args.digest_model,
                                 workers=args.workers,
                                 live_bar=digest_bar,
+                                vertex_project=args.vertex_project or None,
+                                vertex_location=args.vertex_location or None,
                             )
                         except subprocess.CalledProcessError as e:
                             if e.returncode == 100:

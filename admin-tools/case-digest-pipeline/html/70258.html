@@ -1,0 +1,619 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276833 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. JOSE OLBATO Y AURELLA,* JAIME TOLEVA Y CAMPOSANO, ROMEO ARUTA Y FABIANO, RODRIGO ARUTA Y FABIANO, ALBERTO CULANAG Y FREJOLES, SPO4 ROMEO AYSON Y SEJIRA @ "ROMY," PO3 CLAYTON PATINGAN Y AMATIC @ "RICKY / BOBOT," EDWIN CASTILLO Y IGADA, LOLITA MONAREZ Y ESTRELLA, SEBASTIAN MAGAIPO Y ALIPANTE, MARY-ANN ANGCAHAN Y BUTILLA, JULLIEN MADRID Y ECHAVEZ @ "MARLOU," PEPE BIHAG Y BALTAZAR, YONG YONG MENTIS (AT LARGE), VINA ARGAYOZA (AT LARGE), AND FOUR JOHN DOES,** ACCUSED;
+
+JOSE OLBATO Y AURELLA, JAIME TOLEVAS Y CAMPOSANO, ROMEO ARUTA Y FABIANO, RODRIGO ARUTA Y FABIANO, AND ALBERTO CULANAG Y FREJOLES,*** ACCUSED-APPELLANTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '95e8123f6ac780de465cd8fdec7e176a' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '95e8123f6ac780de465cd8fdec7e176a' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70258' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276833, January 21, 2026 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. JOSE OLBATO <I>Y</I> AURELLA,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> JAIME TOLEVA <I>Y</I> CAMPOSANO, ROMEO ARUTA <I>Y</I> FABIANO, RODRIGO ARUTA <I>Y</I> FABIANO, ALBERTO CULANAG <I>Y</I> FREJOLES, SPO4 ROMEO AYSON <I>Y</I> SEJIRA @ "ROMY," PO3 CLAYTON PATINGAN <I>Y</I> AMATIC @ "RICKY / BOBOT," EDWIN CASTILLO <I>Y</I> IGADA, LOLITA MONAREZ <I>Y</I> ESTRELLA, SEBASTIAN MAGAIPO <I>Y</I> ALIPANTE, MARY-ANN ANGCAHAN <I>Y</I> BUTILLA, JULLIEN MADRID <I>Y</I> ECHAVEZ @ "MARLOU," PEPE BIHAG <I>Y</I> BALTAZAR, YONG YONG MENTIS (AT LARGE), VINA ARGAYOZA (AT LARGE), AND FOUR JOHN DOES,<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> ACCUSED;<br><br>
+
+JOSE OLBATO <I>Y</I> AURELLA, JAIME TOLEVAS <I>Y</I> CAMPOSANO, ROMEO ARUTA <I>Y</I> FABIANO, RODRIGO ARUTA <I>Y</I> FABIANO, AND ALBERTO CULANAG <I>Y</I> FREJOLES,<SUP STYLE="COLOR: RGB(255, 0, 0);">***</SUP> ACCUSED-APPELLANTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is an ordinary appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> from the Court of Appeals (CA) Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which affirmed the Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC) and found accused-appellants Jose Olbato <i>y</i> Aurella (Olbato), Jaime Tolevas <i>y</i> Camposano (Tolevas), Romeo Aruta <i>y</i> Fabiano (Romeo), Rodrigo Aruta <i>y</i> Fabiano (Rodrigo), and Alberto Culanag <i>y</i> Frejoles (Culanag) guilty beyond reasonable doubt of kidnapping for ransom penalized under Article 267 of the Revised Penal Code, as amended by Republic Act No. 7659. </p><p align="center"> <b><i>Antecedents</i></b> </p><p> This case originates from an Information<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> charging Olbato, Tolevas, Romeo, Rodrigo, Culanag and their co-accused, Senior Police Officer IV Romeo Ayson <i>y</i> Sejira (SPO4 Ayson), Police Officer III Clayton Patingan <i>y</i> Amatic (PO3 Patingan), Edwin Castillo <i>y</i> Igada (Castillo), Sebastian Magaipo <i>y</i> Alipante (Magaipo), Lolita Monarez <i>y</i> Estrella (Monarez), Pepe Bihag <i>y</i> Baltazar (Bihag), Mary-Ann Angcahan <i>y</i> Butilla (Angcahan), Yong Yong Mentis (Mentis), and Vina Argayoza (Argayoza) (collectively, Olbato et al.), with kidnapping for ransom, the accusatory portion of which reads: </p><blockquote> <p> That between the period of March 18 to 20, 2004, in the City of Manila, Quezon City and Antipolo City[,] Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, conspiring, confederating, and mutually helping one another, did then and there willfully, unlawfully and feloniously kidnap and deprive GENEVIEVE ONG SY of her liberty against her will by flagging her down while on board her red Lancer with plate number XCH-230, boarding the said Lancer and taking over the steering wheel from the victim who [was] brought to a house in North Fairview, Quezon City, and later transferred to a black Cefiro with plate number UPX-256, and then bring her to a safe house located at 11 LT Road 1 St. Pamayanang UPEHCO, San Luis, Antipolo City. That the abduction of the victim was for [the] purpose of extorting ransom from her family as in fact the amount of [PHP] 500,000.00 was delivered to the kidnappers in exchange for the release of the victim. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p> </blockquote> <p> Upon arraignment, Olbato et al. pleaded not guilty to the charge. Thereafter, trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> <i>Version of the Prosecution</i> </p><p> The prosecution presented 10 witnessesâthe victim, Genevieve Ong Sy (Genevieve),<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> her father Santos Lim Sy (Santos),<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> their driver Dominador Gabona (Gabona),<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> and Police Anti-Crime Emergency Response (PACER) operatives Police Senior Inspector Freddie Colico (PSINSP Colico),<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Senior Police Officer III Cresencio Arganda,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Police Officer II Reynaldo Curampez,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Police Inspector Hendrix Mangaldan (PINSP Mangaldan),<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Police Officer II Dexter Bas,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Police Officer II Rolui Gomez,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> and Police Superintendent Guillermo Lorenzo Eleazar (PSUPT Eleazar)<sup style="COLOR: RGB(255, 0, 0);">[16]</sup>âwhose testimonies collectively established that Genevieve was abducted on March 18, 2004 by Olbato, Tolevas, Romeo, Rodrigo, and Culanag, together with their co-accused SPO4 Ayson, PO3 Patingan, Castillo, Magaipo, Mentis, and Argayoza, for the purpose of extorting ransom from her family.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Together, the prosecution's witnesses' testimonies presented the narrative below. </p><p> At around 9:00 a.m. that day, while driving her Mitsubishi Lancer along Severino Street, Sta. Cruz, Manila, Genevieve was flagged down by two uniformed policemen later identified as PO3 Patingan and SPO4 Ayson.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Believing it was a routine inspection, she rolled down her window. PO3 Patingan then opened the door, dragged her from the driver's seat, and forced her to the back of the car.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Two civilians, later identified as Romeo and Rodrigo, sat beside her, while PO3 Patingan drove and SPO4 Ayson took the front seat.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Along Commonwealth Avenue, they divested her of her jewelry, cash, credit cards, cellphone, and bag before proceeding to a house in North Fairview where they transferred her to a black Nissan Cefiro.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Romeo drove the Cefiro toward Antipolo, accompanied by SPO4 Ayson, Rodrigo, and Castillo. While <i>en route</i> to Antipolo, Castillo asked her who among her family members she can contact.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Upon arrival at a two-storey house in Pamayanang UPEHCO, Antipolo City,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Genevieve was turned over to Olbato, Tolevas, Magaipo, and Culanag who locked her in a room and guarded her in shifts.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup></p><p> That same morning, Santos received a call from his daughter's cellphone. A male voice informed him that Genevieve had been kidnapped and demanded PHP 50,000,000.00 for her release.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The caller was later identified as Magaipo.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The amount for ransom was eventually negotiated down to PHP 500,000.00 after several exchanges.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Santos sought help from PACER, which organized a surveillance and rescue operation.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Acting on instructions from the kidnappers, Santos prepared PHP 500,000.00 in marked PHP 1,000.00 bills wrapped in newspaper and placed inside a blue plastic bag. He directed his driver, Gabona, to deliver it using their Ford Fierra.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Following a series of phone instructions from a man calling himself "Major De Guzman," Gabona met two menâSPO4 Ayson and Culanagânear McDonald's Quezon Avenue around 10:00 p.m. They retrieved the blue plastic bag, after which SPO4 Ayson, Culanag, and PO3 Patingan boarded a blue Isuzu pick-up and sped away.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> After the ransom delivery, PACER operatives, under the supervision of PSUPT Eleazar, conducted coordinated surveillance and rescue operations. Acting on real-time monitoring, the team of PSINSP Colico tailed the blue Isuzu pick-up used by SPO4 Ayson, PO3 Patingan, and Culanag to a residence in North Fairview, Quezon City. Continuous surveillance revealed that several of the identified suspects were converging at the house, transferring vehicles, and coordinating movements consistent with the ransom pick-up, prompting simultaneous operations the following morning.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> At about 5:30 a.m. of March 20, 2004, PINSP Mangaldan's team raided a two-storey house in Pamayanang UPEHCO, Antipolo City, where Genevieve was rescued from a locked room. Arrested at the scene were SPO4 Ayson, Castillo, Romeo, Tolevas, Olbato, and Magaipo, from whom firearms and cellphones were recovered.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> At the same time, PSINSP Calico's team raided the North Fairview house, arresting Culanag and several others, and recovering the PHP 500,000.00 ransom money, the victim's Louis Vuitton bag, and a police uniform bearing PO3 Patingan's name.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Another team intercepted the white Honda City along Aurora Boulevard and apprehended PO3 Patingan and Monarez.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> The arrested accused and Genevieve were brought to Camp Crame for investigation. Subsequent follow-up operations yielded two motorcycles believed to have been used during the abduction, as well as identification cards belonging to the victim.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </p><p> The prosecution thus maintained that the series of coordinated arrests, recoveries, and the positive identification by Genevieve and her father conclusively established the participation of all the accused in the abduction, detention, and ransom negotiation, proving a concerted plan and common criminal design to kidnap Genevieve for ransom. </p><p> <i>Version of the Defense</i></p><p> Olbato et al. uniformly denied the charges and interposed defenses of denial, alibi, and frame-up. They claimed that they were separately arrested, maltreated, and falsely implicated by police officers motivated by animosity or career interest.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> SPO4 Ayson testified that he was at Camp Crame on the morning of March 18 for a medical examination and was later unlawfully arrested by Chief Inspector Ricafort's (Ricafort)<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> men on March 20 while on his way to La Salle Village. He alleged that the operation was instigated by Ricafort out of personal hostility arising from a previous smuggling investigation.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> PO3 Patingan admitted knowing Genevieve and her father, having once served as their security aide. He claimed that he and Genevieve had an intimate relationship and that they were together from March 18 to 19 looking for a house in Antipolo. According to him, Santos fabricated the kidnapping to conceal his daughter's affair. He further alleged that he was blindfolded and abducted by unidentified men on March 20 and later surfaced at the PACER office for inquest.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> Romeo asserted that he was abducted by armed men while working as a <i>videoke</i> technician in Malabon and was later detained without a warrant.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> In contrast, Rodrigo insisted that he was in Barugo, Leyte during the incident and could not have participated, although he admitted that he had no evidence to substantiate his claim.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> Similarly, Olbato, a tricycle driver, claimed he was merely stopped by policemen in Caloocan, blindfolded, and brought to Camp Crame in a jail cell.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> For his part, Castillo testified that he was drinking with friends in Valenzuela when police arrested him at gunpoint; he alleged that Genevieve was coached by a police officer when she identified him in court.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Meanwhile, Magaipo maintained that he was repairing his tricycle in Pandacan when he was forcibly taken and beaten by men in a red van; he denied having tattoos on his arms at the time, contrary to Genevieve's description.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Likewise, Culanag said he was a caretaker in PO3 Patingan's North Fairview house and was arrested along with other workers during the raid.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Finally, Tolevas stated that he had just been released from prison in 2003 and was abducted days before the alleged kidnapping, and that he was tied up, blindfolded, and beaten by his captors before eventually being turned over to the police, who falsely implicated him in the crime.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> On the other hand, Monarez testified that she arrived in Manila on March 17, 2004<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> and was fetched by her former boyfriend, PO3 Patingan, who brought her to a house along Mindanao Avenue and later to another residence in Fairview, Quezon City. She recounted that on March 20, 2004, while she and PO3 Patingan were traveling in his blue pick-up, their vehicle was suddenly blocked by armed policemen who ordered them to alight, blindfolded and handcuffed her, and took her to an unknown place where she was interrogated, harassed, and later brought to Camp Crame. She further alleged that the arresting officers made indecent advances toward her and coerced her to admit to matters she knew nothing about.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </p><p> Similarly, Bihag claimed that on March 18, 2004, he was staying at a construction site in Fairview where his acquaintance, Culanag, worked as caretaker. He stated that at around 4:00 a.m. on March 20, 2004, policemen suddenly entered the premises, arrested him and several other helpers without a warrant, and later brought them to Camp Crame. He denied knowing Genevieve or having any involvement in the kidnapping.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> The defense likewise presented Fritz Xavier (Xavier), Maria Celia Marqueses (Marqueses), and Luisito Santos (Luisito). Xavier testified that he saw SPO4 Ayson during their joint medical examination on March 18, 2004 at Camp Crame, although he admitted that he had no documentary proof apart from his statement.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Marqueses, a long-time neighbor of SPO4 Ayson in Antipolo, testified that SPO4 Ayson was at home around 7:00 p.m. to 9:00 p.m. on March 19, 2004, watching a film and tending to his roosters. She even spoke with him briefly to ask to borrow a CD of <i>The Passion of the Christ</i>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Luisito, the president of a local tricycle drivers' association, testified that Magaipo had been his tricycle driver and was seen driving his assigned unit in Pandacan from March 18 to 19, 2004, returning it each evening before his arrest two days later.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> <i>Ruling of the RTC</i></p><p> In its Amended Decision,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> the RTC convicted Olbato, Tolevas, Romeo, Rodrigo, Culanag, SPO4 Ayson, PO3 Patingan, Castillo, and Magaipo, in Criminal Case No. Q-04-125875 for kidnapping for ransom, but acquitted Monarez and Bihag. With respect to accused Argayoza and Mentis, who remained at large, the RTC ordered the issuance of alias warrants of arrest and directed that the case be archived as to them, subject to revival upon their arrest or voluntary surrender. The dispositive portion reads: </p><blockquote> <p> <b>WHEREFORE, premises considered,</b> <b>accused SPO4 ROMEO AYSON [<i>y</i>] SEJIRA@ ["]Romy,["] PO3 CLAYTON PATINGAN [<i>y</i>] AMATIC @ ["]Ricky/Bobot,["] JOSE OLBATO [<i>y</i>] AURELLA, JAIME TOLEVAS [<i>y</i>] CAMPOSANO, EDWIN CASTILLO [<i>y</i>] IGADA, ROMEO ARUTA [<i>y</i>] FABIANO, RODRIGO ARUTA [<i>y</i>] FABIANO, SEBASTIAN MAGAIPO <i>y</i> ALIPANTE,</b> and <b>ALBERTO CULANAG [<i>y</i>] FREJOLES</b>, are found <b>GUILTY</b> beyond reasonable doubt of the crime of [k]idnapping for [r]ansom and are sentenced to suffer the penalty of [<i>reclusion perpetua</i>] without eligibility for parole. They are <b>ORDERED to PAY</b> the private complainant Genevieve Ong Sy each the amounts of [PHP] 100,000.00 as civil indemnity, [PHP] 100,000.00 as moral damages, and [PHP] 100,000.00 as exemplary damages, with legal interest at the rate of [6%] per annum from the time of finality of this Decision until fully paid. </p> <p> Further, for failure to prove guilt beyond reasonable doubt, accused <b>LOLITA MONAREZ [<i>y</i>] ESTRELLA and PEPE BIHAG [<i>y</i>] BALTAZAR</b> are hereby <b>acquitted</b>. Considering that both accused are detained, their immediate release is hereby ordered unless they are being held for other lawful cause or causes. </p> <p> Likewise, considering that accused <b>VINA ARGAYOZA</b> and <b>YONG-YONG MENTIS</b> are still at large, let alias warrants of arrest be issued for their apprehension. The case shall be sent to the archives as to said accused, to be revived upon their arrest or voluntary surrender</p> <p> Let the corresponding [<i>mittimus</i>] be issued. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Emphasis in the original) </p> </blockquote> <p> The RTC found the prosecution's evidence sufficient to establish beyond reasonable doubt that Genevieve was kidnapped and detained for ransom by Olbato, Tolevas, Romeo, Rodrigo, Culanag, SPO4 Ayson, PO3 Patingan, Castillo, and Magaipo, acting in conspiracy.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> It held that the testimonies of the victim and her father were clear, credible, and consistent, narrating in detail how the abduction and ransom transaction transpired.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Moreover, the RTC noted that Genevieve had sufficient opportunity to recognize her abductors during her captivity.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></p><p> The court declined to give weight to PO3 Patingan's claim that he had a romantic relationship with Genevieve and that the case was merely fabricated out of her fear of her parents, holding that to address such assertion would be speculative and unsupported by evidence. It emphasized that the proceedings must rest on proof, not conjecture, and that the prosecution had presented credible testimonies and evidence establishing that a kidnapping for ransom occurred and that the accused were the perpetrators.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> The RTC rejected the defenses of denial and alibi as self-serving and inherently weak, finding that the accused failed to show it was physically impossible for them to be at the crime scene.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> It concluded that the acts of the accused demonstrated unity of purpose and design, constituting conspiracy to commit kidnapping for ransom.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> However, co-accused Monarez and Bihag were acquitted on the ground of reasonable doubt. The RTC found that the prosecution failed to establish their participation in the abduction or detention of the victim, as they were neither identified by Genevieve nor shown by any evidence to have taken part in the conspiracy.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></p><p> Aggrieved, Olbato, Tolevas, Romeo, Rodrigo, Culanag, SPO4 Ayson, PO3 Patingan, and Castillo appealed before the CA and filed their Brief,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> arguing that the RTC erred in relying on Genevieve's allegedly unreliable identification in convicting them despite supposed failure to prove the elements of kidnapping for ransom beyond reasonable doubt, and in finding conspiracy while disregarding their defenses of denial and alibi.</p><p> They asserted that the prosecution's version was implausible and inconsistent with ordinary experience, and that the ransom was never proven since the money was allegedly lost. They also argued that Genevieve's alleged affair with PO3 Patingan explained her absence from home and undermined the claim of abduction.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> </p><p> In turn, the People, through the Office of the Solicitor General, filed their Brief,<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> contending that the guilt of the accused was proven beyond reasonable doubt. It argued that the testimonies of the victim and her father were straightforward and corroborated by police officers, establishing that the accused, acting in conspiracy, abducted Genevieve for ransom.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p><p> It stressed that the loss of the ransom money did not affect the sufficiency of proof of demand and payment. It likewise invoked the settled rule that trial courts' assessments of witness credibility deserve great respect, absent proof of bias or misapprehension of facts.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p><p> <i>Ruling of the CA</i></p><p> In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> the CA affirmed the RTC's Amended Decision <i>in toto</i>, thus: </p><blockquote> <p> <b>WHEREFORE,</b> in view of the foregoing, the instant appeal is <b>DENIED.</b> The June 15, 2021 Amended Decision of the Regional Trial Court of Quezon City, Branch 225 is <b>AFFIRMED</b> <i>in toto</i>. </p> <p> <strong>SO ORDERED</strong>.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> (Emphasis in the original) </p> </blockquote> <p> The CA upheld the RTC's ruling, finding the testimonies of the victim and her father credible and consistent. It held that all the elements of kidnapping for ransom were duly proven, that conspiracy among Olbato, Tolevas, Romeo, Rodrigo, Culanag, SPO4 Ayson, PO3 Patingan, and Castillo was established by their coordinated acts, and that the loss of the ransom money was immaterial.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> </p><p> The appellate court rejected the alleged romantic relationship between the victim and PO3 Patingan as unsubstantiated, and held that the defenses of denial and alibi could not overcome positive identification.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> </p><p> Thus, the CA affirmed the RTC's Amended Decision sentencing Olbato, Tolevas, Romeo, Rodrigo, Culanag, SPO4 Ayson, PO3 Patingan, and Castillo to<i> reclusion perpetua</i> without eligibility for parole and ordering payment of the adjudged damages. </p><p> Aggrieved, Olbato, Tolevas, Romeo, Rodrigo, and Culanag jointly filed their Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> together with SPO4 Ayson, PO3 Patingan, and Castillo. Thereafter, and before the CA acted on the appeal, SPO4 Ayson, PO3 Patingan, and Castillo filed a Manifestation with Motion to Withdraw Notice of Appeal,<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> praying for the withdrawal of their respective appeals in order to apply for executive clemency. Notwithstanding the disclosure therein that SPO4 Ayson had died on November 16, 2023, the Manifestation nonetheless expressly included SPO4 Ayson in the prayer for the withdrawal of the appeal.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> </p><p> In its Resolution dated August 7, 2024,<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> the CA gave due course to Olbato, Tolevas, Romeo, Rodrigo, and Culanag's Notice of Appeal, and granted SPO4 Ayson, PO3 Patingan, and Castillo's motion to withdraw their Notice of Appeal. Consequently, the records of the case were elevated to the Court.</p><p> The parties dispensed with the filing of supplemental briefs,<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> and adopted their respective appellate briefs. Thus, the Court now resolves. </p><p align="center"> <b><i>The Court's Ruling</i></b> </p><p> The Court resolves to dismiss the appeal and affirm the conviction of accused-appellants, with the exception of SPO4 Ayson, whose criminal liability has been extinguished by reason of his death pending appeal. </p><p> At the outset, the Court notes that SPO4 Ayson died on November 16, 2023, during the pendency of the appeal. In accordance with <i>People v. Bayotas</i>,<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> his death extinguished both his criminal liability and his civil liability <i>ex delicto</i>. Accordingly, the criminal case and the appeal are deemed dismissed as to SPO4 Ayson, without prejudice to the filing of a separate civil action against his estate, if warranted, based on a source of obligation other than delict.</p><p> After a judicious review of the records, this Court finds no cogent reason to disturb the findings of either the RTC or the CA with respect to the surviving accused-appellants. As the CA aptly discussed, findings of fact made by the trial court are accorded the highest degree of respect by an appellate court and, absent a clear disregard of the evidence before it that can otherwise affect the results of the case, those findings should not be ignored.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup></p><p> Nonetheless, if only to lay to rest the issues raised on appeal, the Court will address the arguments raised by the remaining accused-appellants. </p><p> Accused-appellants argue that the prosecution failed to establish the essential elements of kidnapping for ransom beyond reasonable doubt;<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> that the alleged ransom was never proven since the money was lost in police custody;<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> that the victim's testimony was riddled with inconsistencies and her identification of the accused was unreliable;<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> and that Genevieve's supposed relationship with PO3 Patingan explained her absence from home, rendering the charge fabricated.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> However, these arguments fail to persuade. </p><p> The elements of kidnapping for ransom are as follows: (1) the accused was a private person; (2) he or she kidnapped or detained, or in any manner deprived another of their liberty; (3) the kidnapping or detention was illegal; and (4) the victim was kidnapped or detained for ransom.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> </p><p> The Court agrees with the CA and RTC that all these elements were sufficiently established by the prosecution through clear, convincing, and consistent testimonial and documentary evidence, as against the remaining accused-appellants. </p><p> Anent the first element, Genevieve positively identified her abductors, who were all private persons, except for PO3 Patingan. As to PO3 Patingan, the Court held in <i>People v. Borja</i>,<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> that a police officer who detains a person for the purpose of extorting ransom cannot be said to be acting in an official capacity.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> Here, the prosecution proved that PO3 Patingan detained Genevieve for the purpose of extorting ransom, thus showing that they acted outside the scope of their official duties when they abducted her. Thus, the first elementâthat the offenders were private individualsâis satisfied. </p><p> With regard to the second and third elements, the prosecution clearly established that Genevieve was forcibly taken against her will and detained in a house in Antipolo City under guard, without lawful cause or authority. Her detailed and categorical narration of her captivity, corroborated by the testimony of her father and the police officers who rescued her, leaves no doubt that she was unlawfully deprived of liberty. The fact that she was held <i>incommunicado</i>, guarded in shifts, and released only after the ransom payment further confirms the illegality of her detention. </p><p> Lastly, as to the fourth element, the demand for and payment of ransom were unequivocally proven. Santos testified that he received repeated calls demanding PHP 50,000,000.00 for his daughter's release, which was later reduced to PHP 500,000.00. The ransom was delivered by their driver, Gabona, and was received by SPO4 Ayson and Culanag under surveillance by PACER operatives. The subsequent recovery of the marked money, together with the rescue of Genevieve from the Antipolo safehouse and the apprehension of her captors, were testified on by the PACER officers who conducted the surveillance and rescue operations. These established beyond doubt that the abduction was motivated by ransom. </p><p> The Court likewise finds that conspiracy among the accused, including herein accused-appellants, was clearly established. In <i>People v. Olidan</i>,<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> the Court ruled that conspiracy exists when two or more persons come to an agreement concerning the commission of a felony and decide to commit it. It need not be proved by direct evidence, for it may be inferred from the concerted acts of the accused before, during, and after the commission of the crime which, taken together, clearly demonstrate a joint purpose, concert of action, and community of interest. A conspirator need not participate in every detail of the execution of the crime; it is enough that they cooperated, directly or indirectly, in its consummation, as the act of one is deemed the act of all.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> </p><p> As applied to this case, the series of actsâfrom the coordinated flagging down of Genevieve's vehicle by SPO4 Ayson and PO3 Patingan, the participation of Romeo, Rodrigo, and Castillo in transferring her between vehicles, her detention at the Antipolo safehouse under guard of Olbato, Tolevas, Magaipo, and Culanag, and the subsequent ransom pickup by SPO4 Ayson, PO3 Patingan, and Culanagâreveal a concerted effort toward a common unlawful purpose. Each accused performed specific acts indispensable to the execution of the crime, demonstrating unity of purpose and community of design. Thus, conspiracy was indubitably proven. </p><p> The Court finds untenable accused-appellants' contention that the loss of the ransom money creates reasonable doubt as to the existence of ransom. In <i>People v. Jatulan</i>,<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> the Court has held that whether the ransom money was actually paid or received by the perpetrator is of no moment.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> In fact, the Court has likewise held that the ransom money is not the <i>corpus delicti</i> of the crime of kidnapping for ransom.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> </p><p> Moreover, contrary to accused-appellants' claims, the prosecution sufficiently proved through the testimonies of Genevieve and her father that the ransom was demanded, negotiated, and delivered. The fact that the PHP 500,000.00 ransom was not presented in court does not negate the occurrence of the demand and payment, both of which were clearly established by testimonial and documentary evidence. </p><p> Thus, the Court upholds the CA and the RTC, both of which correctly found that the demand for and payment of ransom were clearly proven, and that the loss or non-presentation of the ransom money does not create reasonable doubt as to the commission of the crime. Taken together, the evidence on record conclusively establishes all the elements of kidnapping for ransom, warranting the conviction of accused-appellants beyond reasonable doubt. </p><p> Accused-appellants likewise assail Genevieve's testimony as inconsistent and unreliable. The Court finds otherwise. Minor inconsistencies in her accountâif anyârefer only to trivial details and do not affect the substance of her clear, spontaneous, and categorical narration of how she was abducted, detained, and later rescued. In fact, the Court has held that discrepancies in minor particulars are badges of truth, and bolster the probative value of the testimony.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> What is material is that Genevieve never wavered in positively identifying her abductors, describing with specificity their participation in every stage of the crime. Her testimony was corroborated in essential respects by her father and the police officers who witnessed the ransom delivery and rescue operation. </p><p> With regard to the defenses of denial, alibi, and the alleged romantic relationship between Genevieve and PO3 Patingan, the Court likewise finds them bereft of merit.</p><p> It is a well-established legal principle that denial and frame-up, like alibi, are considered among the weakest defenses that an accused may interpose in a criminal case.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> As they may easily be concocted, denials and allegations of frame-up are invariably viewed with suspicion, and, as a rule, cannot prevail over the affirmative testimonies of truthful witnesses.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup></p><p> In this case, as the RTC correctly noted, accused-appellants' bare denials were unsubstantiated by any credible evidence and were contradicted by the straightforward and consistent testimony of the victim, who positively identified each of her abductors, and detailed their specific acts during her captivity. Furthermore, the RTC rightly pointed out that the testimonies of the defense witnesses were inconsistent and improbable, and failed to rebut the prosecution's overwhelming evidence showing the accused's collective participation in the crime. The Court thus agrees with the lower courts that the defenses presented were self-serving and unworthy of belief.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> </p><p> Indeed, accused-appellants' denials are inherently weak and crumble in light of the victim's positive identification. For denial to prosper, it is not enough that the accused prove that they were in another place when the crime was committed, but they must likewise prove that it was physically impossible for them to be present at the crime scene or its immediate vicinity at the time of its commission.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> Here, accused-appellants failed to show such impossibility. As the RTC correctly observed, "physical impossibility" refers to the distance and the facility of access between the crime scene and the location of the accused when the crime was committed. There must be a clear demonstration that they were so far removed that they could not have been physically present at or near the scene of the crime.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> In this regard, accused-appellants failed to prove that it was physically impossible for them to have been at the crime scene when the crime occurred. While Magaipo's alibi was corroborated by his tricycle operator Luisito, such corroboration was rightly viewed with suspicion, as alibiâespecially when supported only by acquaintancesâis a defense easily fabricated. The excuse must be so airtight as to admit of no exception. Where, as in this case, there remains even the slightest possibility of the accused's presence at the crime scene, the alibi cannot prevail. </p><p> Lastly, with regard to the alleged romantic relationship between Genevieve and PO3 Patingan, the Court agrees with the RTC and CA that such claim deserves no weight. It was unsubstantiated by any credible proof. As the RTC aptly observed, courts do not engage in conjecture; they decide based on evidence. It is settled doctrine that bare allegations without proof do not amount to evidence.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> Here, PO3 Patingan did not produce any evidence to prove his claim of a romantic relationship with Genevieve or to show that the charge of kidnapping was fabricated out of fear of her parents. </p><p> In contrast, the prosecution's evidenceâclear, direct, and corroborated by independent witnessesâconvincingly established that Genevieve's abduction was committed for ransom, not due to any personal or familial dispute. Consequently, the Court finds no basis to disturb the uniform findings of the RTC and CA that the alleged romantic relationship was a mere afterthought and that the prosecution's evidence proved beyond reasonable doubt the guilt of accused-appellants for kidnapping for ransom. </p><p> In view of the foregoing, the Court finds no reason to deviate from the factual and legal conclusions of the courts <i>a quo</i> with respect to the surviving accused-appellants. </p><p> <b>ACCORDINGLY</b>, the appeal is <b>DISMISSED</b>. The January 31, 2024 Decision of the Court of Appeals in CA-G.R. CR-HC No. 15854 is <b>AFFIRMED <i>in toto</i></b>. Accused-appellants Jose Olbato <i>y</i> Aurella, Jaime Tolevas <i>y</i> Camposano, Romeo Aruta <i>y</i> Fabiano, Rodrigo Aruta <i>y</i> Fabiano, and Alberto Culanag <i>y</i> Frejoles and co-accused PO3 Clayton Patingan <i>y</i> Amatic @ "RICKY / BOBOT" and Edwin Castillo <i>y</i> Igada are <b>GUILTY</b> of kidnapping for ransom under Article 267 of the Revised Penal Code, and are sentenced to suffer <i>reclusion perpetua</i> without eligibility for parole.</p><p> They are also <b>ORDERED to PAY</b> the victim the amounts of PHP 100,000.00 as civil indemnity, PHP 100,000.00 as moral damages, and PHP 100,000.00 as exemplary damages, with legal interest at the rate of 6% per annum on all of the monetary awards from the finality of this Decision until full payment. </p><p> The criminal case against SPO4 ROMEO AYSON <i>y</i> SEJIRA @ "ROMY" is <b>DISMISSED</b>, his criminal liability having been <b>EXTINGUISHED</b> by reason of his death on November 16, 2023. Consequently, the civil liability <i>ex delicto</i> arising from the offense is likewise <b>EXTINGUISHED</b>, without prejudice to the filing of a separate civil action against his estate, if warranted, based on sources of obligation other than delict. </p><p> <b>SO ORDERED.</b></p><p><i> Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Aurelia" in some parts of the <i>rollo</i>. <i>See</i> <i>rollo</i>, pp. 85, 96. <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Accused Lolita Monarez <i><i>y</i></i> Estrella and Pepe Bihag <i><i>y</i></i> Baltazar were acquitted. <i>Rollo</i>, p. 78. </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> Accused SPO4 Romeo Ayson <i><i>y</i></i> Sejira @ Romy died on November 16, 2023 per Certificate of Death issued by the Philippine Statistics Office, CA <i>rollo</i>, p. 246. PO3 Clayton Patingan <i><i>y</i></i> Amatic @ Ricky/Bobot, and Edwin Castillo <i><i>y</i></i> Igada withdrew their Notice of Appeal, CA <i>rollo</i>, pp. 236, 248-250. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-7. </p><p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 10-36. The January 31, 2024 Decision in CA-G.R. CR-HC No. 15854 was penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Nina G. Antonio-Valenzuela and Jose Lorenzo R. Dela Rosa of the Eleventh Division, Court of Appeals, Manila. </p><p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 39-78. The June 15, 2021 Amended Decision in Criminal Case No. Q-04-125875 was penned by Presiding Judge Maria Luisa Lesle G. Gonzales-Betic of Branch 225, Regional Trial Court, Quezon City. </p><p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 11-12, 39. </p><p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 11-12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 40-42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 42-44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 44-45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 45-48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 48-49. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 49-51. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 51-55. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 55-57. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 57-58. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 12-19, 40-58. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 12-13. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 13. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 13-14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 14-15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 15-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 16-17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 18-19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 19-22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Chief Inspector Ricafort's first name does not appear in the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, p. 19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 19-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 20-21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 21-22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The date appearing on page 61 of the <i>rollo</i> is erroneous, as it incorrectly states the year as 2016. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, pp. 61-62. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 62. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 67. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 68. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 39-78. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 77-78. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 68-74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 68-72. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 71-72. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 76. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 73-74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 72-73. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 76-77. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> CA <i>rollo</i>, pp. 68-102. </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 87-101. </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 157-172. </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 163-171. </p><p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, pp. 10-36. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 35. </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 24-28, 33. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 28-33. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 3-7. </p><p><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> CA <i>rollo</i>, pp. 236-243. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Rollo</i>, pp. 8-8-A. The Notice of the August 7, 2024 Resolution was signed by Division Clerk of Court Manuel G. Asuncion, Jr. of the Special Former Eleventh Division, Court of Appeals, Manila. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 89-93, 98-103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 306 Phil. 266, 282-284 (1994) [Per J. Romero, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Lavarez v. Guevarra</b>, 808 Phil. 247, 256 (2017) [Per J. Peralta, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> CA <i>rollo</i>, pp. 68-102. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 98-101. </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 91-98. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 81-82. </p><p><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <b>People v. Galicia</b>, 905 Phil. 966, 982 (2021) [Per J. Inting, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> 815 Phil. 327 (2017) [Per J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 329, 338. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> 958 Phil. 236 (2024) [Per J. Inting, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 252-254. </p><p><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> 550 Phil. 342 (2007) [Per J. Garcia, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id.</i> at 356. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <b>People v. Mamarion</b>, 459 Phil. 51, 57, 88 (2003) [<i>Per Curiam, En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <b>People v. Gayanilo</b>, 959 Phil. 799, 809-810 (2024) [Per J. Kho, Jr., Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>People v. Roa</b>, 634 Phil. 437, 445 (2010) [Per J. Perez, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Rollo</i>, pp. 73-75. </p><p><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>People v. Masilang</b>, 894 Phil. 855, 868 (2021) [Per C.J. Peralta, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Rollo</i>, pp. 73-74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Cardinez v. Cardinez</b>, 909 Phil. 554, 564 (2021) [Per J. Hernando, Second Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

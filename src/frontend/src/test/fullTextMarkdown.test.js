@@ -3,6 +3,7 @@ import {
     escapeLegalCaptionCommaAsterisks,
     normalizeFullTextMarkdownForGfm,
     normalizeLooseFootnoteCarets,
+    repairDoubleUtf8Latin1,
     repairFullTextBracketGlitches,
     repairFullTextMojibake,
     splitInlineLetterSpacedHeadings,
@@ -49,6 +50,35 @@ describe('normalizeFullTextMarkdownForGfm', () => {
         const out = normalizeFullTextMarkdownForGfm(input);
         expect(out).toContain('### Resolution');
         expect(out).toContain('Held[^1].');
+    });
+});
+
+describe('repairDoubleUtf8Latin1', () => {
+    it('repairs double-encoded N-tilde (Ã + U+0091 -> Ñ)', () => {
+        // "Ñ" stored as double-UTF-8: U+00C3 followed by U+0091 (control char, invisible)
+        const input = 'MR. TREÃAS.';
+        expect(repairDoubleUtf8Latin1(input)).toBe('MR. TREÑAS.');
+    });
+
+    it('repairs double-encoded n-tilde (Ã± -> ñ)', () => {
+        // "ñ" stored as U+00C3 + U+00B1 (±)
+        const input = 'EspaÃ±a';
+        expect(repairDoubleUtf8Latin1(input)).toBe('España');
+    });
+
+    it('repairs double-encoded e-acute (Ã© -> é)', () => {
+        const input = 'cafÃ©';
+        expect(repairDoubleUtf8Latin1(input)).toBe('café');
+    });
+
+    it('preserves ASCII-only text unchanged', () => {
+        const input = 'plain ASCII text';
+        expect(repairDoubleUtf8Latin1(input)).toBe('plain ASCII text');
+    });
+
+    it('integrates into normalizeFullTextMarkdownForGfm', () => {
+        const input = 'MR. TREÃAS.';
+        expect(normalizeFullTextMarkdownForGfm(input)).toBe('MR. TREÑAS.');
     });
 });
 

@@ -262,7 +262,11 @@ def _pipeline_snapshot() -> dict:
         }
 
 
-def _start_pipeline(mode: str) -> Tuple[Optional[dict], Optional[str]]:
+def _start_pipeline(
+    mode: str,
+    vertex_project: Optional[str] = None,
+    vertex_location: Optional[str] = None,
+) -> Tuple[Optional[dict], Optional[str]]:
     """
     Start a pipeline subprocess.
     Returns (result, error_message). Caller serializes result or error.
@@ -270,13 +274,17 @@ def _start_pipeline(mode: str) -> Tuple[Optional[dict], Optional[str]]:
     global _pipeline_proc
 
     root = _repo_root()
+    vertex_flags = []
+    if vertex_project:
+        vertex_flags = ["--vertex-project", vertex_project, "--vertex-location", vertex_location or "global"]
+
     if mode == "full":
         script = root / "scripts" / "elib_digest_pipeline.py"
-        cmd = [sys.executable, "-u", str(script)]
+        cmd = [sys.executable, "-u", str(script)] + vertex_flags
     elif mode == "resume":
         # Resume mode: continue pending digest work on already-ingested rows.
         script = root / "scripts" / "finish_elib_pipeline_digests.py"
-        cmd = [sys.executable, "-u", str(script), "--max-passes", "1"]
+        cmd = [sys.executable, "-u", str(script), "--max-passes", "1"] + vertex_flags
     else:
         return None, "Unsupported pipeline mode"
 
@@ -777,12 +785,25 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
         put_db_connection(conn)
 
 
+def _platform_vertex_args(req: func.HttpRequest) -> Tuple[Optional[str], Optional[str]]:
+    """Extract vertex_project and vertex_location from the request body platform field."""
+    try:
+        body = req.get_json() or {}
+    except Exception:
+        body = {}
+    platform = body.get("platform", "vertex")
+    if platform == "vertex":
+        return "gen-lang-client-0176283199", "global"
+    return None, None
+
+
 @admin_bp.route(route="ops/pipeline/start", methods=["POST"])
 def admin_pipeline_start(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
         return err
-    result, start_err = _start_pipeline("full")
+    v_project, v_location = _platform_vertex_args(req)
+    result, start_err = _start_pipeline("full", vertex_project=v_project, vertex_location=v_location)
     if start_err:
         status = 409 if "already running" in start_err.lower() else 500
         return _json({"error": start_err}, status)
@@ -794,7 +815,8 @@ def admin_pipeline_resume(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
         return err
-    result, start_err = _start_pipeline("resume")
+    v_project, v_location = _platform_vertex_args(req)
+    result, start_err = _start_pipeline("resume", vertex_project=v_project, vertex_location=v_location)
     if start_err:
         status = 409 if "already running" in start_err.lower() else 500
         return _json({"error": start_err}, status)

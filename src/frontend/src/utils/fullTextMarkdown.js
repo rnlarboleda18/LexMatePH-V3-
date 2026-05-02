@@ -3,12 +3,26 @@
  * Fixes common E-Library / conversion artifacts so tables, footnotes, and headings display correctly.
  */
 
-const UTF8_LATIN1_MOJIBAKE_RE = /[ÃÂ][\u0080-\u00ff]|Ã.|Â.|â€|â€™|â€œ|â€\u009d/;
+const UTF8_LATIN1_MOJIBAKE_RE = /[ÃÂ][-ÿ]|Ã.|Â.|â€|â€™|â€œ|â€/;
 
 function mojibakeScore(text) {
     if (!text) return 0;
-    const hits = text.match(/[ÃÂ][\u0080-\u00ff]|Ã.|Â.|â€|â€™|â€œ|â€\u009d|�/g);
+    const hits = text.match(/[ÃÂ][-ÿ]|Ã.|Â.|â€|â€™|â€œ|â€|�/g);
     return hits ? hits.length : 0;
+}
+
+/**
+ * Targeted fix for double-UTF-8 mojibake: U+00C2 ("Â") or U+00C3 ("Ã")
+ * followed by a valid UTF-8 continuation byte (U+0080-U+00BF).  These pairs appear
+ * when UTF-8 bytes are misread as Latin-1 and re-encoded, turning N-tilde into
+ * "Ã", n-tilde into "Ã±", e-acute into "Ã©", etc.
+ * The decode formula is exact -- no heuristic score comparison needed.
+ */
+export function repairDoubleUtf8Latin1(text) {
+    if (!text) return text;
+    return text.replace(/[ÂÃ][-¿]/g, (m) =>
+        String.fromCodePoint(((m.charCodeAt(0) & 0x1f) << 6) | (m.charCodeAt(1) & 0x3f))
+    );
 }
 
 /**
@@ -27,38 +41,38 @@ export function repairUtf8Latin1Mojibake(text) {
 }
 
 /**
- * UTF-8 punctuation decoded as Windows-1252 (each byte → one BMP char): â + € + third.
+ * UTF-8 punctuation decoded as Windows-1252 (each byte -> one BMP char): a-hat + euro + third.
  * Third-byte map from `new TextDecoder('windows-1252').decode(Uint8Array.from(utf8Bytes))`.
  */
 export function repairFullTextMojibake(mdText) {
     if (!mdText) return mdText;
     return (
         mdText
-            .replace(/\u00e2\u20ac\u201d/g, '\u2014') // — em dash (E2 80 94)
-            .replace(/\u00e2\u20ac\u0022/g, '\u2014') // em dash when third byte misread as ASCII "
-            .replace(/\u00e2\u20ac\u201c/g, '\u2013') // – en dash (E2 80 93)
-            .replace(/\u00e2\u20ac\u2122/g, '\u2019') // ’ right single (E2 80 99)
-            .replace(/\u00e2\u20ac\u0153/g, '\u201c') // “ left double (E2 80 9c → œ)
-            .replace(/\u00e2\u20ac\u009d/g, '\u201d') // ” right double (E2 80 9d → raw 0x9d)
-            .replace(/\u00e2\u20ac\u00a2/g, '\u2022') // • bullet (E2 80 A2 → ¢)
-            .replace(/\u00e2\u20ac\u00a6/g, '\u2026') // … ellipsis (E2 80 A6 → U+00A6 as cp1252)
-            // Rules / headings: ". â' When" → em dash before new sentence (SECTION …).
-            .replace(/([.!?])\s*\u00e2(?:\u20ac)?['\u2019]\s+([A-Z])/g, '$1\u2014 $2')
-            // Possessive: "plaintiffâ' cause" / "accountsâ€' inclusion" → correct apostrophe (+ s when needed).
-            .replace(/(\w+)\u00e2(?:\u20ac)?['\u2019](\s+)([a-z])/g, (m, word, sp, next) => {
+            .replace(/â€”/g, '—') // em dash (E2 80 94)
+            .replace(/â€"/g, '—') // em dash when third byte misread as ASCII "
+            .replace(/â€“/g, '–') // en dash (E2 80 93)
+            .replace(/â€™/g, '’') // right single quote (E2 80 99)
+            .replace(/â€œ/g, '“') // left double quote (E2 80 9c -> oe-ligature)
+            .replace(/â€/g, '”') // right double quote (E2 80 9d -> raw 0x9d)
+            .replace(/â€¢/g, '•') // bullet (E2 80 A2 -> cent)
+            .replace(/â€¦/g, '…') // ellipsis (E2 80 A6 -> broken bar as cp1252)
+            // Rules / headings: ". a-hat' When" -> em dash before new sentence (SECTION ...).
+            .replace(/([.!?])\s*â(?:€)?['’]\s+([A-Z])/g, '$1— $2')
+            // Possessive: "plaintiffa-hat' cause" / "accountsa-hateuro' inclusion" -> correct apostrophe (+ s when needed).
+            .replace(/(\w+)â(?:€)?['’](\s+)([a-z])/g, (m, word, sp, next) => {
                 const w = String(word);
-                const apos = '\u2019';
+                const apos = '’';
                 if (/s$/i.test(w)) return `${w}${apos}${sp}${next}`;
                 return `${w}${apos}s${sp}${next}`;
             })
-            // Truncated UTF-8 for ’ (E2 80 99) not caught above: â + € + ASCII '.
-            .replace(/\u00e2\u20ac'/g, '\u2019')
-            // Remaining â + ASCII/curly apostrophe → typographic apostrophe.
-            .replace(/\u00e2['\u2019]/g, '\u2019')
-            // Lone â between word chars (lost € and third byte) → em dash, e.g. "confusionsâbench".
-            .replace(/(\w)\u00e2(?=\w)/g, '$1\u2014')
-            // "reiteratingâ in the" → em dash before continuation.
-            .replace(/(\w)\u00e2\s+([a-z])/g, '$1\u2014 $2')
+            // Truncated UTF-8 for right-single-quote (E2 80 99) not caught above: a-hat + euro + ASCII '.
+            .replace(/â€'/g, '’')
+            // Remaining a-hat + ASCII/curly apostrophe -> typographic apostrophe.
+            .replace(/â['’]/g, '’')
+            // Lone a-hat between word chars (lost euro and third byte) -> em dash, e.g. "confusionsa-hatbench".
+            .replace(/(\w)â(?=\w)/g, '$1—')
+            // "reiteratinga-hat in the" -> em dash before continuation.
+            .replace(/(\w)â\s+([a-z])/g, '$1— $2')
     );
 }
 
@@ -86,7 +100,7 @@ const SPACED_HEADING_SUFFIXES = [
 ];
 
 /**
- * Split `### … D E C I S I O N` / `### … R E S O L U T I O N` into caption line + `### Decision` / `### Resolution`.
+ * Split `### ... D E C I S I O N` / `### ... R E S O L U T I O N` into caption line + `### Decision` / `### Resolution`.
  */
 export function splitSpacedHeadingFromCaseTitleLines(mdText) {
     if (!mdText) return mdText;
@@ -139,7 +153,8 @@ export function normalizeLooseFootnoteCarets(mdText) {
 
 export function normalizeFullTextMarkdownForGfm(mdText) {
     if (!mdText) return mdText;
-    let s = repairUtf8Latin1Mojibake(mdText);
+    let s = repairDoubleUtf8Latin1(mdText);
+    s = repairUtf8Latin1Mojibake(s);
     s = repairFullTextMojibake(s);
     s = repairFullTextBracketGlitches(s);
     s = escapeLegalCaptionCommaAsterisks(s);

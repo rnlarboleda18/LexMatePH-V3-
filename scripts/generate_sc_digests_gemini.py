@@ -23,18 +23,44 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 API_KEY = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
 DB_CONNECTION_STRING = os.environ.get("DB_CONNECTION_STRING") or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 
-VERTEX_PROJECT = os.getenv("VERTEX_AI_PROJECT")
-VERTEX_LOCATION = os.getenv("VERTEX_AI_LOCATION", "us-central1")
+_TIMEOUT_MS = 270_000  # fires before Google's ~5-min server-side limit
 
-# Client Configuration
-# Force AI Studio mode — clear any Vertex-routing env vars
-for _v in ("GOOGLE_GENAI_USE_VERTEXAI", "GOOGLE_CLOUD_PROJECT",
-           "GOOGLE_CLOUD_LOCATION", "VERTEX_AI_PROJECT", "VERTEX_AI_LOCATION"):
-    os.environ.pop(_v, None)
 
-# 270 s client-side timeout — fires before Google's ~5-min server-side limit,
-# giving Python time to handle the exception and release the PROCESSING lock.
-client = genai.Client(api_key=API_KEY, http_options={"timeout": 270000})
+def _build_client(
+    *,
+    api_key: str | None = None,
+    vertex_project: str | None = None,
+    vertex_location: str | None = None,
+) -> "genai.Client":
+    """Return a genai.Client: Vertex AI when a project is available, else AI Studio."""
+    # Explicit --vertex-project arg takes top priority
+    if vertex_project:
+        return genai.Client(
+            vertexai=True,
+            project=vertex_project,
+            location=vertex_location or "us-central1",
+            http_options={"timeout": _TIMEOUT_MS},
+        )
+    # Env-var Vertex: VERTEX_AI_PROJECT or GOOGLE_CLOUD_PROJECT
+    v_project = (os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT") or "").strip()
+    if v_project:
+        v_loc = (os.getenv("VERTEX_AI_LOCATION") or os.getenv("GOOGLE_CLOUD_LOCATION") or "us-central1").strip()
+        return genai.Client(
+            vertexai=True,
+            project=v_project,
+            location=v_loc,
+            http_options={"timeout": _TIMEOUT_MS},
+        )
+    # AI Studio: explicit arg, then env vars
+    key = api_key or (os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or "").strip()
+    # Strip Vertex-routing env vars so the SDK doesn't silently redirect
+    for _v in ("GOOGLE_GENAI_USE_VERTEXAI", "GOOGLE_CLOUD_PROJECT",
+               "GOOGLE_CLOUD_LOCATION", "VERTEX_AI_PROJECT", "VERTEX_AI_LOCATION"):
+        os.environ.pop(_v, None)
+    return genai.Client(api_key=key or None, http_options={"timeout": _TIMEOUT_MS})
+
+
+client = _build_client()
 
 logging.basicConfig(
     level=logging.INFO,
@@ -829,7 +855,6 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                     config=types.GenerateContentConfig(
                         system_instruction=sys_instruction,
                         temperature=0.1,
-                        max_output_tokens=65536,
                         safety_settings=[
                             types.SafetySetting(
                                 category=types.HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -1085,17 +1110,18 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     
-    # Configure Model and Client from Args
-    if args.vertex_project or os.getenv("VERTEX_AI_PROJECT"):
-        v_project = args.vertex_project or os.getenv("VERTEX_AI_PROJECT")
-        v_loc = args.vertex_location or os.getenv("VERTEX_AI_LOCATION", "us-central1")
-        logging.info(f"Override: Using Vertex AI Endpoint (project={v_project}, location={v_loc})")
-        client = genai.Client(vertexai=True, project=v_project, location=v_loc)
-    elif args.api_key:
-        logging.info(f"Using Custom API Key for this run.")
-        client = genai.Client(api_key=args.api_key)
-    
-    logging.info(f"Using Model: {args.model}")
+    # Rebuild client now that CLI args are known (they take priority over env vars)
+    client = _build_client(
+        api_key=args.api_key or None,
+        vertex_project=args.vertex_project or None,
+        vertex_location=args.vertex_location or None,
+    )
+    _auth_mode = (
+        "Vertex AI"
+        if (args.vertex_project or os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT"))
+        else "AI Studio"
+    )
+    logging.info("Auth: %s | Model: %s", _auth_mode, args.model)
     
     target_ids_list = None
     if args.target_ids:

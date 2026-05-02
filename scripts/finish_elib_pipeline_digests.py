@@ -176,6 +176,8 @@ def main() -> int:
         default=10,
         help="Parallel workers passed to generate_sc_digests_gemini.py (capped per chunk)",
     )
+    p.add_argument("--vertex-project", type=str, default=None, help="Vertex AI project ID (uses ADC; overrides GOOGLE_CLOUD_PROJECT)")
+    p.add_argument("--vertex-location", type=str, default="global", help="Vertex AI location (default: global)")
     p.add_argument(
         "--max-passes",
         type=int,
@@ -208,8 +210,14 @@ def main() -> int:
     if not db_url:
         log.error("DB_CONNECTION_STRING is not set.")
         return 2
-    if not args.dry_run and not os.environ.get("GOOGLE_API_KEY"):
-        log.error("GOOGLE_API_KEY is not set; cannot run Gemini.")
+    _has_auth = (
+        os.environ.get("GOOGLE_API_KEY")
+        or os.environ.get("GEMINI_API_KEY")
+        or os.environ.get("GOOGLE_CLOUD_PROJECT")
+        or args.vertex_project
+    )
+    if not args.dry_run and not _has_auth:
+        log.error("No Gemini auth: set GOOGLE_API_KEY (AI Studio) or GOOGLE_CLOUD_PROJECT / --vertex-project (Vertex AI).")
         return 3
 
     max_passes = max(1, int(args.max_passes))
@@ -256,6 +264,10 @@ def main() -> int:
                 chunk = ids[i : i + chunk_size]
                 joined = ",".join(str(x) for x in chunk)
                 w = min(workers, len(chunk))
+                vertex_flags = []
+                if args.vertex_project:
+                    vertex_flags = ["--vertex-project", args.vertex_project,
+                                    "--vertex-location", args.vertex_location]
                 cmd = [
                     sys.executable,
                     str(script),
@@ -269,6 +281,7 @@ def main() -> int:
                     str(len(chunk)),
                     "--workers",
                     str(w),
+                    *vertex_flags,
                 ]
                 log.info(
                     "Pass %s/%s chunk %s..%s (%s ids): workers=%s",
