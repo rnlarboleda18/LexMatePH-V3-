@@ -388,12 +388,17 @@ def delete_sc_cases_for_elib_ids(conn, doc_ids: list[int]) -> list[int]:
     cur = conn.cursor()
     for doc_id in doc_ids:
         sc_url = sc_url_for_elib_id(doc_id)
-        cur.execute(
-            "DELETE FROM sc_decided_cases WHERE sc_url = %s RETURNING id",
-            (sc_url,),
-        )
-        for row in cur.fetchall():
-            deleted.append(int(row[0]))
+        cur.execute("SELECT id FROM sc_decided_cases WHERE sc_url = %s", (sc_url,))
+        row_ids = [int(r[0]) for r in cur.fetchall()]
+        if row_ids:
+            ph = ",".join(["%s"] * len(row_ids))
+            cur.execute(f"DELETE FROM codal_case_links WHERE case_id IN ({ph})", tuple(row_ids))
+            cur.execute(
+                "DELETE FROM sc_decided_cases WHERE sc_url = %s RETURNING id",
+                (sc_url,),
+            )
+            for row in cur.fetchall():
+                deleted.append(int(row[0]))
     conn.commit()
     return deleted
 
@@ -1066,8 +1071,8 @@ def main() -> int:
                 )
             elif new_db_ids and linker_workers == 0:
                 log.info("Codal linking skipped (--linker-workers 0).")
-        else:
-            rep.digest_ok = None
+            else:
+                rep.digest_ok = None
 
     except Exception as e:
         rep.fatal_error = str(e)

@@ -32,10 +32,10 @@ const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }
     const [timeUsed, setTimeUsed] = useState(0);
     const [showDisclaimer, setShowDisclaimer] = useState(false); // Added for custom disclaimer overlay
 
-    // Tell App to hide minimized LexPlayer during simulation (loading, lockdown, exam, submit, grading — not dashboard or results).
+    // Tell App to hide minimized LexPlayer during simulation (loading, lockdown, exam, submit, grading, results — not dashboard).
     useEffect(() => {
         if (!onExamSimulationChange) return;
-        const inSimulation = examState !== 0 && examState !== 6;
+        const inSimulation = examState !== 0;
         onExamSimulationChange(inSimulation);
         return () => onExamSimulationChange(false);
     }, [examState, onExamSimulationChange]);

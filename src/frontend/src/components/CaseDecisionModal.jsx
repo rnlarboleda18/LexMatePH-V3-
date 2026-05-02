@@ -691,14 +691,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     </div>
 
                     <div className="border-t border-lex px-1.5 py-1 sm:px-2 md:px-3 dark:border-lex">
-                        <p
-                            className="w-full truncate text-left font-mono text-[12px] font-medium leading-snug text-gray-600 dark:text-gray-400 sm:text-[13px]"
-                            title={
-                                [fullDecision.case_number, fullDecision.date_str ? formatDate(fullDecision.date_str) : '']
-                                    .filter(Boolean)
-                                    .join(' · ') || undefined
-                            }
-                        >
+                        <p className="w-full text-left font-mono text-[12px] font-medium leading-snug text-gray-600 [overflow-wrap:anywhere] dark:text-gray-400 sm:text-[13px]">
                             {fullDecision.case_number || '—'}
                             {fullDecision.date_str ? (
                                 <span className="text-gray-500 dark:text-gray-500">
@@ -749,6 +742,24 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         </dd>
                                     </div>
                                 </div>
+
+                                {fullDecision.date_str && (
+                                    <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
+                                        <Clock
+                                            className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
+                                            strokeWidth={2}
+                                            aria-hidden
+                                        />
+                                        <div className="min-w-0 flex-1">
+                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                                                Date Decided
+                                            </dt>
+                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                                {formatDate(fullDecision.date_str)}
+                                            </dd>
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                     <BookOpen

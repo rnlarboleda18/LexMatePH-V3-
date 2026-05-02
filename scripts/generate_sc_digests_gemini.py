@@ -27,11 +27,14 @@ VERTEX_PROJECT = os.getenv("VERTEX_AI_PROJECT")
 VERTEX_LOCATION = os.getenv("VERTEX_AI_LOCATION", "us-central1")
 
 # Client Configuration
-if VERTEX_PROJECT:
-    logging.info(f"Using Vertex AI Endpoint (project={VERTEX_PROJECT}, location={VERTEX_LOCATION})")
-    client = genai.Client(vertexai=True, project=VERTEX_PROJECT, location=VERTEX_LOCATION)
-else:
-    client = genai.Client(api_key=API_KEY)
+# Force AI Studio mode — clear any Vertex-routing env vars
+for _v in ("GOOGLE_GENAI_USE_VERTEXAI", "GOOGLE_CLOUD_PROJECT",
+           "GOOGLE_CLOUD_LOCATION", "VERTEX_AI_PROJECT", "VERTEX_AI_LOCATION"):
+    os.environ.pop(_v, None)
+
+# 270 s client-side timeout — fires before Google's ~5-min server-side limit,
+# giving Python time to handle the exception and release the PROCESSING lock.
+client = genai.Client(api_key=API_KEY, http_options={"timeout": 270000})
 
 logging.basicConfig(
     level=logging.INFO,
@@ -233,7 +236,7 @@ def fetch_and_claim_case(worker_id, conn, year=None, force=False, target_ids=Non
         logging.info(f"Claiming Case ID {case_id}...")
         
         # CLAIM THE CASE: Mark as PROCESSING so others don't grab it while we are disconnected
-        cur.execute("UPDATE sc_decided_cases SET digest_significance = 'PROCESSING' WHERE id = %s", (case_id,))
+        cur.execute("UPDATE sc_decided_cases SET digest_significance = 'PROCESSING', updated_at = NOW() WHERE id = %s", (case_id,))
         conn.commit()
         
         return case
@@ -555,26 +558,58 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
 
 def _clear_processing_claim(conn, case_id: int) -> None:
     """Release PROCESSING lock when exiting without a successful save_digest_result."""
+    _SQL = "UPDATE sc_decided_cases SET digest_significance = NULL WHERE id = %s AND digest_significance = 'PROCESSING'"
     try:
         cur = conn.cursor()
-        cur.execute(
-            "UPDATE sc_decided_cases SET digest_significance = NULL WHERE id = %s AND digest_significance = 'PROCESSING'",
-            (case_id,),
-        )
+        cur.execute(_SQL, (case_id,))
         conn.commit()
+        return
     except Exception as e:
-        logging.error("Failed to clear PROCESSING for case %s: %s", case_id, e)
+        logging.error("Failed to clear PROCESSING for case %s via existing conn: %s", case_id, e)
         try:
             conn.rollback()
         except Exception:
             pass
+    # Persistent connection is dead (e.g. idle_in_transaction_session_timeout).
+    # Open a fresh one just for this cleanup.
+    try:
+        fresh = get_db_connection()
+        try:
+            cur = fresh.cursor()
+            cur.execute(_SQL, (case_id,))
+            fresh.commit()
+            logging.info("Cleared PROCESSING for case %s via fresh connection.", case_id)
+        finally:
+            fresh.close()
+    except Exception as e2:
+        logging.error("Also failed to clear PROCESSING for case %s via fresh conn: %s", case_id, e2)
 
 
 def generate_digest_batch(limit=10, doctrinal_only=False, year=None, force=False, target_ids=None, en_banc_only=False, start_year=None, end_year=None, ascending=False, exclude_ids=None, model_name=None, fix_gemini_3=False, start_date=None, end_date=None, smart_backfill=False, max_pages=None, metadata_backfill=False, retry_blocked=False, seek_and_fill=False, fill_empty=False):
     
     conn = get_db_connection()
-    # ... (connection check omitted, assuming verify_connection or just proceed) ...
-    # Do not close conn here
+
+    # Release any PROCESSING locks left by a previous run that crashed or timed out.
+    # updated_at is stamped NOW() when a case is claimed, so anything still in
+    # PROCESSING after 15 minutes is definitely orphaned.
+    try:
+        _stale_cur = conn.cursor()
+        _stale_cur.execute("""
+            UPDATE sc_decided_cases
+            SET digest_significance = NULL
+            WHERE digest_significance = 'PROCESSING'
+              AND updated_at < NOW() - INTERVAL '15 minutes'
+        """)
+        _stale_count = _stale_cur.rowcount
+        conn.commit()
+        if _stale_count:
+            logging.info("Cleared %d stale PROCESSING lock(s) from a previous run.", _stale_count)
+    except Exception as _e:
+        logging.warning("Stale-lock sweep failed (non-fatal): %s", _e)
+        try:
+            conn.rollback()
+        except Exception:
+            pass
 
     processed_count = 0
     
@@ -794,6 +829,7 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                     config=types.GenerateContentConfig(
                         system_instruction=sys_instruction,
                         temperature=0.1,
+                        max_output_tokens=65536,
                         response_mime_type='application/json',
                         safety_settings=[
                             types.SafetySetting(
@@ -945,16 +981,7 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                 # But here we catch, log, and fall through to Reset Lock.
                 # That's fine, resetting lock allows another worker (or this one) to try later.
             
-            try:
-                # Reset processing tag on error so it doesn't stay locked forever
-                # Use persistent conn
-                conn.rollback() # Rollback any pending trans
-                cur = conn.cursor()
-                cur.execute("UPDATE sc_decided_cases SET digest_significance = NULL WHERE id = %s AND digest_significance = 'PROCESSING'", (case_id,))
-                conn.commit()
-                logging.info(f"Reset lock for Case ID {case_id}")
-            except Exception as reset_error:
-                logging.error(f"Failed to reset lock for Case ID {case_id}: {reset_error}")
+            _clear_processing_claim(conn, case_id)
 
     conn.close()
     return processed_count
@@ -1038,7 +1065,7 @@ if __name__ == "__main__":
     parser.add_argument("--end-year", type=int, help="End year filter (inclusive)")
     parser.add_argument("--start-date", type=str, help="Start date filter (YYYY-MM-DD)")
     parser.add_argument("--end-date", type=str, help="End date filter (YYYY-MM-DD)")
-    parser.add_argument("--model", type=str, default="gemini-2.5-flash", help="Gemini Model to use")
+    parser.add_argument("--model", type=str, default="gemini-3-flash-preview", help="Gemini Model to use")
     parser.add_argument("--ascending", action="store_true", help="Process from oldest to newest")
     parser.add_argument("--fix-gemini-3", action="store_true", help="Backfill mode for Gemini 3 cases with missing fields")
     parser.add_argument("--smart-backfill", action="store_true", help="Smart Backfill: Overwrite weak models, fill incomplete strong models")
