@@ -7,8 +7,10 @@ render per-case stage + percentage while a run is active.
 
 from __future__ import annotations
 
+import errno
 import json
 import threading
+import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -57,6 +59,31 @@ def stage_percent(stage: str) -> int:
 
 def _utc_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def _replace_with_retry(src: Path, dst: Path, *, max_wait_s: float = 5.0) -> None:
+    """
+    Windows often raises WinError 5 (Access denied) on ``Path.replace`` when another
+    process briefly holds ``dst`` (IDE preview, AV scan, or concurrent readers).
+    Retry with backoff before surfacing the error.
+    """
+    deadline = time.monotonic() + max_wait_s
+    delay = 0.008
+    last: OSError | None = None
+    while time.monotonic() < deadline:
+        try:
+            src.replace(dst)
+            return
+        except OSError as e:
+            last = e
+            winerr = getattr(e, "winerror", None)
+            if winerr != 5 and e.errno not in (errno.EACCES, errno.EPERM):
+                raise
+            time.sleep(delay)
+            delay = min(delay * 1.65, 0.12)
+    if last is not None:
+        raise last
+    raise OSError(errno.EACCES, f"timed out replacing {dst}")
 
 
 @dataclass
@@ -222,7 +249,7 @@ class DigestPipelineProgressWriter:
             self.path.parent.mkdir(parents=True, exist_ok=True)
             tmp = self.path.with_suffix(self.path.suffix + ".tmp")
             tmp.write_text(json.dumps(data, indent=2, default=str), encoding="utf-8")
-            tmp.replace(self.path)
+            _replace_with_retry(tmp, self.path)
 
 
 def phase_from_stage(stage: str) -> str:

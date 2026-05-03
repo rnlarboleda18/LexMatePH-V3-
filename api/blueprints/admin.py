@@ -49,6 +49,7 @@ _pipeline_state: dict = {
 # ── In-memory eLib scan process state ───────────────────────────────────────────
 _scan_lock = threading.Lock()
 _scan_proc: Optional[subprocess.Popen] = None
+_scan_log_path: Optional[Path] = None
 _scan_state: dict = {
     "status": "idle",   # idle | running | done | failed
     "started_at": None,
@@ -90,6 +91,17 @@ _gap_scan_state: dict = {
     "last_exit_code": None,
 }
 _GAP_RESULTS_PATH = _case_digest_pipeline_store() / "gap_results.json"
+
+# ── In-memory eLib GAP scan log state ────────────────────────────────────────
+_gap_scan_log_path: Optional[Path] = None
+
+
+def _scan_subprocess_log_path() -> Path:
+    return _case_digest_pipeline_store() / "scan_subprocess.log"
+
+
+def _gap_scan_subprocess_log_path() -> Path:
+    return _case_digest_pipeline_store() / "gap_scan_subprocess.log"
 
 
 def _pipeline_progress_path() -> Path:
@@ -346,6 +358,7 @@ def _start_pipeline(
     mode: str,
     vertex_project: Optional[str] = None,
     vertex_location: Optional[str] = None,
+    digest_model: Optional[str] = None,
 ) -> Tuple[Optional[dict], Optional[str]]:
     """
     Start a pipeline subprocess.
@@ -358,9 +371,15 @@ def _start_pipeline(
     if vertex_project:
         vertex_flags = ["--vertex-project", vertex_project, "--vertex-location", vertex_location or "global"]
 
+    # Determine which model to use — explicit arg wins, then env var, then hardcoded fallback.
+    # We pass --digest-model explicitly so GEMINI_DIGEST_MODEL in the child env doesn't override
+    # the intended model (the env var is evaluated at argparse construction time, before
+    # load_api_local_settings_into_environ runs in the subprocess).
+    _model = (digest_model or "").strip() or (os.environ.get("PIPELINE_DIGEST_MODEL") or "").strip() or "gemini-3-flash-preview"
+
     if mode == "full":
         script = root / "scripts" / "elib_digest_pipeline.py"
-        cmd = [sys.executable, "-u", str(script)] + vertex_flags
+        cmd = [sys.executable, "-u", str(script), "--digest-model", _model] + vertex_flags
     elif mode == "resume":
         # Resume mode: continue pending digest work on already-ingested rows.
         script = root / "scripts" / "finish_elib_pipeline_digests.py"
@@ -907,8 +926,13 @@ def admin_pipeline_start(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
         return err
+    try:
+        body = req.get_json(silent=True) or {}
+    except Exception:
+        body = {}
     v_project, v_location = _platform_vertex_args(req)
-    result, start_err = _start_pipeline("full", vertex_project=v_project, vertex_location=v_location)
+    digest_model = (body.get("digest_model") or "").strip() or None
+    result, start_err = _start_pipeline("full", vertex_project=v_project, vertex_location=v_location, digest_model=digest_model)
     if start_err:
         status = 409 if "already running" in start_err.lower() else 500
         return _json({"error": start_err}, status)
@@ -1016,13 +1040,17 @@ def admin_pipeline_scan(req: func.HttpRequest) -> func.HttpResponse:
         _refresh_scan_state_locked()
         if _scan_proc is not None:
             return _json({"error": "Scan is already running"}, 409)
+        global _scan_log_path
         try:
             _SCAN_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+            _scan_log_path = _scan_subprocess_log_path()
+            scan_log_fp = open(_scan_log_path, "w", encoding="utf-8", buffering=1)
             _scan_proc = subprocess.Popen(
                 cmd,
                 cwd=str(root),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                stdout=scan_log_fp,
+                stderr=subprocess.STDOUT,
+                env=os.environ.copy(),
             )
             _scan_state["status"] = "running"
             _scan_state["started_at"] = datetime.now(timezone.utc).isoformat()
@@ -1055,7 +1083,7 @@ def admin_pipeline_scan_results(req: func.HttpRequest) -> func.HttpResponse:
         except Exception as exc:
             logging.warning("Could not read scan results: %s", exc)
 
-    return _json({"scan": state, "results": results}, 200)
+    return _json({"scan": state, "results": results, "log_tail": _pipeline_log_tail(path=_scan_log_path)}, 200)
 
 
 # ── eLib GAP Scan ─────────────────────────────────────────────────────────────
@@ -1139,13 +1167,17 @@ def admin_pipeline_scan_gaps(req: func.HttpRequest) -> func.HttpResponse:
                 _GAP_RESULTS_PATH.unlink()
             except Exception:
                 pass
+        global _gap_scan_log_path
         try:
             _GAP_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+            _gap_scan_log_path = _gap_scan_subprocess_log_path()
+            gap_log_fp = open(_gap_scan_log_path, "w", encoding="utf-8", buffering=1)
             _gap_scan_proc = subprocess.Popen(
                 cmd,
                 cwd=str(root),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                stdout=gap_log_fp,
+                stderr=subprocess.STDOUT,
+                env=os.environ.copy(),
             )
             _gap_scan_state["status"] = "running"
             _gap_scan_state["started_at"] = datetime.now(timezone.utc).isoformat()
@@ -1177,7 +1209,7 @@ def admin_pipeline_gap_results(req: func.HttpRequest) -> func.HttpResponse:
         except Exception as exc:
             logging.warning("Could not read gap results: %s", exc)
 
-    return _json({"scan": state, "results": results}, 200)
+    return _json({"scan": state, "results": results, "log_tail": _pipeline_log_tail(path=_gap_scan_log_path)}, 200)
 
 
 @admin_bp.route(route="ops/pipeline/stop-gap-scan", methods=["POST"])

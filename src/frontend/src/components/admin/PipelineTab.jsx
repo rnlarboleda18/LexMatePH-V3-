@@ -78,6 +78,7 @@ export default function PipelineTab() {
   // Scan state
   const [scanState,   setScanState]   = useState(null);
   const [scanResults, setScanResults] = useState(null);
+  const [scanLogTail, setScanLogTail] = useState(null);
   const [scanLoading, setScanLoading] = useState(false);
   const [scanErr,     setScanErr]     = useState(null);
   const [pipelineRun, setPipelineRun] = useState(null);
@@ -122,6 +123,7 @@ export default function PipelineTab() {
       const data = await res.json();
       setScanState(data.scan);
       if (data.results) setScanResults(data.results);
+      if (data.log_tail != null) setScanLogTail(data.log_tail);
       if (!data.scan?.running && pollRef.current) {
         clearInterval(pollRef.current);
         pollRef.current = null;
@@ -645,6 +647,17 @@ export default function PipelineTab() {
                   No new cases found — the database is up to date with eLib.
                 </div>
               ) : null}
+
+          {scanLogTail && (
+            <details className="mt-3 text-[11px] text-gray-500 dark:text-zinc-400">
+              <summary className="cursor-pointer font-semibold text-gray-600 dark:text-zinc-300">
+                Scan log (tail)
+              </summary>
+              <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-all rounded-md bg-black/80 p-2 font-mono text-[10px] text-emerald-100">
+                {scanLogTail}
+              </pre>
+            </details>
+          )}
             </>
           )}
         </div>
