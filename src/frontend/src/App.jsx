@@ -692,7 +692,7 @@ function App() {
                           selectedCodal={selectedCodalCode}
                           onCodalChange={(id) => {
                             setSelectedCodalCode(id);
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
                           }}
                           onCaseSelect={selectGlobalCaseGuarded}
                           subscriptionTier={tier}

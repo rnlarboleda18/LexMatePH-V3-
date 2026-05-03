@@ -197,6 +197,7 @@ const Layout = ({
 
             {/* Main Content Area — fixed full-width scroll container; sidebar offset handled inside via padding */}
             <main
+                id="lex-scroll-root"
                 className={`fixed z-10 left-0 right-0 overflow-y-auto overflow-x-hidden
         ${hideAppChrome
             ? 'top-0 bottom-0'
