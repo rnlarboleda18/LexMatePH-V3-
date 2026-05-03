@@ -203,6 +203,14 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
         return () => ro.disconnect();
     }, []);
 
+    // Push the global scroll container's top past the fixed filter chrome so its
+    // scrollbar track starts below the chrome, not behind it. Reset on unmount.
+    useEffect(() => {
+        const h = xlFixedChrome ? `${lexFilterChromeHeight}px` : '0px';
+        document.documentElement.style.setProperty('--page-chrome-height', h);
+        return () => document.documentElement.style.setProperty('--page-chrome-height', '0px');
+    }, [xlFixedChrome, lexFilterChromeHeight]);
+
     useLayoutEffect(() => {
         syncFixedPanelPositions();
         let rafId = 0;
@@ -1080,11 +1088,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
 
             <div
                 className="relative z-0 w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
-                style={
-                    xlFixedChrome
-                        ? { paddingTop: `calc(${lexFilterChromeHeight}px + var(--lex-tile-gap))` }
-                        : undefined
-                }
+                style={xlFixedChrome ? { paddingTop: 'var(--lex-tile-gap)' } : undefined}
             >
                 <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 lg:flex-row lg:items-start lg:gap-6">
                     {/* TOC layout spacer — real panel is `position:fixed` via portal */}

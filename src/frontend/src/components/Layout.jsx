@@ -201,7 +201,7 @@ const Layout = ({
                 id="lex-scroll-root"
                 className="fixed z-10 left-0 right-0 overflow-y-auto overflow-x-hidden"
                 style={{
-                    top: hideAppChrome ? 0 : 'var(--app-header-offset)',
+                    top: hideAppChrome ? 0 : 'calc(var(--app-header-offset) + var(--page-chrome-height, 0px))',
                     bottom: hideAppChrome ? 0 : 'var(--player-height, 0px)',
                     touchAction: 'pan-y',
                     WebkitOverflowScrolling: 'touch',
