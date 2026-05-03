@@ -181,10 +181,11 @@ const Layout = ({
                             />
                         )}
                         <aside
-                            className={`fixed bottom-0 left-0 top-[var(--app-header-offset)] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out xl:block xl:translate-x-0 ${SIDEBAR_ASIDE_SURFACE} ${
+                            className={`fixed left-0 top-[var(--app-header-offset)] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out xl:block xl:translate-x-0 ${SIDEBAR_ASIDE_SURFACE} ${
                                 isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                             }`}
                             style={{
+                                bottom: 'var(--player-height, 0px)',
                                 filter: flashcardStudying ? 'blur(4px)' : 'none',
                                 transition: 'filter 0.3s ease',
                             }}
@@ -198,12 +199,13 @@ const Layout = ({
             {/* Main Content Area — fixed full-width scroll container; sidebar offset handled inside via padding */}
             <main
                 id="lex-scroll-root"
-                className={`fixed z-10 left-0 right-0 overflow-y-auto overflow-x-hidden
-        ${hideAppChrome
-            ? 'top-0 bottom-0'
-            : `${lexPlayFullscreen ? 'top-0 lg:top-[var(--app-header-offset)]' : 'top-[var(--app-header-offset)]'} bottom-[var(--player-height,0px)]`
-        }`}
-                style={{touchAction:'pan-y', WebkitOverflowScrolling:'touch'}}
+                className="fixed z-10 left-0 right-0 overflow-y-auto overflow-x-hidden"
+                style={{
+                    top: hideAppChrome ? 0 : 'var(--app-header-offset)',
+                    bottom: hideAppChrome ? 0 : 'var(--player-height, 0px)',
+                    touchAction: 'pan-y',
+                    WebkitOverflowScrolling: 'touch',
+                }}
             >
                 <div className={hideAppChrome ? '' : `xl:pl-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'}`}>
                     <div
