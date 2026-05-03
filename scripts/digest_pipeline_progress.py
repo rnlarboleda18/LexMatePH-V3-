@@ -25,6 +25,7 @@ STAGE_ORDER = [
     "to_markdown",
     "db_insert",
     "ai_digest",
+    "gemini_fallback",
     "grok_fallback",
     "codal_link",
     "done",
@@ -48,7 +49,8 @@ def stage_percent(stage: str) -> int:
         "to_markdown": 24,
         "db_insert": 36,
         "ai_digest": 72,
-        "grok_fallback": 82,
+        "gemini_fallback": 80,
+        "grok_fallback": 87,
         "codal_link": 93,
         "done": 100,
         "skipped": 100,
@@ -117,7 +119,8 @@ def stage_display_label(stage: str) -> str:
         "to_markdown": "Convert to Markdown",
         "db_insert": "Saving to database",
         "ai_digest": "AI digest (Gemini)",
-        "grok_fallback": "AI digest (Gemini 2.5 fallback)",
+        "gemini_fallback": "AI digest (Gemini 2.5 fallback)",
+        "grok_fallback": "AI digest (Grok fallback)",
         "codal_link": "Codal linking",
         "done": "Complete",
         "skipped": "Skipped",
@@ -255,7 +258,7 @@ class DigestPipelineProgressWriter:
 def phase_from_stage(stage: str) -> str:
     if stage in ("fetch_html", "to_markdown", "db_insert"):
         return "ingest"
-    if stage.startswith("ai") or stage == "grok_fallback":
+    if stage.startswith("ai") or stage in ("gemini_fallback", "grok_fallback"):
         return "digest"
     if stage == "codal_link":
         return "link"

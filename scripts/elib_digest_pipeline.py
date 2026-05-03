@@ -920,7 +920,7 @@ def run_gemini_fallback_subprocess(
                 with progress_lock:
                     progress.note_case(
                         elib_id=ei, db_row_id=cid, label="",
-                        stage="grok_fallback",
+                        stage="gemini_fallback",
                         detail="Gemini 2.5 Flash fallback (primary blocked)",
                     )
             else:
@@ -1374,6 +1374,30 @@ def main() -> int:
                         except OSError as e:
                             log.exception("Gemini 2.5 fallback failed to start: %s", e)
                         blocked = _digest_blocked_safety_row_ids(db_url, new_db_ids)
+
+                    # Third fallback: Grok — only when Gemini 2.5 also fails and XAI_API_KEY is set
+                    if blocked and os.environ.get("XAI_API_KEY"):
+                        try:
+                            with _live_progress_bar(
+                                "Grok fallback", len(blocked), use_progress
+                            ) as grok_bar:
+                                _run_grok_safety_fallback_if_needed(
+                                    db_url,
+                                    blocked,
+                                    workers=args.workers,
+                                    live_bar=grok_bar,
+                                    progress=progress_wr,
+                                    progress_lock=digest_pl_lock,
+                                    elib_ids_by_case_id=elib_by_db_id,
+                                )
+                        except OSError as e:
+                            log.exception("Grok fallback failed to start: %s", e)
+                        blocked = _digest_blocked_safety_row_ids(db_url, new_db_ids)
+                    elif blocked:
+                        log.warning(
+                            "Gemini 2.5 still blocked id(s) %s; set XAI_API_KEY to enable Grok third-fallback.",
+                            blocked,
+                        )
 
                     if blocked:
                         rep.digest_ok = False
