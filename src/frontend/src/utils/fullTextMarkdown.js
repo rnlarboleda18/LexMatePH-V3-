@@ -69,10 +69,18 @@ export function repairFullTextMojibake(mdText) {
             .replace(/â€'/g, '’')
             // Remaining a-hat + ASCII/curly apostrophe -> typographic apostrophe.
             .replace(/â['’]/g, '’')
-            // Lone a-hat between word chars (lost euro and third byte) -> em dash, e.g. "confusionsa-hatbench".
-            .replace(/(\w)â(?=\w)/g, '$1—')
-            // "reiteratinga-hat in the" -> em dash before continuation.
-            .replace(/(\w)â\s+([a-z])/g, '$1— $2')
+            // Lone U+00E2 between letters (lost € + third UTF-8 byte) -> em dash, e.g. "confusionsa-hatbench".
+            .replace(/([\w)])â(?=\w)/g, '$1—')
+            // Sentence / rule-number ends where dash introduced mid-line: "Rules. â These …"
+            // (Must run before generic ([\w)])â rule — word char does not precede â here.)
+            .replace(/([.!?])\s*â\s+(?=[A-Z\u00C0-\u024F])/g, '$1— ')
+            // Truncated em dash when only â remains (Euro + 3rd byte stripped from pipeline).
+            // Line-start cites: â Malcolm X / â Our ruling (allow markdown blockquote prefixes)
+            .replace(/^((?:>\s*)*)(\s*)â(\s+)(?=[A-Z""„«»\u00C0-\u024F])/gm, '$1$2—$3')
+            // â + whitespace + lowercase (clause continues)
+            .replace(/(\w)â(\s+)(?=[a-z])/g, '$1—$2')
+            // â + whitespace + uppercase (new sentence / name after word-boundary punctuation)
+            .replace(/([\w)])â(\s+)(?=[A-Z])/g, '$1—$2')
     );
 }
 

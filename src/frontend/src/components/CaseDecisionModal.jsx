@@ -280,6 +280,46 @@ const CitedCasesSection = React.memo(({ citations }) => {
 const isMobileDigestPdfDisabled = () =>
     typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches;
 
+const DIGEST_PDF_BRAND_TITLE = 'LexMatePH Case Digest';
+const DIGEST_PDF_BRAND_URL = 'www.lexmateph.com';
+const DIGEST_PDF_WATERMARK_PRIMARY = 'LexMatePH - Your Legal Companion';
+
+/** Diagonal text-only watermark (draw before page body). */
+function drawDigestPdfWatermark(doc) {
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const angleDeg = -32;
+    const angleRad = (angleDeg * Math.PI) / 180;
+    const lineGap = 3.5;
+    const urlOffset = {
+        x: -Math.sin(angleRad) * lineGap,
+        y: Math.cos(angleRad) * lineGap,
+    };
+
+    doc.setTextColor(236, 236, 236);
+    const stepX = 92;
+    const stepY = 42;
+
+    for (let row = -2; row < pageHeight / stepY + 6; row++) {
+        for (let col = -1; col < pageWidth / stepX + 5; col++) {
+            const stagger = (row & 1) * (stepX * 0.45);
+            const x = col * stepX + stagger;
+            const y = row * stepY;
+
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(7.4);
+            doc.text(DIGEST_PDF_WATERMARK_PRIMARY, x, y, { angle: angleDeg, baseline: 'middle' });
+
+            doc.setFontSize(6.2);
+            doc.text(DIGEST_PDF_BRAND_URL, x + urlOffset.x, y + urlOffset.y, {
+                angle: angleDeg,
+                baseline: 'middle',
+            });
+        }
+    }
+    doc.setTextColor(0, 0, 0);
+}
+
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const { getToken, isSignedIn } = useAuth();
     const { canAccess, openUpgradeModal, loading: subscriptionLoading } = useSubscription();
@@ -420,11 +460,24 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         const maxLineWidth = pageWidth - margin * 2;
         let y = margin + 5;
 
-        // Supreme Court Digest Header
+        drawDigestPdfWatermark(doc);
+
+        const startPdfDigestPage = () => {
+            doc.addPage();
+            drawDigestPdfWatermark(doc);
+            y = margin + 10;
+        };
+
+        // Branded digest header
         doc.setFont("helvetica", "bold");
         doc.setFontSize(16);
-        doc.text("Supreme Court Decision Digest", pageWidth / 2, y, { align: "center" });
+        doc.text(DIGEST_PDF_BRAND_TITLE, pageWidth / 2, y, { align: "center" });
+        y += 8;
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.text(DIGEST_PDF_BRAND_URL, pageWidth / 2, y, { align: "center" });
         y += 10;
+        doc.setFont("helvetica", "bold");
 
         // Title
         doc.setFontSize(13);
@@ -484,7 +537,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             content = sanitizeUnicode(content);
             if (!content) return;
             
-            if (y > pageHeight - margin - 15) { doc.addPage(); y = margin + 10; }
+            if (y > pageHeight - margin - 15) { startPdfDigestPage(); }
             
             doc.setFont("helvetica", "bold");
             doc.setFontSize(11);
@@ -499,8 +552,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 }
 
                 if (y > pageHeight - margin - 10) {
-                    doc.addPage();
-                    y = margin + 10;
+                    startPdfDigestPage();
                 }
 
                 let currentX = margin;
@@ -524,8 +576,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             y += 5.5;
                             currentX = margin;
                             if (y > pageHeight - margin) {
-                                doc.addPage();
-                                y = margin + 10;
+                                startPdfDigestPage();
                             }
                         }
                         

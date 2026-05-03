@@ -103,6 +103,28 @@ describe('repairFullTextMojibake', () => {
         expect(repairFullTextMojibake('reiterating\u00e2 in the')).toBe('reiterating\u2014 in the');
         expect(repairFullTextMojibake('certiorari.\u00e2\' When')).toBe('certiorari.\u2014 When');
     });
+
+    it('repairs lone U+00E2 when â€ prefix was truncated (Euro + UTF-8 third byte lost)', () => {
+        const quote = `"I'm for truth,"\nâ Malcolm X`;
+        expect(repairFullTextMojibake(quote)).toBe('"I\'m for truth,"\n\u2014 Malcolm X');
+        expect(repairFullTextMojibake('Section 3(4)\u00e2that it')).toBe('Section 3(4)\u2014that it');
+        expect(repairFullTextMojibake('House)\u00e2 However')).toBe('House)\u2014 However');
+        expect(repairFullTextMojibake('endorsed\u00e2not')).toBe('endorsed\u2014not');
+    });
+
+    it('repairs mid-line ". â Capital" (rules / doctrinal paragraphs)', () => {
+        expect(repairFullTextMojibake('SECTION 1. Applicability of Rules. â These Rules shall')).toBe(
+            'SECTION 1. Applicability of Rules.\u2014 These Rules shall',
+        );
+        expect(repairFullTextMojibake('SECTION 2. Mode of Initiating Impeachment. â Impeachment shall')).toBe(
+            'SECTION 2. Mode of Initiating Impeachment.\u2014 Impeachment shall',
+        );
+    });
+
+    it('repairs cite dash after markdown blockquote prefix', () => {
+        expect(repairFullTextMojibake('> â SAJ Leonen')).toBe('> \u2014 SAJ Leonen');
+        expect(repairFullTextMojibake('>> â Our ruling')).toBe('>> \u2014 Our ruling');
+    });
 });
 
 describe('repairFullTextBracketGlitches', () => {

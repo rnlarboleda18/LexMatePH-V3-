@@ -5,6 +5,12 @@ import { toTitleCase } from '../utils/textUtils';
 
 import ReactMarkdown from 'react-markdown';
 
+const DIGEST_BRAND_TITLE = 'LexMatePH Case Digest';
+const DIGEST_BRAND_URL = 'www.lexmateph.com';
+/** Single-line primary watermark (diagonal repeat) */
+const DIGEST_WATERMARK_PRIMARY = 'LexMatePH - Your Legal Companion';
+const WATERMARK_TILE_COUNT = 12;
+
 const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
     // Defer the heavy ReactMarkdown render so the overlay paints first (prevents main-thread freeze on open).
     const [contentReady, setContentReady] = useState(false);
@@ -87,11 +93,43 @@ const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
                     </div>
                 ) : (
                     /* A4 PAPER SIMULATION */
-                    <div className="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto shadow-2xl p-[20mm] font-sans text-black box-border relative h-max">
-                        
+                    <div className="bg-white w-full max-w-[210mm] min-h-[297mm] mx-auto shadow-2xl p-[20mm] font-sans text-black box-border relative h-max overflow-hidden">
+                        <div
+                            className="pointer-events-none absolute inset-0 z-0 select-none overflow-hidden"
+                            aria-hidden
+                        >
+                            <div
+                                className="absolute flex flex-wrap items-start justify-start gap-x-[6.5rem] gap-y-12"
+                                style={{
+                                    width: '260%',
+                                    height: '260%',
+                                    left: '-80%',
+                                    top: '-80%',
+                                    opacity: 0.055,
+                                    transform: 'rotate(-28deg)',
+                                    transformOrigin: 'center center',
+                                }}
+                            >
+                                {Array.from({ length: WATERMARK_TILE_COUNT }, (_, i) => (
+                                    <span
+                                        key={i}
+                                        className="inline-flex shrink-0 flex-col items-start whitespace-nowrap font-sans"
+                                    >
+                                        <span className="text-[11px] font-semibold leading-tight tracking-[0.03em] text-neutral-500">
+                                            {DIGEST_WATERMARK_PRIMARY}
+                                        </span>
+                                        <span className="mt-1 text-[9px] font-normal leading-none tracking-[0.06em] text-neutral-400">
+                                            {DIGEST_BRAND_URL}
+                                        </span>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Header: Centered */}
-                        <div className="text-center mb-8 border-b-2 border-black pb-4">
-                            <h1 className="text-[22px] font-bold mb-2">Supreme Court Decision Digest</h1>
+                        <div className="relative z-10 text-center mb-8 border-b-2 border-black pb-4">
+                            <h1 className="text-[22px] font-bold mb-1 leading-tight">{DIGEST_BRAND_TITLE}</h1>
+                            <p className="text-[13px] font-normal text-gray-700">{DIGEST_BRAND_URL}</p>
                             
                             <h2 className="text-[18px] font-bold leading-snug mx-auto max-w-[90%] mb-2">
                                 {toTitleCase(decision.short_title || decision.title || '')}
@@ -103,7 +141,7 @@ const DigestHtmlViewer = ({ decision, onClose, onDownload }) => {
                         </div>
 
                         {/* Content Sections */}
-                        <div className="w-full">
+                        <div className="relative z-10 w-full">
                             <Section title="MAIN DOCTRINE" content={decision.main_doctrine} isItalic={true} />
                             <Section title="FACTS" content={decision.digest_facts} />
                             <Section title="ISSUE(S)" content={decision.digest_issues} />
