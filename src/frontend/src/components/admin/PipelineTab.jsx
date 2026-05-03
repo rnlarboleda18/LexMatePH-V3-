@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import {
-  Play, SkipForward, Square, RefreshCw,
+  Play, SkipForward, FastForward, Square, RefreshCw,
   AlertCircle, CheckCircle2, Link2, Search, ExternalLink, Clock,
 } from 'lucide-react';
 import { MetricCard } from './MetricCard';
@@ -175,12 +175,17 @@ export default function PipelineTab() {
     };
   }, [fetchScanResults]);
 
-  const startScan = async () => {
+  const startScan = async (startAfter = null) => {
     setScanErr(null);
     setScanLoading(true);
     try {
       const h = await authHdr();
-      const res = await fetch(adminApiUrl('/api/ops/pipeline/scan'), { method: 'POST', headers: h });
+      const body = startAfter != null ? JSON.stringify({ start_after: startAfter }) : undefined;
+      const res = await fetch(adminApiUrl('/api/ops/pipeline/scan'), {
+        method: 'POST',
+        headers: { ...h, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+        body,
+      });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
         throw new Error(formatAdminApiError(res, data.error || `Scan failed (${res.status})`));
@@ -275,7 +280,7 @@ export default function PipelineTab() {
 
         <div className="mb-5 flex flex-wrap gap-3">
           <ActionButton
-            onClick={startScan}
+            onClick={() => startScan()}
             disabled={scanLoading || scanState?.running}
             variant="secondary"
             icon={Search}
@@ -285,6 +290,20 @@ export default function PipelineTab() {
               find new cases
             </span>
           </ActionButton>
+
+          {scanResults?.probed_to > 0 && !scanState?.running && (
+            <ActionButton
+              onClick={() => startScan(scanResults.probed_to)}
+              disabled={scanLoading}
+              variant="secondary"
+              icon={FastForward}
+            >
+              Continue Scan
+              <span className="ml-1 text-[10px] font-normal opacity-70">
+                from eLib #{scanResults.probed_to + 1}
+              </span>
+            </ActionButton>
+          )}
 
           <ActionButton
             onClick={() => callPipeline('/api/ops/pipeline/start', 'Full pipeline')}
@@ -539,6 +558,29 @@ export default function PipelineTab() {
               </span>
             )}
           </div>
+
+          {/* Resume prompt — shown when scan failed or exited early */}
+          {!scanState?.running && scanResults?.probed_to > 0 && (scanState?.status === 'failed' || scanState?.last_exit_code !== 0) && (
+            <div className="mb-4 flex flex-wrap items-center gap-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2.5 text-xs dark:border-amber-800/50 dark:bg-amber-950/20">
+              <FastForward size={13} className="shrink-0 text-amber-600 dark:text-amber-400" />
+              <span className="text-amber-700 dark:text-amber-300">
+                Scan stopped at <strong className="font-mono">eLib #{scanResults.probed_to}</strong>.
+                {scanState?.last_exit_code != null && scanState.last_exit_code !== 0 && (
+                  <> Exit code: <code className="font-mono">{scanState.last_exit_code}</code>.</>
+                )}
+                {' '}Use the log below to diagnose, then continue from where it left off.
+              </span>
+              <button
+                type="button"
+                onClick={() => startScan(scanResults.probed_to)}
+                disabled={scanLoading}
+                className="ml-auto flex items-center gap-1.5 rounded-lg border border-amber-400 bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-200 disabled:opacity-50 dark:border-amber-700 dark:bg-amber-900/30 dark:text-amber-300 dark:hover:bg-amber-900/50"
+              >
+                <FastForward size={12} />
+                Continue from #{scanResults.probed_to + 1}
+              </button>
+            </div>
+          )}
 
           {/* last_in_db anchor line in results */}
           {scanResults?.last_in_db?.elib_id > 0 && (
