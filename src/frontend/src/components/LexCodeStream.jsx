@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import ArticleNode from './ArticleNode';
 import { toTitleCase, fixRccStructuralHeadingGlue } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay/useLexPlay';
@@ -195,41 +195,41 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
         fetchData();
     }, [code, bookNum, titleNum, apiCode]);
 
-    // Progressive rendering ΓÇö start with CHUNK_SIZE articles, load more on scroll
-    // MUST BE BEFORE EARLY RETURNS because React requires hooks to be called consistently
+    // Progressive rendering — hooks MUST be before early returns (React rules)
     const [visibleCount, setVisibleCount] = useState(INITIAL_CHUNK);
-    const sentinelRef = useRef(null);
 
-    // Reset visible count whenever the articles change (new codal opened)
-    useEffect(() => { setVisibleCount(INITIAL_CHUNK); }, [articles]);
+    // When articles change (new codal loaded): reset to initial chunk, then drain
+    // the rest one batch-per-frame so the first paint is fast and the rest follows
+    // automatically without any scroll interaction required.
+    useEffect(() => {
+        setVisibleCount(INITIAL_CHUNK);
+        if (articles.length <= INITIAL_CHUNK) return;
 
-    const loadMore = useCallback(() => {
-        setVisibleCount(prev => Math.min(prev + 50, articles.length));
-    }, [articles.length]);
+        let cancelled = false;
+        let current = INITIAL_CHUNK;
 
-    // When an external targetArticleId is provided (e.g. from TOC click),
-    // ensure that chunk is loaded so we can scroll to it.
+        const loadBatch = () => {
+            if (cancelled || current >= articles.length) return;
+            current = Math.min(current + 50, articles.length);
+            setVisibleCount(current);
+            if (current < articles.length) requestAnimationFrame(loadBatch);
+        };
+
+        const raf = requestAnimationFrame(loadBatch);
+        return () => { cancelled = true; cancelAnimationFrame(raf); };
+    }, [articles]);
+
+    // TOC click: jump to a specific article even if not yet rendered.
     useEffect(() => {
         if (!targetArticleId || articles.length === 0) return;
-        const targetIndex = articles.findIndex(a => 
-            a.id === targetArticleId || 
+        const targetIndex = articles.findIndex(a =>
+            a.id === targetArticleId ||
             String(a.article_num || a.article_number) === String(targetArticleId)
         );
         if (targetIndex >= visibleCount) {
-            setVisibleCount(Math.min(targetIndex + 20, articles.length)); // Load enough to show it plus a buffer
+            setVisibleCount(Math.min(targetIndex + 20, articles.length));
         }
     }, [targetArticleId, articles.length, visibleCount]);
-
-    useEffect(() => {
-        const sentinel = sentinelRef.current;
-        if (!sentinel) return;
-        const observer = new IntersectionObserver(
-            (entries) => { if (entries[0].isIntersecting) loadMore(); },
-            { rootMargin: '800px' }  // start loading 800px before reaching bottom
-        );
-        observer.observe(sentinel);
-        return () => observer.disconnect();
-    }, [loadMore]);
 
     // Pre-process articles to extract section headers from content if section_label is missing
     const processedArticles = useMemo(() => articles.map(art => {
@@ -530,14 +530,11 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         </div>
                     );
                 })}
-                {/* Sentinel for progressive loading (or in this case, the one-time big load) */}
                 {visibleCount < processedArticles.length && (
-                    <div ref={sentinelRef} className="py-6 text-center text-xs text-gray-400 dark:text-gray-600 animate-pulse">
-                        Loading all remaining {processedArticles.length - visibleCount} articles...
+                    <div className="py-6 text-center text-xs text-gray-400 dark:text-gray-600 animate-pulse">
+                        Loading articles…
                     </div>
                 )}
-                {/* Invisible sentinel always present so observer can watch end of list */}
-                <div ref={visibleCount >= processedArticles.length ? sentinelRef : null} />
             </div>
         </div>
     );
