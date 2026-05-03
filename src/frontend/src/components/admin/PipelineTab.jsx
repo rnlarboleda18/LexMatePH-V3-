@@ -5,6 +5,7 @@ import {
   AlertCircle, CheckCircle2, Link2, Search, ExternalLink, Clock,
 } from 'lucide-react';
 import { MetricCard } from './MetricCard';
+import { adminApiUrl, formatAdminApiError } from '../../utils/adminApi';
 
 function SectionHeading({ children }) {
   return (
@@ -79,7 +80,9 @@ export default function PipelineTab() {
   const [scanResults, setScanResults] = useState(null);
   const [scanLoading, setScanLoading] = useState(false);
   const [scanErr,     setScanErr]     = useState(null);
+  const [pipelineRun, setPipelineRun] = useState(null);
   const pollRef = useRef(null);
+  const pipelinePollRef = useRef(null);
 
   const authHdr = useCallback(async () => {
     const token = await getToken();
@@ -91,11 +94,11 @@ export default function PipelineTab() {
     setStatsError(null);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/pipeline-stats', { headers: h });
+      const res = await fetch(adminApiUrl('/api/ops/pipeline-stats'), { headers: h });
       if (!res.ok) {
         let m = res.statusText;
         try { m = (await res.json()).error || m; } catch (_) {}
-        throw new Error(m);
+        throw new Error(formatAdminApiError(res, m));
       }
       setStats(await res.json());
     } catch (e) {
@@ -114,7 +117,7 @@ export default function PipelineTab() {
   const fetchScanResults = useCallback(async () => {
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/pipeline/scan-results', { headers: h });
+      const res = await fetch(adminApiUrl('/api/ops/pipeline/scan-results'), { headers: h });
       if (!res.ok) return;
       const data = await res.json();
       setScanState(data.scan);
@@ -131,9 +134,43 @@ export default function PipelineTab() {
     pollRef.current = setInterval(fetchScanResults, 4000);
   }, [fetchScanResults]);
 
+  const fetchPipelineStatus = useCallback(async () => {
+    try {
+      const h = await authHdr();
+      const res = await fetch(adminApiUrl('/api/ops/pipeline/status'), { headers: h });
+      if (!res.ok) return;
+      const data = await res.json();
+      setPipelineRun(data);
+      const alive = data.running === true
+        || data.status === 'running'
+        || data.status === 'stopping';
+      if (!alive && pipelinePollRef.current) {
+        clearInterval(pipelinePollRef.current);
+        pipelinePollRef.current = null;
+        loadStats();
+      }
+    } catch (_) {}
+  }, [authHdr, loadStats]);
+
+  const startPipelinePolling = useCallback(() => {
+    if (pipelinePollRef.current) return;
+    pipelinePollRef.current = setInterval(fetchPipelineStatus, 2000);
+    fetchPipelineStatus();
+  }, [fetchPipelineStatus]);
+
   useEffect(() => {
     fetchScanResults();
-    return () => { if (pollRef.current) clearInterval(pollRef.current); };
+    (async () => {
+      try {
+        const h = await authHdrRef.current();
+        const res = await fetch(adminApiUrl('/api/ops/pipeline/status'), { headers: h });
+        if (res.ok) setPipelineRun(await res.json());
+      } catch (_) {}
+    })();
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+      if (pipelinePollRef.current) clearInterval(pipelinePollRef.current);
+    };
   }, [fetchScanResults]);
 
   const startScan = async () => {
@@ -141,9 +178,11 @@ export default function PipelineTab() {
     setScanLoading(true);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/pipeline/scan', { method: 'POST', headers: h });
+      const res = await fetch(adminApiUrl('/api/ops/pipeline/scan'), { method: 'POST', headers: h });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || `Scan failed (${res.status})`);
+      if (!res.ok) {
+        throw new Error(formatAdminApiError(res, data.error || `Scan failed (${res.status})`));
+      }
       setScanState({ running: true, status: 'running', started_at: data.started_at });
       startPolling();
     } catch (e) {
@@ -159,14 +198,19 @@ export default function PipelineTab() {
     setActionLoading(true);
     try {
       const h = await authHdr();
-      const res = await fetch(path, {
+      const res = await fetch(adminApiUrl(path), {
         method: 'POST',
         headers: { ...h, 'Content-Type': 'application/json' },
         body: JSON.stringify({ platform: aiPlatform }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(data.error || `${label} failed (${res.status})`);
+      if (!res.ok) {
+        throw new Error(formatAdminApiError(res, data.error || `${label} failed (${res.status})`));
+      }
       setActionOk(`${label} triggered successfully.`);
+      if (path.endsWith('/pipeline/start') || path.endsWith('/pipeline/resume')) {
+        startPipelinePolling();
+      }
       setTimeout(() => setActionOk(null), 6000);
     } catch (e) {
       setActionErr(e.message);
@@ -325,6 +369,131 @@ export default function PipelineTab() {
           <div className="mt-4 flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800 dark:bg-red-950/30 dark:text-red-400">
             <AlertCircle size={15} />
             {scanErr}
+          </div>
+        )}
+
+        {pipelineRun && (
+          <div className="mt-5 space-y-3 rounded-lg border border-violet-200 bg-violet-50/50 p-4 dark:border-violet-900/50 dark:bg-violet-950/20">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <Play size={13} className="text-violet-600 dark:text-violet-400" />
+                <span className="text-xs font-bold uppercase tracking-wide text-violet-800 dark:text-violet-300">
+                  Pipeline run status
+                </span>
+                <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold ${
+                  pipelineRun.running || pipelineRun.status === 'stopping'
+                    ? 'bg-blue-100 text-blue-800 dark:bg-blue-950/50 dark:text-blue-300'
+                    : pipelineRun.status === 'done'
+                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300'
+                    : pipelineRun.status === 'failed'
+                    ? 'bg-red-100 text-red-800 dark:bg-red-950/50 dark:text-red-300'
+                    : 'bg-gray-100 text-gray-600 dark:bg-zinc-800 dark:text-zinc-400'
+                }`}>
+                  {(pipelineRun.running || pipelineRun.status === 'stopping') && (
+                    <Clock size={10} className="animate-pulse" />
+                  )}
+                  {pipelineRun.running || pipelineRun.status === 'stopping' ? 'Running' : (pipelineRun.status ?? 'idle')}
+                </span>
+                {pipelineRun.mode && (
+                  <span className="text-[11px] font-medium text-violet-600 dark:text-violet-400">
+                    Mode: {pipelineRun.mode === 'full' ? 'full scrape + digest + link' : pipelineRun.mode}
+                  </span>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => fetchPipelineStatus()}
+                className="flex items-center gap-1 rounded-md px-2 py-1 text-[11px] text-violet-700 hover:bg-violet-100 dark:text-violet-300 dark:hover:bg-violet-950/40"
+              >
+                <RefreshCw size={11} className={pipelineRun.running ? 'animate-spin' : ''} />
+                Refresh
+              </button>
+            </div>
+
+            {Boolean((pipelineRun.progress_message || pipelineRun.progress?.message || '').trim()) && (
+              <p className="text-sm text-gray-700 dark:text-zinc-300">
+                {pipelineRun.progress_message || pipelineRun.progress?.message}
+              </p>
+            )}
+
+            {(() => {
+              const op = pipelineRun.overall_percent ?? pipelineRun.progress?.overall_percent;
+              const hasCases = (pipelineRun.progress?.cases?.length || 0) > 0;
+              if (op == null && !hasCases && !pipelineRun.running) return null;
+              const n = Number(op);
+              const safe = Number.isFinite(n) ? n : 0;
+              return (
+                <CoverageBar
+                  label="Overall (weighted across active cases)"
+                  pct={safe}
+                  color={
+                    pipelineRun.progress?.status === 'failed' || pipelineRun.status === 'failed'
+                      ? 'bg-red-500'
+                      : 'bg-violet-500'
+                  }
+                />
+              );
+            })()}
+
+            {(pipelineRun.progress?.cases?.length || 0) > 0 && (
+              <div className="max-h-72 space-y-4 overflow-y-auto pr-1 pt-1">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 dark:text-zinc-500">
+                  Per-case progress
+                </p>
+                {pipelineRun.progress.cases.map((c) => (
+                  <div
+                    key={`c-${c.db_row_id ?? '-'}-${c.elib_id ?? '-'}-${c.updated_at}`}
+                    className="rounded-lg border border-gray-200 bg-white p-3 shadow-sm dark:border-zinc-700 dark:bg-zinc-900/80"
+                  >
+                    <div className="mb-1.5 flex flex-wrap items-start justify-between gap-2 text-xs">
+                      <div className="min-w-0">
+                        <span className="font-semibold text-gray-900 dark:text-zinc-100">
+                          {c.label || (c.db_row_id ? `Database row ${c.db_row_id}` : (c.elib_id != null ? `eLib ${c.elib_id}` : 'Case'))}
+                        </span>
+                        <div className="mt-0.5 flex flex-wrap gap-2 font-mono text-[11px] text-gray-500 dark:text-zinc-400">
+                          {c.elib_id != null && <span># eLib {c.elib_id}</span>}
+                          {c.db_row_id != null && <span>db {c.db_row_id}</span>}
+                          {c.outcome && <span>{c.outcome}</span>}
+                        </div>
+                      </div>
+                      <span className="shrink-0 rounded-md bg-violet-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-violet-800 dark:bg-violet-950/50 dark:text-violet-300">
+                        {c.stage_label || c.stage}
+                      </span>
+                    </div>
+                    {c.detail && (
+                      <p className="mb-2 text-[11px] text-gray-500 dark:text-zinc-400">{c.detail}</p>
+                    )}
+                    <div className="flex items-center justify-between text-[11px] text-gray-600 dark:text-zinc-400">
+                      <span>Pipeline step</span>
+                      <span className="tabular-nums font-semibold">{Number(c.percent) || 0}%</span>
+                    </div>
+                    <div className="relative mt-1 h-2 overflow-hidden rounded-full bg-gray-100 dark:bg-zinc-800">
+                      <div
+                        className="h-full rounded-full bg-emerald-500 transition-[width] duration-500"
+                        style={{ width: `${Math.min(100, Number(c.percent) || 0)}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {pipelineRun.last_exit_code != null && pipelineRun.status === 'done' && (
+              <p className="text-[11px] text-gray-400 dark:text-zinc-500">
+                Subprocess exited with code {pipelineRun.last_exit_code}
+              </p>
+            )}
+
+            {pipelineRun.log_tail && (
+              <details className="text-[11px] text-gray-500 dark:text-zinc-400">
+                <summary className="cursor-pointer font-semibold text-gray-600 dark:text-zinc-300">
+                  Subprocess log (tail)
+                </summary>
+                <pre className="mt-2 max-h-48 overflow-auto whitespace-pre-wrap break-all rounded-md bg-black/80 p-2 font-mono text-[10px] text-emerald-100">
+                  {pipelineRun.log_tail}
+                </pre>
+              </details>
+            )}
           </div>
         )}
       </div>

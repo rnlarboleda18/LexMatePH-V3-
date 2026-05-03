@@ -5,6 +5,7 @@ import {
   AlertCircle, CheckCircle2, Clock, Table2,
 } from 'lucide-react';
 import { MetricCard } from './MetricCard';
+import { adminApiUrl, formatAdminApiError } from '../../utils/adminApi';
 
 function fmtBytes(bytes) {
   if (!bytes && bytes !== 0) return '—';
@@ -52,8 +53,12 @@ export default function BackupTab() {
     setStatsError(null);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/db-stats', { headers: h });
-      if (!res.ok) { let m = res.statusText; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
+      const res = await fetch(adminApiUrl('/api/ops/db-stats'), { headers: h });
+      if (!res.ok) {
+        let m = res.statusText;
+        try { m = (await res.json()).error || m; } catch (_) {}
+        throw new Error(formatAdminApiError(res, m));
+      }
       setStats(await res.json());
     } catch (e) {
       setStatsError(e.message);
@@ -70,7 +75,7 @@ export default function BackupTab() {
     const id = setInterval(async () => {
       try {
         const h = await authHdr();
-        const res = await fetch(`/api/ops/backup/status?job_id=${jobId}`, { headers: h });
+        const res = await fetch(adminApiUrl(`/api/ops/backup/status?job_id=${jobId}`), { headers: h });
         if (res.ok) setJob(await res.json());
       } catch (_) {}
     }, 800);
@@ -91,7 +96,7 @@ export default function BackupTab() {
     setJobId(null);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/backup/start', { method: 'POST', headers: h });
+      const res = await fetch(adminApiUrl('/api/ops/backup/start'), { method: 'POST', headers: h });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to start backup');
       setJobId(data.job_id);
@@ -103,7 +108,7 @@ export default function BackupTab() {
 
   const downloadBackup = async () => {
     const h = await authHdr();
-    const res = await fetch(`/api/ops/backup/download?job_id=${jobId}`, { headers: h });
+    const res = await fetch(adminApiUrl(`/api/ops/backup/download?job_id=${jobId}`), { headers: h });
     if (!res.ok) return;
     const blob = await res.blob();
     const url  = URL.createObjectURL(blob);

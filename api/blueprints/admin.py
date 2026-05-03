@@ -35,6 +35,9 @@ _backup_lock = threading.Lock()
 # Persists within a single Azure Functions worker lifetime.
 _pipeline_lock = threading.Lock()
 _pipeline_proc: Optional[subprocess.Popen] = None
+_pipeline_log_fp: Optional[object] = None
+_pipeline_log_path: Optional[Path] = None
+
 _pipeline_state: dict = {
     "mode": None,
     "status": "idle",
@@ -87,6 +90,41 @@ _gap_scan_state: dict = {
     "last_exit_code": None,
 }
 _GAP_RESULTS_PATH = _case_digest_pipeline_store() / "gap_results.json"
+
+
+def _pipeline_progress_path() -> Path:
+    """JSON snapshot written by digest pipeline subprocess (per-case stages + %)."""
+    return _case_digest_pipeline_store() / "pipeline_progress.json"
+
+
+def _pipeline_subprocess_log_path() -> Path:
+    """Stdout/stderr from the spawned pipeline subprocess (admin triggers)."""
+    return _case_digest_pipeline_store() / "pipeline_subprocess.log"
+
+
+def _pipeline_progress_read_safe() -> Optional[dict]:
+    p = _pipeline_progress_path()
+    if not p.is_file():
+        return None
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception as exc:
+        logging.warning("Could not parse pipeline_progress.json: %s", exc)
+        return None
+
+
+def _pipeline_log_tail(max_bytes: int = 8192, path: Optional[Path] = None) -> Optional[str]:
+    lp = path or _pipeline_subprocess_log_path()
+    if not lp.is_file():
+        return None
+    try:
+        data = lp.read_bytes()
+        if len(data) <= max_bytes:
+            return data.decode("utf-8", errors="replace")
+        return data[-max_bytes:].decode("utf-8", errors="replace")
+    except Exception as exc:
+        logging.warning("Could not read pipeline_subprocess.log: %s", exc)
+        return None
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -260,7 +298,7 @@ def _arm_list_first_name(base_url, headers, provider_path):
 
 def _refresh_pipeline_state_locked() -> None:
     """Refresh in-memory pipeline state from subprocess status (lock must be held)."""
-    global _pipeline_proc
+    global _pipeline_proc, _pipeline_log_fp
     if _pipeline_proc is None:
         return
     rc = _pipeline_proc.poll()
@@ -270,19 +308,38 @@ def _refresh_pipeline_state_locked() -> None:
     _pipeline_state["finished_at"] = datetime.now(timezone.utc).isoformat()
     _pipeline_state["last_exit_code"] = int(rc)
     _pipeline_proc = None
+    if _pipeline_log_fp is not None:
+        try:
+            _pipeline_log_fp.flush()
+            _pipeline_log_fp.close()
+        except Exception:
+            pass
+        _pipeline_log_fp = None
 
 
 def _pipeline_snapshot() -> dict:
     with _pipeline_lock:
         _refresh_pipeline_state_locked()
-        return {
+        snap = {
             "running": _pipeline_proc is not None,
             "mode": _pipeline_state.get("mode"),
             "status": _pipeline_state.get("status"),
             "started_at": _pipeline_state.get("started_at"),
             "finished_at": _pipeline_state.get("finished_at"),
             "last_exit_code": _pipeline_state.get("last_exit_code"),
+            "progress_path": str(_pipeline_progress_path()),
+            "subprocess_log_path": str(_pipeline_subprocess_log_path()),
         }
+
+    prog = _pipeline_progress_read_safe()
+    if prog:
+        snap["progress"] = prog
+        # Helpful UX: last line mirrors human-readable headline.
+        snap["phase"] = prog.get("phase")
+        snap["progress_message"] = prog.get("message")
+        snap["overall_percent"] = prog.get("overall_percent")
+    snap["log_tail"] = _pipeline_log_tail(path=_pipeline_log_path)
+    return snap
 
 
 def _start_pipeline(
@@ -294,7 +351,7 @@ def _start_pipeline(
     Start a pipeline subprocess.
     Returns (result, error_message). Caller serializes result or error.
     """
-    global _pipeline_proc
+    global _pipeline_proc, _pipeline_log_fp, _pipeline_log_path
 
     root = _repo_root()
     vertex_flags = []
@@ -312,18 +369,43 @@ def _start_pipeline(
         return None, "Unsupported pipeline mode"
 
     if not script.exists():
-        return None, f"Pipeline script not found: {script}"
+        return None, f"Pipeline script not found at {script}. Run from a checkout that includes /scripts."
+
+    digest_store = _case_digest_pipeline_store()
+    digest_store.mkdir(parents=True, exist_ok=True)
+    log_path = _pipeline_subprocess_log_path()
+    prog_path = _pipeline_progress_path()
+    cmd += ["--progress-file", str(prog_path)]
 
     with _pipeline_lock:
         _refresh_pipeline_state_locked()
         if _pipeline_proc is not None:
             return None, "Pipeline is already running"
         try:
+            if _pipeline_log_fp is not None:
+                try:
+                    _pipeline_log_fp.close()
+                except Exception:
+                    pass
+                _pipeline_log_fp = None
+
+            _pipeline_log_path = log_path
+            lf = open(log_path, "w", encoding="utf-8", buffering=1)
+            _pipeline_log_fp = lf
+
+            logging.info(
+                "Starting digest pipeline subprocess mode=%s log=%s cmd=%s",
+                mode,
+                log_path,
+                " ".join(cmd),
+            )
+
             _pipeline_proc = subprocess.Popen(
                 cmd,
                 cwd=str(root),
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
+                stdout=lf,
+                stderr=subprocess.STDOUT,
+                env=os.environ.copy(),
             )
             _pipeline_state["mode"] = mode
             _pipeline_state["status"] = "running"

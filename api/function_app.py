@@ -15,7 +15,10 @@ import sys
 import os
 
 import_error = None
+admin_import_error = None
 
+# Core HTTP blueprints (everything except admin). Kept separate so a failing admin import
+# cannot unregister the entire API — admin routes would 404 until fixed, but Lexify etc. keep working.
 try:
     from blueprints.questions import questions_bp
     from blueprints.lexify import lexify_bp
@@ -37,7 +40,6 @@ try:
     # PayMongo disabled — kept for reference, replaced by Xendit
     # from blueprints.paymongo import paymongo_bp
     from blueprints.xendit import xendit_bp
-    from blueprints.admin import admin_bp
 
     app.register_functions(questions_bp)
     app.register_functions(lexify_bp)
@@ -59,19 +61,30 @@ try:
     # PayMongo disabled
     # app.register_functions(paymongo_bp)
     app.register_functions(xendit_bp)
-    app.register_functions(admin_bp)
 
 except Exception as e:
     import_error = f"Error during import/registration: {str(e)}\n{traceback.format_exc()}"
+
+try:
+    from blueprints.admin import admin_bp
+
+    app.register_functions(admin_bp)
+except Exception as e:
+    admin_import_error = f"Admin blueprint failed to import/register: {str(e)}\n{traceback.format_exc()}"
+    logging.error(admin_import_error)
 
 @app.route(route="debug_imports", methods=["GET"])
 def debug_imports(req: func.HttpRequest) -> func.HttpResponse:
     """Diagnostic endpoint: only active when ALLOW_DEBUG_ROUTES=1 in app settings."""
     if os.environ.get("ALLOW_DEBUG_ROUTES", "").lower() not in ("1", "true", "yes"):
         return func.HttpResponse("Not found.", status_code=404)
+    parts = []
     if import_error:
-        sanitized_error = import_error.replace(os.environ.get("DB_CONNECTION_STRING", "SECRET"), "REDACTED_CONN_STRING")
-        return func.HttpResponse(sanitized_error, status_code=500, mimetype="text/plain")
+        parts.append(import_error.replace(os.environ.get("DB_CONNECTION_STRING", "SECRET"), "REDACTED_CONN_STRING"))
+    if admin_import_error:
+        parts.append(admin_import_error.replace(os.environ.get("DB_CONNECTION_STRING", "SECRET"), "REDACTED_CONN_STRING"))
+    if parts:
+        return func.HttpResponse("\n\n---\n\n".join(parts), status_code=500, mimetype="text/plain")
     return func.HttpResponse("All imports successful.", status_code=200)
 
 @app.route(route="health", methods=["GET"])

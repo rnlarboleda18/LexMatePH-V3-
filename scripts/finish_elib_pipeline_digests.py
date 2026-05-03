@@ -26,6 +26,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import atexit
 import logging
 import os
 import subprocess
@@ -33,8 +34,13 @@ import sys
 from pathlib import Path
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from digest_pipeline_progress import DigestPipelineProgressWriter
 
 from load_local_settings_env import load_api_local_settings_into_environ
 
@@ -203,12 +209,52 @@ def main() -> int:
         default=3,
         help="Parallel workers for unified_codal_linker.py (default 3).",
     )
+    p.add_argument(
+        "--progress-file",
+        type=Path,
+        default=None,
+        help="JSON snapshots for Ops UI (default admin-tools/case-digest-pipeline/pipeline_progress.json)",
+    )
+    p.add_argument(
+        "--no-progress-json",
+        action="store_true",
+        help="Disable writing pipeline_progress.json",
+    )
     args = p.parse_args()
+
+    progress_json_path = (
+        None
+        if args.no_progress_json
+        else (
+            args.progress_file.resolve()
+            if args.progress_file is not None
+            else (_REPO_ROOT / "admin-tools" / "case-digest-pipeline" / "pipeline_progress.json").resolve()
+        )
+    )
+    progress_wr = DigestPipelineProgressWriter(progress_json_path, mode="resume")
+    resume_finish_ok: dict = {"ok": None}
+
+    def _exit_resume_progress() -> None:
+        if progress_wr.disabled():
+            return
+        if getattr(progress_wr, "_finalized", False):
+            return
+        ok = resume_finish_ok["ok"]
+        if ok is None:
+            progress_wr.finalize_if_needed("Resume script exited before completion.", ok=False)
+        else:
+            progress_wr.finalize_if_needed(
+                "Resume sweep finished." if ok else "Resume sweep finished with errors.",
+                ok=bool(ok),
+            )
+
+    atexit.register(_exit_resume_progress)
 
     load_api_local_settings_into_environ(_REPO_ROOT)
     db_url = os.environ.get("DB_CONNECTION_STRING")
     if not db_url:
         log.error("DB_CONNECTION_STRING is not set.")
+        resume_finish_ok["ok"] = False
         return 2
     _has_auth = (
         os.environ.get("GOOGLE_API_KEY")
@@ -218,11 +264,14 @@ def main() -> int:
     )
     if not args.dry_run and not _has_auth:
         log.error("No Gemini auth: set GOOGLE_API_KEY (AI Studio) or GOOGLE_CLOUD_PROJECT / --vertex-project (Vertex AI).")
+        resume_finish_ok["ok"] = False
         return 3
 
     max_passes = max(1, int(args.max_passes))
     conn = psycopg2.connect(db_url)
     try:
+        progress_wr.start("Resume sweep — scanning backlog…")
+
         all_src = bool(args.all_sources)
         scope = "all sources (full_text_md)" if all_src else SOURCE
         script = _REPO_ROOT / "scripts" / "generate_sc_digests_gemini.py"
@@ -255,14 +304,28 @@ def main() -> int:
                 log.info("Wrote %s id(s) to %s", len(ids), export_path)
             if args.dry_run:
                 log.info("Dry-run: first ids (up to 20): %s", ids[:20])
+                resume_finish_ok["ok"] = True
                 return 0
             if not ids:
                 log.info("Nothing to digest.")
+                resume_finish_ok["ok"] = True
                 return 0
 
             for i in range(0, len(ids), chunk_size):
                 chunk = ids[i : i + chunk_size]
                 joined = ",".join(str(x) for x in chunk)
+                progress_wr.phase_snapshot(
+                    "digest_resume",
+                    f"Pass {pass_idx + 1}/{max_passes} chunk {chunk[0]}–{chunk[-1]} ({len(chunk)} row(s))",
+                )
+                for rid in chunk:
+                    progress_wr.note_case(
+                        elib_id=None,
+                        db_row_id=rid,
+                        label="Resume backlog row",
+                        stage="ai_digest",
+                        detail=f"Gemini smart-backfill (pass {pass_idx + 1})",
+                    )
                 w = min(workers, len(chunk))
                 vertex_flags = []
                 if args.vertex_project:
@@ -337,6 +400,8 @@ def main() -> int:
                     run_codal_linker_subprocess(
                         unlinked,
                         workers=linker_workers,
+                        progress=progress_wr,
+                        elib_ids_by_case_id=None,
                     )
                     log.info("Codal linking complete.")
                 except Exception as exc:
@@ -344,6 +409,7 @@ def main() -> int:
             else:
                 log.info("Codal linking: all digested cases already linked.")
 
+        resume_finish_ok["ok"] = True
         return 0
     finally:
         conn.close()

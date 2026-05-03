@@ -7,6 +7,7 @@ import {
   Mic, Volume2,
 } from 'lucide-react';
 import { MetricCard, Sparkline } from './MetricCard';
+import { adminApiUrl, formatAdminApiError } from '../../utils/adminApi';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -187,7 +188,7 @@ function ObservationsPanel({ resource, authHdr }) {
     setLoading(true);
     try {
       const h = await authHdr();
-      const res = await fetch(`/api/ops/observations?resource=${encodeURIComponent(resource)}`, { headers: h });
+      const res = await fetch(adminApiUrl(`/api/ops/observations?resource=${encodeURIComponent(resource)}`), { headers: h });
       if (res.ok) setItems(await res.json());
     } catch (_) {}
     setLoading(false);
@@ -201,12 +202,16 @@ function ObservationsPanel({ resource, authHdr }) {
     setError(null);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/observations', {
+      const res = await fetch(adminApiUrl('/api/ops/observations'), {
         method: 'POST',
         headers: { ...h, 'Content-Type': 'application/json' },
         body: JSON.stringify({ resource, body: text.trim() }),
       });
-      if (!res.ok) { let m = 'Failed to save'; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
+      if (!res.ok) {
+        let m = 'Failed to save';
+        try { m = (await res.json()).error || m; } catch (_) {}
+        throw new Error(formatAdminApiError(res, m));
+      }
       setText('');
       await load();
     } catch (e) {
@@ -218,7 +223,7 @@ function ObservationsPanel({ resource, authHdr }) {
 
   const del = async (id) => {
     const h = await authHdr();
-    await fetch(`/api/ops/observations/${id}`, { method: 'DELETE', headers: h });
+    await fetch(adminApiUrl(`/api/ops/observations/${id}`), { method: 'DELETE', headers: h });
     setItems(prev => prev.filter(i => i.id !== id));
   };
 
@@ -727,8 +732,12 @@ export default function MonitorTab() {
     setError(null);
     try {
       const h = await authHdr();
-      const res = await fetch('/api/ops/azure-metrics', { headers: h });
-      if (!res.ok) { let m = res.statusText; try { m = (await res.json()).error || m; } catch (_) {} throw new Error(m); }
+      const res = await fetch(adminApiUrl('/api/ops/azure-metrics'), { headers: h });
+      if (!res.ok) {
+        let m = res.statusText;
+        try { m = (await res.json()).error || m; } catch (_) {}
+        throw new Error(formatAdminApiError(res, m));
+      }
       setData(await res.json());
     } catch (e) {
       setError(e.message);

@@ -43,6 +43,7 @@ import os
 import re
 import subprocess
 import sys
+import threading
 import time
 from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -55,8 +56,13 @@ from typing import Any, Protocol, cast
 import requests
 
 _REPO_ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS_DIR = Path(__file__).resolve().parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from digest_pipeline_progress import DigestPipelineProgressWriter
 
 from load_local_settings_env import load_api_local_settings_into_environ
 
@@ -451,6 +457,9 @@ def run_digest_subprocess(
     live_bar: _LiveBarProto | None = None,
     vertex_project: str | None = None,
     vertex_location: str | None = None,
+    progress: DigestPipelineProgressWriter | None = None,
+    progress_lock: Any = None,
+    elib_ids_by_case_id: dict[int, int] | None = None,
 ) -> None:
     if not new_case_ids:
         return
@@ -466,6 +475,26 @@ def run_digest_subprocess(
         return flags
 
     def _run_one(case_id: int) -> None:
+        ei = None
+        if elib_ids_by_case_id:
+            ei = elib_ids_by_case_id.get(case_id)
+        if progress and progress_lock:
+            with progress_lock:
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=case_id,
+                    label="",
+                    stage="ai_digest",
+                    detail=f"Gemini digest (workers={workers})",
+                )
+        elif progress:
+            progress.note_case(
+                elib_id=ei,
+                db_row_id=case_id,
+                label="",
+                stage="ai_digest",
+                detail=f"Gemini digest (workers={workers})",
+            )
         cmd = [
             sys.executable,
             str(script),
@@ -485,6 +514,25 @@ def run_digest_subprocess(
         proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(proc.returncode, cmd)
+        if progress and progress_lock:
+            with progress_lock:
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=case_id,
+                    label="",
+                    stage="done",
+                    detail="Digest finished",
+                    outcome="DIGEST_OK",
+                )
+        elif progress:
+            progress.note_case(
+                elib_id=ei,
+                db_row_id=case_id,
+                label="",
+                stage="done",
+                detail="Digest finished",
+                outcome="DIGEST_OK",
+            )
         if live_bar:
             live_bar.update(1)
 
@@ -504,11 +552,32 @@ def run_digest_subprocess(
             *_vertex_flags(),
         ]
         log.info("Running digest subprocess: %s", " ".join(cmd))
+        if progress:
+            for cid in new_case_ids:
+                ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=cid,
+                    label="",
+                    stage="ai_digest",
+                    detail="Gemini digest (single batch)",
+                )
         if live_bar:
             live_bar.set_postfix_str(f"Gemini batch n={len(new_case_ids)}")
         proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(proc.returncode, cmd)
+        if progress:
+            for cid in new_case_ids:
+                ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=cid,
+                    label="",
+                    stage="done",
+                    detail="Digest finished",
+                    outcome="DIGEST_OK",
+                )
         if live_bar:
             live_bar.update(len(new_case_ids))
         return
@@ -541,6 +610,8 @@ def run_codal_linker_subprocess(
     workers: int = 3,
     statutes: str = "CIV,LAB,CONST,FAM,RPC,ROC,RCC",
     live_bar: _LiveBarProto | None = None,
+    progress: DigestPipelineProgressWriter | None = None,
+    elib_ids_by_case_id: dict[int, int] | None = None,
 ) -> None:
     """Run unified_codal_linker.py for the given case IDs against all 7 codals.
 
@@ -564,11 +635,32 @@ def run_codal_linker_subprocess(
         "--commit",
     ]
     log.info("Running codal linker: %s case(s), statutes=%s", len(case_ids), statutes)
+    if progress:
+        for cid in case_ids:
+            ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+            progress.note_case(
+                elib_id=ei,
+                db_row_id=cid,
+                label="",
+                stage="codal_link",
+                detail="Link case to codals",
+            )
     if live_bar:
         live_bar.set_postfix_str(f"Linking {len(case_ids)} case(s) to codals")
     proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
     if proc.returncode != 0:
         raise subprocess.CalledProcessError(proc.returncode, cmd)
+    if progress:
+        for cid in case_ids:
+            ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+            progress.note_case(
+                elib_id=ei,
+                db_row_id=cid,
+                label="",
+                stage="done",
+                detail="Codal linking finished",
+                outcome="LINK_OK",
+            )
     if live_bar:
         live_bar.update(len(case_ids))
 
@@ -640,6 +732,9 @@ def run_grok_digest_fallback_subprocess(
     model: str,
     workers: int = 5,
     live_bar: _LiveBarProto | None = None,
+    progress: DigestPipelineProgressWriter | None = None,
+    progress_lock: Any = None,
+    elib_ids_by_case_id: dict[int, int] | None = None,
 ) -> int:
     """Full digest via Grok for blocked ids; uses ``--force`` so BLOCKED_SAFETY rows are claimable."""
     if not case_ids:
@@ -648,6 +743,24 @@ def run_grok_digest_fallback_subprocess(
     workers = max(1, min(int(workers), len(case_ids)))
 
     def _run_grok_one(case_id: int) -> int:
+        ei = elib_ids_by_case_id.get(case_id) if elib_ids_by_case_id else None
+        if progress and progress_lock:
+            with progress_lock:
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=case_id,
+                    label="",
+                    stage="grok_fallback",
+                    detail="Grok digest (blocked by Gemini safety)",
+                )
+        elif progress:
+            progress.note_case(
+                elib_id=ei,
+                db_row_id=case_id,
+                label="",
+                stage="grok_fallback",
+                detail="Grok digest (blocked by Gemini safety)",
+            )
         cmd = [
             sys.executable,
             str(script),
@@ -665,6 +778,25 @@ def run_grok_digest_fallback_subprocess(
         if live_bar:
             live_bar.set_postfix_str(f"Grok db row {case_id}")
         rc = int(subprocess.run(cmd, cwd=str(_REPO_ROOT)).returncode)
+        if progress and progress_lock and rc == 0:
+            with progress_lock:
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=case_id,
+                    label="",
+                    stage="queued",
+                    detail="Grok pass finished — re-check Gemini block state",
+                    outcome="GROK_OK",
+                )
+        elif progress and rc == 0:
+            progress.note_case(
+                elib_id=ei,
+                db_row_id=case_id,
+                label="",
+                stage="queued",
+                detail="Grok pass finished — re-check Gemini block state",
+                outcome="GROK_OK",
+            )
         if live_bar and rc == 0:
             live_bar.update(1)
         return rc
@@ -685,6 +817,16 @@ def run_grok_digest_fallback_subprocess(
             "1",
         ]
         log.info("Running Grok digest fallback subprocess: %s", " ".join(cmd))
+        if progress:
+            for cid in case_ids:
+                ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=cid,
+                    label="",
+                    stage="grok_fallback",
+                    detail="Grok batch fallback",
+                )
         if live_bar:
             live_bar.set_postfix_str(f"Grok batch n={len(case_ids)}")
         proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
@@ -712,6 +854,9 @@ def _run_grok_safety_fallback_if_needed(
     *,
     workers: int = 5,
     live_bar: _LiveBarProto | None = None,
+    progress: DigestPipelineProgressWriter | None = None,
+    progress_lock: Any = None,
+    elib_ids_by_case_id: dict[int, int] | None = None,
 ) -> None:
     """Run Grok digest on ``blocked_ids`` (must be non-empty; caller checks XAI_API_KEY)."""
     fb_model = _grok_model_for_safety_fallback(db_url)
@@ -723,7 +868,13 @@ def _run_grok_safety_fallback_if_needed(
         latest,
     )
     run_grok_digest_fallback_subprocess(
-        blocked_ids, model=fb_model, workers=workers, live_bar=live_bar
+        blocked_ids,
+        model=fb_model,
+        workers=workers,
+        live_bar=live_bar,
+        progress=progress,
+        progress_lock=progress_lock,
+        elib_ids_by_case_id=elib_ids_by_case_id,
     )
 
 
@@ -831,6 +982,20 @@ def main() -> int:
         default=3,
         help="Parallel workers for the codal linker subprocess (default 3); 0 to skip linking.",
     )
+    parser.add_argument(
+        "--progress-file",
+        type=Path,
+        default=None,
+        help=(
+            "Write JSON progress snapshots for Ops UI "
+            "(default: admin-tools/case-digest-pipeline/pipeline_progress.json)"
+        ),
+    )
+    parser.add_argument(
+        "--no-progress-json",
+        action="store_true",
+        help="Disable writing pipeline_progress.json",
+    )
     args = parser.parse_args()
     if args.workers < 1:
         parser.error("--workers must be >= 1")
@@ -843,6 +1008,19 @@ def main() -> int:
         digest_model=args.digest_model,
     )
     exit_code = 0
+
+    progress_json_path = (
+        None
+        if args.no_progress_json
+        else (
+            args.progress_file.resolve()
+            if args.progress_file is not None
+            else (_REPO_ROOT / "admin-tools" / "case-digest-pipeline" / "pipeline_progress.json").resolve()
+        )
+    )
+    progress_wr = DigestPipelineProgressWriter(progress_json_path, mode="full")
+    digest_pl_lock = threading.Lock()
+    elib_by_db_id: dict[int, int] = {}
 
     id_list: list[int] | None = None
     if args.ids:
@@ -863,11 +1041,13 @@ def main() -> int:
 
     try:
         load_api_local_settings_into_environ(_REPO_ROOT)
+        progress_wr.start("Pipeline initializing…")
 
         db_url = os.environ.get("DB_CONNECTION_STRING")
         if not db_url:
             rep.fatal_error = "DB_CONNECTION_STRING is not set."
             exit_code = 2
+            progress_wr.phase_snapshot("config", "DB_CONNECTION_STRING is not set.")
         else:
             conn = psycopg2.connect(db_url)
             new_db_ids: list[int] = []
@@ -906,6 +1086,13 @@ def main() -> int:
                 with _live_progress_bar("E-Lib ingest", len(doc_iter), use_progress) as ingest_bar:
                     for doc_id in _each_doc_id_with_ingest_pbar(doc_iter, ingest_bar):
                         sc_url = sc_url_for_elib_id(doc_id)
+                        progress_wr.note_case(
+                            elib_id=doc_id,
+                            db_row_id=None,
+                            label="",
+                            stage="fetch_html",
+                            detail=f"Probing {sc_url}",
+                        )
 
                         if row_exists_for_url(conn, sc_url):
                             log.info("Already in DB, skip id=%s", doc_id)
@@ -913,6 +1100,14 @@ def main() -> int:
                                 elib_id=doc_id,
                                 outcome="SKIP_ALREADY_IN_DB",
                                 sc_url=sc_url,
+                            )
+                            progress_wr.note_case(
+                                elib_id=doc_id,
+                                db_row_id=None,
+                                label="",
+                                stage="skipped",
+                                detail="Already in database",
+                                outcome="SKIP_ALREADY_IN_DB",
                             )
                             consecutive_misses = 0
                             time.sleep(args.request_delay)
@@ -941,6 +1136,14 @@ def main() -> int:
                             continue
 
                         consecutive_misses = 0
+                        progress_wr.note_case(
+                            elib_id=doc_id,
+                            db_row_id=None,
+                            label="",
+                            stage="to_markdown",
+                            detail="Convert HTML decision body",
+                            outcome="FETCH_OK",
+                        )
                         md_text, conv_err = elib_html_to_markdown(
                             html, source_url=sc_url, elib_doc_id=doc_id
                         )
@@ -963,17 +1166,35 @@ def main() -> int:
                                 "Skip id=%s: not a G.R. case (ingest only G.R. dockets).",
                                 doc_id,
                             )
+                            cl = _case_label_from_md(md_text) or ""
                             rep.add(
                                 elib_id=doc_id,
                                 outcome="SKIP_NOT_GR",
                                 detail="case header is not G.R.",
                                 sc_url=sc_url,
-                                case_label=_case_label_from_md(md_text) or "",
+                                case_label=cl,
+                            )
+                            progress_wr.note_case(
+                                elib_id=doc_id,
+                                db_row_id=None,
+                                label=(cl[:120] if cl else ""),
+                                stage="skipped",
+                                detail="Not a G.R. decision — skipped",
+                                outcome="SKIP_NOT_GR",
                             )
                             consecutive_misses = 0
                             time.sleep(args.request_delay)
                             continue
 
+                        lbl = (_case_label_from_md(md_text) or "")[:280]
+                        progress_wr.note_case(
+                            elib_id=doc_id,
+                            db_row_id=None,
+                            label=lbl[:120],
+                            stage="db_insert",
+                            detail="Saving HTML/Markdown and inserting row",
+                            outcome="MD_OK",
+                        )
                         html_path = args.html_dir / f"{doc_id}.html"
                         md_path = _markdown_save_path(args.md_dir, md_text, doc_id)
                         html_path.write_text(html, encoding="utf-8")
@@ -981,6 +1202,7 @@ def main() -> int:
 
                         case_id = insert_decision(conn, sc_url, md_text)
                         new_db_ids.append(case_id)
+                        elib_by_db_id[case_id] = doc_id
                         log.info("Ingested E-Lib id=%s -> sc_decided_cases.id=%s", doc_id, case_id)
                         rep.add(
                             elib_id=doc_id,
@@ -996,6 +1218,18 @@ def main() -> int:
                 conn.close()
 
             rep.digest_row_ids = list(new_db_ids)
+            progress_wr.phase_snapshot(
+                "ingest_done",
+                (
+                    f"Ingest complete — {len(new_db_ids)} row(s) ready for digest."
+                    if new_db_ids else
+                    (
+                        "Ingest finished with no inserts: either every probed eLib URL was "
+                        "already in the DB, missed, blocked, skipped (non-G.R.), or failed conversion."
+                    )
+                ),
+            )
+
             if new_db_ids:
                 _has_gemini_auth = (
                     os.environ.get("GOOGLE_API_KEY")
@@ -1010,6 +1244,10 @@ def main() -> int:
                         f"to digest {len(new_db_ids)} new row(s)."
                     )
                     exit_code = 3
+                    progress_wr.phase_snapshot(
+                        "digest",
+                        "Cannot run digest: add GOOGLE_API_KEY or Vertex credentials.",
+                    )
                 else:
                     gemini_exc: str | None = None
                     with _live_progress_bar(
@@ -1023,6 +1261,9 @@ def main() -> int:
                                 live_bar=digest_bar,
                                 vertex_project=args.vertex_project or None,
                                 vertex_location=args.vertex_location or None,
+                                progress=progress_wr,
+                                progress_lock=digest_pl_lock,
+                                elib_ids_by_case_id=elib_by_db_id,
                             )
                         except subprocess.CalledProcessError as e:
                             if e.returncode == 100:
@@ -1047,6 +1288,9 @@ def main() -> int:
                                     blocked,
                                     workers=args.workers,
                                     live_bar=grok_bar,
+                                    progress=progress_wr,
+                                    progress_lock=digest_pl_lock,
+                                    elib_ids_by_case_id=elib_by_db_id,
                                 )
                         except OSError as e:
                             log.exception("Grok fallback failed to start: %s", e)
@@ -1090,6 +1334,8 @@ def main() -> int:
                             new_db_ids,
                             workers=linker_workers,
                             live_bar=link_bar,
+                            progress=progress_wr,
+                            elib_ids_by_case_id=elib_by_db_id,
                         )
                         rep.link_ok = True
                     except subprocess.CalledProcessError as e:
@@ -1114,6 +1360,25 @@ def main() -> int:
         log.exception("Pipeline failed")
     finally:
         rep.emit()
+        fatal = (rep.fatal_error or "").strip()
+        ok = exit_code == 0 and not fatal
+        if ok:
+            if rep.digest_row_ids:
+                summ = (
+                    f"Finished pipeline — {len(rep.digest_row_ids)} new case row(s): "
+                    f"digest {'OK' if rep.digest_ok is not False else 'issues'}; "
+                    f"codal linking {'OK' if rep.link_ok is not False else 'skipped or partial'}."
+                )
+            else:
+                summ = (
+                    "Pipeline stopped after ingest — no new rows were inserted, "
+                    "so Gemini digest + codal linking did not run. "
+                    "That often means everything you probed already exists."
+                )
+        else:
+            summ = fatal or (f"Pipeline ended with exit code {exit_code}.")
+
+        progress_wr.finalize_if_needed(summ[:600], ok=ok)
 
     return exit_code
 
