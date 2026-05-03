@@ -878,6 +878,86 @@ def _run_grok_safety_fallback_if_needed(
     )
 
 
+def run_gemini_fallback_subprocess(
+    case_ids: list[int],
+    *,
+    workers: int = 1,
+    live_bar: _LiveBarProto | None = None,
+    progress: DigestPipelineProgressWriter | None = None,
+    progress_lock: Any = None,
+    elib_ids_by_case_id: dict[int, int] | None = None,
+) -> int:
+    """Retry digest with gemini-2.5-flash for cases blocked/failed by the primary model.
+
+    Calls generate_sc_digests_gemini.py with --force so BLOCKED_SAFETY rows are
+    claimable, then returns the subprocess exit code (0 = success).
+    """
+    if not case_ids:
+        return 0
+    script = _REPO_ROOT / "scripts" / "generate_sc_digests_gemini.py"
+    if not script.exists():
+        log.warning("Gemini digest script not found: %s", script)
+        return 1
+    model = "gemini-2.5-flash"
+    joined = ",".join(str(i) for i in case_ids)
+    workers = max(1, min(int(workers), len(case_ids)))
+    cmd = [
+        sys.executable, str(script),
+        "--force",
+        "--target-ids", joined,
+        "--model", model,
+        "--limit", str(len(case_ids)),
+        "--workers", str(workers),
+    ]
+    log.info(
+        "Running Gemini 2.5 fallback for %s case(s) blocked by primary model: %s",
+        len(case_ids), case_ids,
+    )
+    if progress:
+        for cid in case_ids:
+            ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+            if progress_lock:
+                with progress_lock:
+                    progress.note_case(
+                        elib_id=ei, db_row_id=cid, label="",
+                        stage="grok_fallback",
+                        detail="Gemini 2.5 Flash fallback (primary blocked)",
+                    )
+            else:
+                progress.note_case(
+                    elib_id=ei, db_row_id=cid, label="",
+                    stage="grok_fallback",
+                    detail="Gemini 2.5 Flash fallback (primary blocked)",
+                )
+    if live_bar:
+        live_bar.set_postfix_str(f"Gemini 2.5 batch n={len(case_ids)}")
+    proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
+    if proc.returncode != 0:
+        log.warning("Gemini 2.5 fallback exited with code %s", proc.returncode)
+    if progress:
+        for cid in case_ids:
+            ei = elib_ids_by_case_id.get(cid) if elib_ids_by_case_id else None
+            outcome = "GEMINI25_OK" if proc.returncode == 0 else "GEMINI25_FAIL"
+            if progress_lock:
+                with progress_lock:
+                    progress.note_case(
+                        elib_id=ei, db_row_id=cid, label="",
+                        stage="done" if proc.returncode == 0 else "failed",
+                        detail="Gemini 2.5 fallback finished" if proc.returncode == 0 else "Gemini 2.5 fallback failed",
+                        outcome=outcome,
+                    )
+            else:
+                progress.note_case(
+                    elib_id=ei, db_row_id=cid, label="",
+                    stage="done" if proc.returncode == 0 else "failed",
+                    detail="Gemini 2.5 fallback finished" if proc.returncode == 0 else "Gemini 2.5 fallback failed",
+                    outcome=outcome,
+                )
+    if live_bar and proc.returncode == 0:
+        live_bar.update(len(case_ids))
+    return proc.returncode
+
+
 def _case_label_from_md(md_text: str) -> str:
     m = _MD_CASE_HEADER.search(md_text[:20000])
     if not m:
@@ -1278,28 +1358,22 @@ def main() -> int:
                                 log.error("Gemini digest subprocess failed: %s", e)
 
                     blocked = _digest_blocked_safety_row_ids(db_url, new_db_ids)
-                    if blocked and os.environ.get("XAI_API_KEY"):
+                    if blocked:
                         try:
                             with _live_progress_bar(
-                                "Grok fallback", len(blocked), use_progress
-                            ) as grok_bar:
-                                _run_grok_safety_fallback_if_needed(
-                                    db_url,
+                                "Gemini 2.5 fallback", len(blocked), use_progress
+                            ) as fb_bar:
+                                run_gemini_fallback_subprocess(
                                     blocked,
                                     workers=args.workers,
-                                    live_bar=grok_bar,
+                                    live_bar=fb_bar,
                                     progress=progress_wr,
                                     progress_lock=digest_pl_lock,
                                     elib_ids_by_case_id=elib_by_db_id,
                                 )
                         except OSError as e:
-                            log.exception("Grok fallback failed to start: %s", e)
+                            log.exception("Gemini 2.5 fallback failed to start: %s", e)
                         blocked = _digest_blocked_safety_row_ids(db_url, new_db_ids)
-                    elif blocked:
-                        log.warning(
-                            "Gemini safety block on id(s) %s; set XAI_API_KEY for Grok fallback.",
-                            blocked,
-                        )
 
                     if blocked:
                         rep.digest_ok = False

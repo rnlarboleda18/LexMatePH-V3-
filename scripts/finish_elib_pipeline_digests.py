@@ -175,7 +175,7 @@ def main() -> int:
         help="Write one database id per line (after optional stale-PROCESSING clear unless --dry-run).",
     )
     p.add_argument("--chunk-size", type=int, default=40, help="Target ids per Gemini subprocess (CLI length safe)")
-    p.add_argument("--model", type=str, default="gemini-2.5-flash", help="Gemini model id")
+    p.add_argument("--model", type=str, default="gemini-3-flash-preview", help="Gemini model id (default: gemini-3-flash-preview)")
     p.add_argument(
         "--workers",
         type=int,

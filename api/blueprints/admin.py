@@ -383,7 +383,7 @@ def _start_pipeline(
     elif mode == "resume":
         # Resume mode: continue pending digest work on already-ingested rows.
         script = root / "scripts" / "finish_elib_pipeline_digests.py"
-        cmd = [sys.executable, "-u", str(script), "--max-passes", "1"] + vertex_flags
+        cmd = [sys.executable, "-u", str(script), "--max-passes", "1", "--model", _model] + vertex_flags
     else:
         return None, "Unsupported pipeline mode"
 

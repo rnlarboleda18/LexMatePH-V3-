@@ -117,7 +117,7 @@ def stage_display_label(stage: str) -> str:
         "to_markdown": "Convert to Markdown",
         "db_insert": "Saving to database",
         "ai_digest": "AI digest (Gemini)",
-        "grok_fallback": "AI digest (Grok fallback)",
+        "grok_fallback": "AI digest (Gemini 2.5 fallback)",
         "codal_link": "Codal linking",
         "done": "Complete",
         "skipped": "Skipped",
