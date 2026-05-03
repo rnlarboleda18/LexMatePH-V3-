@@ -411,6 +411,10 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     }, [activeInfo]);
 
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, [shortName]);
+
+    useEffect(() => {
         const fetchData = async () => {
             if (!shortName) {
                 setLoading(false);
