@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo, lazy, Suspense } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useUser, useAuth, useClerk } from '@clerk/clerk-react';
+import { useUser, useAuth } from '@clerk/clerk-react';
 import { RefreshCcw, AlertTriangle, Search } from 'lucide-react';
 import Fuse from 'fuse.js';
 import Layout from './components/Layout';
@@ -11,7 +11,6 @@ import QuestionCard from './components/QuestionCard';
 import SupremeDecisions from './components/SupremeDecisions';
 import PageLoadingFallback from './components/PageLoadingFallback';
 import ErrorBoundary from './components/ErrorBoundary';
-import LandingPage from './components/LandingPage';
 import PastDueBanner from './components/PastDueBanner';
 import FeaturePageShell from './components/FeaturePageShell';
 import PurpleGlassAmbient from './components/PurpleGlassAmbient';
@@ -24,7 +23,6 @@ import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage'
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
-import { useLandingBackgroundPrefetch } from './hooks/useLandingBackgroundPrefetch';
 import {
   FILTER_CHROME_SURFACE,
   FILTER_SELECT,
@@ -45,6 +43,8 @@ const CaseDecisionModal = lazy(() => import('./components/CaseDecisionModal'));
 const QuestionDetailModal = lazy(() => import('./components/QuestionDetailModal'));
 const SubscriptionModal = lazy(() => import('./components/SubscriptionModal'));
 const AccountBillingModal = lazy(() => import('./components/AccountBillingModal'));
+const FoundingPromoModal = lazy(() => import('./components/FoundingPromoModal'));
+const PwaInstallModal = lazy(() => import('./components/PwaInstallModal'));
 const UpgradeWall = lazy(() => import('./components/UpgradeWall'));
 
 /** Codal picker options (sidebar submenu removed; filter lives on LexCode page). */
@@ -63,7 +63,6 @@ const CODAL_FILTER_OPTIONS = [
 /** Canonical URL path for each app mode — defined outside the component so it
  *  is never recreated and never causes extra renders via closure references. */
 const MODE_TO_PATH = {
-  landing: '/',
   supreme_decisions: '/decisions',
   codex: '/lexcode',
   flashcard: '/flashcards',
@@ -103,7 +102,7 @@ function App() {
   } = useSubscription();
   const { user } = useUser();
   const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
-  const { openSignIn } = useClerk();
+
 
   // --- Hooks ---
   const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions();
@@ -180,13 +179,12 @@ function App() {
   );
 
   // UI State
-  /** Marketing landing on every full load; user taps through to the app each time.
-   *  Initial mode is derived from the URL so deep-links and refreshes land correctly.
+  /** Initial mode is derived from the URL so deep-links and refreshes land correctly.
+   *  Unknown paths default to supreme_decisions (/decisions).
    *  We read window.location.pathname directly (not useLocation) to avoid subscribing
    *  App to the React Router context, which would cause an extra re-render on every
    *  navigate() call and make child components (e.g. SupremeDecisions) re-render needlessly. */
-  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'landing');
-  useLandingBackgroundPrefetch(mode === 'landing');
+  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'supreme_decisions');
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
@@ -199,6 +197,12 @@ function App() {
   const [previousMode, setPreviousMode] = useState(null);
   const [barCurrentPage, setBarCurrentPage] = useState(1);
   const BAR_ITEMS_PER_PAGE = 20; // 2 columns * 10 rows
+
+  // Gate modals for unauthenticated users.
+  const [showGuestModal, setShowGuestModal] = useState(null); // null | 'subscription' | 'founding_promo'
+  const [guestModalDismissedAt, setGuestModalDismissedAt] = useState(null); // timestamp of last dismiss
+  const [foundingPromoAvailable, setFoundingPromoAvailable] = useState(false);
+  const [showPwaModal, setShowPwaModal] = useState(false);
 
   // Bar search portal
   const [showBarSuggestions, setShowBarSuggestions] = useState(false);
@@ -219,13 +223,6 @@ function App() {
     return () => mq.removeEventListener('change', on);
   }, []);
 
-  useEffect(() => {
-    const r = document.getElementById('root');
-    if (!r) return;
-    if (mode === 'landing') r.classList.add('lexmate-landing-elevate');
-    else r.classList.remove('lexmate-landing-elevate');
-    return () => r.classList.remove('lexmate-landing-elevate');
-  }, [mode]);
 
   const barCloseSuggestionsTimerRef = useRef(null);
   const barFuseRef = useRef(null);
@@ -375,49 +372,76 @@ function App() {
   useEffect(() => {
     if (isDrawerOpen && mode !== 'lexplay') {
       // Never return to marketing landing when exiting LexPlay fullscreen
-      setPreviousMode(mode === 'landing' ? 'supreme_decisions' : mode);
+      setPreviousMode(mode);
       setMode('lexplay');
       setIsDrawerOpen(false); // Consume the signal
     }
   }, [isDrawerOpen, mode, setIsDrawerOpen]);
 
-  const handleEnterFromLanding = useCallback(() => {
-    if (!isSignedIn) {
-      openSignIn();
-      return;
-    }
-    setMode('supreme_decisions');
-  }, [isSignedIn, openSignIn]);
+  // Close handler for the gate modal — records dismiss time so the 5-min re-trigger works.
+  const handleGuestModalClose = useCallback(() => {
+    setShowGuestModal(null);
+    setGuestModalDismissedAt(Date.now());
+  }, []);
+
+  // Fetch founding promo slot availability once on mount.
+  useEffect(() => {
+    fetch('/api/available-plans')
+      .then((r) => r.json())
+      .then((data) => { setFoundingPromoAvailable(data.founding_promo_available === true); })
+      .catch(() => {});
+  }, []);
+
+  // Gate modal: show after 1 second on first load; re-show 5 minutes after each dismissal.
+  // Runs whenever auth state, dismiss timestamp, or modal visibility changes.
+  useEffect(() => {
+    if (!authLoaded || isSignedIn || showGuestModal !== null) return;
+    const delay = guestModalDismissedAt === null
+      ? 1000
+      : Math.max(0, 5 * 60 * 1000 - (Date.now() - guestModalDismissedAt));
+    const timer = setTimeout(() => {
+      setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable]);
+
+  // PWA install modal: fire once per browser session after 1 minute of browsing.
+  useEffect(() => {
+    if (sessionStorage.getItem('pwa_modal_shown')) return;
+    const timer = setTimeout(() => {
+      sessionStorage.setItem('pwa_modal_shown', '1');
+      setShowPwaModal(true);
+    }, 60 * 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (mode === 'lexplay') setLexPlayMiniDismissed(false);
   }, [mode]);
 
-  // Auth guard: if Clerk has finished loading and the user is not signed in,
-  // snap them back to the landing page. Public routes (about, legal) are exempt.
-  // Payment returns (?xendit_payment, ?payment) are also exempt — Clerk needs
-  // a moment to re-establish its session after a full-page redirect from Xendit.
-  const UNPROTECTED_MODES = useMemo(() => new Set(['landing', 'about', 'legal']), []);
+  // Auth guard: unauthenticated users can freely browse all public modes.
+  // Admin tools are the only mode strictly off-limits without auth.
   useEffect(() => {
-    if (!authLoaded) return;
-    if (isSignedIn) return;
-    if (UNPROTECTED_MODES.has(mode)) return;
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('xendit_payment')) return;
-    setMode('landing');
-  }, [authLoaded, isSignedIn, mode, UNPROTECTED_MODES]);
+    if (!authLoaded || isSignedIn) return;
+    if (mode === 'admin_tools') setMode('supreme_decisions');
+  }, [authLoaded, isSignedIn, mode]);
 
-  // Auto-advance: detect the transition from signed-out → signed-in while still
-  // on the landing page and move into the app automatically.
+  // Track sign-in / sign-out transitions to clear gate state.
   const prevSignedInRef = useRef(false);
   useEffect(() => {
     if (!authLoaded) return;
     const wasSignedOut = !prevSignedInRef.current;
     prevSignedInRef.current = !!isSignedIn;
-    if (isSignedIn && wasSignedOut && mode === 'landing') {
-      setMode('supreme_decisions');
+    if (isSignedIn && wasSignedOut) {
+      // User just signed in — dismiss the gate permanently for this session.
+      setShowGuestModal(null);
+      setGuestModalDismissedAt(null);
+    } else if (!isSignedIn && !wasSignedOut) {
+      // User just signed out — reset dismiss so the 1-sec gate fires again.
+      setGuestModalDismissedAt(null);
+      setShowGuestModal(null);
     }
-  }, [authLoaded, isSignedIn, mode]);
+  }, [authLoaded, isSignedIn]);
 
 
   // Spinner only when user is on Flashcards and we still have nothing to show.
@@ -569,7 +593,7 @@ function App() {
       mode={mode}
       mainFullWidth={mode === 'flashcard' && flashcardState === 'active'}
       flashcardStudying={mode === 'flashcard' && flashcardState === 'active'}
-      hideAppChrome={lexifyExamSimulationActive || mode === 'landing'}
+      hideAppChrome={lexifyExamSimulationActive}
       lexPlayFullscreen={mode === 'lexplay'}
       onToggleQuiz={handleToggleQuiz}
       onToggleMode={(newMode) => {
@@ -622,11 +646,11 @@ function App() {
 
             {/* Content Area - Always mounted so scroll position is preserved */}
             <div aria-hidden={isLexPlayerFull ? "true" : undefined} className={isLexPlayerFull ? "pointer-events-none" : ""}>
-              {loading && effectiveMode !== 'flashcard' && effectiveMode !== 'landing' ? (
+              {loading && effectiveMode !== 'flashcard' ? (
                 <div className="flex justify-center items-center h-64">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
                 </div>
-              ) : error && effectiveMode !== 'flashcard' && effectiveMode !== 'landing' ? (
+              ) : error && effectiveMode !== 'flashcard' ? (
                 <div className="flex flex-col items-center justify-center min-h-[50vh] p-8 text-center space-y-6">
                   <div className="w-20 h-20 bg-rose-500/20 rounded-full flex items-center justify-center text-rose-500 shadow-[0_0_30px_rgba(244,63,94,0.3)]">
                     <AlertTriangle size={40} />
@@ -648,26 +672,11 @@ function App() {
               ) : (
                 <ErrorBoundary message="Content area encountered an error.">
                   <>
-                  {/* Mount default SC Decisions screen while on landing so list + prefetch run in background */}
-                  {(mode === 'landing' || effectiveMode === 'supreme_decisions') && (
-                    <div
-                      className={
-                        mode === 'landing'
-                          ? 'pointer-events-none fixed left-0 top-0 z-0 min-h-[85vh] w-full max-w-[100rem] -translate-x-full opacity-0'
-                          : ''
-                      }
-                      aria-hidden={mode === 'landing' ? 'true' : undefined}
-                    >
-                      <SupremeDecisions
-                        externalSelectedCase={globalSelectedCase}
-                        onCaseSelect={selectGlobalCaseGuarded}
-                      />
-                    </div>
-                  )}
-                  {effectiveMode === 'landing' && (
-                    <div className="relative z-30">
-                      <LandingPage onEnterApp={handleEnterFromLanding} />
-                    </div>
+                  {effectiveMode === 'supreme_decisions' && (
+                    <SupremeDecisions
+                      externalSelectedCase={globalSelectedCase}
+                      onCaseSelect={selectGlobalCaseGuarded}
+                    />
                   )}
                   {effectiveMode === 'about' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
@@ -1045,7 +1054,7 @@ function App() {
           <LexPlayer
             isMinimized={true}
             isDarkMode={isDarkMode}
-            isLanding={mode === 'landing'}
+            isLanding={false}
             onExpand={() => {
               setPreviousMode(mode);
               setMode('lexplay');
@@ -1092,6 +1101,21 @@ function App() {
       {showAccountBillingModal && (
         <Suspense fallback={null}>
           <AccountBillingModal onClose={closeAccountBillingModal} />
+        </Suspense>
+      )}
+      {showGuestModal === 'founding_promo' && (
+        <Suspense fallback={null}>
+          <FoundingPromoModal onClose={handleGuestModalClose} />
+        </Suspense>
+      )}
+      {showGuestModal === 'subscription' && (
+        <Suspense fallback={null}>
+          <SubscriptionModal onClose={handleGuestModalClose} guestPrompt />
+        </Suspense>
+      )}
+      {showPwaModal && (
+        <Suspense fallback={null}>
+          <PwaInstallModal onClose={() => setShowPwaModal(false)} />
         </Suspense>
       )}
 

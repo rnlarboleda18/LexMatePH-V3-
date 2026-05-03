@@ -52,8 +52,30 @@ _scan_state: dict = {
     "finished_at": None,
     "last_exit_code": None,
 }
-# Where the scan script writes its JSON output
-_SCAN_RESULTS_PATH = Path(__file__).resolve().parents[2] / "admin-tools" / "case-digest-pipeline" / "scan_results.json"
+
+
+def _pipeline_scripts_root() -> Path:
+    """Full repo locally (scripts/ sibling to api/); bundled ``api/`` wwwroot on Azure SWA."""
+    api_dir = Path(__file__).resolve().parent.parent
+    # Use env vars directly — _running_on_azure_host() is defined later in the file
+    # and this function is called at module-level before that definition is reached.
+    if os.getenv("WEBSITE_INSTANCE_ID") or os.getenv("WEBSITE_SITE_NAME"):
+        return api_dir
+    sibling = api_dir.parent
+    if (sibling / "scripts").is_dir() and (sibling / "api").is_dir():
+        return sibling
+    return api_dir
+
+
+def _case_digest_pipeline_store() -> Path:
+    """Directory for scan / gap JSON — repo ``admin-tools`` path or writable deploy fallback."""
+    root = _pipeline_scripts_root()
+    if (root / "admin-tools").is_dir():
+        return root / "admin-tools" / "case-digest-pipeline"
+    return root / "pipeline_runtime" / "case-digest-pipeline"
+
+
+_SCAN_RESULTS_PATH = _case_digest_pipeline_store() / "scan_results.json"
 
 # ── In-memory eLib GAP scan process state ────────────────────────────────────
 _gap_scan_lock = threading.Lock()
@@ -64,7 +86,7 @@ _gap_scan_state: dict = {
     "finished_at": None,
     "last_exit_code": None,
 }
-_GAP_RESULTS_PATH = Path(__file__).resolve().parents[2] / "admin-tools" / "case-digest-pipeline" / "gap_results.json"
+_GAP_RESULTS_PATH = _case_digest_pipeline_store() / "gap_results.json"
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -180,7 +202,8 @@ def _get_azure_token():
 
 
 def _repo_root() -> Path:
-    return Path(__file__).resolve().parents[2]
+    """Filesystem root used for bundled pipeline subprocesses (matches _pipeline_scripts_root)."""
+    return _pipeline_scripts_root()
 
 
 def _first_env(*names):

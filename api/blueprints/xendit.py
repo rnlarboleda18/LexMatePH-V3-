@@ -866,11 +866,35 @@ def available_plans(req: func.HttpRequest) -> func.HttpResponse:
         key: {"amount": cfg["amount"], "tier": cfg["tier"], "label": cfg["label"]}
         for key, cfg in PLAN_CONFIGS.items()
     }
+
+    # Check if founding promo slots are still available (best-effort; public endpoint).
+    from utils.founding_promo import get_promo_slot_limit
+    founding_promo_available = False
+    founding_promo_slots_remaining = 0
+    try:
+        limit = get_promo_slot_limit()
+        if limit > 0:
+            with _get_db() as conn:
+                with conn.cursor() as cur:
+                    cur.execute("SELECT claimed_count FROM founding_promo_state WHERE id = 1")
+                    row = cur.fetchone()
+                    if row is None:
+                        founding_promo_available = True
+                        founding_promo_slots_remaining = limit
+                    else:
+                        remaining = max(0, limit - row[0])
+                        founding_promo_available = remaining > 0
+                        founding_promo_slots_remaining = remaining
+    except Exception:
+        pass  # Default to unavailable on any DB error
+
     return func.HttpResponse(
         json.dumps({
             **plans,
             "bypass_mode": XENDIT_BYPASS,
             "payment_provider": "xendit",
+            "founding_promo_available": founding_promo_available,
+            "founding_promo_slots_remaining": founding_promo_slots_remaining,
         }),
         mimetype="application/json", status_code=200,
     )

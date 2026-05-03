@@ -107,7 +107,7 @@ const PLANS = [
 /** Tailwind `md` is 768px — subscription shell matches case digest only below this. */
 const MOBILE_SUBSCRIPTION_MQ = '(max-width: 767px)';
 
-export default function SubscriptionModal({ onClose }) {
+export default function SubscriptionModal({ onClose, guestPrompt = false }) {
   const { tier, refreshStatus } = useSubscription();
   const { getToken, isSignedIn } = useAuth();
   const { redirectToSignUp } = useClerk();
@@ -138,7 +138,14 @@ export default function SubscriptionModal({ onClose }) {
   }, []);
 
   const handleSubscribe = async (plan) => {
-    if (plan.id === 'free' || plan.id === tier) return;
+    // In guest-prompt mode, Free tier signs the user up for free.
+    if (plan.id === 'free') {
+      if (guestPrompt && !isSignedIn) {
+        redirectToSignUp({ redirectUrl: window.location.pathname });
+      }
+      return;
+    }
+    if (plan.id === tier) return;
 
     // Unauthenticated user — redirect to sign-up with a return URL so they
     // land back on the pricing page after registering.
@@ -258,10 +265,12 @@ export default function SubscriptionModal({ onClose }) {
               id="subscription-modal-title"
               className="text-lg font-extrabold tracking-tight text-white drop-shadow-sm sm:text-xl"
             >
-              Upgrade Your Plan
+              {guestPrompt ? 'Continue Your Smart Study' : 'Upgrade Your Plan'}
             </h2>
             <p className="mt-0.5 text-[11px] font-medium text-white/75">
-              GCash · Maya · GrabPay · Card · QR Ph · Direct Debit · <span className="text-white/50">Powered by Xendit</span>
+              {guestPrompt
+                ? 'Your free session has ended — sign up or choose a plan to keep going.'
+                : <>GCash · Maya · GrabPay · Card · QR Ph · Direct Debit · <span className="text-white/50">Powered by Xendit</span></>}
             </p>
           </div>
           <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-2 sm:w-auto sm:justify-end sm:gap-3">
@@ -292,7 +301,8 @@ export default function SubscriptionModal({ onClose }) {
         >
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
-            const isDisabled = plan.id === 'free' || isCurrent || loadingPlan;
+            const freeSignUpAllowed = plan.id === 'free' && guestPrompt && !isSignedIn;
+            const isDisabled = (plan.id === 'free' && !freeSignUpAllowed) || isCurrent || loadingPlan;
             const price = plan.price[billing];
             const visibleLocked = plan.locked.slice(0, MAX_LOCKED_SHOWN);
             const hiddenCount = plan.locked.length - visibleLocked.length;
@@ -379,7 +389,7 @@ export default function SubscriptionModal({ onClose }) {
                   ) : isCurrent ? (
                     'Current Plan'
                   ) : plan.id === 'free' ? (
-                    'Basic Access'
+                    freeSignUpAllowed ? 'Start for Free' : 'Basic Access'
                   ) : (
                     bypassMode ? `⚡ Activate ${plan.name}` : `Get ${plan.name}`
                   )}
@@ -400,7 +410,9 @@ export default function SubscriptionModal({ onClose }) {
         <p
           className={`text-center text-xs text-gray-400 dark:text-gray-600 ${isMobileLayout ? 'px-4 pb-4 sm:px-5 sm:pb-5' : 'px-5 pb-5'}`}
         >
-          Secured by Xendit · Cancel anytime
+          {guestPrompt
+            ? 'GCash · Maya · Card · QR Ph · Powered by Xendit · Cancel anytime'
+            : 'Secured by Xendit · Cancel anytime'}
         </p>
       </div>
     </>
