@@ -1103,12 +1103,24 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
             put_db_connection(conn)
 
 
+def _truthy_query(val) -> bool:
+    if val is None:
+        return False
+    return str(val).strip().lower() in ("1", "true", "yes", "on")
+
+
 @supreme_bp.route(route="sc_decisions/{id:int}", auth_level=func.AuthLevel.ANONYMOUS)
 def supreme_decision_detail(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Processing Supreme Decision Detail request.')
 
     decision_id = req.route_params.get('id')
-    cache_key = f"sc_decisions:detail:{decision_id}"
+    digest_only = _truthy_query(req.params.get("digest_only"))
+    # Separate Redis keys so lightweight digest payloads are cached independently from full text.
+    cache_key = (
+        f"sc_decisions:detail:digest:{decision_id}"
+        if digest_only
+        else f"sc_decisions:detail:{decision_id}"
+    )
 
     # --- Redis cache check ---
     if REDIS_ENABLED:
@@ -1135,20 +1147,31 @@ def supreme_decision_detail(req: func.HttpRequest) -> func.HttpResponse:
         result = cur.fetchone()
 
         if result:
-            if not result.get('full_text_md'):
-                result['full_text_md'] = "*Content not available in Markdown format yet.*"
+            if not digest_only:
+                if not result.get('full_text_md'):
+                    result['full_text_md'] = "*Content not available in Markdown format yet.*"
 
-            cur.execute("""
-                SELECT id, short_title as title, document_type, full_text_md
+            cur.execute(
+                """
+                SELECT id, short_title AS title, document_type
                 FROM sc_decided_cases
                 WHERE parent_id = %s
                 ORDER BY id ASC
-            """, (decision_id,))
+                """,
+                (decision_id,),
+            )
             result['related_opinions'] = cur.fetchall()
+
+            if digest_only:
+                result.pop("full_text_md", None)
+                result.pop("full_text_html", None)
+                result["digest_only"] = True
+            else:
+                result.pop("digest_only", None)
 
             # Store in Redis for subsequent opens
             if REDIS_ENABLED:
-                cache_set(cache_key, result, ttl=CACHE_TTL_DECISION_DETAIL)
+                cache_set(cache_key, dict(result), ttl=CACHE_TTL_DECISION_DETAIL)
 
             body = json.dumps(result, default=str)
             import hashlib

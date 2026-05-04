@@ -12,7 +12,7 @@
  */
 
 const DB_NAME = 'LexMateCacheDB';
-const DB_VERSION = 2; // bumped to force wipe of corrupt v1 data
+const DB_VERSION = 3; // +meta store for decisions filter lists (ponentes/divisions)
 
 class LexCache {
   constructor() {
@@ -28,7 +28,7 @@ class LexCache {
       request.onupgradeneeded = (event) => {
         const db = event.target.result;
         // Drop all old stores to wipe corrupt data from previous versions
-        const storeNames = ['cases', 'codals', 'questions'];
+        const storeNames = ['cases', 'codals', 'questions', 'meta'];
         storeNames.forEach(name => {
           if (db.objectStoreNames.contains(name)) {
             db.deleteObjectStore(name);
@@ -38,6 +38,7 @@ class LexCache {
         db.createObjectStore('cases', { keyPath: 'id' });
         db.createObjectStore('codals', { keyPath: 'key' });
         db.createObjectStore('questions', { keyPath: 'id' });
+        db.createObjectStore('meta', { keyPath: 'key' });
       };
 
       request.onsuccess = (event) => {
@@ -80,7 +81,7 @@ class LexCache {
       if (Array.isArray(data)) {
         // Wrap arrays to prevent spread-to-object corruption
         record = { key, _isArray: true, _data: data, _cachedAt: Date.now() };
-        // Stores with keyPath `id` (not `key`) must set `id` on the wrapper — put() fails otherwise
+        // Stores with keyPath `id` must set `id` on the array wrapper — put() fails otherwise
         if (storeName === 'cases' || storeName === 'questions') {
           record.id = key;
         }
@@ -89,6 +90,7 @@ class LexCache {
         // Ensure primary key is set for non-codal stores
         if (storeName === 'cases' && !record.id) record.id = key;
         if (storeName === 'questions' && !record.id) record.id = key;
+        if (storeName === 'meta' && record.key == null) record.key = key;
       }
 
       const request = store.put(record);

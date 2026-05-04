@@ -76,7 +76,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     );
 };
 
-const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions = [], selectedCodal, onCodalChange }) => {
+const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionTier, codalOptions = [], selectedCodal, onCodalChange }) => {
     const { canAccess, openUpgradeModal } = useSubscription();
 
     // Title mapping (mirrors CodalStream — keep in sync)
@@ -154,6 +154,42 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
     const [jurisFixedLeft, setJurisFixedLeft] = useState(null);
     /** Measured viewport `top` (px) for portaled side panels; null = fall back to fixedPanelStyle. */
     const [fixedPanelTopPx, setFixedPanelTopPx] = useState(null);
+
+    const openJurisCaseDetail = useCallback(
+        async (caseId, ratioIndex) => {
+            const idSeg = normalizeScDecisionsRouteId(caseId);
+            if (!idSeg) {
+                console.error('LexCode juris: invalid case id', caseId);
+                return;
+            }
+            try {
+                const res = await fetch(apiUrl(`/api/sc_decisions/${idSeg}?digest_only=true`));
+                const caseData = await res.json().catch(() => ({}));
+                if (!res.ok || !caseData || caseData.error) {
+                    console.error('LexCode juris: case detail failed', res.status, caseData);
+                    return;
+                }
+                caseData.scrollToRatioIndex = ratioIndex;
+                onCaseSelect && onCaseSelect(caseData);
+                if (onCaseDetailMerge) {
+                    void (async () => {
+                        try {
+                            const r2 = await fetch(apiUrl(`/api/sc_decisions/${idSeg}`));
+                            const full = await r2.json().catch(() => ({}));
+                            if (!r2.ok || !full || full.error) return;
+                            const { digest_only: _d, ...rest } = full;
+                            onCaseDetailMerge(idSeg, { ...rest, scrollToRatioIndex: ratioIndex });
+                        } catch (err) {
+                            console.error('LexCode juris: full case fetch failed', err);
+                        }
+                    })();
+                }
+            } catch (err) {
+                console.error('Failed to fetch case:', err);
+            }
+        },
+        [onCaseSelect, onCaseDetailMerge],
+    );
 
     const syncFixedPanelPositions = useCallback(() => {
         if (typeof window === 'undefined' || window.innerWidth < 1024) {
@@ -874,23 +910,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                             setActiveJurisParagraph(null);
                         }}
                         onSelectRatio={async (caseId, ratioIndex) => {
-                            const idSeg = normalizeScDecisionsRouteId(caseId);
-                            if (!idSeg) {
-                                console.error('LexCode juris: invalid case id', caseId);
-                                return;
-                            }
-                            try {
-                                const res = await fetch(apiUrl(`/api/sc_decisions/${idSeg}`));
-                                const caseData = await res.json().catch(() => ({}));
-                                if (!res.ok || !caseData || caseData.error) {
-                                    console.error('LexCode juris: case detail failed', res.status, caseData);
-                                    return;
-                                }
-                                caseData.scrollToRatioIndex = ratioIndex;
-                                onCaseSelect && onCaseSelect(caseData);
-                            } catch (err) {
-                                console.error('Failed to fetch case:', err);
-                            }
+                            await openJurisCaseDetail(caseId, ratioIndex);
                         }}
                     />
                 )}
@@ -1291,23 +1311,7 @@ const CodexViewer = ({ shortName, onCaseSelect, subscriptionTier, codalOptions =
                                         paragraphFilter={activeJurisParagraph}
                                         onClose={handleCloseMobileLexPanels}
                                         onSelectRatio={async (caseId, ratioIndex) => {
-                                            const idSeg = normalizeScDecisionsRouteId(caseId);
-                                            if (!idSeg) {
-                                                console.error('LexCode juris: invalid case id', caseId);
-                                                return;
-                                            }
-                                            try {
-                                                const res = await fetch(apiUrl(`/api/sc_decisions/${idSeg}`));
-                                                const caseData = await res.json().catch(() => ({}));
-                                                if (!res.ok || !caseData || caseData.error) {
-                                                    console.error('LexCode juris: case detail failed', res.status, caseData);
-                                                    return;
-                                                }
-                                                caseData.scrollToRatioIndex = ratioIndex;
-                                                onCaseSelect && onCaseSelect(caseData);
-                                            } catch (err) {
-                                                console.error('Failed to fetch case:', err);
-                                            }
+                                            await openJurisCaseDetail(caseId, ratioIndex);
                                         }}
                                     />
                                 </div>

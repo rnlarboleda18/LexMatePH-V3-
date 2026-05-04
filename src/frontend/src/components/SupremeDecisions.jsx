@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
-import { Search, Gavel, FileText, X, Filter, BookOpen, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, ChevronUp, Landmark } from 'lucide-react';
+import { Search, Gavel, FileText, X, Filter, BookOpen, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, ChevronUp, Landmark, Clock } from 'lucide-react';
 import { lexCache } from '../utils/cache';
 
 
@@ -44,6 +44,22 @@ async function parseResponseJson(response) {
         throw new Error(
             `Non-JSON response (HTTP ${response.status}): ${preview}${text.length > 180 ? '…' : ''}`
         );
+    }
+}
+
+const SC_META_PONENTES = 'sc_decisions_ponentes';
+const SC_META_DIVISIONS = 'sc_decisions_divisions';
+/** Client-side cache for filter dropdowns (ponentes / divisions change rarely). */
+const SC_DECISIONS_LIST_CACHE_MS = 7 * 24 * 60 * 60 * 1000;
+
+async function persistCaseDetailToIdb(caseId, incoming) {
+    if (caseId == null || !incoming) return;
+    try {
+        const existing = await lexCache.get('cases', caseId);
+        const merged = { ...(existing || {}), ...incoming };
+        await lexCache.set('cases', caseId, merged);
+    } catch (e) {
+        console.warn('persistCaseDetailToIdb failed', e);
     }
 }
 
@@ -487,7 +503,7 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 };
 
 
-const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
+const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerge }) => {
     const { getToken, isSignedIn } = useAuth();
     const { openUpgradeModal, canAccess, loading: subscriptionLoading } = useSubscription();
 
@@ -604,27 +620,54 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
         if (!id || prefetchCache[id] || prefetchInflightRef.current >= 3) return;
         prefetchInflightRef.current += 1;
         try {
-            // Check IndexedDB first — no network if already cached from a prior session
             const idbHit = await lexCache.get('cases', id);
             if (idbHit && idbHit.digest_facts) {
-                // Strip huge fields from component state; full data lives in IndexedDB
                 const { full_text_md: _ft, full_text_html: _fh, ...light } = idbHit;
-                setPrefetchCache(prev => ({ ...prev, [id]: light }));
+                setPrefetchCache((prev) => ({ ...prev, [id]: light }));
                 return;
             }
-            const res = await fetch(apiUrl(`/api/sc_decisions/${id}`));
-            const data = await res.json();
-            // Persist the FULL object to IndexedDB so modal opens get full_text_md instantly.
-            lexCache.set('cases', id, data).catch(() => {});
-            // Only store lightweight fields in component state to keep state small.
+            const res = await fetch(apiUrl(`/api/sc_decisions/${id}?digest_only=true`));
+            const data = await parseResponseJson(res);
+            if (!res.ok || data?.error) return;
+            await persistCaseDetailToIdb(id, data);
             const { full_text_md: _ft, full_text_html: _fh, ...light } = data;
-            setPrefetchCache(prev => ({ ...prev, [id]: light }));
+            setPrefetchCache((prev) => ({ ...prev, [id]: light }));
         } catch (err) {
-            console.error("Prefetch failed", err);
+            console.error('Prefetch failed', err);
         } finally {
             prefetchInflightRef.current -= 1;
         }
     };
+
+    const scheduleBackgroundFullCase = useCallback(
+        (caseId) => {
+            if (caseId == null) return;
+            void (async () => {
+                try {
+                    const res = await fetch(apiUrl(`/api/sc_decisions/${caseId}`));
+                    const full = await parseResponseJson(res);
+                    if (!res.ok || full?.error) return;
+                    const existing = await lexCache.get('cases', caseId);
+                    const merged = { ...(existing || {}), ...full };
+                    delete merged.digest_only;
+                    await lexCache.set('cases', caseId, merged);
+                    const { full_text_md: _a, full_text_html: _b, ...light } = merged;
+                    setPrefetchCache((prev) => ({ ...prev, [caseId]: light }));
+                    const { digest_only: _d, ...patch } = full;
+                    if (onCaseDetailMerge) {
+                        onCaseDetailMerge(caseId, patch);
+                    } else {
+                        setSelectedDecision((prev) =>
+                            prev && String(prev.id) === String(caseId) ? { ...prev, ...patch } : prev,
+                        );
+                    }
+                } catch (err) {
+                    console.error('Background full case fetch failed', err);
+                }
+            })();
+        },
+        [onCaseDetailMerge],
+    );
 
     // AbortController Ref
     const abortControllerRef = useRef(null);
@@ -677,25 +720,45 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
     const fetchPonentes = async () => {
         try {
+            const cached = await lexCache.get('meta', SC_META_PONENTES);
+            if (
+                cached?.items &&
+                Array.isArray(cached.items) &&
+                Date.now() - (cached._cachedAt || 0) < SC_DECISIONS_LIST_CACHE_MS
+            ) {
+                setAvailablePonentes(cached.items);
+                return;
+            }
             const response = await fetch(apiUrl('/api/sc_decisions/ponentes'));
             const data = await response.json();
             if (Array.isArray(data)) {
                 setAvailablePonentes(data);
+                await lexCache.set('meta', SC_META_PONENTES, { items: data });
             }
         } catch (error) {
-            console.error("Failed to fetch ponentes", error);
+            console.error('Failed to fetch ponentes', error);
         }
     };
 
     const fetchDivisions = async () => {
         try {
+            const cached = await lexCache.get('meta', SC_META_DIVISIONS);
+            if (
+                cached?.items &&
+                Array.isArray(cached.items) &&
+                Date.now() - (cached._cachedAt || 0) < SC_DECISIONS_LIST_CACHE_MS
+            ) {
+                setAvailableDivisions(cached.items);
+                return;
+            }
             const response = await fetch(apiUrl('/api/sc_decisions/divisions'));
             const data = await response.json();
             if (Array.isArray(data)) {
                 setAvailableDivisions(data);
+                await lexCache.set('meta', SC_META_DIVISIONS, { items: data });
             }
         } catch (error) {
-            console.error("Failed to fetch divisions", error);
+            console.error('Failed to fetch divisions', error);
         }
     };
 
@@ -818,45 +881,47 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
     };
 
     const handleCaseClick = async (decision) => {
-        // Layer 1: in-memory prefetch cache (same session, fastest) — only if it has full detail
         let fullData = prefetchCache[decision.id];
-        const cacheHasFull = fullData && fullData.digest_facts && fullData.full_text_md !== undefined;
+        const cacheHasDigest = fullData && fullData.digest_facts;
 
-        if (!cacheHasFull) {
-            // Layer 2: IndexedDB (persists across page reloads — no network needed)
-            // The prefetch stores full data here even when it strips it from component state.
+        if (!cacheHasDigest) {
             try {
                 const idbHit = await lexCache.get('cases', decision.id);
                 if (idbHit && idbHit.digest_facts) {
                     fullData = idbHit;
                 }
-            } catch (_) {}
+            } catch (_) {
+                /* ignore */
+            }
         }
 
         if (!fullData || !fullData.digest_facts) {
-            // Layer 3: network fetch (Redis-cached on the server — usually fast)
             document.body.style.cursor = 'wait';
             try {
-                const res = await fetch(apiUrl(`/api/sc_decisions/${decision.id}`));
+                const res = await fetch(apiUrl(`/api/sc_decisions/${decision.id}?digest_only=true`));
                 fullData = await parseResponseJson(res);
                 if (!res.ok || fullData?.error) {
                     console.error('Case detail error:', fullData?.error || res.status);
                 }
-                // Persist full data to IndexedDB; keep component state lightweight
-                lexCache.set('cases', decision.id, fullData).catch(() => {});
+                await persistCaseDetailToIdb(decision.id, fullData);
                 const { full_text_md: _ft, full_text_html: _fh, ...light } = fullData;
-                setPrefetchCache(prev => ({ ...prev, [decision.id]: light }));
+                setPrefetchCache((prev) => ({ ...prev, [decision.id]: light }));
             } catch (err) {
-                console.error("Manual fetch failed", err);
+                console.error('Manual fetch failed', err);
             } finally {
                 document.body.style.cursor = 'default';
             }
         }
 
         const enrichedDecision = { ...decision, ...fullData };
+        const needsFull =
+            enrichedDecision.digest_only === true || enrichedDecision.full_text_md === undefined;
 
         if (onCaseSelect) {
             onCaseSelect(enrichedDecision);
+            if (needsFull) {
+                scheduleBackgroundFullCase(decision.id);
+            }
         } else {
             const usage = await consumeFreeTierUsage({
                 feature: 'case_digest',
@@ -870,6 +935,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 return;
             }
             setSelectedDecision(enrichedDecision);
+            if (needsFull) {
+                scheduleBackgroundFullCase(decision.id);
+            }
         }
     };
 
@@ -1249,13 +1317,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                 className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                 style={xlFixedChrome ? { paddingTop: `${filterChromeHeight + 12}px` } : undefined}
             >
-                {/* Status Indicator */}
-                {loading && (
-                    <div className="flex justify-center mb-4">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-                    </div>
-                )}
-
                 {fetchError && !loading && (
                     <div
                         className="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-100"
@@ -1287,13 +1348,29 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
 
                 {/* Results — codal-style compact cards (two columns on md+) */}
                 <div className="grid grid-cols-1 gap-tile md:grid-cols-2">
-                    {hasInitialLoaded && !fetchError && searchResults.length === 0 && !loading && (
-                        <div className="text-center py-8 text-gray-500">
-                            <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
-                            <p>No decisions found. Adjust your search or filters.</p>
-                        </div>
-                    )}
-                    {searchResults.map((decision) => {
+                    {loading && !fetchError ? (
+                        Array.from({ length: ITEMS_PER_PAGE }, (_, i) => (
+                            <div
+                                key={`decision-skeleton-${i}`}
+                                className="min-w-0 overflow-hidden rounded-lg border border-lex bg-white shadow-sm dark:border-lex dark:bg-zinc-900 animate-pulse"
+                                aria-hidden
+                            >
+                                <div className="space-y-3 p-3">
+                                    <div className="h-4 w-[92%] max-w-full rounded bg-neutral-200 dark:bg-zinc-700" />
+                                    <div className="h-3 w-[55%] rounded bg-neutral-100 dark:bg-zinc-800" />
+                                    <div className="h-28 rounded-lg bg-neutral-50 dark:bg-zinc-800/80" />
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <>
+                            {hasInitialLoaded && !fetchError && searchResults.length === 0 && (
+                                <div className="text-center py-8 text-gray-500 md:col-span-2">
+                                    <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
+                                    <p>No decisions found. Adjust your search or filters.</p>
+                                </div>
+                            )}
+                            {searchResults.map((decision) => {
                         const detailsOpen = !!caseDetailsExpandedById[decision.id];
 
                         let statutesParsed = null;
@@ -1535,7 +1612,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                                 </div>
                             </div>
                         );
-                    })}
+                            })}
+                        </>
+                    )}
                 </div>
 
                 {totalCount > 0 && (
@@ -1544,7 +1623,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                             <button
                                 onClick={() => {
                                     setCurrentPage(prev => Math.max(1, prev - 1));
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage === 1 || loading}
                                 className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-5 py-2.5 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
@@ -1558,7 +1637,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect }) => {
                             <button
                                 onClick={() => {
                                     setCurrentPage(prev => prev + 1);
-                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={currentPage * ITEMS_PER_PAGE >= totalCount || loading}
                                 className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-5 py-2.5 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"

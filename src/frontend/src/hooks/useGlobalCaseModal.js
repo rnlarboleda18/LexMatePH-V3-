@@ -38,5 +38,14 @@ export function useGlobalCaseModal() {
     setSelectedCase(null);
   }, [selectedCase]); // selectedCase in deps so we read the current value
 
-  return { selectedCase, selectCase, closeModal };
+  /** Merge fields into the open case (e.g. full text loaded after digest-only open). */
+  const patchSelectedCase = useCallback((id, patch) => {
+    if (id == null || patch == null) return;
+    setSelectedCase((prev) => {
+      if (prev == null || String(prev.id) !== String(id)) return prev;
+      return { ...prev, ...patch };
+    });
+  }, []);
+
+  return { selectedCase, selectCase, closeModal, patchSelectedCase };
 }

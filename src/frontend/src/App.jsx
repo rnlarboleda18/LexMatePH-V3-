@@ -114,7 +114,12 @@ function App() {
     getPrimarySubject: getCardPrimarySubject,
     subjectCounts: flashcardSubjectCounts,
   } = useFlashcardConcepts();
-  const { selectedCase: globalSelectedCase, selectCase: selectGlobalCase, closeModal: closeGlobalCaseModal } = useGlobalCaseModal();
+  const {
+    selectedCase: globalSelectedCase,
+    selectCase: selectGlobalCase,
+    closeModal: closeGlobalCaseModal,
+    patchSelectedCase: patchGlobalCase,
+  } = useGlobalCaseModal();
 
   const selectGlobalCaseGuarded = useCallback(
     (next) => {
@@ -687,6 +692,7 @@ function App() {
                     <SupremeDecisions
                       externalSelectedCase={globalSelectedCase}
                       onCaseSelect={selectGlobalCaseGuarded}
+                      onCaseDetailMerge={patchGlobalCase}
                     />
                   )}
                   {effectiveMode === 'about' && (
@@ -715,6 +721,7 @@ function App() {
                             document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
                           }}
                           onCaseSelect={selectGlobalCaseGuarded}
+                          onCaseDetailMerge={patchGlobalCase}
                           subscriptionTier={tier}
                         />
                       </Suspense>
@@ -983,7 +990,7 @@ function App() {
                               <button
                                 onClick={() => {
                                   setBarCurrentPage(prev => Math.max(1, prev - 1));
-                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage === 1}
                                 className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
@@ -997,7 +1004,7 @@ function App() {
                               <button
                                 onClick={() => {
                                   setBarCurrentPage(prev => prev + 1);
-                                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                                  document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 disabled={barCurrentPage * BAR_ITEMS_PER_PAGE >= totalCount}
                                 className="flex items-center gap-2 rounded-lg border border-lex-strong bg-white px-4 py-2 text-sm font-medium text-neutral-800 shadow-sm transition-colors hover:bg-neutral-50 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"

@@ -325,6 +325,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const { canAccess, openUpgradeModal, loading: subscriptionLoading } = useSubscription();
     const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
+    const lastSyncedCaseIdRef = useRef(decision?.id ?? null);
     const [viewMode, setViewMode] = useState('digest'); // 'digest' or 'full'
     /** Deferred flag: true only after two rAF ticks so the spinner renders before heavy MD parse. */
     const [fullTextReady, setFullTextReady] = useState(false);
@@ -381,7 +382,23 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         }
     };
 
-
+    // Opened with digest-only first, then parent merges full text (same id) — keep modal in sync.
+    useEffect(() => {
+        if (!decision) {
+            lastSyncedCaseIdRef.current = null;
+            setFullDecision(null);
+            return;
+        }
+        const id = decision.id;
+        if (lastSyncedCaseIdRef.current !== id) {
+            lastSyncedCaseIdRef.current = id;
+            setFullDecision(decision);
+            setViewMode('digest');
+            setFullTextReady(false);
+            return;
+        }
+        setFullDecision((prev) => (prev ? { ...prev, ...decision } : decision));
+    }, [decision]);
 
     // Handle Scroller Sync
     useEffect(() => {

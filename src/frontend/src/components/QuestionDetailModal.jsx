@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getSubjectColorForBarQuestion } from '../utils/colors';
@@ -23,6 +23,7 @@ const QuestionDetailModal = ({
     const colorClass = getSubjectColorForBarQuestion(question);
     const textColor = colorClass.split(' ').find((c) => c.startsWith('text-'));
 
+    const scrollRef = useRef(null);
     const [showPlaylistSelector, setShowPlaylistSelector] = useState(false);
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
@@ -196,7 +197,7 @@ const QuestionDetailModal = ({
                 )}
 
                 {/* Content - Scrollable */}
-                <div className="relative z-10 flex min-h-0 flex-1 flex-col space-y-6 overflow-y-auto p-3 lex-modal-scroll custom-scrollbar sm:p-6 md:space-y-10 md:p-8">
+                <div ref={scrollRef} className="relative z-10 flex min-h-0 flex-1 flex-col space-y-6 overflow-y-auto p-3 lex-modal-scroll custom-scrollbar sm:p-6 md:space-y-10 md:p-8">
                     {/* Main/Parent Question */}
                     <div>
                         <div className="mb-1.5 flex items-center gap-2 drop-shadow-sm md:mb-4">
@@ -267,7 +268,7 @@ const QuestionDetailModal = ({
                 <div className="relative z-10 flex min-h-[2.75rem] shrink-0 items-center justify-between gap-3 border-t border-lex bg-neutral-50 px-1.5 py-1.5 dark:border-lex dark:bg-zinc-950 sm:min-h-[3rem] sm:px-2 md:px-3">
                     <button
                         type="button"
-                        onClick={onPrev}
+                        onClick={() => { scrollRef.current?.scrollTo({ top: 0, behavior: 'instant' }); onPrev(); }}
                         disabled={!hasPrev}
                         className="touch-manipulation inline-flex h-8 min-w-[5.5rem] shrink-0 items-center justify-center gap-1 rounded-lg border border-lex-strong bg-white px-2.5 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white sm:h-8 sm:min-w-[6.5rem] sm:text-xs"
                         title="Previous question"
@@ -278,7 +279,7 @@ const QuestionDetailModal = ({
                     </button>
                     <button
                         type="button"
-                        onClick={onNext}
+                        onClick={() => { scrollRef.current?.scrollTo({ top: 0, behavior: 'instant' }); onNext(); }}
                         disabled={!hasNext}
                         className="touch-manipulation inline-flex h-8 min-w-[5.5rem] shrink-0 items-center justify-center gap-1 rounded-lg border border-lex-strong bg-white px-2.5 text-[11px] font-bold text-slate-600 shadow-sm transition-all hover:bg-neutral-50 hover:text-slate-900 active:scale-95 disabled:pointer-events-none disabled:opacity-30 dark:border-lex-strong dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white sm:h-8 sm:min-w-[6.5rem] sm:text-xs"
                         title="Next question"

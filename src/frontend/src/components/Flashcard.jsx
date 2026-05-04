@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronRight, RotateCcw, X, Headphones, Lock } from 'lucide-react';
 import { getSubjectColor } from '../utils/colors';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
@@ -13,12 +13,14 @@ const FLIP_EASE = 'cubic-bezier(0.4, 0.2, 0.2, 1)';
 /** Physical flashcard: subject / progress / date / close live inside each face; no outer modal shell. */
 const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, onClose }) => {
     const [isFlipped, setIsFlipped] = useState(false);
+    const backScrollRef = useRef(null);
     const { playNow } = useLexPlayApi();
     const { canAccess, openUpgradeModal } = useSubscription();
     const canLexPlay = canAccess('lexplay_flashcard');
 
     useEffect(() => {
         setIsFlipped(false);
+        backScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
     }, [card]);
 
     if (!card) return null;
@@ -231,7 +233,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         <span className={`mb-1 shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] ${textColor}`}>
                             Suggested answers
                         </span>
-                        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 custom-scrollbar">
+                        <div ref={backScrollRef} className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 custom-scrollbar">
                             <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] sm:leading-relaxed whitespace-pre-wrap break-words">
                                 {card.answer || 'Answer not available.'}
                             </p>
@@ -249,7 +251,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         <span className={`mb-1 shrink-0 text-[10px] font-bold uppercase tracking-[0.14em] ${textColor}`}>
                             Definition
                         </span>
-                        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 custom-scrollbar">
+                        <div ref={backScrollRef} className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 custom-scrollbar">
                             <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] sm:leading-relaxed whitespace-pre-wrap break-words">
                                 {card.definition || 'No definition stored for this concept.'}
                             </p>
