@@ -20,6 +20,7 @@ import { LexPlayer, useLexPlay } from './features/lexplay';
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
 import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage';
+import { GUEST_GATE_GRACE_MS, startGuestGateGrace, clearGuestGateGrace } from './utils/guestGateGrace';
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
@@ -390,7 +391,13 @@ function App() {
   const handleGuestModalClose = useCallback(() => {
     setShowGuestModal(null);
     setGuestModalDismissedAt(Date.now());
+    startGuestGateGrace();
   }, []);
+
+  // Clear explore grace once the user signs in (paid/free Clerk identity should use normal metering).
+  useEffect(() => {
+    if (isSignedIn) clearGuestGateGrace();
+  }, [isSignedIn]);
 
   // Fetch founding promo slot availability once on mount.
   useEffect(() => {
@@ -406,7 +413,7 @@ function App() {
     if (!authLoaded || isSignedIn || showGuestModal !== null) return;
     const delay = guestModalDismissedAt === null
       ? 1000
-      : Math.max(0, 5 * 60 * 1000 - (Date.now() - guestModalDismissedAt));
+      : Math.max(0, GUEST_GATE_GRACE_MS - (Date.now() - guestModalDismissedAt));
     const timer = setTimeout(() => {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
     }, delay);

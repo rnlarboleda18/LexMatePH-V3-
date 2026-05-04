@@ -1,9 +1,11 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { consumeFreeTierUsage, getOrCreateAnonymousUsageId } from '../utils/freeTierUsage';
+import { clearGuestGateGrace, startGuestGateGrace } from '../utils/guestGateGrace';
 
 describe('consumeFreeTierUsage', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    clearGuestGateGrace();
     try {
       localStorage.removeItem('lexmate_anonymous_usage_id');
     } catch (_) {
@@ -148,6 +150,46 @@ describe('consumeFreeTierUsage', () => {
     });
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(r).toEqual(expect.objectContaining({ allowed: true, skipped: true, reason: 'auth_loading' }));
+  });
+
+  it('skips track-usage during guest gate grace (signed-out)', async () => {
+    startGuestGateGrace();
+    try {
+      const fetchSpy = vi.spyOn(globalThis, 'fetch');
+      const r = await consumeFreeTierUsage({
+        feature: 'case_digest',
+        getToken: async () => null,
+        isSignedIn: false,
+        authLoaded: true,
+      });
+      expect(fetchSpy).not.toHaveBeenCalled();
+      expect(r).toEqual(
+        expect.objectContaining({ allowed: true, skipped: true, reason: 'guest_gate_grace' }),
+      );
+    } finally {
+      clearGuestGateGrace();
+    }
+  });
+
+  it('still POSTs track-usage when signed in even if guest grace was started', async () => {
+    startGuestGateGrace();
+    try {
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
+        ok: true,
+        json: async () => ({ allowed: true, used: 1, limit: 5 }),
+      });
+      const r = await consumeFreeTierUsage({
+        feature: 'case_digest',
+        getToken: async () => 'tok',
+        isSignedIn: true,
+        canAccess: () => false,
+        authLoaded: true,
+      });
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
+      expect(r.allowed).toBe(true);
+    } finally {
+      clearGuestGateGrace();
+    }
   });
 });
 

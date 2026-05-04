@@ -8,6 +8,7 @@
  */
 import { apiUrl } from './apiUrl';
 import { TRACK_USAGE_FEATURE_TO_UNLIMITED } from '../context/SubscriptionContext';
+import { isGuestGateGraceActive } from './guestGateGrace';
 
 const ANON_STORAGE_KEY = 'lexmate_anonymous_usage_id';
 
@@ -111,6 +112,12 @@ export async function consumeFreeTierUsage({
 
   if (authLoaded === false) {
     return { allowed: true, skipped: true, reason: 'auth_loading' };
+  }
+
+  // Signed-out user just closed the subscription gate modal: browse without consuming daily caps
+  // (same 5-minute window before the gate modal can show again — see guestGateGrace.js).
+  if (isSignedIn !== true && isGuestGateGraceActive()) {
+    return { allowed: true, skipped: true, reason: 'guest_gate_grace' };
   }
 
   if (isSignedIn === true && subscriptionLoading) {
