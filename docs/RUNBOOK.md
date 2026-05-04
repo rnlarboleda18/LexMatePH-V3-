@@ -197,6 +197,60 @@ List your Static Web Apps: `az staticwebapp list -o table`
 
 ---
 
-## 9. Who to contact
+## 9. Admin Digest Pipeline (local `func start` + cloud DB)
+
+**Scope:** Operators use **Admin → Digest Pipeline** (Scan eLib, Full Run, Resume). The API spawns **`scripts/elib_digest_pipeline.py`** (and related scripts) as a **child process** with the **same interpreter** as the Functions worker. Typical environment: workstation + **cloud** `DB_CONNECTION_STRING`. See **`docs/adr/005-admin-case-digest-pipeline.md`**.
+
+### A. `/api/ops/*` returns 404 but `/api/ping` is 200
+
+**Cause:** The host process loaded before recent code changes, or **`function_app`** failed importing a blueprint so admin routes never registered.
+
+**Steps:**
+
+1. Stop the Functions host (**Ctrl+C** in the terminal running `func start`).
+2. From `api/`, activate the same venv you use for installs, then **`func start`** again.
+3. Scan the Functions terminal for **`ImportError` / `Traceback`** on startup; fix the failing import, then restart again.
+
+### B. Pipeline subprocess log shows `ModuleNotFoundError`
+
+**Cause:** Dependencies are missing from the Python environment used by **`func start`**.
+
+**Steps:**
+
+1. `cd api` and run **`pip install -r requirements.txt`** on the interpreter that launches `func` (or recreate `.venv`: `py -3.12 -m venv .venv` from repo root, activate, then reinstall).
+2. Restart **`func start`**.
+
+### C. `[WinError 5] Access is denied` on `pipeline_progress.json.tmp`
+
+**Cause:** On Windows another handle briefly locks the destination (**editor tab**, ** antivirus**, indexer).
+
+**Steps:**
+
+1. Close **`pipeline_progress.json`** / **`pipeline_progress.json.tmp`** if open in an IDE preview.
+2. Re-run the pipeline — **`digest_pipeline_progress.py`** retries **`Path.replace`** for several seconds.
+3. If it persists, add **`admin-tools/case-digest-pipeline/`** (or your repo checkout path) to **Windows Defender exclusions** for the dev machine only.
+
+### D. Listing rows inserted today (timezone confusion)
+
+`sc_decided_cases.created_at` is **`timestamp without time zone`** (UTC clock from Postgres **`NOW()`**). “Today” depends on calendar zone:
+
+```powershell
+# From repo root
+python scripts/list_cases_added_today.py --tz utc     # UTC calendar date
+python scripts/list_cases_added_today.py --tz manila # Philippines calendar date
+```
+
+### Reference
+
+| Artifact | Purpose |
+|---------|---------|
+| `admin-tools/case-digest-pipeline/pipeline_progress.json` | Live progress for Admin UI (**do not rely on git**). |
+| `admin-tools/case-digest-pipeline/pipeline_subprocess.log` | **Tail** shown in Admin; traceback for crashes. |
+
+**Further reading:** **`scripts/README.md`** (script index).
+
+---
+
+## 10. Who to contact
 
 This is a solo / small-team project. For production incidents, the developer can be reached via the contact information in the repo or organization settings.

@@ -73,6 +73,6 @@ Run from repo root (`python scripts/…`). Other env keys: see `api/local.settin
 
 **Runtime artifacts (gitignored or local-only):** `admin-tools/case-digest-pipeline/pipeline_progress.json`, `pipeline_subprocess.log`, scan/gap JSON—do not treat them as source of truth in git.
 
-**Operational note:** If `/api/ops/*` returns **404** but `/api/ping` works, restart **`func start`** from `api/` so blueprints load; see `docs/adr/005-admin-case-digest-pipeline.md`.
+**Operational note:** If `/api/ops/*` returns **404** but `/api/ping` works, restart **`func start`** from `api/` so blueprints load — see **`docs/RUNBOOK.md` § Admin Digest Pipeline** and **`docs/adr/005-admin-case-digest-pipeline.md`**.
 
 **Duplicate scan entrypoints:** copies under `api/scripts/` exist for Azure bundle paths; prefer `scripts/` at repo root for workstation runs unless you are debugging the deployed layout.

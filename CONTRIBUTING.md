@@ -73,6 +73,20 @@ npm run dev
 The Vite dev server proxies `/api/*` to `http://127.0.0.1:7071` (see `vite.config.js`).  
 Open: http://localhost:5173
 
+If you dev with **`https://localhost:5173`** (HTTPS Vite cert) **without** relying on that proxy—or run the SPA outside SWA—you may need **`VITE_API_BASE_URL`** pointing at Functions (see `src/frontend/.env.example`). Admin **`/api/ops/*`** calls use **`src/frontend/src/utils/adminApi.js`** so the SPA hits the correct base.
+
+---
+
+## Admin case digest pipeline (local)
+
+**Admin → Digest Pipeline** starts **`scripts/elib_digest_pipeline.py`** as a subprocess from the Functions host (**`sys.executable`**). Install Python deps **`pip install -r api/requirements.txt`** into the **same** environment as **`func start`**.
+
+Documentation:
+
+- **`docs/adr/005-admin-case-digest-pipeline.md`** — architecture (subprocess, progress JSON, `adminApiUrl`, Windows quirks).
+- **`scripts/README.md`** — table of pipeline / scan scripts and env hints.
+- **`docs/RUNBOOK.md` § Admin Digest Pipeline** — 404 on ops routes, missing modules, **`WinError 5`** on progress file, **`list_cases_added_today.py`**.
+
 ---
 
 ## Where files belong
@@ -82,6 +96,7 @@ Open: http://localhost:5173
 | HTTP route handlers | `api/blueprints/` — **must** be registered in `api/function_app.py` |
 | Shared Python modules | `api/` root (`config.py`, `cache.py`, `db_pool.py`, `codal_text.py`, `codal_structural.py`) |
 | Maintenance / diagnostic scripts | `api/tools/` (see `api/tools/README.md`) |
+| Repo-root maintenance scripts | `scripts/` (see `scripts/README.md`, including case digest / eLib pipeline) |
 | Historical one-off fixes | `api/legacy/` (see `api/legacy/README.md`) |
 | Frontend components | `src/frontend/src/components/` |
 | Custom hooks | `src/frontend/src/hooks/` |

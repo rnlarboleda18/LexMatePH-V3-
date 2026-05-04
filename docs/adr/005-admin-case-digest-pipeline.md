@@ -29,4 +29,6 @@ Operators need to **scan**, **ingest**, **digest**, and **link** new Supreme Cou
 ## Related
 
 - `scripts/README.md` — script index for pipeline maintenance.
+- `docs/RUNBOOK.md` § Admin Digest Pipeline — incident playbook (404 ops, deps, WinError 5).
+- `CONTRIBUTING.md` — Admin digest pipeline subsection for contributors.
 - `api/local.settings.sample.json` — `DB_CONNECTION_STRING`, Vertex/Gemini/XAI keys for digests.
